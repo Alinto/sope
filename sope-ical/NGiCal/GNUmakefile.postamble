@@ -1,9 +1,0 @@
-# compilation settings
-
-MAPDIR="$(SOPE_SAXMAPPINGS)/"
-
-mappings-dir ::
-	$(MKDIRS) $(MAPDIR)
-
-after-install :: mappings-dir
-	cp NGiCal.xmap $(MAPDIR)
