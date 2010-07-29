@@ -1,3 +1,0 @@
-AppName: WOString {
-  value = application.name;
-}
