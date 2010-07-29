@@ -1,3 +1,28 @@
+sope (4.9.r1664-1) unstable; urgency=low
+
+  * updated SOPE patchset for SOGo 1.2.0.
+  * updated upstream SOPE revision to 1664.
+
+ -- Inverse Support <support@inverse.ca>  Wed, 06 Jan 2010 14:49:27 -0500
+
+sope (4.9.r1660-2) unstable; urgency=low
+
+  * debian/control:
+    - we now build the sopeXX-gdl1-mysql package.
+  * updated SOPE patchset from SOGo 1.1.0.
+
+ -- Inverse Support <support@inverse.ca>  Mon, 19 Oct 2009 16:36:29 -0400
+
+sope (4.9.r1660-1) unstable; urgency=low
+
+  * debian/control:
+    - updated dependencies
+    - changed {Source-Version} with {binary:Version}
+    - bumbed standard to 3.8.2
+    - updated debian/copyright with recent LGPL-2
+
+ -- Inverse Support <support@inverse.ca>  Wed, 12 Aug 2009 10:34:00 -0400
+
 sope (4.7.0-0) UNRELEASED; urgency=low
 
   * New upstream release.

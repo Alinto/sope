@@ -1,11 +1,10 @@
-usr/include/NGHttp
-usr/include/NGObjWeb
-usr/include/WOXML
-usr/include/WOExtensions
-usr/include/WEExtensions
-usr/include/NGXmlRpc
-usr/include/SoOFS
-usr/lib/opengroupware.org/System/Library/Makefiles
+usr/include/GNUstep/NGHttp
+usr/include/GNUstep/NGObjWeb
+usr/include/GNUstep/WOXML
+usr/include/GNUstep/WOExtensions
+usr/include/GNUstep/WEExtensions
+usr/include/GNUstep/NGXmlRpc
+usr/include/GNUstep/SoOFS
 usr/lib/libNGObjWeb.so
 usr/lib/libWOXML.so
 usr/lib/libWOExtensions.so
@@ -13,3 +12,4 @@ usr/lib/libWEExtensions.so
 usr/lib/libNGXmlRpc.so
 usr/lib/libSoOFS.so
 usr/lib/libWEPrototype.so
+usr/share/GNUstep/Makefiles/*

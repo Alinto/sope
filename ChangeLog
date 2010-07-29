@@ -3,3 +3,4 @@
 	* Initial import of the SOPE source based on
 	the r1664 revision.
 	* Added the sope-patchset and the sope-gsmake2 patches
+	* Added the sope-debian patch
