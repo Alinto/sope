@@ -292,6 +292,9 @@
 #ifndef XMLNS_AppleCalServer
 #  define XMLNS_AppleCalServer @"http://apple.com/ns/calendarserver/"
 #endif
+#ifndef XMLNS_CalendarServerOrg
+#  define XMLNS_CalendarServerOrg @"http://calendarserver.org/ns/"
+#endif
 #ifndef XMLNS_AppleCalApp
 #  define XMLNS_AppleCalApp @"com.apple.ical:"
 #endif

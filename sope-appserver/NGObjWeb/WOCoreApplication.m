@@ -75,6 +75,43 @@ static NGLogger *perfLogger      = nil;
 NGObjWeb_DECLARE id WOApp = nil;
 static NSMutableArray *activeApps = nil; // THREAD
 
++ (void)registerUserDefaults {
+  NSDictionary *owDefaults = nil;
+  NSString     *apath;
+  
+  apath = [[self class] findNGObjWebResource:@"Defaults" ofType:@"plist"];
+  if (apath == nil)
+    [self errorWithFormat:@"Cannot find Defaults.plist resource of "
+                          @"NGObjWeb library!"];
+#if HEAVY_DEBUG
+  else
+    [self debugWithFormat:@"Note: loading default defaults: %@", apath];
+#endif
+  
+  owDefaults = [NSDictionary dictionaryWithContentsOfFile:apath];
+  if (owDefaults) {
+    [[NSUserDefaults standardUserDefaults] registerDefaults:owDefaults];
+#if HEAVY_DEBUG
+    [self debugWithFormat:@"did register NGObjWeb defaults: %@\n%@", 
+                          apath, owDefaults];
+#endif
+  }
+  else {
+    [self errorWithFormat:@"could not load NGObjWeb defaults: '%@'",
+	                        apath];
+  }
+}
+
++ (void)initialize
+{
+  static BOOL initialized = NO;
+
+  if (!initialized) {
+    [self registerUserDefaults];
+    initialized = YES;
+  }
+}
+
 + (id)application {
   if (WOApp == nil) {
     [self warnWithFormat:@"%s: some code called +application without an "
@@ -115,33 +152,6 @@ static NSMutableArray *activeApps = nil; // THREAD
   }
 }
 
-- (void)registerUserDefaults {
-  NSDictionary *owDefaults = nil;
-  NSString     *apath;
-  
-  apath = [[self class] findNGObjWebResource:@"Defaults" ofType:@"plist"];
-  if (apath == nil)
-    [self errorWithFormat:@"Cannot find Defaults.plist resource of "
-                          @"NGObjWeb library!"];
-#if HEAVY_DEBUG
-  else
-    [self debugWithFormat:@"Note: loading default defaults: %@", apath];
-#endif
-  
-  owDefaults = [NSDictionary dictionaryWithContentsOfFile:apath];
-  if (owDefaults) {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:owDefaults];
-#if HEAVY_DEBUG
-    [self debugWithFormat:@"did register NGObjWeb defaults: %@\n%@", 
-                          apath, owDefaults];
-#endif
-  }
-  else {
-    [self errorWithFormat:@"could not load NGObjWeb defaults: '%@'",
-	                        apath];
-  }
-}
-
 - (id)init {
 #if COCOA_Foundation_LIBRARY
   /*
@@ -157,7 +167,6 @@ static NSMutableArray *activeApps = nil; // THREAD
     NSUserDefaults  *ud;
     NGLoggerManager *lm;
 
-    [self registerUserDefaults];
     ud               = [NSUserDefaults standardUserDefaults];
     lm               = [NGLoggerManager defaultLoggerManager];
     logger           = [lm loggerForClass:[self class]];
@@ -190,6 +199,9 @@ static NSMutableArray *activeApps = nil; // THREAD
           forSignal:SIGHUP immediatelyNotifyOnSignal:NO];
     }
 #endif
+    
+    controlSocket = nil;
+    listeningSocket = nil;
   }
   return self;
 }
@@ -202,7 +214,30 @@ static NSMutableArray *activeApps = nil; // THREAD
   [self->adaptors    release];
   [self->requestLock release];
   [self->lock        release];
+  [self->listeningSocket release];
+  [self->controlSocket release];
   [super dealloc];
+}
+
+/* Watchdog helpers */
+- (void)setControlSocket: (NGActiveSocket *) newSocket
+{
+  ASSIGN(self->controlSocket, newSocket);
+}
+
+- (NGActiveSocket *)controlSocket
+{
+  return self->controlSocket;
+}
+
+- (void)setListeningSocket: (NGPassiveSocket *) newSocket
+{
+  ASSIGN(self->listeningSocket, newSocket);
+}
+
+- (NGPassiveSocket *)listeningSocket
+{
+  return self->listeningSocket;
 }
 
 /* NGLogging */
@@ -225,6 +260,7 @@ static NSMutableArray *activeApps = nil; // THREAD
   /* STDIO is forbidden in signal handlers !!! no malloc !!! */
 #if 1
   self->cappFlags.isTerminating = 1;
+  [self->listeningSocket close];
 #else
   static int termCount = 0;
   unsigned pid;
@@ -730,9 +766,15 @@ static NSMutableArray *activeApps = nil; // THREAD
                      [self sopeMajorVersion], [self sopeMinorVersion]];
 }
 + (NGResourceLocator *)ngobjwebResourceLocator {
+#if GNUSTEP_BASE_LIBRARY
+  return [NGResourceLocator resourceLocatorForGNUstepPath:
+                              @"Libraries/Resources/NGObjWeb"
+                            fhsPath:[self ngobjwebShareDirectorySubPath]];
+#else
   return [NGResourceLocator resourceLocatorForGNUstepPath:
                               @"Library/Libraries/Resources/NGObjWeb"
                             fhsPath:[self ngobjwebShareDirectorySubPath]];
+#endif
 }
 
 + (NSArray *)resourcesSearchPathes {
@@ -786,7 +828,9 @@ static NSMutableArray *activeApps = nil; // THREAD
   id woport;
   id addr;
   
-  woport = [[self userDefaults] objectForKey:@"WOPort"];
+  woport = [[self userDefaults] objectForKey:@"p"];
+  if (!woport)
+    woport = [[self userDefaults] objectForKey:@"WOPort"];
   if ([woport isKindOfClass:[NSNumber class]])
     return woport;
   woport = [woport stringValue];

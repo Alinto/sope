@@ -30,6 +30,7 @@
 
 @interface NSString(GSAdditions)
 
+#if !GNUSTEP
 - (NSString *)stringWithoutPrefix:(NSString *)_prefix;
 - (NSString *)stringWithoutSuffix:(NSString *)_suffix;
 
@@ -39,6 +40,7 @@
 - (NSString *)stringByTrimmingLeadSpaces;
 - (NSString *)stringByTrimmingTailSpaces;
 - (NSString *)stringByTrimmingSpaces;
+#endif /* !GNUSTEP */
 
 /* the following are not available in gstep-base 1.6 ? */
 - (NSString *)stringByTrimmingLeadWhiteSpaces;
@@ -47,6 +49,8 @@
 
 @end /* NSString(GSAdditions) */
 
+#if !GNUSTEP
+
 @interface NSMutableString(GNUstepCompatibility)
 
 - (void)trimLeadSpaces;
@@ -54,6 +58,8 @@
 - (void)trimSpaces;
 
 @end /* NSMutableString(GNUstepCompatibility) */
+
+#endif /* !GNUSTEP */
 
 #endif
 

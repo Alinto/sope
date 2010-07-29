@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../Version
 include ./Version
@@ -10,7 +10,7 @@ LIBRARY_NAME   = libWEPrototype
 
 BUNDLE_NAME      = WEPrototype
 BUNDLE_EXTENSION = .wox
-BUNDLE_INSTALL_DIR = $(GNUSTEP_INSTALLATION_DIR)/Library/WOxElemBuilders-$(MAJOR_VERSION).$(MINOR_VERSION)/
+BUNDLE_INSTALL_DIR = $(SOPE_WOXBUILDERS)/
 else
 FRAMEWORK_NAME = WEPrototype
 endif
@@ -46,6 +46,9 @@ endif
 # building
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/library.make
 include $(GNUSTEP_MAKEFILES)/bundle.make
@@ -53,4 +56,3 @@ else
 include $(GNUSTEP_MAKEFILES)/framework.make
 endif
 -include GNUmakefile.postamble
--include fhs.make

@@ -182,7 +182,7 @@ static __inline__ NSMutableData *_checkBody(WOMessage *self) {
   NSString *key;
 
   keys = [_headers keyEnumerator];
-  while ((key = [keys nextObject])) {
+  while ((key = [[keys nextObject] lowercaseString])) {
     id value;
     
     value = [_headers objectForKey:key];
@@ -198,34 +198,39 @@ static __inline__ NSMutableData *_checkBody(WOMessage *self) {
 }
 
 - (void)setHeader:(NSString *)_header forKey:(NSString *)_key {
-  [self->header setObject:[_header stringValue] forKey:_key];
+  [self->header setObject:[_header stringValue]
+                   forKey:[_key lowercaseString]];
 }
 - (NSString *)headerForKey:(NSString *)_key {
-  return [[self->header objectEnumeratorForKey:_key] nextObject];
+  return [[self->header objectEnumeratorForKey:[_key lowercaseString]]
+           nextObject];
 }
 
 - (void)appendHeader:(NSString *)_header forKey:(NSString *)_key {
-  [self->header addObject:_header forKey:_key];
+  [self->header addObject:_header forKey:[_key lowercaseString]];
 }
 - (void)appendHeaders:(NSArray *)_headers forKey:(NSString *)_key {
-  [self->header addObjects:_headers forKey:_key];
+  [self->header addObjects:_headers forKey:[_key lowercaseString]];
 }
 
 - (void)setHeaders:(NSArray *)_headers forKey:(NSString *)_key {
   NSEnumerator *e;
   id value;
+  NSString *lowerKey;
 
+  lowerKey = [_key lowercaseString];
   e = [_headers objectEnumerator];
 
-  [self->header removeAllObjectsForKey:_key];
+  [self->header removeAllObjectsForKey:lowerKey];
   
   while ((value = [e nextObject]))
-    [self->header addObject:value forKey:_key];
+    [self->header addObject:value forKey:lowerKey];
 }
 - (NSArray *)headersForKey:(NSString *)_key {
   NSEnumerator *values;
 
-  if ((values = [self->header objectEnumeratorForKey:_key])) {
+  if ((values
+       = [self->header objectEnumeratorForKey:[_key lowercaseString]])) {
     NSMutableArray *array = nil;
     id value = nil;
     
@@ -243,17 +248,14 @@ static __inline__ NSMutableData *_checkBody(WOMessage *self) {
   NSEnumerator *values;
 
   if ((values = [self->header keyEnumerator])) {
-    NSMutableArray *array  = nil;
+    NSMutableArray *array;
     id name = nil;
-    array = [[NSMutableArray alloc] init];
-    
+    array = [NSMutableArray array];
+
     while ((name = [values nextObject]))
       [array addObject:name];
 
-    name = [array copy];
-    [array release];
-    
-    return [name autorelease];
+    return array;
   }
   return nil;
 }

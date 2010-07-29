@@ -160,7 +160,7 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
 
 - (NSString *)stringValue {
   NSMutableString *str;
-  
+
   str = [NSMutableString stringWithCapacity:512];
   [str appendString:[self->name stringByEscapingURL]];
   [str appendString:@"="];
@@ -168,14 +168,29 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
   
   if (self->expireDate) {
     static NSTimeZone *gmt = nil;
+    static NSMutableDictionary *localeDict = nil;
     NSString *s;
     if (gmt == nil) 
       gmt = [[NSTimeZone timeZoneWithAbbreviation:@"GMT"] retain];
-    
+    if (localeDict == nil)
+      {
+        localeDict = [NSMutableDictionary new];
+
+        [localeDict setObject: [NSArray arrayWithObjects: @"Jan", @"Feb",
+                                        @"Mar", @"Apr", @"May", @"Jun",
+                                        @"Jul", @"Aug", @"Sep", @"Oct",
+                                        @"Nov", @"Dec", nil]
+                       forKey: @"NSShortMonthNameArray"];
+        [localeDict setObject: [NSArray arrayWithObjects: @"Sun", @"Mon",
+                                        @"Tue", @"Wed", @"Thu", @"Fri",
+                                        @"Sat", nil]
+                       forKey: @"NSShortWeekDayNameArray"];
+      }
+   
     // TODO: replace, -descriptionWithCalendarFormat is *slow*
     s = [self->expireDate descriptionWithCalendarFormat:cookieDateFormat
                           timeZone:gmt
-	                  locale:nil];
+	                  locale:localeDict];
     
     [str appendString:@"; expires="];
     [str appendString:s];

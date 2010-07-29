@@ -28,11 +28,13 @@
 #include <NGStreams/NGPassiveSocket.h>
 
 @class NSMutableArray;
+@class NGActiveSocket;
 
 @interface WOHttpAdaptor : WOAdaptor
 {
 @protected
   id<NGPassiveSocket>    socket;
+  NGActiveSocket *controlSocket;
   NSTimeInterval         sendTimeout;
   NSTimeInterval         receiveTimeout;
 
@@ -46,7 +48,6 @@
   NSMutableArray         *delayedResponses;
 }
 
-+ (BOOL)optionLogStream;
 + (BOOL)optionLogPerf;
 
 @end

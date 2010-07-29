@@ -22,15 +22,13 @@
 # If not, write to the Free Software Foundation,
 # 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 
 CAN_COMPILE_FB = \
 	$(shell ./cancompile.sh $(GNUSTEP_TARGET_CPU) $(GNUSTEP_TARGET_OS))
 
 ifeq ($(CAN_COMPILE_FB),yes)
-
-GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_LOCAL_ROOT)
 
 BUNDLE_NAME = FrontBase2
 
@@ -51,7 +49,7 @@ FrontBase2_PRINCIPAL_CLASS = FrontBase2Adaptor
 FrontBase2_RESOURCE_FILES  = Info.plist Version
 
 BUNDLE_INSTALL     = FrontBase2
-BUNDLE_INSTALL_DIR = $(GNUSTEP_SYSTEM_ROOT)/Libraries/Adaptors
+BUNDLE_INSTALL_DIR = $(SOPE_DBADAPTORS)/
 
 # Use .gdladaptor as the bundle extension
 BUNDLE_EXTENSION = .gdladaptor

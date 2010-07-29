@@ -69,7 +69,7 @@ extern NSString *NGSocketTimedOutNotificationName;
 + (id)socketBoundToAddress:(id<NGSocketAddress>)_address;
 
 #if !defined(WIN32)
-+ (BOOL)socketPair:(id<NGSocket>[2])_pair inDomain:(id<NGSocketDomain>)_domain;
++ (BOOL)socketPair:(id<NGSocket>[2])_pair;
 #endif
 
 // accessors

@@ -74,6 +74,14 @@
 }
 
 - (void)_addGNUstepSearchPathesToArray:(NSMutableArray *)ma {
+#if GNUSTEP_BASE_LIBRARY
+  NSEnumerator *libraryPaths;
+  NSString *directory;
+
+  libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+  while ((directory = [libraryPaths nextObject]))
+    [ma addObject: [directory stringByAppendingPathComponent: self->productDirectoryName]];
+#else
   NSDictionary *env;
   id tmp;
   
@@ -97,6 +105,7 @@
     [self logWithFormat:@"%s: empty library search path !", 
 	  __PRETTY_FUNCTION__];
   }
+#endif
 }
 
 - (void)_addFHSPathesToArray:(NSMutableArray *)ma {

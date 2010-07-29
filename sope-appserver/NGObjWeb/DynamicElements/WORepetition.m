@@ -823,6 +823,7 @@ _sapplyIndex(_WOSimpleRepetition *self, WOComponent *sComponent, NSArray *array,
       [self->template appendToResponse:_response inContext:_ctx];
 
       /* cleanup */
+      [self->item setValue:nil inComponent:sComponent];
       
       [_ctx incrementLastElementIDComponent];
       

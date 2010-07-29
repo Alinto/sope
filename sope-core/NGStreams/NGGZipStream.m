@@ -52,7 +52,7 @@
               @"invalid compression level %i (0-9)", _level);
 
     self->outBufLen = 2048;
-#if GNU_RUNTIME
+#if LIB_FOUNDATION_LIBRARY
     self->outBuf    = NSZoneMallocAtomic([self zone], self->outBufLen);
     self->outp       = NSZoneMallocAtomic([self zone], sizeof(z_stream));
 #else

@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ./Version
 
@@ -14,7 +14,8 @@ endif
 libNGiCal_PCH_FILE = common.h
 libNGiCal_HEADER_FILES_DIR         = .
 libNGiCal_HEADER_FILES_INSTALL_DIR = /NGiCal
-libNGiCal_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libNGiCal_INTERFACE_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libNGiCal_INSTALL_DIR=$(SOPE_SYSLIBDIR)
 libNGiCal_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 
 libNGiCal_HEADER_FILES =  		\
@@ -107,10 +108,12 @@ NGiCal_SUBPROJECTS  = $(libNGiCal_SUBPROJECTS)
 # building
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/library.make
 else
 include $(GNUSTEP_MAKEFILES)/framework.make
 endif
 -include GNUmakefile.postamble
--include fhs.make

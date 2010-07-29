@@ -6,8 +6,6 @@ include $(GNUSTEP_MAKEFILES)/common.make
 include $(SKYROOT)/Version
 -include ./Version
 
-GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_LOCAL_ROOT)
-
 ADDITIONAL_CPPFLAGS += -pipe -Wall -Wno-protocol
 ifeq ($(reentrant),yes)
 ADDITIONAL_CPPFLAGS += -D_REENTRANT=1

@@ -59,6 +59,8 @@ NSString *methodNames[] = {
   /* RFC 3253 (DeltaV) */
   @"REPORT",
   @"VERSION-CONTROL",
+  /* RFC 3744 (WebDAV ACL) */
+  @"ACL",
   /* RFC 4791 (CalDAV) */
   @"MKCALENDAR",
   /* http://ietfreport.isoc.org/idref/draft-daboo-carddav/ (CardDAV) */

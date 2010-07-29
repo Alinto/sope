@@ -1,11 +1,9 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include ../common.make
 -include ../Version
 -include ./Version
-
-GNUSTEP_INSTALLATION_DIR = ${GNUSTEP_LOCAL_ROOT}
 
 ifneq ($(frameworks),yes)
 LIBRARY_NAME = libGDLAccess
@@ -14,7 +12,8 @@ FRAMEWORK_NAME = GDLAccess
 endif
 
 libGDLAccess_PCH_FILE = common.h
-libGDLAccess_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libGDLAccess_INTERFACE_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libGDLAccess_INSTALL_DIR=$(SOPE_SYSLIBDIR)
 libGDLAccess_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 
 libGDLAccess_DLL_DEF = libGDLAccess.def
@@ -123,6 +122,8 @@ load-EOAdaptor_OBJC_FILES    = load-EOAdaptor.m
 connect-EOAdaptor_OBJC_FILES = connect-EOAdaptor.m
 load-EOAdaptor_PCH_FILE      = common.h
 connect-EOAdaptor_PCH_FILE   = common.h
+load-EOAdaptor_INSTALL_DIR	= $(SOPE_TOOLS)/
+connect-EOAdaptor_INSTALL_DIR	= $(SOPE_TOOLS)/
 
 
 # framework support
@@ -136,6 +137,9 @@ GDLAccess_SUBPROJECTS  = $(libGDLAccess_SUBPROJECTS)
 # building
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/library.make
 else
@@ -143,4 +147,3 @@ include $(GNUSTEP_MAKEFILES)/framework.make
 endif
 include $(GNUSTEP_MAKEFILES)/tool.make
 -include GNUmakefile.postamble
-include fhs.make

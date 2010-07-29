@@ -155,8 +155,9 @@ static BOOL       debugOn = NO;
   BOOL     isMultiValue, isFirst;
   
   /* get field name and strip leading spaces */
-  fcname = (const unsigned char *)[_field cString];
-  for (len = [_field cStringLength]; len > 0; fcname++, len--) {
+  fcname = (const unsigned char *)[_field cStringUsingEncoding:NSISOLatin1StringEncoding];
+  for (len = [_field lengthOfBytesUsingEncoding:NSISOLatin1StringEncoding];
+       len > 0; fcname++, len--) {
     if (*fcname != ' ')
       break;
   }
@@ -328,7 +329,7 @@ static BOOL       debugOn = NO;
   if ([body isKindOfClass:[NSData class]])
     data = body;
   else if ([body isKindOfClass:[NSString class]])
-    data = [body dataUsingEncoding:[NSString defaultCStringEncoding]];
+    data = [body dataUsingEncoding: NSISOLatin1StringEncoding];
   else
     data = nil;
   

@@ -1,3 +1,184 @@
+2010-02-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOWatchDogApplicationMain.m (_spawnChild:): we set a timeout of
+	1 second to the parent-side child control socket to avoid hang on
+	status reads when the child dies before the message reaches the
+	parent.
+
+2010-02-18  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOWatchDogApplicationMain.m (-run:argc:argv:): we assign the
+	loop timer to an ivar so that it can be invalidated when a child
+	process is spawned. Child processes are check at each loop, since
+	receiving SIGCHILD is not guaranteed and we deadlock
+	when all remaining processes are zombies.
+	(-_setupSignals): SIGCHILD is no longer trapped.
+	(-readMessage): we now setup a 10 minutes timer when the child
+	accepts the request up to the moment its done with it. This
+	provides a supplemental safety for deadlocked children.
+	(WOWatchDogApplicationMain): we no longer care about the return
+	values for fdreopen since this is useless and is not portable.
+
+2010-02-03  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOCookie.m (-stringValue): pass an minimal english locale
+	dictionary when producing expiration date representation to avoid
+	using the system locale.
+
+2010-01-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* Templates/WOxComponentElemBuilder.m
+	(-buildElement:tempateBuilder:): "children" (local) is the result
+	of a "buildXXX" method that we won't return, so we autorelease it
+	to avoid leaks.
+
+	* Templates/WOxTemplateBuilder.m (-buildTemplateAtURL): same as
+	below for "root".
+
+	* Templates/WOWrapperTemplateBuilder.m (-buildTemplateAtURL):
+	avoid a leak by releasing "rootElement" (local) when used.
+
+	* Templates/WOxElemBuilder.m (-buildNodes:templateBuilder:): the
+	"buildXXX" methods return retained objects all through NGObjWeb,
+	here too now.
+
+	* DynamicElements/_WOTemporaryHyperlink.m
+	(-initWithName:associations:contentElements:): same as below for
+	"template".
+
+	* DynamicElements/WOString.m
+	(-initWithName:associations:template:): "avalue" and "aescape" are
+	local variables and OWGetProperty always returns a retained
+	object. Therefore we want to release them after their use.
+
+	* DynamicElements/WOxHTMLElemBuilder.m
+	(-buildContainer:templateBuilder:): same as below.
+
+	* DynamicElements/WOConditional.m
+	(-initWithNegateElement:templateBuilder:): same as below.
+
+	* DynamicElements/WOGenericElement.m
+	(-initWithElement:templateBuilder:): "children" is retained when
+	returned from "buildNodesXX" but is not an ivar so we want to
+	autorelease that result to avoid leaks.
+
+	* WOComponentDefinition.m (-load): the "buildXX" methods already
+	return retained objects. We don't want to retain them once more.
+
+2010-01-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOHttpAdaptor/WOHttpAdaptor.m (-registerForEvents): the
+	controlSocket is now a retained ivar, that we further use for
+	validation in -acceptControlMessage:.
+
+	* WOHTTPConnection.m: got rid of "runloop based IO" code, which
+	was useless and error prone.
+
+2010-01-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* SoObjects/SoObject.m (-isFolderish): now a real category method,
+	defaulting to NO.
+
+	* WebDAV/SoWebDAVRenderer.m (-renderSearchResultEntry:...): take
+	the potential ending slash of the request to keep or remove the
+	ending slash of the hrefs to the returned objects, in order to
+	avoid confusing iCal with otherwise standard urls to DAV
+	collections.
+
+2009-12-22  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOWatchDogApplicationMain.m (_listeningAddress): read "WOPort"
+	from the user defaults rather than by invoking [WOApplication
+	port], which returns an NSNumber.
+
+2009-12-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOWatchDogApplicationMain.m (-run:argc:argv:): added a
+	repeatable timer, triggered every 0.5 seconds, that ensures the
+	proper looping of the runloop when a signal was received.
+
+2009-12-09  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOWatchDogApplicationMain.m (_handleSIGCHLD:)
+	(_handleTermination:, _handleSIGHUP:): the actual handling is now
+	done elsewhere, in order to avoid messing with memory allocation
+	and risking a dead lock.
+	(-_handlePostTerminationSignal): we set "terminate" to YES if all
+	children are already down, in order to avoid another deadlock
+	where the process termination would stall waiting for SIGCHLD.
+	(-receivedEvent:type:extra:forMode:): check that the control
+	socket is still "alive" before reading from it. If not, we
+	unregister the filedescriptor passed as "data" from the runloop
+	listener.
+
+2009-12-07  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOCoreApplication.m (+initialize): we invoke
+	"registerUserDefaults" from here now. This enables Defaults.plist
+	to be registered as soon as the watchdog is active.
+
+	* WOWatchDogApplicationMain.m (-terminate): we use a SIGTERM to
+	terminate the children instead of passing a message. We also setup
+	a timer that will send a SIGKILL after 5 minutes.
+	(-_releaseListeningSocket): we close the socket here so that other
+	processes can start listening.
+	(WOWatchDogApplicationMain): we accept "-" as argument to
+	"WOLogFile" so that we avoid redirecting the output and the error
+	channels.
+
+2009-11-11  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOCoreApplication.m (-setControlSocket, -controlSocket)
+	(-setListeningSocket, -listeningSocke): new helper accessors for
+	the new watchdog mechanism.
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: slightly refactored to use the
+	control socket provided by the watchdog.
+
+	* WOWatchDogApplicationMain.m: rewritten the watchdog mechanism:
+	- added WOWatchDog and WOWatchDogChild classes
+	- make use of UnixSignalHandler
+	- added support for preforked preocesses (WOWorkersCount)
+	- detach watchdog processes from terminal by default (WONoDetach)
+	- redirect stderr and stdout to file
+	  (WOLogFile = /var/log/[name]/[name].log)
+	- write pid file
+	  (WOPidFile = /var/run/[name]/[name].pid)
+	- use "127.0.0.1:port" as default bind address, unless
+	  WOHTTPAllowHost is specified
+	- added support for delaying process respawning
+	  (WORespawnDelay = 5 seconds)
+
+2009-10-26  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOMessage+XML.m (-contentAsDOMDocument): do not retain "dom" as
+	it will be assigned to self->domCache, to avoid a leak.
+
+2009-10-21  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WebDAV/SoObjectResultEntry.m (-valueForKey:): we now take
+	WOUseRelativeURLs into account when the "href" key is requested,
+	to work around a bug in iCal 4.
+
+2009-07-02  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOMessage.m (-setHeaders:, -setHeader:forKey:, headerForKey:,
+	-appendHeader:forKey:, -appendHeaders:forKey:, setHeaders:forKey:,
+	-headersForKey:): convert the specified header key to lowercase,
+	to ensure they are managed case-insensitively.
+	* WOHttpAdaptor/WOHttpTransaction.m
+	(-deliverResponse:toRequest:onStream:): if the content-type is
+	specified and already has "text/plain" as prefix, we don't
+	override it.
+
+2009-07-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOHttpAdaptor/WOHttpTransaction.m
+	(-deliverResponse:toRequest:onStream:): we test the content-length
+	and impose a content-type of text/plain when 0. This work-arounds
+	a bug in Mozilla clients where empty responses with a content-type
+	set to X/xml will trigger an exception.
+
 2009-06-10  Helge Hess  <helge.hess@opengroupware.org>
 
 	* DAVPropMap.plist: mapped {DAV:}current-user-principal (v4.9.37)

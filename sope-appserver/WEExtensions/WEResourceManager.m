@@ -53,28 +53,43 @@ static NSString *themesDirName = @"Themes";
 
 + (NSString *)gsTemplatesSubpath {
   NSString *p;
-  
   p = [[WOApplication application] gsTemplatesDirectoryName];
+#if ! GNUSTEP_BASE_LIBRARY  
+  // for GNUSTEP_BASE_LIBRARY this is already there in rootPathesInGNUstep
   p = [@"Library/" stringByAppendingString:p];
+#endif
   return p;
 }
 + (NSString *)gsWebSubpath {
   NSString *p;
   
   p = [[WOApplication application] gsWebDirectoryName];
+#if ! GNUSTEP_BASE_LIBRARY  
+  // for GNUSTEP_BASE_LIBRARY this is already there in rootPathesInGNUstep
   p = [@"Library/" stringByAppendingString:p];
+#endif
   return p;
 }
 
 /* locate resource directories */
 
 + (NSArray *)rootPathesInGNUstep {
-  NSDictionary *env;
   id tmp;
-  
+#if GNUSTEP_BASE_LIBRARY
+  NSEnumerator *libraryPaths;
+  NSString *directory;
+
+  tmp = [NSMutableArray array];
+  libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+  while ((directory = [libraryPaths nextObject]))
+    [tmp addObject: directory];
+  return tmp;
+#else  
+  NSDictionary *env;
   env = [[NSProcessInfo processInfo] environment];
   if ((tmp = [env objectForKey:@"GNUSTEP_PATHPREFIX_LIST"]) == nil)
     tmp = [env objectForKey:@"GNUSTEP_PATHLIST"];
+#endif
   
   return [tmp componentsSeparatedByString:@":"];
 }
@@ -95,9 +110,17 @@ static NSString *themesDirName = @"Themes";
   NSMutableArray *ma;
   BOOL           isDir;
   id tmp;
-
   fm  = [NSFileManager defaultManager];
   ma  = [NSMutableArray arrayWithCapacity:8];
+
+#ifdef GNUSTEP_BASE_LIBRARY
+  NSEnumerator *libraryPaths;
+  NSString *directory;
+
+  libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+  while ((directory = [libraryPaths nextObject]))
+    [ma addObject: [directory stringByAppendingPathComponent: _name]];
+#else
   
   e = [[self rootPathesInGNUstep] objectEnumerator];
   while ((tmp = [e nextObject]) != nil) {
@@ -115,6 +138,7 @@ static NSString *themesDirName = @"Themes";
     
     [ma addObject:tmp];
   }
+#endif
 
   /* hack in FHS pathes */
   
@@ -525,7 +549,7 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
 
       /* check language */
       if (_lang) {
-        path = [path stringByAppendingString:_lang];
+        path = [path stringByAppendingPathComponent:_lang];
         path = [path stringByAppendingPathExtension:@"lproj"];
       }
       
@@ -568,7 +592,7 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
     
     /* check language */
     if (_lang) {
-      basepath = [path stringByAppendingString:_lang];
+      basepath = [path stringByAppendingPathComponent:_lang];
       basepath = [basepath stringByAppendingPathExtension:@"lproj"];
     }
     else
@@ -613,6 +637,8 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
   
  done:
   [self cacheValue:url inCache:self->keyToURL];
+  [url autorelease];
+  
   return url;
 }
 

@@ -116,6 +116,7 @@ static NGLogger *debugLogger = nil;
   children = [_element hasChildNodes]
     ? [_b buildNodes:[_element childNodes] templateBuilder:_b]
     : (NSArray *)nil;
+  [children autorelease];
   
   /* build associations */
   
@@ -258,6 +259,7 @@ static NGLogger *debugLogger = nil;
   children = [_element hasChildNodes]
     ? [_b buildNodes:[_element childNodes] templateBuilder:_b]
     : (NSArray *)nil;
+  [children autorelease];
   
   if (compName == nil)
     compName = [_element tagName];

@@ -81,7 +81,7 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
     BOOL          appendLC;
     int           cnt, tmp;
     unsigned char encoding;
-    
+
     buffer = calloc(length + 13, sizeof(unichar));
     
     maxBufLen             = length + 3;
@@ -175,7 +175,7 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
                                       autorelease];
           }
 	  tmpLen = [tmpStr length];
-	  
+
 	  if ((tmpLen + bufLen) < maxBufLen) {
 	    [tmpStr getCharacters:(buffer + bufLen)];
 	    bufLen += tmpLen;
@@ -198,14 +198,23 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
       }
     }
     buffer[bufLen] = '\0';
+    while(bufLen > 1 && buffer[bufLen-1] == '\0')
+      bufLen--;
     {
       id data;
 
       data = nil;
       
       if (buffer && foundQP) {
+        static NSCharacterSet *illegalCS = nil;
+
+        if (illegalCS == nil) {
+          illegalCS = [NSCharacterSet illegalCharacterSet];
+          [illegalCS retain];
+        }
         data = [[[NSStringClass alloc] initWithCharacters:buffer length:bufLen]
                                 autorelease];
+        data = [data stringByTrimmingCharactersInSet: illegalCS];
         if (data == nil) {
           [self warnWithFormat:
 		  @"%s: got no string for buffer '%s', length '%i' !", 

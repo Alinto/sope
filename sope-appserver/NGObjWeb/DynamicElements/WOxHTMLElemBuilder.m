@@ -223,6 +223,7 @@ static Class WOGenericElementClass   = Nil;
   children = [_element hasChildNodes]
     ? [_b buildNodes:[_element childNodes] templateBuilder:_b]
     : (NSArray *)nil;
+  [children autorelease];
 
   if ((count = [children count]) == 0)
     return nil;
@@ -231,7 +232,7 @@ static Class WOGenericElementClass   = Nil;
     return [[children objectAtIndex:0] retain];
   
   return [[WOCompoundElement allocForCount:count 
-			     zone:NULL] initWithContentElements:children];
+                                       zone:NULL] initWithContentElements:children];
 }
 
 - (WOElement *)buildElement:(id<DOMElement>)_element templateBuilder:(id)_b {

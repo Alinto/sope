@@ -5,6 +5,15 @@ ADDITIONAL_CPPFLAGS += \
 	-DLIBRARY_MINOR_VERSION=${MINOR_VERSION} \
 	-DLIBRARY_SUBMINOR_VERSION=${SUBMINOR_VERSION} \
 
+ifeq ($(patsubstr GNU/%,glibc,$(shell uname -o)),glibc)
+ADDITIONAL_CPPFLAGS += \
+        -DHAVE_STRNDUP
+endif
+
+ifneq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
+	ADDITIONAL_CPPFLAGS += -DHAVE_STRNDUP
+endif
+
 NGMime_INCLUDE_DIRS += \
 	-I.. -I../..			\
 	-I../../sope-core/NGStreams/	\

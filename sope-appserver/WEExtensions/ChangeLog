@@ -1,3 +1,11 @@
+2010-01-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WEResourceManager.m
+	(_urlForResourceNamed:inFramework:language:applicationName:):
+	append the language with stringByAppendingPathComponent: rather
+	than ...ByAppendingString. Also, we want to return an autoreleased
+	value to avoid leaks.
+
 2008-02-21  Helge Hess  <helge.hess@opengroupware.org>
 
 	* WEMonthOverview.m: fixed bug, last day of appointments got lost ...

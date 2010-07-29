@@ -1,3 +1,13 @@
+2010-03-08  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* Added password policy support when binding to the
+	LDAP server or when changing passwords.
+
+2009-08-13  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGLdapEntry.m (-attributeWithName:): attribute names are now
+	accessed in a case-insensitive way.
+
 2009-04-02  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGLdapConnection.m (useSSL,startTLS): new method enabling

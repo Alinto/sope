@@ -332,10 +332,7 @@ static NSString *NGEnvVarPathSeparator = @":";
 }
 
 - (void)_addGNUstepPathsToPathArray:(NSMutableArray *)_paths {
-#if !GNUSTEP
-#else
-  // TODO: whats that supposed to do?
-  // TODO: replace with proper path locator function!
+  /* Old code for old gstep-make and gstep-base.  */
   NSDictionary *env;
   NSString     *p;
   unsigned     i, count;
@@ -355,7 +352,19 @@ static NSString *NGEnvVarPathSeparator = @":";
       
     if (p) [self->bundleSearchPaths addObject:p];
   }
-#endif
+   
+  /* New code for new gstep-make and gstep-base.  */
+  tmp = NSStandardLibraryPaths();
+  {
+    NSEnumerator *e = [tmp objectEnumerator];
+    while ((tmp = [e nextObject]) != nil) {
+      tmp = [tmp stringByAppendingPathComponent:@"Bundles"];
+      if ([self->bundleSearchPaths containsObject:tmp])
+	continue;
+      
+      [self->bundleSearchPaths addObject:tmp];
+    }
+  }
 }
 
 - (void)_setupBundleSearchPathes {

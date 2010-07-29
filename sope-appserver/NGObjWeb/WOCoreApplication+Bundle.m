@@ -50,8 +50,6 @@
   }
   else {
     NSDictionary *env;
-    NSEnumerator *e;
-    id tmp;
     
     env = [[NSProcessInfo processInfo] environment];
     
@@ -67,7 +65,20 @@
     bp = @"/System/Library";
     bp = [bp stringByAppendingPathComponent:_domain];
     [chkPathes addObject:bp];
+#elif GNUSTEP_BASE_LIBRARY
+    NSEnumerator *libraryPaths;
+    NSString *directory;
+
+    libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+    while ((directory = [libraryPaths nextObject])) {
+      directory = [directory stringByAppendingPathComponent:_domain];
+      if ([chkPathes containsObject:directory]) continue;
+      [chkPathes addObject:directory];
+
+    }
 #else
+    NSEnumerator *e;
+    id tmp;
     if ((tmp = [env objectForKey:@"GNUSTEP_PATHPREFIX_LIST"]) == nil)
       tmp = [env objectForKey:@"GNUSTEP_PATHLIST"];
     tmp = [tmp componentsSeparatedByString:@":"];

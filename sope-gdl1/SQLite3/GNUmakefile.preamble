@@ -27,7 +27,7 @@ SOPE_ROOT=../..
 ifeq ($(frameworks),yes)
 BUNDLE_INSTALL_DIR := $(FRAMEWORK_INSTALL_DIR)/GDLAccess.framework/Resources/GDLAdaptors/
 else
-BUNDLE_INSTALL_DIR = $(GNUSTEP_INSTALLATION_DIR)/Library/GDLAdaptors-$(MAJOR_VERSION).$(MINOR_VERSION)/
+BUNDLE_INSTALL_DIR = $(SOPE_DBADAPTORS)/
 endif
 
 

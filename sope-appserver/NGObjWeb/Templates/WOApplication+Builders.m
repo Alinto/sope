@@ -76,7 +76,7 @@
   
   fm = [NSFileManager defaultManager];
   pi = [NSProcessInfo processInfo];
-  
+#if ! GNUSTEP_BASE_LIBRARY  
 #if COCOA_Foundation_LIBRARY
   /* 
      TODO: (like COMPILE_FOR_GNUSTEP)
@@ -121,16 +121,43 @@
     [self debugWithFormat:@"  directory %@", lPath];
     [self scanForBuilderBundlesInDirectory:lPath];
   }
+#else
+ NSEnumerator *libraryPaths;
+  NSString *directory;
+ NSMutableArray *tmppathes;
+
+  libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+  tmppathes = [[NSMutableArray alloc] init];
+  while ((directory = [libraryPaths nextObject]))
+    [tmppathes addObject: [directory stringByAppendingPathComponent: 
+		[NSString stringWithFormat:@"WOxElemBuilders-%i.%i/", 
+			SOPE_MAJOR_VERSION, SOPE_MINOR_VERSION]]];
+  pathes = [tmppathes mutableCopy];
+  for (i = 0; i < [pathes count]; i++) {
+    NSString *lPath;
+    BOOL     isDir;
+    
+    lPath = [pathes objectAtIndex:i];
+    if (![fm fileExistsAtPath:lPath isDirectory:&isDir])
+      continue;
+    if (!isDir)
+      continue;
+    
+    [self debugWithFormat:@"  directory %@", lPath];
+    [self scanForBuilderBundlesInDirectory:lPath];
+  }
+  [tmppathes release];
+#endif
   
   /* look into FHS pathes */
   
   relPath = [NSString stringWithFormat:
-#if CONFIGURE_64BIT
-			@"lib/sope-%i.%i/wox-builders/",
+#ifdef CGS_LIBDIR_NAME
+	[CGS_LIBDIR_NAME stringByAppendingString:@"/sope-%i.%i/wox-builders/"],
 #else
-			@"lib64/sope-%i.%i/wox-builders/",
+	@"lib/sope-%i.%i/wox-builders/",
 #endif
-                        SOPE_MAJOR_VERSION, SOPE_MINOR_VERSION];
+        SOPE_MAJOR_VERSION, SOPE_MINOR_VERSION];
   pathes = [NSArray arrayWithObjects:
 #ifdef FHS_INSTALL_ROOT
 		      [FHS_INSTALL_ROOT stringByAppendingString:relPath],

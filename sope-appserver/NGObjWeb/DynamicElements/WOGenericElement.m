@@ -74,6 +74,7 @@ typedef struct {
   children = [_element hasChildNodes]
     ? [_builder buildNodes:[_element childNodes] templateBuilder:_builder]
     : (NSArray *)nil;
+  [children autorelease];
   
   /* construct self ... */
   self = [(WODynamicElement *)self initWithName:name 

@@ -58,4 +58,6 @@ BOOL _moveSubFolder(id<NGImap4Folder> self, NGImap4Folder *_f,
                     id<NGImap4Folder>_folder);
 BOOL _createSubFolderWithName(id<NGImap4Folder> self, NSString *_name, BOOL _app);
 
+NSString *SaneFolderName(NSString *folderName);
+
 #endif /* __NGMime_NGImap4_NGImap4Functions_H__ */

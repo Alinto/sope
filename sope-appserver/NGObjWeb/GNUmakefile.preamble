@@ -50,9 +50,6 @@ ADDITIONAL_LIB_DIRS += \
 	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
 endif
 
-SYSTEM_LIB_DIR += $(CONFIGURE_SYSTEM_LIB_DIR)
-
-
 # dependencies
 
 ifneq ($(frameworks),yes)
@@ -85,6 +82,7 @@ wod_TOOL_LIBS += \
 	$(sope-mime-libs)	\
 	$(sope-core-libs)	\
 	$(sope-xml-libs)
+wod_INSTALL_DIR = $(SOPE_TOOLS)
 SoCore_BUNDLE_LIBS += \
 	$(sope-ngobjweb-libs)	\
 	$(sope-mime-libs)	\
@@ -94,7 +92,7 @@ SoCore_BUNDLE_LIBS += \
 
 # platform specific settings
 
-ifneq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+ifneq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 # OpenBSD does not require libcrypt
 ifneq ($(findstring darwin, $(GNUSTEP_TARGET_OS)), darwin)
 # and neither does MacOSX? ...
@@ -116,6 +114,6 @@ wod_LDFLAGS += -framework Foundation
 libNGObjWeb_LIBRARIES_DEPEND_UPON += -lFoundationExt
 endif
 
-ifeq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 wod_TOOL_LIBS += -liconv
 endif

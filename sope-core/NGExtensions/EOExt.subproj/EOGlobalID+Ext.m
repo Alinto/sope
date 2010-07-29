@@ -19,6 +19,7 @@
   02111-1307, USA.
 */
 
+#import <Foundation/NSString.h>
 #import <EOControl/EOGlobalID.h>
 #import <Foundation/NSString.h>
 

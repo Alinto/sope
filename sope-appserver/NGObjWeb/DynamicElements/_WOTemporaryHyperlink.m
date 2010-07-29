@@ -135,6 +135,7 @@ static Class _WODirectActionHyperlinkClass       = Nil;
     template = [[WOCompoundElement allocForCount:[_contents count]
                                    zone:[self zone]]
                                    initWithContentElements:_contents];
+    [template autorelease];
   }
   
   return [self initWithName:_name

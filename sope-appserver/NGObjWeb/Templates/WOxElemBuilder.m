@@ -280,7 +280,7 @@ static WOAssociation *yesAssoc = nil;
   if ((count = [_nodes length]) == 0)
     return nil;
   
-  children = [NSMutableArray arrayWithCapacity:(count + 1)];
+  children = [[NSMutableArray alloc] initWithCapacity:(count + 1)];
   
   for (i = 0; i < count; i++) {
     WOElement *e;
@@ -376,9 +376,9 @@ static WOAssociation *yesAssoc = nil;
   WOElement *result;
   
   pool   = [[NSAutoreleasePool alloc] init];
-  result = [[self buildNode:_document templateBuilder:self] retain];
+  result = [self buildNode:_document templateBuilder:self];
   [pool release];
-  return [result autorelease];
+  return result;
 }
 
 /* association callbacks */
@@ -773,6 +773,7 @@ static WOAssociation *yesAssoc = nil;
   children = [_tag hasChildNodes]
     ? [_b buildNodes:[_tag childNodes] templateBuilder:_b]
     : (NSArray *)nil;
+  [children autorelease];
   
   return [self wrapElements:children inElementOfClass:_class];
 }

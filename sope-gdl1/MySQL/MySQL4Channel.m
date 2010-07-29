@@ -635,10 +635,10 @@ static int openConnectionCount = 0;
     if ((merrno = mysql_errno(self->_connection)) != 0) {
       const char *error;
       
+      error = mysql_error(self->_connection);
       if (isDebuggingEnabled)
         NSLog(@"%@   cannot use result: '%s'", self, error);
       
-      error = mysql_error(self->_connection);
       return [MySQL4Exception exceptionWithName:@"FetchFailed" 
                               reason:[NSString stringWithUTF8String:error]
                               userInfo:nil];

@@ -19,6 +19,8 @@
   02111-1307, USA.
 */
 
+#include <libxml/encoding.h>
+
 #include <SaxObjC/SaxXMLReader.h>
 #include <SaxObjC/SaxLexicalHandler.h>
 #include <SaxObjC/SaxDeclHandler.h>
@@ -34,7 +36,7 @@
 
 @interface libxmlHTMLSAXDriver : NSObject < SaxXMLReader >
 {
-  id<NSObject,SaxContentHandler> contentHandler;
+  NSObject<SaxContentHandler> *contentHandler;
   id<NSObject,SaxDTDHandler>     dtdHandler;
   id<NSObject,SaxErrorHandler>   errorHandler;
   id<NSObject,SaxEntityResolver> entityResolver;

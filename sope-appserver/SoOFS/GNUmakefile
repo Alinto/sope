@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../Version
 include ./Version
@@ -14,7 +14,8 @@ endif
 
 
 libSoOFS_PCH_FILE = common.h
-libSoOFS_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libSoOFS_INTERFACE_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libSoOFS_INSTALL_DIR=$(SOPE_SYSLIBDIR)
 libSoOFS_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 
 libSoOFS_HEADER_FILES_DIR         = .
@@ -75,7 +76,7 @@ else
 
 BUNDLE_NAME      = SoOFS
 BUNDLE_EXTENSION = .sxp
-BUNDLE_INSTALL_DIR = $(GNUSTEP_INSTALLATION_DIR)/Library/SoProducts-$(MAJOR_VERSION).$(MINOR_VERSION)/
+BUNDLE_INSTALL_DIR = $(SOPE_PRODUCTS)/
 
 SoOFS_OBJC_FILES       = SoOFSProduct.m
 SoOFS_RESOURCE_FILES   = product.plist Version
@@ -91,9 +92,13 @@ SOPED_NAME=sope-$(MAJOR_VERSION).$(MINOR_VERSION)
 TOOL_NAME = $(SOPED_NAME)
 
 $(SOPED_NAME)_OBJC_FILES = sope.m
+$(SOPED_NAME)_INSTALL_DIR = $(SOPE_ADMIN_TOOLS)
 
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/library.make
 include $(GNUSTEP_MAKEFILES)/bundle.make
@@ -102,4 +107,3 @@ include $(GNUSTEP_MAKEFILES)/framework.make
 endif
 include $(GNUSTEP_MAKEFILES)/tool.make
 -include GNUmakefile.postamble
--include fhs.make

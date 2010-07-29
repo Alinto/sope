@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include ../common.make
 
 ifneq ($(frameworks),yes)
@@ -56,10 +56,12 @@ libSaxObjC_PCH_FILE = common.h
 # building
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/library.make
 else
 include $(GNUSTEP_MAKEFILES)/framework.make
 endif
 -include GNUmakefile.postamble
--include fhs.make

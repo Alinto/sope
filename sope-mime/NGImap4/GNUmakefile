@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../Version
 
@@ -63,7 +63,10 @@ NGImap4_OBJC_FILES = \
 	NGImap4MailboxInfo.m		\
 	NGImap4ConnectionManager.m	\
 
--include GNUmakefile.preamble
+include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/subproject.make
 else

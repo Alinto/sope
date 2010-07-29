@@ -67,7 +67,10 @@ static int UseFoundationStringEncodingForMimeText = -1;
   if (_data == nil) return nil;
   
   ctype = [_part contentType];
-  
+  if (!ctype
+      && [_d respondsToSelector: @selector(parser:contentTypeOfPart:)])
+    ctype = [_d parser: self contentTypeOfPart: _part];
+
   if (![ctype isKindOfClass:[NGMimeType class]])
     ctype = [NGMimeType mimeType:[ctype stringValue]];
   
@@ -88,10 +91,20 @@ static int UseFoundationStringEncodingForMimeText = -1;
     NSStringEncoding encoding;
     
     encoding = [NGMimeType stringEncodingForCharset:charset];
-  
+    
+    // If we nave no encoding here, let's not simply return nil.
+    // We SHOULD try at least UTF-8 and after, Latin1.
+    if (!encoding)
+      encoding = NSUTF8StringEncoding;
+    
     body = [[[NSString alloc]
-                       initWithData:_data
+	      initWithData:_data
                        encoding:encoding] autorelease];
+
+    if (!body)
+     body = [[[NSString alloc] initWithData:_data
+			       encoding:NSISOLatin1StringEncoding]
+	      autorelease];
   }
   return body;
 }

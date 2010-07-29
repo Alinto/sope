@@ -19,88 +19,45 @@
   02111-1307, USA.
 */
 
+#ifdef HAVE_STRNDUP
+#define _GNU_SOURCE 1
+#endif
+
+#include <string.h>
+
 #include "NGMimeHeaderFieldParser.h"
 #include "NGMimeHeaderFields.h"
 #include "NGMimeUtilities.h"
 #include "common.h"
-#include <string.h>
+
+#ifndef HAVE_STRNDUP
+char *strndup(const char *str, size_t len)
+{
+  char *dup = (char *)malloc(len+1);
+  if (dup) {
+    strncpy(dup,str,len);
+    dup[len]= '\0';
+  }
+  return dup;
+}
+#endif
 
 @implementation NGMimeRFC822DateHeaderFieldParser
 
-static Class CalDateClass = Nil;
-static NSTimeZone *gmt   = nil;
-static NSTimeZone *gmt01 = nil;
-static NSTimeZone *gmt02 = nil;
-static NSTimeZone *gmt03 = nil;
-static NSTimeZone *gmt04 = nil;
-static NSTimeZone *gmt05 = nil;
-static NSTimeZone *gmt06 = nil;
-static NSTimeZone *gmt07 = nil;
-static NSTimeZone *gmt08 = nil;
-static NSTimeZone *gmt09 = nil;
-static NSTimeZone *gmt10 = nil;
-static NSTimeZone *gmt11 = nil;
-static NSTimeZone *gmt12 = nil;
-static NSTimeZone *gmt0530 = nil;
-static NSTimeZone *gmtM01 = nil;
-static NSTimeZone *gmtM02 = nil;
-static NSTimeZone *gmtM03 = nil;
-static NSTimeZone *gmtM04 = nil;
-static NSTimeZone *gmtM05 = nil;
-static NSTimeZone *gmtM06 = nil;
-static NSTimeZone *gmtM07 = nil;
-static NSTimeZone *gmtM08 = nil;
-static NSTimeZone *gmtM09 = nil;
-static NSTimeZone *gmtM10 = nil;
-static NSTimeZone *gmtM11 = nil;
-static NSTimeZone *gmtM12 = nil;
-static NSTimeZone *gmtM13 = nil;
-static NSTimeZone *gmtM14 = nil;
-static NSTimeZone *met    = nil;
+static NSTimeZone *gmt = nil;
+static NSTimeZone *met = nil;
 
 + (int)version {
   return 2;
 }
+
 + (void)initialize {
   static BOOL didInit = NO;
-  Class TzClass;
   if (didInit) return;
   didInit = YES;
   
-  CalDateClass = [NSCalendarDate class];
-  
-  /* timezones which were actually used in a maillist mailbox */
-  TzClass = [NSTimeZone class];
-  gmt    = [[TzClass timeZoneWithName:@"GMT"] retain];
-  met    = [[TzClass timeZoneWithName:@"MET"] retain];
-  gmt01  = [[TzClass timeZoneForSecondsFromGMT:  1 * (60 * 60)] retain];
-  gmt02  = [[TzClass timeZoneForSecondsFromGMT:  2 * (60 * 60)] retain];
-  gmt03  = [[TzClass timeZoneForSecondsFromGMT:  3 * (60 * 60)] retain];
-  gmt04  = [[TzClass timeZoneForSecondsFromGMT:  4 * (60 * 60)] retain];
-  gmt05  = [[TzClass timeZoneForSecondsFromGMT:  5 * (60 * 60)] retain];
-  gmt06  = [[TzClass timeZoneForSecondsFromGMT:  6 * (60 * 60)] retain];
-  gmt07  = [[TzClass timeZoneForSecondsFromGMT:  7 * (60 * 60)] retain];
-  gmt08  = [[TzClass timeZoneForSecondsFromGMT:  8 * (60 * 60)] retain];
-  gmt09  = [[TzClass timeZoneForSecondsFromGMT:  9 * (60 * 60)] retain];
-  gmt10  = [[TzClass timeZoneForSecondsFromGMT: 10 * (60 * 60)] retain];
-  gmt11  = [[TzClass timeZoneForSecondsFromGMT: 11 * (60 * 60)] retain];
-  gmt12  = [[TzClass timeZoneForSecondsFromGMT: 12 * (60 * 60)] retain];
-  gmtM01 = [[TzClass timeZoneForSecondsFromGMT: -1 * (60 * 60)] retain];
-  gmtM02 = [[TzClass timeZoneForSecondsFromGMT: -2 * (60 * 60)] retain];
-  gmtM03 = [[TzClass timeZoneForSecondsFromGMT: -3 * (60 * 60)] retain];
-  gmtM04 = [[TzClass timeZoneForSecondsFromGMT: -4 * (60 * 60)] retain];
-  gmtM05 = [[TzClass timeZoneForSecondsFromGMT: -5 * (60 * 60)] retain];
-  gmtM06 = [[TzClass timeZoneForSecondsFromGMT: -6 * (60 * 60)] retain];
-  gmtM07 = [[TzClass timeZoneForSecondsFromGMT: -7 * (60 * 60)] retain];
-  gmtM08 = [[TzClass timeZoneForSecondsFromGMT: -8 * (60 * 60)] retain];
-  gmtM09 = [[TzClass timeZoneForSecondsFromGMT: -9 * (60 * 60)] retain];
-  gmtM10 = [[TzClass timeZoneForSecondsFromGMT:-10 * (60 * 60)] retain];
-  gmtM11 = [[TzClass timeZoneForSecondsFromGMT:-11 * (60 * 60)] retain];
-  gmtM12 = [[TzClass timeZoneForSecondsFromGMT:-12 * (60 * 60)] retain];
-  gmtM13 = [[TzClass timeZoneForSecondsFromGMT:-13 * (60 * 60)] retain];
-  gmtM14 = [[TzClass timeZoneForSecondsFromGMT:-14 * (60 * 60)] retain];
-  
-  gmt0530 = [[TzClass timeZoneForSecondsFromGMT:5 * (60*60) + (30*60)] retain];
+  gmt = [[NSTimeZone timeZoneWithName:@"GMT"] retain];
+  met = [[NSTimeZone timeZoneWithName:@"MET"] retain];
 }
 
 /* 
@@ -111,7 +68,7 @@ static NSTimeZone *met    = nil;
    TODO: use an own parser for that.
 */
 
-static int parseMonthOfYear(unsigned char *s, unsigned int len) {
+static int parseMonthOfYear(char *s, unsigned int len) {
   /*
     This one is *extremely* forgiving, it only checks what is
     necessary for the set below. This should work for both, English
@@ -147,162 +104,110 @@ static int parseMonthOfYear(unsigned char *s, unsigned int len) {
   }
 }
 
-static NSTimeZone *parseTimeZone(unsigned char *s, unsigned int len) {
+static int offsetFromTZAbbreviation(const char **p) {
+  NSString *abbreviation;
+  NSTimeZone *offsetTZ;
+  unsigned int length;
+
+  length = 0;
+  while (isalpha(*(*p+length)))
+    length++;
+  abbreviation = [[NSString alloc] initWithBytes: *p
+				   length: length - 1
+				   encoding: NSISOLatin1StringEncoding];
+  offsetTZ = [NSTimeZone timeZoneWithAbbreviation: abbreviation];
+  [abbreviation release];
+  *p += length;
+
+  return [offsetTZ secondsFromGMT];
+}
+
+static inline char *digitsString(const char *string) {
+  const char *p;
+  unsigned int len;
+
+  p = string;
+  while (!isdigit(*p))
+    p++;
+  len = 0;
+  while (isdigit(*(p + len)))
+    len++;
+
+  return strndup(p, len);
+}
+ 
+static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
   /*
     WARNING: failed to parse RFC822 timezone: '+0530' \
              (value='Tue, 13 Jul 2004 21:39:28 +0530')
     TODO: this is because libFoundation doesn't accept 'GMT+0530' as input.
   */
-  char       *p = (char *)s;
+  char *newString, *digits;
+  const char *p;
   NSTimeZone *tz;
-  NSString   *ts;
-  
-  if (len == 0) 
-    return nil;
-  
-  if (*s == '+' || *s == '-') {
-    if (len == 3) {
-      if (p[1] == '0' && p[2] == '0') // '+00' or '-00'
-	return gmt;
-      if (*s == '+') {
-	if (p[1] == '0' && p[2] == '1') // '+01'
-	  return gmt01;
-	if (p[1] == '0' && p[2] == '2') // '+02'
-	  return gmt02;
-      }
-    }
-    else if (len == 5) {
-      if (p[3] == '0' && p[4] == '0' && p[1] == '0') { // '?0x00'
-	if (p[2] == '0') // '+0000'
-	  return gmt;
-	
-	if (*s == '+') {
-	  if (p[2] == '1') return gmt01; // '+0100'
-	  if (p[2] == '2') return gmt02; // '+0200'
-	  if (p[2] == '3') return gmt03; // '+0300'
-	  if (p[2] == '4') return gmt04; // '+0400'
-	  if (p[2] == '5') return gmt05; // '+0500'
-	  if (p[2] == '6') return gmt06; // '+0600'
-	  if (p[2] == '7') return gmt07; // '+0700'
-	  if (p[2] == '8') return gmt08; // '+0800'
-	  if (p[2] == '9') return gmt09; // '+0900'
-	}
-	else if (*s == '-') {
-          if (p[2] == '1') return gmtM01; // '-0100'
-          if (p[2] == '2') return gmtM02; // '-0200'
-          if (p[2] == '3') return gmtM03; // '-0300'
-	  if (p[2] == '4') return gmtM04; // '-0400'
-	  if (p[2] == '5') return gmtM05; // '-0500'
-	  if (p[2] == '6') return gmtM06; // '-0600'
-	  if (p[2] == '7') return gmtM07; // '-0700'
-	  if (p[2] == '8') return gmtM08; // '-0800'
-	  if (p[2] == '9') return gmtM09; // '-0900'
-	}
-      }
-      else if (p[3] == '0' && p[4] == '0' && p[1] == '1') { // "?1x00"
-        if (*s == '+') {
-          if (p[2] == '0') return gmt10; // '+1000'
-          if (p[2] == '1') return gmt11; // '+1100'
-          if (p[2] == '2') return gmt12; // '+1200'
-        }
-        else if (*s == '-') {
-          if (p[2] == '0') return gmtM10; // '-1000'
-          if (p[2] == '1') return gmtM11; // '-1100'
-          if (p[2] == '2') return gmtM12; // '-1200'
-          if (p[2] == '3') return gmtM13; // '-1300'
-          if (p[2] == '4') return gmtM14; // '-1400'
-        }
-      }
-      
-      /* special case for GMT+0530 */
-      if (strncmp((char *)s, "+0530", 5) == 0)
-	return gmt0530;
-    }
-    else if (len == 7) {
-      /*
-        "MultiMail" submits timezones like this: 
-          "Tue, 9 Mar 2004 9:43:00 -05-500",
-        don't know what the "-500" trailer is supposed to mean? Apparently 
-        Thunderbird just uses the "-05", so do we.
-      */
-      
-      if (isdigit(p[1]) && isdigit(p[2]) && (p[3] == '-'||p[3] == '+')) {
-        unsigned char tmp[8];
-        
-        strncpy((char *)tmp, p, 3);
-        tmp[3] = '0';
-        tmp[4] = '0';
-        tmp[5] = '\0';
-        return parseTimeZone(tmp, 5);
-      }
-    }
+  unsigned int hours, minutes, seconds, remaining;
+  int sign;
+
+  sign = 1;
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+
+  newString = strndup(s, len);
+  p = newString;
+
+  if (isalpha(*p))
+    seconds = offsetFromTZAbbreviation(&p);
+  while (isspace(*p))
+    p++;
+  while (*p == '+' || *p == '-') {
+    if (*p == '-')
+      sign = -sign;
+    p++;
   }
-  else if (*s == '0') {
-    if (len == 2) { // '00'
-      if (p[1] == '0') return gmt;
-      if (p[1] == '1') return gmt01;
-      if (p[1] == '2') return gmt02;
-    }
-    else if (len == 4) {
-      if (p[2] == '0' && p[3] == '0') { // '0x00'
-	if (p[1] == '0') return gmt;
-	if (p[1] == '1') return gmt01;
-	if (p[1] == '2') return gmt02;
-      }
-    }
+  digits = digitsString(p);
+  p = digits;
+  remaining = strlen(p);
+  switch(remaining) {
+  case 6: /* hhmmss */
+    seconds += (10 * (*(p + remaining - 2) - 48)
+		+ *(p + remaining - 1) - 48);
+  case 4: /* hhmm */
+    hours += 10 * (*p - 48);
+    p++;
+  case 3: /* hmm */
+    hours += (*p - 48);
+    p++;
+    minutes += 10 * (*p - 48) + *(p + 1) - 48;
+    break;
+  case 2: /* hh */
+    hours += 10 * (*p - 48) + *(p + 1) - 48;
+    break;
+  default:
+    NSLog (@"parseTimeZone: cannot parse time notation '%s'", newString);
   }
-  else if (len == 3) {
-    if (strcasecmp((char *)s, "GMT") == 0) return gmt;
-    if (strcasecmp((char *)s, "UTC") == 0) return gmt;
-    if (strcasecmp((char *)s, "MET") == 0) return met;
-    if (strcasecmp((char *)s, "CET") == 0) return met;
-  }
-  
-  if (isalpha(*s)) {
-    ts = [[NSString alloc] initWithCString:(char *)s length:len];
-  }
-  else {
-    char buf[len + 5];
-    
-    buf[0] = 'G'; buf[1] = 'M'; buf[2] = 'T';
-    if (*s == '+' || *s == '-') {
-      strcpy(&(buf[3]), (char *)s);
-    }
-    else {
-      buf[3] = '+';
-      strcpy(&(buf[4]), (char *)s);
-    }
-    ts = [[NSString alloc] initWithCString:buf];
-  }
-#if 1
-  NSLog(@"%s: RFC822 TZ Parser: expensive: '%@'", __PRETTY_FUNCTION__, ts);
-#endif
-  tz = [NSTimeZone timeZoneWithAbbreviation:ts];
-  [ts release];
+  free(digits);
+
+  seconds += sign * (3600 * hours + 60 * minutes);
+  tz = [NSTimeZone timeZoneForSecondsFromGMT: seconds];
+  free(newString);
+
   return tz;
 }
 
 - (id)parseValue:(id)_data ofHeaderField:(NSString *)_field {
   // TODO: use UNICODE
   NSCalendarDate *date       = nil;
-  unsigned char  buf[256];
-  unsigned char  *bytes = buf, *pe;
+  char	         *bytes, *pe;
   unsigned       length = 0;
   NSTimeZone     *tz = nil;
   char  dayOfMonth, monthOfYear, hour, minute, second;
   short year;
   BOOL  flag;
-  
-  if ((length = [_data cStringLength]) > 254) {
-    [self logWithFormat:
-	    @"header field value to large for date parsing: '%@'(%i)",
-	    _data, length];
-    length = 254;
-  }
-  
-  [_data getCString:(char *)buf maxLength:length];
-  buf[length] = '\0';
-  
+
+  length = [_data lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
+  bytes = [_data cStringUsingEncoding: NSUTF8StringEncoding];
+
   /* remove leading chars (skip to first digit, the day of the month) */
   while (length > 0 && (!isdigit(*bytes))) {
     bytes++;
@@ -312,7 +217,7 @@ static NSTimeZone *parseTimeZone(unsigned char *s, unsigned int len) {
   if (length == 0) {
     NSLog(@"WARNING(%s): empty value for header field %@ ..",
           __PRETTY_FUNCTION__, _field);
-    return [CalDateClass date];
+    return [NSCalendarDate date];
   }
   
   // TODO: should be a category on NSCalendarDate
@@ -435,7 +340,8 @@ static NSTimeZone *parseTimeZone(unsigned char *s, unsigned int len) {
   for (pe = bytes; isalnum(*pe) || *pe == '-' || *pe == '+'; pe++)
     ;
   *pe = '\0';
-  if ((tz = parseTimeZone(bytes, (pe - bytes))) == nil) {
+  if (pe == bytes
+      || (tz = parseTimeZone((const char *) bytes, (pe - bytes))) == nil) {
     [self logWithFormat:
             @"WARNING: failed to parse RFC822 timezone: '%s' (value='%@')",
 	    bytes, _data];
@@ -444,9 +350,9 @@ static NSTimeZone *parseTimeZone(unsigned char *s, unsigned int len) {
   
   /* construct and return */
  finished:  
-  date = [CalDateClass dateWithYear:year month:monthOfYear day:dayOfMonth
-		       hour:hour minute:minute second:second
-		       timeZone:tz];
+  date = [NSCalendarDate dateWithYear:year month:monthOfYear day:dayOfMonth
+			 hour:hour minute:minute second:second
+			 timeZone:tz];
   if (date == nil) goto failed;
 
 #if 0  

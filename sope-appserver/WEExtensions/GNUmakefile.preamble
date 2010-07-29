@@ -21,7 +21,8 @@ after-WEExtensions-all ::
 	  cp ../bundle-info.plist .)
 endif
 
-libWEExtensions_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libWEExtensions_INTERFACE_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libWEExtensions_INSTALL_DIR=$(SOPE_SYSLIBDIR)
 libWEExtensions_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 
 

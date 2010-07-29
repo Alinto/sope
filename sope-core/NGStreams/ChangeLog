@@ -1,3 +1,27 @@
+2010-01-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGActiveSocket.m (-safeReadBytes:count:): explicitly make use of
+	[NGEndOfStreamException alloc] when allocating localException,
+	since the init method is only present in that class and this may
+	cause a crash on rare occasions.
+
+2010-01-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGCTextStream.m (-writeString:): use
+	getCString:maxLength:encoding: on GNUstep too to avoid a possible
+	segfault in GNUstep's handling of cStringLength.
+
+2009-11-11  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGActiveSocket.m (+socketPair): removed the domain: parameter as
+	only AF_LOCAL is permitted. Assign a default instance of
+	NGLocalSocketAddress to the sockets to "declare" the sockets as
+	connected.
+
+	* NGActiveSocket.m (-setSendTimeout, -setReceiveTimeout): make use
+	of those methods to actually configure the timeouts on the socket
+	objects (via setsockopt and SO_RCVTIMEO and SO_SNDTIMEO).
+
 2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* GNUmakefile.preamble: add machine-type to include path (eg i386) (v4.7.57)

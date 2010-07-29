@@ -46,7 +46,7 @@
 }
 - (id)initWithContext:(WOContext *)_ctx {
   if ((self = [self initWithRequest:[_ctx request]])) {
-    self->context = [_ctx retain];
+    self->context = _ctx;
   }
   return self;
 }
@@ -54,16 +54,16 @@
   return [self initWithRequest:nil];
 }
 
-- (void)dealloc {
-  [self->context release];
-  [super dealloc];
-}
+// - (void)dealloc {
+//   [self->context release];
+//   [super dealloc];
+// }
 
 /* accessors */
 
 - (WOContext *)context {
   if (self->context == nil)
-    self->context = [[[WOApplication application] context] retain];
+    self->context = [[WOApplication application] context];
   return self->context;
 }
 

@@ -367,3 +367,16 @@ BOOL _createSubFolderWithName(id<NGImap4Folder> self, NSString *_name,
 }
 
 @end /* NGImap4FolderHandler */
+
+NSString *
+SaneFolderName(NSString *folderName)
+{
+  NSString *saneFName;
+
+  saneFName = [[folderName stringByReplacingString: @"\\"
+                                        withString: @"\\\\"]
+                stringByReplacingString: @"\""
+                             withString: @"\\\""];
+
+  return saneFName;
+}

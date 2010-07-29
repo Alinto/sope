@@ -52,7 +52,7 @@
   NSString      *separator;
 
   /* hierarchy cache */
-  NSDictionary  *subfolders;
+  NSMutableDictionary  *subfolders;
 
   /* permission cache */
   NSMutableDictionary *urlToRights;
@@ -72,8 +72,9 @@
 
 - (NSDate *)creationTime;
 
-- (void)cacheHierarchyResults:(NSDictionary *)_hierarchy;
-- (NSDictionary *)cachedHierarchyResults;
+- (void)cacheHierarchyResults:(NSDictionary *)_hierarchy
+                       forURL:(NSURL *)_url;
+- (NSDictionary *)cachedHierarchyResultsForURL:(NSURL *)_url;
 - (void)flushFolderHierarchyCache;
 
 - (id)cachedUIDsForURL:(NSURL *)_url qualifier:(id)_q sortOrdering:(id)_so;
@@ -88,7 +89,12 @@
 /* folder operations */
 
 - (NSArray *)subfoldersForURL:(NSURL *)_url;
+- (NSArray *)subfoldersForURL:(NSURL *)_url
+  onlySubscribedFolders: (BOOL) subscribedFoldersOnly;
 - (NSArray *)allFoldersForURL:(NSURL *)_url;
+- (NSArray *)allFoldersForURL:(NSURL *)_url
+  onlySubscribedFolders: (BOOL) subscribedFoldersOnly;
+- (BOOL)selectFolder:(id)_url;
 
 /* message operations */
 

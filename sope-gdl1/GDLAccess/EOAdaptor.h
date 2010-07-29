@@ -62,10 +62,13 @@
 + (id)adaptorWithModel:(EOModel *)aModel;
 + (id)adaptorWithName:(NSString *)aName;
 + (id)adaptorForURL:(id)_url;
++ (NSString *)libraryDriversSubDir;
 - (id)initWithName:(NSString *)aName;
 
 /* Getting an adaptor's name */
 - (NSString*)name;
+
+/* Get the library subdir name */
 
 /* Setting connection information */
 - (void)setConnectionDictionary:(NSDictionary*)aDictionary;

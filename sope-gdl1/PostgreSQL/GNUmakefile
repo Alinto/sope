@@ -22,7 +22,7 @@
 # If not, write to the Free Software Foundation,
 # 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../Version
 include ./Version
@@ -70,4 +70,3 @@ gdltest_OBJC_FILES = gdltest.m
 include $(GNUSTEP_MAKEFILES)/bundle.make
 #include $(GNUSTEP_MAKEFILES)/tool.make
 -include GNUmakefile.postamble
-include fhs.make

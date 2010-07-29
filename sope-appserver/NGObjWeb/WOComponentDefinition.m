@@ -540,7 +540,7 @@ static NSArray *woxExtensions = nil;
   builder = [self templateBuilderForURL:url];
   if (debugOn) [self debugWithFormat:@"builder: %@", builder];
   
-  self->template = [[builder buildTemplateAtURL:url] retain];
+  self->template = [builder buildTemplateAtURL:url];
   if (debugOn) [self debugWithFormat:@"template: %@", self->template];
   
   return self->template ? YES : NO;

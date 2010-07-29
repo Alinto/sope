@@ -38,6 +38,9 @@ static NSTimeInterval PoolScanInterval = 5 * 60 /* every five minutes */;
   debugCache   = [ud boolForKey:@"NGImap4EnableIMAP4CacheDebug"];
   poolingOff   = [ud boolForKey:@"NGImap4DisableIMAP4Pooling"];
   
+  if ([ud objectForKey:@"NGImap4PoolingCleanupInterval"])
+    PoolScanInterval = [[ud objectForKey:@"NGImap4PoolingCleanupInterval"] doubleValue];
+
   if (debugOn)    NSLog(@"Note: NGImap4EnableIMAP4Debug is enabled!");
   if (poolingOff) NSLog(@"WARNING: IMAP4 connection pooling is disabled!");
 }
@@ -53,18 +56,17 @@ static NSTimeInterval PoolScanInterval = 5 * 60 /* every five minutes */;
   if ((self = [super init])) {
     if (!poolingOff) {
       self->urlToEntry = [[NSMutableDictionary alloc] initWithCapacity:256];
+      self->gcTimer = [[NSTimer scheduledTimerWithTimeInterval:
+				  PoolScanInterval
+				target:self selector:@selector(_garbageCollect:)
+				userInfo:nil repeats:YES] retain];
     }
-    
-    self->gcTimer = [[NSTimer scheduledTimerWithTimeInterval:
-				PoolScanInterval
-			      target:self selector:@selector(_garbageCollect:)
-			      userInfo:nil repeats:YES] retain];
   }
   return self;
 }
 
 - (void)dealloc {
-  if (self->gcTimer) [self->gcTimer invalidate];
+  [self->gcTimer invalidate];
   [self->urlToEntry release];
   [self->gcTimer    release];
   [super dealloc];
@@ -91,6 +93,25 @@ static NSTimeInterval PoolScanInterval = 5 * 60 /* every five minutes */;
 
 - (void)_garbageCollect:(NSTimer *)_timer {
   // TODO: scan for old IMAP4 channels
+  NGImap4Connection *entry;
+  NSDate *now;
+  NSArray *a;
+  int i;
+
+  a = [self->urlToEntry allKeys];
+  now = [NSDate date];
+
+  for (i = 0; i < [a count]; i++)
+    {
+      entry = [self->urlToEntry objectForKey: [a objectAtIndex: i]];
+
+      if ([now timeIntervalSinceDate: [entry creationTime]] > PoolScanInterval)
+	{
+	  [[entry client] logout];
+	  [self->urlToEntry removeObjectForKey: [a objectAtIndex: i]];
+	}
+    }
+
   [self debugWithFormat:@"should collect IMAP4 channels (%d active)",
 	  [self->urlToEntry count]];
 }
@@ -105,34 +126,42 @@ static NSTimeInterval PoolScanInterval = 5 * 60 /* every five minutes */;
   NGImap4Connection *entry;
   NGImap4Client *client;
 
+  if (poolingOff) {
+    client = [self imap4ClientForURL:_url password:_p];
+    entry = [[NGImap4Connection alloc] initWithClient:client 
+				       password:_p];
+    return [entry autorelease];
+  }
+  else {
   /* check cache */
   
-  if ((entry = [self entryForURL:_url]) != nil) {
-    if ([entry isValidPassword:_p]) {
-      if (debugCache)
-	[self logWithFormat:@"valid password, reusing cache entry ..."];
-      return entry;
-    }
+    if ((entry = [self entryForURL:_url]) != nil) {
+      if ([entry isValidPassword:_p]) {
+	if (debugCache)
+	  [self logWithFormat:@"valid password, reusing cache entry ..."];
+	return entry;
+      }
     
-    /* different password, password could have changed! */
-    if (debugCache)
-      [self logWithFormat:@"different password than cached entry: %@", _url];
-    entry = nil;
-  }
-  else
-    [self debugWithFormat:@"no connection cached yet for url: %@", _url];
+      /* different password, password could have changed! */
+      if (debugCache)
+	[self logWithFormat:@"different password than cached entry: %@", _url];
+      entry = nil;
+    }
+    else
+      [self debugWithFormat:@"no connection cached yet for url: %@", _url];
   
-  /* try to login */
+    /* try to login */
   
-  client = [entry isValidPassword:_p]
-    ? [entry client]
-    : [self imap4ClientForURL:_url password:_p];
-  
-  if (client == nil)
-    return nil;
+    client = [entry isValidPassword:_p]
+      ? [entry client]
+      : [self imap4ClientForURL:_url password:_p];
+    
+    if (client == nil)
+      return nil;
   
   /* sideeffect of -imap4ClientForURL:password: is to create a cache entry */
-  return [self entryForURL:_url];
+    return [self entryForURL:_url];
+  }
 }
 
 /* client object */

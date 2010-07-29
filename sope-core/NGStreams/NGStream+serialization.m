@@ -282,10 +282,10 @@ void NGStreamDeserializeObjC(id<NGStream> self,
       else {
         char *result = NULL;
     
-#if NeXT_Foundation_LIBRARY
-        result = NSZoneMalloc(NULL, len + 1);
-#else
+#if LIB_FOUNDATION_LIBRARY
         result = NSZoneMallocAtomic(NULL, len + 1);
+#else
+        result = NSZoneMalloc(NULL, len + 1);
 #endif
         result[len] = '\0';
     

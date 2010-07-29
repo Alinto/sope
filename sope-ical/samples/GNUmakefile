@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 
 TOOL_NAME = icalparsetest icalds vcf2xml vcfparsetest ievalrrule
@@ -14,4 +14,3 @@ ievalrrule_OBJC_FILES    = ievalrrule.m
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/tool.make
 -include GNUmakefile.postamble
--include fhs.make

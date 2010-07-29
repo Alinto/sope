@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include ../common.make
 
 ifneq ($(frameworks),yes)
@@ -11,7 +11,8 @@ endif
 
 libEOControl_PCH_FILE = common.h
 libEOControl_DLL_DEF = libEOControl.def
-libEOControl_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libEOControl_INTERFACE_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libEOControl_INSTALL_DIR=$(SOPE_SYSLIBDIR)
 libEOControl_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 
 libEOControl_HEADER_FILES_DIR         = .
@@ -73,10 +74,12 @@ EOControl_OBJC_FILES   = $(libEOControl_OBJC_FILES)
 # building
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/library.make
 else
 include $(GNUSTEP_MAKEFILES)/framework.make
 endif
 -include GNUmakefile.postamble
--include fhs.make

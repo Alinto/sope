@@ -467,13 +467,27 @@
 
 // transaction commands
 
+- (NSString *) _sanitizeAddress: (NSString *) address
+{
+  NSString *saneAddress;
+
+  if ([address hasPrefix: @"<"])
+    saneAddress = address;
+  else
+    saneAddress = [NSString stringWithFormat: @"<%@>", address];
+
+  return saneAddress;
+}
+
 - (BOOL)mailFrom:(id)_sender {
-  NGSmtpResponse *reply  = nil;
-  NSString       *sender = nil;
+  NGSmtpResponse *reply;
+  NSString       *sender;
+
   [self requireState:NGSmtpState_connected];
 
-  sender = [@"FROM:" stringByAppendingString:[_sender stringValue]];
-  reply  = [self sendCommand:@"MAIL" argument:sender];
+  sender = [self _sanitizeAddress: [_sender stringValue]];
+  reply  = [self sendCommand: @"MAIL"
+                    argument: [@"FROM:" stringByAppendingString: sender]];
   if ([reply isPositive]) {
     if ([reply code] != NGSmtpActionCompleted) {
       NSLog(@"SMTP(MAIL FROM): expected reply code %i, got code %i ..",
@@ -490,9 +504,10 @@
   NSString       *rcpt  = nil;
   
   [self requireState:NGSmtpState_TRANSACTION];
-  
-  rcpt  = [@"TO:" stringByAppendingString:[_receiver stringValue]];
-  reply = [self sendCommand:@"RCPT" argument:rcpt];
+
+  rcpt  = [self _sanitizeAddress: [_receiver stringValue]];
+  reply = [self sendCommand: @"RCPT"
+                   argument: [@"TO:" stringByAppendingString: rcpt]];
   if ([reply isPositive]) {
     if ([reply code] != NGSmtpActionCompleted) {
       NSLog(@"SMTP(RCPT TO): expected reply code %i, got code %i ..",
@@ -507,6 +522,10 @@
   NGSmtpResponse *reply = nil;
   NSMutableData *cleaned_data;
   NSRange r1, r2;
+  
+  const char *bytes;
+  char *mbytes;
+  int len, mlen;
 
   [self requireState:NGSmtpState_TRANSACTION];
 
@@ -519,7 +538,37 @@
     }
     [self->text flush];
 
-    cleaned_data = [NSMutableData dataWithData: _data];
+    //
+    // SOPE sucks in many ways and that is one of them. The headers are actually
+    // correctly encoded (trailing \r\n is inserted) but not the base64 encoded
+    // data since it uses GNUstep's dataByEncodingBase64 function which says:
+    //
+    // NGBase64Coding.h:- (NSData *)dataByEncodingBase64; /* Note: inserts '\n' every 72 chars */
+    //
+    len = [_data length];
+    mlen = 0;
+
+    cleaned_data = [NSMutableData dataWithLength: len*2];
+
+    bytes = [_data bytes];
+    mbytes = [cleaned_data mutableBytes];
+
+    while (len > 0)
+      {
+	if (*bytes == '\n' && *(bytes-1) != '\r' && mlen > 0)
+	  {
+	    *mbytes = '\r';
+	    mbytes++;
+	    mlen++;
+	  }
+  
+	  *mbytes = *bytes;
+	  mbytes++; bytes++;
+	  len--;
+	  mlen++;
+      }
+
+    [cleaned_data setLength: mlen];
 
     //
     // According to RFC 2821 section 4.5.2, we must check for the character

@@ -2,7 +2,7 @@
 
 SOPE_ROOT=../../..
 
--include $(SOPE_ROOT)/config.make
+include $(SOPE_ROOT)/config.make
 include $(SOPE_ROOT)/Version
 include ../Version
 

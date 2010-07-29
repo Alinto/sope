@@ -296,7 +296,7 @@ static void _flushAtExit(void) {
   unsigned char *str, *buf;
   unsigned toGo;
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1040
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= 1040 || (GNUSTEP && OS_API_VERSION(100400,GS_API_LATEST))
   if ((toGo = [_string maximumLengthOfBytesUsingEncoding:self->encoding]) == 0)
     return YES;
   

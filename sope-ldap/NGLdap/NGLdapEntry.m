@@ -105,14 +105,16 @@
 - (NGLdapAttribute *)attributeWithName:(NSString *)_name {
   NSEnumerator    *e;
   NGLdapAttribute *a;
-  
+  NSString        *upperName;
+
   if (_name == nil)
     return nil;
 
+  upperName = [_name uppercaseString];
   e = [self->attributes objectEnumerator];
 
   while ((a = [e nextObject])) {
-    if ([[a attributeName] isEqualToString:_name])
+    if ([[[a attributeName] uppercaseString] isEqualToString:upperName])
       return a;
   }
   return nil;

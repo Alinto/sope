@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 
 TOOL_NAME = \
@@ -36,4 +36,3 @@ ngcal_OBJC_FILES         = ngcal.m
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/tool.make
 -include GNUmakefile.postamble
--include fhs.make

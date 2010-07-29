@@ -1,3 +1,13 @@
+2010-03-31  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* OracleAdaptorChannel.m (+initialize): set the prefetch memory
+	size from a new "OracleAdaptorPrefetchMemorySize" userdefault. Use
+	"16 * 1024" by default.
+	(-evaluateExpression:): make use of the new prefetchMemorySize
+	variable to configure the OCI_ATTR_PREFETCH_MEMORY on the
+	statement. We also set OCI_ATTR_PREFETCH_ROWS to an unreasonably
+	high number to ensure the memory size always has precedence.
+
 2007-11-15  Ludovic Marcotte <ludovic@inverse.ca>
 
  	* fixes

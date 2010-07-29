@@ -24,6 +24,8 @@
 #include "NGImap4Client.h"
 #include "NGImap4Context.h"
 #include "NGImap4Support.h"
+#include "NGImap4Envelope.h"
+#include "NGImap4EnvelopeAddress.h"
 #include "NGImap4Functions.h"
 #include "NGImap4ResponseParser.h"
 #include "NGImap4ResponseNormalizer.h"
@@ -53,17 +55,17 @@
 
 @end /* NGImap4Client(ConnectionRegistration); */
 
-#if GNUSTEP_BASE_LIBRARY
-/* FIXME: TODO: move someplace better (hh: NGExtensions...) */
-@implementation NSException(setUserInfo)
+// #if GNUSTEP_BASE_LIBRARY
+// /* FIXME: TODO: move someplace better (hh: NGExtensions...) */
+// @implementation NSException(setUserInfo)
 
-- (id)setUserInfo:(NSDictionary *)_userInfo {
-  ASSIGN(self->_e_info, _userInfo);
-  return self;
-}
+// - (id)setUserInfo:(NSDictionary *)_userInfo {
+//   ASSIGN(self->_e_info, _userInfo);
+//   return self;
+// }
 
-@end /* NSException(setUserInfo) */
-#endif
+// @end /* NSException(setUserInfo) */
+// #endif
 
 @interface NGImap4Client(Private)
 
@@ -83,6 +85,8 @@
 - (void)sendResponseNotification:(NGHashMap *)map;
 
 - (NSDictionary *)login;
+
+- (NSDictionary *) _sopeSORT: (id)_sortSpec  qualifier:(EOQualifier *)_qual  encoding:(NSString *)_encoding;
 
 @end
 
@@ -109,6 +113,9 @@ static int          PreventExceptions  = -1;
 static BOOL         fetchDebug         = NO;
 static BOOL         ImapDebugEnabled   = NO;
 static NSArray      *Imap4SystemFlags  = nil;
+
+static NSMutableDictionary *capabilities;
+static NSMutableDictionary *namespaces;
 
 - (BOOL)useSSL {
   return self->useSSL;
@@ -140,6 +147,9 @@ static NSArray      *Imap4SystemFlags  = nil;
 
   Imap4SystemFlags = [[NSArray alloc] initWithObjects: @"seen", @"answered",
 				      @"deleted", @"draft", nil];
+
+  capabilities = [[NSMutableDictionary alloc] init];
+  namespaces = [[NSMutableDictionary alloc] init];
 }
 
 /* constructors */
@@ -195,11 +205,14 @@ static NSArray      *Imap4SystemFlags  = nil;
     self->debug            = ImapDebugEnabled;
     self->responseReceiver = [[NSMutableArray alloc] initWithCapacity:128];
     self->normer = [[NGImap4ResponseNormalizer alloc] initWithClient:self];
+    self->loggedIn	   = NO;
+    self->context	   = nil;
   }
   return self;
 }
 
 - (void)dealloc {
+  if (self->loggedIn) [self logout];
   [self removeFromConnectionRegister];
   [self->normer           release];
   [self->text             release];
@@ -457,8 +470,8 @@ static NSArray      *Imap4SystemFlags  = nil;
 - (void)reconnect {
   if ([self->context lastException] != nil)
     return;
-    
-  [self closeConnection];  
+
+  [self closeConnection];
   self->tagId = 0;
   [self openConnection];
 
@@ -481,6 +494,7 @@ static NSArray      *Imap4SystemFlags  = nil;
   */
   NGHashMap *map;
   NSString  *s, *log;
+  NSDictionary *response;
 
   if (self->isLogin )
     return nil;
@@ -499,7 +513,11 @@ static NSArray      *Imap4SystemFlags  = nil;
   
   self->isLogin = NO;
   
-  return [self->normer normalizeResponse:map];
+  response = [self->normer normalizeResponse:map];
+
+  self->loggedIn = [[response valueForKey:@"result"] boolValue];
+
+  return response;
 }
 
 - (NSDictionary *)logout {
@@ -508,6 +526,8 @@ static NSArray      *Imap4SystemFlags  = nil;
 
   map = [self processCommand:@"logout"];
   [self closeConnection];
+  [self->selectedFolder release]; self->selectedFolder = nil;
+  self->loggedIn = NO;
   
   return [self->normer normalizeResponse:map];
 }
@@ -530,7 +550,7 @@ static NSArray      *Imap4SystemFlags  = nil;
   NSAutoreleasePool *pool;
   NGHashMap         *map;
   NSDictionary      *result;
-  NSString *s;
+  NSString *s, *prefix;
   
   pool = [[NSAutoreleasePool alloc] init];
   
@@ -547,7 +567,12 @@ static NSArray      *Imap4SystemFlags  = nil;
     if (!(_pattern = [self _folder2ImapFolder:_pattern]))
       return nil;
   
-  s = [NSString stringWithFormat:@"list \"%@\" \"%@\"", _folder, _pattern];
+  if ([_folder length] > 0)
+    prefix = [NSString stringWithFormat: @"%@%@",
+                       SaneFolderName(_folder), self->delimiter];
+  else
+    prefix = @"";
+  s = [NSString stringWithFormat:@"LIST \"\" \"%@%@\"", prefix, _pattern];
   map = [self processCommand:s];
   
   if (self->delimiter == nil) {
@@ -563,9 +588,40 @@ static NSArray      *Imap4SystemFlags  = nil;
 }
 
 - (NSDictionary *)capability {
+  NSDictionary *result;
   id capres;
-  capres = [self processCommand:@"capability"];
-  return [self->normer normalizeCapabilityRespone:capres];
+  
+  result = [capabilities objectForKey: [self->address description]];
+
+  if (!result)
+    {
+      capres = [self processCommand:@"capability"];
+      result = [self->normer normalizeCapabilityResponse:capres];
+  
+      if (result)
+	[capabilities setObject:  result  forKey: [self->address description]];
+    }
+  return result;
+}
+
+- (NSDictionary *)namespace {
+  NSArray *capabilities;
+  NGHashMap *namesres;
+  id namespace;
+
+  namespace = [namespaces objectForKey: [self->address description]];
+  if (!namespace) {
+    capabilities = [[self capability] objectForKey: @"capability"];
+    if ([capabilities containsObject: @"namespace"]) {
+      namesres = [self processCommand: @"namespace"];
+      namespace = [self->normer normalizeNamespaceResponse:namesres];
+    }
+    else
+      namespace = [NSNull null];
+    [namespaces setObject: namespace forKey: [self->address description]];
+  }
+
+  return ([namespace isKindOfClass: [NSNull class]] ? nil : namespace);
 }
 
 - (NSDictionary *)lsub:(NSString *)_folder pattern:(NSString *)_pattern {
@@ -574,7 +630,7 @@ static NSArray      *Imap4SystemFlags  = nil;
     The returnvalue is the same like the list:pattern: method
   */
   NGHashMap *map;
-  NSString  *s;
+  NSString  *s, *prefix;
 
   if (_folder == nil)
     _folder = @"";
@@ -591,7 +647,11 @@ static NSArray      *Imap4SystemFlags  = nil;
       return nil;
   }
   
-  s = [NSString stringWithFormat:@"lsub \"%@\" \"%@\"", _folder, _pattern];
+  if ([_folder length] > 0)
+    prefix = [NSString stringWithFormat: @"%@%@", SaneFolderName(_folder), self->delimiter];
+  else
+    prefix = @"";
+  s = [NSString stringWithFormat:@"LSUB \"\" \"%@%@\"", prefix, _pattern];
   map = [self processCommand:s];
 
   if (self->delimiter == nil) {
@@ -617,22 +677,23 @@ static NSArray      *Imap4SystemFlags  = nil;
       'flags'       - array of strings (eg (answered,flagged,draft,seen);
       'RawResponse' - the raw IMAP4 response
    */
-  NSString *s;
-  id tmp;
-  
-  tmp = self->selectedFolder; // remember ptr to old folder name
-  
+  NSString *s, *newFolder;
+
   if (![_folder isNotEmpty])
     return nil;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
 
-  self->selectedFolder = [_folder copy];
-  
-  [tmp release]; tmp = nil; // release old folder name
+  newFolder = [NSString stringWithString: _folder];
+  ASSIGN (self->selectedFolder, newFolder);
 
-  s = [NSString stringWithFormat:@"select \"%@\"", self->selectedFolder];
+  s = [NSString stringWithFormat:@"select \"%@\"", SaneFolderName(self->selectedFolder)];
   return [self->normer normalizeSelectResponse:[self processCommand:s]];
+}
+
+- (NSDictionary *)unselect {
+  [self->selectedFolder release]; self->selectedFolder = nil;
+  return [self->normer normalizeResponse:[self processCommand:@"unselect"]];
 }
 
 - (NSDictionary *)status:(NSString *)_folder flags:(NSArray *)_flags {
@@ -646,7 +707,7 @@ static NSArray      *Imap4SystemFlags  = nil;
     return nil;
   
   cmd     = [NSString stringWithFormat:@"status \"%@\" (%@)",
-                      _folder, [_flags componentsJoinedByString:@" "]];
+                      SaneFolderName(_folder), [_flags componentsJoinedByString:@" "]];
   return [self->normer normalizeStatusResponse:[self processCommand:cmd]];
 }
 
@@ -663,24 +724,28 @@ static NSArray      *Imap4SystemFlags  = nil;
   if ((_newName = [self _folder2ImapFolder:_newName]) == nil)
     return nil;
   
-  cmd = [NSString stringWithFormat:@"rename \"%@\" \"%@\"", _folder, _newName];
+  cmd = [NSString stringWithFormat:@"rename \"%@\" \"%@\"",
+                  SaneFolderName(_folder), SaneFolderName(_newName)];
   
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
 - (NSDictionary *)_performCommand:(NSString *)_op onFolder:(NSString *)_fname {
   NSString *command;
-  
+
   if ((_fname = [self _folder2ImapFolder:_fname]) == nil)
     return nil;
-  
+
   // eg: 'delete "blah"'
-  command = [NSString stringWithFormat:@"%@ \"%@\"", _op, _fname];
-  
+  command = [NSString stringWithFormat:@"%@ \"%@\"", _op, SaneFolderName(_fname)];
+
   return [self->normer normalizeResponse:[self processCommand:command]];
 }
 
 - (NSDictionary *)delete:(NSString *)_name {
+  if ([self->selectedFolder isEqualToString:_name]) {
+    [self unselect];
+  }
   return [self _performCommand:@"delete" onFolder:_name];
 }
 - (NSDictionary *)create:(NSString *)_name {
@@ -820,23 +885,23 @@ static NSArray      *Imap4SystemFlags  = nil;
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
-- (NSDictionary *)storeFlags:(NSArray *)_flags forMSNs:(id)_msns
+- (NSDictionary *)storeFlags:(NSArray *)_flags forUIDs:(id)_uids
   addOrRemove:(BOOL)_flag
 {
   NSString *cmd;
   NSString *flagstr;
   NSString *seqstr;
   
-  if ([_msns isKindOfClass:[NSArray class]]) {
+  if ([_uids isKindOfClass:[NSArray class]]) {
     // TODO: improve by using ranges, eg 1:5 instead of 1,2,3,4,5
-    _msns  = [_msns valueForKey:@"stringValue"];
-    seqstr = [_msns componentsJoinedByString:@","];
+    _uids  = [_uids valueForKey:@"stringValue"];
+    seqstr = [_uids componentsJoinedByString:@","];
   }
   else
-    seqstr = [_msns stringValue];
+    seqstr = [_uids stringValue];
   
   flagstr = [_flags2ImapFlags(self, _flags) componentsJoinedByString:@" "];
-  cmd = [NSString stringWithFormat:@"store %@ %cFLAGS (%@)",
+  cmd = [NSString stringWithFormat:@"UID STORE %@ %cFLAGS (%@)",
 		    seqstr, _flag ? '+' : '-', flagstr];
   
   return [self->normer normalizeResponse:[self processCommand:cmd]];
@@ -896,35 +961,23 @@ static NSArray      *Imap4SystemFlags  = nil;
   NSArray   *flags;
   NGHashMap *result;
   NSString  *message, *icmd;
+  char       *new;
+  const char *old;
+  int         cntOld   = 0;
+  int         cntNew   = 0;
+  int         len      = 0;
 
   flags   = _flags2ImapFlags(self, _flags);
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   
-
   /* Remove bare newlines */
-  {
-    char       *new;
-    const char *old;
-    int         cntOld   = 0;
-    int         cntNew   = 0;
-    int         len      = 0;
-    
-    old = [_message bytes];
-    len = [_message length];
-    
-    new = calloc(len * 2 + 4, sizeof(char));
-    
-    while (cntOld < (len - 1)) {
-      if (old[cntOld] == '\n') {
-        new[cntNew] = '\r'; cntNew++;
-        new[cntNew] = '\n'; cntNew++;
-      }
-      else if (old[cntOld] != '\r') {
-        new[cntNew] = old[cntOld]; cntNew++;
-      }
-      cntOld++;
-    }
+  old = [_message bytes];
+  len = [_message length];
+
+  new = calloc(len * 2 + 4, sizeof(char));
+
+  while (cntOld < (len - 1)) {
     if (old[cntOld] == '\n') {
       new[cntNew] = '\r'; cntNew++;
       new[cntNew] = '\n'; cntNew++;
@@ -932,16 +985,24 @@ static NSArray      *Imap4SystemFlags  = nil;
     else if (old[cntOld] != '\r') {
       new[cntNew] = old[cntOld]; cntNew++;
     }
-    
-    // TODO: fix this junk, do not treat the message as a string, its NSData
-    message = [(NSString *)[NSString alloc] initWithCString:new length:cntNew];
-    if (new != NULL) free(new); new = NULL;
+    cntOld++;
   }
-  
+  if (old[cntOld] == '\n') {
+    new[cntNew] = '\r'; cntNew++;
+    new[cntNew] = '\n'; cntNew++;
+  }
+  else if (old[cntOld] != '\r') {
+    new[cntNew] = old[cntOld]; cntNew++;
+  }
+
+  // TODO: fix this junk, do not treat the message as a string, its NSData
+  message = [(NSString *)[NSString alloc] initWithUTF8String:new];
+  if (new != NULL) free(new); new = NULL;
+
   icmd = [NSString stringWithFormat:@"append \"%@\" (%@) {%d}",
                      _folder,
                      [flags componentsJoinedByString:@" "],
-                     [message cStringLength]];
+                     cntNew];
   result = [self processCommand:icmd
                  withTag:YES withNotification:NO];
   
@@ -967,11 +1028,12 @@ static NSArray      *Imap4SystemFlags  = nil;
   descr = @"Could not process qualifier for imap search "; 
   descr = [descr stringByAppendingString:reason];           
   
-  exception = [[NGImap4SearchException alloc] initWithFormat:@"%@", descr];    
   ui = [NSDictionary dictionaryWithObject:_q forKey:@"qualifier"];
-  [exception setUserInfo:ui];
+  exception
+    = [NGImap4SearchException exceptionWithName: @"NGImap4SearchException"
+			      reason: descr
+			      userInfo: ui];
   [self->context setLastException:exception];
-  [exception release];
 }
 
 - (NSString *)_searchExprForQual:(EOQualifier *)_qualifier {
@@ -1093,6 +1155,17 @@ static NSArray      *Imap4SystemFlags  = nil;
      Eg: UID SORT ( DATE REVERSE SUBJECT ) UTF-8 TODO
   */
   NSString *tmp;
+  NSArray *capa;
+  
+  // We first check to see if our server supports IMAP SORT. If not
+  // we'll sort ourself the results.
+  capa = [[self capability] objectForKey: @"capability"];
+
+  if ([capa indexOfObject: @"sort"] == NSNotFound)
+    {
+      return [self _sopeSORT: _sortSpec  qualifier: _qual  encoding: _encoding];
+    }
+
   
   if ([_sortSpec isKindOfClass:[NSArray class]])
     tmp = [self _generateIMAP4SortOrderings:_sortSpec];
@@ -1107,9 +1180,10 @@ static NSArray      *Imap4SystemFlags  = nil;
     tmp = @"DATE";
   }
   
+
   return [self primarySort:tmp 
-	       qualifierString:[self _searchExprForQual:_qual]
-	       encoding:_encoding];
+			   qualifierString:[self _searchExprForQual:_qual]
+			   encoding:_encoding];
 }
 - (NSDictionary *)sort:(NSArray *)_sortOrderings
   qualifier:(EOQualifier *)_qual
@@ -1130,7 +1204,7 @@ static NSArray      *Imap4SystemFlags  = nil;
     return nil;
   }
   
-  s = [@"search" stringByAppendingString:s];
+  s = [@"UID SEARCH" stringByAppendingString:s];
   return [self->normer normalizeSearchResponse:[self processCommand:s]];
 }
 
@@ -1142,7 +1216,7 @@ static NSArray      *Imap4SystemFlags  = nil;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   
-  cmd = [NSString stringWithFormat:@"getacl \"%@\"", _folder];
+  cmd = [NSString stringWithFormat:@"getacl \"%@\"", SaneFolderName(_folder)];
   return [self->normer normalizeGetACLResponse:[self processCommand:cmd]];
 }
 
@@ -1155,7 +1229,7 @@ static NSArray      *Imap4SystemFlags  = nil;
     return nil;
   
   cmd = [NSString stringWithFormat:@"setacl \"%@\" \"%@\" \"%@\"",
-		  _folder, _uid, _r];
+		  SaneFolderName(_folder), _uid, _r];
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
@@ -1166,7 +1240,7 @@ static NSArray      *Imap4SystemFlags  = nil;
     return nil;
   
   cmd = [NSString stringWithFormat:@"deleteacl \"%@\" \"%@\"",
-		  _folder, _uid];
+		  SaneFolderName(_folder), _uid];
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
@@ -1177,7 +1251,7 @@ static NSArray      *Imap4SystemFlags  = nil;
     return nil;
   
   cmd = [NSString stringWithFormat:@"listrights \"%@\" \"%@\"",
-		  _folder, _uid];
+		  SaneFolderName(_folder), _uid];
   return [self->normer normalizeListRightsResponse:[self processCommand:cmd]];
 }
 
@@ -1187,11 +1261,93 @@ static NSArray      *Imap4SystemFlags  = nil;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   
-  cmd = [NSString stringWithFormat:@"myrights \"%@\"", _folder];
+  cmd = [NSString stringWithFormat:@"myrights \"%@\"", SaneFolderName(_folder)];
   return [self->normer normalizeMyRightsResponse:[self processCommand:cmd]];
 }
 
 /* Private Methods */
+
+- (NSDictionary *) _sopeSORT: (id)_sortSpec  qualifier:(EOQualifier *)_qual  encoding:(NSString *)_encoding {
+  NSMutableDictionary *result;
+  NSDictionary *d;
+  NSCalendarDate *envDate;
+
+  result = [NSMutableDictionary dictionary];
+  [result setObject: [NSNumber numberWithBool: NO]  forKey: @"result"];
+
+  // _sortSpec: [REVERSE] {DATE,FROM,SUBJECT}
+  d = [self searchWithQualifier: _qual];
+    
+  if ((d = [d objectForKey: @"RawResponse"])) {
+    NSMutableDictionary *dict;
+    NSArray *a, *s_a;
+    BOOL b;
+    int i;
+
+    a = [d objectForKey: @"search"];
+    if ([a isNotEmpty]) {
+      d = [self fetchUids: a
+                    parts: [NSArray arrayWithObjects: @"ENVELOPE",
+                                    @"RFC822.SIZE", nil]];
+      a = [d objectForKey: @"fetch"];
+
+      dict = [NSMutableDictionary dictionary];
+      b = YES;
+
+      for (i = 0; i < [a count]; i++) {
+        NGImap4Envelope *env;
+        id o, uid, s;
+
+        o = [a objectAtIndex: i];
+        env = [o objectForKey: @"envelope"];
+        uid = [o objectForKey: @"uid"];
+
+        if ([_sortSpec rangeOfString: @"SUBJECT"].length) {
+          s = [env subject];
+          if ([s isKindOfClass: [NSData class]])
+            s = [[[NSString alloc] initWithData: s  encoding: NSUTF8StringEncoding] autorelease];
+	      
+          [dict setObject: (s != nil ? s : (id)@"")  forKey: uid];
+        }
+        else if ([_sortSpec rangeOfString: @"FROM"].length) {
+          s =  [[[env from] lastObject] email];
+          [dict setObject: (s != nil ? s : (id)@"")  forKey: uid];
+        }
+        else if ([_sortSpec rangeOfString: @"SIZE"].length) {
+          s = [o objectForKey: @"size"];
+          [dict setObject: (s != nil ? s : [NSNumber numberWithInt: 0])
+                   forKey: uid];
+          b = NO;
+        }
+        else {
+          envDate = [env date];
+          if (!envDate)
+            envDate = [NSCalendarDate date];
+          [dict setObject: envDate forKey: uid];
+          b = NO;
+        }
+      }
+      
+      if (b)
+      	s_a = [dict keysSortedByValueUsingSelector: @selector(caseInsensitiveCompare:)];
+      else
+      	s_a = [dict keysSortedByValueUsingSelector: @selector(compare:)];
+
+      if ([_sortSpec rangeOfString: @"REVERSE"].length)	{
+        s_a = [[s_a reverseObjectEnumerator] allObjects];
+      }
+      
+    }
+    else {
+      s_a = [NSArray array];
+    }
+    [result setObject: [NSNumber numberWithBool: YES]  forKey: @"result"];
+    [result setObject: s_a  forKey: @"sort"];
+  }
+
+  return result;
+}
+
 
 - (NSException *)_processCommandParserException:(NSException *)_exception {
   [self logWithFormat:@"ERROR(%s): catched IMAP4 parser exception %@: %@",
@@ -1280,7 +1436,9 @@ static NSArray      *Imap4SystemFlags  = nil;
     if (tryReconnect) {
       [self reconnect];
     }
-    else if ([map objectForKey:@"bye"] && ![_command hasPrefix:@"logout"]) {
+    else if ([map objectForKey:@"bye"]
+             && ![_command hasPrefix:@"logout"]
+             && ![self _isLoginCommand:_command]) {
       if (reconnectCnt == 0) {
         reconnectCnt++;
         tryReconnect = YES;
@@ -1412,21 +1570,24 @@ static inline NSArray *_flags2ImapFlags(NGImap4Client *self, NSArray *_flags) {
       return nil;
   }
 
-  array = [_folder pathComponents];
+//   array = [_folder pathComponents];
+  array = [_folder componentsSeparatedByString:@"/"];
 
-  if ([array isNotEmpty]) {
+  if ([array count]) {
     NSString *o;
 
     o = [array objectAtIndex:0];
-    if (([o isEqualToString:@"/"]) || ([o length] == 0))
+    if ([o length] == 0)
       array = [array subarrayWithRange:NSMakeRange(1, [array count] - 1)];
-    
-    o = [array lastObject];
-    if (([o length] == 0) || ([o isEqualToString:@"/"]))
-      array = [array subarrayWithRange:NSMakeRange(0, [array count] - 1)];
+
+    if ([array count]) {
+      o = [array lastObject];
+      if ([o length] == 0)
+        array = [array subarrayWithRange:NSMakeRange(0, [array count] - 1)];
+    }
   }
   return [[array componentsJoinedByString:self->delimiter]
-                 stringByEncodingImap4FolderName];
+           stringByEncodingImap4FolderName];
 }
 
 - (NSString *)_imapFolder2Folder:(NSString *)_folder {
@@ -1442,10 +1603,16 @@ static inline NSArray *_flags2ImapFlags(NGImap4Client *self, NSArray *_flags) {
       return nil;
   }
   
+  if ([_folder hasPrefix: self->delimiter])
+    _folder = [_folder substringFromIndex: 1];
+  if ([_folder hasSuffix: self->delimiter])
+    _folder = [_folder substringToIndex: [_folder length] - 1];
+
   array = [array arrayByAddingObjectsFromArray:
                    [_folder componentsSeparatedByString:[self delimiter]]];
-  
-  return [[NSString pathWithComponents:array] stringByDecodingImap4FolderName];
+
+  return [[array componentsJoinedByString: @"/"]
+           stringByDecodingImap4FolderName];
 }
 
 - (void)setContext:(NGImap4Context *)_ctx {

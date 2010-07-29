@@ -1,7 +1,7 @@
 # GNUstep makefile
 
--include ../../../config.make
 include ../subdirs.make
+include ../../../config.make
 
 SUBPROJECT_NAME = SoObjects
 

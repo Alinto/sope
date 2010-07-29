@@ -121,6 +121,7 @@ static int descriptiveIDs = -1;
     
     children = [_builder buildNodes:[_element childNodes]
                          templateBuilder:_builder];
+    [children autorelease];
   }
   else
     children = nil;

@@ -22,7 +22,7 @@
 # If not, write to the Free Software Foundation,
 # 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../Version
 include ./Version
@@ -67,4 +67,3 @@ ifeq ($(test),yes)
 include $(GNUSTEP_MAKEFILES)/tool.make
 endif
 -include GNUmakefile.postamble
-include fhs.make

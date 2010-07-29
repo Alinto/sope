@@ -36,8 +36,7 @@
   NGMimeType    *type = nil; // only one content-type field
   NSString      *tmp  = nil;
   NSMutableData *data = nil;
-  unsigned char *ctmp = NULL;
-  unsigned      len   = 0;
+  NSData	*valueData;
   
   type = _value;
 
@@ -59,21 +58,15 @@
   
   tmp = [type type];
   NSAssert(tmp, @"type should not be nil");
-  len  = [tmp length];
-  ctmp = malloc(len + 4);
-  [tmp getCString:(char *)ctmp]; ctmp[len] = '\0';
-  [data appendBytes:ctmp length:len];
-  free(ctmp);
-  
-  [data appendBytes:"//" length:1];
+  valueData = [tmp dataUsingEncoding: NSISOLatin1StringEncoding];
+  [data appendData: valueData];
+
+  [data appendBytes:"/" length:1];
   
   tmp = [type subType];
   if (tmp != nil) {
-    len  = [tmp length];
-    ctmp = malloc(len + 4);
-    [tmp getCString:(char *)ctmp]; ctmp[len] = '\0';
-    [data appendBytes:ctmp length:len];
-    free(ctmp);
+    valueData = [tmp dataUsingEncoding: NSISOLatin1StringEncoding];
+    [data appendData:valueData];
   }
   else
     [data appendBytes:"*" length:1];
@@ -91,12 +84,9 @@
         continue;
       }
       [data appendBytes:"; " length:2];
-      
-      len  = [name cStringLength];
-      ctmp = malloc(len + 1);
-      [name getCString:(char *)ctmp]; ctmp[len] = '\0';
-      [data appendBytes:ctmp length:len];
-      free(ctmp);
+  
+      valueData = [name dataUsingEncoding: NSUTF8StringEncoding];
+      [data appendData: valueData];
 
       /*
         this confuses GroupWise: "= \"" (a space)
@@ -105,66 +95,30 @@
 
       /* check for encoding */
       {
-        unsigned cnt;
+        unsigned cnt, max;
+	const char *dataBytes;
         BOOL doEnc;
         
-        len  = [value cStringLength];
-        ctmp = malloc(len + 4);
-        [value getCString:(char *)ctmp]; ctmp[len] = '\0';
-        cnt  = 0;
+	valueData = [value dataUsingEncoding:NSUTF8StringEncoding];
+	dataBytes = [valueData bytes];
+	max = [valueData length];
+
         doEnc = NO;
-        while (cnt < len) {
-          if ((unsigned char)ctmp[cnt] > 127) {
+        cnt  = 0;
+        while (!doEnc && cnt < max) {
+          if ((unsigned char)dataBytes[cnt] > 127)
             doEnc = YES;
-            break;
-          }
-          cnt++;
+	  else
+	    cnt++;
         }
         if (doEnc) {
-          unsigned char iso[]     = "=?iso-8859-15?q?";
-          unsigned      isoLen    = 16;
-          unsigned char isoEnd[]  = "?=";
-          unsigned      isoEndLen = 2;
-          unsigned      desLen;
-          unsigned char *des;
-	  
-          if (ctmp) free(ctmp);
-          {
-            NSData *data;
-
-#if APPLE_Foundation_LIBRARY || NeXT_Foundation_LIBRARY
-            data = [value dataUsingEncoding:NSISOLatin1StringEncoding];
-#else
-            data = [value dataUsingEncoding:NSISOLatin9StringEncoding];
-#endif
-
-            len  = [data length];
-            ctmp =  malloc(len + 10);
-            [data getBytes:ctmp];  ctmp[len] = '\0';
-          }
-          
-          desLen = len * 3 + 20;
-          des    = calloc(desLen + 10, sizeof(char));
-      
-          memcpy(des, ctmp, cnt);
-          memcpy(des + cnt, iso, isoLen);
-          desLen =
-               NGEncodeQuotedPrintableMime(ctmp + cnt, len - cnt,
-                                           des + cnt + isoLen,
-                                           desLen - cnt - isoLen);
-          if ((int)desLen != -1) {
-            memcpy(des + cnt + isoLen + desLen, isoEnd, isoEndLen);
-            [data appendBytes:des length:(cnt + isoLen + desLen + isoEndLen)];
-          }
-          else {
-            NSLog(@"WARNING: An error occour during quoted-printable decoding");
-          }
-          if (des) free(des);
+	  [data appendBytes:"=?utf-8?q?" length:10];
+	  [data appendData: [valueData dataByEncodingQuotedPrintable]];
+	  [data appendBytes:"?=" length:2];
         }
         else {
-          [data appendBytes:ctmp length:len];
+	  [data appendData: valueData];
         }
-          free(ctmp);
       }
       [data appendBytes:"\"" length:1];      
     }

@@ -1,6 +1,7 @@
 # compilation settings
 
-MACHCPU = $(shell echo $$MACHTYPE | cut -f 1 -d '-')
+# MACHCPU = $(shell echo $$MACHTYPE | cut -f 1 -d '-')
+MACHCPU = $(shell uname -m)
 
 libNGStreams_INCLUDE_DIRS += \
 	-I$(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS) \
@@ -41,7 +42,11 @@ ADDITIONAL_LIB_DIRS += \
 endif
 
 ifeq ($(findstring _64, $(GNUSTEP_TARGET_CPU)), _64)
+ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
+else
 SYSTEM_LIB_DIR += -L/usr/local/lib64 -L/usr/lib64
+endif
 else
 SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
 endif

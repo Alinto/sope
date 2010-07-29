@@ -1,3 +1,165 @@
+2010-04-07  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m (-list:pattern:, -lsub:pattern:): use an empty
+	prefix and put the used prefix in the "pattern" component of the
+	LIST or LSUB command, as this work around bugs in bad server
+	implementations.
+
+2010-04-02  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGSieveClient.m (-putScript:script:):
+	(-setActiveScript:, -deleteScript:): do not append an ending "\r\n"
+	since sendCommand:logText: does it for us.
+	(-setActiveScript:): we accept an empty non-nil script name as
+	argument in order to deactivate the currently active script.
+
+2010-03-11  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4ResponseParser.m (_parseContentSieveResponse): we now use
+	NSUTF8StringEncoding as explicit NSString encoding for sieve
+	responses.
+	(_parseDataSieveResponse): same as above.
+	(_parseOkSieveResponse): added a _parseUntil(.."\n") clause to
+	ensure that the current line has been completely parsed before
+	going on with the rest.
+	(_parseNoSieveResponse): same as above.
+
+2010-03-03  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGSieveClient.m (-putScript:script:): the byte count passed as
+	parameter to the server must correspond to an UTF-8 encoded
+	string.
+
+2010-02-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4ResponseParser.m (_parseACLResponseIntoHashMap:): user
+	ids enclosed in quotes are extracted from them, for servers not
+	following the standards properly.
+
+2010-02-18  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4ResponseParser.m (-parseResponseForTagId:exception:): the
+	unsigned "l0" was never compared with "-1". Therefore we cast "-1"
+	as an unsigned char to let the error check happen.
+
+2010-01-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m (-processCommand:withTag:withNotification:):
+	don't retry the command if it was a login command.
+
+2010-01-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m (-append:toFolder:withFlags:): we use the count
+	found in cntNew to avoid a crash with GNUstep's cStringLength.
+
+	* NGImap4ResponseParser.m (-parseResponseForTagId:exception:):
+	detect "-1" return code from _la and leave the loop with a proper
+	execption when it occurs.
+
+2010-01-15  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Connection.m (-doesMailboxExistAtURL:): sometimes an
+	entry is present in the subfolders cache. When it is the case, the
+	method was returning at the end of the first iteration even though
+	the mailbox was never found. We need to continue and then proceed
+	to the "status" check whether the cache is populated or not.
+
+2010-01-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Connection.m (-doesMailboxExistAtURL:): mailbox paths can
+	start with '/' on non-Apple platforms.
+	(-flushFolderHierarchyCache): reassign a new dictionary to
+	self->subfolders to avoid disappearing folders.
+
+2010-01-05  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4ResponseParser.m (_parseUntaggedResponse): now accepts
+	the "NAMESPACE" response and parse accordingly by making use of
+	the appropriate new method.
+
+	* NGImap4ResponseNormalizer.m (-normalizeNamespaceResponse):
+	self-explicit new method.
+
+	* NGImap4Connection.m (-subfolderForURL:, -allFoldersForURL:):
+	differenciate both methods by having "subfolder..." use the "%"
+	wild card and "allFolders" the "*" wildcard.
+	(-cachedHierarchyResultsForURL): now accepts a url parameter so
+	in order to maintain multiple caches depending on the queried
+	namespace.
+	(SOGoMailGetDirectChildren): if the array count is < 2, we must
+	not return since certain implementations may not return the
+	current folder.
+
+	* NGImap4Client.m (-namespace): new method implementing the
+	"NAMESPACE" command.
+	(-lsub:pattern:): we now sanitize the "prefix" particle of the
+	LSUB command.
+
+2009-11-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NSString+Imap4.m (_encodeToModifiedUTF7): handle the case where
+	the leftOver is 0 by "chance" after the first 2 cycles. This
+	can happen when coding characters having a bitmask with 6 zeroes
+	in a row.
+
+2009-10-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m (-delete:): if the folder we want to delete is
+	the same as self->selectedFolder, we unselect it first to ensure a
+	"SELECT" happens if a new folder with the same name is created.
+
+	* EOQualifier+IMAPAdditions.m
+	(-imap4OperatorForDateKeyword:andComparisonSelector:): modified
+	operator handler to handle "receive-date" search key as well as
+	"date", prefixing the real filter with "sent" or not.
+
+2009-09-22  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m (_sopeSORT:qualifier:encoding:): added support
+	for sorting by message size.
+
+2009-07-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Connection.m (-initWithClient:password:): we need to copy
+	the imap4Separator, otherwise it will be released when the connection
+	is deallocated.
+
+2009-06-15  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NSString+Imap4.m (-stringByEncodingImap4FolderName,
+	-stringByDecodingImap4FolderName): reimplemented the original
+	methods in a unicode-safe way, thereby simplifying the code at the
+	same time.
+
+	* NGImap4Functions.m (SaneFolderName): new function designed to
+	sanitize folder names prior to using them in IMAP commands.
+
+2008-10-23  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m ([NGImap -sort:qualifier:encoding:]): message
+	without date that are sorted on servers which do not have the SORT
+	capability are now given the current date as a work-around.
+
+2008-09-22  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Connection.m ([NGImap -doesMailboxExistAtURL:]): restore
+	the previously selected folder state.
+
+2008-09-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m ([NGImap -select:]): simplified method by
+	removing the need for storing the previous folder before releasing
+	it. This strangely seems to fix a crash with gnustep 1.14.
+
+2008-09-01  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* NGImap4ConnectionManager.m: implemented _garbageCollect.
+
+2008-08-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m ([NGImap -unselect]): new method to send
+	"UNSELECT" to the imap server.
+
 2007-08-24  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
 
 	* NGImap4Connection.m: some fix for folders ending with a slash (OGo

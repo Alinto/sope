@@ -82,7 +82,7 @@ SHARED_LIBEXT = .so
 
 CFLAGS  = -Wall -I. -fPIC \
 	$(APXS_CFLAGS) $(APR_CFLAGS) \
-	$(APXS_INCLUDE_DIRS) $(APR_INCLUDE_DIRS)
+	$(APXS_INCLUDE_DIRS) $(APR_INCLUDE_DIRS) -O0 -ggdb
 
 LDFLAGS = $(APXS_LDFLAGS) $(APR_LDFLAGS) -shared -fPIC
 LDLIBS  = $(APXS_LIBS) $(APR_LIBS)
@@ -111,8 +111,7 @@ distclean :: clean
 apache-dir :
 	$(MKDIRS) $(GNUSTEP_INSTALLATION_DIR)
 
-install :: apache-dir all
-	$(INSTALL_PROGRAM) $(product) $(GNUSTEP_INSTALLATION_DIR)
+install ::
 
 install-usr-libexec :: all
 	$(INSTALL_PROGRAM) $(product) /usr/libexec/httpd/

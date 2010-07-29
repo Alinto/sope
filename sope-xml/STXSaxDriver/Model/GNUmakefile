@@ -6,7 +6,7 @@
 #  Date: 24 November 2003
 #
 
--include ../../../config.make
+include ../../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 
 SUBPROJECT_NAME = Model

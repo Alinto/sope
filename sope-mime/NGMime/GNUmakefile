@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../Version
 
@@ -76,5 +76,8 @@ NGMime_OBJC_FILES = \
 	NGMimeRfc822BodyGenerator.m			\
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 include $(GNUSTEP_MAKEFILES)/subproject.make
 -include GNUmakefile.postamble

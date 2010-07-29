@@ -59,6 +59,8 @@
 - (NSString *)defaultMethodNameInContext:(id)_ctx;
 - (id)lookupDefaultMethod;
 
+- (BOOL)isFolderish;
+
 /* binding (returns self by default [unbound objects]) */
 
 - (id)bindToObject:(id)_object inContext:(id)_ctx;

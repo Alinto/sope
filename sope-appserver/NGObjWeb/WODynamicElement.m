@@ -98,6 +98,7 @@ static Class FormElementClass = Nil;
     template = [[WOCompoundElement allocForCount:[_contents count]
                                    zone:[self zone]]
                                    initWithContentElements:_contents];
+    [template autorelease];
   }
   
   return [self initWithName:_name
@@ -362,6 +363,7 @@ static Class FormElementClass = Nil;
     
     children = [_builder buildNodes:[_element childNodes]
                          templateBuilder:_builder];
+    [children autorelease];
   }
   else
     children = nil;

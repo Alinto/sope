@@ -294,8 +294,8 @@ static BOOL     debugImap4         = NO;
       return con;
   }
   
-  logLen = [self->login cStringLength];
-  bufLen = (logLen * 2) + [self->password cStringLength] +2;
+  logLen = [self->login lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
+  bufLen = (logLen * 2) + [self->password lengthOfBytesUsingEncoding: NSUTF8StringEncoding] +2;
   
   buf = calloc(bufLen + 2, sizeof(char));
   
@@ -306,8 +306,9 @@ static BOOL     debugImap4         = NO;
       password
   */
   sprintf(buf, "%s %s %s", 
-          [self->login cString], [self->login cString],
-          [self->password cString]);
+          [self->login cStringUsingEncoding:NSUTF8StringEncoding],
+          [self->login cStringUsingEncoding:NSUTF8StringEncoding],
+          [self->password cStringUsingEncoding:NSUTF8StringEncoding]);
   
   buf[logLen] = '\0';
   buf[logLen * 2 + 1] = '\0';
@@ -422,8 +423,9 @@ static BOOL     debugImap4         = NO;
   s = @"PUTSCRIPT \"";
   s = [s stringByAppendingString:_name];
   s = [s stringByAppendingString:@"\" "];
-  s = [s stringByAppendingFormat:@"{%d+}\r\n%@", [_script length], _script];
-  s = [s stringByAppendingString:@"\r\n"];
+  s = [s stringByAppendingFormat:@"{%d+}\r\n%@",
+         [_script lengthOfBytesUsingEncoding: NSUTF8StringEncoding],
+         _script];
   map = [self processCommand:s];
   return [self normalizeResponse:map];
 }
@@ -431,12 +433,12 @@ static BOOL     debugImap4         = NO;
 - (NSDictionary *)setActiveScript:(NSString *)_name {
   NGHashMap *map;
   
-  if (![self isValidScriptName:_name]) {
+  if (!_name) {
     NSLog(@"%s: missing script-name", __PRETTY_FUNCTION__);
     return nil;
   }
   map = [self processCommand:
-              [NSString stringWithFormat:@"SETACTIVE \"%@\"\r\n", _name]];
+              [NSString stringWithFormat:@"SETACTIVE \"%@\"", _name]];
   return [self normalizeResponse:map];
 }
 
@@ -449,7 +451,7 @@ static BOOL     debugImap4         = NO;
     return nil;
   }
   
-  s = [NSString stringWithFormat:@"DELETESCRIPT \"%@\"\r\n", _name];
+  s = [NSString stringWithFormat:@"DELETESCRIPT \"%@\"", _name];
   map = [self processCommand:s];
   return [self normalizeResponse:map];
 }
@@ -656,7 +658,7 @@ static BOOL     debugImap4         = NO;
       fputc('\n', stderr);
     }
     else
-      fprintf(stderr, "C: %s\n", [_txt cString]);
+      fprintf(stderr, "C: %s\n", [_txt cStringUsingEncoding:NSUTF8StringEncoding]);
   }
 
   /* write */

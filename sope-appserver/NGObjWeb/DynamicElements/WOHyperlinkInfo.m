@@ -216,6 +216,12 @@
       assocCount++;
     }
   }
+  if (count > 0) {
+    if ((self->isAbsolute = OWGetProperty(_config, @"absolute"))) {
+      count--;
+      assocCount++;
+    }
+  }
   
   self->rest = _config;
   

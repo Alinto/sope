@@ -25,6 +25,7 @@
 #include "SoObject+SoDAV.h"
 #include "EOFetchSpecification+SoDAV.h"
 #include "NSException+HTTP.h"
+#include <NGObjWeb/SoObject.h>
 #include <NGObjWeb/WOContext.h>
 #include <NGObjWeb/WOResponse.h>
 #include <NGObjWeb/WORequest.h>
@@ -48,6 +49,8 @@
 
 #define XMLNS_INTTASK \
 @"{http://schemas.microsoft.com/mapi/id/{00062003-0000-0000-C000-000000000046}/}"
+
+static Class NSURLKlass = Nil;
 
 @interface SoWebDAVRenderer(Privates)
 - (BOOL)renderStatusResult:(id)_object withDefaultStatus:(int)_defStatus
@@ -79,6 +82,8 @@ static BOOL         useRelativeURLs = YES;
   
   if ((debugOn = [ud boolForKey:@"SoRendererDebugEnabled"]))
     NSLog(@"enabled debugging in SoWebDAVRenderer (SoRendererDebugEnabled)");
+
+  NSURLKlass = [NSURL class];
 }
 
 + (id)sharedRenderer {
@@ -616,16 +621,19 @@ static BOOL         useRelativeURLs = YES;
     [r appendContentString:s];
   }
   else {
+    s = [self stringForValue:value ofProperty:_key prefixes:nsToPrefix];
     [r appendContentCharacter:'<'];
     [r appendContentString:extName];
-    [r appendContentCharacter:'>'];
-          
-    s = [self stringForValue:value ofProperty:_key prefixes:nsToPrefix];
-    [r appendContentString:s];
-          
-    [r appendContentString:@"</"];
-    [r appendContentString:extName];
-    [r appendContentString:@">"];
+    if ([s length] > 0) {
+      [r appendContentCharacter:'>'];
+      [r appendContentString:s];
+      [r appendContentString:@"</"];
+      [r appendContentString:extName];
+      [r appendContentString:@">"];
+    }
+    else {
+      [r appendContentString:@"/>"];
+    }
     if (formatOutput) [r appendContentCharacter:'\n'];
   }
 }
@@ -646,8 +654,9 @@ static BOOL         useRelativeURLs = YES;
   NSString     *key;
   id   href = nil;
   id   stat = nil;
-  BOOL isBrief;
-  
+  BOOL isBrief, hasSlash;
+
+  hasSlash = [[[_ctx request] uri] hasSuffix: @"/"];
   r = [_ctx response];
   isBrief = [[[_ctx request] headerForKey:@"brief"] hasPrefix:@"t"] ? YES : NO;
 
@@ -694,8 +703,13 @@ static BOOL         useRelativeURLs = YES;
     }
 
     /* tidy href */
-    href = [self tidyHref:href baseURL:baseURL];
-    
+    if (useRelativeURLs) {
+      if ([href isKindOfClass: NSURLKlass])
+        href = [href path];
+    }
+    else
+      href = [self tidyHref:href baseURL:baseURL];
+
     /* tidy status */
     stat = [self tidyStatus:stat];
   }
@@ -703,7 +717,22 @@ static BOOL         useRelativeURLs = YES;
     href = [baseURL stringValue];
     stat = @"HTTP/1.1 200 OK";
   }
-  
+
+  /* make the presence of the href slash correspond to the request slash */
+  if (hasSlash) {
+    /* megahack: we consider entry to be the base entry if it's an
+       NSDictionary */
+    if (![href hasSuffix: @"/"]
+        && ([entry isFolderish]
+            || [entry isKindOfClass: [NSDictionary class]])) {
+      href = [href stringByAppendingString: @"/"];
+    }
+  }
+  else {
+    if ([href hasSuffix: @"/"])
+      href = [href substringToIndex: [href length] - 2];
+  }
+
   if (debugOn) {
     [self debugWithFormat:@"    status: %@", stat];
     [self debugWithFormat:@"    href:   %@", href];

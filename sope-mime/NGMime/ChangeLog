@@ -1,3 +1,25 @@
+2008-09-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGMimeRFC822DateHeaderFieldParser.m ([NGMimeRFC
+	-parseValue:ofHeaderField:]): don't parse timezone with a length
+	of 0.
+
+2008-09-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGMimeRFC822DateHeaderFieldParser.m ([NGMimeRFC
+	-parseValue:ofHeaderField:]): use an 8-bit safe encoding when
+	parsing dates. Since we only consider 7-bits characters, we ensure
+	that bad user-agents can be handled more properly.
+
+	* NGMimeType.m ([NGMimeType +stringEncodingForCharset:]):
+	x-unknown encoding is now translated to an 8-bit safe encoding
+	(NSISOLatin1StringEncoding).
+
+	* NGMimeAddressHeaderFieldGenerator.m
+	([NGMimeAddressHeaderFieldGenerator
+	-generateDataForHeaderFieldNamed:value:]): encode resulting string
+	in an 8-bit safe encoding (NSISOLatin1StringEncoding).
+
 2008-01-29  Albrecht Dress  <albrecht.dress@lios-tech.com>
 
 	* fixes for OGo bug #789 (reply-to QP encoding)

@@ -231,7 +231,7 @@ static int debugOn = 0;
   
   fm = [NSFileManager defaultManager];
   pi = [NSProcessInfo processInfo];
-  
+#if ! GNUSTEP_BASE_LIBRARY  
 #if COCOA_Foundation_LIBRARY && !COMPILE_FOR_GNUSTEP
   /* 
      TODO: (like COMPILE_FOR_GNUSTEP)
@@ -250,12 +250,9 @@ static int debugOn = 0;
   pathes = [[pathes stringValue] componentsSeparatedByString:@":"];
   relPath = @"Library/";
 #endif
-  
-  [self debugWithFormat:@"scanning for products ..."];
-  
   relPath = [relPath stringByAppendingFormat:@"SoProducts-%i.%i/",
                         SOPE_MAJOR_VERSION, SOPE_MINOR_VERSION];
-  
+  [self debugWithFormat:@"scanning for products ..."];
   for (i = 0; i < [pathes count]; i++) {
     NSString *lPath;
     BOOL     isDir;
@@ -271,6 +268,37 @@ static int debugOn = 0;
     [self debugWithFormat:@"  directory %@", lPath];
     [self scanForProductsInDirectory:lPath];
   }
+#else
+  NSEnumerator *libraryPaths;
+  NSString *directory;
+  NSMutableArray *tmppath;
+
+  libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+  tmppath = [[NSMutableArray alloc] init];
+  while ((directory = [libraryPaths nextObject]))
+    [tmppath addObject: [directory stringByAppendingPathComponent: 
+		[NSString stringWithFormat:@"SoProducts-%i.%i/",
+		SOPE_MAJOR_VERSION, SOPE_MINOR_VERSION]]];
+  pathes = [tmppath mutableCopy];
+  [self debugWithFormat:@"scanning for products ..."];
+  for (i = 0; i < [pathes count]; i++) {
+    NSString *lPath;
+    BOOL     isDir;
+    
+    lPath = [pathes objectAtIndex:i];
+    [self debugWithFormat:@"  scan: %@", lPath];
+    
+    if (![fm fileExistsAtPath:lPath isDirectory:&isDir])
+      continue;
+    if (!isDir)
+      continue;
+    
+    [self debugWithFormat:@"  directory %@", lPath];
+    [self scanForProductsInDirectory:lPath];
+  }
+  [tmppath release];
+#endif
+
 
 #if COCOA_Foundation_LIBRARY
   /* look in wrapper places */
@@ -282,8 +310,8 @@ static int debugOn = 0;
   /* look into FHS pathes */
   
   relPath = [NSString stringWithFormat:
-#if CONFIGURE_64BIT
-			@"lib64/sope-%i.%i/products/",
+#ifdef CGS_LIBDIR_NAME
+			[CGS_LIBDIR_NAME stringByAppendingString:@"/sope-%i.%i/products/"],
 #else
 			@"lib/sope-%i.%i/products/",
 #endif

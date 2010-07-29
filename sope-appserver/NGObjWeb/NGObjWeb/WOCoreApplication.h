@@ -31,6 +31,8 @@
 @class WOAdaptor, WORequest, WOResponse, WORequestHandler;
 @class NSBundle;
 
+@class NGActiveSocket, NGPassiveSocket;
+
 NGObjWeb_EXPORT NSString *WOApplicationWillFinishLaunchingNotification;
 NGObjWeb_EXPORT NSString *WOApplicationDidFinishLaunchingNotification;
 NGObjWeb_EXPORT NSString *WOApplicationWillTerminateNotification;
@@ -40,6 +42,9 @@ NGObjWeb_EXPORT NSString *WOApplicationDidTerminateNotification;
 {
   NSRecursiveLock *lock;
   NSLock          *requestLock;
+
+  NGActiveSocket *controlSocket;
+  NGPassiveSocket *listeningSocket;
 
   struct {
     BOOL isTerminating:1;
@@ -54,6 +59,14 @@ NGObjWeb_EXPORT NSString *WOApplicationDidTerminateNotification;
 + (id)application;
 - (void)activateApplication;
 - (void)deactivateApplication;
+
+/* Watchdog helpers */
+
+- (void)setControlSocket: (NGActiveSocket *) newSocket;
+- (NGActiveSocket *)controlSocket;
+
+- (void)setListeningSocket: (NGPassiveSocket *) newSocket;
+- (NGPassiveSocket *)listeningSocket;
 
 /* adaptors */
 

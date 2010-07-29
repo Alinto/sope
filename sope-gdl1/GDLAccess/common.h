@@ -42,7 +42,7 @@
 #import <Foundation/NSZone.h>
 #import <Foundation/Foundation.h>
 
-#if !(COCOA_Foundation_LIBRARY || NeXT_Foundation_LIBRARY)
+#if !(COCOA_Foundation_LIBRARY || NeXT_Foundation_LIBRARY || GNUSTEP_BASE_LIBRARY)
 #  import <Foundation/NSUtilities.h>
 #endif
 

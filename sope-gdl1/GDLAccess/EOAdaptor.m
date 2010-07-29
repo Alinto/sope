@@ -53,14 +53,23 @@
 + (NSArray *)adaptorSearchPathes {
   // TODO: add support for Cocoa
   static NSArray *searchPathes = nil;
-  NSDictionary   *env;
   NSMutableArray *ma;
   id             tmp;
 
   if (searchPathes != nil) return searchPathes;
 
-  env = [[NSProcessInfo processInfo] environment];
   ma  = [NSMutableArray arrayWithCapacity:8];
+
+#if GNUSTEP_BASE_LIBRARY
+  NSEnumerator *libraryPaths;
+  NSString *directory, *suffix;
+  suffix = [self libraryDriversSubDir];
+  libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+  while ((directory = [libraryPaths nextObject]))
+    [ma addObject: [directory stringByAppendingPathComponent: suffix]];
+#else
+  NSDictionary   *env;
+  env = [[NSProcessInfo processInfo] environment];
   
   if ((tmp = [env objectForKey:@"GNUSTEP_PATHPREFIX_LIST"]) == nil)
     tmp = [env objectForKey:@"GNUSTEP_PATHLIST"];
@@ -79,10 +88,11 @@
       [ma addObject:tmp];
     }
   }
+#endif
   
   tmp = [NSString stringWithFormat:
-#if CONFIGURE_64BIT
-		    @"/lib64/sope-%i.%i/dbadaptors",
+#ifdef CGS_LIBDIR_NAME
+		    [CGS_LIBDIR_NAME stringByAppendingString:@"/sope-%i.%i/dbadaptors"],
 #else
 		    @"/lib/sope-%i.%i/dbadaptors",
 #endif
@@ -92,9 +102,8 @@
   [ma addObject:[FHS_INSTALL_ROOT stringByAppendingPathComponent:tmp]];
 #endif
 
-  [ma addObject:[@"/usr/local" stringByAppendingString:tmp]];
-  [ma addObject:[@"/usr" stringByAppendingString:tmp]];
-  
+  [ma addObject:[@"/usr/local/" stringByAppendingString:tmp]];
+  [ma addObject:[@"/usr/" stringByAppendingString:tmp]];
   searchPathes = [ma copy];
   if ([searchPathes count] == 0)
     NSLog(@"%s: empty library search path !", __PRETTY_FUNCTION__);
@@ -212,6 +221,11 @@
   }
   
   return _scheme;
+}
+
++ (NSString *)libraryDriversSubDir {
+  return [NSString stringWithFormat:@"GDLAdaptors-%i.%i",
+                     GDL_MAJOR_VERSION, GDL_MINOR_VERSION];
 }
 
 - (NSDictionary *)connectionDictionaryForNSURL:(NSURL *)_url {

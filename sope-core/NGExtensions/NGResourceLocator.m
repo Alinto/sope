@@ -43,7 +43,11 @@
   return self;
 }
 - (id)init {
+#if GNUSTEP_BASE_LIBRARY
+  return [self initWithGNUstepPath:@"Resources" fhsPath:@"share"];
+#else
   return [self initWithGNUstepPath:@"Library/Resources" fhsPath:@"share"];
+#endif
 }
 
 - (void)dealloc {
@@ -93,19 +97,30 @@
   NSString *p;
   
   ma = [NSMutableArray arrayWithCapacity:6];
-  
-  e = ([self->gsSubPath length] > 0)
-    ? [[self gsRootPathes] objectEnumerator]
-    : (NSEnumerator *)nil;
-  while ((p = [e nextObject]) != nil) {
-    p = [p stringByAppendingPathComponent:self->gsSubPath];
-    if ([ma containsObject:p])
-      continue;
-    
-    if (![self->fileManager fileExistsAtPath:p])
-      continue;
 
-    [ma addObject:p];
+  if ([self->gsSubPath length] > 0) {
+    
+#if GNUSTEP_BASE_LIBRARY
+    NSString *directory;
+
+    e = [NSStandardLibraryPaths() objectEnumerator];
+    while ((directory = [e nextObject]))
+      [ma addObject: [directory stringByAppendingPathComponent:self->gsSubPath]];
+#else
+
+    /* Old hack using GNUSTEP_PATHLIST.  Should be removed at some point.  */
+    e = [[self gsRootPathes] objectEnumerator];
+    while ((p = [e nextObject]) != nil) {
+      p = [p stringByAppendingPathComponent:self->gsSubPath];
+      if ([ma containsObject:p])
+	continue;
+      
+      if (![self->fileManager fileExistsAtPath:p])
+	continue;
+      
+      [ma addObject:p];
+    }
+#endif
   }
   
   e = ([self->fhsSubPath length] > 0)

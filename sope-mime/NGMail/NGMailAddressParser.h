@@ -24,7 +24,9 @@
 
 #import <Foundation/NSObject.h>
 
-@class NSData, NSString, NSArray;
+#import <Foundation/NSString.h>
+
+@class NSData, NSArray;
 @class NGMailAddressList;
 
 /*
@@ -34,16 +36,16 @@
 @interface NGMailAddressParser : NSObject
 {
 @private
-  unsigned char *data;
-  int           dataPos;
-  int           errorPos;  
-  int           maxLength;
+  unichar *data;
+  int     dataPos;
+  int     errorPos;  
+  int     maxLength;
 }
 
 + (id)mailAddressParserWithString:(NSString *)_string;
 + (id)mailAddressParserWithData:(NSData *)_data;
-+ (id)mailAddressParserWithCString:(char *)_cString;
-- (id)initWithCString:(const unsigned char *)_cstr length:(int unsigned)_len;
++ (id)mailAddressParserWithCString:(const char *)_cString;
+- (id)initWithString:(NSString *)_str;
 
 /* parsing */
 

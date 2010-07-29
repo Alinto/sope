@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ./config.make
+include ./config.make
 
 ifeq ($(GNUSTEP_MAKEFILES),)
 
@@ -34,8 +34,6 @@ endif
 -include $(GNUSTEP_MAKEFILES)/GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/aggregate.make
 -include $(GNUSTEP_MAKEFILES)/GNUmakefile.postamble
-
-include ./Version
 
 endif
 

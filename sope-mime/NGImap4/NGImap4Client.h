@@ -62,6 +62,8 @@ typedef enum {
   NGImap4ResponseNormalizer *normer;
   NSMutableArray            *responseReceiver;  
 
+  BOOL	   loggedIn;
+
   BOOL     isLogin;
   unsigned tagId;
 
@@ -117,9 +119,11 @@ typedef enum {
 - (NSDictionary *)noop;
   
 - (NSDictionary *)capability;
+- (NSDictionary *)namespace;
 - (NSDictionary *)list:(NSString *)_folder pattern:(NSString *)_pattern;
 - (NSDictionary *)lsub:(NSString *)_folder pattern:(NSString *)_pattern;
 - (NSDictionary *)select:(NSString *)_folder;
+- (NSDictionary *)unselect;
 - (NSDictionary *)status:(NSString *)_folder flags:(NSArray *)_flags;
 - (NSDictionary *)rename:(NSString *)_folder to:(NSString *)_newName;
 - (NSDictionary *)delete:(NSString *)_folder;
@@ -138,7 +142,7 @@ typedef enum {
   flags:(NSArray *)_flags;
 - (NSDictionary *)storeFrom:(unsigned)_from to:(unsigned)_to
   add:(NSNumber *)_add flags:(NSArray *)_flags;
-- (NSDictionary *)storeFlags:(NSArray *)_flags forMSNs:(id)_msns
+- (NSDictionary *)storeFlags:(NSArray *)_flags forUIDs:(id)_uids
   addOrRemove:(BOOL)_flag;
 
 - (NSDictionary *)copyUid:(unsigned)_uid    toFolder:(NSString *)_folder;

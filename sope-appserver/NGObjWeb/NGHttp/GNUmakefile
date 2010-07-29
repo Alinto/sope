@@ -1,9 +1,7 @@
 # GNUstep makefile
 
--include ../../../config.make
+include ../../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
-
-GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_LOCAL_ROOT)
 
 SUBPROJECT_NAME = NGHttp
 
@@ -37,5 +35,8 @@ NGHttp_OBJC_FILES = \
 	NGUrlFormCoder.m		\
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 include $(GNUSTEP_MAKEFILES)/subproject.make
 -include GNUmakefile.postamble

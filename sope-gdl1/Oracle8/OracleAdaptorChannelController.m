@@ -31,6 +31,8 @@
 #import <Foundation/Foundation.h>
 #import <GDLAccess/EOSQLExpression.h>
 
+static BOOL debugOn = NO;
+
 //
 //
 //
@@ -48,6 +50,14 @@
 //
 @implementation OracleAdaptorChannelController
 
++ (void) initialize
+{
+  NSUserDefaults *ud;
+
+  ud = [NSUserDefaults standardUserDefaults];
+  debugOn = [ud boolForKey: @"OracleAdaptorDebug"];
+}
+
 - (EODelegateResponse) adaptorChannel: (id) theChannel
                         willInsertRow: (NSMutableDictionary *) theRow
                             forEntity: (EOEntity *) theEntity
@@ -56,7 +66,8 @@
   NSArray *keys;
   int i, c;
 
-  NSLog(@"willInsertRow: %@ %@", [theRow description], [theEntity description]);
+  if (debugOn)
+    NSLog(@"willInsertRow: %@ %@", [theRow description], [theEntity description]);
 
   s = AUTORELEASE([[NSMutableString alloc] init]);
 
@@ -101,7 +112,8 @@
   NSArray *keys;
   int i, c;
 
-  NSLog(@"willUpdatetRow: %@ %@", [theRow description], [theQualifier description]);
+  if (debugOn)
+    NSLog(@"willUpdateRow: %@ %@", [theRow description], [theQualifier description]);
 
   s = AUTORELEASE([[NSMutableString alloc] init]);
 

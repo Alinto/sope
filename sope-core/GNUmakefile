@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../config.make
+include ../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME=sope-core
@@ -32,4 +32,4 @@ endif
 # package
 
 macosx-pkg :: all
-	../maintenance/make-osxpkg.sh sope-core
+	../maintenance/make-osxpkg.sh $(PACKAGE_NAME)

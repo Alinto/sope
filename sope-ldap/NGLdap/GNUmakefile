@@ -1,10 +1,8 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ./Version
-
-GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_LOCAL_ROOT)
 
 ifneq ($(frameworks),yes)
 LIBRARY_NAME = libNGLdap
@@ -15,7 +13,8 @@ endif
 libNGLdap_PCH_FILE = common.h
 libNGLdap_HEADER_FILES_DIR         = .
 libNGLdap_HEADER_FILES_INSTALL_DIR = /NGLdap
-libNGLdap_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libNGLdap_INTERFACE_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libNGLdap_INSTALL_DIR=$(SOPE_SYSLIBDIR)
 libNGLdap_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 
 libNGLdap_HEADER_FILES = \
@@ -61,10 +60,12 @@ NGLdap_OBJC_FILES   = $(libNGLdap_OBJC_FILES)
 # building
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/library.make
 else
 include $(GNUSTEP_MAKEFILES)/framework.make
 endif
 -include GNUmakefile.postamble
--include fhs.make

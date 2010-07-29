@@ -117,6 +117,7 @@ typedef struct _NGMimeHeaderNames {
     BOOL parserParseRawBodyDataOfPart:1;
     BOOL parserBodyParserForPart:1;
     BOOL parserDecodeBodyOfPart:1;
+    BOOL parserContentTypeOfPart:1;
   } delegateRespondsTo;
 
   
@@ -274,6 +275,9 @@ typedef struct _NGMimeHeaderNames {
 */
 - (id<NGMimeBodyParser>)parser:(NGMimePartParser *)_parser
   bodyParserForPart:(id<NGMimePart>)_part;
+
+- (NGMimeType *)parser:(id)_parser
+  contentTypeOfPart:(id<NGMimePart>)_part;
 
 @end /* NSObject(NGMimePartParserDelegate) */
 

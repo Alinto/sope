@@ -22,6 +22,7 @@
 #include "NGImap4Connection.h"
 #include "NGImap4MailboxInfo.h"
 #include "NGImap4Client.h"
+#include "NGImap4Functions.h"
 #include "imCommon.h"
 
 @implementation NGImap4Connection
@@ -66,7 +67,8 @@ static NSString *imap4Separator = nil;
     self->creationTime = [[NSDate alloc] init];
     
     // TODO: retrieve from IMAP4 instead of using a default
-    self->separator = imap4Separator;
+    self->separator = [imap4Separator copy];
+    self->subfolders = [NSMutableDictionary new];
   }
   return self;
 }
@@ -100,14 +102,16 @@ static NSString *imap4Separator = nil;
   return self->creationTime;
 }
 
-- (void)cacheHierarchyResults:(NSDictionary *)_hierarchy {
-  ASSIGNCOPY(self->subfolders, _hierarchy);
+- (void)cacheHierarchyResults:(NSDictionary *)_hierarchy
+  forURL:(NSURL *)_url
+{
+  [self->subfolders setObject:_hierarchy forKey:[_url absoluteString]];
 }
-- (NSDictionary *)cachedHierarchyResults {
-  return self->subfolders;
+- (NSDictionary *)cachedHierarchyResultsForURL:(NSURL *)_url {
+  return [self->subfolders objectForKey:[_url absoluteString]];
 }
 - (void)flushFolderHierarchyCache {
-  [self->subfolders  release]; self->subfolders  = nil;
+  [self->subfolders  release]; self->subfolders  = [NSMutableDictionary new];
   [self->urlToRights release]; self->urlToRights = nil;
 }
 
@@ -151,7 +155,6 @@ static NSString *imap4Separator = nil;
   ASSIGN(self->uidFolderURL,    nil);
   ASSIGN(self->cachedUIDs,      nil);
 }
-
 
 /* errors */
 
@@ -215,18 +218,13 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   NSMutableArray *ma;
   unsigned i, count, prefixlen;
   
-  if ((count = [_array count]) < 2) {
-    /* one entry is the folder itself, so we need at least two */
-    return [NSArray array];
-  }
+  count = [_array count];
   
   // TODO: somehow results are different on OSX
   // we should investigate and test all Foundation libraries and document the
   // differences
 #if __APPLE__ 
   prefixlen = [_fn isEqualToString:@""] ? 0 : [_fn length] + 1;
-#elif GNUSTEP_BASE_LIBRARY
-  prefixlen = [_fn isEqualToString:@"/"] ? 1 : [_fn length];
 #else
   prefixlen = [_fn isEqualToString:@"/"] ? 1 : [_fn length] + 1;
 #endif
@@ -321,13 +319,15 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
     return nil;
   if ([folderName characterAtIndex:0] == '/')
     folderName = [folderName substringFromIndex:1];
+  if ([folderName hasSuffix: @"/"])
+    folderName = [folderName substringToIndex:[folderName length] - 1];
   
   if (_delfn) folderName = [folderName stringByDeletingLastPathComponent];
   
   if ([[self imap4Separator] isEqualToString:@"/"])
     return folderName;
   
-  names = [folderName pathComponents];
+  names = [folderName componentsSeparatedByString: @"/"];
   return [names componentsJoinedByString:[self imap4Separator]];
 }
 - (NSString *)imap4FolderNameForURL:(NSURL *)_url {
@@ -373,16 +373,26 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 
 /* folder operations */
 
-- (NSDictionary *)primaryFetchMailboxHierarchyForURL:(NSURL *)_url {
+- (NSDictionary *)primaryFetchMailboxHierarchyForURL:(NSURL *)_url
+  onlySubscribedFolders:(BOOL) subscribedFoldersOnly
+{
   NSDictionary *result;
+  NSString *prefix;
   
-  if ((result = [self cachedHierarchyResults]) != nil)
+  if ((result = [self cachedHierarchyResultsForURL:_url]) != nil)
     return [result isNotNull] ? result : (NSDictionary *)nil;
   
   if (debugCache) [self logWithFormat:@"  no folders cached yet .."];
-  
-  result = [[self client] list:(onlyFetchInbox ? @"INBOX" : @"*")
-			  pattern:@"*"];
+
+  prefix = [_url path];
+  if ([prefix hasPrefix: @"/"])
+    prefix = [prefix substringFromIndex:1];
+  if (subscribedFoldersOnly)
+    result = [[self client] lsub:(onlyFetchInbox ? @"INBOX" : prefix)
+			    pattern:@"*"];
+  else
+    result = [[self client] list:(onlyFetchInbox ? @"INBOX" : prefix)
+			    pattern:@"*"];
   if (![[result valueForKey:@"result"] boolValue]) {
     [self errorWithFormat:@"Could not list mailbox hierarchy!"];
     return nil;
@@ -391,7 +401,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   /* cache results */
   
   if ([result isNotNull]) {
-    [self cacheHierarchyResults:result];
+    [self cacheHierarchyResults:result forURL:_url];
     if (debugCache) {
       [self logWithFormat:@"cached results: 0x%p(%d)", 
 	      result, [result count]];
@@ -400,23 +410,18 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   return result;
 }
 
-- (NSArray *)subfoldersForURL:(NSURL *)_url {
-  NSDictionary *result;
-
-  if ((result = [self primaryFetchMailboxHierarchyForURL:_url]) == nil)
-    return nil;
-  if ([result isKindOfClass:[NSException class]]) {
-    [self errorWithFormat:@"failed to retrieve hierarchy: %@", result];
-    return nil;
-  }
-  
-  return [self extractSubfoldersForURL:_url fromResultSet:result];
+- (NSDictionary *)primaryFetchMailboxHierarchyForURL:(NSURL *)_url
+{
+  return [self primaryFetchMailboxHierarchyForURL: _url onlySubscribedFolders: NO];
 }
 
-- (NSArray *)allFoldersForURL:(NSURL *)_url {
+- (NSArray *)allFoldersForURL:(NSURL *)_url
+	onlySubscribedFolders:(BOOL)_subscribedFoldersOnly
+{
   NSDictionary *result;
 
-  if ((result = [self primaryFetchMailboxHierarchyForURL:_url]) == nil)
+  if ((result = [self primaryFetchMailboxHierarchyForURL:_url
+		      onlySubscribedFolders:_subscribedFoldersOnly]) == nil)
     return nil;
   if ([result isKindOfClass:[NSException class]]) {
     [self errorWithFormat:@"failed to retrieve hierarchy: %@", result];
@@ -424,6 +429,34 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   }
   
   return [self extractFoldersFromResultSet:result];
+}
+
+- (NSArray *)allFoldersForURL:(NSURL *)_url
+{
+  return [self allFoldersForURL: _url onlySubscribedFolders: NO];
+}
+
+- (NSArray *)subfoldersForURL:(NSURL *)_url
+  onlySubscribedFolders:(BOOL)_subscribedFoldersOnly
+{
+  NSDictionary *result;
+  NSString *baseFolder;
+
+  baseFolder = [self imap4FolderNameForURL:_url removeFileName:NO];
+  if (_subscribedFoldersOnly)
+    result = [[self client] lsub:baseFolder pattern:@"%"];
+  else
+    result = [[self client] list:baseFolder pattern:@"%"];
+  if (![[result valueForKey:@"result"] boolValue]) {
+    [self errorWithFormat:@"Could not list mailbox hierarchy!"];
+    return nil;
+  }
+
+  return [self extractSubfoldersForURL:_url fromResultSet: result];
+}
+
+- (NSArray *)subfoldersForURL:(NSURL *)_url {
+  return [self subfoldersForURL:_url onlySubscribedFolders: NO];
 }
 
 /* message operations */
@@ -646,7 +679,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   
   /* store flags */
   
-  result = [[self client] storeFlags:_f forMSNs:result addOrRemove:YES];
+  result = [[self client] storeFlags:_f forUIDs:result addOrRemove:YES];
   if (![[result valueForKey:@"result"] boolValue]) {
     return [self errorForResult:result 
 		 text:@"Failed to change flags of IMAP4 message"];
@@ -737,34 +770,42 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 
 - (BOOL)doesMailboxExistAtURL:(NSURL *)_url {
   NSString *folderName;
+  NSArray *caches;
   id result;
+  int count, max;
+  BOOL found;
+
+  found = NO;
 
   /* check in hierarchy cache */
-  
-  if ((result = [self cachedHierarchyResults]) != nil) {
+  caches = [self->subfolders allValues];
+  max = [caches count];
+  for (count = 0; !found && count < max; count++) {
     NSString *p;
-    
-    result = [(NSDictionary *)result objectForKey:@"list"];
+
+    result = [[caches objectAtIndex: count] objectForKey:@"list"];
     p      = [_url path];
-#if __APPLE__ 
     /* normalized results already have the / in front on libFoundation?! */
     if ([p hasPrefix:@"/"]) 
       p = [p substringFromIndex:1];
-#endif
     if ([p hasSuffix:@"/"])
       p = [p substringToIndex:[p length]-1];
-    return ([(NSDictionary *)result objectForKey:p] != nil) ? YES : NO;
+    found = ([(NSDictionary *)result objectForKey:p] != nil);
   }
+
+  if (!found) {
+    /* check using IMAP4 select */
+    // TODO: we should probably just fetch the whole hierarchy?
   
-  /* check using IMAP4 select */
-  // TODO: we should probably just fetch the whole hierarchy?
-  
-  folderName = [self imap4FolderNameForURL:_url];
-  result = [[self client] select:folderName];
-  if (![[result valueForKey:@"result"] boolValue])
-    return NO;
-  
-  return YES;
+    folderName = [self imap4FolderNameForURL:_url];
+
+    result = [self->client status: folderName
+                            flags: [NSArray arrayWithObject: @"UIDVALIDITY"]];
+
+    found =([[result valueForKey: @"result"] boolValue]);
+  }
+
+  return found;
 }
 
 - (id)infoForMailboxAtURL:(NSURL *)_url {
@@ -789,7 +830,8 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   /* construct path */
   
   newPath = [self imap4FolderNameForURL:_url];
-  newPath = [newPath stringByAppendingString:[self imap4Separator]];
+  if ([newPath length])
+    newPath = [newPath stringByAppendingString:[self imap4Separator]];
   newPath = [newPath stringByAppendingString:_mailbox];
   
   /* create */

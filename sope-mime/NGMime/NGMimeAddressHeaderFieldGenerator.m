@@ -105,10 +105,10 @@ static int UseLFSeperatedAddressEntries = -1;
     }
     
     tmp    = [obj displayName];
-    bufLen = [tmp cStringLength];
+    bufLen = [tmp lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
     
-    buffer = calloc(bufLen + 10, sizeof(char));
-    [tmp getCString:buffer];
+    buffer = calloc(bufLen, sizeof(char));
+    [tmp getCString: buffer maxLength: bufLen encoding: NSUTF8StringEncoding];
     
     cnt   = 0;
     doEnc = NO;
@@ -117,11 +117,11 @@ static int UseLFSeperatedAddressEntries = -1;
       /* must encode chars outside ASCII 33..60, 62..126 ranges [RFC 2045, Sect. 6.7]
        * RFC 2047, Sect. 4.2 also requires chars 63 and 95 to be encoded
        * For spaces, quotation is fine */
-      if ((unsigned char)buffer[cnt] < 32 ||
-	  (unsigned char)buffer[cnt] == 61 ||
-	  (unsigned char)buffer[cnt] == 63 ||
-          (unsigned char)buffer[cnt] == 95 ||
-	  (unsigned char)buffer[cnt] > 126) {
+      if ((unichar)buffer[cnt] < 32 ||
+	  (unichar)buffer[cnt] == 61 ||
+	  (unichar)buffer[cnt] == 63 ||
+          (unichar)buffer[cnt] == 95 ||
+	  (unichar)buffer[cnt] > 126) {
         doEnc = YES;
         break;
       }
@@ -130,8 +130,13 @@ static int UseLFSeperatedAddressEntries = -1;
     
     if (doEnc) {
       /* FIXME - better use UTF8 encoding! */
+#if NeXT_Foundation_LIBRARY
       unsigned char iso[]     = "=?iso-8859-15?q?";
       unsigned      isoLen    = 16;
+#else
+      unsigned char iso[]     = "=?utf-8?q?";
+      unsigned      isoLen    = 10;
+#endif
       unsigned char isoEnd[]  = "?=";
       unsigned      isoEndLen = 2;
       unsigned      desLen;
@@ -141,10 +146,10 @@ static int UseLFSeperatedAddressEntries = -1;
       {
         NSData *data;
 
-#if APPLE_Foundation_LIBRARY || NeXT_Foundation_LIBRARY
+#if NeXT_Foundation_LIBRARY
         data = [tmp dataUsingEncoding:NSISOLatin1StringEncoding];
 #else
-        data = [tmp dataUsingEncoding:NSISOLatin9StringEncoding];
+        data = [tmp dataUsingEncoding:NSUTF8StringEncoding];
 #endif
 
         bufLen  = [data length];
@@ -162,8 +167,9 @@ static int UseLFSeperatedAddressEntries = -1;
                                     des + isoLen, desLen - isoLen);
       if ((int)desLen != -1) {
         memcpy(des + isoLen + desLen, isoEnd, isoEndLen);
-        tmp = [NSString stringWithCString:(char *)des
-                        length:(isoLen + desLen + isoEndLen)];
+	tmp = [[NSString alloc] initWithData: [NSData dataWithBytes:(char *)des length:(isoLen + desLen + isoEndLen)]
+				encoding: NSISOLatin1StringEncoding];
+	[tmp autorelease];
       }
       else {
         [self warnWithFormat:
@@ -190,11 +196,7 @@ static int UseLFSeperatedAddressEntries = -1;
     }
   }
   
-#if APPLE_Foundation_LIBRARY || NeXT_Foundation_LIBRARY
   data = [result dataUsingEncoding:NSISOLatin1StringEncoding];
-#else
-  data = [result dataUsingEncoding:NSISOLatin9StringEncoding];
-#endif
   [result release];
   
   return data;

@@ -46,11 +46,11 @@ typedef struct NGCharBufferLA {
     // Find first power of 2 >= to requested size
     for (size = 2; size < _la; size *=2);
     
-#if NeXT_Foundation_LIBRARY
-    self->la = NSZoneMalloc([self zone], sizeof(LA_NGCharBuffer) * size);
-#else
+#if LIB_FOUNDATION_LIBRARY
     self->la = NSZoneMallocAtomic([self zone],
                                   sizeof(LA_NGCharBuffer) * size);
+#else
+    self->la = NSZoneMalloc([self zone], sizeof(LA_NGCharBuffer) * size);
 #endif
     memset(self->la, 0, sizeof(LA_NGCharBuffer) * size);
 

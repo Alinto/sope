@@ -31,18 +31,6 @@
   return 2;
 }
 
-static NGMimeType *defaultType = nil;
-
-+ (void)initialize {
-  static BOOL isInitialized = NO;
-  if (!isInitialized) {
-    isInitialized = YES;
-    
-    defaultType =
-      [[NGMimeType mimeType:@"text/plain; charset=us-ascii"] retain];
-  }
-}
-  
 + (id)bodyPartWithHeader:(NGHashMap *)_header {
   return [[[self alloc] initWithHeader:_header] autorelease];
 }
@@ -156,13 +144,12 @@ static NGMimeType *defaultType = nil;
   if (!Fields)
     Fields = (NGMimeHeaderNames *)[NGMimePartParser headerFieldNames];
   
-  
   type = [self->header objectForKey:Fields->contentType];
   
   if (![type isKindOfClass:[NGMimeType class]])
     type = [NGMimeType mimeType:[type stringValue]];
   
-  return (type != nil ? type : (id)defaultType);
+  return type;
 }
 
 - (NSString *)contentId {

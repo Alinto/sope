@@ -23,14 +23,20 @@ endif
 
 # install makefiles
 
-after-install ::
-	$(MKDIRS) $(INSTALL_ROOT_DIR)/$(GNUSTEP_MAKEFILES)/Additional/
-	$(INSTALL_DATA) ngobjweb.make $(INSTALL_ROOT_DIR)/$(GNUSTEP_MAKEFILES)/Additional/ngobjweb.make
+after-install :: $(DESTDIR)/$(GNUSTEP_MAKEFILES)/Additional/ngobjweb.make
 
 ifneq ($(GNUSTEP_MAKE_VERSION),1.3.0)
-after-install ::
-	$(INSTALL_DATA) woapp-gs.make    \
-		$(INSTALL_ROOT_DIR)/$(GNUSTEP_MAKEFILES)/woapp.make
-	$(INSTALL_DATA) wobundle-gs.make \
-		$(INSTALL_ROOT_DIR)/$(GNUSTEP_MAKEFILES)/wobundle.make
+after-install :: $(DESTDIR)/$(GNUSTEP_MAKEFILES)/woapp.make $(DESTDIR)/$(GNUSTEP_MAKEFILES)/wobundle.make
 endif
+
+$(DESTDIR)/$(GNUSTEP_MAKEFILES)/Additional/ngobjweb.make: ngobjweb.make
+	$(MKDIRS) $(DESTDIR)/$(GNUSTEP_MAKEFILES)/Additional/
+	$(INSTALL_DATA) ngobjweb.make $(DESTDIR)/$(GNUSTEP_MAKEFILES)/Additional/ngobjweb.make
+
+$(DESTDIR)/$(GNUSTEP_MAKEFILES)/woapp.make: woapp-gs.make
+	$(INSTALL_DATA) woapp-gs.make    \
+		$(DESTDIR)/$(GNUSTEP_MAKEFILES)/woapp.make
+
+$(DESTDIR)/$(GNUSTEP_MAKEFILES)/wobundle.make: wobundle-gs.make
+	$(INSTALL_DATA) wobundle-gs.make \
+		$(DESTDIR)/$(GNUSTEP_MAKEFILES)/wobundle.make

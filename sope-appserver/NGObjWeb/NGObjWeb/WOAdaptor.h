@@ -27,6 +27,13 @@
 @class NSString, NSDictionary;
 @class WOCoreApplication;
 
+typedef enum {
+  WOChildMessageAccept = 0,
+  WOChildMessageReady,
+  WOChildMessageShutdown,
+  WOChildMessageMax
+} WOChildMessage;
+
 @interface WOAdaptor : NSObject
 {
 @protected

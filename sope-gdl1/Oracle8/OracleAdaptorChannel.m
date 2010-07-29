@@ -1,7 +1,7 @@
 /*
 **  OracleAdaptorChannel.m
 **
-**  Copyright (c) 2007  Inverse groupe conseil inc. and Ludovic Marcotte
+**  Copyright (c) 2007-2009  Inverse inc. and Ludovic Marcotte
 **
 **  Author: Ludovic Marcotte <ludovic@inverse.ca>
 **
@@ -30,6 +30,12 @@
 
 #import <NGExtensions/NSObject+Logs.h>
 
+#include <unistd.h>
+
+static BOOL debugOn = NO;
+static int prefetchMemorySize;
+static int maxTry = 3;
+static int maxSleep = 500;
 //
 //
 //
@@ -41,10 +47,11 @@
 
 @implementation OracleAdaptorChannel (Private)
 
--  (void) _cleanup
+- (void) _cleanup
 {
   column_info *info;
   int c;
+  sword result;
 
   [_resultSetProperties removeAllObjects];
 
@@ -58,11 +65,29 @@
       // so we just free the value instead.
       if (info->value)
 	{
-	  if (OCIDescriptorFree((dvoid *)info->value, (ub4)OCI_DTYPE_LOB) != OCI_SUCCESS)
+	  if (info->type == SQLT_CLOB
+	      || info->type == SQLT_BLOB
+	      || info->type == SQLT_BFILEE
+	      || info->type == SQLT_CFILEE)
+	    {
+	      result = OCIDescriptorFree((dvoid *)info->value, (ub4) OCI_DTYPE_LOB);
+	      if (result != OCI_SUCCESS)
+		{
+		  NSLog (@"value was not a LOB descriptor");
+		  abort();
+		}
+	    }
+	  else
 	    free(info->value);
 	  info->value = NULL;
 	}
-       free(info);
+      else
+	{
+	  NSLog (@"trying to free an already freed value!");
+	  abort();
+	}
+      free(info);
+
       [_row_buffer removeObjectAtIndex: c];
     }
 
@@ -78,8 +103,7 @@
 //
 @implementation OracleAdaptorChannel
 
-static void
-DBTerminate()
+static void DBTerminate()
 {
   if (OCITerminate(OCI_DEFAULT))
     NSLog(@"FAILED: OCITerminate()");
@@ -89,6 +113,15 @@ DBTerminate()
 
 + (void) initialize
 {
+  NSUserDefaults *ud;
+
+  ud = [NSUserDefaults standardUserDefaults];
+  debugOn = [ud boolForKey: @"OracleAdaptorDebug"];
+
+  prefetchMemorySize = [ud integerForKey: @"OracleAdaptorPrefetchMemorySize"];
+  if (!prefetchMemorySize)
+    prefetchMemorySize = 16 * 1024; /* 16Kb */
+
   // We Initialize the OCI process environment.
   if (OCIInitialize((ub4)OCI_DEFAULT, (dvoid *)0,
                     (dvoid * (*)(dvoid *, size_t)) 0,
@@ -156,14 +189,17 @@ DBTerminate()
       [super closeChannel];
     
       // We logoff from the database.
-      if (OCILogoff(_oci_ctx, _oci_err))
+      if (!_oci_ctx || !_oci_err || OCILogoff(_oci_ctx, _oci_err))
 	{
 	  NSLog(@"FAILED: OCILogoff()");
 	}
 
+      if (_oci_ctx)
+	OCIHandleFree(_oci_ctx, OCI_HTYPE_SVCCTX);
 
-      OCIHandleFree(_oci_ctx, OCI_HTYPE_SVCCTX);
-      OCIHandleFree(_oci_err, OCI_HTYPE_ERROR);
+      if (_oci_err)
+	OCIHandleFree(_oci_err, OCI_HTYPE_ERROR);
+      
       // OCIHandleFree(_oci_env, OCI_HTYPE_ENV);
 
       _oci_ctx = (OCISvcCtx *)0;
@@ -177,7 +213,8 @@ DBTerminate()
 //
 - (void) dealloc
 {
-  //NSLog(@"OracleAdaptorChannel: -dealloc");
+  if (debugOn)
+    NSLog(@"OracleAdaptorChannel: -dealloc");
 
   [self _cleanup];
 
@@ -222,21 +259,25 @@ DBTerminate()
 {
   EOAttribute *attribute;
   OCIParam *param;
-
+  int rCount;
   column_info *info;
   ub4 i, clen, count;
   text *sql, *cname;
   sword status;
   ub2 type;
+  ub4 memory, prefetchrows;
 
   [self _cleanup];
+
+  if (debugOn)
+    [self logWithFormat: @"expression: %@", theExpression];
 
   if (!theExpression || ![theExpression length])
     {
       [NSException raise: @"OracleInvalidExpressionException"
 		   format: @"Passed an invalid (nil or length == 0) SQL expression"];
     }
-  
+
   if (![self isOpen])
     {
       [NSException raise: @"OracleChannelNotOpenException"
@@ -244,12 +285,30 @@ DBTerminate()
     }
   
   sql = (text *)[theExpression UTF8String];
-  
+ 
+ rCount = 0;
+ retry:
   // We alloc our statement handle
   if ((status = OCIHandleAlloc((dvoid *)_oci_env, (dvoid **)&_current_stm, (ub4)OCI_HTYPE_STMT, (CONST size_t) 0, (dvoid **) 0)))
     {
       checkerr(_oci_err, status);
       NSLog(@"Can't allocate statement.");
+      return NO;
+    }
+
+  prefetchrows = 100000; /* huge numbers here force a fallback on the memory limit below, which is what we really are interested in */
+  if ((status = OCIAttrSet(_current_stm, (ub4)OCI_HTYPE_STMT, (dvoid *)&prefetchrows, (ub4) sizeof(ub4), (ub4)OCI_ATTR_PREFETCH_ROWS, _oci_err)))
+    {
+      checkerr(_oci_err, status);
+      NSLog(@"Can't set prefetch rows (%d).", prefetchrows);
+      return NO;
+    }
+  
+  memory = prefetchMemorySize;
+  if ((status = OCIAttrSet(_current_stm, (ub4)OCI_HTYPE_STMT, (dvoid *)&memory, (ub4) sizeof(ub4), (ub4)OCI_ATTR_PREFETCH_MEMORY, _oci_err)))
+    {
+      checkerr(_oci_err, status);
+      NSLog(@"Can't set prefetch memory (%d).", memory);
       return NO;
     }
 
@@ -264,13 +323,39 @@ DBTerminate()
   // We check if we're doing a SELECT and if so, we're fetching data!
   OCIAttrGet(_current_stm, OCI_HTYPE_STMT, &type, 0, OCI_ATTR_STMT_TYPE, _oci_err);
   self->isFetchInProgress = (type == OCI_STMT_SELECT ? YES : NO);
-  
+ 
   // We execute our statement. Not that we _MUST_ set iter to 0 for non-SELECT statements.
   if ((status = OCIStmtExecute(_oci_ctx, _current_stm, _oci_err, (self->isFetchInProgress ? (ub4)0 : (ub4)1), (ub4)0, (CONST OCISnapshot *)NULL, (OCISnapshot *)NULL,
 			       ([(OracleAdaptorContext *)[self adaptorContext] autoCommit] ? OCI_COMMIT_ON_SUCCESS : OCI_DEFAULT))))
     {
+      ub4 serverStatus;
+      
       checkerr(_oci_err, status);
       NSLog(@"Statement execute failed (OCI_ERROR): %@", theExpression);
+
+      // We check to see if we lost connection and need to reconnect.
+      serverStatus = 0;
+      OCIAttrGet((dvoid *)_oci_env, OCI_HTYPE_SERVER, (dvoid *)&serverStatus, (ub4 *)0, OCI_ATTR_SERVER_STATUS, _oci_err);
+      
+      if (serverStatus == OCI_SERVER_NOT_CONNECTED)
+	{
+	  // We cleanup our previous handles
+	  [self cancelFetch];
+	  [self closeChannel];
+	  
+	  // We try to reconnect a couple of times before giving up...
+	  while (rCount < maxTry)
+	    {
+	      usleep(maxSleep);
+	      rCount++;
+
+	      if ([self openChannel])
+		{
+		  NSLog(@"Connection re-established to Oracle - retrying to process the statement.");
+		  goto retry;
+		}
+	    }
+	}
       return NO;
     }
 
@@ -302,7 +387,9 @@ DBTerminate()
       // We read the maximum width of a column
       info->max_width = 0;
       status = OCIAttrGet((dvoid*)param, (ub4)OCI_DTYPE_PARAM, (dvoid*)&(info->max_width), (ub4 *)0, (ub4)OCI_ATTR_DATA_SIZE, (OCIError *)_oci_err);
-      
+
+      if (debugOn)
+	NSLog(@"name: %s, type: %d", cname, info->type);
       attribute = [EOAttribute attributeWithOracleType: info->type  name: cname  length: clen  width: info->max_width];
       [_resultSetProperties addObject: attribute];
 
@@ -394,16 +481,17 @@ DBTerminate()
       return NO;
     }
 
- 
   if (OCIEnvInit((OCIEnv **)&_oci_env, (ub4)OCI_DEFAULT, (size_t)0, (dvoid **)0))
     {
       NSLog(@"FAILED: OCIEnvInit()");
+      [self closeChannel];
       return NO;
     }
   
   if (OCIHandleAlloc((dvoid *)_oci_env, (dvoid *)&_oci_err, (ub4)OCI_HTYPE_ERROR, (size_t)0, (dvoid **)0))
     {
       NSLog(@"FAILED: OCIHandleAlloc() on errhp");
+      [self closeChannel];
       return NO;
     }
   
@@ -414,7 +502,10 @@ DBTerminate()
   // Under Oracle 10g, the third parameter of OCILogon() has the form: [//]host[:port][/service_name]
   // See http://download-west.oracle.com/docs/cd/B12037_01/network.101/b10775/naming.htm#i498306 for
   // all juicy details.
-  database = [[NSString stringWithFormat:@"%@:%@", [o serverName], [o port]] UTF8String];
+  if ([o serverName] && [o port])
+    database = [[NSString stringWithFormat:@"%@:%@/%@", [o serverName], [o port], [o databaseName]] UTF8String];
+  else
+    database = [[o databaseName] UTF8String];
 
   // We logon to the database.
   if (OCILogon(_oci_env, _oci_err, &_oci_ctx, (const OraText*)username, strlen(username),
@@ -422,6 +513,7 @@ DBTerminate()
     {
       NSLog(@"FAILED: OCILogon(). username = %s  password = %s"
 	    @"  database = %s", username, password, database);
+      [self closeChannel];
       return NO;
     }
   
@@ -438,6 +530,11 @@ DBTerminate()
 {
   sword status;
   
+  // We check if our connection is open prior to trying to fetch any data. OCIStmtFetch2() returns
+  // NO error code if the OCI environment is set up but the OCILogon() has failed.
+  if (![self isOpen])
+    return nil;
+
   status = OCIStmtFetch2(_current_stm, _oci_err, (ub4)1, (ub4)OCI_FETCH_NEXT, (sb4)0, (ub4)OCI_DEFAULT);
 
   if (status == OCI_NO_DATA)
@@ -605,39 +702,6 @@ DBTerminate()
 - (OCISvcCtx *) serviceContext
 {
   return _oci_ctx;
-}
-
-/* GCSEOAdaptorChannel protocol */
-static NSString *sqlFolderFormat = (@"CREATE TABLE %@ (\n"	\
-				    @"  c_name VARCHAR2 (256) NOT NULL,\n"
-				    @"  c_content CLOB NOT NULL,\n"
-				    @"  c_creationdate INTEGER NOT NULL,\n"
-				    @"  c_lastmodified INTEGER NOT NULL,\n"
-				    @"  c_version INTEGER NOT NULL,\n"
-				    @"  c_deleted INTEGER DEFAULT 0 NOT NULL\n"
-				    @")");
-static NSString *sqlFolderACLFormat = (@"CREATE TABLE %@ (\n"	\
-				       @"  c_uid VARCHAR (256) NOT NULL,\n"
-				       @"  c_object VARCHAR (256) NOT NULL,\n"
-				       @"  c_role VARCHAR (80) NOT NULL\n"
-				       @")");
-
-- (NSException *) createGCSFolderTableWithName: (NSString *) tableName
-{
-  NSString *sql;
-
-  sql = [NSString stringWithFormat: sqlFolderFormat, tableName];
-
-  return [self evaluateExpressionX: sql];
-}
-
-- (NSException *) createGCSFolderACLTableWithName: (NSString *) tableName
-{
-  NSString *sql;
-
-  sql = [NSString stringWithFormat: sqlFolderACLFormat, tableName];
-
-  return [self evaluateExpressionX: sql];
 }
 
 @end

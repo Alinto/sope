@@ -53,7 +53,7 @@ static int NSStringMaxLineWidth = 1024;
   size_t destLength = -1;
   char   *dest, *src;
   
-  if ((len = [self cStringLength]) == 0)
+  if ((len = [self lengthOfBytesUsingEncoding: NSISOLatin1StringEncoding]) == 0)
     return @"";
   
   destSize = (len + 2) / 3 * 4; // 3:4 conversion ratio
@@ -91,7 +91,7 @@ static int NSStringMaxLineWidth = 1024;
 
   if (StringClass == Nil) StringClass = [NSString class];
   
-  if ((len = [self cStringLength]) == 0)
+  if ((len = [self lengthOfBytesUsingEncoding: NSISOLatin1StringEncoding]) == 0)
     return @"";
   
   destSize = (len / 4 + 1) * 3 + 1;
@@ -135,9 +135,9 @@ static int NSStringMaxLineWidth = 1024;
 
   if (StringClass == Nil) StringClass = [NSString class];
   
-  if ((len = [self cStringLength]) == 0)
+  if ((len = [self lengthOfBytesUsingEncoding: NSISOLatin1StringEncoding]) == 0)
     return [NSData data];
-  
+
   destSize = (len / 4 + 1) * 3 + 1;
   dest = malloc(destSize + 1);
 

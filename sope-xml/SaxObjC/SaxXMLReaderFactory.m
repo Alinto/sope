@@ -137,11 +137,19 @@ static id      factory       = nil;
 
 - (void)addSearchPathesForGNUstepEnv:(NSMutableArray *)ma {
   /* for libFoundation */
-  NSDictionary *env;
-  NSEnumerator *e;
+#if GNUSTEP_BASE_LIBRARY
+NSEnumerator *libraryPaths;
+  NSString *directory, *suffix;
+
+  suffix = [self libraryDriversSubDir];
+  libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+  while ((directory = [libraryPaths nextObject]))
+    [ma addObject: [directory stringByAppendingPathComponent: suffix]];
+#else  
   NSString *subdir;
+  NSEnumerator *e;
+  NSDictionary *env;
   id tmp;
-  
   env = [[NSProcessInfo processInfo] environment];
   
   if ((tmp = [env objectForKey:@"GNUSTEP_PATHPREFIX_LIST"]) == nil)
@@ -159,6 +167,7 @@ static id      factory       = nil;
 
     [ma addObject:tmp];
   }
+#endif
 }
 
 - (NSArray *)saxReaderSearchPathes {
@@ -182,8 +191,8 @@ static id      factory       = nil;
   /* FHS fallback */
   
   tmp = [[NSString alloc] initWithFormat:
-#if CONFIGURE_64BIT
-			    @"lib64/sope-%i.%i/saxdrivers/",
+#ifdef CGS_LIBDIR_NAME
+			    [CGS_LIBDIR_NAME stringByAppendingString:@"/sope-%i.%i/saxdrivers/"],
 #else
 			    @"lib/sope-%i.%i/saxdrivers/",
 #endif

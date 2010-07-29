@@ -1,11 +1,11 @@
 # GNUstep Makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 
 BUNDLE_NAME        = PlistSaxDriver
 BUNDLE_EXTENSION   = .sax
-BUNDLE_INSTALL_DIR = $(GNUSTEP_USER_ROOT)/Library/Bundles
+BUNDLE_INSTALL_DIR = $(GNUSTEP_BUNDLES)
 
 PlistSaxDriver_OBJC_FILES = \
 	PlistSaxDriver.m

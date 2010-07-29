@@ -53,13 +53,13 @@ static void _initImap4SearchCategory(void) {
   if (FlagKeyWords) return;
 
   ud = [NSUserDefaults standardUserDefaults];
-  FlagKeyWords = [[NSArray alloc] initWithObjects: @"answered", @"deleted",
-                            @"draft", @"flagged", @"new", @"old", @"recent",
-                            @"seen", @"unanswered", @"undeleted", @"undraft",
-                            @"unflagged", @"unseen", nil];
-  OtherKeyWords = [[NSArray alloc] initWithObjects:
-                             @"bcc", @"body", @"cc", @"from", @"subject",
-                             @"text", @"to", @"keyword", @"unkeyword", nil];
+  FlagKeyWords = [[NSArray alloc] initWithObjects: @"ANSWERED", @"DELETED",
+                            @"DRAFT", @"FLAGGED", @"NEW", @"OLD", @"RECENT",
+                            @"SEEN", @"UNANSWERED", @"UNDELETED", @"UNDRAFT",
+                            @"UNFLAGGED", @"UNSEEN", nil];
+  OtherKeyWords = [[NSArray alloc] initWithObjects: @"ALL", @"BCC", @"BODY",
+                                   @"CC", @"FROM", @"SUBJECT", @"TEXT", @"TO",
+                                   @"KEYWORD", @"UID", @"UNKEYWORD", nil];
   
   debugOn = [ud boolForKey:@"ImapDebugQualifierGeneration"];
 }
@@ -266,10 +266,10 @@ static void _initImap4SearchCategory(void) {
   
   enumerator = [lvalue objectEnumerator];
   while ((lvalue = [enumerator nextObject]) != nil) {
-    lvalue = [lvalue lowercaseString];
+    lvalue = [lvalue uppercaseString];
         
     if ([FlagKeyWords containsObject:lvalue]) {
-      if (insertNot) [search appendString:@"not "];
+      if (insertNot) [search appendString:@"NOT "];
       [search appendString:lvalue];
     }
     else {
@@ -280,15 +280,31 @@ static void _initImap4SearchCategory(void) {
   return nil;
 }
 
-- (NSString *)imap4OperatorForDateComparisonSelector:(SEL)lselector {
+- (NSString *)imap4OperatorForDateKeyword:(NSString *)dkey
+andComparisonSelector:(SEL)lselector {
+  NSString *operatorPrefix, *dateOperator, *imap4Operator;
+
   if (sel_eq(lselector, EOQualifierOperatorEqual))
-    return @" senton ";
-  if (sel_eq(lselector, EOQualifierOperatorGreaterThan))
-    return @" sentsince ";
-  if (sel_eq(lselector, EOQualifierOperatorLessThan))
-    return @" sentbefore ";
-  
-  return nil;
+    dateOperator = @"ON";
+  else if (sel_eq(lselector, EOQualifierOperatorGreaterThan))
+    dateOperator = @"SINCE";
+  else if (sel_eq(lselector, EOQualifierOperatorLessThan))
+    dateOperator = @"BEFORE";
+  else
+    dateOperator = nil;
+ 
+  if (dateOperator) {
+    if ([dkey isEqualToString: @"DATE"])
+      operatorPrefix = @"SENT";
+    else
+      operatorPrefix = @"";
+    imap4Operator = [NSString stringWithFormat: @"%@%@ ",
+                              operatorPrefix, dateOperator];
+  }
+  else
+    imap4Operator = nil;
+
+  return imap4Operator;
 }
 
 - (NSException *)appendToImap4SearchString:(NSMutableString *)search 
@@ -300,11 +316,11 @@ static void _initImap4SearchCategory(void) {
   id       lvalue;
   SEL      lselector;
   
-  lkey      = [[self key] lowercaseString];
+  lkey      = [[self key] uppercaseString];
   lvalue    = [self value];
   lselector = [self selector];
     
-  if ([lkey isEqualToString:@"flags"]) {
+  if ([lkey isEqualToString:@"FLAGS"]) {
     /* NOTE: special "not" processing! */
     return [self appendFlagsCheckToImap4SearchString:search 
                  insertNot:insertNot];
@@ -312,9 +328,9 @@ static void _initImap4SearchCategory(void) {
   
   /* not a flag */
   if (insertNot) 
-    [search appendString:@"not "];
+    [search appendString:@"NOT "];
   
-  if ([lkey isEqualToString:@"date"]) {
+  if ([lkey isEqualToString:@"DATE"] || [lkey isEqualToString:@"RECEIVE-DATE"]) {
     NSString *s;
     
     if (![lvalue isKindOfClass:[NSCalendarDate class]]) {
@@ -322,35 +338,38 @@ static void _initImap4SearchCategory(void) {
 		     @"expected a NSDate as value"];
     }
     
-    if ((s = [self imap4OperatorForDateComparisonSelector:lselector]) == nil)
+    if ((s = [self imap4OperatorForDateKeyword:lkey
+                         andComparisonSelector:lselector]) == nil)
       return [self invalidImap4SearchQualifier:@"unexpected selector"];
     
-    // TODO: operator created but NOT added?
+    [search appendString:s];
     
     // TODO: much faster without descriptionWithCalendarFormat:?!
-    s = [lvalue descriptionWithCalendarFormat:@"%d-%b-%Y"];
+    s = [lvalue descriptionWithCalendarFormat:@"\"%d-%b-%Y\""];
     [search appendString:s];
     return nil;
   }
 
-  if ([lkey isEqualToString:@"uid"]) {
-    if (!sel_eq(lselector, EOQualifierOperatorEqual))
+  if ([lkey isEqualToString:@"UID"]) {
+    if (!sel_eq(lselector, EOQualifierOperatorEqual)) {
       return [self invalidImap4SearchQualifier:@"unexpected qualifier 2"];
+    }
     
-    [search appendString:@"uid "];
+    [search appendString:@"UID "];
     [search appendString:[lvalue stringValue]];
     return nil;
   }
   
-  if ([lkey isEqualToString:@"size"]) {
+  if ([lkey isEqualToString:@"SIZE"]) {
     if (sel_eq(lselector, EOQualifierOperatorGreaterThan))
-      [search appendString:@"larger "];
+      [search appendString:@"LARGER "];
     else if (sel_eq(lselector, EOQualifierOperatorLessThan))
-      [search appendString:@"smaller "];
+      [search appendString:@"SMALLER "];
     else
       return [self invalidImap4SearchQualifier:@"unexpected qualifier 3"];
         
     [search appendString:[lvalue stringValue]];
+
     return nil;
   }
   
@@ -386,7 +405,7 @@ static void _initImap4SearchCategory(void) {
   if (!sel_eq(lselector, EOQualifierOperatorEqual))
     return [self invalidImap4SearchQualifier:@"unexpected qualifier 5"];
   
-  [search appendString:@"header "];
+  [search appendString:@"HEADER "];
   [search appendString:lkey];
   [search appendString:@" \""];
   [search appendString:[lvalue stringValue]];

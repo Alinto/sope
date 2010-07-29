@@ -41,7 +41,8 @@
   WOAssociation *pageName;
   WOAssociation *actionClass;
   WOAssociation *directActionName;
-  
+  WOAssociation *isAbsolute;
+
   BOOL          sidInUrl;
 
   /* 'ivar' associations */

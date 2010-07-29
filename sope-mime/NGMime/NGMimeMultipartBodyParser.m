@@ -428,6 +428,7 @@ static NSString *_searchBoundary(NGMimeMultipartBodyParser *self,
   NSString   *boundary     = nil;
   NSArray    *rawBodyParts = nil;
   BOOL       foundError    = NO;
+  NSData     *boundaryBytes;
 
   contentType = [_part contentType];
   boundary    = [contentType valueOfParameter:@"boundary"];
@@ -437,9 +438,10 @@ static NSString *_searchBoundary(NGMimeMultipartBodyParser *self,
   
   *(&foundError) = NO;
   
+  boundaryBytes = [boundary dataUsingEncoding:NSISOLatin1StringEncoding];
   *(&rawBodyParts) = [self _parseBody:_body part:_part data:_data
-			   boundary:[boundary cString]
-			   length:[boundary cStringLength]
+			   boundary:[boundaryBytes bytes]
+			   length:[boundary length]
 			   delegate:_d];
 
   if (rawBodyParts) {

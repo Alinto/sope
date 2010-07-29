@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../config.make
+include ../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME=sope-appserver
@@ -38,4 +38,4 @@ endif
 # package
 
 macosx-pkg :: all
-	../maintenance/make-osxpkg.sh sope-appserver
+	../maintenance/make-osxpkg.sh $(PACKAGE_NAME)

@@ -85,7 +85,7 @@ WORSRCLINKUP:=../..
 endif
 
 ifeq ($(WOBUNDLE_INSTALL_DIR),)
-WOBUNDLE_INSTALL_DIR = $(GNUSTEP_INSTALLATION_DIR)/Libraries
+WOBUNDLE_INSTALL_DIR = $(GNUSTEP_WEB_APPS)
 endif
 # The name of the bundle is in the BUNDLE_NAME variable.
 # The list of languages the bundle is localized in are in xxx_LANGUAGES
@@ -287,8 +287,10 @@ $(WOBUNDLE_DIR_NAME)/Resources/WebServer:
 	@$(MKDIRS) $@
 
 internal-wobundle-install_:: $(WOBUNDLE_INSTALL_DIR) shared-instance-headers-install
-	rm -rf $(WOBUNDLE_INSTALL_DIR)/$(WOBUNDLE_DIR_NAME); \
-	$(TAR) chf - --exclude=CVS --exclude=.svn --to-stdout $(WOBUNDLE_DIR_NAME) | (cd $(WOBUNDLE_INSTALL_DIR); $(TAR) xf -)
+#	rm -rf $(WOBUNDLE_INSTALL_DIR)/$(WOBUNDLE_DIR_NAME); \
+#	$(TAR) chf - --exclude=CVS --exclude=.svn --to-stdout $(WOBUNDLE_DIR_NAME) | (cd $(WOBUNDLE_INSTALL_DIR); $(TAR) xf -)
+	if [ -e $(WOBUNDLE_INSTALL_DIR)/$(WOBUNDLE_DIR_NAME) ]; then rm -rf $(WOBUNDLE_INSTALL_DIR)/$(WOBUNDLE_DIR_NAME); fi; \
+	cp -LR $(WOBUNDLE_DIR_NAME) $(WOBUNDLE_INSTALL_DIR)
 ifneq ($(CHOWN_TO),)
 	$(CHOWN) -R $(CHOWN_TO) $(WOBUNDLE_INSTALL_DIR)/$(WOBUNDLE_DIR_NAME)
 endif

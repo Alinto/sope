@@ -39,18 +39,6 @@
         : (NSString *)[[self copy] autorelease];
 }
 
-- (NSString *)stringByReplacingString:(NSString *)_orignal
-  withString:(NSString *)_replacement
-{
-    /* very slow solution .. */
-    
-    if ([self rangeOfString:_orignal].length == 0)
-        return [[self copy] autorelease];
-    
-    return [[self componentsSeparatedByString:_orignal]
-                  componentsJoinedByString:_replacement];
-}
-
 - (NSString *)stringByTrimmingLeadWhiteSpaces
 {
     // should check 'whitespaceAndNewlineCharacterSet' ..
@@ -96,6 +84,25 @@
         return [[self copy] autorelease];
 }
 
+- (NSString *)stringByTrimmingWhiteSpaces
+{
+    return [[self stringByTrimmingTailWhiteSpaces]
+                  stringByTrimmingLeadWhiteSpaces];
+}
+
+#ifndef GNUSTEP
+- (NSString *)stringByReplacingString:(NSString *)_orignal
+  withString:(NSString *)_replacement
+{
+    /* very slow solution .. */
+    
+    if ([self rangeOfString:_orignal].length == 0)
+        return [[self copy] autorelease];
+    
+    return [[self componentsSeparatedByString:_orignal]
+                  componentsJoinedByString:_replacement];
+}
+
 - (NSString *)stringByTrimmingLeadSpaces
 {
     unsigned len;
@@ -117,6 +124,7 @@
     else
         return [[self copy] autorelease];
 }
+
 - (NSString *)stringByTrimmingTailSpaces
 {
     unsigned len;
@@ -139,18 +147,16 @@
         return [[self copy] autorelease];
 }
 
-- (NSString *)stringByTrimmingWhiteSpaces
-{
-    return [[self stringByTrimmingTailWhiteSpaces]
-                  stringByTrimmingLeadWhiteSpaces];
-}
 - (NSString *)stringByTrimmingSpaces
 {
     return [[self stringByTrimmingTailSpaces]
                   stringByTrimmingLeadSpaces];
 }
+#endif
 
 @end /* NSString(GSAdditions) */
+
+#if !GNUSTEP
 
 @implementation NSMutableString(GNUstepCompatibility)
 
@@ -168,6 +174,8 @@
 }
 
 @end /* NSMutableString(GNUstepCompatibility) */
+
+#endif /* !GNUSTEP */
 
 @implementation NSString(lfNSURLUtilities)
 

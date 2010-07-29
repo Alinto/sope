@@ -1,3 +1,13 @@
+2010-04-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NSData+MimeQP.m (-decodeQuotedPrintableValueOfMIMEHeaderField:):
+	we now strip invalid characters from the resulting string.
+
+2010-04-13  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGSmtpClient.m (-mailFrom, -recipientTo): we ensure that the
+	provided email address is enclosed within brackets.
+
 2008-09-01  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* NGSmtpClient.m: improved implementation
@@ -31,9 +41,9 @@
 	  fields to fix #1324
 
 2005-03-24  Helge Hess  <helge.hess@skyrix.com>
-	
+
 	* NGMimeMessageGenerator.m: minor code cleanups
-	
+
 2005-01-30  Helge Hess  <helge.hess@opengroupware.org>
 
 	* NGMimeMessageGenerator.m: fixed a format bug in an error log which

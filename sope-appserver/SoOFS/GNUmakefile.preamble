@@ -76,17 +76,9 @@ ADDITIONAL_LIB_DIRS += \
 	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
 endif
 
-ifeq ($(findstring _64, $(GNUSTEP_TARGET_CPU)), _64)
-SYSTEM_LIB_DIR += -L/usr/local/lib64 -L/usr/lib64
-else
-SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
-endif
-
-
-
 # platform specific settings
 
-ifneq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+ifneq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 # OpenBSD does not require libcrypt
 ifneq ($(findstring darwin, $(GNUSTEP_TARGET_OS)), darwin)
 # and neither does MacOSX? ...
@@ -94,6 +86,6 @@ sope_TOOL_LIBS += -lcrypt
 endif
 endif
 
-ifeq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+ifeq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
 $(SOPED_NAME)_TOOL_LIBS += -liconv
 endif

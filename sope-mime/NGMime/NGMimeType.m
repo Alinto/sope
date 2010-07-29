@@ -120,30 +120,30 @@ static Class NSStringClass  = Nil;
   
   /* some unsupported, but known encoding */
   else if ([charset isEqualToString:@"ks_c_5601-1987"]) {
-    encoding = [NSString defaultCStringEncoding];
+    encoding = NSISOLatin1StringEncoding;
     foundUnsupported = YES;
   }
   else if ([charset isEqualToString:@"euc-kr"]) {
-    encoding = [NSString defaultCStringEncoding];
-    foundUnsupported = YES;
+    encoding = NSKoreanEUCStringEncoding;
   }
   else if ([charset isEqualToString:@"big5"]) {
-    encoding = [NSString defaultCStringEncoding];
-    foundUnsupported = YES;
+    encoding = NSBIG5StringEncoding;
   }
   else if ([charset isEqualToString:@"iso-2022-jp"]) {
-    encoding = [NSString defaultCStringEncoding];
-    foundUnsupported = YES;
+    encoding = NSISO2022JPStringEncoding;
   }
   else if ([charset isEqualToString:@"gb2312"]) {
-    encoding = [NSString defaultCStringEncoding];
-    foundUnsupported = YES;
+    encoding = NSGB2312StringEncoding;
   }
   else if ([charset isEqualToString:@"koi8-r"]) {
-    encoding = [NSString defaultCStringEncoding];
-    foundUnsupported = YES;
+    encoding = NSKOI8RStringEncoding;
   }
-  
+  else if ([charset isEqualToString:@"windows-1250"]) {
+    encoding = NSWindowsCP1250StringEncoding;
+  }
+  else if ([charset isEqualToString:@"windows-1251"]) {
+    encoding = NSWindowsCP1251StringEncoding;
+  }
   else if ([charset isEqualToString:@"windows-1252"]) {
     encoding = NSWindowsCP1252StringEncoding;
   }
@@ -152,7 +152,7 @@ static Class NSStringClass  = Nil;
   }
   else if ([charset isEqualToString:@"x-unknown"] ||
            [charset isEqualToString:@"unknown"]) {
-    encoding = NSASCIIStringEncoding;
+    encoding = NSISOLatin1StringEncoding;
   }
   /* ISO Latin 9 */
 #if !(NeXT_Foundation_LIBRARY || APPLE_Foundation_LIBRARY)
@@ -166,7 +166,7 @@ static Class NSStringClass  = Nil;
   else {
     [self logWithFormat:@"%s: unknown charset '%@'",
           __PRETTY_FUNCTION__, _s];
-    encoding = [NSString defaultCStringEncoding];
+    encoding = NSISOLatin1StringEncoding;
   }
   return encoding;
 }
@@ -385,23 +385,26 @@ static Class NSStringClass  = Nil;
 }
 
 - (BOOL)valueNeedsQuotes:(NSString *)_parameterValue {
-  unsigned len = [_parameterValue cStringLength];
-  char     buf[len + 15];
-  char     *cstr;
+  NSData *stringData;
+  const char *cstr;
+  unsigned int count, max;
+  BOOL needsQuote;
 
-  cstr = &(buf[0]);
+  needsQuote = NO;
 
-  [_parameterValue getCString:cstr]; cstr[len] = '\0';
-  while (*cstr) {
-    if (isMime_SpecialByte(*cstr))
-      return YES;
-
-    if (*cstr == 32)
-      return YES;
-    
-    cstr++;
+  stringData = [_parameterValue dataUsingEncoding:NSUTF8StringEncoding];
+  cstr = [stringData bytes];
+  max = [stringData length];
+  count = 0;
+  while (!needsQuote && count < max) {
+    if (isMime_SpecialByte(*(cstr + count))
+	|| *(cstr + count) == 32)
+      needsQuote = YES;
+    else
+      count++;
   }
-  return NO;
+
+  return needsQuote;
 }
 
 - (NSString *)stringValue {

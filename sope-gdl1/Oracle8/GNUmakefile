@@ -19,7 +19,7 @@
 #  License along with this library; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
 include ../Version
 include ./Version
@@ -51,7 +51,7 @@ BUNDLE_NAME = Oracle8
 ifeq ($(frameworks),yes)
 BUNDLE_INSTALL_DIR := $(FRAMEWORK_INSTALL_DIR)/GDLAccess.framework/Resources/GDLAdaptors/
 else
-BUNDLE_INSTALL_DIR = $(GNUSTEP_INSTALLATION_DIR)/Library/GDLAdaptors-$(MAJOR_VERSION).$(MINOR_VERSION)/
+BUNDLE_INSTALL_DIR = $(SOPE_DBADAPTORS)/
 endif
 
 Oracle8_OBJC_FILES = \

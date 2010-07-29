@@ -52,9 +52,9 @@ static NSNumber *yesNum  = nil;
   StrClass = [NSString class];
 }
 
-static inline NSString *mkStrObj(const unsigned char *s, unsigned int l) {
+static inline NSString *mkStrObj(const unichar *s, unsigned int l) {
   // TODO: unicode
-  return [(NSString *)[StrClass alloc] initWithCString:(char *)s length:l];
+  return [(NSString *)[StrClass alloc] initWithCharacters:s length:l];
 }
 
 static inline id parseWhiteSpaces(NGMailAddressParser *self, BOOL _guessMode) {
@@ -79,12 +79,29 @@ static inline id parseWhiteSpaces(NGMailAddressParser *self, BOOL _guessMode) {
   return returnValue;
 }
 
+static void dumpBadString(unichar *text, int length) {
+  char *bytes;
+  NSMutableString *logString;
+  int count, max;
+
+  max = length * sizeof (unichar);
+  logString = [NSMutableString stringWithCapacity: max];
+  [logString appendString: @"dumping buggy atom string: "];
+  bytes = (char *) text;
+  for (count = 0; count < max; count++) {
+    [logString appendFormat: @"0x%X", bytes[count]];
+    if (count < (max - 1))
+      [logString appendString: @", "];
+  }
+
+  NSLog (@"%@", logString);
+}
 
 static inline id parseAtom(NGMailAddressParser *self, BOOL _guessMode) {
   int  keepPos     = self->dataPos; // keep reference for backtracking
   id   returnValue = nil;
   BOOL isAtom      = YES;
-  unsigned char text[self->maxLength + 2];  // token text
+  unichar text[self->maxLength + 2];  // token text
   int  length      = 0;  // token text length
   BOOL done        = NO;
 
@@ -94,7 +111,7 @@ static inline id parseAtom(NGMailAddressParser *self, BOOL _guessMode) {
       done   = YES;
     }
     else {
-      register unsigned char c = self->data[self->dataPos];
+      register unichar c = self->data[self->dataPos];
       
       switch (c) {
         case '(' :  case ')': case '<': case '>':
@@ -128,6 +145,9 @@ static inline id parseAtom(NGMailAddressParser *self, BOOL _guessMode) {
     else {
       NSCAssert(length > 0, @"no atom with length=0");
       returnValue = [mkStrObj(text, length) autorelease];
+      if (!returnValue) {
+        dumpBadString(text, length);
+      }
       NSCAssert([returnValue isKindOfClass:StrClass], @"got no string ..");
     }
   }
@@ -162,7 +182,7 @@ static inline id parseQText(NGMailAddressParser *self, BOOL _guessMode) {
   int  keepPos     = self->dataPos; // keep reference for backtracking
   id   returnValue = nil;
   BOOL isQText    = YES;
-  unsigned char text[self->maxLength + 4];  // token text
+  unichar text[self->maxLength + 4];  // token text
   int  length      = 0;  // token text length
   BOOL done        = YES;
 
@@ -172,9 +192,9 @@ static inline id parseQText(NGMailAddressParser *self, BOOL _guessMode) {
       done    = YES;
     }
     else {
-      register char c = self->data[self->dataPos];
+      register unichar c = self->data[self->dataPos];
       
-      switch ((int)c) {
+      switch (c) {
         case '"' :  
         case '\\':
         case 13  :
@@ -215,7 +235,7 @@ static inline id parseDText(NGMailAddressParser *self, BOOL _guessMode) {
   int  keepPos     = self->dataPos; // keep reference for backtracking
   id   returnValue = nil;
   BOOL isDText    = YES;
-  unsigned char text[self->maxLength];  // token text
+  unichar text[self->maxLength];  // token text
   int  length      = 0;  // token text length
   BOOL done        = YES;
 
@@ -225,9 +245,9 @@ static inline id parseDText(NGMailAddressParser *self, BOOL _guessMode) {
       done    = YES;
     }
     else {
-      register char c = self->data[self->dataPos];
+      register unichar c = self->data[self->dataPos];
       
-      switch ((int)c) {
+      switch (c) {
         case '[':  case ']':
         case '\\': case 13:
           isDText = (length > 0);
@@ -320,34 +340,20 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 /* constructors */
 
 + (id)mailAddressParserWithData:(NSData *)_data {
-  return [[(NGMailAddressParser *)[self alloc] 
-				  initWithCString:[_data bytes]
-				  length:[_data length]] autorelease];
+  NSString *uniString;
+
+  uniString = [NSString stringWithCharacters:(unichar *)[_data bytes]
+			length:([_data length] / sizeof(unichar))];
+
+  return [(NGMailAddressParser *)self mailAddressParserWithString:uniString];
 }
+
 + (id)mailAddressParserWithCString:(char *)_cString {
-  return [[(NGMailAddressParser *)[self alloc] 
-				  initWithCString:(unsigned char *)_cString
-				  length:strlen(_cString)] autorelease];
-}
-- (id)initWithCString:(const unsigned char *)_cstr length:(int unsigned)_len {
-  if ((self = [super init])) {
-    // TODO: remember some string encoding?
-    self->data      = (unsigned char *)_cstr;
-    self->maxLength = _len;
-    self->dataPos   = 0;
-    self->errorPos  = -1;
-  }
-  return self;
-}
+  NSString *nsCString;
 
-- (id)initWithString:(NSString *)_str {
-  // TODO: unicode
-  return [self initWithCString:(unsigned char *)[_str cString] 
-	       length:[_str cStringLength]];
-}
+  nsCString = [NSString stringWithCString:_cString];
 
-- (id)init {
-  return [self initWithCString:NULL length:0];
+  return [(NGMailAddressParser *)self mailAddressParserWithString:nsCString];
 }
 
 + (id)mailAddressParserWithString:(NSString *)_string {
@@ -355,7 +361,26 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 	   autorelease];
 }
 
+- (id)initWithString:(NSString *)_str {
+  if ((self = [super init])) {
+    // TODO: remember some string encoding?
+    self->maxLength = [_str length];
+    self->data      = malloc(self->maxLength*sizeof(unichar));
+    [_str getCharacters:self->data];
+    self->dataPos   = 0;
+    self->errorPos  = -1;
+  }
+  return self;
+}
+
+- (id)init {
+  return [self initWithString:nil];
+}
+
 - (void)dealloc {
+  if (self->data != NULL) {
+    free(self->data);
+  }
   self->data      = NULL;
   self->maxLength = 0;
   self->dataPos   = 0;

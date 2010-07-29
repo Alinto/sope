@@ -34,6 +34,7 @@
 
 + (id)modelWithName:(NSString *)_name;
 + (id)modelWithContentsOfFile:(NSString *)_path;
++ (NSString *)libraryDriversSubDir;
 
 - (id)initWithDictionary:(NSDictionary *)_dict;
 

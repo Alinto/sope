@@ -62,6 +62,8 @@
 #include "common.h"
 
 #include <NGStreams/NGDescriptorFunctions.h>
+#include <NGStreams/NGLocalSocketAddress.h>
+#include <NGStreams/NGLocalSocketDomain.h>
 #include "NGActiveSocket.h"
 #include "NGSocketExceptions.h"
 #include "NGSocket+private.h"
@@ -83,29 +85,35 @@
 
 #if !defined(WIN32) || defined(__CYGWIN32__)
 
-+ (BOOL)socketPair:(id<NGSocket>[2])_pair inDomain:(id<NGSocketDomain>)_domain {
++ (BOOL)socketPair:(id<NGSocket>[2])_pair {
   int fds[2];
+  NGLocalSocketDomain *domain;
 
   _pair[0] = nil;
   _pair[1] = nil;
 
-  if (socketpair([_domain socketDomain], SOCK_STREAM, [_domain protocol],
+  domain = [NGLocalSocketDomain domain];
+  if (socketpair([domain socketDomain], SOCK_STREAM, [domain protocol],
                  fds) == 0) {
     NGActiveSocket *s1 = nil;
     NGActiveSocket *s2 = nil;
+    NGLocalSocketAddress *address;
     
-    s1 = [[self alloc] _initWithDomain:_domain descriptor:fds[0]];
-    s2 = [[self alloc] _initWithDomain:_domain descriptor:fds[1]];
+    s1 = [[self alloc] _initWithDomain:domain descriptor:fds[0]];
+    s2 = [[self alloc] _initWithDomain:domain descriptor:fds[1]];
     s1 = [s1 autorelease];
     s2 = [s2 autorelease];
 
+    address = [NGLocalSocketAddress address];
     if ((s1 != nil) && (s2 != nil)) {
       s1->mode           = NGStreamMode_readWrite;
       s1->receiveTimeout = 0.0;
       s1->sendTimeout    = 0.0;
+      ASSIGN(s1->remoteAddress, address);
       s2->mode           = NGStreamMode_readWrite;
       s2->receiveTimeout = 0.0;
       s2->sendTimeout    = 0.0;
+      ASSIGN(s2->remoteAddress, address);
 
       _pair[0] = s1;
       _pair[1] = s2;
@@ -152,7 +160,7 @@
         break;
     }
     [[[NGCouldNotCreateSocketException alloc]
-              initWithReason:reason domain:_domain] raise];
+              initWithReason:reason domain:domain] raise];
     return NO;
   }
 }
@@ -507,6 +515,13 @@
 }
 
 - (void)setSendTimeout:(NSTimeInterval)_timeout {
+  struct timeval tv;
+
+  if ([self isConnected]) {
+    tv.tv_sec = (int) _timeout;
+    tv.tv_usec = 0;
+    setsockopt(self->fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof (struct timeval));
+  }
   self->sendTimeout = _timeout;
 }
 - (NSTimeInterval)sendTimeout {
@@ -514,6 +529,13 @@
 }
 
 - (void)setReceiveTimeout:(NSTimeInterval)_timeout {
+  struct timeval tv;
+
+  if ([self isConnected]) {
+    tv.tv_sec = (int) _timeout;
+    tv.tv_usec = 0;
+    setsockopt(self->fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof (struct timeval));
+  }
   self->receiveTimeout = _timeout;
 }
 - (NSTimeInterval)receiveTimeout {
@@ -965,12 +987,12 @@
       readBytes(self, @selector(readBytes:count:), pos, toBeRead);
     
     if (readResult == NGStreamError) {
-      NSException *localException = [self lastException];
+      NSException *localException;
       NSData *data;
       
       data = [NSData dataWithBytes:_buf length:(_len - toBeRead)];
       
-      localException = [[[localException class] alloc]
+      localException = [[NGEndOfStreamException alloc]
                           initWithStream:self
                           readCount:(_len - toBeRead)
                           safeCount:_len

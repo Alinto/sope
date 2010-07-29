@@ -1,6 +1,6 @@
 # GNUstep makefile
 
--include ../../../config.make
+include ../../../config.make
 include ../../common.make
 
 SUBPROJECT_NAME = NGRuleEngine

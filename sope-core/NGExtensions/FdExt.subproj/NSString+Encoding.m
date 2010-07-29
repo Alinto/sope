@@ -140,7 +140,11 @@
 
 
 #ifdef __linux__
+#if __BYTE_ORDER == __LITTLE_ENDIAN
 static NSString *unicharEncoding = @"UCS-2LE";
+#else
+static NSString *unicharEncoding = @"UCS-2BE";
+#endif /* __BYTE_ORDER */
 #else
 static NSString *unicharEncoding = @"UCS-2-INTERNAL";
 #endif
@@ -149,21 +153,12 @@ static int IconvLogEnabled = -1;
 static void checkDefaults(void) {
   NSUserDefaults *ud;
   
-  if (IconvLogEnabled != -1) 
-    return;
-  ud = [NSUserDefaults standardUserDefaults];
-  IconvLogEnabled = [ud boolForKey:@"IconvLogEnabled"]?1:0;
+  if (IconvLogEnabled == -1) {
+    ud = [NSUserDefaults standardUserDefaults];
+    IconvLogEnabled = [ud boolForKey:@"IconvLogEnabled"]?1:0;
 
-#ifdef __linux__
-  if (NSHostByteOrder() == NS_BigEndian) {
-    NSLog(@"Note: using UCS-2 big endian on Linux.");
-    unicharEncoding = @"UCS-2BE";
+    NSLog(@"Note: using '%@' on Linux.", unicharEncoding);
   }
-  else {
-    NSLog(@"Note: using UCS-2 little endian on Linux.");
-    unicharEncoding = @"UCS-2LE";
-  }
-#endif
 }
 
 static char *iconv_wrapper(id self, char *_src, unsigned _srcLen,

@@ -227,7 +227,7 @@ static inline BOOL _checkKey(NGMimePartParser *self, NGHashMap *_map,
 }
 
 + (NSStringEncoding)defaultHeaderFieldEncoding {
-  return NSISOLatin1StringEncoding;
+  return NSUTF8StringEncoding;
 }
 
 - (id)valueOfHeaderField:(NSString *)_name data:(id)_data {
@@ -1091,7 +1091,10 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
   id<NGMimeBodyParser> bodyParser   = nil;
   
   ctype = [_p contentType];
-  
+  if (!ctype
+      && self->delegateRespondsTo.parserContentTypeOfPart)
+    ctype = [self->delegate parser: self contentTypeOfPart: _p];
+
   contentType = ([ctype isKindOfClass:[NGMimeType class]])
     ? ctype
     : [NGMimeType mimeType:[ctype stringValue]];

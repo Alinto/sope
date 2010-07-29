@@ -103,7 +103,7 @@ endif
 # Determine the application directory extension
 WOAPP_EXTENSION = woa
 
-GNUSTEP_WOAPPS = $(GNUSTEP_INSTALLATION_DIR)/WOApps
+GNUSTEP_WOAPPS = $(GNUSTEP_WEB_APPS)
 
 .PHONY: internal-woapp-all_ \
         internal-woapp-install_ \
@@ -372,8 +372,9 @@ $(WOAPP_DIR_NAME)/WebServerResources:
 
 internal-woapp-install_::
 	@($(MKINSTALLDIRS) $(GNUSTEP_WOAPPS); \
-	rm -rf $(GNUSTEP_WOAPPS)/$(WOAPP_DIR_NAME); \
-	$(TAR) chf - --exclude=CVS --exclude=.svn --to-stdout $(WOAPP_DIR_NAME) | (cd $(GNUSTEP_WOAPPS); $(TAR) xf -))
+	if [ -e $(GNUSTEP_WOAPPS)/$(WOAPP_DIR_NAME) ]; then rm -rf $(GNUSTEP_WOAPPS)/$(WOAPP_DIR_NAME); fi; \
+#	$(TAR) chf - --exclude=CVS --exclude=.svn --to-stdout $(WOAPP_DIR_NAME) | (cd $(GNUSTEP_WOAPPS); $(TAR) xf -))
+	cp -LR $(WOAPP_DIR_NAME) $(GNUSTEP_WOAPPS)
 ifneq ($(CHOWN_TO),)
 	$(CHOWN) -R $(CHOWN_TO) $(GNUSTEP_WOAPPS)/$(WOAPP_DIR_NAME)
 endif

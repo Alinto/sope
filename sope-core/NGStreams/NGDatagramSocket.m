@@ -25,6 +25,8 @@
 #endif
 
 #include <NGStreams/NGDescriptorFunctions.h>
+#include <NGStreams/NGLocalSocketAddress.h>
+#include <NGStreams/NGLocalSocketDomain.h>
 #include "NGDatagramSocket.h"
 #include "NGDatagramPacket.h"
 #include "NGSocketExceptions.h"
@@ -55,19 +57,21 @@ static const NSTimeInterval NGNoTimeout = 0.0;
 
 #if !defined(WIN32) || defined(__CYGWIN32__)
 
-+ (BOOL)socketPair:(id<NGSocket>[2])_pair inDomain:(id<NGSocketDomain>)_domain {
++ (BOOL)socketPair:(id<NGSocket>[2])_pair {
   int fds[2];
+  NGLocalSocketDomain *domain;
 
   _pair[0] = nil;
   _pair[1] = nil;
 
-  if (socketpair([_domain socketDomain], SOCK_DGRAM, [_domain protocol],
+  domain = [NGLocalSocketDomain domain];
+  if (socketpair([domain socketDomain], SOCK_DGRAM, [domain protocol],
                  fds) == 0) {
     NGDatagramSocket *s1 = nil;
     NGDatagramSocket *s2 = nil;
     
-    s1 = [[self alloc] _initWithDomain:_domain descriptor:fds[0]];
-    s2 = [[self alloc] _initWithDomain:_domain descriptor:fds[1]];
+    s1 = [[self alloc] _initWithDomain:domain descriptor:fds[0]];
+    s2 = [[self alloc] _initWithDomain:domain descriptor:fds[1]];
     s1 = AUTORELEASE(s1);
     s2 = AUTORELEASE(s2);
 
@@ -112,7 +116,7 @@ static const NSTimeInterval NGNoTimeout = 0.0;
         break;
     }
     [[[NGCouldNotCreateSocketException alloc]
-              initWithReason:reason domain:_domain] raise];
+              initWithReason:reason domain:domain] raise];
     return NO;
   }
 }

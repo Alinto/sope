@@ -31,6 +31,7 @@
 @interface NGImap4ResponseParser(ParsingPrivates)
 - (BOOL)_parseNumberUntaggedResponse:(NGMutableHashMap *)result_;
 - (NSDictionary *)_parseBodyContent;
+- (NSData *) _parseBodyHeaderFields;
 
 - (NSData *)_parseData;
 
@@ -38,6 +39,7 @@
 - (void)_parseContinuationResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseListOrLSubResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseCapabilityResponseIntoHashMap:(NGMutableHashMap *)result_;
+- (BOOL)_parseNamespaceResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseSearchResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseSortResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseQuotaRootResponseIntoHashMap:(NGMutableHashMap *)result_;
@@ -84,6 +86,8 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
 static NSDictionary *_parseMultipartBody(NGImap4ResponseParser *self,
 					 BOOL isBodyStructure);
 
+static NSArray *_parseLanguages();
+
 static NSString *_parseBodyString(NGImap4ResponseParser *self,
                                   BOOL _convertString);
 static NSString *_parseBodyDecodeString(NGImap4ResponseParser *self,
@@ -111,6 +115,7 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
 static NSNumber *_parseUnsigned(NGImap4ResponseParser *self);
 static NSString *_parseUntil(NGImap4ResponseParser *self, char _c);
 static NSString *_parseUntil2(NGImap4ResponseParser *self, char _c1, char _c2);
+static BOOL _endsWithCQuote(NSString *_string);
 
 static __inline__ NSException *_consumeIfMatch
   (NGImap4ResponseParser *self, unsigned char _m);
@@ -261,20 +266,6 @@ static NSNull           *null   = nil;
   }
   
   result = [NGMutableHashMap hashMapWithCapacity:64];
-  
-  if (_la(self, 0) == -1) {
-    [self logWithFormat:@"%s: catched: %@", __PRETTY_FUNCTION__,
-            [self->buffer lastException]];
-    
-    if (ex_) {
-      *ex_ = [self->buffer lastException];
-      return nil;
-    }
-    else {
-      [self setLastException:[self->buffer lastException]];
-      return nil;
-    }
-  }
   for (endOfCommand = NO; !endOfCommand; ) {
     unsigned char l0;
     
@@ -299,6 +290,21 @@ static NSNull           *null   = nil;
     else if (isdigit(l0)) {
       /* those starting with a number '24 ', eg '24 OK Completed' */
       endOfCommand = (_parseTaggedResponse(self, result) == _tag);
+    }
+    else if (l0 == (unsigned char) -1) {
+      if (ex_) {
+        *ex_ = [self->buffer lastException];
+        if (!*ex_)
+          *ex_
+            = [NSException exceptionWithName:@"UnexpectedEndOfStream"
+                                      reason:(@"the parsed stream ended"
+                                              @" unexpectedly")
+                                    userInfo:nil];
+      } else {
+        [self setLastException: [self->buffer lastException]];
+      }
+      endOfCommand = YES;
+      result = nil;
     }
   }
   return result;
@@ -488,6 +494,50 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
   return [self _parseDataIntoRAM:size];
 }
 
+/*
+  Similair to _parseData but used to parse something like this :
+
+  BODY[HEADER.FIELDS (X-PRIORITY)] {17}
+  X-Priority: 1
+
+  )
+
+  Headers are returned as data, as is.
+*/
+- (NSData *) _parseBodyHeaderFields
+{ 
+  NSData   *result;
+  unsigned size;
+  NSNumber *sizeNum;
+
+  /* we skip until we're ready to parse {length} */
+  _parseUntil(self, '{');
+  
+  result = nil;  
+
+  if ((sizeNum = _parseUnsigned(self)) == nil) {
+    NSException *e;
+
+    e = [[NGImap4ParserException alloc] 
+	    initWithFormat:@"expect a number between {}"];
+    [self setLastException:[e autorelease]];
+    return nil;
+  }
+  _consumeIfMatch(self, '}');
+  _consumeIfMatch(self, '\n');
+  
+  if ((size = [sizeNum intValue]) == 0) {
+    [self logWithFormat:@"ERROR(%s): got content size '0'!", 
+            __PRETTY_FUNCTION__];
+    return nil;
+  }
+  
+  if (UseMemoryMappedData && (size > Imap4MMDataBoundary))
+    return [self _parseDataToFile:size];
+  
+  return [self _parseDataIntoRAM:size];
+}
+
 static int _parseTaggedResponse(NGImap4ResponseParser *self,
                                 NGMutableHashMap *result_) 
 {
@@ -584,6 +634,10 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
     break;
 
   case 'N':
+    if (_matchesString(self, "NAMESPACE")) {
+      if ([self _parseNamespaceResponseIntoHashMap:result_])
+	return;
+    }
     if (_parseNoUntaggedResponse(self, result_))     // la: 2
       return;
     break;
@@ -648,11 +702,168 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
   [result_ addObject:_parseUntil(self, '\n') forKey:@"description"];
 }
 
+static inline void
+_purifyQuotedString(NSMutableString *quotedString) {
+  unichar *currentChar, *qString, *maxC, *startC;
+  unsigned int max, questionMarks;
+  BOOL possiblyQuoted, skipSpaces;
+  NSMutableString *newString;
+
+  newString = [NSMutableString string];
+
+  max = [quotedString length];
+  qString = malloc (sizeof (unichar) * max);
+  [quotedString getCharacters: qString];
+  currentChar = qString;
+  startC = qString;
+  maxC = qString + max;
+
+  possiblyQuoted = NO;
+  skipSpaces = NO;
+
+  questionMarks = 0;
+
+  while (currentChar < maxC) {
+    if (possiblyQuoted) {
+      if (questionMarks == 2) {
+	if ((*currentChar == 'Q' || *currentChar == 'q'
+	     || *currentChar == 'B' || *currentChar == 'b')
+	    && ((currentChar + 1) < maxC
+		&& (*(currentChar + 1) == '?'))) {
+	  currentChar++;
+	  questionMarks = 3;
+	}
+	else {
+	  possiblyQuoted = NO;
+	}
+      }
+      else if (questionMarks == 4) {
+	if (*currentChar == '=') {
+	  skipSpaces = YES;
+	  possiblyQuoted = NO;
+ 	  currentChar++;
+	  [newString appendString: [NSString stringWithCharacters: startC
+					     length: (currentChar - startC)]];
+	  startC = currentChar;
+	}
+	else {
+	  possiblyQuoted = NO;
+	}
+      }
+      else {
+	if (*currentChar == '?') {
+	  questionMarks++;
+	}
+	else if (*currentChar == ' ' && questionMarks != 3) {
+	  possiblyQuoted = NO;
+	}
+      }
+    }
+    else if (*currentChar == '='
+	     && ((currentChar + 1) < maxC
+		 && (*(currentChar + 1) == '?'))) {
+      [newString appendString: [NSString stringWithCharacters: startC
+ 					 length: (currentChar - startC)]];
+      startC = currentChar;
+      possiblyQuoted = YES;
+      skipSpaces = NO;
+      currentChar++;
+      questionMarks = 1;
+    }
+
+    currentChar++;
+
+    if (skipSpaces) {
+      while (currentChar < maxC
+	     && (*currentChar == ' '
+		 || *currentChar == '\t'))
+	currentChar++;
+      skipSpaces = NO;
+      startC = currentChar;
+    }
+  }
+
+  if (startC < maxC)
+    [newString appendString: [NSString stringWithCharacters: startC
+				       length: (currentChar - startC)]];
+
+  [quotedString setString: newString];
+  free (qString);
+}
+
 - (NSString *)_parseQuotedString {
+  NSMutableString *quotedString;
+  NSString *tmpString;
+  BOOL stop;
+
   /* parse a quoted string, eg '"' */
   if (_la(self, 0) == '"') {
     _consume(self, 1);
-    return _parseUntil(self, '"');
+    quotedString = [NSMutableString string];
+    stop = NO;
+    while (!stop) {
+      tmpString = _parseUntil(self, '"');
+      [quotedString appendString: tmpString];
+      if(_endsWithCQuote(tmpString)) {
+	[quotedString deleteSuffix: @"\\"];
+	[quotedString appendString: @"\""];
+      }
+      else {
+	stop = YES;
+      }
+    }
+  }
+  else {
+    quotedString = nil;
+  }
+
+  _purifyQuotedString(quotedString);
+
+  return quotedString;
+}
+- (NSString *)_parseQuotedStringOrNIL {
+  unsigned char c0;
+  
+  if ((c0 = _la(self, 0)) == '"')
+    return [self _parseQuotedString];
+  
+  if (c0 == '{') {
+    /* a size indicator, eg '{112}\nkasdjfkja sdj fhj hasdfj hjasdf' */
+    NSData   *data;
+    NSString *s;
+    
+    if ((data = [self _parseData]) == nil)
+      return nil;
+    if (![data isNotEmpty])
+      return @"";
+    
+    s = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if (s == nil)
+      s = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
+    if (s == nil) {
+      [self logWithFormat:
+	      @"ERROR(%s): could not convert data (%d bytes) into string.",
+	      __PRETTY_FUNCTION__, [data length]];
+      return @"[ERROR: NGImap4 could not parse IMAP4 data string]";
+    }
+    return [s autorelease];
+  }
+  
+  if (c0 == 'N' && _matchesString(self, "NIL")) {
+    _consume(self, 3);
+    return (id)null;
+  }
+  return nil;
+}
+- (id)_parseQuotedStringOrDataOrNIL {
+  if (_la(self, 0) == '"')
+    return [self _parseQuotedString];
+  if (_la(self, 0) == '{')
+    return [self _parseData];
+  
+  if (_matchesString(self, "NIL")) {
+    _consume(self, 3);
+    return null;
   }
   return nil;
 }
@@ -683,6 +894,10 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
   }
   if (_la(self, 0) == '"') {
     name = [self _parseQuotedString];
+    _parseUntil(self, '\n');
+  }
+  else if (_la(self, 0) == '{') {
+    name = [self _parseQuotedStringOrNIL];
     _parseUntil(self, '\n');
   }
   else
@@ -723,6 +938,85 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
   return YES;
 }
 
+/* support for NAMESPACE extension - RFC2342 */
+
+- (NSDictionary *)_parseNamespacePart {
+  NSDictionary *namespacePart;
+  NSString *prefix, *key, *delimiter;
+  NSMutableDictionary *parameters;
+  NSMutableArray *values;
+
+  _consume(self, 1);                             /* ( */
+  prefix = [self _parseQuotedStringOrNIL];       /* "prefix" */ 
+  _consume(self, 1);                             /* <sp> */
+  delimiter = [self _parseQuotedStringOrNIL];    /* "delimiter" */
+  parameters = [NSMutableDictionary dictionary];
+  while (_la(self, 0) == ' ') {
+    _consume(self, 1);                           /* <sp> */
+    key = [self _parseQuotedString];
+    _consume(self, 1);                           /* <sp> */
+    values = [NSMutableArray new];
+    while (_la(self, 0) != ')') {
+      _consume(self, 1);                         /* ( or <sp> */
+      [values addObject: [self _parseQuotedString]];
+    }
+    _consume(self, 1);                           /* ) */
+    [parameters setObject: values forKey: key];
+    [values release];
+  }
+  _consume(self, 1);                             /* ) */
+
+  namespacePart = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  prefix, @"prefix",
+                                delimiter, @"delimiter",
+                                parameters, @"parameters",
+                                nil];
+
+  return namespacePart;
+}
+
+- (NSArray *)_parseNamespace {
+  NSMutableArray *namespace;
+
+  namespace = [[NSMutableArray alloc] initWithCapacity: 3];
+  if (_la(self, 0) == 'N') {
+    namespace = nil;
+    _consume(self, 3);
+  } else {
+    _consume(self, 1); /* ( */
+    while (_la(self, 0) == '(') {
+      [namespace addObject: [self _parseNamespacePart]];
+    }
+    _consume(self, 1); /* ) */
+  }
+
+  return namespace;
+}
+
+- (BOOL)_parseNamespaceResponseIntoHashMap:(NGMutableHashMap *)result_ {
+  NSArray *namespace;
+
+  if (!_matchesString(self, "NAMESPACE "))
+    return NO;
+
+  _parseUntil(self, ' ');
+
+  namespace = [self _parseNamespace];
+  if (namespace)
+    [result_ addObject:namespace forKey:@"personal"];
+  _consume(self, 1);
+  namespace = [self _parseNamespace];
+  if (namespace)
+    [result_ addObject:namespace forKey:@"other users"];
+  _consume(self, 1);
+  namespace = [self _parseNamespace];
+  if (namespace)
+    [result_ addObject:namespace forKey:@"shared"];
+  _consume(self, 1); /* \n */
+
+  return YES;
+}
+
 - (BOOL)_parseACLResponseIntoHashMap:(NGMutableHashMap *)result_ {
   /*
     21 GETACL INBOX
@@ -734,6 +1028,7 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
   NSMutableArray *uids;
   NSMutableArray *rights;
   NSDictionary   *result;
+  int length;
   
   if (!_matchesString(self, "ACL "))
     return NO;
@@ -750,6 +1045,12 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
   
   enumerator = [[acls componentsSeparatedByString:@" "] objectEnumerator];
   while ((obj = [enumerator nextObject]) != nil) {
+    if ([obj characterAtIndex: 0] == '"') {
+      length = [obj length];
+      if ([obj characterAtIndex: length - 1] == '"') {
+	obj = [obj substringFromRange: NSMakeRange (1, length - 2)];
+      }
+    }
     [uids  addObject:obj];
     obj = [enumerator nextObject];
     [rights addObject:(obj != nil ? obj : (id)@"")];
@@ -1030,8 +1331,13 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
   _consume(self, 7);
 
   if (_la(self, 0) == '"') {
-    _consume(self, 1);
-    name = _parseUntil(self, '"');
+    name = [self _parseQuotedString];
+//     _consume(self, 1);
+//     name = _parseUntil(self, '"');
+    _consumeIfMatch(self, ' ');
+  }
+  else if (_la(self, 0) == '{') {
+    name = [self _parseQuotedStringOrNIL];
     _consumeIfMatch(self, ' ');
   }
   else {
@@ -1071,51 +1377,6 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
   reason = _parseUntil(self, '\n');
   [result_ addObject:reason forKey:@"bye"];
   return YES;
-}
-
-- (NSString *)_parseQuotedStringOrNIL {
-  unsigned char c0;
-  
-  if ((c0 = _la(self, 0)) == '"')
-    return [self _parseQuotedString];
-  
-  if (c0 == '{') {
-    /* a size indicator, eg '{112}\nkasdjfkja sdj fhj hasdfj hjasdf' */
-    NSData   *data;
-    NSString *s;
-    
-    if ((data = [self _parseData]) == nil)
-      return nil;
-    if (![data isNotEmpty])
-      return @"";
-    
-    s = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (s == nil) {
-      [self logWithFormat:
-	      @"ERROR(%s): could not convert data (%d bytes) into string.",
-	      __PRETTY_FUNCTION__, [data length]];
-      return @"[ERROR: NGImap4 could not parse IMAP4 data string]";
-    }
-    return [s autorelease];
-  }
-  
-  if (c0 == 'N' && _matchesString(self, "NIL")) {
-    _consume(self, 3);
-    return (id)null;
-  }
-  return nil;
-}
-- (id)_parseQuotedStringOrDataOrNIL {
-  if (_la(self, 0) == '"')
-    return [self _parseQuotedString];
-  if (_la(self, 0) == '{')
-    return [self _parseData];
-  
-  if (_matchesString(self, "NIL")) {
-    _consume(self, 3);
-    return null;
-  }
-  return nil;
 }
 
 - (id)_decodeQP:(id)_string headerField:(NSString *)_field {
@@ -1185,7 +1446,7 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
   route   = [self _parseQuotedStringOrNIL]; [self _consumeOptionalSpace];
   mailbox = [self _parseQuotedStringOrNIL]; [self _consumeOptionalSpace];
   host    = [self _parseQuotedStringOrNIL]; [self _consumeOptionalSpace];
-  
+
   if (_la(self, 0) != ')') {
     [self logWithFormat:@"WARNING: IMAP4 envelope "
 	    @"address not properly closed (c0=%c,c1=%c): %@",
@@ -1197,6 +1458,7 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
   address = [[NGImap4EnvelopeAddress alloc] initWithPersonalName:pname
 					    sourceRoute:route mailbox:mailbox
 					    host:host];
+
   return address;
 }
 
@@ -1382,7 +1644,15 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
 #if 0
     [self logWithFormat:@"PARSE KEY: %@", key];
 #endif
-    if ([key hasPrefix:@"body["]) {
+    if ([key hasPrefix:@"body[header.fields"]) {
+      NSData *content;
+        
+      if ((content = [self _parseBodyHeaderFields]) != nil)
+	[fetch setObject:content forKey:key];
+      else
+	[self logWithFormat:@"ERROR: got no body content for key: '%@'",key];
+    } 
+    else if ([key hasPrefix:@"body["]) {
       NSDictionary *content;
         
       if ((content = [self _parseBodyContent]) != nil)
@@ -1497,6 +1767,7 @@ static BOOL _parseGreetingsSieveResponse(NGImap4ResponseParser *self,
     _parseUntil(self, '\n');
     [result_ addObject:value forKey:[key lowercaseString]];
   }
+
   return isOK;
 }
 
@@ -1509,9 +1780,12 @@ static BOOL _parseDataSieveResponse(NGImap4ResponseParser *self,
   if ((data = [self _parseData]) == nil)
     return NO;
   
-  str = [[StrClass alloc] initWithData:data encoding:defCStringEncoding];
+  str = [[StrClass alloc] initWithData:data encoding:NSUTF8StringEncoding];
   [result_ setObject:str forKey:@"data"];
   [str release]; str = nil;
+
+  _parseUntil(self, '\n');
+
   return YES;
 }
 
@@ -1542,13 +1816,16 @@ static BOOL _parseNoSieveResponse(NGImap4ResponseParser *self,
   
   if (!((_la(self, 0)=='N') && (_la(self, 1)=='O') && (_la(self, 2)==' ')))
     return NO;
-    
+
   _consume(self, 3);
 
   data = _parseContentSieveResponse(self);
-    
+
   [result_ addObject:NoNum forKey:@"ok"];
   if (data) [result_ addObject:data forKey:@"reason"];
+
+  _parseUntil(self, '\n');
+
   return YES;
 }
 
@@ -1562,7 +1839,7 @@ static NSString *_parseContentSieveResponse(NGImap4ResponseParser *self) {
   if ((data = [self _parseData]) == nil)
     return nil;
   
-  return [[[StrClass alloc] initWithData:data encoding:defCStringEncoding]
+  return [[[StrClass alloc] initWithData:data encoding:NSUTF8StringEncoding]
                           autorelease];
 }
 
@@ -1594,8 +1871,11 @@ static NSString *_parseBodyDecodeString(NGImap4ResponseParser *self,
     if (_decode)
       data = [data decodeQuotedPrintableValueOfMIMEHeaderField:nil];
     
-    return [[[StrClass alloc] initWithData:data encoding:encoding]
-                            autorelease];
+    if ([data isKindOfClass: [NSString class]])
+      return (NSString *) data;
+    else
+      return [[[StrClass alloc] initWithData:data encoding:encoding]
+	       autorelease];
   }
   else {
     str = _parseUntil2(self, ' ', ')');
@@ -1620,11 +1900,33 @@ static NSString *_parseBodyDecodeString(NGImap4ResponseParser *self,
   return str;
 }
 
-
 static NSString *_parseBodyString(NGImap4ResponseParser *self,
                                   BOOL _convertString)
 {
   return _parseBodyDecodeString(self, _convertString, NO /* no decode */);
+}
+
+static NSArray *_parseLanguages(NGImap4ResponseParser *self) {
+  NSMutableArray *languages;
+  NSString *language;
+
+  languages = [NSMutableArray array];
+  if (_la(self, 0) == '(') {
+    while (_la(self, 0) != ')') {
+      _consume(self,1);
+      language = _parseBodyString(self, YES);
+      if ([language length])
+	[languages addObject: language];
+    }
+    _consume(self,1);
+  }
+  else {
+    language = _parseBodyString(self, YES);
+    if ([language length])
+      [languages addObject: language];
+  }
+
+  return languages;
 }
 
 static NSDictionary *_parseBodyParameterList(NGImap4ResponseParser *self)
@@ -1646,7 +1948,7 @@ static NSDictionary *_parseBodyParameterList(NGImap4ResponseParser *self)
       _consumeIfMatch(self, ' ');
       value = _parseBodyDecodeString(self, YES, YES);
 
-      [list setObject:value forKey:[key lowercaseString]];
+      if (value) [list setObject:value forKey:[key lowercaseString]];
     }
     _consumeIfMatch(self, ')');
   }
@@ -1731,13 +2033,14 @@ static NSArray *_parseParenthesizedAddressList(NGImap4ResponseParser *self) {
 static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
 				      BOOL isBodyStructure) {
   NSString            *type, *subtype, *bodyId, *description,
-		      *encoding, *bodysize;
+		      *result, *encoding, *bodysize;
   NSDictionary        *parameterList;
   NSMutableDictionary *dict;
+  NSArray	      *languages;
 
   type = [_parseBodyString(self, YES) lowercaseString];
   _consumeIfMatch(self, ' ');
-  subtype = _parseBodyString(self, YES);
+  subtype = [_parseBodyString(self, YES) lowercaseString];
   _consumeIfMatch(self, ' ');
   parameterList = _parseBodyParameterList(self);
   _consumeIfMatch(self, ' ');
@@ -1762,13 +2065,18 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
     _consumeIfMatch(self, ' ');
     [dict setObject:_parseBodyString(self, YES) forKey:@"lines"];
   }
-  else if ([type isEqualToString:@"message"]) {
+  else if ([type isEqualToString:@"message"]
+	   && [subtype isEqualToString:@"rfc822"]) {
     if (_la(self, 0) != ')') {
       _consumeIfMatch(self, ' ');
       _consumeIfMatch(self, '(');
-      [dict setObject:_parseBodyString(self, YES) forKey:@"date"];
+      result = _parseBodyString(self, YES);
+      if (result == nil) result = @"";
+      [dict setObject:result forKey:@"date"];
       _consumeIfMatch(self, ' ');
-      [dict setObject:_parseBodyString(self, YES) forKey:@"subject"];
+      result = _parseBodyString(self, YES);
+      if (result == nil) result = @"";
+      [dict setObject:result forKey:@"subject"];
       _consumeIfMatch(self, ' ');
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"from"];
       _consumeIfMatch(self, ' ');
@@ -1783,14 +2091,20 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
       _consumeIfMatch(self, ' ');
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"bcc"];
       _consumeIfMatch(self, ' ');
-      [dict setObject:_parseBodyString(self, YES) forKey:@"in-reply-to"];
+      result = _parseBodyString(self, YES);
+      if (result == nil) result = @"";
+      [dict setObject:result forKey:@"in-reply-to"];
       _consumeIfMatch(self, ' ');
-      [dict setObject:_parseBodyString(self, YES) forKey:@"messageId"];
+      result = _parseBodyString(self, YES);
+      if (result == nil) result = @"";
+      [dict setObject:result forKey:@"messageId"];
       _consumeIfMatch(self, ')');
       _consumeIfMatch(self, ' ');
       [dict setObject:_parseBody(self, isBodyStructure) forKey:@"body"];
       _consumeIfMatch(self, ' ');
-      [dict setObject:_parseBodyString(self, YES) forKey:@"bodyLines"];
+      result = _parseBodyString(self, YES);
+      if (result == nil) result = @"";
+      [dict setObject:result forKey:@"bodyLines"];
     }
   }
 
@@ -1805,14 +2119,9 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
 	      forKey: @"disposition"];
 	if (_la(self, 0) != ')') {
 	  _consume(self,1);
-	  if (_la(self, 0) == '(') {
-	    [dict setObject: _parseBodyParameterList(self)
-		  forKey: @"language"];
-	  }
-	  else {
-	    [dict setObject: _parseBodyString(self, YES)
-		  forKey: @"language"];
-	  }
+	  languages = _parseLanguages(self);
+	  if ([languages count])
+	    [dict setObject: languages forKey: @"languages"];
 	  if (_la(self, 0) != ')') {
 	    _consume(self,1);
 	    [dict setObject: _parseBodyString(self, YES)
@@ -1829,6 +2138,7 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
 static NSDictionary *_parseMultipartBody(NGImap4ResponseParser *self,
 					 BOOL isBodyStructure) {
   NSMutableArray *parts;
+  NSArray	 *languages;
   NSString       *kind;
   NSMutableDictionary *dict;
 
@@ -1854,14 +2164,9 @@ static NSDictionary *_parseMultipartBody(NGImap4ResponseParser *self,
 	      forKey: @"disposition"];
 	if (_la(self, 0) != ')') {
 	  _consume(self,1);
-	  if (_la(self, 0) == '(') {
-	    [dict setObject: _parseBodyParameterList(self)
-		  forKey: @"language"];
-	  }
-	  else {
-	    [dict setObject: _parseBodyString(self, YES)
-		  forKey: @"language"];
-	  }
+	  languages = _parseLanguages(self);
+	  if ([languages count])
+	    [dict setObject: languages forKey: @"languages"];
 	  if (_la(self, 0) != ')') {
 	    _consume(self,1);
 	    [dict setObject: _parseBodyString(self, YES)
@@ -2090,6 +2395,10 @@ static NSString *_parseUntil(NGImap4ResponseParser *self, char _c) {
   cnt = 0;
   str = nil;  
   while ((c = _la(self, 0)) != _c) {
+    if (c == '\\') {
+      _consume(self, 1);
+      c = _la(self, 0);
+    }
     buf[cnt] = c;
     _consume(self, 1);
     cnt++;
@@ -2170,6 +2479,21 @@ static NSString *_parseUntil2(NGImap4ResponseParser *self, char _c1, char _c2){
   }
 }
 
+static BOOL _endsWithCQuote(NSString *_string){
+  unsigned int quoteSlashes;
+  int pos;
+
+  quoteSlashes = 0;
+  pos = [_string length] - 1;
+  while (pos > -1
+	 && [_string characterAtIndex: pos] == '\\') {
+    quoteSlashes++;
+    pos--;
+  }
+
+  return ((quoteSlashes % 2) == 1);
+}
+
 - (NSException *)exceptionForFailedMatch:(unsigned char)_match
   got:(unsigned char)_avail
 {
@@ -2225,9 +2549,9 @@ static __inline__ void _consume(NGImap4ResponseParser *self, unsigned _cnt) {
       [s release];
       
       if (c == '\n') {
-          if ([self->serverResponseDebug cStringLength] > 2) {
+	if ([self->serverResponseDebug lengthOfBytesUsingEncoding:NSISOLatin1StringEncoding] > 2) {
             fprintf(stderr, "S[%p]: %s", self,
-                    [self->serverResponseDebug cString]);
+                    [self->serverResponseDebug cStringUsingEncoding:NSISOLatin1StringEncoding]);
           }
           [self->serverResponseDebug release];
           self->serverResponseDebug = 

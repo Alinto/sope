@@ -25,6 +25,13 @@
 @implementation SoObjectResultEntry
 
 static BOOL debugOn = NO;
+static BOOL useRelativeURLs = NO;
+
++ (void) initialize
+{
+  useRelativeURLs = [[NSUserDefaults standardUserDefaults]
+		      boolForKey: @"WOUseRelativeURLs"];
+}
 
 - (id)initWithURI:(NSString *)_href object:(id)_o values:(NSDictionary *)_d {
   if ((self = [super init])) {
@@ -85,10 +92,36 @@ static BOOL debugOn = NO;
   return YES;
 }
 
-- (id)valueForKey:(NSString *)_key {
-  if ([_key isEqualToString:@"{DAV:}href"])
+- (NSString *)_relativeHREF {
+  NSString *newHREF;
+  NSRange hostRange;
+
+  if ([self->href hasPrefix: @"/"])
     return self->href;
-  
+  else {
+    hostRange = [self->href rangeOfString: @"://"];
+    if (hostRange.length > 0) {
+      newHREF = [self->href substringFromIndex: NSMaxRange (hostRange)];
+      hostRange = [newHREF rangeOfString: @"/"];
+      if (hostRange.length > 0) {
+	newHREF = [newHREF substringFromIndex: hostRange.location];
+      }
+    } else {
+      newHREF = self->href;
+    }
+
+    return newHREF;
+  }
+}
+
+- (id)valueForKey:(NSString *)_key {
+  if ([_key isEqualToString:@"{DAV:}href"]) {
+    if (useRelativeURLs)
+      return [self _relativeHREF];
+    else
+      return self->href;
+  }
+
   if ([_key isEqualToString:@"{DAV:}status"])
     return nil;
   
@@ -100,6 +133,12 @@ static BOOL debugOn = NO;
     [self logWithFormat:@"key %@: %@", _key, v];
     return v;
   }
+}
+
+/* SoObject */
+- (BOOL)isFolderish
+{
+  return [self->object isFolderish];
 }
 
 /* description */

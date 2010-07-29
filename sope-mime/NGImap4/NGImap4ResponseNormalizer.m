@@ -76,22 +76,6 @@ static int      LogImapEnabled = -1;
   return self;
 }
 
-/* client callbacks */
-
-- (void)closeConnection {
-  [(id)self->client closeConnection];
-}
-
-- (NSString *)delimiter {
-  return [self->client delimiter];
-}
-
-/* folder handling */
-
-- (NSString *)_imapFolder2Folder:(NSString *)_folder {
-  return [self->client _imapFolder2Folder:_folder];
-}
-
 /* primary */
 
 - (NSMutableDictionary *)normalizeResponse:(NGHashMap *)_map {
@@ -117,7 +101,7 @@ static int      LogImapEnabled = -1;
   if ((obj = [_map objectForKey:@"bye"])) {
     [result setObject:NoNumber forKey:@"result"];
     [result setObject:obj forKey:@"reason"];
-    [self closeConnection];
+    [self->client closeConnection];
     return result;
   }
 
@@ -157,7 +141,7 @@ static int      LogImapEnabled = -1;
   return result;
 }
 
-- (NSDictionary *)normalizeCapabilityRespone:(NGHashMap *)_map {
+- (NSDictionary *)normalizeCapabilityResponse:(NGHashMap *)_map {
   /* filter for capability response: capability  : NSArray */
   id                  obj;
   NSMutableDictionary *result;
@@ -167,6 +151,51 @@ static int      LogImapEnabled = -1;
   if ((obj = [[_map objectEnumeratorForKey:@"capability"] nextObject]))
     [result setObject:obj forKey:@"capability"];
   
+  return result;
+}
+
+- (NSArray *)_normalizeNamespace:(NSArray *)_namespace {
+  NSMutableArray *result;
+  NSDictionary *currentNS;
+  NSMutableDictionary *newNS;
+  NSString *newPrefix;
+  int count, max;
+
+  max = [_namespace count];
+  result = [NSMutableArray arrayWithCapacity: max];
+  for (count = 0; count < max; count++) {
+    currentNS = [_namespace objectAtIndex: count];
+    newNS = [currentNS mutableCopy];
+    newPrefix = [self->client
+                  _imapFolder2Folder: [currentNS objectForKey: @"prefix"]];
+    [newNS setObject: newPrefix forKey: @"prefix"];
+    [result addObject: newNS];
+    [newNS release];
+  }
+
+  return result;
+}
+
+- (NSDictionary *)normalizeNamespaceResponse:(NGHashMap *)_map {
+  NSMutableDictionary *result;
+  NSDictionary *rawResponse;
+  NSArray *namespace;
+
+  result = [self normalizeResponse:_map];
+  rawResponse = [result objectForKey: @"RawResponse"];
+  namespace = [rawResponse objectForKey: @"personal"];
+  if (namespace)
+    [result setObject: [self _normalizeNamespace: namespace]
+               forKey: @"personal"];
+  namespace = [rawResponse objectForKey: @"other users"];
+  if (namespace)
+    [result setObject: [self _normalizeNamespace: namespace]
+               forKey: @"other users"];
+  namespace = [rawResponse objectForKey: @"shared"];
+  if (namespace)
+    [result setObject: [self _normalizeNamespace: namespace]
+               forKey: @"shared"];
+
   return result;
 }
 
@@ -292,7 +321,7 @@ static int      LogImapEnabled = -1;
 /*
   filter for fetch response
     fetch : NSArray (fetch responses)
-      'header'  - RFC822.HEADER
+      'header'  - RFC822.HEADER and BODY[HEADER.FIELDS (...)]
       'text'    - RFC822.TEXT
       'size'    - SIZE
       'flags'   - FLAGS
@@ -336,7 +365,12 @@ static int      LogImapEnabled = -1;
       switch (c) {
       case 'b':
         /* Note: we check for _prefix_! eg body[1] is valid too */
-	if (klen > 3 && [key hasPrefix:@"body"]) {
+	if (klen > 17 && [key hasPrefix:@"body[header.fields"]) {
+	  keys[count]   = @"header";
+	  values[count] = objForKey(obj, @selector(objectForKey:), key);
+	  count++;
+	}
+	else if (klen > 3 && [key hasPrefix:@"body"]) {
 	  keys[count]   = @"body";
 	  values[count] = objForKey(obj, @selector(objectForKey:), key);
 	  count++;
@@ -516,7 +550,7 @@ static int      LogImapEnabled = -1;
       }
       continue;
     }
-    [tmp setObject:qDesc forKey:[self _imapFolder2Folder:obj]];
+    [tmp setObject:qDesc forKey:[self->client _imapFolder2Folder:obj]];
   }
   [result setObject:tmp forKey:@"quotas"];
   return [[result copy] autorelease];
@@ -615,7 +649,7 @@ static int      LogImapEnabled = -1;
     
     while ((o = [enumerator nextObject])) {
       [folder setObject:_imapFlags2Flags(self, [o objectForKey:@"flags"])
-              forKey:[self _imapFolder2Folder:[o objectForKey:@"folderName"]]];
+              forKey:[self->client _imapFolder2Folder:[o objectForKey:@"folderName"]]];
     }
     
     {
@@ -648,14 +682,13 @@ _imapFlags2Flags(NGImap4ResponseNormalizer *self, NSArray *_flags)
   enumerator = [_flags objectEnumerator];
   cnt = 0;
   while ((obj = [enumerator nextObject])) {
-    if (![obj isNotEmpty])
-      continue;
-    
-    if (![[obj substringToIndex:1] isEqualToString:@"\\"])
-      continue;
-
-    objs[cnt] = [obj substringFromIndex:1];
-    cnt++;
+    if ([obj isNotEmpty]) {
+      if ([obj hasPrefix:@"\\"])
+	objs[cnt] = [obj substringFromIndex:1];
+      else
+	objs[cnt] = obj;
+      cnt++;
+    }
   }
   result = [NSArray arrayWithObjects:objs count:cnt];
   if (objs) free(objs);

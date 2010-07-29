@@ -60,7 +60,7 @@
 - (id)initWithDomain:(id<NGSocketDomain>)_domain; // designated initializer
 
 #if !defined(WIN32)
-+ (BOOL)socketPair:(id<NGSocket>[2])_pair inDomain:(id<NGSocketDomain>)_domain;
++ (BOOL)socketPair:(id<NGSocket>[2])_pair;
 #endif
 
 // ******************** operations ********************

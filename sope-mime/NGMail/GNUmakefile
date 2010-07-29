@@ -1,9 +1,7 @@
 # GNUstep makefile
 
--include ../../config.make
+include ../../config.make
 include $(GNUSTEP_MAKEFILES)/common.make
-
-GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_LOCAL_ROOT)
 
 ifneq ($(frameworks),yes)
 SUBPROJECT_NAME = NGMail
@@ -55,6 +53,9 @@ NGMail_OBJC_FILES = \
 	NSData+MimeQP.m		\
 
 -include GNUmakefile.preamble
+ifneq ($(FHS_INSTALL_ROOT),)
+GNUSTEP_HEADERS=$(DESTDIR)$(FHS_INSTALL_ROOT)/include
+endif
 ifneq ($(frameworks),yes)
 include $(GNUSTEP_MAKEFILES)/subproject.make
 else

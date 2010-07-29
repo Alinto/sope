@@ -67,12 +67,12 @@ static Class NSCFArrayClass = Nil;
   if (searchPathes == nil) {
     NSMutableArray *ma;
     NSDictionary   *env;
-    id tmp;
     
     env = [[NSProcessInfo processInfo] environment];
     ma  = [NSMutableArray arrayWithCapacity:6];
 
 #if COCOA_Foundation_LIBRARY
+    id tmp;
     tmp = NSSearchPathForDirectoriesInDomains(NSAllLibrariesDirectory,
                                               NSAllDomainsMask,
                                               YES);
@@ -86,7 +86,16 @@ static Class NSCFArrayClass = Nil;
           [ma addObject:tmp];
       }
     }
+#elif GNUSTEP_BASE_LIBRARY
+    NSEnumerator *libraryPaths;
+    NSString *directory, *suffix;
+
+    suffix = [self libraryDriversSubDir];
+    libraryPaths = [NSStandardLibraryPaths() objectEnumerator];
+    while ((directory = [libraryPaths nextObject]))
+      [ma addObject: [directory stringByAppendingPathComponent: suffix]];
 #else
+    id tmp;
     if ((tmp = [env objectForKey:@"GNUSTEP_PATHPREFIX_LIST"]) == nil)
       tmp = [env objectForKey:@"GNUSTEP_PATHLIST"];
     tmp = [tmp componentsSeparatedByString:@":"];
@@ -120,6 +129,10 @@ static Class NSCFArrayClass = Nil;
       NSLog(@"%s: no search pathes were found!", __PRETTY_FUNCTION__);
   }
   return searchPathes;
+}
+
++ (NSString *)libraryDriversSubDir {
+  return [NSString stringWithFormat:@"SaxMappings"];
 }
 
 + (id)modelWithName:(NSString *)_name {

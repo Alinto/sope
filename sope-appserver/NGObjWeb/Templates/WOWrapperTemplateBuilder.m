@@ -406,6 +406,7 @@ static NSDictionary *defaultAssocMap = nil;
   NS_ENDHANDLER;
   
   [self->iTemplate setRootElement:rootElement];
+  [rootElement release];
   template = self->iTemplate;
   self->iTemplate = nil;
   
@@ -423,7 +424,7 @@ static NSDictionary *defaultAssocMap = nil;
     [script release];
   }
   
-  return [template autorelease];
+  return template;
 }
 
 /* creating associations from WO/hash tag attributes */

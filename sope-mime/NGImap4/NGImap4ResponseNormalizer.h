@@ -49,7 +49,8 @@
 - (NSDictionary *)normalizeSearchResponse:(NGHashMap *)_map;
 - (NSDictionary *)normalizeSortResponse:(NGHashMap *)_map;
 - (NSDictionary *)normalizeThreadResponse:(NGHashMap *)_map;
-- (NSDictionary *)normalizeCapabilityRespone:(NGHashMap *)_map;
+- (NSDictionary *)normalizeCapabilityResponse:(NGHashMap *)_map;
+- (NSDictionary *)normalizeNamespaceResponse:(NGHashMap *)_map;
 - (NSDictionary *)normalizeQuotaResponse:(NGHashMap *)_map;
 
 /* ACL */

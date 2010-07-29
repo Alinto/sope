@@ -180,6 +180,7 @@ static int candidateSort(NGRule *rule1, NGRule *rule2, NGRuleModel *model) {
 
   /* sort candidates */
   [candidates sortUsingFunction:(void *)candidateSort context:self];
+  [candidates autorelease];
   
   return candidates;
 }

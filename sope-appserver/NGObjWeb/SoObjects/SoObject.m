@@ -30,30 +30,38 @@
 #include <NGObjWeb/WORequest.h>
 #include "common.h"
 
-@interface NSObject(Folders)
-- (BOOL)isFolderish;
-@end
-
 @implementation NSObject(SoObject)
 
 static int debugLookup  = -1;
 static int debugBaseURL = -1;
 static int useRelativeURLs = -1;
+static int redirectInitted = -1;
+static NSURL *redirectURL = nil;
+
 static void _initialize(void) {
+  NSString *url;
+  NSUserDefaults *ud;
+
+  ud = [NSUserDefaults standardUserDefaults];
+
   if (debugLookup == -1) {
-    debugLookup = [[NSUserDefaults standardUserDefaults]
-		                   boolForKey:@"SoDebugKeyLookup"] ? 1 : 0;
+    debugLookup = [ud boolForKey:@"SoDebugKeyLookup"] ? 1 : 0;
     NSLog(@"Note(SoObject): SoDebugKeyLookup is enabled!");
   }
   if (debugBaseURL == -1) {
-    debugBaseURL = [[NSUserDefaults standardUserDefaults]
-		                     boolForKey:@"SoDebugBaseURL"] ? 1 : 0;
+    debugBaseURL = [ud boolForKey:@"SoDebugBaseURL"] ? 1 : 0;
     NSLog(@"Note(SoObject): SoDebugBaseURL is enabled!");
   }
   if (useRelativeURLs == -1) {
-    useRelativeURLs = [[NSUserDefaults standardUserDefaults]
-		                       boolForKey:@"WOUseRelativeURLs"] ?1:0;
+    useRelativeURLs = [ud boolForKey:@"WOUseRelativeURLs"] ?1:0;
     NSLog(@"Note(SoObject): relative base URLs are enabled.");
+  }
+  if (redirectInitted == -1) {
+    url = [ud stringForKey:@"WOApplicationRedirectURL"];
+    if ([url length]) {
+      redirectURL = [[NSURL alloc] initWithString: url];
+    }
+    redirectInitted = 1;
   }
 }
 
@@ -241,6 +249,11 @@ static void _initialize(void) {
   return pathArray;
 }
 
+- (BOOL) isFolderish
+{
+  return NO;
+}
+
 - (NSString *)baseURLInContext:(id)_ctx {
   NSString *baseURL;
   id parent;
@@ -284,10 +297,8 @@ static void _initialize(void) {
   /* add a trailing slash for folders */
   
   if (![baseURL hasSuffix:@"/"]) {
-    if ([self respondsToSelector:@selector(isFolderish)]) {
-      if ([self isFolderish])
-	baseURL = [baseURL stringByAppendingString:@"/"];
-    }
+    if ([self isFolderish])
+      baseURL = [baseURL stringByAppendingString:@"/"];
   }
   
   return baseURL;
@@ -318,56 +329,61 @@ NSString *SoObjectRootURLInContext
   
   rq = [_ctx request];
   ms = [[NSMutableString alloc] initWithCapacity:128];
+
+  if (redirectURL) {
+    [ms appendString: [redirectURL absoluteString]];
+  }
+  else {  
+    if (!useRelativeURLs) {
+      port = [[rq headerForKey:@"x-webobjects-server-port"] intValue];
   
-  if (!useRelativeURLs) {
-    port = [[rq headerForKey:@"x-webobjects-server-port"] intValue];
-  
-    /* this is actually a bug in Apache */
-    if (port == 0) {
-      static BOOL didWarn = NO;
-      if (!didWarn) {
-	[self warnWithFormat:@"(%s:%i): got an empty port from Apache!",
-              __PRETTY_FUNCTION__, __LINE__];
-	didWarn = YES;
+      /* this is actually a bug in Apache */
+      if (port == 0) {
+	static BOOL didWarn = NO;
+	if (!didWarn) {
+	  [self warnWithFormat:@"(%s:%i): got an empty port from Apache!",
+		__PRETTY_FUNCTION__, __LINE__];
+	  didWarn = YES;
+	}
+	port = 80;
       }
-      port = 80;
-    }
   
-    if ((tmp = [rq headerForKey:@"host"]) != nil) { 
-      /* check whether we have a host header with port */
-      if ([tmp rangeOfString:@":"].length == 0)
-	tmp = nil;
-    }
-    if (tmp != nil) { /* we have a host header with port */
-      isHTTPS = 
-	[[rq headerForKey:@"x-webobjects-server-url"] hasPrefix:@"https"];
-      [ms appendString:isHTTPS ? @"https://" : @"http://"]; 
-      [ms appendString:tmp];
-    }
-    else if ((tmp = [rq headerForKey:@"x-webobjects-server-url"]) != nil) {
-      /* sometimes the URL is just wrong! (suggests port 80) */
-      if ([tmp hasSuffix:@":0"] && [tmp length] > 2) { // TODO: bad bad bad
-	[self warnWithFormat:@"%s: got incorrect URL from Apache: '%@'",
-	      __PRETTY_FUNCTION__, tmp];
-	tmp = [tmp substringToIndex:([tmp length] - 2)];
+      if ((tmp = [rq headerForKey:@"host"]) != nil) { 
+	/* check whether we have a host header with port */
+	if ([tmp rangeOfString:@":"].length == 0)
+	  tmp = nil;
       }
-      else if ([tmp hasSuffix:@":443"] && [tmp hasPrefix:@"http://"]) {
-	/* see OGo bug #1435, Debian Apache hack */
-	[self warnWithFormat:@"%s: got 'http' protocol but 443 port, "
-	      @"assuming Debian/Apache bug (OGo #1435): '%@'",
-	      __PRETTY_FUNCTION__, tmp];
-	tmp = [tmp substringWithRange:NSMakeRange(4, [tmp length] - 4 - 4)];
-	tmp = [@"https" stringByAppendingString:tmp];
+      if (tmp != nil) { /* we have a host header with port */
+	isHTTPS = 
+	  [[rq headerForKey:@"x-webobjects-server-url"] hasPrefix:@"https"];
+	[ms appendString:isHTTPS ? @"https://" : @"http://"]; 
+	[ms appendString:tmp];
       }
-      [ms appendString:tmp];
-    }
-    else {
-      // TODO: isHTTPS always no in this case?
-      [ms appendString:isHTTPS ? @"https://" : @"http://"]; 
+      else if ((tmp = [rq headerForKey:@"x-webobjects-server-url"]) != nil) {
+	/* sometimes the URL is just wrong! (suggests port 80) */
+	if ([tmp hasSuffix:@":0"] && [tmp length] > 2) { // TODO: bad bad bad
+	  [self warnWithFormat:@"%s: got incorrect URL from Apache: '%@'",
+		__PRETTY_FUNCTION__, tmp];
+	  tmp = [tmp substringToIndex:([tmp length] - 2)];
+	}
+	else if ([tmp hasSuffix:@":443"] && [tmp hasPrefix:@"http://"]) {
+	  /* see OGo bug #1435, Debian Apache hack */
+	  [self warnWithFormat:@"%s: got 'http' protocol but 443 port, "
+		@"assuming Debian/Apache bug (OGo #1435): '%@'",
+		__PRETTY_FUNCTION__, tmp];
+	  tmp = [tmp substringWithRange:NSMakeRange(4, [tmp length] - 4 - 4)];
+	  tmp = [@"https" stringByAppendingString:tmp];
+	}
+	[ms appendString:tmp];
+      }
+      else {
+	// TODO: isHTTPS always no in this case?
+	[ms appendString:isHTTPS ? @"https://" : @"http://"]; 
   
-      [ms appendString:[rq headerForKey:@"x-webobjects-server-name"]];
-      if ((isHTTPS ? (port != 443) : (port != 80)) && port != 0)
-	[ms appendFormat:@":%i", port];
+	[ms appendString:[rq headerForKey:@"x-webobjects-server-name"]];
+	if ((isHTTPS ? (port != 443) : (port != 80)) && port != 0)
+	  [ms appendFormat:@":%i", port];
+      }
     }
   }
   

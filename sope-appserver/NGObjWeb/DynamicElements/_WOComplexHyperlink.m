@@ -41,6 +41,7 @@
   WOAssociation *string;
   WOAssociation *target;
   WOAssociation *disabled;
+  WOAssociation *isAbsolute;
   WOElement     *template;
   
   /* new in WO4: */
@@ -360,6 +361,7 @@ static BOOL debugStaticLinks = NO;
 {
   if ((self = [super initWithName:_name hyperlinkInfo:_info template:_t])) {
     self->href = _info->href;
+    self->isAbsolute = _info->isAbsolute;
   }
   return self;
 }
@@ -375,8 +377,11 @@ static BOOL debugStaticLinks = NO;
   // TODO: we need a binding to disable rewriting!
   NSRange r;
 
+  if ([[self->isAbsolute valueInContext:_ctx] boolValue] == YES)
+    return NO;
+
   r.length = [_s length];
-  
+
   /* do not rewrite pure fragment URLs */
   if (r.length > 0 && [_s characterAtIndex:0] == '#')
     return NO;

@@ -69,11 +69,11 @@ static Class DateClass = Nil;
   
   builder = [self builderForDocument:_doc];
   
-  root = [[builder buildTemplateFromDocument:_doc] retain];
+  root = [builder buildTemplateFromDocument:_doc];
   
   template = [[self templateClass] alloc];
   template = [template initWithURL:_url rootElement:root];
-  template = [template autorelease];
+  [root release];
   
   /* transform builder info's into element defs ... */
   
@@ -150,10 +150,9 @@ static Class DateClass = Nil;
   else
     template = nil;
 
-  template = [template retain];
   [pool release];
   
-  return [template autorelease];
+  return template;  
 }
 
 @end /* WOxTemplateBuilder */

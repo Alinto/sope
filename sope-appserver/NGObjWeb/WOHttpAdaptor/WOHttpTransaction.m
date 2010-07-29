@@ -48,7 +48,7 @@ NSString *WOAsyncResponseTokenKey = @"WOAsyncResponseToken";
 NSString *WOAsyncResponseReadyNotificationName =
   @"WOAsyncResponseReadyNotification";
 NSString *WOAsyncResponse = @"WOAsyncResponse";
-
+static BOOL     WOHttpAdaptor_LogStream      = NO;
 
 @interface WOCoreApplication(SimpleParserSelection)
 
@@ -85,13 +85,14 @@ static NGLogger *transActionLogger = nil;
   ud = [NSUserDefaults standardUserDefaults];
   useSimpleParser = [ud boolForKey:@"WOHttpTransactionUseSimpleParser"];
   doCore = [[ud objectForKey:@"WOCoreOnHTTPAdaptorException"] boolValue]?1:0;
+  WOHttpAdaptor_LogStream = [ud boolForKey:@"WOHttpAdaptor_LogStream"];
   
   adLogPath = [[ud stringForKey:@"WOAdaptorLogPath"] copy];
   if (adLogPath == nil) adLogPath = @"";
 }
 
 - (BOOL)optionLogStream {
-  return [WOHttpAdaptor optionLogStream];
+  return WOHttpAdaptor_LogStream;
 }
 - (BOOL)optionLogPerf {
   return perfLogger ? YES : NO;
@@ -108,6 +109,9 @@ static NGLogger *transActionLogger = nil;
   NSAssert(_app,    @"missing application ...");
   self->socket      = [_socket retain];
   self->application = [_app    retain];
+  if ([[_app recordingPath] length] > 0)
+    WOHttpAdaptor_LogStream = YES;
+
   return self;
 }
 
@@ -696,7 +700,7 @@ static int logCounter = 0;
   *(&out) = nil;
 
   [self _httpValidateResponse:_response];
-  
+
   out = [(NGCTextStream *)[NGCTextStream alloc] initWithSource:_out];
   
   NS_DURING {
@@ -705,6 +709,7 @@ static int logCounter = 0;
     id   body;
     BOOL doZip;
     BOOL isok = YES;
+    int length;
     
     doZip = [_response shouldZipResponseToRequest:_request];
     
@@ -738,7 +743,11 @@ static int logCounter = 0;
     
     /* add content length header */
     
-    snprintf((char *)buf, sizeof(buf), "%d", [body length]);
+    if ((length = [body length]) == 0
+        && ![[_response headerForKey: @"content-type"] hasPrefix:@"text/plain"]) {
+      [_response setHeader:@"text/plain" forKey:@"content-type"];
+    }
+    snprintf((char *)buf, sizeof(buf), "%d", length);
     t1 = [[NSString alloc] initWithCString:(char *)buf];
     [_response setHeader:t1 forKey:@"content-length"];
     [t1 release]; t1 = nil;
@@ -766,7 +775,7 @@ static int logCounter = 0;
         NSString *value;
 	
 	if (!hasConnectionHeader) {
-	  if ([fieldName caseInsensitiveCompare:@"connection"]==NSOrderedSame)
+	  if ([fieldName isEqualToString:@"connection"])
 	    hasConnectionHeader = YES;
 	}
 	
@@ -789,7 +798,7 @@ static int logCounter = 0;
 	NSLog(@"  END:   %@", fieldName);
 #endif
       }
-      
+
 #if HEAVY_DEBUG
       NSLog(@"  HEADER:\n%@", header);
       NSLog(@"  OUT: %@", out);

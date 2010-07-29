@@ -25,6 +25,9 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
 
+#define LDAP_DEPRECATED 1
+#include <ldap.h>
+
 @class NSString, NSArray, NSEnumerator;
 @class EOQualifier;
 @class NGLdapEntry;
@@ -64,6 +67,20 @@
 
 - (BOOL)bindWithMethod:(NSString *)_method
   binddn:(NSString *)_login credentials:(NSString *)_cred;
+
+#ifdef LDAP_CONTROL_PASSWORDPOLICYREQUEST
+- (BOOL) bindWithMethod: (NSString *) _method
+		 binddn: (NSString *) _login
+	    credentials: (NSString *) _cred
+		   perr: (LDAPPasswordPolicyError *) _perr
+		 expire: (int *) _expire
+		  grace: (int *) _grace;
+
+- (BOOL) changePasswordAtDn: (NSString *) _dn
+		oldPassword: (NSString *) _oldPassword
+		newPassword: (NSString *) _newPassword
+		       perr: (LDAPPasswordPolicyError *) _perr;
+#endif
 
 /* query parameters */
 

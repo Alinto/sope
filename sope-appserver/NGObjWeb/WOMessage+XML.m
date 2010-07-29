@@ -84,7 +84,7 @@
     id builder;
     
     builder = [[[NSClassFromString(@"DOMSaxBuilder") alloc] init] autorelease];
-    dom = [[builder buildFromData:data] retain];
+    dom = [builder buildFromData:data];
   }
   
   /* cache DOM structure */

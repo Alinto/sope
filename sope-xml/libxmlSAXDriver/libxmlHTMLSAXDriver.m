@@ -200,10 +200,10 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
   return self->entityResolver;
 }
 
-- (void)setContentHandler:(id<NSObject,SaxContentHandler>)_handler {
+- (void)setContentHandler:(NSObject <NSObject,SaxContentHandler> *)_handler {
   ASSIGN(self->contentHandler, _handler);
 }
-- (id<NSObject,SaxContentHandler>)contentHandler {
+- (NSObject <NSObject,SaxContentHandler> *)contentHandler {
   return self->contentHandler;
 }
 

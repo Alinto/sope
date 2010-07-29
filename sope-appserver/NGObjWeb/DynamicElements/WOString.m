@@ -235,6 +235,8 @@
     
     doEscape = (aescape != nil) ? [aescape boolValueInComponent:nil] : YES;
     self = [self initWithValue:avalue escapeHTML:doEscape];
+    [avalue release];
+    [aescape release];
   }
   return self;
 }
@@ -357,6 +359,8 @@
     
     doEscape = (aescape != nil) ? [aescape boolValueInComponent:nil] : YES;
     self = [self initWithValue:avalue escapeHTML:doEscape];
+    [avalue release];
+    [aescape release];
   }
   return self;
 }

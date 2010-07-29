@@ -51,7 +51,7 @@
 }
 
 - (id)initWithURL:(NSURL *)_url cached:(BOOL)_flag {
-  if (![[_url scheme] isEqualToString:@"http"]) {
+  if (![[_url scheme] hasPrefix:@"http"]) {
     NSLog(@"%s: invalid URL scheme %@ for WOHTTPURLHandle !",
           __PRETTY_FUNCTION__, [_url scheme]);
     RELEASE(self);

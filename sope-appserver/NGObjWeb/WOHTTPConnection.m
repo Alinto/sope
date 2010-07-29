@@ -38,7 +38,6 @@
 @interface WOHTTPConnection(Privates)
 - (BOOL)_connect;
 - (void)_disconnect;
-- (void)_unregisterNotification;
 @end
 
 @interface WOCookie(Privates)
@@ -153,7 +152,6 @@ static BOOL logStream = NO;
 }
 
 - (void)dealloc {
-  [self _unregisterNotification];
   [self->lastException release];
   [self->log      release];
   [self->io       release];
@@ -286,57 +284,6 @@ static BOOL logStream = NO;
   NS_ENDHANDLER;
   
   [self->socket release]; self->socket = nil;
-}
-
-/* runloop based IO */
-
-- (NSNotificationCenter *)notificationCenter {
-  return [NSNotificationCenter defaultCenter];
-}
-- (NSRunLoop *)runLoop {
-  return [NSRunLoop currentRunLoop];
-}
-- (NSString *)runLoopMode {
-  return NSDefaultRunLoopMode;
-}
-
-- (void)_socketActivated:(NSNotification *)_n {
-  if ([_n object] != self->socket)
-    return;
-
-#if DEBUG && 0  
-  [self debugWithFormat:@"socket activated ..."];
-#endif
-  
-  [[self notificationCenter]
-         postNotificationName:WOHTTPConnectionCanReadResponse
-         object:self];
-}
-
-- (void)_registerForNotification {
-  NSRunLoop *rl;
-  
-  if (self->didRegisterForNotification)
-    return;
-
-  [[self notificationCenter]
-         addObserver:self selector:@selector(_socketActivated:)
-         name:NSFileObjectBecameActiveNotificationName
-         object:self->socket];
-  
-  rl = [self runLoop];
-  [rl addFileObject:self->socket
-      activities:(NSPosixReadableActivity|NSPosixExceptionalActivity)
-      forMode:[self runLoopMode]];
-}
-- (void)_unregisterNotification {
-  if (!self->didRegisterForNotification)
-    return;
-  
-  [[self notificationCenter] removeObserver:self];
-  
-  [[self runLoop] removeFileObject:self->socket
-                  forMode:[self runLoopMode]];
 }
 
 /* logging IO */
@@ -543,8 +490,6 @@ static BOOL logStream = NO;
   if (![self->socket isConnected])
     return NO;
   
-  [self _registerForNotification];
-  
   return YES;
 }
 
@@ -560,7 +505,6 @@ static BOOL logStream = NO;
   WOResponse *response;
   
   *(&response) = nil;
-  [self _unregisterNotification];
   
   if (self->socket == nil) {
     [self debugWithFormat:@"no socket available for reading response ..."];
