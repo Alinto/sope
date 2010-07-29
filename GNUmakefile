@@ -17,8 +17,7 @@ SUBPROJECTS += \
 	sope-mime	\
 	sope-appserver	\
 	sope-ical	\
-	sope-gdl1	\
-	xmlrpc_call
+	sope-gdl1
 
 ifeq ($(HAS_LIBRARY_ldap),yes)
 SUBPROJECTS += sope-ldap
