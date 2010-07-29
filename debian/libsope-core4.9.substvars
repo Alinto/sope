@@ -1,1 +1,0 @@
-shlibs:Depends=gnustep-base-runtime (>= 1.16.3), libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libgnustep-base1.16 (>= 1.16.3), libobjc2 (>= 4.2.1), libsope-core4.9 (>= 4.7.0), libsope-xml4.9 (>= 4.7.0), libssl0.9.8 (>= 0.9.8f-5), zlib1g (>= 1:1.1.4)
