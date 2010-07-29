@@ -7,8 +7,7 @@ PACKAGE_NAME=sope-ldap
 VERSION=4.5.0
 
 SUBPROJECTS = \
-	NGLdap	\
-	samples
+	NGLdap
 
 include $(GNUSTEP_MAKEFILES)/aggregate.make
 

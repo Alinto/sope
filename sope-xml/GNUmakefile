@@ -9,8 +9,7 @@ VERSION=4.5.0
 SUBPROJECTS = \
 	SaxObjC		\
 	DOM		\
-	XmlRpc		\
-	samples
+	XmlRpc
 
 SUBPROJECTS += STXSaxDriver
 
