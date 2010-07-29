@@ -1,0 +1,9 @@
+# compile settings
+
+# static references required for Mach linker
+
+ADDITIONAL_TOOL_LIBS += \
+	-lEOControl			\
+	-lDOM -lXmlRpc -lSaxObjC
+
+ADDITIONAL_LIB_DIRS += -L/usr/local/lib -L/usr/lib

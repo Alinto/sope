@@ -1,0 +1,38 @@
+{
+  "http://purl.org/rss/1.0/" = {
+
+    channel = {
+      class  = RSSChannel;
+      
+      attributes = {
+        title       = title;
+        link        = link;
+        description = info;
+      };
+    };
+    
+    item = {
+      class  = RSSItem;
+      
+      attributes = {
+        title       = title;
+        link        = link;
+        description = info;
+      };
+    };
+    
+    title       = { class = NSString; };
+    link        = { class = NSString; };
+    description = { class = NSString; key = "info"; };
+  };
+  
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#" = {
+    RDF = {
+      class = NSMutableDictionary;
+      ToManyRelationships = {
+ 	channels = ( channel );
+        items    = ( item );
+      };
+    };
+  };
+}

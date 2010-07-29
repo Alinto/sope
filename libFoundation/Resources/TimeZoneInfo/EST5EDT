@@ -1,0 +1,49 @@
+{
+    details = {
+	EDT = {abbrev = EDT; isDST = 1; offset = "-4:00:00"; };
+	EST = {abbrev = EST; isDST = 0; offset = "-5:00:00"; };
+	EWT = {abbrev = EWT; isDST = 1; offset = "-4:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Mar 31 09:00:00 1918 GMT";
+	    endDate = "Sun Oct 26 08:00:00 1919 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/9:00:00"; detail = EDT; },
+		{ date = "October/last Sunday/8:00:00"; detail = EST; }
+	    );
+	},
+	{
+	    startDate = "Sun Apr 30 09:00:00 1967 GMT";
+	    endDate = "Sun Oct 28 08:00:00 1973 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/9:00:00"; detail = EDT; },
+		{ date = "October/last Sunday/8:00:00"; detail = EST; }
+	    );
+	},
+	{
+	    startDate = "Sun Apr 25 09:00:00 1976 GMT";
+	    endDate = "Sun Oct 26 08:00:00 1986 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/9:00:00"; detail = EDT; },
+		{ date = "October/last Sunday/8:00:00"; detail = EST; }
+	    );
+	},
+	{
+	    startDate = "Sun Apr 05 09:00:00 1987 GMT";
+	    endDate = "Sun Oct 25 08:00:00 2037 GMT";
+	    transitions = (
+		{ date = "April/first Sunday/9:00:00"; detail = EDT; },
+		{ date = "October/last Sunday/8:00:00"; detail = EST; }
+	    );
+	}
+    );
+    transitions = (
+	{ date = "Mon Feb 09 09:00:00 1942 GMT"; detail = EWT; },
+	{ date = "Sun Sep 30 08:00:00 1945 GMT"; detail = EST; },
+	{ date = "Sun Jan 06 09:00:00 1974 GMT"; detail = EDT; },
+	{ date = "Sun Oct 27 08:00:00 1974 GMT"; detail = EST; },
+	{ date = "Sun Feb 23 09:00:00 1975 GMT"; detail = EDT; },
+	{ date = "Sun Oct 26 08:00:00 1975 GMT"; detail = EST; }
+    );
+}

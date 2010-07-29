@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<body xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+>
+
+<div id="banner">
+  <table border="0" width="100%">
+    <tr>
+      <td>
+  <h1><a href="accounts/helge/">Helge's</a> Projects</h1>
+  <span class="description"></span>
+      </td>
+      <td align="right">
+        <img src="OGoLogo.gif" alt="Logo" />
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="content">
+  <div class="blog">
+
+    <!-- loop begin -->
+      <var:component className="projectcard" 
+	const:title="Sales - Internal"
+        const:subtitle="Blah Fasel"
+        const:leadurl="accounts/muenst/"
+        const:lead="Jens Muenster"
+        const:startdate="2003-09-10"
+      >
+        The Sales Internal Project collects information regarding the Sales 
+        process. Pricing information etc.
+      </var:component>
+
+      <var:component className="projectcard" 
+	const:title="Development"
+        const:subtitle="Junk Junn"
+        const:leadurl="accounts/helge/"
+        const:lead="Helge Hess"
+        const:startdate="2000-10-23"
+      >
+        OGo Development Information. asdhf jkasd skadfh j asdf
+        asd  jsdkfh asjdfh j asdhfjkasdh fjhsadf jshad fjash dfkj
+        asdfkj asdk aksd klasdjf k asdjf k asdfasdfj.
+      </var:component>
+
+    <!-- loop end -->
+
+  </div>
+</div>
+
+</body>

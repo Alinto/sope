@@ -1,0 +1,315 @@
+2008-09-01  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* NGSmtpClient.m: improved implementation
+
+2007-08-09  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGSmtpClient.m: properly change connection states (fixes OGo bug
+	  #1897)
+
+2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeMessageParser.m: moved NSData QP category to own file
+	  (NSData+MimeQP.m)
+
+2005-07-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeMessage.m: added some convinience methods to access the header
+	  fields of a message
+
+2005-07-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeMessage.m: copy hashmap on object creation to make it immutable
+
+2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 warnings
+
+2005-03-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeMessageGenerator.m: mark To, Cc and Bcc as multivalue header
+	  fields to fix #1324
+
+2005-03-24  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGMimeMessageGenerator.m: minor code cleanups
+	
+2005-01-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeMessageGenerator.m: fixed a format bug in an error log which
+	  could lead to a crash, moved base64 encoding function to separate
+	  file
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMail.xcode: minor fixes and updated
+
+2004-11-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSendMail.m: properly pass the command line to sendmail
+
+2004-10-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSendMail.m: use fwrite() to write to pipe
+
+	* NGMimeMessageGenerator.m: minor code cleanups
+
+2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMail.xcode: added NGSendMail.h
+
+2004-10-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGSendMail.m: use /usr/sbin/sendmail on Cocoa Foundation
+	  (/usr/lib/sendmail on all other platforms)
+
+	* NGSendMail.m: properly setup user defaults object
+
+	* added new NGSendMail object (derived from mail-deliver command in
+	  OGo Logic)
+
+2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMail.xcode: updated to the current build version
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMail.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects.
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMail.xcode: new Xcode project
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed for SOPE 4.3 structure (v4.3.173)
+
+2004-07-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMBoxReader.m: fixed a gcc 3.4 warning (v4.2.170)
+
+2004-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMailAddressParser.m: added stronger typing for gcc 3.4 (v4.2.161)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMailAddressParser.m: major code cleanups, cache YES number, cache
+	  NSString class (v4.2.160)
+
+2004-02-10  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* NGMBoxReader.m, NGPop3Client.m, NGSmtpClient.m: fixed compilation 
+	  warnings on OSX (v4.2.151)
+	
+2004-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.150
+
+	* NGMimeMessageGenerator.m: expose _base64Encoding function (should
+	  be some category?)
+
+	* GNUmakefile, NGMimeMessageGenerator.m: moved body generators to
+	  separate source files
+
+Wed Jun 11 11:15:48 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessageParser: use unicode, use named encoding to encode 
+	  header fields (if default 
+	  'UseFoundationStringEncodingForMimeHeader' = YES, libFoundation 
+	  string encoding will be used (v4.2.113)
+ 
+Wed May 14 12:58:44 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessageParser.m: code cleanups, fix a decode quoted printable 
+	  bug (sometimes last char was ignored) (v4.2.107)
+
+2003-04-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeMessageGenerator.m, NGMimeMessageParser.m: some gcc 3.3 
+	  signed/unsigned warnings fixed (v4.2.97)
+
+	* NGPop3Client.m: some gcc 3.3 signed/unsigned warnings fixed (v4.2.96)
+
+Mon Feb 17 18:21:33 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessageParser: add NGMimeRfc822BodyParser, 
+	  add delegate method bodyParserForPart: to call the 
+	  NGMimeRfc822BodyParser (v4.2.86)
+
+Mon Jan 27 19:13:34 2003    <jan@skyrix.com>
+
+	* NGMimeMessageGenerator.m: code cleanups, use disk blob handling from
+	  NGMime (v4.2.73)
+
+Tue Jan 21 18:16:46 2003    <jan@skyrix.com>
+
+	* NGMimeMessageParser.m: increase version (NGMimePartParser got 
+	  new instance vars) (v4.2.70)
+
+2003-01-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeMessageParser.h: added some docu to header
+
+Mon Oct 21 16:15:58 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessageParser.m: remove logs (v4.2.26)
+
+2002-08-15  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGMimeMessageParser.m: fixed decoding of quoted printable fields,
+	  which was completly broken after the last change by JR :-( Still
+	  to be tested ...
+	  (v4.2.21) fixes SuSE Bug 17579
+	
+	* NGMimeMessageParser.m: some cleanups, changed some "char" variables
+	  to "unsigned char", do not allocate buffer on stack, but in the heap,
+	  use NSStringClass more often, moved decoding code in an NSData
+	  category to make testing easier
+	  Note: the changed from 2002-07-10 probably broke umlaut handling,
+	  SuSE Bug 17579 (added a small tool in samples which reproduces the
+	  problem)
+
+- 2002-07-23 v4.2.19 (hh)
+- 2002-07-17 v4.2.18 (jr)
+- 2002-07-17 v4.2.17 (hh)
+
+2002-07-10  Jan Reichmann  <jr@skyrix.com>
+
+	* NGMimeMessageParser.m: added optimization, got a 100% gain for
+	  listing IMAP folders
+
+- 2002-07-10 v4.2.16 (hh) [before the changes above were applied ???]
+- 2002-07-09 v4.2.15 (hh) [extracted from CVS]
+- 2002-07-09 v4.2.14 (hh) [extracted from CVS]
+
+2002-07-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeMessageParser.m: use NGMimeType string->charset decoding,
+	  fixes a bug with uppercase charset names
+
+- 2002-07-08 v4.2.13 (hh) [extracted from CVS]
+- 2002-07-08 v4.2.12 (hh) [extracted from CVS]
+
+2002-07-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeMessage.m: fixed a (non-serious) bug in +initialize (wasn't 
+	  properly protected against multiple calls), some cleanup
+
+- 2002-06-13 v4.2.11 (jr) [extracted from CVS]
+- 2002-06-11 v4.2.10 (jr) [extracted from CVS]
+- 2002-06-10 v4.2.9  (jr) [extracted from CVS]
+- 2002-06-10 v4.2.8  (jr) [extracted from CVS]
+
+Mon Jun 10 20:22:20 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMailAddressParser.m: fixed address parsing bug
+	(delete white spaces between phrases) 
+
+Thu Mar 14 15:05:53 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMailAddressParser.m: fixed mail-address parsing bug
+
+Thu Nov  1 16:08:13 2001  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessageGenerator.m: fixed utf8 encoding bug
+
+Thu Oct 25 09:41:00 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeMessageGenerator.m: fixed content-type access bug (use
+	  -contentType method to access content types)
+
+Wed Oct 24 15:04:22 2001  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessageGenerator.m: add 8 bit Headerfield encoding default
+
+Wed Oct 24 12:54:58 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* updated to SKYRiXgreen version (mail address parser, message gen)
+
+Thu Oct 11 17:32:38 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeMessage.m: make string-header safe
+
+Thu Aug  9 13:21:22 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMBoxReader.m: use -initWithPath:, no use of NGFileUrl anymore
+
+Mon Apr  2 14:09:11 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMailAddressParser.h: add doc
+
+Wed Mar  7 16:46:43 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessage.m: fixed body == NSString bug
+
+Mon Mar  5 16:29:40 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessage.[hm]: if content-type is nil either text or 
+	application/octet-stream will be returned
+
+Mon Jan 29 16:22:27 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessageParser.m: fixed encoding bug
+
+Fri Jan 26 18:53:10 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeMessageGenerator.m: fixed content bug
+
+	* NGMailAddressParser.m: fixed outlock mail-address parse bug
+
+Tue Jun  6 17:39:08 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMailAddressParser.[mh]: fixed type bug (char --> unsigned char)
+
+	* NGMailAddressParser.m: fixed parse bug
+
+Tue May 30 15:25:41 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMailAddressParser.m: add parseAddressList (addresses seperated 
+	by comma)
+
+Tue Apr 25 15:29:35 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeMessageGenerator.m (_base64Encoding): if the body should be 
+	encoded and the content-type isn`t exits, 
+	set application/octet-stream as content-type
+
+	* NGMimeMessageGenerator.m (_base64Encoding): if no 
+
+Tue Feb 29 18:27:29 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* MOF3 import
+
+Thu Sep  2 21:09:41 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* added class versions and superclass version checks
+
+Wed Aug 25 13:40:32 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeMessageParser.m: L 93 fixed appendLC bug (set appendLC = NO)
+
+Thu Jul 22 14:28:12 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeMessageGenerator.m (_base64Encoding): insert quoted-printable 
+	  encoding for text/* Mimeparts
+
+Fri Apr 16 18:00:50 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* mbox parser rewritten for better speed
+
+Mon Apr 12 16:47:33 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* use #include instead of #import, modified headers to support #include
+
+Fri Nov 27 15:37:04 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* started WIN32 port
+
+1998-10-09  Helge Hess  <helge@trex.mdlink.de>
+
+	* created ChangeLog
+

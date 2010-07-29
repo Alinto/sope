@@ -1,0 +1,13 @@
+// $Id: Main.wod,v 1.1 2004/06/08 11:08:23 helge Exp $
+
+ClickCount: WOString {
+  value = clickCount;
+}
+SID: WOString {
+  value = session.sessionID;
+}
+
+Click: WOHyperlink {
+  action = click;
+  string = "click";
+}

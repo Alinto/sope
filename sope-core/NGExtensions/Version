@@ -1,0 +1,6 @@
+# version
+
+SUBMINOR_VERSION:=203
+
+# v4.3.115 requires libFoundation v1.0.59
+# v4.2.72  requires libEOControl  v4.2.39

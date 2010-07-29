@@ -1,0 +1,25 @@
+# compilation settings
+
+ifeq ($(FOUNDATION_LIB),apple)
+
+ADDITIONAL_CPPFLAGS += -I./macosx
+
+else
+
+before-all :: config.status
+
+after-distclean::
+	rm -f config.cache config.log config.status config.h config.mak
+	rm -rf $(GNUSTEP_TARGET_CPU)
+
+$(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS)/config.h config.status : config.h.in configure
+	./configure
+
+endif
+
+ifneq ($(GNUSTEP_TARGET_OS),cygwin32)
+configure : configure.in
+	#autoconf configure.in > configure
+	echo "configure.in seems to have changed, you might want to rerun autoconf"
+	chmod +x configure
+endif

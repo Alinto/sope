@@ -1,0 +1,24 @@
+This directory contains sample programs for the skyrix-core libraries.
+
+Tools
+=====
+
+mime2xml    - read a MIME file and output the structure as XML
+
+imapls      - list IMAP4 server directories, sample for NGImap4FileManager
+
+bmlookup    - perform resource lookups using the NGExtensions NGBundleManager
+              class
+
+fmdls       - list directories using the NGFileManager directory-datasource
+              implementation
+
+subclassing - test runtime subclassing in the Objective-C runtime 
+              (NGObjCRuntime in NGExtensions)
+
+testdirenum - test the NGDirectoryEnumerator
+
+ldapls	    - an 'ls' for LDAP directories
+ldap2dsml   - return the output of an LDAP server as DSML (directory service
+              markup language)
+ldapchkpwd  - check whether a login/password combo would be authenticated

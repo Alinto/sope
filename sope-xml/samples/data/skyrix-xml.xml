@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE project-listing SYSTEM "http://freshmeat.net/backend/fm-projects-0.1.dtd">
+<project-listing>
+  <project>
+    <project_id>34265</project_id>
+    <date_added>2003-01-17 05:08:06</date_added>
+    <date_updated>2003-01-17 05:57:18</date_updated>
+    <projectname_short>skyrix-xml</projectname_short>
+    <projectname_full>SKYRiX XML Processing Libraries</projectname_full>
+    <desc_short>A SAX, DOM, and XML-RPC Implementation for Objective-C.</desc_short>
+    <desc_full>The SKYRiX XML library package is a set of
+Objective-C libraries for processing XML and
+XML-like data. It includes a SAX2, DOM, and
+XML-RPC implementation for Objective-C. SAX
+drivers are provided for accessing HTML and XML
+files using libxml2, XML using expat, iCal/vCard
+using libical, pyx and plist files. The package
+works with GNUstep and with the Apple Cocoa
+Foundation. </desc_full>
+    <vitality_score>0.00</vitality_score>
+    <vitality_percent>0.00</vitality_percent>
+    <popularity_score>5.01</popularity_score>
+    <popularity_percent>0.01</popularity_percent>
+    <rating>0.00</rating>
+    <rating_count>0</rating_count>
+    <subscriptions>0</subscriptions>
+    <branch_name>Default</branch_name>
+    <url_project_page>http://freshmeat.net/projects/skyrix-xml/</url_project_page>
+    <url_homepage>http://freshmeat.net/redir/skyrix-xml/36366/url_homepage/</url_homepage>
+    <url_tgz>http://freshmeat.net/redir/skyrix-xml/36366/url_tgz/</url_tgz>
+    <url_changelog></url_changelog>
+    <url_rpm></url_rpm>
+    <url_deb></url_deb>
+    <url_bz2></url_bz2>
+    <url_cvs></url_cvs>
+    <url_list></url_list>
+    <url_zip></url_zip>
+    <license>GNU Lesser General Public License (LGPL)</license>
+    <latest_version></latest_version>
+    <screenshot_thumb></screenshot_thumb>
+  </project>
+</project-listing>

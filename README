@@ -1,0 +1,66 @@
+SKYRiX Object Publishing Environment
+====================================
+
+This directory contains SOPE, the application server hosting the
+OpenGroupware.org business logic and web interface.
+
+SOPE 4.5 is the development version of the upcoming SOPE 4.6 release.
+
+SKYRiX Libraries for XML Processing (sope-xml)
+==============================================
+
+The package contains:
+- a SAX2 Implementation for Objective-C
+- SaxObjC driver bundles for: libxml2 (HTML, XML), libical (iCalendar, 
+  vCard), expat (XML), plists, pyx, CoreFoundation (XML)
+- DOM on top of SaxObjC
+- an XML-RPC implementation (without the transport layer)
+
+SKYRiX Core Libraries (sope-core)
+=================================
+
+The SKYRiX Core libraries (sope-core) contain:
+- various Foundation extensions
+- a java.io like stream and socket library
+
+SKYRiX MIME Libraries (sope-mime)
+=================================
+
+- classes for processing MIME entities
+- a full IMAP4 implementation
+- prototypical POP3 and SMTP processors
+
+SKYRiX LDAP Libraries (sope-ldap)
+=================================
+
+- an Objective-C wrapper for LDAP directory services
+
+SKYRiX iCalendar Libraries (sope-ical)
+======================================
+
+- classes for iCalendar/vCard objects
+
+SKYRiX Application Server (SOPE)
+================================
+
+The SKYRiX SOPE package is a framework for developing web applications and 
+services. The name "SOPE" (SKYRiX Object Publishing Environment) is 
+inspired by ZOPE ;-)
+
+It provides
+- template rendering engine, lots of dynamic elements
+- HTTP client/server
+- XML-RPC client
+- WebDAV server framework
+- session management
+- scripting extensions for Foundation, JavaScript bridge
+- DOM tree rendering library
+
+mod_ngobjweb
+============
+
+An Apache module for forwarding HTTP request from Apache to a SOPE
+application server. This is a non-streaming proxy so that the application
+server isn't blocked by IO of slow connections!
+(this eliminates the need for threading because of IO, the Apache server
+ pool runs the blocking IO operations)

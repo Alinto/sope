@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="JSValidatedField">
+  <binding name="inputText" required="YES" />
+  <binding name="errorMessage" required="YES" />
+  <binding name="formName" required="YES" />
+  <binding name="fieldSize" />
+  <binding name="inputIsRequired" />
+  <binding name="requiredText" />
+
+  <!-- SOPE -->
+  <binding name="escapeJS" defaults="YES/NO" />
+</wo>

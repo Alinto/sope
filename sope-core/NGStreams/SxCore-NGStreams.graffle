@@ -1,0 +1,4989 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+<dict>
+	<key>CanvasColor</key>
+	<dict>
+		<key>w</key>
+		<real>1.000000e+00</real>
+	</dict>
+	<key>ColumnAlign</key>
+	<integer>0</integer>
+	<key>ColumnSpacing</key>
+	<real>5.400000e+01</real>
+	<key>GraphDocumentVersion</key>
+	<integer>2</integer>
+	<key>GraphicsList</key>
+	<array>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{639, 1332}, {225, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8385</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotGetSocketOptionException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{720, 1359}, {225, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8386</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotSetSocketOptionException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{702, 1296}, {171, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8387</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketOptionException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8385</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8388</integer>
+					<key>Points</key>
+					<array>
+						<string>{778.5, 1314}</string>
+						<string>{760.5, 1332}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8387</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8386</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8389</integer>
+					<key>Points</key>
+					<array>
+						<string>{793.929, 1314}</string>
+						<string>{826.071, 1359}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8387</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8384</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{567, 999}, {234, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8383</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotResolveHostNameException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{324, 315}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8368</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGBase64Stream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGBase64Stream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{396, 279}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8369</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGLockingStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGLockingStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{252, 279}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8370</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGMD5Stream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGMD5Stream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{396, 252}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8371</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGByteBuffer.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGByteBuffer}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{396, 225}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8372</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGByteCountStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGByteCountStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{252, 252}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8373</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGBufferedStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGBufferedStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{252, 225}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8374</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGGZipStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGGZipStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{324, 189}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8375</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGFilterStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGFilterStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8368</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8376</integer>
+					<key>Points</key>
+					<array>
+						<string>{387, 207}</string>
+						<string>{387, 315}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8375</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8369</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8377</integer>
+					<key>Points</key>
+					<array>
+						<string>{394.2, 207}</string>
+						<string>{451.8, 279}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8375</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8370</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8378</integer>
+					<key>Points</key>
+					<array>
+						<string>{379.8, 207}</string>
+						<string>{322.2, 279}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8375</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8371</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8379</integer>
+					<key>Points</key>
+					<array>
+						<string>{397.286, 207}</string>
+						<string>{448.714, 252}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8375</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8372</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8380</integer>
+					<key>Points</key>
+					<array>
+						<string>{405, 207}</string>
+						<string>{441, 225}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8375</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8373</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8381</integer>
+					<key>Points</key>
+					<array>
+						<string>{376.714, 207}</string>
+						<string>{325.286, 252}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8375</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8374</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8382</integer>
+					<key>Points</key>
+					<array>
+						<string>{369, 207}</string>
+						<string>{333, 225}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8375</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8367</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{36, 981}, {207, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8366</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotCloseStreamException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{117, 1404}, {243, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8357</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketShutdownDuringReadException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{18, 1377}, {243, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8358</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketConnectionResetException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{117, 1350}, {243, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8359</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketTimedOutException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{54, 1287}, {279, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8360</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketShutdownException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{18, 1323}, {243, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8361</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketShutdownDuringWriteException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8357</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8362</integer>
+					<key>Points</key>
+					<array>
+						<string>{196.962, 1305}</string>
+						<string>{235.038, 1404}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8360</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8358</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8363</integer>
+					<key>Points</key>
+					<array>
+						<string>{188.1, 1305}</string>
+						<string>{144.9, 1377}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8360</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8359</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8364</integer>
+					<key>Points</key>
+					<array>
+						<string>{199.929, 1305}</string>
+						<string>{232.071, 1350}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8360</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8361</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8365</integer>
+					<key>Points</key>
+					<array>
+						<string>{180, 1305}</string>
+						<string>{153, 1323}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8360</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8356</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{567, 972}, {234, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8355</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketIsAlreadyListeningException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{225, 1089}, {180, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8348</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamSeekErrorException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{333, 1062}, {180, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8349</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamWriteErrorException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{225, 1035}, {180, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8350</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamReadErrorException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{279, 999}, {153, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8351</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamErrorException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8348</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8352</integer>
+					<key>Points</key>
+					<array>
+						<string>{351.45, 1017}</string>
+						<string>{319.05, 1089}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8351</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8349</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8353</integer>
+					<key>Points</key>
+					<array>
+						<string>{365.143, 1017}</string>
+						<string>{413.357, 1062}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8351</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8350</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8354</integer>
+					<key>Points</key>
+					<array>
+						<string>{345.375, 1017}</string>
+						<string>{325.125, 1035}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8351</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8347</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{171, 540}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8334</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGDatagramSocket.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGDatagramSocket}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{315, 567}, {117, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8335</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketProtocols.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGActiveSocket}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{171, 567}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8336</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGActiveSocket.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGActiveSocket}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{315, 513}, {117, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8337</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketProtocols.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGPassiveSocket}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{171, 513}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8338</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGPassiveSocket.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGPassiveSocket}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{45, 576}, {81, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8339</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketProtocols.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGSocket}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{45, 540}, {81, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8340</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocket.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocket}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8334</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8341</integer>
+					<key>Points</key>
+					<array>
+						<string>{126, 549}</string>
+						<string>{171, 549}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8340</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8336</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8342</integer>
+					<key>Points</key>
+					<array>
+						<string>{315, 576}</string>
+						<string>{297, 576}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8335</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8336</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8343</integer>
+					<key>Points</key>
+					<array>
+						<string>{124.876, 556.159}</string>
+						<string>{184.5, 567}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8340</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8338</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8344</integer>
+					<key>Points</key>
+					<array>
+						<string>{315, 522}</string>
+						<string>{297, 522}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8337</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8338</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8345</integer>
+					<key>Points</key>
+					<array>
+						<string>{124.876, 541.841}</string>
+						<string>{184.5, 531}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8340</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8340</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8346</integer>
+					<key>Points</key>
+					<array>
+						<string>{85.5, 576}</string>
+						<string>{85.5, 558}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8339</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8333</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{558, 1179}, {198, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8329</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketAlreadyBoundException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{585, 1143}, {171, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8330</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketBindException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{603, 1206}, {198, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8331</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotBindSocketException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8331</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8332</integer>
+					<key>Points</key>
+					<array>
+						<string>{675, 1161}</string>
+						<string>{697.5, 1206}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8330</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8328</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{567, 945}, {234, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8327</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGInvalidSocketDomainException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{99, 684}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8316</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGCharBuffer.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCharBuffer}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{243, 684}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8317</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStringTextStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStringTextStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{99, 648}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8318</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGFilterTextStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGFilterTextStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{306, 648}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8319</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGCTextStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCTextStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{297, 612}, {153, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8320</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGTextStreamProtocols.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGExtendedTextStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{153, 612}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8321</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGTextStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGTextStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8316</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8322</integer>
+					<key>Points</key>
+					<array>
+						<string>{162, 666}</string>
+						<string>{162, 684}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8318</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8317</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8323</integer>
+					<key>Points</key>
+					<array>
+						<string>{227.25, 630}</string>
+						<string>{294.75, 684}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8321</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8318</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8324</integer>
+					<key>Points</key>
+					<array>
+						<string>{202.5, 630}</string>
+						<string>{175.5, 648}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8321</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8319</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8325</integer>
+					<key>Points</key>
+					<array>
+						<string>{254.25, 630}</string>
+						<string>{330.75, 648}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8321</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8321</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8326</integer>
+					<key>Points</key>
+					<array>
+						<string>{297, 621}</string>
+						<string>{279, 621}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8320</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8315</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{234, 1233}, {180, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8308</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGWriteOnlyStreamException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{234, 1179}, {180, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8309</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGReadOnlyStreamException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{270, 1134}, {207, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8310</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamModeException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{306, 1206}, {207, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8311</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGUnknownStreamModeException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8308</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8312</integer>
+					<key>Points</key>
+					<array>
+						<string>{369, 1152}</string>
+						<string>{328.5, 1233}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8310</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8309</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8313</integer>
+					<key>Points</key>
+					<array>
+						<string>{363.6, 1152}</string>
+						<string>{333.9, 1179}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8310</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8311</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8314</integer>
+					<key>Points</key>
+					<array>
+						<string>{378, 1152}</string>
+						<string>{405, 1206}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8310</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8307</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{567, 918}, {234, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8306</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGDidNotFindServiceException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{351, 837}, {171, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8305</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGIOSearchAccessException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{99, 234}, {90, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8302</integer>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>5.000000e-01</real>
+								<key>g</key>
+								<real>1.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NSFileHandle}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{54, 270}, {180, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8303</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGConcreteStreamFileHandle.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGConcreteStreamFileHandle}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8303</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8304</integer>
+					<key>Points</key>
+					<array>
+						<string>{144, 252}</string>
+						<string>{144, 270}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8302</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8301</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{567, 891}, {234, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8300</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotListenException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{189, 837}, {144, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8299</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGIOAccessException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{837, 1116}, {225, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8292</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketAlreadyConnectedException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{801, 1143}, {198, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8293</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketNotConnectedException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{837, 1053}, {171, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8294</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketConnectException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{801, 1089}, {198, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8295</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotConnectException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8292</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8296</integer>
+					<key>Points</key>
+					<array>
+						<string>{926.357, 1071}</string>
+						<string>{945.643, 1116}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8294</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8293</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8297</integer>
+					<key>Points</key>
+					<array>
+						<string>{920.25, 1071}</string>
+						<string>{902.25, 1143}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8294</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8295</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8298</integer>
+					<key>Points</key>
+					<array>
+						<string>{916.875, 1071}</string>
+						<string>{905.625, 1089}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8294</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8291</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{45, 306}, {207, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8289</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>5.000000e-01</real>
+								<key>g</key>
+								<real>1.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NSObjCTypeSerializationCallBack}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{45, 342}, {207, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8290</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamCoder.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamCoder}</string>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8288</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{45, 477}, {153, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8283</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGInternetSocketDomain.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGInternetSocketDomain}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{216, 468}, {117, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8284</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketProtocols.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGSocketDomain}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{45, 450}, {153, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8285</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGLocalSocketDomain.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGLocalSocketDomain}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8283</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8286</integer>
+					<key>Points</key>
+					<array>
+						<string>{216, 480.441}</string>
+						<string>{197.975, 481.501}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8284</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8285</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8287</integer>
+					<key>Points</key>
+					<array>
+						<string>{216, 470.118}</string>
+						<string>{194.883, 467.633}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8284</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8282</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{252, 72}, {99, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8277</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGDataStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGDataStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{369, 45}, {135, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8278</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamProtocols.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGPositionableStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{252, 27}, {99, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8279</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGFileStream.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGFileStream}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8277</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8280</integer>
+					<key>Points</key>
+					<array>
+						<string>{391.5, 63}</string>
+						<string>{346.415, 72.017}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8278</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8279</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8281</integer>
+					<key>Points</key>
+					<array>
+						<string>{369, 45}</string>
+						<string>{350.325, 42.51}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8278</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8276</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{72, 27}, {99, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8273</integer>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>5.000000e-01</real>
+								<key>g</key>
+								<real>1.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NSPipe}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{72, 63}, {99, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8274</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamPipe.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamPipe}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>8274</integer>
+					</dict>
+					<key>ID</key>
+					<integer>8275</integer>
+					<key>Points</key>
+					<array>
+						<string>{121.5, 45}</string>
+						<string>{121.5, 63}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>8273</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8272</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{306, 936}, {207, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8271</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamNotOpenException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{27, 1197}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8270</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGEndOfStreamException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{207, 774}, {108, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8269</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGIOException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{567, 864}, {234, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8268</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotCreateSocketException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{198, 900}, {126, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8267</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStreamException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{18, 945}, {207, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8266</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotOpenStreamException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{729, 774}, {126, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8265</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGSocketException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{567, 837}, {234, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8264</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketExceptions.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGCouldNotAcceptException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{351, 459}, {153, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8261</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGInternetSocketAddress.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGInternetSocketAddress}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{216, 441}, {117, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8262</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketProtocols.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGSocketAddress}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{351, 432}, {153, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8263</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGLocalSocketAddress.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGLocalSocketAddress}</string>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8260</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8261</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8259</integer>
+			<key>Points</key>
+			<array>
+				<string>{333, 456.882}</string>
+				<string>{354.117, 459.367}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8262</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8263</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8258</integer>
+			<key>Points</key>
+			<array>
+				<string>{333, 446.559}</string>
+				<string>{351.025, 445.499}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8262</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{342, 108}, {99, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8257</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGTaskStream.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGTaskStream}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{216, 387}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8255</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGSocketProtocols.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGDatagramPacket}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{45, 387}, {153, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>8256</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGDatagramPacket.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGDatagramPacket}</string>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>8254</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8256</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8253</integer>
+			<key>Points</key>
+			<array>
+				<string>{216, 396}</string>
+				<string>{198, 396}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8255</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{207, 738}, {108, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8252</integer>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>fill</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>5.000000e-01</real>
+						<key>g</key>
+						<real>1.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NSException}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 189}, {81, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8251</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamProtocols.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGStream}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{117, 117}, {153, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8250</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStreamProtocols.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 NGByteSequenceStream}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{153, 189}, {81, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>8249</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/NGStreams/NGStreams/NGStream.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NGStream}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8383</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8248</integer>
+			<key>Points</key>
+			<array>
+				<string>{787.68, 792}</string>
+				<string>{688.32, 999}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8366</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8247</integer>
+			<key>Points</key>
+			<array>
+				<string>{247.5, 918}</string>
+				<string>{153, 981}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8267</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8269</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8246</integer>
+			<key>Points</key>
+			<array>
+				<string>{261, 756}</string>
+				<string>{261, 774}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8252</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8355</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8245</integer>
+			<key>Points</key>
+			<array>
+				<string>{787.091, 792}</string>
+				<string>{688.909, 972}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8329</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8244</integer>
+			<key>Points</key>
+			<array>
+				<string>{667.125, 1161}</string>
+				<string>{660.375, 1179}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8330</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8294</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8243</integer>
+			<key>Points</key>
+			<array>
+				<string>{796.21, 792}</string>
+				<string>{918.29, 1053}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8360</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8242</integer>
+			<key>Points</key>
+			<array>
+				<string>{116.55, 1215}</string>
+				<string>{184.95, 1287}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8270</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8327</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8241</integer>
+			<key>Points</key>
+			<array>
+				<string>{786.316, 792}</string>
+				<string>{689.684, 945}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8387</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8240</integer>
+			<key>Points</key>
+			<array>
+				<string>{791.922, 792}</string>
+				<string>{787.578, 1296}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8330</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8239</integer>
+			<key>Points</key>
+			<array>
+				<string>{789.037, 792}</string>
+				<string>{673.463, 1143}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8306</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8238</integer>
+			<key>Points</key>
+			<array>
+				<string>{785.25, 792}</string>
+				<string>{690.75, 918}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8305</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8237</integer>
+			<key>Points</key>
+			<array>
+				<string>{333, 846}</string>
+				<string>{351, 846}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8299</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8300</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8236</integer>
+			<key>Points</key>
+			<array>
+				<string>{783.692, 792}</string>
+				<string>{692.308, 891}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8299</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8235</integer>
+			<key>Points</key>
+			<array>
+				<string>{261, 792}</string>
+				<string>{261, 837}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8269</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8290</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8234</integer>
+			<key>Points</key>
+			<array>
+				<string>{148.5, 324}</string>
+				<string>{148.5, 342}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8289</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8277</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8233</integer>
+			<key>Points</key>
+			<array>
+				<string>{201.808, 189}</string>
+				<string>{293.192, 90}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8249</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8274</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8232</integer>
+			<key>Points</key>
+			<array>
+				<string>{88.0714, 189}</string>
+				<string>{118.929, 81}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8251</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8274</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8231</integer>
+			<key>Points</key>
+			<array>
+				<string>{181.5, 117}</string>
+				<string>{133.5, 81}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8250</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8279</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8230</integer>
+			<key>Points</key>
+			<array>
+				<string>{199.5, 189}</string>
+				<string>{295.5, 45}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8249</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8271</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8229</integer>
+			<key>Points</key>
+			<array>
+				<string>{298.125, 918}</string>
+				<string>{372.375, 936}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8267</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8351</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8228</integer>
+			<key>Points</key>
+			<array>
+				<string>{269.591, 918}</string>
+				<string>{346.909, 999}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8267</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8310</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8227</integer>
+			<key>Points</key>
+			<array>
+				<string>{265.327, 918}</string>
+				<string>{369.173, 1134}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8267</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8267</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8226</integer>
+			<key>Points</key>
+			<array>
+				<string>{261, 792}</string>
+				<string>{261, 900}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8269</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8375</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8225</integer>
+			<key>Points</key>
+			<array>
+				<string>{234, 198}</string>
+				<string>{324, 198}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8249</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8270</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8224</integer>
+			<key>Points</key>
+			<array>
+				<string>{256.364, 918}</string>
+				<string>{112.636, 1197}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8267</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8223</integer>
+			<key>Points</key>
+			<array>
+				<string>{315, 783}</string>
+				<string>{729, 783}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8269</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8268</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8222</integer>
+			<key>Points</key>
+			<array>
+				<string>{781.2, 792}</string>
+				<string>{694.8, 864}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8266</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8221</integer>
+			<key>Points</key>
+			<array>
+				<string>{233.1, 918}</string>
+				<string>{149.4, 945}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8267</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8264</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8220</integer>
+			<key>Points</key>
+			<array>
+				<string>{776.571, 792}</string>
+				<string>{699.429, 837}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8265</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8257</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8219</integer>
+			<key>Points</key>
+			<array>
+				<string>{215.5, 189}</string>
+				<string>{369.5, 126}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8249</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8249</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8218</integer>
+			<key>Points</key>
+			<array>
+				<string>{126, 198}</string>
+				<string>{153, 198}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8251</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8249</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8217</integer>
+			<key>Points</key>
+			<array>
+				<string>{193.5, 135}</string>
+				<string>{193.5, 189}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8250</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>8251</integer>
+			</dict>
+			<key>ID</key>
+			<integer>8216</integer>
+			<key>Points</key>
+			<array>
+				<string>{85.5, 576}</string>
+				<string>{85.5, 207}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledDiamond</string>
+					<key>LineType</key>
+					<integer>1</integer>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>8339</integer>
+			</dict>
+		</dict>
+	</array>
+	<key>GridInfo</key>
+	<dict/>
+	<key>HPages</key>
+	<integer>4</integer>
+	<key>ImageCounter</key>
+	<integer>1</integer>
+	<key>IsPalette</key>
+	<string>NO</string>
+	<key>Layers</key>
+	<array>
+		<dict>
+			<key>Lock</key>
+			<string>NO</string>
+			<key>Name</key>
+			<string>Layer 1</string>
+			<key>Print</key>
+			<string>YES</string>
+			<key>View</key>
+			<string>YES</string>
+		</dict>
+	</array>
+	<key>LayoutInfo</key>
+	<dict>
+		<key>AutoAdjust</key>
+		<string>YES</string>
+		<key>HierarchicalOrientation</key>
+		<integer>0</integer>
+		<key>MagneticFieldCenter</key>
+		<string>{0, 0}</string>
+	</dict>
+	<key>MagnetsEnabled</key>
+	<string>YES</string>
+	<key>PageBreakColor</key>
+	<dict>
+		<key>w</key>
+		<real>3.333333e-01</real>
+	</dict>
+	<key>PageBreaks</key>
+	<string>YES</string>
+	<key>PageSetup</key>
+	<data>
+	BAt0eXBlZHN0cmVhbYED6IQBQISEhAtOU1ByaW50SW5mbwGEhAhOU09iamVjdACFkoSE
+	hBNOU011dGFibGVEaWN0aW9uYXJ5AISEDE5TRGljdGlvbmFyeQCUhAFpEpKEhIQITlNT
+	dHJpbmcBlIQBKxBOU0pvYkRpc3Bvc2l0aW9uhpKEmZkPTlNQcmludFNwb29sSm9ihpKE
+	mZkOTlNCb3R0b21NYXJnaW6GkoSEhAhOU051bWJlcgCEhAdOU1ZhbHVlAJSEASqEhAFm
+	nSSGkoSZmQtOU1BhcGVyTmFtZYaShJmZBkxldHRlcoaShJmZD05TUHJpbnRBbGxQYWdl
+	c4aShJ2chIQBc54AhpKEmZkNTlNSaWdodE1hcmdpboaShJ2cn50khpKEmZkITlNDb3Bp
+	ZXOGkoSdnISEAVOfAYaShJmZD05TU2NhbGluZ0ZhY3RvcoaShJ2chIQBZKABhpKEmZkL
+	TlNGaXJzdFBhZ2WGkoSdnKmfAYaShJmZFE5TVmVydGljYWxQYWdpbmF0aW9uhpKEnZyk
+	ngCGkoSZmRVOU0hvcml6b25hbFBhZ2luYXRpb26GkoSdnKSeAIaShJmZFk5TSG9yaXpv
+	bnRhbGx5Q2VudGVyZWSGkoSdnKSeAYaShJmZDE5TTGVmdE1hcmdpboaShJ2cn50khpKE
+	mZkNTlNPcmllbnRhdGlvboaShJ2cpJ4AhpKEmZkZTlNQcmludFJldmVyc2VPcmllbnRh
+	dGlvboaSo5KEmZkKTlNMYXN0UGFnZYaShJ2chJeXgn////+GkoSZmQtOU1RvcE1hcmdp
+	boaShJ2cn50khpKEmZkUTlNWZXJ0aWNhbGx5Q2VudGVyZWSGkrSShJmZC05TUGFwZXJT
+	aXplhpKEnpyEhAx7X05TU2l6ZT1mZn2hgQJkgQMYhoaG
+	</data>
+	<key>RowAlign</key>
+	<integer>0</integer>
+	<key>RowSpacing</key>
+	<real>9.000000e+00</real>
+	<key>VPages</key>
+	<integer>2</integer>
+	<key>WindowInfo</key>
+	<dict>
+		<key>Frame</key>
+		<string>{{185, 90}, {794, 751}}</string>
+		<key>VisibleRegion</key>
+		<string>{{0, 0}, {1038.67, 898.667}}</string>
+		<key>Zoom</key>
+		<string>0.75</string>
+	</dict>
+</dict>
+</plist>

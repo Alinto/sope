@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEMonthOverview">
+  <binding name="list" required="YES" />
+  <binding name="item" settable="YES" />
+  <binding name="index" settable="YES" />
+  <binding name="identifier" />
+  <binding name="currentDay" settable="YES" />
+  <binding name="year" />
+  <binding name="month" />
+  <binding name="timeZone" />
+  <binding name="firstDay" />
+  <binding name="tableTags" />
+  <binding name="startDateKey" />
+  <binding name="endDateKey" />
+  <binding name="labelStyle" />
+  <binding name="contentStyle" />
+  <binding name="labelColor" />
+  <binding name="contentColor" />
+</wo>

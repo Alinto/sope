@@ -1,0 +1,13 @@
+EXPORTS
+	__objc_class_name_SaxAttributeList;
+	__objc_class_name_SaxAttributes;
+	__objc_class_name_SaxDefaultHandler;
+	__objc_class_name_SaxException;
+	__objc_class_name_SaxHandlerBase;
+	__objc_class_name_SaxLocator;
+	__objc_class_name_SaxNamespaceSupport;
+	__objc_class_name_SaxNotRecognizedException;
+	__objc_class_name_SaxNotSupportedException;
+	__objc_class_name_SaxParseException;
+	__objc_class_name_SaxXMLFilter;
+	__objc_class_name_SaxXMLReaderFactory;

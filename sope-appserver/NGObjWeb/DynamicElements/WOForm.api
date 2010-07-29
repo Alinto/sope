@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOForm">
+  <binding name="action" passthrough="NO" defaults="Actions"/>
+  <binding name="href" passthrough="NO"/>
+  <binding name="pageName" passthrough="NO" defaults="Page Names"/>
+
+  <binding name="queryDictionary" passthrough="NO"/>
+  <binding name="actionClass" passthrough="NO" defaults="Direct Action Classes"/>
+  <binding name="directActionName" passthrough="NO" defaults="Direct Actions"/>
+
+  <binding name="otherTagString" passthrough="NO"/>
+  <!-- SOPE -->
+  <binding name="method" passthrough="NO"/>
+  <binding name="_wosid" passthrough="NO" defaults="YES/NO"/>
+
+  <validation message="either one of &apos;action&apos;, &apos;href&apos; or &apos;pageName&apos; may be bound, or one or both of &apos;actionClass&apos; or &apos;directActionName&apos; may be bound">
+    <count test="&gt;1">
+      <bound name="action"/>
+      <bound name="href"/>
+      <bound name="pageName"/>
+      <or>
+        <bound name="actionClass"/>
+        <bound name="directActionName"/>
+      </or>
+    </count>
+  </validation>
+</wo>

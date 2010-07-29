@@ -1,0 +1,281 @@
+# GNUmakefile.alone
+#
+# Copyright (C) 1995, 1996 Ovidiu Predescu and Mircea Oancea.
+# All rights reserved.
+#
+# Author: Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+#
+# This file is part of libFoundation.
+#
+# Permission to use, copy, modify, and distribute this software and its
+# documentation for any purpose and without fee is hereby granted, provided
+# that the above copyright notice appear in all copies and that both that
+# copyright notice and this permission notice appear in supporting
+# documentation.
+#
+# We disclaim all warranties with regard to this software, including all
+# implied warranties of merchantability and fitness, in no event shall
+# we be liable for any special, indirect or consequential damages or any
+# damages whatsoever resulting from loss of use, data or profits, whether in
+# an action of contract, negligence or other tortious action, arising out of
+# or in connection with the use or performance of this software.
+
+TOP	= ..
+INCLUDE	= $(TOP)/include
+LIB	= $(TOP)/lib
+
+include $(TOP)/config.mak
+include $(TOP)/sharedlib.mak
+
+.SUFFIXES:	.c .m .h $(objext)
+
+OBJDIR	= obj
+TARGET	= $(LIB)/$(LIB_FOUNDATION_NAME)
+
+ifeq ($(OBJC_RUNTIME), NeXT)
+MFILES	= encoding.m misc.m thr-mach.m
+endif
+
+CFILES  += cvtutf.c
+MFILES	+= behavior.m objc-runtime.m common.m realpath.m load.m \
+	NSObject.m NSObjectAllocation.m NSObjCRuntime.m NSVMPage.m \
+	NSDebug.m NSException.m NSAutoreleasePool.m NSEnumerator.m \
+	NSUtilities.m NSHashMap.m NSRange.m NSGeometry.m \
+	NSZone.m NSDefaultZone.m NSAllocDebugZone.m StackZone.m \
+	NSArray.m NSConcreteArray.m NSDictionary.m NSConcreteDictionary.m \
+	NSConcreteMutableDictionary.m \
+	NSData.m NSConcreteData.m NSSet.m NSConcreteSet.m \
+	NSValue.m NSConcreteValue.m NSNumber.m NSConcreteNumber.m \
+	NSString.m NSString+DataEncoding.m NSConcreteString.m \
+	NSPathUtilities.m NSConcreteUTF16String.m \
+	NSConcreteMutableString.m \
+	NSCoder.m NSArchiver.m NSSerialization.m \
+	NSCharacterSet.m NSConcreteCharacterSet.m \
+	NSMethodSignature.m NSInvocation.m \
+	NSNotification.m NSNotificationQueue.m NSNotificationCenter.m \
+	NSDate.m NSConcreteDate.m \
+	NSScanner.m NSConcreteScanner.m \
+	NSCalendarDate.m NSCalendarDateScannerHandler.m NSCalendarDateScanf.m \
+	NSTimeZone.m NSConcreteTimeZone.m NSConcreteTimeZoneDetail.m \
+	NSProcessInfo.m NSUserDefaults.m NSBundle.m \
+	NSThread.m PrivateThreadData.m NSLock.m NSDistributedLock.m \
+	NSRunLoop.m NSTimer.m \
+	FormatScanner.m PrintfFormatScanner.m \
+	DefaultScannerHandler.m PrintfScannerHandler.m \
+	NSPosixFileDescriptor.m NSFileHandle.m NSConcreteFileHandle.m \
+	NSMappedData.m NSAccount.m NSFileManager.m \
+	NSHost.m NSTask.m NSPipe.m UnixSignalHandler.m \
+	GarbageCollector.m GCObject.m GCArray.m GCDictionary.m \
+	NSFormatter.m NSNumberFormatter.m NSDateFormatter.m \
+	PropertyListParser.m NSProxy.m \
+	NSConcreteUnixTask.m NSConcreteWindowsTask.m \
+	NSFrameInvocation.m NSObjectInvocation.m \
+	NSPort.m NSPortNameServer.m NSPortMessage.m NSUndoManager.m \
+	NSSocketPort.m NSMessagePort.m NSConnection.m NSPortCoder.m \
+	NSNull.m NSClassDescription.m \
+
+HFILES	= NSObject.h lfmemory.h NSException.h NSAutoreleasePool.h \
+	NSZone.h NSAllocDebugZone.h NSDefaultZone.h \
+	NSArray.h NSDictionary.h NSSet.h NSString.h NSData.h NSCharacterSet.h \
+	NSUtilities.h NSHashTable.h NSMapTable.h NSGeometry.h NSRange.h \
+	NSEnumerator.h NSScanner.h StackZone.h \
+	NSNotification.h NSNotificationQueue.h \
+	NSInvocation.h NSMethodSignature.h NSObjCRuntime.h \
+	NSProcessInfo.h NSUserDefaults.h NSBundle.h \
+	NSThread.h NSLock.h NSDistributedLock.h \
+	NSRunLoop.h NSTimer.h NSCalendarDate.h \
+	NSValue.h NSDate.h NSPosixFileDescriptor.h NSFileHandle.h \
+	NSPathUtilities.h NSCoder.h NSArchiver.h NSSerialization.h \
+	NSHost.h NSTask.h UnixSignalHandler.h \
+	NSConcreteArray.h NSConcreteCharacterSet.h NSConcreteData.h \
+	NSConcreteDate.h NSConcreteDictionary.h NSConcreteNumber.h \
+	NSConcreteSet.h NSConcreteString.h NSConcreteTimeZoneDetail.h \
+	NSConcreteValue.h \
+	NSFormatter.h NSNumberFormatter.h NSDateFormatter.h NSProxy.h \
+	NSAccount.h NSFileManager.h NSByteOrder.h Foundation.h \
+	NSPort.h NSPortNameServer.h NSPortMessage.h NSUndoManager.h \
+	NSDebug.h NSConnection.h NSDistantObject.h NSPortCoder.h \
+	NSNull.h NSClassDescription.h \
+	NSKeyValueCoding.h NSScriptKeyValueCoding.h \
+
+EXT_HFILES = objc-runtime.h encoding.h NSException.h \
+	GarbageCollector.h GCObject.h GCArray.h GCDictionary.h \
+	FormatScanner.h PrintfFormatScanner.h \
+	DefaultScannerHandler.h PrintfScannerHandler.h \
+	support.h \
+	$(addprefix exceptions/, FoundationException.h GeneralExceptions.h \
+	    NSCoderExceptions.h)
+
+EXCEPTION_MFILES = EncodingFormatExceptions.m FoundationException.m \
+	GeneralExceptions.m \
+	StringExceptions.m NSValueExceptions.m NSCoderExceptions.m \
+	NSInvocationExceptions.m NSFileHandleExceptions.m
+
+EXCEPTION_HFILES = $(EXCEPTION_MFILES:.m=.h) FoundationExceptions.h
+
+OFILES	         = $(MFILES:.m=$(objext)) $(CFILES:.c=$(objext))
+EXCEPTION_OFILES = $(EXCEPTION_MFILES:.m=$(objext))
+
+# The `all' and `install' targets. On systems with shared libs, make them to
+# build shared libs by default. Otherwise the defaults are the normal libs.
+ifeq ($(HAVE_SHARED_LIBS), yes)
+all check check-all: shared
+install: install_shared
+else
+all check check-all: static
+install: install_static
+endif
+
+install_static: static headers install_static_lib
+
+install_shared: shared headers install_shared_lib
+
+uninstall:
+	rm -rf $(includedir)/Foundation
+	rm -rf $(includedir)/extensions
+	rm -f $(libdir)/$(LIB_FOUNDATION_NAME)
+
+realclean::
+	rm -f NSStringPropList.[cm] tokens.h err.m mode.h NSStringScanner.m \
+		parser.dlg err.m mode.h parser.dlg remap.h tokens.h
+
+
+#
+# Other targets
+#
+compile: $(addprefix $(OBJDIR)/, $(OFILES) $(EXCEPTION_OFILES))
+
+static: $(OBJDIR) $(TARGET)
+
+ifeq ($(HAVE_SHARED_LIBS), yes)
+shared: $(SHARED_OBJDIR)
+	@$(MAKE) shared_lib CC="$(CC) $(ADDITIONAL_CC_FLAGS)" \
+		libext=$(shared_libext) OBJDIR=$(SHARED_OBJDIR)
+
+shared_lib: $(LIB_FOUNDATION_NAME)
+	cp $^ ../lib/$^
+
+$(LIB_FOUNDATION_NAME): $(addprefix $(OBJDIR)/, $(OFILES) $(EXCEPTION_OFILES))
+	$(SHARED_LIB_LINK_CMD)
+
+install_shared_lib:
+	@$(MAKE) __install_shared_lib CC="$(CC) $(ADDITIONAL_CC_FLAGS)" \
+		libext=$(shared_libext)
+
+__install_shared_lib:
+	$(INSTALL_SHARED_LIB_CMD)
+
+else # HAVE_SHARED_LIBS = no
+shared: static
+
+install_shared: install_static
+
+endif # HAVE_SHARED_LIBS = no
+
+
+$(TARGET): $(addprefix $(OBJDIR)/, $(OFILES) $(EXCEPTION_OFILES))
+	rm -f $@
+ifneq ($(LIBTOOL),)
+	$(LIBTOOL) -o $@ $^
+else
+	$(AR) rc $@ $^
+	$(RANLIB) $@
+endif
+
+objects: $(OBJDIR) headers \
+		$(addprefix $(OBJDIR)/, $(OFILES) $(EXCEPTION_OFILES))
+
+headers: $(includedir)/Foundation/exceptions \
+	$(includedir)/extensions/exceptions \
+	$(addprefix $(includedir)/Foundation/, $(HFILES)) \
+	$(addprefix $(includedir)/Foundation/exceptions/, $(EXCEPTION_HFILES))\
+	$(addprefix $(includedir)/extensions/, $(EXT_HFILES)) \
+	exception_header_file
+
+install_static_lib: $(libdir) $(TARGET)
+	$(INSTALL_DATA) $(TARGET) $(libdir)/$(LIB_FOUNDATION_NAME)
+	$(RANLIB) $(libdir)/$(LIB_FOUNDATION_NAME)
+
+ifneq ($(SHARED_OBJDIR), $(OBJDIR))
+$(SHARED_OBJDIR):
+	mkdir $@
+endif
+
+$(OBJDIR):
+	mkdir $@
+
+CFLAGS += -I. -DRESOURCES_PATH=\"$(sharedstatedir)\"
+
+mfile_compile_cmd = \
+	$(CC) $(CFLAGS) $(DEBUGFLAGS) -c $< -o $(OBJDIR)/$(@F)
+
+$(addprefix $(OBJDIR)/, %$(objext)) : %.c
+	$(mfile_compile_cmd)
+
+$(addprefix $(OBJDIR)/, %$(objext)) : %.m
+	$(mfile_compile_cmd)
+
+$(addprefix $(OBJDIR)/, %$(objext)) : $(addprefix exceptions/, %.m)
+	$(mfile_compile_cmd)
+
+$(OBJDIR)/NSCharacterSet$(objext): NSCharacterSet.m
+	$(mfile_compile_cmd) -DRESOURCES_PATH=\"$(sharedstatedir)\"
+
+$(OBJDIR)/NSTimeZone$(objext): NSTimeZone.m
+	$(mfile_compile_cmd) -DRESOURCES_PATH=\"$(sharedstatedir)\"
+
+$(OBJDIR)/NSBundle$(objext): NSBundle.m
+	$(mfile_compile_cmd) -DRESOURCES_PATH=\"$(sharedstatedir)\"
+
+NSConcreteNumber.m: NSConcreteNumber.m.sh
+	./NSConcreteNumber.m.sh >NSConcreteNumber.m
+
+
+ifeq ($(NO_NESTED_FUNCTIONS), yes)
+exception_header_file:
+	 $(INSTALL_DATA) NSExceptionWithoutNested.h \
+	    $(includedir)/Foundation/NSException.h
+else
+ifeq ($(BROKEN_COMPILER), yes)
+exception_header_file:
+	 $(INSTALL_DATA) NSClassicException.h \
+	    $(includedir)/Foundation/NSException.h
+else
+exception_header_file:
+	 $(INSTALL_DATA) NSFuncallException.h \
+	    $(includedir)/Foundation/NSException.h
+endif
+endif
+
+$(includedir)/extensions/objc-runtime.h:
+	sed "s^#include <config.h>^#define $(OBJC_RUNTIME)_RUNTIME 1^" ../extensions/objc-runtime.h >temp.h
+	$(INSTALL_DATA) temp.h $@
+	rm temp.h
+
+$(addprefix $(includedir)/Foundation/, %.h): %.h
+	$(INSTALL_DATA) $< $@
+
+$(addprefix $(INCLUDE)/Foundation/exceptions/, %.h): \
+		$(addprefix exceptions/, %.h)
+	$(INSTALL_DATA) $< $@
+
+$(addprefix $(includedir)/extensions/, %.h): ../extensions/%.h
+	$(INSTALL_DATA) $< $@
+
+$(includedir)/Foundation $(includedir)/Foundation/exceptions \
+    $(includedir)/extensions/exceptions $(libdir):
+	../mkinstalldirs $@
+
+clean:
+	rm -rf $(OBJDIR) $(SHARED_OBJDIR)
+
+distclean: clean
+	rm -f NSException.h NSConcreteNumber.m GNUmakefile \
+	    libFoundation.make NSObject.h lfmemory.h
+
+realclean:: distclean
+
+#
+# Dependencies
+#
+$(OBJDIR)/NSScanner$(objext): NSScanner.m scanInt.def scanFloat.def

@@ -1,0 +1,51 @@
+# compilation settings
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I..			\
+	-I../NGStreams		\
+	-I../NGExtensions	\
+
+# PCH
+
+encoding_PCH_FILE      = common.h
+subclassing_PCH_FILE   = common.h
+fmdls_PCH_FILE         = common.h
+bmlookup_PCH_FILE      = common.h
+testdirenum_PCH_FILE   = common.h
+eoqual_PCH_FILE        = common.h
+testsock_PCH_FILE      = common.h
+parserule_PCH_FILE     = common.h
+httpu_notify_PCH_FILE  = common.h
+testurl_PCH_FILE       = common.h
+sope-rsrclookup_PCH_FILE = common.h
+ngcal_PCH_FILE         = common.h
+
+# dependencies
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_TOOL_LIBS += \
+	-lNGStreams -lNGExtensions -lEOControl	\
+	-lDOM -lSaxObjC
+else
+ADDITIONAL_TOOL_LIBS += \
+	-framework NGStreams -framework NGExtensions -framework EOControl \
+	-framework DOM -framework SaxObjC
+endif
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	../EOControl ../NGExtensions ../NGStreams \
+	../../sope-xml/DOM ../../sope-xml/SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib

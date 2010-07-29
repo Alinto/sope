@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEWeekOverview">
+  <binding name="list" required="YES" />
+  <binding name="item" required="YES" />
+  <binding name="index" />
+  <binding name="identifier" />
+
+  <binding name="dayIndex" />
+  <binding name="weekStart" />
+
+  <binding name="startDateKey" />
+  <binding name="endDateKey" />
+
+  <binding name="titleStyle" />
+  <binding name="contentStyle" />
+
+  <binding name="footerRows" />
+  <binding name="footerRow" />
+  <binding name="headerRows" />
+  <binding name="headerRow" />
+  <binding name="colIndex" />
+
+  <binding name="isInfoItem" defaults="YES/NO" />
+  <binding name="infoItems" />
+
+  <binding name="hideWeekend" defaults="YES/NO" />
+</wo>

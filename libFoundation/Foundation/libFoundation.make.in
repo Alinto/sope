@@ -1,0 +1,93 @@
+#  libFoundation.make.in
+#
+#  Copyright (C) 1995, 1996, 1997, 1998 Ovidiu Predescu and Mircea Oancea.
+#  All rights reserved.
+#
+#  Author: Ovidiu Predescu <ovidiu@net-community.com>
+#  Date: February 1998
+#
+#  This file is part of libFoundation.
+#
+#  Permission to use, copy, modify, and distribute this software and its
+#  documentation for any purpose and without fee is hereby granted, provided
+#  that the above copyright notice appear in all copies and that both that
+#  copyright notice and this permission notice appear in supporting
+#  documentation.
+#
+#  We disclaim all warranties with regard to this software, including all
+#  implied warranties of merchantability and fitness, in no event shall
+#  we be liable for any special, indirect or consequential damages or any
+#  damages whatsoever resulting from loss of use, data or profits, whether in
+#  an action of contract, negligence or other tortious action, arising out of
+#  or in connection with the use or performance of this software.
+#
+
+ifeq ($(FOUNDATION_LIB),fd)
+
+FND_DEFINE  = -DLIB_FOUNDATION_LIBRARY=1 -DFD_WITH_GSMAKE=1 -DGNUSTEP=1
+FND_LDFLAGS =
+FND_LIBS    = -lFoundation
+
+GNUSTEP_DEFINE = -DGNUSTEP=1 -DWITH_GSTEP_MAKE=1
+
+SUMMARY_VERSION = $(GNUSTEP_MAKE_MAJOR_VERSION).$(GNUSTEP_MAKE_MINOR_VERSION)
+
+# All versions but the ones listed look for headers in xxx/Library/Headers
+ifneq ($(SUMMARY_VERSION),1.3)
+  ifneq ($(SUMMARY_VERSION),1.4)
+    ifneq ($(SUMMARY_VERSION),1.5)
+      ifneq ($(SUMMARY_VERSION),1.6)
+LIBFOUNDATION_HEADER_TARGET_FLAG = \
+  -I$(GNUSTEP_SYSTEM_ROOT)/Library/Headers/libFoundation/$(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS)/$(OBJC_RUNTIME)
+      endif
+    endif
+  endif
+endif
+
+# Old versions (the ones listead above) look for headers in xxx/Library/Headers
+ifeq ($(LIBFOUNDATION_HEADER_TARGET_FLAG),)
+LIBFOUNDATION_HEADER_TARGET_FLAG = \
+  -I$(GNUSTEP_SYSTEM_ROOT)/Headers/libFoundation/$(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS)/$(OBJC_RUNTIME)
+endif
+
+AUXILIARY_CPPFLAGS  += $(LIBFOUNDATION_HEADER_TARGET_FLAG)
+AUXILIARY_OBJCFLAGS += -fconstant-string-class=NSConstantString
+
+# If gc=yes was passed and libFoundation was compiled with Boehm's
+# GC support, use the appropriate libraries
+
+ifeq ($(gc), yes)
+  ifeq ($(LIBFOUNDATION_WITH_GC), yes)
+    OBJC_LIBS = -lobjc $(LIBFOUNDATION_GC_LIBRARY)
+    ifeq ($(leak), yes)
+      AUXILIARY_CPPFLAGS += -DLIB_FOUNDATION_LEAK_GC=1
+    else
+      AUXILIARY_CPPFLAGS += -DLIB_FOUNDATION_BOEHM_GC=1
+    endif
+  endif
+endif
+
+ifeq ($(LIBFOUNDATION_MAKE),)
+  LIBFOUNDATION_MAKE = yes
+
+  # If libFoundation is built with support for Boehm's garbage collector we
+  # should pass in addition to GC library to linker.
+
+  ifeq ($(gc), yes)
+    LIBFOUNDATION_WITH_GC = yes
+  else
+    LIBFOUNDATION_WITH_GC = no
+  endif
+  # LIBFOUNDATION_WITH_GC = @WITH_GC@
+
+  GC_LIB = @GC_LIB@
+
+  ifeq ($(LIBFOUNDATION_WITH_GC), yes)
+    ifneq ($(GC_LIB),)
+      LIBFOUNDATION_GC_LIBRARY          = -l$(GC_LIB)
+      LIBRARIES_FOUNDATION_DEPENDS_UPON = -l$(GC_LIB)
+    endif # GC_LIB != ""
+  endif # LIBFOUNDATION_WITH_GC
+endif # LIBFOUNDATION_MAKE!=yes
+
+endif # ($(FOUNDATION_LIB),fd)

@@ -1,0 +1,52 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                back = id; 
+                editInXcode = id; 
+                reload = id; 
+                toggleToolbar = id; 
+                viewApplication = id; 
+                viewHTML = id; 
+                viewHTTP = id; 
+                viewSource = id; 
+            }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = MLHierarchyView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; target = id; }; 
+            SUPERCLASS = NSControl; 
+        }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {
+            ACTIONS = {clear = id; openConsole = id; openStatistics = id; }; 
+            CLASS = SOPEXAppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                aboutMenuItem = NSMenuItem; 
+                debugMenuItem = NSMenuItem; 
+                hideMenuItem = NSMenuItem; 
+                mainMenu = NSMenu; 
+                quitMenuItem = NSMenuItem; 
+                viewApplicationMenuItem = NSMenuItem; 
+                viewHTMLMenuItem = NSMenuItem; 
+                viewHTTPMenuItem = NSMenuItem; 
+                viewSeparatorMenuItem = NSMenuItem; 
+                viewSourceMenuItem = NSMenuItem; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = SOPEXBrowserWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {
+            CLASS = SOPEXTextView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {statusField = NSTextField; }; 
+            SUPERCLASS = NSTextView; 
+        }
+    ); 
+    IBVersion = 1; 
+}

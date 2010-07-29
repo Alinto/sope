@@ -1,0 +1,38 @@
+2004-07-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODRDynamicXHTMLTag.m, ODR_XHTML_a.m: fixed some gcc 3.4 warnings 
+	  (v4.2.24)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package.
+
+2003-12-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile (BUNDLE_INSTALL_DIR): use GNUSTEP_INSTALLATION_DIR 
+	  instead of GNUSTEP_USER_ROOT
+
+Wed Oct 22 15:58:32 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* GNUmakefile.preamble: add ADDITIONAL_LIB_DIRS NGScripting 
+
+Tue Nov 20 12:12:45 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_XHTML_input.m (-takeValuesForNode:fromRequest:inContext:):
+	  added selection attribute used for radio-buttons
+
+Tue Jul 17 17:38:55 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_XHTML_input.m (-takeValuesForNode:fromRequest:inContext:): 
+	  set value for the active radio-button
+
+Thu Jul  5 18:12:15 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_XHTML_a.m: added dynamic 'action' and 'page' bindings
+
+Thu Jul  5 18:11:30 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* created ChangeLog
+

@@ -1,0 +1,32 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className='iCalPortalFrame' title='localizedTitle'
+               xmlns='http://www.w3.org/1999/xhtml'
+               xmlns:var='http://www.skyrix.com/od/binding'
+               xmlns:const='http://www.skyrix.com/od/constant'>
+  <var:component className="iCalPortalCalTabs" const:selection="month"
+		 calendarName="calendarName">
+
+  <var:month-overview list="dataSource.fetchObjects" item="item"
+                      currentDay="currentDay"
+                      const:year="2002" const:month="10"
+                      const:labelColor="#FFDAAA" const:contentColor="#FAE8B8"
+  >
+    <!--var:month-info>
+      <small><b><i>infos of day</i></b></small><br/><br/>
+    </var:month-info-->
+    
+    <var:month>
+      <font class="default">
+        <b><var:string value="item.summary"/></b>
+        <br/>
+        <var:string value="item.startDate" const:dateformat="%H:%M"/>
+        <br/>
+      </font>
+    </var:month>
+
+  </var:month-overview>
+
+  </var:component>
+</var:component>
+

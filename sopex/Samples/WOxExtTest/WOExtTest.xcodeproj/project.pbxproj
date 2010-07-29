@@ -1,0 +1,848 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* WOExtTest_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* WOExtTest_main.m */; settings = {ATTRIBUTES = (); }; };
+		AD06681E0600AA700010C833 /* TableView.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD06681A0600AA700010C833 /* TableView.plist */; };
+		AD06681F0600AA700010C833 /* TreeView.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD06681B0600AA700010C833 /* TreeView.plist */; };
+		AD0668200600AA700010C833 /* Dictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD06681C0600AA700010C833 /* Dictionary.plist */; };
+		AD0668210600AA700010C833 /* appointments.plist in Resources */ = {isa = PBXBuildFile; fileRef = AD06681D0600AA700010C833 /* appointments.plist */; };
+		AD19ED5405D7FBD1009EBA3A /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = AD19ED5205D7FBD1009EBA3A /* Application.h */; };
+		AD19ED5505D7FBD1009EBA3A /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = AD19ED5305D7FBD1009EBA3A /* Application.m */; };
+		AD19ED6505D7FBEA009EBA3A /* Session.h in Headers */ = {isa = PBXBuildFile; fileRef = AD19ED6305D7FBEA009EBA3A /* Session.h */; };
+		AD19ED6605D7FBEA009EBA3A /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = AD19ED6405D7FBEA009EBA3A /* Session.m */; };
+		AD7B9745076F7F5F008F4F3D /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = AD7B9743076F7F5F008F4F3D /* MainMenu.nib */; };
+		AD7B99D7076F81D1008F4F3D /* DOM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99C9076F81D1008F4F3D /* DOM.framework */; };
+		AD7B99D8076F81D1008F4F3D /* EOControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99CA076F81D1008F4F3D /* EOControl.framework */; };
+		AD7B99D9076F81D1008F4F3D /* NGExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99CB076F81D1008F4F3D /* NGExtensions.framework */; };
+		AD7B99DA076F81D1008F4F3D /* NGHttp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99CC076F81D1008F4F3D /* NGHttp.framework */; };
+		AD7B99DB076F81D1008F4F3D /* NGImap4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99CD076F81D1008F4F3D /* NGImap4.framework */; };
+		AD7B99DC076F81D1008F4F3D /* NGMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99CE076F81D1008F4F3D /* NGMail.framework */; };
+		AD7B99DD076F81D1008F4F3D /* NGMime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99CF076F81D1008F4F3D /* NGMime.framework */; };
+		AD7B99DE076F81D1008F4F3D /* NGObjWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99D0076F81D1008F4F3D /* NGObjWeb.framework */; };
+		AD7B99DF076F81D1008F4F3D /* NGStreams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99D1076F81D1008F4F3D /* NGStreams.framework */; };
+		AD7B99E0076F81D1008F4F3D /* SoObjects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99D2076F81D1008F4F3D /* SoObjects.framework */; };
+		AD7B99E1076F81D1008F4F3D /* WebDAV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99D3076F81D1008F4F3D /* WebDAV.framework */; };
+		AD7B99E2076F81D1008F4F3D /* WEExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99D4076F81D1008F4F3D /* WEExtensions.framework */; };
+		AD7B99E3076F81D1008F4F3D /* WOExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99D5076F81D1008F4F3D /* WOExtensions.framework */; };
+		AD7B99E4076F81D1008F4F3D /* XmlRpc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99D6076F81D1008F4F3D /* XmlRpc.framework */; };
+		AD7B99E6076F81E2008F4F3D /* SaxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B99E5076F81E2008F4F3D /* SaxObjC.framework */; };
+		AD7B9EC6076F822E008F4F3D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7B9EC5076F822E008F4F3D /* WebKit.framework */; };
+		ADA38B8205DD238A00C820AA /* Lori.icns in Resources */ = {isa = PBXBuildFile; fileRef = ADA38B8105DD238A00C820AA /* Lori.icns */; };
+		ADEE3DD005DD11C900F523DB /* WebServerResources in Resources */ = {isa = PBXBuildFile; fileRef = ADEE3DCE05DD11C900F523DB /* WebServerResources */; };
+		ADEE3DD405DD123C00F523DB /* WebServerResources in CopyFiles */ = {isa = PBXBuildFile; fileRef = ADEE3DCE05DD11C900F523DB /* WebServerResources */; };
+		ADEE3DD705DD126900F523DB /* DirectAction.h in Headers */ = {isa = PBXBuildFile; fileRef = ADEE3DD505DD126900F523DB /* DirectAction.h */; };
+		ADEE3DD805DD126900F523DB /* DirectAction.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEE3DD605DD126900F523DB /* DirectAction.m */; };
+		ADEE3DDC05DD131F00F523DB /* SOPEX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEE3DDB05DD131E00F523DB /* SOPEX.framework */; };
+		ADEE3DEC05DD135A00F523DB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEE3DEB05DD135A00F523DB /* Cocoa.framework */; };
+		E80D743D05EE9655008CFE96 /* Main.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D743B05EE9655008CFE96 /* Main.m */; };
+		E80D743E05EE9655008CFE96 /* Main.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D743C05EE9655008CFE96 /* Main.wox */; };
+		E80D746605EE96E1008CFE96 /* AlertPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D745605EE96E1008CFE96 /* AlertPanel.m */; };
+		E80D746705EE96E1008CFE96 /* AlertPanel.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D745705EE96E1008CFE96 /* AlertPanel.wox */; };
+		E80D746805EE96E1008CFE96 /* ConfirmPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D745805EE96E1008CFE96 /* ConfirmPanel.m */; };
+		E80D746905EE96E1008CFE96 /* ConfirmPanel.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D745905EE96E1008CFE96 /* ConfirmPanel.wox */; };
+		E80D746A05EE96E1008CFE96 /* DnD.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D745A05EE96E1008CFE96 /* DnD.m */; };
+		E80D746B05EE96E1008CFE96 /* DnD.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D745B05EE96E1008CFE96 /* DnD.wox */; };
+		E80D746C05EE96E1008CFE96 /* ImageFlyover.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D745C05EE96E1008CFE96 /* ImageFlyover.m */; };
+		E80D746D05EE96E1008CFE96 /* ImageFlyover.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D745D05EE96E1008CFE96 /* ImageFlyover.wox */; };
+		E80D746E05EE96E1008CFE96 /* ModalWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D745E05EE96E1008CFE96 /* ModalWindow.m */; };
+		E80D746F05EE96E1008CFE96 /* ModalWindow.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D745F05EE96E1008CFE96 /* ModalWindow.wox */; };
+		E80D747005EE96E1008CFE96 /* ShiftClick.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D746005EE96E1008CFE96 /* ShiftClick.m */; };
+		E80D747105EE96E1008CFE96 /* ShiftClick.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D746105EE96E1008CFE96 /* ShiftClick.wox */; };
+		E80D747205EE96E1008CFE96 /* TextFlyover.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D746205EE96E1008CFE96 /* TextFlyover.m */; };
+		E80D747305EE96E1008CFE96 /* TextFlyover.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D746305EE96E1008CFE96 /* TextFlyover.wox */; };
+		E80D747405EE96E1008CFE96 /* ValidatedField.m in Sources */ = {isa = PBXBuildFile; fileRef = E80D746405EE96E1008CFE96 /* ValidatedField.m */; };
+		E80D747505EE96E1008CFE96 /* ValidatedField.wox in Resources */ = {isa = PBXBuildFile; fileRef = E80D746505EE96E1008CFE96 /* ValidatedField.wox */; };
+		E80D747A05EE9708008CFE96 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = E80D747905EE9708008CFE96 /* common.h */; };
+		E846E7A806120917002A4AC8 /* QualifierConditional.m in Sources */ = {isa = PBXBuildFile; fileRef = E846E7A606120917002A4AC8 /* QualifierConditional.m */; };
+		E846E7A906120917002A4AC8 /* QualifierConditional.wox in Resources */ = {isa = PBXBuildFile; fileRef = E846E7A706120917002A4AC8 /* QualifierConditional.wox */; };
+		E86526B005EEAE0400C9C768 /* Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = E86526AE05EEAE0400C9C768 /* Frame.m */; };
+		E86526B105EEAE0400C9C768 /* Frame.wox in Resources */ = {isa = PBXBuildFile; fileRef = E86526AF05EEAE0400C9C768 /* Frame.wox */; };
+		E865272605EEB13000C9C768 /* Browser.m in Sources */ = {isa = PBXBuildFile; fileRef = E865271805EEB13000C9C768 /* Browser.m */; };
+		E865272705EEB13000C9C768 /* Browser.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865271905EEB13000C9C768 /* Browser.wox */; };
+		E865272805EEB13000C9C768 /* CollapsibleContentExt.m in Sources */ = {isa = PBXBuildFile; fileRef = E865271A05EEB13000C9C768 /* CollapsibleContentExt.m */; };
+		E865272905EEB13000C9C768 /* CollapsibleContentExt.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865271B05EEB13000C9C768 /* CollapsibleContentExt.wox */; };
+		E865272A05EEB13000C9C768 /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E865271C05EEB13000C9C768 /* PageView.m */; };
+		E865272B05EEB13000C9C768 /* PageView.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865271D05EEB13000C9C768 /* PageView.wox */; };
+		E865272C05EEB13000C9C768 /* TableMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = E865271E05EEB13000C9C768 /* TableMatrix.m */; };
+		E865272D05EEB13000C9C768 /* TableMatrix.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865271F05EEB13000C9C768 /* TableMatrix.wox */; };
+		E865272E05EEB13000C9C768 /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E865272005EEB13000C9C768 /* TableView.m */; };
+		E865272F05EEB13000C9C768 /* TableView.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865272105EEB13000C9C768 /* TableView.wox */; };
+		E865273005EEB13000C9C768 /* TabView.m in Sources */ = {isa = PBXBuildFile; fileRef = E865272205EEB13000C9C768 /* TabView.m */; };
+		E865273105EEB13000C9C768 /* TabView.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865272305EEB13000C9C768 /* TabView.wox */; };
+		E865273205EEB13000C9C768 /* TreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E865272405EEB13000C9C768 /* TreeView.m */; };
+		E865273305EEB13000C9C768 /* TreeView.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865272505EEB13000C9C768 /* TreeView.wox */; };
+		E865274805EEB18C00C9C768 /* CheckBoxMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = E865273405EEB18C00C9C768 /* CheckBoxMatrix.m */; };
+		E865274905EEB18C00C9C768 /* CheckBoxMatrix.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865273505EEB18C00C9C768 /* CheckBoxMatrix.wox */; };
+		E865274A05EEB18C00C9C768 /* CollapsibleContent.m in Sources */ = {isa = PBXBuildFile; fileRef = E865273605EEB18C00C9C768 /* CollapsibleContent.m */; };
+		E865274B05EEB18C00C9C768 /* CollapsibleContent.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865273705EEB18C00C9C768 /* CollapsibleContent.wox */; };
+		E865274C05EEB18C00C9C768 /* DictionaryRepetition.m in Sources */ = {isa = PBXBuildFile; fileRef = E865273805EEB18C00C9C768 /* DictionaryRepetition.m */; };
+		E865274D05EEB18C00C9C768 /* DictionaryRepetition.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865273905EEB18C00C9C768 /* DictionaryRepetition.wox */; };
+		E865274E05EEB18C00C9C768 /* KeyValueConditional.m in Sources */ = {isa = PBXBuildFile; fileRef = E865273A05EEB18C00C9C768 /* KeyValueConditional.m */; };
+		E865274F05EEB18C00C9C768 /* KeyValueConditional.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865273B05EEB18C00C9C768 /* KeyValueConditional.wox */; };
+		E865275005EEB18C00C9C768 /* RadioButtonMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = E865273C05EEB18C00C9C768 /* RadioButtonMatrix.m */; };
+		E865275105EEB18C00C9C768 /* RadioButtonMatrix.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865273D05EEB18C00C9C768 /* RadioButtonMatrix.wox */; };
+		E865275205EEB18C00C9C768 /* RichString.m in Sources */ = {isa = PBXBuildFile; fileRef = E865273E05EEB18C00C9C768 /* RichString.m */; };
+		E865275305EEB18C00C9C768 /* RichString.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865273F05EEB18C00C9C768 /* RichString.wox */; };
+		E865275405EEB18C00C9C768 /* Switch.m in Sources */ = {isa = PBXBuildFile; fileRef = E865274005EEB18C00C9C768 /* Switch.m */; };
+		E865275505EEB18C00C9C768 /* Switch.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865274105EEB18C00C9C768 /* Switch.wox */; };
+		E865275605EEB18C00C9C768 /* Table.m in Sources */ = {isa = PBXBuildFile; fileRef = E865274205EEB18C00C9C768 /* Table.m */; };
+		E865275705EEB18C00C9C768 /* Table.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865274305EEB18C00C9C768 /* Table.wox */; };
+		E865275805EEB18C00C9C768 /* TabPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E865274405EEB18C00C9C768 /* TabPanel.m */; };
+		E865275905EEB18C00C9C768 /* TabPanel.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865274505EEB18C00C9C768 /* TabPanel.wox */; };
+		E865275A05EEB18C00C9C768 /* ThresholdColoredNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = E865274605EEB18C00C9C768 /* ThresholdColoredNumber.m */; };
+		E865275B05EEB18C00C9C768 /* ThresholdColoredNumber.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865274705EEB18C00C9C768 /* ThresholdColoredNumber.wox */; };
+		E865276805EEB1B500C9C768 /* CalendarField.m in Sources */ = {isa = PBXBuildFile; fileRef = E865275C05EEB1B500C9C768 /* CalendarField.m */; };
+		E865276905EEB1B500C9C768 /* CalendarField.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865275D05EEB1B500C9C768 /* CalendarField.wox */; };
+		E865276A05EEB1B500C9C768 /* DateField.m in Sources */ = {isa = PBXBuildFile; fileRef = E865275E05EEB1B500C9C768 /* DateField.m */; };
+		E865276B05EEB1B500C9C768 /* DateField.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865275F05EEB1B500C9C768 /* DateField.wox */; };
+		E865276C05EEB1B500C9C768 /* MonthOverview.m in Sources */ = {isa = PBXBuildFile; fileRef = E865276005EEB1B500C9C768 /* MonthOverview.m */; };
+		E865276D05EEB1B500C9C768 /* MonthOverview.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865276105EEB1B500C9C768 /* MonthOverview.wox */; };
+		E865276E05EEB1B500C9C768 /* TimeField.m in Sources */ = {isa = PBXBuildFile; fileRef = E865276205EEB1B500C9C768 /* TimeField.m */; };
+		E865276F05EEB1B500C9C768 /* TimeField.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865276305EEB1B500C9C768 /* TimeField.wox */; };
+		E865277005EEB1B500C9C768 /* WeekColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = E865276405EEB1B500C9C768 /* WeekColumnView.m */; };
+		E865277105EEB1B500C9C768 /* WeekColumnView.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865276505EEB1B500C9C768 /* WeekColumnView.wox */; };
+		E865277205EEB1B500C9C768 /* WeekOverview.m in Sources */ = {isa = PBXBuildFile; fileRef = E865276605EEB1B500C9C768 /* WeekOverview.m */; };
+		E865277305EEB1B500C9C768 /* WeekOverview.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865276705EEB1B500C9C768 /* WeekOverview.wox */; };
+		E865277605EEB1E200C9C768 /* VarString.wox in Resources */ = {isa = PBXBuildFile; fileRef = E865277505EEB1E200C9C768 /* VarString.wox */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		4A9504CCFFE6A4B311CA0CBA /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OPTIMIZATION_CFLAGS = "-O0";
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		4A9504CDFFE6A4B311CA0CBA /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUGGING_SYMBOLS = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				INSTALL_MODE_FLAG = "go-w,a+rX,u+w";
+				OPTIMIZATION_CFLAGS = "-O3";
+				SYMROOT = /tmp/SOPEXDeploymentProducts;
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build/$(TARGET_NAME).build";
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ADF026F205D903AE00D2292D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 1;
+			files = (
+				ADEE3DD405DD123C00F523DB /* WebServerResources in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* WOExtTest_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = WOExtTest_main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* WOExtTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WOExtTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD06681A0600AA700010C833 /* TableView.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = TableView.plist; sourceTree = "<group>"; };
+		AD06681B0600AA700010C833 /* TreeView.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = TreeView.plist; sourceTree = "<group>"; };
+		AD06681C0600AA700010C833 /* Dictionary.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = Dictionary.plist; sourceTree = "<group>"; };
+		AD06681D0600AA700010C833 /* appointments.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = appointments.plist; sourceTree = "<group>"; };
+		AD19ED5205D7FBD1009EBA3A /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		AD19ED5305D7FBD1009EBA3A /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
+		AD19ED6305D7FBEA009EBA3A /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		AD19ED6405D7FBEA009EBA3A /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		AD7B9744076F7F5F008F4F3D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		AD7B99C9076F81D1008F4F3D /* DOM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DOM.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/DOM.framework"; sourceTree = "<absolute>"; };
+		AD7B99CA076F81D1008F4F3D /* EOControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EOControl.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/EOControl.framework"; sourceTree = "<absolute>"; };
+		AD7B99CB076F81D1008F4F3D /* NGExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGExtensions.framework"; sourceTree = "<absolute>"; };
+		AD7B99CC076F81D1008F4F3D /* NGHttp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGHttp.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGHttp.framework"; sourceTree = "<absolute>"; };
+		AD7B99CD076F81D1008F4F3D /* NGImap4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGImap4.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGImap4.framework"; sourceTree = "<absolute>"; };
+		AD7B99CE076F81D1008F4F3D /* NGMail.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGMail.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGMail.framework"; sourceTree = "<absolute>"; };
+		AD7B99CF076F81D1008F4F3D /* NGMime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGMime.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGMime.framework"; sourceTree = "<absolute>"; };
+		AD7B99D0076F81D1008F4F3D /* NGObjWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGObjWeb.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGObjWeb.framework"; sourceTree = "<absolute>"; };
+		AD7B99D1076F81D1008F4F3D /* NGStreams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGStreams.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGStreams.framework"; sourceTree = "<absolute>"; };
+		AD7B99D2076F81D1008F4F3D /* SoObjects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SoObjects.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SoObjects.framework"; sourceTree = "<absolute>"; };
+		AD7B99D3076F81D1008F4F3D /* WebDAV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebDAV.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/WebDAV.framework"; sourceTree = "<absolute>"; };
+		AD7B99D4076F81D1008F4F3D /* WEExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WEExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/WEExtensions.framework"; sourceTree = "<absolute>"; };
+		AD7B99D5076F81D1008F4F3D /* WOExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WOExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/WOExtensions.framework"; sourceTree = "<absolute>"; };
+		AD7B99D6076F81D1008F4F3D /* XmlRpc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XmlRpc.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/XmlRpc.framework"; sourceTree = "<absolute>"; };
+		AD7B99E5076F81E2008F4F3D /* SaxObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SaxObjC.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SaxObjC.framework"; sourceTree = "<absolute>"; };
+		AD7B9EC5076F822E008F4F3D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		ADA38B8105DD238A00C820AA /* Lori.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Lori.icns; sourceTree = "<group>"; };
+		ADA38BE605DD23C400C820AA /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		ADEE3DCE05DD11C900F523DB /* WebServerResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebServerResources; sourceTree = "<group>"; };
+		ADEE3DD505DD126900F523DB /* DirectAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectAction.h; sourceTree = "<group>"; };
+		ADEE3DD605DD126900F523DB /* DirectAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectAction.m; sourceTree = "<group>"; };
+		ADEE3DDB05DD131E00F523DB /* SOPEX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SOPEX.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SOPEX.framework"; sourceTree = "<absolute>"; };
+		ADEE3DEB05DD135A00F523DB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		E80D743B05EE9655008CFE96 /* Main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main.m; sourceTree = "<group>"; };
+		E80D743C05EE9655008CFE96 /* Main.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Main.wox; sourceTree = "<group>"; };
+		E80D745605EE96E1008CFE96 /* AlertPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPanel.m; sourceTree = "<group>"; };
+		E80D745705EE96E1008CFE96 /* AlertPanel.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AlertPanel.wox; sourceTree = "<group>"; };
+		E80D745805EE96E1008CFE96 /* ConfirmPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmPanel.m; sourceTree = "<group>"; };
+		E80D745905EE96E1008CFE96 /* ConfirmPanel.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ConfirmPanel.wox; sourceTree = "<group>"; };
+		E80D745A05EE96E1008CFE96 /* DnD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DnD.m; sourceTree = "<group>"; };
+		E80D745B05EE96E1008CFE96 /* DnD.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DnD.wox; sourceTree = "<group>"; };
+		E80D745C05EE96E1008CFE96 /* ImageFlyover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFlyover.m; sourceTree = "<group>"; };
+		E80D745D05EE96E1008CFE96 /* ImageFlyover.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ImageFlyover.wox; sourceTree = "<group>"; };
+		E80D745E05EE96E1008CFE96 /* ModalWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWindow.m; sourceTree = "<group>"; };
+		E80D745F05EE96E1008CFE96 /* ModalWindow.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ModalWindow.wox; sourceTree = "<group>"; };
+		E80D746005EE96E1008CFE96 /* ShiftClick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiftClick.m; sourceTree = "<group>"; };
+		E80D746105EE96E1008CFE96 /* ShiftClick.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ShiftClick.wox; sourceTree = "<group>"; };
+		E80D746205EE96E1008CFE96 /* TextFlyover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFlyover.m; sourceTree = "<group>"; };
+		E80D746305EE96E1008CFE96 /* TextFlyover.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TextFlyover.wox; sourceTree = "<group>"; };
+		E80D746405EE96E1008CFE96 /* ValidatedField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidatedField.m; sourceTree = "<group>"; };
+		E80D746505EE96E1008CFE96 /* ValidatedField.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ValidatedField.wox; sourceTree = "<group>"; };
+		E80D747905EE9708008CFE96 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		E846E7A606120917002A4AC8 /* QualifierConditional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QualifierConditional.m; sourceTree = "<group>"; };
+		E846E7A706120917002A4AC8 /* QualifierConditional.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = QualifierConditional.wox; sourceTree = "<group>"; };
+		E86526AE05EEAE0400C9C768 /* Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Frame.m; sourceTree = "<group>"; };
+		E86526AF05EEAE0400C9C768 /* Frame.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Frame.wox; sourceTree = "<group>"; };
+		E865271805EEB13000C9C768 /* Browser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Browser.m; sourceTree = "<group>"; };
+		E865271905EEB13000C9C768 /* Browser.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Browser.wox; sourceTree = "<group>"; };
+		E865271A05EEB13000C9C768 /* CollapsibleContentExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapsibleContentExt.m; sourceTree = "<group>"; };
+		E865271B05EEB13000C9C768 /* CollapsibleContentExt.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CollapsibleContentExt.wox; sourceTree = "<group>"; };
+		E865271C05EEB13000C9C768 /* PageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageView.m; sourceTree = "<group>"; };
+		E865271D05EEB13000C9C768 /* PageView.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PageView.wox; sourceTree = "<group>"; };
+		E865271E05EEB13000C9C768 /* TableMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableMatrix.m; sourceTree = "<group>"; };
+		E865271F05EEB13000C9C768 /* TableMatrix.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TableMatrix.wox; sourceTree = "<group>"; };
+		E865272005EEB13000C9C768 /* TableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableView.m; sourceTree = "<group>"; };
+		E865272105EEB13000C9C768 /* TableView.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TableView.wox; sourceTree = "<group>"; };
+		E865272205EEB13000C9C768 /* TabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabView.m; sourceTree = "<group>"; };
+		E865272305EEB13000C9C768 /* TabView.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TabView.wox; sourceTree = "<group>"; };
+		E865272405EEB13000C9C768 /* TreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeView.m; sourceTree = "<group>"; };
+		E865272505EEB13000C9C768 /* TreeView.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TreeView.wox; sourceTree = "<group>"; };
+		E865273405EEB18C00C9C768 /* CheckBoxMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxMatrix.m; sourceTree = "<group>"; };
+		E865273505EEB18C00C9C768 /* CheckBoxMatrix.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CheckBoxMatrix.wox; sourceTree = "<group>"; };
+		E865273605EEB18C00C9C768 /* CollapsibleContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapsibleContent.m; sourceTree = "<group>"; };
+		E865273705EEB18C00C9C768 /* CollapsibleContent.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CollapsibleContent.wox; sourceTree = "<group>"; };
+		E865273805EEB18C00C9C768 /* DictionaryRepetition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryRepetition.m; sourceTree = "<group>"; };
+		E865273905EEB18C00C9C768 /* DictionaryRepetition.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DictionaryRepetition.wox; sourceTree = "<group>"; };
+		E865273A05EEB18C00C9C768 /* KeyValueConditional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValueConditional.m; sourceTree = "<group>"; };
+		E865273B05EEB18C00C9C768 /* KeyValueConditional.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = KeyValueConditional.wox; sourceTree = "<group>"; };
+		E865273C05EEB18C00C9C768 /* RadioButtonMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButtonMatrix.m; sourceTree = "<group>"; };
+		E865273D05EEB18C00C9C768 /* RadioButtonMatrix.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RadioButtonMatrix.wox; sourceTree = "<group>"; };
+		E865273E05EEB18C00C9C768 /* RichString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichString.m; sourceTree = "<group>"; };
+		E865273F05EEB18C00C9C768 /* RichString.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RichString.wox; sourceTree = "<group>"; };
+		E865274005EEB18C00C9C768 /* Switch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Switch.m; sourceTree = "<group>"; };
+		E865274105EEB18C00C9C768 /* Switch.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Switch.wox; sourceTree = "<group>"; };
+		E865274205EEB18C00C9C768 /* Table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Table.m; sourceTree = "<group>"; };
+		E865274305EEB18C00C9C768 /* Table.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Table.wox; sourceTree = "<group>"; };
+		E865274405EEB18C00C9C768 /* TabPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabPanel.m; sourceTree = "<group>"; };
+		E865274505EEB18C00C9C768 /* TabPanel.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TabPanel.wox; sourceTree = "<group>"; };
+		E865274605EEB18C00C9C768 /* ThresholdColoredNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThresholdColoredNumber.m; sourceTree = "<group>"; };
+		E865274705EEB18C00C9C768 /* ThresholdColoredNumber.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ThresholdColoredNumber.wox; sourceTree = "<group>"; };
+		E865275C05EEB1B500C9C768 /* CalendarField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarField.m; sourceTree = "<group>"; };
+		E865275D05EEB1B500C9C768 /* CalendarField.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CalendarField.wox; sourceTree = "<group>"; };
+		E865275E05EEB1B500C9C768 /* DateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateField.m; sourceTree = "<group>"; };
+		E865275F05EEB1B500C9C768 /* DateField.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DateField.wox; sourceTree = "<group>"; };
+		E865276005EEB1B500C9C768 /* MonthOverview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthOverview.m; sourceTree = "<group>"; };
+		E865276105EEB1B500C9C768 /* MonthOverview.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MonthOverview.wox; sourceTree = "<group>"; };
+		E865276205EEB1B500C9C768 /* TimeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeField.m; sourceTree = "<group>"; };
+		E865276305EEB1B500C9C768 /* TimeField.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TimeField.wox; sourceTree = "<group>"; };
+		E865276405EEB1B500C9C768 /* WeekColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekColumnView.m; sourceTree = "<group>"; };
+		E865276505EEB1B500C9C768 /* WeekColumnView.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WeekColumnView.wox; sourceTree = "<group>"; };
+		E865276605EEB1B500C9C768 /* WeekOverview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekOverview.m; sourceTree = "<group>"; };
+		E865276705EEB1B500C9C768 /* WeekOverview.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = WeekOverview.wox; sourceTree = "<group>"; };
+		E865277505EEB1E200C9C768 /* VarString.wox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VarString.wox; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADEE3DEC05DD135A00F523DB /* Cocoa.framework in Frameworks */,
+				ADEE3DDC05DD131F00F523DB /* SOPEX.framework in Frameworks */,
+				AD7B99D7076F81D1008F4F3D /* DOM.framework in Frameworks */,
+				AD7B99D8076F81D1008F4F3D /* EOControl.framework in Frameworks */,
+				AD7B99D9076F81D1008F4F3D /* NGExtensions.framework in Frameworks */,
+				AD7B99DA076F81D1008F4F3D /* NGHttp.framework in Frameworks */,
+				AD7B99DB076F81D1008F4F3D /* NGImap4.framework in Frameworks */,
+				AD7B99DC076F81D1008F4F3D /* NGMail.framework in Frameworks */,
+				AD7B99DD076F81D1008F4F3D /* NGMime.framework in Frameworks */,
+				AD7B99DE076F81D1008F4F3D /* NGObjWeb.framework in Frameworks */,
+				AD7B99DF076F81D1008F4F3D /* NGStreams.framework in Frameworks */,
+				AD7B99E0076F81D1008F4F3D /* SoObjects.framework in Frameworks */,
+				AD7B99E1076F81D1008F4F3D /* WebDAV.framework in Frameworks */,
+				AD7B99E2076F81D1008F4F3D /* WEExtensions.framework in Frameworks */,
+				AD7B99E3076F81D1008F4F3D /* WOExtensions.framework in Frameworks */,
+				AD7B99E4076F81D1008F4F3D /* XmlRpc.framework in Frameworks */,
+				AD7B99E6076F81E2008F4F3D /* SaxObjC.framework in Frameworks */,
+				AD7B9EC6076F822E008F4F3D /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AD19ED5205D7FBD1009EBA3A /* Application.h */,
+				AD19ED5305D7FBD1009EBA3A /* Application.m */,
+				AD19ED6305D7FBEA009EBA3A /* Session.h */,
+				AD19ED6405D7FBEA009EBA3A /* Session.m */,
+				ADEE3DD505DD126900F523DB /* DirectAction.h */,
+				ADEE3DD605DD126900F523DB /* DirectAction.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* WOExtTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* WOExtTest */ = {
+			isa = PBXGroup;
+			children = (
+				ADA38BE605DD23C400C820AA /* README */,
+				E80D747905EE9708008CFE96 /* common.h */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				AD19ED3F05D7FBB4009EBA3A /* Web Components */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				ADEE3DCE05DD11C900F523DB /* WebServerResources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = WOExtTest;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* WOExtTest_main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				AD7B9743076F7F5F008F4F3D /* MainMenu.nib */,
+				ADA38B8105DD238A00C820AA /* Lori.icns */,
+				AD06681A0600AA700010C833 /* TableView.plist */,
+				AD06681B0600AA700010C833 /* TreeView.plist */,
+				AD06681C0600AA700010C833 /* Dictionary.plist */,
+				AD06681D0600AA700010C833 /* appointments.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADEE3DEB05DD135A00F523DB /* Cocoa.framework */,
+				AD7B9EC5076F822E008F4F3D /* WebKit.framework */,
+				AD7B9A3D076F81E9008F4F3D /* sope-xml */,
+				AD7B9B54076F81F2008F4F3D /* sope-core */,
+				AD7B9DA8076F8205008F4F3D /* sope-appserver */,
+				AD7B9CBE076F81FD008F4F3D /* sope-mime */,
+				ADEE3DDB05DD131E00F523DB /* SOPEX.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD19ED3F05D7FBB4009EBA3A /* Web Components */ = {
+			isa = PBXGroup;
+			children = (
+				E80D743B05EE9655008CFE96 /* Main.m */,
+				E80D743C05EE9655008CFE96 /* Main.wox */,
+				E86526AE05EEAE0400C9C768 /* Frame.m */,
+				E86526AF05EEAE0400C9C768 /* Frame.wox */,
+				E865277405EEB1BE00C9C768 /* Standard Elements */,
+				E80D744505EE967D008CFE96 /* JavaScript Elements */,
+				E80D744B05EE968A008CFE96 /* Complex Elements */,
+				E80D744805EE9685008CFE96 /* Misc Elements */,
+				E80D744E05EE968E008CFE96 /* Scheduling Elements */,
+			);
+			name = "Web Components";
+			sourceTree = "<group>";
+		};
+		AD7B9A3D076F81E9008F4F3D /* sope-xml */ = {
+			isa = PBXGroup;
+			children = (
+				AD7B99E5076F81E2008F4F3D /* SaxObjC.framework */,
+				AD7B99C9076F81D1008F4F3D /* DOM.framework */,
+				AD7B99D6076F81D1008F4F3D /* XmlRpc.framework */,
+			);
+			name = "sope-xml";
+			sourceTree = "<group>";
+		};
+		AD7B9B54076F81F2008F4F3D /* sope-core */ = {
+			isa = PBXGroup;
+			children = (
+				AD7B99CA076F81D1008F4F3D /* EOControl.framework */,
+				AD7B99CB076F81D1008F4F3D /* NGExtensions.framework */,
+				AD7B99D1076F81D1008F4F3D /* NGStreams.framework */,
+			);
+			name = "sope-core";
+			sourceTree = "<group>";
+		};
+		AD7B9CBE076F81FD008F4F3D /* sope-mime */ = {
+			isa = PBXGroup;
+			children = (
+				AD7B99CD076F81D1008F4F3D /* NGImap4.framework */,
+				AD7B99CE076F81D1008F4F3D /* NGMail.framework */,
+				AD7B99CF076F81D1008F4F3D /* NGMime.framework */,
+			);
+			name = "sope-mime";
+			sourceTree = "<group>";
+		};
+		AD7B9DA8076F8205008F4F3D /* sope-appserver */ = {
+			isa = PBXGroup;
+			children = (
+				AD7B99CC076F81D1008F4F3D /* NGHttp.framework */,
+				AD7B99D0076F81D1008F4F3D /* NGObjWeb.framework */,
+				AD7B99D2076F81D1008F4F3D /* SoObjects.framework */,
+				AD7B99D3076F81D1008F4F3D /* WebDAV.framework */,
+				AD7B99D4076F81D1008F4F3D /* WEExtensions.framework */,
+				AD7B99D5076F81D1008F4F3D /* WOExtensions.framework */,
+			);
+			name = "sope-appserver";
+			sourceTree = "<group>";
+		};
+		E80D744505EE967D008CFE96 /* JavaScript Elements */ = {
+			isa = PBXGroup;
+			children = (
+				E80D745605EE96E1008CFE96 /* AlertPanel.m */,
+				E80D745705EE96E1008CFE96 /* AlertPanel.wox */,
+				E80D745805EE96E1008CFE96 /* ConfirmPanel.m */,
+				E80D745905EE96E1008CFE96 /* ConfirmPanel.wox */,
+				E80D745A05EE96E1008CFE96 /* DnD.m */,
+				E80D745B05EE96E1008CFE96 /* DnD.wox */,
+				E80D745C05EE96E1008CFE96 /* ImageFlyover.m */,
+				E80D745D05EE96E1008CFE96 /* ImageFlyover.wox */,
+				E80D745E05EE96E1008CFE96 /* ModalWindow.m */,
+				E80D745F05EE96E1008CFE96 /* ModalWindow.wox */,
+				E80D746005EE96E1008CFE96 /* ShiftClick.m */,
+				E80D746105EE96E1008CFE96 /* ShiftClick.wox */,
+				E80D746205EE96E1008CFE96 /* TextFlyover.m */,
+				E80D746305EE96E1008CFE96 /* TextFlyover.wox */,
+				E80D746405EE96E1008CFE96 /* ValidatedField.m */,
+				E80D746505EE96E1008CFE96 /* ValidatedField.wox */,
+			);
+			name = "JavaScript Elements";
+			sourceTree = "<group>";
+		};
+		E80D744805EE9685008CFE96 /* Misc Elements */ = {
+			isa = PBXGroup;
+			children = (
+				E865273405EEB18C00C9C768 /* CheckBoxMatrix.m */,
+				E865273505EEB18C00C9C768 /* CheckBoxMatrix.wox */,
+				E865273605EEB18C00C9C768 /* CollapsibleContent.m */,
+				E865273705EEB18C00C9C768 /* CollapsibleContent.wox */,
+				E865273805EEB18C00C9C768 /* DictionaryRepetition.m */,
+				E865273905EEB18C00C9C768 /* DictionaryRepetition.wox */,
+				E865273A05EEB18C00C9C768 /* KeyValueConditional.m */,
+				E865273B05EEB18C00C9C768 /* KeyValueConditional.wox */,
+				E846E7A606120917002A4AC8 /* QualifierConditional.m */,
+				E846E7A706120917002A4AC8 /* QualifierConditional.wox */,
+				E865273C05EEB18C00C9C768 /* RadioButtonMatrix.m */,
+				E865273D05EEB18C00C9C768 /* RadioButtonMatrix.wox */,
+				E865273E05EEB18C00C9C768 /* RichString.m */,
+				E865273F05EEB18C00C9C768 /* RichString.wox */,
+				E865274005EEB18C00C9C768 /* Switch.m */,
+				E865274105EEB18C00C9C768 /* Switch.wox */,
+				E865274205EEB18C00C9C768 /* Table.m */,
+				E865274305EEB18C00C9C768 /* Table.wox */,
+				E865274405EEB18C00C9C768 /* TabPanel.m */,
+				E865274505EEB18C00C9C768 /* TabPanel.wox */,
+				E865274605EEB18C00C9C768 /* ThresholdColoredNumber.m */,
+				E865274705EEB18C00C9C768 /* ThresholdColoredNumber.wox */,
+			);
+			name = "Misc Elements";
+			sourceTree = "<group>";
+		};
+		E80D744B05EE968A008CFE96 /* Complex Elements */ = {
+			isa = PBXGroup;
+			children = (
+				E865271805EEB13000C9C768 /* Browser.m */,
+				E865271905EEB13000C9C768 /* Browser.wox */,
+				E865271A05EEB13000C9C768 /* CollapsibleContentExt.m */,
+				E865271B05EEB13000C9C768 /* CollapsibleContentExt.wox */,
+				E865271C05EEB13000C9C768 /* PageView.m */,
+				E865271D05EEB13000C9C768 /* PageView.wox */,
+				E865271E05EEB13000C9C768 /* TableMatrix.m */,
+				E865271F05EEB13000C9C768 /* TableMatrix.wox */,
+				E865272005EEB13000C9C768 /* TableView.m */,
+				E865272105EEB13000C9C768 /* TableView.wox */,
+				E865272205EEB13000C9C768 /* TabView.m */,
+				E865272305EEB13000C9C768 /* TabView.wox */,
+				E865272405EEB13000C9C768 /* TreeView.m */,
+				E865272505EEB13000C9C768 /* TreeView.wox */,
+			);
+			name = "Complex Elements";
+			sourceTree = "<group>";
+		};
+		E80D744E05EE968E008CFE96 /* Scheduling Elements */ = {
+			isa = PBXGroup;
+			children = (
+				E865275C05EEB1B500C9C768 /* CalendarField.m */,
+				E865275D05EEB1B500C9C768 /* CalendarField.wox */,
+				E865275E05EEB1B500C9C768 /* DateField.m */,
+				E865275F05EEB1B500C9C768 /* DateField.wox */,
+				E865276005EEB1B500C9C768 /* MonthOverview.m */,
+				E865276105EEB1B500C9C768 /* MonthOverview.wox */,
+				E865276205EEB1B500C9C768 /* TimeField.m */,
+				E865276305EEB1B500C9C768 /* TimeField.wox */,
+				E865276405EEB1B500C9C768 /* WeekColumnView.m */,
+				E865276505EEB1B500C9C768 /* WeekColumnView.wox */,
+				E865276605EEB1B500C9C768 /* WeekOverview.m */,
+				E865276705EEB1B500C9C768 /* WeekOverview.wox */,
+			);
+			name = "Scheduling Elements";
+			sourceTree = "<group>";
+		};
+		E865277405EEB1BE00C9C768 /* Standard Elements */ = {
+			isa = PBXGroup;
+			children = (
+				E865277505EEB1E200C9C768 /* VarString.wox */,
+			);
+			name = "Standard Elements";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D1107270486CEB800E47090 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD19ED5405D7FBD1009EBA3A /* Application.h in Headers */,
+				AD19ED6505D7FBEA009EBA3A /* Session.h in Headers */,
+				ADEE3DD705DD126900F523DB /* DirectAction.h in Headers */,
+				E80D747A05EE9708008CFE96 /* common.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* WOExtTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA07C17085750F100993825 /* Build configuration list for PBXNativeTarget "WOExtTest" */;
+			buildPhases = (
+				8D1107270486CEB800E47090 /* Headers */,
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				ADF026F205D903AE00D2292D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = WOExtTest;
+				WRAPPER_EXTENSION = sopex;
+			};
+			dependencies = (
+			);
+			name = WOExtTest;
+			productInstallPath = "$(HOME)/Applications";
+			productName = WOExtTest;
+			productReference = 8D1107320486CEB800E47090 /* WOExtTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA07C1B085750F100993825 /* Build configuration list for PBXProject "WOExtTest" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA /* Development */,
+				4A9504CDFFE6A4B311CA0CBA /* Deployment */,
+			);
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* WOExtTest */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* WOExtTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				ADEE3DD005DD11C900F523DB /* WebServerResources in Resources */,
+				ADA38B8205DD238A00C820AA /* Lori.icns in Resources */,
+				E80D743E05EE9655008CFE96 /* Main.wox in Resources */,
+				E80D746705EE96E1008CFE96 /* AlertPanel.wox in Resources */,
+				E80D746905EE96E1008CFE96 /* ConfirmPanel.wox in Resources */,
+				E80D746B05EE96E1008CFE96 /* DnD.wox in Resources */,
+				E80D746D05EE96E1008CFE96 /* ImageFlyover.wox in Resources */,
+				E80D746F05EE96E1008CFE96 /* ModalWindow.wox in Resources */,
+				E80D747105EE96E1008CFE96 /* ShiftClick.wox in Resources */,
+				E80D747305EE96E1008CFE96 /* TextFlyover.wox in Resources */,
+				E80D747505EE96E1008CFE96 /* ValidatedField.wox in Resources */,
+				E86526B105EEAE0400C9C768 /* Frame.wox in Resources */,
+				E865272705EEB13000C9C768 /* Browser.wox in Resources */,
+				E865272905EEB13000C9C768 /* CollapsibleContentExt.wox in Resources */,
+				E865272B05EEB13000C9C768 /* PageView.wox in Resources */,
+				E865272D05EEB13000C9C768 /* TableMatrix.wox in Resources */,
+				E865272F05EEB13000C9C768 /* TableView.wox in Resources */,
+				E865273105EEB13000C9C768 /* TabView.wox in Resources */,
+				E865273305EEB13000C9C768 /* TreeView.wox in Resources */,
+				E865274905EEB18C00C9C768 /* CheckBoxMatrix.wox in Resources */,
+				E865274B05EEB18C00C9C768 /* CollapsibleContent.wox in Resources */,
+				E865274D05EEB18C00C9C768 /* DictionaryRepetition.wox in Resources */,
+				E865274F05EEB18C00C9C768 /* KeyValueConditional.wox in Resources */,
+				E865275105EEB18C00C9C768 /* RadioButtonMatrix.wox in Resources */,
+				E865275305EEB18C00C9C768 /* RichString.wox in Resources */,
+				E865275505EEB18C00C9C768 /* Switch.wox in Resources */,
+				E865275705EEB18C00C9C768 /* Table.wox in Resources */,
+				E865275905EEB18C00C9C768 /* TabPanel.wox in Resources */,
+				E865275B05EEB18C00C9C768 /* ThresholdColoredNumber.wox in Resources */,
+				E865276905EEB1B500C9C768 /* CalendarField.wox in Resources */,
+				E865276B05EEB1B500C9C768 /* DateField.wox in Resources */,
+				E865276D05EEB1B500C9C768 /* MonthOverview.wox in Resources */,
+				E865276F05EEB1B500C9C768 /* TimeField.wox in Resources */,
+				E865277105EEB1B500C9C768 /* WeekColumnView.wox in Resources */,
+				E865277305EEB1B500C9C768 /* WeekOverview.wox in Resources */,
+				E865277605EEB1E200C9C768 /* VarString.wox in Resources */,
+				AD06681E0600AA700010C833 /* TableView.plist in Resources */,
+				AD06681F0600AA700010C833 /* TreeView.plist in Resources */,
+				AD0668200600AA700010C833 /* Dictionary.plist in Resources */,
+				AD0668210600AA700010C833 /* appointments.plist in Resources */,
+				E846E7A906120917002A4AC8 /* QualifierConditional.wox in Resources */,
+				AD7B9745076F7F5F008F4F3D /* MainMenu.nib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* WOExtTest_main.m in Sources */,
+				AD19ED5505D7FBD1009EBA3A /* Application.m in Sources */,
+				AD19ED6605D7FBEA009EBA3A /* Session.m in Sources */,
+				ADEE3DD805DD126900F523DB /* DirectAction.m in Sources */,
+				E80D743D05EE9655008CFE96 /* Main.m in Sources */,
+				E80D746605EE96E1008CFE96 /* AlertPanel.m in Sources */,
+				E80D746805EE96E1008CFE96 /* ConfirmPanel.m in Sources */,
+				E80D746A05EE96E1008CFE96 /* DnD.m in Sources */,
+				E80D746C05EE96E1008CFE96 /* ImageFlyover.m in Sources */,
+				E80D746E05EE96E1008CFE96 /* ModalWindow.m in Sources */,
+				E80D747005EE96E1008CFE96 /* ShiftClick.m in Sources */,
+				E80D747205EE96E1008CFE96 /* TextFlyover.m in Sources */,
+				E80D747405EE96E1008CFE96 /* ValidatedField.m in Sources */,
+				E86526B005EEAE0400C9C768 /* Frame.m in Sources */,
+				E865272605EEB13000C9C768 /* Browser.m in Sources */,
+				E865272805EEB13000C9C768 /* CollapsibleContentExt.m in Sources */,
+				E865272A05EEB13000C9C768 /* PageView.m in Sources */,
+				E865272C05EEB13000C9C768 /* TableMatrix.m in Sources */,
+				E865272E05EEB13000C9C768 /* TableView.m in Sources */,
+				E865273005EEB13000C9C768 /* TabView.m in Sources */,
+				E865273205EEB13000C9C768 /* TreeView.m in Sources */,
+				E865274805EEB18C00C9C768 /* CheckBoxMatrix.m in Sources */,
+				E865274A05EEB18C00C9C768 /* CollapsibleContent.m in Sources */,
+				E865274C05EEB18C00C9C768 /* DictionaryRepetition.m in Sources */,
+				E865274E05EEB18C00C9C768 /* KeyValueConditional.m in Sources */,
+				E865275005EEB18C00C9C768 /* RadioButtonMatrix.m in Sources */,
+				E865275205EEB18C00C9C768 /* RichString.m in Sources */,
+				E865275405EEB18C00C9C768 /* Switch.m in Sources */,
+				E865275605EEB18C00C9C768 /* Table.m in Sources */,
+				E865275805EEB18C00C9C768 /* TabPanel.m in Sources */,
+				E865275A05EEB18C00C9C768 /* ThresholdColoredNumber.m in Sources */,
+				E865276805EEB1B500C9C768 /* CalendarField.m in Sources */,
+				E865276A05EEB1B500C9C768 /* DateField.m in Sources */,
+				E865276C05EEB1B500C9C768 /* MonthOverview.m in Sources */,
+				E865276E05EEB1B500C9C768 /* TimeField.m in Sources */,
+				E865277005EEB1B500C9C768 /* WeekColumnView.m in Sources */,
+				E865277205EEB1B500C9C768 /* WeekOverview.m in Sources */,
+				E846E7A806120917002A4AC8 /* QualifierConditional.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AD7B9743076F7F5F008F4F3D /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD7B9744076F7F5F008F4F3D /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ADA07C18085750F100993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = WOExtTest;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		ADA07C19085750F100993825 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUGGING_SYMBOLS = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_MODE_FLAG = "go-w,a+rX,u+w";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OPTIMIZATION_CFLAGS = "-O3";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = WOExtTest;
+				SYMROOT = /tmp/SOPEXDeploymentProducts;
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build/$(TARGET_NAME).build";
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		ADA07C1A085750F100993825 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = WOExtTest;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		ADA07C1C085750F100993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA07C1D085750F100993825 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		ADA07C1E085750F100993825 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA07C17085750F100993825 /* Build configuration list for PBXNativeTarget "WOExtTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07C18085750F100993825 /* Development */,
+				ADA07C19085750F100993825 /* Deployment */,
+				ADA07C1A085750F100993825 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		ADA07C1B085750F100993825 /* Build configuration list for PBXProject "WOExtTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07C1C085750F100993825 /* Development */,
+				ADA07C1D085750F100993825 /* Deployment */,
+				ADA07C1E085750F100993825 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

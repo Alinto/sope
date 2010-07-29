@@ -1,0 +1,95 @@
+# $Id$
+
+# JavaScript config
+
+ADDITIONAL_CPPFLAGS += -DXP_UNIX=1
+
+ifeq ($(NATIVEJS),yes)
+ADDITIONAL_INCLUDE_DIRS += \
+	-I/usr/local/src/js-1.5rc1/src	\
+	-I/usr/local/src/js-1.5rc1/src/Linux_All_DBG.OBJ
+
+ADDITIONAL_LIB_DIRS += -L/usr/local/src/js-1.5rc1/src/Linux_All_DBG.OBJ
+endif
+
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+RELBUILD_DIR_JS=$(GNUSTEP_BUILD_DIR)/../../../ThirdParty/js-1.5
+RELBUILD_DIR_SxCore=$(GNUSTEP_BUILD_DIR)/../../sope-core
+RELBUILD_DIR_SxXml=$(GNUSTEP_BUILD_DIR)/../../sope-xml
+RELBUILD_DIR_SOPE=$(GNUSTEP_BUILD_DIR)/..
+
+ADDITIONAL_LIB_DIRS += \
+	-L$(RELBUILD_DIR_SOPE)/NGJavaScript/$(GNUSTEP_OBJ_DIR_NAME)	\
+	-L$(RELBUILD_DIR_SOPE)/NGScripting/$(GNUSTEP_OBJ_DIR_NAME)	\
+	-L$(RELBUILD_DIR_SxCore)/NGExtensions/$(GNUSTEP_OBJ_DIR_NAME)	\
+	-L$(RELBUILD_DIR_SxCore)/EOControl/$(GNUSTEP_OBJ_DIR_NAME)	\
+	-L$(RELBUILD_DIR_SxXml)/DOM/$(GNUSTEP_OBJ_DIR_NAME)		\
+	-L$(RELBUILD_DIR_SxXml)/SaxObjC/$(GNUSTEP_OBJ_DIR_NAME)		\
+	-L$(RELBUILD_DIR_JS)/$(GNUSTEP_OBJ_DIR_NAME)
+else
+ADDITIONAL_LIB_DIRS += \
+	-L$(GNUSTEP_OBJ_DIR)			\
+	-L../NGScripting/$(GNUSTEP_OBJ_DIR)	\
+	-L../NGJavaScript/$(GNUSTEP_OBJ_DIR)	\
+	-L../NGExtensions/$(GNUSTEP_OBJ_DIR)	\
+	-L../EOControl/$(GNUSTEP_OBJ_DIR)	\
+	-L../js/$(GNUSTEP_OBJ_DIR)
+endif
+
+# further config
+
+ADDITIONAL_CPPFLAGS += -Wall
+
+ifeq ($(GNUSTEP_TARGET_OS),darwin1.1)
+ADDITIONAL_LDFLAGS += -framework Foundation
+endif
+
+ifeq ($(GNUSTEP_TARGET_OS),darwin1.2)
+ADDITIONAL_LDFLAGS += \
+	-framework Foundation			\
+	-L../js/$(GNUSTEP_OBJ_DIR)		\
+	-L../NGStreams/$(GNUSTEP_OBJ_DIR)	\
+
+libNGJavaScript_LIBRARIES_DEPEND_UPON += -ljs -lNGStreams
+endif
+
+# Windows
+
+ifeq ($(GNUSTEP_TARGET_OS),mingw32)
+libNGJavaScript_LIBRARIES_DEPEND_UPON += -lFoundation -lobjc
+endif
+ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
+libNGJavaScript_LIBRARIES_DEPEND_UPON += -lFoundation -lobjc
+endif
+
+# dependencies
+
+libNGJavaScript_LIBRARIES_DEPEND_UPON += \
+	-lNGScripting			\
+	-lNGExtensions -lEOControl	\
+	-lDOM -lSaxObjC			\
+	-ljs
+
+testjs_CPP_FLAGS    += -DBUILD_libNGJavaScript_DLL=1
+testjs_INCLUDE_DIRS += -I. -I.. -I./tests/
+testjs_LIB_DIRS     += -L./$(GNUSTEP_OBJ_DIR)
+testjs_TOOL_LIBS    += -lNGJavaScript -lNGScripting -lNGExtensions -ljs
+
+jsobjops_CPP_FLAGS    += -DBUILD_libNGJavaScript_DLL=1 -Wall
+jsobjops_INCLUDE_DIRS += -I. -I..
+jsobjops_LIB_DIRS     += -L./$(GNUSTEP_OBJ_DIR)
+jsobjops_TOOL_LIBS    += -lNGExtensions -ljs
+
+
+# Apple
+
+ifeq ($(FOUNDATION_LIB),apple)
+libNGJavaScript_PREBIND_ADDR="0xC3200000"
+libNGJavaScript_LDFLAGS += -seg1addr $(libNGJavaScript_PREBIND_ADDR)
+endif
+
+ifeq ($(FOUNDATION_LIB),nx)
+libNGJavaScript_LIBRARIES_DEPEND_UPON += -lFoundationExt
+ADDITIONAL_LDFLAGS      += -framework Foundation
+endif

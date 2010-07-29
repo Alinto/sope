@@ -1,0 +1,106 @@
+.\"openapp(1) man page
+.\"put together by Martin Brecher <martin@gnustep.de>
+.\"
+.\"Process this file with
+.\"groff -man -Tascii openpp.1
+.\"
+.TH OPENAPP 1 "August 2003" GNUstep "GNUstep System Manual"
+.SH NAME
+openapp \- launch applications from the command line
+
+.SH SYNOPSIS
+.B openapp
+.RB [ --find ] 
+.IR application
+.RB [ "\fIarguments..." ] 
+.P
+.SH DESCRIPTION
+The 
+.B openapp
+command allows you launch graphical GNUstep applications from the command 
+line.a
+.PP
+.I application
+is the complete or relative name of the application program with or
+without the .app extension, like Ink.app.
+.PP
+.I arguments
+are the arguments passed to the application.
+.PP
+.B openapp
+first checks whether the application is in the current working directory.
+If not then searches the GNUstep domains' Applications folders in the 
+following order:
+User (i.e. ~/GNUstep/Applications), Local, Network, System. First match wins.
+.PP
+If 
+.I application
+is given without extension (i.e. Ink instead of Ink.app),
+.B openapp
+searches for 
+.I application.app
+,
+.I application.debug
+,
+.I application.profile
+(in that order).
+.PP
+If
+.I --find 
+is used as first argument, 
+.B openapp 
+prints out
+the full path of the application executable which would be
+executed, without actually executing it as it would normally do.
+.PP
+.SH OPTIONS
+.IP "\fB--find"
+print complete path of the executable which would be launched.
+.IP "\fB--help"
+print above usage description.
+.PP
+.SH EXAMPLES
+Start Ink.app without additional parameters:
+.PP
+.I openapp Ink.app 
+.PP
+Launch Ink.app and pass it the --GNU-Debug argument:
+.PP
+.I openapp Ink.app --GNU-Debug=NSTextView
+.PP
+To determine which executable is launched by openapp, type: 
+.PP
+.I openapp --find Ink.app
+.PP
+The output of the abovecommand might be something like:
+.I /usr/GNUstep/Local/Applications/Ink.app/Ink
+.PP
+.SH BUGS
+.B openapp
+does currently not handle library combos.
+.PP
+.SH ENVIRONMENT
+.IP "\fBGNUSTEP_PATHLIST"
+This variable contains the paths of the domains in which
+.B gopen
+tries to find applications to open the files with. Entries are
+separated by a colon.
+.IP
+.IP Example:
+.I /home/foo/GNUstep:/usr/GNUstep/Local:/usr/GNUstep/Network:/usr/GNUstep/System
+.PP
+.SH SEE ALSO
+GNUstep(7), gopen(1)
+.P
+.SH HISTORY
+Work on
+.B openapp
+started October 1997.
+.P
+This manual page was first written July 2003.
+.P
+.SH AUTHORS
+openapp was originally written by Ovidiu Predescu <ovidiu@net-community.com>
+and is now maintained by Nicola Pero <n.pero@mi.flashnet.it>.
+.P
+This man page was written by Martin Brecher <martin@mb-itconsulting.com>.

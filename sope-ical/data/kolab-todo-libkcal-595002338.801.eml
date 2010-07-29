@@ -1,0 +1,55 @@
+From Helge Hess Fri Jul 29 21:43:58 2005
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_+bo6CuIy2NXtayu"
+From: Helge Hess
+X-KMail-Fcc: sent-mail
+Subject: libkcal-595002338.801
+Date: Fri, 29 Jul 2005 21:43:58 +0200
+User-Agent: KMail/1.8.50
+MIME-Version: 1.0
+X-Kolab-Type: application/x-vnd.kolab.task
+Status: RO
+X-Status: O
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+X-KMail-MDN-Sent:  
+X-UID: 6
+X-Length: 1590
+
+--Boundary-00=_+bo6CuIy2NXtayu
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+This is a Kolab Groupware object.
+To view this object you will need an email client that can understand the Kolab Groupware format.
+For a list of such email clients please visit
+http://www.kolab.org/kolab2-clients.html
+--Boundary-00=_+bo6CuIy2NXtayu
+Content-Type: application/x-vnd.kolab.task;
+  name="kolab.xml"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+  filename="kolab.xml"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<task version="1.0" >
+ <product-id>KOrganizer 3.5 pre, Kolab resource</product-id>
+ <uid>libkcal-595002338.801</uid>
+ <creation-date>2005-07-29T19:43:58Z</creation-date>
+ <last-modification-date>2005-07-29T19:44:01Z</last-modification-date>
+ <sensitivity>public</sensitivity>
+ <summary>waer</summary>
+ <organizer>
+  <display-name>Anonymous</display-name>
+  <smtp-address>nobody@nowhere</smtp-address>
+ </organizer>
+ <revision>0</revision>
+ <priority>5</priority>
+ <completed>100</completed>
+ <status>not-started</status>
+ <x-completed-date>2005-07-29T19:44:01Z</x-completed-date>
+</task>
+
+--Boundary-00=_+bo6CuIy2NXtayu--
+

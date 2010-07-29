@@ -1,0 +1,63 @@
+.TH sope 8 "October 2004" OpenGroupware.org "User Manuals"
+.\" Copyright (c) 2004 Helge Hess. All rights reserved.
+.\" ====================================================================
+.\"
+.\" Copyright (c) 2004 Helge Hess.  All rights reserved.
+.\"
+.\" Check the COPYING file for further information.
+.\"
+.\" Created with the help of:
+.\"   http://www.schweikhardt.net/man_page_howto.html
+.\"
+
+.SH NAME
+sope-4.5 \- A tool to serve template based SOPE sites.
+.SH SYNOPSIS
+.B sope-4.5 
+[
+.BI \-WOPort " port"
+]
+
+.SH DESCRIPTION
+.B sope-4.5
+is a generic server to serve SOPE applications composed of just templates
+and products.
+.PP
+Note that you should not connect
+.B sope-4.5
+directly on its port using your client, but rather use
+.B mod_ngobjweb
+in combination with
+.B Apache.
+
+.SH OPTIONS
+.TP 12
+.IP "-WOPort port"
+This option sets the TCP/IP port the
+.B sope-4.5
+server is running on and which the mod_ngobjweb will connect to.
+
+.SH FILES
+.I /etc/opengroupware.org/NSGlobalDomain.plist
+.RS
+This file contains configurations which apply to all SOPE related daemons.
+.RE
+.I /etc/opengroupware.org/sope-4.5.plist
+.RS
+Configurations contained in this file overwrite those in the NSGlobalDomain.
+You can persist any command line option in this file using the
+.BR Defaults (5)
+tool.
+.RE
+
+.SH BUGS
+SOPE bugs are collected in the OpenGroupware.org Bugzilla:
+  http://bugzilla.opengroupware.org/
+
+.SH AUTHOR
+Helge Hess <helge.hess@opengroupware.org>
+
+.SH SEE ALSO
+.BR httpd (8),
+.BR sope-ngobjweb-defaults (8),
+.BR Defaults (5).

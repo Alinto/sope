@@ -1,0 +1,9 @@
+# compile settings
+
+davpropget_TOOL_LIBS += \
+	-lNGObjWeb	\
+	-lNGMime	\
+	-lNGStreams -lNGExtensions -lEOControl \
+	-lDOM -lXmlRpc -lSaxObjC
+
+SYSTEM_LIB_DIR += $(CONFIGURE_SYSTEM_LIB_DIR)

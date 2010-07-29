@@ -1,0 +1,96 @@
+{
+  CVSID = "$Id$";
+  bundleHandler = "NGObjDOMModule";
+
+  requires = {
+    bundleManagerVersion = 1;
+    
+    classes = (
+      { name = NSObject; }
+    );
+  };
+
+  provides = {
+    ODRendererFactory = (
+      { 
+        name  = "ODWONodeRenderFactory"; 
+        class = "ODWONodeRenderFactory"; 
+      },
+      { 
+        name  = "BIND"; 
+        class = "ODBindNodeRenderFactory"; 
+      },
+    );
+    
+    ODRenderer = (
+      { name = "{http://www.skyrix.com/od/binding}checkbox";    },
+      { name = "{http://www.skyrix.com/od/binding}collapsible"; },
+      { name = "{http://www.skyrix.com/od/binding}datefield";   },
+      { name = "{http://www.skyrix.com/od/binding}fieldset";    },
+      { name = "{http://www.skyrix.com/od/binding}foreach";     },
+      { name = "{http://www.skyrix.com/od/binding}form";        },
+      { name = "{http://www.skyrix.com/od/binding}if";          },
+      { name = "{http://www.skyrix.com/od/binding}nbsp";        },
+      { name = "{http://www.skyrix.com/od/binding}popupbutton"; },
+      { name = "{http://www.skyrix.com/od/binding}radiobutton"; },
+      { name = "{http://www.skyrix.com/od/binding}string";      },
+      { name = "{http://www.skyrix.com/od/binding}switch";      },
+      { name = "{http://www.skyrix.com/od/binding}td";          },
+      { name = "{http://www.skyrix.com/od/binding}th";          },
+      { name = "{http://www.skyrix.com/od/binding}tableview";   },
+      { name = "{http://www.skyrix.com/od/binding}tabview";     },
+      { name = "{http://www.skyrix.com/od/binding}viewertitle"; },
+      { name = "{http://www.skyrix.com/od/binding}with";        },
+    );
+    
+    WODynamicElements = (
+      { name = WORenderDOM; },
+    );
+    
+    classes = (
+      { name = NGObjDOMModule;           },
+      { name = ODNodeRenderer;           },
+      { name = ODNodeRendererFactory;    },
+      { name = ODNodeRendererFactorySet; },
+      { name = ODREmbedComponent;        },
+      { name = ODRGenericTag;            },
+      { name = ODRNodeText;              },
+      { name = ODRWebObject;             },
+      { name = ODWONodeRenderFactory;    },
+      { name = WORenderDOM;              },
+
+      { name = ODBindNodeRenderFactory;  },
+      { name = ODR_bind_checkbox;        },
+      { name = ODR_bind_collapsible;     },
+      { name = ODR_bind_datefield;       },
+      { name = ODR_bind_fieldset;        },
+      { name = ODR_bind_foreach;         },
+      { name = ODR_bind_form;            },
+      { name = ODR_bind_groupby;         },
+      { name = ODR_bind_groupings;       },
+      { name = ODR_bind_groupingset;     },
+      { name = ODR_bind_if;              },
+      { name = ODR_bind_ifnot;           },
+      { name = ODR_bind_multiselection;  },
+      { name = ODR_bind_nbsp;            },
+      { name = ODR_bind_popup;           },
+      { name = ODR_bind_popupbutton;     },
+      { name = ODR_bind_radiobutton;     },
+      { name = ODR_bind_singleselection; },
+      { name = ODR_bind_sortordering;    },
+      { name = ODR_bind_sortorderings;   },
+      { name = ODR_bind_string;          },
+      { name = ODR_bind_switch;          },
+      { name = ODR_bind_tablecell;       },
+      { name = ODR_bind_tableview;       },
+      { name = ODR_bind_tabview;         },
+      { name = ODR_bind_tbutton;         },
+      { name = ODR_bind_td;              },
+      { name = ODR_bind_tfooter;         },
+      { name = ODR_bind_tgroup;          },
+      { name = ODR_bind_th;              },
+      { name = ODR_bind_ttitle;          },
+      { name = ODR_bind_viewertitle;     },
+    );
+  };
+}

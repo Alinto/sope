@@ -1,0 +1,77 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className='iCalPortalBaseFrame' title='name'
+               xmlns='http://www.w3.org/1999/xhtml'
+               xmlns:var='http://www.skyrix.com/od/binding'
+               xmlns:const='http://www.skyrix.com/od/constant'>
+   <center>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center"><img 
+	    border="0" filename="small.gif" width="1" height="30" /></td>
+        <td align="center"><img
+	    border="0" filename="free_hosting.gif" width="622" height="30" /></td>
+        <td align="center"><img
+	    border="0" filename="small.gif" width="1" height="30" /></td>
+      </tr>
+
+      <tr>
+        <td align="center"
+	    background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+    	    border="0" filename="pixel.gif" width="1" height="1" /></td>
+
+        <td align="center" bgcolor="white" height="200">
+  <table border="0" width="550">
+    <tr>
+      <td colspan="2">
+	<p>
+	  Registration to this service is free! We do insist that you abide
+	  by the rules and policies detailed below. If you agree to the
+	  terms, please press the Accept button at the end of the page.
+	</p>
+
+        <p>
+           blah blah blah blah blah blah blah blah blah blah <br />
+           blah blah blah blah blah blah blah blah blah blah <br />
+           blah blah blah blah blah blah blah blah blah blah <br />
+        </p>	
+        <p>
+           blah blah blah blah blah blah blah blah blah blah <br />
+           blah blah blah blah blah blah blah blah blah blah <br />
+           blah blah blah blah blah blah blah blah blah blah <br />
+        </p>	
+        <p>
+           blah blah blah blah blah blah blah blah blah blah <br />
+           blah blah blah blah blah blah blah blah blah blah <br />
+           blah blah blah blah blah blah blah blah blah blah <br />
+        </p>	
+        
+	<p>
+	  <b>By accepting this agreement you hereby agree to all the listed
+	  items above and take full responsibility for the actions and
+	  information that you the member post.</b>
+	</p>
+     </td>
+    </tr>
+
+    <tr>
+      <td align="center" width="50%">
+        <a directActionName="acceptRules" 
+	   actionClass="iCalPortalLicenseAction"
+          >Accept and continue</a>
+      </td>
+      <td align="center" width="50%">
+        <a directActionName="declineRules" 
+	   actionClass="iCalPortalLicenseAction"
+	  >Decline</a>
+      </td>
+    </tr>
+  </table>
+        </td>
+        <td align="center"
+	    background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+    	    border="0" filename="pixel.gif" width="1" height="1" /></td>
+      </tr>
+    </table>
+   </center>
+</var:component>

@@ -1,0 +1,22 @@
+{
+  requires = {
+    bundleManagerVersion = 1;
+    classes = (
+      { name = NSObject;    }
+    );
+  };
+  
+  provides = {
+    SAXDrivers = ( 
+        { 
+          name        = STXSaxDriver;
+          sourceTypes = ( "text/structured" ); 
+        },
+        { 
+          name        = STXSaxDriver;
+          sourceTypes = ( "text/restructured" ); 
+        }
+    );
+    classes = ( { name = STXSaxDriver;  } );
+  };
+}

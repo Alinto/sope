@@ -1,0 +1,5 @@
+{
+  // site local defaults
+  WODebuggingEnabled = YES;
+  WOPort = 23032;
+}

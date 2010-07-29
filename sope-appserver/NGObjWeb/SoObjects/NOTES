@@ -1,0 +1,302 @@
+SoObjects
+=========
+
+Some Notes on the implementation ...
+
+OFSWebMethod / SoTemplateRenderer
+=================================
+
+should a GET on OFSWebMethod 
+a) return the method and let a renderer instantiate the component 
+- or -
+b) should a GET return the component
+
+a) has the advantage that the renderer has more control and more
+   information about the thing being rendered
+   new: and: OFSWebMethod objects can be returned as method results !
+b) has the advantage that the OFSWebMethod more directly corresponds
+   to a WOComponent and can be flexible about performing actions
+
+The template-renderer doesn't need to have OFSWebMethod directly but
+can rather use the clientObject in the context and it's hierarchy to
+locate a template.
+
+=> for now we should return the component, maybe reconsider later
+
+
+Acquision: lookupName vs traverseKey
+====================================
+
+The question is: should -lookupName do acquisition if the flag is set,
+or is the acquisition flag just a "hint" that acquisition is in progress ?
+If it *does* acquisition, should it consider the traversal-stack in the
+context ? What about 'binding' the result ? Currently the result is
+bound to the position where it was located and not to the object the
+lookup was performed on.
+
+Currently the major difference in traverseKey is, that traverseKey
+maintains the objectTraversalStack in the given context. This implies,
+that for "sub-traversals" a new context should be created.
+
+So for now -lookupName: acquires in the containment hierarchy if the
+aquisition flag is turned on and traverseKey acquires along the context
+hierarchy.
+
+Hm. This lookup issue needs to be cleared up and written down.
+
+
+Acquisition of "relative" Resources
+===================================
+
+Consider you have a page called "Test" which acquires and embeds
+a component called "Embed". And "Embed" itself embeds another object
+called "Who":
+
+  - Embed.dtml
+  - Who.dtml (A)
+  - Folder/
+    - Test.dtml
+    - Who.dtml (B)
+
+If Test embeds "Embed" how does "Embed" locate the "Who" object ?
+A) Will it start looking at it's local position ?
+B) Will it start looking at Test's position ?
+
+I tried with Zope and it always embeds Who.dtml (B) - that is,
+lookup for any "subobject" seems to go over the root-context
+traversal hierarchy and not relative to the object's position.
+
+I'm currently unsure whether that's a good solution, since when
+designing a reusable component (or template) you probably want to keep 
+the associated resources in the component's location, not in the
+location where the component is used ...
+Indeed this is how it works in SkyPublisher.
+Hm.
+
+All this gets even more tricky if you consider URL processing. Zope
+does not do any URL processing resulting in a similiar problem. When
+you write to reusable component you are probably thinking in the
+context of that component, not in the context of the invocation. So
+it probably makes perfect sense to rewrite URLs.
+Hm.
+
+Products: a product can use "filename" bindings to trigger the resource
+manager and this will return a product-relative URL. Maybe we can use that
+for templates as well (eg Manage-Templates ?)
+
+Templates
+=========
+
+Should we use .xtmpl as the extension for templates and forbid web-access
+to those ? Probably.
+Maybe we should even create a custom OFSWebMethod subclass for templates.
+=> do that for now.
+
+We currently do not support sites without a template :-( This is because
+NGObjWeb currently always "finds" a component, even if it has neither a
+template nor a class (probably something todo with scripting or forms).
+
+Note: just remembered about Zope Page Templates ZPT which are similiar to
+      .xtmpl templates.
+How are ZPT templates activated ?
+
+
+Templates vs WebMethods
+=======================
+
+What's the difference between a web-"method" and a "template" ? Both operate
+on a document (the "clientObject") to perform some tasks.
+
+  Method:   /folder/index.html/manage
+  Template: /folder/index.html?template=manage
+
+Apparently templates and methods are quite similiar. In practice they are not 
+and can be used in conjunction. "Methods", like the name suggests, are intended
+to perform some operation, eg "adduser", while "templates" are for *rendering*
+objects (usually in HTML).
+
+Again:
+- Methods:   for performing operations on behalf of the clientObject
+- Templates: for rendering a clientObject
+
+It's a bit difficult to get that right and to decide what is best for a given
+task ;-) 
+
+You most often use templates for automatic reuse of HTML "frames", eg instead
+of the Zope typical:
+
+  <dtml-var standard_html_header>
+  ... my content ...
+  <dtml-var standard_html_footer>
+
+In SOPE you simply defined a Main.xtmpl which does that for you. It's also 
+very common to use templates to provide navigation, banners, etc.
+
+A template is somewhat like the thing known as a "skin", eg in the management
+interface you activate a "management skin".
+
+
+File Extensions and Class Hierarchy
+===================================
+
+One problem with file-extensions is that they do not represent the SoClass
+hierarchy. Consider that you are looking for a "user-folder" to perform
+authentication. So the straight forward approach would be to walk up the
+context and look for a child which has the ".userfolder" extension, eg:
+
+  /folder/*.userfolder
+  /*.userfolder
+
+But this would defeat the whole purpose of user-folders and SoClasses, you
+cannot replace the folder class with an "LDAPUserFolder", because extensions
+are bound to classes.
+
+Some ideas to solve this problem:
+- define a default which contains the sequence of the extensions to look up
+  (too limited, a new default for *each* kind of resource ?)
+- instantiate each object and look at it's class
+  (too expensive, SOPE idea is to avoid instantiation if possible)
+- look at a fixed name instead of the extension (eg acl_users.*)
+  - maybe, a bit limiting
+- let the content-negotiation decide (like above)
+  - maybe, but how do we feed to negotiator ? Hm.
+
+Currently I think we need to extend the SoClass system to provide a list. 
+Something like
+  [SoClass gimmeAllExtensionsForClassAndIncludeParents:YES
+           includeChildren:NO]
+
+Hm.
+
+Similiar problem exists with various lookups. Eg "gimme a template" - currently
+we can only lookup templates that end with ".xtmpl".
+
+
+Security
+========
+
+How does a security lookup flow ? Eg what leads to a 401 if the protected
+'manage' method is called ? When are authenticators triggered ?
+
+First: the SoSecurityManagerDebugEnabled default is your friend :-) By 
+activating that you can easily find out why access to a specific object
+was denied or permitted (eg what role was selected)
+
+Sequence:
+- if a path is traversed, each 'name' is validated prior being queried by
+  calling the -validateName:inContext: method on the container
+- the default-implementation in turn calls -validateName:ofObject:inContext:
+  on the shared security manager (SoSecurityManager object)
+- the security manager first validates the object itself by calling
+  -validateObject:inContext:, this method checks whether a object is declared
+  public or which permissions are required to access the object
+  - if a permission is required, the security manager calls
+    -validatePermission:onObject:inContext:, this methods 
+    - determines the "roles" which provide the permission (currently only by 
+      using the class security info)
+    - then calls -userInContext:object: to get a SoUser object
+    - then compares the roles associated with the user and the roles required
+      to find out whether to allow access
+...
+
+
+Manager vs Developer
+====================
+
+In Zope a manager is basically the same thing like a developer since the ZMI
+provides the development environment. In SOPE things are intended to be a bit
+different, more like in traditional WO development.
+
+Especially I would like to avoid the requirement to deploy the management
+interface on the live site ! In contrast I would like to run a development
+system for editing the web application and a deployment system for running the
+application. Basically all things are intended to be read-only on the deployed
+system (if only for security reasons).
+
+This has some side-effects:
+- different user-management in the deployed site ?
+- manage dynamic site data *not* in SoOFS !
+
+Eg an easy way to deploy a site would be a read-only subversion checkout area
+which is updated periodically.
+
+[say more why etc]
+- dislike mix of templates and content
+- dislike "live" editing of things, even if happening in a snapshot
+- security issues, disable everything not required on the live site
+  (eg WebDAV write access)
+
+
+"Special" Method Name Form Values
+=================================
+
+We currently support three "special" form-values that are processed during
+method lookup:
+
+a) Cmd,        eg ?Cmd=freebusy
+b) :method,    eg ?:method=addFolder
+c) XXX:method, eg ?XXX:method=blah
+
+The first is for compatibility with ASP, the second is convenient for 
+attaching methods to form elements like popups and the third is for attaching
+methods to submit buttons which display their value in the browser.
+
+
+Product Resources
+=================
+
+How does a template stored in a product (bundle) acquire it's resources ? In
+Zope it seems to use a special "/p_/" path, eg the ZMI tab locates it's images
+using "/p_/ltab.gif" - search for "Using the p_ folder" in Google.
+
+This is related to the acquisition of relative resources.
+[write more]
+
+
+Resource Manager and Bundles
+============================
+
+Problem: WOResourceManager cannot discover templates in bundles since the
+application wide manager only looks in it's own path.
+
+This is not really necessary since classes know their bundles and therefore
+could locate templates using that information. But bundle classes should also
+be able to "see" all the other components for embedding, so we can't simply
+restrict the lookup to a bundle local manager.
+
+Skyrix41e WebUI does that by creating an own, global, LSWResourceManager which
+uses the NGBundleManager and the bundle-info.plist to locate resources.
+
+What to do ?
+... for now I have added SoComponent as a superclass which uses the product
+for lookup.
+
+Problem: pageWithName: uses the global resource manager to lookup components.
+- the WOResourceManager *does* find the class
+- but it does *not* find the template
+=> need a way in WOResourceManager to map a class to a different RM ?
+- currently pages can only be loaded by the global resource manager
+=> put a hack into WOResourceManager, check's the class' bundle path
+
+
+Acquisition of Templates
+========================
+
+When we acquire a template by name on a custom object which itself is private
+the custom object will reject the request for the template resource name with
+a security exception.
+This will abort the whole traverse-key method even though the container (or a
+parent of the container has a perfectly valid template with public access).
+
+Well, right now we allow public access to OFSImage and OFSPropertyListObject
+to work around that issue, yet it may not be the "preferred" solution.
+Some other options:
+- treat a security exception like a missing resources .. urks, nope, this is
+  properly no good solution ...
+- always lookup the template in the container?
+- if the lookup fails in the object itself, lookup the template in the 
+  container?
+- somehow check whether the object itself does intend to deal with such keys
+  at all (try something like hasKey: before attempting to use validateKey: on
+  an object which does not have it anyway ...)
+Hm.

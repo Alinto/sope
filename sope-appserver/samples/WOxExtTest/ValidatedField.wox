@@ -1,0 +1,41 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:var="http://www.skyrix.com/od/binding"
+  xmlns:const="http://www.skyrix.com/od/constant"
+>
+  <form name="validateForm" var:action="self">
+    <table border="0">
+      <tr>
+        <td align="right">input is required:</td>
+        <td>
+          <var:js-validated-field
+                inputText="inputIsRequiredText"
+                const:fieldSize="50" const:inputIsRequired="YES"
+                const:formName="validateForm"
+                const:errorMessage=
+                  "Please fill out the 'input is required' - textfield"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">text is required:</td>
+        <td>
+          <var:js-validated-field
+                inputText          = "textIsRequiredText"
+                const:fieldSize    = "50"
+                const:requiredText = "500$"
+                const:formName     = "validateForm"
+                const:errorMessage=
+                "The 'text is required' - textfield doesn't contain '500$'"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" var:action="self" value="apply"/>
+        </td>
+      </tr>
+    </table>
+
+  </form>
+
+</var:component>

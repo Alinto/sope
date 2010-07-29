@@ -1,0 +1,4 @@
+{
+    NSPrincipalClass = FrontBase2Adaptor;
+    NSExecutable     = FrontBase2;
+}

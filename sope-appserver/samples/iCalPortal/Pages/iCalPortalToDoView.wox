@@ -1,0 +1,33 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className='iCalPortalFrame' title='localizedTitle'
+               xmlns='http://www.w3.org/1999/xhtml'
+               xmlns:var='http://www.skyrix.com/od/binding'
+               xmlns:const='http://www.skyrix.com/od/constant'>
+
+  <var:component className="iCalPortalCalTabs" const:selection="todo"
+		 calendarName="calendarName">
+
+    <table border="0" width="100%">
+      <tr bgcolor="#aaaaaa">
+        <th align="left">summary</th>
+        <th align="left">startdate</th>
+        <th align="left">duedate</th>
+        <th align="left">priority</th>
+      </tr>
+      
+      <var:foreach list="dataSource.fetchObjects" item="item">
+	<tr>
+	  <td><a directActionName="showJob" var:_uid="uid"
+		 var:_calendarName="calendarName"
+		><var:string value="item.summary"/></a></td>
+	  <td><var:string value="item.startDate"
+			  const:dateformat="%Y-%m-%d"/></td>
+	  <td><var:string value="item.due" const:dateformat="%Y-%m-%d"/></td>
+	  <td><var:string value="item.priority"/></td>
+	</tr>
+      </var:foreach>
+    </table>
+
+  </var:component>
+</var:component>

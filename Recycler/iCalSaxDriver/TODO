@@ -1,0 +1,22 @@
+# $Id$
+
+iCalSaxDriver Todos ...
+=======================
+
+report errors as SAX exceptions ...
+- _reportICalErrno:
+
+handle iCal entities which do not properly close vtimezone
+components (for example Entourage ...)
+
+
+With iCal 1.5.2:
+---snip---
+-[ICalSaxParser logUnknownParameterKind:]: cannot process parameter kind CUTYPE
+-[ICalSaxParser logUnknownParameterKind:]: cannot process parameter kind CUTYPE
+-[ICalSaxParser logUnknownParameterKind:]: cannot process parameter kind CUTYPE
+---snap---
+---snip---
+ATTENDEE;CUTYPE=INDIVIDUAL;PARTSTAT=NEEDS-ACTION;ROLE=OPT-PARTICIPANT;RS
+ VP=TRUE:MAILTO:helge.hess@skyrix.com
+---snap---

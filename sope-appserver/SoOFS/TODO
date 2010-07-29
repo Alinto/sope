@@ -1,0 +1,48 @@
+Todo's for SOPE OFS
+
+- distinguish between WebMethods and WebDocuments !!! WebMethods operate
+  on the 'clientObject' while WebDocuments operate on themselves (eg
+  /a/b.wox - if b.wox is a method, the clientObject is 'a')
+
+- currently OFSImage/OFSFile "GET" returns a WOResponse, it should return 
+  itself and the SOPE rendering step should morph the OFSImage into a 
+  WOResponse, this way we are much more flexible in handling (eg a renderer
+  could convert or compress an image on the fly)
+  [DONE?]
+
+- autodetect "special" versioned folders based on ".svn" and "CVS", this
+  should be supported in the core to trigger categories based on that ?
+  [DONE?]
+
+- add some caching logic, eg a "cached" filemanager which wraps an 
+  NGFileManager (remember, SOPE objects itself should be controller !)
+
+- OFSImage/OFSFile (or their renderer) should properly deliver the last
+  modified and etag HTTP headers
+
+- add MIME-type mapping to OFSFile/OFSImage using /etc/mime.types
+
+- store permissions of objects in folders (special file ?)
+  - acquire object permissions from parent folders ?
+
+- a "property storage" object for abstracting where OFS properties are
+  stored:
+  - in a plist file
+  - in Subversion
+  - in ...
+  The property storage should not be fixed on the OFS SoClass !
+
+- add support for Zope Page Template syntax (create a WOxElementBuilder for
+  the tal: namespace)
+
+- add a dynamic element for "rendering" HTTP headers, eg:
+  <http:header name="content-type" value="text/xml+svg" />
+
+- add an XSLT method using libxml2
+
+- add a PHP OFS method
+  - how to apply templates ? 
+  - internal redirect ?
+
+- add support for "source.html", like in Zope
+  - edit raw source of a document

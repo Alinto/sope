@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WERichString">
+  <binding name="isBold" defaults="YES/NO" />
+  <binding name="isItalic" defaults="YES/NO" />
+  <binding name="isUnderlined" defaults="YES/NO" />
+  <binding name="isSmall" defaults="YES/NO" />
+  <binding name="color" />
+  <binding name="face" />
+  <binding name="size" />
+  <binding name="insertBR" defaults="YES/NO" />
+  <binding name="condition" defaults="YES/NO" />
+  <binding name="negate" defaults="YES/NO" />
+  <binding name="formatter" />
+  <binding name="value" />
+</wo>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<model>
+
+  <entity xmlTag="backslash" name="NSMutableDictionary">
+    <property xmlTag="story" name="stories" forceList="YES"/>
+  </entity>
+  
+  <entity xmlTag="story" name="SlashDotStory">
+    <property xmlTag="title"      name="title"/>
+    <property xmlTag="url"        name="url"/>
+    <property xmlTag="time"       name="time"/>
+    <property xmlTag="author"     name="author"/>
+    <property xmlTag="department" name="department"/>
+    <property xmlTag="topic"      name="topic"/>
+    <property xmlTag="comments"   name="numberOfComments"/>
+    <property xmlTag="section"    name="section"/>
+    <property xmlTag="image"      name="image"/>
+  </entity>
+
+</model>

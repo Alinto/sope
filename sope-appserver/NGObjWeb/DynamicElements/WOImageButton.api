@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOImageButton">
+  <binding name="pageName" passthrough="NO" defaults="Page Names"/>
+  <binding name="action" passthrough="NO" defaults="Actions"/>
+  <binding name="directActionName" passthrough="NO" defaults="Direct Actions"/>
+  <binding name="actionClass" passthrough="NO" defaults="Direct Action Classes"/>
+  <binding name="src"/>
+
+  <binding name="filename" passthrough="NO" defaults="Resources"/>
+  <binding name="framework" passthrough="NO" defaults="Frameworks"/>
+  <binding name="x" passthrough="NO" settable="YES" />
+  <binding name="y" passthrough="NO" settable="YES"/>
+  <binding name="queryDictionary" passthrough="NO"/>
+
+  <binding name="name"/>
+  <binding name="value" passthrough="NO" settable="YES"/>
+  <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
+
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <!-- SOPE -->
+  <binding name="disabledFilename" passthrough="NO" defaults="Resources"/>
+
+  <validation message="either &apos;action&apos;, or one or both of &apos;actionClass&apos; or &apos;directActionName&apos; may be bound">
+    <and>
+      <bound name="action"/>
+      <or>
+        <bound name="actionClass"/>
+        <bound name="directActionName"/>
+      </or>
+    </and>
+  </validation>
+
+  <validation message="exactly one of&apos;filename&apos;, &apos;src&apos;, or &apos;value&apos; must be bound">
+    <count test="!=1">
+      <bound name="filename"/>
+      <bound name="src"/>
+      <bound name="value"/>
+    </count>
+  </validation>
+
+  <validation message="&apos;filename&apos; must be bound when &apos;framework&apos; is bound">
+    <and>
+      <bound name="framework"/>
+      <unbound name="filename"/>
+    </and>
+  </validation>
+</wo>

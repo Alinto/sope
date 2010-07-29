@@ -1,0 +1,20 @@
+SKYRIX Object Publishing Environment on Mac OS X
+================================================
+
+This directory contains SOPEX, a Mac OS X framework and accompanied
+tools for running and developing SOPE applications on the Mac OS X
+Desktop using Apple's XCode.
+
+
+SOPEX
+=====
+
+A framework used for launching SOPE applications directly from the
+Mac OS X Desktop (self-hosting web applications).
+
+
+Templates
+=========
+
+XCode project template and several file templates.
+

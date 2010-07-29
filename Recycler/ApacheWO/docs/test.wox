@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:js="http://www.skyrix.com/od/javascript"
+           xmlns:const="http://www.skyrix.com/od/constant">
+    <h3>Apache served .wox page</h3>
+    
+    <table border="0">
+      <tr>
+        <td>ComponentName: </td>
+        <td><var:string value="name"/></td>
+      </tr>
+      <tr>
+        <td>Filename: </td>
+        <td><var:string value="context.request.userInfo.ApacheRequest.filename"/></td>
+      </tr>
+      <tr>
+        <td>Pathinfo: </td>
+        <td><var:string value="context.request.userInfo.ApacheRequest.pathInfo"/></td>
+      </tr>
+      <tr>
+        <td>Context:</td>
+        <td><var:string value="context"/></td>
+      </tr>
+      <tr>
+        <td>Request:</td>
+        <td><var:string value="context.request"/></td>
+      </tr>
+      <tr>
+        <td>FormValues Keys:</td>
+        <td><var:string value="context.request.formValueKeys"/></td>
+      </tr>
+      <tr>
+        <td>ApacheRequest:</td>
+        <td><var:string value="context.request.userInfo.ApacheRequest"/></td>
+      </tr>
+      <tr>
+        <td>ApacheConnection:</td>
+        <td><var:string value="context.request.userInfo.ApacheRequest.connection"/></td>
+      </tr>
+    </table>
+
+    <!-- var:script>print('init test');</var:script -->
+
+</var:component>

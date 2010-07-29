@@ -1,0 +1,67 @@
+
+Starting with the release 0.9.0, libFoundation supports the Boehm's
+garbage collector as an alternative to the standard memory allocation
+from OpenStep. We consider the new mechanism as a better alternative
+to the standard way because of its benefits:
+
+* the programmer is no longer required to use the
+  -retain/release/autorelease messages, so a source of bugs introduced
+  by the missuse of these methods is removed
+
+* the reference counting memory management is unable to properly
+  handle graphs of objects that contain cycles. This is not the case
+  with the Boehm's conservative collector, it automatically eliminates
+  the cycles.
+
+
+To work with the Boehm's collector several changes were made to the
+Objective-C runtime. Here is a small description of the changes to the
+GNU runtime to support the Boehm's collector:
+
+* a new member was added to the objc_class, it keeps the type
+  description of each class. This type description is needed because
+  we use the typed memory allocation available in Boehm's collector to
+  maximize the performance and to be able to use the so-called
+  'invisible' pointers (see below).
+  [Be careful to use typed memory with variable sized instances !!!]
+
+* defines two new runtime functions, class_get_gc_object_type and
+  class_ivar_set_gcinvisible. The first function provides access to
+  the type descriptor of a class. The second function marks a named
+  instance variable name as invisible to the collector, aka a pointer
+  which is not considered by the collector a reference to a particular
+  zone of memory.
+
+* the allocation functions are set up to the the Boehm's collector.
+
+Currently only the GNU runtime is supported and I don't think I'll be
+able to add support for NeXT runtime anytime soon because this support
+requires access to the runtime sources :-(.
+
+The garbage collected library is chosen automatically by the makefile
+package when you specify the gc=yes flag to the top-level make
+process, in addition to the rest of the options:
+
+   $ make debug=yes gc=yes
+
+This happens automatically only when you're working with libFoundation
+in the GNUstep environment. If you're working in the standalone
+environment, you should add -DLIB_FOUNDATION_BOEHM_GC=1 to the
+compiler's command line and link against libFoundation_gc.a or
+libFoundation_gc.so.
+
+The library is installed in a different directory than the normal one,
+the library combo is extended with one more part that specifies the
+Boehm's GC. To take advantage of the Boehm's collector, you will need
+to rebuild all your libraries so that they'll exist in this
+directory. Other than that you normaly don't have to modify your
+programs except for optimizing them for the presence of Boehm's
+collector. libFoundation for example removes out all of the
+retain/release/autorelease messages sent to objects so that the
+overhead of sending these messages is completely eliminated.
+
+
+
+! Local variables:
+! mode: indented-text
+! End:

@@ -1,0 +1,24 @@
+{
+    details = {
+	ADT = {abbrev = ADT; isDST = 1; offset = "-3:00:00"; };
+	AST = {abbrev = AST; isDST = 0; offset = "-4:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Apr 27 08:00:00 1969 GMT";
+	    endDate = "Sun Oct 26 07:00:00 1986 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/8:00:00"; detail = ADT; },
+		{ date = "October/last Sunday/7:00:00"; detail = AST; }
+	    );
+	},
+	{
+	    startDate = "Sun Apr 05 08:00:00 1987 GMT";
+	    endDate = "Sun Oct 25 07:00:00 2037 GMT";
+	    transitions = (
+		{ date = "April/first Sunday/8:00:00"; detail = ADT; },
+		{ date = "October/last Sunday/7:00:00"; detail = AST; }
+	    );
+	}
+    );
+}

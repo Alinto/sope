@@ -1,0 +1,29 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <var:if-key const:key="selection" const:value="first">
+    *** content of <b>first</b> KeyValueCondition ***
+  </var:if-key>
+
+  <var:if-key const:key="selection" const:value="second">
+    +++ content of <b>second</b> KeyValueCondition +++
+  </var:if-key>
+
+  <var:if-key const:key="selection" const:value="third">
+    --- content of <b>third</b> KeyValueCondition ---
+  </var:if-key>
+
+  <var:if-key const:key="selection" const:value="fourth">
+    ### content of <b>fourth</b> KeyValueCondition ###
+  </var:if-key>
+   
+  <form var:action="self">
+    <var:popup list="list" item="item" selection="selection" string="item"
+               const:singleSelection="YES"/>
+    
+    <input type="submit" var:action="self" value="apply"/>
+  </form>
+</var:component>

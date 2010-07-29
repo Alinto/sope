@@ -1,0 +1,4996 @@
+2009-06-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DAVPropMap.plist: mapped {DAV:}current-user-principal (v4.9.37)
+
+2009-04-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOHttpAdaptor/WOHttpTransaction.m: added HTTP reason for 304 (v4.7.36)
+
+2009-04-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoPageInvocation.m, SoActionInvocation.m: retain behaviour of instantiateMethod:
+	  is now consistent (v4.7.35)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WebDAV: added support for dispatch of MKCALENDAR (v4.7.34)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* SoObjects/SoObject+Traversal.m: added MKCALENDAR as a 'create' method
+    (v4.7.33)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOHttpAdaptor/WOHttpTransaction.m: implement parser:contentTypeOfPart:
+	  (returns text/plain) [TBD: explain] (v4.7.32)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* Defaults.plist, NGHttp/NGHttpRequest.[hm]: added MKCALENDAR, MKADDRESSBOOK
+	  as known HTTP methods (v4.7.31)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* DAVPropMap.plist: added a set of new DAV property to short name mappings,
+	  DeltaV, CalDAV and CardDAV (v4.7.30)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WOContext.m(-serverURL): added a way to override the server URL using the
+	  WOApplicationRedirectURL default (hh: when is this necessary?) (v4.7.29)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* SoObjects/SoActionInvocation.m ([SoActionInvocation
+    -bindToObject:inContext:]): do not retain methodObject when
+    instantiated since it is not autoreleased. (v4.7.28)
+
+2008-12-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: properly embed threaded request
+	  handler in a top-level pool (v4.7.27)
+
+2008-09-01  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* WORequest.m ([WORequest -browserLanguages]): we ensure
+    "language" never is an empty string, otherwise we ignore it.
+
+2008-05-21  Sebastian Reitenbach  <reitenbach@rapideye.de>
+
+	* WOHTTPURLHandle.m: add 'query' component of URL to request path
+	  (OGo bug #1980) (v4.7.26)
+
+2008-06-30  Adam Williams  <awilliam@whitemice.org>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: allow application/xml as a content
+	  type for WebDAV REPORTs (OGo bug #1986) (v4.7.25)
+
+2008-03-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: added ZideOne connector as a known user
+	  agent (v4.7.24)
+
+2008-03-11  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* DAVPropMap.plist: added more GroupDAV2 properties (v4.7.23)
+
+2008-03-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DAVPropMap.plist: mapped {http://www.groupdav.org/}component-set
+	  WebDAV property to gdavComponentSet (v4.7.22)
+
+2008-02-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOCookie.m: fixed bug pointed out by Stephane, use -UTF8String to
+	  decode the cookie (was -cString) (v4.7.21)
+
+2008-02-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/_WOComplexHyperlink.m: use NO, not 'false', as
+	  suggested by Wolfgang (v4.7.20)
+
+2008-02-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/_WOComplexHyperlink.m: do not attempt to rewrite
+	  pure fragment URLs (v4.7.19)
+
+2007-11-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOComponent+Sync.m: use -setValue:forKey: instead of
+	  -takeValue:forKey: on gnustep-base (might also make sense on Cocoa 
+	  starting with 10.4). As suggested by Sebastian (v4.7.18)
+
+2007-10-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: added wdfs as a known (WebDAV) user agent
+	  (v4.7.17)
+
+2007-09-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Associations/WOKeyPathAssociation.m: clarified some code (v4.7.16)
+
+2007-09-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoHTTPAuthenticator.m, SoCookieAuthenticator.m: be more
+	  tolerant about the formatting of 'basic' auth credentials (wrt OGo
+	  bug #1911) (v4.7.15)
+
+2007-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: added CookComputing XML-RPC.NET as a known
+	  user-agent (fixes OGo bug #1910) (v4.7.14)
+
+2007-06-29  Adam Williams  <awilliam@whitemice.org>
+
+	* WEClientCapabilities.m: added PHP PEAR as a known user-agent (fixes
+	  OGo bug #1882) (v4.7.13)
+
+2007-07-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.7.12
+
+	* DynamicElements/*.[hm]: moved WOHTMLDynamicElement.h to the public
+	  headers. This is required for some future extensions in WEPrototype.
+
+	* NGObjWeb/WOActionURL.h: exposed API for elements which require
+	  link generation
+
+2007-05-31  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.7.11
+
+	* NGHttp+WO.m, WOSimpleHTTPParser.m: process the 'charset' parameter
+	  of the request content type to extract the content encoding of the
+	  request
+
+	* WOMessage.m: print a warning if -contentAsString got called but the
+	  content could not be converted using the charset assigned to the
+	  WORequest
+
+	* WORequest.m: minor code cleanups, use isNotEmpty
+
+2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DAVPropMap.plist: added HTTPMail junkemail property (v4.7.10)
+
+2007-05-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGHttp+WO.m, WORequest.m, NGHttp: minor code cleanups (v4.7.9)
+
+2007-05-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOSession.m: do not attempt to process 'nil' keys when working on
+	  extra variables (lead to NSDictionary exceptions) (v4.7.8)
+
+2007-05-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOApplication.m: properly call +_setupSNS method
+	  (fixes OGo bug #1867) (v4.7.7)
+
+2007-03-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WORequest.m, WebDAV/SoWebDAVRenderer.m: fixed a gcc 4.1 warning
+	  (v4.7.6)
+
+2007-03-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.7.5
+	
+	* WOContext.[hm]: added fragmentID API from JOPE. This API provides a
+	  means for conditionally suppressing the rendering of WOElements -
+	  this is triggered by a 'wofid' URL parameter; comes in very
+	  handy when dealing with AJAX.
+	
+	* WORequest.[hm]: added -fragmentID API.
+	
+	* WOResponse+private.h: added new convenience macros
+	
+	* DynamicElements/WOFragment.[m,api]: new dynamic element for
+	  triggering render state
+
+	* WOChildComponentReference.m, WEClientCapabilities.m,
+	  DynamicElements/*.m: all elements obey WOContext's new
+	  -isRenderingDisabled flag now
+
+2007-03-13  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WORepetition.m: Reverted 'list' binding extensions as this had side
+	  effects with existing code. I advise using 'asArray' trampolines in
+	  situations where the 'list extension' was helpful. (v4.7.4)
+
+2007-03-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Templates/WOWrapperTemplateBuilder.m: allow component classes in
+	  <#hash/> references (eg <#Frame>) (v4.7.3)
+
+2007-02-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WORepetition.m: minor code cleanup. Extended the 'list' binding
+	  so that it's possible now to bind any object as a list - this helps
+	  in cases where provided objects are either arrays or ordinary
+	  objects. (v4.7.2)
+
+2007-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.266
+
+	* SoObject.m, SoWebDAVRenderer.m: made the URL generation honour the
+	  WOUseRelativeURLs default (which is on by default, so all generated
+	  WebDAV URLs now do not include the hostname)
+
+	* DAVPropMap.plist: mapped calendar-color WebDAV property
+
+	* WebDAV/SoWebDAVRenderer.m: added support for XML properties which
+	  contain values (v4.5.265)
+
+	* DAVPropMap.plist: added mappings for calendar-home-set,
+	  dropbox-home-URL and notifications-URL CalDAV properties (v4.5.264)
+
+2007-01-17  Helge Hess  <helge@perform>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: never report 404 WebDAV properties
+	  in combination with <allprop/> requests (this hacks in the 'brief'
+	  header into the request) (v4.5.263)
+
+2006-12-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.262
+
+	* WOCoreApplication.m: Removed the +_initDefaults class method and
+	  instead added a new -registerUserDefaults method which provides a
+	  sane hook to alter/extend registration of userDefaults in
+	  subclasses. Registration is called very early by -init, though, so
+	  subclassers must still act very carefully. Removed the braindead
+	  +_initializeClass method, instead moved the proper initialization
+	  code into -init.
+
+	* WOCoreApplication.h: exposed -registerUserDefaults to subclassers.
+
+	* WOApplication.m: removed +_initializeWOApp, instead moved
+	  initialization code to the proper place in -init (after super has
+	  been initialized and user defaults have been set in a proper manner).
+
+2006-12-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/WORepetition.m: fixed another bug when using count
+	  without index and list (v4.5.261)
+
+2006-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/WORepetition.m: fixed a bug when using count without
+	  index and list (v4.5.260)
+
+2006-12-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Templates/WOHTMLParser.m: fixed a bug with lowercase NAME tags in
+	  wrapper templates (v4.5.259)
+
+2006-11-23  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGHttp: added DeltaV HTTP methods (v4.5.258)
+
+	* SoObjects/SoProductClassInfo.m: enable the use of arrays in the
+	  declaration of default roles for a permission in product.plist files
+	  (v4.5.257)
+
+2006-11-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: added Sunbird as a known user-agent
+	  (v4.5.256)
+
+2006-11-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOCopyValue.m: fixed an uninitialized local
+	  (v4.5.255)
+
+2006-11-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.254
+
+	* DynamicElements/WOInput.m: changed to use -warnWithFormat:
+
+	* DynamicElements/WOCheckBox.m: subminor code cleanup
+
+2006-11-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* woapp-gs.make: fixed a bug in a variable test for which_lib, note
+	  that WHICH_LIB_SCRIPT must be defined for older gnustep-make versions
+	  (v4.5.253)
+
+2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements: filter out -O% flags for files using exception
+	  handlers, enable -O2 per default (v4.5.252)
+
+2006-09-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* wobundle-gs.make: basically reverted to r103, but with the
+	  WHICH_LIB_SCRIPT check enabled - the rest was garbage which
+	  accidentaly got committed, unsure how that happened in the
+	  first place (v4.5.251)
+
+2006-09-18  Helge Hess  <helge.hess@opengroupware.org>
+
+        * removed deprecated woapp.make, wobundle.make (v4.5.250)
+
+2006-09-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* woapp-gs.make, wobundle-gs.make: play nicely with
+	  gnustep-make 1.13.0, where WHICH_LIB_SCRIPT has been removed
+	  (v4.5.249)
+
+2006-09-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOForm.m: added 'fragmentIdentifier' binding to
+	  generate actions which contains a named link (#tasks) (v4.5.248)
+
+2006-09-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOCheckBoxList.m: fixed a typo (v4.5.247)
+
+2006-08-31  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: code cleanups, use -isNotEmpty
+	  (v4.5.246)
+
+2006-08-31  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* DynamicElements/WOCheckBoxList.m: embed 'suffix' label binding in
+	  a label tag enclosing the checkbox (v4.5.245)
+
+2005-08-15  Sebastian Reitenbach  <reitenbach@rapideye.de>
+
+	* WOWatchDogApplicationMain.m: include <unistd.h> instead of
+	  <sys/unistd.h>, fixes warnings on BSD and works with Linux too
+	  (v4.5.244)
+
+2006-08-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: properly mark Safari as a JavaScript capable
+	  browser (v4.5.243)
+
+2006-08-03  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* WebDAV/SoWebDAVRenderer.m: added special handling for 0-port values
+	  in URLs (v4.5.242)
+
+2006-07-25  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Templates/WODParser.m: fixed an infinite loop bug during comment
+	  scanning that occured when a multiline comment contained a '*'
+	  (v4.5.241)
+
+2006-07-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.240
+
+	* SoObjects/SoProductRegistry.m, SoObjects/SoProductLoader.m:
+	  changed to find SoProducts on 64bit systems in lib64, added
+	  FHS_INSTALL_ROOT to lookup path
+
+	* Templates/WOApplication+Builders.m: changed to find WOxBuilders on
+	  64bit systems in lib64, added FHS_INSTALL_ROOT to lookup path
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings, use
+	  -warnWithFormat: when appropriate (v4.5.239)
+
+2006-06-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DAVPropMap.plist: added three more WebDrive properties,
+	  "{DAV:}srt_lastaccesstime", "{DAV:}SRT_fileattributes",
+	  "{DAV:}BSI_isreadonly" (v4.5.238)
+
+2006-06-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DAVPropMap.plist: added WebDrive WebDAV properties: 
+         {DAV:}srt_creationtime, {DAV:}srt_modifiedtime,
+	 {DAV:}srt_proptimestamp (v4.5.237)
+
+	* v4.5.236
+
+	* WEClientCapabilities.m: added WebDrive as a known WebDAV client
+
+	* fixed some gcc 4.1 warnings
+
+2006-06-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.235
+
+	* WebDAV/SoWebDAVRenderer.m: added a hack for Cadaver so that it
+	  doesn't show errors on missing properties (enabled 'brief' mode),
+	  log missing properties if debug is enabled
+
+	* fixed some gcc 4.1 warnings
+
+2006-06-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoWebDAVDispatcher.m: added some basic REPORT support, allows
+	  mapping of the top-level report XML element name to a SoMethod
+	  (v4.5.234)
+
+2006-05-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/WOForm.api: added wosid parameter. There probably
+	  are a lot more parameters we want to add; also, it might be a good
+	  idea to mark them as such - this would enable proper validation
+	  in .wox files, as they must be prefixed with an underscore in the
+	  XML.
+
+2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* *m: changed EOControl related includes into imports
+	  to enable compilation against MulleEOF (v4.5.233)
+
+2006-05-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoWebDAVRenderer.m: deliver more lockinfo fields when a lock
+	  is acquired. This solves an issue with files being openened in Word
+	  2003 in readonly mode. (v4.5.232)
+
+	* v4.5.231
+	
+	* WebDAV/SoWebDAVRenderer.m: major change: WebDAV properties which got
+	  NSNull as their value are now rendered in a 404-propstat element. So
+	  if you want to have empty properties delivered, return empty strings.
+	
+	* SoObjects/SoObjectRequestHandler.m: minor code cleanups
+
+	* WEClientCapabilities.m: added support for Office 2003
+
+2006-05-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.230
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: added default
+	  'SoWebDAVDisableCrossHostMoveCheck' to disable the check for the
+	  hostname on WebDAV MOVE/COPY operations. This can give issues when
+	  Apache is accessed with different DNS names or IPs.
+
+	* WOHttpAdaptor/WOHttpTransaction.m: log HTTP request size after
+	  response size
+
+2006-05-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.229
+
+	* DAVPropMap.plist: added some WebDAV mappings for Novell NetDrive
+
+	* WebDAV: fixed some gcc 4.1 warnings
+
+2006-04-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoObjectMethodDispatcher.m: added support for
+	  x-http-method-override header (v4.5.228)
+
+	* SoObjects/SoHTTPAuthenticator.m: prepared some Google login API
+	  support (v4.5.227)
+
+2006-04-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: shifted retrieval of WOPort default
+	  from +initialize to -addressFromDefaultsOfApplication:, so apps that
+	  may add adaptors on demand during runtime can do so. (v4.5.226)
+
+2006-04-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.225
+
+	* SoObjects/SoSelectorInvocation.m: added default to enable debugging
+	  (SoSelectorInvocationDebugEnabled)
+
+	* SoObjects/SoObjectSOAPDispatcher.m: improved to SOAP request
+	  dispatcher to work with iFolder generated requests
+
+2006-03-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcodeproj: latest additions added to Xcode build
+
+2006-03-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.224
+
+	* Associations/WOKeyPathAssociation.m: fixed a crasher in a debug log
+
+	* WOContext.m: changed to generate relative component action URLs in
+	  case the request already was a valid component action URL. added a
+	  way to detect whether the context session is a fresh one.
+
+	* WOComponentRequestHandler.m, WOApplication.m: minor code cleanups,
+	  use -isNotEmpty
+
+2006-03-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.223
+
+	* SoObjects: started SoCookieAuthenticator
+
+	* SoObjects/SoHTTPAuthenticator.m: code cleanups
+
+	* SoObjects/SoProductLoader.m: quickfix to API (v4.5.222)
+
+	* SoObjects: added new class SoProductLoader which can be used to
+	  load SoProduct bundles for a given application (v4.5.221)
+
+2006-02-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcodeproj: UnixSignalHandler.h is public now
+
+2006-02-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Associations/WOKeyPathAssociation.m: use logging framework (v4.5.220)
+
+2006-02-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOComponent.m, WODirectAction.m, DynamicElements/WOBrowser.m: minor
+	  code cleanups (v4.5.219)
+
+2006-01-25  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SoObjects/SoObject+Traversal.m: stop traversal immediately if an
+	  exception was returned (v4.5.218)
+
+	* SoObjects/SoObject+Traversal.m: minor code cleanups (v4.5.217)
+
+2005-11-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: set 'public' header in case the
+	  WebDAV client is WebFolders (v4.5.216)
+
+	* WEClientCapabilities.m: added WebFolders WinXP SP2 as a known user
+	  agent (v4.5.215)
+
+	* Associations/WOAssociation.[hm]. WOKeyPathAssociation.m: explicitly
+	  type signed char values to avoid gcc4 warnings (v4.5.214)
+
+2005-11-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.213
+
+	* DynamicElements/_WOComplexHyperlink.m: fixed a logging bug of
+	  WODebugStaticLinkProcessing (#fixes OGo bug #1624)
+
+	* SoObjects/SoObjectRequestHandler.m: minor code cleanups
+
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.212
+
+	* DynamicElements/WOCopyValue.m: fixed a gcc3 warning
+
+	* include string.h where required
+
+2005-11-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WORadioButton.m: added some comments and a warning
+	  about issues wrt request handling (v4.5.211)
+
+2005-11-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOSession.m ([WOSession -takeValuesFromRequest:inContext:]): changed
+	  handling of -takeValues in combination with directaction components
+	  (v4.5.210)
+
+2005-10-16  Jean-Alexis Montignies  <ja@sente.ch>
+
+	* DynamicElements/WOSwitchComponent.m: properly consume element-id
+	  component in -invokeAction: (OGo bug #1590) (v4.5.209)
+
+2005-10-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: decode XML content of REPORT
+	  requests (v4.5.208)
+
+2005-10-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOCompoundElement.m: setup defaults in +initialize
+	  (v4.5.207)
+
+2005-10-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WORadioButtonList.m: changed handling of 'disabled'
+	  during -takeValuesFromRequest:. Now the index/item bindings are
+	  pushed, and then the 'disabled' binding is checked prior setting the
+	  'selection' to the item (the item will not get selected if its
+	  disabled). (v4.5.206)
+
+	* DynamicElements/WOSubmitButton.m: disable KVC push for 'value'
+	  binding in -takeValuesFromRequest:inContext:. This is usually not
+	  required but results in issue #1568 on OSX. The old behaviour can
+	  be reenabled by setting the WOSubmitButtonEnableValueSync default to
+	  YES (v4.5.205)
+
+2005-10-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WODisplayGroup.m: added -qualifyDataSourceAndReturnDisplayCount
+	  method to support qualification via .wod, make use of -isNotEmpty
+	  (v4.5.204)
+
+2005-09-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/_WOComplexHyperlink.m: changed
+	  -shouldRewriteURLString:inContext: to only rewrite url strings which
+	  either do not bear a scheme or have an `http' scheme (v4.5.203)
+
+2005-09-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOPopUpButton.m: fixed a bug in the 'selection' which
+	  occurred when the element is being used with the 'value' binding
+	  (returned the last item instead of nil for 'noSelectionString')
+	  (v4.5.202)
+
+2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added missing linking path to NGMail (required
+	  on OSX) (v4.5.201)
+
+2005-09-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* started WOxTalElemBuilder (v4.5.200)
+
+2005-09-13  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/_WOComplexHyperlink.m: do not generate hyperlink
+	  if "disabled" evaluates true. This matches the behaviour of
+	  WebObjects 4.5 and guarantees to do the right stuff in the context
+	  of SOPE applications also. (v4.5.199)
+
+2005-09-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* Templates/WOxElemBuilder.m: added several support methods to assist
+	  builder subclasses to build WOElements (moved in from OGo) (v4.5.198)
+
+2005-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.197
+
+	* Templates/WOWrapperTemplateBuilder.m: attributes of <WEBOBJECT> or
+	  <#Element> tags are now added as associations to dynamic elements.
+	  The type of the association is determined by the prefix (hardcoded:
+	  var, const, so, rsrc). Tag attributes have precedence over wod
+	  associations so that you can define defaults in the .wod file and
+	  override them in the .html template.
+	  If the .wod file does not contain a definition for a given tagname,
+	  the parser will now attempt to treat the tagname as a class (eg:
+	  <#WOString var:value="name"/> now works w/o any .wod entry).
+	
+	* Templates/WOHTMLParser.m (_parseHashElement): parse attributes
+	  defined in hash tags (eg <#abc value="abc"/>)
+
+	* DynamicElements/WOSwitchComponent.m,
+	  DynamicElements/WOComponentReference.m: minor code cleanups
+	  (v4.5.196)
+
+2005-09-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.195
+
+	* DynamicElements/WOxMiscElemBuilder.m: mapped "set-header" to
+	  WOSetHeader element
+
+	* DynamicElements/WOConditional.api: added SOPE extensions
+
+2005-08-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.194
+
+	* DynamicElements/WOString.m: minor code cleanups
+
+	* DynamicElements/WOxMiscElemBuilder.m: removed generation of
+	  radio-button-matrix (which is part of WOExtensions), added generation
+	  of WORadioButtonList (<var:radio-button-list/>)
+
+2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: improved dependency handling (v4.5.193)
+
+2005-08-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.192
+
+	* DynamicElements/WOCopyValue.api: fixed required attribute
+
+	* DynamicElements: added WOSetHeader dynamic element, this renders
+	  nothing and is used to manipulate the headers of the response being
+	  generated (or other objects with the same API)
+
+2005-08-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/WOCopyValue.api: completed definition (v4.5.191)
+
+2005-08-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.190
+
+	* GNUmakefile.preamble: added NGMail framework dependency
+
+	* WODisplayGroup.m: fixed an issue with processing max qualifiers
+
+2005-08-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.189
+
+	* DynamicElements/WOxComponentElemBuilder.m: expose WOCopyValue as
+	  <var:copy-value/> in WOx
+
+	* DynamicElements: added WOCopyValue dynamic element, this renders
+	  nothing and is used to copy KVC values at certain times during the
+	  template evaluation
+
+2005-08-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.188
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: reuse root-url construction
+	  method in SoObject.m
+
+	* WebDAV/SoObjectDataSource.m, WebDAV/SoObjectResultEntry.m: removed
+	  two aborts
+
+	* SoObjects/SoObject.m: added a hack to deal with buggy Debian
+	  apachessl (#1435), moved root-url construction method to a function
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.187
+
+	* WOApplication.m: minor code cleanups
+
+	* GNUmakefile, GNUmakefile.preamble: fixed installation of framework
+	  resources
+
+2005-08-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ngobjweb.make: added support for OSX frameworks (v4.5.186)
+
+2005-08-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Defaults.plist: changed 'NGLogDefaultAppenderClass' from
+	  'NGLogStdoutAppender' to 'NGLogStderrAppender' (v4.5.185)
+
+2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Templates/WOHTMLParser.m (_parseHashElement): fixed a bug in
+	  detecting errors (v4.5.184)
+
+2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.183
+	
+	* Templates/WOHTMLParser.m: improved error handling for hash-closetag
+	  typos (will warn when a slash follows a hash, eg "<#/blub>")
+	
+	* WODisplayGroup.m: implemented -setSelectedObject:/-selectedObject,
+	  changes -selectObject: to replace the full selection with the given
+	  object (correct?), added delete/insert operations
+	
+	* WOApplication.m: also check for CoreData NSManagedObjectContext
+	  when trying to locate an EOEditingContext like class
+
+2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* minor code cleanups (v4.5.182)
+
+2005-08-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WODisplayGroup.m: detect whether an EOEditingContext is available at
+	  runtime (previously compile time), consolidated categories in the
+	  main class to allow for runtime overloading (v4.5.181)
+
+2005-08-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.180
+
+	* WEClientCapabilities.m: added Google as a known user-agent
+
+	* WOResourceManager.m, SoObjects/SoProductClassInfo.m: minor code
+	  cleanup
+
+	* SoObjects/SoProductResourceManager.m: improved an error log
+
+2005-07-23  Sebastian Reitenbach  <reitenbach@rapideye.de>
+
+	* GNUmakefile.preamble: added OpenBSD linking flags (v4.5.179)
+
+2005-07-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOContext.m: subminor code reformatting
+
+	* NGHttp/NGUrlFormCoder.m: added some patch by Mont which changes
+	  URL handling on non-libFoundation platforms
+	
+2005-07-21  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* SoObjects/WOContext+SoObjects.m: lookup SoUser using authenticator in
+	  case a clientObject is available and it wasn't set yet (when
+	  retrieving the user using -activeUser) (v4.5.178)
+
+2005-07-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.177
+
+	* WOApplication.m: workaround the problem that context during page
+	  instantiation is always believed to be that of WOApplication.
+
+	* WOResourceManager.m: added comment for possible resource lookup
+	  problem
+
+2005-07-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOContext.m: properly generate multivalue query parameters (value is
+	  an NSArray) (v4.5.176)
+
+	* NGObjWeb/WOApplication.h: added +isDirectConnectEnabled,
+	  +setCGIAdaptorURL:, +cgiAdaptorURL prototypes (v4.5.175)
+
+	* v4.5.174
+
+	* WOResourceManager.m: added method to retrieve a string-table object
+	  with a given name/framework/language
+
+	* _WOStringTable.m: added methods to access a table like a dictionary,
+	  added -valueForKey:
+
+2005-07-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.173
+	
+	* DynamicElements/WOFileUpload.m: improved debug logging
+	
+	* DynamicElements/_WOComplexHyperlink.m: minor code cleanups
+	
+	* WOElement.m: improved handling of query parameters (now handles
+	  arrays of form values)
+
+2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObject+SoDAV.m: changed not to return an etag per default
+	  (must be overridden by subclasses!) (v4.5.172)
+
+2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* v4.5.171
+	
+	* WOComponentRequestHandler.m: stabilized session handling to properly
+	  deal with expired sessions and URLs without element-ids
+	
+	* WORequestHandler.m: properly register logger bound to
+	  'WODebuggingEnabled' as debugLogger, not as the regular logger
+	
+2005-07-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoHTTPAuthenticator.m: deprecated -authRealm, replaced with
+	  -authRealmInContext: (v4.5.170)
+
+	* WOComponent.m: added support for WODebugTakeValues (v4.5.169)
+
+2005-07-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: fixed an issue when trying to call
+	  a WebDAV method on an object (v4.5.168)
+
+2005-06-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.167
+	
+	* WebDAV/SoWebDAVRenderer.m: improved reliability by checking the class
+	  of OPTIONS method results, deprecated array results
+	
+	* WebDAV/SoObjectWebDAVDispatcher.m: when receiving an OPTIONS request,
+	  the dispatcher will try to invoke a method with the same name on the
+	  object. If none is available, the dispatcher checks supported methods
+	  and DAV compliance classes
+	
+	* WebDAV/SoObject+SoDAV.m: added method to determine the WebDAV
+	  compliance classes supported by an object
+	  (davComplianceClassesInContext:). The method now only returns class 2
+	  if the object returns a lock manager object. Also moved the 'allowed'
+	  processing to the object (-davAllowedMethodsInContext: method)
+
+2005-06-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoProductRegistry.m: fixed product lookup on MacOSX with
+	  GNUstep environment (v4.5.166)
+
+2005-06-23  Stephane Corthesy  <stephane@sente.ch>
+
+	* v4.5.165
+
+	* WOComponent.m: -synchronizesVariablesWithBindings now returns NO if
+	  the component is stateless (-isStateless returns YES)
+	  
+	* WOComponent.m: -frameworkName now returns 'nil' if the component is
+	  located in the main bundle (this might affect resource lookups)
+	  
+	* WOComponent.m: +templateWithHTMLString:declarationString:languages:
+	  is now a class method like in WO
+	  
+	* WOComponent.m: -pathForResourceNamed: now checks whether a session
+	  is available and otherwise uses the browserLanguages array to
+	  perform a languages lookup
+
+2005-06-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: fixed a typo (v4.5.164)
+
+2005-06-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: prepared MKCALENDAR method
+	  (v4.5.163)
+
+2005-06-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.162
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: minor code cleanups, added support
+	  for PROPFIND without content (treated as <allprop/>)
+
+	* WebDAV/README: added content to the README
+
+2005-05-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoProductClassInfo.m: allow plain string values for slots
+	  in product.plist (v4.5.161)
+
+2005-05-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: added Perl HTTP::DAV as a known WebDAV user
+	  agent (v4.5.160)
+
+2005-05-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* Templates/WOApplication+Builders.m: fixed a typo (v4.5.159)
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.158
+
+	* WOWatchDogApplicationMainOSX.m: fixed a gcc 4.0 warning
+
+	* NGHttp, WOImage.m, WOString.m, _WOTemporaryHyperlink.m: fixed Tiger
+	  warnings
+
+	* Templates/WOApplication+Builders.m: fixed an uninitialized variable
+	  on Cocoa (v4.5.157)
+
+2005-04-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Templates/WODParser.m: fixed parsing of bool constants (got broken in
+	  v4.5.152) (OGo bug #1360) (v4.5.156)
+
+2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.155
+
+	* WOMailDelivery.m: generate \r\n instead of \n when writing to the
+	  sendmail process
+
+	* fixed gcc 4.0 warnings
+
+	* WOHttpAdaptor, WebDAV: fixed gcc 4.0 warnings (v4.5.154)
+
+	* v4.5.153
+
+	* Templates/WOHTMLParser.m: rewrote parser to use unichar
+
+	* Templates: fixed gcc 4.0 warnings
+
+	* v4.5.152
+
+	* Templates/WODParser.m: rewrote parser to use unichar
+
+	* DynamicElements, WOResponse+private.h: fixed gcc 4.0 warnings
+
+2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.151
+
+	* added generated manpages for all .api files
+
+	* added woapi2man.py, a tool to generate man-pages from .api XML files
+	  (used for describing the bindings of dynamic elements)
+
+2005-04-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.150
+
+	* fhs.make: install manpages
+
+	* sope-ngobjweb-defaults: fixed a syntax error
+
+2005-04-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOPopUpButton.m: added a template so that static
+	  <option> elements can be embedded inside the <select> (v4.5.149)
+
+2005-04-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SoObjects/SoObjectRequestHandler.m: properly setup NGLogging so
+	  logging works again. (v4.5.148)
+
+2005-03-31  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.147
+
+	* DynamicElements/WOCheckBox.m, DynamicElements/WOCheckBoxList.m,
+	  DynamicElements/WORadioButton.m, DynamicElements/WORadioButtonList.m:
+	  added support for empty 'disabled' and 'checked' attributes, removed
+	  '\n' after generated tag
+
+	* DynamicElements/WOBrowser.m, DynamicElements/WOPopUpButton.m: added
+	  support for empty "selected" attribute
+
+	* WOContext.m: added new flag/accessor 'generateEmptyAttributes' to
+	  put elements into a mode where they do not render XHTML style
+	  attributes (just 'selected' instead of 'selected="selected"')
+
+2005-03-30  Stephane Corthesy  <stephane@sente.ch>
+
+	* DynamicElements/WOPopUpButton.m, DynamicElements/WOPopUpButton.api: 
+	  added new binding 'itemGroup' which allows generation of the
+	  <optgroup> element in a <select> element. Fixed a bug where 
+	  displayed value '<nil>' was not HTML-escaped, in some cases
+	  (v4.5.146)
+	
+2005-03-28  Stephane Corthesy  <stephane@sente.ch>
+
+	* added NSString category NSString+JavaScriptEscaping (v4.5.145)
+
+2005-03-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOComponentDefinition.m: moved WONoContentElement and
+	  _WOStaticHTMLElement classes to own files in DynamicElements
+	  (v4.5.144)
+
+2005-03-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObjectDataSource.m: fixed a small memory leak (v4.5.143)
+
+	* SoObjects/SoObject+Traversal.m, WebDAV/SoObjectWebDAVDispatcher.m: 
+	  minor code cleanups (v4.5.142)
+
+2005-03-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* OWResourceManager.m, WOResourceManager.m: changed table name for
+	  default strings lookups from "default.strings" to
+	  "Localizable.strings" in order to be compatible to WebObjects 4.51.
+	  (v4.5.141)
+
+2005-03-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOJavaScript.m: added support for extra attributes,
+	  generate script 'type' field as 'text/javascript' instead of
+	  'language', as suggested by Mont (v4.5.140)
+
+2005-03-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.139
+	
+	* DynamicElements/WOCheckboxList.m, DynamicElements/WOBrowser.m,
+	  DynamicElements/WOCheckbox.m, DynamicElements/WOPopUpButton.m,
+	  DynamicElements/WORadioButton.m, DynamicElements/WORadioButtonList.m,
+	  DynamicElements/WOSubmitButton.m, DynamicElements/WOText.m,
+	  DynamicElements/WOTextField.m: code cleanups, minor perf
+	  improvements, generate 'disabled' <input> attribute
+	
+	* DynamicElements/WOImageButton.m: generate <img> instead of <input>
+	  if 'disabled' binding evaluates to true
+	
+	* WOContext.m: changed default query parameter separator to &amp; as
+	  suggested by Stephane (v4.5.138)
+	
+2005-03-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcode: added WOWatchDogApplicationMainOSX.m and removed
+	  WOWatchDogApplicationMain.m from Xcode build. Added
+	  SOPE_SUBMINOR_VERSION build flag for Xcode.
+
+2005-03-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOApplication.m: added some ObjC runtime profiling support (moved in
+	  from OGo main object) (v4.5.137)
+
+2005-03-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoSubContext.m: updated superclass version check (v4.5.136)
+
+2005-03-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.135
+	
+	* WOHTTPConnection.m: deliver proper SOPE version in 'user-agent'
+	
+	* SoWebDAVRenderer.m: deliver proper SOPE version in 'server' header
+	
+	* WOStats.m, SoWebDAVRenderer.m: explicitly specify charset of text/xml
+	  result
+
+2005-03-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoWebDAVRenderer.m: fixed ordering of propstat result elements
+	  (<status/> must come after <prop/>) (v4.5.134)
+
+2005-03-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/common.h, DynamicElements/*.m: renamed to decommon.h
+	  to avoid issues with Xcode, fixed broken compile due to missing
+	  header file (v4.5.133)
+
+2005-03-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/common.h: added missing #include's for
+	  Xcode build (v4.5.132)
+
+2005-03-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.131
+
+	* WOElementID.h: lowered max element nesting to 126 due to limited
+	  scope of ivar (hopefully doesn't trigger #1281)
+	
+	* DynamicElements: added support for empty non-XML tags (generate
+	  empty tags without the " />")
+
+	* WOContext.m: changed ivars (bumped class version to 8), added a flag
+	  for generating XML empty elements (to be checked by dynamic elements)
+
+	* DynamicElements/WOForm.m: consume 'multipleSubmit' association for
+	  WO compatibility as requested by Stephane (v4.5.130)
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: added the ability to fork multiple
+	  child servers listing on the same passive socket. The OS will
+	  distribute the load between such processes. Note that this only
+	  works for session less processes (like ZideStore) and that automatic
+	  restarts are not yet implemented. The number of processes can be
+	  controlled using the 'WOHttpAdaptorForkCount' default (v4.5.129)
+
+2005-03-06  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* WOWatchDogApplicationMainOSX.m: fixed some minor issues, still need
+	  a fix to allow for starts without a full path (v4.5.128)
+
+2005-03-06  Mont Rothstein  <mont_rothstein@yahoo.com>
+
+	* added an MacOSX specific WOWatchDogApplicationMain, this fixes some
+	  issue when linking against the AJR libraries (see OGo bug #1175)
+	  (v4.5.127)
+
+2005-03-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOElementID.h (NGObjWeb_MAX_ELEMENT_ID_COUNT): bumped max element
+	  nesting to 128 wrt bug #1281 (v4.5.126)
+
+	* WOContext.m: added -setQueryPathSeparator:/-queryPathSeparator
+	  methods as requested by Stephane (v4.5.125)
+
+	* WOComponent.m: protect component against duplicate -awake in the
+	  same context as suggested by Stephane (v4.5.124)
+
+2005-03-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOMetaRefresh.m: added support for 'seconds' binding
+	  as available in WO and suggested by Stephane (v4.5.123)
+
+2005-03-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoProductResourceManager.m: fixed to use the changed lookup
+	  in NGBundleManager.m (v4.5.122)
+
+2005-02-25  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOResourceManager.m: Fixed condition in -resourcesPathForFramework:,
+	  this needs to consider the rapidTurnAroundPath as a special case.
+	  RAD in SOPE:X will once again work with this fix applied. (v4.5.121)
+
+2005-02-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoProductResourceManager.m: major fixes in resource
+	  processing, properly relay URL requests to the fallback or product
+	  resource managers (v4.5.120)
+
+2005-02-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.119
+
+	* Templates/WOxTagClassElemBuilder.m: added some API to improve support
+	  for subclassing
+
+	* DynamicElements/WOxHTMLElemBuilder.m: added <html:container> tag
+	  which is suitable as a root tag for template, it only generates its
+	  contents
+
+2005-02-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.118
+	
+	* SoObjects/SoProductResourceManager.m:
+	  - if a resource could not be found, continue lookup using
+	    WOApplication resource manager instead of calling super
+	  - fixed a major issue in the bundle resource lookup code
+	  - use resource manager of other product when looking up a file of
+	    that (instead of directly querying the bundle)
+	
+	* WOResourceManager.m: minor code cleanups
+	
+	* SoObjects/SoComponent.m: fixed a typo
+
+2005-02-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOApplication.m: the resource manager class to be used for a SOPE
+	  application can now be choosen using the 'WODefaultResourceManager'
+	  default (defaults to WOResourceManager) (v4.5.117)
+
+2005-02-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Associations/WOResourceURLAssociation.m: added support for
+	  framework resources (can be specified as "fwname/resource")
+	  (v4.5.116)
+
+	* SoObjects/SoObjectRequestHandler.m: added a safety limit on the URL
+	  to avoid excessive redirects to view URLs, the "stop suffix" can be
+	  configured using the 'WORedirectURISafetySuffix' default (v4.5.115)
+
+2005-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOxHTMLElemBuilder.m: create a WOGenericElement
+	  instead of WOSubmitButton for "input type='button'" (v4.5.114)
+
+2005-02-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOApplication.m: added a warning if the default component request
+	  handler key is not set (v4.5.113)
+
+2005-02-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOBrowser.m: fixed a warning if neither selection
+	  nor selections is set (fixes OGo bug #1231) (v4.5.112)
+
+	* Defaults.plist: added "127.0.0.1" to WOHttpAllowHost (v4.5.111)
+
+2005-02-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: allow WOPort bind addresses with IPs,
+	  eg "192.168.0.1:7900", this was previously parsed incorrectly as
+	  just the port, eg "7900" (which still works) (v4.5.110)
+
+2005-01-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Associations/WOKeyPathAssociation.m: fixed a type coercion issue on
+	  YellowDog Linux (v4.5.109)
+
+2005-01-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* _WOStringTable.m: changed strings file encoding from ISO-Latin-1
+	  to UTF-8, so this is now en par with libFoundation, gnustep-base
+	  and Mac OS X 10.3. Fixed a minor bug that affected gnustep-base
+	  only. (v4.5.108)
+
+2005-01-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SoObjects/SoProductResourceManager.m: changed resource lookup to use
+	  'older' NGExtension category to NSBundle instead of newer one which
+	  uses more recent API currently not supported in gnustep-base
+	  (v4.5.107)
+
+2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.106
+
+	* Defaults.plist: added new default "WOContextClass".
+
+	* WOContext.[hm]: Factory method +contextWithRequest: observes new user
+	  default "WOContextClass" to chose proper class for new contexts.
+          New method -resourceLookupLanguages, aggregates the
+	  current lookup strategy in one place. Ideal place for overriding the
+	  lookup behaviour in conjunction with new WOContextClass default.
+
+	* WOApplication.m, WOComponentDefinition.m, WOStats.m, WOComponent.m,
+	  DynamicElements/{_WOComplexHyperlink.m, WOImageButton.m,
+	  _WOConstResourceImage.m, WOJavaScript.m, WOResourceURL.m,
+	  WOEmbeddedObject.m, WOBody.m}, SoObjects/{SoPageInvocation.m,
+	  SoProductResourceManager.m},
+	  Associations/{WOResourceURLAssociation.m, WOLabelAssociation.m}:
+	  use new -resourceLookupLanguages API.
+
+	* v4.5.105
+
+	* NGObjWeb.xcode: removed target "SoProducts" from "all". By using a
+	  minor hack we can avoid having to build products for SoCore and
+	  SoOFS (new framework) altogether.
+
+	* SoObjects/SoObjects.xcode: version updated, minor changes to build
+	  process
+
+	* SoObjects/SoProductRegistry.m: if compiled as framework, a project
+	  named "SoObjects" will be registered as "SoCore" - this is
+	  necessary to retain dependency tracking
+
+2004-12-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOMessage.m: added 'WOMessageUseUTF8' bool default to enable UTF-8
+	  as the default message encoding (v4.5.104)
+
+2004-12-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.103
+
+	* WOContext.m: fixed bug in -pushCursor:, first element in newly
+	  allocated stack was never set
+
+	* DynamicElements/WORepetition.m: reverted use of -pushCursor/
+	  -popCursor for ComplexRepetition, but only in case index is not used.
+
+2004-12-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/WORepetition.m: bugfix in -appendToResponse:... for
+	  case when only "count" and "index" are set (this didn't work because
+	  of erroneous use of -pushCursor/-popCursor) (v4.5.102)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcode: minor changes and updated
+
+	* WebDAV/WebDAV.xcode: minor changes and updated
+
+	* SoObjects/SoObjects.xcode: minor changes and updated
+
+	* NGHttp/NGHttp.xcode: minor changes and updated
+
+2004-11-25  Helge Hess  <helge.hess@skyrix.com>
+
+	* Defaults.plist: set WOHttpAllowHost per default to ( localhost,
+	  localhost.localdomain ) (v4.5.101)
+
+2004-11-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOForm.m: minor code cleanups (v4.5.100)
+
+2004-11-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WORequestHandler.m: properly check whether logger is available
+	  prior running debugWithFormat: to avoid excessive logging in OGo
+	  (v4.5.99)
+
+2004-11-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent.m: reapplied change in v4.2.423 which got lost in some
+	  4.5 logging change (v4.5.98)
+
+2004-11-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.97
+
+	* WOContext.m: move some categories into main class implementation
+
+	* WORequestHandler.m: bind default logger to WODebuggingEnabled
+
+2004-11-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WODirectActionRequestHandler.m: minor code cleanups (v4.5.96)
+
+2004-11-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.95
+
+	* Defaults.plist: new defaults for NGLogging
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: rewrote transaction logging to use
+	  NGLogging. Configuration for transActionLogger is stored in
+	  Defaults.plist.
+	  NOTE: no profiling has been done, yet - thus the profiling
+	  information needs to be updated (a TODO has been placed at the
+	  appropriate place).
+
+	* DynamicElements/_WOTemporaryHyperlink.m: added correct cast to
+	  circumvent gcc bug (false warning).
+
+2004-11-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.94
+
+	* NGHttp+WO.m: minor improvements to cookie handling
+
+	* WORequestHandler.m: cleaned up cookie adder
+
+	* v4.5.93
+	
+	* WOApplication.m: print a note if debug logging is enabled
+
+	* WOComponentRequestHandler.m: removed usage of unavailabel
+	  -logInfoWithFormat: (replaced with logWithFormat:)
+
+	* WOStatisticsStore.m: fixed a new warning due to incompatible pointer
+	  types
+	
+	* WOComponentRequestHandler.m: append session-id cookies to response,
+	  reject favicon requests, added some logs, minor cleanups (v4.5.92)
+
+2004-11-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.91
+
+	* Associations/{WOKeyPathAssociation.m, WOLabelAssociation.m,
+	  WOResourceURLAssociation.m, common.h},
+	  DynamicElements/{WOForm.m, WOGenericElement.m, WOImage.m,
+	  WOPopUpButton.m, WOString.m, WOxHTMLElemBuilder.m,
+	  WOxMiscElemBuilder.m, _WOTemporaryHyperlink.m},
+	  NGObjWeb/WOxElemBuilder.h,
+	  SoObjects/{SoActionInvocation.m, SoClassSecurityInfo.m,
+	  SoComponent.m, SoObject+Traversal.m, SoObject.m,
+	  SoObjectRequestHandler.m, SoObjectSOAPDispatcher.m,
+	  SoObjectXmlRpcDispatcher.m, SoPageInvocation.m, SoProduct.m,
+	  SoProductClassInfo.m, SoProductRegistry.m,
+	  SoProductResourceManager.m, SoSelectorInvocation.m},
+	  Templates/{WOApplication+Builders.m, WOComponentScriptPart.m,
+	  WODParser.m, WOHTMLParser.m, WOWrapperTemplateBuilder.m,
+	  WOxComponentElemBuilder.m, WOxElemBuilder.m, common.h},
+	  WebDAV/{SaxDAVHandler.m, SoDAVSQLParser.m, SoObject+SoDAV.m,
+	  SoObject+SoDAVQuery.m, SoObjectWebDAVDispatcher.m,
+	  SoWebDAVRenderer.m},
+	  WOHttpAdaptor/{WOHttpAdaptor.m, WOHttpTransaction.m,
+	  WORequestParser.m},
+	  NGHttp+WO.m, OWResourceManager.m, SNSConnection.m,
+	  WEClientCapabilities.m, WOApplication.m, WOChildComponentReference.m,
+	  WOComponent.m, WOComponentDefinition.m, WOComponentRequestHandler.m,
+	  WOContext.m, WOCoreApplication+Bundle.m, WOCoreApplication.m,
+	  WODirectAction.m, WODirectActionRequestHandler.m, WODisplayGroup.m,
+	  WODynamicElement.m, WOElementID.m, WOFileSessionStore.m,
+	  WOMessage.m, WOPageRequestHandler.m, WORequest.m, WORequestHandler.m,
+	  WOResourceManager.m, WORunLoop.m, WOServerSessionStore.m,
+	  WOSimpleHTTPParser.m, _WOStringTable.m, common.h:
+	  changed to use new logging API, various code cleanup.
+
+	* NGObjWeb.xcode, SoObjects/SoObjects.xcode, WebDAV/WebDAV.xcode:
+	  bumped framework version
+
+2004-11-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WORequestHandler.m: removed double click hack, not necessary anymore
+	  (v4.5.90)
+
+2004-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WORequestHandler.m: added 'WOUseGlobalCookiePath' default to
+	  configure whether the application URL (NO) or "/" (YES) should be
+	  used as the path for the session-id cookie (related to OGo bug #914
+	  (v4.5.89)
+
+2004-11-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOSimpleHTTPParser.m: set a default file boundary size and max upload
+	  size if the Defaults.plist was not loaded (eg in xmlrpc_call with
+	  WOHTTPConnectionUseSimpleParser) (v4.5.88)
+
+2004-11-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.87
+
+	* WOCoreApplication.m: needed to define a private +logger to enable
+	  proper logging in class methods.
+
+	* WOHttpAdaptor/common.h: add new logging API to common includes
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: rewrote logging to use new logging
+	  API. Added an own (conditional) logger for performance logging.
+
+2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOApplication.m: changed wrapper-missing-log from warn to debug
+	  (v4.5.86)
+
+2004-11-13  Helge Hess  <helge@groove.local>
+
+	* WOApplication.m, WOCoreApplication.m: do not use deprecated logger
+	  API (v4.5.85)
+
+2004-11-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOApplication.m, WOCoreApplication.m: use new NGLogging API from
+	  NGExtensions (v4.5.84)
+
+2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcode: declared several So* headers as public - these were
+	  already public in the GNUmakefiles but declared as project headers
+	  in Xcode - fixed this incompatibility.
+
+	* NGObjWeb.xcode: fixed incorrect SOPE_MINOR_VERSION
+
+	* NGObjWeb.xcode, WebDAV/WebDAV.xcode, SoObjects/SoObjects.xcode:
+	  bumped the framework version
+
+2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* use Version file for install directory location
+
+2004-11-03  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/*.api: provided formal specifications for all
+	  dynamic elements in a format borrowed from WebObjects 4.51.
+	  (v4.5.83)
+
+2004-11-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* branched 4.3 into 4.4 and 4.5
+	
+2004-11-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOWatchDogApplicationMain.m: disable warning on /etc server defaults
+	  (v4.3.82)
+
+2004-11-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.3.81
+
+	* NGObjWeb.xcode: added new targets to the build process to make
+	  embedding of SoProducts within the framework's wrapper possible.
+
+	* SoObjects/SoProductRegistry.m: fixed crash bug on Cocoa Foundation
+	  that occurred during product registration. As a new feature added
+	  search for products within framework's "SoProducts" resource
+	  directory. This can be used as a fallback, suitable for wrapper
+	  targets that want to use "SoObjects" functionality.
+
+2004-11-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoWebDAVRenderer.m: added support for multiple resource type
+	  tags (v4.3.80)
+
+2004-10-31  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoWebDAVRenderer.m: preserve etag in response if set (v4.3.79)
+
+	* SoObjects/SoDefaultRenderer.m: fixed typo, check exceptions for 200
+	  HTTP codes and do not return them as an error (v4.3.78)
+
+2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/{WOResetButton.m, WOText.m, WOFileUpload.m,
+	  WOGenericElement.m, _WOComplexHyperlink.m, WOHiddenField.m,
+	  WOImageButton.m, WOCheckBoxList.m, _WOCommonStaticDAHyperlink.m,
+	  WORadioButton.m, WOForm.m, WOMetaRefresh.m, WOJavaScript.m,
+	  WOEmbeddedObject.m, WOImage.m, WOBrowser.m, WOVBScript.m, WOIFrame.m,
+	  WOPasswordField.m, _WOSimpleActionHyperlink.m, WOGenericContainer.m,
+	  WOCheckBox.m, WORadioButtonList.m, WOTextField.m, WOFrame.m,
+	  WOBody.m, WOSubmitButton.m}:
+	  fixed rendering of otherTagString, which was appended without
+	  leading space before. (v4.3.77)
+
+2004-10-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOxHTMLElemBuilder.m: select WOSubmitButton for
+	  <input type="button"> in .wox files (should be fixed) (v4.3.76)
+
+2004-10-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoUser.m: just return nil for unsupported KVC keys
+	  (v4.3.75)
+
+2004-10-23  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* v4.3.74
+	
+	* WODirectAction.m: ignore requests on unbound KVC keys on non-lF
+	  libraries
+
+	* SoObjects/SoObjectXmlRpcDispatcher.m: do not call -setUserInfo: to
+	  annotate NSException's on Cocoa Foundation
+
+	* SoObjects/SoActionInvocation.m: added support for calling actions
+	  and pages with positional parameters (eg from XML-RPC)
+
+	* SoObjects/SoObjectXmlRpcDispatcher.m: when looking up a SoMethod for
+	  an XML-RPC method name containing a dot (like system.listmethods),
+	  first check the fully qualified name prior traversing the package
+	  namespaces
+	
+	* SoObjects/SoObjectXmlRpcDispatcher.m: print a warning if server was
+	  not linked against libNGXmlRpc
+
+2004-10-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOElement.m: fixed unwanted behaviour introduced in v4.3.72 (v4.3.73)
+
+	* WOElement.m: queryParameters override keys from queryDictionary in
+	  case of conflicts (v4.3.72)
+
+	* WOElement.m: if both queryDictionary and queryParameters were set on
+	  an element, the '&' seperator wasn't rendered when it should in fact
+	  (v4.3.71)
+
+2004-10-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Defaults.plist: only use single char prefixes for Exchange namespaces
+	  (Connector bug #68682) (v4.3.70)
+
+2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOImage.m: minor code cleanup (v4.3.69)
+
+2004-10-19  Helge Hess  <helge.hess@skyrix.com>
+	
+	* SoObjects/SoHTTPAuthenticator.m: return 401 instead of 400 if the
+	  authentication method was not recognized (eg if Evo attempts an NTLM
+	  connect) (v4.3.68)
+
+2004-10-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* include config.make if available (v4.3.67)
+
+2004-10-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcode: added WOxTagClassElemBuilder.m and
+	  SoActionInvocation.m to the xcode build, bumped the framework 
+	  version
+	  
+	* SoObjects/SoObjects.xcode: added SoActionInvocation.h as a public
+	  header, bumped the framework version.
+
+2004-10-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* sope-ngobjweb-defaults.5: added more default descriptions to man page
+
+2004-10-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoObjectMethodDispatcher.m: fixed an issue when the
+	  clientObject is a WOResponse object. In this case, just return the
+	  response instead of starting method processing (v4.3.66)
+
+	* DynamicElements/WOInput.m: minor code cleanups, be tolerant on
+	  missing value binding (previously printed a warning) (v4.3.65)
+
+2004-10-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.3.64
+
+	* Associations/WOValueAssociation.m: small tweak for bool values of nil
+
+	* SoObjects/SoObject.m: added baseURL support for appnames which end
+	  with a slash
+
+	* SoObjects/SoObjectMethodDispatcher.m: do not call default methods in
+	  place, but rather redirect to the method URL (can be disabled with
+	  the SoRedirectToDefaultMethods default)
+
+	* SoObjects/SoObjectMethodDispatcher.m, SoObjects/SoApplication.m:
+	  minor improvements to logging
+
+2004-10-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* _WOStringTable.m: always open .strings files in ISO-Latin-1 encoding
+	  (will be changed to UTF-8 later) (v4.3.63)
+
+2004-10-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoObjCClass.m: fixed a bug in "Action" selector processing
+	  (v4.3.62)
+
+	* v4.3.61
+
+	* SoObjects/product.plist: properly export SoActionInvocation
+
+	* SoObjects/SoProductClassInfo.m: fixed product.plist class name entry
+	  for action invocations
+
+	* SoObjects/SoPageInvocation.h: fixed header file (install include and
+	  compile include differ :-|) (v4.3.60)
+
+	* v4.3.59
+	
+	* SoObjects/SoProductClassInfo.m: added support for action invocations
+	  (triggered by either 'actionClass' or 'directActionName' key in
+	  product.plist)
+	
+	* SoObjects/SoPageInvocation.m: moved most of the implementation to a
+	  new SoActionInvocation class which can invoke WODirectAction objects
+
+2004-10-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGHttp: fixed umlaut decoding on MacOSX, removed some unused code
+	  (v4.3.58)
+
+2004-10-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObjectDataSource.m: ensure that the child key used for
+	  lookup is a string (eg if toOneRelationshipKeys returns NSNumber's
+	  as values) (v4.3.57)
+
+	* WebDAV/SoObjectDataSource.m: minor optimization to URL generation
+	  (v4.3.56)
+
+	* v4.3.55
+
+	* WebDAV/SoObjectResultEntry.m, WebDAV/SoWebDAVRenderer.m: improved
+	  debugging and error detection facilities
+
+	* WebDAV/SoObjectDataSource.m: fixed URL construction on Cocoa
+	  Foundation (you cannot use NSPathUtilities to work on URLs with that
+	  Foundation)
+
+	* WEClientCapabilities.m: added Goliath as a known (WebDAV) user agent,
+	  added -isRSSClient method
+
+2004-10-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.3.54
+
+	* WebDAV/SoObject+SoDAV.m: -isCollection now also checks whether
+	  objects are contained in the toManyRelationshipKeys collection
+
+	* WebDAV/SoObject+SoDAVQuery.m: -davChildKeys now returns the values of
+	  both, -toOneRelationshipKeys and -toManyRelationshipKeys
+
+2004-10-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: added more debug output (v4.3.53)
+
+2004-10-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Templates/WOxElemBuilder.m: moved WOxTagClassElemBuilder to own file
+	  (v4.3.52)
+
+2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcode: updated to current build version
+
+2004-10-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/_WOComplexHyperlink.m: minor code cleanups (v4.3.51)
+
+2004-09-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: print listen address as a string value
+	  (v4.3.50)
+
+	* WebDAV/SoWebDAVRenderer.m: set lock-token header on LOCK requests
+	  (v4.3.49)
+
+2004-09-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WONestedList.m: minor code cleanups (v4.3.48)
+
+2004-09-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: added the NewsFire RSS reader as a known
+	  user-agent (v4.3.47)
+
+	* OWResourceManager.m: removed a warning on a missing path on MacOSX
+	  (v4.3.46)
+
+2004-09-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoProductRegistry.m: do not abort scanning for SOPE
+	  products if GNUSTEP_PATHPREFIX_LIST is not set (to continue
+	  searching in FHS locations) (v4.3.45)
+
+	* SoObjects/SoSecurityManager.m: improved reason string of security
+	  exceptions (v4.3.44)
+
+2004-09-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.3.43
+	
+	* WOCoreApplication.m: improved handling of WOPort default (detect
+	  numeric ports)
+
+	* Defaults.plist: changed default WOPort value from '"*:20000"' to
+	  just 20000 (which is the same like *:20000' but compatible to WO)
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: for numberic WOPort's, retrieve the
+	  port from the WOApplication object
+
+	* WOCoreApplication.m: use NGResourceLocator to determine search pathes
+	  (v4.3.42)
+	
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcode: added WOServerDefaults.m to the build
+
+2004-09-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.3.41
+
+	* WOWatchDogApplicationMain.m: added new function
+	  WOWatchDogApplicationMainWithServerDefaults() which installs the
+	  WOServerDefaults class as the default NSUserDefaults class
+
+	* added WOServerDefaults class (not implemented yet)
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.3.41
+
+	* Templates/common.h, SoObjects/common.h: fixed duplicate interface
+	  declarations by renaming them. I believe this only affected Xcode
+	  builds.
+
+	* NGObjWeb.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects.
+
+2004-09-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.3.40
+
+	* SoObjects/SoProductResourceManager.m: changed method
+	  -pathForResourceNamed:inFramework:languages: to use new NGExtensions
+	  addition to NSBundle for proper localized resource lookup
+
+	* NGObjWeb.xcode: added SOPE_MAJOR_VERSION and SOPE_MINOR_VERSION to
+	  the build defines
+
+2004-09-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOMessage.m, WOCoreApplication.m, SoProductRegistry.m, 
+	  WOApplication+Builders.m: use makefile provided SOPE version for
+	  resource lookup (v4.3.39)
+
+2004-09-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* OWResourceManager.m: deprecated -pathToComponentNamed:inFramework:
+	  in favor of -pathToComponentNamed:inFramework:languages (v4.3.38)
+
+	* v4.3.37
+
+	* Templates/WOWrapperTemplateBuilder.m: added ability to load wod
+	  templates without a .wo wrapper (but from an arbitary path). You need
+	  to pass in the .html file of the template to enable that. Used in OGo
+	  for FHS support.
+
+	* OWResourceManager.m: do not look for templates in WebServerResources,
+	  major cleanups in resource lookup code
+	
+2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: minor changes for inline compilation with
+	  GNUSTEP_BUILD_DIR set elsewhere (v4.3.36)
+
+2004-09-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* removed JavaScript function support (v4.3.35)
+
+2004-09-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.3.34
+
+	* SoObjects/SoProductResourceManager.m: added an implementation of
+	  -pathForResourceNamed:inFramework:languages: which checks the 
+	  product bundle resources (also required to make the URL lookup work),
+	  improved debug logging
+
+	* Associations/WOResourceURLAssociation.m, Defaults.plist: added
+	  WOResourceURLAssociationDebugEnabled default and a set of debug
+	  logs
+
+2004-09-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOBrowser.m: deprecated 'selection' binding and
+	  activated 'selections' as requested in OGo bug #894 (v4.3.33)
+	
+	* DynamicElements/WOBrowser.m: deprecated 'string' binding and
+	  activated 'displayString' as requested in OGo bug #888 (v4.3.32)
+
+2004-09-09  Frank Reppin  <frank@opengroupware.org>
+
+	* GNUmakefile.postamble: added patch for installing in different
+	  install roots (INSTALL_ROOT_DIR prefix variable) (v4.3.31)
+
+2004-09-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOHttpAdaptor/WOHttpTransaction.m: check whether the simple HTTP
+	  parser is to be used using the
+	  -shouldUseSimpleHTTPParserForTransaction: method on
+	  WOCoreApplication. That way applications which require the parser
+	  (like xmlrpcd/ZideStore) can override the default
+	  WOHttpTransactionUseSimpleParser default (v4.3.30)
+
+2004-09-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* Defaults.plist: disable WODebugging per default (v4.3.29)
+
+	* WOContext.m: minor code cleanup (v4.3.28)
+	
+2004-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* Defaults.plist: enable watch dog per default (use WOUseWatchDog
+	  default to disable the watch dog) (v4.3.27)
+
+2004-09-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOResourceManager.m: minor code cleanups (v4.3.26)
+
+2004-09-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOResourceRequestHandler.m: added some debug logging, send a 404
+	  instead of a 500 if a resource could not be found (v4.3.25)
+
+2004-09-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* wo*.make: when copying bundles to the install location, ensure that
+	  .svn directories (Subversion tracking dirs) are excluded (v4.3.24)
+
+2004-09-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOApplication.m: added a fix to find the appwrapper in flattened
+	  environments (v4.3.23)
+
+	* WOCoreApplication.m: search for libNGObjWeb resources in
+	  Library/Libraries for compatibility with gstep-make 1.9.2 (Note:
+	  this version does _not_ work with the old gstep-make fork anymore!)
+	  (v4.3.22)
+
+2004-09-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fhs.make (move-headers-to-fhs): moved NGHttp headers to FHS root
+	  (v4.3.21)
+
+2004-08-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: fixed sope-mime library location for gstep-make
+	  1.9.2 (v4.3.20)
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGObjWeb.xcode: new Xcode project
+
+	* SoObjects/SoObjecs.xcode, SoObjects/SoObjects-Info.plist: new Xcode
+	  project and accompanied files.
+
+	* WebDAV/WebDAV.xcode: new Xcode project
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: properly setup bundle path (v4.3.19)
+
+	* v4.3.18
+	
+	* Templates/WOApplication+Builders.m: also look in
+	  /usr/local/lib/sope-4.3/wox-builders/ and
+	  /usr/lib/sope-4.3/wox-builders/ for SOPE WOx element builder bundles
+
+	* SoObjects/SoProductRegistry.m: also look in
+	  /usr/local/share/sope-4.3/products and /usr/share/sope-4.3/products
+	  for SOPE product bundles
+
+	* WORequest.m, WebDAV/SoObject+SoDAV.m: use new WOCoreApplication
+	  method to lookup Languages.plist / DAVPropMap.plist resource
+
+	* WOCoreApplication.m: use GNUSTEP_PATHPREFIX_LIST and GNUSTEP_PATHLIST
+	  to find libNGObjWeb resources, also look in
+	  /usr/local/share/sope-4.3/ngobjweb/ and
+	  /usr/share/sope-4.3/ngobjweb/. Added a method
+	  +findNGObjWebResource:ofType: to locate library resources
+	
+	* WOCoreApplication+Bundle.m: use GNUSTEP_PATHPREFIX_LIST and
+	  GNUSTEP_PATHLIST to load application bundles
+	
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local),
+	  SOPE products are installed in lib/sope-4.3/products/
+	
+2004-08-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: export WOComponentDefinition.h as a public header
+	  (v4.3.17)
+
+2004-08-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent: added ivar for clientObject, _without_ increasing class
+	  version (so that we don't need to touch every component in OGo :-| ),
+	  moved SoObjects methods to own category file in SoObjects (v4.3.16)
+	
+	* WOComponentScript.m, WOComponentScriptPart.m: removed dependency on
+	  NGScripting (disables WOx scripting due to missing backend) (v4.3.15)
+
+	* v4.3.14
+
+	* WOComponent.m, WOContext.m: added ivar for _ODCycleCtx, _without_
+	  increasing class version (so that we don't need to touch every
+	  component in OGo :-| )
+
+	* DynamicElements/WOHtml.m, WOBody.m: minor code cleanups
+
+2004-08-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.3.13
+
+	* removed dependency on NGScripting (disabled WOScriptedComponent)
+
+	* WOComponent.m: added baseURL ivar, _without_ increasing class
+	  version (so that we don't need to touch every component in OGo :-| )
+
+	* v4.3.12
+
+	* Templates/WOxTemplateBuilder.m: properly select a DOM builder based
+	  on the template extension
+
+	* Templates/WOTemplateBuilder.m, WOComponentDefinition.m: moved
+	  builder factory to WOComponentDefinition
+
+2004-08-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* changed bundles to install in "xxx-4.3" pathes instead of "xxx/4.3"
+	  to be consistent with OGo (v4.3.11)
+
+	* v4.3.10
+
+	* GNUmakefile: install SoCore.sxp in Library/SoProducts/4.3/
+
+	* Templates/WOxTemplateBuilder.m: moved WOApplication category to an
+	  own file, preload builder bundles in Library/WOxElemBuilders/4.3
+	
+	* SoObjects/SoProductRegistry.m: look for products in
+	  Library/SoProducts/4.3
+
+	* v4.3.9
+
+	* DynamicElements/WOConditional.m: added specific WOx initializer to
+	  support negative conditionals (if-not)
+
+	* DynamicElements/WOxControlElemBuilder.m: mapped "if-not"/"ifnot" to
+	  WOConditional
+
+	* SoObjects/WOContext+SoObjects.m: added missing
+	  -setObjectPermissionCache: method (v4.3.8)
+
+2004-08-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: removed libjs linking path (v4.3.7)
+
+	* moved NGXmlRpc/xmlrpc_call to a separate project (v4.3.6)
+
+	* v4.3.5
+
+	* WOContext.m, WOComponent.m: modified component awake handling, should
+	  fix some awake-in-context logs
+
+	* WOComponentRequestHandler.m: use _setCurrentContext: method
+
+	* WOApplication.m: added -_setCurrentContext: method to set the global
+	  context (should be avoided, but not always possible ..)
+
+	* SoObjects/SoProductClassInfo.m: improved error handling (v4.3.4)
+
+2004-08-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.3.3
+	
+	* moved the SoOFS library/sope tool to a separate project
+
+	* WORequest, WOMessage, WOContext: added new ivars to avoid user-info
+	  dictionary
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.3.2
+
+	* removed dependency on NGJavaScript
+
+	* DynamicElements/WOFileUpload.m: code cleanups
+
+	* fixed for SOPE 3.3 directory layout
+
+	* moved to SOPE 4.3, restarted subminor version to 1 to remove special
+	  MacOSX version (v4.3.1)
+
+2004-08-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoProductResourceManager.m: added html, xml, txt and js as 
+	  known product resource extensions (v4.2.431)
+
+2004-08-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoObject.m: improved a debug log, improved root URL 
+	  processing (v4.2.430)
+
+2004-08-05  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* v4.2.429
+	
+	* OWResourceManager.m: major changes to resource lookup. When scanning
+	  language lproj directories contained inside .wo wrappers, the lproj
+	  themselves will be checked whether they contain an component.html 
+	  file.
+
+	* Templates/WOWrapperTemplateBuilder.m: minor improvement to logging
+	  code
+	
+	* WOComponentDefinition.m: added WODebugComponentDefinition default to
+	  enable debug logs
+	
+2004-08-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added OWResourceManager as a copy of WOResourceManager so that we
+	  can apply Stephane's patches without breaking OGo. OWResourceManager
+	  will be kept as a legacy until its ensured that OGo is compatible
+	  with the WO resource manager (v4.2.428)
+
+2004-08-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoProductRegistry.m: register product bundles loaded by
+	  other code sections (using the NSBundleDidLoadNotification)
+	  (v4.2.427)
+
+2004-08-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.426
+
+	* WOHttpAdaptor/WOHttpTransaction.m: added some debug logs
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: minor code cleanups
+
+2004-07-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoObject.m(-baseURLInContext:): if the object implements 
+	  -isFolderish and returns YES, a slash will be added to the baseURL
+	  (v4.2.425)
+
+2004-07-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.424
+
+	* Templates/WOxComponentElemBuilder.m: improved debug logs
+
+	* Associations/WOValueAssociation.m: improved description
+
+2004-07-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent.m: made "missing context in component" warning log a
+	  debug log (v4.2.423)
+
+2004-07-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Associations/WOValueAssociation.m: added a great premature 
+	  optimization to speed up value access for objects as ints, unsigned
+	  ints and bools ;-), added a small optimization to access bool
+	  objects as strings (v4.2.422)
+
+2004-07-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.421
+
+	* WOValueAssociation.m: minor code cleanups
+
+	* Defaults.plist(WOxAssociationClassMapping): registered new 
+	  WOLabelAssociation for 'OGo:label' namespace
+	
+	* added new WOLabelAssociation for resolving labels
+
+2004-07-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.420
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: improved error handling if the
+	  target object does not implement a specific method (returns 501,
+	  not implemented)
+	
+	* DAVPropMap.plist: added some DAV properties which are new with 
+	  OOo 1.9 UCB
+
+2004-07-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOCoreApplication.m: added ability to filter out some "expected"
+	  validation issues (by overwriting the -hideValidationIssue: method)
+	  (v4.2.419)
+
+2004-07-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* Languages.plist: added mapping from 'nb' code to NorwegianBokmaal
+	  (v4.2.418)
+
+2004-07-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOContext.m, WOComponent.m, Defaults.plist: added new 
+	  'WODebugComponentAwake' default to enable component -awake/-sleep 
+	  logging (v4.2.417)
+
+2004-07-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.416
+	
+	* SoObjects/SoPageInvocation.m, SoObjects/SoProductClassInfo.m: added 
+	  support for extracting SOAP parameters as KVC keys for the 
+	  WOComponent (SOAP parameters will be extracted and applied using
+	  KVC)
+
+	* SoObjects/SoObjectSOAPDispatcher.m, 
+	  SoObjects/SoObjectXmlRpcDispatcher.m: added an own logging prefix
+
+2004-07-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.415
+	
+	* SoObjects/SoSelectorInvocation.m: added support for SOAP parameter
+	  extractions
+
+	* SoObjects/SoObjectSOAPDispatcher.m: added SOAP envelope in context
+	
+	* SoObjects/SoProductClassInfo.m: added support for 'arguments' key
+	  in selector invocation declarations to specify request type specific
+	  argument extractions
+
+2004-07-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DynamicElements/WOString.m: new attribute "style" appends
+	  surrounding <span> tag bearing the styleclass. Doesn't get set if
+	  no string value will be printed. (v4.2.414)
+
+2004-07-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.413
+	
+	* SoObjects: started SOAP dispatcher for SOPE objects
+	
+	* Defaults.plist: added SOAP configuration to SOPE dispatcher selection
+
+	* SoObjects/WORequest+So.m: added -isSoSOAPRequest to detect SOAP 
+	  requests based on the SOAPAction HTTP header
+
+2004-07-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: report Mozilla browsers starting with major
+	  version 5 as <iframe/> capable browsers, this should fix OGo bug 
+	  #634 (v4.2.412)
+
+2004-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.411
+
+	* DynamicElements/WOForm.m: print a debug log if a session ID is to be
+	  embedded in a direct action form, but no session is active
+
+	* DynamicElements/WOPopUpButton.m: minor improvement to 
+	  WONoSelectionString generation code
+
+	* Templates/WOxTemplateBuilder.m: added WOxLogBuilderQueue default to
+	  log the builder queue setup being used by the application
+
+2004-06-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/NSException+HTTP.m: subminor fix to 404 reason (v4.2.410)
+
+2004-06-29  Stephane Corthesy  <stephane@sente.ch>
+
+	* Associations/WOKeyPathAssociationSystemKVC.m: fixed bool value 
+	  processing (return YES for NO NSNumber's) (v4.2.409)
+
+2004-06-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* various makefile fixes to allow in-place compilation of the whole
+	  SOPE frameworks (v4.2.408)
+
+	* WOComponent.m: removed a superflous log on MacOSX (v4.2.407)
+
+2004-06-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/_WOConstResourceImage.m: added some debugging code
+	  (v4.2.406)
+
+2004-06-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOCoreApplication.m: fixed a gstep-base warning (v4.2.405)
+
+2004-06-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoClass.m: added slot access logging (v4.2.404)
+
+	* SoApplication.m, SoObject+Traversal.m, SoObject.m,
+	  SoObjectMethodDispatcher.m, SoPageInvocation.m, SoProductClassInfo.m,
+	  SoSecurityManager.m: fixed some gcc 3.4 warnings (v4.2.403)
+
+2004-06-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.402
+
+	* DynamicElements/WOPopUpButton.m: moved in .h file
+
+	* DynamicElements/WOBrowser.m: do not include WOPopUpButton.h (does not
+	  inherit from that dynamic element anymore)
+	
+2004-06-20  Stephane Corthesy  <stephane@sente.ch>
+	
+	* DynamicElements/WOPopUpButton.[hm]: 
+	  - removed the singleSelection binding (now is fixed to YES [Note: 
+	    will break compatibility with very old WO versions])
+	  - added 'displayString' as an alias for the 'string' binding
+	  - added 'selectedValue' and 'escapeHTML' bindings
+	  - 'value' is not longer set to selected value in 
+	    -takeValuesFromRequest:inContext:. Use 'selectedValue' instead.
+	  - uses WONoSelectionString variable instead of hardcoded "$" for 
+	    empty selections
+	  - 'item' binding is reset after use
+	  - added missing space in generated HTML when 'otherTagString' is set
+	  - 'value' is now escaped
+	
+2004-06-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.401
+
+	* SoObjects/SoObjectMethodDispatcher.m: only lookup HTTP methods in the
+	  SoClass, not in the object itself to avoid clashes with contained
+	  objects
+
+	* DynamicElements/_WOComplexHyperlink.m: added 
+	  'WODebugStaticLinkProcessing' default to debug URL processing in
+	  static hyperlinks
+
+2004-06-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.400
+
+	* WOContext.m ([WOContext -urlWithRequestHandlerKey:path:queryString:]):
+	  fixed processing of application name for '/' request URLs
+
+	* SoObjectMethodDispatcher.m: minor code cleanups
+
+	* SoObjects/SoObject.h: exposed -defaultMethodNameInContext: method
+	  (v4.2.399)
+
+	* SoObjects/SoHTTPAuthenticator.m: added +parseCredentials: method
+	  to reuse the HTTP authorization parsing (v4.2.398)
+
+2004-06-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoApplication.m: fixed lookup for appname.woa which is
+	  generated since the changes in v4.2.385 (v4.2.397)
+
+	* WOPageRequestHandler.m: fixed a bug in the new request methods 
+	  (v4.2.396)
+
+	* v4.2.395
+	
+	* NGObjWeb/WOComponent.h: added prototypes for direct action methods
+
+	* WOPageRequestHandler.m: added direct action like form-value methods
+	  to WOComponent category (-takeFormValuesForKeys:)
+
+	* SoObjects/SoProductRegistry.m: improved bundle based product lookup
+	  (first checks using the bundle path)
+	
+	* SoObjects/SoPageInvocation.m: use application context for page
+	  instantiation if none was passed in
+
+	* SoObjects/SoObject.m: use application context when looking up the
+	  default method
+
+2004-06-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* woapp-gs.make, wobundle-gs.make: patches to use Contents/Resources 
+	  as the resources directory on MacOSX (v4.2.394)
+	
+	* v4.2.393
+	
+	* WOComponentRequestHandler.m: properly generate content-type if none
+	  is set in the response
+
+	* ngobjweb.make: added static linking flags for Mach linker
+
+	* Templates/WODParser.m (_parseProperty): now correctly parses key
+	  pathes starting with a boolean substring like "true" or "NO"
+	  (eg 'trueFlag') (v4.2.392)
+
+	* WORequestHandler.m: added KVC support for MacOSX (v4.2.391)
+
+2004-06-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoPageInvocation.m: added KVC support for MacOSX (v4.2.390)
+
+2004-06-10  Stephane Corthesy  <stephane@sente.ch>
+
+	* v4.2.389
+
+	* WOResourceURLAssociation.m, WOStats.m: explicitly use 
+	  -browserLanguages for resource lookup if there is no session
+
+	* WOBody.m, WOEmbeddedObject.m, WOImageButton.m, WOJavaScript.m,
+          WOResourceURL.m, _WOConstResourceImage.m, _WOResourceImage.m:
+	  [hm, what was the change here?]
+	
+2004-06-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoObjectRequestHandler.m: improved handling of NSNull
+	  objects in the traversal stack, avoids coredumps in some edge
+	  condition (v4.2.388)
+
+2004-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOApplication.m, WORequest.m, WORequestHandler.m: fixed gcc 3.4
+	  warnings (v4.2.387)
+
+2004-06-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.386
+
+	* GNUmakefile.preamble: added prebinding
+
+	* SoObjects/SoPageInvocation.m: fixed code formatting
+
+2004-06-09  Stephane Corthesy  <stephane@sente.ch>
+	
+	* v4.2.385
+	
+	* Defaults.plist: added "WONoSelectionString" default (defaults to
+	  "WONoSelectionString")
+	
+	* WORequest.[hm]: fixed parsing of URIs without request handler pathes 
+	  (like /x.woa/wr?abc), added WONoSelectionString variable and default
+
+	* WOContext.[hm]: added -queryStringFromDictionary: method, rewrote
+	  -directActionURLForActionNamed:queryDictionary: to use that. Fixed
+	  -urlWithRequestHandlerKey:path:queryString: to append to application
+	  extension
+
+	* Templates/WODParser.m: allow keypath strings which contain a slash 
+	  ('/') (eg "src = urlKVC/path/to/file.html;")
+
+2004-06-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOString.m: fixed default (YES) for 'escapeHTML' 
+	  binding in cluster subclasses (was correct in _WOComplexString, but
+	  wrong in the other ones). This might fix OGo bug #625 (v4.2.384)
+	
+	* DynamicElements/WOString.m: never escape value of 'valueWhenEmpty'
+	  binding as suggested by Stephane (v4.2.383)
+	
+	* DynamicElements/WOPopUpButton.m: some code cleanups, properly close
+	  the <option> tag for the 'nilValue' (v4.2.382)
+
+	* v4.2.381
+		
+	* _WOStringTable.m: added -description method
+
+	* WOComponent.m: changed -description to be more consistent with the
+	  rest of the system
+
+2004-06-09  Stephane Corthesy  <stephane@sente.ch>
+	
+	* _WOStringTable.m: support .strings files in NSDictionary plist format
+	
+	* Associations/WOKeyPathAssociationSystemKVC.m: now properly supports
+	  caret (^) notation
+	
+	* WOCoreApplication.m: added -setPrintsHTMLParserDiagnostics: and
+	  -printsHTMLParserDiagnostics for enabling/disabling the output
+	  validation
+
+2004-06-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.380
+
+	* SoObjects/SoComponent.m: minor logging improvement
+
+	* SoObjects/SoProductResourceManager.m, Defaults.plist: added default 
+	  SoProductResourceManagerDebugEnabled to enable logging
+
+	* WOResourceManager.m (RSRCDIR_CONTENTS): this was only defined for
+	  Xcode builds, it is now also enabled for gstep-make on OSX (which
+	  also places resources in Contents/Resources) (this change makes
+	  UI-X work on OSX)
+
+	* v4.2.379
+	
+	* GNUmakefile.preamble (libNGObjWeb_LIB_DIRS): fixed relative search
+	  pathes
+
+	* SoObjects/SoProductRegistry.m: use bundle manager to get bundle 
+	  objects, fixed a bug which lead to duplicate product registration
+	  (and a set of resulting other issues), on MacOSX. Apparently
+	  bundle uniquing is broken on MacOSX
+	
+	* SoObjects/SoClassSecurityInfo.m: be more tolerant about NSNull 
+	  values, improved error logging
+
+	* NGObjWeb/WOCoreApplication.h: fixed for MacOSX compilation 
+	  (NSTimeInterval was missing)
+
+2004-06-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOResourceManager.m: fixed a gcc 3.4 warnings (v4.2.378)
+
+2004-06-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOString.m: added 'valueWhenEmpty' as suggested by
+	  Stephane, various code cleanups (v4.2.377)
+
+2004-06-04  Stephane Corthesy  <stephane@sente.ch>
+
+	* WODisplayGroup.m: added special KVC support for "queryMatch.",
+	  "queryMax.", "queryMin." and "queryOperator." keys (v4.2.376)
+
+2004-06-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SoObjects/SoObjectRequestHandler.m: added support for
+	  rapidTurnAround (v4.2.375)
+
+2004-06-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.374
+	
+	* DynamicElements/WOxHTMLElemBuilder.m: use WOGenericContainer for
+	  generating <a name=""> anchors instead of silently dropping the 
+	  element
+	
+	* DynamicElements/WOGenericElement.m: some code cleanups
+
+2004-06-01  Stephane Corthesy  <stephane@sente.ch>
+
+	* v4.2.373
+
+	* WOApplication.h, WODirectAction.h, WOComponent.h: added prototypes
+	  for logging methods, so that those are available in case NGExtensions
+	  is not included
+
+	* WOCoreApplication.[hm]: added implementation of 
+	  -terminateAfterTimeInterval:
+
+	* WOApplication+defaults.m, Defaults.plist: added: 
+	  WOApplicationBaseURL, WOAutoOpenInBrowser, WOCGIAdaptorURL, 
+	  WOFrameworksBaseURL
+
+2004-05-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOResponse.m: minor code cleanups (v4.2.372)
+
+2004-05-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOMessage+Validation.m: do not trigger validation for text/plain
+	  (v4.2.371)
+
+2004-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SoOFS/SoOFS-SXP-Info.plist, SoObjects/SoCore-SXP-Info.plist: new
+	  entries for Xcode build (v4.2.370)
+
+2004-05-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOCoreApplication.m: fixed a typo (v4.2.369)
+
+2004-05-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoObjectRequestHandler.m: minor tweak for MacOSX Foundation
+	  (v4.2.368)
+
+2004-05-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.367
+	
+	* WOMessage+Validation.m: added validation functionality for XML and 
+	  HTML
+	
+	* WOCoreApplication.m: validation of generated output can be turned on
+	  using the WOOutputValidationEnabled default
+
+2004-05-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOJavaScript.m: minor code cleanups (v4.2.366)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.365)
+
+2004-05-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* WORequest.m: if a browser language region code (like de-ch) cannot be
+	  found, retry the lookup with the major language code (in this case 
+	  'de') (as suggested by Stephane Corthesy) (v4.2.364)
+
+	* WOApplication.m: removed old license check, added 
+	  "WOLogDefaultsOnStartup" default to enable logging of the default
+	  configuration on server startup (as suggested by Stephane Corthesy)
+	  (v4.2.363)
+
+2004-05-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGObjWeb/NGObjWeb.h: include WOMailDelivery.h and WOStatisticsStore.h
+	  as suggested by Stephane Corthesy (thanks!) (v4.2.362)
+
+2004-05-04  Helge Hess  <helge.hess@skyrix.com>
+	
+	* DynamicElements/_WOComplexHyperlink.m: added special handling for
+	  mailto: and javascript: URLs in href links (not processed using
+	  NSURL) (v4.2.361)
+
+2004-05-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOString.m: fixed a typo (v4.2.360)
+
+2004-05-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.359
+	
+	* WOMessage: added +setDefaultEncoding:/+defaultEncoding class methods
+	  as suggested by Stephane Corthesy (thanks!) and as available in 
+	  WO 4.5.
+	
+	* WOCookie: added missing set accessors as suggested by Stephane
+	  Corthesy (thanks!) and as available in WO 4.5. Deprecated -expireDate
+	  methods in favor of the WO 4.5 -expires/-setExpires: methods,
+	  since WOCookie objects are not immutable anymore, changed the
+	  NSCopying implementation to return a real copy
+
+2004-04-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* some minor cleanups to log messages
+
+	* WOComponent.m, Defaults.plist: added debugging default
+	  'WOCoreOnAwakeComponentInCtxDealloc'
+
+2004-04-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SoOFS/OFSFolderDataSource.m: didn't work at all when no qualifier
+	  was set (v4.2.358)
+
+2004-04-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOBrowser.m: improved XHTML compatibility for bool
+	  attributes (v4.2.357)
+
+2004-04-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WORadioButton.m: code cleanups (v4.2.356)
+
+2004-04-20  Jean-Alexis Montignies <ja@sente.ch>
+	
+	* WOResourceManager: added
+	  -stringForKey:inTableNamed:withDefaultValue:inFramework:languages:
+	  method, simplified implementation (v4.2.355)
+	
+2004-04-19  Jean-Alexis Montignies <ja@sente.ch>
+        
+	* WOKeyPathAssociation.m: added support for float and double (v4.2.354)
+
+2004-04-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOHyperlink.m: moved the cluster subclasses to separate files 
+	  (v4.2.353)
+
+	* v4.2.352
+
+	* DynamicElements/WOJavaScript.m: code cleanups
+
+	* Templates/WOWrapperTemplateBuilder.m: fixed for Linux compilation
+
+2004-04-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.351
+
+	* WOApplication.m: fixed generated HTML in -handleException:inContext.
+	  If application is in RAD mode, extracts templateURL from exception's
+	  userInfo and sets "x-sope-template-path" header appropriately.
+        
+	* Templates/WOWrapperTemplateBuilder.m: exceptions during template
+	  parsing are being caught now before being re-raised.
+	  During exceptions some necessary cleanup will be performed and the
+	  templateURL will be added to the exception's userInfo for later
+	  extraction.
+
+	* WOApplication.m, WOCoreApplication.m, WOHTTPConnection.m,
+	  WOSimpleHTTPParser.m, WOWatchDogApplicationMain.m,
+	  WOHttpAdaptor/WOHttpAdaptor.m: replaced all occurrences of "catched"
+	  with "caught" in log statements and comments.
+
+2004-04-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOComponent.m: print a warning if the component name is set to nil
+	  (v4.2.350)
+
+2004-04-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* Templates/WOxTemplateBuilder.m: minor code cleanups (v4.2.349)
+
+2004-04-16  Jean-Alexis Montignies  <ja@sente.ch>
+
+	* v4.2.348
+	
+	* WOComponent.m: resolve plist unarchiver references using KVC pathes
+	
+	* WOComponentDefinition.m: set component as delegate for plist 
+	  unarchiver
+	
+2004-04-15  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* WOComponentDefinition.m: fixed use of incorrect variable in .woo
+	  initializer, as reported by Jean-Alexis (v4.2.347)
+
+	* WOComponent.m, WOComponentDefinition.m: .woo postprocessing is
+	  now triggered by WOComponent -init, the component definition is 
+	  passed in the wocVariables ivar (HACK CD!) (v4.2.346)
+
+2004-04-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.345
+	
+	* WOComponentDefinition.m: minor code cleanups, implement
+	  -_finishInitializingComponent: which loads the .woo and does some
+	  other postprocessing
+	
+	* WOComponent.m: added -_setContext: private method and use that
+	  instead of assigning to self->context
+
+	* WOApplication.m: added -_pageWithName:inContext: private method
+	  (which is wrapped by -pageWithName:inContext:)
+
+2004-04-12  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* WOContext.m: improved -applicationURL to handle empty adaptor
+	  prefixes (v4.2.344)
+
+2004-04-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Languages.plist: added de-lu, en-gb, fr-be and fr-lu mappings
+	  (v4.2.343)
+
+2004-04-09  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Templates/WOHTMLParser.m: -[NSException setUserInfo:] does
+	  not exist on MacOSX (v4.2.342)
+
+2004-04-07  Jean-Alexis Montignies   <ja@sente.ch>
+
+	* v4.2.341 (requires libNGExtensions v4.2.77)
+
+	* WOApplication: Added +eoEditingContextClass and 
+          +implementsEditingContexts dependant on the
+          availability of EOEditingContext in EOControl.
+
+	* WOSession: Implemented -defaultEditingContext, bumped class version
+	  because an ivar was added
+	
+	* WORequest: Implemented -formValues.
+
+2004-04-07  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* Templates/WOWrapperTemplateBuilder.m: use 
+	  -stringEncodingForEncodingNamed: on Cocoa (v4.2.340)
+
+2004-04-06  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* WOHTMLParser.m, WODParser.m: fixed a missing return statement, 
+	  introduced in v4.2.338 (thanks Jean-Alexis for reporting :-) 
+	  (v4.2.339)
+	
+2004-04-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.338
+
+	* WODParser.m, WOHTMLParser.m, WOWrapperTemplateBuilder.m: added 
+	  support for using UTF-8 as the parsing encoding, can be enabled 
+	  using the WOParsersUseUTF8 bool default (Note: this slows the parser
+	  down).
+	
+	* WODParser.m: added support for parsing 'true' and 'false'
+
+2004-04-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.337
+
+	* WOComponentDefinition.m: added support for woo variables stored in 
+	  the template
+
+	* WOWrapperTemplateBuilder.m: parse .woo file, remember .woo variables
+	  in template and add a hack to support .woo file encodings
+
+	* WOTemplate.m: added ability to store extra, KVC encoded, component
+	  variables, as contained in .woo files
+
+	* WOComponentDefinition.m, WOComponent.m: moved .woo loading from
+	  WOComponent to WOComponentDefinition as suggested by ja@sente.ch 
+	  (v4.2.336)
+
+2004-04-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOComponent.m: use just the component name as the login prefix
+	  (without <>), properly deal with components without a name
+	  (v4.2.335)
+
+2004-04-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Languages.plist: added mapping of fr-fr to French (v4.2.334)
+
+2004-03-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* Associations/WOAssociation.m: minor fix to cache log message 
+	  (v4.2.333)
+
+2004-03-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WORadioButtonList.m: code cleanups (v4.2.332)
+
+2004-03-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOComponentDefinition.m: fixed support for components without 
+	  classes, some related warnings can be disabled by setting the
+	  WOEnableComponentsWithoutClasses default (v4.2.331)
+
+2004-03-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOConditional.m, WOTextField.m: subminor code 
+	  cleanups (v4.2.330)
+
+2004-03-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoSelectorInvocation.m: fixed a typo (v4.2.329)
+
+2004-03-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.328
+	
+	* WEClientCapabilities.m: added Ecto as a known client (BLog, XML-RPC)
+	
+	* SoObjectXmlRpcDispatcher.m, Defaults.plist: added default to enable
+	  debug logs 'SoObjectXmlRpcDispatcherDebugEnabled', implemented first
+	  working version of SOPE XML-RPC invocation using positional 
+	  parameters
+	
+	* SoProductClassInfo.m: enhanced manifests for selector invocations
+	
+	* SoSecurityManager.m: minor improvements on the debug logs
+	
+	* SoSelectorInvocation.m: added ability to call methods with 
+	  positional parameters as submitted by the XML-RPC dispatcher
+	
+2004-03-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOComponent.m: added empty default implementation of 
+	  -unableToSetNilForKey: to support Cocoa KVC (v4.2.327)
+
+2004-03-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* Languages.plist: added "es-es" language mapping (v4.2.326)
+
+2004-03-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.325
+
+	* WOApplication.m: If in RAD mode sets new HTTP header bearing the path
+	  to the current page template.
+        
+	* WOComponent+private.h: Expose private method
+	  - (WOElement *)_woComponentTemplate;
+        
+	* WOTemplate.[hm]: New accessor - (NSURL *)url
+
+2004-03-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOComponent: fixed (the new) KVC extravar handling on gstep-base and
+	  MacOSX (v4.2.324)
+
+2004-03-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.323
+
+	* SoObjects/SoSelectorInvocation.m: minor improvement to response 
+	  generation (if GET is called directly on the method object)
+
+	* v4.2.322
+
+	* WOComponent.m, WOSession.m: improved KVC handling on Cocoa and 
+	  gstep-base, uses "-handleQueryWithUnboundKey:" for extra variables
+
+	* SoObjects/SoProductClassInfo.m, NGXmlRpc: fixed a warning
+
+	* WOApplicationMain.m, WOWatchDogApplicationMain.m, xmlrpc_call.m: use 
+	  explicit NSProcessInfo initialization if GS_PASS_ARGUMENTS is defined
+	  (for some gstep-base setups) (v4.2.321)
+
+2004-03-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.320
+
+	* Associations/WOKeyPathAssociation.m: new approach for fixing the
+	  CoreFoundation related issue of possible immutability of
+	  NSMutableDictionary.
+
+	* DynamicElements/WOxHTMLElemBuilder.m: Do not create WOHyperlink
+	  element if <a /> tag has a name attribute (anchor). Also, do not
+	  create WOHtml element at all.
+	
+	* DynamicElements/WOHtml.m: Minor fixes for obvious copy/paste
+	  mistakes.
+
+2004-03-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOComponentReference.m: removed inclusion of
+	  private WOKeyPathAssociation header file (no reason for that) 
+	  (v4.2.319)
+
+2004-03-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.319
+
+	* WOComponent.m, WOSession.m: improved KVC handling on Cocoa and 
+	  gstep-base
+
+2004-03-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.318
+
+	* NGObjWeb/WebDAV/SoWebDAVRenderer.m: fixed a minor compilation
+	  warning with gstep-base
+
+	* SoObjects/SoObjCClass.m: changed not use -stringWithoutSuffix:
+
+2004-03-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.317
+
+	* NGXmlRpc/NGXmlRpcClient.m: generate capitalized "Basic" authorization
+	  header, required by eGroupware, improved processing of HTML
+	  responses to XML-RPC calls (usually webserver error pages)
+	
+	* WOHttpAdaptor/WOHttpTransaction.m, WOContext.m, SoObjects/SoObject.m:
+	  check for :0 ports
+
+	* WORequest.m: make language codes lowercase prior mapping
+
+	* WOMessage.m(-setHeaders:): properly process array values
+
+	* Languages.plist: map de-at to German
+
+	* SoObjects/SoProductClassInfo.m: added support for "valueClass"
+	  slots which do not have a value (an instance of the class is created
+	  using just -init)
+
+2004-03-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m, WebDAV/SoDAVSQLParser.m: fixed 
+	  not to use deprecated EOControl API (v4.2.316)
+
+2004-03-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.315
+
+	* Languages.plist: mapped "de-ch" to German, fixes OGo bug #666
+
+	* NGXmlRpc: improved NGXmlRpcClient class to allow more HTTP tweaking
+
+2004-03-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.314
+	
+	* Associations/WOAssociation.m: the association class used for 
+	  keypathes can now be configured using the WOKeyPathAssociationClass
+	  default
+
+	* Associations/WOKeyPathAssociation.m: moved KVC category on 
+	  NSUserDefaults to a separate file
+	
+	* Associations: added WOKeyPathAssociationSystemKVC association, which
+	  uses the Foundation KVC implementation for improved WO compatibility
+
+	* WebDAV: removed dependency on EOSQLParser, added own SoDAVSQLParser
+	  classes (different SQL dialect anyway) - should help with GDL2
+	  compatibility
+	
+2004-03-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOHTTPConnection.m: write default "accept" and "user-agent" HTTP 
+	  headers in case none are specified in a WORequest. Improves 
+	  compatibility with the Roxen HTTP server (v4.2.313)
+
+2004-03-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent.m: components can now load .woo files as emitted by
+	  WebObjects Builder - you need to set the default 
+	  WOComponentLoadWOOFiles to enable that (v4.2.312)
+
+2004-03-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Templates/WOHTMLParser.m: allow for lowercase WO tags (v4.2.311)
+
+2004-02-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Templates/WOHTMLParser.m: added ability to parse templates containing
+	  <WEBOBJECT> tags, as requested by ZNeK for rapid turnaround support
+	  with WebObjects Builder (v4.2.310)
+
+2004-02-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.309
+
+	* WOSession.m: fixed a small issue in the content-type processing,
+	  thanks chunsj for pointing that out!
+
+	* WOHTTPConnection.m: subminor code cleanup
+
+	* v4.2.308
+	
+	* Templates/WOxElemBuilder.m: log a note if debugging is turned on,
+	  ensure that +initialize is only called once (on MacOSX)
+	
+	* WOResourceManager.m: fixed resource lookup in MacOSX rapid 
+	  turnaround mode
+
+2004-02-25  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.307
+
+	* WOResourceManager.m: improved error logging (backport from SX5)
+
+	* Associations/WOKeyPathAssociation.m: do not protected keypath 
+	  evaluation using exception handlers - major slowdown and only really
+	  useful in debugging contexts. Exception handlers can be reactivated
+	  by passing "WOAssociationExceptionHandlers=yes" to make when 
+	  compiling NGObjWeb
+
+2004-02-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.306
+
+	* WOApplication.m(-shouldTerminate): subminor cleanups
+
+	* WebDAV/SaxDAVHandler.m: ensure that a local variable is initialized
+	
+2004-02-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Associations/WOKeyPathAssociation.m: added a hack to workaround
+	  to find out whether a dictionary is immutable - even immutable
+	  dictionaries have a -setObject:forKey: on Cocoa (v4.2.305)
+
+	* WOComponent.m, WOApplication.m: added KVC default handlers for Cocoa
+	  Foundation (avoids some exceptions, libFoundation is much more 
+	  tolerant regarding missing KVC keys than Cocoa) (v4.2.304)
+
+2004-02-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* Languages.plist: map pt-br to ptBR instead of "Portuguese-Brazil" 
+	  (the .lproj's are ptBR.lproj) (v4.2.303)
+
+2004-02-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.302
+
+	* SoObjects/SoObject.m: ensure that no port ":0" is attached to object
+	  URLs
+
+	* SoObjects/SoHTTPAuthenticator.m: return a proper 401/www-authenticate
+	  response if an empty password is passed in
+
+2004-02-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.301
+
+	* Defaults.plist: explicitly list some adaptor defaults
+
+	* Languages.plist: mapped bt-br browser lang-code to Portuguese-Brazil
+	  (fixes OGo bug 631)
+
+2004-02-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.300
+
+	* WOSimpleHTTPParser.m: added very simple support for 100-continue to
+	  make the Mono HTTP client happy
+
+	* WOSimpleHTTPParser.m: trims trailing spaces in header lines
+
+	* WOSimpleHTTPParser.m, Defaults.plist: added defaults to configure
+	  the WOSimpleHTTPParser: WOSimpleHTTPParserDebugEnabled,
+	  WOSimpleHTTPParserHeavyDebugEnabled, 
+	  WOSimpleHTTPParserFileIOBoundary, WOSimpleHTTPParserMaxUploadSizeInKB
+
+2004-02-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.299
+
+	* WORequest.m: missing browser-mapping log is now a debug-level log
+
+	* Languages.plist: added "es-cl" to Spanish mapping
+
+2004-02-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DAVPropMap.plist: added mappings for {DAV:} source, executable, 
+	  supportedlock, lockdiscovery properties as submitted by Konqueror
+	  (v4.2.298)
+
+	* Languages.plist: added "pt-pt" to Portuguese mapping (v4.2.297)
+
+2004-02-13  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.296
+
+	* README: documented new -WOProjectDirectory default
+
+	* WOResourceManager.m, WOApplication.m: added support for new
+	  -WOProjectDirectory default. If set, resources will be looked
+	  up there instead of using the default mechanism.
+
+	* SNSConnection.m: wrapped all safeWrite: methods to raise exceptions.
+	  Not doing so breaks the existing checks. At least on OSX this did
+	  prevent SNSConnection from running as expected.
+
+2004-02-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOImage.m: moved some cluster subclasses to separate
+	  source files, properly create a _WOConstResourceImage for constant
+	  'filename' bindings (v4.2.295)
+
+2004-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.294
+	
+	* Languages.plist: add some country/language codes (as submitted by
+	  Safari)
+	
+	* WORequest: rewrote to parse the accept-language header on its own
+	  (instead of relying on the deprecated NGHttpRequest methods), print
+	  a warning if the browser language map could not be found
+	
+	* GNUmakefile: another fix to the Version for the MacOSX linker
+	
+	* WEClientCapabilities.m: added new -ignoresCSSOnFormElements probe
+	  for detecting browsers like Safari which do not apply stylesheets
+	  on form elements (v4.2.293)
+
+2004-02-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* Templates: minor code cleanups in various files (v4.2.292)
+
+2004-02-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.291
+
+	* SoOFS/OFSFileRenderer.m: do not use -initWithTimeIntervalSince1970:
+	  on MacOSX (deprecated in Cocoa)
+
+	* Templates/WOWrapperTemplateBuilder.m, 
+	  WOHttpAdaptor/WOHttpTransaction.m: fixed compilation warnings on
+	  MacOSX
+
+2004-02-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOString.m: added support for 'format' binding (used
+	  in conjunction with the 'formatterClass' binding for creation of
+	  custom formatters) (v4.2.290)
+
+2004-02-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpc: deprecated some API in NGXmlRpcClient (v4.2.289)
+	  (what happened to 4.2.288?)
+
+2004-02-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.287
+
+	* SoObjects/SoObject+Traversal.m: modified key traversal so that
+	  path-info is correctly set if a key right *after* a callable could
+	  not be found (eg /object/myMethod/junk)
+
+	* SoObjects/SoProductRegistry.m, SoProduct.m: generate a simple 
+	  registry representation
+
+2004-01-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: minor cleanups (v4.2.287)
+
+	* v4.2.286
+	
+	* NGHttp: removed an unnecessary debug log
+	
+	* GNUmakefile, Version: moved the MacOSX version hack to GNUmakefile
+	  since the SKYRiX 5 migration tool will break on that otherwise
+
+2004-01-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DynamicElements/WOGenericElement.m: minor cleanups (v4.2.285)
+
+2004-01-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile, SoApplication.m: provided include of -I../WebDAV/
+	  and removed #include "WebDAV/..." because this breaks stupid
+	  Xcode.
+	  (v4.2.284)
+
+2004-01-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttp+WO.m: fixed a log (always logged the _decodeMultiPart.. stuff)
+	  (v4.2.283) 
+
+2004-01-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent.m, SoApplication.m, SaxDAVHandler.m: fixed some 
+	  compilation warnings (v4.2.282)
+
+2004-01-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.281
+
+	* WOHttpAdaptor/WOHttpTransaction.m: fixed logging of response zipping
+	  information
+	
+	* WOStatisticsStore.m: minor speed improvements and cleanups
+
+	* WOResponse.m: added default to debug 'zipping' of response contents,
+	  fixed detection of the clients ability to process zipped responses
+	  (in other words: pages should now (again) be zipped automatically)
+
+2003-12-31  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.280
+
+	* DynamicElements/WOConditional.m: code cleanups
+
+	* WOElementID.m: subminor cleanups
+
+	* Associations/WOKeyPathAssociation.m: minor cleanups
+
+2003-12-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.279
+	
+	* WebDAV/SoWebDAVRenderer.m: fixed rendering of propertyname-only
+	  WebDAV queries (fixes OGo bug 503), use appendContentXMLString
+	
+	* WOMessage.m: added default WOProfileResponse for collecting append 
+	  statistics, make more use of cached selectors
+	
+2003-12-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* DAVPropMap.plist: added mappings for two OOo DAV properties 
+	  (v4.2.278)
+
+2003-12-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: added Kung-Log as a known user-agent, added
+          new typing checks "isXmlRpcClient" and "isBLogClient" (v4.2.277)
+
+2003-12-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: allow delete properties during
+	  object creation for iSync (v4.2.276)
+
+	* SoObjects/SoObject.m: added methods to calculate containment pathes
+	  (-pathArrayToSoObject, -reversedPathArrayToSoObject) and a method to
+	  calculate the containment stack (objectContainmentStack) (v4.2.275)
+
+	* v4.2.274
+
+	* DynamicElements/WOxHTMLElemBuilder.m: only create WOMetaRefresh 
+	  elements for "http-equiv=refresh" (was previously used for anything
+	  which has a "http-equiv" attribute)
+
+	* added new "WOResourceURLAssociation", only available in XML templates
+	
+	* added new - shorter - namespace mappings. "OGo:bind", "OGo:value",
+	  "OGo:script" and "OGo:url" (only for associations!)
+	
+	* Templates/WOxElemBuilder.m: made namespace->association mapping a
+	  default
+
+2003-12-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent.m: subminor cleanups to some logging messages (v4.2.273)
+
+2003-12-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SoObjects/SoObjectMethodDispatcher.m: ensure that the method-object 
+	  which was looked-up, is indeed callable. If not, return the object
+	  itself (relates to OGo Bug #480) (v4.2.272)
+
+	* WEClientCapabilities.m: added Apple CoreFoundation user-agent as a
+	  known one (v4.2.271)
+
+2003-12-09  Helge Hess  <helge.hess@skyrix.com>
+	
+	* SoObjects/SoHTTPAuthenticator.m: fixed an authentication bug 
+	  introduced in v4.2.268 (v4.2.270)
+	
+2003-12-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.postamble: install woapp-gs.make and wobundle-gs.make
+	  in all but gstep-make 1.3.0 (which is the local OGo version) 
+	  (v4.2.269)
+
+2003-12-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.268
+
+	* SoObjects/SoObjectXmlRpcDispatcher.m: made a bit more tolerant
+	  regarding invalid input
+
+	* SoObjects/SoHTTPAuthenticator.m: fixed parsing of basic auth 
+	  credentials
+
+	* NGHttp+WO.m: major cleanups in form decoding code (v4.2.267)
+
+2003-12-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: marked Safari as CSS and fast-table browser
+	  (v4.2.266)
+
+2003-11-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.265
+
+	* GNUmakefile: added principal classes to the product bundles
+
+	* Templates/GNUmakefile: include project makefile from 
+	  GNUSTEP_MAKEFILES (as suggested by chunsj@embian.com)
+
+2003-11-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WEClientCapabilities.m: added Morgul as a known (WebDAV) user agent
+	  (v4.2.264)
+
+2003-11-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.263
+
+	* WebDAV/SoWebDAVRenderer.m: subminor cleanups
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: unescape destination URL pathes
+	  for MOVE/COPY operations (related to bug 456)
+
+2003-11-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WODirectActionRequestHandler.m: check whether class being used for
+	  direct action actually responds to -initWithContext: - if not, no
+	  object will be activated (v4.2.262)
+
+2003-11-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOMessage.m(-setHTTPVersion:): log a message if the version passed in
+	  doesn't start with "HTTP/" (fixes OGo Bug 434) (v4.2.261)
+
+2003-11-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.260
+	
+	* SoObjects/SoObject.m: added some tweaks to generate a proper URL
+	  even if x-webobjects-server-url reports a wrong port (mismatch of
+	  host port and URL port)
+
+	* WOContext.m: replaced some defines with regular BOOL configurations
+
+	* SoObjects/SoProduct.m: fixed -description
+
+2003-11-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WebDAV/SoWebDAVRenderer.m: generate a preliminary etag to keep
+	  WebFolders happy (v4.2.259)
+
+	* v4.2.258
+	
+	* WebDAV/SoObjectWebDAVDispatcher.m: added proper depth generation for
+	  IE WebFolders (do not use flat+self on IE and Evo)
+
+	* WebDAV/SoObject+SoDAVQuery.m: do not include self in resultsets when
+	  accessing with IE webfolders
+
+	* WebDAV/SoWebDAVRenderer.m: do not deliver content in the DELETE
+	  response if the status is set to 204 (no content) ...
+
+	* WOSimpleHTTPParser.m: added "destroy" as a known header (sent by
+	  IE 6)
+	
+	* WebDAV/SoWebDAVRenderer.m: improved debug logging
+
+2003-11-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.257
+
+	* SoWebDAVRenderer.m: minor improvements to GET/HEAD rendering
+
+	* SoObjects/WORequest+So.m: added ability to detect "break-DAV"
+	  (/servlet/webdav. URIs), small fix to login code
+
+	* DAVPropMap.plist: mapped seven new WebDAV properties submitted by
+	  WebFolders (IE 6)
+
+2003-11-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.256
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: more tweaks for MOVE/COPY
+
+	* SoObjects/SoObject+Traversal.m: properly differentiate between
+	  MOVE/COPY source and target pathinfo handling
+	
+	* WebDAV/SoWebDAVRenderer.m: added ability to render MOVE and COPY
+	  result codes
+
+2003-11-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.255
+
+	* SoObject+Traversal.m: necessary tweaks for MOVE/COPY
+	
+	* SoWebDAVDispatcher.m: added initial implementation for WebDAV
+	  MOVE and COPY operations
+	
+	* SoObject+SoDAV.[hm]: added method prototypes for WebDAV move and
+	  copy operations
+
+	* WOSimpleHTTPParser.m: added "overwrite" as a known header
+
+	* SoObjects/SoObject.m, SoObjects/SoProduct.m, 
+	  WebDAV/SoObjectDataSource.m: properly URL escape object names prior
+	  adding them to URLs! (v4.2.254)
+
+2003-11-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/SoWebDAVRenderer.m: properly XML escape URLs which are part 
+	  of a WebDAV response (fixed SX 1896), added a default to trigger
+	  the generation of "good looking" WebDAV (inserts newlines in the
+	  output for debugging) (v4.2.253)
+
+2003-11-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOApplication+defaults.m: comment the use of some default (v4.2.252)
+
+2003-11-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.251
+
+	* NGAsyncResultProxy: fixed the header file, replaced some retain
+	  macros with methods
+
+	* WOGenericContainer.m: fixed a minor bug with an edge case where the
+	  tag may not be defined
+
+	* WOAssociation.m, WOActionURL.m: minor tweak for OSX
+
+2003-11-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.250
+
+	* WebDAV/SoWebDAVRenderer.m: be smart about PUTAction return values
+
+	* WOSimpleHTTPParser.m: added "timeout" as a known header
+
+	* v4.2.249
+	
+	* WebDAV/SoObjectWebDAVDispatcher.m: minor cleanups
+
+	* WOSimpleHTTPParser.m: added "lock-token", "if" and "destination" as 
+	  known headers
+
+2003-11-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.248
+
+	* SoObjects/SoProductClassInfo.m: improved logging of SoClasses
+	  incorrectly declared in product.plist files (eg a product bundle
+	  exporting a class it does not contain ...)
+
+2003-11-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* xmlrpc_call.m: added ability to force authentication (intended for
+	  services which do not return a 401 on a protected resource, like
+	  Zope) (v4.2.247)
+
+2003-11-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.246
+	
+	* WEClientCapabilities.m: added new MacOSX davfs user agent
+	
+	* DAVPropMap.plist: added WebDAV mappings for {DAV:}quota, quotaused
+	  and {...}appledoubleheader, which are submitted by the Apple davfs
+
+2003-11-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOResponse.m: always use HTTP/1.0 as the response HTTP version
+	  (before we just copied the version used in the request which
+	  obviously is nonsense ...) (v4.2.245)
+
+2003-11-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOSimpleHTTPParser.m: added x-forwarded-host, x-forwarded-server
+	  and max-forwards as known headers (v4.2.244)
+
+2003-10-31  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.243
+	
+	* DynamicElements/WOMetaRefresh.m: properly add the session-id to the
+	  query-string
+	
+	* DynamicElements/WOForm.m: code cleanups
+
+	* v4.2.242
+
+	* DynamicElements/WOHyperlink.m: smaller cleanups
+
+	* WOFileSessionStore.m: small code cleanups
+
+	* SoOFS/OFSFolder+SoDAV.m: fixed a warning
+
+	* WOServerSessionStore.m: small code cleanups
+
+2003-10-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoApplication.m: fixed a bug in new lookup code (did not
+	  work with ZideStore, sigh), added lookup logging code (triggered by
+	  SoDebugKeyLookup) (v4.2.241)
+
+	* v4.2.240
+
+	* SoObjects/SoObject.m: added SoDebugBaseURL default to enable debug
+	  logs for SoObject base-url processing
+
+	* SoOFS/OFSFolder+SoDAV.m: added capability to create collections
+
+	* WebDAV/SoWebDAVRenderer.m: added ability to render MKCOL results
+
+	* WebDAV/SoObject+SoDAV.m: added default implementations for DAV
+	  creation methods (which just return 405 exceptions ..)
+
+	* SoObjects/SoApplication.m: now forwards WebDAV resource creation 
+	  requests to root folder. Further the application is now able to
+	  lookup its own name (for /MyApp style path resolution)
+
+	* SoObjects/WORequest+So.m, Defaults.plist: added 
+	  SoDebugRequestClassification default to control logging of request
+	  classification (as WebDAV, XML-RPC, etc)
+
+Mon Oct 27 15:05:13 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* WOHttpAdaptor/WOHttpTransaction.m: if x-webobjects-server-port < 1
+	  set x-webobjects-server-port to the [woRequest host] port (Apache 
+	  2.x adaptor returns empty x-webobjects-server-port) (v4.2.239)
+
+2003-10-27  Thomas Schild  <ts@skyrix.com>
+
+	* Defaults.plist: added Dutch to WODefaultLanguages (v4.2.238)
+
+2003-10-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOResourceManager.m: improved lookup logging (v4.2.237)
+
+	* WOContext.m: changed serverURL (the base for most other URLs)
+	  generation. Sometimes the mod_ngobjweb seems to report wrong ports
+	  - so, if a 'host' header is available, we consider *that* as being
+	  primary (v4.2.236)
+
+2003-10-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: properly detect version of Safari 1.1 -
+	  this is a bit weird (Safari 1.1 reports v100 as its version ...)
+	  (v4.2.235)
+
+	* v4.2.234
+
+	* WOResourceManager.m (-urlForResourceNamed:): avoid generation of two
+	  slashes in URL (was triggered when WOResourcePrefix is set)
+
+	* DynamicElements/WOInput.m, DynamicElements/WOText.m: smaller cleanups
+
+2003-10-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: explicitly link tools against libNGJavaScript
+	  (v4.2.233)
+
+2003-10-20  Thomas Schild  <ts@skyrix.com>
+
+	* Defaults.plist: added ptBR to WODefaultLanguages
+
+2003-10-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.232
+
+	* GNUmakefile.preamble: mark when doing a gstep-make environment
+	  compilation ...
+
+	* WOResourceManager.m: some modifications to support gstep-make on
+	  MacOSX, added debugging defaults
+
+2003-10-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOHTTPConnection.m: improved request logging (v4.2.231)
+
+2003-10-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.postamble (after-install): properly install NGObjWeb 
+	  makefiles with gstep-make 1.7.4 (this is currently a fix makefile 
+	  version check)
+
+2003-10-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.230
+
+	* WOHTTPConnection.m: added -description, added a lot of debug logs
+	
+	* SoObjects/SoProductRegistry.m: fixed a warning (v4.2.229)
+	
+	* Associations/WOKeyPathAssociation.m: patches to compile on MacOSX
+	  without FoundationExt (adopted for the Apple runtime) (v4.2.228)
+
+2003-10-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.227
+
+	* SoOFS/OFSFolder.m: generalized authenticator lookup
+
+	* SoOFS/OFSBaseObject.m: avoid endless recursions in 
+	  -authenticatorInContext:
+
+	* lots of fixes for compilation using gstep-make on MacOSX 
+
+2003-10-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.226
+
+	* WOPageRequestHandler.m, Defaults.plist: some code cleanups, added 
+	  the WOPageRequestHandlerDebugEnabled log default
+
+	* WODirectActionRequestHandler.m: when a WOComponent class is used as
+	  a direct-action, the code now applies the request on the component 
+	  if it responds YES to shouldTakeValuesFromRequest:..
+
+	* NGObjWeb/WODirectAction.h: added -context method to public interface
+
+2003-10-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* common.h, NGObjWeb.h: minor fixes for MacOSX compilation (the port
+	  is not finished yet) (v4.2.225)
+
+	* v4.2.224
+
+	* SoOFS: added a folder datasource class for querying contents of an
+	  OFS folder and a "contentDataSource" method
+	
+	* SoObjects/SoTemplateRenderer.m: name the wrapper component of custom
+	  components like the custom objects themselves
+
+	* SoObjects/SoObject+Traversal.m: improved debug logs
+
+	* v4.2.223
+	
+	* SoObjects/SoTemplateRenderer.m: added ability to render *any* 
+	  object, not just WOComponent results
+
+	* SoObjects/SoObject.m: added -soClassName method to any SoObject
+
+	* SoOFS/OFSFile.m: moved renderer selection to 
+	  SoRequestDispatcherRules
+
+	* Defaults.plist: added some renderer selections to the 
+	  SoRequestDispatcherRules
+
+	* SoOFS/product.plist: set default access of OFSImage and 
+	  OFSPropertyListObject to allow, so that acquisition works when we
+	  lookup a template on the object
+
+	* SoOFS/OFSResourceManager.m: improved debug logging in error cases
+
+	* SoObjects/SoSubContext.m: fixed a bug in the description (parent
+	  ctx was not properly logged)
+	
+	* SoObjects/SoSecurityManager.m: improved private key access exception
+
+2003-10-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m (WEUA_xmlrpclib_py): added Python XML-RPC
+	  library as a known user-agent, smaller cleanups (v4.2.222)
+
+2003-10-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: detect NetNewsWire as a user-agent 
+	  (v4.2.221)
+
+2003-10-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: added a new iCal.app user-agent (reports 
+	  DAVKit instead of DAVAccess) (v4.2.220)
+
+2003-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+        * fixed some MacOSX warnings (v4.2.219)
+
+2003-09-06  Marcus Mueller <znek@mulle-kybernetik.com>
+
+	* v4.2.218
+
+	* SoOFS/OFSFolder.m, SoObjects/SoObject+Traversal.m,
+	  SoObjects/SoPageInvocation.m, SoObjects/SoProductResourceManager.m,
+	  WebDAV/SoObject+SoDAVQuery.m: Casts for _ctx because of multiple
+	  definitions of - response.
+	  NOTE: I probably should have changed the interface,
+	  but didn't know exactly if that was appropriate. However it seems
+	  likely that this SHOULD be changed
+
+	* SoOFS/OFSHttpPasswd.m: Include <unistd.h> for crypt if on Apple
+	  or FreeBSD. A quick glimpse revealed that the system gcc (3.2) on
+	  FreeBSD 5.x doesn't define __FreeBSD__ which is most likely a bug
+	  and should be reported. On FreeBSD 4.x everything's as expected.
+
+	* SoObjects/SoClass.h: class forward declarations include NSArray now
+
+2003-08-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile (RESOURCES_DIR): use GNUSTEP_RESOURCES instead of hard-
+	  coded $(GNUSTEP_LOCAL_ROOT)/Libraries/Resources, do not pass the
+	  RESOURCES_DIR to sourcecode (v4.2.217)
+
+2003-08-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpc: small cleanup to exception handling (v4.2.216)
+
+2003-08-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent.m, WOResourceManager.m: added some comments on the
+	  -initWithContext: issue (v4.2.215)
+
+2003-08-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.214
+
+	* WOSimpleHTTPParser.m: added 'content-class' and 'if-none-match'
+	  as known headers, both submitted by Entourage/X
+
+	* SoObjects/SoHTTPAuthenticator.m: split off domain names in login
+	  strings (separated by backslash)
+
+	* v4.2.213
+
+	* WEClientCapabilities.m: added Entourage as a known user agent
+
+	* WOSimpleHTTPParser.m: added 'extension', 'ua-cpu' and 'ua-os',
+	  all submitted by Entourage/X
+
+2003-08-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.212
+		
+	* WebDAV/SoWebDAVRenderer.m: added some very basic support for 
+	  Exchange row range headers
+
+	* WebDAV/SoWebDAVRenderer.m, SoWebDAVValue.m: do not format XML output 
+	  with newlines, this is good for improving WebStore compatibility
+
+2003-08-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: added detection of SOUP WebDAV library
+	  (v4.2.211)
+
+2003-08-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.210
+
+	* GNUmakefile.preamble: do not link against libcrypt on OpenBSD
+
+	* SoOFS/OFSHttpPasswd.m: include des.h instead of crypt.h on OpenBSD
+	  (pointed out by Max Berger, thanks!)
+
+2003-07-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.209
+
+	* DynamicElements/WOMetaRefresh.m: small cleanups
+
+	* DynamicElements/WOHTMLDynamicElement.m: ensure that components
+	  returned by actions are awake in the current context, added a
+	  debugging default to track action execution
+
+2003-07-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoObject.m: added a log if the hard coded default for
+	  the broken SOUP library is used (v4.2.208)
+
+2003-07-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* applied rangeOfString patches provided by Filip Van Raemdonck for 
+	  improved compilation with gstep-base (v4.2.207)
+
+	* applied GNUstep patches provided by Filip Van Raemdonck for improved
+	  compilation with gstep-base (v4.2.206)
+
+2003-07-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.205
+
+	* SoObjects: improved the debug output
+	
+	* Defaults.plist: added some more default languages
+
+2003-07-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* Defaults.plist, WORequest.m, WOSession.m: made default language array
+	  configurable using the WODefaultLanguages array default (v4.2.204)
+
+Fri Jul  4 17:55:15 2003  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved to OpenGroupware.org CVS repository
+
+	* removed old (pre-SOPE) ChangeLogs, uninteresting for OGo development
+
+2003-06-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed some gcc 3.3 signed/unsigned warnings (v4.2.203)
+
+	* v4.2.202
+	
+	* WOResourceManager.m: major change in template lookup: consider the
+	  bundle-path of a component class (shouldn't break anything, but who
+	  knows ...)
+	
+	* SoObjects/SoProductRegistry.m: added a product lookup based on the
+	  bundle (to be completed, right now only the last path component is
+	  checked as the name ...)
+	
+	* WOResourceManager.m: replaced some RELEASE macros with methods
+	
+	* WOComponent.m: small cleanups, +initialize did not properly use the
+	  didInit flag
+	
+	* SoObjects: added SoComponent, a WOComponent subclass which uses the
+	  SoProductResourceManager for resource lookup (useful with product
+	  bundles)
+	
+2003-06-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.201
+	
+	* SoObjects/SoObjects.h: included WORequest+So
+	
+	* SoObjects/product.plist: add SoApplication definition
+	
+	* SoObjects/SoProductClassInfo.m, SoObjects/SoProduct.m: improved 
+	  handling of SoObject categories
+	
+	* SoObjects/SoClass.m: added -allKeys and -slotNames reflection methods
+	
+	* WOSimpleHTTPParser.m: added ms-webstorage as a known HTTP header
+	  (v4.2.200)
+
+2003-06-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOContext.m: moved cursor tracking to WOComponent category, so that
+	  custom subclasses (SkyPubComponent) can override it (v4.2.199)
+	
+2003-06-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent.m: added a method which can be replaced to decide whether
+	  extra variables are created (intendend for components which rely on
+	  extra vars, like SkyPubComponent [News: not true, SkyPubComponent 
+	  uses a JS shadow !]) (v4.2.198)
+
+2003-06-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: added -doesSupportUTF8Encoding to check for
+	  UTF-8 capable browsers, properly recognize Apple's Safari browser
+	  (previously detected as Mozilla) (v4.2.197)
+
+2003-06-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/WORequest+So.m: added -isSoWCAPRequest (v4.2.196)
+
+2003-05-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoOFS/OFSFolder.m: fixed calculation of default-method URI when
+	  given a URI with a query-string (v4.2.195)
+
+2003-05-30  Helge Hess  <helge.hess@skyrix.com>
+	
+	* v4.2.194
+		
+	* SoOFS/OFSWebMethod.m: added support for POSTs (calls takeValues on
+	  the component before returning it)
+	
+	* DynamicElements/WOComponentReference.m, Defaults.plist: added a
+	  default (WOCoreOnRecursiveSubcomponents) to produce a coredump if
+	  a component embeds itself (which is not necessarily an error, but
+	  often it is)
+	
+	* SoObjects/SoObjectRequestHandler.m: added support for "XXX:method"
+	  form values which are used with submit-buttons
+
+	* WOElementID.m: ensure element-id size constraints
+	
+	* v4.2.193
+	
+	* sope.m: modified to work with SMI
+
+	* SoObjects/product.plist: updated permissions
+
+2003-05-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.192
+
+	* Templates: improved error handling for WOx templates
+
+	* WOApplication.m ([WOApplication -handleException:inContext:]): fixed
+	  a bug, the -handleException: method triggered a session creation in
+	  session-less sites (when trying to output to session-id)
+	
+	* more fixes to compile and run on MacOSX
+
+2003-05-28  Helge Hess  <helge.hess@skyrix.com>
+	
+	* v4.2.191
+	
+	* SoObjects/WOContext+SoObjects.m: added -parentContext and 
+	  -rootContext methods
+
+	* added UnixSignalHandler for compilation without FoundationExt on 
+	  MacOSX
+
+2003-05-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* various fixes to compile on MacOSX (v4.2.190)
+
+2003-05-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoObject+Traversal.m: do not stop at executable objects
+	  during traversal, so that we can call methods on methods (eg manage)
+	  (v4.2.189)
+
+	* v4.2.188
+
+	* WOComponent+JS.m: fixed -initialize ... (the category also
+	  declared an own +initialize method
+
+	* SoObjects/SoSubContext.m: fixed a bug with the SubContext's ID being
+	  the same like the parent ctx-id, causing problems with the awake
+	  state of a component
+
+	* SoObjects/SoOFS: major fixes to "clientObject" handling
+	
+	* WOComponent.m: only log extra-variable creation if we have a 
+	  WOComponent subclass (since with components without an own class we
+	  can only use extra variables ...)
+	
+	* SoOFS: added OFSWebDocument, map 'xhtml' extension to OFSWebDocument
+	
+	* SoOFS: prepared classes for ChangeLog files and htpasswd files
+
+	* SoObjects/SoClassRegistry.m: added support for exact names
+
+	* SoOFS/OFSFactoryRegistry.m: allow file extensions to determine 
+	  folder factory, added exact-name support
+
+	* SoObjects: moved SoSecurityException to own file
+
+	* SoObjects/SoSecurityManager.m: various cleanups
+
+2003-05-23  Helge Hess  <helge.hess@skyrix.com>
+	
+	* SoOFS: added methods to detect version control systems (v4.2.187)
+	
+	* v4.2.186
+		
+	* WOComponentDefinition.m: small cleanups
+
+	* Templates/WOTemplateBuilder.m: select WOxTemplateBuilder based on
+	  the WOxFileExtensions default (default: wox, xtmpl, xhtml)
+
+	* SoOFS: added OFSWebTemplate handler for xtmpl templates
+
+	* SoOFS/OFSResourceManager.m: uses -traverseKey with a subcontext to
+	  acquire resources, added logging (SoOFSResourceManagerDebugEnabled)
+	
+	* SoObjects/SoObject.m(-lookupName:): added capability to acquire from
+	  the container (should we add context-acquisition ?, see NOTES)
+	
+	* SoTemplateRenderer.m: allows selection of template using the 
+	  "template" query parameter
+
+	* SoSubContext.m: copy traversal stack, keep clientObject,
+	  set request-type to "INTERNAL" - all this is required to keep the
+	  context
+	
+2003-05-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.185
+
+	* Defaults.plist: used template-renderer for OFSWebMethod's
+
+	* SoObjects/SoTemplateRenderer.m: first working version ! locates
+	  templates with name "Main"
+
+	* WOxComponentElemBuilder.m: added support for <var:component value="">
+	  to embed components by value instead of reference (eg if you keep
+	  a WOComponent object in an ivar)
+	
+	* WOContext.m: explicitly ensure that the page is put to sleep, even
+	  if the page is not marked as awake in the context. Also ensure that
+	  the page is awaked in the context if it's set via -setPage:.
+	
+	* WOComponent.m: fixed a bug in _contextWillDealloc, a context mismatch
+	  was reported even though the context was correct (the context-*id*
+	  references was compared to the context object ...)
+	
+	* SoObjects: added SoSubContext for nested SOPE lookups (v4.2.184)
+
+2003-05-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.183
+
+	* SoOFS/OFSFileRenderer.m: changed to be a fully compliant renderer,
+	  now also does the actual rendering (moved in code from OFSFile)
+	
+	* SoOFS/OFSWebMethod.m: moved OFSWebMethodRenderer to separate file
+	
+	* v4.2.182
+	
+	* SoOFS/OFSWebMethod.m: added specialized renderer for OFSWebMethod
+	
+	* modified renderer API to return an NSException instead of just a
+	  bool (so that not all renderers need to implement NSException
+	  rendering)
+	
+	* started SoTemplateRenderer
+	
+	* WebDAV/SoWebDAVRenderer.m: do not crash when a SOPE app is called
+	  on a root URI '/', fixes bug 1592 (v4.2.181)
+	
+	* v4.2.180
+	
+	* SoObjects/SoObjectRequestHandler.m: 
+	  - do not add empty path components to traversal path
+	  - use default renderer if a renderer rejected an object (important 
+	    for rendering exceptions)
+
+	* SoObjects/SoObjectRequestHandler.m: fixed a bug, SoRequestType was
+	  not properly set in context resulting in wrong renderer for WebDAV
+	  requests (v4.2.179)
+
+2003-05-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.178
+
+	* SoObjects: improved logging
+
+	* WORequest.m: added debug-logging
+
+	* SoObjectRequestHandler.m: use new NGExtension rules system to select
+	  dispatcher, renderer and acquisition - requires NGExtension 4.2.33 !
+	  (v4.2.177)
+
+2003-05-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.176
+
+	* SoObjects/SoProduct.m: added -description
+
+	* SoObjects/SoObjectRequestHandler.m: moved request classification into
+	  category of WORequest (new files WORequest+So)
+
+	* GNUmakefile: added Version file to SoOFS and SoCore products
+
+2003-05-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* sope.m: the tool can now load a site-local defaults file located in
+	  ".sope.plist". the defaults are loaded into the registration domain
+	  (should become an own domain)
+
+	* WOSimpleHTTPParser.m, OFSFolder.m: fixed signed/unsigned warning 
+	  (v4.2.175)
+
+2003-05-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.174
+
+	* SoOFS/OFSFile.m: return self on GET, use a renderer
+
+	* SoObjects/SoObjectRequestHandler.m: use traversal stack to find the
+	  renderer for an object
+	
+	* v4.2.173
+
+	* SoOFS/OFSFile.m: added support for HEAD, cleaned up rendering (still
+	  needs more work ...)
+
+	* NGHttp: smaller cleanups
+
+	* SoObjects/SoObjectRequestHandler.m: some cleanups, does consider the
+	  appname part of the URI traversal path if the request handler key is
+	  not detected as a registered one
+
+	* v4.2.172
+
+	* WOApplication.m: cleaned up login
+
+	* SoOFS/OFSWebMethod.m: added OFSWebMethodDebugEnabled default to
+	  trigger debug logging, fixed a bug in component caching
+
+2003-04-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* Templates/WOHTMLParser.m: fixed a gcc 3.3 warning
+
+	* WOHTMLParser: added support for "hash tags" (eg <#name/>) (v4.2.171)
+
+2003-04-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoSecurityManager.m: disabled buggy permission cache, needs
+	  to be fixed (v4.2.170)
+
+	* WOWatchDogApplicationMain.m: do not log signal code for SIGCHLD
+	  (v4.2.169)
+
+2003-04-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV: added support for MKCOL for creating collections (v4.2.168)
+
+2003-04-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: recognize ZideLook 0.9.5 plugin (changed user
+	  agent identifier) (v4.2.167)
+
+2003-04-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.166
+	
+	* SoObjectRequestHandler.m: does request path aquisition per default,
+	  fixed a retain bug (the path traversal array), added a facility to
+	  put objects to sleep (they must implement either _sleepWithContext:
+	  or just sleep and will be called after all processing is done)
+	
+	* SoObject+Traversal.m: fixed a bug in the name of the logging default
+	
+	* OFSFolder.m: added code to some negotiation of the object to be
+	  located (eg you can lookup 'index.html' by looking up 'index')
+	
+	* OFSWebMethod.m: smaller cleanups
+	
+	* WOApplication.m: smaller cleanups
+	
+	* SoClassSecurityInfo, SoClass: added more logging, keeps associated 
+	  class name
+	
+	* added 'sope' tool for hosting SoOFS based SOPE applications
+	
+	* DAVPropMap.plist: added {DAV:}status (v4.2.165)
+	
+2003-04-11  Helge Hess  <helge.hess@skyrix.com>
+        
+	* SoObjects/SoObjectRequestHandler.m: made WebDAV methods to check
+	  for determining the SOPE handler a userdefault (v4.2.164)
+          
+2003-04-01  GNUstep User  <helge.hess@skyrix.com>
+
+	* DynamicElements/WOText.m: use -rangeOfString: instead of 
+	  -indexOfString: (v4.2.163)
+
+Fri Mar 28 17:19:33 2003  Martin Hoerning  <mh@skyrix.com>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: fixed bulk target pathes where 
+	  the base uri path was not properly unescaped (v4.2.162)
+
+2003-03-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/GNUmakefile: export SoObjectResultEntry.h as a public header
+
+2003-03-19  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WebDAV/SoObjectWebDAVDispatcher.m: fixed a bug with _range queries
+	  (an empty ID was added for the first _) (v4.2.161)
+
+	* v4.2.160
+
+	* WOHttpTransaction.m, WOResponse.m: moved body zipping code to 
+	  response, so that it can be used in different adaptors
+
+	* WOHttpTransaction.m: removed unused (#if 0) code
+
+	* WOSimpleHTTPParser.m: added if-match as a known header (v4.2.159)
+
+2003-03-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.158
+
+	* SoObjects/SoControlPanel.m: added -appendToResponse:inContext:
+	  for rendering a HTML representation (a GET should be bound by SMI)
+	
+	* SoObjects/SoSecurityManager.m: add support for special "<public>"
+	  permission
+
+2003-03-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.157
+
+	* WebDAV/SoObject+SoDAVQuery.m: caught traversal exceptions in
+	  bulk-path queries
+	  
+	* SoObjects/SoSecurityManager.m: initialize security exceptions with
+	  name and reason
+	
+2003-03-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/SoObject+SoDAVQuery.m: use traversePath for bulk targets that
+	  contain slashes
+
+	* SoObjects/SoObjectRequestHandler.m, 
+	  WebDAV/SoObjectWebDAVDispatcher.m: handle empty range queries
+	  (v4.2.156)
+
+2003-03-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/SoObject+SoDAVQuery.m: always query davURL (v4.2.155)
+
+	* Defaults.plist: added {DAV:}href as default property
+
+2003-03-11  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WebDAV/SoObjectWebDAVDispatcher.m: added support for ZideLook range
+	  queries (transformed into bulk-queries) (v4.2.153)
+	
+2003-03-07  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WebDAV/SaxDAVHandler.m: hopefully fixed the <prop> set vs <prop>
+	  response the last time (v4.2.152)
+
+2003-03-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOSimpleHTTPParser.m: added "x-forwarded-for" as a known header
+	  (v4.2.151)
+
+2003-03-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoObjectRequestHandler.m: fixed bug, query parameters were
+	  not properly cut off when doing the URI processing in the handler,
+	  added support for ASP ?Cmd style methods (v4.2.150)
+
+	* WebDAV/SaxDAVHandler.m: added a DAVParserDebugProp and 
+	  DAVParserHeavyLog defaults for improved debugging, fixed yet another
+	  bug in the property "set" handler (if each property was enclosed in
+	  an individual "set" tag, only the last was delivered) (v4.2.149)
+
+2003-03-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxDAVHandler: fixed another bug in prop-patch parsing (if the prop-
+	  patch contained a "delete" section, no values were returned 
+	  (v4.2.148)
+
+2003-02-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.147
+
+	* SaxDAVHandler: fixed a bug in property-patch parsing
+
+	* SoObjects/SoSecurityManager.m: allow operations on objects which
+	  are not owned
+
+	* SoObjects/SoObjectRequestHandler.m: set a HTTP header for the
+	  SxNewObjectID context variable
+
+	* WOSimpleHTTPParser.m: added x-zidestore-name as known header
+
+2003-02-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOSimpleHTTPParser.m: added 'if-modified-since' as a known header
+	  (v4.2.146)
+
+2003-02-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/SaxDAVHandler.m: fixed a bug with properties in the DAV: 
+	  namespaces not being parsed in property-update and prop tags,
+	  added a delegate for parsing results (v4.2.145)
+	  
+2003-02-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoObject.m(lookupName:inContext:acquire:): if a key
+	  is contained in the toOneRelationshipKeys array, lookupName will
+	  now use -valueForKey: to find a name
+	
+	* WebDAV/SoObject+SoDAV.m: an object now becomes a DAV collection
+	  marker if it the toOneRelationshipKeys array is not empty
+
+	* SoObjects/SoApplication.m(hasName:inContext:): fixed a bug with
+	  name-lookup when the root object is the application itself
+
+2003-02-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGObjWeb/WOComponent.h: added missing declaration of NSException
+
+	* NGObjWeb/WODynamicElement.h: removed unnecessary declaration of
+	  NSMutableArray and WOComponent
+
+	* NGObjWeb/WOElement.h: removed unnecessary declaration of NSException
+
+2003-02-14  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WebDAV/SaxDAVHandler.m: added basic DASL query capabilities,
+	  orderings still missing (v4.2.144)
+
+	* WOSimpleHTTPParser.m: added version control HTTP methods as known
+	  methods (v4.2.143)
+
+2003-02-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoClass.m: added -copyWithZone: for OSX (v4.2.142)
+
+2003-01-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: added ZideLook detection (v4.2.141)
+
+2003-01-30  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WebDAV: subscription manager almost complete (v4.2.140)
+	
+	* v4.2.139
+	
+	* WOSimpleHTTPParser.m: added UNSUBSCRIBE as a known HTTP method
+	
+	* WebDAV: started subscription manager
+	
+	* NGXmlRpc: added reflection support on MacOSX (v4.2.138)
+
+2003-01-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpc bugfix by bs@skyrix.com (v4.2.137)
+
+2003-01-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpcClient.m: abstracted HTTP connection and request in abstract
+	  class factories (-connectionClass and -requestClass), removed 
+	  dependency on XmlRpcMethodResponse+WO and XmlRpcMethodCall+WO
+	  (v4.2.136)
+
+2003-01-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOSimpleHTTPParser.m: added 'p3p', 'set-cookie' and 'x-powered-by' 
+	  as known headers (v4.2.135)
+
+2003-01-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.134
+	
+	* WOProxyRequestHandler.m: added facility to log to files
+	
+	* WOMessage.m: added -headersAsString method (useful for debugging)
+	
+	* WOSimpleHTTPParser.m: added 'server', 'x-cache', 'proxy-connection'
+	  and 'subscription-id' as known headers
+	
+	* SoObjects/SoObjectRequestHandler.m: if the request-handler-key in the
+	  request does not match a registered one, process the request URI
+	  in this class (v4.2.133)
+	
+	* NGHttp: check superclass version (v4.2.132)
+	
+2003-01-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.131
+
+	* NGXmlRpc: bugfix with parameter counts
+
+	* Templates/WOHTMLParser.m (_isWOCloseTag): fixed a bug with parsing
+	  tags (in files were the ">" of the close tag is the
+	  last char of the file)
+
+2003-01-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: fixed an Evo bug with unsafe
+	  chars in BPROPFIND target URLs (v4.2.130)
+
+	* v4.2.129
+	
+	* SoOFS/OFSPropertyListObject.m: improved factory and -saveObject to be
+	  able to deal with new objects
+	
+	* SoOFS/OFSFactoryContext, OFSFolder: added a context creation method
+	  for objects that do not yet exist in the store
+
+	* WebDAV: added handling for bulk queries to NSObject+SoDAV (v4.2.128)
+
+	* v4.2.127
+
+	* WebDAV: changed implementation of BPROPFIND. BPROPFIND doesn't use
+	  individual queries for each target anymore, but passes relative
+	  target names in the "bulkTargetKeys" fetch hint, this way it can be
+	  processed by a SQL based datasource much faster.
+	
+	* WOSimpleHTTPParser.m: improved processing of content-length
+
+2003-01-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m: fixed a bug in the BPROPFIND
+	  implementation (v4.2.126)
+
+	* WORequest.m: added parsing of query parameters and form content in
+	  query-parameter format (v4.2.125), multipart-formdata is not yet
+	  processed
+
+	* WORequest.m: print a warning if the form parameters could not be
+	  calculated (eg if you use the current WOSimpleHTTPParser)
+
+	* NGHttp+WO.m: replaced some RETAIN macros
+
+	* WOSimpleHTTPParser.m: added support for streamed uploads (large 
+	  HTTP request bodies are streamed into a temporary file which is 
+	  mapped into memory) (v4.2.124)
+
+	* v4.2.123
+
+	* WOHttpAdaptor/WOHttpTransaction.m: use request logging method for
+	  WOSimpleHTTPParser (method became independed from NGHttpRequest)
+
+	* WOHttpAdaptor/WOHttpAdaptor.m: replaced RETAIN macros with methods
+
+	* WOSimpleHTTPParser.m: added some missing headers, added parsing of
+	  content-length
+
+	* WebDAV fixes (v4.2.122)
+
+	* v4.2.121
+
+	* WebDAV/SoObject+SoDAVQuery.m: fixed typo
+
+	* WebDAV/SoObject+SoDAV.m: added default -dav* methods for 
+	  WOCoreApplication, WOApplication and WORequestHandler
+
+	* SoObjects/SoApplication.m: added -toOneRelationshipKeys
+
+	* DynamicElements/WOPopUpButton.m: properly close option tag (v4.2.120)
+
+	* v4.2.119
+	
+	* WOHttpAdaptor/WOHttpTransaction.m: added a faster logging (does not
+	  use -descriptionWithCalendarFormat:), replaced some RETAIN macros,
+	  use gettimeofday() for calculating request-duration, use char* 
+	  instead of NSString for reason, added a deliverResponse that uses
+	  less NGTextStream operations and more direct buffer writes
+	
+	* WOSimpleHTTPParser.m: added "cookie" as a known header
+	
+	* v4.2.118 (results of NGObjWeb raw-performance "weekend", after
+	  profiling on OSX
+	
+	* Templates/WOxElemBuilder.m: created WOSimpleStaticASCIIString for
+	  ASCII strings (ASCII detection speed needs to be improved !)
+	
+	* DynamicElements/WOGenericElement.m, WOGenericContainer.m: added code
+	  to handle constant tag-names efficiently
+
+	* DynamicElements: use WOResponse_AddCString if possible
+	
+	* DynamicElements/WOCompoundElement.m: replaced some RETAIN macros
+	
+	* DynamicElements/WOString.m: added WOSimpleStaticASCIIString subclass
+	  (this class uses -appendContentCString: for a quick addition), 
+	  replaced some RETAIN macros
+	
+	* WORequestHandler.m: return 404 on calls to /favicon.ico
+	
+	* WOHTTPConnection.m: fixed an OSX compiler warning
+
+	* SoObjects/SoApplication.m: fixed a bug, lookup always returned a
+	  WORequestHandler (since requestHandlerForKey: returns the default
+	  handler if the key did not match)
+
+	* WOElementTrackingContext.h: added -appendIntElementIDComponet:
+
+	* WOResponse+private.h: use macros for direct WOMessage access, added
+	  macros for adding integers
+
+	* WOSession.m: replaced some RETAIN macros
+
+	* WOResponse.m: improved speed of -disableClientCaching, caches
+	  GMT timezone, does not use -descriptionWithCalendarFormat: for
+	  speed and locale-indepedence
+
+	* WODynamicElement.m: use -appendContentCString:
+
+	* WOCoreApplication.m: replaced some retain macros, cache some defaults
+
+	* WOCookie.m: cache GMT timezone during generation, replaced some
+	  RETAIN macros
+
+	* WOApplication.m: generate session-id using sprintf for speed, 
+	  replaced some RETAIN macros
+
+	* WOApplication+defaults.m: cache request-handler key defaults
+
+	* added WOElementID class for fast element-id tracking and
+	  generation (more than twice as fast)
+	
+	* WOMessage.m: added -appendContentCString: for adding ASCII strings
+	  (much faster than using -dataUsingEncoding: if we know that a string
+	  is ASCII since most other encodings are "ASCII-compatible")
+	
+	* WOContext.m: caches URL prefixes (faster URL generation), moved 
+	  element-id processing to WOElementID, several minor changes for speed
+
+2003-01-10  Helge Hess  <helge.hess@skyrix.com>
+        
+	* added generation of SoProduct bundles for SoCore and SoOFS (v4.2.117)
+
+2003-01-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOHttpAdaptor/WOHttpTransaction.m: cleaned up default initialization,
+	  added default to enable WOSimpleHTTPParser (v4.2.116)
+
+	* Templates/WOHTMLParser.m (_makeHtmlException): only add parser to
+	  exception userinfo if the parser is passed to _makeHtmlException
+	  (v4.2.115)
+
+	* NGXmlRpc, xmlrpc_call: completed Unix domain sockets (v4.2.114)
+
+	* WOHTTPConnection.m: rewrote to base connections on NSURL (in 
+	  preparation for HTTP-over-Unix-Domain-Sockets) (v4.2.113)
+
+	* NGXmlRpcClient, xmlrpc_call: started support for HTTP digest auth
+
+	* WOSimpleHTTPParser.m: added request parsing (v4.2.112)
+
+2003-01-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.111
+
+	* WOHTTPConnection.m: added support for WOSimpleHTTPParser (must be 
+	  turned on using a default)
+
+	* started WOSimpleHTTPParser
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOHTTPConnection, NGXmlRpcClient, xmlrpc_call: added SSL support 
+	  (v4.2.109)
+	
+	* v4.2.108
+
+	* SoOFS/OFSFactoryRegistry.m: added some code to allow SoClass'es 
+	  behave as factories (located using the extension manifest key)
+
+	* SoOFS/OFSFolder.m: move factory method to a separate category
+
+	* WOHttpAdaptor/WORecordRequestStream.m: use defines for buffer sizes
+
+	* SoObjects/SoSecurityManager.m: some little code cleanups
+
+	* SoObjects/SoProductClassInfo.m: some code cleanups, process the
+	  SoClass->extension mapping of the manifest
+
+	* SoObjects/SoObjCClass.m: added the -objcClass method to find the
+	  implementation of a SoClass
+
+	* SoObjects/SoApplication.m: allow lookup of request-handlers
+
+	* replaced RETAIN macros with method calls in several places
+
+	* WOApplication.m: fixed a bug in the -path method, if the app wrapper
+	  could not be found, the application retain count was broken
+
+2003-01-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoProductClassInfo.h: fixed header (NSArray was missing)
+	  (v4.2.107)
+
+2003-01-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoProductClassInfo.m: parse extensions code from manifest
+	  (v4.2.106)
+
+Thu Jan  2 11:07:43 2003  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.105
+	
+	* Templates/WOxComponentElemBuilder.m: fixed a compiler warning (added
+	  a informal protocol for -line)
+	
+	* WOApplication.m: now reports a missing app-path (.woa wrapper) only
+	  once
+
+Fri Dec 27 11:18:34 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.104
+
+	* WOMessage.m: some modifications to -appendContentCharacter: which
+	  breaks if optimization is turned on in MacOSX Dec2002 devtools !,
+	  also prints a warning if NSString is ever used to add a character
+	  (performance warning ...)
+	
+	* WOPageRequestHandler.m: fixed a warning
+
+	* WOCoreApplication.m: allow capitalized keys on MacOSX (this usually
+	  prints warnings on OSX), check for "COMPILE_AS_FRAMEWORK" instead of
+	  "NGOBJWEB_AS_FRAMEWORK"
+	
+	* WOComponentRequestHandler.m: fixed a warning
+
+	* Templates/WOxElemBuilder.m: small code cleanups
+
+	* Templates/WOxTemplateBuilder.m: disabled logging on OSX too
+
+	* Templates/WOxComponentElemBuilder.m: fixed a bug, 'className' was
+	  passed to the created component as a binding
+
+	* SoOFS/OFSResourceManager.m: fixed some compilation warnings
+	
+	* SoOFS/OFSBaseObject.m: return nil for unbound keys (OSX)
+
+	* NGXmlRpc: small code cleanups
+	
+	* SoObjects/WOContext+SoObjects.m: do not use -removeObjectForKey: on
+	  WOContext anymore (use -setObject:nil forKey: instead)
+	
+	* SoObjects/SoSecurityManager.m: small logging improvement
+	
+	* SoObjects/SoProductRegistry.m: check for COCOA_Foundation_LIBRARY
+	  instead of APPLE_Foundation_LIBRARY, do not fail product loading
+	  of the MAIN bundle (eg if the main program is a tool)
+
+	* SoObjects/SoPageInvocation.m: fixed a warning
+
+	* SoObject.m, SoProduct.m, SoProductResourceManager.m: use basic
+	  string methods for URL construction since 
+	  -stringByAppendingPathComponent: doesn't work for URLs on
+	  MacOSX
+
+	* SoObjects/SoHTTPAuthenticator.m: removed empty -dealloc
+
+	* SoObjects/NSException+HTTP.m: return nil for unbound keys (OSX)
+	
+	* WebDAV/SoObjectDataSource.m: check whether lookupName: returned an
+	  exception
+	
+	* WebDAV/SoObject+SoDAV.m: added an exception handler for some key 
+	  lookup on OSX, since OSX throws unbound key exceptions per default
+	  (to be changed, OSX behaviour should be standard in libFoundation)
+	
+	* WOTextField.m, WOText.m, WOQuickTime.m: fixed a warning
+	
+Mon Dec 23 15:57:27 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.103 (results of OSX compilation)
+
+	* SoObjects/WODirectActionRequestHandler+SoObjects.m: fixed a bug, if
+	  no context was available the lookup sent -context to the 
+	  WOApplication class instead of the instance
+
+	* SoObjects/SoSelectorInvocation.m: does not rebind bound invocations
+
+	* SoObjects/SoSecurityManager.m, WOContext+SoObjects.m: fixed some
+	  warnings
+
+	* SoObjects/SoProductRegistry.m: print log if main-bundle could not be
+	  determined
+
+	* SoObjects/SoObjectRequestHandler.m: improved handling of root object
+
+	* SoObjects/SoObject.m: removed lookupKey completly (was still
+	  available for compatibility reasons), added _initialize for 
+	  initialization of category globals
+
+	* SoObjects/SoObjCClass.m: fixed invalid number of args in NSAssert
+
+	* SoClassSecurityInfo.h, SoObject.h, SoProductRegistry.h, 
+	  WOContext+SoObjects.h: added NSArray which was missing in the header
+	  file (for MacOSX)
+	
+	* SoObjects/SoApplication.m: only check for EnableDoubleReleaseCheck
+	  on libFoundation
+
+	* Templates/WOWrapperTemplateBuilder.m: fixed a bug, when no root 
+	  element was available the parsing result was undefined
+
+	* WODisplayGroup.m: fixed a bug, used -objectForKey: with the wrong
+	  variable
+	
+	* OWViewRequestHandler.m, WOComponent.m, WOCoreApplication.m, 
+	  WOHTTPURLHandle.m, WORequestHandler.m, WORepetition.m, 
+	  SaxDAVHandler.m, SoObjectDataSource.m, SoProductClassInfo.m:
+	  fixed gcc 3.2 warnings
+	
+2002-12-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects/SoClassRegistry.m: added a file-extension=>SoClass registry
+	  (v4.2.102)
+
+2002-12-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoOFS/OFSFolder.m: fixed a typo
+
+	* WebDAV/SoObject+SoDAVQuery.m: fixed a bug with WebDAV deep queries
+	  (v4.2.101)
+
+	* Defaults.plist: added a preferred WebDAV prefix for the Cadaver
+	  namespace
+
+2002-12-11  Helge Hess  <helge.hess@skyrix.com>
+	
+	* SoOFS/OFSFile.m: added a generic "writeState:" method
+
+2002-12-08  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WOComponent.m: improved -description
+
+	* WOComponentFault.m: reenabled usage of parent-resourcemanager, this
+	  was #ifdef'ed out, why (problems with SKYRiX Forms) ?
+	
+	* WOResourceManager.m: added a -resourceNameForComponentNamed: to map
+	  component names to resource names (previously this was fixed to .wox
+	  files)
+	
+	* WOComponentDefinition.m: do not search for classes if the component
+	  name contains a "."
+
+	* SoObjects: - fixed a problem with the default renderer returning an
+	  empty result when the SoHTTPAuthenticator refused to render a 
+	  security exception 
+	  - added a GETAction: to OFSFolder which does a redirect to uri+/view
+	  (v4.2.100)
+
+2002-12-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved to skyrix-sope-42 (v4.2.99)
+	  - removed WOExtensions, WEExtensions (moved to Skyrix41e/WebUI)
+
+2002-11-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects: renamed -lookupKey:inContext: to 
+	  -lookupName:inContext:acquire: (v4.2.98)
+
+2002-11-28  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WebDAV.subproj: pass a context into DAV PROPPATCH methods (v4.2.97)
+	
+2002-11-25  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WebDAV.subproj: fixed a bug in SoObjectDataSource,
+	  -toOneRelationshipKeys of the object is checked, if the brief header
+	  is set, no null properties are encoded (correct ???)
+	  (v4.2.96)
+	
+	* SoObjects.subproj/SoHTTPAuthenticator.h: added public API (v4.2.95)
+
+	* Defaults.plist (WOxBuilderClasses): added WOxXULElemBuilder
+
+	* DynamicElements.subproj/WOxXULElemBuilder.m: started XULElemBuilder
+
+2002-11-22  Helge Hess  <helge.hess@skyrix.com>
+	
+	* SoOFS: cleanup of OFS storage system (v4.2.94)
+	
+2002-11-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* DynamicElements.subproj/WOForm.m, WOComponent.m: added a 
+	  -shouldTakeValuesFromRequest:inContext: to check whether a form
+	  should take the values even though it's href or element-id doesn't
+	  match the request (v4.2.93)
+	
+	* WOComponent.m: added -redirectToLocation: for easy redirection in
+	  response to an action of any kind (v4.2.92)
+	
+	* SoObjects.subproj/SoProductClassInfo.m: added support for non-method
+	  slots (v4.2.91)
+
+2002-11-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* Associations.subproj/WOKeyPathAssociation.m: added faster number to
+	  string conversions by using static strings for numbers < 50,
+	  added a HEAVY_DEBUG define (v4.2.90)
+
+	* WebDAV: improved object datasource and DAV datasource handling
+	  (v4.2.89)
+	
+	* Templates.subproj/WOxElemBuilder.m: added association for so-lookup
+	  namespace (v4.2.88)
+
+	* SoObjects: added a SoApplication (v4.2.87)
+
+2002-11-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOResourceManager.m: added more bundle sensitivity (v4.2.86)
+	
+	* SoObjects: added product management system (v4.2.85)
+	
+2002-11-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOHttpAdaptor.subproj/WOHttpTransaction.m: ensure that 
+	  x-webobjects-server-name and x-webobjects-server-port are always
+	  set (v4.2.84)
+
+	* WebDAV.subproj/SoObjectWebDAVDispatcher.m: properly check permissions
+	  of WebDAV methods (previously only WebDAV access was checked) 
+	  (v4.2.83)
+
+	* SoObjects: added SoHTTPAuthenticator (v4.2.82)
+
+2002-11-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects, SoOFS: authenticator object is now local to the object and
+	  acquired using the container (v4.2.81)
+
+2002-11-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV.subproj/SoWebDAVRenderer.m: added SoWebDAVValue for rendering
+	  complex WebDAV properties (v4.2.80)
+
+	* WOHTTPConnection.m: added -initWithURL:
+
+	* GNUmakefile: fixed includes (v4.2.79)
+
+	* WebDAV.subproj/SoObjectWebDAVDispatcher.m: added support for 
+	  BPROPFIND (v4.2.78)
+
+	* WOContext: moved protocols from WOContext.h into separate header
+	  files, added ivars for SOPE (clientObject, traversalStack),
+	  increased version (v4.2.77)
+
+2002-11-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOMessage.m: prepared for content streaming, increased class version
+	  (v4.2.76)
+		
+	* added first version of SoOFS (v4.2.75)
+
+2002-11-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* Associations.subproj/WOAssociation.m: support objects as values
+	  which do not implement NSCopying (previously disallowed because
+	  associations were cached) (v4.2.74)
+
+	* SoObjects: moved traversal code from SoObjectRequestHandler to
+	  SoObject category (traversal is required in several environments)
+	  (v4.2.73)
+	
+2002-11-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObject: fixed validation, added debugkey for SoObjectDataSource
+	  (v4.2.72)
+
+	* WOComponentDefinition.m ([WOComponent -instantiateChildComponentsInTemplate:languages:]):
+	  fixed a bug with components not passing down languages to child
+	  components (v4.2.71)
+
+	* WOContext.m: fixed a small bug with the cursor debugging (cursor
+	  pops were not reported correctly) (v4.2.70)
+
+2002-11-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* WebDAV.subproj/SaxDAVHandler.m: started support for DASL (SQL 
+	  with XML syntax)
+
+	* added special SoClass subclass for ObjC classes (v4.2.69)
+
+2002-11-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttp: do not parse requests without clen in HTTP/1.1 (v4.2.68)
+
+	* started a new HTTP parser in NGHttpAdaptor (not used yet)
+	
+	* WebDAV: moved the query methods to a SoObjectDataSource class, which
+	  is retrieved from the object using -davDataSourceInContext: (v4.2.67)
+
+2002-11-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects: first version supporting components as SoClass methods
+	  (SoPageInvocation) (v4.2.66)
+
+2002-11-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects.subproj/SoSecurityManager.m: first version that actually
+	  denies access to objects ;-) (v4.2.65)
+
+	* WEClientCapabilities.m: detect the GNOME-VFS (Nautilus) and mark
+	  it as a WebDAV client (v4.2.64)
+
+2002-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.63
+
+	* WebDAV: added parsing of PROPPATCH queries, mapped some additional
+	  DAV standard properties and provide a default implementation, added
+	  PROPPATCH processing, use exceptions for most error responses, 
+
+	* SoObjects.subproj/SoSelectorInvocation.m: added a description and
+	  -appendToResponse:inContext: in case the object is to be delivered
+	  to the browser instead of being called
+
+	* SoObjects.subproj/SoObjectRequestHandler.m: added PROPPATCH as an
+	  object creation method, create a PATH_INFO
+
+	* DAVPropMap.plist: added some classes
+
+2002-11-01  Helge Hess  <helge.hess@skyrix.com>
+	
+	* WebDAV.subproj: DAV property name->key mapping is now done in
+	  NGObjWeb (v4.2.62)
+	
+	* WOComponentFault.m: added -setParent:, this fixes a bug introduced
+	  in v4.2.57.
+
+	* started support for "renderer" objects, added SoDefaultRenderer and
+	  SoWebDAVRenderer (v4.2.61)
+	
+	* moved WebDAV related SoObject stuff into a separate subproject,
+	  WebDAV.subproj
+
+2002-10-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects.subproj/SoObjectWebDAVDispatcher.m: started subscribe/
+	  unsubscribe support, uses attributes for search result generation
+	  if available (v4.2.60)
+
+	* Defaults.plist: added SoPreferredNamespacePrefixes defaults to
+	  configure default-prefixes for XML namespace generation
+
+	* NGHttp: added SUBSCRIBE/UNSCRIBE to the request methods were no body
+	  parsing is performed (v4.2.59)
+
+2002-10-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: fixed Outlook detection (was recognized as
+	  IE, not as Outlook ...).
+	
+	* SoObjects.subproj/EOFetchSpecification+SoDAV.m: changed to use the
+	  new EOControl/EOSQLParser (v4.2.58)
+
+2002-10-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOComponent.m(-dealloc): reset parent pointers of subcomponents 
+	  (v4.2.57)
+
+	* SoObjects: started security infrastructure (v4.2.56)
+
+	* Defaults.plist: added SoSecurityManagerDebugEnabled, 
+	  SoLogSecurityDeclarations
+
+2002-10-25  Helge Hess  <helge.hess@skyrix.com>
+	
+	* SoObjects: abstracted DAV queries (PROPFIND, SEARCH) in
+	  EOFetchSpecification (v4.2.55)
+	
+	* SoObjects: working dispatcher selection based on request (v4.2.54)
+
+2002-10-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* SoObjects: started to add dispatcher and WebDAV support (v4.2.53)
+
+2002-10-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttp: added some WebDAV/HTTP methods (v4.2.52)
+
+	* WEClientCapabilities.m (WEUA_IE): recognizes Microsoft Outlook 
+	  Express when used to access mailboxes over HTTP (v4.2.51)
+
+	* WOProxyRequestHandler.m: can act as a (non-transparent) HTTP proxy
+	  (v4.2.50)
+
+	* WORequest.m: added -isProxyRequest to check whether we got a
+	  proxy request ;-) (whether the URI passed is a full URL)
+
+	* WOHTTPConnection.m: filter out host headers during sending of request
+	  headers (because host: is set by WOHTTPConnection itself)
+
+	* added the WOProxyRequestHandler for forwarding requests to other
+	  HTTP servers (v4.2.49)
+	
+	* WEClientCapabilities.m: recognizes Microsoft Outlook 2002 when used
+	  to access mailboxes over HTTP (v4.2.48)
+
+2002-10-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* WEClientCapabilities.m: added the Evolution WebDAV connector as a
+	  known host (v4.2.47)
+
+2002-10-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOContext.m: disabled the new context-URL style (DnD should work 
+	  again) (v4.2.47)
+
+	* some SoObject fixes (v4.2.46)
+
+	* v4.2.45
+
+	* a lot of work on the SoObject system (added classes, registry, 
+	  selector invocation)
+
+	* WOHttpAdaptor.subproj/WOHttpTransaction.m: some code cleanup, added
+	  some status-code=>reason mapping
+
+	* WEClientCapabilities.m: recognizes the curl program
+
+Fri Oct 18 10:59:16 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added SoObject support for WODirectActionRequestHandler and
+	  WODirectAction (v4.2.44)
+	
+	* started SoObject support (object based request handling) (v4.2.43)
+
+1998-10-09  Helge Hess  <helge@trex.mdlink.de>
+
+	* added OWContext
+
+	* OWApplication.m: session cookie added
+
+	* created ChangeLog

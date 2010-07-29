@@ -1,0 +1,183 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className='iCalPortalBaseFrame' 
+	       title='name' 
+	       const:showHeader="1"
+               xmlns='http://www.w3.org/1999/xhtml'
+               xmlns:var='http://www.skyrix.com/od/binding'
+               xmlns:const='http://www.skyrix.com/od/constant'>
+  <br />
+  <form directActionName="saveProfile" 
+	actionClass="iCalPortalRegistrationAction">
+<center>
+   <var:component className="iCalPortalBox" const:title="Create Account">
+    <table border="0" width="500">
+      <tr>
+	<td align="right">
+	  <var:if condition="loginWrong"><font color="red">FIX:</font></var:if>
+	  
+	  <var:string value="label.login"/>:
+	</td>
+	<td><input name="login" var:value="login" size="16"/>
+	  <var:if condition="loginUsed"><font color="red">already used</font></var:if>
+	</td>
+	<td width="50%"><small>(4 to 16 characters)</small></td>
+      </tr>
+      
+      <tr>
+	<td align="right">
+	  <var:if condition="pwdWrong"><font color="red">FIX:</font></var:if>
+	  <var:string value="label.password"/>:
+	</td>
+	<td><input type="password" name="pwd1" var:value="password" size="16"/></td>
+	<td><small>(6 to 16 characters)</small></td>
+      </tr>
+      <tr>
+	<td align="right"><nobr><var:string value="label.password2"/>:</nobr></td>
+	<td><input type="password" name="pwd2" var:value="password" size="16"/></td>
+	<td><small>(enter the same as above)</small></td>
+      </tr>
+      
+      <tr><td colspan="3"><hr/></td></tr>
+      
+      <tr>
+	<td align="right"><nobr>
+	  <var:if condition="firstNameWrong"><font color="red">FIX:</font></var:if>
+	  <var:string value="label.firstName"/>:</nobr>
+	</td>
+	<td><input name="firstName" var:value="firstName" size="32"/></td>
+	<td><small>(required)</small></td>
+      </tr>
+      
+      <tr>
+	<td align="right"><nobr>
+	  <var:if condition="lastNameWrong"><font color="red">FIX:</font></var:if>
+	  <var:string value="label.lastName"/>:</nobr>
+	</td>
+	<td><input name="lastName" var:value="lastName" size="32"/></td>
+	<td><small>(required)</small></td>
+      </tr>
+      
+      <tr>
+	<td align="right">
+	  <var:if condition="emailOK"><font color="red">FIX:</font></var:if>
+	  <var:string value="label.email"/>:
+	</td>
+	<td><input name="email" var:value="email" size="32"/></td>
+	<td><small>(required)</small></td>
+      </tr>
+      
+      <tr>
+	<td align="right"><i><var:string value="label.address"/>:</i></td>
+	<td><input name="address" var:value="address" size="32"/></td>
+      </tr>
+      <tr>
+	<td align="right"><i><var:string value="label.city"/>:</i></td>
+	<td><input name="city" var:value="city" size="32"/></td>
+      </tr>
+      <tr>
+	<td align="right"><i><var:string value="label.state"/>:</i></td>
+	<td>
+          <select name="state">
+            <option value="other" selected="selected">-other-</option>
+            
+            <option value="Alabama"       >Alabama</option>
+            <option value="Alaska"        >Alaska</option>
+            <option value="Arizona"       >Arizona</option>
+            <option value="Arkansas"      >Arkansas</option>
+            <option value="California"    >California</option>
+            <option value="Colorado"      >Colorado</option>
+            <option value="Connecticut"   >Connecticut</option>
+            <option value="Delaware"      >Delaware</option>
+            <option value="Florida"       >Florida</option>
+            <option value="Georgia"       >Georgia</option>
+            <option value="Hawaii"        >Hawaii</option>
+            <option value="Idaho"         >Idaho</option>
+            <option value="Illinois"      >Illinois</option>
+            <option value="Indiana"       >Indiana</option>
+            <option value="Iowa"          >Iowa</option>
+            <option value="Kansas"        >Kansas</option>
+            <option value="Kentucky"      >Kentucky</option>
+            <option value="Louisiana"     >Louisiana</option>
+            <option value="Maine"         >Maine</option>
+            <option value="Maryland"      >Maryland</option>
+            <option value="Massachusetts" >Massachusetts</option>
+            <option value="Michigan"      >Michigan</option>
+            <option value="Minnesota"     >Minnesota</option>
+            <option value="Mississippi"   >Mississippi</option>
+            <option value="Missouri"      >Missouri</option>
+            <option value="Montana"       >Montana</option>
+            <option value="Nebraska"      >Nebraska</option>
+            <option value="Nevada"        >Nevada</option>
+            <option value="New Hampshire" >New Hampshire</option>
+            <option value="New Jersey"    >New Jersey</option>
+            <option value="New Mexico"    >New Mexico</option>
+            <option value="New York"      >New York</option>
+            <option value="North Carolina">North Carolina</option>
+            <option value="North Dakota"  >North Dakota</option>
+            <option value="Ohio"          >Ohio</option>
+            <option value="Oklahoma"      >Oklahoma</option>
+            <option value="Oregon"        >Oregon</option>
+            <option value="Pennsylvania"  >Pennsylvania</option>
+            <option value="Rhode Island"  >Rhode Island</option>
+            <option value="South Carolina">South Carolina</option>
+            <option value="South Dakota"  >South Dakota</option>
+            <option value="Tennessee"     >Tennessee</option>
+            <option value="Texas"         >Texas</option>
+            <option value="Utah"          >Utah</option>
+            <option value="Vermont"       >Vermont</option>
+            <option value="Virginia"      >Virginia</option>
+            <option value="Washington"    >Washington</option>
+            <option value="West Virginia" >West Virginia</option>
+            <option value="Wisconsin"     >Wisconsin</option>
+            <option value="Wyoming"       >Wyoming</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+	<td align="right"><i><var:string value="label.zip"/>:</i></td>
+	<td><input name="zip" var:value="zip" size="32"/></td>
+      </tr>
+      <tr>
+	<td align="right"><i><var:string value="label.country"/>:</i></td>
+	<td><input name="country" var:value="country" size="32"/></td>
+      </tr>
+      <tr>
+	<td align="right"><i><var:string value="label.phone"/>:</i></td>
+	<td><input name="phone" var:value="phone" size="32"/></td>
+      </tr>
+      
+      <tr><td colspan="3"><hr/></td></tr>
+
+      <tr>
+        <td></td>
+        <td colspan="2">
+	  <input type="checkbox" name="wantIcalNews" value="1" 
+		 checked="YES"/>
+	  <small><var:string value="label.wantIcalNews"/></small>
+	</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="2">
+	  <input type="checkbox" name="wantSkyrixNews" value="1" 
+		 checked="YES"/>
+	  <small><var:string value="label.wantSkyrixNews"/></small>
+	</td>
+      </tr>
+      
+      <tr><td colspan="3"><hr/></td></tr>
+      
+      <tr>
+        <td></td>
+        <td>
+	  <input type="submit" value="save"   name="action"/>
+	  <input type="submit" value="cancel" name="action"/>
+	</td>
+      </tr>
+    </table>
+   </var:component>
+  </center>  
+  </form>
+  <br/>
+</var:component>

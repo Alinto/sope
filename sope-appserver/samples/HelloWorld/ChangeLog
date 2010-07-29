@@ -1,0 +1,18 @@
+2005-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* Main.wo/Main.html: added test for inline attributes
+
+	* Main.m: fixed a gcc4 warning
+
+2004-11-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: fixed for FHS setups
+
+2004-06-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added GNUmakefile.preamble with static library dependencies for
+	  Mach linker
+
+	* created ChangeLog
+
+

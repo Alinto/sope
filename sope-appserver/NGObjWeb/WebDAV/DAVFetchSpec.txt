@@ -1,0 +1,46 @@
+DAVFetchSpec
+============
+
+Required Context
+
+  request-url => entity
+
+DAV PROPFIND
+
+  entity:
+    Request URL
+
+  scope:
+    0         - object
+    1         - collection children + collection
+    1,noroot  - collection children
+    infinity  - all children, deep
+
+  attribute selection
+    propnames  ([[obj soClass] -allKeysInContext:] ?)
+    allprops   (= SQL SELECT * FROM...)
+
+DAV SEARCH SQL
+  
+  entity:
+    traversal of "xxx" -> [requesturl relativeURL:xxx]
+    => only children allowed in FROM ?
+  
+  scope
+    shallow (= depth 1 or 1,noroot ??)
+      FROM Scope('shallow traversal of ""')
+      FROM scope('shallow traversal of "http://x:23000/a/ol/helge/Contacts"')
+
+    hierarchical (= depth infinity)    
+      from scope('hierarchical traversal of "/janb/"')
+  
+  attribute selection
+    named, fqn
+      "DAV:creationdate", 
+      "http://schemas.microsoft.com/mapi/email3addrtype", 
+      "urn:schemas:contacts:cn"
+    *
+
+
+WHERE:
+where "DAV:iscollection" = False and "DAV:ishidden" = False      order by "http://schemas.microsoft.com/mapi/proptag/x0e230003"

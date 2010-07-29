@@ -1,0 +1,45 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className="Frame" title="name" 
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <b>JSImageFlyover example:</b><br/><br/>
+  
+  <var:js-img-flyover
+      const:pageName        = "PanelContent"
+      const:targetWindow    = "panel"
+      const:selectedImage   = "menu_email.gif"
+      const:unselectedImage = "menu_email_inactive.gif"
+      const:ALT             = "'new page' - image flyover"/>
+  <br/><br/>
+  
+  <var:js-img-flyover
+      var:action            = "countClicks"
+      const:selectedImage   = "menu_email.gif"
+      const:unselectedImage = "menu_email_inactive.gif"
+      const:alt             = "'invoke action' - image flyover"
+      const:align           = "middle"/>
+  clicks: <b><var:string value="clicks"/></b>
+  <br/><br/>
+  
+  <var:js-img-flyover
+      javaScriptFunction    = "javaScriptFunction"
+      const:selectedImage   = "menu_email.gif"
+      const:unselectedImage = "menu_email_inactive.gif"
+      const:alt             = "'invoke javescript' - image flyover"/>
+  <br/><br/>
+
+  <var:js-img-flyover
+      const:directActionName = "flyto"
+      const:selectedImage    = "menu_email.gif"
+      const:unselectedImage  = "menu_email_inactive.gif"
+      const:_test            = "direct action invoked" 
+      const:align            = "middle"
+      const:alt              = "'direct action' - image flyover"/>
+  (Note: _ is used for query parameters instead of ?)
+  
+  <var:string value="flyover"/>
+
+</var:component>

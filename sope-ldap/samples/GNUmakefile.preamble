@@ -1,0 +1,61 @@
+# compilation settings
+
+SOPE_ROOT=../..
+
+ldapls_PCH_FILE	    = common.h
+ldap2dsml_PCH_FILE  = common.h
+ldapchkpwd_PCH_FILE = common.h
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I..					\
+	-I$(SOPE_ROOT)/sope-core/NGStreams	\
+	-I$(SOPE_ROOT)/sope-core/NGExtensions	\
+	-I$(SOPE_ROOT)/sope-core		\
+	-I$(SOPE_ROOT)/sope-xml
+
+
+# dependencies
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_TOOL_LIBS += \
+	-lNGLdap \
+	-lNGStreams -lNGExtensions -lEOControl	\
+	-lDOM -lSaxObjC
+else
+ADDITIONAL_TOOL_LIBS += \
+	-framework NGLdap \
+	-framework NGStreams -framework NGExtensions -framework EOControl \
+	-framework DOM -framework SaxObjC
+endif
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	../NGLdap \
+	$(SOPE_ROOT)/sope-core/NGStreams	\
+	$(SOPE_ROOT)/sope-core/NGExtensions	\
+	$(SOPE_ROOT)/sope-core/EOControl	\
+	$(SOPE_ROOT)/sope-xml/DOM		\
+	$(SOPE_ROOT)/sope-xml/SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+ifeq ($(findstring _64, $(GNUSTEP_TARGET_CPU)), _64)
+SYSTEM_LIB_DIR += -L/usr/local/lib64
+else
+SYSTEM_LIB_DIR += -L/usr/local/lib
+endif
+
+
+# OS dependend stuff
+ifeq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+ADDITIONAL_TOOL_LIBS += -liconv
+endif

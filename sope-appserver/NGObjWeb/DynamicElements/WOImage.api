@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOImage">
+  <binding name="framework" passthrough="NO" defaults="Frameworks"/>
+  <binding name="mimeType" passthrough="NO" defaults="MIME Types"/>
+  <binding name="key" passthrough="NO"/>
+  <binding name="data" passthrough="NO"/>
+  <binding name="src"/>
+  <binding name="alt"/>
+  <binding name="border"/>
+  <binding name="filename" passthrough="NO" defaults="Resources"/>
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <!-- SOPE -->
+  <binding name="value" passthrough="NO"/>
+
+  <validation message="exactly one of &apos;data&apos;, &apos;filename&apos;, &apos;src&apos; or &apos;value&apos; must be bound">
+    <count test="!=1">
+      <bound name="filename"/>
+      <bound name="src"/>
+      <bound name="data"/>
+      <bound name="value"/>
+    </count>
+  </validation>
+
+  <validation message="&apos;filename&apos; must be bound when &apos;framework&apos; is bound">
+    <and>
+      <bound name="framework"/>
+      <unbound name="filename"/>
+    </and>
+  </validation>
+
+  <validation message="&apos;mimeType&apos; must be bound when &apos;data&apos; is bound">
+    <and>
+      <bound name="data"/>
+      <unbound name="mimeType"/>
+    </and>
+  </validation>
+</wo>

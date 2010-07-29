@@ -1,0 +1,12 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className="Frame" title="name" 
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  <form var:action="self">
+    <var:date-field year="year" month="month" day="day" const:format="%Y-%m-%d"/>
+    <var:date-field date="date" const:format="%Y-%m-%d"/>
+    <input type="submit" value="apply"/>
+  </form>
+</var:component>

@@ -1,0 +1,30 @@
+2008-03-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README-OSX.txt: Updated
+
+2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added PCH support
+
+2004-10-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* sope-ical.xcode: removed iCalSaxDriver project reference
+
+2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved iCalSaxDriver to recycler
+
+2004-10-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* sope-ical.xcode: added samples and data. Also added project reference
+	  to versitSaxDriver and added it as a dependency. Removed the now
+	  deprecated iCalSaxDriver as a dependency.
+
+2004-10-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* all sope-ical makefiles now include config.make if available
+
+	* GNUmakefile (SUBPROJECTS): compile versitSaxDriver and only compile
+	  the ical sax driver if "libical=yes" is specified in the make call
+
+	* create sope-ical ChangeLog

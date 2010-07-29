@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOBrowser">
+  <binding name="list" passthrough="NO" required="YES"/>
+  <binding name="item" passthrough="NO"/>
+  <binding name="selections" passthrough="NO" settable="YES"/>
+  <binding name="displayString" passthrough="NO"/>
+
+  <binding name="name"/>
+  <binding name="value" passthrough="NO"/>
+  <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
+
+  <binding name="multiple"/>
+  <binding name="size" passthrough="NO"/>
+
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <!-- SOPE -->
+  <binding name="singleSelection" passthrough="NO"/>
+
+  <!-- WO4.5, NOT IMPLEMENTED IN SOPE
+  <binding name="selectedValues" passthrough="NO"/>
+  <binding name="escapeHTML" passthrough="NO" defaults="YES/NO"/>
+  -->
+
+  <validation message="&apos;list&apos; must not be a constant">
+    <and>
+      <bound name="list"/>
+      <ungettable name="list"/>
+    </and>
+  </validation>
+
+  <validation message="&apos;singleSelection&apos; and &apos;selections&apos; cannot both be bound">
+    <and>
+      <bound name="selections"/>
+      <bound name="singleSelection"/>
+    </and>
+  </validation>
+</wo>

@@ -1,0 +1,11 @@
+WebObjects
+==========
+
+This directory contains resources for making SOPE compatible with
+Apple's discontinued WebObjects 4.51 release.
+
+
+WebObjects
+==========
+
+An umbrella framework for linking your old legacy projects against.

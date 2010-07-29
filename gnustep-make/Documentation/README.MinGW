@@ -1,0 +1,311 @@
+Date:	11-Jan-2006 (tested under Windows XP)
+Author: Nicola Pero <n.pero@mi.flashnet.it>, 
+        after Richard Frith-Macdonald <rfm@gnu.org> and others
+
+PURPOSE
+-------
+
+This document is intended to provide a step by step instruction on how
+to get the GNUstep base library into a usable state on a recent Windows
+operating system (XP, 2000, and probably NT).
+
+MinGW is a collection of header files and import libraries that allow
+one to use GCC and produce native Windows32 programs that do not rely
+on any 3rd-party DLLs. GNUstep has only partially been ported to MinGW
+so expect some problems when trying to compile. Also, there are still
+subtle problems with running GNU tools on Windows, so any problems you
+may encounter may just as easly have to do with the compilation tools
+you are using as with GNUstep.
+
+MSYS is a very much cut down version of the Cygwin environment ...
+providing a minimal set of tools needed to build programs using MingGW.
+If you wish to build for MinGW by cross-compiling from a Cygwin
+environment, please read README.Cygwin instead.
+
+The gui library is only partially ported to run under MinGW. The look
+and behavior may not be consistant.
+
+PRELIMINARIES
+-------------
+
+One way to vastly simplify installing GNUstep, is to use the Windows-based
+GNUstep installer.  Get it from
+
+http://www.gnustep.org/resources/sources.html#windows
+
+If you have already installed this, you can skip to the end and just
+start compiling applications!  Although you may want to read the rest of
+the instructions for other helpful information.
+
+
+STEP BY STEP INSTALLATION INSTRUCTIONS
+--------------------------------------
+
+1. Install MinGW
+================
+
+Download MinGW-4.1.0 from
+http://sourceforge.net/projects/mingw Install it into
+
+C:/xxx/msys/1.0/mingw
+
+(where /xxx/ is the top-level path you want to use, I use Nicola/GNUstep so
+I install it into C:/Nicola/GNUstep/msys/1.0/mingw) (earlier versions of 
+MinGW might not work)
+
+PS: Download MinGW-4.1.0.exe, then start it up.  Select the
+installation path C:\xxx\msys\1.0\mingw; then install all the Current
+versions of everything (but not the sources).
+
+
+2. Install msys
+===============
+
+Download MSYS-1.0.10 from the same site.  Install it into
+C:/xxx/msys/1.0
+
+The postinstall script should ask you for the mingw location, then
+detect it and be happy that it's there and all is setup properly.
+
+
+3. Install msys developer toolkit
+=================================
+
+Download msysDTK-1.0.1 from the same site.  Install it into
+C:/xxx/msys/1.0
+
+
+Now your MSYS/MinGW system should be setup!  There should be an icon
+on your desktop called 'MSYS'.  Double-clicking on it will launch a
+Unix-like shell.  Go around and make sure you know how to use it.  Log
+into it and work in it.
+
+
+4. Additional Windows steps
+===========================
+
+You may need to edit /mingw/include/winsock2.h to change the size of the
+sa_data field in the sockaddr structure from 14 to 22 ... this is because
+some versions of Windows have changed the layout of this structure.
+This modification may be needed to be able to correctly determine the
+network interface details for your machine.
+
+It's a good idea to remove the libobjc.a and libobjc.la and
+include/objc headers that come with gcc (gcc -v for location) so that
+they are not accidentally found instead of the libobjc DLL that you
+will compile below.
+
+Now you can open a window containg a shell by choosing MSYS from the
+start menu.
+
+From this window we can now start building things.
+
+
+5. Obtaining GNUstep
+====================
+
+The main GNUstep project pages tell you how to get hold of this. You can get
+the latest release of the following libraries. However, since MinGW support
+is currently evolving, we recommend that you get the latest snapshot
+or code from SVN.
+
+svn co http://svn.gna.org/svn/gnustep/modules/core
+
+6. Installing gnustep-make
+==========================
+
+go in core/make and do
+
+./configure --prefix=/C/xxx/GNUstep
+make
+make install
+
+
+7. setup your GNUstep environment
+=================================
+
+NB: you will need to do the same every time you start up your MSYS
+shell to do development
+
+. /C/xxx/GNUstep/System/Library/Makefiles/GNUstep.sh
+
+Also, set HOMEPATH, HOMEDRIVE and HOME ... add the following lines to
+your ~/.profile:
+
+export HOMEDRIVE=C:
+export HOMEPATH=/home/Nicola
+export HOME=/C/xxx/msys/1.0/home/Nicola
+. /C/xxx/GNUstep/System/Library/Makefiles/GNUstep.sh
+
+(obviously replacing 'Nicola' with your Login name) (not sure if this 
+setting of HOMEDRIVE etc is really required, will investigate)
+
+NOTE: Sometimes the HOME variable may already be set by Windows to be
+%USERPROFILE% (which is the Windows variable that contains the path of
+your home folder). MSYS has problems with that as it doesn't recognise
+that %USERPROFILE% is a variable name. Be sure to check that if you run
+into errors.
+     
+     MinGW comes with a buggy 'ln -s' and Makefiles are no longer
+     installed into $GNUSTEP_SYSTEM_ROOT/Makefiles so there is 
+     no compatibility symlink to $GNUSTEP_SYSTEM_ROOT/Library/Makefiles
+
+
+8. Installing gnustep-objc
+==========================
+
+Download gnustep-libobjc, (find it at http://www.gnustep.org/resources/downloads.php) and compile it:
+
+make
+make install
+
+
+9. Reinstalling gnustep-make
+============================
+
+Go in core/make and reconfigure/recompile again so that gnustep-objc
+is detected:
+
+make distclean
+./configure
+make 
+make install
+
+gnustep-make should have detected your custom libobjc.
+
+
+10. Installing ffcall
+=====================
+
+Download ffcall from the GNUstep website, and type:
+
+./configure --prefix=$GNUSTEP_SYSTEM_ROOT
+make
+make install
+
+(if you get a popup about contest.exe failing, just ignore it)
+
+11. Installing additional packages
+=======================
+
+Download the following packages:
+
+ libintl-0.11.5-2.bin.zip
+ libintl-0.11.5-2.lib.zip
+ (important: libintl-0.14.4 is untested, use 0.11.5 to be safe)
+
+ libiconv-1.8-1-bin.zip 
+ libiconv-1.8-1-lib.zip 
+
+ zlib-1.2.2-bin.zip
+ zlib-1.2.2-lib.zip
+
+from http://gnuwin32.sourceforge.net, and install them.  To
+install them, simply unzip them into /C/xxx/msys/1.0/mingw.
+
+
+12. XML support
+===============
+
+You need to get the source code for libxml2 and  build it yourself ...
+but first you must fix the symbol information in libiconv so you can link to it.
+
+cd /mingw/lib
+mkdir backup-libiconv
+mv libiconv.la backup-libiconv
+mv libiconv.lib backup-libiconv
+dlltool -D libiconv-2.dll -C -l libiconv.lib --export-all-symbols -A ../bin/libiconv-2.dll
+
+Then you can remove the backup-libiconv directory and its
+contents if all has worked.
+
+Now download the libxml2 source from http://www.xmlsoft.org
+I used libxml2-2.6.23.tar.gz
+
+Unpack the source, change into the directory and run the configure script
+Then do 'make'
+Then do 'make install'
+
+You should now have libxml2 installed on your system.
+
+13. Installing gnustep-base
+===========================
+
+Go in gnustep-base, and type 
+
+./configure
+make
+make install
+
+At this point, you should be able to compile and run any non-gui tool
+and library.  The next steps are only required for gui applications.
+
+
+14. Installing gui additional packages
+======================================
+
+For the gui, download and install the following packages:
+
+  jpeg-6b-4-bin.zip
+  jpeg-6b-4-dep.zip
+  jpeg-6b-4-lib.zip
+
+  tiff-3.7.2-bin.zip
+  tiff-3.7.2-dep.zip
+  tiff-3.7.2-lib.zip
+
+  libpng-1.2.8-bin.zip
+  libpng-1.2.8-lib.zip
+
+The process is always the same: download the zip file from the
+gnuwin32 website, then unzip them into /C/xxx/msys/1.0/mingw.
+
+
+15. Installing gnustep-gui
+==========================
+
+Go in the gui, and type:
+
+  ./configure
+  make
+  make install
+
+
+16. Installing gnustep-back
+===========================
+
+Go in back, and type:
+
+  ./configure
+  make
+  make install
+
+
+17. Testing your gui installation
+=================================
+
+Go in a simple gui application (examples/gui a very good starting
+point), compile and run it. :-)
+
+Additionally, you might want to compile and run Gorm or other GNUstep
+applications.  Gorm (and hopefully other GNUstep applications too)
+should compile and run out of the box.
+
+
+
+Troubleshooting
+---------------
+
+Issues with updating:
+Before attempting to update your GNUstep installation, be sure to stop/kill
+all running GNUstep programs or services (i.e. gdomap, gdnc, gpbs) since
+Windows cannot overwrite files that are currently in use.
+
+If you pass any include (-Ixxx) paths to GCC, make sure they do *not*
+end with a slash.  The current GCC/MinGW releases have a bug where
+such paths would be ignored.
+
+Where we specify specific versions of packages to be used, we have tested
+with those versions ... later or earlier versions may work, but may well not.
+Generally earlier versions should be assumed not to work.
+

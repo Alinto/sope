@@ -1,0 +1,25 @@
+2005-10-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* MonthPage: highlight days with articles
+
+	* MonthPage.wo/MonthPage.woo: added missing selector for kv qualifier
+
+2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added ability to save/rollback changes in managed object context
+
+2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* changed to use WODisplayGroup and .woo to access database
+
+2005-08-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved reusable objects to sope-core/EOCoreData
+
+	* added EOCoreDataSource
+
+	* added classes to map EOControl objects to CoreData ones
+
+2005-08-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* started CoreData demo

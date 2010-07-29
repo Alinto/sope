@@ -1,0 +1,10 @@
+DESIGN
+======
+
+This library was roughly designed after the Java IO package. Additionally it
+fully supports Unix socket abstractions (domains, addresses and sockets).
+
+Some ObjC design decisions:
+- do not throw exceptions (but keep them in -lastException)
+- use protocols
+- support streaming operation

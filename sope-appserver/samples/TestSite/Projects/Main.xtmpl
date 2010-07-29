@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+>
+  <head>
+    <title><var:string value="context.page.title"/></title>
+    
+    <meta name="lastChanged" var:content="clientObject.davLastModified"/>
+    <meta name="author"      content="SKYRIX Software AG"/>
+    <meta name="generator"   content="SKYRiX Object Publishing Environment"/>
+    <meta name="robots"      content="index, follow, all" />
+    
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <!-- link rel="stylesheet"    href="stylesheet.css" type="text/css" / -->
+    <link rel="stylesheet"    href="blogstyle.css"  type="text/css" />
+
+    <link rev="made"          href="mailto:hh@skyrix.com" /> 
+  </head>
+  
+  <var:component value="context.page"/>
+</html>

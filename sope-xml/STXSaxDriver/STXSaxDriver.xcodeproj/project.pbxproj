@@ -1,0 +1,400 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ADBE78C70765E90E003C5ACF /* bundle-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADBE78C60765E90E003C5ACF /* bundle-info.plist */; };
+		ADBE78CB0765E936003C5ACF /* STXSaxDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE78C90765E936003C5ACF /* STXSaxDriver.m */; };
+		ADBE790A0765EBA0003C5ACF /* SaxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBE79090765EBA0003C5ACF /* SaxObjC.framework */; };
+		ADBE790C0765EBD1003C5ACF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBE790B0765EBD1003C5ACF /* Foundation.framework */; };
+		ADBE7A800766076A003C5ACF /* NGExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBE7A7F0766076A003C5ACF /* NGExtensions.framework */; };
+		ADBE7DB20766619F003C5ACF /* README in Resources */ = {isa = PBXBuildFile; fileRef = ADBE7DB10766619F003C5ACF /* README */; };
+		ADBE7DB4076661A8003C5ACF /* COPYRIGHT in Resources */ = {isa = PBXBuildFile; fileRef = ADBE7DB3076661A8003C5ACF /* COPYRIGHT */; };
+		ADBE7DBA076661CF003C5ACF /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = ADBE7DB9076661CF003C5ACF /* ChangeLog */; };
+		ADBE7DBC076661DB003C5ACF /* Version in Resources */ = {isa = PBXBuildFile; fileRef = ADBE7DBB076661DB003C5ACF /* Version */; };
+		ADCDDC1E0B80BFC100ED540E /* StructuredTextBodyElement.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC110B80BFC100ED540E /* StructuredTextBodyElement.m */; };
+		ADCDDC1F0B80BFC100ED540E /* StructuredTextDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC130B80BFC100ED540E /* StructuredTextDocument.m */; };
+		ADCDDC200B80BFC100ED540E /* StructuredTextHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC150B80BFC100ED540E /* StructuredTextHeader.m */; };
+		ADCDDC210B80BFC100ED540E /* StructuredTextList.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC170B80BFC100ED540E /* StructuredTextList.m */; };
+		ADCDDC220B80BFC100ED540E /* StructuredTextListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC190B80BFC100ED540E /* StructuredTextListItem.m */; };
+		ADCDDC230B80BFC100ED540E /* StructuredTextLiteralBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC1B0B80BFC100ED540E /* StructuredTextLiteralBlock.m */; };
+		ADCDDC240B80BFC100ED540E /* StructuredTextParagraph.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC1D0B80BFC100ED540E /* StructuredTextParagraph.m */; };
+		ADCDDC330B80BFE900ED540E /* NSString+STX.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC290B80BFE900ED540E /* NSString+STX.m */; };
+		ADCDDC340B80BFE900ED540E /* StructuredLine.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC2B0B80BFE900ED540E /* StructuredLine.m */; };
+		ADCDDC350B80BFE900ED540E /* StructuredStack.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC2D0B80BFE900ED540E /* StructuredStack.m */; };
+		ADCDDC370B80BFE900ED540E /* StructuredText.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC310B80BFE900ED540E /* StructuredText.m */; };
+		ADCDDC390B80C04C00ED540E /* StructuredTextBodyElement+SAX.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDC380B80C04C00ED540E /* StructuredTextBodyElement+SAX.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8D5B49B6048680CD000E48DA /* STXSaxDriver.sax */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STXSaxDriver.sax; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADBE78C60765E90E003C5ACF /* bundle-info.plist */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = text.plist; path = "bundle-info.plist"; sourceTree = "<group>"; };
+		ADBE78C80765E936003C5ACF /* STXSaxDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STXSaxDriver.h; sourceTree = "<group>"; };
+		ADBE78C90765E936003C5ACF /* STXSaxDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STXSaxDriver.m; sourceTree = "<group>"; };
+		ADBE79050765EAC0003C5ACF /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; path = GNUmakefile; sourceTree = "<group>"; };
+		ADBE79090765EBA0003C5ACF /* SaxObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SaxObjC.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SaxObjC.framework"; sourceTree = "<absolute>"; };
+		ADBE790B0765EBD1003C5ACF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		ADBE79110765EDB6003C5ACF /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		ADBE7A7F0766076A003C5ACF /* NGExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGExtensions.framework"; sourceTree = "<absolute>"; };
+		ADBE7DB10766619F003C5ACF /* README */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		ADBE7DB3076661A8003C5ACF /* COPYRIGHT */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYRIGHT; sourceTree = "<group>"; };
+		ADBE7DB9076661CF003C5ACF /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 8; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		ADBE7DBB076661DB003C5ACF /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+		ADBE7DBE07666204003C5ACF /* GNUmakefile.preamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		ADBE7DC00766620F003C5ACF /* GNUmakefile.postamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; path = GNUmakefile.postamble; sourceTree = "<group>"; };
+		ADBE7DC307666236003C5ACF /* fhs.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; path = fhs.make; sourceTree = "<group>"; };
+		ADCDDC100B80BFC100ED540E /* StructuredTextBodyElement.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredTextBodyElement.h; path = Model/StructuredTextBodyElement.h; sourceTree = "<group>"; };
+		ADCDDC110B80BFC100ED540E /* StructuredTextBodyElement.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredTextBodyElement.m; path = Model/StructuredTextBodyElement.m; sourceTree = "<group>"; };
+		ADCDDC120B80BFC100ED540E /* StructuredTextDocument.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredTextDocument.h; path = Model/StructuredTextDocument.h; sourceTree = "<group>"; };
+		ADCDDC130B80BFC100ED540E /* StructuredTextDocument.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredTextDocument.m; path = Model/StructuredTextDocument.m; sourceTree = "<group>"; };
+		ADCDDC140B80BFC100ED540E /* StructuredTextHeader.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredTextHeader.h; path = Model/StructuredTextHeader.h; sourceTree = "<group>"; };
+		ADCDDC150B80BFC100ED540E /* StructuredTextHeader.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredTextHeader.m; path = Model/StructuredTextHeader.m; sourceTree = "<group>"; };
+		ADCDDC160B80BFC100ED540E /* StructuredTextList.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredTextList.h; path = Model/StructuredTextList.h; sourceTree = "<group>"; };
+		ADCDDC170B80BFC100ED540E /* StructuredTextList.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredTextList.m; path = Model/StructuredTextList.m; sourceTree = "<group>"; };
+		ADCDDC180B80BFC100ED540E /* StructuredTextListItem.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredTextListItem.h; path = Model/StructuredTextListItem.h; sourceTree = "<group>"; };
+		ADCDDC190B80BFC100ED540E /* StructuredTextListItem.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredTextListItem.m; path = Model/StructuredTextListItem.m; sourceTree = "<group>"; };
+		ADCDDC1A0B80BFC100ED540E /* StructuredTextLiteralBlock.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredTextLiteralBlock.h; path = Model/StructuredTextLiteralBlock.h; sourceTree = "<group>"; };
+		ADCDDC1B0B80BFC100ED540E /* StructuredTextLiteralBlock.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredTextLiteralBlock.m; path = Model/StructuredTextLiteralBlock.m; sourceTree = "<group>"; };
+		ADCDDC1C0B80BFC100ED540E /* StructuredTextParagraph.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredTextParagraph.h; path = Model/StructuredTextParagraph.h; sourceTree = "<group>"; };
+		ADCDDC1D0B80BFC100ED540E /* StructuredTextParagraph.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredTextParagraph.m; path = Model/StructuredTextParagraph.m; sourceTree = "<group>"; };
+		ADCDDC280B80BFE900ED540E /* NSString+STX.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = "NSString+STX.h"; path = "ExtraSTX/NSString+STX.h"; sourceTree = "<group>"; };
+		ADCDDC290B80BFE900ED540E /* NSString+STX.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = "NSString+STX.m"; path = "ExtraSTX/NSString+STX.m"; sourceTree = "<group>"; };
+		ADCDDC2A0B80BFE900ED540E /* StructuredLine.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredLine.h; path = ExtraSTX/StructuredLine.h; sourceTree = "<group>"; };
+		ADCDDC2B0B80BFE900ED540E /* StructuredLine.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredLine.m; path = ExtraSTX/StructuredLine.m; sourceTree = "<group>"; };
+		ADCDDC2C0B80BFE900ED540E /* StructuredStack.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredStack.h; path = ExtraSTX/StructuredStack.h; sourceTree = "<group>"; };
+		ADCDDC2D0B80BFE900ED540E /* StructuredStack.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredStack.m; path = ExtraSTX/StructuredStack.m; sourceTree = "<group>"; };
+		ADCDDC300B80BFE900ED540E /* StructuredText.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredText.h; path = ExtraSTX/StructuredText.h; sourceTree = "<group>"; };
+		ADCDDC310B80BFE900ED540E /* StructuredText.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = StructuredText.m; path = ExtraSTX/StructuredText.m; sourceTree = "<group>"; };
+		ADCDDC320B80BFE900ED540E /* StructuredTextRenderingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = StructuredTextRenderingDelegate.h; path = ExtraSTX/StructuredTextRenderingDelegate.h; sourceTree = "<group>"; };
+		ADCDDC380B80C04C00ED540E /* StructuredTextBodyElement+SAX.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = "StructuredTextBodyElement+SAX.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D5B49B3048680CD000E48DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADBE790A0765EBA0003C5ACF /* SaxObjC.framework in Frameworks */,
+				ADBE790C0765EBD1003C5ACF /* Foundation.framework in Frameworks */,
+				ADBE7A800766076A003C5ACF /* NGExtensions.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* STXSaxDriver */ = {
+			isa = PBXGroup;
+			children = (
+				ADBE7DB10766619F003C5ACF /* README */,
+				ADBE7DB3076661A8003C5ACF /* COPYRIGHT */,
+				ADBE7DB9076661CF003C5ACF /* ChangeLog */,
+				ADBE7DBB076661DB003C5ACF /* Version */,
+				ADBE79040765EAA0003C5ACF /* Makefiles */,
+				ADBE78C50765E8B7003C5ACF /* Headers */,
+				08FB77AFFE84173DC02AAC07 /* Classes */,
+				ADCDDC0F0B80BFAA00ED540E /* Model */,
+				ADCDDC270B80BFD400ED540E /* Extras */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = STXSaxDriver;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADBE790B0765EBD1003C5ACF /* Foundation.framework */,
+				ADBE79090765EBA0003C5ACF /* SaxObjC.framework */,
+				ADBE7A7F0766076A003C5ACF /* NGExtensions.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ADBE78C60765E90E003C5ACF /* bundle-info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ADBE79110765EDB6003C5ACF /* common.h */,
+				ADBE78C90765E936003C5ACF /* STXSaxDriver.m */,
+				ADCDDC380B80C04C00ED540E /* StructuredTextBodyElement+SAX.m */,
+			);
+			fileEncoding = 5;
+			indentWidth = 2;
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D5B49B6048680CD000E48DA /* STXSaxDriver.sax */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADBE78C50765E8B7003C5ACF /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				ADBE78C80765E936003C5ACF /* STXSaxDriver.h */,
+			);
+			fileEncoding = 5;
+			indentWidth = 2;
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		ADBE79040765EAA0003C5ACF /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADBE79050765EAC0003C5ACF /* GNUmakefile */,
+				ADBE7DBE07666204003C5ACF /* GNUmakefile.preamble */,
+				ADBE7DC00766620F003C5ACF /* GNUmakefile.postamble */,
+				ADBE7DC307666236003C5ACF /* fhs.make */,
+			);
+			indentWidth = 8;
+			name = Makefiles;
+			sourceTree = "<group>";
+			tabWidth = 8;
+			usesTabs = 1;
+		};
+		ADCDDC0F0B80BFAA00ED540E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ADCDDC100B80BFC100ED540E /* StructuredTextBodyElement.h */,
+				ADCDDC110B80BFC100ED540E /* StructuredTextBodyElement.m */,
+				ADCDDC120B80BFC100ED540E /* StructuredTextDocument.h */,
+				ADCDDC130B80BFC100ED540E /* StructuredTextDocument.m */,
+				ADCDDC140B80BFC100ED540E /* StructuredTextHeader.h */,
+				ADCDDC150B80BFC100ED540E /* StructuredTextHeader.m */,
+				ADCDDC160B80BFC100ED540E /* StructuredTextList.h */,
+				ADCDDC170B80BFC100ED540E /* StructuredTextList.m */,
+				ADCDDC180B80BFC100ED540E /* StructuredTextListItem.h */,
+				ADCDDC190B80BFC100ED540E /* StructuredTextListItem.m */,
+				ADCDDC1A0B80BFC100ED540E /* StructuredTextLiteralBlock.h */,
+				ADCDDC1B0B80BFC100ED540E /* StructuredTextLiteralBlock.m */,
+				ADCDDC1C0B80BFC100ED540E /* StructuredTextParagraph.h */,
+				ADCDDC1D0B80BFC100ED540E /* StructuredTextParagraph.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		ADCDDC270B80BFD400ED540E /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				ADCDDC280B80BFE900ED540E /* NSString+STX.h */,
+				ADCDDC290B80BFE900ED540E /* NSString+STX.m */,
+				ADCDDC2A0B80BFE900ED540E /* StructuredLine.h */,
+				ADCDDC2B0B80BFE900ED540E /* StructuredLine.m */,
+				ADCDDC2C0B80BFE900ED540E /* StructuredStack.h */,
+				ADCDDC2D0B80BFE900ED540E /* StructuredStack.m */,
+				ADCDDC300B80BFE900ED540E /* StructuredText.h */,
+				ADCDDC310B80BFE900ED540E /* StructuredText.m */,
+				ADCDDC320B80BFE900ED540E /* StructuredTextRenderingDelegate.h */,
+			);
+			name = Extras;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D5B49AC048680CD000E48DA /* STXSaxDriver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA076C2085728F500993825 /* Build configuration list for PBXNativeTarget "STXSaxDriver" */;
+			buildPhases = (
+				8D5B49AF048680CD000E48DA /* Resources */,
+				8D5B49B1048680CD000E48DA /* Sources */,
+				8D5B49B3048680CD000E48DA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = STXSaxDriver;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = STXSaxDriver;
+			productReference = 8D5B49B6048680CD000E48DA /* STXSaxDriver.sax */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA076C6085728F500993825 /* Build configuration list for PBXProject "STXSaxDriver" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* STXSaxDriver */;
+			projectDirPath = "";
+			targets = (
+				8D5B49AC048680CD000E48DA /* STXSaxDriver */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D5B49AF048680CD000E48DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADBE78C70765E90E003C5ACF /* bundle-info.plist in Resources */,
+				ADBE7DB20766619F003C5ACF /* README in Resources */,
+				ADBE7DB4076661A8003C5ACF /* COPYRIGHT in Resources */,
+				ADBE7DBA076661CF003C5ACF /* ChangeLog in Resources */,
+				ADBE7DBC076661DB003C5ACF /* Version in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D5B49B1048680CD000E48DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADBE78CB0765E936003C5ACF /* STXSaxDriver.m in Sources */,
+				ADCDDC1E0B80BFC100ED540E /* StructuredTextBodyElement.m in Sources */,
+				ADCDDC1F0B80BFC100ED540E /* StructuredTextDocument.m in Sources */,
+				ADCDDC200B80BFC100ED540E /* StructuredTextHeader.m in Sources */,
+				ADCDDC210B80BFC100ED540E /* StructuredTextList.m in Sources */,
+				ADCDDC220B80BFC100ED540E /* StructuredTextListItem.m in Sources */,
+				ADCDDC230B80BFC100ED540E /* StructuredTextLiteralBlock.m in Sources */,
+				ADCDDC240B80BFC100ED540E /* StructuredTextParagraph.m in Sources */,
+				ADCDDC330B80BFE900ED540E /* NSString+STX.m in Sources */,
+				ADCDDC340B80BFE900ED540E /* StructuredLine.m in Sources */,
+				ADCDDC350B80BFE900ED540E /* StructuredStack.m in Sources */,
+				ADCDDC370B80BFE900ED540E /* StructuredText.m in Sources */,
+				ADCDDC390B80C04C00ED540E /* StructuredTextBodyElement+SAX.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADA076C3085728F500993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "STXSaxDriver-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-4.5";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = STXSaxDriver;
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = sax;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		ADA076C4085728F500993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "STXSaxDriver-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-4.5";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = STXSaxDriver;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = sax;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA076C5085728F500993825 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "STXSaxDriver-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-4.5";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = STXSaxDriver;
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = sax;
+			};
+			name = Default;
+		};
+		ADA076C7085728F500993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA076C8085728F500993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+		ADA076C9085728F500993825 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA076C2085728F500993825 /* Build configuration list for PBXNativeTarget "STXSaxDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA076C3085728F500993825 /* Development */,
+				ADA076C4085728F500993825 /* Wrapper */,
+				ADA076C5085728F500993825 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		ADA076C6085728F500993825 /* Build configuration list for PBXProject "STXSaxDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA076C7085728F500993825 /* Development */,
+				ADA076C8085728F500993825 /* Wrapper */,
+				ADA076C9085728F500993825 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

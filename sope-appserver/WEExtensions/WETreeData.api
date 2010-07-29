@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETreeData">
+  <binding name="isTreeElement" defaults="YES/NO" />
+  <binding name="title" />
+  <binding name="string" />
+  <binding name="icon" />
+  <binding name="cornerIcon" />
+  <binding name="treeLink" />
+
+  <binding name="otherTagString" />
+</wo>

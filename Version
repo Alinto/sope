@@ -1,0 +1,11 @@
+#
+# This file is included by library makefiles to set the version information 
+# of the executable.
+
+# Note:
+#   These versions do not say anything about the SOPE "release"
+#   version. It's just the "compatibility" version used for shared libraries.
+
+MAJOR_VERSION=4
+MINOR_VERSION=9
+# next: SUBMINOR_VERSION=2

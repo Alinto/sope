@@ -1,0 +1,57 @@
+{
+  requires = {
+    bundleManagerVersion = 1;
+    
+    classes = (
+      { name = NSObject; }
+    );
+  };
+
+  provides = {
+    WOxElemBuilder = (
+      { name = "WOxExtElemBuilder"; },
+    );
+    
+    WODynamicElements = (
+      { name = "JSAlertPanel";          },
+      { name = "JSConfirmPanel";        },
+      { name = "JSImageFlyover";        },
+      { name = "JSModalWindow";         },
+      { name = "JSTextFlyover";         },
+      { name = "JSValidatedField";      },
+      { name = "WOCheckBoxMatrix";      },
+      { name = "WOCollapsibleComponentContent"; },
+      { name = "WODictionaryRepetition";   },
+      { name = "WOKeyValueConditional"; },
+      { name = "WORadioButtonMatrix";   },
+      { name = "WOTabPanel";            },
+      { name = "WOTable";               },
+      { name = "WOThresholdColoredNumber"; },
+    );
+
+    WOComponents = (
+      { name = "WORedirect";            },
+    );
+    
+    classes = (
+      { name = "WOExtensionsBuilderModule"; },
+      { name = "WOxExtElemBuilder";     },
+
+      { name = "JSAlertPanel";          },
+      { name = "JSConfirmPanel";        },
+      { name = "JSImageFlyover";        },
+      { name = "JSModalWindow";         },
+      { name = "JSTextFlyover";         },
+      { name = "JSValidatedField";      },
+      { name = "WOCheckBoxMatrix";      },
+      { name = "WOCollapsibleComponentContent"; },
+      { name = "WODictionaryRepetition";   },
+      { name = "WOKeyValueConditional"; },
+      { name = "WORadioButtonMatrix";   },
+      { name = "WORedirect";            },
+      { name = "WOTabPanel";            },
+      { name = "WOTable";               },
+      { name = "WOThresholdColoredNumber"; },
+    );
+  };
+}

@@ -1,0 +1,174 @@
+WEPrototype
+===========
+
+This framework contains dynamic elements wrapping and connecting the
+excellent Prototype JavaScript library.
+
+http://api.rubyonrails.com/classes/ActionView/Helpers/JavaScriptHelper.html#M000394
+
+Prototype functions
+===================
+
+Prototype
+=========
+
+Prototype
+- 'Version' property
+
+Class
+  .create()
+
+Abstract
+
+[Object]
+  .extend(otherobject) - copy properties of 'otherobject' to receiver
+
+[Function]
+  .bind(object)
+  .bindAsEventListener(object)
+
+[Number]
+  .toColorPart()
+
+Try
+
+PeriodicalExecuter
+  .initialize(callback, frequency)
+  .registerCallback()
+  .onTimerEvent
+
+$(...)
+- run getElementById() for arguments
+- return array for multiple, a single for one
+
+
+Form
+====
+
+Field
+  .clear(...)        - resolve names using $() and reset value
+    eg: Field.clear("sender", "from", "to")
+  .present(...)      - check whether all elements have values
+  .focus(element)    - lookup element using $() and focus
+  .select(element)   - lookup element using $() and select
+  .activate(element) - lookup element using $() and focus+select
+
+Form
+  .serialize(form)
+  .getElements(form)
+  .disable(form)
+  .focusFirstElement(form)
+  .reset(form)
+
+Form.Element
+  .serialize(element)
+  .getValue(element)
+
+Form.Element.Serializers
+
+Abstract.TimedObserver
+  .initialize(element, frequency, callback)
+
+Form.Element.Observer : Abstract.TimedObserver
+  .getValue
+
+Form.Observer : Abstract.TimedObserver
+  .getValue
+
+
+AJAX
+====
+
+Ajax.getTransport()
+- return XMLHTTP object depending on browser
+
+Ajax.Base()
+  .setOptions(dict)
+    method       - post
+    asynchronous - true
+    parameters   - ''
+
+Ajax.Request()
+  - states: Uninitialized, Loading, Loaded, Interactive, Complete
+  .initialize(url, options)
+
+Ajax.Updater()
+  .initialize(container, url, options)
+   options:
+   - Base options
+   'insertion' => function(container, responseText) => default: .innerHTML
+
+
+Effects
+=======
+TODO
+
+
+DOM
+===
+
+document.getElementsByClasName(className)
+
+Element
+  .toggle(...)         - toggle style between "None" and ""
+  .hide(...)
+  .show(...)
+  .remove(elemName)    - removed named element (lookup using $())
+  .getHeight(elemName)
+
+Toggle
+  .display(..)         - same like Element.toggle()
+
+Abstract.Insertion(adjacency)
+  .initialize(element, content)
+
+Insertion.Before : Abstract.Insertion
+
+Insertion.Top    : Abstract.Insertion
+
+Insertion.Bottom : Abstract.Insertion
+
+Insertion.After  : Abstract.Insertion
+
+
+Compat
+======
+TODO
+
+
+RoR
+===
+<form action="/articles/comment/46" 
+      class="commentform" 
+      id="commentform" method="post" 
+      onsubmit="new Ajax.Updater('commentList', '/articles/comment/46', {onLoading:function(request){item_loading()}, onComplete:function(request){item_added()}, parameters:Form.serialize(this), insertion:Insertion.Bottom, evalScripts:true, asynchronous:true}); return false;"
+>
+
+
+        <td> <input id="comment_author" name="comment[author]" size="20" type="text" value="" /> <small><a href="javascript:Element.toggle('guest_url')">(leave url &#187;)</a></small></td>
+
+
+link_to_remote word,
+      :url => { :action => "action" },
+      404 => "alert('Not found...? Wrong URL...?')",
+      :failure => "alert('HTTP Error ' + request.status + '!')"
+
+
+link_to_remove
+  :url
+  :update
+    :update => "emails"
+    or
+    :update => { :success => "posts", :failure => "error" }
+  :position
+    - :before, :top, :bottom, :after
+ Callbacks
+  :complete
+  :loading
+  :loaded
+  :interactive
+  :failure
+  :confirm     - add confirmation dialog
+  :condition
+  :before      - before request is initiated
+  :after       - after request was initiated and before :loading

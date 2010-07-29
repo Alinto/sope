@@ -1,0 +1,38 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className='iCalPortalFrame' 
+	       title='localizedTitle'
+               xmlns='http://www.w3.org/1999/xhtml'
+               xmlns:var='http://www.skyrix.com/od/binding'
+               xmlns:const='http://www.skyrix.com/od/constant'>
+
+ <var:component className="iCalPortalCalTabs" const:selection="week"
+                calendarName="calendarName">
+  <var:week-overview list="dataSource.fetchObjects" item="item" 
+		     weekStart="weekStart"
+                     const:titleColor="#FFDAAA" const:contentColor="#FAE8B8"
+                     headerRows="abList" footerRows="cdList"
+                     headerRow="item"    footerRow="item"
+                     columnIndex="colIndex" const:width="100%">
+    
+    <!-- var:week-info><font class="default">all day</font></var:week-info -->
+    
+    <var:week>
+      <font class="default">
+        <b><var:string value="item.summary"/></b><br/>
+        <var:string value="item.startDate" const:dateformat="%H:%M"/><br/>
+      </font>
+    </var:week>
+
+    <var:week-header>
+      Row:<var:string value="item"/><br />
+      Column:<var:string value="colIndex"/>
+    </var:week-header>
+
+    <var:week-footer>
+      Row:<var:string value="item"/><br />
+      Column:<var:string value="colIndex"/>
+    </var:week-footer>
+  </var:week-overview>
+ </var:component>
+</var:component>

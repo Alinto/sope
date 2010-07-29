@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="JSClipboard">
+  <binding name="filename" passthrough="NO" defaults="Resources" />
+  <binding name="imgURL" passthrough="NO" />
+  <binding name="string" passthrough="NO" />
+  <binding name="toolTip" passthrough="NO" />
+  <binding name="value" passthrough="NO" />
+
+  <validation message="either one of &apos;filename&apos;, &apos;imgURL&apos; or &apos;imgURL&apos; may be bound">
+    <count test="!=1">
+      <bound name="filename"/>
+      <bound name="imgURL"/>
+      <bound name="string"/>
+    </count>
+  </validation>
+</wo>

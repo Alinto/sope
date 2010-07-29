@@ -1,0 +1,179 @@
+#!/bin/sh
+#
+# @configure_input@
+#
+# Copyright (C) 1997 Free Software Foundation, Inc.
+#
+# Author: Ovidiu Predescu <ovidiu@net-community.com>
+# Date: October 1997
+# Author: Nicola Pero <n.pero@mi.flashnet.it>
+# Date: 2002
+#
+# This file is part of the GNUstep Makefile Package.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# You should have received a copy of the GNU General Public
+# License along with this library; see the file COPYING.LIB.
+# If not, write to the Free Software Foundation,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+# Try to execute the application passed as argument. The application is
+# searched through the GNUstep directories if a complete or relative path name
+# is not specified. The arguments passed after the application name are passed
+# unmodified to the application.
+
+if [ -z "$1" ]; then
+  echo usage: openapp [--find] application [arguments...]
+  echo openapp --help for more help
+  exit 1
+fi
+
+if [ -z "$GNUSTEP_CONFIG_FILE" ]; then
+  GNUSTEP_CONFIG_FILE=@GNUSTEP_CONFIG_FILE@
+fi
+. $GNUSTEP_CONFIG_FILE
+
+. $GNUSTEP_SYSTEM_ROOT/Library/Makefiles/GNUstep.sh
+
+if [ -z "$GNUSTEP_FLATTENED" ]; then
+  GNUSTEP_FLATTENED=@GNUSTEP_FLATTENED@
+fi
+
+only_find=
+
+# TODO: implement a --library-combo parameter
+case "$1" in
+  --help)
+    echo usage: openapp [--find] application [arguments...]
+    echo
+    echo application is the complete or relative name of the application
+    echo program with or without the .app extension, like Ink.app.
+    echo
+    echo [arguments...] are the arguments to the application.     
+    echo 
+    echo If --find is used as first argument, openapp prints out
+    echo the full path of the application executable which would be 
+    echo executed, without actually executing it as it would normally do.
+    echo 
+    exit 0
+    ;;
+  --find)
+    only_find=yes;
+    if [ -z "$2" ]; then
+      echo Missing application name.  Please try openapp --help for more help.
+      exit 1
+    fi
+    app="$2"; shift; shift;;
+  *)
+    app="$1"; shift;;
+esac
+
+# Remove leading slashes at the end of the application name
+app="`echo \"$app\" | sed 's%/*$%%'`"
+
+# Now form the set of directory names we look for.  If the user has
+# given us a full application directory name (for example, Gorm.app)
+# then we only search for the given directory name; if instead the
+# user has given us the application name without the suffix (for
+# example, 'Gorm') we want to search for Gorm.app, then for
+# Gorm.debug, then for Gorm.profile (in that order).
+# If the appname is known, save it to avoid running a grep later to get it.
+case "$app" in
+  *.app)     a1="$app"; a2=""; a3=""; appname="";;
+  *.debug)   a1="$app"; a2=""; a3=""; appname="";;
+  *.profile) a1="$app"; a2=""; a3=""; appname="";;
+  *)         a1="$app.app"; a2="$app.debug" a3="$app.profile"; appname="$app";
+esac
+
+case "$app" in
+    /*) # An absolute path.
+      for appdir in "$a1" "$a2" "$a3"; do
+        if [ \( "" != "$appdir" \) -a \( -d "$appdir" \) ]; then
+	   full_appname="$appdir"
+	   break
+        fi
+      done
+      ;;
+    */*) # A relative path
+      for appdir in "$a1" "$a2" "$a3"; do
+        if [ \( "" != "$appdir" \) -a \( -d "$appdir" \) ]; then
+	  full_appname="`(cd \"$appdir\"; pwd)`"
+	  break
+	fi
+      done
+      ;;
+    *)
+      # We should first search the standard GNUstep locations.
+      for dir in "$GNUSTEP_USER_ROOT" "$GNUSTEP_LOCAL_ROOT" "$GNUSTEP_NETWORK_ROOT" "$GNUSTEP_SYSTEM_ROOT"; do
+	for appdir in "$a1" "$a2" "$a3"; do
+	  # Standard locations ... in $dir/Applications/$appdir
+	  if [ \( "" != "$appdir" \) -a \( -d "$dir/Applications/$appdir" \) ]; then
+	    full_appname="`(cd \"$dir/Applications/$appdir\"; pwd)`"
+	    break 2
+	  fi
+	done
+      done
+      if [ -z "$full_appname" ]; then
+	# And now search the standard PATH (may include '.')
+	old_IFS="$IFS"
+	IFS=:
+	for dir in $PATH; do
+	  for appdir in "$a1" "$a2" "$a3"; do
+	    if [ \( "" != "$appdir" \) -a \( -d "$dir/$appdir" \) ]; then
+	      full_appname="`(cd \"$dir/$appdir\"; pwd)`"
+	      break 2
+	    fi
+	  done
+	done
+	IFS="$old_IFS"
+      fi
+    ;;
+esac
+unset app_list
+unset appdir
+
+if [ -z "$full_appname" ]; then
+  echo "Can't find the required application: $app!"
+  exit 1
+fi
+
+#echo "found: $full_appname"
+
+# get base app name
+if [ -z "$appname" ]; then
+  appname="`echo \"$app\" | sed 's/\.[a-z]*$//'`"
+fi
+appname="`basename \"$appname\"`"
+
+if [ -n "$GNUSTEP_FLATTENED" ]; then
+
+  if [ -z "$EXEEXT" ]; then
+    EXEEXT=@EXEEXT@
+  fi
+
+  if [ -n "$EXEEXT" ]; then
+    appname="$appname$EXEEXT"
+  fi
+
+fi
+
+case "$LIBRARY_COMBO" in
+  apple-*) app_executable="$full_appname/Contents/MacOS/$appname";;
+  *)       app_executable="$full_appname/$appname";;
+esac
+
+if [ ! -f "$app_executable" ]; then
+  echo "Could not find $app_executable executable/script"
+  exit 1
+fi
+
+if [ -n "$only_find" ]; then
+  echo "$app_executable"
+  exit 0
+fi
+
+exec "$app_executable" "$@"

@@ -1,0 +1,125 @@
+/* bind template to controller */
+
+Test: WOString {
+  value = session.defaultManagedObjectContext;
+}
+
+Entities: WORepetition {
+  list = session.defaultManagedObjectContext.persistentStoreCoordinator.managedObjectModel.entities;
+  item = item;
+}
+
+Entity: WOString {
+  value = item.name;
+}
+
+Attr: WOString {
+  value = session.defaultManagedObjectContext.persistentStoreCoordinator.managedObjectModel.entitiesByName.Post.propertiesByName.title;
+}
+
+/* real content */
+
+PostCount: WOString {
+  value = postDisplayGroup.allObjects.@count;
+}
+Posts: WORepetition {
+  list = postDisplayGroup.displayedObjects;
+  item = post;
+}
+
+PostSelectLink: WOHyperlink {
+  action = selectPost;
+}
+
+PostTitle: WOString {
+  value          = post.title;
+  valueWhenEmpty = "[no title]";
+}
+
+IsPostSelected: WOConditional {
+  condition = postDisplayGroup.selectedObject;
+  value     = post;
+}
+IsPostNotSelected: WOConditional {
+  condition = postDisplayGroup.selectedObject;
+  value     = post;
+  negate    = YES;
+}
+
+// form
+
+PostForm: WOForm {
+}
+
+SelectedPostTitle: WOString {
+  value = postDisplayGroup.selectedObject.title;
+}
+
+TitleEditField: WOTextField {
+  value = postDisplayGroup.selectedObject.title;
+  style = "width: 100%;";
+}
+
+AuthorEditField: WOPopUpButton {
+  list      = authorDisplayGroup.allObjects;
+  item      = author;
+  string    = author.name;
+  selection = postDisplayGroup.selectedObject.author;
+  style     = "width: 100%;";
+}
+
+TopicEditField: WOPopUpButton {
+  list      = topicDisplayGroup.allObjects;
+  item      = topic;
+  string    = topic.title;
+  selection = postDisplayGroup.selectedObject.topic;
+  style     = "width: 100%;";
+}
+
+BodyEditField: WOText {
+  rows  = 12;
+  style = "height: 200px; width: 100%;";
+  value = postDisplayGroup.selectedObject.body;
+}
+
+Submit: WOSubmitButton {
+  action = context.page; /* just jump back to page */
+  value  = "ok";
+}
+
+/* posts */
+
+AddPost: WOHyperlink {
+  action = postDisplayGroup.insert;
+}
+DeletePost: WOHyperlink {
+  action = postDisplayGroup.delete;
+}
+RefetchPosts: WOHyperlink {
+  action = postDisplayGroup.fetch;
+}
+
+/* saving */
+
+HasChanges: WOConditional {
+  condition = session.defaultManagedObjectContext.hasChanges;
+}
+
+InsertedCount: WOString {
+  value = session.defaultManagedObjectContext.insertedObjects.@count;
+}
+UpdatedCount: WOString {
+  value = session.defaultManagedObjectContext.updatedObjects.@count;
+}
+DeletedCount: WOString {
+  value = session.defaultManagedObjectContext.deletedObjects.@count;
+}
+
+SaveChanges: WOSubmitButton {
+  action = saveChanges;
+  value  = "save";
+}
+Rollback: WOSubmitButton {
+  action = rollback;
+  value  = "rollback";
+}

@@ -1,0 +1,152 @@
+2008-03-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README-OSX.txt: Updated
+
+2005-09-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: added WEPrototype to makefile
+
+2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* all makefiles: add common.h as the precompiled header file
+
+2005-08-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* more work on OSX framework support
+
+2005-08-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* prepared for OSX frameworks
+
+2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* sope-appserver.xcode: added SoOFS product
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGXmlRpc/NGXmlRpc.xcode: minor changes and updated
+
+2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* sope-appserver.xcode: added NGXmlRpc product
+	
+	* README-OSX.txt: updated prebinding information
+
+2004-11-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* sope-appserver.xcode: adjusted the build process to new NGObjWeb
+	  targets.
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README-OSX.txt: minor changes to the prebinding documentation. The
+	  whole document needs an overhaul, still.
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGExtensions.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects.
+
+2004-08-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* sope-appserver.xcode: new Xcode aggregate project
+
+	* removed old SOPE.xcode
+
+2004-08-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* move NGScripting to Recycler, not used anymore
+
+2004-08-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added SoOFS as a separate project
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved SxComponents to Recycler
+
+2004-07-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: fixed an incorrect framework search path.
+
+2004-07-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README-OSX.txt: Major overhaul for build description, especially the
+	  Xcode section.
+
+	* SOPE.xcode: added WOKeyPathAssociationSystemKVC.m and
+	  NSUserDefaults+KVC.m in NGObjWeb/Associations to the Xcode build
+	  which were previously missing.
+
+2004-07-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: added 'Wrapper' build style and 'Wrapper Contents' target.
+	  Use these to build the frameworks in an appropriate form to have them
+	  embedded in an applications app wrapper's 'Frameworks' folder.
+
+2004-06-24  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: removed WOPopUpButton.h.
+
+2004-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: added new bundle products, SoCore.sxp and SoOFS.sxp -
+	  both seemed to get lost in the transition from Project Builder to
+	  Xcode. Please note that the names of the two products bear the (SXP)
+	  specifier which is unfortunately necessary since there already is an
+	  SoOFS target and Xcode seriously gets confused by this, despite the
+	  fact that the product types are different.
+
+2004-05-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: added new WOMessage+Validation.m
+
+2004-04-28  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: added new WOXML framework for legacy applications.
+
+	* README-OSX.txt: updated prebinding info list for new WOXML target.
+
+2004-04-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: added WEPageLink in WEExtensions,
+	  WOHyperlink cluster in NGObjWeb.
+
+2004-04-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: Added WETableView group and accompanied files in
+	  WEExtensions.
+
+2004-03-31  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: added WERedirect.m to WEExtensions, added WORedirect.[hm]
+	  and WOExtensions.h to WOExtensions.
+
+2004-03-24  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: added WEQualifierConditional in WEExtensions.
+	  Also, added -headerpad_max_install_names link option where
+	  appropriate.
+
+2004-03-08  Helge Hess  <helge@mac.in.skyrix.com>
+
+	* SOPE.xcode: added new source files in WebDAV
+
+	* README-OSX.txt: added some build notes
+
+2004-02-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added WOResourceURLAssociation to Xcode project
+
+2004-02-10  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SOPE.xcode: Updated prebinding information according to
+	  README-OSX.txt. Also, added Foundation.framework explicitly
+	  to all subprojects.
+
+	* README-OSX.txt: New README currently describing prebinding
+	  information for Mac OS X.
+
+	* ChangeLog: created.

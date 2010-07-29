@@ -1,0 +1,281 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ADA07A150857393700993825 /* Build configuration list for PBXAggregateTarget "Wrapper Contents" */;
+			buildPhases = (
+			);
+			dependencies = (
+				AD8BF26C0701996900EC239A /* PBXTargetDependency */,
+			);
+			name = "Wrapper Contents";
+			productName = "Wrapper Contents";
+		};
+		ADDF479906DA58D700C4E7F8 /* all */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ADA07A190857393700993825 /* Build configuration list for PBXAggregateTarget "all" */;
+			buildPhases = (
+			);
+			dependencies = (
+				ADDF479B06DA58DD00C4E7F8 /* PBXTargetDependency */,
+			);
+			name = all;
+			productName = all;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		AD8BF26B0701996900EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BF2680701995B00EC239A /* NGLdap.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = NGLdap;
+		};
+		AD8BF2740701998600EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BF2680701995B00EC239A /* NGLdap.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = NGLdap;
+		};
+		ADDF479A06DA58DD00C4E7F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADDF476A06DA572500C4E7F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADDF478006DA57DA00C4E7F8;
+			remoteInfo = "Wrapper Contents";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AD8BF2680701995B00EC239A /* NGLdap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NGLdap.xcodeproj; path = NGLdap/NGLdap.xcodeproj; sourceTree = "<group>"; };
+		ADDF477306DA575700C4E7F8 /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADDF477606DA575700C4E7F8 /* README-OSX.txt */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = "README-OSX.txt"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		AD8BF2690701995B00EC239A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD8BF2710701997D00EC239A /* NGLdap.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADDF476606DA572500C4E7F8 = {
+			isa = PBXGroup;
+			children = (
+				ADDF477606DA575700C4E7F8 /* README-OSX.txt */,
+				ADDF477D06DA577400C4E7F8 /* Makefiles */,
+				ADDF478306DA57F500C4E7F8 /* Projects */,
+			);
+			sourceTree = "<group>";
+		};
+		ADDF477D06DA577400C4E7F8 /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADDF477306DA575700C4E7F8 /* GNUmakefile */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADDF478306DA57F500C4E7F8 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				AD8BF2680701995B00EC239A /* NGLdap.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		ADDF476A06DA572500C4E7F8 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA07A1D0857393700993825 /* Build configuration list for PBXProject "sope-ldap" */;
+			hasScannedForEncodings = 0;
+			mainGroup = ADDF476606DA572500C4E7F8;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AD8BF2690701995B00EC239A /* Products */;
+					ProjectRef = AD8BF2680701995B00EC239A /* NGLdap.xcodeproj */;
+				},
+			);
+			targets = (
+				ADDF479906DA58D700C4E7F8 /* all */,
+				ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AD8BF2710701997D00EC239A /* NGLdap.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NGLdap.framework;
+			remoteRef = AD8BF2740701998600EC239A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXTargetDependency section */
+		AD8BF26C0701996900EC239A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "NGLdap (from NGLdap.xcodeproj)";
+			targetProxy = AD8BF26B0701996900EC239A /* PBXContainerItemProxy */;
+		};
+		ADDF479B06DA58DD00C4E7F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */;
+			targetProxy = ADDF479A06DA58DD00C4E7F8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ADA07A160857393700993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = "Wrapper Contents";
+			};
+			name = Development;
+		};
+		ADA07A170857393700993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				DYLIB_INSTALL_NAME_BASE = "@executable_path/../Frameworks/";
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+				);
+				PRODUCT_NAME = "Wrapper Contents";
+				SKIP_INSTALL = YES;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				UNSTRIPPED_PRODUCT = NO;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA07A1A0857393700993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = all;
+			};
+			name = Development;
+		};
+		ADA07A1B0857393700993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				DYLIB_INSTALL_NAME_BASE = "@executable_path/../Frameworks/";
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+				);
+				PRODUCT_NAME = all;
+				SKIP_INSTALL = YES;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				UNSTRIPPED_PRODUCT = NO;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA07A1E0857393700993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA07A1F0857393700993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA07A150857393700993825 /* Build configuration list for PBXAggregateTarget "Wrapper Contents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07A160857393700993825 /* Development */,
+				ADA07A170857393700993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA07A190857393700993825 /* Build configuration list for PBXAggregateTarget "all" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07A1A0857393700993825 /* Development */,
+				ADA07A1B0857393700993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA07A1D0857393700993825 /* Build configuration list for PBXProject "sope-ldap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07A1E0857393700993825 /* Development */,
+				ADA07A1F0857393700993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADDF476A06DA572500C4E7F8 /* Project object */;
+}

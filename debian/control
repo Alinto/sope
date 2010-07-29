@@ -1,0 +1,282 @@
+Source: sope
+Priority: extra
+Maintainer: Sebastian Ley <ley@debian.org>
+Build-Depends: debhelper (>= 4.0.0), dpatch, gnustep-make-ogo, gobjc | objc-compiler, libfoundation1.1-dev, libobjc1, libxml2-dev, libldap2-dev | libldap-dev, libssl-dev, zlib1g-dev, libpq-dev | postgresql-dev, libecpg-dev, apache-dev, apache2-threaded-dev | apache2-prefork-dev | apache2-dev, autotools-dev
+Standards-Version: 3.6.1
+
+Package: libsope4.9-dev
+Section: libdevel
+Architecture: all
+Provides: libsope-dev
+Conflicts: libsope-dev
+Depends: libsope-appserver4.9-dev, libsope-core4.9-dev, libsope-xml4.9-dev, libsope-mime4.9-dev, libsope-ldap4.9-dev, libsope-ical4.9-dev, libsope-gdl1-4.9-dev
+Description: Development files for all SOPE libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This is a meta-package depending on all development files of all
+ components of SOPE.
+
+Package: libsope-appserver4.9-dev
+Section: libdevel
+Architecture: any
+Provides: libsope-appserver-dev
+Conflicts: libsope-appserver-dev
+Depends: libsope-appserver4.9 (= ${Source-Version})
+Description: Development files for the SOPE libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the development files for the SOPE application server
+ libraries.
+
+Package: libsope-appserver4.9
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SOPE application server libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ The SOPE application server libraries provide:
+ .
+  * template rendering engine, lots of dynamic elements
+  * HTTP client/server
+  * XML-RPC client
+  * WebDAV server framework
+  * session management
+  * scripting extensions for Foundation, JavaScript bridge
+  * DOM tree rendering library
+
+Package: sope-tools
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Tools shipped with SOPE application server
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains some tools shipped with the SOPE application
+ server framework, which are mostly useful for development and debugging
+ of SOPE applications.
+
+Package: sope4.9-appserver
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SOPE application server
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ . 
+ This package contains the application server that serves SOPE sites.
+
+Package: libsope-core4.9-dev
+Section: libdevel
+Architecture: any
+Provides: libsope-core-dev
+Conflicts: libsope-core-dev
+Depends: libsope-core4.9 (= ${Source-Version})
+Description: Development files for the SOPE core libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the header files for the SOPE core
+ libraries,  which are part of the SOPE application server framework.
+
+Package: libsope-core4.9
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Core libraries of the SOPE application server
+ The SOPE core libraries contain:
+ .
+  * various Foundation extensions
+  * a java.io like stream and socket library
+
+Package: libsope-xml4.9-dev
+Section: libdevel
+Architecture: any
+Provides: libsope-xml-dev
+Conflicts: libsope-xml-dev
+Depends: libsope-xml4.9 (= ${Source-Version})
+Description: Development files for the SOPE XML libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the development files of the SOPE
+ XML libraries.
+
+Package: libsope-xml4.9
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SOPE libraries for XML processing
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ The SOPE libraries for XML processing contain:
+ .
+  * a SAX2 Implementation for Objective-C
+  * an attempt to implement DOM on top of SaxObjC
+  * an XML-RPC implementation (without a transport layer)
+
+Package: libsope-ldap4.9-dev
+Section: libdevel
+Architecture: any
+Provides: libsope-ldap-dev
+Conflicts: libsope-ldap-dev
+Depends: libsope-ldap4.9 (= ${Source-Version})
+Description: Development files for the SOPE LDAP libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the development files of the SOPE
+ LDAP libraries.
+
+Package: libsope-ldap4.9
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SOPE libraries for LDAP access
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ The SOPE libraries for LDAP access contain an Objective-C wrapper for
+ LDAP directory services.
+
+Package: libsope-mime4.9-dev
+Section: libdevel
+Architecture: any
+Provides: libsope-mime-dev
+Conflicts: libsope-mime-dev
+Depends: libsope-mime4.9 (= ${Source-Version})
+Description: Development files for the SOPE MIME libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the development files of the SOPE
+ MIME libraries.
+
+Package: libsope-mime4.9
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SOPE libraries for MIME processing
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ The SOPE libraries for MIME processing contain:
+ .
+  * classes for processing MIME entities
+  * a full IMAP4 implementation
+  * prototypical POP3 and SMTP processor
+
+Package: libsope-ical4.9-dev
+Section: libdevel
+Architecture: any
+Provides: libsope-ical-dev
+Conflicts: libsope-ical-dev
+Depends: libsope-ical4.9 (= ${Source-Version})
+Description: Development files for the SOPE iCal libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the development files of the SOPE
+ iCal libraries.
+
+Package: libsope-ical4.9
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: SOPE libraries for iCal handling
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ The SOPE libraries for iCal handling contain  classes for iCalendar and
+ vCard objects.
+
+Package: libsope-gdl1-4.9-dev
+Section: libdevel
+Architecture: any
+Provides: libsope-gdl1-dev
+Conflicts: libsope-gdl1-dev
+Depends: libsope-gdl1-4.9 (= ${Source-Version})
+Description: Development files for the GNUstep database libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the header files for SOPE's fork of the GNUstep
+ database libraries.
+
+Package: libsope-gdl1-4.9
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: GNUstep database libraries for SOPE
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains a fork of the GNUstep database libraries used
+ by the SOPE application server.
+
+Package: sope4.9-gdl1-postgresql
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: sope-db-connector
+Recommends: postgresql (>= 7.2.0)
+Description: PostgreSQL connector for SOPE's fork of the GNUstep database environment
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the postgresql connector for SOPE's fork of the
+ GNUstep database libraries.
+     
+Package: sope4.9-stxsaxdriver
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: sope-stxsaxdriver
+Description: Structured Text Parser for SOPE's SAX engine
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ . 
+ This parser enables SOPE's SAX engine to parse structured text files.
+
+Package: sope4.9-libxmlsaxdriver
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: sope-libxmlsaxdriver
+Description: XML Parser for SOPE's SAX engine
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This parser enables SOPE's SAX engine to parse XML files.
+
+Package: sope4.9-versitsaxdriver
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: sope-versitsaxdriver
+Description: iCal and vCard Parser for SOPE's SAX engine
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This parser enables SOPE's SAX engine to parse iCal and vCard files.
+
+Package: libapache-mod-ngobjweb
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ucf (>= 0.8), apache-common (>= 1.3.29)
+Description: Apache module for the SOPE application server
+ This package contains an apache module which enables the apache
+ webserver to deliver pages generated by the SOPE application server.
+
+Package: libapache2-mod-ngobjweb
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, apache2-common | apache2.2-common
+Description: Apache2 module for the SOPE application server
+ This package contains an apache module which enables the apache2
+ webserver to deliver pages generated by the SOPE application server.

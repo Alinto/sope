@@ -1,0 +1,6 @@
+usr/include/DOM
+usr/include/SaxObjC
+usr/include/XmlRpc
+usr/lib/libDOM.so
+usr/lib/libSaxObjC.so
+usr/lib/libXmlRpc.so

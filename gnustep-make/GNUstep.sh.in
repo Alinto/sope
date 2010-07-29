@@ -1,0 +1,366 @@
+#! /bin/echo This file must be sourced inside (ba)sh using: .
+#
+#   @configure_input@
+#
+#   Shell initialization for the GNUstep environment.
+#
+#   Copyright (C) 1997-2005 Free Software Foundation, Inc.
+#
+#   Author:  Scott Christley <scottc@net-community.com>
+#   Author:  Adam Fedor <fedor@gnu.org>
+#   Author:  Richard Frith-Macdonald <rfm@gnu.org>
+#   Author:  Nicola Pero <n.pero@mi.flashnet.it>
+#
+#   This file is part of the GNUstep Makefile Package.
+#
+#   This library is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU General Public License
+#   as published by the Free Software Foundation; either version 2
+#   of the License, or (at your option) any later version.
+#   
+#   You should have received a copy of the GNU General Public
+#   License along with this library; see the file COPYING.LIB.
+#   If not, write to the Free Software Foundation,
+#   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+
+# Warning - this shell script is delicate, because it is sourced by
+# using . rather than simply executed.  It is sourced because that is
+# the only way to change the shell variables in the calling
+# environment.
+#
+# Sourcing makes the shell script more delicate for the following reasons:
+#
+#  * temporary variables are automatically set in the calling
+#  environment!  WORKAROUND: we need to unset all them after using
+#  them to avoid polluting the calling environment;
+#
+#  * not only the exit value of the script, but the exit value of each
+#  command we execute, might be interpreted by the calling
+#  environment.  Typically, the calling environment might be using the
+#  shell errexit option ('set -e') in bash parlance, which causes the
+#  shell to exit if any command returns an error value.  If this were
+#  a normal script, this option would mean that the shell would exit
+#  if the return value of the whole script were an error value; but
+#  because we are sourced, it is as all the commands in this script
+#  were executed directly in the calling environment, so *all* values
+#  returned by *all* commands must be non-error.  [this all typically
+#  happens in rpm builds, where scripts are run with the errexit
+#  option so that errors in scripts abort the build, and now if a
+#  script sources GNUstep.sh, then we are exactly in this situation -
+#  if any command inside GNUstep.sh returns an error value (even if
+#  GNUstep.sh as a whole would be happy and return succes), the whole
+#  rpm build process aborts!]. WORKAROUND: we must make sure all
+#  commands return success - last resorts hacks like 'command || :'
+#  which always returns success whatever command returns.
+#
+
+# If we're running in zsh (auch!) make sure we're using -y
+# (SH_WORD_SPLIT) else our path manipulations won't work.
+if [ -n "$ZSH_VERSION" ]; then
+
+  # If -y is not already set, set it and remember that we
+  # need to set it back to what it was at the end.
+  if ( setopt | grep shwordsplit > /dev/null ); then :; else
+    set -y
+    GS_ZSH_NEED_TO_RESTORE_SET=yes
+  fi
+
+fi
+
+#
+# Set the GNUstep system root and local root
+#
+
+#
+# Read our configuration files
+#
+
+# Determine the location of the system configuration file
+if [ -z "$GNUSTEP_CONFIG_FILE" ]; then
+  GNUSTEP_CONFIG_FILE=@GNUSTEP_CONFIG_FILE@
+fi
+
+# Determine the location of the user configuration file
+if [ -z "$GNUSTEP_USER_CONFIG_FILE" ]; then
+  GNUSTEP_USER_CONFIG_FILE=@GNUSTEP_USER_CONFIG_FILE@
+fi
+
+# Read the system configuration file
+if [ -f "$GNUSTEP_CONFIG_FILE" ]; then
+  . "$GNUSTEP_CONFIG_FILE"
+fi
+
+# FIXME: determining GNUSTEP_HOME
+GNUSTEP_HOME=~
+
+# Read the user configuration file ... unless it is disabled (ie, set
+# to an empty string)
+if [ -n "$GNUSTEP_USER_CONFIG_FILE" ]; then
+  case "$GNUSTEP_USER_CONFIG_FILE" in 
+    /*) # An absolute path
+        if [ -f "$GNUSTEP_USER_CONFIG_FILE" ]; then
+          . "$GNUSTEP_USER_CONFIG_FILE"
+        fi;;
+     *) # Something else
+        if [ -f "$GNUSTEP_HOME/$GNUSTEP_USER_CONFIG_FILE" ]; then
+          . "$GNUSTEP_HOME/$GNUSTEP_USER_CONFIG_FILE"
+        fi;;
+  esac
+fi
+
+# Now, set any essential variable (that is not already set) to the
+# built-in values.
+if [ -z "$GNUSTEP_SYSTEM_ROOT" ]; then
+  GNUSTEP_SYSTEM_ROOT=@GNUSTEP_SYSTEM_ROOT@
+fi
+
+if [ -z "$GNUSTEP_LOCAL_ROOT" ]; then
+  GNUSTEP_LOCAL_ROOT=@GNUSTEP_LOCAL_ROOT@
+fi
+
+if [ -z "$GNUSTEP_NETWORK_ROOT" ]; then
+  GNUSTEP_NETWORK_ROOT=@GNUSTEP_NETWORK_ROOT@
+fi
+
+export GNUSTEP_SYSTEM_ROOT GNUSTEP_LOCAL_ROOT GNUSTEP_NETWORK_ROOT
+
+GNUSTEP_FLATTENED=@GNUSTEP_FLATTENED@
+if [ -z "$LIBRARY_COMBO" ]; then
+  LIBRARY_COMBO=@ac_cv_library_combo@
+fi
+export GNUSTEP_FLATTENED LIBRARY_COMBO
+
+if [ -z "$GNUSTEP_MAKEFILES" ]; then
+  GNUSTEP_MAKEFILES=$GNUSTEP_SYSTEM_ROOT/Library/Makefiles
+fi
+export GNUSTEP_MAKEFILES
+
+if [ -z "$GNUSTEP_USER_DIR" ]; then
+  GNUSTEP_USER_DIR=@GNUSTEP_USER_DIR@
+fi
+
+#
+# Set GNUSTEP_USER_ROOT which is the variable used in practice
+#
+case "$GNUSTEP_USER_DIR" in 
+  /*) # An absolute path
+      GNUSTEP_USER_ROOT="$GNUSTEP_USER_DIR";;
+   *) # Something else
+      GNUSTEP_USER_ROOT="$GNUSTEP_HOME/$GNUSTEP_USER_DIR";;
+esac
+
+export GNUSTEP_USER_ROOT
+
+# No longer needed
+unset GNUSTEP_HOME
+
+# If multi-platform support is disabled, just use the hardcoded cpu,
+# vendor and os determined when gnustep-make was configured.  The
+# reason using the hardcoded ones might be better is that config.guess
+# and similar scripts might even require compiling test files to
+# determine the platform - but then you can't source GNUstep.sh
+# without having gcc, binutils, libc6-dev installed.  Which can be a
+# problem for end-users who are not developers and have no development
+# tools installed.  To prevent this problem, unless we were configured
+# to determine the platform at run time, by default we use the
+# hardcoded values of GNUSTEP_HOST*.
+if [ -z "@GNUSTEP_MULTI_PLATFORM@" ]; then
+  GNUSTEP_HOST=@target@
+  GNUSTEP_HOST_CPU=@clean_target_cpu@
+  GNUSTEP_HOST_VENDOR=@clean_target_vendor@
+  GNUSTEP_HOST_OS=@clean_target_os@
+fi
+
+#
+# Determine the host information
+#
+if [ -z "$GNUSTEP_HOST" ]; then
+  # Not all shells (e.g. /bin/sh on FreeBSD < 4.0 or ash) have pushd/popd
+  tmpdir=`pwd`; cd /tmp
+  GNUSTEP_HOST=`$GNUSTEP_MAKEFILES/config.guess`
+  GNUSTEP_HOST=`$GNUSTEP_MAKEFILES/config.sub $GNUSTEP_HOST`
+  cd "$tmpdir"
+  unset tmpdir
+fi
+
+if [ -z "$GNUSTEP_HOST_CPU" ]; then
+  GNUSTEP_HOST_CPU=`$GNUSTEP_MAKEFILES/cpu.sh $GNUSTEP_HOST`
+  GNUSTEP_HOST_CPU=`$GNUSTEP_MAKEFILES/clean_cpu.sh $GNUSTEP_HOST_CPU`
+fi
+
+if [ -z "$GNUSTEP_HOST_VENDOR" ]; then
+  GNUSTEP_HOST_VENDOR=`$GNUSTEP_MAKEFILES/vendor.sh $GNUSTEP_HOST`
+  GNUSTEP_HOST_VENDOR=`$GNUSTEP_MAKEFILES/clean_vendor.sh $GNUSTEP_HOST_VENDOR`
+fi
+
+if [ -z "$GNUSTEP_HOST_OS" ]; then 
+  GNUSTEP_HOST_OS=`$GNUSTEP_MAKEFILES/os.sh $GNUSTEP_HOST`
+  GNUSTEP_HOST_OS=`$GNUSTEP_MAKEFILES/clean_os.sh $GNUSTEP_HOST_OS`
+fi
+
+export GNUSTEP_HOST GNUSTEP_HOST_CPU GNUSTEP_HOST_VENDOR GNUSTEP_HOST_OS
+
+#
+# GNUSTEP_PATHLIST is like an abstract path-like shell
+# variable, which can be used to search the gnustep directories - and
+# in these scripts, it is also used to set up other shell variables
+#
+if [ -z "$GNUSTEP_PATHLIST" ]; then
+
+  # If we need to convert win32 paths, this is the time!
+  if [ -z "`echo $GNUSTEP_SYSTEM_ROOT | sed 's|^[a-zA-Z]:/.*$||'`" ]; then
+    G_U_R=`$GNUSTEP_MAKEFILES/fixpath.sh -u "$GNUSTEP_USER_ROOT"`
+    G_L_R=`$GNUSTEP_MAKEFILES/fixpath.sh -u "$GNUSTEP_LOCAL_ROOT"`
+    G_N_R=`$GNUSTEP_MAKEFILES/fixpath.sh -u "$GNUSTEP_NETWORK_ROOT"`
+    G_S_R=`$GNUSTEP_MAKEFILES/fixpath.sh -u "$GNUSTEP_SYSTEM_ROOT"`
+  else
+    G_U_R="$GNUSTEP_USER_ROOT"
+    G_L_R="$GNUSTEP_LOCAL_ROOT"
+    G_N_R="$GNUSTEP_NETWORK_ROOT"
+    G_S_R="$GNUSTEP_SYSTEM_ROOT"
+  fi
+
+  # Now we basically want to build
+  # GNUSTEP_PATHLIST="$G_U_R:$G_L_R:$G_N_R:$G_S_R"
+  # but we want to remove duplicates.
+
+  # Start with $G_U_R:$G_L_R - or $G_U_R if they are the same
+  if [ "$G_L_R" != "$G_U_R" ]; then
+    GNUSTEP_PATHLIST="$G_U_R:$G_L_R"
+  else
+    GNUSTEP_PATHLIST="$G_U_R"
+  fi
+
+  # Now append $G_N_R but only if different from what already there
+  if [ "$G_N_R" != "$G_U_R" ]; then
+    if [ "$G_N_R" != "$G_L_R" ]; then
+      GNUSTEP_PATHLIST="$GNUSTEP_PATHLIST:$G_N_R"
+    fi
+  fi
+
+  # Now append $G_S_R but only if different from what already there
+  if [ "$G_S_R" != "$G_U_R" ]; then
+    if [ "$G_S_R" != "$G_L_R" ]; then
+      if [ "$G_S_R" != "$G_N_R" ]; then
+        GNUSTEP_PATHLIST="$GNUSTEP_PATHLIST:$G_S_R"
+      fi
+    fi
+  fi
+
+  unset G_U_R
+  unset G_L_R
+  unset G_N_R
+  unset G_S_R
+
+  export GNUSTEP_PATHLIST
+fi
+
+#
+# Add path to Tools to PATH
+#
+tmp_IFS="$IFS"
+IFS=:
+temp_path=
+for dir in $GNUSTEP_PATHLIST; do
+
+  # Prepare the path_fragment
+  if [ -z "$GNUSTEP_FLATTENED" ]; then
+    path_fragment="$dir/Tools:$dir/Tools/${GNUSTEP_HOST_CPU}/${GNUSTEP_HOST_OS}/${LIBRARY_COMBO}:$dir/Tools/${GNUSTEP_HOST_CPU}/${GNUSTEP_HOST_OS}"
+  else
+    path_fragment="$dir/Tools"
+  fi
+
+  # Add it to temp_path
+  if [ -z "$temp_path" ]; then
+    temp_path="$path_fragment"
+  else
+    temp_path="$temp_path:$path_fragment"
+  fi
+
+  unset path_fragment
+
+done
+IFS="$tmp_IFS"
+unset tmp_IFS
+unset dir
+if [ -z "$PATH" ]; then
+  PATH="$temp_path"
+else
+  if ( echo ${PATH}| grep -v "${temp_path}" >/dev/null ); then
+    PATH="${temp_path}:${PATH}"
+  fi
+fi
+unset temp_path
+export PATH
+
+. $GNUSTEP_MAKEFILES/ld_lib_path.sh
+
+tmp_IFS="$IFS"
+IFS=:
+gnustep_class_path=
+for dir in $GNUSTEP_PATHLIST; do
+
+  if [ -z "$gnustep_class_path" ]; then
+    gnustep_class_path="$dir/Library/Libraries/Java"
+  else
+    gnustep_class_path="$gnustep_class_path:$dir/Library/Libraries/Java"
+  fi
+
+done
+IFS="$tmp_IFS"
+unset tmp_IFS
+unset dir
+
+if [ -z "$CLASSPATH" ]; then
+  CLASSPATH="$gnustep_class_path"
+else
+  if ( echo ${CLASSPATH}| grep -v "${gnustep_class_path}" >/dev/null ); then
+    CLASSPATH="$CLASSPATH:$gnustep_class_path"
+  fi
+fi
+
+unset gnustep_class_path
+export CLASSPATH
+
+#
+# Setup path for loading guile modules too.
+#
+old_IFS="$IFS"
+IFS=:
+guile_paths=
+for dir in $GNUSTEP_PATHLIST; do
+
+  if [ -z "$guile_paths" ]; then
+    guile_paths="$dir/Library/Libraries/Guile"
+  else
+    guile_paths="$guile_paths:$dir/Library/Libraries/Guile"
+  fi
+
+done
+IFS="$old_IFS"
+unset old_IFS
+unset dir
+
+if [ -z "$GUILE_LOAD_PATH" ]; then
+  GUILE_LOAD_PATH="$guile_paths"
+else
+  if ( echo ${GUILE_LOAD_PATH}| grep -v "${guile_paths}" >/dev/null ); then
+    GUILE_LOAD_PATH="$guile_paths:$GUILE_LOAD_PATH"
+  fi
+fi
+export GUILE_LOAD_PATH
+unset guile_paths
+
+
+#
+# Perform any user initialization
+#
+if [ -f "$GNUSTEP_USER_ROOT/GNUstep.sh" ]; then
+  . "$GNUSTEP_USER_ROOT/GNUstep.sh"
+fi
+
+if [ -n "$GS_ZSH_NEED_TO_RESTORE_SET" ]; then
+  set +y
+fi
+# EOF

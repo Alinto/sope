@@ -1,0 +1,6 @@
+# version file
+
+MAJOR_VERSION:=1
+MINOR_VERSION:=1
+SUBMINOR_VERSION:=7
+

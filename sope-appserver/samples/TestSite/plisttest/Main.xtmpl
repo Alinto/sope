@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding">
+  <head>
+    <title><var:string value="context.page.title"/></title>
+    
+    <meta name="lastChanged" var:content="clientObject.davLastModified"/>
+    <meta name="author"      content="SKYRIX Software AG"/>
+    <meta name="generator"   content="SKYRiX Object Publishing Environment"/>
+    <meta name="robots"      content="index, follow, all" />
+    
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet"    href="stylesheet.css" type="text/css" />
+    <link rev="made"          href="mailto:info@developer.skyrix.com" /> 
+  </head>
+  
+  <body bgcolor="white">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="462"><a target="_top" href="/index.html"
+         ><img border="0" src="images/banner_left.gif"/></a></td>
+        <td width="100%" 
+            background="images/banner_back.gif"><entity name="nbsp"/></td>
+        <td align="right" width="14"
+         ><img border="0" src="images/banner_right.gif"/></td>
+      </tr>
+    </table>
+
+    <!-- process news (property list) item -->
+   <var:if condition="clientObject.soClassName" 
+           const:value="OFSPropertyListObject">
+    <br />
+    <br />
+    <table cellpadding="3" cellspacing="0">
+      <tr bgcolor="#ACACAC">
+        <th>Access as "context.page"</th>
+        <th>Access as "clientObject"</th>
+      </tr>
+      <tr>
+        <td>
+          <h4><var:string value="context.page.subject"/></h4>
+          Date:  <var:string value="context.page.date"/><br />
+          Color: <var:string value="context.page.color"/><br />
+          Object: <var:string value="context.page"/>
+        </td>
+        <td>
+          <h4><var:string value="clientObject.subject"/></h4>
+          Date:  <var:string value="clientObject.date"/><br />
+          Color: <var:string value="clientObject.color"/><br />
+          Object: <var:string value="clientObject"/>
+        </td>
+      </tr>
+    </table>
+   </var:if>
+    
+    <!-- process templates -->
+    <var:if condition="clientObject.soClassName" 
+            const:value="OFSPropertyListObject"
+            const:negate="YES">
+      <var:component value="context.page" />
+    </var:if>
+  </body>
+</html>

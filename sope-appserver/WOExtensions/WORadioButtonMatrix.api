@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WORadioButtonMatrix">
+  <binding name="list" passthrough="NO" required="YES"/>
+  <binding name="item" passthrough="NO"/>
+  <binding name="selection" passthrough="NO" settable="YES"/>
+  <binding name="maxColumns" passthrough="NO"/>
+
+  <!-- SOPE -->
+  <binding name="index" passthrough="NO"/>
+  <binding name="col" passthrough="NO"/>
+  <binding name="row" passthrough="NO"/>
+
+  <binding name="cellAlign" passthrough="NO"/>
+  <binding name="cellVAlign" passthrough="NO"/>
+  <binding name="rowBackgroundColor" passthrough="NO"/>
+  <binding name="cellBackgroundColor" passthrough="NO"/>
+  <binding name="horizontal" passthrough="NO" defaults="YES/NO" />
+
+  <!-- SOPE -->
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <validation message="&apos;list&apos; must not be a constant">
+    <and>
+      <bound name="list"/>
+      <ungettable name="list"/>
+    </and>
+  </validation>
+</wo>

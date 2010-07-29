@@ -1,0 +1,158 @@
+(
+ {
+   firstName = "Jochen";
+   name      = "Gutmann";
+   key       = one;
+   sublist   = (
+     {
+       firstName = "Ulli";
+       name      = "Bauer";
+       key       = one.one;
+       sublist   = ();
+     },
+     {
+       firstName = "Herbert";
+       name      = "Ganghover";
+       key       = one.two;
+       sublist   = (
+         {
+           firstName = "Traudel";
+           name      = "Busemann";
+           key       = one.two.one;
+           sublist   = (
+             {
+               firstName = "Flip";
+               name      = "Flop";
+               key       = one.two.one.one;
+               sublist   = (
+                 {
+                   firstName = "Tura";
+                   name      = "Nabelbauch";
+                   key       = one.two.one.one.one;
+                   sublist   = ();
+                 },
+                 {
+                   firstName = "Gollum";
+                   name      = "Hobbit";
+                   key       = one.two.one.one.two;
+                   sublist   = ();
+                 }
+               );
+             }
+           );
+         },
+         {
+           firstName = "Hubi";
+           name      = "Gubert";
+           key       = one.two.two;
+           sublist   = ();
+         },
+         {
+           firstName = "Klaus";
+           name      = "Fallenstein";
+           key       = one.two.three;
+           sublist   = ();
+         },
+         {
+           firstName = "Judith";
+           name      = "Beckstein";
+           key       = one.two.four;
+           sublist   = ();
+         }
+       );
+     },
+     {
+        firstName = "Johanna";
+        name      = "Strauss";
+        key       = one.three;
+        sublist   = ();
+     },
+     {
+        firstName = "Falco";
+        name      = "Jufert";
+        key       = one.four;
+        sublist   = ();
+     },
+     {
+       firstName = "Anja";
+       name      = "Jungblume";
+        key      = one.five;
+        sublist  = (
+          {
+            firstName = "Jan";
+            name      = "Pfitzmann";
+            key       = one.five.one;
+            sublist   = ();
+          },
+          {
+            firstName = "Oliver";
+            name      = "Stein";
+            key       = one.five.two;
+            sublist   = ();
+          },
+          {
+            firstName = "Gustav";
+            name      = "Schaffenbach";
+            key       = one.five.three;
+            sublist   = ();
+          }
+        );
+     }
+   );
+ },
+ {
+   name      = "Meier";
+   firstName = "Hannes";
+   key       = two;
+   sublist   = ();
+ },
+ {
+   firstName = "Liesel";
+   name      = "Rautenstein";
+   key       = three;
+   sublist   = (
+     {
+       firstName = "Lotte";
+       name      = "Buchholz";
+       key     = three.one;
+       sublist = ();
+     },
+     {
+       firstName = "Ingmar";
+       name      = "Rosenherz";
+       key       = three.two;
+       sublist   = ();
+     },
+     {
+       firstName = "Helge";
+       name      = "Schulz";
+       key       = three.three;
+       sublist   = ();
+     }
+   );
+ },
+ {
+   firstName = "Dieter";
+   name      = "Hosenfranz";
+   key       = four;
+   sublist   = ();
+ },
+ {
+   firstName = "Inge";
+   name      = "Meisel";
+   key       = five;
+   sublist   = ();
+ },
+ {
+   firstName = "Andre";
+   name      = "Zerter";
+   key       = six;
+   sublist   = ();
+ },
+ {
+   firstName = "Joseph";
+   name      = "Hedermeier";
+   key       = seven;
+   sublist   = ();
+ }
+)

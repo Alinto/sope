@@ -1,0 +1,72 @@
+SoObjects
+=========
+
+An attempt to rewrite some Zope concepts in NGObjWeb, basically the thing which
+is called "object publishing".
+
+It defines a new type system (SoClasses) and a new KVC system (which returns
+methods/selectors as objects).
+Further it provides the SoObjectRequestHandler for publishing objects on the
+web.
+
+TODO
+====
+
+- Object based security (now security-info can only get attached to classes)
+
+NOTES
+=====
+
+- we support ASP style ?Cmd query parameters !
+- we support :method form parameters
+=> both, when found, are added to the traversal path, this has the advantage
+   that it leaves the URI of a node intact
+
+FAQ
+===
+
+Q: Why is that in NGObjWeb and not in a separate framework?
+A: The idea is that the WO concept could be represented on top of SoObjects,
+   that is, the request handler, the session object etc could all become
+   SoObjects. The main control would be passed over to SOPE. Eg:
+     /MyApp/wo/1283746571/18233445.1.2.3.4.5
+   Could be
+     MyApp      lookup: wo                 => WORequestHandler
+     wo         lookup: 1283746571         => WOSession
+     1283746571 lookup: 18233445.1.2.3.4.5 => WOContext with element-id
+
+Class Hierarchy
+===============
+
+<NSObject>
+  <NSException>
+    SoHTTPException
+  <WOApplication>
+    SoApplication
+  <WOAssociation>
+    SoLookupAssociation
+  <WORequestHandler>
+    SoObjectRequestHandler
+  <WOResourceManager>
+    SoProductResourceManager
+  SoClass
+    SoObjCClass
+  SoClassRegistry
+  SoClassSecurityInfo
+  SoControlPanel
+  SoDefaultRenderer
+  SoHTTPAuthenticator
+  SoObjectMethodDispatcher
+    SoObjectXmlRpcDispatcher
+  SoPageInvocation
+  SoProduct
+  SoProductClassInfo
+  SoProductRegistry
+  SoSecurityManager
+  SoSelectorInvocation
+  SoUser < SoUser >
+  WODirectActionPubInvocation
+
+Protocols
+  SoUserDatabase
+  SoUser

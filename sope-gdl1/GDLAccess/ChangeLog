@@ -1,0 +1,332 @@
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* EOAdaptor: invoke MySQL adaptor using the 'mysql' URL scheme (v4.7.63)
+
+2007-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptor.m: invoke new Oracle8 adaptor for the 'oracle' URL scheme
+	  (v4.7.62)
+
+2007-06-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.7.61
+
+	* EOAttribute.m: minor code cleanups
+
+	* EOExpressionArray.m: copy prefix/suffix/infix strings in accessor
+	  methods
+
+2007-06-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOEntity.m, EOAttribute.m: minor improvements/comments on value
+	  encoding (v4.7.60)
+
+2007-04-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOSQLExpression.m: fixed a gcc4 warning (v4.7.59)
+
+2006-08-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOCustomValues.m: added special support for lF NSTemporaryString
+	  to fix OGo bug #1701 (v4.5.58)
+
+2006-07-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptor.m: changed to find SAX drivers on 64bit systems
+	  in lib64, added FHS_INSTALL_ROOT to lookup path (v4.5.57)
+
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.56)
+
+2005-10-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOArrayProxy.m, EOPrimaryKeyDictionary.m, EOExpressionArray.m,
+	  EORecordDictionary.m: added -isNotEmpty methods (v4.5.55)
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile, GNUmakefile.preamble: added OSX framework compilation
+	  (v4.5.54)
+
+2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptorContext.m, common.h: do not include NSUtilities.h on Cocoa
+	  (v4.5.53)
+
+2005-06-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOJoinTypes.h: properly protect header against multiple inclusion
+	  (fixes a compilation issue) (v4.5.52)
+
+2005-05-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 warnings (v4.5.51)
+
+2005-04-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptorChannel.[hm]: added -describeResults: as a public method,
+	  implemented -describeResults based on that (adaptors now need to
+	  override -describeResults:) (v4.5.50)
+
+2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.49
+
+	* fixed various gcc 3.4.3 warnings
+
+	* removed support for unused EOAttribute features like flattened, 
+	  derived, read-only, insert/update formats, definition
+
+2005-03-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FoundationExt/GNUmakefile: properly include config.make (v4.5.48)
+
+2005-02-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptor.m: added +adaptorForURL: method to create EOAdaptor
+	  objects from JDBC style URLs (eg PostgreSQL://OGo:OGo@localhost/OGo")
+	  (v4.5.47)
+
+2005-01-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptorDataSource.m: fixed a bug in the sorting code, the "AS" was
+	  missing in the SQL rename statement (v4.5.46)
+
+2005-01-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptorDataSource.m: improved -description (v4.5.45)
+
+2005-01-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAttribute.m, EOFaultHandler.m, EODatabaseFaultResolver.m: added 
+	  casts to avoid compile warnings with Xcode (v4.5.44)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.43
+
+	* GDLAccess.xcode: minor fixes and updated
+
+	* EOAttribute.m: changed usage of -timeZoneName (deprecated) to -name
+	  for Foundations different to libFoundation.
+
+2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptor.m: fixed a bug in the lookup of GDL adaptor bundles
+	  (v4.5.42)
+
+2004-11-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GDLAccess.xcode: fixed Xcode build by providing all necessary
+	  major/minor numbers and bumped the framework revision
+
+2004-11-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.41
+
+	* bumped version from 1.3 to 4.5 to be consistent with the remaining
+	  SOPE versions (the "super major version" is still gdl1)
+
+	* EOAdaptor.m: fixed adaptor lookup path
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GDLAccess.xcode: new Xcode project
+
+2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble, FoundationExt/GNUmakefile: minor changes for
+	  inline compilation with GNUSTEP_BUILD_DIR set elsewhere (v1.1.40)
+
+2004-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOSQLQualifier.m: fixed a compile warning related to scanner handler
+	  and NSArray argument instead of va_list (v1.1.39)
+
+2004-09-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptorChannel.m: added
+	  -selectAttributesX:describedByQualifier:fetchOrder:lock: for
+	  selects which return, not raise, exceptions (v1.1.38)
+
+2004-08-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: added library search pathes for FHS install
+	  (v1.1.37)
+
+2004-08-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.1.36
+
+	* EOAdaptor.m: also look for adaptors in /usr/lib/sope-4.3/dbadaptors
+	  and /usr/local/lib/sope-4.3/dbadaptors
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+
+2004-08-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOAdaptor.m: look for adaptor bundles in Library/GDLAdaptors-1.1/
+	  (v1.1.35)
+
+	* increased version to v1.1 because it depends on libEOControl v4.3
+	  (v1.1.34)
+
+2004-08-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.33
+
+	* fixed for SOPE 3.3 directory layout
+
+	* removed GDLExtensions
+
+	* moved headers files from EOAccess subdirectory to main directory
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved from ThirdParty to SOPE/sope-gdl1 (v1.0.32)
+
+2004-06-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.31
+	
+	* EOAdaptorChannel.m: fixed a bug in the transaction check introduced
+	  in v1.0.29 - resulted in OGo bug #824, #825
+	
+	* EODatabaseChannel.m: use new "X" adaptor methods
+
+	* GNUmakefile.preamble: added include path to SOPE/skyrix-core for
+	  "inline" compilation (v1.0.30)
+
+2004-06-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptorChannel.[hm]: added more "X" methods which do not raise
+	  exceptions (v1.0.29)
+
+	* EOAdaptorChannel.m: added new method -evaluateExpressionX: which 
+	  returns the exception instead of raising it. It returns 
+	  @"EOEvaluationError" if the -evaluateExpression: returned NO without
+	  raising an exception. It is recommended that adaptor classes 
+	  implement -evaluateExpression: using -evaluateExpressionX:, not the
+	  other way around (v1.0.28)
+
+2004-06-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOModel.m: minor code cleanups (v1.0.27)
+
+2004-06-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOModel.m: some code cleanups, improved description (v1.0.26)
+
+2004-06-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed Xcode compilation with embedded FoundationExt classes (v1.0.25)
+
+2004-05-14  Helge Hess  <helge@developer.opengroupware.org>
+
+	* EOAdaptorDataSource.m: removed some ==YES comparisons, minor cleanups
+	  (v1.0.24)
+
+2004-03-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.23
+
+	* EOSQLQualifier.m: improved -description method
+
+	* EOSQLExpression.m: moved EOSelectSQLExpression to separate file, 
+	  added a -description method, various minor code cleanups
+
+	* EOExpressionArray.m: added a -description method, minor cleanups
+	
+	* EOAdaptorChannel.m: minor code cleanups
+	
+	* EODatabaseContext.m: removed registration for 
+	  EOCooperatingObjectStoreNeeded notification (solves an issue with
+	  gstep-base)
+
+2004-03-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAdaptorChannel.m, EOAdaptorDataSource.m, EOAttribute.m,
+	  EODatabase.m, EOEntity.m, EOEntityClassDescription.m,
+	  EOQualifier+SQL.m, EOSQLExpression.m, common.h, EOQualifierScanner.h:
+	  various subminor fixes for compilation against gstep-base (v1.0.22)
+
+2004-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EODatabaseChannel.m: only check for GC objects on libFoundation
+	  (v1.0.21)
+
+2004-01-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* EORecordDictionary.m: disabled a profiling log (v1.0.20)
+
+2004-01-07  Helge Hess  <helge@groove.local>
+
+	* some tweaks for Xcode compilation (v1.0.19)
+
+2004-01-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.18
+
+	* more tweaks to makefiles and source, now seems to compile fine on
+	  MacOSX
+	
+	* added FoundationExt subproject containing the necessary classes from
+	  the extensions library, that is, the FormatScanner, 
+	  PrintfFormatScanner and DefaultScannerHandler
+
+2004-01-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.17
+
+	* EORecordDictionary.m: cache -hash and -isEqual selector in 
+	  objectForKey:
+
+	* various changes to make gnustep-db compile on MacOSX (eg do not use
+	  InvalidArgumentException class but rather NSInvalidArgumentException
+	  exception name, etc)
+	
+2003-12-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EORecordDictionary.m(dealloc): cache release method of dict key, 
+	  which is basically always an NSString, also cache empty dictionary
+	  (v1.0.16)
+	
+2003-10-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.15
+	
+	* common.h: do not use zones for memory allocation (read: speedup)
+
+	* removed support for Boehm GC, makes code much more readable and
+	  shorter (and isn't used in OGo anyway ...)
+
+	* removed some warnings, some FoundationExt cleanups
+
+	* EOExpressionArray.h: does not inherit from GCObject and use
+	  GCMutableArray anymore (replaced with NSObject and NSMutableArray)
+
+	* EODatabaseContext.m: removed some unused methods
+
+	* removed some GCObject dependency
+
+	* EODatabaseChannel.m: removed some unused methods
+
+Wed Oct 15 16:26:50 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* EOModel.m: initialize model name with the filename which contains the model
+	  (*.eomodel) (v1.0.14)
+
+Sun Sep 07 00:30:59 2003  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile: reordered autodoc target
+
+Mon Jul 14 14:07:22 2003  Jan Reichmann  <jr@skyrix.com>
+
+	*  fixed license entries (v1.0.13)
+
+Fri Jul  4 19:15:35 2003  Helge Hess  <helge.hess@skyrix.com>
+
+	* imported into OpenGroupware.org (v1.0.11)

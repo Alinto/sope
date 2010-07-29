@@ -1,0 +1,1474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+<dict>
+	<key>CanvasColor</key>
+	<dict>
+		<key>w</key>
+		<real>1.000000e+00</real>
+	</dict>
+	<key>ColumnAlign</key>
+	<integer>0</integer>
+	<key>ColumnSpacing</key>
+	<real>5.400000e+01</real>
+	<key>GraphDocumentVersion</key>
+	<integer>2</integer>
+	<key>GraphicsList</key>
+	<array>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 414}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2788</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOQualifier.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOQualifierVariable}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 351}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2787</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOGenericRecord.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOGenericRecord}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{243, 270}, {135, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2782</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOKeyGlobalID.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOKeyGlobalID}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{387, 270}, {135, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2783</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOGlobalID.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOTemporaryGlobalID}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{315, 234}, {135, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2784</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOGlobalID.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOGlobalID}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2782</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2785</integer>
+					<key>Points</key>
+					<array>
+						<string>{364.5, 252}</string>
+						<string>{328.5, 270}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2784</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2783</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2786</integer>
+					<key>Points</key>
+					<array>
+						<string>{400.5, 252}</string>
+						<string>{436.5, 270}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2784</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>2781</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 315}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2780</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOSortOrdering.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOSortOrdering}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 162}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2779</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOObserver.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOObserverCenter}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{99, 585}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2762</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOQualifier.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EONotQualifier}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{297, 630}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2763</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOQualifier.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOAndQualifier}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{315, 594}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2764</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOQualifier.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOKeyValueQualifier}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{333, 558}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2765</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOQualifier.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOOrQualifier}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{99, 504}, {135, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2766</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOQualifier.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 EOQualifierEvaluation}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{279, 504}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2767</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOQualifier.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOQualifier}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{99, 630}, {171, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2768</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOQualifier.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOKeyComparisonQualifier}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2762</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2769</integer>
+					<key>Points</key>
+					<array>
+						<string>{166, 522}</string>
+						<string>{162.5, 585}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2766</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2762</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2770</integer>
+					<key>Points</key>
+					<array>
+						<string>{322, 522}</string>
+						<string>{182, 585}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2767</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2763</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2771</integer>
+					<key>Points</key>
+					<array>
+						<string>{180.321, 522}</string>
+						<string>{346.179, 630}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2766</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2763</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2772</integer>
+					<key>Points</key>
+					<array>
+						<string>{343.286, 522}</string>
+						<string>{358.714, 630}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2767</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2764</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2773</integer>
+					<key>Points</key>
+					<array>
+						<string>{187.65, 522}</string>
+						<string>{356.85, 594}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2766</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2764</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2774</integer>
+					<key>Points</key>
+					<array>
+						<string>{345.6, 522}</string>
+						<string>{374.4, 594}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2767</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2765</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2775</integer>
+					<key>Points</key>
+					<array>
+						<string>{204.75, 522}</string>
+						<string>{357.75, 558}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2766</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2765</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2776</integer>
+					<key>Points</key>
+					<array>
+						<string>{351, 522}</string>
+						<string>{387, 558}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2767</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2768</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2777</integer>
+					<key>Points</key>
+					<array>
+						<string>{167.786, 522}</string>
+						<string>{183.214, 630}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2766</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2768</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2778</integer>
+					<key>Points</key>
+					<array>
+						<string>{330.75, 522}</string>
+						<string>{195.75, 630}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2767</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>2761</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{243, 342}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2759</integer>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>5.000000e-01</real>
+								<key>g</key>
+								<real>1.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NSClassDescription}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{243, 378}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2760</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOClassDescription.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOClassDescription}</string>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>2758</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{387, 342}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2755</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOObserver.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 EOObserving}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{387, 378}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2756</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOObserver.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EODelayedObserver}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{387, 414}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2757</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOObserver.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOObserverProxy}</string>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>2754</integer>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{252, 153}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2749</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EODetailDataSource.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EODetailDataSource}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{387, 153}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2750</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOArrayDataSource.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOArrayDataSource}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{324, 117}, {126, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>2751</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EODataSource.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>RoundedRectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EODataSource}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2749</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2752</integer>
+					<key>Points</key>
+					<array>
+						<string>{369, 135}</string>
+						<string>{333, 153}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2751</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>2750</integer>
+					</dict>
+					<key>ID</key>
+					<integer>2753</integer>
+					<key>Points</key>
+					<array>
+						<string>{402.75, 135}</string>
+						<string>{434.25, 153}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>2751</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>2748</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 126}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2747</integer>
+			<key>Link</key>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 }</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 99}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2746</integer>
+			<key>Link</key>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 }</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 288}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2745</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOFetchSpecification.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOFetchSpecification}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 189}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2744</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOObserver.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EODelayedObserverQueue}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 378}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2743</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EONull.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EONull}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 252}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2742</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOKeyValueArchiver.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOKeyValueUnarchiver}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{45, 225}, {162, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>2741</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-core-42/EOControl/EOKeyValueArchiver.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>RoundedRectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 EOKeyValueArchiver}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>2760</integer>
+			</dict>
+			<key>ID</key>
+			<integer>2740</integer>
+			<key>Points</key>
+			<array>
+				<string>{306, 360}</string>
+				<string>{306, 378}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>2759</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>2756</integer>
+			</dict>
+			<key>ID</key>
+			<integer>2739</integer>
+			<key>Points</key>
+			<array>
+				<string>{450, 360}</string>
+				<string>{450, 378}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>2755</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>2757</integer>
+			</dict>
+			<key>ID</key>
+			<integer>2738</integer>
+			<key>Points</key>
+			<array>
+				<string>{450, 396}</string>
+				<string>{450, 414}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>2756</integer>
+			</dict>
+		</dict>
+	</array>
+	<key>GridInfo</key>
+	<dict/>
+	<key>HPages</key>
+	<integer>1</integer>
+	<key>ImageCounter</key>
+	<integer>1</integer>
+	<key>IsPalette</key>
+	<string>NO</string>
+	<key>Layers</key>
+	<array>
+		<dict>
+			<key>Lock</key>
+			<string>NO</string>
+			<key>Name</key>
+			<string>Layer 1</string>
+			<key>Print</key>
+			<string>YES</string>
+			<key>View</key>
+			<string>YES</string>
+		</dict>
+	</array>
+	<key>LayoutInfo</key>
+	<dict>
+		<key>AutoAdjust</key>
+		<string>YES</string>
+		<key>HierarchicalOrientation</key>
+		<integer>0</integer>
+		<key>MagneticFieldCenter</key>
+		<string>{0, 0}</string>
+	</dict>
+	<key>MagnetsEnabled</key>
+	<string>YES</string>
+	<key>PageBreakColor</key>
+	<dict>
+		<key>w</key>
+		<real>3.333333e-01</real>
+	</dict>
+	<key>PageBreaks</key>
+	<string>YES</string>
+	<key>PageSetup</key>
+	<data>
+	BAt0eXBlZHN0cmVhbYED6IQBQISEhAtOU1ByaW50SW5mbwGEhAhOU09iamVjdACFkoSE
+	hBNOU011dGFibGVEaWN0aW9uYXJ5AISEDE5TRGljdGlvbmFyeQCUhAFpEpKEhIQITlNT
+	dHJpbmcBlIQBKxBOU0pvYkRpc3Bvc2l0aW9uhpKEmZkPTlNQcmludFNwb29sSm9ihpKE
+	mZkOTlNCb3R0b21NYXJnaW6GkoSEhAhOU051bWJlcgCEhAdOU1ZhbHVlAJSEASqEhAFm
+	nSSGkoSZmQtOU1BhcGVyTmFtZYaShJmZBkxldHRlcoaShJmZD05TUHJpbnRBbGxQYWdl
+	c4aShJ2chIQBc54AhpKEmZkNTlNSaWdodE1hcmdpboaShJ2cn50khpKEmZkITlNDb3Bp
+	ZXOGkoSdnISEAVOfAYaShJmZD05TU2NhbGluZ0ZhY3RvcoaShJ2chIQBZKABhpKEmZkL
+	TlNGaXJzdFBhZ2WGkoSdnKmfAYaShJmZFE5TVmVydGljYWxQYWdpbmF0aW9uhpKEnZyk
+	ngCGkoSZmRVOU0hvcml6b25hbFBhZ2luYXRpb26GkoSdnKSeAIaShJmZFk5TSG9yaXpv
+	bnRhbGx5Q2VudGVyZWSGkoSdnKSeAYaShJmZDE5TTGVmdE1hcmdpboaShJ2cn50khpKE
+	mZkNTlNPcmllbnRhdGlvboaShJ2cpJ4AhpKEmZkZTlNQcmludFJldmVyc2VPcmllbnRh
+	dGlvboaSo5KEmZkKTlNMYXN0UGFnZYaShJ2chJeXgn////+GkoSZmQtOU1RvcE1hcmdp
+	boaShJ2cn50khpKEmZkUTlNWZXJ0aWNhbGx5Q2VudGVyZWSGkrSShJmZC05TUGFwZXJT
+	aXplhpKEnpyEhAx7X05TU2l6ZT1mZn2hgQJkgQMYhoaG
+	</data>
+	<key>RowAlign</key>
+	<integer>0</integer>
+	<key>RowSpacing</key>
+	<real>8.999991e+00</real>
+	<key>VPages</key>
+	<integer>1</integer>
+	<key>WindowInfo</key>
+	<dict>
+		<key>Frame</key>
+		<string>{{67, 21}, {821, 897}}</string>
+		<key>VisibleRegion</key>
+		<string>{{-133, -50}, {806, 820}}</string>
+		<key>Zoom</key>
+		<string>1</string>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,9 @@
+pyxSAXDriver
+============
+
+This directory contains the sources for a SAX driver bundle which can read
+so called "pyx" files. PYX is a line based representation for XML useful for
+processing XML files using Unix cmdline tools (like grep or awk).
+
+The parser itself is written in Objective-C (and probably pretty slow for
+large files ;-)

@@ -1,0 +1,75 @@
+2006-07-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* MySQL4Channel+Model.m: added SHOW TABLES to retrieve MySQL table
+	  names (v4.5.14)
+
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.13)
+
+2005-07-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.12
+
+	* NSData+MySQL4Val.m: fixed handling of NSData rows (proper init was
+	  missing)
+
+	* MySQL4Values.m: improved logging of unsupported types
+
+2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed gcc 4.0 warnings (char signedness) (v4.5.11)
+
+2005-04-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: fixed include flags (v4.5.10)
+
+2005-04-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.9
+
+	* GNUmakefile.preamble: use mysql_config --cflags instead of --include,
+	  the former is also available with MySQL 3.x
+	
+	* MySQL4Channel.m: added a -describeResults: method to allow
+	  descriptions without beautified names
+
+2005-04-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* MySQL4Channel.m: only warn if the character set could not be changed
+	  to UTF-8 (v4.5.8)
+
+	* renamed MySQL4 adaptor to MySQL to avoid confusion (v4.5.7)
+
+2005-04-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.6
+	
+	* MySQL4Channel.m: added support for primary key generation
+	
+	* NSNumber+MySQL4Val.m: added support for basic number types
+	
+	* v4.5.5
+	
+	* MySQL4Values.m: added a workaround to support NSTemporaryString
+
+	* MySQL4Channel.m: fixed errno result handling
+	
+	* MySQL4Adaptor.m: do not fall back to PGHOST variable if not hostname
+	  is set
+
+2005-04-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* MySQL4Channel.m: finished fetching code (v4.5.4)
+
+2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* MySQL4Channel.m: added some fetch result processing (v4.5.3)
+
+2005-04-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* MySQL4Channel.m: implemented query (v4.5.2)
+
+2005-04-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* started MySQL4 adaptor based on SQLite one (v4.5.1)

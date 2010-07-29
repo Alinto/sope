@@ -1,0 +1,11 @@
+ExpatSaxDriver
+==============
+
+This directory contains the sources for a SAX driver bundle which works on top
+of the Expat XML processing library.
+
+NOTE: this driver is outdated now, hence it's in the recycler. I
+revived it for some test against the libxmlSAXDriver which nevertheless
+showed that expat consumes way less memory and seems to be much faster
+when parsing "large" (in my case a 9MB XML plist) XML files than
+libxml2.

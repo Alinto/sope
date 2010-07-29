@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding">
+  <body>
+    <h3>SubDir Index</h3>
+    
+    <small>I'm Component: <var:string value="self"/><br/>
+    On Client: <var:string value="clientObject"/><br/></small>
+    
+    <table border="1" bgcolor="#EFEFEF">
+      <tr><th>Embed</th></tr>
+      <tr><td><var:component className="embed.wox"/></td></tr>
+    </table>
+    
+    <h4>Querying Images</h4>
+    <p>
+      accept.gif via filename: <img filename="accept.gif"/> 
+      <br/>
+      accept.gif via src: <img src="accept.gif"/>
+    </p>
+
+    <hr />
+    <a href="test.wox"  >test.wox</a>,
+    <a href="/test.wox" >/test.wox</a>,
+    <a href="index.html">index.html</a>,
+    <a href="embed.wox" >embed.wox</a>,
+    <a href="accept.gif">accept.gif</a>
+  </body>
+</html>

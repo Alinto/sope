@@ -1,0 +1,24 @@
+{
+    details = {
+	CET = {abbrev = CET; isDST = 0; offset = "+1:00:00"; };
+	"CEST" = {abbrev = "CEST"; isDST = 1; offset = "+2:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Mar 30 03:00:00 1986 GMT";
+	    endDate = "Sun Sep 24 03:00:00 1995 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/3:00:00"; detail = "CEST"; },
+		{ date = "September/last Sunday/3:00:00"; detail = CET; }
+	    );
+	},
+	{
+	    startDate = "Sun Mar 31 03:00:00 1996 GMT";
+	    endDate = "Sun Oct 25 03:00:00 2037 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/3:00:00"; detail = "CEST"; },
+		{ date = "October/last Sunday/3:00:00"; detail = CET; }
+	    );
+	}
+    );
+}

@@ -1,0 +1,19 @@
+
+Notes
+=====
+
+The central class containing the parsing code seems to be:
+
+  StructuredTextBodyElement
+
+Classes
+=======
+
+  NSObject
+    StructuredTextBodyElement
+      StructuredTextHeader
+      StructuredTextList
+      StructuredTextListItem
+      StructuredTextParagraph
+    StructuredTextDocument
+    StructuredTextLiteralBlock

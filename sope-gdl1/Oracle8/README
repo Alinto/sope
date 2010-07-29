@@ -1,0 +1,73 @@
+Oracle 10g GDL Adaptor
+Copyright (c) 2007  Inverse groupe conseil inc. and Ludovic Marcotte
+====================================================================
+
+This adaptor allows you to use an Oracle 10g (or above/below) server togeter
+with GDL. It makes use of the new OCI API from Oracle. In order to compile
+and use this adaptor, you must install the Oracle Instant Client.
+
+For Linux-based operating systems, please refer to the following page
+for installation instructions:
+
+http://www.oracle.com/technology/software/tech/oci/instantclient/htdocs/linuxsoft.html
+
+You'll have to install the following packages from Oracle:
+
+ * oracle-instantclient-basic
+ * oracle-instantclient-devel
+
+Once you've installed the requirements, follow the installation and configuration
+instructions to get the adaptor working.
+
+
+Installation and Configuration
+==============================
+
+1- Based on where you've installed the Oracle dependancies, modify the
+   GNUmakefile so gnustep-make can find the location of Oracle's headers
+   and client librairies. You would want to modify at least:
+
+   ORACLE_VERSION
+   -lnnz
+
+2- Compile and install the adaptor:
+   % make
+   % make install 
+
+
+Testing the Oracle Adaptor
+==========================
+
+The adaptor comes with a simple testing tool called 'otest'.
+
+To try it, first modify the database connection parameters specified in the
+'condict.plist' file.
+
+Then, simply run the tool:
+
+% ./obj/otest
+
+This will do a simple "SELECT * FROM all_tables"
+
+
+Current limitations
+===================
+
+The adaptor currently supports only the following data types:
+
+ - CLOB
+ - DATE
+ - INTEGER
+ - NUMBER
+ - STRING
+ - VARCHAR2
+
+CLOB are read as strings.
+
+The adaptor does not yet support the EOModel kungfu. The following
+improvements are also coming soon:
+
+ - primary key generation support
+ - schema selection support
+ - delegate calls, when required
+ - more datatypes support 

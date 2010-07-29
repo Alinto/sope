@@ -1,0 +1,22 @@
+BEGIN:VCARD
+VERSION:2.1
+N:Doe;John
+FN;QUOTED-PRINTABLE:John Doe
+ORG:work-org;work-department
+NICKNAME:nick
+ADR;WORK;POSTAL:;;work-adr1;work-city;work-state;work-zip;work-country
+ADR;HOME;POSTAL:;;home-address1;home-city;home-sa;home-zip;home-country
+TEL;WORK;VOICE:work-phone
+TEL;HOME;VOICE:home-phone
+TEL;CELL;VOICE:mobile-phone
+TEL;FAX:fax-phone
+EMAIL;PREF;INTERNET:john@doe.com
+EMAIL;INTERNET:doe@john.com
+URL;HOME:http://www.home.de
+TITLE:work-title
+URL;WORK:http://www.work.de/
+CATEGORIES:sales,notes
+BDAY:1976-09-21
+NOTE;QUOTED-PRINTABLE:a note=0Amulti=0Aline
+END:VCARD
+

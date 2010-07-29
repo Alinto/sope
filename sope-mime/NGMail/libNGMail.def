@@ -1,0 +1,21 @@
+EXPORTS
+	__objc_class_name_NGMBoxReader;
+	__objc_class_name_NGMail;
+	__objc_class_name_NGMailAddress;
+	__objc_class_name_NGMailAddressList;
+	__objc_class_name_NGMailAddressParser;
+	__objc_class_name_NGMimeMessage;
+	__objc_class_name_NGMimeMessageBodyGenerator;
+	__objc_class_name_NGMimeMessageGenerator;
+	__objc_class_name_NGMimeMessageMultipartBodyGenerator;
+	__objc_class_name_NGMimeMessageParser;
+	__objc_class_name_NGMimeMessageRfc822BodyGenerator;
+	__objc_class_name_NGMimeMessageTextBodyGenerator;
+	__objc_class_name_NGPop3Client;
+	__objc_class_name_NGPop3Exception;
+	__objc_class_name_NGPop3MailDropEnumerator;
+	__objc_class_name_NGPop3MessageInfo;
+	__objc_class_name_NGPop3Response;
+	__objc_class_name_NGPop3StateException;
+	__objc_class_name_NGSmtpClient;
+	__objc_class_name_NGSmtpResponse;

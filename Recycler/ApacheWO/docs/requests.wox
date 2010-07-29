@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:js="http://www.skyrix.com/od/javascript"
+           xmlns:const="http://www.skyrix.com/od/constant">
+    <h3>Check Apache Internal Subrequests ..</h3>
+    
+    <table border="0">
+      <tr>
+        <td valign="top">Filename: </td>
+        <td><var:string value="apacheRequest.filename"/></td>
+      </tr>
+      <tr>
+        <td valign="top">Pathinfo: </td>
+        <td><var:string value="apacheRequest.pathInfo"/></td>
+      </tr>
+      <tr>
+        <td valign="top">ApacheRequest:</td>
+        <td><code><var:string value="apacheRequest"/></code></td>
+      </tr>
+      <tr>
+        <td valign="top">ApacheConnection:</td>
+        <td><code><var:string value="apacheRequest.connection"/></code></td>
+      </tr>
+
+      <tr>
+        <td valign="top">test.wox:</td>
+        <td><var:component className="RqInfo" rq="testRq"/></td>
+      </tr>
+      <tr>
+        <td valign="top">test.wox (file):</td>
+        <td><var:component className="RqInfo" rq="testRqFile"/></td>
+      </tr>
+      <tr>
+        <td valign="top">test.wox/add:</td>
+        <td><var:component className="RqInfo" rq="testRqAdd"/></td>
+      </tr>
+      <tr>
+        <td valign="top">WoPage1.wo:</td>
+        <td><var:component className="RqInfo" rq="testWO"/></td>
+      </tr>
+      <tr>
+        <td valign="top">blah.wo/:</td>
+        <td><var:component className="RqInfo" rq="testNo"/></td>
+      </tr>
+      <tr>
+        <td valign="top">SSIPage.shtml:</td>
+        <td><var:component className="RqInfo" rq="testSSI"/></td>
+      </tr>
+      <tr>
+        <td valign="top">/docs/:</td>
+        <td><var:component className="RqInfo" rq="docs"/></td>
+      </tr>
+      <tr>
+        <td valign="top">/docs/manage:</td>
+        <td>
+	  <i>Note:</i> pathInfo doesn't work on directories :-(<br/>
+	  <var:component className="RqInfo" rq="docsMg"/>
+	</td>
+      </tr>
+    </table>
+    
+    <var:script><![CDATA[
+      var rq = this.apacheRequest;
+      
+      print("run requests setup ...");
+      var testRq     = rq.subRequestLookupURI('test.wox',   'HEAD');
+      var testRqAdd  = rq.subRequestLookupURI('test.wox/add',   'HEAD');
+      var testRqFile = rq.subRequestLookupFile('test.wox');
+      var testWO     = rq.subRequestLookupURI('WoPage1.wo', 'HEAD');
+      var testNo     = rq.subRequestLookupURI('blah.wo/',   'HEAD');
+      var testSSI    = rq.subRequestLookupURI('SSIPage.shtml','HEAD');
+      var docs       = rq.subRequestLookupURI('/docs/',       'HEAD');
+      var docsMg     = rq.subRequestLookupURI('/docs/manage', 'HEAD');
+      
+      if (0) {
+        print("run test.wox as subreq ...");
+        var res = testRq.runSubRequest();
+        print("  result: " + res);
+      }
+    ]]></var:script>
+
+</var:component>

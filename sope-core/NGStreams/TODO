@@ -1,0 +1,8 @@
+TODO for NGStreams
+==================
+
+- can we support NSxxStreams?
+- do we really need the dependency to:
+  - NGStreams
+  - NGExtensions
+  ?

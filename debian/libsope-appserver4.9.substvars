@@ -1,0 +1,1 @@
+shlibs:Depends=libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libsope-appserver4.9 (>= 4.7.0), libsope-core4.9 (>= 4.7.0), libsope-mime4.9 (>= 4.7.0), libsope-xml4.9 (>= 4.7.0)

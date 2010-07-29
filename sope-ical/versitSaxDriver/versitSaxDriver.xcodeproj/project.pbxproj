@@ -1,0 +1,305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1656CCE4058805BB0012D2BC /* VSiCalSaxDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 1656CCE2058805BB0012D2BC /* VSiCalSaxDriver.h */; };
+		1656CCE5058805BB0012D2BC /* VSiCalSaxDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1656CCE3058805BB0012D2BC /* VSiCalSaxDriver.m */; };
+		1656CD26058806680012D2BC /* VSSaxDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 1656CD24058806680012D2BC /* VSSaxDriver.h */; };
+		1656CD27058806680012D2BC /* VSSaxDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1656CD25058806680012D2BC /* VSSaxDriver.m */; };
+		1656CD38058806CE0012D2BC /* bundle-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1656CD37058806CE0012D2BC /* bundle-info.plist */; };
+		1656CD7E058809660012D2BC /* VSvCardSaxDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 1656CD7C058809660012D2BC /* VSvCardSaxDriver.h */; };
+		1656CD7F058809660012D2BC /* VSvCardSaxDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1656CD7D058809660012D2BC /* VSvCardSaxDriver.m */; };
+		AD0CFACC071FFF0000E72147 /* VSStringFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = AD0CFACA071FFF0000E72147 /* VSStringFormatter.h */; };
+		AD0CFACD071FFF0000E72147 /* VSStringFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0CFACB071FFF0000E72147 /* VSStringFormatter.m */; };
+		AD5010A6071F18AE0020300E /* README in Resources */ = {isa = PBXBuildFile; fileRef = AD5010A5071F18AE0020300E /* README */; };
+		AD5010A8071F18B80020300E /* AUTHORS in Resources */ = {isa = PBXBuildFile; fileRef = AD5010A7071F18B80020300E /* AUTHORS */; };
+		AD5010BF071F18F00020300E /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = AD5010BE071F18F00020300E /* COPYING */; };
+		AD5010C1071F18FA0020300E /* COPYRIGHT in Resources */ = {isa = PBXBuildFile; fileRef = AD5010C0071F18FA0020300E /* COPYRIGHT */; };
+		AD665AB0071EB30200EC5911 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD665AAF071EB30200EC5911 /* Foundation.framework */; };
+		AD665AB4071EB36D00EC5911 /* SaxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD665AB3071EB36D00EC5911 /* SaxObjC.framework */; };
+		AD665AB6071EB38C00EC5911 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = AD665AB5071EB38C00EC5911 /* common.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1656CCB80588036A0012D2BC /* versitSaxDriver-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; path = "versitSaxDriver-Info.plist"; sourceTree = "<group>"; };
+		1656CCE2058805BB0012D2BC /* VSiCalSaxDriver.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = VSiCalSaxDriver.h; sourceTree = "<group>"; };
+		1656CCE3058805BB0012D2BC /* VSiCalSaxDriver.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = VSiCalSaxDriver.m; sourceTree = "<group>"; };
+		1656CD24058806680012D2BC /* VSSaxDriver.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = VSSaxDriver.h; sourceTree = "<group>"; };
+		1656CD25058806680012D2BC /* VSSaxDriver.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = VSSaxDriver.m; sourceTree = "<group>"; };
+		1656CD37058806CE0012D2BC /* bundle-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = "bundle-info.plist"; sourceTree = "<group>"; };
+		1656CD7C058809660012D2BC /* VSvCardSaxDriver.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = VSvCardSaxDriver.h; sourceTree = "<group>"; };
+		1656CD7D058809660012D2BC /* VSvCardSaxDriver.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = VSvCardSaxDriver.m; sourceTree = "<group>"; };
+		16800E2F05880E8E007700A5 /* versitSaxDriver.sax */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = versitSaxDriver.sax; sourceTree = BUILT_PRODUCTS_DIR; };
+		16800E4205880EC4007700A5 /* ChangeLog */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 30; indentWidth = 8; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		16800E4305880EC4007700A5 /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 30; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+		AD0CFACA071FFF0000E72147 /* VSStringFormatter.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = VSStringFormatter.h; sourceTree = "<group>"; };
+		AD0CFACB071FFF0000E72147 /* VSStringFormatter.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = VSStringFormatter.m; sourceTree = "<group>"; };
+		AD5010A5071F18AE0020300E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		AD5010A7071F18B80020300E /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		AD5010BE071F18F00020300E /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		AD5010C0071F18FA0020300E /* COPYRIGHT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYRIGHT; sourceTree = "<group>"; };
+		AD665AAF071EB30200EC5911 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		AD665AB3071EB36D00EC5911 /* SaxObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SaxObjC.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SaxObjC.framework"; sourceTree = "<absolute>"; };
+		AD665AB5071EB38C00EC5911 /* common.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		AD665AB7071EB39600EC5911 /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		AD665AB8071EB39600EC5911 /* GNUmakefile.postamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile.postamble; sourceTree = "<group>"; tabWidth = 8; };
+		AD665AB9071EB39600EC5911 /* GNUmakefile.preamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile.preamble; sourceTree = "<group>"; tabWidth = 8; };
+		AD77EDB70C4F6BD00018A131 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		AD77EDB80C4F6BD00018A131 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		AD77EDB90C4F6BD00018A131 /* Wrapper.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Wrapper.xcconfig; sourceTree = "<group>"; };
+		ADB07DC207666226003C5ACF /* fhs.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = fhs.make; sourceTree = "<group>"; tabWidth = 8; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1656CCAD058802B80012D2BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD665AB0071EB30200EC5911 /* Foundation.framework in Frameworks */,
+				AD665AB4071EB36D00EC5911 /* SaxObjC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1656CC9D058802980012D2BC = {
+			isa = PBXGroup;
+			children = (
+				AD5010A5071F18AE0020300E /* README */,
+				AD5010C0071F18FA0020300E /* COPYRIGHT */,
+				AD5010BE071F18F00020300E /* COPYING */,
+				AD5010A7071F18B80020300E /* AUTHORS */,
+				16800E4205880EC4007700A5 /* ChangeLog */,
+				16800E4305880EC4007700A5 /* Version */,
+				AD665AAE071EB2C200EC5911 /* Makefiles */,
+				AD665ABF071EB3D500EC5911 /* Headers */,
+				1656CD1F0588063D0012D2BC /* Classes */,
+				1656CD8F058809E30012D2BC /* Resources */,
+				1656CD92058809FD0012D2BC /* Frameworks */,
+				16800E3905880EA1007700A5 /* Products */,
+				AD77EDB60C4F6BD00018A131 /* xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		1656CD1F0588063D0012D2BC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AD665AB5071EB38C00EC5911 /* common.h */,
+				1656CD25058806680012D2BC /* VSSaxDriver.m */,
+				1656CCE3058805BB0012D2BC /* VSiCalSaxDriver.m */,
+				1656CD7D058809660012D2BC /* VSvCardSaxDriver.m */,
+				AD0CFACB071FFF0000E72147 /* VSStringFormatter.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1656CD8F058809E30012D2BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1656CCB80588036A0012D2BC /* versitSaxDriver-Info.plist */,
+				1656CD37058806CE0012D2BC /* bundle-info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1656CD92058809FD0012D2BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD665AB3071EB36D00EC5911 /* SaxObjC.framework */,
+				AD665AAF071EB30200EC5911 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		16800E3905880EA1007700A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				16800E2F05880E8E007700A5 /* versitSaxDriver.sax */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD665AAE071EB2C200EC5911 /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				AD665AB7071EB39600EC5911 /* GNUmakefile */,
+				AD665AB9071EB39600EC5911 /* GNUmakefile.preamble */,
+				AD665AB8071EB39600EC5911 /* GNUmakefile.postamble */,
+				ADB07DC207666226003C5ACF /* fhs.make */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		AD665ABF071EB3D500EC5911 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				1656CD24058806680012D2BC /* VSSaxDriver.h */,
+				1656CCE2058805BB0012D2BC /* VSiCalSaxDriver.h */,
+				1656CD7C058809660012D2BC /* VSvCardSaxDriver.h */,
+				AD0CFACA071FFF0000E72147 /* VSStringFormatter.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		AD77EDB60C4F6BD00018A131 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				AD77EDB70C4F6BD00018A131 /* Common.xcconfig */,
+				AD77EDB80C4F6BD00018A131 /* Development.xcconfig */,
+				AD77EDB90C4F6BD00018A131 /* Wrapper.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../xcconfig;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1656CCAA058802B80012D2BC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1656CCE4058805BB0012D2BC /* VSiCalSaxDriver.h in Headers */,
+				1656CD26058806680012D2BC /* VSSaxDriver.h in Headers */,
+				1656CD7E058809660012D2BC /* VSvCardSaxDriver.h in Headers */,
+				AD665AB6071EB38C00EC5911 /* common.h in Headers */,
+				AD0CFACC071FFF0000E72147 /* VSStringFormatter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1656CCAE058802B80012D2BC /* versitSaxDriver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA07A610857395900993825 /* Build configuration list for PBXNativeTarget "versitSaxDriver" */;
+			buildPhases = (
+				1656CCAA058802B80012D2BC /* Headers */,
+				1656CCAB058802B80012D2BC /* Resources */,
+				1656CCAC058802B80012D2BC /* Sources */,
+				1656CCAD058802B80012D2BC /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = versitSaxDriver;
+			productName = versitSaxDriver;
+			productReference = 16800E2F05880E8E007700A5 /* versitSaxDriver.sax */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1656CCA1058802990012D2BC /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA07A650857395900993825 /* Build configuration list for PBXProject "versitSaxDriver" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 1656CC9D058802980012D2BC;
+			productRefGroup = 1656CC9D058802980012D2BC;
+			projectDirPath = "";
+			targets = (
+				1656CCAE058802B80012D2BC /* versitSaxDriver */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1656CCAB058802B80012D2BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1656CD38058806CE0012D2BC /* bundle-info.plist in Resources */,
+				AD5010A6071F18AE0020300E /* README in Resources */,
+				AD5010A8071F18B80020300E /* AUTHORS in Resources */,
+				AD5010BF071F18F00020300E /* COPYING in Resources */,
+				AD5010C1071F18FA0020300E /* COPYRIGHT in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1656CCAC058802B80012D2BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1656CCE5058805BB0012D2BC /* VSiCalSaxDriver.m in Sources */,
+				1656CD27058806680012D2BC /* VSSaxDriver.m in Sources */,
+				1656CD7F058809660012D2BC /* VSvCardSaxDriver.m in Sources */,
+				AD0CFACD071FFF0000E72147 /* VSStringFormatter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADA07A620857395900993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EDB80C4F6BD00018A131 /* Development.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "versitSaxDriver-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION)";
+				PRODUCT_NAME = versitSaxDriver;
+				WRAPPER_EXTENSION = sax;
+			};
+			name = Development;
+		};
+		ADA07A630857395900993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EDB90C4F6BD00018A131 /* Wrapper.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "versitSaxDriver-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION)";
+				PRODUCT_NAME = versitSaxDriver;
+				WRAPPER_EXTENSION = sax;
+			};
+			name = Wrapper;
+		};
+		ADA07A660857395900993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA07A670857395900993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA07A610857395900993825 /* Build configuration list for PBXNativeTarget "versitSaxDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07A620857395900993825 /* Development */,
+				ADA07A630857395900993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA07A650857395900993825 /* Build configuration list for PBXProject "versitSaxDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07A660857395900993825 /* Development */,
+				ADA07A670857395900993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1656CCA1058802990012D2BC /* Project object */;
+}

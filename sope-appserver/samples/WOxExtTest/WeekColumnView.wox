@@ -1,0 +1,51 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <form var:action="self">
+
+    <var:weekcol-view list="list" item="item" weekStart="weekStart"
+                      dayIndex="dayIndex"
+                      const:titleColor="#FFDAAA" const:contentColor="#FAE8B8"
+                      const:width="100%" const:border="0"
+                      const:cellspacing="2" const:cellpadding="4">
+  
+      <var:weekcol-title>
+        <font size="+2"><b><var:string value="dayTitle"/></b></font>
+      </var:weekcol-title>
+      
+      <var:weekcol-info>
+        <var:js-drop const:elementName="td" 
+                     const:isAttached="YES"
+                     tags="oneList" 
+                     action="dropAction" droppedObject="droppedObject"
+                     const:swapColor="YES"/>
+        
+        <small><b><i>
+            infos of day <var:string value="dayTitle"/>
+          <hr width="80%"/>
+        </i></b></small>
+      </var:weekcol-info>
+      
+      <var:weekcol>
+        <var:js-drag const:tag="one" const:object="one-toBeDropped">
+          <var:rich-string value="item.startDate" 
+                           const:isSmall="YES" const:color="red"/>
+          <var:rich-string value="item.endDate" 
+                           const:isSmall="YES" const:color="red"/>
+
+          <var:rich-string value="item.title" 
+                           const:isBold="YES" const:color="green"/>
+
+          <a var:action="increaseClicks">increase clicks</a>
+          <br/>
+        </var:js-drag>
+      </var:weekcol>
+    
+    </var:weekcol-view>
+  </form>
+
+  <var:string value="clicks"/>
+</var:component>

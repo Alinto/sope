@@ -1,0 +1,1325 @@
+2007-08-24  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGImap4Connection.m: some fix for folders ending with a slash (OGo
+	  bug #1905)
+
+2007-08-16  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGImap4Client.m: added support for non-system IMAP4 flags (eg
+	  $Forwarded) (fixes OGo bug #1899)
+
+2007-08-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Connection.m: fixed some issue with gnustep-base and the
+	  first char of a subfolder name (fixes OGo bug #1893)
+
+2007-08-01  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGImap4ResponseParser.m: added support for bodystructure fetches
+	  (fixes OGo bug #1892)
+
+2007-07-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSString+Imap4.m: changed code to use -initWithData: as suggested in
+	  bug report (OGo bug #1885). Note that the methods still support
+	  Latin1 only and should be changed to decode/encode unichar buffers
+
+2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4ResponseNormalizer.m: changed not to throw an exception in the
+	  situation described in OGo bug 1875
+
+2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Functions.m, NGSieveClient.m: fixed a gstep-base compilation
+	  warning
+
+2006-08-03  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGImap4Connection.m: check for \noinferiors flags when traversing
+	  subfolders
+
+2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4ResponseParser.m: properly decode quoted-printable headers
+	  when the QP marker starts somewhere inside the header value
+
+2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Connection.m: fixed gcc 4.0 warnings
+
+2005-07-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Connection.m: fixed a Cocoa compatibility issue with
+	  -doesMailboxExistAtURL
+
+2005-07-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4ResponseParser.m: fixed a bug in parsing mailbox names in ACL
+	  responses
+
+2005-07-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Connection.m: updated defaults to use NGImap4Connection*
+	  names, made the IMAP4 folder separator an ivar, consolidated the
+	  fetching of the mailbox hierarchy
+
+2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Connection.m: added a -description
+
+2005-07-13  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGImap4.xcodeproj: synced with GNUmakefile
+
+2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added NGImap4Connection/NGImap4ConnectionManager classes, a simpler
+	  interface to the IMAP4 client library
+
+2005-07-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Client.m: added -storeFlags:forMSNs:addOrRemove: method to
+	  change flags for a set of MSNs (instead of ranges)
+
+2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 warnings
+
+2005-03-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOQualifier+IMAPAdditions.m: fixed a warning
+
+2005-03-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Folder.m: properly create NSURL if the absolute name doesn't
+	  start with a slash
+
+	* NGImap4Context.m: initialize NSURL with a path to avoid an issue on
+	  MacOSX
+
+2005-03-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4FileManager.m: added debug logs which can be enabled using
+	  the 'NGImap4FileManagerDebugEnabled' default, improved handling of
+	  root folder in -fileExists method
+
+	* NGImap4Context.m: improved -description
+
+	* NGImap4Functions.m: added some debugging facilities
+
+2005-02-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSieveClient.m: encode base64 with a large line break to fix OGo
+	  bug #1228
+
+2005-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOQualifier+IMAPAdditions.m: more reworks in qualifier generation,
+	  changed handling of spaces, fixed handling of OR qualifiers
+
+	* EOQualifier+IMAPAdditions.m: allow contains: qualifier operator for
+	  key searches
+
+	* NGImap4Client.m: moved EOSortOrdering => IMAP4 code to an own
+	  category/file
+
+	* NGImap4Client.m: added -copyUids:toFolder: method to perform set copy
+	  operations without sequence numbers (uses UID COPY IMAP4 command)
+
+2005-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Client.m: added -selectedFolderName method to retrieve the 
+	  folder which was selected last
+
+	* NGImap4ResponseParser.m: properly parse from/reply-to as lists
+
+	* NGImap4Envelope.m: properly use NSArray for 'from' and 'reply-to',
+	  both can be multi valued (only 'sender' is a single mailbox in RFC
+	  2822, 3.6.2) - Note: might break API!
+	
+2005-01-31  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Envelope.m, NGImap4EnvelopeAddress.m: added support for
+	  bodystructure dictionaries
+
+2005-01-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4ResponseNormalizer.m: code cleanup
+
+	* NGSieveClient.m: removed a superflous "{" in the script-put call
+
+2005-01-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Client.m: minor code cleanups
+
+2005-01-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGSieveClient.m: fixed a warning when compiling with Xcode
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGImap4.xcode: minor fixes and updated
+
+2004-12-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSieveClient.m: fixed error processing on missing scripts
+
+2004-11-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSieveClient.m: can init using a URL, prepared some parsing methods,
+	  open connection on demand when login:password: is called, added
+	  support for -listScripts and -getScript:
+
+	* NGSieveClient.m: added a buffered stream for raw IO, added proper
+	  error handling in some methods, added support for 'NSData commands',
+	  properly convert commands to UTF-8
+
+2004-11-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSieveClient.m, NGImap4Client.m: minor code cleanups
+
+2004-11-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSieveClient.m: some code cleanups, needs fixes for UTF-8 scripts
+
+2004-11-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4ResponseParser.m(_parseQuotedStringOrNIL): added support for
+	  parsing "data" strings (those which begin with {count})
+
+2004-10-30  Thierry Delhaise  <befree_fr@mac.com>
+	
+	* NGImap4ResponseParser.m: fixed OGo bug #958 (consume didn't match
+	  SEARCH match in IMAP4 parser)
+
+2004-10-28  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGImap4Envelope.m: added constructor method:
+	  -initWithMessageID:subject:sender:replyTo:to:cc:bcc:
+	
+2004-10-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4EnvelopeAddress.m: added -initWithString: method (not properly
+	  implemented yet, should parse the string using the
+	  NGMailAddressParser)
+
+2004-10-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4ResponseParser.m: added INTERNALDATE as a known, but
+	  unsupported fetch key (v4.3.189)
+
+2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGImap4.xcode: added new files to Xcode build
+
+2004-10-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4ResponseParser.m: decode quoted printable in personal names
+	  of envelope addresses and in the subject, fixed a memory leak in the
+	  envelope parser (v4.3.187)
+
+	* NGImap4ResponseParser.m: support data-style subjects in envelopes
+	  (v4.3.186)
+
+	* NGImap4ResponseNormalizer.m: pass on envelope raw responses in
+	  normalized responses (v4.3.185)
+
+2004-10-01  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* NGImap4ResponseParser.m: added support for envelope responses, major
+	  code cleanups (v4.3.184)
+	
+2004-09-30  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* v4.3.183
+	
+	* NGImap4Folder.m: use new sort API
+	
+	* NGImap4Client.m: deprecated -sort:qualifier: in favor of
+	  -sort:qualifier:encoding:, code cleanups
+	
+2004-09-29  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGImap4Client.m: improved -description (v4.3.181)
+	
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+	
+	* imCommon.h: Fixed duplicate interface declarations by renaming
+	  them. I believe this was an Xcode only issue. (v4.3.180)
+	
+2004-09-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4ResponseParser.m: added some sanity checks for unexpected
+	  parsing input, removes crashes as reported in OGo bug #883 (v4.3.179)
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGImap4.xcode: new Xcode project
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed for SOPE 4.3 structure (v4.3.173)
+
+2004-07-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.169
+
+	* NGImap4Client.m, NGImap4Context.m, NGImap4DataSource.m,
+	  NGImap4FileManager.m, NGImap4Message.m, NGImap4ResponseParser.m:
+	  fixed gcc 3.x warnings
+
+	* NGImap4ResponseNormalizer.m: fixed some gcc 3.x warnings, fixed
+	  normalization (OGo bug #840), bug introduced in v4.2.166
+
+	* NGImap4Folder.m: major code cleanups, fixed some gcc 3.x warnings,
+	  added debug output if ImapDebugEnabled is on
+
+2004-07-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Client.m: fixed some compilation issue with older gcc's
+	  (v4.2.168)
+
+	* NGImap4Client.m: minor improvements to exception handling (v4.2.167)
+
+	* v4.2.166
+
+	* NGImap4Message.m(-generateBodyStructure): scan for the response
+	  containing the body structure if multiple responses were submitted
+	  by the IMAP server (eg Courier), this might fix OGo bug #800
+
+	* NGImap4ResponseNormalizer.m: various code cleanups, minor speed
+	  improvements in fetch-response normalization
+
+	* NGImap4Message.m: added more logging to find OGo bug #800 (v4.2.165)
+
+2004-06-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4FolderMailRegistry.m: fixed a warning with gstep-base 
+	  (v4.2.164)
+
+2004-06-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4/NGImap4Message.m: minor optimization (v4.2.163)
+
+2004-06-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Client.m, NGImap4ResponseParser.m, NSString+Imap4.m: fixed
+	  gcc 3.4 warnings (v4.2.162)
+
+2004-05-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Context.m, NGImap4FileManager.m, NGImap4Folder.m, 
+	  NGImap4Message.m, NGImap4ServerRoot.m, NGSieveClient.m: replaced 
+	  "==YES" comparisons (v4.2.158)
+
+2004-04-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.154
+
+	* NGImap4Message.m: remember mail registry in an ivar (increased the
+	  class version), this should fix OGo bug #660
+
+	* NGImap4Folder.m: some code cleanups
+
+2004-02-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.152
+
+	* EOQualifier+IMAPAdditions.m, NGImap4Client.m: minor cleanups
+
+	* imCommon.h: only define sel_eq on NeXT or APPLE runtime, fixes OGo
+	  bug #582
+
+2004-02-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4Client.m, NGImap4FolderMailRegistry.m, NGImap4Functions.m,
+	  NGImap4ResponseParser.m, NGSieveClient.m: fixed compilation warnings
+	  on OSX (v4.2.151)
+
+2004-01-25  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* NGImap4Folder.m: use new NGDataStream API to allow additional
+	  optimizations (open data parsing streams in read-only mode) 
+	  (v4.2.149)
+
+2004-01-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.148
+
+	* NGImap4Client.m: cleanups, moved "response normalization" methods to
+	  a separate NGImap4ResponseNormalizer object
+	
+	* NGImap4ResponseParser.m (_parseUntaggedResponse): optimized parsing
+	  of untagged responses, cache NSNumber class, improved autorelease
+	  behaviour (v4.2.147)
+	
+	* NGMimeRFC822DateHeaderFieldParser.m: replaced (expensive) usage of 
+	  the NSCalendarDate parser with a hackish, but much faster hand
+	  written parser. Should give a good performance benefit on large mail
+	  folders (looks like ~50ms for 30 mails ) (v4.2.146)
+
+2004-01-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.145
+
+	* NGImap4FolderMailRegistry.m: implemented new "flat-array" 
+	  notification center for mail flag coordination. Quite fast with
+	  observer inserts/removes. Hopefully this doesn't break anything,
+	  but apparently it works just fine.
+
+	* added NGImap4FolderFlags class to manage folder flags
+
+2004-01-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.144
+
+	* EOQualifier+IMAPAdditions.m: fixed unseen qualifier processing
+
+	* NGImap4Client.m, EOQualifier+IMAPAdditions.m: moved IMAP4 search
+	  string generation out of NGImap4Client.m to 
+	  EOQualifier+IMAPAdditions.m
+
+2004-01-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.143
+
+	* NGImap4Message.m: deprecated URL based factory methods - you should
+	  always use the context or folder "constructors", removed 
+	  +messageWithUid:.. methods (used nowhere and messages should be
+	  constructed using their folder!)
+
+	* NGImap4Folder.m: added -messageWithUid: factory method - you should
+	  always use that instead of allocating an NGImap4Message on your own,
+	  removed +imap4FolderWithContext: (used nowhere and folders should be
+	  constructed using their parent folder or context)
+
+	* NGImap4Context.m: added URL based factory for messages and folders
+
+2004-01-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Message.m: added various attempts for optimizations (v4.2.142)
+
+2004-01-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.141
+
+	* NGImap4Context.m: added globalID method, various cleanups
+	
+	* NGImap4Folder.m: added -globalID method, major cleanups
+	
+	* NGImap4Client.m: added -serverGlobalID method, moved password 
+	  escaping code to NSString+Imap4.m
+	
+	* added global-id classes in NGImap4 (v4.2.140)
+
+2004-01-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.139
+
+	* NGImap4Functions.m: started a new object to wrap all the old function
+	  junk
+
+	* NGImap4Client.m, NGImap4Message.m: major cleanups
+
+	* NGImap4DataSource.m: moved EOQualifier additions to separate source
+	  file, various cleanups
+
+	* v4.2.138
+
+	* NGImap4ServerRoot.m: some cleanups, replaced NSZoneMalloc with
+	  calloc()
+
+	* NGImap4Client.m: major cleanups, better handling of -lastException
+
+Tue Nov 11 15:04:18 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: add parsing of capability entries without 
+	  value (v4.2.136)
+
+2003-11-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4ResponseParser.m: explicitly marked the lastChar variable as
+	  being a signed char to avoid compiler errors (v4.2.135)
+
+Thu Nov  6 16:41:13 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.134
+
+	* NGSieveClient: fixed a bug in normalizeResponse, return 
+	  NSMutableDictionary
+
+	* NGImap4ResponseParser.m: remove CYRUS_2_0 constant, don`t now
+	  what it should be :(
+
+Mon Nov  3 15:42:37 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Context: temporary set selected folder befor the select action
+	  to prevent notification confusions (v4.2.133)
+
+2003-10-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSieveClient.m: small code cleanups
+
+Fri Jul 25 13:27:26 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4DataSource.h: fixed #define
+
+Tue Jul 22 15:19:34 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: check for empty quota reponses 
+	  (v4.2.128)
+
+2003-07-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Client.m: fixed some gstep-base issues, patch provided by 
+	  Filip Van Raemdonck and cleaned up a bit (v4.2.127)
+
+Thu Jul 17 10:37:22 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4ServerRoot: add a missing method 
+	  (bulkFetchHeadersFor:inRange:withAllUnread:) (v4.2.126)
+
+Mon Jun 30 17:45:12 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.125
+	
+	* NGImap4Client: code cleanups
+
+	* NGImap4Message: improve cache behavior (store the read-flag without
+	  fetching all flags)
+
+	* NGImap4Folder: add a new method to fetch headers in range + set all
+	  read flags
+
+Fri Jun 27 18:08:49 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Message.m: improve flag handling (v4.2.124)
+
+	* NGImap4Message.m: code cleanups (v4.2.123)
+
+Thu Jun 26 13:23:30 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v.4.2.122
+	
+	* NGImap4Message.m: add messageWithURL: methods
+
+	* NGImap4Context.m: execute select-command before setting selectet 
+	  folder
+
+	* NGImap4Folder: add a struct do store failed select, status, getQuota 
+	  responses, set selectet folder after successfully select response
+
+Fri Jun 20 18:51:24 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.121
+
+	* NGImap4Client.m: cleanups
+
+	* NGImap4ServerRoot, NGImap4Folder.m, NGImap4Functions: 
+	  fetch status (new/unseen) of subfolders on demand only if Default: 
+	  FetchNewUnseenMessagesInSubFoldersOnDemand = 'YES'
+
+	* NGImap4ServerRoot, NGImap4Folder.m: improve folder-flag analysing, 
+	  nonexistent folders will be ignored (Default: ShowNonExistentFolder), 
+          no 'list' request for folder  with hasnochildren flag 
+	  (Default: IgnoreHasNoChildrenFlag) (v4.2.120)
+
+	* v4.2.119
+	
+	* NGImap4Functions: cleanups
+
+	* NGImap4Context.m: cleanups
+
+	* NGImap4Folder.m: only reset subfolders if -resetSubFolders called 
+	  (prev. behavior: -resetFolder called -resetSubFolders), cleanups
+
+Tue Jun 17 11:53:46 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.118
+	
+	* NGImap4Message+BodyStructure.h: check parsing of date failed 
+
+	* NGImap4Folder: cleanups
+
+Mo Jun 02 15:55:20 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder, NGImap4Functions: add notification for 
+	  subfolder-resets (v4.2.112)
+	
+2003-05-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Folder.m: fixed NSLogL=>NSLog removed a NSLog (v4.2.111)
+
+Tue May 27 17:39:20 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: check for quota only if folder is selectable 
+	  (v4.2.110)
+
+Tue May 20 18:03:12 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Context; add accessor to edit default values (v4.2.108)
+
+Wed May 14 10:57:51 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.106
+	* NGImap4ResponseParser.m: use lowercase string to determine whether
+	  fetch body reponse is 'text' or 'message' (courier imap use lowercase
+	  letters for the body description) (bug 1611)
+	* Info: move rfc, drafts and other information files to 'Info'
+
+Thu May 13 17:59:25 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: add notification for folder reset, if more than one
+	  folder for the same folderpath exist (v4.2.105) (bug 1612)
+
+Mon May  5 17:59:25 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: improve error log, fix a bug regarding multiple 
+	  mail copy from and to the same folder (v4.2.103)
+
+Wed Apr 30 15:24:26 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.102
+	
+	* NGImap4ServerRoot: noinferiors depends on serverkind (bug 932)
+	
+	* NGImap4ResponseParser.m: improve parsing of server greeting 
+	
+	* NGImap4Folder, NGImap4ServerRoot: take ShowOnlySubscribedIn* 
+	  from context
+	
+	* NGImap4Context.m: set ShowOnlySubscribedIn* Defaults 
+	  (depends on server)
+	
+	* NGImap4Client.m: detect washington imap server
+
+Wed Apr 30 12:34:38 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.101
+	
+	* NGImap4ServerRoot: fixed retain bug
+	
+	* NGImap4Folder.m: NSLog -> logWithFormat, fixed release (bug 1559),
+	
+	* NGImap4Context: accessors for server defaults
+	
+	* NGImap4Client.m: code cleanups, some logs depends LogDefault,
+	  try to get server name (cyrus, courier) - set some server-depending
+	  Defaults, fixed special folder subscribe/create behavior (bug 1540)
+	  
+
+Fri Apr 11 11:17:25 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Functions.m: add ImapLogEnabled' default
+	  bind some logs to 'LogImapEnabled' (v4.2.99)
+
+2003-04-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.98
+
+	* NSString+Imap4.m: fixed a gcc signed/unsigned warning
+
+	* NGSieveClient.m: fixed a warning
+
+	* NGImap4FileManager.m: fixed some warnings
+
+	* NGImap4Folder.m: fixed a warning
+
+	* NGImap4Client.m: small cleanups
+
+	* NGImap4ResponseParser.m: some smaller cleanups and small performance
+	  improvements (less autorelease, use NSStringClass) (v4.2.96)
+	
+Mon Apr  7 20:02:29 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.95
+	
+	* NGImap4Message.m: check whether encoding was set -> set encoding 
+	  during body-structure fetch
+	
+	* NGImap4Message+BodyStructure.h: if body-structure component is no 
+	  rfc822 or multipart --> body url got  'part=1' (bug 1385)
+
+Fri Feb 28 18:32:53 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Functions.m: add support for Washington Imap Server, 
+	  (delete folders in server root) (v4.2.93)
+
+Wed Feb 26 17:47:53 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.92
+	
+	* NGImap4ServerRoot.m: read also inbox folder if it
+	  is not subscribed
+	
+	* NGImap4Client.m: check whether no sequence contains 'ALERT', 
+	  reconnect also if the server repsonse an unexpecte 'bye' sequence
+
+	* (Changes for Washington Imap Server support)
+	
+Wed Feb 26 14:26:30 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: remove NXConstStr in Excep. Handler (v4.2.91)
+
+Wed Feb 26 11:37:18 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: check whether so key exist, 
+	  use DATE as default sort key (v4.2.89)
+
+Tue Feb 25 11:21:52 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: fixed a reconnect bug (try only one time, 
+	  before return with exception) (bug 1108) (v4.2.88)
+
+Mon Feb 24 15:48:07 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Message.m: select folder befor fetch body structure (bug 1094)
+	  (v4.2.87)
+
+Fri Feb 14 16:16:47 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Context.m: code cleanups (v4.2.85)
+
+Fri Jan 31 17:05:55 2003    <jr@skyrix.com>
+
+	* NGImap4Context.m: add defaults for imap special folders, 
+	  fix folder create bug (v4.2.83)
+
+Fri Jan 31 14:39:12 2003    <jr@skyrix.com>
+
+	* NGImap4Folder.m: fetch all messages if no sort failed or no 
+	  sortordering was given (v4.2.82)
+
+Fri Jan 31 12:28:09 2003    <jr@skyrix.com>
+
+	* v4.2.81
+	
+	* NGImap4Message.m: code cleanups
+	
+	* NGImap4Message+BodyStructure.h: fix parsing structure bug
+
+Wed Jan 29 22:12:08 2003    <jr@skyrix.com>
+
+	* NGImap4*: code cleanups (replace macros with method calls),
+	  catch all exceptions, now they are stored in [context lastException]
+	  remove connection retry (v4.2.80)
+	
+Tue Jan 28 16:24:37 2003    <jr@skyrix.com>
+
+	* NGImap4Functions.m: fix courier imap bug (couldn`t delete subfoder 
+	  which are selected) (v4.2.78)
+
+Tue Jan 28 15:54:21 2003    <jr@skyrix.com>
+
+	* NGImap4Client.m: remove unnecessary abort() (v4.2.77)
+
+Tue Jan 21 19:05:30 2003    <jr@skyrix.com>
+
+	* NGImap4Client.m: add sort encoding default 
+	  (ImapSortEncoding default: UTF-8) (v4.2.71)
+
+Tue Jan 21 18:38:09 2003    <jr@skyrix.com>
+
+	* NGMimeMessageParser: increase version number cause changing of 
+	  instance vars of super-class (v4.2.70)
+
+Fri Jan 17 13:49:17 2003    <jr@skyrix.com>
+
+	* NGImap4ResponseParser: fix variable placing (v4.2.66)
+
+Thu Jan 16 18:40:47 2003    <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: decode header values fur bodystructures
+	(v4.2.65)
+
+Tue Jan 14 18:17:55 2003    <jr@skyrix.com>
+
+	* v4.2.64
+	
+	* NGImap4Message+BodyStructure.h: lowercase content-transfer-encoding
+
+Tue Jan 14 12:24:44 2003    <jr@skyrix.com>
+
+	* v4.2.61
+
+	* NGImap4Functions.m: build exception after delete failed
+	
+	* NGImap4Folder.m: reset subfolders after rename
+	
+	* NGImap4Client.m: handle unexpectet 'bye' - response (occured with 
+	  broken courier-imap server) 
+
+Tue Jan 14 10:20:29 2003    <jr@skyrix.com>
+
+	* v4.2.60
+	
+	* NGImap4Client.m: fix parsing of cyrus version bug (skyrix bug 845)
+
+Tue Jan 14 09:22:47 2003    <jr@skyrix.com>
+
+	* NGImap4Message+BodyStructure.h: fixed wong instance var
+
+Mon Jan 13 19:44:55 2003    <jr@skyrix.com>
+
+	* NGImap4Message.m, NGImap4Message+BodyStructure.h,
+	  NGImap4FileManager.m: use NGMime header field name contants (v4.2.59)
+
+Fri Jan 10 09:54:14 2003    <jr@skyrix.com>
+
+	* v4.2.58
+	
+	* NGImap4Support.h: add -isOverQuota method to protocol
+	
+	* NGImap4ServerRoot.m: add missed methods from protocol
+	
+	* NGImap4ResponseParser.m: parse also quotaroot respones without 
+	  given quota-root (skyrix bug 822)
+	
+	* NGImap4Folder.m: improve error handling (needed by quota errors)
+
+Thu Jan  9 14:31:12 2003    <jr@skyrix.com>
+
+	* v4.2.57
+	
+	* NGImap4Context.m: add private method to set lastExceptions 
+	  from folder
+	
+	* NGImap4Client.m: handle ALERT responses
+	
+	* NGImap4Folder: check for quota warning, check whether copy failed 
+	  during move (SKYRiX Bug #777)
+	
+	* NGImap4ResponseParser.m: improve 'no' response parsing
+	
+Wed Jan  8 16:26:00 2003    <jr@skyrix.com>
+	
+	* v4.2.56
+
+	* NGImap4ResponseParser.m: fix quoted quota response parsing behavior
+
+	* NGImap4Folder, NGImap4Client.m: use absolute names for 
+	  quota response (bug 835)
+
+Tue Jan  7 16:47:36 2003    <jr@skyrix.com>
+
+	* v4.2.55
+
+	* NGImap4ServerRoot.m: add -usedSpace und -maxQuota methods (bug 821)
+
+	* NGImap4Support.h: complete NGImap4Folder protocol 
+	  (add -usedSpace, -maxQuota)
+
+Fri Dec 27 10:52:44 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.53
+
+	* NSString+Imap4.m: fixed ordering of arguments to calloc() call
+	  (count,size) not (size,count)
+	
+	* NGSieveClient.m: removed some gcc 3.2 warnings
+
+	* NGImap4ResponseParser.h: added -parseSieveResponse to interface
+	  declaration (removes a warning)
+
+Mon Dec 23 15:38:30 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.52
+
+	* NGImap4Message.m: removed some unneeded code in -dealloc
+
+	* NGImap4Message.h: NSMutableDictionary declaration was missing in the
+	  header file
+
+	* NGImap4FileManager.m: -messageAtPath: is now typed to returned an
+	  NGImap4Message
+
+2002-12-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Client.m: replaced THROW with raise (4.2.51)
+
+Tue Dec 17 14:46:58 2002    <jr@skyrix.com>
+
+	* v4.2.50
+
+	* NGImap4ResponseParser.m: parse quota responses
+	
+	* NGImap4Folder.*: add maxQuota/usedQuota methods
+	
+	* NGImap4Context.*: add -canQuota method
+	
+	* NGImap4Client.*: add 'quota' command
+
+2002-12-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Folder.m: added -isComplete prototype to NGImap4Message
+	  Privates (removes a compilation warning) (v4.2.49)
+
+Tue Dec 10 19:12:45 2002    <jr@skyrix.com>
+
+	* v4.2.48
+
+	* NGImap4ResponseParser.m: throw exception "No response exception" 
+	  if server is down (SKYRiX Bug #651)
+	
+	* NGImap4Folder.m, NGImap4ServerRoot: Default for display 
+	  subscribed-folders (ShowOnlySubscribedInSubFolders and
+	  ShowOnlySubscribedInRoot)
+	
+	* NGImap4Client.m: release exceptions after description output now 
+
+Tue Dec 10 12:47:08 2002    <jr@skyrix.com>
+
+	* v4.2.47
+
+	* NGImap4ResponseParser.m: fixing 'fetch body' response bug (check for
+	  empty bodies) (SX Bug #756)
+	
+	* NGImap4Message+BodyStructure.h: build messages only for rfc822 
+	  subtype, fixed header handling message/rfc822 bodies
+	
+	* NGImap4Folder.m: remove logs
+	
+	* NGImap4ServerRoot.m: add fake methods (SX Bug #756)
+	
+Mon Dec  9 13:55:52 2002    <jr@skyrix.com>
+
+	* v4.2.46
+
+	* NGImap4Context.m: add capability support
+	
+	* NGImap4Client.*, NGImap4ResponseParser: add capability command
+
+Fri Dec  6 17:08:28 2002    <jr@skyrix.com>
+
+	* v4.2.45
+	
+	* NGImap4Folder*: add some ss-sorting improvements, bulk-fetch 
+	  messages in range
+	
+	* NGImap4Message.m: description do not initialize headers anymore,
+	  add -_setHeaders: private function for bulk-fetching
+
+Tue Dec  3 16:45:14 2002    <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: parse empty string if message does 
+  	  'no longer exists'(v4.2.44)
+
+Mon Dec  2 19:22:13 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.43
+
+	* NGImap4Context.m: add -setSelectedFolder for performance 
+	  improvements
+	
+	* NGImap4Folder.m: (Bug #17379) clear msn->uid cache after delete,
+	  performance (remove double 'select' call) 
+
+Mon Dec  2 11:18:51 2002    <jr@skyrix.com>
+
+	* NGImap4Folder.m: only reset subfolder if they are already loaded 
+	  (v4.2.42)
+
+Fri Nov 29 12:27:25 2002    <jr@skyrix.com>
+
+	* v4.2.40
+
+	* NGImap4ResponseParser.m: check tagged responses before parsing 
+	  it
+	
+	* code cleanups
+
+Wed Nov 27 16:42:07 2002    <jr@skyrix.com>
+
+	* NGImap4Context.m, NGImap4Folder: add msn-uid cache (v4.2.39)
+
+Mon Nov 25 16:29:40 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: if no next mail, return nil (v4.2.38)
+	
+	* NGImap4Client.m: check whether sort keys are valid (v4.2.36)
+	
+	* NGImap4ResponseParser.m: fix 'idle to long' bug
+
+Fri Nov 22 15:04:18 2002    <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: fixed content parsing (v4.2.36)
+	
+	* NGImap4Message*: add support for body-structure content(v4.2.35)
+
+Fri Nov 22 11:13:40 2002    <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: add Imap4MMDataBoundary Default to 
+	  modify MM-Data-Use boundary (v4.2.34)
+
+Thu Nov 21 20:02:48 2002    <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: add file mapped data for fetching imap data 
+	  (to restore previous behavior -NoMemoryMappedDataForImapBlobs YES) 
+	  (v4.2.33)
+
+Wed Nov 21 18:07:37 2002    <jr@skyrix.com>
+
+	* add fetch body structure with content-urls
+	
+	* add fetch content of single parts (v4.2.32)
+
+Wed Nov 20 18:07:37 2002    <jr@skyrix.com>
+
+	* GNUmakefile: remove tool-make
+
+2002-11-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Message.m: added ability to query headers using KVC (v4.2.31)
+
+	* v4.2.30
+
+	* NGImap4FileManager.m: do not create if no URL is given, better
+	  error handling with URL initialization
+
+	* NGImap4Context.m: do not create context if an empty URL is given
+
+Tue Nov 19 18:13:38 2002    <jr@skyrix.com>
+
+	* NGImap4*: add commands (thread, fetch body)
+
+Mon Nov 11 10:24:14 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: improve greetings parse behaviour
+
+2002-11-10  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGImap4Client, NGImap4FileManager: can init with URL (v4.2.27)
+
+2002-09-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Client.m: prepared for SSL support
+
+	* NGImap4Context.m: do not alloc with zone (v4.2.25)
+
+Tue Aug 22 14:57:38 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* (from 4.1) use cyrus 2.0, sieve, fixes (v4.2.23)
+
+Tue Aug 20 14:57:38 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: (BUG 17379) if there is no prev-message,
+	  take last message (v4.2.22)
+
+Tue Jul 23 10:17:23 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: (BUG 17129) remove debug abort (v4.2.19)
+
+- 2002-07-17 v4.2.17 (hh) [extracted from CVS]
+
+Wed Jul 17 12:58:01 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: added better logs (v4.2.18)
+
+	* NGImap4Folder.m: (BUG 16784) if no sort ordering is given,
+	  sort on "date" field of the message
+	
+Thu Jul 11 16:04:39 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder, NGImap4Client, NGImap4ResponseParser: add 
+	  sortedMessagesInRange Method
+
+- 2002-07-10 v4.2.16 (hh) [extracted from CVS]
+
+2002-07-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4DataSource.m: place -fetchObjects in an autorelease-pool
+	  (v4.2.15)
+
+	* NGImap4Message.m: now supports file-info keys, cleaned up 
+	  -description (v4.2.14)
+
+- 2002-07-08 v4.2.13 (hh) [extracted from CVS]
+- 2002-07-08 v4.2.12 (hh) [extracted from CVS]
+
+Thu Jun 13 19:36:33 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Context: add folderWithName:caseInsensitive: (v4.2.11)
+
+Tue Jun 11 16:17:06 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: (bug 11939) add quote support for special 
+	  chars in passwd (v4.2.10)
+
+Mon Jun 10 18:58:55 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Context.m, NGImap4Folder.m: add support for case sensitve 
+	  folder handling (v4.2.9)
+
+	* NGImap4Context.m, NGImap4Folder.m: reduce logs (v4.2.8)
+
+Sun Jun  9 02:56:55 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: (bug 16482) double encoding bug (v4.2.7)
+
+	* NGImap4ServerRoot.m: (bug 16050) show also not subscribed folders
+	  (v4.2.6)
+
+- 2002-06-07 v4.2.5  (jr) [extracted from CVS]
+- 2002-06-04 v4.2.4  (jr) [extracted from CVS]
+
+2002-06-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed to compile with gstep-base
+
+- 2002-05-22 v4.2.3  (jr) [extracted from CVS]
+
+Wed Mar  6 13:29:28 CET 2002 Jan Reichmann  <jr@skyrix.com>
+
+	* merge with SkyrixGreen
+
+Mon Jan  7 16:57:07 2002  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: improved error messages
+
+Fri Dec  7 14:14:33 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m ([NGImap -fetchFrom:to:parts:]): add profiling
+
+Tue Dec  4 19:14:43 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m ([NGImap -fetchFrom:to:parts:]): passwd with spaces
+
+Wed Nov 28 18:17:06 2001  Gerrit Albrecht  <ga@skyrix.com>
+
+	* NGImap4Context.m, NGImap4FileManager.m: Added knowledge
+	  about drafts folder.
+
+Wed Oct 24 13:18:29 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Client.m: moved Folder-Name encoding/decoding to NSString
+	  category - needs to be corrected to NSData !!!
+
+	* updated to SKYRiXgreen version (lots of fixes & changes)
+
+Tue Oct  2 05:41:32 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Context.m: Fixed __RELEASE__ bug ;(
+
+Fri Aug 10 13:48:29 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4FileManager.m: inherit from NGFileManager
+
+Fri Aug 10 07:28:10 2001  Martin Hoerning  <mh@skyrix.com>
+
+	* NGImap4Client, NGImap4FileManager, NGImap4Context:
+	  RETAIN-BUGS fixed
+
+Fri Jun 22 15:46:23 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: fixed search uid bug
+
+Thu Jun 21 16:50:13 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4FileManager.m: add -imapContext
+
+Wed May 16 17:59:00 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m, NGImap4Context.m, NGImap4ResponseParser.m: 
+	  washington imap server
+
+Tue May 15 18:10:33 2001  Jan Reichmann  <jr@skyrix.com>
+
+
+	* NGImap4ResponseParser.m: ignore now empty fetchentries with no 
+	header length field
+
+Tue May  8 16:26:13 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4FileManager.m: add edit possibility for syncMode
+
+Mon Apr  17 11:17:47 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: fixed error log bug
+	
+Mon Apr  2 13:47:47 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4FileManager.m: fixed private interface
+
+Fri Mar 30 14:17:25 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: try only 10 times to reconnect before raising an 
+	exception
+
+	* NGImap4Client.m: fixed error log
+
+Fri Mar 30 10:54:08 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4DataSource.m: major cleanups
+
+Fri Mar 16 16:05:27 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Message.m: fixed parse message bug 
+
+Wed Mar 14 13:16:24 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4FileManager.m: add datasource at path
+
+Tue Feb  6 19:47:03 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: fixed bug for wrong MSN
+
+Tue Feb  6 19:47:03 2001  Joerg Grimm  <joerg@trex2>
+
+	* NGImap4Client.m: check open connection response without
+	                   servername (Cyrus IMAP4 v)
+
+Wed Jan  3 13:14:43 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: fixed flag bug
+
+Tue Jan  2 16:58:46 2001  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m: hide password in log
+
+	* NGImap4Client.m: sleep before reconnect
+
+Mon Dec 18 14:48:18 2000  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Folder.m: fixed 'lookup only' folder bug
+
+Fri Dec 15 19:26:09 2000  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Client.m, NGImap4Context.m: automatically subscribe to inbox
+
+	* NGImap4Context.m: format text
+
+Mon Nov 13 14:51:13 2000  Jan Reichmann  <jr@skyrix.com>
+
+	* Python/: insert python module
+	* NGImapClient.m: enable append of messages with more than 15kB
+
+Fri Sep 29 15:15:29 2000  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4: add sync mode (synchronize selects for folder)
+
+Thu Sep 14 13:33:49 2000  Jan Reichmann  <jr@skyrix.com>
+
+	* search.txt: use '=' instead of '=='
+
+	* NGImap4Context.[hm]: insert - newMessages
+
+	* NGImap4Client.m: remove compiler warning
+
+Wed Sep 13 14:47:23 2000  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Context.m: at first ask inbox in method hasNewMessages
+
+Tue Sep  5 14:04:37 2000  Joerg Grimm  <joerg@trex2>
+
+	* NGImap4Folder.m: log removed
+
+Fri Sep  1 13:15:22 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Client.m: remove logs
+
+Wed Aug 30 21:22:31 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Context.[hm], NGImap4Client.m: store server data
+
+Tue Aug 29 18:56:38 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Context.m, NGImap4Folder.h, NGImap4Folder.m,NGImap4Functions.m:
+	actions for no-select folders
+
+Mon Aug 28 18:43:11 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Folder.m: fixed bug for read-only folder
+
+Tue Aug  8 11:21:16 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGImap4Message.m: added -globalID method
+
+	* NGImap4Context.m: added -login method
+
+Thu Jul 27 14:48:26 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Folder.m: fixed bug (unseen was not updated) 
+
+Fri Jun 23 10:32:00 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4ResponseParser.m: remove category for NSData
+
+Wed Jun  7 16:07:03 2000  Jan Reichmann  <jan@mdlink.de>
+
+	*  NGImap4Folder.[hm], NGImap4ServerRoot.[hm]: maxResults for search 
+
+Mon May 29 17:56:46 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Functions.m: remove recursive copy bug
+
+Sat May 27 18:27:48 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Message.m: add flagged methods
+
+Tue May 23 12:33:25 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Context.[hm]: improvements ( add -folderWithName)
+
+Fri May 19 11:52:25 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Client.m: replace 0 with 1 in range-commands
+
+Thu May 18 15:20:19 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4*: enabled mailboxes with more than one rootfolder
+
+Tue May 16 12:35:46 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Client.m: fixed RC bug
+
+Mon May 15 16:26:19 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Context.m, NGImap4Folder.[hm]: evaluate noinferiors flag 
+
+Wed May 10 19:30:37 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Folder.m: fixed RC-bug (raised during moveFolder)
+
+Wed May  3 22:15:10 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Folder.m: improvements
+
+Mon May  1 21:24:21 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Folder.m: fixed RC-bug
+
+Wed Apr 26 10:26:54 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Context.m: bugfix in hasNewMessages
+
+Thu Apr 13 16:19:56 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4Message.m: insert isEqual: and hash methods
+
+Mon Apr 10 14:34:49 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGImap4Folder.m: added autorelease-pools, added immutable containers
+
+	* NGImap4Client.m: added autorelease-pools
+
+	* NGImap4Client.m(-normalizeFetchResponse:): created immutable, 
+	  not-autoreleased NSDictionary entry objects
+
+	* NGImap4Client.m: replaced abort() with NSCAssert
+
+Thu Apr  6 16:32:09 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGImap4 build lib-internal Trash/Sent Folder managment
+
+Tue Feb 29 19:18:09 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* MOF3 import
+
+Tue Feb 22 19:16:11 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* GNUmakefile (GNUSTEP_INSTALLATION_DIR): changed to GNUSTEP_LOCAL_ROOT
+
+Thu Jan 13 17:24:40 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* created ChangeLog

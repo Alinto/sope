@@ -1,0 +1,23 @@
+{
+  requires = {
+    bundleManagerVersion = 1;
+    
+    classes = (
+      { name = NSObject; }
+    );
+  };
+
+  provides = {
+    WOxElemBuilder = (
+      { name = "WEPrototypeElemBuilder"; },
+    );
+    
+    WODynamicElements = (
+      { name = "WELiveLink"; },
+    );
+    
+    classes = (
+      { name = "WEPrototypeElemBuilder"; },
+    );
+  };
+}

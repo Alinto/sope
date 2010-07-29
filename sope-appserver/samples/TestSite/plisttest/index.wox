@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<span xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding">
+  <h3>I'm the index page ...</h3>
+  
+  Client: <var:string value="clientObject"/>
+  <br />
+  PathInfo: <var:string value="context.PATHINFO"/>
+  <br />
+  <br />
+
+  <table border="0" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#AAAAAA">
+      <th align="left">Subject</th>
+      <th align="left">Date</th>
+      <th align="left">Color</th>
+    </tr>
+
+    <!-- var:foreach datasource="clientObject.contentDataSource"
+                 qualifier="category='news'"
+                 sortedby="date,-color" -->
+
+    <var:foreach list="clientObject.allValues">
+      <tr bgcolor="#DDDDDD">
+        <td><a var:href="nameInContainer"><var:string value="subject"/></a></td>
+        <td><var:string value="date"/></td>
+        <td><var:string value="color"/></td>
+      </tr>
+    </var:foreach>
+  </table>
+</span>

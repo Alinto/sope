@@ -1,0 +1,19 @@
+compare /home/helge/wdev/complete/SOPE/releases/4.2pre/ with /home/helge/wdev/SOPE-4.3/
+added:   sope-mime
+added:   INSTALL
+added:   sope-ldap
+added:   xmlrpc_call
+added:   TODO-4.3.txt
+added:   sope-ical
+added:   sope-xml
+added:   sope-core
+added:   Recycler
+added:   sope-appserver
+added:   sope-gdl1
+added:   maintenance
+added:   sopex
+removed: skyrix-core
+removed: rules.mk
+removed: skyrix-xml
+removed: mod_ngobjweb
+removed: skyrix-sope

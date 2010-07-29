@@ -1,0 +1,15 @@
+# GNUstep makefile
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I..	\
+	-I../../../sope-core			\
+	-I../../../sope-core/NGStreams		\
+	-I../../../sope-core/NGExtensions	\
+
+ifeq ($(WOAssociationExceptionHandlers),yes)
+ADDITIONAL_CPPFLAGS += -DUSE_EXCEPTION_HANDLERS=1
+endif
+
+ifeq ($(heavydebug),yes)
+ADDITIONAL_CPPFLAGS += -DHEAVY_DEBUG=1
+endif

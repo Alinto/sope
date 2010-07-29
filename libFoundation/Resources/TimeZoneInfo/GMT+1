@@ -1,0 +1,3 @@
+{
+    details = {"GMT+0100" = {abbrev = "GMT+0100"; isDST = 0; offset = "+1:00:00"; }; };
+}

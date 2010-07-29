@@ -1,0 +1,9 @@
+PlistSaxDriver
+==============
+
+This directory contains the sources for a SAX driver bundle which can read
+"old-style" property list files. It reports the parsing events in the XML
+format of "new-style" XML property-list.
+
+This one is experimental and more a technology demo than a practical 
+application ! Feel free to extend it and submit changes ;-)

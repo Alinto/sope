@@ -1,0 +1,29 @@
+SOPE WebDAV Todos
+=================
+
+- implement move
+
+- Proper handling of "If:" headers, WebDAV RFC 2518, 9.4.2
+  ---
+  If: <http://www.foo.bar/resource1> (<locktoken:a-write-lock-token>
+   [W/"A weak ETag"]) (["strong ETag"])
+   <http://www.bar.bar/random>(["another strong ETag"])
+  ---
+  Syntax seems to be:
+
+   <URL> (lock [etag]) ([etag2])
+
+  a url embedded in <>, then a set of () surrounded options which contain
+  some XML and optionally an etag.
+
+  Eg this is submitted by Cadaver for locking requests.
+
+- reverse mapping of keys->DAV names
+  - schema queries (propnames)          (partly done)
+  - queries on all attributes (propget) (partly done)
+
+- SUBSCRIBE/UNSUBSCRIBE (partly done in the meantime)
+  - subscription manager
+  - httpu:// implementation for WOHTTPConnection
+
+- DASL searching

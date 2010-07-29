@@ -1,0 +1,16 @@
+Fri Jan 31 13:04:03 CET 2003  Helge Hess <hh@skyrix.com>
+-------------------------------------------------------------
+
+- fixed a small bug in the configuration of SNSAppPrefix
+  => not used in SkyrixGreen
+
+-------------------------------------------------------------
+Tue Dec 10 12:33:00 CET 2002  Helge Hess <hh@skyrix.com>
+
+- created CHANGES file to document changes on a higher level
+
+-------------------------------------------------------------
+Tue Jul  2 16:09:56 2002  Jan Reichmann  <jan@skyrix.com>
+
+- fixed SuSE Bug 13871 (improper handling of umlauts in HTTP
+  header fields - required for filenames in downloads)

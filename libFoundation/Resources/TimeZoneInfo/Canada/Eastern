@@ -1,0 +1,24 @@
+{
+    details = {
+	EDT = {abbrev = EDT; isDST = 1; offset = "-4:00:00"; };
+	EST = {abbrev = EST; isDST = 0; offset = "-5:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Apr 27 09:00:00 1969 GMT";
+	    endDate = "Sun Oct 26 08:00:00 1986 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/9:00:00"; detail = EDT; },
+		{ date = "October/last Sunday/8:00:00"; detail = EST; }
+	    );
+	},
+	{
+	    startDate = "Sun Apr 05 09:00:00 1987 GMT";
+	    endDate = "Sun Oct 25 08:00:00 2037 GMT";
+	    transitions = (
+		{ date = "April/first Sunday/9:00:00"; detail = EDT; },
+		{ date = "October/last Sunday/8:00:00"; detail = EST; }
+	    );
+	}
+    );
+}

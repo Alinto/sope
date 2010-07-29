@@ -1,0 +1,41 @@
+# $Id$
+
+in common.h, correctly detect NG_VARARGS_AS_REFERENCE for gcc 3
+  - how do we detect gcc3 ?
+
+
+- add a .jobs like file for mapping selectors to functions instead of
+  special _jsfunc_, _jsprop_ selectors
+
+
+Find out the difference between NGJavaScriptObject and 
+NGJavaScriptObjectHandler
+=> document NGJavaScriptObject
+- the handler seems to be stored in the JS private field ?
+
+NGJavaScriptObjectHandler
+- is attached to a SpiderMonkey finalizer
+  - the finalizer func gets the handler reference from the JS private
+  - the managedObject should be active there
+  - the finalizer calls forgetObject: on the context
+    - forgetObject: removes the object from the objcToJS hash
+    - objcToJS retains the object
+- is created in NGJavaScriptObjectMappingContext -proxyForObject:
+- is created in makeObjectCombined
+
+BUG
+- Note: do not mix up the mapping context and the JS context
+  - we are talking about the NGJavaScriptObjectMappingContext, not about
+    the JS context (which is retained by the mapping context)
+- sometimes a context is collected earlier than a NGJavaScriptObjectHandler,
+  AFAIK the handler is registered inside the context and therefore can't
+  retain it (otherwise we would have a retain cycle)
+  - so either the context does not invalidate the object handlers
+  - or we have some handler which does not properly unregisters
+  - or something else :-(
+  Result:
+  ---snip---
+  Reason: message 'forgetObject:' sent to freed object 0x811a4d4 \
+    (NGJavaScriptObjectMappingContext)
+  ---snap---
+  - hm, but NGJavaScriptObject retains the context ?

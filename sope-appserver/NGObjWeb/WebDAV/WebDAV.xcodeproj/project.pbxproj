@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AD013B8C06E20AC5000910D8 /* README in Resources */ = {isa = PBXBuildFile; fileRef = AD013B8706E20AC5000910D8 /* README */; };
+		ADD65F7506DA3C51007161CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65F7406DA3C51007161CA /* Foundation.framework */; };
+		ADFE665406E26BA0006628C4 /* EOFetchSpecification+SoDAV.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE663906E26BA0006628C4 /* EOFetchSpecification+SoDAV.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE665606E26BA0006628C4 /* SaxDAVHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE663B06E26BA0006628C4 /* SaxDAVHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE665806E26BA0006628C4 /* SoDAV.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE663D06E26BA0006628C4 /* SoDAV.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE665906E26BA0006628C4 /* SoDAVLockManager.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE663E06E26BA0006628C4 /* SoDAVLockManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE665B06E26BA0006628C4 /* SoDAVSQLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE664006E26BA0006628C4 /* SoDAVSQLParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE665D06E26BA0006628C4 /* SoObject+SoDAV.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE664206E26BA0006628C4 /* SoObject+SoDAV.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE666006E26BA0006628C4 /* SoObjectDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE664506E26BA0006628C4 /* SoObjectDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE666206E26BA0006628C4 /* SoObjectResultEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE664706E26BA0006628C4 /* SoObjectResultEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE666406E26BA0006628C4 /* SoObjectWebDAVDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE664906E26BA0006628C4 /* SoObjectWebDAVDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE666606E26BA0006628C4 /* SoSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE664B06E26BA0006628C4 /* SoSubscription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE666806E26BA0006628C4 /* SoSubscriptionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE664D06E26BA0006628C4 /* SoSubscriptionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE666A06E26BA0006628C4 /* SoWebDAVRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE664F06E26BA0006628C4 /* SoWebDAVRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE666C06E26BA0006628C4 /* SoWebDAVValue.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE665106E26BA0006628C4 /* SoWebDAVValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADFE6A3906E26FC6006628C4 /* dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE6A3806E26FC6006628C4 /* dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AD013B8706E20AC5000910D8 /* README */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		AD77EBAC0C4F61620018A131 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		AD77EBAD0C4F61620018A131 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		AD77EBAE0C4F61620018A131 /* Wrapper.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Wrapper.xcconfig; sourceTree = "<group>"; };
+		ADD65C7406DA343C007161CA /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65C7506DA343C007161CA /* GNUmakefile.preamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile.preamble; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65C8A06DA343C007161CA /* TODO */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		ADD65C8B06DA343C007161CA /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; name = Version; path = ../Version; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65D5806DA372D007161CA /* WebDAV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebDAV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADD65D5A06DA372D007161CA /* WebDAV-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WebDAV-Info.plist"; sourceTree = "<group>"; };
+		ADD65F7406DA3C51007161CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		ADFE663806E26BA0006628C4 /* DAVFetchSpec.txt */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = DAVFetchSpec.txt; sourceTree = "<group>"; };
+		ADFE663906E26BA0006628C4 /* EOFetchSpecification+SoDAV.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = "EOFetchSpecification+SoDAV.h"; sourceTree = "<group>"; };
+		ADFE663B06E26BA0006628C4 /* SaxDAVHandler.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SaxDAVHandler.h; sourceTree = "<group>"; };
+		ADFE663D06E26BA0006628C4 /* SoDAV.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoDAV.h; sourceTree = "<group>"; };
+		ADFE663E06E26BA0006628C4 /* SoDAVLockManager.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoDAVLockManager.h; sourceTree = "<group>"; };
+		ADFE664006E26BA0006628C4 /* SoDAVSQLParser.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoDAVSQLParser.h; sourceTree = "<group>"; };
+		ADFE664206E26BA0006628C4 /* SoObject+SoDAV.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = "SoObject+SoDAV.h"; sourceTree = "<group>"; };
+		ADFE664506E26BA0006628C4 /* SoObjectDataSource.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoObjectDataSource.h; sourceTree = "<group>"; };
+		ADFE664706E26BA0006628C4 /* SoObjectResultEntry.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoObjectResultEntry.h; sourceTree = "<group>"; };
+		ADFE664906E26BA0006628C4 /* SoObjectWebDAVDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoObjectWebDAVDispatcher.h; sourceTree = "<group>"; };
+		ADFE664B06E26BA0006628C4 /* SoSubscription.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoSubscription.h; sourceTree = "<group>"; };
+		ADFE664D06E26BA0006628C4 /* SoSubscriptionManager.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoSubscriptionManager.h; sourceTree = "<group>"; };
+		ADFE664F06E26BA0006628C4 /* SoWebDAVRenderer.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoWebDAVRenderer.h; sourceTree = "<group>"; };
+		ADFE665106E26BA0006628C4 /* SoWebDAVValue.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SoWebDAVValue.h; sourceTree = "<group>"; };
+		ADFE6A3806E26FC6006628C4 /* dummy.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; name = dummy.m; path = ../dummy.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADD65D5606DA372D007161CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD65F7506DA3C51007161CA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD013C1806E20C17000910D8 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE663B06E26BA0006628C4 /* SaxDAVHandler.h */,
+				ADFE663D06E26BA0006628C4 /* SoDAV.h */,
+				ADFE663E06E26BA0006628C4 /* SoDAVLockManager.h */,
+				ADFE664006E26BA0006628C4 /* SoDAVSQLParser.h */,
+				ADFE664206E26BA0006628C4 /* SoObject+SoDAV.h */,
+				ADFE664506E26BA0006628C4 /* SoObjectDataSource.h */,
+				ADFE664706E26BA0006628C4 /* SoObjectResultEntry.h */,
+				ADFE664906E26BA0006628C4 /* SoObjectWebDAVDispatcher.h */,
+				ADFE664B06E26BA0006628C4 /* SoSubscription.h */,
+				ADFE664D06E26BA0006628C4 /* SoSubscriptionManager.h */,
+				ADFE664F06E26BA0006628C4 /* SoWebDAVRenderer.h */,
+				ADFE665106E26BA0006628C4 /* SoWebDAVValue.h */,
+				ADFE663906E26BA0006628C4 /* EOFetchSpecification+SoDAV.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		AD77EBAB0C4F61620018A131 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				AD77EBAC0C4F61620018A131 /* Common.xcconfig */,
+				AD77EBAD0C4F61620018A131 /* Development.xcconfig */,
+				AD77EBAE0C4F61620018A131 /* Wrapper.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../../xcconfig;
+			sourceTree = "<group>";
+		};
+		ADD65B6606DA32D6007161CA = {
+			isa = PBXGroup;
+			children = (
+				AD013B8706E20AC5000910D8 /* README */,
+				ADD65C8A06DA343C007161CA /* TODO */,
+				ADD65C8B06DA343C007161CA /* Version */,
+				ADD65C9106DA346D007161CA /* Documentation */,
+				ADD65C8E06DA344C007161CA /* Makefiles */,
+				AD013C1806E20C17000910D8 /* Headers */,
+				ADD65C9406DA34FF007161CA /* Classes */,
+				ADD65D5D06DA37C7007161CA /* Resources */,
+				ADD65D5906DA372D007161CA /* Products */,
+				ADD65F7306DA3C02007161CA /* Linked Frameworks */,
+				AD77EBAB0C4F61620018A131 /* xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		ADD65C8E06DA344C007161CA /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65C7406DA343C007161CA /* GNUmakefile */,
+				ADD65C7506DA343C007161CA /* GNUmakefile.preamble */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADD65C9106DA346D007161CA /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE663806E26BA0006628C4 /* DAVFetchSpec.txt */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+		ADD65C9406DA34FF007161CA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE6A3806E26FC6006628C4 /* dummy.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		ADD65D5906DA372D007161CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65D5806DA372D007161CA /* WebDAV.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADD65D5D06DA37C7007161CA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65D5A06DA372D007161CA /* WebDAV-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		ADD65F7306DA3C02007161CA /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65F7406DA3C51007161CA /* Foundation.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		ADD65D5306DA372D007161CA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADFE665406E26BA0006628C4 /* EOFetchSpecification+SoDAV.h in Headers */,
+				ADFE665606E26BA0006628C4 /* SaxDAVHandler.h in Headers */,
+				ADFE665806E26BA0006628C4 /* SoDAV.h in Headers */,
+				ADFE665906E26BA0006628C4 /* SoDAVLockManager.h in Headers */,
+				ADFE665B06E26BA0006628C4 /* SoDAVSQLParser.h in Headers */,
+				ADFE665D06E26BA0006628C4 /* SoObject+SoDAV.h in Headers */,
+				ADFE666006E26BA0006628C4 /* SoObjectDataSource.h in Headers */,
+				ADFE666206E26BA0006628C4 /* SoObjectResultEntry.h in Headers */,
+				ADFE666406E26BA0006628C4 /* SoObjectWebDAVDispatcher.h in Headers */,
+				ADFE666606E26BA0006628C4 /* SoSubscription.h in Headers */,
+				ADFE666806E26BA0006628C4 /* SoSubscriptionManager.h in Headers */,
+				ADFE666A06E26BA0006628C4 /* SoWebDAVRenderer.h in Headers */,
+				ADFE666C06E26BA0006628C4 /* SoWebDAVValue.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		ADD65D5706DA372D007161CA /* WebDAV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA078880857389E00993825 /* Build configuration list for PBXNativeTarget "WebDAV" */;
+			buildPhases = (
+				ADD65D5306DA372D007161CA /* Headers */,
+				ADD65D5406DA372D007161CA /* Resources */,
+				ADD65D5506DA372D007161CA /* Sources */,
+				ADD65D5606DA372D007161CA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WebDAV;
+			productName = WebDAV;
+			productReference = ADD65D5806DA372D007161CA /* WebDAV.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADD65B6A06DA32D6007161CA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA0788C0857389E00993825 /* Build configuration list for PBXProject "WebDAV" */;
+			hasScannedForEncodings = 0;
+			mainGroup = ADD65B6606DA32D6007161CA;
+			productRefGroup = ADD65D5906DA372D007161CA /* Products */;
+			projectDirPath = "";
+			targets = (
+				ADD65D5706DA372D007161CA /* WebDAV */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADD65D5406DA372D007161CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD013B8C06E20AC5000910D8 /* README in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADD65D5506DA372D007161CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADFE6A3906E26FC6006628C4 /* dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADA078890857389E00993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EBAD0C4F61620018A131 /* Development.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).0";
+				DYLIB_CURRENT_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).12";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "WebDAV-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-seg1addr",
+					0xC3700000,
+					"-headerpad_max_install_names",
+				);
+				PRODUCT_NAME = WebDAV;
+			};
+			name = Development;
+		};
+		ADA0788A0857389E00993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EBAE0C4F61620018A131 /* Wrapper.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).0";
+				DYLIB_CURRENT_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).12";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "WebDAV-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-seg1addr",
+					0xC3700000,
+					"-headerpad_max_install_names",
+				);
+				PRODUCT_NAME = WebDAV;
+			};
+			name = Wrapper;
+		};
+		ADA0788D0857389E00993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA0788E0857389E00993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA078880857389E00993825 /* Build configuration list for PBXNativeTarget "WebDAV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA078890857389E00993825 /* Development */,
+				ADA0788A0857389E00993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA0788C0857389E00993825 /* Build configuration list for PBXProject "WebDAV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA0788D0857389E00993825 /* Development */,
+				ADA0788E0857389E00993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADD65B6A06DA32D6007161CA /* Project object */;
+}

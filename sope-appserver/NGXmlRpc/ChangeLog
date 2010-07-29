@@ -1,0 +1,333 @@
+2007-11-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGXmlRpcClient.m: add redirect locations to error reason (v4.7.17)
+
+2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGXmlRpcClient.m: fixed a gnustep-base compilation warning (v4.7.16)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings, use -isNotEmpty
+	  when appropriate (v4.5.15)
+
+2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* *m: changed EOControl related includes into imports
+	  to enable compilation against MulleEOF (v4.5.14)
+
+2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added dependency to NGMail (v4.5.13)
+
+2005-08-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added framework compilation for OSX (v4.5.12)
+
+2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WODirectAction+XmlRpc.m: fixed gcc 4.0 warnings (v4.5.11)
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGXmlRpcAction.m: fixed gcc 4.0 warnings (v4.5.10)
+
+2005-01-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WODirectAction+XmlRpc.m: minor code cleanups (v4.5.9)
+
+2004-11-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGXmlRpc.xcode: fixed a subtle bug that prevent Xcode from being
+	  loaded correctly.
+
+2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.8
+
+	* NGXmlRpc.xcode: new Xcode project
+
+	* common.h: fixed for multiple inclusion during Xcode
+	  build (common.h is the prefix header)
+
+2004-09-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved xmlrpc_call tool to own top-level SOPE dir (xmlrpc_call)
+	  (v4.3.7)
+
+2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: minor changes for inline compilation with
+	  GNUSTEP_BUILD_DIR set elsewhere (v4.3.6)
+
+2004-09-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: fixed soname, libname versions (v4.3.5)
+
+2004-08-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: fixed libNGMime location for gstep-make 1.9.2,
+	  fixed library locations for FHS (v4.3.4)
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+	  (v4.3.3)
+
+2004-08-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.3.2
+	
+	* xmlrpc_call.m: properly include UnixSignalHandler from NGObjWeb on
+	  non-lF platforms
+
+	* GNUmakefile.preamble: removed libjs linking path
+
+	* moved NGXmlRpc to own subproject (v4.3.1)
+
+2004-04-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WODirectAction+XmlRpc.m: replaced "catched" with "caught" in comment.
+
+2004-03-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOFetchSpecification+XmlRpcCoding.m: do not use deprecated plist
+	  init method (v4.2.322)
+
+2004-03-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGXmlRpcClient.m: added ability to specify additional, HTTP level
+	  headers to be used when creating the WORequest for the XML-RPC
+	  invocation (v4.2.315)
+
+2004-02-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpcClient.m: deprecated non-URL based API, add -login method
+	  (v4.2.289)
+
+2003-08-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: small cleanup to exception handling 
+	  (v4.2.216)
+
+2003-01-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.138
+
+	* WODirectAction+XmlRpc.m: added special handling for NULL selectors,
+	  since the MacOSX Foundation does not allow -respondsToSelector:NULL
+
+	* NSObject+Reflection.m: added reflection for Apple runtime (required
+	  by system.listMethods)
+
+	* NGXmlRpcRequestHandler.m: replaced some release macros
+
+2003-01-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpcIntrospection.m: added patch provided by Bjoern
+	  (fixes SKYRiX bug 918)
+
+2003-01-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: fixed a bug (incorrect number of arguments
+	  passed to a selector)
+
+2003-01-09  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGXmlRpcClient.m: started support for HTTP digest authentication
+	  (v4.2.112)
+	
+Mon Dec 23 15:47:38 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: fixed a gcc 3.2 warning (v4.2.103)
+
+2002-10-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed the change below (v4.2.38) :-(
+
+	* NGXmlRpcAction+Registry.m: use -skyDictionaryWithContentsOfFile:
+	  for parsing of property lists (so that comments work on OSX) 
+	  (v4.2.37)
+
+2002-08-29  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGXmlRpcRequestHandler.m: small fix to make gcc 3.1 happy (v4.2.35)
+
+2002-07-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpcAction.m: fixed a bug in auth handling (www-authenticate
+	  header was not set, if access was denied)
+	  - allow an action selector to have more arguments than the associated
+	  signature (the remaining args are filled with nil ...)
+
+2002-06-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpcAction+Registry.m: added a default to control the logging of
+	  selector<->rpc-method mapping
+
+2002-06-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcMethodResponse+WO.m: changed back to use WOResponse
+	  content encoding
+
+Wed Jun 19 18:53:49 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* XmlRpcMethodResponse+WO.m: changed default response
+	  encoding to UTF-8 (was defaultCStringEncoding before)
+
+Fri May 10 15:29:14 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpcAction.m: improved error handling
+
+	* NGXmlRpcClient.m: improved error handling
+
+Sun May  5 14:27:12 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved as a subproject to NGObjWeb
+
+Mon Apr 22 13:34:44 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: always build xmlrpc_call
+
+Fri Apr 12 14:35:30 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGXmlRpcAction.m: added ability to coredump if a fault is going
+	  to be delivered
+
+Tue Apr  9 15:19:13 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* NGXmlRpcClient.m: fixed adding of authorization to headers
+	  even if no username/password was set
+
+Fri Apr  5 15:20:47 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m ([WODirectAction -selectorForXmlRpcAction:parameters:]): 
+	  don't print warning if system.* methods are invoked
+
+Tue Mar 26 19:26:15 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* added xmlrpc_call tool
+
+Mon Mar 25 16:54:20 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NGXmlRpcRequestHandler, NGXmlRpcAction, NGAsyncResultProxy
+	  from SkyDaemon
+
+Fri Mar 15 15:29:31 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcMethodResponse+WO.m: set content-type to text/xml
+
+Mon Mar 11 18:09:54 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcMethodResponse+WO.h: conforms to WOActionResults
+
+Tue Feb 26 18:27:37 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* WODirectAction+XmlRpcIntrospection.m: component namespace
+	  is now added for all functions who are not introspection methods
+
+Thu Feb 14 11:09:19 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOFetchSpecification+XmlRpcCoding.m: use EOQualifier to decode
+	  a property list  parameter
+
+Wed Feb 13 13:52:09 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved generic stuff to XML/XmlRpc
+
+Sat Feb  9 13:00:11 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcSaxHandler.m: added warning and error handlers ...
+
+	* XmlRpcDecoder.m: improved error output
+
+Fri Feb  8 17:35:05 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcDecoder.m: fixed charset problems
+
+	* WODirectAction+XmlRpcIntrospection.m: changed to return "string"
+	  signature for object types
+
+Thu Feb  7 20:19:55 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: autogenerate SandStorm component name
+
+Wed Jan 30 18:16:31 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpcIntrospection.m: fixed bug with method names
+
+	* NGXmlRpcInvocation.m: convert types prior to call, if signature
+	  is available
+
+Tue Jan 29 18:30:56 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NGXmlRpcInvocation, NGXmlRpcMethodSignature
+
+Mon Jan 28 18:46:34 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: improved reflection capabilities
+
+	* WODirectAction+XmlRpc.m: support a GET action for dynamic reflection
+
+	* WODirectAction+XmlRpc.m: added method to define component prefix
+
+Fri Jan 25 18:36:58 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: use RPC2 as action name ...
+
+	* added NGXmlRpcClient class
+
+Thu Jan 17 17:23:09 2002  Martin Spindler  <spindler@mdlink.de>
+
+	* NSObject+XmlRpc.m: raise exception if coding methods arn't supported
+
+Tue Nov 13 09:34:54 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOKeyGlobalID+XmlRpcCoding.m: removed unnecessary retain/autorelease
+
+Tue Nov 13 01:06:50 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* EOKeyGlobalID+XmlRpcCoding.m: fixed decoding bug
+
+Wed Oct 24 13:23:54 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* XmlRpcSaxHandler.m: fixed multiple call of -characters:length:
+
+Mon Oct 22 20:53:33 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcEncoder.m: normalize NSString subclasses
+
+	* XmlRpcMethodResponse+WO.m: enabled UTF-8 for result encoding
+
+Wed Oct 10 19:42:17 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* XmlRpcEncoder.m: use -classForCoder instead of -class
+
+Tue Aug 28 15:38:05 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* changed 'timeZone' - tag into 'timeZone' - attribute
+
+	* support of 'timeZone' - tag (not xmlprc compatible!)
+
+	* XmlRpcCoder: added accessors for defaultTimeZone
+
+Mon Aug 27 10:47:03 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved SKYRiX Logic categories back to skyxmlrpcd
+
+Wed Aug 22 15:41:39 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcDecoder.m: decode dates as calendar-dates
+
+	* use ObjC base-types for decoding/encoding numbers
+
+	* NSDate+XmlRpcCoding.m: fixed NSTimeZone decoding
+
+	* NSArray+XmlRpcCoding.m: fixed NSEnumerator coding, fixed RC bugs
+
+Mon Aug 20 21:55:41 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* created ChangeLog
+

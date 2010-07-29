@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:admin="http://webns.net/mvcb/"
+  xmlns:cc="http://web.resource.org/cc/"
+  xmlns="http://purl.org/rss/1.0/">
+
+<channel rdf:about="http://www.mulle-kybernetik.com/weblog/">
+<title>Nat!&apos;s Web Journal</title>
+<link>http://www.mulle-kybernetik.com/weblog/</link>
+<description></description>
+<dc:language>en-us</dc:language>
+<dc:creator></dc:creator>
+<dc:date>2005-08-23T00:56:21+01:00</dc:date>
+<admin:generatorAgent rdf:resource="http://www.movabletype.org/?v=2.63" />
+
+
+<items>
+<rdf:Seq><rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000681.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000680.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000677.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000676.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000675.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000674.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000673.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000672.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000671.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000669.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000668.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000667.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000664.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000663.html" />
+<rdf:li rdf:resource="http://www.mulle-kybernetik.com/weblog/archives/000660.html" />
+</rdf:Seq>
+</items>
+
+</channel>
+
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000681.html">
+<title>&quot;Interesting&quot; Example Code</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000681.html</link>
+<description>From an AudioCore code sample: static void BuildDeviceMenu(AudioDeviceList *devlist, NSPopUpButton *menu, AudioDeviceID initSel) { [menu removeAllItems]; AudioDeviceList::DeviceList &amp;#38;thelist = devlist-&gt;GetList(); int index = 0; for (AudioDeviceList::DeviceList::iterator i = thelist.begin(); i != thelist.end(); ++i, ++index) { while([menu itemWithTitle:[NSString stringWithCString: (*i).mName]] !=...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-08-23T00:56:21+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000680.html">
+<title>Server migration</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000680.html</link>
+<description>The Mulle kybernetiK server will move tomorrow. So you can expect some downtime....</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-08-19T00:59:00+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000677.html">
+<title>Zero Filling - Part VII - Hyperthreads a related problem</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000677.html</link>
+<description>A long time ago, about two years back, I was unhappy about zero filling. I am still unhappy about it. One of the main arguments for zero filling is security. On a multi-user system you enter your password, which invariably...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-08-09T23:40:54+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000676.html">
+<title>The Mac swears at you!</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000676.html</link>
+<description> I think this could be worded in much more explecitive and redundant way, still giving away as little information as possible: %@!!! The %@ preferences pane could not be removed because a %@ error occurred. Something apparently has gone...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-08-04T23:33:10+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000675.html">
+<title>Grow RPG</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000675.html</link>
+<description> There is a new version of Grow available. It&apos;s as good as the old one and I solved it :)...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-07-25T00:05:50+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000674.html">
+<title>Wie schlecht ist das denn ?</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000674.html</link>
+<description><![CDATA[Aus dem Kicker: Homeless World Cup in Edinburgh - 17.07.2005&nbsp;22:07 F&#252;nf afrikanischen Teams die Einreise verweigert Vom 20. bis 24. Juli findet in Edinburgh der Homeless World Cup statt. Es ist die dritte Auflage der Obdachlosen-Weltmeisterschaft nach der Premiere 2003...]]></description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-07-18T00:19:47+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000673.html">
+<title>Garageband Latency, excellent</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000673.html</link>
+<description>I was wondering how much latency there is when using Garageband. If I am playing with the metronome, the metronome sound bits get &quot;rendered&quot; into a buffer. That incurs a little lag as sounds are usually rendered a few samples...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-07-15T02:11:50+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000672.html">
+<title>Home Network Suckage Supreme</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000672.html</link>
+<description>In my old flat I had like 20 meters of cable canal to connect my room that contained all the computers to the DSL modem in another room. The DSL line went into the linux router, and that was it....</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-07-07T02:44:56+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000671.html">
+<title>Whatever happened to Asteroid ?</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000671.html</link>
+<description> It&apos;s exactly what I want to connect my guitar with my Mac, but its not on the market. Now should I wait or not ? Has this product been cancelled ? Was it just a hoax ? Argh! Firewire...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-07-06T11:34:42+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000669.html">
+<title>MulleSybaseEOAdaptor - a new beginning</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000669.html</link>
+<description>Today a new version of MulleSybase adaptor will be released. Here are some more or less relevant snippets from the release notes with respect to the last release 1.5.2. There have been quite a lot of changes and improvements over...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-07-04T13:06:58+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000668.html">
+<title>Poetic Spam</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000668.html</link>
+<description>To keep up to date with the latest in spam, I sample a few of the hundreds of letters that I receive at work. That way I learn for instance that the &quot;Viagra Party Pack&quot; can be delievered to my...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-06-28T22:56:31+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000667.html">
+<title>A peculiar new input device</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000667.html</link>
+<description><![CDATA[ This is an interesting new device. With a little tweaking it could make a very nice, albeit expensive (&euro; 2500) game controller. I figure it would depend how nice the screen feels to touch....]]></description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-06-28T22:44:47+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000664.html">
+<title>Guest Article: ZNeK needs NeXTstep 2.1</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000664.html</link>
+<description>The first guest entry on this weblog. Enjoy: After reading yet another hillariously stupid article in the totally braindead OSNews series &quot;My workstation OS&quot; I figured I might contribute with yet another senseless OS review ... how about &quot;NeXTstep 2.1&quot;?!...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-06-12T19:53:01+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000663.html">
+<title>The Emperor has chosen a new Apprentice </title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000663.html</link>
+<description>Image stolen from www.templetons.comAnd what a surprise it was. It was none other than Jar Jar Binks, that the emperor had tempted to the dark side. Now folks with a sense for aesthetics, or common sense for that matter, were...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-06-06T23:22:18+01:00</dc:date>
+</item>
+<item rdf:about="http://www.mulle-kybernetik.com/weblog/archives/000660.html">
+<title>Devious Guitar Circles</title>
+<link>http://www.mulle-kybernetik.com/weblog/archives/000660.html</link>
+<description>||------------------------|| ||-------------3----------|| ||----2-----4-----2-------|| ||-1-----3-----------3----|| ||----------------------2-|| repeat ||------------------------|| in the search for simple little patterns to get my fret fingers more nimble, I created this one. I like it, because it seems to make two circles. Now I can play the...</description>
+<dc:subject></dc:subject>
+<dc:creator>Nat!</dc:creator>
+<dc:date>2005-05-30T23:46:58+01:00</dc:date>
+</item>
+
+
+</rdf:RDF>

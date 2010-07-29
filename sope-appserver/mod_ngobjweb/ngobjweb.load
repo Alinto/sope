@@ -1,0 +1,8 @@
+#
+# ngobjweb.load for Ubuntu
+#
+# You can copy this to /etc/apache2/mods-available/ and then enable
+# mod_ngobjweb using:
+#   a2enmod ngobjweb
+#
+LoadModule ngobjweb_module /usr/lib/apache2/modules/mod_ngobjweb.so

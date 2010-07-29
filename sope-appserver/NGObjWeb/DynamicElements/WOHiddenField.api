@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOHiddenField">
+  <binding name="name"/>
+  <binding name="value" settable="YES" required="YES"/>
+  <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
+
+  <binding name="otherTagString" passthrough="NO"/>
+</wo>

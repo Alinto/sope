@@ -1,0 +1,52 @@
+# GNUmakefile
+#
+# Copyright (C) 1995, 1996 Ovidiu Predescu and Mircea Oancea.
+# All rights reserved.
+#
+# Author: Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+#
+# This file is part of libFoundation.
+#
+# Permission to use, copy, modify, and distribute this software and its
+# documentation for any purpose and without fee is hereby granted, provided
+# that the above copyright notice appear in all copies and that both that
+# copyright notice and this permission notice appear in supporting
+# documentation.
+#
+# We disclaim all warranties with regard to this software, including all
+# implied warranties of merchantability and fitness, in no event shall
+# we be liable for any special, indirect or consequential damages or any
+# damages whatsoever resulting from loss of use, data or profits, whether in
+# an action of contract, negligence or other tortious action, arising out of
+# or in connection with the use or performance of this software.
+
+TOP	= .
+OBJDIR	= obj
+
+include $(TOP)/config.mak
+
+DIRS_TO_MAKE = Foundation Resources examples
+
+all clean distclean realclean install uninstall check check-all::
+	@(dir=`(cd $(TOP); pwd)`; newdir=`(pwd | sed "s%$$dir/%%")`;\
+	if test "$$newdir" = "$$dir"; then dir=; else dir=$$newdir/; fi; \
+	for f in $(DIRS_TO_MAKE); do \
+	    echo Making $@ in $${dir}$$f...;\
+	    (cd $$f; $(MAKE) $@ OBJDIR=$(OBJDIR)); \
+	done)
+
+clean::
+	rm -f lib/libFoundation.*
+
+distclean::
+	rm -f config.cache config.log config.status config.h config.mak \
+	    GNUmakefile lib/libFoundation.*
+
+realclean:: distclean
+
+shared static:
+	@(echo Making $@ in Foundation...; \
+	(cd Foundation; $(MAKE) $@ OBJDIR=$(OBJDIR)))
+
+$(TOP)/config.mak:
+	touch $@

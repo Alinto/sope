@@ -1,0 +1,67 @@
+2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added imapcontest.m tool to test the new NGImap4Connection object
+
+2005-07-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added imapacl tool to test ACL related IMAP4 commands
+
+2005-03-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ImapListTool.m: improved output with directories
+
+2004-09-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: added imap_tool to compilation
+
+	* imap_tool.m: code cleanups
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the tools in FHS locations - the executables
+	  will be installed in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local)
+	
+	* imapquota.m: fixed a warning
+
+	* fixed makefile for new SOPE 4.3 setup
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved in NGMime samples from sope-core
+
+2004-06-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* common.h: fixed compatibility with gstep-base
+
+2004-04-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ImapListTool, ImapTool.m, imapls.m: minor code cleanups
+
+2003-05-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* some gcc 3.3 warnings fixed
+
+2003-04-01  GNUstep User  <helge.hess@skyrix.com>
+
+	* ImapListTool.m: do not use NSFileIdentifier constant
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* ImapQuotaTool.m, imapquota.m: fixed compilation warnings
+
+Fri Dec 27 10:54:40 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Mime2XmlTool.m: fixed a protocol warning
+
+Mon Dec 23 15:36:01 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* ImapListTool.m: pass correct filemanager as a parameter
+
+Tue Dec 17 15:07:40 2002    <jan@skyrix.com>
+
+	* imapquota.m: add quota test
+
+2002-11-21  Jan Reichmann <jr@skyrix.com>
+
+	* added Imap-Super class, improve imapls

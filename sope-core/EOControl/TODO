@@ -1,0 +1,4 @@
+TODOs:
+
+EOSQLParser.m
+- remove usage of stringByReplacingString: which is not available on MacOSX

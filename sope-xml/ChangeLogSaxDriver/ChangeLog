@@ -1,0 +1,15 @@
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.1
+
+	* install into SaxObjC framework Resources when being used with OSX
+	
+	* ChangeLogSaxDriver.m: fixed a gcc 4.0 warning
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* ChangeLogSaxDriver.xcode: minor fixes
+
+2004-12-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* ChangeLog: created (v4.5.0)

@@ -1,0 +1,15 @@
+Package: libsope-gdl1-4.9
+Source: sope
+Version: 4.7.0-0
+Architecture: powerpc
+Maintainer: Sebastian Ley <ley@debian.org>
+Installed-Size: 768
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libsope-core4.9 (>= 4.7.0)
+Section: libs
+Priority: extra
+Description: GNUstep database libraries for SOPE
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains a fork of the GNUstep database libraries used
+ by the SOPE application server.

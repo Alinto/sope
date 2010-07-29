@@ -1,0 +1,5 @@
+TODOs for SaxObjC
+=================
+
+- find out whether SaxObjC is deprecated due to NSXMLParser
+  (probably not ;-)

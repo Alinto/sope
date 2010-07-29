@@ -1,0 +1,243 @@
+# $Id: INSTALL.txt,v 1.2 2004/07/15 17:32:19 helge Exp $
+
+UPDATE: the OGo fork of libFoundation can only be build with gstep-make!
+
+libFoundation can be built in two different ways:
+
+1. as a standalone library.
+2. as the Foundation library in the GNUstep environment, instead of
+gnustep-base.
+
+In both cases you can build the library with support for the Boehm's
+garbage collector.
+
+To be able to build libFoundation you need either GCC 2.8.x or EGCS
+1.1. Older versions of GCC with the Objective-C patches are
+obsolete. You'll also need the GNUmake to compile libFoundation.
+
+
+
+Which way to build libFoundation?
+=================================
+
+People that don't want to use the library in the GNUstep environment
+should build it in the standalone mode. In this mode you're not
+required to specify any environment variables in order to make the
+library work. In the GNUstep environment you will have to specify the
+GNUSTEP_SYSTEM_ROOT in order for the library to find the resource
+files it needs.
+
+For example applications like CGI programs that use libFoundation may
+want to use the standalone library as they don't have to setup a
+special environment.
+
+People that want to use libFoundation as the Foundation library for
+GNUstep should build it for the GNUstep environment.
+
+If you need libFoundation in both types of applications you can
+configure, compile and install it in both ways. The two versions of
+the library install their header files and libraries in different
+places and they do not interfere with each other.
+
+IMPORTANT: If you compile libFoundation in the standalone mode be sure
+you don't have the gnustep-base headers in the include path or you'll
+encounter problems because the compiler will get them instead.
+
+
+
+Boehm's garbage collector support
+=================================
+
+Starting with 0.9.0, libFoundation supports the Boehm's garbage
+collector. You must have the Boehm's garbage collector support
+installed before building libFoundation.
+
+Here are the steps you need to do to install the Boehm's garbage
+collector:
+
+1. Download the package. The library was tested using the 4.12
+version, previous versions may work but they were not tested. The
+official site is:
+
+    http://reality.sgi.com/employees/boehm_mti/
+
+Read carefully the Makefile and add the flags specific to your
+system. Don't add the -DNO_SIGNALS to the list of flags, as
+libFoundation uses signals internally. After you're sure everything is
+fine with the makefile, type 'make' followed by 'make test' which
+briefly tests the collector.
+
+The next step is to install the collector. The makefile doesn't have
+an install target, so copy the gc.h and gc_typed.h files to
+/usr/local/include or to whatever location you prefer. Then copy the
+gc.a library into /usr/local/lib and rename it to libgc.a. This step
+is important, otherwise the configure script in libFoundation and the
+test programs you'll write will not work.
+
+2. You need to compile a special version of the compiler which adds
+support for the Boehm's collector to the GNU runtime. 
+
+The currently supported compilers are GCC 2.8.1 and EGCS 1.1. The
+patches are contained in the libFoundation's distribution. Apply the
+appropriate patch for your compiler. Then configure the compiler using
+
+	./configure --enable-objc-gc
+
+Add whatever arguments you might need to the configure. Then compile
+the compiler following the instructions in the INSTALL file included
+with the compiler.
+
+3. Configure libFoundation to be compiled with Boehm's GC support. To
+do this add --with-gc to the specific flags for your system. At this
+point you also have to decide in which environment you want to build
+libFoundation.
+
+For an impatient user, just type the following if you want to build
+the library in the GNUstep environment.
+
+	./configure --with-gnustep --with-gc
+
+Or run the following if you want to build the library as a standalone
+library.
+
+	./configure --with-gc
+
+Configuring the library with support for Boehm's garbage collector
+does not imply that the built library will be automatically using the
+collector. Actually you can build two versions of the library, one
+that is garbage collected and another one that uses the normal
+reference counting mechanism.
+
+To build the garbage collected library type:
+
+	make gc=yes
+
+To build the normal library type in the OpenStep compatibility mode:
+
+	make
+
+If you're building in the GNUstep environment you may want to add
+additional options like debug=yes.
+
+
+
+Building libFoundation
+======================
+
+If you want to build the library with support for Boehm's garbage
+collector, please read the above part first.
+
+1. If you want to build the library in the GNUstep environment, run
+the configure script with the --with-gnustep argument, otherwise just
+omit it:
+
+   ./configure --with-gnustep
+
+If you need support for Boehm's garbage collector, just add the
+--with-gc flag:
+
+   ./configure --with-gnustep --with-gc
+
+If you're building on a NeXTSTEP/OPENSTEP system read the note at the
+end of this file.
+
+2. Run `make' to compile the package. If you're building in the
+GNUstep environment add any additional options you might need. For
+example if you want debugging and/or profile information to be
+included in the library:
+
+   make debug=yes [profile=yes]
+
+where [profile=yes] means that profile=yes is an optional
+argument. Read the GNUstep's makefile package documentation to find
+out more about compiling in the GNUstep environment.
+
+NOTE: In the standalone environment, debug=yes and profile=yes
+arguments have no meaning.
+
+To build the garbage collected library add the gc=yes argument to the
+list of arguments you pass to make:
+
+   make gc=yes
+
+This works with both the standalone and GNUstep environments.
+
+3. Before you install the library you may want to set up the locales
+for your site. To do this go to the Resources/Defaults directory and
+modify the NSGlobalDomain.plist file as you wish. This file specifies
+the language and the time zone name of your site.
+
+If your language is not included in the supported languages, you can
+create a new one using as model one of the existing language files.
+
+The timezones are specified in the Resources/TimeZoneInfo
+directory. You should choose as time zone the one that coresponds to
+your geo-political region.
+
+4. Type `make install' to install the library, the headers and the
+public binaries. Add the debug and profile arguments to the make
+process if you want that specific version to be installed:
+
+   make [debug=yes] [profile=yes] [gc=yes] install
+
+5. To try out if the package works fine on your machine, you can run
+the tests from the FoundationTestsuite directory. All the tests are
+written using the DejaGnu testing framework. So if you don't have
+installed the package on your machine you have to install it before
+trying out these tests. Before compiling the FoundationTestsuite you
+will have to install the ObjCTest package that comes with the
+libFoundation's distribution.
+
+The classes that intimately depend on the specific machine are
+NSMethodSignature and NSInvocation. If you get crashes when you run
+the NSInvocation and NSMethodSignature tests you have to look to the
+sources for these classes in the Foundation directory and to the files
+dependent on the target machine in config directory.
+
+6. You can remove the object files and binaries using the `make clean'
+command. You can also remove all the generated files (the files
+generated by configure etc) with `make distclean'.
+
+
+
+Notes for NeXTSTEP/OPENSTEP users
+=================================
+
+If you're compiling the package on a NeXT system you can compile it to
+use with either the GNU or the NeXT Objective-C runtime. You can
+specify this by setting the OBJC_RUNTIME variable. For example:
+
+   OBJC_RUNTIME=gnu ./configure
+
+will compile the package using the GNU runtime. Similarly, you can do:
+
+   OBJC_RUNTIME=next ./configure
+
+In the last case you will be able to link the package with code
+compiled with the native compiler.
+
+If you don't specify the OBJC_RUNTIME flag the code will be compiled
+with the default option for runtime. It is either -fnext-runtime on
+NeXT systems or -fgnu-runtime on the other machines.
+
+You can also specify the compiler using the CC variable. The package
+has been compiled using the 2.6.3, 2.7.0 and 2.7.2.1 gcc versions,
+depending on machine. If you compile the package with other versions
+than 2.7.2.1 you will need to adapt yourself the Objective-C patch to
+the compiler sources. GCC 2.8.x and EGCS 1.0.x have not been tested.
+
+Compiling the package on NeXT release 3.3 with the native compiler
+won't work. The native compiler doesn't support nested functions and
+variable arguments macros.
+
+Starting with the 0.9.0 version the NeXTSTEP systems are no longer
+supported due to compiler and debugger problems on these systems. If
+somebody is willing to send us patches for NeXTSTEP, we'll incorporate
+them in the distribution.
+
+
+
+
+! Local variables:
+! mode: indented-text
+! End:

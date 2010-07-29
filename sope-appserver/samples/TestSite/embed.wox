@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<span xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding">
+  <small>I'm Embedded Component: <var:string value="self"/><br/>
+  On Client: <var:string value="clientObject"/></small>
+</span>

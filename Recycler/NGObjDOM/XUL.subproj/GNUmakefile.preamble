@@ -1,0 +1,57 @@
+# $Id$
+
+ADDITIONAL_CPPFLAGS += -pipe -Wall
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I..			\
+	-I../..			\
+	-I../../XML		\
+	-I../../NGObjWeb	\
+	-I../../NGStreams	\
+
+ifeq ($(FOUNDATION_LIB),apple)
+
+RELBUILD_DIR_SOPE=../..
+RELBUILD_DIR_SxCore=../../../skyrix-core
+RELBUILD_DIR_SxXml=../../../skyrix-xml
+
+ADDITIONAL_LIB_DIRS += \
+        -L$(RELBUILD_DIR_SOPE)/NGObjDOM/$(GNUSTEP_OBJ_DIR_NAME)		\
+        -L$(RELBUILD_DIR_SOPE)/NGObjWeb/$(GNUSTEP_OBJ_DIR_NAME)		\
+        -L$(RELBUILD_DIR_SOPE)/NGJavaScript/$(GNUSTEP_OBJ_DIR_NAME)	\
+        -L$(RELBUILD_DIR_SOPE)/NGScripting/$(GNUSTEP_OBJ_DIR_NAME)      \
+        -L$(RELBUILD_DIR_SxCore)/NGMime/$(GNUSTEP_OBJ_DIR_NAME)      	\
+        -L$(RELBUILD_DIR_SxCore)/NGStreams/$(GNUSTEP_OBJ_DIR_NAME)      \
+        -L$(RELBUILD_DIR_SxCore)/NGExtensions/$(GNUSTEP_OBJ_DIR_NAME)   \
+        -L$(RELBUILD_DIR_SxCore)/EOControl/$(GNUSTEP_OBJ_DIR_NAME)     	\
+        -L$(RELBUILD_DIR_SxXml)/DOM/$(GNUSTEP_OBJ_DIR_NAME)     	\
+
+XUL_BUNDLE_LIBS += \
+	-lNGObjDOM -lNGObjWeb -lNGScripting \
+	-lNGMime -lNGStreams -lNGExtensions -lEOControl	\
+	-lXmlRpc -lDOM -lSaxObjC
+
+ADDITIONAL_LDFLAGS += -framework Foundation
+
+endif
+
+ifeq ($(FOUNDATION_LIB),nx)
+
+ADDITIONAL_LIB_DIRS += \
+        -L../$(GNUSTEP_OBJ_DIR)			\
+        -L../../NGMime/$(GNUSTEP_OBJ_DIR)	\
+        -L../../NGStreams/$(GNUSTEP_OBJ_DIR)	\
+        -L../../EOControl/$(GNUSTEP_OBJ_DIR)	\
+        -L../../NGExtensions/$(GNUSTEP_OBJ_DIR)	\
+
+XUL_BUNDLE_LIBS += \
+	-lNGObjDOM	\
+	-lNGMime	\
+	-lNGStreams	\
+	-lEOControl	\
+	-lNGExtensions	\
+	-lFoundationExt	\
+
+ADDITIONAL_LDFLAGS += -framework Foundation
+
+endif

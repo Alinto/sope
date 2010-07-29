@@ -1,0 +1,7 @@
+This directory contains sample programs for the sope-mime libraries.
+
+Tools
+=====
+
+mime2xml - read a MIME file and output the structure as XML
+imapls   - list IMAP4 server directories, sample for NGImap4FileManager

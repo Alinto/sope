@@ -1,0 +1,22 @@
+#
+# GNUmakefile.preamble
+# ÇPROJECTNAMEÈ
+#
+# Created by ÇUSERNAMEÈ on ÇDATEÈ
+#
+
+-include GNUmakefile.preamble.local
+
+NAME = $(WOAPP_NAME)
+
+ifeq ($(findstring darwin, $(GNUSTEP_HOST_OS)),)
+ADDITIONAL_OBJCFLAGS += -DWITHOUT_SOPEX
+endif
+
+# Add support for apple-generic versioning if
+# $(NAME)_CURRENT_PROJECT_VERSION is set
+
+ifneq ($($(NAME)_CURRENT_PROJECT_VERSION),)
+VERS_FILE = $(NAME)_vers.c
+$(NAME)_C_FILES += $(VERS_FILE)
+endif

@@ -1,0 +1,78 @@
+{
+    ReloadToolbarItem = {
+        label           = "Reload";
+        paletteLabel    = "Reload";
+        toolTip         = "Reload";
+        imageName       = "Reload.tiff";
+        action          = "reload:";
+    };
+
+    BackToolbarItem = {
+        label           = "Back";
+        paletteLabel    = "Back";
+        toolTip         = "Back";
+//        imageName       = "Back.tiff";
+        imageName       = "Reload.tiff";
+        action          = "back:";
+    };
+
+    ViewApplicationToolbarItem = {
+        label           = "Application";
+        paletteLabel    = "View Application";
+        toolTip         = "View Application";
+//        imageName       = "ApplicationIcon.tiff";
+        imageName       = "Reload.tiff";
+        action          = "viewApplication:";
+    };
+
+    ViewHTMLSourceToolbarItem = {
+        label           = "HTML";
+        paletteLabel    = "View HTML";
+        toolTip         = "View HTML";
+//        imageName       = "ViewHTML.tiff";
+        imageName       = "Reload.tiff";
+        action          = "viewHTML:";
+    };
+
+    OpenStatisticsToolbarItem = {
+        label           = "stats";
+        imageName       = "Reload.tiff";
+        action          = "openStatistics:";
+    };
+
+    OpenConsoleToolbarItem = {
+        label           = "console";
+        imageName       = "Reload.tiff";
+        action          = "openConsole:";
+    };
+
+    defaultItems = (
+        ReloadToolbarItem,
+        BackToolbarItem,
+        NSToolbarSeparatorItem,
+        ViewApplicationToolbarItem,
+        ViewHTMLSourceToolbarItem,
+        NSToolbarSeparatorItem,
+        NSToolbarFlexibleSpaceItem,
+        NSToolbarCustomizeToolbarItem
+    );
+
+    allowedItems = (
+        ReloadToolbarItem,
+        BackToolbarItem,
+        ViewApplicationToolbarItem,
+        ViewHTMLSourceToolbarItem,
+        OpenStatisticsToolbarItem,
+        OpenConsoleToolbarItem,
+        NSToolbarCustomizeToolbarItem,
+        NSToolbarFlexibleSpaceItem,
+        NSToolbarSpaceItem,
+        NSToolbarSeparatorItem,
+        NSToolbarCustomizeToolbarItem
+    );
+    
+    selectableItems = (
+        ViewApplicationToolbarItem,
+        ViewHTMLSourceToolbarItem
+    );
+}

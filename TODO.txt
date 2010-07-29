@@ -1,0 +1,5 @@
+TODOs for SOPE 4.5
+==================
+
+- rename DOM classes to be compatible with some upcoming WebKit (major change)
+  - can we keep the DOM protocols?

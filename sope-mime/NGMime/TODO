@@ -1,0 +1,11 @@
+TODO: NGMime
+============
+
+NGMimeRFC822DateHeaderFieldGenerator:
+- do not use -descriptionWithCalendarFormat:
+
+- apparently a lot of code duplications for quoted printable decoding/encoding?
+  look for "?iso-8859" in:
+  - NGMimeAddressHeaderFieldGenerator.m
+  - NGMimeContentDispositionHeaderFieldGenerator.m
+  - NGMimeContentTypeHeaderFieldGenerator.m

@@ -1,0 +1,82 @@
+TODO
+====
+
+- find out what the OOo WebDAV properties are supposed to do
+
+- TOO MUCH duplicate code for URL processing ...
+
+- add a hack for redirecting "/" to "/$bundleName" in case the default
+  request handler is WOComponentRequestHandler or WODirectActionRequestHandler
+
+- add an HTML compatibility mode to the dynamic elements to support WO pages
+  which start with:
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+- implement WOMultipartIterator like in WO 5.3, would be useful for the
+  WOSimpleHTTPParser
+  - also: WOMultipartIterator.WOFormData
+
+Man Pages
+=========
+
+Checking for correctness:
+  nroff -mandoc  -Tascii sope-ngobjweb-defaults.5 > /dev/null
+
+
+Dynamic Elements
+================
+- none missing?
+- WOActiveImage
+
+WOx
+===
+- bind 
+
+XML-RPC
+=======
+- add timeout capability to NGXmlRpcClient
+
+
+Ivars
+=====
+currently stored in extended attributes or userInfo:
+- WORequest:
+  - WORequestStartDate           [done: startDate]
+  - WORequestStartProcStatistics [done: startStatistics]
+- WOComponent:
+  - _ODCycleCtx (used for cursor) [done] TODO: isn't that a WOContext ivar?
+    => needs to be documented and explained first
+  - component definition during init (currently wosVariables)
+- WOContext
+  - SoRootURL      [done: rootURL]
+  - SoObjPermCache [done: objectPermissionCache]
+- WOMessage
+  - WODOMContent (cache for -contentAsDOMDocument) [done: domCache]
+
+Misc
+====
+
+- WebScript, maybe using StepTalk?
+  => SOPE 5.0
+
+- catch requests to /favicon.ico
+
+- watchdog does restart child even on a clean termination ?
+
+MacOSX port
+===========
+
+- really hackish use of COCOA_Foundation_LIBRARY to distinguish
+  whether we are compiling for the GNUstep environment or not
+
+WOMessage / WOResponse
+======================
+
+- support streaming (prepared)
+
+- queue append calls instead of processing them in-place
+  - use WOProfileResponse for profiling
+  - avg:     ~1500 str calls, ~250 char/cstr, ~300 HTML
+  - regular: ~5000 str calls, ~2000 char, ~1200 HTML
+  - hopefully we could gain major performance benefits by doing bulk
+    charset=> data conversions?

@@ -1,0 +1,98 @@
+Wed Oct 22 15:57:58 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* GNUmakefile: add ADDITIONAL_LIB_DIRS NGScripting 
+
+Fri Sep 21 18:13:33 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_with.m ([ODR_bind_with -appendNode:toResponse:inContext:]): 
+	  added special object keys (# for component, #S for session ...)
+
+Tue Aug 21 15:48:24 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_foreach.m: added filtering and sorting
+
+Tue Aug 21 15:19:45 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_if.m: added value1/value2 bindings
+
+	* ODR_bind_foreach.m: added cursor support (when no item is present,
+	  the cursor is used)
+
+Thu Jul 26 16:24:42 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_form.m ([ODR_bind_form -_childComponentForNode:inContext:]):
+	  register child-forms as subcomponents
+
+Mon Jul  2 17:38:53 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_popupbutton.m: use lowercase 'noselectionstring' instead of
+	  noSelectionString
+
+Wed Jun  6 14:52:30 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* added ODR_bind_nbsp to generate HTML nbsp entities ...
+
+Wed May 16 11:59:18 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_datefield.m: better support for calendar-dates, fixed bug
+
+Mon May  7 20:51:57 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* ODR_bind_tableview+Private.m: color was wrong, if no navigation
+
+Sun May  6 17:12:35 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* ODR_bind_tableview+Private.m: render '&nbsp;' if no ttitle
+
+Sun May  6 15:43:02 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_tabview.m: removed underline of tab-link using CSS
+
+	* ODR_bind_tabview.m: added tab-deactivation
+
+Tue Apr 10 16:38:14 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* ODR_bind_tableview+Private.m fixed dataSource bug
+
+Wed Apr  4 17:16:31 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* ODR_bind_tableview+Private.m create copy of fetchSpecification 
+
+Mon Apr  2 18:49:47 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* ODR_bind_sortorderings.[h|m]: added
+
+	* ODR_bind_tableview[_private]: changed behaviour of sorting
+
+Mon Apr  2 11:41:01 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_viewertitle.m ([ODR_bind_viewertitle -appendNode:toResponse:inContext:]): 
+	  fixed various HTML generation bugs
+
+Fri Mar 30 18:51:20 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ODR_bind_string.m: added support for dateformat, numberformat and nil
+
+Thu Mar 15 20:06:22 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* ODR_bind_tableview.m: added selector caching
+
+	* ODR_bind_tableview.m: added profiling
+
+Thu Mar  8 16:58:47 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* ODR_bind_tableview+Private.m ([ODR_bind_tableview -_appendNav:isBlind:toResponse:inContext:]):
+	  made less sensible to index problems
+
+	* ODR_bind_tableview+Private.m: added selector caching
+
+	* ODR_bind_tableview.m: cleanups in tableview
+
+Wed Mar  7 18:44:51 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* ODR_bind_tabledata.m: fixed bug with formatter binding
+
+Fri Feb 23 10:38:08 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* ODR_bind_if.m: added ifnot, removed 'negate' binding
+

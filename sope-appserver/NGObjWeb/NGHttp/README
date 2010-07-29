@@ -1,0 +1,25 @@
+# GNUstep makefile
+
+Note: This should be removed in favor of WOSimpleHTTPParser which should
+      be completed to implement all features
+      The MIME based implementation of NGHttp is a bit overkill for parsing
+      HTTP ...
+
+NGObjWeb HTTP Implementation
+
+  Debugging Topics:
+
+    topic     used by
+    showreq   NGHttpShowRequestService
+    http      NGHttpEventHandler
+    server    NGHttpServer
+
+Deleted in 4.1, available in MOF3
+
+  NGHttpFileService
+  NGHttpCGIService
+  NGHttpShowRequestService
+
+--
+Helge Hess
+2002-12-02

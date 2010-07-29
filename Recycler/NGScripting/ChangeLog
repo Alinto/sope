@@ -1,0 +1,49 @@
+2005-03-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* added FHS and config.make support, fixed compilation (v4.5.12)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved to SOPE 4.3 (v4.3.11)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added prebinding (v4.2.10)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.9)
+
+2003-07-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* applied GNUstep patches provided by Filip Van Raemdonck for improved
+	  compilation with gstep-base (v4.2.8)
+
+2003-04-01  GNUstep User  <helge.hess@skyrix.com>
+
+	* common.h: fixed for gstep-base compilation (v4.2.7)
+
+2002-12-02  Helge Hess  <helge.hess@skyrix.com>
+	
+	* moved to skyrix-sope-42 (v4.2.6)
+	
+2002-08-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGScriptLanguage.m: added -copyWithZone: to make it possible to
+	  add NGScriptLanguage objects to MacOSX Foundation collections
+
+	* NGObjectMappingContext.m: added debug logging of context stack
+	  changes (v4.2.5)
+
+2002-08-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGScriptLanguage, NGObjectMappingContext: added NSCoding to support
+	  archiving in InterfaceBuilder
+
+Mon Jun 10 13:01:58 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* created ChangeLog
+
+

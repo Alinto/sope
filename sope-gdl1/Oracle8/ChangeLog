@@ -1,0 +1,36 @@
+2007-11-15  Ludovic Marcotte <ludovic@inverse.ca>
+
+ 	* fixes
+
+2007-10-19  Ludovic Marcotte <ludovic@inverse.ca>
+
+ 	* We call OCITerminate() in OracleAdaptorChannel:
+	  -closeChannel:       
+	
+	* Some formatting cleanups.
+
+2007-10-05  Ludovic Marcotte <ludovic@inverse.ca>
+
+	* Fixed otest wrt bundle name.
+	
+	* Modified sqlFolderFormat so that for the c_deleted
+	  columns, we default the value to 0.
+	
+	* Added full CLOB support for reading / writing more
+	  than 4000 characters in a CLOB column.
+
+2007-09-20  Ludovic Marcotte <ludovic@inverse.ca>
+
+        * Small fix for 64-bit platforms.
+
+2007-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Changed bundle name from Oracle to Oracle8 to avoid clashes with
+	  older adaptors.
+
+2007-07-25  Ludovic Marcotte <ludovic@inverse.ca>
+
+        * Initial version of the SOPE GDL1 Oracle connector which
+	  makes use of the new Oracle OCI API. The initial
+	  version has been tested extensively with the Inverse
+	  edition of SOGo. See the READMe file for all details.

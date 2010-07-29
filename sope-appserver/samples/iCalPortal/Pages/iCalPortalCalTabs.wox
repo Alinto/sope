@@ -1,0 +1,46 @@
+<?xml version='1.0' standalone='yes'?>
+
+<table border='0' width='100%' cellpadding='0' cellspacing='0'
+       xmlns='http://www.w3.org/1999/xhtml'
+       xmlns:var='http://www.skyrix.com/od/binding'
+       xmlns:const='http://www.skyrix.com/od/constant'>
+  <tr>
+    <td colspan='2'>
+      <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+	  <td align='center' valign='middle' width='100' height='22' 
+	      var:background='dayTabURL'><a 
+	    style="text-decoration: none;" directActionName="dayOverview" 
+	    var:_calendarName="calendarName"><font
+	    class="tablink"><var:string value="label.day_tab"/></font></a>
+	  </td>
+	  <td align='center' valign='middle' width='100' height='22' 
+	      var:background='weekTabURL'><a 
+	    style="text-decoration: none;" directActionName="weekOverview" 
+	    var:_calendarName="calendarName"><font 
+	    class="tablink"><var:string value="label.week_tab"/></font></a>
+	  </td>
+	  <td align='center' valign='middle' width='100' height='22' 
+	      var:background='monthTabURL'><a 
+	    style="text-decoration: none;" directActionName="monthView" 
+	    var:_calendarName="calendarName"><font
+	    class="tablink"><var:string value="label.month_tab"/></font></a>
+	  </td>
+	  <td align='center' valign='middle' width='100' height='22' 
+	      var:background='todoTabURL'><a 
+	    style="text-decoration: none;" directActionName="todoView" 
+	    var:_calendarName="calendarName"><font
+	    class="tablink"><var:string value="label.todo_tab"/></font></a>
+	  </td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+  <tr bgcolor="#FCF8DF">
+    <td align="left" width="10"><entity name="nbsp"/></td>
+    <td align="right"><entity name="nbsp"/></td>
+  </tr>
+  <tr>
+    <td colspan='2' bgcolor="#FCF8DF"><var:component-content/></td>
+  </tr>
+</table>

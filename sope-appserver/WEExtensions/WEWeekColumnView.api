@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEWeekColumnView">
+  <binding name="list" required="YES" />
+  <binding name="item" required="YES" />
+  <binding name="index" />
+  <binding name="identifier" />
+
+  <binding name="dayIndex" />
+  <binding name="weekStart" />
+
+  <binding name="startDateKey" />
+  <binding name="endDateKey" />
+
+  <binding name="titleColor" />
+  <binding name="contentColor" />
+
+  <binding name="isInfoItem" defaults="YES/NO" />
+  <binding name="infoItems" />
+
+  <binding name="hideWeekend" defaults="YES/NO" />
+</wo>

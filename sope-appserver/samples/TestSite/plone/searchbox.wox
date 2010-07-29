@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:var="http://www.skyrix.com/od/binding"
+     class="searchBox"
+>
+  <form name="searchform"
+        href="http://docs.opengroupware.org/search">
+
+                    <input id="searchGadget"
+                           name="SearchableText" type="text"
+                           size="20" tabindex="30001" />
+
+                    <input class="context searchButton"
+                           type="submit" value="Search"
+                           tabindex="30002" />
+  </form>
+</div>

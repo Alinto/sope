@@ -1,0 +1,9 @@
+Rapid Development
+=================
+
+In order for "Rapid Development" to work properly you need to open
+Xcode's "Project" menu and select "Edit active executable"
+(Apple-Option-X). In the following dialog navigate to the "General"
+section (in previous versions of Xcode this was called "Runtime") and
+select the "Project Directory" as the working directory when launching
+the executable.

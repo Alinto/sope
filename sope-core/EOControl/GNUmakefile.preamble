@@ -1,0 +1,37 @@
+# GNUstep Makefile
+
+libEOControl_INCLUDE_DIRS += -I..
+
+ADDITIONAL_CPPFLAGS += -Wall -funsigned-char
+
+ifeq ($(findstring _64, $(GNUSTEP_TARGET_CPU)), _64)
+SYSTEM_LIB_DIR += -L/usr/local/lib64 -L/usr/lib64
+else
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
+endif
+
+# libFoundation, gstep-base
+
+ifeq ($(FOUNDATION_LIB),fd)
+libEOControl_LIBRARIES_DEPEND_UPON += -lFoundation
+endif
+
+ifeq ($(FOUNDATION_LIB),gnu)
+libEOControl_LIBRARIES_DEPEND_UPON += -lgnustep-base
+endif
+
+# Apple
+
+ifeq ($(FOUNDATION_LIB),apple)
+libEOControl_PREBIND_ADDR="0xC1000000"
+libEOControl_LDFLAGS += -seg1addr $(libEOControl_PREBIND_ADDR)
+endif
+
+# Windows
+
+ifeq ($(GNUSTEP_TARGET_OS),mingw32)
+libEOControl_LIBRARIES_DEPEND_UPON += -lobjc
+endif
+ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
+libEOControl_LIBRARIES_DEPEND_UPON += -lobjc
+endif

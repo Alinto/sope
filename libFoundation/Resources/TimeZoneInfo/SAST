@@ -1,0 +1,5 @@
+{
+    details = { /* south africa standard time */
+	SAST = {abbrev = SAST; isDST = 0; offset = "+2:00:00"; };
+    };
+}

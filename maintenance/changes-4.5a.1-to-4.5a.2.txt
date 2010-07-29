@@ -1,0 +1,487 @@
+- fixes/improvements in NGCalendarDateRange
+- NGBundleManager: changes in resource lookup, added debug logs
+- added some methods to NSNull (#1080)
+- changes in URL escaping (#1260)
+- NGObjCRuntime: improved varargs processing
+- improved base64 encoding (#1228)
+- added mail-quoting category to NSString
+- added SQLite3 database adaptor
+- added support for URL based connection info in sope-gdl1
+- fixed a sorting bug in EOAdaptorDataSource (missing "AS")
+- various SOPE:X fixes and enhancements
+- fixed password encoding in Sieve (#1228)
+- fixed handling of IMAP4 OR qualifiers
+- improved/changed API in NGImap4Envelope
+- various NGSieveClient releated fixes
+- improvements in MIME generation code, NGMimeJoinedData
+- added UID based copy command to NGImap4Client
+- added WEResourceManager
+- fixed Apache module to use proper port if none was transmitted
+- fixed SoOFS for Xcode compilation
+- added support for 'seconds' binding in WOMetaRefresh
+- major reworks in SoProductResourceManager
+- added <html:container> .wox tag as a noop-wrapper element
+- made default resource manager configurable (WODefaultResourceManager)
+- added support for frameworks in WOResourceURLAssociation
+- added a safety-limit in SoObjectRequestHandler to avoid endless redirects
+- create a WOGenericElement for input type=button in .wox
+- fixed an issue with with WOBrowser selections (#1231)
+- allow numeric IP addresses in WOPort
+- made WOContext class configurable using 'WOContextClass' default
+- added new -resourceLookupLanguages API
+- major fixes in NGiCal, including broad support for recurrences
+
+===========================================================================
+r611
+compare ../complete/SOPE/releases/4.5alpha.1-nevermind with .
+changed: sope-core/EOControl/
+     2005-01-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOFetchSpecification.m: minor code cleanups (v4.5.50)
+changed: sope-core/NGExtensions/
+     2005-03-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGCalendarDateRange.m: Bugfix for -containsDate: (v4.5.154)
+     2005-03-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBundleManager.m (-pathForResource:ofType:inDirectory:languages:):
+     	  changed resource lookup to look in Contents/Resources or Resources
+     	  depending on the Foundation library when no inDirectory: has been
+     	  given (v4.5.153)
+     2005-02-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSNull+misc.m: added -hasPrefix: / -hasSuffix:, should
+     	  fix OGo bug #1080 (v4.5.152)
+     2005-02-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSString+URLEscaping.m: changed to escape '+' chars
+     	  in URLs - this is required since the same methods are used for forms
+     	  which treat spaces as "+" (OGo bug #1260) (v4.5.151)
+     2005-02-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBundleManager.m: added some debugging code, minor code cleanups
+     	  (v4.5.150)
+     2005-02-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGObjCRuntime.m: fixed some issue with the last commit (v4.5.149)
+     2005-02-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGObjCRuntime.m: decoupled some varargs processing (v4.5.148)
+     2005-02-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGExtensions/NGCalendarDateRange.h: fixed header file for MacOSX
+     	  (v4.5.147)
+     2005-02-14  Helge Hess  <helge.hess@skyrix.com>
+     	* NGBase64Coding.m: added method -dataByEncodingBase64WithLineLength:
+     	  to support the fix for OGo bug #1228 (v4.5.146)
+     2005-02-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGCalendarDateRange.[hm]: new method -duration (v4.5.145)
+     2005-02-09  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* FdExt.subproj/NSCalendarDate+misc.m: Julian number <-> date
+     	  conversion methods (v4.5.144)
+     2005-02-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSString+misc.m: do not quote the last newline if the
+     	  newline is the last char in the string (v4.5.143)
+     2005-02-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSString+misc.m: added new method
+     	  -stringByApplyingMailQuoting for placing "> " in front of each line
+     	  contained in the string (v4.5.142)
+     2005-01-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGExtensions/AutoDefines.h, common.h: fixed defines on MacOSX (fixes
+     	  OGo bug #912 (v4.5.141)
+added:   sope-gdl1/SQLite3
+changed: sope-gdl1/GDLAccess/
+     2005-02-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAdaptor.m: added +adaptorForURL: method to create EOAdaptor
+     	  objects from JDBC style URLs (eg PostgreSQL://OGo:OGo@localhost/OGo")
+     	  (v4.5.47)
+     2005-01-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAdaptorDataSource.m: fixed a bug in the sorting code, the "AS" was
+     	  missing in the SQL rename statement (v4.5.46)
+     2005-01-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAdaptorDataSource.m: improved -description (v4.5.45)
+     2005-01-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAttribute.m, EOFaultHandler.m, EODatabaseFaultResolver.m: added 
+     	  casts to avoid compile warnings with Xcode (v4.5.44)
+changed: sope-gdl1/PostgreSQL/
+     2005-01-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAttribute+PostgreSQL72.m: map PG oid's to NSStrings (avoids issues
+     	  when fetching from core PG tables) (v4.5.40)
+     2005-01-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* NSCalendarDate+PGVal.m: fixed a warning on Xcode (v4.5.39)
+changed: sopex/Templates/
+     2005-02-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* README: updated with a detailed NOTE to prevent confusion
+     	* Project Templates/SOPE/Web Application/GNUmakefile: slightly improved
+changed: sopex/SOPEX/
+     2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SOPEXAppController.m: changed default handling in -prepareForLaunch
+     	  to be more applicable to the changed conditions. It would probably
+     	  be best to have a search list, but AFAIK Apple removed this from
+     	  NSUserDefaults ... sigh. (v2.0.2)
+     2005-01-03  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v2.0.1
+     	* SOPEXAppController.[hm]: applications start on arbitrary port now.
+     	  This is managed by some "convenience" insight into WOApplication.
+     	  Applications are also restartable now - this might help debugging
+     	  a bit. When the last browser window was closed, other windows are
+     	  closed automatically - this means the app will terminate then
+     	  (even in RAD mode).
+     	* SOPEXBrowserController.m: notify SOPEXAppController of controller
+     	  shutdown during window close.
+     	* SOPEXConsole.[hm]: new API to close console programmatically and
+     	  to ask whether it is visible currently - this is used by
+     	  SOPEXAppController to automatically close the console when it's the
+     	  last interesting window around.
+     	* SOPEXStatisticsController.[hm]: same as in SOPEXConsole (s.a.)
+changed: sope-mime/
+     2005-03-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: added some debugging facilities (v4.5.215)
+     2005-02-14  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: changed base64 encoding in Sieve client to fix OGo bug #1228
+               (v4.5.214)
+     2005-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: reworked qualifier generation, fixed handling of OR
+     	  qualifiers (v4.5.213)
+     	* NGImap4: improved copying, cleaned up sort ordering (v4.5.212)
+     2005-02-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: added method to retrieve selected folder (v4.5.211)
+     	* NGImap4: change in API: NGImap4Envelope now uses lists for 'from'
+     	  and 'reply-to' headers (v4.5.210)
+     2005-01-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: added support for creating envelope objects from body
+     	  structure dictionaries (v4.5.209)
+     2005-01-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: code cleanup in response normalizer (v4.5.208)
+     	* NGImap4: some fix in the Sieve script upload (v4.5.207)
+     2005-01-30  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.206
+     	* NGMail: fixed a crasher in a warn-log (occurred if no content-type
+     	  was set), major reorgs
+     	* NGMime: some code cleanups, added MIME generation debugging,
+     	  improved NGMimeJoinedData, make reorgs
+     	* NGImap4: minor code cleanups
+     2005-01-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: fixed a small warning with Xcode (v4.5.205)
+changed: sope-mime/samples/
+     2005-03-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* ImapListTool.m: improved output with directories
+changed: sope-mime/NGMime/
+     2005-01-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeContentTypeHeaderFieldGenerator.m, NGPart.m: fixed default
+     	  type ("application/octet-stream", not "application/octet")
+     	* NGMimePartGenerator.m: code cleanups, added support for
+     	  'NGMimeGeneratorDebugEnabled' default, properly generate \r\n instead
+     	  of just \n as a header/body separator, add a hack to avoid duplicate
+     	  generation of the \r\n header/body separator (needs to get tested)
+     	* NGMimeJoinedData.m: code cleanups, added a -length method
+     	* NGMimeMultipartBodyGenerator.m: enable debug logs when
+     	  'NGMimeGeneratorDebugEnabled' default is enabled
+     	* NGMimeBodyGenerator.m: moved NGMimeMultipartBodyGenerator to own 
+     	  file, added support for 'NGMimeGeneratorDebugEnabled' default
+added:   sope-mime/NGMime/NGMimeMultipartBodyGenerator.m
+changed: sope-mime/NGImap4/
+     2005-03-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4FileManager.m: added debug logs which can be enabled using
+     	  the 'NGImap4FileManagerDebugEnabled' default, improved handling of
+     	  root folder in -fileExists method
+     	* NGImap4Context.m: improved -description
+     	* NGImap4Functions.m: added some debugging facilities
+     2005-02-14  Helge Hess  <helge.hess@skyrix.com>
+     	* NGSieveClient.m: encode base64 with a large line break to fix OGo
+     	  bug #1228
+     2005-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOQualifier+IMAPAdditions.m: more reworks in qualifier generation,
+     	  changed handling of spaces, fixed handling of OR qualifiers
+     	* EOQualifier+IMAPAdditions.m: allow contains: qualifier operator for
+     	  key searches
+     	* NGImap4Client.m: moved EOSortOrdering => IMAP4 code to an own
+     	  category/file
+     	* NGImap4Client.m: added -copyUids:toFolder: method to perform set copy
+     	  operations without sequence numbers (uses UID COPY IMAP4 command)
+     2005-02-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4Client.m: added -selectedFolderName method to retrieve the 
+     	  folder which was selected last
+     	* NGImap4ResponseParser.m: properly parse from/reply-to as lists
+     	* NGImap4Envelope.m: properly use NSArray for 'from' and 'reply-to',
+     	  both can be multi valued (only 'sender' is a single mailbox in RFC
+     	  2822, 3.6.2) - Note: might break API!
+     2005-01-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4Envelope.m, NGImap4EnvelopeAddress.m: added support for
+     	  bodystructure dictionaries
+     2005-01-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4ResponseNormalizer.m: code cleanup
+     	* NGSieveClient.m: removed a superflous "{" in the script-put call
+     2005-01-30  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4Client.m: minor code cleanups
+     2005-01-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGSieveClient.m: fixed a warning when compiling with Xcode
+added:   sope-mime/NGImap4/EOSortOrdering+IMAPAdditions.m
+changed: sope-mime/NGMail/
+     2005-01-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeMessageGenerator.m: fixed a format bug in an error log which
+     	  could lead to a crash, moved base64 encoding function to separate
+     	  file
+added:   sope-mime/NGMail/NGMailBase64Encoding.m
+changed: sope-xml/SaxObjC/
+     2005-01-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SaxObjectDecoder.m: fixed hard to spot autorelease bug (v4.5.48)
+changed: sope-appserver/
+     2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-appserver.xcode: added SoOFS product
+added:   sope-appserver/NGObjWeb.tgz
+changed: sope-appserver/WEExtensions/
+     2005-02-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEResourceManager.m: lookup web resources in
+     	  Library/AppName/WebServerResources, fixed an incorrect reference to
+     	  OGo (w4.5.68)
+     2005-02-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.67
+     	* WEResourceManager.m: removed special handling of components.cfg (only
+     	  required by OGo for legacy reasons)
+     	* GNUmakefile: properly export the WEResourceManager.h header file
+     2005-02-17  Helge Hess  <helge.hess@skyrix.com>
+     	* added a modified variant of the OGoResourceManager and the required
+     	  support classes, this allows for integration of SOPE apps with FHS
+     	  (v4.5.66)
+     2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* common.h, JSClipboard.m: changed to use WOContext's new
+     	  resourceLookupLanguages now (v4.5.65)
+added:   sope-appserver/WEExtensions/WEExtensions.wox
+added:   sope-appserver/WEExtensions/WEResourceKey.h
+added:   sope-appserver/WEExtensions/WEResourceKey.m
+added:   sope-appserver/WEExtensions/WEStringTable.h
+added:   sope-appserver/WEExtensions/WEStringTableManager.h
+added:   sope-appserver/WEExtensions/WEStringTableManager.m
+added:   sope-appserver/WEExtensions/WEResourceManager.h
+added:   sope-appserver/WEExtensions/WEStringTable.m
+added:   sope-appserver/WEExtensions/WEResourceManager.m
+changed: sope-appserver/mod_ngobjweb/
+     2005-02-24  Helge Hess  <helge.hess@skyrix.com>
+     	* handler.c: only write the x-webobjects-port if the Apache variable
+     	  is not 0 (need to find out how this can happen ...)
+changed: sope-appserver/SoOFS/
+     2005-02-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.15
+     	* sope.m: slightly adjusted #include's, sope.m now builds with Xcode
+     	  as well
+     	* SoOFS.xcode: added sope-4.5 tool target
+     2005-01-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* common.h: streamline NeXT/APPLE/COCOA Foundation library define into
+     	  just COCOA_Foundation_LIBRARY (fixes a warning) (v4.5.14)
+     2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* OFSWebMethodRenderer.m, OFSWebMethod.m, common.h: removed warnings
+     	  that occured during Xcode compile by explicitly declaring used
+     	  private interfaces (v4.5.14)
+     	* v4.5.13
+     	* SoOFS.xcode: new product
+     	* SoOFS-Info.plist: updated properly
+     	* GNUmakefile.preamble: adjusted include paths, this way it works in
+     	  Xcode also without major changes.
+     	* common.h: safeguarded against double inclusion. Adjusted #include
+     	  paths
+     	* OFSFactoryRegistry.m, OFSHttpPasswd.m, OFSWebMethodRenderer.m,
+     	  OFSWebMethod.m, OFSFileRenderer.m, OFSPropertyListObject.m: adjusted
+     	  #include path.
+changed: sope-appserver/NGObjWeb/
+     2005-03-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOMetaRefresh.m: added support for 'seconds' binding
+     	  as available in WO (v4.5.123)
+     2005-03-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoProductResourceManager.m: fixed to use the changed lookup
+     	  in NGBundleManager.m (v4.5.122)
+     2005-02-25  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOResourceManager.m: Fixed condition in -resourcesPathForFramework:,
+     	  this needs to consider the rapidTurnAroundPath as a special case.
+     	  RAD in SOPE:X will once again work with this fix applied. (v4.5.121)
+     2005-02-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoProductResourceManager.m: major fixes in resource
+     	  processing, properly relay URL requests to the fallback or product
+     	  resource managers (v4.5.120)
+     2005-02-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.119
+     	* Templates/WOxTagClassElemBuilder.m: added some API to improve support
+     	  for subclassing
+     	* DynamicElements/WOxHTMLElemBuilder.m: added <html:container> tag
+     	  which is suitable as a root tag for template, it only generates its
+     	  contents
+     2005-02-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.118
+     	* SoObjects/SoProductResourceManager.m:
+     	  - if a resource could not be found, continue lookup using
+     	    WOApplication resource manager instead of calling super
+     	  - fixed a major issue in the bundle resource lookup code
+     	  - use resource manager of other product when looking up a file of
+     	    that (instead of directly querying the bundle)
+     	* WOResourceManager.m: minor code cleanups
+     	* SoObjects/SoComponent.m: fixed a typo
+     2005-02-17  Helge Hess  <helge.hess@skyrix.com>
+     	* WOApplication.m: the resource manager class to be used for a SOPE
+     	  application can now be choosen using the 'WODefaultResourceManager'
+     	  default (defaults to WOResourceManager) (v4.5.117)
+     2005-02-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* Associations/WOResourceURLAssociation.m: added support for
+     	  framework resources (can be specified as "fwname/resource")
+     	  (v4.5.116)
+     	* SoObjects/SoObjectRequestHandler.m: added a safety limit on the URL
+     	  to avoid excessive redirects to view URLs, the "stop suffix" can be
+     	  configured using the 'WORedirectURISafetySuffix' default (v4.5.115)
+     2005-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOxHTMLElemBuilder.m: create a WOGenericElement
+     	  instead of WOSubmitButton for "input type='button'" (v4.5.114)
+     2005-02-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOApplication.m: added a warning if the default component request
+     	  handler key is not set (v4.5.113)
+     2005-02-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOBrowser.m: fixed a warning if neither selection
+     	  nor selections is set (fixes OGo bug #1231) (v4.5.112)
+     	* Defaults.plist: added "127.0.0.1" to WOHttpAllowHost (v4.5.111)
+     2005-02-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOHttpAdaptor/WOHttpAdaptor.m: allow WOPort bind addresses with IPs,
+     	  eg "192.168.0.1:7900", this was previously parsed incorrectly as
+     	  just the port, eg "7900" (which still works) (v4.5.110)
+     2005-01-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* Associations/WOKeyPathAssociation.m: fixed a type coercion issue on
+     	  YellowDog Linux (v4.5.109)
+     2005-01-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* _WOStringTable.m: changed strings file encoding from ISO-Latin-1
+     	  to UTF-8, so this is now en par with libFoundation, gnustep-base
+     	  and Mac OS X 10.3. Fixed a minor bug that affected gnustep-base
+     	  only. (v4.5.108)
+     2005-01-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SoObjects/SoProductResourceManager.m: changed resource lookup to use
+     	  'older' NGExtension category to NSBundle instead of newer one which
+     	  uses more recent API currently not supported in gnustep-base
+     	  (v4.5.107)
+     2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.106
+     	* Defaults.plist: added new default "WOContextClass".
+     	* WOContext.[hm]: Factory method +contextWithRequest: observes new user
+     	  default "WOContextClass" to chose proper class for new contexts.
+               New method -resourceLookupLanguages, aggregates the
+     	  current lookup strategy in one place. Ideal place for overriding the
+     	  lookup behaviour in conjunction with new WOContextClass default.
+     	* WOApplication.m, WOComponentDefinition.m, WOStats.m, WOComponent.m,
+     	  DynamicElements/{_WOComplexHyperlink.m, WOImageButton.m,
+     	  _WOConstResourceImage.m, WOJavaScript.m, WOResourceURL.m,
+     	  WOEmbeddedObject.m, WOBody.m}, SoObjects/{SoPageInvocation.m,
+     	  SoProductResourceManager.m},
+     	  Associations/{WOResourceURLAssociation.m, WOLabelAssociation.m}:
+     	  use new -resourceLookupLanguages API.
+     	* v4.5.105
+     	* NGObjWeb.xcode: removed target "SoProducts" from "all". By using a
+     	  minor hack we can avoid having to build products for SoCore and
+     	  SoOFS (new framework) altogether.
+     	* SoObjects/SoObjects.xcode: version updated, minor changes to build
+     	  process
+     	* SoObjects/SoProductRegistry.m: if compiled as framework, a project
+     	  named "SoObjects" will be registered as "SoCore" - this is
+     	  necessary to retain dependency tracking
+changed: sope-appserver/WOExtensions/
+     2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* common.h, JSConfirmPanel.m, JSAlertPanel.m, JSImageFlyover.m,
+     	  JSModalWindow.m: changed to use WOContext's new
+     	  resourceLookupLanguages now (v4.5.22)
+added:   sope-appserver/WOExtensions/WOExtensions.wox
+changed: maintenance/
+     2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* znek-fix-xcode-projects.sh: added SoOFS
+added:   maintenance/changes-4.3.9-to-4.5a.1.txt
+added:   maintenance/changes-4.5a.1-to-4.5a.2.txt
+added:   maintenance/mod_ngobjweb_conectiva10.spec
+added:   sope-ical/data/kde-vcard1.vcf
+added:   sope-ical/data/kde-vcard4-evo.vcf
+added:   sope-ical/data/kde-vcard5.vcf
+added:   sope-ical/data/kde-vcard3-moz.vcf
+added:   sope-ical/data/kde-vcard6.vcf
+added:   sope-ical/data/kde-vcard2-ns.vcf
+changed: sope-ical/NGiCal/
+     2005-03-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalRecurrenceCalculator.m: bugfix for monthly and yearly recurrences
+     	  (v4.5.49)
+     	* iCalRecurrenceCalculator.m: optimized exception date handling in
+     	  complex calculation method quite a bit. Fixed bugs in all calculation
+     	  methods by introducing checks on the desired range. (v4.5.48)
+     2005-02-28  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.47
+     	* iCalRepeatableEntityObject.m:  shifted code to
+     	  iCalRecurrenceCalculator
+     	* iCalRecurrenceCalculator.[hm]: new class method to calculate
+     	  complex recurrences. In SOGo this information is stored in quick
+     	  fields to reduce the complexity of lookups, hence we need to offer
+     	  a proper API to calculate date ranges from this information.
+     	  Fixed all calculations to explicitly set timeZone for all newly
+     	  created startDates - it seems the timeZone information is not
+     	  properly retained by the hour:minute:second: method from NGExtensions
+     	  which lead to improper DST related shifts.
+     	* iCalDateHolder.h: exposed the API
+     	* NSCalendarDate+ICal.[hm]: new convenience constructor for calendar
+     	  dates from iCal representations (uses iCalDateHolder internally)
+     	* iCalRecurrenceRule.m: changed setUntil: to utilize new public
+     	  NSCalendarDate+ICal category
+     	* NGiCal.h: added NSCalendarDate+ICal.h to the public headers
+     	* GNUmakefile: NSCalendarDate+ICal.h is public now
+     2005-02-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGiCal.xmap: fixed a missing semicolon (did not load on MacOSX)
+     	  (v.4.5.46)
+     2005-02-17  Helge Hess  <helge.hess@skyrix.com>
+     	* GNUmakefile.preamble: fixed linking locations for dependencies
+     	  (v4.5.45)
+     2005-02-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.44
+     	* iCalEntityObject.[hm]: added convenience API
+     	* iCalRepeatableEntityObject.[hm]: added convenience API
+     	* iCalRecurrenceRule.m: bugfixes in -byDayList and
+     	  -iCalRepresentationForWeekDay:
+     	* iCalRecurrenceCalculator.m: implemented 'BYDAY' calculations for
+     	  weekly frequency. Note that 'COUNT' is still broken for this case.
+     	* iCalRenderer.m: updated rendering, now can render recurrence rules
+     	  and accompanied stuff properly.
+     2005-02-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.43
+     	* iCalRecurrenceRule.[hm]: exposed some more of the API
+     	* iCalRecurrenceCalculator.m: some bugfixes. Split the code and gave
+     	  iCalWeeklyRecurrenceCalculator its own calculation - there are a
+     	  number of foreseeable differences to daily calculation that make
+     	  this necessary in the near future anyways.
+     	* v4.5.42
+     	* iCalRepeatableEntityObject.[hm]: added ability to properly calculate
+     	  the recurrence ranges within a specific calendar date range, taking
+     	  all possible exceptions into account.
+     	* iCalEvent.[hm]: convenience wrapper for the new method found in
+     	  iCalRepeatableEntityObject.
+     2005-02-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.41
+     	* GNUmakefile.preamble: added missing dependency on libNGExtensions
+     	  (which also adds the dependency on libDOM)
+     	* iCalRecurrenceCalculator.h: fixed missing forward declaration in
+     	  header
+     2005-02-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.40
+     	* iCalRecurrenceCalculator.[hm]: implemented all required (and simple)
+     	  calculations. Added some convenience API to query some of the more
+     	  obvious ranges suitable as limits for fetching/comparison. 
+     	* iCalRepeatableEntityObject.[hm]: new method for calculating the
+     	  last possible recurrence start date. This can be used for fetches
+     	  as well.
+     	* iCalEvent.[hm]: more convenient wrapper for the new method found in
+     	  iCalRepeatableEntityObject.
+     	* NSCalendarDate+ICal.[hm]: convenience methods for calculating
+     	  "distances" between dates.
+     	* tests/*: updated
+     2005-02-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.39
+     	* README: updated
+     	* iCalRepeatableEntityObject.[hm]: new base class for all other
+     	  repeatable entity objects. Offers a convenience API for generating
+     	  recurrence ranges and tests, taking all exceptions into account.
+     	* iCalRecurrenceRule.[hm]: an iCal recurrence rule, modeled as closely
+     	  as possible to RFC2445. Please note that this is work in progress
+     	  and far from being complete, yet.
+     	* iCalRecurrenceCalculator.[hm]: a controller implementing RFC2445
+     	  to properly generate recurrence ranges and accompanied functionality.
+     	* iCalEvent.[hm], iCalToDo.[hm]: now subclasses from
+     	  iCalRepeatableEntityObject, thus removed code dealing with
+     	  recurrences
+     	* NGiCal.h: added new headers
+     	* NGiCal.xmap: changed recurrenceRule mappings due to model change
+     	* tests/*: contains unit tests for stuff dealing with recurrences. See
+     	  accompanied README for details
+added:   sope-ical/NGiCal/tests
+added:   sope-ical/NGiCal/iCalRecurrenceCalculator.h
+added:   sope-ical/NGiCal/iCalRecurrenceCalculator.m
+added:   sope-ical/NGiCal/iCalRecurrenceRule.h
+added:   sope-ical/NGiCal/iCalRecurrenceRule.m
+added:   sope-ical/NGiCal/iCalRepeatableEntityObject.h
+added:   sope-ical/NGiCal/iCalRepeatableEntityObject.m

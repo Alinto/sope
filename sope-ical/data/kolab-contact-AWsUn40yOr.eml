@@ -1,0 +1,163 @@
+From Helge Hess Fri Jul 29 21:39:29 2005
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_xXo6C6G+KhSWFaw"
+From: Helge Hess
+X-KMail-Fcc: sent-mail
+Subject: AWsUn40yOr
+Date: Fri, 29 Jul 2005 21:39:29 +0200
+User-Agent: KMail/1.8.50
+MIME-Version: 1.0
+X-Kolab-Type: application/x-vnd.kolab.contact
+Status: RO
+X-Status: OT
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+X-KMail-MDN-Sent:  
+X-UID: 7
+X-Length: 7244
+
+--Boundary-00=_xXo6C6G+KhSWFaw
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: 
+
+This is a Kolab Groupware object.
+To view this object you will need an email client that can understand the Kolab Groupware format.
+For a list of such email clients please visit
+http://www.kolab.org/kolab2-clients.html
+--Boundary-00=_xXo6C6G+KhSWFaw
+Content-Type: application/x-vnd.kolab.contact;
+  name="kolab.xml"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+  filename="kolab.xml"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<contact version="1.0" >
+ <product-id>KAddressBook 3.3, Kolab resource</product-id>
+ <uid>AWsUn40yOr</uid>
+ <body>HisNote
+text
+test
+text
+</body>
+ <categories>Cat,Cat mit Space,Cat,mit,Komma,Cat:mit:Colon,Customer,Friend</categories>
+ <creation-date>2005-07-29T21:39:29Z</creation-date>
+ <last-modification-date>2005-07-30T14:30:04Z</last-modification-date>
+ <sensitivity>confidential</sensitivity>
+ <name>
+  <given-name>Donald</given-name>
+  <last-name>Duck</last-name>
+  <full-name>Donald Duck</full-name>
+ </name>
+ <organization>HisOrg</organization>
+ <web-page>http://hishome.xml</web-page>
+ <im-address>hishis</im-address>
+ <department>HisDep</department>
+ <office-location>HisOffice</office-location>
+ <profession>HisProfession</profession>
+ <job-title>HisRole</job-title>
+ <manager-name>HisManager</manager-name>
+ <assistant>HisAssistant</assistant>
+ <nick-name>HisNick</nick-name>
+ <spouse-name>HisSpouse</spouse-name>
+ <birthday>2005-07-23</birthday>
+ <anniversary>2005-07-29</anniversary>
+ <picture>kolab-picture.png</picture>
+ <x-logo>kolab-logo.png</x-logo>
+ <phone>
+  <type>home2</type>
+  <number>12345</number>
+ </phone>
+ <phone>
+  <type>business2</type>
+  <number>54321</number>
+ </phone>
+ <phone>
+  <type>mobile</type>
+  <number>43215</number>
+ </phone>
+ <email>
+  <display-name>Donald Duck</display-name>
+  <smtp-address>hismail@her.com</smtp-address>
+ </email>
+ <address>
+  <type>home</type>
+  <street>HomeStreet</street>
+  <locality>HomeLoc</locality>
+  <region>HomeReg</region>
+  <postal-code>HomePost</postal-code>
+  <country>HomeCountry</country>
+ </address>
+ <preferred-address>home</preferred-address>
+ <latitude>52.5</latitude>
+ <longitude>13.3666667938232</longitude>
+ <x-custom value="http://hisblog.blog" app="" name="BlogFeed" />
+ <x-custom value="openpgp/mime,s/mime,s/mime opaque" app="" name="CRYPTOPROTOPREF" />
+ <x-custom value="b0rk" app="" name="textfielda" />
+ <x-custom value="15" app="" name="intfieldb" />
+ <x-custom value="2000-05-12" app="" name="datefielda" />
+</contact>
+
+--Boundary-00=_xXo6C6G+KhSWFaw
+Content-Type: image/png;
+  name="kolab-logo.png"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+  filename="kolab-logo.png"
+
+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
+
+--Boundary-00=_xXo6C6G+KhSWFaw--
+

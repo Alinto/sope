@@ -1,0 +1,101 @@
+{
+    details = {
+	NZDT = {abbrev = NZDT; isDST = 1; offset = "+13:00:00"; };
+	NZST = {abbrev = NZST; isDST = 0; offset = "+12:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sat Mar 01 16:00:00 1975 GMT";
+	    endDate = "Sat Oct 25 16:00:00 1980 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 06 16:00:00 1982 GMT";
+	    endDate = "Sat Oct 25 16:00:00 1986 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 05 16:00:00 1988 GMT";
+	    endDate = "Sat Oct 26 16:00:00 1991 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 06 16:00:00 1993 GMT";
+	    endDate = "Sat Oct 25 16:00:00 1997 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 06 16:00:00 1999 GMT";
+	    endDate = "Sat Oct 25 16:00:00 2008 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 06 16:00:00 2010 GMT";
+	    endDate = "Sat Oct 25 16:00:00 2014 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 05 16:00:00 2016 GMT";
+	    endDate = "Sat Oct 26 16:00:00 2019 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 06 16:00:00 2021 GMT";
+	    endDate = "Sat Oct 25 16:00:00 2025 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 06 16:00:00 2027 GMT";
+	    endDate = "Sat Oct 25 16:00:00 2036 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/16:00:00"; detail = NZST; },
+		{ date = "October/last Saturday/16:00:00"; detail = NZDT; }
+	    );
+	}
+    );
+    transitions = (
+	{ date = "Sat Oct 26 16:00:00 1974 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 28 16:00:00 1981 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 1981 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 28 16:00:00 1987 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 1987 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 29 16:00:00 1992 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 1992 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 28 16:00:00 1998 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 1998 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 28 16:00:00 2009 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 2009 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 28 16:00:00 2015 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 2015 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 29 16:00:00 2020 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 2020 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 28 16:00:00 2026 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 2026 GMT"; detail = NZDT; },
+	{ date = "Sat Feb 28 16:00:00 2037 GMT"; detail = NZST; },
+	{ date = "Sat Oct 24 16:00:00 2037 GMT"; detail = NZDT; }
+    );
+}

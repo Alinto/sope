@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEQualifierConditional">
+  <binding name="condition" required="YES" />
+  <binding name="object" />
+  <binding name="negate" defaults="YES/NO" />
+  <binding name="bindings" />
+  <binding name="requiresAllVariables" defaults="YES/NO" />
+</wo>

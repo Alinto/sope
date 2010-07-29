@@ -1,0 +1,122 @@
+2004-10-10 17:36:46.576 saxxml[27328] iCalSaxDriver: recurrence rules are not properly handled yet
+2004-10-10 17:36:46.576 saxxml[27328] iCalSaxDriver: recurrence rules are not properly handled yet
+start document ..
+    ns-map: =http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt
+    <vcalendar (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) version="2.0" prodid="-//Microsoft Corporation//Entourage Mac 10.0 MIMEDIR//EN" method="REQUEST">
+        <vtimezone (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "B9C624B1.6AE7C6%x@x.x"
+            </uid>
+            <X-ENTOURAGE-TZID (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "9"
+            </X-ENTOURAGE-TZID>
+            <tzid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "Amsterdam"
+            </tzid>
+            <tzid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                " Berlin"
+            </tzid>
+            <tzid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                " Bern"
+            </tzid>
+            <tzid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                " Rome"
+            </tzid>
+            <tzid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                " Stockholm"
+            </tzid>
+            <tzid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                " Vienna"
+            </tzid>
+            <standard (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "20001029T030000"
+                </dtstart>
+                <rrule (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                </rrule>
+                <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "B9C624B1.6AE7C6%x@x.x"
+                </uid>
+                <tzname (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "Standard Time"
+                </tzname>
+                <tzoffsetto (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+010000"
+                </tzoffsetto>
+                <tzoffsetfrom (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+020000"
+                </tzoffsetfrom>
+            </standard>
+            <daylight (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "20010325T020000"
+                </dtstart>
+                <rrule (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                </rrule>
+                <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "B9C624B1.6AE7C6%x@x.x"
+                </uid>
+                <tzname (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "Daylight Savings Time"
+                </tzname>
+                <tzoffsetto (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+020000"
+                </tzoffsetto>
+                <tzoffsetfrom (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+010000"
+                </tzoffsetfrom>
+            </daylight>
+        </vtimezone>
+        <vevent (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <attendee (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) role="REQ-PART" rsvp="true" cn=""Donald Duck (E-Mail)"">
+                "MAILTO:donald@entenhausen.com"
+            </attendee>
+            <class (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "PUBLIC"
+            </class>
+            <description (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "Zeit: Freitag\, 22. Februar 2002 15:00-18:00 (GMT+01:00) Amsterdam\, \n Berlin\, Bern\, Rom\, Stockholm\, Wien.\nOrt: dort\n\n*~*~*~*~*~*~*~*\n ~*~*\n\n"
+            </description>
+            <dtend (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20020222T190000"
+            </dtend>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20020222T160000"
+            </dtstart>
+            <location (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "dort"
+            </location>
+            <priority (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "5"
+            </priority>
+            <sequence (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "0"
+            </sequence>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "nexte Woche"
+            </summary>
+            <transp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "OPAQUE"
+            </transp>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "040000008200E00074C5B7101A82E0080000000040028583B1B3C10100000000000000001000\n 00002A630344F69E4D4592BEDDF473DD5B34"
+            </uid>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20021006T173400"
+            </dtstamp>
+            <organizer (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "MAILTO:donald@entenhausen.com"
+            </organizer>
+            <attendee (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) role="OPT-PART" rsvp="true" partstat="ACCEPTED" x-unknown-0="1">
+                "MAILTO:donald"
+            </attendee>
+            <X-MICROSOFT-CDO-INSTTYPE (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "0"
+            </X-MICROSOFT-CDO-INSTTYPE>
+            <X-MICROSOFT-CDO-BUSYSTATUS (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "BUSY"
+            </X-MICROSOFT-CDO-BUSYSTATUS>
+        </vevent>
+    </vcalendar>
+    ns-unmap: 
+end document.

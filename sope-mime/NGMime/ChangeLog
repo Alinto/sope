@@ -1,0 +1,1414 @@
+2008-01-29  Albrecht Dress  <albrecht.dress@lios-tech.com>
+
+	* fixes for OGo bug #789 (reply-to QP encoding)
+
+2007-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeFileData.m ([NGMimeFileData -initWithBytes:length:]): do not
+	  call [super init] on gnustep-base. This should fix (hack around)
+	  OGo bug #1890
+
+2007-06-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimePartParser.m: moved processing of content-transfer-encoding
+	  to an NSData category, fixed OGo bug #1856 (use correct quoted
+	  printable decoder!)
+
+2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeTextBodyGenerator.m: fixed compilation on gnustep-base
+
+2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeTextBodyGenerator.m: reworked body contents encoding using the
+	  character encoding support in NGExtension/NSString+Encoding
+
+	* NGMimeBodyGenerator.m: moved contained classes to own .m files
+
+2007-05-15  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGMimeBodyGenerator.m: encode string body contents using the charset
+	  of the content-type (when available) (OGo bug #1873)
+
+2006-02-22  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* NGMimeRFC822DateHeaderFieldParser.m: added hardcoded detection for
+	  CET and UTC in addition to GMT and MET
+	
+2005-12-16 Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMime.xcodeproj: synced with GNUmakefile
+
+2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeAddressHeaderFieldGenerator.m: use -warnWithFormat:
+
+	* NGMimeUtilities.h: code cleanups
+
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* properly include string.h where required to avoid warnings
+
+2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeAddressHeaderFieldGenerator.m: fixed some strict dependencies
+	  on NGMail (this generator should be moved to NGMail)
+
+2005-07-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeBodyPart.m: added some convinience methods to access the header
+	  fields of a part
+
+2005-07-13 Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMime.xcodeproj: synced with GNUmakefile
+
+2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeBodyGenerator.m: improved reliability against invalid body
+	  objects
+
+2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 warnings
+
+2005-03-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimePartGenerator.m: minor improvement in field generation API,
+	  added support for multivalue headers (related to #1324)
+
+2005-03-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimePartGenerator.m: properly terminate header fields with \r\n
+	  (OGo bug #1282)
+
+2005-01-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeContentTypeHeaderFieldGenerator.m, NGPart.m: fixed default
+	  type ("application/octet-stream", not "application/octet")
+
+	* NGMimePartGenerator.m: code cleanups, added support for
+	  'NGMimeGeneratorDebugEnabled' default, properly generate \r\n instead
+	  of just \n as a header/body separator, add a hack to avoid duplicate
+	  generation of the \r\n header/body separator (needs to get tested)
+	
+	* NGMimeJoinedData.m: code cleanups, added a -length method
+
+	* NGMimeMultipartBodyGenerator.m: enable debug logs when
+	  'NGMimeGeneratorDebugEnabled' default is enabled
+
+	* NGMimeBodyGenerator.m: moved NGMimeMultipartBodyGenerator to own 
+	  file, added support for 'NGMimeGeneratorDebugEnabled' default
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMime.xcode: minor fixes and updated
+
+2004-12-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMimeRFC822DateHeaderFieldParser.m: fix spam mail date header
+	  parsing for libFoundation
+
+2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGConcreteMimeType.m: added support for 'reply-type' parameter in
+	  text MIME types
+
+2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMime.xcode: added NGSendMail files to Xcode build
+
+2004-10-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeRFC822DateHeaderFieldParser.m: added special case for +0530
+	  timezone which seems to be common (v4.3.188)
+
+2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMime.xcode: added new files to Xcode build
+
+2004-09-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMime: minor cleanups (v4.3.187)
+
+	* NGMimePartParser.m: fixed an issue with unlimited length parsing,
+	  fixes OGo bug #936 (v4.3.182)
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMime.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects.
+
+	* NGMime.xcode: fixes
+
+2004-08-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: define library version (v4.3.176)
+
+	* NGMime.m: use 4.3.0 as fallback library version
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMime.xcode: new Xcode project
+
+2004-08-27  Helge Hess  <helge@dogbert.in.skyrix.com>
+
+	* NGMimeRFC822DateHeaderFieldParser.m: always use custom date parser
+	  instead of the NSCalendarDate format parser (closes OGo bug #562)
+	  (v4.3.174)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* now is a subproject of the sope-mime library just like NGImap4 and
+	  NGMail (v4.3.173)
+
+	* moved to sope-mime
+
+	* moved to SOPE 4.3 (v4.3.172)
+
+2004-08-02  Frank Reppin  <frank@opengroupware.org>
+
+	* NGMimeRFC822DateHeaderFieldParser.m: fixed OGo Bug #861 (August 
+	  mails were reported as April mails) (v4.2.171)
+
+2004-07-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.170
+
+	* NGMimeHeaderFieldParser.h: fixed prototypes of 
+	  NGMimeHeaderFieldParser protocol
+
+	* NGMimeFileData.m, NGMail: fixed a gcc 3.4 warning
+
+2004-07-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: fixed OGo bug #840 (introduced in v4.2.166), code cleanups,
+	  fixed some gcc 3.4 warnings (v4.2.169)
+
+2004-07-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: fixed some compilation issue with older gcc's (v4.2.168)
+
+	* NGImap4: minor improvements to exception handling (v4.2.167)
+
+	* NGImap4: some changes to body response parser which might fix OGo
+	  bug 800, some speed improvements in the fetch response normalizer
+	  (v4.2.166)
+
+	* NGImap4: added more logging output (v4.2.165)
+
+2004-06-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4: fixed a gstep-base warning (v4.2.164)
+
+2004-06-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.163
+
+	* NGImap4/NGImap4Message.m: minor optimization
+
+	* NGMimeAddressHeaderFieldGenerator.m, NGMimeBodyParser.m, 
+	  NGMimeHeaderFields.m, NGMimeMultipartBodyParser.m,
+	  NGMimePartParser.m, NGMimeUtilities.m: minor cleanups to default
+	  processing
+
+	* NGMimeFileData.m, NGMimeBodyGenerator.m: per default generate 
+	  temporary files in /tmp/OGo/ instead of /tmp/Skyrix/
+
+2004-06-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4: fixed some gcc 3.4 warnings (v4.2.162)
+
+2004-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMail: fixed some gcc 3.4 warnings (v4.2.161)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGMail: minor tweaks (v4.2.160)
+
+	* GNUmakefile.preamble: added prebinding (v4.2.159)
+
+2004-05-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4: various cleanups (v4.2.158)
+
+	* NGMimeAddressHeaderFieldGenerator.m, NGMimeBodyGenerator.m, 
+	  NGMimeContentDispositionHeaderFieldGenerator.m,
+	  NGMimeContentTypeHeaderFieldGenerator.m, NGMimeMultipartBodyParser.m,
+	  NGMimePartParser.m: various code cleanups (v4.2.157)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.156)
+
+2004-04-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGMimeRFC822DateHeaderFieldParser.m: ported RFC822 timezone parser
+	  to gnustep-base and Apple's Foundation. Using abbreviations for
+	  timezone names turned out to be non-portable across foundations.
+	  Also enhanced the range of GMT timezones understood - this is now
+	  from GMT-1400 until GMT+1200 (v4.2.155)
+
+2004-04-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: some code cleanups, fixed OGo bug #660 (premature dealloc)
+	  (v4.2.154)
+
+2004-03-19  Helge Hess  <helge.hess@skyrix.com>
+	
+	* v4.2.153
+	
+	* NGMimeRFC822DateHeaderFieldParser.m: improved RFC822 timezone parser
+	  to deal with timezone strings as submitted by MultiMail (-05-500)
+	
+	* NGConcreteMimeType.m: detect x-avg-checked MIME type parameter
+
+2004-02-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4: fixed OGo bug #582 (mail searching was broken) (v4.2.152)
+
+2004-02-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4, NGMail: fixed compilation warnings on OSX (v4.2.151)
+
+2004-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.150
+
+	* NGMail/NGMimeMessageGenerator.m: expose _base64Encoding function
+
+	* NGMail/GNUmakefile, NGMail/NGMimeMessageGenerator.m: moved body 
+	  generator subclass to separate source files
+	
+	* GNUmakefile, NGMimeHeaderFieldGenerator.m: moved out field generator
+	  subclasses to own source files
+	
+	* NGMimeHeaderFieldGenerator.h: export NGEncodeQuotedPrintableMime
+	  function (should be a NSString category?!)
+
+2004-01-24  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* NGImap4: various improvements, parsing optimization (v4.2.149)
+
+	* NGMimeRFC822DateHeaderFieldParser.m: improved performance, see
+	  NGImap4 ChangeLog for details (v4.2.146)
+	
+2004-01-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4: cleanups, fixed OGo bug #537 (v4.2.145)
+
+2004-01-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: cleanups, cleanups, cleanups (v4.2.144)
+
+2004-01-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4: cleaned up API (v4.2.143)
+
+2004-01-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4Message: optimization (v4.2.142)
+
+2004-01-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGImap4: various optimizations and cleanups (see NGImap4 ChangeLog
+	  for details) (v4.2.141)
+
+2004-01-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* added global-id classes in NGImap4 (v4.2.140)
+
+2004-01-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.139
+	
+	* NGMimeRFC822DateHeaderFieldParser.m: optimized date parsing - 
+	  additional optimizations lined out
+	
+	* NGMimeHeaderFieldParser.m: moved the various parser classes to 
+	  separate files (maybe should be moved to a subproject in the long 
+	  run), minor code cleanups
+	
+	* NGMimePartParser.m: cache defaultRfc822HeaderFieldParserSet for speed
+	
+	* NGImap4: major cleanups, see NGImap4/ChangeLog for details
+
+2004-01-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.138
+
+	* NGImap4: major cleanups
+
+	* NGImap4: renamed common.h to imCommon.h, fixed other files to include
+	  that (v4.2.137)
+
+Tue Nov 11 15:04:18 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: add parsing of capability entries without 
+	  value (v4.2.136)
+
+2003-11-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.135
+
+	* NGMime.m: use some defaults for the NGMime version in case we are
+	  not compiling using gstep-make
+
+	* NGImap4ResponseParser.m: explicitly marked the lastChar variable as
+	  being a signed char to avoid compiler errors
+
+Thu Nov  6 16:41:13 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* v4.2.134
+
+	* NGSieveClient: fixed a bug in normalizeResponse, return 
+	  NSMutableDictionary
+
+	* NGImap4ResponseParser.m: remove CYRUS_2_0 constant, don`t now
+	  what it should be :(
+
+Mon Nov  3 15:42:37 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4Context: temporary set selected folder befor the select action
+	  to prevent notification confusions (v4.2.133)
+
+2003-10-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: small code cleanups to Sieve client (v4.2.132)
+
+2003-10-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added libEOControl as a dependency
+	  (required on MacOSX) (v4.2.131)
+
+2003-09-06  Helge Hess  <helge.hess@skyrix.com>
+	
+	* removed various dependencies to FoundationExt (v4.2.130)
+
+	* various fixes to remove warnings on MacOSX (v4.2.129)
+
+Tue Jul 22 15:19:34 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4ResponseParser.m: check for empty quota reponses 
+	  (v4.2.128)
+
+2003-07-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: fixed some gstep-base issues, patch provided by 
+	  Filip Van Raemdonck and cleaned up a bit (v4.2.127)
+
+Thu Jul 17 10:37:22 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGImap4ServerRoot: add a missing method 
+	  (bulkFetchHeadersFor:inRange:withAllUnread:) (v4.2.126)
+
+Fri Jun 27 18:08:49 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Message.m: improve flag handling (v4.2.124)
+
+	* NGImap4Message.m: code cleanups (v4.2.123)
+
+Thu Jun 26 13:23:30 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v.4.2.122
+	
+	* NGImap4Message.m: add messageWithURL: methods
+
+	* NGImap4Context.m: execute select-command before setting selectet folder
+
+	* NGImap4Folder: add a struct do store failed select, status, getQuota 
+	  responses, set selectet folder after successfully select response
+
+Fri Jun 20 18:51:24 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.121
+
+	* NGImap4Client.m: cleanups
+
+	* NGImap4ServerRoot, NGImap4Folder.m, NGImap4Functions: 
+	  fetch status (new/unseen) of subfolders on demand only if Default: 
+	  FetchNewUnseenMessagesInSubFoldersOnDemand = 'YES'
+
+	* NGImap4ServerRoot, NGImap4Folder.m: improve folder-flag analysing, 
+	  nonexistent folders will be ignored (Default: ShowNonExistentFolder), 
+          no 'list' request for folder  with hasnochildren flag 
+	  (Default: IgnoreHasNoChildrenFlag) (v4.2.120)
+
+	* 4.2.119
+	
+	* NGImap4Functions: cleanups
+
+	* NGImap4Context.m: cleanups
+
+	* NGImap4Folder.m: only reset subfolders if -resetSubFolders called 
+	  (prev. behavior: -resetFolder called -resetSubFolders), cleanups
+
+Tue Jun 17 11:53:46 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap/NGImap4Message+BodyStructure.h: check whether parsing of 
+	  date headerfield failed (v4.2.118)
+
+Fri Jun 13 17:37:37 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeType.m: add charset 'unknown' (use us-ascii) (v4.2.117)
+
+Wed Jun 11 14:49:05 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.116
+	
+	* NGMimeMultipartBodyParser.m: improve multipart-body parsing behavior 
+	  (parse bodies with no content)
+	
+	* NGMimeType.m: use ASCII string encoding for "x-unknown" encoding type
+	
+	* NGMimePartParser: add unknown-8bit content-transfer encoding
+
+	* v4.2.115
+	
+	* NGMimePartParser.m, NGMimeMultipartBodyParser.m: code cleanups
+	
+	* NGConcreteMimeType: added "x-unix-mode" as a known text mime-type 
+	  parameter
+
+	* NGMimePartParser: add 'binary' content transfer encoding (v4.2.114)
+	
+	* v4.2.113
+	
+	* NGMail/NGMimeMessageParser: use unicode, use named encoding to 
+	  encode header fields (if default 
+	  'UseFoundationStringEncodingForMimeHeader' = YES, libFoundation 
+	  string encoding will be used)
+	
+	* NGMimeUtilities: add parseParameters() (parse the same kind of 
+	  parameter for NGMimeType and NGMimeContentDispositionType), use 
+	  unicode
+	
+	* NGMimeType.m: use unicode, parse parameters in NGMimeUtilities
+	
+	* NGMimeHeaderFields.m: use unicode, parse parameters in 
+	  NGMimeUtilities 
+	
+	* NGMimeHeaderFieldParser.m: code cleanups, add default whether to 
+	  strip leading spaces or not (StripLeadingSpaces), use unicode for
+	  content-type, content-disposition and string type header-fields,
+	  wrap some comments with MimeLogEnabled, some speed optimization, 
+	
+	* NGMimePartParser.m: ignore leading white spaces for header values 
+	  (speed optimization)
+	
+	* NGMimeHeaderFieldParser.m: use unicode to remove comments, improve 
+	  comment parsing behavior, strip leading spaces only if 
+	  default 'StripLeadingSpaces' is set (currently be done during 
+	  header-field parsing for speed optimization)
+	
+	* NGMimeBodyParser.m: use named encoding (currently iconv) to encode
+	  text bodies, (if default 'UseFoundationStringEncodingForMimeText' 
+	  is set, libFoundation string encoding will be used)
+
+2003-06-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGConcreteMimeType.m: added support for 'delsp' attribute (delete
+	  space ?) on text/... mime-types (v4.2.113)
+
+Mo Jun 02 15:55:20 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Folder, NGImap4Functions: add notification for 
+	  subfolder-resets (v4.2.112)
+
+2003-05-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed a linking bug in NGImap4 (due to a ignored warning ...)
+	  (v4.2.111)
+
+Tue May 27 17:39:20 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Folder.m: check for quota only if folder is selectable 
+	  (v4.2.110)
+
+Tue May 20 18:03:12 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Context; add accessor to set edit default values (v4.2.108)
+
+Wed May 14 12:54:08 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.107
+	
+	* NGMimeType.m: code cleanups, hide some logs behind 'MimeLogEnabled'
+	
+	* NGMimeMessageParser.m: code cleanups, fix a decode quoted printable 
+	  bug (sometimes last char was ignored) 
+
+	* v4.2.106
+	
+	* NGImap4ResponseParser.m: use lowercase string to determine whether
+	  fetch body reponse is 'text' or 'message' (courier imap use lowercase
+	  letters for the body description) (bug 1611)
+	
+	* Info: move rfc, drafts and other information files to 'Info'
+
+Thu May 13 17:59:25 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Folder.m: add notification for folder reset, if more than one
+	  folder for the same folderpath exist (v4.2.105) (bug 1612)
+
+Fri May  9 10:35:42 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* media-types: add (v4.2.104)
+
+Mon May  5 17:59:25 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Folder.m: improve error log, fix a bug regarding multiple 
+	  mail copy from and to the same folder (v4.2.103)
+
+Wed Apr 30 15:24:26 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.102
+	
+	* NGMimeHeaderFieldParser.m: add some time zone format fields (bug 943)
+	
+	* NGImap4ServerRoot: noinferiors depends on serverkind (bug 932)
+	
+	* NGImap4ResponseParser.m: improve parsing of server greeting 
+	
+	* NGImap4Folder, NGImap4ServerRoot: take ShowOnlySubscribedIn* 
+	  from context
+	
+	* NGImap4Context.m: set ShowOnlySubscribedIn* Defaults 
+	  (depends on server)
+	
+	* NGImap4Client.m: detect washington imap server
+
+	* v4.2.101
+	
+	* NGImap4ServerRoot: fixed retain bug
+	
+	* NGImap4Folder.m: NSLog -> logWithFormat, fixed release (bug 1559),
+	
+	* NGImap4Context: accessors for server defaults
+	
+	* NGImap4Client.m: code cleanups, some logs depends LogDefault,
+	  try to get server name (cyrus, courier) - set some server-depending
+	  Defaults, fixed special folder subscribe/create behavior (bug 1540)
+
+Thu Apr 17 11:13:44 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeFileData.m: fixed bug which occurs during hh cleanups 
+	  (self->path = [path copy] --> self->path = [_path copy] (v4.2.100)
+
+Fri Apr 11 10:59:45 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.99
+	
+	* NGImap4Functions.m: add ImapLogEnabled' default
+	  bind some logs to ImapLogEnabled'
+	
+	* NGMimeType.m: create MimeLogEnabled'
+	  'WARNING(%s): expected end of string or' - occurs only if 
+	  MimeLogEnabled (bug 1430)
+
+2003-04-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.98
+
+	* various fixed of new gcc 3.3 warnings in all modules
+	
+	* NGMimeType.m: fixed gcc 3.3 signed/unsigned warnings
+
+	* NGMimeFileData.m: small cleanups, signed-warnings
+
+	* NGMail: fixed more gcc 3.3 signed/unsigned warnings (v4.2.97)
+	
+	* v4.2.96
+
+	* NGMail: some gcc 3.3 signed/unsigned warnings fixed
+
+	* NGMimeUtilities.h: some gcc 3.3 signed/unsigned warnings fixed
+
+	* NGImap4: small speed improvements
+
+Mon Apr  7 20:02:29 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.95
+	
+	* NGImap4Message.m: check whether encoding was set -> set encoding 
+	  during body-structure fetch
+	
+	* NGImap4Message+BodyStructure.h: body-structuree component is no 
+	  rfc822 or multipart --> body url got  'part=1'
+
+2003-04-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: added compilation support for GNUstep base (v4.2.94)
+
+Fri Feb 28 18:32:53 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4/NGImap4Functions.m: add support for Washington Imap Server, 
+	  (delete folders in server root) (v4.2.93)
+
+Wed Feb 26 17:47:53 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.92
+	
+	* NGImap/NGImap4ServerRoot.m: read also inbox folder if it
+	  is not subscribed
+	
+	* NGImap/NGImap4Client.m: check whether no sequence contains 'ALERT', 
+	  reconnect also if the server repsonse an unexpecte 'bye' sequence
+
+	* (Changes for Washington Imap Server support)
+	
+	* NGImap/NGImap4Client.m: remove NXConstStr in Excep. Handler (v4.2.91)
+
+	* NGMimePartParser.h: add headers (v4.2.90)
+
+Wed Feb 26 11:37:18 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap/NGImap4Client.m: check whether so key exist, 
+	  use DATE as default sort key (v4.2.89)
+
+Tue Feb 25 11:21:52 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap/NGImap4Client.m: fixed a reconnect bug (try only one time, 
+	  before return with exception) (bug 1108) (v4.2.88)
+
+Mon Feb 24 15:48:07 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4/NGImap4Message.m: select folder befor fetch 
+          body structure (bug 1094) (v4.2.87)
+
+Mon Feb 17 18:19:06 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.86 (fixed bug 1064)
+	
+	* NGMimeBodyParser: remove NGMimeRfc822BodyParser
+	
+	* NGMimePartParser.m: remove call to NGMimeRfc822BodyParser
+	
+	* NGMimeMessageParser: add NGMimeRfc822BodyParser, 
+	  add delegate method bodyParserForPart: to call the 
+	  NGMimeRfc822BodyParser 
+
+Fri Feb 14 16:16:47 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Context.m: code cleanups (v4.2.85)
+
+Wed Feb  5 14:43:22 2003    <jan@skyrix.com>
+
+	* NGMimePartParser.m: check whether la (called to buffer data) 
+	  failed with EndOfStream (bug 993) (v4.2.84)
+
+Fri Jan 31 17:05:55 2003    <jan@skyrix.com>
+
+	* NGImap4Context.m: add defaults for imap special folders, 
+	  fix folder create bug (v4.2.83)
+
+	* NGImap4Folder.m: fetch all messages if no sort failed or no 
+	  sortordering was given (v4.2.82)
+
+	* NGImap4: fix parsing structure bug, code cleanups (v4.2.81)
+
+Wed Jan 29 22:12:08 2003    <jan@skyrix.com>
+
+	* NGImap4*: code cleanups (replace macros with method calls),
+	  catch all exceptions, now they are stored in [context lastException]
+	  remove connection retry (v4.2.80)
+	
+2003-01-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeFileData.m: fixed required includes (v4.2.79)
+
+Tue Jan 28 15:39:25 2003    <jan@skyrix.com>
+
+	* NGImap4: courier support (v4.2.78)
+
+	* NGImap4: remove abort() (v4.2.77)
+
+	* v4.2.76
+	
+	* NGMimePartGenerator: generator handles now tmp-file creation
+	
+	* NGMimeGeneratorProtocols.h: add missing methods
+	
+	* NGMimeFileData.m: add Data init methods, use default to generate 
+	  file-data (NGMimeBuildMimeTempDirectory)
+
+	* v4.2.75
+	
+	* NGMimeJoinedData: code cleanups, write file with 0600
+	
+	* NGMimeFileData: code cleanups
+
+	* NGMimeFileData: code cleanup (v4.2.74)
+
+Mon Jan 27 19:08:28 2003    <jan@skyrix.com>
+
+	* v4.2.73
+	
+	* NGMimeJoinedData: a mutable date wrapper to join date objects 
+	  without merging them in memory
+	
+	* NGMimeFileData: a data object to store the date content on disk
+	
+	* NGMime*Generator: build mime parts on disk
+
+Wed Jan 22 17:26:17 2003    <jan@skyrix.com>
+
+	* NGMimeBodyGenerator.m: add configurable boundary prefix
+
+2003-01-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeMultipartBodyParser.m: use incremental version (v4.2.72)
+
+Tue Jan 21 19:05:30 2003    <jan@skyrix.com>
+	
+	* NGImap4: add additional Courier imapd support (v4.2.71)
+	
+	* v4.2.70
+	
+	* NGImap4: increase class version number of NGMimeMessageParser
+	
+	* NGMimePartParser: if parsePartFromData got immutable data, 
+	  parsing will be based on data bytes, increase version, 
+	  add instance vars
+	
+	* NGMimeMultipartBodyParser.m: code cleanups 
+	
+Mon Jan 20 19:00:14 2003    <jan@skyrix.com>
+	
+	* NGMimePartGenerator.m: fixed wrong release handling (v4.2.69)
+	
+2003-01-20  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGConcreteMimeType.m: added support for vCalendar "method" parameters
+	  in text/* MIME types, replaced some RELEASE macros (v4.2.68)
+	
+	* replaced some RETAIN macros (v4.2.67)
+	
+Fri Jan 17 13:49:17 2003    <jan@skyrix.com>
+	
+	* NGImap4: fix variable placing (v4.2.66)
+
+Thu Jan 16 18:36:54 2003    <jan@skyrix.com>
+
+	* v4.2.65
+
+	* NGImap4: decode headers values fur bodystructures
+
+	* NGMimePartParser: add +defaultHeaderFieldEncoding
+
+Tue Jan 14 16:57:28 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4: improve body structure parsing
+	
+	* NGMimeType.m: allow all chars for parameter-values,
+	  use constant strings for some types, subtypes, parameternames
+	  (v4.2.64)
+
+2003-01-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeType.m: added "koi-r" as an unsupported, but known encoding
+	  (v4.2.62)
+	
+Tue Jan 14 12:24:44 2003    <jan@skyrix.com>
+
+	* NGImap4: improve error handling, handle unexpected BYE response
+	  (v4.2.61)
+	
+	* NGImap: fix parsing of cyrus version bug (skyrix bug 845) (v4.2.60)
+
+Mon Jan 13 19:42:47 2003    <jan@skyrix.com>
+
+	* v4.2.59
+	
+	* NGMimePartParser: add fix header field names
+
+	* NGImap4, NGPart.m, NGMimeHeaderFieldParser.m,
+	  NGMimeHeaderFieldGenerator.m, NGMimeBodyPart.m: use header field 
+	  name constants
+
+2003-01-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGPart.h: added some docu to header
+
+Fri Jan 10 09:54:14 2003    <jan@skyrix.com>
+
+	* NGImap4: fixed skyrix bug 822, improve error handling (v4.2.58)
+
+Wed Jan  9 15:26:00 2003    <jan@skyrix.com>
+
+	* NGImap4: improve parsing to handle over quota warnings
+	  fix skyrix bug 777 (v4.2.57)
+
+Wed Jan  8 16:26:00 2003    <jan@skyrix.com>
+
+	* NGImap4: fix skyrix bug 835 (fix quota bugs) (v4.2.56)
+
+Tue Jan  7 16:47:36 2003    <jan@skyrix.com>
+
+	* NGImap4: fix skyrix bug 821 (add -usedSpace and -maxQuota to 
+	  NGImap4Folder protocol and NGImap4ServerRoot) (v4.2.55)
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* changes for improved compilation on MacOSX, replaced RETAIN macros
+	  with methods (v4.2.54)
+
+Fri Dec 27 10:53:50 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* smaller clean ups (v4.2.53)
+
+Mon Dec 23 15:39:33 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: small cleanups (v4.2.52)
+
+2002-12-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* cosmetic change, replaced 'THROW' with 'raise'
+
+	* NGMimeType.m: added big5, 'iso-2022-jp' and 'gb2312' as unsupported,
+	  but known encodings (SuSE Bug 16780) (v4.2.51)
+
+Tue Dec 10 19:12:45 2002    <jan@skyrix.com>
+
+	* NGImap4: add quota support
+
+2002-12-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: fixed a compilation warning (v4.2.49)
+	
+	* fixed Jan's version numbers
+
+Tue Dec 10 19:12:45 2002    <jan@skyrix.com>
+
+	* NGImap4ResponseParser.m: throw concrete exception  (Bug 651)
+	
+	* NGImap4Folder.m, NGImap4ServerRoot: Default for display sub-folders 
+	
+	* NGImap4Client.m: fixed debug release-bug (v4.2.48)
+
+	* NGImap4ResponseParser.m: fix parse bug
+	
+	* NGImap4Message+BodyStructure.h: fix header handling (v4.2.47)
+	
+Mon Dec  9 13:55:52 2002    <jan@skyrix.com>
+
+	* NGImap4Context.m, NGImap4Client.*, NGImap4ResponseParser: add 
+	  capability support (v4.2.46)
+
+Fri Dec  6 17:08:28 2002    <jan@skyrix.com>
+
+	* NGImap4Folder (v4.2.45)
+	
+	* NGImap4Message: add some ss-sorting improvements
+	
+Tue Dec  3 16:45:14 2002    <jan@skyrix.com>
+
+	* NGImap4ResponseParser.m: parse empty string if message does 
+	  'no longer exists' (v4.2.44)
+
+Mon Dec  2 19:22:13 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Context.m: performance improvements (v4.2.43)
+	* NGImap4Folder.m: -(BUG 17379) clear msn->uid cache after delete
+			   -performance
+
+Mon Dec  2 11:18:51 2002    <jan@skyrix.com>
+
+	* NGImap4Folder.m: only reset subfolder if they are already loaded (v4.2.42)
+
+Fri Nov 29 18:12:32 2002    <jan@skyrix.com>
+
+	* NGMimePartParser.m: improve error log (v4.2.41)
+	* NGMail/NGMimeMessageParser.m: fixed quoted printable parsing bug
+
+Fri Nov 29 12:27:25 2002    <jan@skyrix.com>
+
+	* NGImap4ResponseParser.m: check tagged responses before parsing 
+	  it(v4.2.40)
+	
+Mon Nov 25 16:29:40 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Context.m, NGImap4Folder: add msn-uid cache (v4.2.39)
+	* NGImap4Folder.m: if no next mail, return nil (v4.2.38)
+* NGImap4Client.m: check whether sort keys are valid (v4.2.36)
+	* NGImap4ResponseParser.m: fixed content parsing
+
+Fri Nov 22 15:04:18 2002    <jan@skyrix.com>
+
+	* NGImap4Message*: add support for body-structure content(v4.2.35)
+
+Fri Nov 22 11:13:40 2002    <jan@skyrix.com>
+
+	* NGImap4ResponseParser.m: add Imap4MMDataBoundary Default to 
+	modify MM-Data-Use boundary (v4.2.34)
+
+Tue Nov 21 18:13:38 2002    <jan@skyrix.com>
+	
+	* NGImap4*: memory mapped data (v4.2.33)
+	* NGImap4*: add fetch bodystructure/single part bodies (v4.2.32)
+
+2002-11-20  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGImap4: can query headers using KVC (4.2.31)
+	
+	* NGImap4: smaller changes in URL initialization (v4.2.30)
+
+Tue Nov 19 18:13:38 2002    <jan@skyrix.com>
+
+	* NGImap4*: add commands (thread, fetch body) (v4.2.29)
+
+Mon Nov 11 10:24:14 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* NGImap4Client.m: improve greetings parse behavior (v4.2.29)
+
+2002-11-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGImap4: initialize objects with URL and SSL support (v4.2.28)
+
+Wed Oct 30 16:26:46 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimePartParser.m retain/autorelease values to prevent 
+	RELEASE Exceptions (v4.2.27)
+
+2002-09-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.25
+
+	* NGMimeHeaderFieldGenerator.m: fixed some compilation warnings
+
+2002-08-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeHeaderFieldGenerator.m: small fix for Jaguar compilation
+
+Tue Aug 20 18:33:00 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeHeaderFieldGenerator.m: add default for LF seperated address 
+	entries (v4.2.22) (BUG 17551)
+
+2002-08-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeType.m: added windows-1252, iso-8859-2 as known charset strings
+	  (v4.2.20)
+
+- 2002-07-23 v4.2.19 (hh)
+- 2002-07-17 v4.2.18 (jr)
+- 2002-07-17 v4.2.17 (hh)
+- 2002-07-10 v4.2.16 (hh)
+- 2002-07-09 v4.2.15 (hh)
+- 2002-07-09 v4.2.14 (hh)
+- 2002-07-08 v4.2.13 (hh)
+- 2002-07-08 v4.2.12 (hh)
+
+2002-07-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeType.m: added some charset encoding strings (8859-1, 
+	  ks_c_5601-1987, euc-kr)
+
+	* NGConcreteMimeType.m: do not print a warning if a "x-mac-" MIME type
+	  parameter was found ...
+
+Tue Jul  9 12:39:12 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMime.m: add libraryVersion method
+
+2002-07-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed fix for -valueOfHeaderField:data:, since this breaks
+	  SKYRiXgreen => later
+
+2002-07-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimePartParser.m: immediatly close the datastream after parsing,
+	  so that the NSData object associated with the stream is guaranteed
+	  to be released (this lessens the possibility for a new variant of
+	  "The Big Master Bug")
+
+	* NGMimeUtilities.h (_rfc2047Decoding): small optimization, if the
+	  data is base64 encoded, immediatly release the temporary NSData
+	  object used to call -dataByDecodingBase64:
+
+	* NGMimeType.m: added a class method to turn charset strings into
+	  a Foundation NSStringEncoding constants 
+	  (eg utf-8 => NSUTF8StringEncoding)
+
+	* NGMimePartParser.m: cache the mutable data object used during parsing
+	  to avoid memory fragmentation and to improve speed
+
+	* NGMimeBodyParser.m: moved multipart body parser to it's own file
+
+	* NGMimePartParser.m ([NGMimePartParser -valueOfHeaderField:data:):
+	  fixed behaviour of method when a delegate is set. Previously if
+	  the delegate returned nil, the parser would invoke it's own
+	  header field parsing (while the doc says, that if the delegate
+	  implements the method, it's *completly* responsible ...)
+	  SEE ABOVE, fix removed
+	
+	* major source code cleanup to support hunting the bug known as
+	  "The Big Master Bug" (BMB, SuSE bug 16845)
+
+Fri Jun 28 17:27:16 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeBodyGenerator.m: remove log
+	* NGMimeHeaderFieldParser.m: add DateFormat
+
+Fri Jun 28 16:58:15 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeBodyParser.m: compares charset caseInsensitive now
+
+Fri Jun 26 10:40:05 2002  Helge Hess <hh@skyrix.com>
+
+	* various fixes for MacOSX
+
+- 2002-06-13 v4.2.11 (jr) [extracted from CVS]
+- 2002-06-11 v4.2.10 (jr) [extracted from CVS]
+- 2002-06-10 v4.2.9  (jr) [extracted from CVS]
+- 2002-06-10 v4.2.8  (jr) [extracted from CVS]
+- 2002-06-09 v4.2.7  (jr) [extracted from CVS]
+- 2002-06-09 v4.2.6  (jr) [extracted from CVS]
+- 2002-06-07 v4.2.5  (jr) [extracted from CVS]
+
+Fri Jun  7 17:11:05 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMime*: add better encoding handling
+
+- 2002-06-04 v4.2.4  (jr) [extracted from CVS]
+
+Tue Jun  4 17:47:30 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeHeaderFieldParser.m: fixed euro handling
+
+Fri May 31 16:13:56 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeHeaderFieldGenerator.m: add NGMimeAddressHeaderFieldGenerator,
+	  encoding of filenames
+
+- 2002-05-22 v4.2.3  (jr) [extracted from CVS]
+
+Wed May 15 13:23:03 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NGMail, NGImap4 subprojects
+
+Mon May  6 22:28:21 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeHeaderFieldGenerator.m: fixed a problem with GroupWise (a space
+	  was generated before a MIME-type parameter value)
+
+Thu Mar  7 12:24:41 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeBodyGenerator.m: fixed assertion bug
+
+Thu Feb 21 13:03:52 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimePartParser.m: changed to support -lastException
+
+Thu Feb 14 11:27:06 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeHeaderFields.m: supports now ill microsoft content-disposition type
+
+Tue Dec 18 16:58:11 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGConcreteMimeType.m ([NGConcreteTextMimeType -initWithType:subType:parameters:]): 
+	  parse "q" quality parameter
+
+Tue Dec 18 11:37:15 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeBodyParser.m: added iso-8859-1 as a known charset
+
+Tue Dec 11 09:53:03 2001  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGMimeHeaderFieldGenerator.m: fixed string value bug
+	* NGMimeHeaderFieldParser.m: add date format
+
+Fri Dec  7 15:17:54 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeBodyGenerator.m: fixed bug with content-type
+
+Mon Oct 22 19:00:59 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimePartParser.m ([NGMimePartParser -parserForBodyOfPart:data:]): 
+	  use TextParser only for text/plain bodies
+
+Mon Oct 22 10:12:45 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeHeaderFieldGenerator.m: changed to deal with string-header
+	  fields and replaced various -cString calls with -dataUsingEncoding:
+
+Tue Oct 16 19:21:15 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeType.m: check for empty mime-type strings ...
+
+Tue Oct 16 18:59:39 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeHeaderFieldGenerator.m: fixed static-var init bug
+
+Fri Oct 12 10:36:53 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimePartParser.m ([NGMimePartParser -parserForBodyOfPart:data:]):
+	  trim spaces of header-field values ...
+
+Thu Aug  9 14:21:45 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed java.mail related stuff
+
+Thu Aug  9 13:22:35 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGMimeFileDataSource.m: use -initWithPath:, no use of NGFileUrl
+
+Fri Jul 20 15:48:36 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGConcreteMimeType.m: allow parameters in wildcard MIME type
+
+Fri Apr  6 14:51:41 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimePartGenerator.m: fixed Autorelease/Release bug
+
+Wed Mar 28 17:55:21 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeHeaderFieldParser.m: add new date formats
+
+Tue Feb  6 17:08:04 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimePartParser.m: fixed delegate message bug
+
+Mon Jan 29 16:27:23 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NGMimeBodyParser.m, NGMimePartGenerator.m, NGMimePartParser.m: fixed 
+	header encoding bug
+
+Mon Dec  4 12:19:19 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGMimePartParser.m: changed to support empty HTTP headers (might break
+	  some email parsing ??)
+
+	* NGMimePartParser.m: dynamically allocate parse buffer, added class
+	  caching
+
+Fri Jun 23 14:24:36 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* reverted changes from Jun-21
+
+Fri Jun 23 12:21:32 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGMimeHeaderFieldParser.m: fixed stmt ordering bug
+
+Wed Jun 21 23:39:23 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* removed stack-buffer allocations in various methods
+
+Tue Jun 13 19:33:31 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGMimeHeaderFields.m: do not use stack-allocated buffers
+
+Fri Jun  9 17:50:00 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* GNUmakefile (ADDITIONAL_CPPFLAGS): added -Wall
+
+Tue Feb 29 18:24:39 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* MOF3 import
+
+2000-02-17    <helge.hess@mdlink.de>
+
+	* NGMimeHeaderFieldGenerator.m, NGMimeType, NGMimePartParser, NGMimeHeaderFields:
+ 	  removed cString stuff
+
+Wed Jan 26 11:11:23 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeHeaderFieldParser.m: NGMimeRFC822DateHeaderFieldParser returns now
+	a y2k date
+
+Mon Oct 25 15:07:36 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGConcreteMimeType.m: fixed bug in NGConcreteTextMimeType, fixed bugs
+	  in -stringValue of multipart-types
+
+Wed Oct  6 14:19:57 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGConcreteMimeType.m: added support for 'format' parameter in 
+	  text/* types
+
+Mon Oct  4 10:23:32 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGMimePartParser.m: lowercase content-transfer-encoding, to catch both,
+	  7bit and 7BIT and 7Bit ...
+
+Fri Oct  1 18:53:43 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGMimeHeaderFieldParser.m: added various date formats to Rfc822 date
+	  header scanner
+
+	* NGMimePartParser.m: added '8bit' as a known content-transfer-encoding
+
+Thu Sep  2 21:04:32 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* added class versions and superclass version checks
+
+Mon Jul 12 22:36:45 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGMimePartGenerator.m: fixed bug (collection was modified while an
+	  enumerator was in use ..)
+
+Fri Jun 18 19:28:52 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGMimePartParser.m: filter out and apply content-transfer-encoding
+
+Tue Jun 15 11:22:29 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* removed quoted printable encoding from string header field parser
+
+	* NGMimePartParser.m: lowercase MIME header field names on-the-fly
+
+Tue Jun 15 07:57:20 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeHeaderFieldGenerator.m: insert parsing of date-field and 
+	  quoted-printable encoding 
+	* NGMimeHeaderFieldParser.m : insert generating from NSDate date-field
+
+Tue Jun  1 16:48:38 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeBodyGenerator.m: fixed bug (add generated boundary to multipart)
+
+Wed May 26 11:01:48 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeBodyGenerator.m fixed nil-body bug
+
+Fri May  7 20:42:53 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* add -stringValue to NGMimeHeaderFields
+
+Tue May  4 16:16:47 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* added MIME generator classes
+
+Tue May  4 11:43:39 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeBodyPartParser.m: fixed remove-comments bug
+
+Tue May  4 11:30:53 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGMimeBodyParser.m: added NGMimeRfc822BodyParser class
+
+	* NGMimePartParser.m: added new delegate method to apply content
+	  transfer encoding like stuff on MIME bodies.
+
+Thu Apr 22 18:58:02 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* renamed NGMimeParser to NGMimePartParser
+
+Tue Apr 20 18:27:44 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeParser.m: fixed content-length LA-bug
+
+Tue Apr 20 11:01:27 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeBodyParser.m: end-of-line chars needn`t to be on end of 
+	boundary
+	
+	body can be less than 2 * boundary (remove assert)
+	if start- or end-boundary wasn`t found the left over data were append 
+	to the multipart
+
+	* NGMimeParser.m : check whether content-type, content-length, 
+	subject are already in headers
+
+	* NGMimeType.m : fixed len bug
+
+Mon Apr 19 08:55:42 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGMimeParser.m: add delegate for use of content-length-field
+	fixed read content-length bug
+
+Fri Apr 16 19:52:46 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGMimeParser.m: improved content-length parsing
+
+Fri Apr 16 18:48:35 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGMimeParser.m: rewritten to support MIME mails
+
+Fri Apr 16 12:33:46 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGMimeType.m, NGConcreteMimeType.[hm]: added 'name' parameter to
+	  text type and added x-vcard type
+
+	* NGMimeType.m: make MIME type names and parameters lowercase
+
+	* NGMimeBodyParser.m: added support for different EOL sequences
+
+	* NGMimeParser.m: added delegates to parse a body of a part or to
+	  select a body parser for a body of a part.
+
+	* NGConcreteMimeType.m: fixed bug, message/rfc822 is not a composite
+	  type
+
+Mon Apr 12 16:28:47 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* use #include instead of #import, made headers #include safe
+
+Mon Mar 29 11:39:45 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* added kit class NGMime
+
+	* separate MIME parsers for messages and general MIME.
+
+Mon Jan 18 20:17:19 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGConcreteMimeType.m: fixed bug in NSConcreteTextMimeType
+	  -parametersAsDictionary method
+
+Sat Jan  9 21:09:29 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGMimeParser.m: new 'foundEOF' variable
+
+Tue Dec 15 17:56:40 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGConcreteMimeType.m: fixed -isEqual: of NGConcreteGenericMimeType
+
+Fri Nov 27 14:50:03 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* started WIN32 support
+
+Thu Nov  5 12:25:22 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* added NGMimeHeaderFields.[hm] with NGMimeContentDispositionHeaderField
+	class in it.
+
+	* NGMimeHeaderFieldParser.m: added NGMimeContentDispositionHeaderFieldParser
+	class
+
+	* added NGMimeBodyPart for parts contained in multiparts
+
+	* made NSData/NSMutableData a NGMimePart
+
+	* added NGMimeMultipartBody class
+
+Wed Nov  4 21:07:48 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGMimeType.m: bugfix in wildcard-type creation
+
+	* NGConcreteMimeType.m: bugfix in wildcard matching
+
+	* NGMimeBodyParser.m: added NGMimeMultipartBodyParser for parsing
+	multipart bodies.
+
+Wed Nov  4 18:49:22 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* added NGMimeBodyPartParser for parsing the entities in multipart-bodies.
+
+	* NGConcreteMimeType.m: added fast concrete implementations of
+	comparison methods
+
+	* NGMimeType.m: added advanced type-comparison/matching methods
+
+	* Added new protocol and class NGMimeBodyParser responsible for parsing
+	raw body data provided by the NGMimeParser.
+
+1998-10-09  Helge Hess  <helge@trex.mdlink.de>
+
+	* created ChangeLog
+

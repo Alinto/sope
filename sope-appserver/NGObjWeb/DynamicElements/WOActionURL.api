@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOActionURL">
+  <binding name="pageName" passthrough="NO" defaults="Page Names"/>
+  <binding name="action" passthrough="NO" defaults="Actions"/>
+  <binding name="actionClass" passthrough="NO" defaults="Direct Action Classes"/>
+  <binding name="directActionName" passthrough="NO" defaults="Direct Actions"/>
+
+  <binding name="fragmentIdentifier" passthrough="NO"/>
+  <binding name="queryDictionary" passthrough="NO"/>
+
+  <!-- SOPE -->
+  <binding name="otherTagString" passthrough="NO"/>
+  
+  <validation message="either one of &apos;action&apos;, or &apos;pageName&apos; may be bound, or either or both of &apos;actionClass&apos; and &apos;directActionName&apos; may be bound">
+    <count test="!=1">
+      <bound name="action"/>
+      <bound name="pageName"/>
+      <or>
+        <bound name="actionClass"/>
+        <bound name="directActionName"/>
+      </or>
+    </count>
+  </validation>
+</wo>

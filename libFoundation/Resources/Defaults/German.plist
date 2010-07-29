@@ -1,0 +1,39 @@
+{
+    NSWeekDayNameArray = (
+	Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
+    );
+    NSShortWeekDayNameArray = (
+	Mo, Di, Mi, Do, Fr, Sa, So
+    );
+    NSMonthNameArray = (
+	Januar, Februar, Marz, April, Mai, Juni, Juli, August, September,
+	Oktober, November, Dezember
+    );
+    NSShortMonthNameArray = (
+	Jan, Feb, Mrz, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez
+    );
+    NSTimeFormatString = "%H:%M:%S";
+    NSDateFormatString = "%a, %b %d, %Y";
+    NSTimeDateFormatString = "%a %b %d %Y %H:%M:%S %z";
+    NSShortTimeDateFormatString = "%m.%d.%y %H:%M:%S";
+    NSDecimalSeparator = ",";
+    NSThousandsSeparator = ".";
+    NSInternationalCurrencyString = DEM;
+    NSCurrencySymbol = DM;
+    NSCurrencyString = DM;
+    NSDecimalDigits = (0, 1, 2 , 3, 4, 5, 6, 7, 8, 9);
+    NSAMPMDesignation = (AM, PM);
+    NSEarlierTimeDesignations     = ( vorher );
+    NSLaterTimeDesignations       = ( nachher );
+    NSNextDayDesignations         = ( morgen );
+    NSNextNextDayDesignations     = ( uebermorgen );
+    NSPriorDayDesignations        = ( gestern );
+    NSThisDayDesignations         = ( heute, jetzt );
+    NSHourNameDesignations        = ( 
+        (0,  Mitternacht),  (10, Vormittag), (12, Mittag, lunch), 
+        (14, Nachmittag), (19, Abend) 
+    );
+    NSPositiveCurrencyFormatString= "$9.999,00";
+    NSNegativeCurrencyFormatString= "-$9.999,00";
+    NSShortDateFormatString       = "%b %d %Y";
+}

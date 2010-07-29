@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WODictionaryRepetition">
+  <binding name="dictionary" required="YES" />
+  <binding name="key" required="YES" />
+  <binding name="item" />
+</wo>

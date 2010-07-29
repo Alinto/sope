@@ -1,0 +1,5 @@
+# aftermath
+
+after-all ::
+	@(cp bundle-info.plist \
+	  $(GNUSTEP_BUILD_DIR)/$(BUNDLE_NAME)$(BUNDLE_EXTENSION))

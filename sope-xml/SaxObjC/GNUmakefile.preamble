@@ -1,0 +1,76 @@
+# compilation settings
+
+libSaxObjC_DLL_DEF      = libSaxObjC.def
+libSaxObjC_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libSaxObjC_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
+SaxObjC_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+SaxObjC_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
+
+libSaxObjC_HEADER_FILES_DIR         = .
+libSaxObjC_HEADER_FILES_INSTALL_DIR = /SaxObjC
+
+# framework support
+SaxObjC_HEADER_FILES = $(libSaxObjC_HEADER_FILES)
+SaxObjC_OBJC_FILES   = $(libSaxObjC_OBJC_FILES)
+
+# disable optimization for exception handlers
+SaxDefaultHandler.m_FILE_FILTER_OUT_FLAGS = -O%
+SaxHandlerBase.m_FILE_FILTER_OUT_FLAGS    = -O%
+SaxObjectDecoder.m_FILE_FILTER_OUT_FLAGS  = -O%
+
+ADDITIONAL_CPPFLAGS += \
+	-O2 \
+        -Wall -DCOMPILE_FOR_GSTEP_MAKE=1        \
+        -DSOPE_MAJOR_VERSION=$(MAJOR_VERSION)   \
+        -DSOPE_MINOR_VERSION=$(MINOR_VERSION)   \
+        -DSOPE_SUBMINOR_VERSION=$(SUBMINOR_VERSION)
+
+ADDITIONAL_CPPFLAGS += -Wno-protocol
+
+ifeq ($(frameworks),yes)
+ADDITIONAL_CPPFLAGS += -DCOMPILE_AS_FRAMEWORK=1
+ifeq ($(FOUNDATION_LIB),apple)
+ADDITIONAL_CPPFLAGS += -DCOCOA_Foundation_LIBRARY=1
+endif
+endif
+
+saxxml_INCLUDE_DIRS += -I..
+saxxml_LIB_DIRS     += -L./$(GNUSTEP_OBJ_DIR)
+saxxml_TOOL_LIBS    += -lSaxObjC
+
+xmln_INCLUDE_DIRS += -I..
+xmln_LIB_DIRS     += -L./$(GNUSTEP_OBJ_DIR)
+xmln_TOOL_LIBS    += -lSaxObjC
+
+# Parameters for SaxDriver lookup
+
+ifneq ($(FHS_INSTALL_ROOT),)
+ADDITIONAL_CPPFLAGS += -DFHS_INSTALL_ROOT=\@\"$(FHS_INSTALL_ROOT)\"
+endif
+
+ifeq ($(CONFIGURE_64BIT),yes)
+ADDITIONAL_CPPFLAGS += -DCONFIGURE_64BIT=1
+endif
+
+# Apple
+
+ifeq ($(FOUNDATION_LIB),apple)
+libSaxObjC_PREBIND_ADDR="0xC0000000"
+libSaxObjC_LDFLAGS += -seg1addr $(libSaxObjC_PREBIND_ADDR)
+SaxObjC_LDFLAGS    += -seg1addr $(libSaxObjC_PREBIND_ADDR)
+endif
+
+ifeq ($(FOUNDATION_LIB),nx)
+saxxml_LDFLAGS += -framework Foundation
+xmln_LDFLAGS   += -framework Foundation
+endif
+
+# Windows
+
+ifeq ($(GNUSTEP_TARGET_OS),mingw32)
+libSaxObjC_LIBRARIES_DEPEND_UPON += -lobjc
+endif
+
+ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
+libSaxObjC_LIBRARIES_DEPEND_UPON += -lobjc
+endif

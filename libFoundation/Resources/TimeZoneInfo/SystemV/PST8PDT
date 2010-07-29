@@ -1,0 +1,30 @@
+{
+    details = {
+	PDT = {abbrev = PDT; isDST = 1; offset = "-7:00:00"; };
+	PST = {abbrev = PST; isDST = 0; offset = "-8:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Apr 27 12:00:00 1902 GMT";
+	    endDate = "Sun Oct 28 11:00:00 1973 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/12:00:00"; detail = PDT; },
+		{ date = "October/last Sunday/11:00:00"; detail = PST; }
+	    );
+	},
+	{
+	    startDate = "Sun Apr 25 12:00:00 1976 GMT";
+	    endDate = "Sun Oct 25 11:00:00 2037 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/12:00:00"; detail = PDT; },
+		{ date = "October/last Sunday/11:00:00"; detail = PST; }
+	    );
+	}
+    );
+    transitions = (
+	{ date = "Sun Jan 06 12:00:00 1974 GMT"; detail = PDT; },
+	{ date = "Sun Nov 24 11:00:00 1974 GMT"; detail = PST; },
+	{ date = "Sun Feb 23 12:00:00 1975 GMT"; detail = PDT; },
+	{ date = "Sun Oct 26 11:00:00 1975 GMT"; detail = PST; }
+    );
+}

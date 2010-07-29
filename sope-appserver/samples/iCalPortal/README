@@ -1,0 +1,39 @@
+iCalPortal
+==========
+
+A small application for hosting iCalendar files.
+
+- this is far from complete! (but has nice graphics ;-)
+
+Installation
+============
+
+Please ensure that a SAX reader bundle for iCalendar files is installed
+(in Library/SaxDrivers/, eg iCalSaxDriver.sax).
+
+
+TODO
+====
+
+- rewrite DAV part to use SOPE WebDAV
+- rewrite iCalPublishAction not to use -httpRequest, use WOSimpleHTTPParser
+  for iCalPortal if possible
+- no navigation in scheduler views!
+
+
+Defaults
+========
+
+DevMode	- YES|NO	- Development mode, do not redirect to static homepages
+
+
+Apache Config
+=============
+
+<LocationMatch "^/iCalPortal/*">
+SetHandler ngobjweb-adaptor
+SetAppPort 29022
+</LocationMatch>
+
+Alias /iCalPortal.woa/WebServerResources/ \
+  /home/helge/dev/OGo/helge/iCalPortal/iCalPortal.woa/WebServerResources/

@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEDragContainer">
+  <binding name="tag" required="YES" />
+  <binding name="effectsAllowed" />
+  <binding name="elementName" />
+  <binding name="isDraggable" defaults="YES/NO" />
+  <binding name="object" required="YES" />
+  <binding name="droppedObject" required="YES" />
+</wo>

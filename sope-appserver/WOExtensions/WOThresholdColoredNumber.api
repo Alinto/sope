@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOThresholdColoredNumber">
+  <binding name="lowColor"  passthrough="NO" required="YES" />
+  <binding name="highColor" passthrough="NO" required="YES" />
+  <binding name="threshold" passthrough="NO" required="YES" />
+  <binding name="value"     passthrough="NO" required="YES" />
+  <binding name="numberformat"
+           passthrough="NO"
+           defaults="Number Format Strings"
+  />
+</wo>

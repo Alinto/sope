@@ -1,0 +1,48 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  
+  threshold colored number: 
+  <var:threshold-colored-number
+        lowColor="lowColor" highColor="highColor"
+        threshold="threshold"
+        value="value"
+        numberformat="numberformat"/>
+  <br/>
+
+  <form var:action="self">
+    <table border="0">
+      <tr>
+         <td align="right">low color:</td>
+         <td><input type="text" var:value="lowColor" size="10"/></td>
+      </tr>
+      <tr>
+         <td align="right">high color:</td>
+         <td><input type="text" var:value="highColor" size="10"/></td>
+      </tr>
+      <tr>
+        <td align="right">threshold:</td>
+        <td>
+          <input type="text" var:value="threshold" size="10" 
+                 numberformat="0.00"/>
+        </td>
+      </tr>
+      <tr>
+         <td align="right">value:</td>
+         <td>
+           <input type="text" var:value="value" size="10" 
+                  numberformat="0.00"/>
+         </td>
+      </tr>
+      <tr>
+         <td align="right">NumberFormat:</td>
+         <td><input type="text" var:value="numberformat" size="10"/></td>
+      </tr>
+      <tr>
+         <td colspan="2"><input type="submit" value="apply"/></td>
+      </tr>
+    </table>
+  </form>
+</var:component>

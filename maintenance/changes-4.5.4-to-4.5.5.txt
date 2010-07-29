@@ -1,0 +1,1095 @@
+- added EOCoreData framework to build a bridge between EO stuff and CoreData
+- added support for building frameworks on OSX (with gstep-make)
+- add support for precompiled header files on OSX (with gstep-make)
+- major improvements / fixes in EOKeyValueArchiver
+- added key/value coding to various objects (qualifiers, datasources, ...)
+- added NSCopying to EOQualifier
+- added -isNotEmpty to NSObject
+- added -isException/-isExceptionOrNull to NSObject
+- improved NGBundleManager support for OSX 10.4
+- added method to calculate a calendar matrix
+- exposed NGRuleParser.h
+- added support for keypathes in string-bindings
+- fixed handling of MySQL NSData rows
+- use 'pg_config' tool to determine PostgreSQL locations
+- added some OpenBSD support
+- added automatic foldertype discovery to GDLContentStore 
+- changed GDLContentStore to use raw SQL names internally
+- proper support for versioned update operations
+- minor SOPEX fixes for gstep-make compilation
+- added some convenience methods to NGMail message API
+- fixed parsing of IMAP4 ACL responses
+- use immutable hashmaps in NGMail message objects
+- added NGImap4Connection and NGImap4ConnectionManager objects
+- improved driver lookup in SaxXMLReaderFactory
+- added --help and --dirs options to saxxml
+- added support for query-pathes to DOMElement/DOMDocument KVC
+- added JSStringTable dynamic element in WEExtensions
+- improved WEStringTableManager / WEStringTable
+- use apr-config to locate APR includes dirs in mod_ngobjweb
+- improved/enhanced/bugfixed WODisplayGroup class
+- changed WOHyperlink not to rewrite non-absolute URLs
+- fixed a bug with the 'selection' binding in WOPopUpButton
+- started WOxTalElemBuilder
+- changed WOHyperlink not to generate the link if 'disabled' is true
+- extended WOxElemBuilder API to better support subclasses
+- extended WOWrapperBuilder to support inline attributes'and element names
+- smart detection of incorrectly closed hash-tags (<#/abc>)
+- added WOSetHeader dynamic element (set HTTP header in response)
+- added WOCopyValue dynamic element (copy KVC values from the template)
+- added support for <var:radio-button-list/> in WOxMiscElemBuilder
+- added a hack to SoObject.m to deal with buggy Apache SSL setups (#1435)
+- make WebDAV dispatcher use the SoObject URL construction
+- make NGObjWeb log to stderr per default (instead of stdout)
+- use CoreData NSManagedObjectContext instead of EOEditingContext when avail.
+- added Google agent as a known user agent
+- changed URL handling on non-lF platforms in NGUrlFormCoder
+- properly lookup SoUser using authenticator
+- fixed generation/handling of multivalue query parameters in WOContext/Element
+- enhanced WOResourceManager API to allow retrieval of string-tables
+- improved session handling in WOComponentRequestHandler
+- improved etag caching in WEPrototype
+- bumped Prototype to 1.3.1 and Scriptaculous to 1.0.0 in WEPrototype
+- improved recurrence rule support in NGiCal
+- added NSCopying to NGiCal model objects
+- fixed NGiCal model objects to compare emails case insensitive
+- added support for iCalendar 'comment' and 'method' fields as used in iMIP
+- added PCH to snapshot of gstep-make (--enable-pch)
+- added building of MacOSX installer packages / .dmg (with gstep-make)
+- code cleanups in a lot of files
+- fixed plenty of gcc4 warnings
+
+Major contributors for 4.5.5:
+Marcus Mueller
+Sebastian Ley
+Sebastian Reitenbach
+Mont Rothstein
+Helge Hess
+... and many more :-)
+
+===========================================================================
+compare /home/helge/dev/complete/SOPE/releases/4.5.4-nevermind with .
+r1152
+changed: sope-core/
+     2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* all makefiles: add common.h as the precompiled header file
+     2005-08-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* added sope-core umbrella framework
+     2005-08-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* all makefiles: added flags to build only frameworks on MacOSX
+     2005-08-08  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* README-OSX.txt: updated prebinding info
+added:   sope-core/umbrella.make
+added:   sope-core/EOCoreData
+changed: sope-core/EOControl/
+     2005-10-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyValueQualifier.m: improved -description in edge conditions,
+     	  added warnings if the qualifier is initialized with insufficient
+     	  values (v4.5.61)
+     2005-08-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOQualifier.m: added NSCopying (v4.5.60)
+     2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyValueArchiver.m: improved decoding of bools (v4.5.59)
+     2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.58
+     	* EODetailDataSource.m: added EOKeyValueArchiving
+     	* EOSortOrdering.m: use 'selectorName' instead of 'selector' for
+     	  kv archiving
+     	* EOKeyValueArchiver.m: fixed decoding of arrays
+     2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyValueArchiver.m: fixed a bug with decoding references (v4.5.57)
+     	* EOKeyValueArchiver.m: print a warning if a class specified in the
+     	  archive could not be found (v4.5.56)
+     2005-08-04  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.55
+     	* EOSortOrdering.m, EOFetchSpecification.m: added EOKeyValueArchiving
+     	* EO*Qualifier.m: added EOKeyValueArchiving to EOQualifier classes
+     	* NSObject+EOQualifierOps.m: fixed gcc 4.0 warnings
+     2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyValueArchiver.m: process class names containing a dot by
+     	  first looking up the class using the last dot-component and then
+     	  by trying to map some known prefixes (eg D2W) (v4.5.54)
+changed: sope-core/NGExtensions/
+     2005-09-28  Helge Hess  <helge.hess@skyrix.com>
+     	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty to NSData (v4.5.175)
+     2005-09-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBundleManager.m: avoid an autorelease call in class lookup, added
+     	  some lookup hacks for Tiger Foundation (v4.5.174)
+     2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* added common.h files to support PCH compilation of subprojects (just
+     	  include the parent common.h and are not required for Xcode builds)
+     	  (v4.5.173)
+     2005-08-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOExt.subproj: code cleanups, added a README.txt (v4.5.172)
+     2005-08-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* added method to calculate a calendar matrix for a date representing
+     	  a month (-calendarMatrixWithStartDayOfWeek:onlyCurrentMonth:),
+     	  added a method to turn an English/German string into a day-of-a-week
+     	  number (0=Sun-6=Sat) (v4.5.171)
+     2005-08-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGExtensions.xcodeproj: moved NGRuleParser.h from source to header
+     	  section
+     2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGRuleEngine.subproj/NGRuleModel.m: added EOKeyValueArchiving, added
+     	  method to load from such an archive, added -addRules: to add a set
+     	  of rules (v4.5.170)
+     2005-08-04  Helge Hess  <helge.hess@skyrix.com>
+     	* NGRuleEngine.subproj/NGRuleContext.m: added new method
+     	  -allPossibleValuesForKey: to calculate all possible values for a
+     	  given key, not just the first matching one (v4.5.169)
+     2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOFilterDataSource.m, EOCompoundDataSource.m: code cleanups
+     	  (v4.5.168)
+     2005-08-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* added EOKeyValueArchiving support to NGRuleEngine objects (v4.5.167)
+     2005-07-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSException+misc.m: added -isException and
+     	  -isExceptionOrNull methods to NSObject to check whether a given
+     	  object is an exception (v4.5.166)
+     2005-07-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSNull+misc.m: fixed a stupid bug in -isNotEmpty
+     	  (v4.5.165)
+     	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty for NSArray and
+     	  NSDictionary (return YES in case they have no elements) (v4.5.164)
+     2005-07-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSString+misc.m: use -valueForKeyPath: instead of
+     	  -valueForKey: to retrieve string binding patterns (might give issues
+     	  in case you had keys with dots inside before) (v4.5.163)
+     2005-07-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty to all objects. Its
+     	  similiar to -isNotNull but also checks for strings composed of just
+     	  spaces (v4.5.162)
+     2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGResourceLocator.m: added -description, added method
+     	  -lookupAllFilesWithExtension:doReturnFullPath: to discover all
+     	  available files in a search hierarchy (v4.5.161)
+added:   sope-core/NGExtensions/NGLogging.subproj/common.h
+added:   sope-core/NGExtensions/FdExt.subproj/NSCalendarDate+matrix.m
+added:   sope-core/NGExtensions/FdExt.subproj/common.h
+added:   sope-core/NGExtensions/NGRuleEngine.subproj/common.h
+added:   sope-core/NGExtensions/EOExt.subproj/common.h
+added:   sope-core/NGExtensions/EOExt.subproj/README.txt
+changed: sope-core/NGStreams/
+     2005-08-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* reorganized inclusion to support frameworks (v4.5.49)
+changed: sope-core/samples/
+     2005-08-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* ngcal.m: finished cal tool (requires libNGExtensions v4.5.171)
+     2005-08-18  Helge Hess  <helge.hess@skyrix.com>
+     	* prepared new ngcal tool for testing calendar calculations
+     	  (unfinished)
+     2005-08-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOQualTool.m: fixed gcc 4.0 warnings
+added:   sope-core/samples/ngcal.m
+changed: sope-gdl1/MySQL/
+     2005-07-29  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.12
+     	* NSData+MySQL4Val.m: fixed handling of NSData rows (proper init was
+     	  missing)
+     	* MySQL4Values.m: improved logging of unsupported types
+     2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+     	* fixed gcc 4.0 warnings (char signedness) (v4.5.11)
+changed: sope-gdl1/PostgreSQL/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added OSX framework compilation (v4.5.45)
+     2005-08-08  Helge Hess  <helge.hess@skyrix.com>
+     	* removed CVS Id fields (v4.5.44)
+     2005-08-08  Sebastian Ley  <sebastian@withouthat.org>
+     	* GNUmakefile.preamble: use 'pg_config' tool to determine PostgreSQL
+     	  include/lib locations (v4.5.43)
+     2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.42
+     	* PostgreSQL72Channel+Model.m: fixed an EOJoin related gcc 4.0 warning
+     	* NSCalendarDate+PGVal.m: fixed gcc 4.0 signed-warnings
+changed: sope-gdl1/GDLAccess/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile, GNUmakefile.preamble: added OSX framework compilation
+     	  (v4.5.54)
+     2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAdaptorContext.m, common.h: do not include NSUtilities.h on Cocoa
+     	  (v4.5.53)
+changed: sope-gdl1/GDLContentStore/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile, GNUmakefile.preamble: added OSX framework compilation
+     	  (v4.5.35)
+     2005-07-23  Sebastian Reitenbach  <reitenbach@rapideye.de>
+     	* GNUmakefile.preamble: added OpenBSD linking flags (v4.5.34)
+     2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* GCSFolder.h: added -versionOfContentWithName: method to header file
+     	  (v4.5.33)
+     	* GCSFolder.m: return a proper exception if the extractor was unable to
+     	  create a quickrow for a given content object (v4.5.32)
+     	* GCSFolder.m: added -writeContent:toName:baseVersion: to support
+     	  consistent update operations (eg using etags), properly increase
+     	  content object version on update operations (v4.5.31)
+     	* GCSFolderManager.m, GCSFolder.m: changed not to use EOF
+     	  attribute-name 'beautification', eg 'c_name' will stay 'c_name' 
+     	  instead of being transformed into 'cName' (v4.5.30)
+     2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* GCSFolderManager.m: added automatic discovery of folder types by
+     	  scanning for .ocs files (v4.5.29)
+changed: sope-gdl1/SQLite3/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added OSX framework compilation (v4.5.20)
+     2005-08-08  Helge Hess  <helge@shire.in.skyrix.com>
+     	* GNUmakefile.preamble: fixed pathes for inline-compilation (v4.5.19)
+     2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+     	* fixed gcc 4.0 warnings (char signedness) (v4.5.18)
+added:   sopex/GNUmakefile
+added:   sopex/Templates/Project Templates/SOPE/Web Application (Wrapper)
+added:   sopex/Templates/Project Templates/SOPE/Web Application (WOx)
+removed: sopex/Templates/Project Templates/SOPE/Web Application
+changed: sopex/SOPEX/
+     2005-09-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* SOPEXContentValidator.h: added missing @class declarations (v2.0.7)
+     2005-09-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added include dirs for inline compilation
+     	  (v2.0.6)
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added linking path/dependency to NGMail
+     	  (v2.0.5)
+     2005-08-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: fixed install-dir (/Library/Frameworks)
+     	  (v2.0.4)
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* v2.0.3
+     	* added framework GNUmakefile
+     	* SOPEXWebConnection.h: added missing NSMutableDictionary prototype
+     	* SOPEXSheetRunner.m: include required AppKit.h
+     	* SOPEXSheetRunner.h: added missing NSWindow prototype
+     	* SOPEXContentValidator.m: added missing prototypes, include NSError.h
+     	  for NSLocalizedDescriptionKey
+     	* SOPEXConsoleEventFormatter.m: fixed a gcc 4.0 warning
+     	* SOPEXAppController.m: include NGObjWeb.h for missing symbols
+     	* SOPEXConsole.h: added NGLogEvent class forward declaration
+added:   sopex/SOPEX/GNUmakefile.preamble
+added:   sopex/SOPEX/GNUmakefile
+changed: sope-mime/
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: fixed a linking issue on OSX (v4.5.236)
+     2005-08-30  Helge Hess  <helge.hess@skyrix.com>
+     	* do not use PCH warning flags with older compilers (v4.5.235)
+     2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* added some PCH support (v4.5.234)
+     2005-08-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* build NGImap4 and NGMail frameworks (v4.5.233)
+     2005-08-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* added OSX framework support (v4.5.232)
+     2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: fixed a gcc 4.0 warning (v4.5.231)
+     2005-07-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: fixed a compatibility issue with Cocoa (v4.5.230)
+     2005-07-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime, NGMail: added some convinience methods to access the header
+     	  fields of a part (v4.5.229)
+     2005-07-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: fixed a parsing bug in ACL responses (v4.5.228)
+     2005-07-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: fixed default names of NGImap4Connection, some code reorgs
+     	  (v4.5.227)
+     2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: added -description to imap4-connection (v4.5.226)
+     2005-07-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: headers hashmap is now properly made immutable (v4.5.225)
+     2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: added a safeguard for some edge case (v4.5.224)
+     	* NGImap4: added NGImap4Connection, NGImap4ConnectionManager (v4.5.223)
+changed: sope-mime/samples/
+     2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* added imapcontest.m tool to test the new NGImap4Connection object
+added:   sope-mime/samples/imapcontest.m
+changed: sope-mime/NGMime/
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeAddressHeaderFieldGenerator.m: fixed some strict dependencies
+     	  on NGMail (this generator should be moved to NGMail)
+     2005-07-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeBodyPart.m: added some convinience methods to access the header
+     	  fields of a part
+     2005-07-13 Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMime.xcodeproj: synced with GNUmakefile
+     2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeBodyGenerator.m: improved reliability against invalid body
+     	  objects
+changed: sope-mime/NGImap4/
+     2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4Connection.m: fixed gcc 4.0 warnings
+     2005-07-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4Connection.m: fixed a Cocoa compatibility issue with
+     	  -doesMailboxExistAtURL
+     2005-07-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4ResponseParser.m: fixed a bug in parsing mailbox names in ACL
+     	  responses
+     2005-07-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4Connection.m: updated defaults to use NGImap4Connection*
+     	  names, made the IMAP4 folder separator an ivar, consolidated the
+     	  fetching of the mailbox hierarchy
+     2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4Connection.m: added a -description
+     2005-07-13  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGImap4.xcodeproj: synced with GNUmakefile
+     2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* added NGImap4Connection/NGImap4ConnectionManager classes, a simpler
+     	  interface to the IMAP4 client library
+added:   sope-mime/NGImap4/NGImap4MailboxInfo.h
+added:   sope-mime/NGImap4/NGImap4MailboxInfo.m
+added:   sope-mime/NGImap4/NGImap4Connection.h
+added:   sope-mime/NGImap4/NGImap4Connection.m
+added:   sope-mime/NGImap4/NGImap4ConnectionManager.h
+added:   sope-mime/NGImap4/NGImap4ConnectionManager.m
+changed: sope-mime/NGMail/
+     2005-07-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeMessage.m: added some convinience methods to access the header
+     	  fields of a message
+     2005-07-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeMessage.m: copy hashmap on object creation to make it immutable
+changed: sope-xml/
+     2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* all makefiles: add common.h as the precompiled header file
+     2005-08-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* all makefiles: added flags to build only frameworks on MacOSX
+added:   sope-xml/umbrella.make
+changed: sope-xml/libxmlSAXDriver/
+     2005-09-14  Helge Hess  <helge.hess@skyrix.com>
+     	* libxmlSAXDriver.m: improved 'activeDriver' handling in some edge
+     	  condition (v4.5.22)
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* install into SaxObjC framework Resources when being used with OSX
+     	  (v4.5.21)
+     2005-07-20  Helge Hess  <helge.hess@skyrix.com>
+     	* TableCallbacks.m: fixed a compilation issues with either gcc 4.0.1
+     	  or Sarge (v4.5.20)
+changed: sope-xml/ChangeLogSaxDriver/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.1
+     	* install into SaxObjC framework Resources when being used with OSX
+     	* ChangeLogSaxDriver.m: fixed a gcc 4.0 warning
+changed: sope-xml/STXSaxDriver/
+     2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* added common.h in project subdirs for PCH support (v4.5.13)
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.12
+     	* install into SaxObjC framework Resources when being used with OSX
+     	* bumped version to 4.5 to be consistent with the remaining SOPE
+     	  versioning
+added:   sope-xml/STXSaxDriver/Model/common.h
+added:   sope-xml/STXSaxDriver/ExtraSTX/common.h
+changed: sope-xml/SaxObjC/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.52
+     	* SaxXMLReaderFactory.m: improved bundle-info.plist lookup (first look
+     	  in bundle directory, then try to lookup as a NSBundle resource),
+     	  log searched pathes if no XML reader could be found
+     	* GNUmakefile.preamble: set framework/cocoa defines when compiling
+     	  with frameworks support
+changed: sope-xml/samples/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* saxxml.m: print a usage information in case no arguments are given or
+     	  the --help argument is used. Print SAX driver lookup directories when
+     	  --dirs option is given
+changed: sope-xml/DOM/
+     2005-08-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile: removed duplicate definition of EDOM.h (v4.5.20)
+     2005-08-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* DOMDocumentFragment.m: fixed some prototypes (v4.5.19)
+     2005-07-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* DOMElement.m: evaluate KVC keys starting with a slash '/' as query
+     	  path expressions (by stripping of the slash!), return an attribute
+     	  node for keys starting with '@' (v4.5.18)
+     	* v4.5.17
+     	* DOMDocument.m: evaluate KVC keys starting with a slash '/' as query
+     	  path expressions
+     	* DOMNode.m: changed to return 'nil' for unknown KVC keys instead of
+     	  raising an exception
+changed: sope-ldap/NGLdap/
+     2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile: added PCH support (v4.5.25)
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile, GNUmakefile.preamble: added OSX framework compilation
+     	  (v4.5.24)
+removed: sope-ldap/NGLdap/GNUmakefile.postamble
+changed: sope-ldap/samples/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile, GNUmakefile.preamble: added OSX framework compilation
+     2005-07-23  Sebastian Reitenbach  <reitenbach@rapideye.de>
+     	* GNUmakefile.preamble: added OpenBSD linking flags
+changed: xmlrpc_call/
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added dependency to NGMail
+     2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* added an own common.h file, use PCH
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added OSX framework compilation
+     2005-07-23  Sebastian Reitenbach  <reitenbach@rapideye.de>
+     	* GNUmakefile.preamble: added OpenBSD linking flags
+added:   xmlrpc_call/common.h
+changed: sope-appserver/
+     2005-09-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile: added WEPrototype to makefile
+     2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* all makefiles: add common.h as the precompiled header file
+     2005-08-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* more work on OSX framework support
+     2005-08-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* prepared for OSX frameworks
+added:   sope-appserver/dummy.c
+added:   sope-appserver/umbrella.make
+removed: sope-appserver/README
+changed: sope-appserver/WEExtensions/
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added dependency to NGMail (v4.5.83)
+     2005-09-09  Helge Hess  <helge.hess@skyrix.com>
+     	* WETableMatrixLabel.m: avoid an edge condition when the position
+     	  binding is missing (v4.5.82)
+     2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* WETableView: added common.h file to support PCH (not required for
+     	  Xcode) (v4.5.81)
+     2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* JSStringTable.m: fixed a non-lF warning (v4.5.80)
+     2005-08-01  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.79
+     	* WETreeView.m: major code cleanups
+     	* WETreeMatrixElement.m: minor performance improvements
+     2005-07-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* JSStringTable.m: if 'if-none-match' is not set, do not return a 304
+     	  (v4.5.78)
+     2005-07-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEExtensions.xcodeproj: added JSStringTable, bumped framework version
+     2005-07-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* JSStringTable.m: use -resourceLookupLanguages on context (v4.5.77)
+     2005-07-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.76
+     	* WExExtElemBuilder.m: expose JSStringTable as var:js-stringtable
+     	* added JSStringTable dynamic element to expose localization string
+     	  tables as JavaScript arrays on the client side
+     	* WEDateField.m, JSMenu.h: minor code cleanups
+     	* v4.5.75
+     	* WEStringTableManager.m: reworked table manager
+     	* WEStringTable.m: added methods for NSDictionary compatibility
+     	* WEResourceManager.m: updated API to match NGObjWeb
+     2005-07-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEExtensions-Info.plist: fixed bundle identifier
+added:   sope-appserver/WEExtensions/JSStringTable.api
+added:   sope-appserver/WEExtensions/JSStringTable.m
+added:   sope-appserver/WEExtensions/WETableView/common.h
+changed: sope-appserver/mod_ngobjweb/
+     2005-10-04  Helge Hess  <helge.hess@skyrix.com>
+     	* GNUmakefile: add APR include dirs if apr-config can be found (this is
+     	  for Apache2 only) (OGo bug #900)
+     2005-08-01  Helge Hess  <helge.hess@skyrix.com>
+     	* scanhttp.c, sns.c: fixed gcc 4.0 warnings
+     2005-07-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBufferedDescriptor.[hc]: fixed some gcc 4.0 warnings
+     	* added an Xcode 2.1 project for building the adaptor
+     	* GNUmakefile: added a distclean and an install-usr-libexec target
+     	* NGBufferedDescriptor.c: fixed some gcc 4.0 warnings
+added:   sope-appserver/mod_ngobjweb/mod_ngobjweb.xcodeproj
+changed: sope-appserver/SoOFS/
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added dependency to NGMail (v4.5.19)
+     2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* OFSResourceManager.m, OFSFolderDataSource.m, OFSPropertyListObject.m:
+     	  fixed gcc 4.0 warnings (v4.5.18)
+     2005-07-23  Sebastian Reitenbach  <reitenbach@rapideye.de>
+     	* GNUmakefile.preamble: added OpenBSD linking flags (v4.5.17)
+changed: sope-appserver/WOExtensions/
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added dependency to NGMail (v4.5.29)
+     2005-08-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: fixed makefile for inline compilation (v4.5.28)
+     2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOKeyValueConditional.m: fixed a gcc 4.0 warning (v4.5.27)
+     2005-07-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOKeyValueConditional.m: minor code cleanups (v4.5.26)
+     2005-07-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOExtensions-Info.plist: corrected bundle identifier
+changed: sope-appserver/NGObjWeb/
+     2005-10-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* WODisplayGroup.m: added -qualifyDataSourceAndReturnDisplayCount
+     	  method to support qualification via .wod, make use of -isNotEmpty
+     	  (v4.5.204)
+     2005-09-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/_WOComplexHyperlink.m: changed
+     	  -shouldRewriteURLString:inContext: to only rewrite url strings which
+     	  either do not bear a scheme or have an `http' scheme (v4.5.203)
+     2005-09-27  Helge Hess  <helge.hess@skyrix.com>
+     	* DynamicElements/WOPopUpButton.m: fixed a bug in the 'selection' which
+     	  occurred when the element is being used with the 'value' binding
+     	  (returned the last item instead of nil for 'noSelectionString')
+     	  (v4.5.202)
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added missing linking path to NGMail (required
+     	  on OSX) (v4.5.201)
+     2005-09-15  Helge Hess  <helge.hess@skyrix.com>
+     	* started WOxTalElemBuilder (v4.5.200)
+     2005-09-13  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/_WOComplexHyperlink.m: do not generate hyperlink
+     	  if "disabled" evaluates true. This matches the behaviour of
+     	  WebObjects 4.5 and guarantees to do the right stuff in the context
+     	  of SOPE applications also. (v4.5.199)
+     2005-09-07  Helge Hess  <helge.hess@skyrix.com>
+     	* Templates/WOxElemBuilder.m: added several support methods to assist
+     	  builder subclasses to build WOElements (moved in from OGo) (v4.5.198)
+     2005-09-06  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.197
+     	* Templates/WOWrapperTemplateBuilder.m: attributes of <WEBOBJECT> or
+     	  <#Element> tags are now added as associations to dynamic elements.
+     	  The type of the association is determined by the prefix (hardcoded:
+     	  var, const, so, rsrc). Tag attributes have precedence over wod
+     	  associations so that you can define defaults in the .wod file and
+     	  override them in the .html template.
+     	  If the .wod file does not contain a definition for a given tagname,
+     	  the parser will now attempt to treat the tagname as a class (eg:
+     	  <#WOString var:value="name"/> now works w/o any .wod entry).
+     	* Templates/WOHTMLParser.m (_parseHashElement): parse attributes
+     	  defined in hash tags (eg <#abc value="abc"/>)
+     	* DynamicElements/WOSwitchComponent.m,
+     	  DynamicElements/WOComponentReference.m: minor code cleanups
+     	  (v4.5.196)
+     2005-09-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.195
+     	* DynamicElements/WOxMiscElemBuilder.m: mapped "set-header" to
+     	  WOSetHeader element
+     	* DynamicElements/WOConditional.api: added SOPE extensions
+     2005-08-31  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.194
+     	* DynamicElements/WOString.m: minor code cleanups
+     	* DynamicElements/WOxMiscElemBuilder.m: removed generation of
+     	  radio-button-matrix (which is part of WOExtensions), added generation
+     	  of WORadioButtonList (<var:radio-button-list/>)
+     2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: improved dependency handling (v4.5.193)
+     2005-08-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.192
+     	* DynamicElements/WOCopyValue.api: fixed required attribute
+     	* DynamicElements: added WOSetHeader dynamic element, this renders
+     	  nothing and is used to manipulate the headers of the response being
+     	  generated (or other objects with the same API)
+     2005-08-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/WOCopyValue.api: completed definition (v4.5.191)
+     2005-08-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.190
+     	* GNUmakefile.preamble: added NGMail framework dependency
+     	* WODisplayGroup.m: fixed an issue with processing max qualifiers
+     2005-08-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.189
+     	* DynamicElements/WOxComponentElemBuilder.m: expose WOCopyValue as
+     	  <var:copy-value/> in WOx
+     	* DynamicElements: added WOCopyValue dynamic element, this renders
+     	  nothing and is used to copy KVC values at certain times during the
+     	  template evaluation
+     2005-08-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.188
+     	* WebDAV/SoObjectWebDAVDispatcher.m: reuse root-url construction
+     	  method in SoObject.m
+     	* WebDAV/SoObjectDataSource.m, WebDAV/SoObjectResultEntry.m: removed
+     	  two aborts
+     	* SoObjects/SoObject.m: added a hack to deal with buggy Debian
+     	  apachessl (#1435), moved root-url construction method to a function
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.187
+     	* WOApplication.m: minor code cleanups
+     	* GNUmakefile, GNUmakefile.preamble: fixed installation of framework
+     	  resources
+     2005-08-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* ngobjweb.make: added support for OSX frameworks (v4.5.186)
+     2005-08-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* Defaults.plist: changed 'NGLogDefaultAppenderClass' from
+     	  'NGLogStdoutAppender' to 'NGLogStderrAppender' (v4.5.185)
+     2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* Templates/WOHTMLParser.m (_parseHashElement): fixed a bug in
+     	  detecting errors (v4.5.184)
+     2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.183
+     	* Templates/WOHTMLParser.m: improved error handling for hash-closetag
+     	  typos (will warn when a slash follows a hash, eg "<#/blub>")
+     	* WODisplayGroup.m: implemented -setSelectedObject:/-selectedObject,
+     	  changes -selectObject: to replace the full selection with the given
+     	  object (correct?), added delete/insert operations
+     	* WOApplication.m: also check for CoreData NSManagedObjectContext
+     	  when trying to locate an EOEditingContext like class
+     2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* minor code cleanups (v4.5.182)
+     2005-08-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* WODisplayGroup.m: detect whether an EOEditingContext is available at
+     	  runtime (previously compile time), consolidated categories in the
+     	  main class to allow for runtime overloading (v4.5.181)
+     2005-08-02  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.180
+     	* WEClientCapabilities.m: added Google as a known user-agent
+     	* WOResourceManager.m, SoObjects/SoProductClassInfo.m: minor code
+     	  cleanup
+     	* SoObjects/SoProductResourceManager.m: improved an error log
+     2005-07-23  Sebastian Reitenbach  <reitenbach@rapideye.de>
+     	* GNUmakefile.preamble: added OpenBSD linking flags (v4.5.179)
+     2005-07-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOContext.m: subminor code reformatting
+     	* NGHttp/NGUrlFormCoder.m: added some patch by Mont which changes
+     	  URL handling on non-libFoundation platforms
+     2005-07-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/WOContext+SoObjects.m: lookup SoUser using authenticator in
+     	  case a clientObject is available and it wasn't set yet (when
+     	  retrieving the user using -activeUser) (v4.5.178)
+     2005-07-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.177
+     	* WOApplication.m: workaround the problem that context during page
+     	  instantiation is always believed to be that of WOApplication.
+     	* WOResourceManager.m: added comment for possible resource lookup
+     	  problem
+     2005-07-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOContext.m: properly generate multivalue query parameters (value is
+     	  an NSArray) (v4.5.176)
+     	* NGObjWeb/WOApplication.h: added +isDirectConnectEnabled,
+     	  +setCGIAdaptorURL:, +cgiAdaptorURL prototypes (v4.5.175)
+     	* v4.5.174
+     	* WOResourceManager.m: added method to retrieve a string-table object
+     	  with a given name/framework/language
+     	* _WOStringTable.m: added methods to access a table like a dictionary,
+     	  added -valueForKey:
+     2005-07-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.173
+     	* DynamicElements/WOFileUpload.m: improved debug logging
+     	* DynamicElements/_WOComplexHyperlink.m: minor code cleanups
+     	* WOElement.m: improved handling of query parameters (now handles
+     	  arrays of form values)
+     2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoObject+SoDAV.m: changed not to return an etag per default
+     	  (must be overridden by subclasses!) (v4.5.172)
+     2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.171
+     	* WOComponentRequestHandler.m: stabilized session handling to properly
+     	  deal with expired sessions and URLs without element-ids
+     	* WORequestHandler.m: properly register logger bound to
+     	  'WODebuggingEnabled' as debugLogger, not as the regular logger
+added:   sope-appserver/NGObjWeb/DynamicElements/WOCopyValue.m
+added:   sope-appserver/NGObjWeb/DynamicElements/WOSetHeader.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOSetHeader.m
+added:   sope-appserver/NGObjWeb/DynamicElements/WOCopyValue.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOxTalElemBuilder.m
+changed: sope-appserver/WEPrototype/
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: fixed for framework compilation (v4.5.6)
+     2005-09-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble, GNUmakefile.postamble: moved targets from
+     	  pre- to postamble (v4.5.5)
+     2005-07-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEPrototypeScriptAction.m: improved check of if-none-match header
+     	  (v4.5.4)
+     2005-07-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* added Scriptaculous library v1.0.0 (v4.5.3)
+     2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* updated to Prototype library v1.3.1 (v4.5.2)
+     2005-07-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEPrototype-Info.plist: bundle description for Xcode
+     	* WEPrototype.xcodeproj: new Xcode 2.1 project
+added:   sope-appserver/WEPrototype/WEPrototype-Info.plist
+added:   sope-appserver/WEPrototype/scriptaculous
+added:   sope-appserver/WEPrototype/WEPrototype.xcodeproj
+added:   sope-appserver/WEPrototype/doc/GNUmakefile
+added:   sope-appserver/WEPrototype/doc/WEPrototypeScript.3
+added:   sope-appserver/WEPrototype/prototype/THANKS
+changed: sope-appserver/NGXmlRpc/
+     2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added dependency to NGMail (v4.5.13)
+     2005-08-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added framework compilation for OSX (v4.5.12)
+     2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* WODirectAction+XmlRpc.m: fixed gcc 4.0 warnings (v4.5.11)
+added:   sope-appserver/samples/CoreDataBlog
+added:   sope-appserver/samples/HelloForm
+changed: sope-appserver/samples/HelloWorld/
+     2005-09-06  Helge Hess  <helge.hess@skyrix.com>
+     	* Main.wo/Main.html: added test for inline attributes
+     	* Main.m: fixed a gcc4 warning
+changed: sope-appserver/samples/WOxExtTest/
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added linking against frameworks
+     2005-08-01  Helge Hess  <helge.hess@skyrix.com>
+     	* fixed gcc 4.0 warnings
+changed: maintenance/
+     2005-09-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* started make-osxdmg.sh script
+     	* make-osxpkg.sh, make-osxmpkg.sh: fixed some pkg build issues
+     2005-08-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* added files required to build an OSX package
+     2005-08-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* added rm-sope-on-osxlib.sh to delete all SOPE frameworks from
+     	  /Library/Frameworks on OSX
+     2005-08-08  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* znek-fix-xcode-projects.sh: added EOCoreData
+     2005-07-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* syncXcodeVersions.sh: updated for Xcode 2.1
+added:   maintenance/make-osxpkg.sh
+added:   maintenance/changes-4.5.4-to-4.5.5.txt
+added:   maintenance/package_background.tiff
+added:   maintenance/Welcome.rtf
+added:   maintenance/rm-sope-on-osxlib.sh
+added:   maintenance/License.rtf
+added:   maintenance/package-background.tiff
+added:   maintenance/make-osxmpkg.sh
+added:   maintenance/make-osxdmg.sh
+changed: sope-ical/
+     2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* added PCH support
+added:   sope-ical/data/kolab-event-libkcal-1899114701.872.eml
+added:   sope-ical/data/kolab-todo-libkcal-595002338.801.eml
+added:   sope-ical/data/kolab-contact-AWsUn40yOr.eml
+changed: sope-ical/samples/
+     2005-09-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* ievalrrule.m: started tool to evaluate iCal rrules on the shell
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* link tools against OSX frameworks if configured so
+added:   sope-ical/samples/ievalrrule.m
+changed: sope-ical/NGiCal/
+     2005-09-22  Helge Hess  <helge.hess@skyrix.com>
+     	* iCalRecurrenceRule.m: added direct parser support for 'interval',
+     	  allow 'until' values w/o Z marker for date-only values (v4.5.68)
+     2005-09-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.67
+     	* iCalMonthlyRecurrenceCalculator.m: finished 'byday' calculation
+     	* iCalRecurrenceRule.m: added support for 'bymonthday', fixed handling
+     	  of occurrence1
+     2005-09-21  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.66
+     	* iCalRecurrenceRule.m: temporarily expose byDayOccurence1 until the
+     	  API is fixed
+     	* iCalMonthlyRecurrenceCalculator.m: prepared for byday/bymonthday
+     	  rule specs
+     	* v4.5.65
+     	* iCalMonthlyRecurrenceCalculator.m: fixed calculation of 'count' field
+     	* iCalRecurrenceCalculator.m: minor code cleanups
+     	* iCalRecurrenceRule.m: improved rrule parser
+     2005-09-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalMonthlyRecurrenceCalculator.m: stop calculation if a byday part
+     	  was detected in the rule (v4.5.64)
+     	* iCalRecurrenceCalculator.m: moved cluster subclasses to own source
+     	  files (v4.5.63)
+     	* iCalRecurrenceRule.m: added some parsing/gen support for BYDAY
+     	  (v4.5.62)
+     2005-09-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalRecurrenceRule.m: minor code improvements, more tolerant on
+     	  invalid iCal rrule input (v4.5.61)
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile, GNUmakefile.preamble: added OSX framework compilation
+     	  (v4.5.60)
+     2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalCalendar.m, NGVCardName.m: fixed gcc 4.0 warnings (v4.5.59)
+     2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGVCardSaxHandler.h: fixed a gcc 4.0 warning (v4.5.58)
+     2005-07-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalPerson.m: added -partStatWithDefault method to retrieve the
+     	  partstat and return NEEDS-ACTION in case none is set (v4.5.57)
+     2005-07-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalObject.[hm], iCalEntityObject.m, iCalToDo.m, iCalAlarm.m,
+     	  iCalPerson.m, iCalCalendar.m, iCalEvent.m, iCalTrigger.m,
+     	  iCalObject.m, iCalFreeBusy.m, iCalRepeatableEntityObject.m:
+     	  fixed NSCopying (v4.5.56)
+     2005-07-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* added fragile base class version checks (v4.5.55)
+     2005-07-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalObject.[hm], iCalEntityObject.m, iCalToDo.m, iCalAlarm.m,
+     	  iCalPerson.m, iCalCalendar.m, iCalEvent.m, iCalTrigger.m,
+     	  iCalObject.m, iCalFreeBusy.m, iCalRepeatableEntityObject.m:
+     	  added NSCopying (v4.5.54)
+     2005-07-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.53
+     	* iCalCalendar.m: added +parseCalendarFromSource: convenience method
+     	* NGVCard.m: properly reset sax driver after parsing
+     2005-07-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalEntityObject.[hm]: added -increaseSequence (v4.5.52)
+     	* iCalPerson.m: fixed -hasSameEmailAddress: to lowercase email
+     	  addresses before attempting comparison (v4.5.51)
+     2005-07-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.50
+     	* NGiCal.xmap: fixed mapping of 'method' property (is an attribute of
+     	  the calendar)
+     	* iCalCalendar.m: use ASSIGNCOPY in accessors, added 'method' to
+     	  -description
+     2005-07-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.49
+     	* iCalCalendar.[hm]: added 'method'
+     	* iCalEntityObject.[hm]: added 'userComment', changed all email
+     	  related comparisons to lowercase all strings before comparison
+     	* iCalEvent.h: pretty printed iVars
+     	* NGiCal.xmap: added mapping for 'comment' -> 'userComment' and
+     	  'method' -> 'method'
+     2005-07-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.48
+     	* NGVCard.m: added some convenience methods to access the preferred
+     	  email, tel and adr
+     	* NGVCardOrg.m: added a convenience method to access the first orgunit
+added:   sope-ical/NGiCal/iCalWeeklyRecurrenceCalculator.m
+added:   sope-ical/NGiCal/iCalMonthlyRecurrenceCalculator.m
+added:   sope-ical/NGiCal/iCalYearlyRecurrenceCalculator.m
+added:   sope-ical/NGiCal/iCalDailyRecurrenceCalculator.m
+changed: sope-ical/versitSaxDriver/
+     2005-09-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: install bundle in proper SaxObjC framework
+     	  location (v4.5.19)
+     2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* install into /Library/SaxDrivers-4.5 when compiling for frameworks
+     	  (v4.5.18)
+     	* GNUmakefile.preamble: added support for OSX frameworks (v4.5.17)
+changed: gnustep-make/
+     2005-08-29  Helge Hess  <helge.hess@opengroupware.org>
+     	* Instance/subproject.make: moved include of Shared/pch.make up (to
+     	  make it available prior use)
+     	* Instance/framework.make: enabled compilation of PCH
+     2005-08-29  Helge Hess  <helge.hess@skyrix.com>
+     	* Instance/Shared/headers.make: fixed HEADER_FILES_INSTALL_DIR not to
+     	  include HEADER_FILES_DIR
+     	* Instance/Shared/headers.make (.PHONY): removed all/clean targets (now
+     	  in pch.make)
+     	* Instance/Shared/pch.make: removed PCH debug logs
+     	* which_lib.c: fixed gcc4 warnings
+     2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* configure.ac: replaced gcc-version check with a --enable-pch option
+     	* Master/*.make: delete derived sources directory during clean in
+     	  relevant project files
+     	* Instance/*.make: include pch.make in relevant project files
+     	* GNUmakefile.in: properly install pch.make
+     	* Instance/Shared/headers.make: moved PCH stuff to an own Shared file
+     	  (pch.make)
+     2005-08-26  Helge Hess  <helge.hess@skyrix.com>
+     	* configure.ac/config.make.in: enable PRECOMPILED_HEADERS if gcc
+     	  version is >=4
+     	* Instance/Shared/headers.make: added shared-instance-headers-all/clean
+     	  phony targets, added ability to compile a PCH_FILE
+     	* Instance/library.make: moved internal-library-clean out of the
+     	  old-dll section (but this doesn't get called?). Make 
+     	  shared-instance-headers-all a dependency of internal-library-all_
+     	* Master/library.make (internal-clean): delete $(DERIVED_SOURCES_DIR)
+     	  directory (which contains the precompiled header if one was created)
+     	* rules.make: added a rule to compile a precompiled header (.h header
+     	  to .gch), added a flag to ObjC file compilation to include a PCH
+     2005-07-21  Adam Fedor  <fedor@gnu.org>
+     	* Version 1.11.0
+     2005-07-20  Jeremy Bettis <jeremy@deadbeef.com>,
+     	    Nicola Pero  <n.pero@mi.flashnet.it>
+     	* config.make.in: Set FRAMEWORK_VERSION_SUPPORT here.
+     	* Instance/framework.make: And do not set it here.
+     	* Master/rules.make (%.variables, %.subprojects): if
+     	FRAMEWORK_VERSION_SUPPORT is not set to yes, use
+     	non-Versions directories for frameworks.
+     	* config.make.in (HAS_LN_S): Make sure it's set to no
+     	when it's not set to yes.
+     2005-07-14  Jeremy Bettis <jeremy@deadbeef.com>, 
+     	    Nicola Pero  <n.pero@mi.flashnet.it>
+     	Implemented support for xxx_WINDRES_FILES on mingw32.
+     	* rules.make ($(GNUSTEP_OBJ_DIR)/%${OEXT}): New mingw32 rule to
+     	compile a .rc (windres) file into an object file.
+     	(.SUFFIXES): On mingw32, add .rc.
+     	* Instance/rules.make (WINDRES_OBJS, WINDRES_OBJ_FILES): New
+     	variables for mingw32; generate them from xxx_WINDRES_FILES.
+     	(OBJ_FILES_TO_LINK): Add WINDRES_OBJ_FILES to the list of files to
+     	link.
+     2005-07-14 Jeremy Bettis <jeremy@deadbeef.com>, 
+     	   Nicola Pero <n.pero@mi.flashnet.it>
+     	Implemented pseudo-framework support for mingw32 (Windows).
+     	* Instance/framework.make: disable versioning on Windows, switch
+     	to use the new DLL building system already used by libraries, and
+     	clean up all the small details of pseudo-frameworks on mingw32.
+     2005-07-13  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* target.make (EXTRACT_CLASS_NAMES_COMMAND): New define for
+     	mingw32 where class name symbols start with '___' rather than
+     	'__'.
+     2005-07-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* target.make (FreeBSD ELF): if -pthread is being used for
+     	threads, add -pthread to INTERNAL_CFLAGS, INTERNAL_OBJCFLAGS,
+     	INTERNAL_LDFLAGS.
+     2005-07-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* Instance/framework.make (DUMMY_FRAMEWORK): Mangle
+     	framework names into valid ObjC class names.
+     2005-07-12  Nicola Pero <n.pero@mi.flashnet.it>
+     	* Documentation/README.MinGW: Updated.
+     2005-07-08  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/news.texi: Update for next version.
+     2005-07-06  Nicola Pero <n.pero@mi.flashnet.it>
+     	* Instance/bundle.make: Removed usage of :: rules for all but the
+     	internal- rules.  Can't see a reason why we were using :: rules in
+     	the other cases, probably a tradition that was followed without
+     	really understanding why.
+     	* Instance/gswbundle.make: Same change.
+     	* Instance/framework.make: Same change.
+     	* Instance/subproject.make: Same change.
+     2005-06-17  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/GNUmakefile: Don't try to install README.NetBSD
+     	* Documentation/machines.texi: Updates.
+     2005-06-10  Adam Fedor  <fedor@gnu.org>
+     	* Instance/test-library.make: Remove dejagnu code and replace
+     	with rules to inherit from library.make
+     2005-06-10  Adam Fedor  <fedor@gnu.org>
+     	* Master/source-distribution.make (dist): Tar/copy the directory
+     	instead of moving it to make the distribution. Fixes bug #13305
+     	* Documentation/machines.texi: Update Suse.
+     2005-06-06  Adam Fedor  <fedor@gnu.org>
+     	* Instance/application.make (ALL_GUI_LIBS): Remove OBJC_LIBS,
+     	AUXILIARY_OBJC_LIBS, and TARGET_SYSTEM_LIBS
+     	* Instance/gswapp.make (ALL_GSW_LIBS): Idem.
+     	* Instance/service.make (ALL_SERVICE_LIBS): Idem.
+     	* Instance/test-library.make (ALL_TEST_LIBRARY_LIBS): Idem.
+     	* Instance/tool.make (ALL_TOOL_LIBS): Idem.
+     	Fixes bug #9920.
+     2005-05-31  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* Documentation/README.MinGW: Rewritten with updated instructions.
+     2005-05-23  David Lazaro Saz  <dlazaro@acm.org>
+     	* Documentation/userfaq.texi: Updated style, trademark usage and some
+     	spelling mistakes.
+     2005-05-21  Adam Fedor  <fedor@gnu.org>
+     	* Update FSF Address.
+     	* Documentation/gnustep-howto.texi: Update required libs.
+     2005-04-19  Adam Fedor  <fedor@gnu.org>
+     	* GNUmakefile.in (install): Don't make Makefiles link
+     	* target.make (darwin/GNU): Use $(CC) to link library.
+     	* Instance/framework.make: More comments.
+     2005-04-15  Adam Fedor  <fedor@gnu.org>
+     	* Instance/framework.make: Add top-level symlink for all darwin
+     	* ld_lib_path.[c]sh: Clarify framework comment.
+     	* Documentation/machines.texi: Update
+     	* Documentation/README.NetBSD: Remove, obsolete.
+     2005-04-06  Nicola Pero <n.pero@mi.flashnet.it>
+     	* GNUstep.conf (USER_GNUSTEP_RC): Fixed typo, it was spelt
+     	as .GNusteprc instead of .GNUsteprc.
+     2005-04-06  Nicola Pero <n.pero@mi.flashnet.it>
+     	* Instance/framework.make: Create header directories and copy them
+     	even if HEADER_FILES is empty.  This fixes problems when
+     	subprojects have headers, but the top-level framework does not.
+     	* Instance/Shared/headers.make (HEADER_FILES_DIR,
+     	HEADER_FILES_INSTALL_DIR): Always compute those two variables
+     	even if HEADER_FILES is empty.
+     2005-04-06  Nicola Pero <n.pero@mi.flashnet.it>
+     	* Instance/framework.make ($(FRAMEWORK_HEADER_FILES)): Fixed
+     	depending on HEADER_FILES, which wasn't taking HEADER_FILES_DIR
+     	into account (Fix suggested by Matt Rice <ratmice@yahoo.com>).
+     2005-03-22  Nicola Pero <n.pero@mi.flashnet.it>
+     	* Instance/application.make (ALL_LDFLAGS): When on a platform
+     	where DLLs are built (such as Mingw), automatically generate a
+     	.exe.a library for the application.  Required by Gorm.
+     2005-03-21  Adam Fedor  <fedor@gnu.org>
+     	* GNUmakefile.in: Don't install .GNUsteprc file
+     	* GNUstep.conf: New file.
+     	* Documentation/README.Darwin,  Documentation/README.MinGW,
+     	Documentation/faq.texi, Documentation/machines.texi: Updates.
+     2005-03-21  Nicola Pero <n.pero@mi.flashnet.it>
+     	* Instance/palette.make (internal-palette-all_): Use the old dll
+     	rules only if OLD_DLL_SUPPORT is YES.  In all other cases,
+     	including Mingw, use the standard ones.
+     	(Info-gnustep.plist): Include PALETTE_OBJ_EXT in NSExecutable.
+     2005-03-21  Nicola Pero <n.pero@mi.flashnet.it>
+     	* Instance/bundle.make: Use make quotes, not shell quotes, for
+     	BUNDLE_OBJ_EXT when used in rules.
+     2005-03-21  Nicola Pero <n.pero@mi.flashnet.it>
+     	* target.make (SHARED_LIBEXT): Set to .dll.a for Mingw so that
+     	which_lib manages to find the libs and building with debug=yes now
+     	works on Mingw.
+     2005-03-10  Nicola Pero <n.pero@mi.flashnet.it>
+     	* Instance/library.make: On Windows, try to link against all 
+     	libraries, except the one we are compiling.
+     	* Instance/bundle.make: Replaced all occurrences of WITH_DLL with
+     	BUILD_DLL.
+     	* Instance/framework.make: Same change.
+     	* Instance/palette.make:  Same change.
+     	* Instance/bundle.make (build-bundle): Use the old DLL rules to
+     	build bundles only if OLD_DLL_SUPPORT is defined.  Else, use the
+     	rules specified in target.make for that platform.
+     	* target.make (BUNDLE_LD): Just use -shared on Mingw.
+     2005-03-10  Nicola Pero <n.pero@mi.flashnet.it>
+     	* user_home.c (main): Fixed missing case for Windows ... if
+     	HOMEPATH was already a full path, the code would forget to copy
+     	the path into home.
+     2005-03-09  Nicola Pero <n.pero@mi.flashnet.it>
+     	* configure.ac: Detect libobjc.dll.a as a custom ObjC library.
+     	* configure: Regenerated.
+     2005-03-01  Nicola Pero <n.pero@mi.flashnet.it>
+     	* target.make (WITH_DLL): Variable removed.
+     	(OLD_DLL_SUPPORT): New variable which is set to yes for cygwin,
+     	but to no for mingw.
+     	(DLLTOOL): Do not define for mingw.
+     	(DLLWRAP): Do not define for mingw.
+     	(SHARED_LIB_LINK_CMD): New variable for mingw.
+     	(AFTER_INSTALL_SHARED_LIB_CMD): The same.
+     	(AFTER_INSTALL_SHARED_LIB_CHOWN): The same.
+     	(SHARED_LIBEXT): Do not define to be .a on mingw; that is only
+     	confusing; use LIBEXT instead.
+     	(LIBEXT): Define to be .a on mingw.
+     	(TARGET_SYSTEM_LIBS): Define using =, not :=.
+     	* rules.make (ALL_CPPFLAGS): Check BUILD_DLL instead of WITH_DLL
+     	when adding -DGNUSTEP_WITH_DLL.
+     	* Instance/library.make (LIBRARY_NAME_WITHOUT_LIB): New variable.
+     	(LIBRARY_FILE_EXT): Unused variable removed.
+     	(CLEAN_library_NAME): Generate using make functions rather than
+     	firing external shell scripts to increase building speed.
+     	Execute existing DLL code when OLD_DLL_SUPPORT is set to yes.  For
+     	BUILD_DLL but not OLD_DLL_SUPPORT, added brand new code which uses
+     	the new target.make mingw variables and takes advantage of the new
+     	DLL support in GCC and mingw.
+     2005-02-19  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/README.MinGW: Minor edit.
+     	* Documentation/faq.texi: Add question.
+     	* Documentation/gnustep-howto.texi: Add service
+     	* Documentation/machines.texi: Edit FreeBSD 5.x	
+     2005-02-18  Richard Frith-Macdonald <rfm@gnu.org>
+     	* Documentation/README.MinGW: Update with my latest experiences.
+     2005-01-31  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/GNUmakefile: Install README.* docs
+     	* Documentation/machines.texi: Typo.
+     2005-01-14  Armando Di Cianno <fafhrd@gentoo.org>
+     	* GNUstep-reset.sh (reset-path): Add new argument with a path
+     	fragment to make the path removal more accurate.  Use it with
+     	appropriate arguments for each variable. (with small changes by
+     	Nicola).
+     2005-01-05  Sergii Stoian <stoian255@ukr.net>
+     	* Instance/Shared/bundle.make (shared-instance-bundle-all): Fixed
+     	copying resource files and localized resource files into the
+     	bundle when they are in subdirs.
+     2004-12-27  Quentin Mathe <qmathe@club-internet.fr>
+             * Documentation/README.Darwin: Rewritten the base library install
+             instructions (libxslt support with Fink explained) and other minor
+             updates.
+             * Documentation/machines.texi: Made the GNUstep on MacOSX section a bit
+             more clear.
+             * GNUstep-HOWTO: Synchronized with Documentation/machines.texi and made
+             the spacing more consistent.
+     2004-12-26  Quentin Mathe <qmathe@club-internet.fr>
+             * Documentation/README.Darwin: Updated to take in account the latest 
+             feedback by Uli Kusterer.
+             * Documentation/machines.texi: 
+             * GNUstep-HOWTO:
+             Updated the current GCC state for GNUstep on Darwin.
+     2004-12-26  Quentin Mathe <qmathe@club-internet.fr>
+             * Documentation/README.Darwin: Improved indentation and presentation.
+     2004-12-19 Richard Frith-Macdonald <rfm@gnu.org>
+             * target.make: For gnu compiler on darwin, use flat namespace and
+     	undefined warning for executables as well as libraries/bundles so
+     	that we can link with libraries/bundles without havint to explictly
+     	name all the libraries that thay depend upon.
+     2004-12-06  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/machines.texi (MacOSX): Update (info from Markus
+     	Hitter).
+     	* Documentation/README.Darwin: Clean up, simplify.
+     Sun Nov  7 04:18:39 2004  Nicola Pero <n.pero@mi.flashnet.it>
+     	* tar-exclude-list: Use *.svn instead of .svn to have
+     	.svn dirs excluded.
+     Sun Nov  7 04:07:50 2004  David Wetzel <dave@turbocat.de>
+     	* Instance/Shared/bundle.make: Everywhere use the '-f' flag to 'cp
+     	-r' so that read-only files such as subversions dirs can be
+     	written and overwritten.
+     Thu Nov  4 08:39:29 2004  Nicola Pero <n.pero@mi.flashnet.it>
+     	* common.make (RM_LN_S): New variable.
+     	* target.make: Replaced 'rm -f', when used before creating a
+     	symlink, with $(RM_LN_S).
+     	* rules.make ($(GNUSTEP_OBJ_DIR)): Same change.
+     	* Instance/framework.make: Same change.
+     	* Instance/gswbundle.make: Same change.
+     2004-10-29  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/README.Cygwin: Updated
+     	* Documentation/README.Darwin: Minor update
+     	* Documentation/gnustep.init: Add navigation tags back
+     2004-10-18  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/README.MinGW: Mention Windows installer. Update links
+     	* Documentation/gnustep-howto.texi: Some setup no longer needed.
+     	* Documentation/gnustep.init: Don't add links - currently not 
+     	referenced correctly.
+     	* Documentation/machines.texi: Add compilers section.
+     	* Instance/tool.make: Fix a typo.
+added:   gnustep-make/GNUstep.conf
+added:   gnustep-make/Instance/Shared/pch.make

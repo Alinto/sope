@@ -1,0 +1,86 @@
+SOPE Installation Guide
+=======================
+
+Prerequisites
+=============
+
+- gstep-make
+- libFoundation or gstep-base or Cocoa Foundation
+- libxml2/libxml2-dev
+- autoconf
+- openldap2/openldap2-dev
+- postgresql-dev
+
+sope-xml
+- libxml2/libxml2-dev
+
+sope-core
+- autoconf
+
+sope-ldap
+- openldap2/openldap2-dev
+
+sope-gdl1
+- postgresql-dev
+
+
+(Internal) Dependencies
+=======================
+
+sope-xml
+- [self contained]
+
+sope-core
+- sope-xml
+
+sope-mime
+- sope-core
+
+sope-ical
+- sope-xml
+- sope-core
+
+sope-ldap
+
+sope-appserver
+- sope-xml
+- sope-core
+- sope-mime (to be removed!)
+
+sope-gdl1
+- sope-core (EOControl/NGExtensions)
+
+
+Building
+========
+
+If the prerequisites are properly fulfilled, building SOPE 4.5 is
+a simple:
+
+  ./configure
+  make -s all
+
+(a build takes about 5 minutes on a Debian/Athlon 1.8+)
+
+Installation:
+
+  make -s install
+
+
+Troubleshooting
+===============
+
+* /common.make not found
+
+  If you see errors like "/common.make" not found you either did not configure
+  your SOPE tree _or_ you did not source GNUstep.sh
+
+* warning: Foundation/NSObject.h: No such file or directory
+
+  You did not install a Foundation library, eg libFoundation
+
+Building mod_ngobjweb
+=====================
+
+TODO: write something
+Note: a README is in the mod_ngobjweb directory?

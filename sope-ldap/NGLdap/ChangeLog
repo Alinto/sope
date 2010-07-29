@@ -1,0 +1,280 @@
+2009-04-02  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGLdapConnection.m (useSSL,startTLS): new method enabling
+	  encryption on the LDAP connection. (v4.7.35)
+
+2007-11-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGLdapConnection.m: replaced some -cString calls with -UTF8String
+	  (v4.7.34)
+
+	* NGLdapURL.m: removed local URL escaping and replaced it with
+	  NSString+misc (v4.7.33)
+
+	* NSString+DN.m: removed cString based space-stripping function and
+	  replaced it with the method from NGExtensions (v4.7.32)
+
+2007-07-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* changed API to use NSTimeInterval, added missing getter methods
+	  (v4.7.31)
+
+2007-07-23  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* added methods to specify query time and size limits (OGo bug #1888)
+
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings, minor code
+	  cleanups (v4.5.30)
+
+2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOQualifier+LDAP.h: changed EOControl related includes into imports
+	  to enable compilation against MulleEOF (v4.5.29)
+
+2006-01-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGLdapConnection.m: set LDAP options prior performing a bind. Default
+	  to UTF-8 credentials (can be changed back to Latin1 using the
+	  LDAPUseLatin1Creds default). This should fix OGo bug #995 (v4.5.28)
+
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGLdapURL.m: properly include string.h to avoid a warning (v4.5.27)
+
+2005-10-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.26
+
+	* NGLdapSearchResultEnumerator.m: minor code improvements
+
+2005-10-16  Jean-Alexis Montignies  <ja@sente.ch>
+
+	* NGLdapSearchResultEnumerator.m: properly set microseconds field of
+	  timeout, added accessors for fetch-timeout (OGo bug #1588)
+
+2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: added PCH support (v4.5.25)
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile, GNUmakefile.preamble: added OSX framework compilation
+	  (v4.5.24)
+
+2005-04-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 warnings (v4.5.23)
+
+2005-03-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGLdapConnection.m: fixed not to do unauthenticated binds (related to
+	  OGo bug #957) (v4.5.22)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLdap.xcode: minor fixes and updated
+
+2004-10-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: include config.make if available (v4.3.21)
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README.macosx: removed obsoleted documentation
+
+	* NGLdap.xcode: adjusted several build parameters
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+	  (v4.3.20)
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLdap.xcode: new Xcode project
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed for SOPE 3.3 directory layout (v4.3.19)
+
+	* moved to sope-ldap
+
+	* moved to SOPE 4.3 (v4.3.18)
+
+2004-06-20  Florian G. Pflug  <fgp@phlo.org>
+
+	* NGLdapConnection.m: added support for MS Active Directory, introduced
+	  three new defaults: LDAPInitialBindSpecific - YES means not to do 
+	  anonymous binds, but instead use LDAPInitialBindDN, LDAPInitialBindPW
+	  for the initial bind. Two LDAP options are set (protocol version to
+	  LDAPv3 and disabled referrals). Finally "LDAP_PARTIAL_RESULTS" is
+	  accepted as a valid return code for successful searches. (v4.2.17)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added prebinding (v4.2.16)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.15)
+
+2004-01-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGLdapConnection.m: fixed various compile warnings with OpenLDAP v2
+	  (v4.2.14)
+
+2003-09-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.13
+
+	* EOQualifier+LDAP.m: define sel_eq for NeXT_RUNTIME
+
+	* common.h: remove obsolete FoundationExt references
+
+2003-07-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: do not link against SASL library by default,
+	  you can still use the "sasl=yes" makefile parameter to enable
+	  compilation against the SASL library (required for some older
+	  LDAP libraries which do not link against SASL)
+
+2003-07-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLdapConnection.m: replaced an indexOfString with rangeOfString
+	  (v4.2.12)
+
+Wed Apr 16 17:00:06 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* NGLdapConnection.m: move DN for login code in seperate method 
+	  (v4.2.11)
+
+2003-04-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLdapURL.m: small cleanups (v4.2.10)
+
+2003-04-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: added "nosasl" and "nossl" configuration
+	  parameters
+
+2003-04-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: added setting to compile against reentrant
+	  LDAP libraries
+
+	* NGLdapConnection.m: added new LDAPLoginAttributeName default and
+	  a lot more debugging messages if LDAPDebugEnabled is on (v4.2.9)
+	
+2003-04-01  GNUstep User  <helge.hess@skyrix.com>
+
+	* v4.2.8
+
+	* common.h: compiles with GNUstep Base
+
+	* NGLdapDataSource.m, NGLdapFileManager.m: do not use NSFileIdentifier
+	  constant (uses a string instead)
+
+	* NGLdapAttribute.m, NSString+DN.m: replaced -indexOfString: calls
+	  with -rangeOfString
+
+2003-01-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLdapFileManager.m: replaced a RETAIN macro (v4.2.7)
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* changes for improved compilation on MacOSX, replaced RETAIN macros
+	  with methods (v4.2.6)
+
+Fri Dec 27 10:55:32 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLdapAttribute.m: moved UTF8/Latin1 string to NSString conversion to
+	  a centralized method (stringFromData) (v4.2.5)
+
+2002-11-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLdapFileManager.m: made -dnForPath:, -pathForDn: and 
+	  -ldapConnection public methods (v4.2.4)
+	
+	* NGLdapFileManager.m: added -initWithURL: to init filemanager using
+	  an NSURL object (v4.2.3)
+
+	* moved ldapls, ldap2dsml tools to ../samples/
+
+2002-09-26  Helge Hess  <helge.hess@skyrix.com>
+
+        * removed all OpenLDAP v1 things not available in v2 anymore ... 
+	  (v4.2.2)
+
+2002-05-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved from Skyrix-dev-42 repository to skyrix-core (v4.2.1)
+
+Thu Apr 25 15:37:57 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLdapConnection.m: pass credentials as ISO-Latin-1 ..
+
+Wed Mar  6 13:29:28 CET 2002 Jan41 Reichmann  <jan@skyrix.com>
+
+	* merge with SkyrixGreen
+
+Mon Jan 21 16:29:30 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGLdapAttribute.m: 
+	* NGLdapSearchResultEnumerator.m: Fixed UTF8 handling
+
+Wed Oct 24 12:46:58 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* changed various places to use UTF-8 instead of cString
+
+	* updated to SKYRiXgreen
+
+Mon Aug 13 18:01:48 2001  Martin Hoerning  <mh@skyrix.com>
+
+	* NGLdapSearchResultEnumerator.m: fixed RETAIN-BUG
+
+	* NGLdapAttribute.m: fixed performance/BUGS
+
+	* NGLdapConnection.m: repeared RETAIN-BUG, 
+	                      updated changes from SKYRiXgreen
+
+	* NSString+DN.m: repaired free - BUG
+
+	* NGLdapSearchResultEnumerator.m: repaired RETAIN bugs
+
+	* NGLdapConnection.m/NSString+DN.m repaired RETAIN bugs
+
+Fri Aug 10 13:52:30 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLdapFileManager.m: inherit from NGFileManager
+
+Mon Feb 26 17:03:38 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGLdapConnection.m: use port 389 if none is specified
+
+Mon Jan 29 15:38:23 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGLdapFileManager.m: added (non-)support for trash-folder
+
+Fri Jan 19 16:15:57 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGLdapFileManager.m: added support for global-ids
+
+Thu Jan 18 17:08:50 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGLdapFileManager.m: use new FileManager protocols in NGExtensions
+
+Mon Dec 18 13:02:10 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGLdapEntry.m: added -valueForKey:
+
+Wed Nov 29 18:06:03 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* created ChangeLog
+

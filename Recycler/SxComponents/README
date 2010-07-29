@@ -1,0 +1,40 @@
+# $Id$
+
+This implements the client interfaces to a SandStorm like
+XML-RPC based component system.
+
+Auth-Handling
+=============
+If you make a call which requires authentication, a somewhat
+complex process is initiated ... ;-)
+This is to be described here ...
+
+Failover
+========
+The components support some kind of 'transparent application failover'.
+When a daemon crashes, it gets restarted by the skymasterd, but on
+a new port as the ports are assigned by the kernel. When the component
+can't connect to the server anymore, cause it only knows the old port
+the server ran on before it crashed, it queries the new data from the
+registry and runs the method on the server with the new IP and port.
+The retry count and the time between the retries can be handled with
+the defaults described below. If it can't connect within the retry count
+given, the exception is passed as result (which can then be handled by the
+UI). 
+
+Defaults
+========
+  
+  SxComponentRegistryBackends - ( SxXmlRpcRegBackend )
+  SxComponentRegistryURL      - "http://127.0.0.1:14042/RPC2"
+
+  SxComponentRetriesOnError   - how many retries should be run
+                                when the component couldn't connect
+                                to the server (Default: 3)
+
+  SxComponentRetryTime        - how long should be waited between
+                                the retries - this one gets multiplied
+                                with the retry count, so the first retry
+                                is run immediately, the second after
+                                1*retryTime, the third after 2*retryTime etc.
+                                (Default: 5)

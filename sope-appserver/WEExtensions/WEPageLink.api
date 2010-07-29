@@ -1,0 +1,6 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEPageLink">
+  <binding name="pageName" required="YES" defaults="Page Names" />
+  <binding name="sync" required="YES" />
+</wo>

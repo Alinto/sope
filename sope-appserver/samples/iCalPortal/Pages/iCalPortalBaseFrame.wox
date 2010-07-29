@@ -1,0 +1,54 @@
+<?xml version='1.0' standalone='yes'?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:const="http://www.skyrix.com/od/constant">
+  <head>
+    <title><var:string value="title"/></title>
+    <meta name="description" content="SKYRiX iCalendar Portal" />
+    <meta name="author"      content="SKYRIX Software AG" />
+    <meta name="robots"      content="stop" />
+
+    <link rel="shortcut icon" href="http://calendar.skyrix.com/favicon.ico" />
+    <link type="text/css" 
+          rel="stylesheet" 
+          href="/iCalPortal.woa/WebServerResources/English.lproj/site.css" />
+    <link href="mailto:webmaster@skyrix.com" rev="made" />
+  </head>
+  
+  <body background="/iCalPortal.woa/WebServerResources/English.lproj/back.gif">
+
+    <var:if condition="showHeader">
+      <center>
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center"><img 
+                border="0" filename="small.gif" width="1" height="30" /></td>
+            <td align="center"><img
+                border="0" filename="free_hosting.gif" width="622" height="30" /></td>
+            <td align="center"><img
+                border="0" filename="small.gif" width="1" height="30" /></td>
+          </tr>
+          <tr>
+            <td align="center"
+                background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+                border="0" filename="pixel.gif" width="1" height="1" /></td>
+    
+
+            <td align="center" bgcolor="white" height="200">
+              <var:component-content/>
+            </td>
+
+            <td align="center"
+                background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+                border="0" filename="pixel.gif" width="1" height="1" /></td>
+          </tr>
+        </table>
+      </center>
+    </var:if>
+    
+    <var:if const:negate="YES" condition="showHeader">
+      <var:component-content/>
+    </var:if>
+  </body>
+</html>

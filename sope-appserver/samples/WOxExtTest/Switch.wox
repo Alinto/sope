@@ -1,0 +1,61 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  
+  <b>MultiSwitch:</b><br/><br/>
+
+  <var:switch selections="selections">
+    <var:case const:key="one">     content of <b>one</b>       <br/></var:case>
+    <var:case const:key="two">     content of <b>two</b>       <br/></var:case>
+    <var:case const:key="three">   content of <b>three</b>     <br/></var:case>
+    <var:case const:key="four">    content of <b>four</b>      <br/></var:case>
+    <var:case keys="keys">   content of <b>fifth/six</b> <br/></var:case>
+    <var:default> content of <b>default</b> <br/></var:default>
+  </var:switch>
+  
+  <br/>
+
+  <b>SingleSwitch:</b>
+  <br/><br/>
+
+  <var:switch selection="selection">
+    <var:case const:key="one">   1. content of one    <br/></var:case>
+    <var:case const:key="two">   2. content of two    <br/></var:case>
+    <var:case const:key="three"> 3. content of three  <br/></var:case>
+    <var:case const:key="four">  4. content of four   <br/></var:case>
+    <var:case keys="keys">  content of fifth/six <br/></var:case>
+    <var:default> content of <b>default</b> <br/></var:default>
+  </var:switch> <!--SingleSwitch-->
+
+  <hr/>
+
+  <form var:action="self">
+    <table border="0">
+      <tr>
+        <td align="right">multi selection:</td>
+        <td>
+          <var:checkbox-list list="list" item="item"
+                             selections="selections"
+                             suffix="item"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">single selection:</td>
+        <td><var:popup list="list" item="item" 
+                       selection="selection"
+                       const:singleSelection="YES"/></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" var:action="self" value="apply"/></td>
+      </tr>
+    </table>
+    
+    content--
+      <var:component-content/>
+    --content
+  </form>
+
+</var:component>

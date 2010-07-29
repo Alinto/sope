@@ -1,0 +1,7 @@
+xmlrpc_client
+=============
+
+A shell tool to call XML-RPC web services.
+
+Note: you should set the WOHTTPConnectionUseSimpleParser default to YES to
+      ensure proper HTTP parsing.

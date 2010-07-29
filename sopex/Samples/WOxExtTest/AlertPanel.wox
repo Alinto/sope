@@ -1,0 +1,25 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  <var:js-alert-panel 
+        const:pageName="PanelContent"
+        const:alertMessage="Show a page in a new target window ..."
+        const:targetWindow="panel"
+        const:string="'new page' - alert panel"/>
+  <br/>
+  
+  <var:js-alert-panel
+        action="countClicks"
+        const:alertMessage="Increment the clicks ..."
+        const:string="'invoke action' - alert panel"/>
+  
+  clicks: <b><var:string value="clicks"/></b> <br/>
+  
+  <var:js-alert-panel
+        javaScriptFunction="javaScriptFunction"
+        const:alertMessage="Invoke a javaScript function ..."
+        const:string="'invoke javescript' - alert panel"/>
+  <br/>
+</var:component>

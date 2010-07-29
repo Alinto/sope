@@ -1,0 +1,24 @@
+2004-04-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* CFXMLSaxDriver.m: do not dump core if the contentHandler callback
+          doesn't implement a proper character selector or if no contentHandler
+          is set
+
+2004-02-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* CFXMLSaxDriver.m: major fix to namespace processing (was not able to
+	  properly parse .wox templates before)
+
+2003-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* CFXMLSaxDriver.m: fixed warnings on invalid prototypes for error
+          reporting and entity resolution CFXML callbacks (at least the entity
+          callback was completely wrong)
+        
+2003-05-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* CFXMLSaxDriver.m (-handleAttributesOfNode:nsdecls:defaultPrefix:): 
+	  fixed a namespace processing bug, attributes did not inherit the 
+	  namespace of their element as their default namespace
+
+	* created ChangeLog

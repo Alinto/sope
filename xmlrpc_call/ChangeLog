@@ -1,0 +1,35 @@
+2007-03-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XmlRpcClientTool.m: fixed a gstep-base compilation warning
+
+2006-01-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* xmlrpc_call.xcodeproj: added Xcode 2.2 project
+
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* HandleCredentialsClient.m: properly include string.h to avoid a
+	  warning
+
+2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added dependency to NGMail
+
+2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added an own common.h file, use PCH
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added OSX framework compilation
+
+2005-07-23  Sebastian Reitenbach  <reitenbach@rapideye.de>
+
+	* GNUmakefile.preamble: added OpenBSD linking flags
+
+2004-11-07  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* added "-plist YES" switch to trigger XML-RPC result output in
+	  property list file format
+
+	* cleaned up source code

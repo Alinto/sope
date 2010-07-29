@@ -1,0 +1,535 @@
+#!/bin/bash
+
+#
+# Note: When adding make options to this script, ensure that the source still
+#       compiles without those options! (and just with GNUstep.sh being
+#       sourced)
+#       We do not want to force people to run configure.
+#
+
+# ******************** variables ****************
+
+CFG_ARGS="$0 $1 $2 $3 $4 $5 $6 $7 $8 $9"
+
+ARG_BEQUIET=0
+ARG_NOCREATE=0
+ARG_PREFIX=""
+ARG_FRAMEWORK_DIR=""
+ARG_GSMAKE="$GNUSTEP_MAKEFILES"
+ARG_CFGMAKE="$PWD/config.make"
+ARG_WITH_GNUSTEP=0
+ARG_WITH_DEBUG=1
+ARG_WITH_STRIP=1
+
+DARG_GNUSTEP_SH="$ARG_GSMAKE/GNUstep.sh"
+DARG_IS_FHS=1
+
+SOPE_SRCDIR="$PWD" # TODO: rather use location of configure (using basename)
+NGSTREAMS_DIR="${SOPE_SRCDIR}/sope-core/NGStreams"
+GSTEPMAKE_SRCDIR="${SOPE_SRCDIR}/gnustep-make"
+INTERNAL_MAKEDIR="${SOPE_SRCDIR}/.gsmake"
+USES_INTERNAL_MAKE=no
+
+# TODO: add pg_config, mysql_config etc!
+LINK_SYSLIBDIRS="-L/usr/local/pgsql/lib -L/usr/local/lib -L/usr/lib"
+
+# ******************** usage ********************
+
+function usage() {
+  cat <<_ACEOF
+\`configure' configures a GNUstep-make based sourcetree for installation.
+
+Usage: $0 [OPTION]...
+
+Note: You do not need to configure this source tree, as another option
+      just ensure that the GNUstep.sh of your GNUstep make installation
+      is properly sourced prior running make.
+
+Configuration:
+  -h, --help              display this help and exit
+  -q, --quiet, --silent   do not print \`checking...' messages
+  -n, --no-create         do not create output files
+
+Installation directories:
+  --prefix=PREFIX	  install files in PREFIX [/usr/local]
+  --frameworks=DIR        build frameworks and install in DIR
+  --gsmake=PATH           path to gnustep-make tree
+  --configmake=PATH       path to the config file being created
+  --with-gnustep          install in GNUstep tree
+  --enable-debug          turn on debugging and compile time warnings
+  --enable-strip          turn on stripping of debug symbols
+
+_ACEOF
+
+  exit 0;
+}
+
+# ******************** running ********************
+
+function printParas() {
+  echo "Configuration:"
+  if test $ARG_BEQUIET  = 1; then echo "  will be quite.";  fi
+  if test $ARG_NOCREATE = 1; then echo "  won't create files"; fi
+  if test "x$ARG_FRAMEWORK_DIR" != "x"; then
+    echo "  FHS:    install in frameworks directory"; 
+  elif test $DARG_IS_FHS = 1;  then
+    echo "  FHS:    install in FHS root"; 
+  else
+    echo "  FHS:    install in GNUstep tree"; 
+  fi
+
+  if test $ARG_WITH_DEBUG = 1; then 
+    echo "  debug:  yes";
+  else
+    echo "  debug:  no";
+  fi
+  if test $ARG_WITH_STRIP = 1; then 
+    echo "  strip:  yes";
+  else
+    echo "  strip:  no";
+  fi
+  
+  echo "  prefix:     $ARG_PREFIX"
+  echo "  frameworks: $ARG_FRAMEWORK_DIR"
+  echo "  gstep:      $ARG_GSMAKE"
+  echo "  config:     $ARG_CFGMAKE"
+  echo "  script:     $DARG_GNUSTEP_SH"
+  echo ""
+}
+
+function warnOnFHSPrefix() {
+  cat <<_ACEOFWARN
+Warning: you are configuring for a non standard FHS style prefix.
+         prefix: $ARG_PREFIX
+
+Some code in SOPE only looks in /usr and /usr/local for resources and is
+therefore incompatible with arbitary install pathes.
+
+If you want to have the flexibility of installation in arbitary pathes just
+configure GNUstep-make and source the GNUstep.sh script prior executing tools
+to ensure a proper environment.
+All SOPE based code is completely relocatable when being used in a GNUstep
+environment.
+
+_ACEOFWARN
+}
+
+function setupInternalGSMake() {
+  if test -f ${INTERNAL_MAKEDIR}/Library/Makefiles/GNUstep.sh; then
+    ARG_GSMAKE="${INTERNAL_MAKEDIR}/Library/Makefiles/"
+    ARG_IS_FHS=1
+    DARG_IS_FHS=1
+    ARG_WITH_GNUSTEP=0
+    USES_INTERNAL_MAKE=yes
+    if test "x$ARG_PREFIX" = "x"; then
+      ARG_PREFIX="/usr/local/"
+    fi
+  elif test -d gnustep-make; then
+    ENABLE_PCH_OPT=""
+    SETUP_COMBO="gnu-fd-nil"
+    SETUP_LOGNAME="config-gstepmake.log"
+    if test -d /Developer/Applications/Xcode.app; then
+      # rather weird OSX test, right? ;->
+      SETUP_COMBO="apple-apple-nil"
+      ENABLE_PCH_OPT="--enable-pch"
+    fi
+    pregsmdir="$PWD"
+    
+    echo -n "configuring builtin gnustep-make environment (${SETUP_LOGNAME}) .."
+    
+    cd "$GSTEPMAKE_SRCDIR"
+    ./configure >${pregsmdir}/${SETUP_LOGNAME} \
+      ${ENABLE_PCH_OPT} \
+      --prefix="${INTERNAL_MAKEDIR}" \
+      --with-config-file="${INTERNAL_MAKEDIR}/GNUstep.conf" \
+      --with-system-root="${INTERNAL_MAKEDIR}" \
+      --with-network-root="${INTERNAL_MAKEDIR}" \
+      --with-local-root="${INTERNAL_MAKEDIR}" \
+      --with-user-root="${INTERNAL_MAKEDIR}" \
+      --with-library-combo="${SETUP_COMBO}"
+
+    echo -n ".. install .."
+    make install >>${pregsmdir}/${SETUP_LOGNAME}
+    
+    ARG_GSMAKE="${INTERNAL_MAKEDIR}/Library/Makefiles/"
+    ARG_IS_FHS=1
+    DARG_IS_FHS=1
+    ARG_WITH_GNUSTEP=0
+    USES_INTERNAL_MAKE=yes
+    if test "x$ARG_PREFIX" = "x"; then
+      ARG_PREFIX="/usr/local/"
+    fi
+    
+    cd "$pregsmdir"
+    if test -f $ARG_GSMAKE/GNUstep.sh; then
+      echo ".. done (log in ${SETUP_LOGNAME})."
+    else
+      echo "error: failed to setup embedded gnustep-make sources!"
+      tail ${pregsmdir}/${SETUP_LOGNAME}
+      exit 1
+    fi
+  else
+    echo "error: did not find embedded gnustep-make sources!"
+    exit 1
+  fi
+}
+
+function validateGNUstepArgs() {
+  # GNUstep make
+  if test "x$ARG_GSMAKE" = "x"; then
+    if test -f $HOME/OGoRoot/Library/Makefiles/GNUstep.sh; then
+      ARG_GSMAKE="$HOME/OGoRoot/Library/Makefiles/"
+    elif test -f $HOME/GNUstep/Library/Makefiles/GNUstep.sh; then
+      ARG_GSMAKE="$HOME/GNUstep/Library/Makefiles/"
+    elif test -f /usr/GNUstep/System/Library/Makefiles/GNUstep.sh; then
+      ARG_GSMAKE="/usr/GNUstep/System/Library/Makefiles/"
+    else
+      setupInternalGSMake;
+    fi
+    DARG_GNUSTEP_SH="$ARG_GSMAKE/GNUstep.sh"
+  elif test -d $ARG_GSMAKE; then
+    if test -f $ARG_GSMAKE/GNUstep.sh; then
+      DARG_GNUSTEP_SH="$ARG_GSMAKE/GNUstep.sh"
+    elif test -f $ARG_GSMAKE/Library/Makefiles/GNUstep.sh; then
+      ARG_GSMAKE="$ARG_GSMAKE/Library/Makefiles"
+      DARG_GNUSTEP_SH="$ARG_GSMAKE/GNUstep.sh"
+    else
+      echo "error: specified directory contains no GNUstep.sh: $ARG_GSMAKE"
+      exit 1
+    fi
+  else
+    echo "error: specified GNUstep make tree does not exist: $ARG_GSMAKE"
+    exit 1
+  fi
+}
+
+function setupAppleArgs() {
+  ARG_WITH_STRIP=0
+  if test "x${USES_INTERNAL_MAKE}" = "no"; then
+    ARG_WITH_GNUSTEP=1
+  fi
+  
+  # no reason to print a warning?
+  #if test "x${xLIBRARY_COMBO}" != "xapple-apple-nil"; then
+  #  if test "x${LIBRARY_COMBO}" != "xapple-apple-apple"; then
+  #    echo "WARNING: detected MacOSX GNUstep setup: ${LIBRARY_COMBO}"
+  #    echo ""
+  #  fi
+  #fi
+}
+
+function validateArgs() {
+  # validate prefix (could be better?)
+  case "x$ARG_PREFIX" in
+    "x/usr/local"|"x/usr/local/")
+        DARG_IS_FHS=1;
+	;;
+    "x/usr"|"x/usr/")
+        DARG_IS_FHS=1;
+	;;
+    "x$GNUSTEP_USER_ROOT"|"x$GNUSTEP_LOCAL_ROOT"|"x$GNUSTEP_SYSTEM_ROOT")
+        DARG_IS_FHS=0;
+	ARG_WITH_GNUSTEP=1;
+	;;
+    "x")
+        if test $ARG_WITH_GNUSTEP = 1; then
+          DARG_IS_FHS=0;
+          ARG_PREFIX="$GNUSTEP_LOCAL_ROOT"
+          if test $ARG_BEQUIET != 1; then
+	    echo "Note: will install in GNUSTEP_LOCAL_ROOT: $ARG_PREFIX"
+	    echo ""
+	  fi
+        elif test "x$ARG_FRAMEWORK_DIR" != "x"; then
+          DARG_IS_FHS=0;
+          ARG_PREFIX="$ARG_FRAMEWORK_DIR"
+	  echo "Note: will install in frameworks location: $ARG_PREFIX"
+	  echo ""
+        else
+          DARG_IS_FHS=1;
+          ARG_PREFIX="/usr/local/"
+	  echo "Note: will install in default location: $ARG_PREFIX"
+	  echo ""
+	fi
+	;;
+    *)
+        if test $ARG_WITH_GNUSTEP = 1; then
+	  echo "error: specified --with-gnustep, but specified prefix is not"
+	  echo "       a GNUstep root: '$ARG_PREFIX'"
+	  exit 1
+        else
+          if test $ARG_BEQUIET != 1; then
+	    warnOnFHSPrefix;
+          fi
+	  DARG_IS_FHS=1;
+        fi
+	;;
+  esac
+  
+  if test $ARG_WITH_GNUSTEP = 1; then
+    if test $DARG_IS_FHS = 1; then
+      echo "error: configured for FHS root _and_ GNUstep tree. Choose one!"
+      exit 1
+    fi
+  fi
+}
+
+function printGNUstepSetup() {
+  echo "GNUstep environment:"
+  echo "  system: ${GNUSTEP_SYSTEM_ROOT}"
+  echo "  local:  ${GNUSTEP_LOCAL_ROOT}"
+  echo "  user:   ${GNUSTEP_USER_ROOT}"
+  echo "  path:   ${GNUSTEP_PATHLIST}"
+  echo "  flat:   ${GNUSTEP_FLATTENED}"
+  echo "  arch:   ${GNUSTEP_HOST}"
+  echo "  combo:  ${LIBRARY_COMBO}"
+  echo ""
+}
+
+function cfgwrite() {
+  echo "$1" >> $ARG_CFGMAKE
+}
+
+function genConfigMake() {
+  # we ignore the following vars also patches by gstep-make:
+  #   PATH
+  #   DYLD_LIBRARY_PATH
+  #   GUILE_LOAD_PATH
+  #   CLASSPATH
+  
+  if test $ARG_BEQUIET != 1; then
+    echo "creating: $ARG_CFGMAKE"
+  fi
+  
+  echo "# GNUstep environment configuration" > $ARG_CFGMAKE
+  cfgwrite "#   created by: '$CFG_ARGS'"
+  cfgwrite ""
+  
+  cfgwrite "# Note: you can override any option as a 'make' parameter, eg:"
+  cfgwrite "#         make debug=yes"
+  cfgwrite ""
+  
+  #cfgwrite "# print on the cmdline that this file is being used"
+  #cfgwrite "all :: "
+  #cfgwrite "	@echo Local GNUstep config.make is active"
+  #cfgwrite ""
+  
+  # TODO: should be also write a GNUSTEP_INSTALLATION_DIR / BUNDLE_INSTALL_DIR?
+  
+  
+  if test "x$ARG_FRAMEWORK_DIR" != "x"; then
+    cfgwrite "# configured to install in Frameworks directory"
+    cfgwrite "FRAMEWORK_INSTALL_DIR:=${ARG_FRAMEWORK_DIR}"
+    cfgwrite "frameworks=yes"
+    cfgwrite ""
+  elif test $DARG_IS_FHS = 1; then
+    cfgwrite "# configured for FHS install"
+    cfgwrite "FHS_INSTALL_ROOT:=$ARG_PREFIX"
+    cfgwrite ""
+  else
+    cfgwrite "# configured for GNUstep install"
+  fi
+  
+  if test $ARG_WITH_DEBUG = 1; then
+    cfgwrite "# configured to produce debugging code";
+    cfgwrite "debug:=yes"
+  else
+    cfgwrite "# configured to produce non-debugging code";
+    cfgwrite "debug:=no"
+  fi
+  cfgwrite ""
+  
+  if test $ARG_WITH_STRIP = 1; then
+    cfgwrite "# configured to produce stripped code";
+    cfgwrite "strip:=yes"
+  else
+    cfgwrite "# configured not to strip code";
+    cfgwrite "strip:=no"
+  fi
+  cfgwrite ""
+
+  cfgwrite "# enforce shared libraries";
+  cfgwrite "shared:=yes"
+  cfgwrite ""
+  
+  cfgwrite "# GNUstep environment variables:";
+  for i in `env | grep GNUSTEP_ | sort`; do
+    MAKE_ASSI="`echo $i | sed s/=/:=/`"
+    cfgwrite "${MAKE_ASSI}";
+  done
+  cfgwrite "LIBRARY_COMBO=$LIBRARY_COMBO"
+  cfgwrite ""
+  
+  # Note: GNUSTEP_TARGET_CPU is not yet available (set by common.make), so we
+  #       only have environment variables
+  # Note: we can't set SYSTEM_LIB_DIR in this location, it gets overridden by
+  #       common.make
+  cfgwrite "ifeq (\$(findstring _64, \$(GNUSTEP_HOST_CPU)), _64)"
+  cfgwrite "CONFIGURE_64BIT:=yes"
+  cfgwrite "CGS_LIBDIR_NAME:=lib64"
+  cfgwrite "else"
+  cfgwrite "CGS_LIBDIR_NAME:=lib"
+  cfgwrite "endif"
+
+  cfgwrite "ifneq (\$(FHS_INSTALL_ROOT),)"
+  cfgwrite "CONFIGURE_FHS_INSTALL_LIBDIR:=\$(FHS_INSTALL_ROOT)/\$(CGS_LIBDIR_NAME)/"
+  cfgwrite "CONFIGURE_SYSTEM_LIB_DIR += -L\$(CONFIGURE_FHS_INSTALL_LIBDIR)"
+  cfgwrite "endif"
+  cfgwrite "CONFIGURE_SYSTEM_LIB_DIR += -L/usr/\$(CGS_LIBDIR_NAME)/"
+  
+  cfgwrite "# avoid a gstep-make warning"
+  cfgwrite "PATH:=\$(GNUSTEP_SYSTEM_ROOT)/Tools:\$(PATH)"
+}
+
+function checkLinking() {
+  # library-name => $1, type => $2
+  local oldpwd=$PWD
+  local tmpdir=".configure-test-$$"
+  
+  mkdir $tmpdir
+  cd $tmpdir
+  cp ../maintenance/dummytool.c .
+  
+  tmpmake="GNUmakefile"
+  echo  >$tmpmake "include ../config.make"
+  echo >>$tmpmake "include \$(GNUSTEP_MAKEFILES)/common.make"
+  echo >>$tmpmake "CTOOL_NAME           := linktest"
+  echo >>$tmpmake "linktest_C_FILES := dummytool.c"
+  echo >>$tmpmake "linktest_TOOL_LIBS  += -l$1"
+  echo >>$tmpmake "SYSTEM_LIB_DIR += \$(CONFIGURE_SYSTEM_LIB_DIR)"
+  echo >>$tmpmake "SYSTEM_LIB_DIR      += ${LINK_SYSLIBDIRS}"
+  echo >>$tmpmake "include \$(GNUSTEP_MAKEFILES)/ctool.make"
+  
+  make -s messages=yes -f $tmpmake linktest >out.log 2>err.log
+  LINK_RESULT=$?
+  
+  if test $LINK_RESULT = 0; then
+    echo "$2 library found: $1"
+    cfgwrite "HAS_LIBRARY_$1=yes"
+  else
+    if test "x$2" = "xrequired"; then
+      echo "failed to link $2 library: $1"
+      rm ../config.make
+      exit 1
+    else
+      echo "failed to link $2 library: $1"
+      cfgwrite "HAS_LIBRARY_$1=no"
+    fi
+  fi
+  
+  cd $oldpwd
+  rm -rf $tmpdir
+}
+
+function checkDependencies() {
+  cfgwrite ""
+  cfgwrite "# library dependencies"
+  checkLinking "xml2"        optional;
+  checkLinking "ldap"        optional;
+  checkLinking "ssl"         required; # TODO: make optional
+  checkLinking "pq"          optional;
+  checkLinking "sqlite3"     optional;
+  checkLinking "mysqlclient" optional;
+}
+
+function runIt() {
+  if test $ARG_BEQUIET != 1; then
+    printParas;
+  fi
+  
+  if test $ARG_NOCREATE = 1; then 
+    if test $ARG_BEQUIET != 1; then
+      echo "not creating the config file ...";
+    fi
+  else
+    genConfigMake;
+    checkDependencies;
+    
+    if test -x $NGSTREAMS_DIR/configure; then
+      if test $ARG_BEQUIET != 1; then
+        echo -n "configuring NGStreams library .."
+        old="$PWD"
+        cd $NGSTREAMS_DIR
+        ./configure >$old/config-NGStreams.log
+        cd $old
+        echo ".. done (log in config-NGStreams.log)."
+      fi
+    fi
+  fi
+}
+
+# ******************** options ********************
+
+function extractFuncValue() {
+  VALUE="`echo "$1" | sed "s/[^=]*=//g"`"
+}
+
+function processOption() {
+  case "x$1" in
+    "x--help"|"x-h")
+	usage;
+	;;
+    "x--quiet"|"x--silent"|"x-q") ARG_BEQUIET=1;  ;;
+    "x--no-create"|"x-n")	  ARG_NOCREATE=1; ;;
+    x--prefix=*)
+	extractFuncValue $1;
+        ARG_PREFIX="$VALUE";
+	;;
+    x--frameworks=*)
+	extractFuncValue $1;
+        ARG_FRAMEWORK_DIR="$VALUE";
+	;;
+    x--gsmake=*)
+	extractFuncValue $1;
+        ARG_GSMAKE="$VALUE";
+	;;
+    x--configmake=*)
+	extractFuncValue $1;
+        ARG_CFGMAKE="$VALUE";
+	;;
+    "x--with-gnustep")
+        ARG_WITH_GNUSTEP=1
+        DARG_IS_FHS=0
+	;;
+    "x--without-gnustep")
+        ARG_WITH_GNUSTEP=0
+        DARG_IS_FHS=1
+        ;;
+    "x--enable-debug")
+        ARG_WITH_DEBUG=1
+	;;
+    "x--disable-debug")
+        ARG_WITH_DEBUG=0
+	;;
+    "x--enable-strip")
+        ARG_WITH_STRIP=1
+	;;
+    "x--disable-strip")
+        ARG_WITH_STRIP=0
+	;;
+
+    *) echo "error: cannot process argument: $1"; exit 1; ;;
+  esac
+}
+
+for i in $@; do
+  processOption $i;
+done
+
+# load GNUstep environment
+validateGNUstepArgs
+# first we load the GNUstep.sh environment
+source $DARG_GNUSTEP_SH
+if test $ARG_BEQUIET != 1; then
+  printGNUstepSetup;
+fi
+
+# setup some GNUstep dependend defaults
+if test "x$GNUSTEP_HOST_VENDOR" = "xapple"; then
+  setupAppleArgs;
+fi
+
+# ensure the parameters make sense
+validateArgs
+
+# start it
+runIt

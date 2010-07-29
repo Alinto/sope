@@ -1,0 +1,325 @@
+2007-07-31  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* common.h: changed include guard prefix
+
+2007-03-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* *.m: ported all elements to honour the new
+	  -[WOContext isRenderingDisabled] flag. (v4.7.31)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.30)
+
+2005-09-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added dependency to NGMail (v4.5.29)
+
+2005-08-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: fixed makefile for inline compilation (v4.5.28)
+
+2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOKeyValueConditional.m: fixed a gcc 4.0 warning (v4.5.27)
+
+2005-07-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOKeyValueConditional.m: minor code cleanups (v4.5.26)
+
+2005-07-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOExtensions-Info.plist: corrected bundle identifier
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added strict bundle dependencies for MacOSX
+	  (v4.5.25)
+
+2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added generated manpages for all .api files (v4.5.24)
+
+2005-03-28  Stephane Corthesy  <stephane@sente.ch>
+	
+	* v4.5.23
+
+	* JSAlertPanel: added new bindings, escapeJS and framework;
+	  fixed html 'onclick' attribute
+
+	* JSConfirmPanel: added new bindings, escapeJS and framework; replaced
+	  deprecated 'language' html attribute by 'type'
+	
+	* JSImageFlyover.m: replaced deprecated 'language' html attribute by
+	  'type'
+	
+	* JSModalWindow: added 'framework' binding
+	
+	* JSValidatedField: added new binding, escapeJS; replaced deprecated
+	  'language' html attribute by 'type'
+	
+	* JSImageFlyover.api, WOCollapsibleComponentContent.api: added
+	  defaults to framework binding
+
+2005-03-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* JSValidatedField.m, JSModalWindow.m, JSAlertPanel.m,
+	  JSConfirmPanel.m, JSImageFlyover.m, WOCheckBoxMatrix.m,
+	  WORadioButtonMatrix.m, WOTabPanel.m: minor code cleanups, added some
+	  support for non-xml style elements
+
+2005-01-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* common.h, JSConfirmPanel.m, JSAlertPanel.m, JSImageFlyover.m,
+	  JSModalWindow.m: changed to use WOContext's new
+	  resourceLookupLanguages now (v4.5.22)
+
+2004-12-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOKeyValueConditional.[api,m]: added "negate" binding (v4.5.21)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOExtensions.xcode: minor fixes and updated
+
+2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOExtensions.xcode: bumped the framework version
+
+2004-11-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.3.20
+
+	* *.api: new formal definitions for WOElements defined in this
+	  framework
+
+	* WOExtensions.xcode: added .api files
+
+2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* use Version file for install directory location
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOExtensions.xcode: fixed dependencies
+
+2004-08-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOExtensions.xcode: new Xcode project
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+	  (v4.3.19)
+
+2004-08-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* install bundle in Library/WOxElemBuilders-4.3/ (v4.3.18)
+
+	* v4.3.17
+
+	* added a bundle manager class (WOExtensionsBuilderModule)
+
+	* install (elem builder) bundle in Library/WOxElemBuilders/4.3/
+
+	* added a GNUmakefile.postamble
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed for SOPE 4.3 directory layout (v4.3.16)
+
+	* moved to SOPE 4.3 (v4.3.15)
+
+2004-06-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.14
+
+	* GNUmakefile.preamble: added prebinding
+
+	* JSModalWindow.m: improved XHTML compatibility
+
+	* JSTextFlyover.m, JSValidatedField.m, WOCheckBoxMatrix.m: minor 
+	  cleanups
+
+2004-06-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* common.h: added typecast to avoid gcc 3.4 warning (v4.2.13)
+
+	* v4.2.12
+
+	* JSAlertPanel.m: minor code cleanups, improved XHTML compatibility
+
+	* GNUmakefile.preamble: fixed relative search pathes
+
+2004-06-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile: more support for building with GNUSTEP_BUILD_DIR
+	  env variable set (v4.2.11)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.10)
+
+2004-03-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.9
+
+	* WOxExtElemBuilder.m: do not process <var:redirect/> (now handled
+	  by WExExtElemBuilder)
+
+	* added new WORedirect implementation as a subclass of WOComponent,
+	  added WORedirect header file
+
+	* added WOExtensions.h header file
+
+	* moved WORedirect dynamic element to WEExtensions as WERedirect
+
+2003-12-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* JSConfirmPanel.m: sourcecode cleanups, fixed with regards to
+	  XHTML generation (v4.2.8)
+
+2003-11-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: include makefiles from GNUSTEP_MAKEFILES (as suggested
+	  by chunsj@embian.com (v4.2.7)
+
+2003-10-15  Helge Hess  <helge@mac.in.skyrix.com.0.168.192.in-addr.arpa>
+
+	* v4.2.6
+
+	* GNUmakefile.preamble: added explicit library dependencies as
+	  required by MacOSX
+
+	* common.h: made independend from FoundationExt
+
+2003-09-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed js2m.sh, not required in WOExtensions
+
+2003-09-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* various: smaller cleanups and performance improvements (v4.2.5)
+
+2003-07-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* applied rangeOfString patches provided by Filip Van Raemdonck for 
+	  improved compilation with gstep-base (v4.2.4)
+
+2003-06-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* some cleanups, generate lowercase HTML tags, fixed some 
+	  signed/unsigned gcc warnings (v4.2.3)
+
+	* moved to skyrix-sope-42 (v4.2.2)
+
+2002-12-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: fixed linking
+
+2002-12-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: fixed SOVERSION (major/minor)
+
+2002-12-02  Helge Hess  <helge.hess@skyrix.com>
+	
+	* moved to Skyrix41e/WebUI/WOExtensions (v4.1.1)
+	
+2002-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOTabPanel.m: use -isEqual: to find the selected tab instead of
+	  object identity since tabkeys which where passed thru a bridge
+	  (eg JavaScript engine) usually don't preserve identity of base
+	  types
+
+Wed Feb 27 13:39:08 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODictionaryRepetition.m: remove warning for immutable dicts
+
+Wed Jan  9 17:07:10 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WOxExtElemBuilder.m: all WOExtensions tags supported now
+
+Mon Jan  7 17:37:39 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added WOExtensions bundle
+
+Fri Jun 15 14:42:12 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* JSConfirmPanel.m: added 'showPanel' association
+
+Tue Apr 17 13:37:56 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* WOTable.m: upper limit of 'maxColumns' is count of 'list'
+
+Tue Apr 10 16:03:10 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* WOTable.m: added WOTableHeader and WOTableContent
+
+Fri Apr  6 20:23:06 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* WOTable.m: added hasOwnTDs association
+
+	* JSValidatedField.m: escape inputText
+
+Mon Jan  8 13:38:27 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* fixed compilation
+
+Thu Dec  7 14:16:53 2000  Martin Spindler  <spindler@mdlink.de>
+
+	* WOThresholdColoredNumber.m: renamed 'treshold' assoc. to 'thres...'
+
+	* GNUmakefile: renamed Treshold.m into Threshold.m
+
+Thu Dec  7 12:15:39 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* cleanups, renamed WETresholdColoredNumber to WOThre...
+
+Thu Nov 23 14:42:11 2000  Martin Spindler  <spindler@mdlink.de>
+
+	* WOTable.m: generate TD WIDTH depending on maxColumns 
+
+Fri Oct 27 19:13:30 2000  Martin Spindler  <spindler@mdlink.de>
+
+	* WOCheckBoxMatrix.m: added
+
+	* WORadioButtonMatrix.m: added
+
+	* WOCollapsibleComponentContent.m: added association 'condition'
+
+Tue Oct 17 11:25:44 2000  Martin Spindler  <spindler@mdlink.de>
+
+	* WOTabPanel.m: 'selectedTab' wasn't updated correctly
+
+	* WOResponse+HtmlAdditions.[h|m]: removed
+
+	* WODynamicElement+WOExtensions.[h|m]: removed
+
+	* WOContextConditional.*: moved to WEExtensions/WEContextConditional.*
+
+	* WOTableView.m: moved to WEExtensions/WETableView.m
+
+	* WOTreeView.m: moved to WEExtensions/WETreeView.m
+
+	* WOSwitch.m: moved to WEExtensions/WESwitch.m
+
+Fri Oct  6 15:25:28 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* JSImageFlyover.m: added direct-action bindings
+
+Tue Sep 19 14:03:10 2000  Martin Spindler  <spindler@mdlink.de>
+
+	* added WOSwitch, WOTable, WOContextConditional, WOTableView
+
+Fri Aug  4 18:26:22 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* added JS* components done by semkat
+
+Thu Jul 20 13:54:03 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* created WOExtensions directory

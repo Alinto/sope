@@ -1,0 +1,27 @@
+Q: Apache 1.3 WebDAV not returning a content-length header?
+==
+
+Apparently Apache doesn't transmit a proper length header for PROPFIND
+responses, urks. Isn't that required for HTTP/1.1 responses (which it claims
+it is).
+
+---snip---
+PROPFIND /zs/H_chste_Ebene_der_Pers_nlichen_Ordner/My_Calendar/1B40B81E-6F11EE4B-9F81EFE5-6B2F7D7F HTTP/1.0
+Host: mac
+content-type: text/xml
+content-length: 101
+Depth: 0
+Brief: t
+
+<?xml version="1.0" encoding="utf-8" ?>
+<propfind xmlns="DAV:"  xmlns:V="DAV:"><allprop/></propfind>
+
+HTTP/1.1 207 Multi-Status
+Date: Thu, 16 Oct 2003 13:18:57 GMT
+Server: Apache/1.3.28 (Darwin) DAV/1.0.3
+Connection: close
+Content-Type: text/xml; charset="utf-8"
+
+<?xml version="1.0" encoding="utf-8"?>
+<D:multistatus xmlns:D="DAV:">
+---snap---

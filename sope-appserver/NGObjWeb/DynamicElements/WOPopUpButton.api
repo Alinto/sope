@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOPopUpButton">
+  <binding name="list" passthrough="NO" required="YES"/>
+  <binding name="item" passthrough="NO"/>
+  <binding name="selection" passthrough="NO" settable="YES"/>
+  <binding name="displayString" passthrough="NO"/>
+
+  <binding name="noSelectionString" passthrough="NO"/>
+  <binding name="selectedValue" passthrough="NO"/>
+  <binding name="escapeHTML" passthrough="NO" defaults="YES/NO"/>
+
+  <binding name="name"/>
+  <binding name="value" passthrough="NO"/>
+  <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
+
+  <binding name="itemGroup"/>
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <validation message="&apos;list&apos; must not be a constant">
+    <and>
+      <bound name="list"/>
+      <ungettable name="list"/>
+    </and>
+  </validation>
+
+  <validation message="&apos;item&apos; may not be a constant when &apos;displayString&apos; or &apos;value&apos; is bound">
+    <and>
+      <or>
+        <bound name="displayString"/>
+        <bound name="value"/>
+      </or>
+      <unsettable name="item"/>
+    </and>
+  </validation>
+
+  <validation message="&apos;item&apos; must be bound when &apos;displayString&apos; or &apos;value&apos; is bound">
+    <and>
+      <or>
+        <bound name="displayString"/>
+        <bound name="value"/>
+      </or>
+      <unbound name="item"/>
+    </and>
+  </validation>
+
+  <validation message="&apos;selectedValue&apos; and &apos;selection&apos; cannot both be bound">
+    <and>
+      <bound name="selection"/>
+      <bound name="selectedValue"/>
+    </and>
+  </validation>
+</wo>

@@ -1,0 +1,33 @@
+{
+  requires = {
+    bundleManagerVersion = 1;
+    
+    classes = (
+      { name = NSObject; }
+    );
+  };
+
+  provides = {
+    WOxElemBuilder = (
+      { name = "WExExtElemBuilder"; },
+      { name = "WExCalElemBuilder"; },
+      { name = "WExDnDElemBuilder"; },
+    );
+    
+    WODynamicElements = (
+      { name = "JSClipboard";          },
+      { name = "WEQualifierCondition"; },
+      { name = "WERedirect";           },
+      { name = "JSStringTable";        },
+    );
+    
+    classes = (
+      { name = "WExExtElemBuilder";    },
+      { name = "WExCalElemBuilder";    },
+      { name = "WExDnDElemBuilder";    },
+      { name = "JSClipboard";          },
+      { name = "WEQualifierCondition"; },
+      { name = "WERedirect";           },
+    );
+  };
+}

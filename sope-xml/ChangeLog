@@ -1,0 +1,94 @@
+2008-03-03  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README-OSX.txt: Updated
+
+2006-04-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile: reverse test for libxml2 existence flag - this allows
+	  for building libxml2 even if we didn't run configure :-)
+
+2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* all makefiles: add common.h as the precompiled header file
+
+2005-08-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* all makefiles: added flags to build only frameworks on MacOSX
+
+2004-10-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* all makefiles: include config.make if available
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* sope-xml.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects.
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* sope-xml.xcode: new Xcode aggregate project
+
+	* SxXML*: removed old Xcode projects
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved iCalSaxDriver to sope-ical
+
+	* moved ExpatSaxDriver, CFXMLSaxDriver to Recycler
+
+	* moved PlistSaxDriver to samples
+
+2004-08-03  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SxXML.xcode: fixed missing SaxObjC build dependency. libxmlSAXDriver
+	  is now built before SaxObjC, so copying it in the framework's 
+	  wrapper will succeed.
+
+2004-07-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README-OSX.txt: Major overhaul for build description, especially the
+	  Xcode section.
+
+2004-07-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SxXML.xcode: added 'Wrapper' build style and 'Wrapper Contents'
+	  target.  Use these to build the frameworks in an appropriate form to
+	  have them embedded in an applications app wrapper's 'Frameworks'
+	  folder.
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* ExpatSaxDriver/GNUmakefile, PlistSaxDriver/GNUmakefile:
+	  added support for building with GNUSTEP_BUILD_DIR environment
+	  variable set for recent gnustep-make package.
+
+2004-03-24  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SxXML.xcode: added -headerpad_max_install_names to linker flags
+	  where appropriate.
+
+2004-03-08  Helge Hess  <helge@mac.in.skyrix.com>
+
+	* SxXML.xcode: added a README file
+
+	* README-OSX.txt: added some build notes
+
+2004-02-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: compile STXSaxDriver per default
+
+	* SxXML.xcode: added new STXSaxDriver for parsing structured
+	  text files
+
+2004-02-10  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SxXML.xcode: Updated prebinding information according to
+	  README-OSX.txt. Also, added Foundation.framework explicitly
+	  to all subprojects.
+
+	* README-OSX.txt: New README currently describing prebinding
+	  information for Mac OS X.
+
+	* ChangeLog: created.

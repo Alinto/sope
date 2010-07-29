@@ -1,0 +1,9 @@
+This directory contains sample programs for the sope-ldap libraries.
+
+Tools
+=====
+
+ldapls	    - an 'ls' for LDAP directories
+ldap2dsml   - return the output of an LDAP server as DSML (directory service
+              markup language)
+ldapchkpwd  - check whether a login/password combo would be authenticated

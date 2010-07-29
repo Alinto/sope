@@ -1,0 +1,48 @@
+# MySQL4 Adaptor
+
+Note: this is far from being complete! The adaptor is currently a fork of
+      the MySQL4 adaptor.
+
+http://sql-info.de/mysql/gotchas.html
+
+TODO
+====
+- implement
+
+Basics
+======
+
+Open a Shell:
+
+  mysql --password=abc
+  > use OGo
+  > insert schema
+  > select * from date_x;
+
+Configure the Adaptor (below does not work yet for MySQL4!)
+
+  Defaults write ogo-webui-1.0a LSAdaptor MySQL4
+
+  Defaults write ogo-webui-1.0a LSConnectionDictionary \
+	'{ databaseName = OGo; }'
+
+  Defaults write ogo-webui-1.0a PKeyGeneratorDictionary \
+	"{ newKeyExpression=\"select nextval(\\'key_generator\\');\" }"
+
+  MySQL4DebugEnabled
+
+
+Setup gdltest Database
+======================
+mysql --password=abc
+> create database Test;
+> use Test;
+> CREATE TABLE my_table ( pkey INT PRIMARY KEY );
+
+
+Notes
+=====
+
+mysql_store_result      - does not block the server, full result in memory
+vs
+mysql_use_result        - does block the server, one row in memory

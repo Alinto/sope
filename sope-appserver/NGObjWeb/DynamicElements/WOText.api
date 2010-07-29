@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOTextField">
+  <binding name="name"/>
+  <binding name="value" settable="YES" required="YES"/>
+  <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
+
+  <!-- SOPE -->
+  <binding name="rows" passthrough="NO"/>
+  <binding name="cols" passthrough="NO"/>
+  <binding name="numberformat" passthrough="NO" defaults="Number Format Strings"/>
+  <binding name="dateformat" passthrough="NO" defaults="Date Format Strings"/>
+  <binding name="formatter" passthrough="NO"/>
+
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <validation message="no more than one of &apos;dateFormat&apos;, &apos;numberFormat&apos;, or &apos;formatter&apos; may be bound">
+    <count test="&gt;1">
+      <bound name="numberformat"/>
+      <bound name="dateformat"/>
+      <bound name="formatter"/>
+    </count>
+  </validation>
+</wo>

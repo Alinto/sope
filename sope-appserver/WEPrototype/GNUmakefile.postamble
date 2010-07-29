@@ -1,0 +1,20 @@
+# postprocessing makefile 
+
+WEPrototypeScript.jsm : prototype/prototype.js js2m.sh
+	sh js2m.sh $< $@
+	touch WEPrototypeScript.m
+
+WEPrototypeScriptAction.m : WEPrototypeScript.jsm
+
+before-all :: WEPrototypeScript.jsm
+
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+after-WEPrototype-all ::
+	@(cp bundle-info.plist \
+	  $(GNUSTEP_BUILD_DIR)/$(BUNDLE_NAME)$(BUNDLE_EXTENSION))
+else
+after-WEPrototype-all ::
+	@(cd $(BUNDLE_NAME)$(BUNDLE_EXTENSION);\
+	  cp ../bundle-info.plist .)
+endif

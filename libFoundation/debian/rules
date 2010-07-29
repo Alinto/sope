@@ -1,0 +1,115 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# Include dpatch stuff.
+include /usr/share/dpatch/dpatch.make
+
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+GNUSTEP_SETUP=/usr/lib/opengroupware.org/System/Library/Makefiles/GNUstep.sh
+
+CFLAGS = -Wall -g
+MAKE_FLAGS = messages=yes OPTFLAG=-O0
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+
+config.status: configure
+	dh_testdir
+	CFLAGS="$(CFLAGS)" . $(GNUSTEP_SETUP); \
+		./configure	--host=$(DEB_HOST_GNU_TYPE) \
+				--build=$(DEB_BUILD_GNU_TYPE) \
+				--with-gnustep
+
+build: build-stamp
+build-stamp:  config.status patch-stamp
+	dh_testdir
+
+	. $(GNUSTEP_SETUP); \
+		$(MAKE) $(MAKE_FLAGS) GNUSTEP_INSTALLATION_DIR=$(CURDIR)/debian/tmp/$$GNUSTEP_SYSTEM_ROOT
+
+	touch build-stamp
+
+clean: unpatch
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp 
+
+	-. $(GNUSTEP_SETUP); $(MAKE) clean
+	-. $(GNUSTEP_SETUP); $(MAKE) distclean
+
+ifneq "$(wildcard /usr/share/misc/config.sub)" ""
+	cp -f /usr/share/misc/config.sub config.sub
+endif
+ifneq "$(wildcard /usr/share/misc/config.guess)" ""
+	cp -f /usr/share/misc/config.guess config.guess
+endif
+
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
+
+	. $(GNUSTEP_SETUP); \
+		mkdir -p $(CURDIR)/debian/tmp/$$GNUSTEP_MAKEFILES/Additional
+
+	. $(GNUSTEP_SETUP); \
+		$(MAKE) $(MAKE_FLAGS) GNUSTEP_INSTALLATION_DIR=$(CURDIR)/debian/tmp/$$GNUSTEP_SYSTEM_ROOT \
+		INSTALL_ROOT_DIR=$(CURDIR)/debian/tmp install \
+		FHS_INSTALL_ROOT=$(CURDIR)/debian/tmp/usr
+		
+			
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs ChangeLog
+	dh_installdocs
+	dh_installexamples
+	dh_install --sourcedir=debian/tmp
+#	dh_installmenu
+#	dh_installdebconf	
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installmime
+#	dh_installinit
+#	dh_installcron
+#	dh_installinfo
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_perl
+#	dh_python
+	dh_makeshlibs -V
+	dh_installdeb
+	dh_shlibdeps  -L libfoundation1.1 -l debian/libfoundation1.1/usr/lib
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 

@@ -1,0 +1,289 @@
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* EOGenericRecord.m: special support for gstep-base (v4.7.74)
+
+2007-04-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyValueCoding.m: fixed a gcc4 warning (v4.7.73)
+
+2007-01-15  Stephane Corthesy  <stephane@sente.ch>
+
+	* EOQualifierParser.m (_parseValue): fixed a bug in the qualifier
+	  parser (v4.5.72)
+
+2006-12-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOKeyValueCoding.m: fixed a runtime portability issue - removed
+	  +initialize on NSArray category (v4.5.71)
+
+2006-12-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOKeyValueCoding.m: fixed numerous bugs in the computeXXX: methods
+	  and provided proper implementations according to the WO4.5 specs
+	  for gnustep-base and Apple Foundation (v4.5.70)
+
+2006-12-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyValueCoding.m: added NSDecimalNumber implementation for
+	  -computeSumForKey: (TBD: implementations for the other methods)
+	  (v4.5.69)
+
+2006-09-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyGlobalID.m: print a warning if a key-gid is created with a nil
+	  value, improved -description (v4.5.68)
+
+2006-08-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyValueCoding.m: -valueForKey: now returns mutable arrays when
+	  being called on mutable arrays (WO 4.5 compatibility) (v4.5.67)
+
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* 64bit fixes (v4.5.66)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.65
+
+	* EOKeyValueCoding.m: reduced autorelease usage in KVC key creation
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings
+
+2006-05-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOSortOrdering.m: use keyPaths instead of just keys in
+	  keyOrderComparator() function - this is feature compatible with
+	  Apple's EOF 4.5 (v4.5.64)
+
+2006-02-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyValueCoding.m: do not use EOKeyValueCoding with gstep-base (KVC
+	  implemented directly in base) (v4.5.63)
+
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.62
+
+	* EOKeyValueQualifier.m: fixed some SEL related warnings
+
+	* common.h: properly include string.h
+
+2005-10-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyValueQualifier.m: improved -description in edge conditions,
+	  added warnings if the qualifier is initialized with insufficient
+	  values (v4.5.61)
+
+2005-08-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOQualifier.m: added NSCopying (v4.5.60)
+
+2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyValueArchiver.m: improved decoding of bools (v4.5.59)
+
+2005-08-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.58
+	
+	* EODetailDataSource.m: added EOKeyValueArchiving
+
+	* EOSortOrdering.m: use 'selectorName' instead of 'selector' for
+	  kv archiving
+	
+	* EOKeyValueArchiver.m: fixed decoding of arrays
+
+2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyValueArchiver.m: fixed a bug with decoding references (v4.5.57)
+
+	* EOKeyValueArchiver.m: print a warning if a class specified in the
+	  archive could not be found (v4.5.56)
+
+2005-08-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.55
+	
+	* EOSortOrdering.m, EOFetchSpecification.m: added EOKeyValueArchiving
+	
+	* EO*Qualifier.m: added EOKeyValueArchiving to EOQualifier classes
+
+	* NSObject+EOQualifierOps.m: fixed gcc 4.0 warnings
+
+2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyValueArchiver.m: process class names containing a dot by
+	  first looking up the class using the last dot-component and then
+	  by trying to map some known prefixes (eg D2W) (v4.5.54)
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOQualifier.h: fixed prototypes of -isLike/-isCaseInsensitiveLike:
+	  (v4.5.53)
+
+	* NSObject+EOQualifierOps.m: fixed signature of -isLike: and
+	  -isCaseInsensitiveLike: to match Tiger (v4.5.52)
+
+2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 signed/unsigned warnings (v4.5.51)
+
+2005-01-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOFetchSpecification.m: minor code cleanups (v4.5.50)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOControl.xcode: minor changes and updated
+
+2004-12-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyGlobalID.m: minor code cleanup (v4.5.49)
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+	  (v4.3.48)
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOControl.xcode: various fixes for project settings
+
+2004-08-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* added new Xcode project
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved to SOPE 4.3 (v4.3.47)
+
+2004-07-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOKeyComparisonQualifier.m, EOKeyValueQualifier.m, 
+	  EOKeyValueArchiver.m, EOFetchSpecification.m: fixed gcc 3.4 warnings
+	  (v4.2.46)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.45
+
+	* GNUmakefile.preamble: added prebinding
+
+	* GNUmakefile: minor cleanups
+
+2004-05-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOKeyComparisonQualifier.m, EOKeyValueQualifier.m, EOQualifier.m,
+	  EOQualifierVariable.m: minor code cleanups, fixed some "== YES"
+	  comparisons (v4.2.44)
+
+2004-04-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOQualifierParser.m: minor code cleanups (==YES) (v4.2.43)
+
+2004-03-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOFetchSpecification, EOQualifier, EOSortOrdering: moved property
+	  list initializer methods to NGExtensions to improve GDL2 
+	  compatibility (v4.2.42)
+
+2004-03-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOFetchSpecification, EOQualifier, EOSortOrdering: deprecated
+	  -initWithPropertyList: method, added new -initWithPropertyList:owner:
+	  method (like in EOPropertyListEncoding) (v4.2.41)
+
+2004-03-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOFetchSpecification.m: subminor improvement in -copyWithZone:
+	  method (v4.2.40)
+
+2004-03-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOFetchSpecification.m: fixed a recursion introduced in v4.2.38
+	  (v4.2.39)
+
+2004-03-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.38
+
+	* EOQualifier.m: added -qualifierByApplyingBindings: to improve GDL2
+	  compatibility (should not be used)
+
+	* EOFetchSpecification.m: added -fetchSpecificationByApplyingBindings:
+	  to improve GDL2 compatibility (should not be used)
+
+	* EOQualifier.m: moved EOQualifierVariable to separate file, moved
+	  qualifier-description categories to separate files
+	
+	* EOFetchSpecification.m, EOSQLParser.m: improved GDL2/EOF 3 
+	  compatibility (different -init method, deprecated old)
+
+2003-12-29  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* EOKeyValueCoding.m: do not invoke NSDictionary -objectForKey: with
+	  'nil' key (v4.2.37)
+	
+2003-11-25  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed unused source files (v4.2.36) [what was v4.2.35?, missing]
+	
+2003-11-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOSortOrdering.m: added an assertion to prevent index overflows
+	  (v4.2.34)
+
+Tue Nov 11 12:01:10 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* common.h: fixed Free marcro declaration (introduced in 4.2.33)  
+	  (v4.2.34)
+
+2003-11-09  Helge Hess  <helge@groove.local>
+
+	* v4.2.33
+
+	* common.h: always use malloc/free for allocating instead of
+	  objc_malloc/objc_free to clean up the code
+
+	* EOAndQualifier.m: some minor tweaks for Xcode
+
+	* EOFault.m: removed support for Boehm GC to clean up the code
+
+2003-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+        * EOGenericRecord.m: fixed a warning on MacOSX (used return in
+          dealloc ...) (v4.2.32)
+
+        * v4.2.31
+
+        * EOSQLParser.m: do not use stringByReplacingString:withString:
+
+	* EOClassDescription.m: fixed some warning on OSX
+
+2003-09-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOFault.m/EOFaultHandler.m: ported to NeXT runtime (v4.2.30)
+
+2003-09-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* changed not to require FoundationExt on MacOSX (v4.2.29)
+
+2003-08-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOQualifierParser.m: added facility to register own classes for
+	  complex cast expressions (eg "cast(xxxx as myValue)"), required
+	  for Evolution 1.4.4. Also less restrictive about whitespace between
+	  "cast" and the "(" (v4.2.28)
+
+Fri Jul  4 17:00:54 2003  Helge Hess  <helge.hess@skyrix.com>
+
+	* added to OpenGroupware.org
+
+	* stripped out old ChangeLogs, unimportant for OGo
+
+Wed Dec  8 18:35:40 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* created ChangeLog

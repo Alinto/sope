@@ -1,0 +1,311 @@
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* libxmlHTMLSAXDriver.m: added a hack to allow the content-handler to specify
+	  the input charset (hh: this hack should be fixed) (v4.7.29)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* libxmlSAXDriver.m (_startElement): autorelease "nsDict" when its
+    instantiated from a copy of "ns" (v4.7.28)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* libXMLSaxDriver.m: fixed last changes for libFoundation (v4.5.24)
+	
+2007-03-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* libxmlSAXDriver.m: rewrote decoding of hexadecimal entities as
+	  this used functionality not present in libFoundation (v4.7.26)
+
+2007-03-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* libxmlSAXDriver.m: properly decode #%i; values in attributes -
+	  libxml2 doesn't decode them properly, but the driver is expected
+	  to do so. While fixing this also refrained from using the global
+	  uniqued string cache for these values (I guess the former is
+	  correct for tags and attribute names, but using it for values
+	  feels somewhat odd). (v4.7.25)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.24
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings
+
+	* improved retain-count for exception userInfo dicts
+
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* properly include string.h to avoid warnings (v4.5.23)
+
+2005-09-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: improved 'activeDriver' handling in some edge
+	  condition (v4.5.22)
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* install into SaxObjC framework Resources when being used with OSX
+	  (v4.5.21)
+
+2005-07-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* TableCallbacks.m: fixed a compilation issues with either gcc 4.0.1
+	  or Sarge (v4.5.20)
+
+2005-05-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* libxmlSAXDriver.m: minor improvements to error messages (v4.5.19)
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed loads of gcc 4.0 warnings (v4.5.18)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* libxmlSAXDriver.xcode: minor fixes
+
+2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* use Version file for install directory location
+
+2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* fhs.make, GNUmakefile: use Version file to set install dir
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* libxmlSAXDriver.xcode: minor fixes
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* libxmlSAXDriver.xcode: Fixed library search path
+
+	* libxmlSAXDriver.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects. Also added a new copy files phase to copy the
+	  resulting bundle to a well-known place where the SaxObjC framework
+	  can later pick it up for inclusion in its framework wrapper.
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* added hack to install the project in FHS locations - the SAX driver
+	  will be installed in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local) (v4.3.17)
+	
+2004-08-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* libxmlSAXDriver.xcode: new Xcode project
+
+2004-08-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.3.16
+
+	* libxmlHTMLSAXDriver.m: generate SAX events (HTML/BODY) for empty
+	  documents
+
+	* libxmlDocSAXDriver.m, libxmlHTMLSAXDriver.m: allows NSURL objects as
+	  the source for parsing
+
+2004-08-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: install SAX driver in Library/SaxDrivers-4.3/ (v4.3.15)
+	
+	* GNUmakefile: install SAX driver in Library/SaxDrivers/4.3/ (v4.3.14)
+
+2004-05-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlHTMLSAXDriver.m: do not report unclosed entity references
+	  (as they often appear as query parameters in URLs) per default, can
+	  be enabled using the libxmlHTMLSAXDriverReportUnclosedEntityRefs
+	  default (v4.2.13)
+
+	* libxmlHTMLSAXDriver.m: invalid tags are now reported to the SAX
+	  error handler if you enable the libxmlHTMLSAXDriverReportInvalidTags
+	  default (v4.2.12)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.11
+
+	* GNUmakefile, GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package.
+
+	* GNUmakefile.preamble: get libxml_INCLUDE_DIR and libxml_LIBS via
+	  xml2-config instead of hardcoding. This plays nicely on
+	  systems that use their own libxml as well as on GNUstep
+	  installations that install an own copy of libxml2 in GNUSTEP_ROOT,
+	  because xml2-config will be found in PATH prior to the system one.
+
+2003-12-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: install driver in GNUSTEP_INSTALLATION_DIR instead
+	  of GNUSTEP_USER_DIR, as "demanded" by Nicola ;-) (v4.2.10)
+
+2003-12-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: include common.make from GNUSTEP_MAKEFILES (v4.2.9)
+
+2003-10-15  Helge Hess  <helge@groove.local.>
+
+	* created GNUmakefile.preamble, look for libxml2 in Fink (/sw/lib)
+	  if we are building on darwin6 (v4.2.8)
+
+2003-10-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: fixed a void-return issue (v4.2.7)
+
+2003-08-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: fixed compilation on Cocoa (v4.2.6)
+
+2003-07-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: improved XML charset detection (v4.2.5)
+
+2003-07-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlHTMLSAXDriver.m: proper handling of system-id (v4.2.4)
+
+	* libxmlHTMLSAXDriver.m: changed not to report "invalid tag" errors,
+	  used for allowing SKYOBJ tags in .html files (v4.2.3)
+
+	* unicode.h: removed some unused statics
+
+2003-06-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.2
+
+	* added Version file to bundle
+
+	* libxmlHTMLSAXDriver.m: do not log unsupported features
+
+2003-01-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile (ADDITIONAL_INCLUDE_DIRS): added /usr/include/libxml2 for
+	  cases were we compile without sxsys-libxml2
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed dependency on FoundationExt on MacOSX
+
+Thu Jan  2 10:53:25 2003  Helge Hess  <helge.hess@skyrix.com>
+	
+	* replaced usage of RETAIN macros with method calls
+	
+Thu Oct 17 20:27:14 2002  Helge Hess  <helge.hess@skyrix.com>
+	
+	* libxmlSAXDriver.m: fixed a rare problem where an element was popped
+	  from the namespace stack in endDocument, but the stack was empty
+	
+2002-06-04  Helge Hess  <helge.hess@skyrix.com>
+	
+	* GNUmakefile: fixed linking of libSaxObjC if SaxObjC isn't installed
+	  yet
+	
+Sun May  5 18:57:02 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed SAX1 document handler
+
+Thu May  2 12:21:48 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added own NSMapTable callbacks since NSNonOwnedCStringMapKeyCallBacks
+	  aren't available on MacOSX and gstep-base
+
+	* changed bundle to use -rangeOfString: instead of -indexOfString:
+
+Mon Feb 11 17:33:52 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: fixed bug in XML charset detection
+
+Sat Feb  9 13:39:55 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: made less sensible regarding whitespace before
+	  XML declaration
+
+	* libxmlSAXDriver.m: added charset detection for NSString's containing
+	  XML
+
+Wed Nov 14 13:02:13 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlHTMLSAXDriver.m: fixed bug: unicode length was incorrectly
+	  calculated
+	
+	* libxmlHTMLSAXDriver.m: check for empty text nodes
+
+Tue Nov 13 16:22:13 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlHTMLSAXDriver.m: don't throw exception on unrecognized features
+
+Mon Nov  5 14:13:45 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: fixed bug (_cdataBlock called libxml characters())
+
+Fri Nov  2 12:56:54 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: prefix all libxml SAX callbacks with underscore
+	  (libxml 2.4.7 compatibility)
+
+Wed Oct 24 18:31:52 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* all drivers: fixed bug in UTF8-UTF16 conversion (incorrect length
+	  was passed to -characters:length: SAX callback !!!)
+
+Mon Aug 27 19:39:07 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlHTMLSAXDriver.m: use UTF8 for parsing
+
+Mon Aug 27 18:25:41 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* again: more stable in error conditions ;-)
+
+Fri Aug 24 19:50:44 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlHTMLSAXDriver.m: more stable in error conditions
+
+Fri Aug 17 18:35:56 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlHTMLSAXDriver.m: place autorelease pool around parsing
+
+Fri Aug 17 18:18:35 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlHTMLSAXDriver.m: added string uniquing table
+
+	* libxmlSAXDriver.m: added string uniquing table
+
+Thu Aug 16 13:46:06 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: cache SaxAttributes for efficiency, SAX callbacks
+	  may not reuse SaxAttributes objects but must copy them ...
+
+Thu Aug  9 20:11:01 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* libxmlSAXDriver.m: reduced use of autorelease
+
+Fri Mar  9 10:40:53 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* libxmlSAXDriver.m: fixed bug with declaration of default-namespace
+
+Wed Feb  7 10:33:39 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* libxmlSAXDriver.m: add support for NSURL
+
+Fri Jan 12 16:36:42 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* libxmlSAXDriver.m: changed locator handling, lost reentrancy
+
+Wed Jan  3 14:50:07 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* libxmlSAXDriver.m: removed caching of SaxAttrs
+
+Tue Dec 12 20:20:02 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* added a driver for the libxml's HTML parser
+
+2000-10-09    <hh@skyrix.com>
+
+	* libxmlSAXDriver.m: fixed bug with NSData parsing
+
+

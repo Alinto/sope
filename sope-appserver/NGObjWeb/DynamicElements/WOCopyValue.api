@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOCopyValue">
+  <binding name="copyValues"   required="NO"/>
+  <binding name="finishValues" />
+  <binding name="resetValues"  defaults="YES/NO"/>
+</wo>

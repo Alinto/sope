@@ -1,0 +1,57 @@
+Source: libfoundation1.1
+Priority: extra
+Maintainer: Sebastian Ley <ley@debian.org>
+Build-Depends: debhelper (>= 4.0.0), dpatch, gnustep-make-ogo, gobjc | objc-compiler, libobjc1
+Standards-Version: 3.6.1
+
+Package: libfoundation1.1-dev
+Section: libdevel
+Architecture: any
+#Provides: libfoundation-dev
+#Conflicts: libfoundation-dev, libfoundation1.0-dev
+Conflicts: libfoundation1.0-dev
+Depends: libfoundation1.1 (= ${Source-Version})
+Description: Development files for libfoundation
+ LibFoundation is a library that provides an almost complete
+ implementation of the OpenStep specification plus many other extensions
+ that can be found in the Apple's MacOS X Foundation library.
+ .
+ This package contains the development files of libFoundation.
+
+Package: libfoundation1.1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfoundation1.1-data
+Conflicts: libfoundation-ogo1.0, libfoundation1.0
+Description: Implementation of the OpenStep specification
+ LibFoundation is a library that provides an almost complete
+ implementation of the OpenStep specification plus many other extensions
+ that can be found in the Apple's MacOS X Foundation library.
+ .
+ This package contains the shared library.
+
+Package: libfoundation1.1-data
+Section: misc
+Architecture: all
+Conflicts: libfoundation-data
+Description: Static data files used by libFoundation
+ LibFoundation is a library that provides an almost complete
+ implementation of the OpenStep specification plus many other extensions
+ that can be found in the Apple's MacOS X Foundation library.
+ .
+ This package contains some data needed by libFoundation, for
+ instance timezone information.
+
+Package: libfoundation1.1-tools
+Section: misc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: libfoundation-tools
+Description: Configuration tools for libFoundation
+ LibFoundation is a library that provides an almost complete
+ implementation of the OpenStep specification plus many other extensions
+ that can be found in the Apple's MacOS X Foundation library.
+ .
+ This package contains tools shipped with libFoundation. Presently the
+ only tool is the "Defaults" program, used to read and store values
+ in libFoundation's configuration databases.

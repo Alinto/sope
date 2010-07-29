@@ -1,0 +1,349 @@
+- updated projects to Xcode 2.1
+- added external sources: gnustep-make, gnustep-objc, libFoundation
+- fixed gcc 4 and Tiger warnings
+- changed NGCTextStream and NGFileStream not to flush input streams
+- added NGImap4 method to store flags for MSN sequences
+- added support for ACL commands to NGImap4
+- fixed duplicate decoding of base64 values in XML-RPC results
+- added namespace declaration for XML vCards
+- renamed most implementations from DOMxx to NGDOMxx (WebKit compat)
+- keep JavaScript as a static in WEDropContainer
+- SoHTTPAuthenticator.m: deprecated -authRealm (now -authRealmInContext:)
+- more dynamic elements report on WODebugTakeValues
+- major improvements in WebDAV protocol layer
+- fixed SoProduct lookup with gstep-make on OSX
+- -synchronizesVariablesWithBindings now returns NO if the comp. is stateless
+- -frameworkName now returns 'nil' if the component is in the main bundle
+- +templateWithHTMLString:declarationString:languages: is now a class method
+- -pathForResourceNamed: now checks whether a session is available
+- prepared MKCALENDAR method in WebDAV dispatcher
+- added support for PROPFIND without content (same like <allprop/>)
+- added Perl HTTP::DAV as a known WebDAV user agent
+- WOMailDelivery.m generates proper \r\n instead of \n to sendmail
+- rewrote HTML and WOD parsers to use unichar
+- properly deal with seconds in NSCalendarDate+ICal.m
+- added extensive vCard support to NGiCal
+- changed vCard parser to decode qp property values
+- vCard parser now supports groupings (as emitted by Apple Addressbook)
+- added support for parsing UTF-16 vCards
+
+===========================================================================
+compare ../complete/SOPE/releases/4.5alpha.3-nevermind with .
+r876
+added:   SOPE.xcodeproj
+added:   gnustep-make
+added:   gnustep-objc
+added:   libFoundation
+added:   sope-core/sope-core.xcodeproj
+changed: sope-core/EOControl/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOQualifier.h: fixed prototypes of -isLike/-isCaseInsensitiveLike:
+     	  (v4.5.53)
+     	* NSObject+EOQualifierOps.m: fixed signature of -isLike: and
+     	  -isCaseInsensitiveLike: to match Tiger (v4.5.52)
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 signed/unsigned warnings (v4.5.51)
+added:   sope-core/EOControl/EOControl.xcodeproj
+changed: sope-core/NGExtensions/
+     2005-05-20  Helge Hess  <helge.hess@skyrix.com>
+     	* moved NGStringScanEnumerator to Recycler (was not in makefile)
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings (v4.5.160)
+     	* XmlExt.subproj/DOMNode+EOQualifier.m: reworked for new DOM
+     	  (v4.5.159)
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings (v4.5.158)
+added:   sope-core/NGExtensions/NGExtensions.xcodeproj
+removed: sope-core/NGExtensions/NGStringScanEnumerator.m
+changed: sope-core/NGStreams/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGSocket.m (SockAddrLenType): fixed a Tiger warning (v4.5.48)
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.47
+     	* fixed some gcc 4.0 warnings
+     	* NGCTextStream.m, NGFileStream.m: do not flush input streams
+added:   sope-core/NGStreams/NGStreams.xcodeproj
+added:   sope-gdl1/sope-gdl1.xcodeproj
+added:   sope-gdl1/PostgreSQL/PostgreSQL.xcodeproj
+changed: sope-gdl1/GDLAccess/
+     2005-06-02  Helge Hess  <helge.hess@skyrix.com>
+     	* EOJoinTypes.h: properly protect header against multiple inclusion
+     	  (fixes a compilation issue) (v4.5.52)
+     2005-05-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings (v4.5.51)
+added:   sope-gdl1/GDLAccess/GDLAccess.xcodeproj
+changed: sope-gdl1/GDLContentStore/
+     2005-04-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings (v4.5.28)
+added:   sope-gdl1/SQLite3/SQLite3.xcodeproj
+added:   sopex/Samples/WOxExtTest/WOExtTest.xcodeproj
+added:   sopex/WebObjects/WebObjects.xcodeproj
+added:   sopex/SOPEX/SOPEX.xcodeproj
+changed: sope-mime/
+     2005-07-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: added method to store flags for MSN sequences (v4.5.222)
+     2005-07-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4ResponseNormalizer.[hm], NGImap4Client.[hm],
+     	  NGImap4ResponseParser.m: added some ACL related commands (v4.5.221)
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime, NGImap4, NGMail: fixed gcc 4.0 warnings (v4.5.220)
+added:   sope-mime/sope-mime.xcodeproj
+changed: sope-mime/samples/
+     2005-07-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* added imapacl tool to test ACL related IMAP4 commands
+added:   sope-mime/samples/imapacl.m
+changed: sope-mime/NGMime/
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings
+added:   sope-mime/NGMime/NGMime.xcodeproj
+changed: sope-mime/NGImap4/
+     2005-07-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4Client.m: added -storeFlags:forMSNs:addOrRemove: method to
+     	  change flags for a set of MSNs (instead of ranges)
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings
+added:   sope-mime/NGImap4/NGImap4.xcodeproj
+changed: sope-mime/NGMail/
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings
+added:   sope-mime/NGMail/NGMail.xcodeproj
+added:   sope-xml/sope-xml.xcodeproj
+changed: sope-xml/libxmlSAXDriver/
+     2005-05-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* libxmlSAXDriver.m: minor improvements to error messages (v4.5.19)
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed loads of gcc 4.0 warnings (v4.5.18)
+added:   sope-xml/libxmlSAXDriver/libxmlSAXDriver.xcodeproj
+added:   sope-xml/ChangeLogSaxDriver/ChangeLogSaxDriver.xcodeproj
+changed: sope-xml/STXSaxDriver/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* Model/StructuredTextBodyElement.m: fixed a gcc 4.0 warning (v1.0.11)
+changed: sope-xml/XmlRpc/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* NSObject+XmlRpc.m, XmlRpcSaxHandler.m: fixed gcc 4.0 warnings
+     	  (v4.5.25)
+     2005-04-26  Helge Hess  <helge.hess@skyrix.com>
+     	* XmlRpcDecoder.m: fixed duplicate decoding of base64 values in XML-RPC
+     	  results (v4.5.24)
+added:   sope-xml/XmlRpc/XmlRpc.xcodeproj
+changed: sope-xml/SaxObjC/
+     2005-05-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* XMLNamespaces.h: added namespace declaration for XML vCards (v4.5.51)
+     2005-04-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* SaxMethodCallHandler.m: fixed a gcc 4.0 warning (v4.5.50)
+added:   sope-xml/SaxObjC/SaxObjC.xcodeproj
+changed: sope-xml/samples/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings, changed for new DOM implemention names
+changed: sope-xml/DOM/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* DOMTreeWalker.m: fixed a MacOSX 10.4 warning (v4.5.16)
+     	* renamed most implementations from DOMxx to NGDOMxx to avoid linking
+     	  issues with Tiger WebKit (still incomplete). Note that protocols are
+     	  still the same, so 'real' DOM apps will continue to work ;-)
+     	  (v4.5.15)
+     2005-04-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed loads of @protocol related gcc 4.0 warnings (v4.5.14)
+added:   sope-xml/DOM/DOM.xcodeproj
+added:   Recycler/Snippets/NGStringScanEnumerator.m
+added:   sope-ldap/sope-ldap.xcodeproj
+changed: sope-ldap/NGLdap/
+     2005-04-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings (v4.5.23)
+added:   sope-ldap/NGLdap/NGLdap.xcodeproj
+added:   sope-appserver/sope-appserver.xcodeproj
+added:   sope-appserver/WEPrototype
+changed: sope-appserver/WEExtensions/
+     2005-07-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEDropContainer.m: keep drop-script JavaScript code as a static
+     	  (v4.5.74)
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added strict bundle dependencies for MacOSX
+     	  (v4.5.73)
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.0 warnings (v4.5.72)
+added:   sope-appserver/WEExtensions/WEExtensions.xcodeproj
+changed: sope-appserver/SoOFS/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added strict bundle dependencies for MacOSX
+     	  (v4.5.16)
+added:   sope-appserver/SoOFS/SoOFS.xcodeproj
+changed: sope-appserver/WOExtensions/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: added strict bundle dependencies for MacOSX
+     	  (v4.5.25)
+added:   sope-appserver/WOExtensions/WOExtensions.xcodeproj
+changed: sope-appserver/NGObjWeb/
+     2005-07-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoHTTPAuthenticator.m: deprecated -authRealm, replaced with
+     	  -authRealmInContext: (v4.5.170)
+     	* WOComponent.m: added support for WODebugTakeValues (v4.5.169)
+     2005-07-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoObjectWebDAVDispatcher.m: fixed an issue when trying to call
+     	  a WebDAV method on an object (v4.5.168)
+     2005-06-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.167
+     	* WebDAV/SoWebDAVRenderer.m: improved reliability by checking the class
+     	  of OPTIONS method results, deprecated array results
+     	* WebDAV/SoObjectWebDAVDispatcher.m: when receiving an OPTIONS request,
+     	  the dispatcher will try to invoke a method with the same name on the
+     	  object. If none is available, the dispatcher checks supported methods
+     	  and DAV compliance classes
+     	* WebDAV/SoObject+SoDAV.m: added method to determine the WebDAV
+     	  compliance classes supported by an object
+     	  (davComplianceClassesInContext:). The method now only returns class 2
+     	  if the object returns a lock manager object. Also moved the 'allowed'
+     	  processing to the object (-davAllowedMethodsInContext: method)
+     2005-06-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoProductRegistry.m: fixed product lookup on MacOSX with
+     	  GNUstep environment (v4.5.166)
+     2005-06-23  Stephane Corthesy  <stephane@sente.ch>
+     	* v4.5.165
+     	* WOComponent.m: -synchronizesVariablesWithBindings now returns NO if
+     	  the component is stateless (-isStateless returns YES)
+     	* WOComponent.m: -frameworkName now returns 'nil' if the component is
+     	  located in the main bundle (this might affect resource lookups)
+     	* WOComponent.m: +templateWithHTMLString:declarationString:languages:
+     	  is now a class method like in WO
+     	* WOComponent.m: -pathForResourceNamed: now checks whether a session
+     	  is available and otherwise uses the browserLanguages array to
+     	  perform a languages lookup
+     2005-06-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEClientCapabilities.m: fixed a typo (v4.5.164)
+     2005-06-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoObjectWebDAVDispatcher.m: prepared MKCALENDAR method
+     	  (v4.5.163)
+     2005-06-01  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.162
+     	* WebDAV/SoObjectWebDAVDispatcher.m: minor code cleanups, added support
+     	  for PROPFIND without content (treated as <allprop/>)
+     	* WebDAV/README: added content to the README
+     2005-05-30  Helge Hess  <helge.hess@skyrix.com>
+     	* SoObjects/SoProductClassInfo.m: allow plain string values for slots
+     	  in product.plist (v4.5.161)
+     2005-05-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEClientCapabilities.m: added Perl HTTP::DAV as a known WebDAV user
+     	  agent (v4.5.160)
+     2005-05-03  Helge Hess  <helge.hess@skyrix.com>
+     	* Templates/WOApplication+Builders.m: fixed a typo (v4.5.159)
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.158
+     	* WOWatchDogApplicationMainOSX.m: fixed a gcc 4.0 warning
+     	* NGHttp, WOImage.m, WOString.m, _WOTemporaryHyperlink.m: fixed Tiger
+     	  warnings
+     	* Templates/WOApplication+Builders.m: fixed an uninitialized variable
+     	  on Cocoa (v4.5.157)
+     2005-04-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* Templates/WODParser.m: fixed parsing of bool constants (got broken in
+     	  v4.5.152) (OGo bug #1360) (v4.5.156)
+     2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.155
+     	* WOMailDelivery.m: generate \r\n instead of \n when writing to the
+     	  sendmail process
+     	* fixed gcc 4.0 warnings
+     	* WOHttpAdaptor, WebDAV: fixed gcc 4.0 warnings (v4.5.154)
+     	* v4.5.153
+     	* Templates/WOHTMLParser.m: rewrote parser to use unichar
+     	* Templates: fixed gcc 4.0 warnings
+     	* v4.5.152
+     	* Templates/WODParser.m: rewrote parser to use unichar
+     	* DynamicElements, WOResponse+private.h: fixed gcc 4.0 warnings
+added:   sope-appserver/NGObjWeb/NGObjWeb.xcodeproj
+changed: sope-appserver/NGObjWeb/NGHttp/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* common.h: fixed Tiger warnings
+added:   sope-appserver/NGObjWeb/NGHttp/NGHttp.xcodeproj
+added:   sope-appserver/NGObjWeb/WebDAV/WebDAV.xcodeproj
+added:   sope-appserver/NGObjWeb/SoObjects/SoObjects.xcodeproj
+changed: sope-appserver/WOXML/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOXMLMapDecoder.m: fixed a gcc 4.0 warnings, changed for the new
+     	  DOM implementation naming (v4.5.8)
+changed: sope-appserver/NGXmlRpc/
+     2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGXmlRpcAction.m: fixed gcc 4.0 warnings (v4.5.10)
+added:   sope-appserver/NGXmlRpc/NGXmlRpc.xcodeproj
+added:   sope-appserver/samples/TestPrototype
+changed: maintenance/
+     2005-06-08  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* znek-fix-xcode-projects.sh: updated for Xcode 2.1
+added:   maintenance/mod_ngobjweb_rhel4.spec
+added:   maintenance/changes-4.5a.3-to-4.5a.4.txt
+added:   maintenance/changes-4.5a.4-to-4.5a.5.txt
+added:   sope-ical/sope-ical.xcodeproj
+added:   sope-ical/data/outlook2002.vcf
+added:   sope-ical/data/evo22-fullrecord.vcf
+added:   sope-ical/data/evo22-fulltask.ics
+added:   sope-ical/data/apple-fullrecord.vcf
+added:   sope-ical/data/korg34-fulltask.ics
+added:   sope-ical/data/kabc34-fullrecord.vcf
+changed: sope-ical/samples/
+     2005-05-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* renamed ical3.m to icalds.m, ical2.m to icalparsetest
+     2005-04-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* properly include config.make
+     	* fixed some gcc 4.0 warnings
+added:   sope-ical/samples/vcf2xml.m
+added:   sope-ical/samples/icalds.m
+added:   sope-ical/samples/icalparsetest.m
+added:   sope-ical/samples/vcfparsetest.m
+removed: sope-ical/samples/ical2.m
+removed: sope-ical/samples/ical3.m
+changed: sope-ical/NGiCal/
+     2005-07-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NSCalendarDate+ICal.m: fixed 'gmtcalfmt' which removed seconds from
+     	  format for no obvious reason (v4.5.47)
+     2005-05-31  Helge Hess  <helge.hess@skyrix.com>
+     	* NGVCardSaxHandler.m: ensure that types are always uppercase, improved
+     	  check for DUPs (v4.5.46)
+     2005-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGiCal.xcode: reorganized ordering of headers/classes
+     2005-05-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGiCal.xcode: added vCard related stuff
+     2005-05-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGVCard.m: added support for profile, source, name (v4.5.45)
+     2005-05-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* first version of working vCard SAX handler (v4.5.54)
+     2005-05-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* more work on vCard parsing (v4.5.53)
+     	* work on vCard objects (incomplete) (v4.5.52)
+     2005-04-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalDateHolder.m, iCalDataSource.m: fixed gcc 4.0 warnings (v4.5.51)
+added:   sope-ical/NGiCal/NGVCard.h
+added:   sope-ical/NGiCal/NGVCard.m
+added:   sope-ical/NGiCal/NGVCardOrg.h
+added:   sope-ical/NGiCal/NGVCardOrg.m
+added:   sope-ical/NGiCal/NGVCardStrArrayValue.h
+added:   sope-ical/NGiCal/NGVCardStrArrayValue.m
+added:   sope-ical/NGiCal/NGVCardSaxHandler.h
+added:   sope-ical/NGiCal/NGVCardSaxHandler.m
+added:   sope-ical/NGiCal/NGVCardValue.h
+added:   sope-ical/NGiCal/NGVCardValue.m
+added:   sope-ical/NGiCal/NGVCardSimpleValue.h
+added:   sope-ical/NGiCal/NGVCardSimpleValue.m
+added:   sope-ical/NGiCal/NGVCardPhone.h
+added:   sope-ical/NGiCal/NGVCardPhone.m
+added:   sope-ical/NGiCal/NGVCardAddress.h
+added:   sope-ical/NGiCal/NGVCardAddress.m
+added:   sope-ical/NGiCal/NGVCardName.h
+added:   sope-ical/NGiCal/NGVCardName.m
+added:   sope-ical/NGiCal/NGiCal.xcodeproj
+added:   sope-ical/NGiCal/NGICalSaxHandler.h
+added:   sope-ical/NGiCal/NGICalSaxHandler.m
+changed: sope-ical/versitSaxDriver/
+     2005-06-02  Helge Hess  <helge.hess@skyrix.com>
+     	* VSSaxDriver.m: transparently decode property values if
+     	  ENCODING=QUOTED-PRINTABLE is set as an attribute (used by Outlook
+     	  vCards, needs testing against umlauts/charsets) (v4.5.16)
+     2005-05-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* VSSaxDriver.m: more reorganisations, added support for groupings
+     	  (v4.5.15)
+     2005-05-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* VSSaxDriver.m: code cleanups / reorgs, properly embed reported
+     	  contents in <vCardSet> tag, added support for vCards in Unicode
+     	  16-bit encoding (v4.5.14)
+     	* VSSaxDriver.m: improved parsing entry methods, added support for SAX
+     	  error handlers (v4.5.13)
+     2005-04-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* VSSaxDriver.m: fixed a gcc 4.0 warning (v4.5.12)
+added:   sope-ical/versitSaxDriver/versitSaxDriver.xcodeproj

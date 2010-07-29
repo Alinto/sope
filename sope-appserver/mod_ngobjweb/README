@@ -1,0 +1,78 @@
+mod_ngobjweb
+============
+
+This is an Apache module for forwarding HTTP requests to SOPE application
+server instances. It has the ability to ask the snsd load balancer to 
+distribute requests between processes and/or hosts.
+
+Apache Config Directives
+------------------------
+SetSNSPort
+SetAppPrefix
+SetAppPort
+SNSUseHTTP (experimental)
+
+Loading the Module with apache 1.3.x
+------------------------------------
+LoadModule ngobjweb_module modules/ngobjweb_1.3.x.so
+
+AddModule ngobjweb_module.c
+
+Loading the Module with apache 2.0.x
+------------------------------------
+LoadModule ngobjweb_module modules/ngobjweb_2.0.x.so
+
+Example Apache Config
+---------------------
+<LocationMatch "^/OpenGroupware*">
+SetHandler ngobjweb-adaptor
+SetAppPort 20000
+</LocationMatch>
+
+Apache on Debian SID
+====================
+
+Apache is not named 'httpd' on Debian, so you need to invoke make with a
+parameter.
+
+Compilation for Apache2:
+
+  make HTTPD=/usr/sbin/apache
+
+Afterwards move the build module to /usr/lib/apache/1.3/mod_ngobjweb.so and
+copy the *.info file to the same directory.
+
+Then run:
+  modules-config apache enable mod_ngobjweb
+
+Finally create a proper OGo.conf in /etc/apache/conf.d.
+
+
+Apache2 on MacOSX 10.5
+======================
+
+So you need to add the APR include dir to the make call, eg:
+
+  make apxs=/usr/sbin/apxs apr=/usr/bin/apr-1-config \
+    EXTRA_LDFLAGS="-bundle -undefined error -dynamic"
+
+Apache2 on SuSE 9.0
+===================
+
+Compilation for Apache2:
+
+  make \
+    apxs=/usr/sbin/apxs2   \
+    HTTPD=/usr/sbin/httpd2
+
+Just create a new config file in "/etc/apache2/conf.d/OGo.conf" and add the
+directives you need. Be sure to use "apache2" to restart instead of "apache"
+(which will restart Apache 1.3 ...).
+You should probably not use a threaded Apache 2 MPM, which may have issues
+with mod_ngobjweb but something like prefork.
+
+And finally: in the long run you should remove SuSE 9.0 from your machine and
+rather install a free distribution like Debian.
+
+Note: /etc/rc.d/apache2 stop does not work on SuSE 9.0 ... you need to killall
+the httpd-prefork processes manually, sigh.

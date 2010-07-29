@@ -1,0 +1,14 @@
+usr/bin/connect-EOAdaptor
+usr/bin/domxml
+usr/bin/ldap2dsml
+usr/bin/ldapchkpwd
+usr/bin/ldapls
+usr/bin/load-EOAdaptor
+usr/bin/rss2plist1
+usr/bin/rss2plist2
+usr/bin/rssparse
+usr/bin/saxxml
+usr/bin/testqp
+usr/bin/wod
+usr/bin/xmln
+usr/bin/xmlrpc_call

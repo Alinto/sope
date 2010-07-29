@@ -1,0 +1,22 @@
+{
+  //bundleHandler = NSObject;
+
+  requires = {
+    bundleManagerVersion = 1;
+    classes = (
+      { name = NSObject;    }
+    );
+  };
+
+  provides = {
+    SAXDrivers = ( 
+        { 
+          name        = PlistSaxDriver;
+          sourceTypes = ( "application/x-plist" ); 
+        },
+    );
+    classes    = ( 
+        { name = PlistSaxDriver;     },
+    );
+  };
+}

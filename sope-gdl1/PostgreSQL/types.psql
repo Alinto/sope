@@ -1,0 +1,13 @@
+
+# type test table
+
+create table pgtypetest (
+  t_int2          int2,
+  t_int4          int4,
+  t_int8          int8,
+  t_int           int,
+  t_varchar255    varchar(255),
+  t_datetime      datetime,
+  t_timestamp     timestamp,
+  t_timestamp_wtz timestamp with time zone
+);

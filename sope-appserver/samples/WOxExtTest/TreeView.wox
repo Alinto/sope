@@ -1,0 +1,108 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant"
+>
+   <var:js-drag const:tag="one" const:object="one-toBeDropped">
+     <a href="#">DragMe</a></var:js-drag>
+   
+   <table border="0">
+     <tr>
+       <td valign="top" width="50%">
+         <form var:action="self">
+   
+           <var:treeview list="root" sublist="item.sublist" item="item"
+                         currentPath="currentPath" zoom="isZoom"
+                         showItem="showItem"
+                         const:iconWidth       = "13"
+                         const:plusIcon        = "treeview_plus.gif"
+                         const:minusIcon       = "treeview_minus.gif"
+                         const:lineIcon        = "treeview_line.gif"
+                         const:cornerIcon      = "treeview_corner.gif"
+                         const:junctionIcon    = "treeview_junction.gif"
+                         const:leafIcon        = "treeview_leaf.gif"
+                         const:leafCornerIcon  = "treeview_leaf_corner.gif"
+                         const:cornerPlusIcon  = "treeview_corner_plus.gif"
+                         const:cornerMinusIcon = "treeview_corner_minus.gif"
+                         const:spaceIcon       = "treeview_space.gif"
+             >
+             
+             <!-- Header Content -->
+             
+             <var:tree-header const:isTreeElement="YES"
+                              const:bgcolor="#FFDAAA">
+               <b>tree cell</b><entity name="nbsp"/><entity name="nbsp"/>
+             </var:tree-header>
+             <var:tree-header const:isTreeElement="NO" const:bgcolor="#FFDAAA">
+               <b>first name</b><entity name="nbsp"/><entity name="nbsp"/>
+             </var:tree-header>
+             <var:tree-header const:isTreeElement="NO" const:bgcolor="#FFDAAA">
+               <b>name</b><entity name="nbsp"/><entity name="nbsp"/>
+             </var:tree-header>
+             
+             <!-- Data Content -->
+             <var:tree-data const:isTreeElement="YES" const:bgcolor="#FCF8DF"><a var:action="countClicks"><var:string value="keyPath"/></a></var:tree-data>
+        
+             <var:tree-data const:isTreeElement="NO" const:bgcolor="#FCF8DF">
+               <var:js-drop action="dropAction" droppedObject="droppedObject"
+                  const:elementName   = "tr"
+                  const:isAttached    = "YES"
+                  tags                = "oneTags"
+                  const:swapColor     = "YES"
+                  const:bgcolor       = "green">
+                  <var:string value="item.firstName"/>
+                </var:js-drop>
+             </var:tree-data>
+
+             <var:tree-data const:isTreeElement="NO" const:bgcolor="#FCF8DF">
+               <var:string value="item.name"/>
+             </var:tree-data>
+             
+           </var:treeview>
+         </form>
+       </td>
+        
+       <td width="30"><entity name="nbsp"/></td>
+
+       <td valign="top">
+         <var:treeview list="root" sublist="item.sublist" item="item"
+                       currentPath="currentPath" zoom="isZoom"
+                       showItem="showItem">
+      
+           <!-- Header Content -->
+           <var:tree-header const:isTreeElement="YES" const:bgcolor="#FFDAAA">
+              <b>tree cell</b>
+              <a var:action="countClicks">count</a>
+              <entity name="nbsp"/><entity name="nbsp"/>
+           </var:tree-header>
+
+           <var:tree-header const:isTreeElement="NO" const:bgcolor="#FFDAAA">
+             <b>first name</b>
+             <a var:action="countClicks">count</a>
+             <entity name="nbsp"/><entity name="nbsp"/>
+           </var:tree-header>
+
+           <var:tree-header const:isTreeElement="NO" const:bgcolor="#FFDAAA">
+             <b>name</b><entity name="nbsp"/><entity name="nbsp"/>
+           </var:tree-header>
+           
+           <!-- Data Content -->
+           <var:tree-data const:isTreeElement="YES" const:bgcolor="#FCF8DF">
+             <a var:action="countClicks"><var:string value="keyPath"/></a>
+           </var:tree-data>
+      
+           <var:tree-data const:isTreeElement="NO" const:bgcolor="#FCF8DF">
+             <var:string value="item.firstName"/>
+           </var:tree-data>
+           <var:tree-data const:isTreeElement="NO" const:bgcolor="#FCF8DF">
+             <var:string value="item.name"/>
+           </var:tree-data>
+      
+         </var:treeview>
+       </td>
+     </tr>
+   </table>
+   
+   <var:string value="clicks"/>
+</var:component>

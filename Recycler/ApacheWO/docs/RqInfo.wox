@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<span xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:js="http://www.skyrix.com/od/javascript"
+      xmlns:const="http://www.skyrix.com/od/constant">
+
+  <table style="font-size: 10">
+    <tr>
+      <td colspan="6" bgcolor="#CCCCCC">
+	Info on <var:string value="rq.uri"/></td>
+    </tr>
+    
+    <tr>
+      <td valign="top" width="20%">filename</td>
+      <td colspan="5">
+	<var:string value="rq.filename"/> 
+	(<var:string value="rq.fileType"/>)
+        <var:if js:condition="rq.pathInfo.length > 0">
+	  [<var:string value="rq.pathInfo"/>]
+	</var:if>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">method</td>
+      <td><var:string value="rq.method"/></td>
+      <td valign="top">status</td>
+      <td><var:string value="rq.status"/></td>
+      <td valign="top">content-type</td>
+      <td><var:string value="rq.contentType"/></td>
+    </tr>
+    <tr>
+      <td valign="top">headers-in</td>
+      <td colspan="5">
+	<table border="0" style="font-size: 8">
+        <var:foreach-key dictionary="rq.headersIn" key="header" item="value">
+	  <tr>
+	    <td valign="top"><var:string value="header"/></td>
+	    <td><var:foreach const:count="3" js:list="value.split(',')" item="valuePart"><var:string value="valuePart"/><br/></var:foreach></td>
+	  </tr>
+        </var:foreach-key>
+	</table>
+      </td>
+    </tr>
+<!--
+    <tr>
+      <td valign="top">headers-out</td>
+      <td colspan="3">
+        <var:foreach-key dictionary="rq.headersOut" key="header" item="value">
+          <li><var:string value="header"/>: <var:string value="value"/></li>
+        </var:foreach-key></td>
+    </tr>
+-->
+  </table>
+
+  <var:script>
+    var rq, value;
+    var value="";
+  </var:script>
+</span>

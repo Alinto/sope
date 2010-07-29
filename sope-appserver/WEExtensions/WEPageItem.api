@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+
+<!-- TODO: properly set rules (required etc.) -->
+<wo class="WEPageView">
+  <binding name="key" />
+  <binding name="title" />
+  <binding name="action" defaults="Actions" />
+</wo>

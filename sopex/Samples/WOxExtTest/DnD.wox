@@ -1,0 +1,99 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+   Drag'n'Drop - only works on IE !<br/>
+
+   Used elements:
+   <ul>
+     <li>WEDragContainer</li>
+     <li>WEDropContainer</li>
+     <li>WEDragScript</li>
+     <li>WEDropScript</li>
+   </ul>
+   
+   <var:script-drag/>
+   <var:script-drop/>
+   
+   <table border="0">
+     <tr>
+       <td valign="top">
+         <table border="1">
+           <tr>
+             <td colspan="3">DropZone</td>
+           </tr>
+           <tr>
+             <td>one</td>
+             <td>two</td>
+             <td>one/two</td>
+           </tr>
+           
+           <tr>
+             <td>
+               <var:js-drop const:elementName   = "td"
+                            const:isAttached    = "YES"
+                            tags                = "oneList"
+                            droppedObject       = "droppedObject"
+                            action              = "one"
+                            const:swapColor     = "YES"
+                            const:bgcolor       = "gray"
+                            const:activeColor   = "blue"
+                            const:inactiveColor = "green"
+                            const:width         = "80"
+                            const:height        = "80">
+                 <var:if condition="droppedOnOne">
+                   <var:string value="droppedObject"/></var:if>
+                 <entity name="nbsp"/>
+               </var:js-drop>
+             </td>
+             
+             <var:js-drop const:elementName   = "td"
+                          const:isAttached    = "YES"
+                          tags                = "twoList"
+                          droppedObject       = "droppedObject"
+                          action              = "two"
+                          const:swapColor     = "YES"
+                          const:bgcolor       = "gray"
+                          const:width         = "80"
+                          const:height        = "80">
+               <var:if condition="droppedOnTwo">
+                 <var:string value="droppedObject"/></var:if>
+               <entity name="nbsp"/>
+             </var:js-drop>
+
+             <var:js-drop const:elementName   = "td"
+                          const:isAttached    = "YES"
+                          tags                = "listOneTwo"
+                          droppedObject       = "droppedObject"
+                          action              = "two"
+                          const:swapColor     = "YES"
+                          const:bgcolor       = "gray"
+                          const:width         = "80"
+                          const:height        = "80">
+               <var:if condition="droppedOnOneTwo">
+                 <var:string value="droppedObject"/></var:if>
+               <entity name="nbsp"/>
+             </var:js-drop>
+           </tr>
+         </table>
+       </td>
+       
+       <td valign="top" align="left">
+         Outside form:<br/><br/>
+      
+         <var:js-drag const:tag="one" const:object="one-toBeDropped">
+           <a href="#">DragMe</a></var:js-drag>
+         
+         <hr/>
+         
+         Inside form:
+         <form var:action="self">
+           <var:js-drag const:tag="one" const:object="one-toBeDropped">
+             <a href="#">DragMe</a></var:js-drag>
+         </form>
+       </td>
+     </tr>
+   </table>
+</var:component>

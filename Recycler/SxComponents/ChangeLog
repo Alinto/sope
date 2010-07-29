@@ -1,0 +1,265 @@
+2006-05-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed some gcc 4.1 warnings (v4.5.30)
+
+2005-03-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* added FHS and config.make support, fixed compilation (v4.5.29)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved to SOPE 4.3 (v4.3.28)
+
+2004-06-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added prebinding (v4.2.27)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.26)
+
+2004-05-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble (ADDITIONAL_TOOL_LIBS): added missing 
+	  dependencies on Panther (v4.2.25)
+
+2004-03-10  Donald Duck  <helge.hess@opengroupware.org>
+
+	* SxXmlRpcRegBackend.m: fixed a minor compilation warning when 
+	  compiling with gstep-base (v4.2.24)
+
+2004-02-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SxXmlRpcRegBackend.m: use NGXmlRpcClient -initWithURL: method instead
+	  of using the now deprecated -initWithHost:.. API (v4.2.23)
+
+Tue Dec  9 20:28:35 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* v4.2.22
+
+	* GNUmakefile (autodoc): Moved autodoc rule in the postamble.
+
+	* SxComponentInvocation.m: Removed usage of NSString
+	  -stringWithoutPrefix:.
+
+2003-10-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.21
+	
+	* SxComponent.m: fixed MacOSX compilation warning
+
+	* GNUmakefile.preamble (libSxComponents_LIBRARIES_DEPEND_UPON): added
+	  all the explicit dependencies required for MacOSX
+	  
+	* common.h: made independend of FoundationExt
+
+2003-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+        * SxXmlRpcRegBackend.m: fixed some MacOSX warnings (v4.2.20)
+
+2003-07-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* applied rangeOfString patches provided by Filip Van Raemdonck for 
+	  improved compilation with gstep-base (v4.2.19)
+	
+	* applied GNUstep patches provided by Filip Van Raemdonck for improved
+	  compilation with gstep-base (v4.2.18)
+
+2003-02-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxComponentInvocation.m, SxXmlRpcInvocation.m: replaced some RETAIN
+	  macros (v4.2.17)
+
+2002-12-02  Helge Hess  <helge.hess@skyrix.com>
+	
+	* moved to skyrix-sope-42 (v4.2.16)
+	
+Thu Oct 10 12:34:16 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* SxXmlRpcComponent.m: added defaults for retry count and time
+	  between retries (v4.2.15)
+
+Tue Oct  8 18:10:37 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* SxXmlRpcComponent.m: added retry on NGCouldNotConnectException
+	* SxComponentRegistry.m: added method to remove component
+	  from lookup cache
+	  (v4.2.14)
+
+2002-08-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* added a default for SxComponentRegistryURL, some smaller
+          changes for MacOSX (v4.2.13)
+
+2002-08-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcInvocation.m: fixed a small MacOSX compilation issue 
+	  (v4.2.12)
+
+Thu Aug 15 13:25:12 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* SxXmlRpcComponent.m: don't add component namespace
+	  to system methods (libSxComponents.4.2.11)
+
+Tue Aug 13 15:51:48 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* added namespace support to components (component name and
+	  namespace are now separated from each other)
+
+Thu Aug  8 13:32:50 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcInvocation.m: be less strict regarding HTTP response content
+	  types because some servers return text/plain as the result type ...
+
+2002-07-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcInvocation.m: fixed a retain bug introduced during the
+	  async support changes
+
+2002-07-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcInvocation.m: major restruction to support async call
+
+2002-07-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* sxc_call.m: added login and password defaults, so that the prompt
+	  can be avoided (of course it's not recommended to write passwords
+	  into the defaults database
+
+2002-07-02  Helge Hess  <helge.hess@skyrix.com>
+	
+	* sxc_call.m: added coercion for most types
+	
+Tue Jul  2 17:35:14 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* SxXmlRpcRegBackend.m: cleaned up registryd API
+
+Tue Jul  2 11:05:16 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* sxc_call.m: fixed error description output when an
+	  exception occurs
+
+Thu May 23 18:23:32 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* SxComponentInvocation.m: added KVC
+
+Fri May 17 11:10:11 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcComponent.m: improved logging of errors ..
+
+Fri May 10 16:51:30 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* sxc_call.m: sort results of listMethods
+
+	* sxc_ls.m: cleanup
+
+Wed May  8 13:57:38 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* sxc_call.m: fixed trailing newline
+
+Sun May  5 14:30:49 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed linking against NGXmlRpc (which is moved to libNGObjWeb)
+
+Thu May  2 11:10:32 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* sxc_call.m: fixed some formatting bug
+
+	* sxc_call.m: do not log full executable path in usage
+
+Mon Apr 29 16:02:45 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcComponent.m: catch incorrect results returned by XML-RPC
+	  server's system.methodSignature
+
+Mon Apr 29 13:31:37 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcRegBackend.m: created component using new initializer
+	  (construct and pass a NSURL)
+
+	* SxXmlRpcComponent.m: changed initializer, init with an NSURL,
+	  removed 'uri' ivar (this is the -path of the URL ?), fixed a memory
+	  bug ('url' ivar wasn't deallocated)
+
+Mon Apr 29 12:35:50 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* sxc_call.m, sxc_ls.m: use -argumentsWithoutDefaults from NGExtensions
+
+Fri Apr 26 20:31:11 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcInvocation.m: added debugging capabilities
+
+	* SxXmlRpcComponent.m: improved -description
+
+	* SxComponent.m: started support for subcomponents/component
+	  collections
+
+Fri Apr 19 18:02:14 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* sxc_call.m: new output formatting for dictionaries
+	  and arrays added
+
+Sun Apr 14 16:55:00 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added authorization support in several places
+
+Fri Apr 12 23:18:40 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcInvocation.m: fixed error handling ...
+
+Fri Apr 12 11:15:34 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxComponentRegistry.m: added listMethods cache
+
+Thu Apr 11 16:28:43 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcRegBackend.m: improved fail-over
+
+	* SxComponent.m: implemented introspection methods using
+	  registry
+
+Fri Mar  1 13:42:44 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxComponentInvocation.m: added call indirection to allow
+	  subclasses to call a component themselves
+
+Wed Feb 27 19:06:01 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxComponentInvocation.m: fixed bug in exception handling
+
+Wed Feb 27 13:01:57 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcComponent.m: fixed -signaturesForMethodNamed: (recursive
+	  call)
+
+Wed Feb 27 12:28:11 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcComponent.m: added method to create an invocation using
+	  name and arguments
+
+	* SxComponentInvocation.m: added -setArguments:,-arguments, use
+	  call: instead of _call:
+
+Wed Feb 27 11:32:14 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxComponent.m: removed _call:...
+
+Mon Feb 25 19:02:20 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcComponent.m: added _call method (calling XML-RPC methods
+	  without namespace ..)
+
+Tue Feb 19 18:08:20 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SxXmlRpcComponent.m: improved error handling for failed connects
+
+Thu Feb 14 12:17:58 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* started credentials system
+
+Wed Jan 30 16:49:35 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* created ChangeLog
+

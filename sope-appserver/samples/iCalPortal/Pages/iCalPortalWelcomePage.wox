@@ -1,0 +1,118 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className='iCalPortalBaseFrame' title='localizedTitle'
+               xmlns='http://www.w3.org/1999/xhtml'
+               xmlns:var='http://www.skyrix.com/od/binding'
+               xmlns:const='http://www.skyrix.com/od/constant'>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center"><img 
+	border="0" filename="small.gif" width="1" height="30" /></td>
+      <td align="center"><img
+	 border="0" filename="free_hosting.gif" width="622" height="30" /></td>
+      <td align="center"><img
+	 border="0" filename="small.gif" width="1" height="30" /></td>
+    </tr>
+    <tr>
+      <td align="center"
+	 background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img 
+	border="0" filename="pixel.gif" width="1" height="1" /></td>
+      <td align="center"><img 
+	border="0" filename="wp_info.gif" width="622" height="50" /></td>
+      <td align="center" 
+	background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+	 border="0" filename="pixel.gif" width="1" height="1" /></td>
+    </tr>
+
+    <!-- create account -->
+    <tr>
+      <td align="center"
+	 background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+	 border="0" filename="pixel.gif" width="1" height="1" /></td>
+      <td align="center"><a directActionName="showLicense"><img
+	 border="0" filename="wp_create.gif" width="622" height="50" /></a></td>
+      <td align="center" 
+	background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+	 border="0" filename="pixel.gif" width="1" height="1" /></td>
+    </tr>
+
+    <!-- config -->
+    <tr>
+      <td align="center" 
+	background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img 
+	border="0" filename="pixel.gif" width="1" height="1" /></td>
+      <td align="center"><img
+	 border="0" filename="wp_config.gif" width="622" height="50" /></td>
+      <td align="center" 
+	background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+	 border="0" filename="pixel.gif" width="1" height="1" /></td>
+    </tr>
+
+    <!-- FAQ -->
+    <tr>
+      <td align="center"
+	 background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+	 border="0" filename="pixel.gif" width="1" height="1" /></td>
+      <td align="center"><img 
+	border="0" filename="wp_faq.gif" width="622" height="50" /></td>
+      <td align="center"
+	 background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+	 border="0" filename="pixel.gif" width="1" height="1" /></td>
+    </tr>
+
+    <!-- feedback -->
+    <tr>
+      <td align="center"
+	 background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+	 border="0" filename="pixel.gif" width="1" height="1" /></td>
+      <td align="center"><a directActionName="feedback"><img 
+	border="0" filename="wp_feedback.gif" width="622" height="66" /></a></td>
+      <td align="center"
+	 background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img 
+	border="0" filename="pixel.gif" width="1" height="1" /></td>
+    </tr>
+
+    <!-- login -->
+    <tr>
+      <td align="center" 
+	background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img 
+	border="0" filename="pixel.gif" width="1" height="1" /></td>
+
+      <td align="right" bgcolor="white" height="200">
+
+        <form directActionName="login" actionClass="iCalPortalWelcomeAction">
+           <table width="200" border="0" cellspacing="0" cellpadding="3">
+             <tr> 
+               <td><font face="Arial,Helvetica,Verdana,Geneva,Tahoma"><strong>Username</strong></font></td>
+             </tr>
+             <tr> 
+               <td><input name="user" type="text" id="user" size="17" /></td>
+             </tr>
+             <tr> 
+               <td><font face="Arial,Helvetica,Verdana,Geneva,Tahoma"><strong>Password</strong></font></td>
+             </tr>
+             <tr> 
+               <td><input name="pwd" type="password" id="pwd" size="17" /></td>
+             </tr>
+             <tr> 
+               <td><input type="submit" name="login" value="login" /></td>
+             </tr>
+           </table>
+	
+         </form>
+
+      </td>
+      <td align="center"
+	 background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img
+	 border="0" filename="pixel.gif" width="1" height="1" /></td>
+    </tr>
+    <tr>
+      <td align="center" background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img border="0" filename="pixel.gif" width="1" height="1" /></td>
+      <td align="center" background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img border="0" filename="pixel.gif" width="622" height="1" /></td>
+      <td align="center" background="/iCalPortal.woa/WebServerResources/English.lproj/pixel.gif"><img border="0" filename="pixel.gif" width="1" height="1" /></td>
+    </tr>
+  </table>
+</div>
+</var:component>

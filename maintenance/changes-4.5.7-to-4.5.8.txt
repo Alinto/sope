@@ -1,0 +1,129 @@
+- added more NGBundleManager debug logs (NGBundleManagerDebugEnabled)
+- use %p instead of %08X for pointer formats
+- reduced autorelease usage in KVC
+- reduced autorelease usage in combination with exceptions
+- added some GData related XML namesapces (ATOM, OpenSearch, gCal, etc)
+- added more WebDAV property mappings (to support WebDrive)
+- added WebDrive as a known WebDAV user agent
+- increased usage of -isNotEmpty, -warnWithFormat:
+- added mod_ngobjweb specfiles for CentOS 4.3 and SuSE 10.1
+- fixed plenty of stupid gcc 4.1 warnings
+
+- updated to libFoundation 1.1.3 vendor branch
+- removed gnustep-objc vendor branch (not necessary anymore for lF 1.1.3)
+
+Major contributors for 4.5.8:
+Frank Reppin
+Helge Hess
+... and many more :-)
+
+===========================================================================
+compare ../complete/SOPE/releases/4.5.7-david with .
+removed: gnustep-objc
+changed: sope-core/NGExtensions/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBundleManager.m: added more debug logs which can be triggered using
+     	  NGBundleManagerDebugEnabled (v4.5.186)
+     	* 64bit fixes (v4.5.185)
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.184
+     	* NGHashMap.m: improved memory management with exceptions
+     	* FdExt.subproj/NSSet+enumerator.m: code cleanups
+     	* use %p for pointer formats, fixed gcc 4.1 warnings
+changed: sope-core/EOControl/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* 64bit fixes (v4.5.66)
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.65
+     	* EOKeyValueCoding.m: reduced autorelease usage in KVC key creation
+     	* use %p for pointer formats, fixed gcc 4.1 warnings
+changed: sope-core/NGStreams/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* 64bit fixes (v4.5.51)
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.50)
+changed: sope-gdl1/MySQL/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.13)
+changed: sope-gdl1/PostgreSQL/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.46)
+changed: sope-gdl1/GDLAccess/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.56)
+changed: sope-gdl1/GDLContentStore/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.36)
+changed: sope-gdl1/SQLite3/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.21)
+changed: sope-mime/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings, use -isNotEmpty
+     	  when appropriate (v4.5.241)
+changed: sope-xml/libxmlSAXDriver/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.24
+     	* use %p for pointer formats, fixed gcc 4.1 warnings
+     	* improved retain-count for exception userInfo dicts
+changed: sope-xml/STXSaxDriver/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.1 warnings, use %p for pointers formats (v4.5.14)
+changed: sope-xml/XmlRpc/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.1 warnings, use %p for pointer formats (v4.5.28)
+changed: sope-xml/SaxObjC/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.58
+     	* SaxAttributes.m: fixed gcc 4.1 warnings
+     	* use %p for pointer formats
+     2006-07-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* XMLNamespaces.h: added ATOM namespace, gCal namespace, OpenSearch
+     	  namespace (v4.5.57)
+changed: sope-xml/DOM/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed gcc 4.1 warnings, use %p for pointer formats (v4.5.22)
+changed: sope-ldap/NGLdap/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings, minor code
+     	  cleanups (v4.5.30)
+changed: sope-appserver/WEExtensions/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings, use -isNotEmpty
+     	  when appropriate (v4.5.86)
+changed: sope-appserver/SoOFS/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.22)
+changed: sope-appserver/WOXML/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats (v4.5.9)
+changed: sope-appserver/NGObjWeb/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings, use
+     	  -warnWithFormat: when appropriate (v4.5.239)
+     2006-06-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* DAVPropMap.plist: added three more WebDrive properties,
+     	  "{DAV:}srt_lastaccesstime", "{DAV:}SRT_fileattributes",
+     	  "{DAV:}BSI_isreadonly" (v4.5.238)
+     2006-06-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* DAVPropMap.plist: added WebDrive WebDAV properties: 
+              {DAV:}srt_creationtime, {DAV:}srt_modifiedtime,
+     	 {DAV:}srt_proptimestamp (v4.5.237)
+     	* v4.5.236
+     	* WEClientCapabilities.m: added WebDrive as a known WebDAV client
+     	* fixed some gcc 4.1 warnings
+changed: sope-appserver/WOExtensions/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.30)
+changed: sope-appserver/NGXmlRpc/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings, use -isNotEmpty
+     	  when appropriate (v4.5.15)
+added:   maintenance/mod_ngobjweb_suse101.spec
+added:   maintenance/mod_ngobjweb_centos43.spec
+changed: sope-ical/NGiCal/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.75)
+changed: sope-ical/versitSaxDriver/
+     2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.24)

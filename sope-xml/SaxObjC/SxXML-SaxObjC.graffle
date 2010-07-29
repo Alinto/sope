@@ -1,0 +1,2050 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+<dict>
+	<key>CanvasColor</key>
+	<dict>
+		<key>w</key>
+		<real>1.000000e+00</real>
+	</dict>
+	<key>ColumnAlign</key>
+	<integer>0</integer>
+	<key>ColumnSpacing</key>
+	<real>5.400000e+01</real>
+	<key>GraphDocumentVersion</key>
+	<integer>2</integer>
+	<key>GraphicsList</key>
+	<array>
+		<dict>
+			<key>Bounds</key>
+			<string>{{12, 477}, {98, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>FitText</key>
+			<string>YES</string>
+			<key>ID</key>
+			<integer>1101</integer>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>fill</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>shadow</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>stroke</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 libxmlSAXDriver}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{9, 10}, {112, 36}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>FitText</key>
+			<string>YES</string>
+			<key>ID</key>
+			<integer>1100</integer>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>fill</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>shadow</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>stroke</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-BoldOblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\b\fs48 \cf0 SaxObjC}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{9, 459}, {702, 1}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1099</integer>
+			<key>Shape</key>
+			<string>Rectangle</string>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{27, 81}, {131, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1073</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxDocumentHandler.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxDocumentHandler}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{202, 81}, {104, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1074</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxHandlerBase.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxHandlerBase}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>Group</string>
+					<key>Graphics</key>
+					<array>
+						<dict>
+							<key>Bounds</key>
+							<string>{{189, 306}, {135, 18}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>ID</key>
+							<integer>1076</integer>
+							<key>Link</key>
+							<dict>
+								<key>url</key>
+								<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxMethodCallHandler.h</string>
+							</dict>
+							<key>Shape</key>
+							<string>Rectangle</string>
+							<key>Text</key>
+							<dict>
+								<key>Text</key>
+								<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxMethodCallHandler}</string>
+							</dict>
+						</dict>
+						<dict>
+							<key>Bounds</key>
+							<string>{{202, 270}, {113, 18}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>ID</key>
+							<integer>1077</integer>
+							<key>Link</key>
+							<dict>
+								<key>url</key>
+								<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxDefaultHandler.h</string>
+							</dict>
+							<key>Shape</key>
+							<string>Rectangle</string>
+							<key>Text</key>
+							<dict>
+								<key>Text</key>
+								<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxDefaultHandler}</string>
+							</dict>
+						</dict>
+					</array>
+					<key>ID</key>
+					<integer>1075</integer>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>Group</string>
+					<key>Graphics</key>
+					<array>
+						<dict>
+							<key>Bounds</key>
+							<string>{{315, 180}, {90, 18}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>ID</key>
+							<integer>1079</integer>
+							<key>Link</key>
+							<dict>
+								<key>url</key>
+								<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxXMLFilter.h</string>
+							</dict>
+							<key>Shape</key>
+							<string>Rectangle</string>
+							<key>Style</key>
+							<dict>
+								<key>stroke</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>b</key>
+										<real>0.000000e+00</real>
+										<key>g</key>
+										<real>0.000000e+00</real>
+										<key>r</key>
+										<real>1.000000e+00</real>
+									</dict>
+								</dict>
+							</dict>
+							<key>Text</key>
+							<dict>
+								<key>Text</key>
+								<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxXMLFilter}</string>
+							</dict>
+						</dict>
+						<dict>
+							<key>Bounds</key>
+							<string>{{207, 180}, {90, 18}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>ID</key>
+							<integer>1080</integer>
+							<key>Link</key>
+							<dict>
+								<key>url</key>
+								<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxXMLFilter.h</string>
+							</dict>
+							<key>Shape</key>
+							<string>Rectangle</string>
+							<key>Text</key>
+							<dict>
+								<key>Text</key>
+								<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxXMLFilter}</string>
+							</dict>
+						</dict>
+					</array>
+					<key>ID</key>
+					<integer>1078</integer>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{27, 180}, {131, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1081</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxEntityResolver.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxEntityResolver}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{27, 135}, {131, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1082</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxDTDHandler.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxDTDHandler}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{27, 270}, {131, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1083</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxContentHandler.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxContentHandler}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{27, 225}, {131, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1084</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxErrorHandler.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxErrorHandler}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1074</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1085</integer>
+					<key>Points</key>
+					<array>
+						<string>{107.182, 180}</string>
+						<string>{239.318, 99}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1081</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1074</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1086</integer>
+					<key>Points</key>
+					<array>
+						<string>{119.417, 135}</string>
+						<string>{227.083, 99}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1082</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1074</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1087</integer>
+					<key>Points</key>
+					<array>
+						<string>{158, 90}</string>
+						<string>{202, 90}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1073</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1074</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1088</integer>
+					<key>Points</key>
+					<array>
+						<string>{102.594, 225}</string>
+						<string>{243.906, 99}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1084</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1076</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1089</integer>
+					<key>Points</key>
+					<array>
+						<string>{258, 288}</string>
+						<string>{257, 306}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1077</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1077</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1090</integer>
+					<key>Points</key>
+					<array>
+						<string>{109.1, 198}</string>
+						<string>{241.9, 270}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1081</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1077</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1091</integer>
+					<key>Points</key>
+					<array>
+						<string>{103.567, 153}</string>
+						<string>{247.433, 270}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1082</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1077</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1092</integer>
+					<key>Points</key>
+					<array>
+						<string>{158, 279}</string>
+						<string>{202, 279}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1083</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1077</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1093</integer>
+					<key>Points</key>
+					<array>
+						<string>{125.7, 243}</string>
+						<string>{225.3, 270}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1084</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1080</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1094</integer>
+					<key>Points</key>
+					<array>
+						<string>{315, 189}</string>
+						<string>{297, 189}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1079</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1080</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1095</integer>
+					<key>Points</key>
+					<array>
+						<string>{158, 189}</string>
+						<string>{207, 189}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1081</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1080</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1096</integer>
+					<key>Points</key>
+					<array>
+						<string>{124.4, 153}</string>
+						<string>{220.1, 180}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1082</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1080</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1097</integer>
+					<key>Points</key>
+					<array>
+						<string>{108.45, 270}</string>
+						<string>{236.05, 198}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1083</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1080</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1098</integer>
+					<key>Points</key>
+					<array>
+						<string>{124.4, 225}</string>
+						<string>{220.1, 198}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1084</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>1072</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{333, 504}, {130, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1071</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/libxmlSAXDriver/libxmlSAXDriver.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 libxmlSAXDriver}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{603, 81}, {90, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1068</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxAttributes.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxAttributes}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{495, 81}, {90, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1069</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxAttributes.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxAttributes}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1069</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1070</integer>
+					<key>Points</key>
+					<array>
+						<string>{603, 90}</string>
+						<string>{585, 90}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1068</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>1067</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{495, 504}, {108, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1066</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/libxmlSAXDriver/libxmlSAXLocator.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 libxmlSAXLocator}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{193, 504}, {131, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1065</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/libxmlSAXDriver/libxmlDocSAXDriver.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 libxmlDocSAXDriver}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{490, 207}, {86, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1058</integer>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>fill</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>5.000000e-01</real>
+								<key>g</key>
+								<real>1.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 NSException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{508, 333}, {167, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1059</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxException.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxNotSupportedException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{508, 279}, {167, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1060</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxException.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxParseException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{486, 243}, {91, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1061</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxException.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{418, 306}, {167, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1062</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxException.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxNotRecognizedException}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1059</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1063</integer>
+					<key>Points</key>
+					<array>
+						<string>{537.5, 261}</string>
+						<string>{585.5, 333}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1061</integer>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1060</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1064</integer>
+					<key>Points</key>
+					<array>
+						<string>{546.5, 261}</string>
+						<string>{576.5, 279}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>HeadArrow</key>
+							<string>FilledArrow</string>
+							<key>TailArrow</key>
+							<string>0</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1061</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>1057</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{207, 423}, {99, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1056</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxXMLReader.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxXMLReader}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{54, 504}, {130, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1055</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/libxmlSAXDriver/libxmlHTMLSAXDriver.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 libxmlHTMLSAXDriver}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{527, 153}, {167, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1054</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxXMLReaderFactory.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxXMLReaderFactory}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>Group</string>
+			<key>Graphics</key>
+			<array>
+				<dict>
+					<key>Bounds</key>
+					<string>{{265, 360}, {95, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1051</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxAttributeList.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+						</dict>
+					</dict>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxAttributeList}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Bounds</key>
+					<string>{{144, 360}, {103, 18}}</string>
+					<key>Class</key>
+					<string>ShapedGraphic</string>
+					<key>ID</key>
+					<integer>1052</integer>
+					<key>Link</key>
+					<dict>
+						<key>url</key>
+						<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxAttributeList.h</string>
+					</dict>
+					<key>Shape</key>
+					<string>Rectangle</string>
+					<key>Text</key>
+					<dict>
+						<key>Text</key>
+						<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxAttributeList}</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>Class</key>
+					<string>LineGraphic</string>
+					<key>Head</key>
+					<dict>
+						<key>ID</key>
+						<integer>1052</integer>
+					</dict>
+					<key>ID</key>
+					<integer>1053</integer>
+					<key>Points</key>
+					<array>
+						<string>{265, 369}</string>
+						<string>{247, 369}</string>
+					</array>
+					<key>Style</key>
+					<dict>
+						<key>stroke</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>b</key>
+								<real>0.000000e+00</real>
+								<key>g</key>
+								<real>0.000000e+00</real>
+								<key>r</key>
+								<real>1.000000e+00</real>
+							</dict>
+							<key>HeadArrow</key>
+							<string>0</string>
+							<key>TailArrow</key>
+							<string>FilledBall</string>
+						</dict>
+					</dict>
+					<key>Tail</key>
+					<dict>
+						<key>ID</key>
+						<integer>1051</integer>
+					</dict>
+				</dict>
+			</array>
+			<key>ID</key>
+			<integer>1050</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{527, 126}, {167, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1049</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxNamespaceSupport.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxNamespaceSupport}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{495, 423}, {108, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1048</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxLocator.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\i\fs24 \cf0 SaxLocator}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{396, 423}, {81, 18}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>1047</integer>
+			<key>Link</key>
+			<dict>
+				<key>url</key>
+				<string>file://localhost/Volumes/Jaguar/Users/helge/dev/pkg42/skyrix-xml-42/SaxObjC/SaxLocator.h</string>
+			</dict>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\mac\ansicpg10000\cocoartf100
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\fs24 \cf0 SaxLocator}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>1071</integer>
+			</dict>
+			<key>ID</key>
+			<integer>1046</integer>
+			<key>Points</key>
+			<array>
+				<string>{272.222, 441}</string>
+				<string>{382.278, 504}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>1056</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>1066</integer>
+			</dict>
+			<key>ID</key>
+			<integer>1045</integer>
+			<key>Points</key>
+			<array>
+				<string>{549, 441}</string>
+				<string>{549, 504}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>1048</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>1065</integer>
+			</dict>
+			<key>ID</key>
+			<integer>1044</integer>
+			<key>Points</key>
+			<array>
+				<string>{256.722, 441}</string>
+				<string>{258.278, 504}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>1056</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>1061</integer>
+			</dict>
+			<key>ID</key>
+			<integer>1043</integer>
+			<key>Points</key>
+			<array>
+				<string>{532.625, 225}</string>
+				<string>{531.875, 243}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>1058</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>1055</integer>
+			</dict>
+			<key>ID</key>
+			<integer>1042</integer>
+			<key>Points</key>
+			<array>
+				<string>{241.222, 441}</string>
+				<string>{134.278, 504}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>1056</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>1062</integer>
+			</dict>
+			<key>ID</key>
+			<integer>1041</integer>
+			<key>Points</key>
+			<array>
+				<string>{527.214, 261}</string>
+				<string>{505.786, 306}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>HeadArrow</key>
+					<string>FilledArrow</string>
+					<key>TailArrow</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>1061</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>Class</key>
+			<string>LineGraphic</string>
+			<key>Head</key>
+			<dict>
+				<key>ID</key>
+				<integer>1047</integer>
+			</dict>
+			<key>ID</key>
+			<integer>1040</integer>
+			<key>Points</key>
+			<array>
+				<string>{495, 432}</string>
+				<string>{477, 432}</string>
+			</array>
+			<key>Style</key>
+			<dict>
+				<key>stroke</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<real>0.000000e+00</real>
+						<key>g</key>
+						<real>0.000000e+00</real>
+						<key>r</key>
+						<real>1.000000e+00</real>
+					</dict>
+					<key>HeadArrow</key>
+					<string>0</string>
+					<key>TailArrow</key>
+					<string>FilledBall</string>
+				</dict>
+			</dict>
+			<key>Tail</key>
+			<dict>
+				<key>ID</key>
+				<integer>1048</integer>
+			</dict>
+		</dict>
+	</array>
+	<key>GridInfo</key>
+	<dict/>
+	<key>HPages</key>
+	<integer>1</integer>
+	<key>ImageCounter</key>
+	<integer>1</integer>
+	<key>IsPalette</key>
+	<string>NO</string>
+	<key>Layers</key>
+	<array>
+		<dict>
+			<key>Lock</key>
+			<string>NO</string>
+			<key>Name</key>
+			<string>Layer 1</string>
+			<key>Print</key>
+			<string>YES</string>
+			<key>View</key>
+			<string>YES</string>
+		</dict>
+	</array>
+	<key>LayoutInfo</key>
+	<dict>
+		<key>AutoAdjust</key>
+		<string>YES</string>
+		<key>HierarchicalOrientation</key>
+		<integer>0</integer>
+		<key>MagneticFieldCenter</key>
+		<string>{0, 0}</string>
+	</dict>
+	<key>MagnetsEnabled</key>
+	<string>YES</string>
+	<key>PageBreakColor</key>
+	<dict>
+		<key>w</key>
+		<real>3.333333e-01</real>
+	</dict>
+	<key>PageBreaks</key>
+	<string>YES</string>
+	<key>PageSetup</key>
+	<data>
+	BAt0eXBlZHN0cmVhbYED6IQBQISEhAtOU1ByaW50SW5mbwGEhAhOU09iamVjdACFkoSE
+	hBNOU011dGFibGVEaWN0aW9uYXJ5AISEDE5TRGljdGlvbmFyeQCUhAFpEpKEhIQITlNT
+	dHJpbmcBlIQBKxBOU0pvYkRpc3Bvc2l0aW9uhpKEmZkPTlNQcmludFNwb29sSm9ihpKE
+	mZkOTlNCb3R0b21NYXJnaW6GkoSEhAhOU051bWJlcgCEhAdOU1ZhbHVlAJSEASqEhAFm
+	nSSGkoSZmQtOU1BhcGVyTmFtZYaShJmZBkxldHRlcoaShJmZD05TUHJpbnRBbGxQYWdl
+	c4aShJ2chIQBc54AhpKEmZkNTlNSaWdodE1hcmdpboaShJ2cn50khpKEmZkITlNDb3Bp
+	ZXOGkoSdnISEAVOfAYaShJmZD05TU2NhbGluZ0ZhY3RvcoaShJ2chIQBZKABhpKEmZkL
+	TlNGaXJzdFBhZ2WGkoSdnKmfAYaShJmZFE5TVmVydGljYWxQYWdpbmF0aW9uhpKEnZyk
+	ngCGkoSZmRVOU0hvcml6b25hbFBhZ2luYXRpb26GkoSdnKSeAIaShJmZFk5TSG9yaXpv
+	bnRhbGx5Q2VudGVyZWSGkoSdnKSeAYaShJmZDE5TTGVmdE1hcmdpboaShJ2cn50khpKE
+	mZkNTlNPcmllbnRhdGlvboaShJ2cpJ4BhpKEmZkZTlNQcmludFJldmVyc2VPcmllbnRh
+	dGlvboaSo5KEmZkKTlNMYXN0UGFnZYaShJ2chJeXgn////+GkoSZmQtOU1RvcE1hcmdp
+	boaShJ2cn50khpKEmZkUTlNWZXJ0aWNhbGx5Q2VudGVyZWSGkrSShJmZC05TUGFwZXJT
+	aXplhpKEnpyEhAx7X05TU2l6ZT1mZn2hgQMYgQJkhoaG
+	</data>
+	<key>RowAlign</key>
+	<integer>0</integer>
+	<key>RowSpacing</key>
+	<real>9.000000e+00</real>
+	<key>VPages</key>
+	<integer>1</integer>
+	<key>WindowInfo</key>
+	<dict>
+		<key>Frame</key>
+		<string>{{109, 134}, {783, 743}}</string>
+		<key>VisibleRegion</key>
+		<string>{{-24, -63}, {768, 666}}</string>
+		<key>Zoom</key>
+		<string>1</string>
+	</dict>
+</dict>
+</plist>

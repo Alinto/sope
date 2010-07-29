@@ -1,0 +1,35 @@
+# compilation settings
+
+SOPE_ROOT=../..
+
+ADDITIONAL_CPPFLAGS += -Wall
+ifeq ($(PRECOMPILED_HEADERS),yes)
+ADDITIONAL_CPPFLAGS += -Winvalid-pch
+endif
+
+NGImap4_INCLUDE_DIRS += \
+	-I.. -I$(SOPE_ROOT)			\
+	-I$(SOPE_ROOT)/sope-core/NGStreams/	\
+	-I$(SOPE_ROOT)/sope-core/NGExtensions/	\
+	-I$(SOPE_ROOT)/sope-core/
+
+ifeq ($(frameworks),yes)
+NGImap4_LIBRARIES_DEPEND_UPON += \
+	-framework NGMime -framework NGMail \
+	-framework NGStreams -framework NGExtensions -framework EOControl \
+	-framework DOM -framework SaxObjC
+endif
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	.. \
+	../NGMail \
+	$(SOPE_ROOT)/sope-core/EOControl $(SOPE_ROOT)/sope-core/NGExtensions \
+	$(SOPE_ROOT)/sope-core/NGStreams \
+	$(SOPE_ROOT)/sope-xml/DOM $(SOPE_ROOT)/sope-xml/SaxObjC
+
+ifeq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif

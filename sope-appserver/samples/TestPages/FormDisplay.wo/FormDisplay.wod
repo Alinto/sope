@@ -1,0 +1,23 @@
+// bind template to class
+
+Form: WOForm {
+}
+
+TextField: WOTextField {
+  name  = "text";
+  value = text;
+  size  = 40;
+}
+DisplayText: WOString {
+  value = text;
+}
+
+Submit: WOSubmitButton {
+  name   = "ok";
+  value  = "ok";
+  action = ok;
+}
+
+MainLink: WOHyperlink {
+  pageName = "Main";
+}

@@ -1,0 +1,114 @@
+{
+Abbreviations = {
+    CDT = "US/Central";
+    CST = "US/Central";
+    CWT = "US/Central";
+    EDT = "US/Eastern";
+    EET = Turkey;
+    "EET DST" = Turkey;
+    EST = "US/Eastern";
+    EWT = "US/Eastern";
+    GMT = GMT;
+    "GMT+0100" = "GMT+1";
+    "GMT+0200" = "GMT+2";
+    "GMT+0300" = "GMT+3";
+    "GMT+0400" = "GMT+4";
+    "GMT+0500" = "GMT+5";
+    "GMT+0600" = "GMT+6";
+    "GMT+0700" = "GMT+7";
+    "GMT+0800" = "GMT+8";
+    "GMT+0900" = "GMT+9";
+    "GMT+1000" = "GMT+10";
+    "GMT+1100" = "GMT+11";
+    "GMT+1200" = "GMT+12";
+    "GMT+1300" = "GMT+13";
+    "GMT-0100" = "GMT-1";
+    "GMT-0200" = "GMT-2";
+    "GMT-0300" = "GMT-3";
+    "GMT-0400" = "GMT-4";
+    "GMT-0500" = "GMT-5";
+    "GMT-0600" = "GMT-6";
+    "GMT-0700" = "GMT-7";
+    "GMT-0800" = "GMT-8";
+    "GMT-0900" = "GMT-9";
+    "GMT-1000" = "GMT-10";
+    "GMT-1100" = "GMT-11";
+    "GMT-1200" = "GMT-12";
+    HDT = "US/Hawaii";
+    HST = "US/Hawaii";
+    HWT = "US/Hawaii";
+    JST = Japan;
+    MDT = "US/Mountain";
+    MET = Poland;
+    "MET DST" = Poland;
+    MST = "US/Mountain";
+    MWT = "US/Mountain";
+    NZDT = NZ;
+    NZST = NZ;
+    PDT = "US/Pacific";
+    PST = "US/Pacific";
+    PWT = "US/Pacific";
+    SST = Singapore;
+    YDT = "US/Yukon";
+    YST = "US/Yukon";
+    YWT = "US/Yukon";
+  };
+
+/*
+    The following dictionary contains dictionaries whose keys represents
+    offsets from GMT and the values are time zone names whose offsets are equal
+    with the key offset.
+
+    The offset keys are represented in the [+|-]HHMM format. It's important to
+    keep all the insignificant zeroes even if the number is the same.
+
+    A time zone should be put in a value array corresponding to a given key
+    offset if it has a detail which is not daylight saving whose offset is
+    equal with the key offset. If the time zone contains details that have
+    different offsets, the time zone should appear in all the entries for
+    the given offsets.
+ */
+RegionsByOffset = {
+    "-1200" = ("GMT-12");
+    "-1100" = ("GMT-11");
+    "-1030" = ("HST", "US/Hawaii");
+    "-1000" = ("GMT-10", "HST", "US/Hawaii");
+    "-0900" = ("GMT-9", "US/Yukon", "Canada/Yukon");
+    "-0800" = ("GMT-8", "US/Pacific", "US/Pacific-New", "Canada/Pacific", PST8PDT);
+    "-0700" = ("GMT-7", "US/Mountain", "US/Arizona", "Canada/Mountain", MST, "MST7MDT");
+    "-0600" = (
+	"GMT-6",
+	"US/Central",
+	"Canada/Central",
+	"Canada/East-Saskatchewan",
+	"CST6CDT"
+    );
+    "-0500" = ("GMT-5", "US/Eastern", "US/East-Indiana", "Canada/Eastern");
+    "-0400" = ("GMT-4", "Canada/Atlantic", EST, "EST5EDT");
+    "-0330" = ("Canada/Newfoundland");
+    "-0300" = ("GMT-3");
+    "-0200" = ("GMT-2");
+    "-0100" = ("GMT-1");
+    "+0000" = (GMT, "Greenwich", "GB-Eire", "Iceland", "WET", "Universal", "UTC");
+    "+0100" = ("GMT+1", "Poland", "MET", "CET");
+    "+0200" = ("GMT+2", "EET");
+    "+0300" = ("GMT+3", "Turkey", "W-SU");
+    "+0400" = ("GMT+4");
+    "+0500" = ("GMT+5");
+    "+0600" = ("GMT+6");
+    "+0700" = ("GMT+7");
+    "+0800" = ("GMT+8", "Singapore", "Australia/West");
+    "+0900" = ("GMT+9", "Japan");
+    "+0930" = ("Australia/North", "Australia/South");
+    "+1000" = (
+      "GMT+10",
+      "Australia/Tasmania",
+      "Australia/Queensland",
+      "Australia/Victoria",
+      "Australia/NSW"
+    );
+    "+1100" = ("GMT+11");
+    "+1200" = ("GMT+12", "NZ");
+    "+1300" = ("GMT+13");
+  };
+}

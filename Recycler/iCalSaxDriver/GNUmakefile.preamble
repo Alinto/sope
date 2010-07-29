@@ -1,0 +1,18 @@
+# $Id$
+
+
+SOPE_ROOT=../..
+ADDITIONAL_INCLUDE_DIRS += \
+	-I$(SOPE_ROOT)/sope-xml -I$(SOPE_ROOT)/sope-core/NGExtensions
+
+
+BUNDLE_LIBS += -lSaxObjC -lical
+
+ADDITIONAL_BUNDLE_LIBS += $(BUNDLE_LIBS)
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+ADDITIONAL_LIB_DIRS += \
+	-L$(GNUSTEP_BUILD_DIR)/../../sope-xml/SaxObjC/$(GNUSTEP_OBJ_DIR_NAME)
+else
+ADDITIONAL_LIB_DIRS += -L../../sope-xml/SaxObjC/$(GNUSTEP_OBJ_DIR)
+endif

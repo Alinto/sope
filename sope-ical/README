@@ -1,0 +1,20 @@
+sope-ical
+=========
+Last change: 2004-10-17
+
+This package currently contains three things:
+
+a) iCalSaxDriver   - a SaxObjC SAX driver based on libical
+   => DEPRECATED
+b) versitSaxDriver - a SaxObjC SAX driver for parsing vCard and iCal files
+c) NGiCal          - a set of classes representing iCal entities
+
+The iCalSaxDriver is deprecated in favor of the versitSaxDriver which does
+not have the dependency on libical but implements the parsing on its own.
+
+
+To test the SAX driver, you can use the saxxml tool, eg:
+
+  saxxml -XMLReader VSiCalSaxDriver data/test-noodle1.ics 
+
+This will print the tags reported to the SAX handler.

@@ -1,0 +1,77 @@
+NGMime
+======
+
+Defaults
+========
+  Mail_Use_8bit_Encoding_For_Text        - bool - 
+    Use 8bit content-transfer-encoding for text messages
+  UseLFSeperatedAddressEntries           - bool
+  NGMime_MultipartBoundaryPrefix         - string
+  UseFoundationStringEncodingForMimeText - bool
+  NGMimeBuildMimeTempDirectory           - string - "/tmp/"
+  MimeLogEnabled                         - bool
+  StripLeadingSpaces                     - bool
+
+Removed in SKYRiX 4.1, available in MOF3
+========================================
+
+  java.mail related stuff:
+    NGMimeFileDataSource
+    NGMimeFileTypeMap
+    NGMimeCommandMap
+    NGMimeDataHandler
+
+NGMime Objective-C Kit
+======================
+
+  Class-Hierachy
+
+    NSObject
+      NGMimeType                          < NSCopying, NSCoding >
+        NGParameterMimeType
+          NGConcreteApplicationMimeType
+          NGConcreteMultipartMimeType
+          NGConcreteMessageMimeType
+          NGConcreteImageMimeType
+          NGConcreteAudioMimeType
+          NGConcreteVideoMimeType
+        NGConcreteTextMimeType
+          NGConcreteAppOctetMimeType
+          NGConcreteGenericMimeType
+          NGConcreteWildcardType
+      NGMimeBodyParser                    < NGMimeBodyParser >
+        NGMimeTextBodyParser
+        NGMimeMultipartBodyParser
+      NGMimeBodyPart                      < NGPart, NGMimePart >
+      NGMimeHeaderFieldParser             < NGMimeHeaderFieldParser >
+        NGMimeContentTypeHeaderFieldParser
+        NGMimeContentLengthHeaderFieldParser
+        NGMimeStringHeaderFieldParser
+      NGMimeHeaderFieldParserSet          < NGMimeHeaderFieldParser,NSCopying >
+      NGMimeMultipartBody
+      NGMimePartParser
+        NGMimeBodyPartParser
+
+    NSException
+      NGMimeException
+        NGMimeParserException
+
+  Protocols
+
+    NSObject+NGMimeParserDelegate
+
+    NGMimeBodyParser
+    NGMimeHeaderFieldParser
+    NGPart
+    NGMimePart < NGPart >
+
+  Categories
+
+    NSData+DataPart
+    NSMutableData+DataPart
+
+--
+Helge Hess (helge.hess@opengroupware.org)
+1998-11-04
+updated: 2002-07-08
+updated: 2004-06-20

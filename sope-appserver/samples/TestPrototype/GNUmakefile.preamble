@@ -1,0 +1,16 @@
+# compile settings
+
+APPSERVER="../.."
+
+ADDITIONAL_LIB_DIRS += \
+	-L$(APPSERVER)/WEPrototype/$(GNUSTEP_OBJ_DIR)	\
+	-L$(APPSERVER)/NGObjWeb/$(GNUSTEP_OBJ_DIR)	\
+
+# static references required for Mach linker
+
+ADDITIONAL_TOOL_LIBS += \
+	-lWEPrototype	\
+	-lEOControl	\
+	-lDOM -lXmlRpc -lSaxObjC
+
+ADDITIONAL_LIB_DIRS += -L/usr/local/lib -L/usr/lib

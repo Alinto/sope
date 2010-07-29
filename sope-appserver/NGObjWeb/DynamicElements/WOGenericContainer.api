@@ -1,0 +1,6 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOGenericContainer">
+  <binding name="elementName" passthrough="NO" required="YES"/>
+  <binding name="otherTagString" passthrough="NO" />
+</wo>

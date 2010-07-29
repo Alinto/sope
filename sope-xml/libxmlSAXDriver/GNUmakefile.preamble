@@ -1,0 +1,58 @@
+# compilation settings
+
+ifeq ($(frameworks),yes)
+BUNDLE_INSTALL_DIR := $(FRAMEWORK_INSTALL_DIR)/SaxObjC.framework/Resources/SaxDrivers/
+endif
+
+
+ADDITIONAL_CPPFLAGS += -funsigned-char
+
+ADDITIONAL_INCLUDE_DIRS += -I../.. -I..
+ADDITIONAL_INCLUDE_DIRS += $(shell xml2-config --cflags)
+
+
+libxml_LIBS := $(shell xml2-config --libs)
+
+
+ifneq ($(frameworks),yes)
+libxmlSAXDriver_BUNDLE_LIBS += -lSaxObjC $(libxml_LIBS)
+else
+libxmlSAXDriver_BUNDLE_LIBS += -framework SaxObjC $(libxml_LIBS)
+endif
+
+
+# library/framework search pathes
+
+DEP_DIRS = ../SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+ifeq ($(findstring _64, $(GNUSTEP_TARGET_CPU)), _64)
+SYSTEM_LIB_DIR += -L/usr/local/lib64 -L/usr/lib64
+else
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
+endif
+
+
+# platform specific options
+
+ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
+libxmlSAXDriver_BUNDLE_LIBS += \
+	-lz \
+	-lFoundation -lobjc
+endif
+
+ifeq ($(GNUSTEP_TARGET_OS),darwin6)
+ADDITIONAL_LIB_DIRS += -L/sw/lib
+endif
+
+ifeq ($(FOUNDATION_LIB),nx)
+libxmlSAXDriver_LDFLAGS += -framework Foundation
+endif

@@ -1,0 +1,127 @@
+compare /home/helge/wdev/complete/SOPE/releases/4.3.6-shapeshifter with /home/helge/wdev/SOPE-4.3/
+added:   xmlrpc_call
+added:   maintenance
+changed: sope-ldap/samples/
+     2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile.preamble: minor changes for inline compilation with
+     	  GNUSTEP_BUILD_DIR set elsewhere.
+changed: sope-ical/iCalSaxDriver/
+     2004-09-14  Helge Hess  <helge.hess@skyrix.com>
+     	* ICalSaxParser.m: minor improvement to logging (v4.3.15)
+     2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile.preamble: minor changes for inline compilation with
+     	  GNUSTEP_BUILD_DIR set elsewhere (v4.3.14)
+changed: sope-mime/
+     2004-09-07  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: removed some crash situations wrt OGo bug #883 (v4.3.179)
+changed: sope-mime/NGImap4/
+     2004-09-07  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4ResponseParser.m: added some sanity checks for unexpected
+     	  parsing input, removes crashes as reported in OGo bug #883 (v4.3.179)
+changed: sope-appserver/NGXmlRpc/
+     2004-09-14  Helge Hess  <helge.hess@skyrix.com>
+     	* moved xmlrpc_call tool to own top-level SOPE dir (xmlrpc_call)
+     	  (v4.3.7)
+     2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile.preamble: minor changes for inline compilation with
+     	  GNUSTEP_BUILD_DIR set elsewhere (v4.3.6)
+     2004-09-10  Helge Hess  <helge.hess@skyrix.com>
+     	* GNUmakefile: fixed soname, libname versions (v4.3.5)
+removed: sope-appserver/NGXmlRpc/xmlrpc_call.m
+changed: sope-appserver/SoOFS/
+     2004-09-10  Helge Hess  <helge.hess@skyrix.com>
+     	* GNUmakefile: fixed soname, libname versions (v4.3.9)
+added:   sope-appserver/WOExtensions/WOExtensions.wox
+changed: sope-appserver/NGObjWeb/
+     2004-09-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.3.40
+     	* SoObjects/SoProductResourceManager.m: changed method
+     	  -pathForResourceNamed:inFramework:languages: to use new NGExtensions
+     	  addition to NSBundle for proper localized resource lookup
+     	* NGObjWeb.xcode: added SOPE_MAJOR_VERSION and SOPE_MINOR_VERSION to
+     	  the build defines
+     2004-09-14  Helge Hess  <helge.hess@skyrix.com>
+     	* WOMessage.m, WOCoreApplication.m, SoProductRegistry.m, 
+     	  WOApplication+Builders.m: use makefile provided SOPE version for
+     	  resource lookup (v4.3.39)
+     2004-09-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* OWResourceManager.m: deprecated -pathToComponentNamed:inFramework:
+     	  in favor of -pathToComponentNamed:inFramework:languages (v4.3.38)
+     	* v4.3.37
+     	* Templates/WOWrapperTemplateBuilder.m: added ability to load wod
+     	  templates without a .wo wrapper (but from an arbitary path). You need
+     	  to pass in the .html file of the template to enable that. Used in OGo
+     	  for FHS support.
+     	* OWResourceManager.m: do not look for templates in WebServerResources,
+     	  major cleanups in resource lookup code
+     2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile.preamble: minor changes for inline compilation with
+     	  GNUSTEP_BUILD_DIR set elsewhere (v4.3.36)
+     2004-09-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* removed JavaScript function support (v4.3.35)
+     2004-09-10  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.3.34
+     	* SoObjects/SoProductResourceManager.m: added an implementation of
+     	  -pathForResourceNamed:inFramework:languages: which checks the 
+     	  product bundle resources (also required to make the URL lookup work),
+     	  improved debug logging
+     	* Associations/WOResourceURLAssociation.m, Defaults.plist: added
+     	  WOResourceURLAssociationDebugEnabled default and a set of debug
+     	  logs
+     2004-09-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOBrowser.m: deprecated 'selection' binding and
+     	  activated 'selections' as requested in OGo bug #894 (v4.3.33)
+     	* DynamicElements/WOBrowser.m: deprecated 'string' binding and
+     	  activated 'displayString' as requested in OGo bug #888 (v4.3.32)
+     2004-09-09  Frank Reppin  <frank@opengroupware.org>
+     	* GNUmakefile.postamble: added patch for installing in different
+     	  install roots (INSTALL_ROOT_DIR prefix variable) (v4.3.31)
+     2004-09-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOHttpAdaptor/WOHttpTransaction.m: check whether the simple HTTP
+     	  parser is to be used using the
+     	  -shouldUseSimpleHTTPParserForTransaction: method on
+     	  WOCoreApplication. That way applications which require the parser
+     	  (like xmlrpcd/ZideStore) can override the default
+     	  WOHttpTransactionUseSimpleParser default (v4.3.30)
+     2004-09-07  Helge Hess  <helge.hess@skyrix.com>
+     	* Defaults.plist: disable WODebugging per default (v4.3.29)
+     	* WOContext.m: minor code cleanup (v4.3.28)
+added:   sope-appserver/NGObjWeb/subdirs.make
+removed: sope-appserver/NGObjWeb/WOSession+JS.m
+changed: sope-appserver/NGObjWeb/NGHttp/
+     2004-09-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGHttp.xcode: minor changes
+changed: sope-appserver/mod_ngobjweb/
+     2004-09-20  Helge Hess  <helge.hess@skyrix.com>
+     	* scanhttp.c (NGScanResponseLine): changed char types to unsigned char
+     	* GNUmakefile: remove version and EAPI marker from generated module,
+     	  the result is now called mod_ngobjweb.so
+     2004-09-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* handler.c: fixed some log text
+added:   sope-appserver/mod_ngobjweb/500mod_ngobjweb.info
+added:   sope-appserver/WEExtensions/WEExtensions.wox
+changed: sope-gdl1/PostgreSQL/
+     2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile.preamble: minor changes for inline compilation with
+     	  GNUSTEP_BUILD_DIR set elsewhere (v1.1.38)
+     2004-09-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAttribute+PostgreSQL72.m: use same exception handling on all
+     	  Foundations (v1.1.37)
+changed: sope-gdl1/GDLAccess/
+     2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile.preamble, FoundationExt/GNUmakefile: minor changes for
+     	  inline compilation with GNUSTEP_BUILD_DIR set elsewhere (v1.1.40)
+changed: sope-core/NGStreams/
+     2004-09-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGByteBuffer.m, NGLocalSocketAddress.m, NGCharBuffer.m: fixed
+     	  exception handling to be the same on all Foundation libraries
+     	  (v4.3.45)
+changed: sope-core/NGExtensions/
+     2004-09-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.3.115
+     	* NGExtensions/NSBundle+misc.h, FdExt.subproj/NSBundle+misc.m: new
+     	  NSBundle method -pathForResource:ofType:inDirectory:forLocalizations:
+     	* NGExtensions/NGExtensions.h: added NSBundle+misc.h to the public
+     	  headers
+added:   sope-core/NGExtensions/NGExtensions/NSBundle+misc.h
+added:   sope-core/NGExtensions/FdExt.subproj/NSBundle+misc.m

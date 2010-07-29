@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<span xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      class="projectcard"
+>
+      <h2 class="projecttitle"><var:string value="title" /></h2>
+      <div class="blogbody">
+        <h3 class="title"><var:string value="subtitle" /></h3>
+        <p><var:component-content/></p>
+        
+        <div class="projectowner">
+          Projectlead is <a var:href="leadurl"><var:string value="lead"/></a>, 
+          started at 2003-09-10.
+        </div>
+      </div>
+</span>

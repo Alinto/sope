@@ -1,0 +1,31 @@
+
+The authors of this library are
+
+Ovidiu Predescu <ovidiu@slip.net> 
+Mircea Oancea <mircea@pathcom.com>
+Helge Hess <helge@mdlink.de>
+
+We would like to thank to Florin Mihaila for his ideas and for his support in
+putting our work in public domain and to Mihaela Mihaila, Stefan Popescu,
+Claudiu Cruceanu, Calin Gatina and Bogdan Baliuc for their work in the old
+library and for removing all those nasty bugs :-)!
+
+Many thanks to Helge Hess <hh@mdlink.de> for lots of ideas, bug
+reports and effective work. He is responsible for persuading me to
+integrate the Boehm's garbage collector and for the support of this
+integration.
+
+Special thanks to the following people:
+
+- Jeremy R. Bettis <jeremy@hksys.com> for the port on Windows NT using
+  the Cygnus tools
+- Aleksandr Savostyanov <sav@conextions.com> for completion of the port on
+  Solaris, many bug fixes and a lot of suggestions.
+- Paul H. Kenyon <phk@hksys.com> for fixes in NSString
+- Gregor Hoffleit <flight@mathi.uni-heidelberg.de> for suggestions and bug
+  fixes.
+- Marcus Mueller <znek@object-factory.com> for the port on FreeBSD
+- Steven Besler <sbesler@exchange.ml.com> and Leon Salvail
+  <lsalvail@global-village.net> for supporting the AIX port.
+
+Please send us your suggestions and problems you encountered.

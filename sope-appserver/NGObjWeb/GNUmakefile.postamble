@@ -1,0 +1,36 @@
+# postprocessing
+
+
+# install library resources
+
+ifneq ($(frameworks),yes)
+
+$(RESOURCES_DIR) :
+	$(MKDIRS) $(RESOURCES_DIR)
+
+ngobjweb-resources : $(RESOURCES_DIR) $(libNGObjWeb_RESOURCES)
+	@(if [ "$(libNGObjWeb_RESOURCES)" != "" ]; then \
+	  echo "Copying resources into install path ..."; \
+          for ff in $(libNGObjWeb_RESOURCES); do \
+	    cp $$ff $(RESOURCES_DIR)/$$ff; \
+          done; \
+	fi)
+
+after-install :: ngobjweb-resources
+
+endif
+
+
+# install makefiles
+
+after-install ::
+	$(MKDIRS) $(INSTALL_ROOT_DIR)/$(GNUSTEP_MAKEFILES)/Additional/
+	$(INSTALL_DATA) ngobjweb.make $(INSTALL_ROOT_DIR)/$(GNUSTEP_MAKEFILES)/Additional/ngobjweb.make
+
+ifneq ($(GNUSTEP_MAKE_VERSION),1.3.0)
+after-install ::
+	$(INSTALL_DATA) woapp-gs.make    \
+		$(INSTALL_ROOT_DIR)/$(GNUSTEP_MAKEFILES)/woapp.make
+	$(INSTALL_DATA) wobundle-gs.make \
+		$(INSTALL_ROOT_DIR)/$(GNUSTEP_MAKEFILES)/wobundle.make
+endif

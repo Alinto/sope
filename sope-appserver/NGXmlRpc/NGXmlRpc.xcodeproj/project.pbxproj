@@ -1,0 +1,477 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AD013C2606E20D19000910D8 /* NGHttp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C1906E20D18000910D8 /* NGHttp.framework */; };
+		AD013C2B06E20D19000910D8 /* NGMime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C1E06E20D18000910D8 /* NGMime.framework */; };
+		AD013C2D06E20D19000910D8 /* NGObjWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C2006E20D18000910D8 /* NGObjWeb.framework */; };
+		AD013C2E06E20D19000910D8 /* NGStreams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C2106E20D18000910D8 /* NGStreams.framework */; };
+		AD0142CF06E21A3D000910D8 /* NGExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0142CE06E21A3D000910D8 /* NGExtensions.framework */; };
+		ADBFE6B8073EA42B00E7F7CA /* NGAsyncResultProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6AC073EA42B00E7F7CA /* NGAsyncResultProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6B9073EA42B00E7F7CA /* NGXmlRpc.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6AD073EA42B00E7F7CA /* NGXmlRpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6BA073EA42B00E7F7CA /* NGXmlRpcAction.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6AE073EA42B00E7F7CA /* NGXmlRpcAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6BB073EA42B00E7F7CA /* NGXmlRpcClient.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6AF073EA42B00E7F7CA /* NGXmlRpcClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6BC073EA42B00E7F7CA /* NGXmlRpcInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6B0073EA42B00E7F7CA /* NGXmlRpcInvocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6BD073EA42B00E7F7CA /* NGXmlRpcMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6B1073EA42B00E7F7CA /* NGXmlRpcMethodSignature.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6BE073EA42B00E7F7CA /* NGXmlRpcRequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6B2073EA42B00E7F7CA /* NGXmlRpcRequestHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6BF073EA42B00E7F7CA /* NSObject+Reflection.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6B3073EA42B00E7F7CA /* NSObject+Reflection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6C0073EA42B00E7F7CA /* WODirectAction+XmlRpc.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6B4073EA42B00E7F7CA /* WODirectAction+XmlRpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6C1073EA42B00E7F7CA /* WODirectAction+XmlRpcIntrospection.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6B5073EA42B00E7F7CA /* WODirectAction+XmlRpcIntrospection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6C2073EA42B00E7F7CA /* XmlRpcMethodCall+WO.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6B6073EA42B00E7F7CA /* XmlRpcMethodCall+WO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6C3073EA42B00E7F7CA /* XmlRpcMethodResponse+WO.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBFE6B7073EA42B00E7F7CA /* XmlRpcMethodResponse+WO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADBFE6D8073EA44000E7F7CA /* EOFetchSpecification+XmlRpcCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6C4073EA44000E7F7CA /* EOFetchSpecification+XmlRpcCoding.m */; };
+		ADBFE6D9073EA44000E7F7CA /* EOKeyGlobalID+XmlRpcCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6C5073EA44000E7F7CA /* EOKeyGlobalID+XmlRpcCoding.m */; };
+		ADBFE6DA073EA44000E7F7CA /* EONull+XmlRpcCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6C6073EA44000E7F7CA /* EONull+XmlRpcCoding.m */; };
+		ADBFE6DB073EA44000E7F7CA /* EOQualifier+XmlRpcCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6C7073EA44000E7F7CA /* EOQualifier+XmlRpcCoding.m */; };
+		ADBFE6DC073EA44000E7F7CA /* EOSortOrdering+XmlRpcCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6C8073EA44000E7F7CA /* EOSortOrdering+XmlRpcCoding.m */; };
+		ADBFE6DD073EA44000E7F7CA /* NGAsyncResultProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6C9073EA44000E7F7CA /* NGAsyncResultProxy.m */; };
+		ADBFE6DE073EA44000E7F7CA /* NGXmlRpcAction.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6CA073EA44000E7F7CA /* NGXmlRpcAction.m */; };
+		ADBFE6DF073EA44000E7F7CA /* NGXmlRpcAction+Registry.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6CB073EA44000E7F7CA /* NGXmlRpcAction+Registry.m */; };
+		ADBFE6E0073EA44000E7F7CA /* NGXmlRpcClient.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6CC073EA44000E7F7CA /* NGXmlRpcClient.m */; };
+		ADBFE6E1073EA44000E7F7CA /* NGXmlRpcInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6CD073EA44000E7F7CA /* NGXmlRpcInvocation.m */; };
+		ADBFE6E2073EA44000E7F7CA /* NGXmlRpcMethodSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6CE073EA44000E7F7CA /* NGXmlRpcMethodSignature.m */; };
+		ADBFE6E3073EA44000E7F7CA /* NGXmlRpcRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6CF073EA44000E7F7CA /* NGXmlRpcRequestHandler.m */; };
+		ADBFE6E4073EA44000E7F7CA /* NSObject+Reflection.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6D0073EA44000E7F7CA /* NSObject+Reflection.m */; };
+		ADBFE6E5073EA44000E7F7CA /* WODirectAction+XmlRpc.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6D1073EA44000E7F7CA /* WODirectAction+XmlRpc.m */; };
+		ADBFE6E6073EA44000E7F7CA /* WODirectAction+XmlRpcIntrospection.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6D2073EA44000E7F7CA /* WODirectAction+XmlRpcIntrospection.m */; };
+		ADBFE6E7073EA44000E7F7CA /* WOMessage+XmlRpcCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6D3073EA44000E7F7CA /* WOMessage+XmlRpcCoding.m */; };
+		ADBFE6E8073EA44000E7F7CA /* WORequest+XmlRpcCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6D4073EA44000E7F7CA /* WORequest+XmlRpcCoding.m */; };
+		ADBFE6E9073EA44000E7F7CA /* WOResponse+XmlRpcCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6D5073EA44000E7F7CA /* WOResponse+XmlRpcCoding.m */; };
+		ADBFE6EA073EA44000E7F7CA /* XmlRpcMethodCall+WO.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6D6073EA44000E7F7CA /* XmlRpcMethodCall+WO.m */; };
+		ADBFE6EB073EA44000E7F7CA /* XmlRpcMethodResponse+WO.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBFE6D7073EA44000E7F7CA /* XmlRpcMethodResponse+WO.m */; };
+		ADBFE89C073EA72000E7F7CA /* NGImap4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBFE89A073EA72000E7F7CA /* NGImap4.framework */; };
+		ADBFE89D073EA72000E7F7CA /* WebDAV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBFE89B073EA72000E7F7CA /* WebDAV.framework */; };
+		ADBFE8EC073EA76600E7F7CA /* SoObjects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBFE8EB073EA76600E7F7CA /* SoObjects.framework */; };
+		ADBFE90D073EA79600E7F7CA /* NGMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBFE90C073EA79600E7F7CA /* NGMail.framework */; };
+		ADD65F6406DA3AF6007161CA /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = ADD65C7006DA343C007161CA /* common.h */; };
+		ADD65F7506DA3C51007161CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65F7406DA3C51007161CA /* Foundation.framework */; };
+		ADD65FE806DA3CDE007161CA /* DOM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE506DA3CDE007161CA /* DOM.framework */; };
+		ADD65FE906DA3CDE007161CA /* SaxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE606DA3CDE007161CA /* SaxObjC.framework */; };
+		ADD65FEA06DA3CDE007161CA /* XmlRpc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE706DA3CDE007161CA /* XmlRpc.framework */; };
+		ADD6610E06DA3D1F007161CA /* EOControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD6610D06DA3D1F007161CA /* EOControl.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AD013C1906E20D18000910D8 /* NGHttp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGHttp.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGHttp.framework"; sourceTree = "<absolute>"; };
+		AD013C1E06E20D18000910D8 /* NGMime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGMime.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGMime.framework"; sourceTree = "<absolute>"; };
+		AD013C2006E20D18000910D8 /* NGObjWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGObjWeb.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGObjWeb.framework"; sourceTree = "<absolute>"; };
+		AD013C2106E20D18000910D8 /* NGStreams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGStreams.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGStreams.framework"; sourceTree = "<absolute>"; };
+		AD013C4706E20DAA000910D8 /* LDAP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LDAP.framework; path = /System/Library/Frameworks/LDAP.framework; sourceTree = "<absolute>"; };
+		AD0142CE06E21A3D000910D8 /* NGExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGExtensions.framework"; sourceTree = "<absolute>"; };
+		AD77EC220C4F64B80018A131 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		AD77EC230C4F64B80018A131 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		AD77EC240C4F64B80018A131 /* Wrapper.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Wrapper.xcconfig; sourceTree = "<group>"; };
+		ADBFE6AB073EA3EA00E7F7CA /* fhs.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = fhs.make; sourceTree = "<group>"; tabWidth = 8; };
+		ADBFE6AC073EA42B00E7F7CA /* NGAsyncResultProxy.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = NGAsyncResultProxy.h; sourceTree = "<group>"; };
+		ADBFE6AD073EA42B00E7F7CA /* NGXmlRpc.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = NGXmlRpc.h; sourceTree = "<group>"; };
+		ADBFE6AE073EA42B00E7F7CA /* NGXmlRpcAction.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = NGXmlRpcAction.h; sourceTree = "<group>"; };
+		ADBFE6AF073EA42B00E7F7CA /* NGXmlRpcClient.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = NGXmlRpcClient.h; sourceTree = "<group>"; };
+		ADBFE6B0073EA42B00E7F7CA /* NGXmlRpcInvocation.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = NGXmlRpcInvocation.h; sourceTree = "<group>"; };
+		ADBFE6B1073EA42B00E7F7CA /* NGXmlRpcMethodSignature.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = NGXmlRpcMethodSignature.h; sourceTree = "<group>"; };
+		ADBFE6B2073EA42B00E7F7CA /* NGXmlRpcRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = NGXmlRpcRequestHandler.h; sourceTree = "<group>"; };
+		ADBFE6B3073EA42B00E7F7CA /* NSObject+Reflection.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = "NSObject+Reflection.h"; sourceTree = "<group>"; };
+		ADBFE6B4073EA42B00E7F7CA /* WODirectAction+XmlRpc.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = "WODirectAction+XmlRpc.h"; sourceTree = "<group>"; };
+		ADBFE6B5073EA42B00E7F7CA /* WODirectAction+XmlRpcIntrospection.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = "WODirectAction+XmlRpcIntrospection.h"; sourceTree = "<group>"; };
+		ADBFE6B6073EA42B00E7F7CA /* XmlRpcMethodCall+WO.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = "XmlRpcMethodCall+WO.h"; sourceTree = "<group>"; };
+		ADBFE6B7073EA42B00E7F7CA /* XmlRpcMethodResponse+WO.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = "XmlRpcMethodResponse+WO.h"; sourceTree = "<group>"; };
+		ADBFE6C4073EA44000E7F7CA /* EOFetchSpecification+XmlRpcCoding.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "EOFetchSpecification+XmlRpcCoding.m"; sourceTree = "<group>"; };
+		ADBFE6C5073EA44000E7F7CA /* EOKeyGlobalID+XmlRpcCoding.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "EOKeyGlobalID+XmlRpcCoding.m"; sourceTree = "<group>"; };
+		ADBFE6C6073EA44000E7F7CA /* EONull+XmlRpcCoding.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "EONull+XmlRpcCoding.m"; sourceTree = "<group>"; };
+		ADBFE6C7073EA44000E7F7CA /* EOQualifier+XmlRpcCoding.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "EOQualifier+XmlRpcCoding.m"; sourceTree = "<group>"; };
+		ADBFE6C8073EA44000E7F7CA /* EOSortOrdering+XmlRpcCoding.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "EOSortOrdering+XmlRpcCoding.m"; sourceTree = "<group>"; };
+		ADBFE6C9073EA44000E7F7CA /* NGAsyncResultProxy.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NGAsyncResultProxy.m; sourceTree = "<group>"; };
+		ADBFE6CA073EA44000E7F7CA /* NGXmlRpcAction.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NGXmlRpcAction.m; sourceTree = "<group>"; };
+		ADBFE6CB073EA44000E7F7CA /* NGXmlRpcAction+Registry.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "NGXmlRpcAction+Registry.m"; sourceTree = "<group>"; };
+		ADBFE6CC073EA44000E7F7CA /* NGXmlRpcClient.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NGXmlRpcClient.m; sourceTree = "<group>"; };
+		ADBFE6CD073EA44000E7F7CA /* NGXmlRpcInvocation.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NGXmlRpcInvocation.m; sourceTree = "<group>"; };
+		ADBFE6CE073EA44000E7F7CA /* NGXmlRpcMethodSignature.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NGXmlRpcMethodSignature.m; sourceTree = "<group>"; };
+		ADBFE6CF073EA44000E7F7CA /* NGXmlRpcRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NGXmlRpcRequestHandler.m; sourceTree = "<group>"; };
+		ADBFE6D0073EA44000E7F7CA /* NSObject+Reflection.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Reflection.m"; sourceTree = "<group>"; };
+		ADBFE6D1073EA44000E7F7CA /* WODirectAction+XmlRpc.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "WODirectAction+XmlRpc.m"; sourceTree = "<group>"; };
+		ADBFE6D2073EA44000E7F7CA /* WODirectAction+XmlRpcIntrospection.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "WODirectAction+XmlRpcIntrospection.m"; sourceTree = "<group>"; };
+		ADBFE6D3073EA44000E7F7CA /* WOMessage+XmlRpcCoding.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "WOMessage+XmlRpcCoding.m"; sourceTree = "<group>"; };
+		ADBFE6D4073EA44000E7F7CA /* WORequest+XmlRpcCoding.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "WORequest+XmlRpcCoding.m"; sourceTree = "<group>"; };
+		ADBFE6D5073EA44000E7F7CA /* WOResponse+XmlRpcCoding.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "WOResponse+XmlRpcCoding.m"; sourceTree = "<group>"; };
+		ADBFE6D6073EA44000E7F7CA /* XmlRpcMethodCall+WO.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "XmlRpcMethodCall+WO.m"; sourceTree = "<group>"; };
+		ADBFE6D7073EA44000E7F7CA /* XmlRpcMethodResponse+WO.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "XmlRpcMethodResponse+WO.m"; sourceTree = "<group>"; };
+		ADBFE89A073EA72000E7F7CA /* NGImap4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGImap4.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGImap4.framework"; sourceTree = "<absolute>"; };
+		ADBFE89B073EA72000E7F7CA /* WebDAV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebDAV.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/WebDAV.framework"; sourceTree = "<absolute>"; };
+		ADBFE8EB073EA76600E7F7CA /* SoObjects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SoObjects.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SoObjects.framework"; sourceTree = "<absolute>"; };
+		ADBFE90C073EA79600E7F7CA /* NGMail.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGMail.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGMail.framework"; sourceTree = "<absolute>"; };
+		ADD65C6F06DA343C007161CA /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 8; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		ADD65C7006DA343C007161CA /* common.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		ADD65C7406DA343C007161CA /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65C7506DA343C007161CA /* GNUmakefile.preamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile.preamble; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65C8B06DA343C007161CA /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65D5806DA372D007161CA /* NGXmlRpc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NGXmlRpc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADD65D5A06DA372D007161CA /* NGXmlRpc-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "NGXmlRpc-Info.plist"; sourceTree = "<group>"; };
+		ADD65F7406DA3C51007161CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		ADD65FE306DA3CA7007161CA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = /usr/lib/libz.dylib; sourceTree = "<absolute>"; };
+		ADD65FE506DA3CDE007161CA /* DOM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DOM.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/DOM.framework"; sourceTree = "<absolute>"; };
+		ADD65FE606DA3CDE007161CA /* SaxObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SaxObjC.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SaxObjC.framework"; sourceTree = "<absolute>"; };
+		ADD65FE706DA3CDE007161CA /* XmlRpc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XmlRpc.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/XmlRpc.framework"; sourceTree = "<absolute>"; };
+		ADD6610D06DA3D1F007161CA /* EOControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EOControl.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/EOControl.framework"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADD65D5606DA372D007161CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD65F7506DA3C51007161CA /* Foundation.framework in Frameworks */,
+				ADD6610E06DA3D1F007161CA /* EOControl.framework in Frameworks */,
+				ADD65FE906DA3CDE007161CA /* SaxObjC.framework in Frameworks */,
+				ADD65FE806DA3CDE007161CA /* DOM.framework in Frameworks */,
+				ADD65FEA06DA3CDE007161CA /* XmlRpc.framework in Frameworks */,
+				AD013C2606E20D19000910D8 /* NGHttp.framework in Frameworks */,
+				AD013C2B06E20D19000910D8 /* NGMime.framework in Frameworks */,
+				AD013C2D06E20D19000910D8 /* NGObjWeb.framework in Frameworks */,
+				AD013C2E06E20D19000910D8 /* NGStreams.framework in Frameworks */,
+				AD0142CF06E21A3D000910D8 /* NGExtensions.framework in Frameworks */,
+				ADBFE89C073EA72000E7F7CA /* NGImap4.framework in Frameworks */,
+				ADBFE89D073EA72000E7F7CA /* WebDAV.framework in Frameworks */,
+				ADBFE8EC073EA76600E7F7CA /* SoObjects.framework in Frameworks */,
+				ADBFE90D073EA79600E7F7CA /* NGMail.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD013C1806E20C17000910D8 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				ADBFE6AC073EA42B00E7F7CA /* NGAsyncResultProxy.h */,
+				ADBFE6AD073EA42B00E7F7CA /* NGXmlRpc.h */,
+				ADBFE6AE073EA42B00E7F7CA /* NGXmlRpcAction.h */,
+				ADBFE6AF073EA42B00E7F7CA /* NGXmlRpcClient.h */,
+				ADBFE6B0073EA42B00E7F7CA /* NGXmlRpcInvocation.h */,
+				ADBFE6B1073EA42B00E7F7CA /* NGXmlRpcMethodSignature.h */,
+				ADBFE6B2073EA42B00E7F7CA /* NGXmlRpcRequestHandler.h */,
+				ADBFE6B3073EA42B00E7F7CA /* NSObject+Reflection.h */,
+				ADBFE6B4073EA42B00E7F7CA /* WODirectAction+XmlRpc.h */,
+				ADBFE6B5073EA42B00E7F7CA /* WODirectAction+XmlRpcIntrospection.h */,
+				ADBFE6B6073EA42B00E7F7CA /* XmlRpcMethodCall+WO.h */,
+				ADBFE6B7073EA42B00E7F7CA /* XmlRpcMethodResponse+WO.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		AD013C9E06E20E99000910D8 /* sope-core */ = {
+			isa = PBXGroup;
+			children = (
+				ADD6610D06DA3D1F007161CA /* EOControl.framework */,
+				AD0142CE06E21A3D000910D8 /* NGExtensions.framework */,
+				AD013C2106E20D18000910D8 /* NGStreams.framework */,
+			);
+			name = "sope-core";
+			sourceTree = "<group>";
+		};
+		AD013DD406E20EBA000910D8 /* sope-appserver */ = {
+			isa = PBXGroup;
+			children = (
+				AD013C2006E20D18000910D8 /* NGObjWeb.framework */,
+				AD013C1906E20D18000910D8 /* NGHttp.framework */,
+				ADBFE89B073EA72000E7F7CA /* WebDAV.framework */,
+				ADBFE8EB073EA76600E7F7CA /* SoObjects.framework */,
+			);
+			name = "sope-appserver";
+			sourceTree = "<group>";
+		};
+		AD01401C06E20F1D000910D8 /* sope-mime */ = {
+			isa = PBXGroup;
+			children = (
+				AD013C1E06E20D18000910D8 /* NGMime.framework */,
+				ADBFE90C073EA79600E7F7CA /* NGMail.framework */,
+				ADBFE89A073EA72000E7F7CA /* NGImap4.framework */,
+			);
+			name = "sope-mime";
+			sourceTree = "<group>";
+		};
+		AD77EC210C4F64B80018A131 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				AD77EC220C4F64B80018A131 /* Common.xcconfig */,
+				AD77EC230C4F64B80018A131 /* Development.xcconfig */,
+				AD77EC240C4F64B80018A131 /* Wrapper.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../xcconfig;
+			sourceTree = "<group>";
+		};
+		ADD65B6606DA32D6007161CA = {
+			isa = PBXGroup;
+			children = (
+				ADD65C6F06DA343C007161CA /* ChangeLog */,
+				ADD65C8B06DA343C007161CA /* Version */,
+				ADD65C8E06DA344C007161CA /* Makefiles */,
+				AD013C1806E20C17000910D8 /* Headers */,
+				ADD65C9406DA34FF007161CA /* Classes */,
+				ADD65D5D06DA37C7007161CA /* Resources */,
+				ADD65D5906DA372D007161CA /* Products */,
+				ADD65F7306DA3C02007161CA /* Linked Frameworks */,
+				AD77EC210C4F64B80018A131 /* xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		ADD65C8E06DA344C007161CA /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65C7406DA343C007161CA /* GNUmakefile */,
+				ADD65C7506DA343C007161CA /* GNUmakefile.preamble */,
+				ADBFE6AB073EA3EA00E7F7CA /* fhs.make */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADD65C9406DA34FF007161CA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65C7006DA343C007161CA /* common.h */,
+				ADBFE6C4073EA44000E7F7CA /* EOFetchSpecification+XmlRpcCoding.m */,
+				ADBFE6C5073EA44000E7F7CA /* EOKeyGlobalID+XmlRpcCoding.m */,
+				ADBFE6C6073EA44000E7F7CA /* EONull+XmlRpcCoding.m */,
+				ADBFE6C7073EA44000E7F7CA /* EOQualifier+XmlRpcCoding.m */,
+				ADBFE6C8073EA44000E7F7CA /* EOSortOrdering+XmlRpcCoding.m */,
+				ADBFE6C9073EA44000E7F7CA /* NGAsyncResultProxy.m */,
+				ADBFE6CA073EA44000E7F7CA /* NGXmlRpcAction.m */,
+				ADBFE6CB073EA44000E7F7CA /* NGXmlRpcAction+Registry.m */,
+				ADBFE6CC073EA44000E7F7CA /* NGXmlRpcClient.m */,
+				ADBFE6CD073EA44000E7F7CA /* NGXmlRpcInvocation.m */,
+				ADBFE6CE073EA44000E7F7CA /* NGXmlRpcMethodSignature.m */,
+				ADBFE6CF073EA44000E7F7CA /* NGXmlRpcRequestHandler.m */,
+				ADBFE6D0073EA44000E7F7CA /* NSObject+Reflection.m */,
+				ADBFE6D1073EA44000E7F7CA /* WODirectAction+XmlRpc.m */,
+				ADBFE6D2073EA44000E7F7CA /* WODirectAction+XmlRpcIntrospection.m */,
+				ADBFE6D3073EA44000E7F7CA /* WOMessage+XmlRpcCoding.m */,
+				ADBFE6D4073EA44000E7F7CA /* WORequest+XmlRpcCoding.m */,
+				ADBFE6D5073EA44000E7F7CA /* WOResponse+XmlRpcCoding.m */,
+				ADBFE6D6073EA44000E7F7CA /* XmlRpcMethodCall+WO.m */,
+				ADBFE6D7073EA44000E7F7CA /* XmlRpcMethodResponse+WO.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		ADD65D5906DA372D007161CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65D5806DA372D007161CA /* NGXmlRpc.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADD65D5D06DA37C7007161CA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65D5A06DA372D007161CA /* NGXmlRpc-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		ADD65F7306DA3C02007161CA /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65F7406DA3C51007161CA /* Foundation.framework */,
+				AD013C4706E20DAA000910D8 /* LDAP.framework */,
+				ADD65FE306DA3CA7007161CA /* libz.dylib */,
+				ADD6603106DA3CE2007161CA /* sope-xml */,
+				AD013C9E06E20E99000910D8 /* sope-core */,
+				AD013DD406E20EBA000910D8 /* sope-appserver */,
+				AD01401C06E20F1D000910D8 /* sope-mime */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		ADD6603106DA3CE2007161CA /* sope-xml */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65FE506DA3CDE007161CA /* DOM.framework */,
+				ADD65FE606DA3CDE007161CA /* SaxObjC.framework */,
+				ADD65FE706DA3CDE007161CA /* XmlRpc.framework */,
+			);
+			name = "sope-xml";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		ADD65D5306DA372D007161CA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD65F6406DA3AF6007161CA /* common.h in Headers */,
+				ADBFE6B8073EA42B00E7F7CA /* NGAsyncResultProxy.h in Headers */,
+				ADBFE6B9073EA42B00E7F7CA /* NGXmlRpc.h in Headers */,
+				ADBFE6BA073EA42B00E7F7CA /* NGXmlRpcAction.h in Headers */,
+				ADBFE6BB073EA42B00E7F7CA /* NGXmlRpcClient.h in Headers */,
+				ADBFE6BC073EA42B00E7F7CA /* NGXmlRpcInvocation.h in Headers */,
+				ADBFE6BD073EA42B00E7F7CA /* NGXmlRpcMethodSignature.h in Headers */,
+				ADBFE6BE073EA42B00E7F7CA /* NGXmlRpcRequestHandler.h in Headers */,
+				ADBFE6BF073EA42B00E7F7CA /* NSObject+Reflection.h in Headers */,
+				ADBFE6C0073EA42B00E7F7CA /* WODirectAction+XmlRpc.h in Headers */,
+				ADBFE6C1073EA42B00E7F7CA /* WODirectAction+XmlRpcIntrospection.h in Headers */,
+				ADBFE6C2073EA42B00E7F7CA /* XmlRpcMethodCall+WO.h in Headers */,
+				ADBFE6C3073EA42B00E7F7CA /* XmlRpcMethodResponse+WO.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		ADD65D5706DA372D007161CA /* NGXmlRpc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA07924085738D100993825 /* Build configuration list for PBXNativeTarget "NGXmlRpc" */;
+			buildPhases = (
+				ADD65D5306DA372D007161CA /* Headers */,
+				ADD65D5406DA372D007161CA /* Resources */,
+				ADD65D5506DA372D007161CA /* Sources */,
+				ADD65D5606DA372D007161CA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NGXmlRpc;
+			productName = NGXmlRpc;
+			productReference = ADD65D5806DA372D007161CA /* NGXmlRpc.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADD65B6A06DA32D6007161CA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA07928085738D100993825 /* Build configuration list for PBXProject "NGXmlRpc" */;
+			hasScannedForEncodings = 0;
+			mainGroup = ADD65B6606DA32D6007161CA;
+			productRefGroup = ADD65D5906DA372D007161CA /* Products */;
+			projectDirPath = "";
+			targets = (
+				ADD65D5706DA372D007161CA /* NGXmlRpc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADD65D5406DA372D007161CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADD65D5506DA372D007161CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADBFE6D8073EA44000E7F7CA /* EOFetchSpecification+XmlRpcCoding.m in Sources */,
+				ADBFE6D9073EA44000E7F7CA /* EOKeyGlobalID+XmlRpcCoding.m in Sources */,
+				ADBFE6DA073EA44000E7F7CA /* EONull+XmlRpcCoding.m in Sources */,
+				ADBFE6DB073EA44000E7F7CA /* EOQualifier+XmlRpcCoding.m in Sources */,
+				ADBFE6DC073EA44000E7F7CA /* EOSortOrdering+XmlRpcCoding.m in Sources */,
+				ADBFE6DD073EA44000E7F7CA /* NGAsyncResultProxy.m in Sources */,
+				ADBFE6DE073EA44000E7F7CA /* NGXmlRpcAction.m in Sources */,
+				ADBFE6DF073EA44000E7F7CA /* NGXmlRpcAction+Registry.m in Sources */,
+				ADBFE6E0073EA44000E7F7CA /* NGXmlRpcClient.m in Sources */,
+				ADBFE6E1073EA44000E7F7CA /* NGXmlRpcInvocation.m in Sources */,
+				ADBFE6E2073EA44000E7F7CA /* NGXmlRpcMethodSignature.m in Sources */,
+				ADBFE6E3073EA44000E7F7CA /* NGXmlRpcRequestHandler.m in Sources */,
+				ADBFE6E4073EA44000E7F7CA /* NSObject+Reflection.m in Sources */,
+				ADBFE6E5073EA44000E7F7CA /* WODirectAction+XmlRpc.m in Sources */,
+				ADBFE6E6073EA44000E7F7CA /* WODirectAction+XmlRpcIntrospection.m in Sources */,
+				ADBFE6E7073EA44000E7F7CA /* WOMessage+XmlRpcCoding.m in Sources */,
+				ADBFE6E8073EA44000E7F7CA /* WORequest+XmlRpcCoding.m in Sources */,
+				ADBFE6E9073EA44000E7F7CA /* WOResponse+XmlRpcCoding.m in Sources */,
+				ADBFE6EA073EA44000E7F7CA /* XmlRpcMethodCall+WO.m in Sources */,
+				ADBFE6EB073EA44000E7F7CA /* XmlRpcMethodResponse+WO.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADA07925085738D100993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EC230C4F64B80018A131 /* Development.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).0";
+				DYLIB_CURRENT_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).16";
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "NGXmlRpc-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-seg1addr",
+					0xC3D00000,
+					"-headerpad_max_install_names",
+				);
+				PRODUCT_NAME = NGXmlRpc;
+			};
+			name = Development;
+		};
+		ADA07926085738D100993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EC240C4F64B80018A131 /* Wrapper.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).0";
+				DYLIB_CURRENT_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).16";
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "NGXmlRpc-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-seg1addr",
+					0xC3D00000,
+					"-headerpad_max_install_names",
+				);
+				PRODUCT_NAME = NGXmlRpc;
+			};
+			name = Wrapper;
+		};
+		ADA07929085738D100993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA0792A085738D100993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA07924085738D100993825 /* Build configuration list for PBXNativeTarget "NGXmlRpc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07925085738D100993825 /* Development */,
+				ADA07926085738D100993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA07928085738D100993825 /* Build configuration list for PBXProject "NGXmlRpc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07929085738D100993825 /* Development */,
+				ADA0792A085738D100993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADD65B6A06DA32D6007161CA /* Project object */;
+}

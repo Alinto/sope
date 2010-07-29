@@ -1,0 +1,13 @@
+TODO
+====
+
+- add SAX wrapper for Parsifal ?
+  http://www.saunalahti.fi/~samiuus/toni/xmlproc/
+
+- add a DOM builder which can create a DOM from a libxml2 or
+  CoreFoundation DOM tree instead of using SAX
+  (should be much more efficient)
+
+- write a SAX driver based on NSXMLParser (should be an almost trivial 1:1
+  mapping)
+

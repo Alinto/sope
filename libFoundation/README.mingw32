@@ -1,0 +1,208 @@
+libFoundation on Windows mingw32 README
+=======================================
+
+Intro
+=====
+
+    I have started to port the libFoundation library to Windows 95/NT by
+    using the so called mingw32 environment. Mingw32 is a GNU compilation
+    environment containing gcc, ld and other tools.
+    The port is done in a cross-compilation environment. This is significant
+    mostly because configure and the Makefiles might not work on Win32 because
+    of file naming problems (slash vs backslash).
+    First attempts are made to compile lF using mingw32 only, that is, without
+    cross-compilation and without cygwin, see below for issues.
+
+Mingw32
+=======
+
+    The libFoundation compiles with a sparc-solaris-X-i386-mingw32 compiler in
+    the GNUstep make environment. Quite a lot information regarding Unix
+    to Windows porting using GNU tools is contained on this site:
+        
+        http://www.xraylith.wisc.edu/~khan/software/gnu-win32/
+    
+    The site includes a HOWTO file for creating a cross-compiler with a
+    i386-mingw32 target which I found *very* useful.
+
+    I recently modified libFoundation to use the Win32 API libraries at
+
+        http://www.acc.umu.se/~anorland/gnu-win32/w32api.html
+
+    These includes/libraries are much more extensive than the ones delivered
+    with mingw32. Probably they will make it into the mingw32 distribution.
+
+    There are some other Unix-to-Windows porting packages, especially Cygwin
+    from http://www.cygnus.com. Cygwin emulates large parts of Unix
+    in it's environment and also provides a Unix shell environment that
+    might be used to host native mingw32 compiles.
+    The major advantages of mingw32 is that the resulting executables are
+    not covered by GPL and that it doesn't require any additional libraries but
+    the ones provided by Windows itself. The disadvantage is that more porting
+    is required ..
+
+GNUstep-make
+============
+
+    If compiling lF with gstep-make (--with-gnustep configure switch) you
+    have to configure gstep-make for cross-compilation. This is usually 
+    done with a sequence like this:
+
+      cd make
+      setenv CC      i386-mingw32-gcc
+      setenv RANLIB  i386-mingw32-ranlib
+      setenv AR      i386-mingw32-ar
+      setenv DLLTOOL i386-mingw32-dlltool
+      rm -f config.cache
+      ./configure --prefix=/usr/local/GNUstep \
+        --target="i386-mingw32" \
+        --program-suffix=exe
+      unsetenv CC RANLIB AR DLLTOOL
+      make install
+
+    Never forget to remove config.cache before calling configure on a different
+    target !!!
+    If you have done this you can use just
+
+      make target="i386-mingw32"
+
+    to cross compile a gstep-make package.
+
+Building lF
+===========
+
+    If you have correctly installed your mingw32 x-tools and gstep-make package,
+    compilation of libFoundation for Windows is quite easy:
+
+      cd libFoundation
+      setenv CC i386-mingw32-gcc
+      rm -f config.cache
+      ./configure --with-gnustep --target="i386-mingw32"
+      unsetenv CC
+      make target="i386-mingw32" install
+
+    That's it ! The resulting binaries will be placed in the appropriate 
+    platform subdirectories of the GNUstep hierachy, this way you can keep 
+    libraries for multiple targets in one hierachy.
+
+Native Build of lF with cygwin tools
+====================================
+
+    I managed to compile lF on NT using the cygwin environment (this is 
+    actually a x-compilation as well, from cygwin->mingw32). Note that the
+    cygwin environment is only used as the compilation environment, the 
+    resulting binary is still mingw32-only.
+    
+    To get this running I got the b20 version of cygwin:
+    
+       http://sourceware.cygnus.com
+    
+    The gcc 2.95.2 compilers from Mumit Khan:
+    
+       ftp://www.xraylith.wisc.edu/pub/khan/gnu-win32/mingw32/
+    
+    The GNUstep-make package:
+    
+       ftp://ftp.gnustep.org/pub/gnustep
+    
+    First you need to configure gstep-make:
+    
+       cd make
+       ./configure --target=i386-mingw32	\
+		   --prefix=/cygwin/GNUstep	\
+		   --program-suffix=.exe	\
+		   --with-library-combo=gnu-fd-gnu-nil
+       make target=i386-mingw32 install
+    
+    Note the --target switch. If you miss that, gstep-make will be configured
+    for producing cygwin binaries, which is a different story - so don't
+    forget it ! (See below for a hack avoiding this x-setup).
+    If you get a message from native make like 'unmatched "', you probably
+    are using a wrong shell. Check whether the SHELL variable and /bin/sh
+    matches your standard shell (eg cygwin bash or zsh)
+    If you get makefiles errors, you may want to make sure that you are
+    running cygwin in unix-make-mode (eg echo $MAKE_MODE)
+    
+    If you like you can patch config.guess to output 'i386-pc-mingw32', this
+    makes running tools a bit nicer (this way you avoid making config.guess
+    guess the environment as being cygwin). To do that, replace config.guess
+    with these contents:
+
+      #!/bin/sh
+      echo "i386-pc-mingw32"
+    
+    After you have installed GNUstep makefiles, source them (you might also
+    want to source them on every startup in the .profile file).
+
+Native Build of lF with mingw32 tools
+=====================================
+    
+    It will also be possible to compile libFoundation without the help of a
+    Unix system or a Unix emulation like cygwin. The native build process needs
+    some more stuff than just the mingw32 binaries provided by Mumit Khan.
+    
+    You need at least:
+    
+      egcs and make binaries as provided by Mumit Khan:
+
+        ftp://www.xraylith.wisc.edu/pub/khan/gnu-win32/mingw32/
+      
+      an appropriate sh.exe, eg the zsh:
+      
+        ftp://ftp.blarg.net/users/amol/
+      
+      (note that the native bash I retrieved didn't work with make)
+      
+      a sed:
+      
+        ftp://agnes.dida.physik.uni-essen.de/home/janjaap/mingw32/newnew/
+      
+      some other tools are useful but not required if one does some handwork:
+      
+        mkdir  (the DOS mkdir is an internal command and not available in zsh)
+        rm
+      
+      I figured out that you need at least these to run configure:
+      
+        a sh shell:
+        
+          see above
+        
+        grep:
+        
+          http://agnes.dida.physik.uni-essen.de/~janjaap/mingw32/download.html
+        
+        cat
+      
+      The Unix95 kit provides some Unix utilities described (it's also called
+      'Virtually Unix'):
+      
+        http://www.itribe.net/virtunix/files/unix95.7.zip
+    
+    Note that the library doesn't yet build cleanly, I work on this.
+
+Other useful native Windows software
+====================================
+
+    Native Xemacs:
+    
+      ftp://ftp.ese-metz.fr/pub/xemacs/win32/
+    
+    Native tcsh:
+    
+      ftp://ftp.blarg.net/users/amol/tcsh/
+
+    Further Mingw32 software:
+    
+      ftp://agnes.dida.physik.uni-essen.de/home/janjaap/mingw32
+      ftp://www.xraylith.wisc.edu/pub/khan
+      ftp://ftp.franken.de/pub/win32/develop/gnuwin32/mingw32
+
+---
+Helge Hess (hh@mdlink.de)
+MDlink online service center
+2000-02-09
+
+! Local variables:
+! mode: indented-text
+! End:

@@ -1,0 +1,68 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className='iCalPortalFrame' title='localizedTitle'
+               xmlns='http://www.w3.org/1999/xhtml'
+               xmlns:var='http://www.skyrix.com/od/binding'
+               xmlns:const='http://www.skyrix.com/od/constant'>
+  
+  <h3>Edit Profile of
+    <var:string value="user.firstName"/>
+    <var:string value="user.lastName"/>
+  </h3>
+
+  <form directActionName="saveProfile">
+    <table border="0">
+      <tr>
+	<td align="right">Login:</td>
+	<td><var:string value="user.login" size="40"/></td>
+      </tr>
+      
+      <tr>
+	<td align="right"><nobr><var:string value="label.firstName"/>:</nobr>
+:</td>
+	<td><input name="firstName" var:value="user.firstName" size="40"/></td>
+      </tr>
+      <tr>
+	<td align="right"><nobr><var:string value="label.lastName"/>:</nobr>
+:</td>
+	<td><input name="lastName" var:value="user.lastName" size="40"/></td>
+      </tr>
+      <tr>
+	<td align="right"><nobr><var:string value="label.email"/>:</nobr>
+:</td>
+	<td><input name="email" var:value="user.email" size="40"/></td>
+      </tr>
+      <tr>
+	<td align="right"><nobr><var:string value="label.address"/>:</nobr>
+:</td>
+	<td><input name="address" var:value="user.address" size="40"/></td>
+      </tr>
+      <tr>
+	<td align="right"><nobr><var:string value="label.city"/>:</nobr>
+:</td>
+	<td><input name="city" var:value="user.city" size="40"/></td>
+      </tr>
+      <tr>
+	<td align="right"><nobr><var:string value="label.zip"/>:</nobr>
+:</td>
+	<td><input name="zip" var:value="user.zip" size="40"/></td>
+      </tr>
+      <tr>
+	<td align="right"><nobr><var:string value="label.country"/>:</nobr>
+:</td>
+	<td><input name="country" var:value="user.country" size="40"/></td>
+      </tr>
+      <tr>
+	<td align="right"><nobr><var:string value="label.phone"/>:</nobr>
+:</td>
+	<td><input name="phone" var:value="user.phone" size="40"/></td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td><input type="submit" value="save" name="save"/></td>
+      </tr>
+    </table>
+  </form>
+  
+</var:component>

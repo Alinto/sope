@@ -1,0 +1,16 @@
+{
+    details = {
+	CLST = {abbrev = CLST; isDST = 0; offset = "-4:00:00"; };
+	CLDT = {abbrev = CLDT; isDST = 1; offset = "-3:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Mar 31 03:00:00 1977 GMT";
+	    endDate = "Sun Oct 25 03:00:00 2037 GMT";
+	    transitions = (
+		{ date = "March/third Sunday/0:00:00";   detail = CLDT; },
+		{ date = "October/third Sunday/0:00:00"; detail = CLST; }
+	    );
+	}
+    );
+}

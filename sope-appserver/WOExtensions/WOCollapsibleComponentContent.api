@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOCollapsibleComponentContent">
+  <binding name="condition" required="YES" />
+  <binding name="visibility" required="YES" defaults="YES/NO"/>
+  <binding name="openedImageFileName" />
+  <binding name="closedImageFileName" />
+  <binding name="framework" defaults="Frameworks"/>
+  <binding name="openedLabel" />
+  <binding name="closedLabel" />
+  <binding name="submitActionName" />
+
+  <validation message="&apos;visibility&apos; must not be a constant">
+    <and>
+      <bound name="visibility"/>
+      <unsettable name="visibility"/>
+    </and>
+  </validation>
+</wo>

@@ -1,0 +1,12 @@
+<?xml version='1.0' standalone='yes'?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:const="http://www.skyrix.com/od/constant">
+  <head><title>Panel Content</title></head>
+
+  <body bgcolor="#FFDAAA">
+    <center><img filename="menu_email.gif" alt="nice image" border="0"/></center>
+    <center><b>some panel content</b></center>
+  </body>
+
+</html>

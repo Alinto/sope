@@ -1,0 +1,178 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  Selection: <var:string value="selection"/>
+  <br/>
+
+  <hr/>
+  Without form:<br/>
+  <var:pageview selection="selection"
+                titleColor="titleColor"
+                contentColor="contentColor"
+                const:firstIcon         = "first.gif"
+                const:firstBlindIcon    = "first_blind.gif"
+                const:previousIcon      = "previous.gif"
+                const:previousBlindIcon = "previous_blind.gif"
+                const:nextIcon          = "next.gif"
+                const:nextBlindIcon     = "next_blind.gif"
+                const:lastIcon          = "last.gif"
+                const:lastBlindIcon     = "last_blind.gif"
+    >
+    <var:page const:key="first" const:title="first page">
+       first page content
+    </var:page>
+
+    <var:page const:key="second" const:title="second page">
+       second page content
+    </var:page>
+      
+    <var:page const:key="third" const:title="third page">
+       third page content
+    </var:page>
+
+    <var:page const:key="fourth" const:title="fourth page">
+       fourth page content
+    </var:page>
+
+    <var:page const:key="fifth" const:title="fifth page">
+       fifth page content
+    </var:page>
+  </var:pageview>
+
+  <hr/>
+  Dynamically generated pages (using a var:foreach ...):<br/>
+  DO NOT WORK !
+<!--
+  <var:pageview selection="selection"
+                titleColor="titleColor"
+                contentColor="contentColor"
+                const:firstIcon         = "first.gif"
+                const:firstBlindIcon    = "first_blind.gif"
+                const:previousIcon      = "previous.gif"
+                const:previousBlindIcon = "previous_blind.gif"
+                const:nextIcon          = "next.gif"
+                const:nextBlindIcon     = "next_blind.gif"
+                const:lastIcon          = "last.gif"
+                const:lastBlindIcon     = "last_blind.gif"
+    >
+    <var:foreach list="pages" item="page">
+      <var:page key="page" title="page">
+        Content of <var:string value="page"/>
+      </var:page>
+    </var:foreach>
+  </var:pageview>
+-->
+  
+  <hr/>
+  With form inside :<br/>
+  <var:pageview selection="selection"
+                titleColor="titleColor"
+                contentColor="contentColor"
+                const:firstIcon         = "first.gif"
+                const:firstBlindIcon    = "first_blind.gif"
+                const:previousIcon      = "previous.gif"
+                const:previousBlindIcon = "previous_blind.gif"
+                const:nextIcon          = "next.gif"
+                const:nextBlindIcon     = "next_blind.gif"
+                const:lastIcon          = "last.gif"
+                const:lastBlindIcon     = "last_blind.gif"
+    >
+    <var:page const:key="first" const:title="first page">
+      <form var:action="self">
+         first page content
+         
+      </form>
+    </var:page>
+
+    <var:page const:key="second" const:title="second page">
+       second page content
+       <form var:action="self">
+         <table border="0">
+            <tr>
+              <td align="right">title color:</td>
+              <td><input type="text" var:value="titleColor"/></td>
+            </tr>
+            <tr>
+              <td align="right">content color:</td>
+              <td><input type="text" var:value="contentColor"/></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="submit" var:action="self" value="apply"/>
+              </td>
+            </tr>
+        </table>  
+      </form>
+    </var:page>
+      
+      <var:page const:key="third" const:title="third page">
+         third page content
+      </var:page>
+
+      <var:page const:key="fourth" const:title="fourth page">
+         fourth page content
+      </var:page>
+
+      <var:page const:key="fifth" const:title="fifth page">
+         fifth page content
+      </var:page>
+  </var:pageview>
+
+  <hr/>
+  With form (doesn't work ...):<br/>
+  <form var:action="self">
+    <var:pageview selection="selection"
+                  titleColor="titleColor"
+                  contentColor="contentColor"
+                  const:firstIcon         = "first.gif"
+                  const:firstBlindIcon    = "first_blind.gif"
+                  const:previousIcon      = "previous.gif"
+                  const:previousBlindIcon = "previous_blind.gif"
+                  const:nextIcon          = "next.gif"
+                  const:nextBlindIcon     = "next_blind.gif"
+                  const:lastIcon          = "last.gif"
+                  const:lastBlindIcon     = "last_blind.gif"
+      >
+      <var:page const:key="first" const:title="first page">
+         first page content
+      </var:page>
+
+      <var:page const:key="second" const:title="second page">
+         second page content
+      </var:page>
+      
+      <var:page const:key="third" const:title="third page">
+         third page content
+      </var:page>
+
+      <var:page const:key="fourth" const:title="fourth page">
+         fourth page content
+      </var:page>
+
+      <var:page const:key="fifth" const:title="fifth page">
+         fifth page content
+      </var:page>
+    </var:pageview>
+  </form>
+
+  <form var:action="self">
+    <table border="0">
+       <tr>
+         <td align="right">title color:</td>
+         <td><input type="text" var:value="titleColor"/></td>
+       </tr>
+       <tr>
+         <td align="right">content color:</td>
+         <td><input type="text" var:value="contentColor"/></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <input type="submit" var:action="self" value="apply"/>
+         </td>
+       </tr>
+     </table>  
+  </form>
+</var:component>

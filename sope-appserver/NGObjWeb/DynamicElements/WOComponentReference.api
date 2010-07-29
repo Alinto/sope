@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOComponentReference">
+  <binding name="component" required="YES" />
+  
+  <validation message="&apos;component&apos; is required" >
+      <unbound name="component" />
+  </validation>
+</wo>

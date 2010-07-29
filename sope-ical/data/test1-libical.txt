@@ -1,0 +1,131 @@
+start document ..
+    ns-map: =http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt
+    <vcalendar (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) calscale="GREGORIAN" prodid="-//Apple Computer\, Inc//iCal 1.0//EN" version="2.0">
+        <X-WR-TIMEZONE (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) value="text">
+            "Europe/Berlin"
+        </X-WR-TIMEZONE>
+        <X-WR-CALNAME (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) value="text">
+            "shire-cal1"
+        </X-WR-CALNAME>
+        <X-WR-RELCALID (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) value="text">
+            "C3CBA0E4-DBCC-11D6-A381-00039340AF4A"
+        </X-WR-RELCALID>
+        <vevent (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20021008T155243Z"
+            </dtstamp>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "work"
+            </summary>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "C3CB87C0-DBCC-11D6-A381-00039340AF4A"
+            </uid>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20021009T120000"
+            </dtstart>
+            <duration (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "PT3H45M"
+            </duration>
+        </vevent>
+        <vevent (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <attendee (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) cn="Anja Berlin">
+                "mailto:anja.berlin@regiocom.net"
+            </attendee>
+            <attendee (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) cn="Marcus Müller">
+                "mailto:mm@codeon.de"
+            </attendee>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20021009T211904Z"
+            </dtstamp>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "trink"
+            </summary>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "C3CB8E9A-DBCC-11D6-A381-00039340AF4A"
+            </uid>
+            <organizer (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) cn="Helge Heß">
+                "mailto:helge.hess@skyrix.com"
+            </organizer>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20021010T190000"
+            </dtstart>
+            <duration (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "PT45M"
+            </duration>
+            <valarm (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                <trigger (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) value="duration">
+                    "-PT15M"
+                </trigger>
+                <action (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "DISPLAY"
+                </action>
+                <description (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "Event reminder"
+                </description>
+            </valarm>
+            <valarm (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                <attach (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) value="uri">
+                    "Ping"
+                </attach>
+                <trigger (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) value="duration">
+                    "-PT15M"
+                </trigger>
+                <action (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "AUDIO"
+                </action>
+            </valarm>
+        </vevent>
+        <vevent (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20021008T155256Z"
+            </dtstamp>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "Zahnarzt"
+            </summary>
+            <dtend (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20021009T110000"
+            </dtend>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "C3CB92B0-DBCC-11D6-A381-00039340AF4A"
+            </uid>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20021009T094500"
+            </dtstart>
+        </vevent>
+        <vtodo (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20021009T154221Z"
+            </dtstamp>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "testjob"
+            </summary>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "C3CB96C7-DBCC-11D6-A381-00039340AF4A"
+            </uid>
+            <due (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20021011T175228"
+            </due>
+            <priority (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "5"
+            </priority>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20021008T175228"
+            </dtstart>
+        </vtodo>
+        <vtodo (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "C3CB9A9F-DBCC-11D6-A381-00039340AF4A"
+            </uid>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20021010T000000"
+            </dtstart>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20021009T154205Z"
+            </dtstamp>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "testjob2"
+            </summary>
+        </vtodo>
+    </vcalendar>
+    ns-unmap: 
+end document.

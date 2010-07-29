@@ -1,0 +1,54 @@
+From Helge Hess Fri Jul 29 21:41:35 2005
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_vZo6Cljj0P55xRD"
+From: Helge Hess
+X-KMail-Fcc: sent-mail
+Subject: libkcal-1899114701.872
+Date: Fri, 29 Jul 2005 21:41:35 +0200
+User-Agent: KMail/1.8.50
+MIME-Version: 1.0
+X-Kolab-Type: application/x-vnd.kolab.event
+Status: RO
+X-Status: O
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+X-KMail-MDN-Sent:  
+X-UID: 3
+X-Length: 1579
+
+--Boundary-00=_vZo6Cljj0P55xRD
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+This is a Kolab Groupware object.
+To view this object you will need an email client that can understand the Kolab Groupware format.
+For a list of such email clients please visit
+http://www.kolab.org/kolab2-clients.html
+--Boundary-00=_vZo6Cljj0P55xRD
+Content-Type: application/x-vnd.kolab.event;
+  name="kolab.xml"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+  filename="kolab.xml"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<event version="1.0" >
+ <product-id>KOrganizer 3.5 pre, Kolab resource</product-id>
+ <uid>libkcal-1899114701.872</uid>
+ <creation-date>2005-07-29T19:41:35Z</creation-date>
+ <last-modification-date>2005-07-29T19:41:54Z</last-modification-date>
+ <sensitivity>public</sensitivity>
+ <start-date>2005-07-31T14:45:00Z</start-date>
+ <summary>test</summary>
+ <organizer>
+  <display-name>Anonymous</display-name>
+  <smtp-address>nobody@nowhere</smtp-address>
+ </organizer>
+ <revision>0</revision>
+ <show-time-as>busy</show-time-as>
+ <end-date>2005-07-31T17:45:00Z</end-date>
+</event>
+
+--Boundary-00=_vZo6Cljj0P55xRD--
+

@@ -1,0 +1,19 @@
+This directory contains a SAX (Simple API for XML) for Objective-C.
+
+SaxObjDecoder
+=============
+
+Take a look at SaxObjDecoder for simple mapping from XML to ObjC objects.
+
+SaxMethodCallHandler
+====================
+
+Take a look at SaxMethodCallHandler for mapping SAX events to ObjC method
+calls. Write a method per tag and SaxMethodCallHandler will call that for
+you ;-)
+
+Defaults
+========
+
+SaxCoreOnMissingParser - YES|NO - abort if a SAX driver could not be found
+SaxDebugReaderFactory  - YES|NO - debug SAX reader lookup/loading

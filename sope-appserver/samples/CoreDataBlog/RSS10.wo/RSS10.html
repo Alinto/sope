@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<#SetContentType/>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:admin="http://webns.net/mvcb/"
+  xmlns:cc="http://web.resource.org/cc/"
+  xmlns="http://purl.org/rss/1.0/"
+>
+  <channel rdf:about="http://www.mulle-kybernetik.com/weblog/">
+    <title><#FeedTitle/></title>
+    <link>http://www.mulle-kybernetik.com/weblog/</link>
+    <description></description>
+    <dc:language>en-us</dc:language>
+    <dc:creator></dc:creator>
+    <dc:date><#FeedDate/></dc:date>
+    <admin:generatorAgent rdf:resource="http://sope.opengroupware.org/?v=4.5"/>
+
+    <items>
+      <rdf:Seq>
+        <#ResourceList>
+          <rdf:li rdf:resource="<#ItemHref/>" />
+        </#ResourceList>
+      </rdf:Seq>
+    </items>
+  </channel>
+
+  <#ResourceList>
+    <item rdf:about="<#ItemHref/>">
+      <title      ><#ItemTitle      /></title>
+      <link       ><#ItemHref       /></link>
+      <description><#ItemDescription/></description>
+      <dc:subject ><#ItemDcSubject  /></dc:subject>
+      <dc:creator ><#ItemDcCreator  /></dc:creator>
+      <dc:date    ><#ItemDcDate     /></dc:date>
+    </item>
+  </#ResourceList>
+</rdf:RDF>

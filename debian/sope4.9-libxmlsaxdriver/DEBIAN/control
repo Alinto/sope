@@ -1,0 +1,14 @@
+Package: sope4.9-libxmlsaxdriver
+Source: sope
+Version: 4.7.0-0
+Architecture: powerpc
+Maintainer: Sebastian Ley <ley@debian.org>
+Installed-Size: 32
+Provides: sope-libxmlsaxdriver
+Section: web
+Priority: extra
+Description: XML Parser for SOPE's SAX engine
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This parser enables SOPE's SAX engine to parse XML files.

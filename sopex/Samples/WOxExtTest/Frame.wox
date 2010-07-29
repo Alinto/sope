@@ -1,0 +1,40 @@
+<?xml version='1.0' standalone='yes'?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:const="OGo:value"
+      xmlns:rsrc="OGo:url"
+>
+  <head>
+    <title><var:string value="title"/></title>
+
+    <meta name="author" content="SKYRIX Software AG" />
+    <meta name="robots" content="stop" />
+
+    <link type="text/css" rel="stylesheet" rsrc:href="site.css"    />
+    <link href="mailto:helge.hess@opengroupware.org" rev="made" />
+    <link rel="shortcut icon" rsrc:href="favicon.ico" />
+  </head>
+
+  <body>
+    <div id="header">
+      <img filename="OGoLogo.gif" class="headerlogo" alt="Logo" />
+      <div id="headerhistory">
+        <span id="navtitle">WOxExtTest - Dynamic Element Demonstration</span>
+      </div>
+    </div>
+    <br />
+    
+    <h3><var:string value="title"/></h3>
+
+    <!-- this embeds the content of the page -->
+    <var:component-content/>
+
+    <!-- here we keep a link back to the Main page -->
+    <hr/>
+    [<a pageName="Main">main</a>]
+    <hr/>
+    
+    <!-- and we print out the template source of the page -->
+    <pre id="tmplsrc"><var:string value="xmlContent"/></pre>
+  </body>
+</html>

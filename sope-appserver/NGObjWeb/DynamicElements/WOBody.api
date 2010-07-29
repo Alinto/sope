@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOBody">
+  <binding name="filename" passthrough="NO" defaults="Resources"/>
+  <binding name="framework" passthrough="NO" defaults="Frameworks"/>
+  <binding name="src" passthrough="NO"/>
+  <binding name="value" passthrough="NO"/>
+
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <validation message="&apos;filename&apos; must be bound when &apos;framework&apos; is bound">
+    <and>
+      <bound name="framework"/>
+      <unbound name="filename"/>
+    </and>
+  </validation>
+</wo>

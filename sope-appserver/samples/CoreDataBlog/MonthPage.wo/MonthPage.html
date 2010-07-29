@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>SOPE CoreData Test: MonthPage</title>
+
+    <style>
+      div#content {
+        position:    absolute;
+        margin-left: 14em;
+      }
+      div#links {
+        width:   12em;
+        padding: 15px;
+      }
+      div#banner {
+        text-align:    right;
+        border-bottom: 1px solid #BE5303;
+      }
+
+      .date {
+        /* font-family:   palatino, georgia; */
+        font-family:   palatino, georgia;
+        font-size:     large;
+        color:         #333333;
+        border-bottom: 1px solid #999999;
+        margin-bottom: 10px;
+        font-weight:bold;
+      }	
+      .blogbody {
+        font-family: palatino, georgia, verdana, arial, sans-serif;
+        color:       #333333;
+        font-size:   small;
+        font-weight: normal;
+  	background:  white;
+        line-height: 150%;
+      }
+      .posted { 
+        font-family:   verdana, arial, sans-serif; 
+        font-size:     x-small;
+        color:         black; 
+        margin-bottom: 25px;
+      }
+      .title {
+        font-family: palatino, georgia;
+        font-size: medium;
+        color: #666;
+    	margin-bottom:10px;
+      }			
+
+      /* Calendar */
+      .calendar {
+        font-family: Verdana, Arial;
+        color:       #666666;
+        font-size:   x-small;
+        line-height: 140%;
+        padding:     2px;
+        text-align:  center;
+      }
+      caption.calendarhead { 
+        font-family:    Palatino, Georgia;
+        color:          #BE5303;
+        font-size:      small;
+        padding:        2px;
+        letter-spacing: .3em;
+        text-transform: uppercase;
+      }       
+
+      .side {
+        font-family: verdana, arial, sans-serif;
+        color:       #333333;
+        font-size:   x-small;
+        line-height: 140%;
+        padding:     2px;                            
+      }       
+      .sidetitle {
+        font-family: palatino, georgia;
+        color:       #BE5303;
+        font-size:   small;
+        padding:     2px;
+        margin-top:  30px;
+        letter-spacing: .3em;
+        text-transform: uppercase;               
+      }               
+    </style>
+  </head>
+
+  <body>
+    <div id="banner" style="text-align: right;">
+      <img src="http://sope.opengroupware.org/images/lori_48x48_lookleft.png"
+           border="0" width="48" height="48" alt="Lori" title="Lori" />
+    </div>
+
+
+    <div id="content">
+
+      <div class="blog">
+        <#Posts>
+          <h2 class="date"><!-- Note: MT groups by date -->
+            <#HasDate>
+              <#PostDate/>
+            </#HasDate>
+          </h2>
+
+          <div class="blogbody">
+            <h3 class="title"><#PostTitle/></h3>
+
+            <#PostBody/>
+
+            <div class="posted">
+              Posted by <#PostAuthor/> at <#PostTime/>.
+            </div>
+          </div>
+        </#Posts>
+      </div>
+
+    </div>
+
+
+    <div id="links">
+
+      <div class="calendar">
+        <table style="width: 11em;">
+          <caption class="calendarhead"><#CalMonthName/></caption>
+          <tr class="calendar">
+            <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th>
+            <th>Fri</th><th>Sat</th><th>Sun</th>
+          </tr>
+          <#Weeks>
+            <tr class="calendar">
+              <#Week>
+                <!-- this element sets up our environment -->
+                <#SetupCalDayDisplayGroup/>
+
+                <#IsSameMonth>
+                  <td>
+                    <#DayHasArticles>
+                      <b><#Day/></b>
+                    </#DayHasArticles>
+
+                    <#DayHasNoArticles>
+                      <#Day/>
+                    </#DayHasNoArticles>
+                  </td>
+                </#IsSameMonth>
+                <#IsOtherMonth>
+                  <td class="calendar-othermonth"><#Day/></td>
+                </#IsOtherMonth>
+              </#Week>
+            </tr>
+          </#Weeks>
+        </table>
+      </div>
+
+
+      <div class="sidetitle">Search</div>
+      <div class="side">
+        Search this site:<br />
+        add a form here and bind<br />
+        to query match<br />
+        Note: we can only bind one?
+      </div>
+
+
+      <div class="sidetitle">Archives</div>
+      <div class="side">
+        impossible in an efficient way?<br />
+        August 2005<br />
+        Juli 2005
+      </div>
+
+
+      <div class="sidetitle">Recent Entries</div>
+      <div class="side">
+        <#RecentPosts>
+          <!-- TODO: add link, maybe focus on date of post? -->
+          <#PostTitle/><br />
+        </#RecentPosts>
+      </div>
+    </div>
+
+  </body>
+</html>

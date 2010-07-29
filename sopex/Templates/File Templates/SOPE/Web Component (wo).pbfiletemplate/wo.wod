@@ -1,0 +1,3 @@
+ComponentName: WOString {
+  value = name;
+}

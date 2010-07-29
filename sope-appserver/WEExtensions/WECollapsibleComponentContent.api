@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WECollapsibleComponentContent">
+  <binding name="condition"   required="YES" />
+  <binding name="visibility"  required="YES" settable="YES" />
+  <binding name="allowScript" defaults="YES/NO" />
+</wo>

@@ -1,0 +1,77 @@
+{
+  variables = {
+    postDisplayGroup = {
+      class      = WODisplayGroup;
+      dataSource = {
+        class              = EOCoreDataSource;
+        editingContext     = session.defaultManagedObjectContext;
+        fetchSpecification = {
+          class      = EOFetchSpecification;
+          entityName = Post;
+          fetchLimit = 0;
+          isDeep     = YES;
+          sortOrderings = (
+            { class = EOSortOrdering; 
+              key = "title";
+              selector = "compareAscending:";
+              /* Tiger?: selector = "compareCaseInsensitiveAscending:"; */
+            }
+          );
+        };
+      };
+      formatForLikeQualifier       = "%@*";
+      localKeys                    = ();
+      numberOfObjectsPerBatch      = 0;
+      selectsFirstObjectAfterFetch = YES;
+      fetchesOnLoad                = YES;
+    };
+
+    authorDisplayGroup = {
+      class = WODisplayGroup;
+      dataSource = {
+        class              = EOCoreDataSource;
+        editingContext     = session.defaultManagedObjectContext;
+        fetchSpecification = {
+          class      = EOFetchSpecification;
+          entityName = Author;
+        };
+      };
+      fetchesOnLoad           = YES; 
+      formatForLikeQualifier  = "*%@*"; 
+      localKeys               = (); 
+      numberOfObjectsPerBatch = 30; 
+      selectsFirstObjectAfterFetch = YES; 
+      sortOrdering = ( // proper position?
+        {
+          class = EOSortOrdering; 
+          key   = name;
+          selectorName = "compareAscending:";
+        }
+      ); 
+    }; 
+
+    topicDisplayGroup = {
+      class = WODisplayGroup;
+      dataSource = {
+        class              = EOCoreDataSource;
+        editingContext     = session.defaultManagedObjectContext;
+        fetchSpecification = {
+          class      = EOFetchSpecification;
+          entityName = Topic;
+        };
+      };
+      fetchesOnLoad           = YES; 
+      formatForLikeQualifier  = "*%@*"; 
+      localKeys               = (); 
+      numberOfObjectsPerBatch = 30; 
+      selectsFirstObjectAfterFetch = YES; 
+      sortOrdering = ( // proper position?
+        {
+          class = EOSortOrdering; 
+          key   = title;
+          selectorName = "compareAscending:";
+        }
+      ); 
+    }; 
+  };
+}

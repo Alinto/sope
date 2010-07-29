@@ -1,0 +1,107 @@
+NGImap4 Library
+===============
+  
+NSUserDefaults
+==============
+
+    Default                 | Type   | Example Value
+    =============================================================
+    ImapDebugEnabled          BOOL     NO
+    ProfileImapEnabled        BOOL     NO
+    ShowNonExistentFolder     BOOL     NO
+    FetchNewUnseenMessagesInSubFoldersOnDemand BOOL NO
+    ImapLogEnabled
+    ImapPreventConnectionExceptions
+    NGImapMaxConnectionCount
+    ImapDebugQualifierGeneration
+    ImapSortEncoding
+    ImapSubscribedCouldFailed
+    ShowOnlySubscribedInSubFolders
+
+Notifications
+=============
+  
+    NGImap4DataSource
+    - postDataSourceChangedNotification
+    - observes: 
+      - LSWImapMailWasDeleted		(resets DS)
+      - LSWImapMailFolderWasDeleted     (resets DS + folder)
+      - LSWImapMailFlagsChanged		(post DS changed notification)
+    
+    NGImap4Message
+    - Update: this is now coordinated using a specialized notification 
+              mechanism attached to the folder
+    - used to broadcast changes to messages with the same uid?
+      - not reliable across accounts?!
+    - posts: _addFlagNotificationName + _removeFlagNotificationName
+      NGImap4MessageAddFlag_    + folder + uid
+      NGImap4MessageRemoveFlag_ + folder + uid
+    - observes: the above notifications (object is nil)
+
+    NGImap4Folder
+    - used to broadcast changes to folders with the same path?
+      - not reliable across accounts?!
+    - -resetFolder posts:     "NGImap4FolderReset_"    + [self absoluteName]
+    - -resetSubFolders posts: "NGImap4SubFolderReset_" + [self absoluteName]
+    - observes: the above notifications on its own folder name (object is nil)
+
+Parsing/Fetching
+================
+
+  a) NGImap4Client issues fetch command and parses "raw" response
+  b) NGImap4ResponseNormalizer "normalizes" the "raw" response to a dict (?)
+  c) NGImap4Folder issues _buildMessagesFromFetch:
+     - 'fetch' dict key contains array of 'normalized raw' entries
+     - uses NGMimeMessageParser and NGDataStream to parse 'raw' header
+
+Notes
+=====
+
+  - folder hierarchies are cached and synchronized using a somewhat broken
+    notification system
+    - you can trigger a reload of the subfolders by calling -resetSubFolders,
+      eg on the context's -serverRoot or -inboxFolder
+      - TODO: find out whether this is a deep operation
+    - resetSpecialFolders might also help, this 'nils' the default folders
+
+Class-Hierachy
+==============
+
+    NSObject
+      NGImap4Client
+      NGImap4Context            <NGImap4ResponseReceiver>
+      NGImap4Folder
+      NGImap4Message
+      NGImap4ResponseParser
+      NGImap4FolderFlags
+      NGImap4FolderMailRegistry
+
+      NSException
+        NGImap4Exception
+          NGImap4ConnectionException
+          NGImap4ParserException
+          NGImap4ResponseException
+          NGImap4SearchException
+
+      EODataSource
+        NGImap4DataSource
+
+      NGFileManager
+        NGImap4FileManager
+
+Categories
+==========
+
+Protocols
+=========
+
+    NGImap4ResponseReceiver
+
+Log Topics
+==========
+
+--
+Helge Hess (helge.hess@opengroupware.org)
+created, MDlink online service center, 1998-10-22
+updated 2002-07-09
+updated 2004-01-15

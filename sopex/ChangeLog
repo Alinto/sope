@@ -1,0 +1,9 @@
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved sopex from OGo/Contrib to SOPE/sopex
+
+	* moved in WebObjects compatibility layer
+
+2004-02-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* ChangeLog: created.

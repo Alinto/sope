@@ -1,0 +1,21 @@
+{
+    details = {
+	MDT = {abbrev = MDT; isDST = 1; offset = "-6:00:00"; };
+	MST = {abbrev = MST; isDST = 0; offset = "-7:00:00"; };
+	MWT = {abbrev = MWT; isDST = 1; offset = "-6:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Mar 31 11:00:00 1918 GMT";
+	    endDate = "Sun Oct 26 10:00:00 1919 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/11:00:00"; detail = MDT; },
+		{ date = "October/last Sunday/10:00:00"; detail = MST; }
+	    );
+	}
+    );
+    transitions = (
+	{ date = "Mon Feb 09 11:00:00 1942 GMT"; detail = MWT; },
+	{ date = "Sun Sep 30 10:00:00 1945 GMT"; detail = MST; }
+    );
+}

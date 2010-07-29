@@ -1,0 +1,403 @@
+2007-03-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added XMLNS_MXML_2006 namespace (4.7.66)
+
+2007-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added XMLNS_CARDDAV namespace (v4.5.65)
+
+	* XMLNamespaces.h: added XMLNS_AppleCalApp namespace (v4.5.64)
+
+	* XMLNamespaces.h: added XMLNS_GROUPDAV namespace (v4.5.63)
+
+	* XMLNamespaces.h: added XMLNS_AppleCalServer namespace (v4.5.62)
+
+2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: filter out -O% flags for files using exception
+	  handlers, enable -O2 per default (v4.5.61)
+
+2006-07-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxObjectModel.m: added FHS_INSTALL_ROOT to lookup path (v4.5.60)
+
+	* SaxXMLReaderFactory.m: changed to find SAX drivers on 64bit systems
+	  in lib64, added FHS_INSTALL_ROOT to lookup path (v4.5.59)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.58
+
+	* SaxAttributes.m: fixed gcc 4.1 warnings
+
+	* use %p for pointer formats
+
+2006-07-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added ATOM namespace, gCal namespace, OpenSearch
+	  namespace (v4.5.57)
+
+2006-06-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h (XMLNS_CALDAV): added CalDAV namespace (v4.5.56)
+
+2006-04-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added Google namespace (v4.5.55)
+
+2005-12-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxObjectDecoder.m: trigger debug logging via new
+	  SaxObjectDecoderDebugEnabled default (v4.5.54)
+
+2005-11-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxMethodCallHandler.m: rewrote tag=>selector mapping function to be
+	  Unicode safe (v4.5.53)
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.52
+
+	* SaxXMLReaderFactory.m: improved bundle-info.plist lookup (first look
+	  in bundle directory, then try to lookup as a NSBundle resource),
+	  log searched pathes if no XML reader could be found
+
+	* GNUmakefile.preamble: set framework/cocoa defines when compiling
+	  with frameworks support
+
+2005-05-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added namespace declaration for XML vCards (v4.5.51)
+
+2005-04-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxMethodCallHandler.m: fixed a gcc 4.0 warning (v4.5.50)
+
+2005-03-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxObjectDecoder.m: fixed remaining leaks (v4.5.49)
+
+2005-01-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxObjectDecoder.m: fixed hard to spot autorelease bug (v4.5.48)
+
+2004-11-12  Max Berger  <max@berger.name>
+
+	* SaxXMLReaderFactory.m: fixed SaxDriver lookup for gstep-base on
+	  MingW32 (OGo bug #979) (v4.5.47)
+
+2004-11-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxXMLReaderFactory.m: cleanup of driver path processing (v4.5.46)
+
+2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxObjC.xcode: added SOPE_MAJOR/MINOR definitions for the build
+
+2004-11-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxXMLReaderFactory.m: fixed a bug in FHS bundle lookup (v4.5.45)
+
+2004-11-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxObjectModel.m, SaxXMLReaderFactory.m: use SOPE version defines
+	  for object model lookup (v4.5.44)
+
+2004-10-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxObjectDecoder.m: fixed typo that prevented compile on non
+	  Apple Foundation (v4.3.43)
+
+	* SaxObjectDecoder.m: provide fix for discovering mutable array on
+	  Apple/CoreFoundation - this is rather disturbing, but Apple really
+	  broke the concept of mutability for NSArray/NSDictionary. (v4.3.42)
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxObjC.xcode: minor fixes
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxObjC.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects. Also fixed cyclic dependency between the
+	  framework and the libxmlSAXDriver, which gets copied into the
+	  framework wrapper after compilation. This now gets achieved by two
+	  shellscript phases, one in the framework and one as a separate
+	  shellscript target.
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.3.41
+
+	* SaxXMLReaderFactory.m: look in /usr/local/lib/sope-4.3/saxdrivers/
+	  and /usr/lib/sope-4.3/saxdrivers/ for SAX drivers
+	  
+	* SaxObjectModel.m: also look in /usr/local/share/sope-4.3/saxmappings/
+	  and /usr/share/sope-4.3/saxmappings/ for models
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+
+2004-08-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxObjC.xcode: new Xcode project
+
+2004-08-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* changed lookup path to SaxDrivers-4.3 to be consistent with OGo
+	  (v4.3.40)
+
+	* SaxXMLReaderFactory.m: lookup SAX drivers in Library/SaxDrivers/4.3
+	  (v4.3.39)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved to SOPE 4.3 (v4.3.38)
+
+2004-08-03  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SaxXMLReaderFactory.m: fixed multiple registration of sax drivers in
+	  the search path. Also, when built as a framework, the frameworks's
+	  SaxDriver directory is added to the search path (with least
+	  significance, so it doesn't interfere with development and custom
+	  deployments). (v4.2.37)
+
+2004-07-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added OOo WebDAV namespace (v4.2.36)
+
+2004-07-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* XMLNamespaces.h: added namespace declaration for Kupu and XInclude 
+	  (v4.2.35)
+
+2004-07-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added relaxng structure namespace as used by Kupu
+	  (v4.2.34)
+
+2004-07-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* XMLNamespaces.h: added namespace declarations for SOAP, XMLSchema and
+	  some Novell namespaces (v4.2.33)
+
+2004-06-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added namespace declaration for OOo meta (v4.2.32)
+
+2004-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxObjectModel.m: fixed a warning with gcc 3.4 (v4.2.31)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.30
+
+	* GNUmakefile: also build SaxObjC.framework on non-libFoundation 
+	  systems
+	
+	* GNUmakefile.preamble: added prebinding segaddr
+	
+2004-03-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxXMLReaderFactory.m: added SaxDebugReaderFactory default to enable
+	  debug logs, added more debug logging (v4.2.29)
+
+	* XMLNamespaces.h: added namespace declaration for Zope METAL (v4.2.28)
+
+2004-03-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added namespace declaration for Zope TAL (v4.2.27)
+
+2004-02-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxXMLReaderFactory.m: subminbor improvement to warn-log in case
+	  multiple XML parsers are found for a single type (v4.2.26)
+
+2004-02-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxXMLReaderFactory.m: subminor code cleanup and fixes to log 
+	  messages (v4.2.25)
+
+2003-12-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxXMLReaderFactory.m: cleaned up logging for missing parsers 
+	  (v4.2.24)
+
+2003-11-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added namespace declaration for some proprietary
+	  groupware server (v4.2.23)
+
+2003-11-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: removed autodoc target
+
+2003-11-09  Helge Hess  <helge.hess@opengroupware.org>
+        
+        * v4.2.22
+        
+        * SaxAttributes.m: added -initWithDictionary method necessary for the
+          NSXMLParser support (Note: Panther NSXMLParser currently doesn't seem
+          to be able to do proper namespace processing for attributes?)
+
+	* added the SaxDefaultHandler+NSXML category which allows any SAX 
+          handler inheriting from SaxDefaultHandler to be used as a delegate 
+          for the new NSXMLParser in Panther
+
+2003-10-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxAttributes.m: fixed an Xcode warning (v4.2.21)
+
+2003-10-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XMLNamespaces.h: added MS WordML namespace, added Dublin Core
+	  namespace (v4.2.20)
+
+2003-10-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SaxObjectModel.m, SaxXMLReaderFactory.m: added support for 
+	  GNUSTEP_PATHLIST (apparently replaces GNUSTEP_PATHPREFIX_LIST in 
+	  newer gstep-make versions (v4.2.19)
+
+2003-08-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxObjectDecoder.m: fixed OGo bug 133, decoder did not properly 
+	  check value classes on Cocoa (v4.2.18)
+
+2003-07-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxXMLReaderFactory.m: added a missing @end for gstep-base, patch
+	  provided by Filip Van Raemdonck (v4.2.17)
+
+2003-07-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* XMLNamespaces.h: added defines for the various XML namespaces used
+	  in OpenOffice.org emitted XML files (v4.2.16)
+
+2003-06-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.15
+	
+	* SaxXMLReaderFactory.m: added SaxCoreOnMissingParser default to 
+	  trigger a coredump for debugging purposes
+
+	* fixed some signed/unsigned warnings
+
+2003-02-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved saxxml and xmln tools to ../samples/
+
+2003-01-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxMethodCallHandler.m, SaxObjectDecoder.m: reduced logging if
+	  debugOn is off (v4.2.14)
+
+Thu Jan  2 10:40:19 2003  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.13
+	
+	* saxxml.m: replaced RELEASE macros with method calls
+
+	* common.h: define ASSIGN macro if missing, do not include headers from
+	  FoundationExt
+	
+	* SaxNamespaceSupport.m: replaced -notImplemented: with 
+	  -doesNotRecognizeSelector: since -notImplemented: is not available
+	  on MacOSX
+	
+2002-11-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxObjectModel.m: fixed a bug with parsing toMany keys (addToRel:
+	  was not properly called) (v4.2.12)
+
+2002-11-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* XMLNamespaces.h: added Nautilus namespace (v4.2.11)
+
+2002-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* XMLNamespaces.h: added the cadaver namespaces (v4.2.10)
+
+2002-10-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* XMLNamespaces.h: added various namespace declarations (v4.2.9)
+
+2002-10-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxObjectModel.m, SaxObjectDecoder.m: added a namespaceKey to the
+	  model (allows you to track the namespace in your parsed objects)
+
+	* XMLNamespaces.h: added the hotmail and httpmail namespaces (v4.2.8)
+
+Thu Oct 17 20:24:53 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxObjectDecoder.m ([_SaxObjTagInfo -unableToSetValue:forKey:withTag:toParent:exception:]):
+	  now logs, why it was unable to set the key (exception) (v4.2.7)
+
+2002-10-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxObjectModel.m: when searching for a model the mainbundle resources
+	  are checked before traversing the Library/SaxMappings pathes (v4.2.6)
+
+2002-10-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxObjectDecoder.m: added support for contentKey (v4.2.5)
+
+2002-10-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* added SaxObjectDecoder, a SAX handler which constructs object trees
+	  by consulting a XML<->object mapping model (v4.2.4)
+
+2002-10-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* XMLNamespaces.h: added namespace declaration for xcal 01 (v4.2.3)
+
+2002-08-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxXMLReaderFactory.m: small fix for OSX, renamed COCOA_FRAMEWORK
+	  define to COCOA_Foundation_LIBRARY
+
+2002-05-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxXMLReaderFactory.m: added NSBundle -copyWithZone: when compiling
+	  for gstep-base compatibility
+
+Sun May  5 18:01:32 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed SAX1<->SAX2 adaptor classes, SAX1 stuff in general
+
+Tue Feb 12 20:24:59 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxXMLReaderFactory.m: modified to be usable without NGBundleManager
+	  (but uses same bundle-info.plist ...)
+
+Sat Feb  9 11:35:27 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved XML test files to Examples/xmlsamples
+
+Wed Jan  9 13:24:40 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxXMLReaderFactory.m: ensure that a text/xml reader is created ...
+
+Mon Dec 17 17:02:15 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* added namespaces-declaration header
+
+Wed Oct 24 18:45:05 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* ExpatSaxDriver/ExpatSaxDriver.m: fixed UTF8->UTF16 conversion bug
+	  (incorrect string length was passed to Sax callbacks)
+
+Mon Oct  1 15:47:31 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxXMLReaderFactory.m: added capability to create SAX parsers based
+	  on MIME-type
+
+Thu Aug 16 13:48:01 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* SaxAttributes.m: added NSCopying

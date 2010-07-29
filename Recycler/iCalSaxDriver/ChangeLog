@@ -1,0 +1,93 @@
+2004-10-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved test files to ../data/
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.3.16
+
+	* iCalSaxDriver.xcode: new definition for Xcode build (XCODE_BUILD)
+
+	* ICalSaxParser.m, NSString+ICal.h, NSCalendarDate+ICal.h,
+	  NSString+ICal.m, NSCalendarDate+ICal.m: use new XCODE_BUILD
+	  definition to correctly include ical.h.
+
+	* iCalSaxDriver.xcode: new Xcode project
+
+2004-09-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* ICalSaxParser.m: minor improvement to logging (v4.3.15)
+
+2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: minor changes for inline compilation with
+	  GNUSTEP_BUILD_DIR set elsewhere (v4.3.14)
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* added hack to install the project in FHS locations - the SAX driver
+	  will be installed in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local) (v4.3.13)
+	
+2004-08-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: install SAX driver in Library/SaxDrivers-4.3/ (v4.3.12)
+	
+	* GNUmakefile: install SAX driver in Library/SaxDrivers/4.3/ (v4.3.11)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed for SOPE 4.3 directory layout (v4.3.10)
+
+	* moved from sope-xml to sope-ical (v4.3.9)
+
+2004-07-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ICalSaxParser.m: added default 'iCalSaxDriverDebugEnabled' to enable
+	  debug logs, subminor fixed to exception reason strings (v4.2.8)
+
+2004-06-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ICalSaxParser.m: cache NSString class, added ability to parse DIR
+	  parameters (v4.2.7)
+
+2004-06-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.6
+	
+	* ICalSaxParser.m: fixed a wrong return
+	
+	* common.h: fixed for non-lF Foundation libraries
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble, GNUmakefile.postamble: added support for
+	  building with GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.5)
+
+2004-02-25  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: fixed for OGo gstep-make (v4.2.4)
+
+2003-12-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* install into GNUSTEP_INSTALLATION_DIR instead of GNUSTEP_USER_ROOT,
+	  split up makefiles (v4.2.3)
+
+2003-08-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* ICalSaxParser.m: added debug logs (v4.2.2)
+
+2002-10-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* ICalSaxParser.m: added support for percent-complete property and
+	  several new parameter types
+
+2002-10-14  Helge Hess  <helge.hess@skyrix.com>
+	
+	* ICalSaxParser.m: added some error handling (x-lic-error props)
+	
+2002-10-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* create ChangeLog
+

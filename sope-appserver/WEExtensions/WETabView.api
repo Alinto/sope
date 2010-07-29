@@ -1,0 +1,26 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETabView">
+  <binding name="selection" required="YES" />
+
+  <binding name="bgColor" />
+  <binding name="nonSelectedBgColor" />
+  <binding name="leftCornerIcon" />
+  <binding name="rightCornerIcon" />
+
+  <binding name="tabIcon" />
+  <binding name="leftTabIcon" />
+  <binding name="selectedTabIcon" />
+
+  <binding name="asBackground" defaults="YES/NO" />
+  <binding name="width" />
+  <binding name="height" />
+  <binding name="activeBgColor" />
+  <binding name="inactiveBgColor" />
+
+  <binding name="fontColor" />
+  <binding name="fontSize" />
+  <binding name="fontFace" />
+
+  <binding name="disabledTabKeys" />
+</wo>

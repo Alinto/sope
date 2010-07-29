@@ -1,0 +1,7 @@
+{
+  hostName     = "oracle";
+  userName     = "focus";
+  password     = "focusrocks";
+  databaseName = "oracle";
+  port         = 1521;
+}

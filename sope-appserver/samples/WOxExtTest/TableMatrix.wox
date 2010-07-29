@@ -1,0 +1,32 @@
+<?xml version='1.0' standalone='yes'?>
+<var:Frame title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <h3>this demo doesn't work ...</h3>
+
+  <var:hspan-matrix NAME="ChartMatrix">
+    <var:matrix-title NAME="ChartTitle">
+      <var:string NAME="WeekdayTitle"/>
+    </var:matrix-title>
+    
+    <var:matrix-title NAME="ChartRowTitle">
+      <font size="-4"><var:string NAME="RowInfo"/></font>
+    </var:matrix-title>
+    
+    <var:matrix-empty><entity name="nbsp"/></var:matrix-empty>
+    
+    <var:matrix-cell NAME="ChartCell">
+      <font size="-4">
+        <var:if NAME="IsViewAccessAllowed">
+          <a NAME="AptLink"><img NAME="AptInfoIcon"/><font NAME="TitleFont"><var:string NAME="AptInfo"/></font></a>
+        </var:if>
+  
+        <var:if NAME="IsViewAccessNotAllowed">
+          <img NAME="AptInfoIcon"/><font NAME="TitleFont"><var:string NAME="AptInfo"/></font>
+        </var:if>
+      </font>
+    </var:matrix-cell>
+  </var:hspan-matrix>
+</var:Frame>

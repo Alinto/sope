@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WECalendarField">
+  <binding name="name" />
+
+  <binding name="date" />
+
+  <binding name="hour" />
+  <binding name="minute" />
+  <binding name="second" />
+  <binding name="day" />
+  <binding name="month" />
+  <binding name="year" />
+
+  <binding name="useTextField" />
+  <binding name="hourInterval" />
+  <binding name="minuteInterval" />
+  <binding name="secondInterval" />
+  <binding name="format" defaults="Date Format Strings" />
+
+  <validation message="either &apos;date&apos; or any of &apos;hour&apos;, &apos;minute&apos;, &apos;second&apos;, &apos;day&apos;, &apos;month&apos; and &apos;year&apos; may be bound">
+    <count test="!=1">
+      <bound name="date"/>
+      <or>
+        <bound name="hour"/>
+        <bound name="minute"/>
+        <bound name="second"/>
+        <bound name="day"/>
+        <bound name="month"/>
+        <bound name="year"/>
+      </or>
+    </count>
+  </validation>
+</wo>

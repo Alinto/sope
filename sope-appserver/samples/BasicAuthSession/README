@@ -1,0 +1,18 @@
+
+Session's bound to basic-authentication ...
+
+States
+a) auth is invalid
+b) auth is valid, session is available
+c) auth is valid, session is missing
+
+
+What is called:
+
+- handleSessionCreationErrorInContext:
+  -> is called, if no authorization header was provided, so that session-id
+     generation failed
+
+- handleSessionRestorationErrorInContext:
+  -> is called if an authorization header is present, but the session couldn't
+     be found

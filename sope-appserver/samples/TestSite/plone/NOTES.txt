@@ -1,0 +1,17 @@
+view | edit | properties | state
+/Members/helge/index_html/document_view
+/Members/helge/index_html/portal_form/document_edit_form
+/Members/helge/index_html/portal_form/metadata_edit_form
+/Members/helge/index_html/portal_form/content_status_history
+
+Contents View | Item View
+http://docs.opengroupware.org/Members/helge/folder_contents
+http://docs.opengroupware.org/Members/helge/
+
+Edit POST action
+/Members/helge/index_html/portal_form/document_edit_form
+
+Prefs | Plone Setup
+/portal_form/personalize_form
+/portal_form/reconfig_form
+

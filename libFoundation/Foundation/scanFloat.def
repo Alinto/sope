@@ -1,0 +1,232 @@
+/* 
+   scanFloat.def
+
+   Copyright (C) 1995, 1996 Ovidiu Predescu and Mircea Oancea.
+   All rights reserved.
+
+   Author: Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+   This file is part of libFoundation.
+
+   Permission to use, copy, modify, and distribute this software and its
+   documentation for any purpose and without fee is hereby granted, provided
+   that the above copyright notice appear in all copies and that both that
+   copyright notice and this permission notice appear in supporting
+   documentation.
+
+   We disclaim all warranties with regard to this software, including all
+   implied warranties of merchantability and fitness, in no event shall
+   we be liable for any special, indirect or consequential damages or any
+   damages whatsoever resulting from loss of use, data or profits, whether in
+   an action of contract, negligence or other tortious action, arising out of
+   or in connection with the use or performance of this software.
+*/
+
+/* This file is included by NSScanner.m to produce the definitions of
+   -scanFloat: and -scanDouble: methods. In order to work, either FLOAT_TYPE or
+   DOUBLE_TYPE should be defined. */
+
+#if defined(FLOAT_TYPE)
+# define TYPE double
+# define MIN_VALUE FLT_MIN
+# define MAX_VALUE FLT_MAX
+# define MAX_DIG FLT_DIG
+# define MAX_EXP FLT_MAX_10_EXP
+# define MIN_EXP FLT_MIN_10_EXP
+#elif defined(DOUBLE_TYPE)
+# define TYPE double
+# define MIN_VALUE DBL_MIN
+# define MAX_VALUE DBL_MAX
+# define MAX_DIG DBL_DIG
+# define MAX_EXP DBL_MAX_10_EXP
+# define MIN_EXP DBL_MIN_10_EXP
+#else
+# error You should define FLOAT_TYPE or DOUBLE_TYPE
+#endif
+
+    NSCharacterSet* decimals = nil;
+    id string = [self string];
+    unsigned int orig;
+    unsigned int location;
+    unsigned int length = [string length];
+    TYPE maxvalue = MAX_VALUE / 10;
+    TYPE mantissa = 0;
+    TYPE decValue = 0;
+    TYPE exponent1 = 0;
+    TYPE result;
+    int exponent2 = 0;
+    BOOL isNegative = NO;
+    NSDictionary* locale = [self locale];
+    unichar zeroChar = '0';
+    unichar thousandSep = ',';
+    unichar decimalSep = '.';
+    unichar c;
+
+    if ([self isAtEnd])
+	return NO;
+
+    /* First skip the blank characters */
+    [self scanCharactersFromSet:[self charactersToBeSkipped] intoString:NULL];
+
+    /* Create the decimals set */
+    if (locale) {
+	NSString* thousandString = [locale objectForKey:NSThousandsSeparator];
+	NSString* decimalsString = [locale objectForKey:NSDecimalDigits];
+	NSString* decimalSepString = [locale objectForKey:NSDecimalSeparator];
+
+	if (decimalsString) {
+	    zeroChar = [decimalsString characterAtIndex:0];
+	    decimals = [NSCharacterSet characterSetWithCharactersInString:
+				    decimalsString];
+	}
+
+	if (thousandString)
+	    thousandSep = [thousandString characterAtIndex:0];
+
+	if (decimalSepString)
+	    decimalSep = [decimalSepString characterAtIndex:0];
+    }
+
+    if (!decimals)
+	decimals = [NSCharacterSet decimalDigitCharacterSet];
+
+    orig = [self scanLocation];
+    c = [string characterAtIndex:orig];
+    if (c == '-' || c == '+') {
+	isNegative = (c == '-');
+	orig++;
+    }
+
+    /* Scan the mantisa */
+    for (location = orig; location < length; location++) {
+	c = [string characterAtIndex:location];
+	if ([decimals characterIsMember:c]) {
+	    /* Even if result is greater than the maximum value that can be 
+	       represented, continue the scanning to skip the hole number. */
+	    if (mantissa <= maxvalue)
+		mantissa = mantissa * 10 + (c - zeroChar);
+	    continue;
+	}
+	if (c == thousandSep)
+	    continue;
+
+	/* If `c' is neither a decimal nor a thousand separator, break. */
+	break;
+    }
+    result = mantissa;
+
+    if (c == decimalSep) {
+	/* The number has a decimal part. Store it in the decValue but no more
+	   than MAX_DIG digits; then skip all the digits. */
+	int digits_no = 0;
+
+	location++;
+
+	/* Iterate through the exponent's digits */
+	for (exponent1 = 0.1; location < length; location++, exponent1 /= 10) {
+	    c = [string characterAtIndex:location];
+
+	    /* Break if the character is not a digit */
+	    if (![decimals characterIsMember:c])
+		break;
+
+	    /* If result is too big to be represented just skip to the
+	       next character. */
+	    if (result > maxvalue)
+		continue;
+
+	    digits_no++;
+
+	    /* Only store the digit if the number of digits read so far is less
+	       than MAX_DIG to avoid a possible overflow. */
+	    if (digits_no <= MAX_DIG)
+		decValue += (c - zeroChar) * exponent1;
+	}
+    }
+    if (result <= maxvalue)
+	result += decValue;
+
+    if (c == 'e' || c == 'E') {
+	/* The number has an exponent. Store it in exponent2. */
+	BOOL expIsNegative = NO;
+
+	location++;
+	if (location < length) {
+	    c = [string characterAtIndex:location];
+	    if (c == '-') {
+		expIsNegative = YES;
+		location++;
+	    }
+	    else if (c == '+')
+		location++;
+	}
+
+	/* Read the digits of the exponent. First skip the leading zeroes. */
+	for (; location < length; location++) {
+	    c = [string characterAtIndex:location];
+	    if (c == '0')
+		continue;
+	    else
+		break;
+	}
+
+	/* Read the exponent digits but check if it's greater than MAX_EXP or
+	   less than MIN_EXP. */
+	for (; location < length; location++) {
+	    TYPE power10[10] = {
+		1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9
+	    };
+
+	    c = [string characterAtIndex:location];
+
+	    /* Break if the character is not a digit */
+	    if (![decimals characterIsMember:c])
+		break;
+
+	    /* If result is too big to be represented just skip to the
+	       next character. */
+	    if (result > maxvalue)
+		continue;
+
+	    if (expIsNegative) {
+		if (exponent2 < abs(MIN_EXP)) {
+		    exponent2 = exponent2 * 10 + (c - zeroChar);
+		    /* Adjust the result */
+		    if (exponent2 < abs(MIN_EXP))
+			result /= power10[c - zeroChar];
+		}
+	    }
+	    else {
+		if (exponent2 < MAX_EXP) {
+		    exponent2 = exponent2 * 10 + (c - zeroChar);
+		    /* Adjust the result */
+		    if (exponent2 < MAX_EXP)
+			result *= power10[c - zeroChar];
+		}
+	    }
+	}
+    }
+
+    if (location != orig) {
+	[self setScanLocation:location];
+
+	if (result > maxvalue) {
+	    if (value)
+		*value = (isNegative ? MIN_VALUE : MAX_VALUE);
+	    return NO;
+	}
+	else {
+	    if (value)
+		*value = (isNegative ? -result : result);
+	    return YES;
+	}
+    }
+
+    return NO;
+
+#undef TYPE
+#undef MIN_VALUE
+#undef MAX_VALUE
+#undef MAX_DIG
+#undef MAX_EXP
+#undef MIN_EXP

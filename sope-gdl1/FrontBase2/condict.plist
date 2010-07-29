@@ -1,0 +1,5 @@
+{
+  userName     = "test";
+  databaseName = "helgetest";
+  hostName     = "localhost";
+}

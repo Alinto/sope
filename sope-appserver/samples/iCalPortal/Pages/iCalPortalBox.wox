@@ -1,0 +1,15 @@
+<?xml version='1.0' standalone='yes'?>
+
+<span xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:const="http://www.skyrix.com/od/constant">
+  <table border="0" cellspacing="1" cellpadding="4" 
+	 background="/iCalPortal.woa/WebServerResources/English.lproj/back_menu.gif">
+    <tr>
+      <td background="/iCalPortal.woa/WebServerResources/English.lproj/back.gif"><i><var:string value="title"/></i></td>
+    </tr>
+    <tr>
+      <td bgcolor="#FFFFFF"><var:component-content/></td>
+    </tr>
+  </table>
+</span>

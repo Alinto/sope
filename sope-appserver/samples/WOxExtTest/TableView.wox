@@ -1,0 +1,120 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component
+  className="Frame" 
+  title="name"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:var="http://www.skyrix.com/od/binding"
+  xmlns:const="http://www.skyrix.com/od/constant"
+>
+  <form var:action="self">
+
+    <!-- in this case we need some 'subtags' for configuration ... -->
+    
+    <var:tableview list="list" item="item" identifier="item.identifier"
+        batchSize="batchSize" currentBatch="currentBatch"
+        previousItem="previousItem"
+        sortedKey      = "sortedKey"
+        isDescending   = "isDescending"
+        scrollOnClient = "javaSciptScrolling"
+        autoScroll     = "overflowScrolling"
+        titleColor     = "titleColor"
+        headerColor    = "headerColor"
+        footerColor    = "footerColor"
+        evenColor      = "evenColor"
+        oddColor       = "oddColor"
+        
+        const:nonSortIcon       = "non_sorted.gif"
+        const:upwardSortIcon    = "upward_sorted.gif"
+        const:downwardSortIcon  = "downward_sorted.gif"
+        const:firstIcon         = "first.gif"
+        const:firstBlindIcon    = "first_blind.gif"
+        const:previousIcon      = "previous.gif"
+        const:previousBlindIcon = "previous_blind.gif"
+        const:nextIcon          = "next.gif"
+        const:nextBlindIcon     = "next_blind.gif"
+        const:lastIcon          = "last.gif"
+        const:lastBlindIcon     = "last_blind.gif"
+      >
+      
+      <var:ttitle><b>Folder</b></var:ttitle>
+      <var:tbutton>Buttons of TableView</var:tbutton>
+      
+      <var:td const:sortKey="city" const:title="city" const:valign="top"
+              isGroup="isGroupCity">
+        <var:string value="item.identifier"/>
+      </var:td>
+
+      <var:td const:sortKey="zip" const:title="zip" const:valign="top"
+              isGroup="isGroupZip">
+        <var:string value="item.zip"/>
+      </var:td>
+
+      <var:td const:sortkey="firstName" const:title="first name">
+        <var:string value="item.firstName"/>
+      </var:td>
+      
+      <var:td const:sortkey="name" const:title="name">
+        <var:string value="item.name"/>
+        <a var:action="increaseClicks">increaseClicks</a>
+      </var:td>
+      
+      <var:td const:sortkey="street" const:title="street">
+        <var:string value="item.street"/>
+      </var:td>
+      
+      <var:tfooter><small>Footer of TableView:</small></var:tfooter>
+   </var:tableview>
+   
+   <br/>
+    <b>clickedItem = <var:string value="clickedItem"/></b>
+   <br/>
+      
+      <table border="0">
+        <tr>
+          <td align="right">
+            javaScriptScrolling (only MSIE):
+          </td>
+          <td><input type="checkbox" var:checked="javaScriptScrolling"/></td>
+        </tr>
+        <var:if condition="javaScriptScrolling" const:negate="YES">
+          <tr>
+            <td align="right">
+              overflow scrolling (only MSIE):
+            </td>
+            <td><input type="checkbox" var:checked="overflowScrolling"/></td>
+          </tr>
+        </var:if>
+
+          <tr>
+            <td align="right">batch size:</td>
+            <td><input type="text" size="1" var:value="batchSize"/></td>
+          </tr>
+          <tr>
+            <td align="right">even color:</td>
+            <td><input type="text" var:value="evenColor"/></td>
+          </tr>
+          <tr>
+            <td align="right">odd color:</td>
+            <td><input type="text" var:value="oddColor"/></td>
+          </tr>
+          <tr>
+            <td align="right">title color:</td>
+            <td><input type="text" var:value="titleColor"/></td>
+          </tr>
+          <tr>
+            <td align="right">header color:</td>
+            <td><input type="text" var:value="headerColor"/></td>
+          </tr>
+          <tr>
+            <td align="right">footer color:</td>
+            <td><input type="text" var:value="footerColor"/></td>
+          </tr>
+
+        <tr>
+          <td colspan="2">
+            <input type="submit" value="apply"/>
+          </td>
+        </tr>
+      </table>  
+   </form>
+</var:component>

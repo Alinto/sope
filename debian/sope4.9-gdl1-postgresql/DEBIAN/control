@@ -1,0 +1,16 @@
+Package: sope4.9-gdl1-postgresql
+Source: sope
+Version: 4.7.0-0
+Architecture: powerpc
+Maintainer: Sebastian Ley <ley@debian.org>
+Installed-Size: 32
+Recommends: postgresql (>= 7.2.0)
+Provides: sope-db-connector
+Section: web
+Priority: extra
+Description: PostgreSQL connector for SOPE's fork of the GNUstep database environment
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the postgresql connector for SOPE's fork of the
+ GNUstep database libraries.

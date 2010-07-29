@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  Seite 2 ...
+
+  Zur Index-Seite: <a href="/docs/">/docs</a><br/>
+  Zu test.wox: <a href="test.wox">test.wox</a><br/>
+  <br/>
+  Embed: |<var:component className="Embed"/>|
+  <br/>
+  <br/>
+  <img src="SlowMarket.gif" alt="bigimg.gif"/>
+  <hr/>
+  <img filename="SlowMarket.gif" alt="bigimg.gif"/>
+  <hr/>
+  <var:component className="imgs/SlowMarket.wox"/>
+</var:component>

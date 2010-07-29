@@ -1,0 +1,51 @@
+Todo's for SOPE subsystem
+=========================
+
+- add a "lightweight" WOContext for doing internal SOPE calls
+  [done: SoSubContext]
+- add a template rendering system
+  [done: SoTemplateRenderer]
+
+- implement XML-RPC invocations and mapping of XML-RPC parameters to
+  SoMethod parameters!
+
+- there is a bug with embedded components in templates (SoTemplateRenderer?)
+
+- add proper mapping of HTTP methods and parameters to selector
+  invocations !
+- should we generate HTTP redirects after performing content negotiation 
+  instead of resolving to the right object on the server side ? probably
+- add object base security (currently we only have class based security)
+
+- support special context variables like Zope (very useful for path handling):
+  URLn
+  URLPATHn
+  BASEn
+  BASEPATHn
+  eg:
+  URL0  - "http://blah/a/b/c"
+  URL1  - "http://blah/a/b"
+  URL2  - "http://blah/a"
+  BASE0 - "http://blah/"
+  BASE1 - "http://blah/a"
+  BASE2 - "http://blah/a/b"
+  
+- add a "property sheet" API for "controlled" access to object properties.
+  - eg an OFS object can check whether it's in subversion and if so,
+    present a subversion-property-sheet
+
+- add typed form keys, eg:
+    [rq formValueForTypedKey:@"ids"]
+  will check for all form-keys beginning with "ids:" (and "ids" itself and 
+  apply a type coercion based on the "coercion key" following the "ids:",
+  eg "ids:list", "ids:int". The coercion key should be dynamic and extensible
+  to provide custom serialization formats
+  - maybe formatters are well-suited for this task ! formatters could be used
+    in selector-invocations as well
+
+- renderer for DOM tree !
+  - it should be easy for a method to return a DOM tree which is then rendered
+    to it's XML representation
+
+- associate a sort-ordering with a container, so that we can easily retrieve 
+  next/previous links (eg for Mozilla navigation URL support)

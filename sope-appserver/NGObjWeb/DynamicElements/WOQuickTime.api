@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOQuickTime">
+  <binding name="filename" passthrough="NO" defaults="Resources"/>
+  <binding name="framework" passthrough="NO" defaults="Frameworks"/>
+  <binding name="src" passthrough="NO"/>
+
+  <binding name="action" passthrough="NO" defaults="Actions"/>
+  <binding name="href" passthrough="NO"/>
+  <binding name="pageName" passthrough="NO" defaults="Page Names"/>
+  <binding name="prefixHost" passthrough="NO"/>
+
+  <binding name="width" passthrough="NO" required="YES"/>
+  <binding name="height" passthrough="NO" required="YES"/>
+  <binding name="pluginsPage" passthrough="NO"/>
+  <binding name="hotspotList" passthrough="NO"/>
+  <binding name="selection" passthrough="NO"/>
+  <binding name="bgcolor" passthrough="NO"/>
+  <binding name="target" passthrough="NO"/>
+  <binding name="volume" passthrough="NO"/>
+  <binding name="pan" passthrough="NO"/>
+  <binding name="tilt" passthrough="NO"/>
+  <binding name="fov" passthrough="NO"/>
+  <binding name="node" passthrough="NO"/>
+  <binding name="correction" passthrough="NO"/>
+  <binding name="cache" passthrough="NO" defaults="YES/NO"/>
+  <binding name="autoplay" passthrough="NO" defaults="YES/NO"/>
+  <binding name="hidden" passthrough="NO"/>
+  <binding name="playEveryFrame" passthrough="NO" defaults="YES/NO"/>
+  <binding name="controller" passthrough="NO" defaults="YES/NO"/>
+
+  <!-- SOPE -->
+  <binding name="otherTagString" passthrough="NO" />
+
+  <!-- WO4.5, NOT IMPLEMENTED IN SOPE:
+  <binding name="qtnextList" passthrough="NO"/>
+  <binding name="qtnextAction" passthrough="NO"/>
+  -->
+</wo>

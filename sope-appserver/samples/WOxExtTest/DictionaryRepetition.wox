@@ -1,0 +1,28 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <form var:action="self">
+    <table border="0">
+
+      <var:foreach-key dictionary="dictionary" key="key" item="item">
+         <tr>
+           <td align="right"><var:string value="key"/></td>
+           <td><input type="text" var:value="item" const:size="30"/></td>
+           <td><a var:action="increaseClicks">increase clicks</a></td>
+         </tr>
+      </var:foreach-key>
+      
+      <tr><td colspan="2">
+        <input type="submit" var:action="clearClicks" value="apply"/>
+      </td></tr>
+    </table>
+    
+    <br/>
+    clicks: <var:string value="clicks"/>
+
+  </form>
+
+</var:component>

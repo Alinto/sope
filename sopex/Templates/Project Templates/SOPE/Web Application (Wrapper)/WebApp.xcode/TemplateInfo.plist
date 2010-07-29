@@ -1,0 +1,28 @@
+{
+	FilesToRename = {
+		"WebApp_main.m" = "«PROJECTNAME»_main.m";
+	};
+	FilesToMacroExpand = (
+		"common.h",
+		"«PROJECTNAME»_main.m",
+		"Application.h",
+		"Application.m",
+		"Session.h",
+		"Session.m",
+		"DirectAction.h",
+		"DirectAction.m",
+		"Main.m",
+		"Info.plist",
+		"English.lproj/InfoPlist.strings",
+		"GNUmakefile",
+		"GNUmakefile.preamble",
+		"GNUmakefile.postamble",
+		"README",
+		"COPYING",
+		"COPYRIGHT",
+		"NOTES",
+		"PROJECTLEAD",
+		"TODO"
+	);
+	Description = "This project builds a SOPE application written in Objective-C.";
+}

@@ -1,0 +1,53 @@
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* testqp.m: properly include string.h to fix a strlen warning
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* saxxml.m: print a usage information in case no arguments are given or
+	  the --help argument is used. Print SAX driver lookup directories when
+	  --dirs option is given
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 warnings, changed for new DOM implemention names
+
+2004-08-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed linking for FHS configurations
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the tools in FHS locations - the executables
+	  will be installed in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package.
+
+2004-03-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* saxxml.m: minor improvements in error processing
+
+2003-11-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* domxml.m: minor fix to result logging
+
+2003-07-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved in domxml and testqp from DOM
+
+2003-02-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* saxxml.m: makes pathes absolute, before constructing a URL from
+	  them
+
+2003-02-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved in xmln and saxxml tools
+
+	* created ChangeLog for tools
+

@@ -1,0 +1,253 @@
+- changed EOControl includes into #imports to allow compilation with MulleEOF
+- adjusted EOSortOrdering to use keypathes
+- fixed SOPE:X logging
+- NGMime: changed tzname parsing of UTC/CET
+- assume that libxml2 is installed per default (./configure can revert that)
+- improved exception handling in XmlRpcValue
+- added namespace constants: CalDAV, Google
+- DOMElement: implemented -localName
+- improved error logging in WEResourceManager
+- WebDAV: added a hack to support Cadaver
+- WebDAV: added some support for REPORT
+- WebDAV: enhanced lock support to work with Word 2003
+- WebDAV: added support for 404-propstat elements for missing properties
+- WebDAV: added default 'SoWebDAVDisableCrossHostMoveCheck' to disable hostchks
+- WebDAV: added property mappings to support Novell NetDrive
+- added Office 2003 to WEClientCapabilities
+- log HTTP request size in the HTTP log
+- SoObjects: added support for x-http-method-override header
+- SoObjects: some simple support for Google login API
+- changed handling of WOPort default
+- improved SOAP dispatcher to work with iFolder generated requests
+- fixed a crasher in a WOKeyPathAssociation debug log
+- generate relative URLs for component actions when possible
+- started SoCookieAuthenticator
+- added new SoProductLoader object to load specific SoProducts for apps
+- removed a use of -indexOfString: in BasicAuthSession example
+- NGiCal: added missing 'url' property to iCalEntityObject
+- improved error handling in VSSaxDriver
+- properly define principal class in VSSaxDriver
+- updated manpages
+- updated builds to Xcode 2.2
+- improved GCJ support in embedded gnustep-make
+- fixed various gcc 4.1 warnings
+
+Major contributors for 4.5.7:
+Marcus Mueller
+Philippe Laval
+Helge Hess
+... and many more :-)
+
+===========================================================================
+compare ../complete/SOPE/releases/4.5.6-morecore with .
+added:   SOPE-Info.plist
+changed: sope-core/NGExtensions/
+     2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* *.h, *m: changed EOControl related includes into imports
+     	  to enable compilation against MulleEOF (v4.5.183)
+changed: sope-core/EOControl/
+     2006-05-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* EOSortOrdering.m: use keyPaths instead of just keys in
+     	  keyOrderComparator() function - this is feature compatible with
+     	  Apple's EOF 4.5 (v4.5.64)
+changed: sopex/SOPEX/
+     2006-05-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SOPEXAppController.m: added config for WOHttpTransactionLogger -
+     	  transactions now properly do appear in the console window (v2.0.9)
+changed: sope-mime/
+     2006-02-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: hardcoded CET/UTC in tzname parsing (v4.5.240)
+changed: sope-mime/NGMime/
+     2006-02-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeRFC822DateHeaderFieldParser.m: added hardcoded detection for
+     	  CET and UTC in addition to GMT and MET
+changed: sope-xml/
+     2006-04-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile: reverse test for libxml2 existence flag - this allows
+     	  for building libxml2 even if we didn't run configure :-)
+changed: sope-xml/XmlRpc/
+     2006-02-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* XmlRpcValue.m: fixed stupid bugs in -isException and -isDictionary,
+     	  which formerly lead to unreadable exception garbage whenever a
+     	  remote exception occured. NOTE: have we had proper unit tests,
+     	  this probably wouldn't have splipped through so easily. :-)
+     	  (v4.5.27)
+changed: sope-xml/SaxObjC/
+     2006-06-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* XMLNamespaces.h (XMLNS_CALDAV): added CalDAV namespace (v4.5.56)
+     2006-04-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* XMLNamespaces.h: added Google namespace (v4.5.55)
+changed: sope-xml/DOM/
+     2006-06-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* DOMElement.m: added missing -localName implementation (v4.5.21)
+changed: Recycler/SxComponents/
+     2006-05-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed some gcc 4.1 warnings (v4.5.30)
+changed: sope-ldap/NGLdap/
+     2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* EOQualifier+LDAP.h: changed EOControl related includes into imports
+     	  to enable compilation against MulleEOF (v4.5.29)
+changed: gnustep-make/
+     2006-03-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* Instance/library.make: added a hack to redefine CC to gcj in case
+     	  the shared library build includes AOT_JAVA_FILES.
+     	* gcj-tool.make, Instance/gcj-tool.make, Master/gcj-tool.make,
+     	  GNUmakefile.in: added special AOT tool makefile
+     	* Instance/rules.make, common.make, rules.make: added support for
+     	  ahead-of-time Java compilation (AOT_JAVA_FILES), aka GCJ compilation
+added:   gnustep-make/openapp
+added:   gnustep-make/gcj-tool.make
+added:   gnustep-make/which_lib
+added:   gnustep-make/user_home
+added:   gnustep-make/config.make
+added:   gnustep-make/debugapp
+added:   gnustep-make/opentool
+added:   gnustep-make/executable.template
+added:   gnustep-make/GNUmakefile
+added:   gnustep-make/GNUstep.sh
+added:   gnustep-make/GNUstep.csh
+added:   gnustep-make/fixpath.sh
+added:   gnustep-make/gnustep-make.spec
+added:   gnustep-make/GNUsteprc
+added:   gnustep-make/config.h
+added:   gnustep-make/Instance/gcj-tool.make
+added:   gnustep-make/Master/gcj-tool.make
+changed: xmlrpc_call/
+     2006-01-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* xmlrpc_call.xcodeproj: added Xcode 2.2 project
+added:   xmlrpc_call/xmlrpc_call.xcodeproj
+changed: sope-appserver/WEExtensions/
+     2006-03-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEResourceManager.m: minor code cleanups, log the flat template
+     	  subpath if it could not be found (v4.5.85)
+changed: sope-appserver/SoOFS/
+     2006-04-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* OFSPropertyListObject.m: removed workaround for gstep-base KVC
+     	  problem - this has been fixed in gstep-base svn trunk (4.5.21)
+     2006-04-08  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* OFSPropertyListObject.m: added a workaround for a current gstep-base
+     	  KVC problem (4.5.20)
+changed: sope-appserver/NGObjWeb/
+     2006-06-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.235
+     	* WebDAV/SoWebDAVRenderer.m: added a hack for Cadaver so that it
+     	  doesn't show errors on missing properties (enabled 'brief' mode),
+     	  log missing properties if debug is enabled
+     	* fixed some gcc 4.1 warnings
+     2006-06-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoWebDAVDispatcher.m: added some basic REPORT support, allows
+     	  mapping of the top-level report XML element name to a SoMethod
+     	  (v4.5.234)
+     2006-05-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/WOForm.api: added wosid parameter. There probably
+     	  are a lot more parameters we want to add; also, it might be a good
+     	  idea to mark them as such - this would enable proper validation
+     	  in .wox files, as they must be prefixed with an underscore in the
+     	  XML.
+     2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* *m: changed EOControl related includes into imports
+     	  to enable compilation against MulleEOF (v4.5.233)
+     2006-05-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoWebDAVRenderer.m: deliver more lockinfo fields when a lock
+     	  is acquired. This solves an issue with files being openened in Word
+     	  2003 in readonly mode. (v4.5.232)
+     	* v4.5.231
+     	* WebDAV/SoWebDAVRenderer.m: major change: WebDAV properties which got
+     	  NSNull as their value are now rendered in a 404-propstat element. So
+     	  if you want to have empty properties delivered, return empty strings.
+     	* SoObjects/SoObjectRequestHandler.m: minor code cleanups
+     	* WEClientCapabilities.m: added support for Office 2003
+     2006-05-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.230
+     	* WebDAV/SoObjectWebDAVDispatcher.m: added default
+     	  'SoWebDAVDisableCrossHostMoveCheck' to disable the check for the
+     	  hostname on WebDAV MOVE/COPY operations. This can give issues when
+     	  Apache is accessed with different DNS names or IPs.
+     	* WOHttpAdaptor/WOHttpTransaction.m: log HTTP request size after
+     	  response size
+     2006-05-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.229
+     	* DAVPropMap.plist: added some WebDAV mappings for Novell NetDrive
+     	* WebDAV: fixed some gcc 4.1 warnings
+     2006-04-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoObjectMethodDispatcher.m: added support for
+     	  x-http-method-override header (v4.5.228)
+     	* SoObjects/SoHTTPAuthenticator.m: prepared some Google login API
+     	  support (v4.5.227)
+     2006-04-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOHttpAdaptor/WOHttpAdaptor.m: shifted retrieval of WOPort default
+     	  from +initialize to -addressFromDefaultsOfApplication:, so apps that
+     	  may add adaptors on demand during runtime can do so. (v4.5.226)
+     2006-04-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.225
+     	* SoObjects/SoSelectorInvocation.m: added default to enable debugging
+     	  (SoSelectorInvocationDebugEnabled)
+     	* SoObjects/SoObjectSOAPDispatcher.m: improved to SOAP request
+     	  dispatcher to work with iFolder generated requests
+     2006-03-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGObjWeb.xcodeproj: latest additions added to Xcode build
+     2006-03-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.224
+     	* Associations/WOKeyPathAssociation.m: fixed a crasher in a debug log
+     	* WOContext.m: changed to generate relative component action URLs in
+     	  case the request already was a valid component action URL. added a
+     	  way to detect whether the context session is a fresh one.
+     	* WOComponentRequestHandler.m, WOApplication.m: minor code cleanups,
+     	  use -isNotEmpty
+     2006-03-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.223
+     	* SoObjects: started SoCookieAuthenticator
+     	* SoObjects/SoHTTPAuthenticator.m: code cleanups
+     	* SoObjects/SoProductLoader.m: quickfix to API (v4.5.222)
+     	* SoObjects: added new class SoProductLoader which can be used to
+     	  load SoProduct bundles for a given application (v4.5.221)
+     2006-02-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGObjWeb.xcodeproj: UnixSignalHandler.h is public now
+     2006-02-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* Associations/WOKeyPathAssociation.m: use logging framework (v4.5.220)
+     2006-02-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOComponent.m, WODirectAction.m, DynamicElements/WOBrowser.m: minor
+     	  code cleanups (v4.5.219)
+added:   sope-appserver/NGObjWeb/doc/WOCopyValue.3
+added:   sope-appserver/NGObjWeb/doc/WOSetHeader.3
+added:   sope-appserver/NGObjWeb/SoObjects/SoCookieAuthenticator.h
+added:   sope-appserver/NGObjWeb/SoObjects/SoProductLoader.h
+added:   sope-appserver/NGObjWeb/SoObjects/SoProductLoader.m
+added:   sope-appserver/NGObjWeb/SoObjects/SoCookieAuthenticator.m
+changed: sope-appserver/NGXmlRpc/
+     2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* *m: changed EOControl related includes into imports
+     	  to enable compilation against MulleEOF (v4.5.14)
+changed: sope-appserver/samples/
+     2006-04-02  Philippe Laval  <philippe.laval@free.fr>
+     	* BasicAuthSession/NSString+BasicAuth.m: replaced usage of non-Cocoa
+     	  -indexOfString: with -rangeOfString:
+added:   sope-appserver/samples/SoCookieAuth
+changed: sope-appserver/samples/iCalPortal/
+     2006-04-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* Pages/GNUmakefile, WebDAV/GNUmakefile: properly include the SOPE
+     	  config.make when available
+changed: maintenance/
+     2005-10-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* make-osxmpkg.sh, make-osxpkg.sh: improved versioning support
+added:   maintenance/changes-4.5.6-to-4.5.7.txt
+added:   sope-ical/data/evo26-bug1714-wrapline-1.ics
+changed: sope-ical/NGiCal/
+     2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalDataSource.h, common.h: changed EOControl related includes into
+     	  imports to enable compilation against MulleEOF (v4.5.74)
+     2006-04-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalEntityObject.h: added missing forward declaration for
+     	  gstep-base compile (v4.5.73)
+     2006-04-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.72
+     	* iCalEntityObject.[hm]: added "url" property - unfortunately
+     	  this was missing before. Increased class version to "1".
+     	* iCalRepeatableEntityObject.m, iCalEvent.m, iCalToDo.m: adjusted
+     	  super class version check.
+changed: sope-ical/versitSaxDriver/
+     2006-04-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile: properly declare principal class (v4.5.23)
+     2006-04-08  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* VSSaxDriver.m: improved error reporting in case no data could be
+     	  retrieved from a URL (v4.5.22)

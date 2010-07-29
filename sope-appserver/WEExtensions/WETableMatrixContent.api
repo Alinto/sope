@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETableMatrixContent">
+  <binding name="elementName" />
+  <binding name="rowspan" settable="YES" />
+  <binding name="colspan" settable="YES" />
+</wo>

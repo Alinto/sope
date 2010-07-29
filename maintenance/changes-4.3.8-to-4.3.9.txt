@@ -1,0 +1,233 @@
+compare /home/helge/dev/complete/SOPE/releases/4.3.8-shapeshifter with .
+added:   configure
+added:   config.make
+changed: sope-core/
+     2004-10-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* all makefiles: include config.make if available
+changed: sope-core/NGExtensions/
+     2004-10-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* FdExt.subproj/NSString+Escaping.m: minor code cleanups, removed a
+     	  superfluous statement (v4.3.125)
+     2004-10-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSString+Escaping.m: minor code cleanups, removed a
+     	  superflous if() condition (v4.3.124)
+     2004-10-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.3.123
+     	* FdExt.subproj/NSString+Escaping.m, NGExtensions/NSString+Escaping.h:
+     	  new category and protocol to do generic escaping. The category is
+     	  Unicode safe and optimized for performance.
+     	* FdExt.subproj/NSString+misc.m, NGExtensions/NSString+misc.h: moved
+     	  -stringByApplyingCEscaping to new NSString+Escaping.
+     2004-10-11  Matthew Joyce  <mjoyce@aboveit.nl>
+     	* FdExt.subproj/NSCalendarDate+misc.m: fixed -isAfternoon (all dates
+     	  were reported as forenoon) (v4.3.122)
+     2004-10-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSString+URLEscaping.m: do not escape URL safe chars
+     	  (fixes a WebDAV issue with Cadaver) (v4.3.121)
+     2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGExtensions.xcode: updated to the current build version
+     2004-10-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSURL+misc.m: fixed URL processing in some edge case
+     	  (v4.3.120)
+     2004-10-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGQuotedPrintableCoding.m: minor code cleanups (v4.3.119)
+     2004-10-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSException+misc.m: check whether nil is being passed
+     	  in as the exception format (v4.3.118)
+added:   sope-core/NGExtensions/FdExt.subproj/NSString+Escaping.m
+added:   sope-core/NGExtensions/NGExtensions/NSString+Escaping.h
+changed: sope-core/NGStreams/
+     2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGStreams.xcode: updated to the current build version
+changed: sope-mime/
+     2004-10-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: minor improvement in an error condition (v4.3.189)
+     2004-10-06  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMime: added special case for +0530 timezone (v4.3.188)
+     2004-10-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.3.187
+     	* NGMime, NGMail: minor cleanups
+     	* NGImap4: decode quoted printable subjects and addresses
+     	* NGImap4: fixed long subject envelope processing (v4.3.186)
+     	* NGImap4: improved processing of envelope responses (v4.3.185)
+     2004-10-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGIm
+changed: sope-mime/NGMime/
+     2004-10-06  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMimeRFC822DateHeaderFieldParser.m: added special case for +0530
+     	  timezone which seems to be common (v4.3.188)
+     2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMime.xcode: added new files to Xcode build
+     2004-09-30  Helge Hess  <helge.hess@sk
+changed: sope-mime/NGImap4/
+     2004-10-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4ResponseParser.m: added INTERNALDATE as a known, but
+     	  unsupported fetch key (v4.3.189)
+     2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGImap4.xcode: added new files to Xcode build
+     2004-10-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4ResponseParser.m: decode quoted printable in personal names
+     	  of envelope addresses and in the subject, fixed a memory leak in the
+     	  envelope parser (v4.3.187)
+     	* NGImap4ResponseParser.m: support data-style subjects in envelopes
+     	  (v4.3.186)
+     	* NGImap4ResponseNormalizer.m: pass on envelope raw responses in
+     	  normalized responses (v4.3.185)
+     2004-10-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4ResponseParser.m: added support for envelope responses, major
+     	  code cleanups (v4.3.184)
+     2004-09-
+added:   sope-mime/NGImap4/NGImap4EnvelopeAddress.h
+added:   sope-mime/NGImap4/NGImap4EnvelopeAddress.m
+added:   sope-mime/NGImap4/NGImap4Envelope.h
+added:   sope-mime/NGImap4/NGImap4Envelope.m
+changed: sope-mime/NGMail/
+     2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMail.xcode: updated to the current build version
+changed: sope-xml/
+     2004-10-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* all makefiles: include config.make if available
+changed: sope-xml/STXSaxDriver/
+     2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+     	* ExtraSTX/GNUmakefile, Model/GNUmakefile: fixed for config.make
+     	  compilation (v1.0.10)
+added:   sope-xml/samples/data/test-digit.xml
+added:   Recycler/iCalSaxDriver
+changed: sope-ldap/NGLdap/
+     2004-10-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile: include config.make if available (v4.3.21)
+changed: sope-appserver/WEExtensions/
+     2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+     	* WETableView/GNUmakefile: added support for config.make (v4.3.61)
+     2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEExtensions.xcode: updated to current build version
+added:   sope-appserver/WEExtensions/WEExtensions.wox
+changed: sope-appserver/SoOFS/
+     2004-10-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* sope.m: minor logging improvements (v4.3.12)
+added:   sope-appserver/SoOFS/sope.8
+added:   sope-appserver/WOExtensions/WOExtensions.wox
+changed: sope-appserver/NGObjWeb/
+     2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+     	* DynamicElements/WOImage.m: minor code cleanup (v4.3.69)
+     2004-10-19  Helge Hess  <helge.hess@skyrix.com>
+     	* SoObjects/SoHTTPAuthenticator.m: return 401 instead of 400 if the
+     	  authentication method was not recognized (eg if Evo attempts an NTLM
+     	  connect) (v4.3.68)
+     2004-10-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* include config.make if available (v4.3.67)
+     2004-10-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGObjWeb.xcode: added WOxTagClassElemBuilder.m and
+     	  SoActionInvocation.m to the xcode build, bumped the framework 
+     	  version
+     	* SoObjects/SoObjects.xcode: added SoActionInvocation.h as a public
+     	  header, bumped the framework version.
+     2004-10-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* sope-ngobjweb-defaults.5: added more default descriptions to man page
+     2004-10-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoObjectMethodDispatcher.m: fixed an issue when the
+     	  clientObject is a WOResponse object. In this case, just return the
+     	  response instead of starting method processing (v4.3.66)
+     	* DynamicElements/WOInput.m: minor code cleanups, be tolerant on
+     	  missing value binding (previously printed a warning) (v4.3.65)
+     2004-10-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.3.64
+     	* Associations/WOValueAssociation.m: small tweak for bool values of nil
+     	* SoObjects/SoObject.m: added baseURL support for appnames which end
+     	  with a slash
+     	* SoObjects/SoObjectMethodDispatcher.m: do not call default methods in
+     	  place, but rather redirect to the method URL (can be disabled with
+     	  the SoRedirectToDefaultMethods default)
+     	* SoObjects/SoObjectMethodDispatcher.m, SoObjects/SoApplication.m:
+     	  minor improvements to logging
+     2004-10-12  Helge Hess  <helge.hess@skyrix.com>
+     	* _WOStringTable.m: always open .strings files in ISO-Latin-1 encoding
+     	  (will be changed to UTF-8 later) (v4.3.63)
+     2004-10-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoObjCClass.m: fixed a bug in "Action" selector processing
+     	  (v4.3.62)
+     	* v4.3.61
+     	* SoObjects/product.plist: properly export SoActionInvocation
+     	* SoObjects/SoProductClassInfo.m: fixed product.plist class name entry
+     	  for action invocations
+     	* SoObjects/SoPageInvocation.h: fixed header file (install include and
+     	  compile include differ :-|) (v4.3.60)
+     	* v4.3.59
+     	* SoObjects/SoProductClassInfo.m: added support for action invocations
+     	  (triggered by either 'actionClass' or 'directActionName' key in
+     	  product.plist)
+     	* SoObjects/SoPageInvocation.m: moved most of the implementation to a
+     	  new SoActionInvocation class which can invoke WODirectAction objects
+     2004-10-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGHttp: fixed umlaut decoding on MacOSX, removed some unused code
+     	  (v4.3.58)
+     2004-10-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoObjectDataSource.m: ensure that the child key used for
+     	  lookup is a string (eg if toOneRelationshipKeys returns NSNumber's
+     	  as values) (v4.3.57)
+     	* WebDAV/SoObjectDataSource.m: minor optimization to URL generation
+     	  (v4.3.56)
+     	* v4.3.55
+     	* WebDAV/SoObjectResultEntry.m, WebDAV/SoWebDAVRenderer.m: improved
+     	  debugging and error detection facilities
+     	* WebDAV/SoObjectDataSource.m: fixed URL construction on Cocoa
+     	  Foundation (you cannot use NSPathUtilities to work on URLs with that
+     	  Foundation)
+     	* WEClientCapabilities.m: added Goliath as a known (WebDAV) user agent,
+     	  added -isRSSClient method
+     2004-10-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.3.54
+     	* WebDAV/SoObject+SoDAV.m: -isCollection now also checks whether
+     	  objects are contained in the toManyRelationshipKeys collection
+     	* WebDAV/SoObject+SoDAVQuery.m: -davChildKeys now returns the values of
+     	  both, -toOneRelationshipKeys and -toManyRelationshipKeys
+     2004-10-07  Helge Hess  <helge.hess@skyrix.com>
+     	* WebDAV/SoObjectWebDAVDispatcher.m: added more debug output (v4.3.53)
+     2004-10-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* Templates/WOxElemBuilder.m: moved WOxTagClassElemBuilder to own file
+     	  (v4.3.52)
+     2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGObjWeb.xcode: updated to current build version
+     2004-10-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/_WOComplexHyperlink.m: minor code cleanups (v4.3.51)
+added:   sope-appserver/NGObjWeb/sope-ngobjweb-defaults.5
+changed: sope-appserver/NGObjWeb/NGHttp/
+     2004-10-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGUrlFormCoder.m: print a warning if the deprecated
+     	  -stringByApplyingURLEncoding method is used instead of
+     	  -stringByEscapingURL, removed unused isURLSafeChar() function, fixed
+     	  decoding of form values containing umlauts on MacOSX 
+added:   sope-appserver/NGObjWeb/Templates/WOxTagClassElemBuilder.m
+added:   sope-appserver/NGObjWeb/SoObjects/SoActionInvocation.h
+added:   sope-appserver/NGObjWeb/SoObjects/SoActionInvocation.m
+added:   sope-appserver/samples/README
+added:   sope-appserver/samples/davpropget/common.h
+added:   sope-appserver/samples/TestPages/FormDisplay.wo
+added:   sope-appserver/samples/TestPages/FormDisplay.m
+added:   maintenance/mod_ngobjweb_slss8.spec
+added:   maintenance/mod_ngobjweb_sles9.spec
+added:   maintenance/mod_ngobjweb_suse82.spec
+added:   maintenance/ChangeLog
+added:   maintenance/mod_ngobjweb_mdk100.spec
+added:   maintenance/mod_ngobjweb_mdk101.spec
+added:   sope-ical/data
+added:   sope-ical/README
+added:   sope-ical/versitSaxDriver
+added:   sope-ical/ChangeLog
+removed: sope-ical/iCalSaxDriver
+changed: sope-ical/NGiCal/
+     2004-10-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGiCal.xcode: added iCalRenderer.[hm], bumped framework version
+     2004-10-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalRenderer.m: fixed some issue with Cocoa Foundation (v4.3.33)
+     	* v4.3.32
+     	* iCalEvent.m: added -vEvent method to produce an iCalendar
+     	  representation of an event
+     	* added iCalRenderer class based on the SOGo render by ZNeK
+     2004-10-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGiCal.xmap: added "categories" mapping (v4.3.31)
+     2004-10-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalEntityObject.[hm]: added categories property (v4.3.30)
+added:   sope-ical/NGiCal/iCalRenderer.h
+added:   sope-ical/NGiCal/iCalRenderer.m
+removed: debian/mod_ngobjweb.conf

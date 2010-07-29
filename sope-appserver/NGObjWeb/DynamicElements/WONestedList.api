@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WONestedList">
+  <binding name="action" passthrough="NO" defaults="Actions"/>
+  <binding name="list" required="YES" />
+  <binding name="item" required="YES" settable="YES" />
+  <binding name="value" required="YES" settable="YES" />
+  <binding name="sublist" required="YES" />
+  <binding name="action" passthrough="NO" defaults="Direct Actions"/>
+  <binding name="selection" />
+  <binding name="index" />
+  <binding name="level" />
+  <binding name="isOrdered" />
+  <binding name="prefix" />
+  <binding name="suffix" />
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <validation message="&apos;list&apos; must not be a constant">
+    <and>
+      <bound name="list"/>
+      <ungettable name="list"/>
+    </and>
+  </validation>
+</wo>

@@ -1,0 +1,25 @@
+# $Id: .htaccess,v 1.1 2004/06/14 14:59:38 helge Exp $
+
+Options FollowSymLinks Indexes Includes
+
+AddIcon /icons/image2.gif .gif
+AddIcon /icons/image1.gif .wox
+AddIcon /icons/dir.gif    ^^DIRECTORY^^
+
+AddDescription "SKYRiX XML template"    .wox
+AddDescription "SKYRiX WO template"     .wo
+AddDescription "GIF Image"              .gif
+AddDescription "Server Side Include"    .shtml
+AddDescription "SKYRiX Request Handler" .rqh
+
+FancyIndexing on
+IndexOptions  FoldersFirst
+
+#IconHeight 16
+#IconWidth  16
+
+SetSxApplication app1
+
+AddType    text/html              .shtml
+AddHandler server-parsed          .shtml
+AddType    skyrix/request-handler .rqh

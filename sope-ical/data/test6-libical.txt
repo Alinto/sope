@@ -1,0 +1,107 @@
+start document ..
+    ns-map: =http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt
+    <iCalendar (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+        <vtimezone (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <tzid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "Europe/Berlin"
+            </tzid>
+            <last-modified (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20031217T103412Z"
+            </last-modified>
+            <daylight (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "20030330T010000"
+                </dtstart>
+                <tzoffsetto (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+020000"
+                </tzoffsetto>
+                <tzoffsetfrom (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+000000"
+                </tzoffsetfrom>
+                <tzname (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "CEST"
+                </tzname>
+            </daylight>
+            <standard (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "20031026T030000"
+                </dtstart>
+                <tzoffsetto (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+010000"
+                </tzoffsetto>
+                <tzoffsetfrom (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+020000"
+                </tzoffsetfrom>
+                <tzname (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "CET"
+                </tzname>
+            </standard>
+            <daylight (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "20040328T030000"
+                </dtstart>
+                <tzoffsetto (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+020000"
+                </tzoffsetto>
+                <tzoffsetfrom (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "+010000"
+                </tzoffsetfrom>
+                <tzname (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                    "CEST"
+                </tzname>
+            </daylight>
+        </vtimezone>
+        <vevent (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) value="date">
+                "20030913"
+            </dtstart>
+            <dtend (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) value="date">
+                "20031004"
+            </dtend>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "Urlaub"
+            </summary>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "64B213D2-C2C7-11D7-94E9-00039340AF4A-RID"
+            </uid>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20030730T195305Z"
+            </dtstamp>
+        </vevent>
+        <vevent (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20030807T000000"
+            </dtstart>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "dsfsdjjjf"
+            </summary>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "C02440DC-D1C2-11D7-B4D3-00039340AF4A-RID"
+            </uid>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20030818T212734Z"
+            </dtstamp>
+            <duration (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "PT1H"
+            </duration>
+        </vevent>
+        <vevent (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) tzid="Europe/Berlin">
+                "20031217T160000"
+            </dtstart>
+            <summary (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "kjhjhjk"
+            </summary>
+            <uid (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "6DC63BEA-2FEA-11D8-A355-00039340AF4A-RID"
+            </uid>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20031217T103243Z"
+            </dtstamp>
+            <duration (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "PT1H"
+            </duration>
+        </vevent>
+    </iCalendar>
+    ns-unmap: 
+end document.

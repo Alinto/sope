@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="JSStringTable">
+  <binding name="identifier" />
+  <binding name="name"       />
+  <binding name="framework"  />
+  <binding name="languages"  />
+  <binding name="inplace" defaults="YES/NO" />
+</wo>

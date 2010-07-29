@@ -1,0 +1,26 @@
+{
+    EOModelVersion   = 1;
+    adaptorClassName = SQLiteAdaptor;
+    adaptorName      = SQLite3;
+
+    entities = (
+      { /* CREATE TABLE my_table ( pkey INT PRIMARY KEY ); */
+        name         = MyEntity;
+        externalName = my_table;
+        
+        className    = EOGenericRecord;
+        primaryKeyAttributes     = ( pkey );
+        attributesUsedForLocking = ( pkey );
+        classProperties          = ( pkey );
+        attributes = (
+                {
+                    valueClassName = NSNumber;
+                    columnName = pkey;
+                    name = pkey;
+                    valueType = i;
+                    externalType = INT; // t_id
+                },
+        );
+      }
+    );
+}

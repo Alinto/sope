@@ -1,0 +1,30 @@
+{
+	"statisticsDate" = "";
+
+	"instanceLoad" = "Instance Load Factor";
+	"instanceStartDate" = "Instance Start Date";
+
+	"totalResponseSize" = "Total Response Size (bytes)";
+	"averageResponseSize" = "Average Response Size (bytes)";
+	"smallestResponseSize" = "Smallest Response Size (bytes)";
+	"largestResponseSize" = "Largest Response Size (bytes)";
+
+	"pageResponseCount" = "Page Response Count";
+	"totalResponseCount" = "Total Response Count";
+
+	"totalDuration" = "Total Duration (seconds)";
+	"maximumDuration" = "Maximum Duration (seconds)";
+	"minimumDuration" = "Minimum Duration (seconds)";
+	"averageDuration" = "Average Duration (seconds)";
+
+	"instanceUptimeInHours" = "Instance Uptime (hours)";
+	"instanceUptime" = "Instance Uptime (seconds)";
+
+	"numberOfZippedResponses" = "Compressed Responses Count";
+	"totalZippedSize" = "Total Compressed Size (bytes)";
+
+	"responseFrequency" = "Response Frequency (percent)";
+	"pageDeliveryVolume" = "Page Delivery Volume (percent)";
+	"pageFrequency" = "Page Frequency (percent)";
+	"relativeTimeConsumption" = "Relative Time Consumption (percent)";
+}

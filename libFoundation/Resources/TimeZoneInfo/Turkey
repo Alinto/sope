@@ -1,0 +1,24 @@
+{
+    details = {
+	EET = {abbrev = EET; isDST = 0; offset = "+3:00:00"; };
+	"EET DST" = {abbrev = "EET DST"; isDST = 1; offset = "+4:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Mar 30 01:00:00 1986 GMT";
+	    endDate = "Sun Sep 24 01:00:00 1995 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/1:00:00"; detail = "EET DST"; },
+		{ date = "September/last Sunday/1:00:00"; detail = EET; }
+	    );
+	},
+	{
+	    startDate = "Sun Mar 31 01:00:00 1996 GMT";
+	    endDate = "Sun Oct 25 01:00:00 2037 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/1:00:00"; detail = "EET DST"; },
+		{ date = "October/last Sunday/1:00:00"; detail = EET; }
+	    );
+	}
+    );
+}

@@ -1,0 +1,469 @@
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* GNUmakefile.preamble: add machine-type to include path (eg i386) (v4.7.57)
+
+2008-02-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGCTextStream.m: fixed -writeString: on MacOS > 10.4, use
+	  -maximumLengthOfBytesUsingEncoding: (v4.7.56)
+
+2007-12-03  Helge Hess  <me@helgehess.eu>
+
+	* NGCTextStream.m: replaced usage of getCString on MacOS > 10.4
+	  (v4.7.55)
+
+	* NGTextStream.m: do not use exception handlers in combination with
+	  varargs on MacOS >10.5 (v4.7.54)
+
+2007-08-09  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGInternetSocketAddress.m: properly convert ports returned by
+	  getservbyname() to host byteorder prior calling -initWithPort:onHost:
+	  (fixes OGo bug #1896) (v4.7.53)
+
+2007-08-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGInternetSocketAddress.m: do not define USE_GETHOSTBYNAME_R on
+	  FreeBSD (although HAVE_GETHOSTBYNAME_R is defined). It appears
+	  gethostbyname() is thread safe on FreeBSD and there are 3 API
+	  versions of gethostbyname_r(), which isn't worth the hassle
+	  to check in this case. Changed code to consequently use
+	  USE_GETHOSTBYNAME_R. (v4.7.52)
+	  
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* 64bit fixes (v4.5.51)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.50)
+
+2005-08-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* reorganized inclusion to support frameworks (v4.5.49)
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGSocket.m (SockAddrLenType): fixed a Tiger warning (v4.5.48)
+
+2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.47
+
+	* fixed some gcc 4.0 warnings
+
+	* NGCTextStream.m, NGFileStream.m: do not flush input streams
+
+2004-11-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGStreams.xcode: properly link against libssl/libcrypto and set
+	  HAVE_OPENSSL=1, this enables SSL support on MacOSX
+	
+2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGStreams.xcode: updated to the current build version
+
+2004-09-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGInternetSocketAddress.m: _fillAddress() does not throw an
+	  exception, just returns it. Improved -description (v4.3.46)
+
+2004-09-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGByteBuffer.m, NGLocalSocketAddress.m, NGCharBuffer.m: fixed
+	  exception handling to be the same on all Foundation libraries
+	  (v4.3.45)
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+	  (v4.3.44)
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGStreams.xcode: various fixes for project settings
+
+2004-08-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.postamble: do not automatically run autoconf to update
+	  configure (the configure checked in should work fine on all 
+	  platforms) (v4.3.43)
+
+2004-08-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* added new Xcode project
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved to SOPE 4.3 (v4.3.42)
+
+2004-07-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLocalSocketAddress.m: fixed a gcc 3.4 warning (v4.2.41)
+
+2004-07-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added missing library lookup path to EOControl,
+	  this fixes OGo bug #820 (v4.2.40)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added prebinding (v4.2.39)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.38)
+
+2004-02-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: define OPENSSL_NO_KRB5 to keep Fedora and RH9
+	  happy on compilation (v4.2.37)
+
+2004-02-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: enable SSL per default (this adds OpenSSL-devel as a
+	  prerequisite unless you compile with ssl=no) (v4.2.36)
+
+2004-02-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGCTextStream.m, NGConcreteStreamFileHandle.m, NGFilterStream.m,
+	  NGFilterTextStream.m: fixed minor compilation warnings on OSX 
+	  (v4.2.35)
+
+2004-01-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.34
+
+	* NGDataStream.m: optimized processing for readonly streams (only call
+	  -length and -bytes on the data object in the beginning) - this gives
+	  us about 100ms when parsing 1000 IMAP4 headers (about 3-4% speedup)
+
+	* NGDataStream.m: added method to open a datastream in read-only mode
+	  even with NSMutableData objects (allows for optimizations in the
+	  stream)
+	
+2004-01-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.33
+
+	* NGBufferedStream.m, NGByteBuffer.m: avoid creation of buffered 
+	  stream if the source is an NGDataStream (no buffering needed ;-), do
+	  not create buffer streams when no source stream is passed in
+	
+	* NGDataStream.m: NGDataStream objects can now add as byte buffers on
+	  their own - which removes a lot of unncessary overhead when parsing
+	  NSData (this gives a speedup of about 10% when parsing IMAP4 mail
+	  headers)
+
+2004-01-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGDataStream.m: properly return last-exception (always returned
+	  nil!) - could have side-effects (v4.2.32)
+
+2004-01-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGDataStream.m: subminor cleanups (v4.2.31)
+
+2003-11-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* configure.in: patched to use GNUSTEP_MAKEFILES (as suggested by
+	  chunsj@embian.com) (v4.2.30)
+
+2003-11-09  Helge Hess  <helge@groove.local>
+
+	* NGActiveSocket.m, NGFilterStream.m, NGStreamCoder.m: minor tweaks
+	  for MacOSX (v4.2.29)
+
+2003-10-13  Helge Hess  <helge@opengroupware.org>
+
+	* GNUmakefile, GNUmakefile.postamble: removed NGStream+serialization,
+	  NGActiveSocket+serialization from compilation - those files should
+	  be removed completely as they aren't used anywhere (v4.2.28)
+
+2003-09-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLocalSocketAddress.m, NGLocalSocketDomain.m:
+          include <sys/types.h> if __FreeBSD__ is defined. This will
+	  currently affect FreeBSD 4.x only. (v4.2.27)
+
+2003-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* various fixes to warnings on MacOSX (v4.2.26)
+
+2003-09-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* configure.in: truncate target_os to "freebsd" on FreeBSD
+
+2003-09-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.25
+
+	* fixes for MacOSX
+
+	* GNUmakefile.postamble: do not generate config.h on MacOSX, use the
+	  preconfigured on in the macosx subdir
+
+2003-07-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* small cleanups to the included headers to improve gstep-base
+	  compatibility (v4.2.24)
+
+2003-07-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGGZipStream.m: removed dependency on zutil.h (v4.2.23)
+
+2003-05-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* updated MacOSX support, removed dependencies on FoundationExt
+	  (v4.2.22)
+
+2003-05-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGByteBuffer.m: fixed the last signed/unsigned warnings, smaller
+	  cleanups to -la: (v4.2.21)
+
+2003-05-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.20
+
+	* fixed some more gcc 3.3 (signed/unsigned) warnings
+
+	* NGInternetSocketAddress.m: some change ?
+
+	* removed several gcc 3.3 warnings
+
+2003-01-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGSocket.m: allocate sockets in the NGInternetSocketDomain by default
+	  (v4.2.19)
+
+2003-01-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* replaced some RETAIN macros (v4.2.18)
+
+2003-01-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGPassiveSocket.m, NGInternetSocketDomain.m: small code cleanups 
+	  (v4.2.17)
+	
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+	
+	* moved testsock.m to skyrix-core-42/samples/
+
+	* GNUmakefile: added optional SSL activation (using ssl=yes)
+
+	* v4.2.16
+
+	* changes for improved compilation on MacOSX, replaced RETAIN macros
+	  with methods
+
+Mon Dec 30 13:51:15 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.15
+
+	* NGStreams/NGStreams.h: do not include NGStream+serialization.h
+
+	* NGStreams/NGNet.h: do not include NGActiveSocket+serialization.h
+
+	* NGByteBuffer.m: fixed a gcc 3.2 warning
+
+Fri Dec 27 10:50:56 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: removed NGStreamCoder from library
+
+	* testsock.m: rewritten to use a tool class
+
+	* NGStreamCoder.m: fixed some gcc 3.2 compiler warnings
+
+	* NGStreams/NGStreams.h: does not include NGStreamCoder.h
+	
+	* fixed Copyright headers in most files (v4.2.14)
+
+2002-11-01  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGDescriptorFunctions.m: added some debugging/logging (new default
+	  NGLogDescriptorRecv) (v4.2.13)
+	
+2002-09-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* testsock.m: added various tests
+
+	* NGLockingStream.m, NGDataStream.m, NGFileStream.m, NGByteBuffer.m: 
+	  removed compilation warnings
+        
+	* NGCTextStream.m: do not create a text stream if the source stream is
+          nil ...
+          
+        * started support for OpenSSL sockets (v4.2.12)
+	
+2002-08-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGInternetSocketAddress.m: fixed a compilation bug on hosts which
+	  are have gethostbyaddr_r() but are not Linux (eg Solaris) (v4.2.11)
+	
+Thu Aug 29 16:46:25 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* v4.2.10
+
+	* NGBase64Stream.m, NGConcreteStreamFileHandle.m, NGStream.m: 
+	  fixed 'char-buffer in Exception Handler scope' bug
+
+2002-08-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* some tweaks to support OSX Jaguar (v4.2.9)
+	
+2002-08-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGFileStream.m: do not log, if the filestream is closed on
+	  deallocation (v4.2.8)
+	
+Wed Aug 14 09:49:05 2002  Bjoern Stierand  <bjoern@skyrix.com>
+	
+	* NGNetUtilities.m (NGSocketAddressFromString): allows definition
+	  of kernel bound addresses using 'host:auto' or '*:auto'
+	  (v4.2.7)
+
+2002-07-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.6 [extracted from cvs]
+
+	* fixed a major retain cycle between stream exceptions and streams
+	  (lastException ptr). In the case of datastreams this lead to huge
+	  memory consumption if the stream reached EOF (the datastream was
+	  never released and the whole data kept in memory, most notably this
+	  resulted in a leaking MIME parser)
+	  => fixes SuSE bug 16845
+	
+	* added DESIGN document (small ;-)
+
+Fri Jun 26 10:40:05 2002  Helge Hess <hh@skyrix.com>
+
+	* NGLocalSocketAddress.h: small fix for MacOSX
+
+Fri May 31 16:08:56 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	*  NGCTextStream.m, NGByteBuffer.m, NGActiveSocket.m, NGBufferedStream.m: remove NSLogs
+	*  NGDataStream.*: add exception-handling (raise version)
+	*  NGStreamExceptions.*: add +exceptionWithStream methods
+
+Tue May 21 12:26:03 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGActiveSocket.m: fixed a small exception related problem with
+	  +socketConnectedToAddress: ...
+	  v4.2.5 [extracted from cvs]
+
+Fri May 17 14:49:21 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NGGZipStream from NGZlib
+
+Mon Apr 29 13:46:11 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGByteBuffer.m: modified to support the new exception-less IO ...
+
+Tue Apr 23 12:32:23 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGActiveSocket.m: do not throw exception if connect failed (rather
+	  set the last exception ...)
+
+Thu Mar 14 13:39:10 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGActiveSocket.m: marks itself as shut down, if the errno says so
+
+	* NGStream.m(NGSafe...): fixed exception handling
+
+	* NGActiveSocket.m(safeWriteBytes:length:): added IMP cache, fixed
+	  exception handling bug ...
+
+	* NGBufferedStream.m: added flush buffer size check
+
+Wed Mar 13 17:24:47 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGCTextStream.m: added new exception handling
+
+	* NGTextStream.m: added +version, added lastException
+
+	* NGActiveSocket.m: does not throw exceptions in -read.. and -write..
+
+Mon Mar  4 11:05:54 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGActiveSocket.m: throws less exceptions (uses -lastException,retval)
+
+Mon Feb 25 18:43:13 2002  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGBufferedStream.m: checks return codes
+	
+Thu Feb 21 12:04:16 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGStreamExceptions.m: added -raiseOnStream:...
+
+Wed Feb 20 13:30:44 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* everything reworked not to throw exceptions ...
+
+Fri Dec  7 14:35:47 2001  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGByteBuffer.m: add profiling
+
+Mon Oct  8 17:47:01 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGLocalSocketAddress.m, NGPassiveSocket.m: better Linux-bug 
+	  support ;-) (local sock addresses with length=2, as given by
+	  accept())
+
+Thu Oct  4 11:15:34 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGInternetSocketAddress.m: fixed recursion bug
+
+Thu Aug  9 14:14:17 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed all NGUrl related stuff
+
+Thu Aug  9 14:00:04 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved URL escaping to NGExtensions
+
+	* NGFileStream.m: added -initWithPath:
+
+Tue May 15 19:05:45 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGActiveSocket.m: added max-retry count (20) for writeBytes: with 
+	  errno==0
+
+Wed May  9 19:22:43 2001  Joerg Grimm  <joerg@trex2>
+
+	* NGActiveSocket.m: check for errno=0 if writeResult<0
+
+Mon Feb 26 11:13:12 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGActiveSocket.m: added more errno=0-on-fail checking
+
+Fri Feb 23 21:40:40 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGActiveSocket.m: check for errno=0 if result<0
+
+	* NGDescriptorFunctions.m: check for errno=0 if result<0
+
+Tue Jan 30 19:50:13 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGUrl.m: modified URL encoding/decoding stuff to use unsigned char
+
+Mon Sep 18 10:47:41 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGCTextStream.m: fixed bug in -writeString
+
+Tue Jun 13 19:40:41 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGUrl.m, NGFileUrl.m: doesn't use stack-based buffers anymore
+
+Fri Jun  9 17:38:27 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* GNUmakefile: added -Wall
+
+Tue Feb 29 17:08:45 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* MOF3 import
+

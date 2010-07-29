@@ -1,0 +1,11 @@
+# compiler flags
+
+ADDITIONAL_CPPFLAGS += -pipe -Wall
+ADDITIONAL_CPPFLAGS += -DCOMPILING_NGOBJWEB=1
+
+WOHttpAdaptor_INCLUDE_DIRS += \
+	-I.. -I. -I../..			\
+	-I../../../sope-core			\
+	-I../../../sope-core/NGStreams		\
+	-I../../../sope-core/NGExtensions	\
+	-I../../../sope-mime

@@ -1,0 +1,17 @@
+last change:
+20040608?
+
+How to start
+============
+
+First you need to tweek httpd.conf to reflect you pathes ...
+Important: you probably need to *install* the bundle before it works,
+Apache doesn't search for the bundle in the current directory ...
+
+The easiest way to start it is to invoke:
+
+# httpd -X -f $PWD/httpd.conf
+
+The -X option starts Apache in single-process mode (no children are
+forked) and the -f specifies the local server config file. Note that
+the server config file needs to be specified as an absolute path.

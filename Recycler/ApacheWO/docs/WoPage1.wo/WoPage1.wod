@@ -1,0 +1,18 @@
+Frame: Frame {
+  title = name;
+}
+
+AddAB: WOString {
+  value = addAB;
+}
+
+a: WOString {
+  value = a;
+}
+b: WOString {
+  value = b;
+}
+
+Page2: WOHyperlink {
+  action = gotoPage2;
+}

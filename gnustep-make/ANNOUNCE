@@ -1,0 +1,37 @@
+Announcement
+************
+
+The GNUstep Makefile Package version 1.13.0 is now available.
+
+What is the GNUstep makefile package?
+=====================================
+
+The makefile package is a simple, powerful and extensible way to write
+makefiles for a GNUstep-based project.  It allows the user to write a
+project without having to deal with the complex issues associated with
+configuration, building, installation, and packaging.  It also allows
+the user to easily create cross-compiled binaries.
+
+Changes in version `1.13.0'
+===========================
+
+Debug libraries now have the same name as normal libraries (i.e. no "_d"
+suffix). This reduces the possiblity of multiple libraries being loaded
+into the same executable.
+
+   Added dragonfly OS to make targets.
+
+   Spaces and backslashes are no longer allowed in paths used by the
+make package (e.g. with Windows OS). The libraries can still use native
+paths.
+
+Obtaining gnustep-make
+======================
+
+You can get the gstep-make-1.13.0.tar.gz distribution file at
+<ftp://ftp.gnustep.org/pub/gnustep/core>
+
+   Please log bug reports on the GNUstep project page
+<http://savannah.gnu.org/bugs/?group=gnustep> or send bug reports to
+<bug-gnustep@gnu.org>.
+

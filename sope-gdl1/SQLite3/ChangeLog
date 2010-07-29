@@ -1,0 +1,89 @@
+2006-10-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* SQLite3.xcodeproj: link against the system version of sqlite3 rather
+	  than a custom version in /usr/local.
+
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.21)
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added OSX framework compilation (v4.5.20)
+
+2005-08-08  Helge Hess  <helge@shire.in.skyrix.com>
+
+	* GNUmakefile.preamble: fixed pathes for inline-compilation (v4.5.19)
+
+2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed gcc 4.0 warnings (char signedness) (v4.5.18)
+
+2005-04-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.17
+
+	* NSString+SQLiteVal.m: fixed a gcc 3.4.3 warning
+
+	* SQLiteChannel.m: changed for -describeResults: API
+
+2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SQLiteChannel.m: bumped max connection count from 15 to 150 (v4.5.16)
+
+2005-04-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SQLiteChannel.h, SQLiteAdaptor.m: removed unused ivars (v4.5.15)
+
+2005-02-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSString+SQLiteVal.m, NSCalendarDate+SQLiteVal.m: improved SQL value
+	  generation (v4.5.14)
+
+	* v4.5.13
+
+	* NSString+SQLiteVal.m: fixed a warning on MacOSX
+
+	* NSCalendarDate+SQLiteVal.m: added some support for creating
+	  NSCalendarDate's from SQLite base types
+	
+	* SQLiteValues.m: fixed some MacOSX compile warning
+
+	* GNUmakefile.preamble: added missing bundle dependency on GDLAccess
+
+2005-02-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.12
+
+	* common.h: added #include of <NGExtensions/NGExtensions.h> for
+	  definitions of required macros
+
+	* SQLite3.xcode: added
+
+	* SQLite3-Info.plist: added
+
+2005-02-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.11
+
+	* SQLiteChannel.m: fixed an issue with fetching empty tables
+
+	* SQLiteChannel.m: properly generate the trailing ';' for SQL
+	  expressions
+
+	* SQLiteAdaptor.m: added special url=>condict handling (the whole URL
+	  path is taken as the database name)
+
+2005-02-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* SQLiteChannel.m: implemented -describeResults (v4.5.10)
+
+	* most SQL operations based on models are implemented now (v4.5.9)
+	
+	* made gdltest work again
+
+	* added work on the SQLite3 adaptor to SOPE 4.5 repository
+
+	* removed some PostgreSQL stuff
+
+	* created ChangeLog

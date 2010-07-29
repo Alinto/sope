@@ -1,0 +1,213 @@
+NGRuleEngine
+============
+
+This is a rule engine inspired by the "BDRuleEngine" available from 
+bDistributed.com (www.bdistributed.com) which in turn is inspired by the
+direct to web framework which is part of WebObjects.
+
+We have choosen different class names, so that NGExtensions can be used
+together with the BDRuleEngine framework.
+
+It's a nice application of EOControl qualifiers and key-value coding to
+implement a simple rule evaluation system. It consists of just five small
+classes:
+  NGRuleAssignment
+  NGRuleKeyAssignment
+  NGRule
+  NGRuleContext
+  NSRuleModel
+
+
+How does it work?
+=================
+
+The rule engine is an evaluator for a set of rules which map to values. It can
+be used to make all kinds of actions configurable without being required to
+write code.
+
+Example Ruleset:
+  (
+    "context.soRequestType='WebDAV'  => renderer = 'SoWebDAVRenderer' ; high",
+    "context.soRequestType='XML-RPC' => renderer = 'SoXmlRpcRenderer' ; high",
+    "context.soRequestType='SOAP'    => renderer = 'SoSOAPRenderer' ;   high",
+    "context.soRequestType='WCAP'    => renderer = 'SoWCAPRenderer' ;   high",
+    "*true* => renderer = 'SoDefaultRenderer' ; fallback",
+  )
+
+This is a rule from SOPE which selects the render class for SoObjects. As you
+can see a rule has a left hand side, eg:
+
+  context.soRequestType='WebDAV'
+
+and a right hand side, eg:
+
+  renderer = 'SoWebDAVRenderer'
+
+further control specifiers like the priority of the rule in the set (high) can
+be attached.
+
+The left hand side is just a regular EOQualifier which is evaluated against
+a rule context (an object of the NGRuleContext class). A rule context is the
+entry object for all rule processing.
+
+To configure rule evaluation, you need to set some variables in the context,
+those variables are basically the "parameters" of the rule. Eg in the above
+case we use:
+  [self->dispatcherRules reset];
+  [self->dispatcherRules takeValue:_rq           forKey:@"request"];
+  [self->dispatcherRules takeValue:[_rq headers] forKey:@"headers"];
+  [self->dispatcherRules takeValue:[_rq method]  forKey:@"method"];
+  [self->dispatcherRules takeValue:_ctx          forKey:@"context"];
+
+'dispatcherRules' is the NGRuleContext object. Because we reuse the same
+context for each WORequest, we need to 'reset' the context to remove all old
+information.
+
+As you can see the rule context gets set the 'context' variable which is used
+in the qualifier - "context.soRequestType='WebDAV'". If this left hand side
+(LHS) qualifier evaluates to true, the RHS will be run.
+
+
+So lets get to the right hand side. It is the so called "Assignment" and is
+actually someone similiar to a WOAssociation. The actual operation is triggered
+by some subclass of NGRuleAssignment in the -fireInContext: method.
+
+In the above example the RHS is
+
+  renderer = 'SoWebDAVRenderer'
+
+this says that if the rule context is asked for a value of 'renderer', the
+assignment will return the 'SoWebDAVRenderer' string constant.
+
+Note: the assignment does _not_ set the value in the rule context.
+TODO: should it set the value in the context? ;-)
+
+You can have as many assignment as you like. Assignments are only run if the
+user asks for a key which is set by the assignment!
+
+
+Now that we have the basics, how do we use the rule context? Here is a small
+example:
+
+  NGRuleModel   *model;
+  NGRuleContext *context;
+  
+  /* setup */
+  model   = [[NGRuleModel alloc] initWithContentsOfFile:@"myrules.plist"];
+  context = [NGRuleContext ruleContextWithModel:model];
+
+  /* fill in parameters */
+  [context takeValue:@"10" forKey:@"age"];
+
+  /* query values that depend on the parameter */
+  [context valueForKey:@"color"];
+
+A sample myrules.plist:
+
+  ( "age < 5 => color = 'white'", "age > 4 => color = 'green'" )
+
+This would return 'green' in the above example (because age = 10 is >4).
+
+Note that the cool aspect of the rule context is that the rule evaluation is
+queried using regular key/value coding methods! This way you can easily bind
+values to SOPE templates, eg:
+
+  TableCell: WOGenericContainer {
+    elementName = "td";
+    bgcolor     = rules.color;
+  }
+
+This assumes that the component returns a rule context in the 'rules' method.
+A component setup like this can be easily customized just by changing the rules
+avoiding the requirement to hack code.
+
+
+Another neat application for rules is the selection of the "next page", that
+is, to control the flow of a web application.
+Consider a ruleset like this:
+
+  ( "document.status = 'saved'    => pageName = 'MyReviewPage'",
+    "document.status = 'created'  => pageName = 'MyReviewPage'",
+    "document.status = 'reviewed' => pageName = 'MyPublishPage'" )
+
+and code like this:
+
+  - (id)showNextPage {
+    return [self pageWithName:[rules valueForKey:@"pageName"]];
+  }
+
+This code will automatically determine the correct page to be shown depending
+on the rules and the state of an object. Eg if you later decide that the
+publish page should also been selected for saved docuents which are green, just
+enhance the rule to:
+
+  ( "document.status = 'saved'    => pageName = 'MyReviewPage'",
+    "document.status = 'created'  => pageName = 'MyReviewPage'",
+    "document.status = 'reviewed' => pageName = 'MyPublishPage'",
+    "document.status = 'saved' AND document.color = 'green' 
+     => pageName = 'MyPublishPage'; priority = high",
+  )
+
+The rule context has a neat shortcut method in case you want to store rules in
+the defaults system:
+  
+  context = [NGRuleContext ruleContextWithModelInUserDefault:@"MyRules"];
+
+Since rules are often used to customize the behaviour of an application, this
+is quite useful.
+
+
+Another shortcut method you can use is the evaluation of a ruleset for a set
+of objects. Eg if you want to get the color of a set of objects with the 'age'
+property, you can run:
+  
+  colors = [rules valuesForKeyPath:@"color"
+                  takingSuccessiveValues:ageObjects
+                  forKey:@"document"];
+
+This will walk over the 'ageObjects' array and perform a
+
+  [rules takeValue:ageObject forKey:@"document"]
+
+for each object and add the result of
+
+  [rules valueForKeyPath:@"color"]
+
+to the result array.
+
+
+Finally remember that assignment results do not need to be base values, they
+can also be complex objects, eg:
+
+  [rules takeValue:bossObject forKey:@"boss"];
+  [rules takeValue:secretary  forKey:@"secretary"];
+
+  contactEMail = [rules valuesForKeyPath:@"contact.email"
+                        takingSuccessiveValues:mailObjects
+                        forKey:@"mail"];
+
+with the ruleset:
+
+  ( "mail.priority = 'high'   => contact = boss",
+    "mail.priority = 'normal' => contact = secretary",
+    "mail.priority = 'low'    => contact = secretary" )
+
+Note that another speciality with the above ruleset is that it uses
+NGRuleKeyAssignment assignments, that is, it retrieves the value of the
+assignment from the rule context (the boss or secretary objects previously
+set as parameters).
+
+
+Priorities
+==========
+
+You should normally use one of the predefined priorities:
+  - important (override)
+  - very high
+  - high
+  - normal/default
+  - low
+  - very low
+  - fallback
+If you need fine-grained control, you can use priority numbers which should
+be between 50 (low) and 150 (high).

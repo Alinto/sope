@@ -1,0 +1,374 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AD50D60307C9EC0B00C9F415 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65F7406DA3C51007161CA /* Foundation.framework */; };
+		AD50D67107C9EC1500C9F415 /* SaxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE606DA3CDE007161CA /* SaxObjC.framework */; };
+		AD50D68907C9EC1D00C9F415 /* DOM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE506DA3CDE007161CA /* DOM.framework */; };
+		AD50D6A807C9EC2000C9F415 /* XmlRpc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE706DA3CDE007161CA /* XmlRpc.framework */; };
+		AD50D6AF07C9EC2A00C9F415 /* EOControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD6610D06DA3D1F007161CA /* EOControl.framework */; };
+		AD50D6C207C9EC2D00C9F415 /* NGExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0142CE06E21A3D000910D8 /* NGExtensions.framework */; };
+		AD50D72307C9EC9900C9F415 /* GDLAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD50D72207C9EC9900C9F415 /* GDLAccess.framework */; };
+		AD50D72807C9ECD600C9F415 /* COPYING.LIB in Resources */ = {isa = PBXBuildFile; fileRef = AD50D72707C9ECD600C9F415 /* COPYING.LIB */; };
+		AD50D74507C9ED1E00C9F415 /* EOAttribute+SQLite.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D72D07C9ED1E00C9F415 /* EOAttribute+SQLite.m */; };
+		AD50D74607C9ED1E00C9F415 /* NSCalendarDate+SQLiteVal.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D72E07C9ED1E00C9F415 /* NSCalendarDate+SQLiteVal.m */; };
+		AD50D74707C9ED1E00C9F415 /* NSData+SQLiteVal.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D72F07C9ED1E00C9F415 /* NSData+SQLiteVal.m */; };
+		AD50D74807C9ED1E00C9F415 /* NSNumber+SQLiteVal.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73007C9ED1E00C9F415 /* NSNumber+SQLiteVal.m */; };
+		AD50D74A07C9ED1E00C9F415 /* NSString+SQLite.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73207C9ED1E00C9F415 /* NSString+SQLite.m */; };
+		AD50D74B07C9ED1E00C9F415 /* NSString+SQLiteVal.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73307C9ED1E00C9F415 /* NSString+SQLiteVal.m */; };
+		AD50D74D07C9ED1E00C9F415 /* SQLiteAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73507C9ED1E00C9F415 /* SQLiteAdaptor.m */; };
+		AD50D74F07C9ED1E00C9F415 /* SQLiteChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73707C9ED1E00C9F415 /* SQLiteChannel.m */; };
+		AD50D75107C9ED1E00C9F415 /* SQLiteChannel+Model.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73907C9ED1E00C9F415 /* SQLiteChannel+Model.m */; };
+		AD50D75307C9ED1E00C9F415 /* SQLiteContext.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73B07C9ED1E00C9F415 /* SQLiteContext.m */; };
+		AD50D75507C9ED1E00C9F415 /* SQLiteException.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73D07C9ED1E00C9F415 /* SQLiteException.m */; };
+		AD50D75707C9ED1E00C9F415 /* SQLiteExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D73F07C9ED1E00C9F415 /* SQLiteExpression.m */; };
+		AD50D75907C9ED1E00C9F415 /* SQLiteValues.m in Sources */ = {isa = PBXBuildFile; fileRef = AD50D74107C9ED1E00C9F415 /* SQLiteValues.m */; };
+		AD50D75B07C9ED9B00C9F415 /* README in Resources */ = {isa = PBXBuildFile; fileRef = AD013B8706E20AC5000910D8 /* README */; };
+		ADFF76200AF531A600AC953A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ADFF761F0AF531A600AC953A /* libsqlite3.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AD013B8706E20AC5000910D8 /* README */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		AD013C2106E20D18000910D8 /* NGStreams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGStreams.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGStreams.framework"; sourceTree = "<absolute>"; };
+		AD0142CE06E21A3D000910D8 /* NGExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGExtensions.framework"; sourceTree = "<absolute>"; };
+		AD50D60207C9EB8500C9F415 /* SQLite3.gdladaptor */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SQLite3.gdladaptor; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD50D72207C9EC9900C9F415 /* GDLAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GDLAccess.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/GDLAccess.framework"; sourceTree = "<absolute>"; };
+		AD50D72707C9ECD600C9F415 /* COPYING.LIB */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYING.LIB; sourceTree = "<group>"; };
+		AD50D72907C9ECE700C9F415 /* fhs.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = fhs.make; sourceTree = "<group>"; tabWidth = 8; };
+		AD50D72B07C9ED1E00C9F415 /* condict.plist */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.plist; path = condict.plist; sourceTree = "<group>"; };
+		AD50D72C07C9ED1E00C9F415 /* EOAttribute+SQLite.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = "EOAttribute+SQLite.h"; sourceTree = "<group>"; };
+		AD50D72D07C9ED1E00C9F415 /* EOAttribute+SQLite.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = "EOAttribute+SQLite.m"; sourceTree = "<group>"; };
+		AD50D72E07C9ED1E00C9F415 /* NSCalendarDate+SQLiteVal.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = "NSCalendarDate+SQLiteVal.m"; sourceTree = "<group>"; };
+		AD50D72F07C9ED1E00C9F415 /* NSData+SQLiteVal.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = "NSData+SQLiteVal.m"; sourceTree = "<group>"; };
+		AD50D73007C9ED1E00C9F415 /* NSNumber+SQLiteVal.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+SQLiteVal.m"; sourceTree = "<group>"; };
+		AD50D73107C9ED1E00C9F415 /* NSString+SQLite.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = "NSString+SQLite.h"; sourceTree = "<group>"; };
+		AD50D73207C9ED1E00C9F415 /* NSString+SQLite.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = "NSString+SQLite.m"; sourceTree = "<group>"; };
+		AD50D73307C9ED1E00C9F415 /* NSString+SQLiteVal.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = "NSString+SQLiteVal.m"; sourceTree = "<group>"; };
+		AD50D73407C9ED1E00C9F415 /* SQLiteAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SQLiteAdaptor.h; sourceTree = "<group>"; };
+		AD50D73507C9ED1E00C9F415 /* SQLiteAdaptor.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = SQLiteAdaptor.m; sourceTree = "<group>"; };
+		AD50D73607C9ED1E00C9F415 /* SQLiteChannel.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SQLiteChannel.h; sourceTree = "<group>"; };
+		AD50D73707C9ED1E00C9F415 /* SQLiteChannel.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = SQLiteChannel.m; sourceTree = "<group>"; };
+		AD50D73807C9ED1E00C9F415 /* SQLiteChannel+Model.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = "SQLiteChannel+Model.h"; sourceTree = "<group>"; };
+		AD50D73907C9ED1E00C9F415 /* SQLiteChannel+Model.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = "SQLiteChannel+Model.m"; sourceTree = "<group>"; };
+		AD50D73A07C9ED1E00C9F415 /* SQLiteContext.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SQLiteContext.h; sourceTree = "<group>"; };
+		AD50D73B07C9ED1E00C9F415 /* SQLiteContext.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = SQLiteContext.m; sourceTree = "<group>"; };
+		AD50D73C07C9ED1E00C9F415 /* SQLiteException.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SQLiteException.h; sourceTree = "<group>"; };
+		AD50D73D07C9ED1E00C9F415 /* SQLiteException.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = SQLiteException.m; sourceTree = "<group>"; };
+		AD50D73E07C9ED1E00C9F415 /* SQLiteExpression.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SQLiteExpression.h; sourceTree = "<group>"; };
+		AD50D73F07C9ED1E00C9F415 /* SQLiteExpression.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = SQLiteExpression.m; sourceTree = "<group>"; };
+		AD50D74007C9ED1E00C9F415 /* SQLiteValues.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = SQLiteValues.h; sourceTree = "<group>"; };
+		AD50D74107C9ED1E00C9F415 /* SQLiteValues.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = SQLiteValues.m; sourceTree = "<group>"; };
+		AD50D74207C9ED1E00C9F415 /* test.eomodel */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = test.eomodel; sourceTree = "<group>"; };
+		AD77EDF50C4F6D460018A131 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		AD77EDF60C4F6D460018A131 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		AD77EDF70C4F6D460018A131 /* Wrapper.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Wrapper.xcconfig; sourceTree = "<group>"; };
+		ADD65C6F06DA343C007161CA /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 8; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		ADD65C7006DA343C007161CA /* common.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		ADD65C7406DA343C007161CA /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65C7506DA343C007161CA /* GNUmakefile.preamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile.preamble; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65C8B06DA343C007161CA /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65D5A06DA372D007161CA /* SQLite3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "SQLite3-Info.plist"; sourceTree = "<group>"; };
+		ADD65F7406DA3C51007161CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		ADD65FE506DA3CDE007161CA /* DOM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DOM.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/DOM.framework"; sourceTree = "<absolute>"; };
+		ADD65FE606DA3CDE007161CA /* SaxObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SaxObjC.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SaxObjC.framework"; sourceTree = "<absolute>"; };
+		ADD65FE706DA3CDE007161CA /* XmlRpc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XmlRpc.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/XmlRpc.framework"; sourceTree = "<absolute>"; };
+		ADD6610D06DA3D1F007161CA /* EOControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EOControl.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/EOControl.framework"; sourceTree = "<absolute>"; };
+		ADFF761F0AF531A600AC953A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AD50D60007C9EB8500C9F415 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD50D60307C9EC0B00C9F415 /* Foundation.framework in Frameworks */,
+				AD50D67107C9EC1500C9F415 /* SaxObjC.framework in Frameworks */,
+				AD50D68907C9EC1D00C9F415 /* DOM.framework in Frameworks */,
+				AD50D6A807C9EC2000C9F415 /* XmlRpc.framework in Frameworks */,
+				AD50D6AF07C9EC2A00C9F415 /* EOControl.framework in Frameworks */,
+				AD50D6C207C9EC2D00C9F415 /* NGExtensions.framework in Frameworks */,
+				AD50D72307C9EC9900C9F415 /* GDLAccess.framework in Frameworks */,
+				ADFF76200AF531A600AC953A /* libsqlite3.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD013C1806E20C17000910D8 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				AD50D73407C9ED1E00C9F415 /* SQLiteAdaptor.h */,
+				AD50D73607C9ED1E00C9F415 /* SQLiteChannel.h */,
+				AD50D73807C9ED1E00C9F415 /* SQLiteChannel+Model.h */,
+				AD50D73A07C9ED1E00C9F415 /* SQLiteContext.h */,
+				AD50D73C07C9ED1E00C9F415 /* SQLiteException.h */,
+				AD50D73E07C9ED1E00C9F415 /* SQLiteExpression.h */,
+				AD50D74007C9ED1E00C9F415 /* SQLiteValues.h */,
+				AD50D72C07C9ED1E00C9F415 /* EOAttribute+SQLite.h */,
+				AD50D73107C9ED1E00C9F415 /* NSString+SQLite.h */,
+			);
+			fileEncoding = 5;
+			indentWidth = 2;
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		AD013C9E06E20E99000910D8 /* sope-core */ = {
+			isa = PBXGroup;
+			children = (
+				ADD6610D06DA3D1F007161CA /* EOControl.framework */,
+				AD0142CE06E21A3D000910D8 /* NGExtensions.framework */,
+				AD013C2106E20D18000910D8 /* NGStreams.framework */,
+			);
+			name = "sope-core";
+			sourceTree = "<group>";
+		};
+		AD50D72107C9EC6000C9F415 /* sope-gdl1 */ = {
+			isa = PBXGroup;
+			children = (
+				AD50D72207C9EC9900C9F415 /* GDLAccess.framework */,
+			);
+			name = "sope-gdl1";
+			sourceTree = "<group>";
+		};
+		AD77EDF40C4F6D460018A131 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				AD77EDF50C4F6D460018A131 /* Common.xcconfig */,
+				AD77EDF60C4F6D460018A131 /* Development.xcconfig */,
+				AD77EDF70C4F6D460018A131 /* Wrapper.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../xcconfig;
+			sourceTree = "<group>";
+		};
+		ADD65B6606DA32D6007161CA = {
+			isa = PBXGroup;
+			children = (
+				AD013B8706E20AC5000910D8 /* README */,
+				AD50D72707C9ECD600C9F415 /* COPYING.LIB */,
+				ADD65C6F06DA343C007161CA /* ChangeLog */,
+				ADD65C8B06DA343C007161CA /* Version */,
+				ADD65C8E06DA344C007161CA /* Makefiles */,
+				AD013C1806E20C17000910D8 /* Headers */,
+				ADD65C9406DA34FF007161CA /* Classes */,
+				ADD65D5D06DA37C7007161CA /* Resources */,
+				ADD65D5906DA372D007161CA /* Products */,
+				ADD65F7306DA3C02007161CA /* Linked Frameworks */,
+				AD77EDF40C4F6D460018A131 /* xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		ADD65C8E06DA344C007161CA /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65C7406DA343C007161CA /* GNUmakefile */,
+				ADD65C7506DA343C007161CA /* GNUmakefile.preamble */,
+				AD50D72907C9ECE700C9F415 /* fhs.make */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADD65C9406DA34FF007161CA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65C7006DA343C007161CA /* common.h */,
+				AD50D73507C9ED1E00C9F415 /* SQLiteAdaptor.m */,
+				AD50D73707C9ED1E00C9F415 /* SQLiteChannel.m */,
+				AD50D73907C9ED1E00C9F415 /* SQLiteChannel+Model.m */,
+				AD50D73B07C9ED1E00C9F415 /* SQLiteContext.m */,
+				AD50D73D07C9ED1E00C9F415 /* SQLiteException.m */,
+				AD50D73F07C9ED1E00C9F415 /* SQLiteExpression.m */,
+				AD50D74107C9ED1E00C9F415 /* SQLiteValues.m */,
+				AD50D72D07C9ED1E00C9F415 /* EOAttribute+SQLite.m */,
+				AD50D72E07C9ED1E00C9F415 /* NSCalendarDate+SQLiteVal.m */,
+				AD50D72F07C9ED1E00C9F415 /* NSData+SQLiteVal.m */,
+				AD50D73007C9ED1E00C9F415 /* NSNumber+SQLiteVal.m */,
+				AD50D73207C9ED1E00C9F415 /* NSString+SQLite.m */,
+				AD50D73307C9ED1E00C9F415 /* NSString+SQLiteVal.m */,
+			);
+			fileEncoding = 5;
+			indentWidth = 2;
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		ADD65D5906DA372D007161CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD50D60207C9EB8500C9F415 /* SQLite3.gdladaptor */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADD65D5D06DA37C7007161CA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65D5A06DA372D007161CA /* SQLite3-Info.plist */,
+				AD50D72B07C9ED1E00C9F415 /* condict.plist */,
+				AD50D74207C9ED1E00C9F415 /* test.eomodel */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		ADD65F7306DA3C02007161CA /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65F7406DA3C51007161CA /* Foundation.framework */,
+				ADFF761F0AF531A600AC953A /* libsqlite3.dylib */,
+				ADD6603106DA3CE2007161CA /* sope-xml */,
+				AD013C9E06E20E99000910D8 /* sope-core */,
+				AD50D72107C9EC6000C9F415 /* sope-gdl1 */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		ADD6603106DA3CE2007161CA /* sope-xml */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65FE506DA3CDE007161CA /* DOM.framework */,
+				ADD65FE606DA3CDE007161CA /* SaxObjC.framework */,
+				ADD65FE706DA3CDE007161CA /* XmlRpc.framework */,
+			);
+			name = "sope-xml";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AD50D60107C9EB8500C9F415 /* SQLite3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA07A050857392D00993825 /* Build configuration list for PBXNativeTarget "SQLite3" */;
+			buildPhases = (
+				AD50D5FE07C9EB8500C9F415 /* Resources */,
+				AD50D5FF07C9EB8500C9F415 /* Sources */,
+				AD50D60007C9EB8500C9F415 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SQLite3;
+			productName = SQLite3;
+			productReference = AD50D60207C9EB8500C9F415 /* SQLite3.gdladaptor */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADD65B6A06DA32D6007161CA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA07A090857392D00993825 /* Build configuration list for PBXProject "SQLite3" */;
+			hasScannedForEncodings = 0;
+			mainGroup = ADD65B6606DA32D6007161CA;
+			productRefGroup = ADD65D5906DA372D007161CA /* Products */;
+			projectDirPath = "";
+			targets = (
+				AD50D60107C9EB8500C9F415 /* SQLite3 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AD50D5FE07C9EB8500C9F415 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD50D75B07C9ED9B00C9F415 /* README in Resources */,
+				AD50D72807C9ECD600C9F415 /* COPYING.LIB in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AD50D5FF07C9EB8500C9F415 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD50D74507C9ED1E00C9F415 /* EOAttribute+SQLite.m in Sources */,
+				AD50D74607C9ED1E00C9F415 /* NSCalendarDate+SQLiteVal.m in Sources */,
+				AD50D74707C9ED1E00C9F415 /* NSData+SQLiteVal.m in Sources */,
+				AD50D74807C9ED1E00C9F415 /* NSNumber+SQLiteVal.m in Sources */,
+				AD50D74A07C9ED1E00C9F415 /* NSString+SQLite.m in Sources */,
+				AD50D74B07C9ED1E00C9F415 /* NSString+SQLiteVal.m in Sources */,
+				AD50D74D07C9ED1E00C9F415 /* SQLiteAdaptor.m in Sources */,
+				AD50D74F07C9ED1E00C9F415 /* SQLiteChannel.m in Sources */,
+				AD50D75107C9ED1E00C9F415 /* SQLiteChannel+Model.m in Sources */,
+				AD50D75307C9ED1E00C9F415 /* SQLiteContext.m in Sources */,
+				AD50D75507C9ED1E00C9F415 /* SQLiteException.m in Sources */,
+				AD50D75707C9ED1E00C9F415 /* SQLiteExpression.m in Sources */,
+				AD50D75907C9ED1E00C9F415 /* SQLiteValues.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADA07A060857392D00993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EDF60C4F6D460018A131 /* Development.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "SQLite3-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/GDLAdaptors-$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION)";
+				PRODUCT_NAME = SQLite3;
+				WRAPPER_EXTENSION = gdladaptor;
+			};
+			name = Development;
+		};
+		ADA07A070857392D00993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EDF70C4F6D460018A131 /* Wrapper.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "SQLite3-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/GDLAdaptors-$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION)";
+				PRODUCT_NAME = SQLite3;
+				WRAPPER_EXTENSION = gdladaptor;
+			};
+			name = Wrapper;
+		};
+		ADA07A0A0857392D00993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA07A0B0857392D00993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA07A050857392D00993825 /* Build configuration list for PBXNativeTarget "SQLite3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07A060857392D00993825 /* Development */,
+				ADA07A070857392D00993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA07A090857392D00993825 /* Build configuration list for PBXProject "SQLite3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07A0A0857392D00993825 /* Development */,
+				ADA07A0B0857392D00993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADD65B6A06DA32D6007161CA /* Project object */;
+}

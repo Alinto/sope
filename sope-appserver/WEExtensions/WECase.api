@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WECase">
+  <binding name="key" />
+  <binding name="keys" />
+  
+  <validation message="either &apos;key&apos; or &apos;keys&apos; may be bound">
+    <count test="!=1">
+      <bound name="key" />
+      <bound name="keys" />
+    </count>
+  </validation>
+</wo>

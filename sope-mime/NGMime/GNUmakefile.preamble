@@ -1,0 +1,12 @@
+# compilation settings
+
+ADDITIONAL_CPPFLAGS += \
+        -DLIBRARY_MAJOR_VERSION=${MAJOR_VERSION} \
+	-DLIBRARY_MINOR_VERSION=${MINOR_VERSION} \
+	-DLIBRARY_SUBMINOR_VERSION=${SUBMINOR_VERSION} \
+
+NGMime_INCLUDE_DIRS += \
+	-I.. -I../..			\
+	-I../../sope-core/NGStreams/	\
+	-I../../sope-core/NGExtensions/	\
+	-I../../sope-core

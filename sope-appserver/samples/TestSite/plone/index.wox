@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:var="http://www.skyrix.com/od/binding"
+>
+  <h1>Blah Blah</h1>
+  
+  <div class="description">
+    My Blahblah Frontpage. Collecting all kinds of unorganized documentation 
+    in the directories below ...
+    <br />
+    NOTE: This is not Plone, its just a testpage for OGo SOPE.
+  </div>
+    
+  <p>
+    <em><a href="folder_contents">Switch Plone to contents view</a> to see the actual folder contents and skip this personal junk!</em>
+  </p>
+
+  <p>
+    Well, seems like I'm the project lead of OpenGroupware.org until I can 
+    pass over the job to someone more qualified and concentrate on development 
+    tasks ;-)
+  </p>
+  <p>
+    Please send me mail at 
+    <a href="mailto:hh@opengroupware.org">hh@opengroupware.org</a>.
+  </p>
+
+  <h4><a href="http://faculty.washington.edu/hhess/">My brothers website</a></h4>
+  <p>Recently got forwarded a mail by my precious brother ...</p>
+  <pre>
+    "I'd like to look at your work on your website but I can't because I use 
+    Linux.  I'm curious why you have such a strong 'only people with 
+    Microsoft software can see my site' approach.  It is one of the most 
+    aggressively anti open source sites I've come across."
+  </pre>
+  <p>... now if people only would understand that it is really hard to live 
+    in Seattle?!
+  </p>
+
+  <h4>OGo related articles ...</h4>
+  <li><a href="DocumentAPI/DocStorage/">OGo Project Document Stores</a></li>
+  <li><a href="SOPE/">What is SOPE?</a></li>
+
+  <h4>OGo Snippets</h4>
+  <li><a href="bundles/">Regarding OGo Bundles</a></li>
+  <li><a href="Profiling/">Profiling OGo</a></li>
+  <li><a href="WebUI/activation/">Component Activation</a></li>
+  <li><a href="ZideStore/ZideStore-URLs/">ZideStore Folders/URLs</a></li>
+
+  <h4>Cyrus Links</h4>
+  <p>
+    <a href="http://sourceforge.net/project/showfiles.php?group_id=33489&amp;release_id=91587">Cyrus Tools</a>
+  </p>
+</div>

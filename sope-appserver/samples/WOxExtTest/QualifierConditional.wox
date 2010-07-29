@@ -1,0 +1,29 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <var:if-qualifier const:condition="name like '*Quali*'">
+    Qualifier matches: <tt>name like '*Quali*'</tt>
+  </var:if-qualifier>
+
+  <br />
+
+  <var:if-qualifier condition="qualifier">
+    Qualifier matches: <tt><var:string value="qualifier" /></tt>
+  </var:if-qualifier>
+  <var:if-qualifier condition="qualifier" const:negate="YES">
+    Qualifier does not match: <tt><var:string value="qualifier" /></tt>
+  </var:if-qualifier>
+
+  <hr />
+  
+  <form var:action="self">
+    Qualifier: 
+    <input type="text" name="qual" var:value="qualifier" size="60" />
+    <br />
+    
+    <input name="doit" type="submit" var:action="self" value="apply" />
+  </form>
+</var:component>

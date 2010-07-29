@@ -1,0 +1,12 @@
+for ((i=0; i < 12; i=i+1)); do 
+  if test $i -lt 10; then export is=0$i; else export is=$i; fi;
+  echo "{
+   details = {"GMT+${is}30" = {abbrev = "GMT+${is}30"; isDST = 0; offset = "+${i}:30:00"; }; };
+}" > GMT+${i}_30; done;
+
+for ((i=0; i < 12; i=i+1)); do 
+  if test $i -lt 10; then export is=0$i; else export is=$i; fi;
+  echo "{
+   details = {"GMT-${is}30" = {abbrev = "GMT-${is}30"; isDST = 0; offset = "-${i}:30:00"; }; };
+}" > GMT-${i}_30; done;
+

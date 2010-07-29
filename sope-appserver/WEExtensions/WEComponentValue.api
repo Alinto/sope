@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEComponentValue">
+  <binding name="value" />
+  <binding name="boolValue" />
+  <binding name="stringValue" />
+  <binding name="intValue" />
+  <binding name="unsignedIntValue" />
+  <binding name="key" required="YES" />
+
+  <validation message="only one of &apos;value&apos;, &apos;boolValue&apos;, &apos;stringValue&apos;, &apos;intValue&apos; or &apos;unsignedIntValue&apos; may be bound">
+    <count test="!=1">
+      <bound name="value"/>
+      <bound name="boolValue"/>
+      <bound name="stringValue"/>
+      <bound name="intValue"/>
+      <bound name="unsignedIntValue"/>
+    </count>
+  </validation>
+</wo>

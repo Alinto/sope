@@ -1,0 +1,65 @@
+GNU Objective-C/libFoundation on MacOSX README
+==============================================
+
+Intro
+=====
+
+    It doesn't work out of the box to compile libFoundation on
+    Darwin or MacOSX, primarily because the default compiler
+    produces binaries for the Apple ObjC runtime which libFoundation
+    doesn't seem to support anymore.
+
+GNU Runtime
+===========
+
+    To get a working GNU runtime, you should first fetch & compile 
+    GCC 3.2, this worked out-of-the-box in OSX 10.1.5.
+
+GNUstep Makefiles
+=================
+
+    I only tried with GNUstep Makefiles (libFoundation theoretically
+    can compile without them ...)
+
+Configuration
+=============
+
+    Before invoking configure you need to set the following environment
+    variables:
+
+      export CFLAGS="-traditional-cpp -fgnu-runtime"
+      export OBJC_RUNTIME_FLAG="-fgnu-runtime"
+      export LDFLAGS="-L/usr/local/gcc32/lib/"
+      export CC="/usr/local/gcc32/bin/gcc"
+      export OBJC_LIBS="/usr/local/gcc32/lib/libobjc.a"
+      export LIBS="/usr/local/gcc32/lib/libobjc.a"
+    
+    at least this worked for me ;-)
+
+    Then you can call configure:
+    
+      ./configure --with-gnustep
+
+    Ensure that configure recognized the GNU runtime:
+
+      checking for the Objective-C runtime... GNU
+
+    REALLY! ;-) Also ensure that these ObjC things are found:
+    
+      checking for objc_mutex_allocate... yes
+      checking for objc_malloc... yes
+
+    Otherwise something is still wrong ...
+
+TO BE COMPLETED
+  - currently I get a lot of weird gcc 3.2 debugging output
+    during compilation ..., so didn't get it working yet
+
+---
+2002-08-16
+Helge Hess (hh@skyrix.com)
+SKYRIX Software AG
+
+! Local variables:
+! mode: indented-text
+! End:

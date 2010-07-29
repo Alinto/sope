@@ -1,0 +1,78 @@
+{
+  variables = {
+    postDisplayGroup = {
+      class      = WODisplayGroup;
+      dataSource = {
+        class              = EOCoreDataSource;
+        editingContext     = session.defaultManagedObjectContext;
+        fetchSpecification = {
+          class      = EOFetchSpecification;
+          entityName = Post;
+          fetchLimit = 0;
+          isDeep     = YES;
+          sortOrderings = (
+            { class = EOSortOrdering; 
+              key = "creationDate";
+              selector = "compareDescending:";
+            }
+          );
+        };
+      };
+      formatForLikeQualifier       = "%@*";
+      localKeys                    = ();
+      numberOfObjectsPerBatch      = 0;
+      selectsFirstObjectAfterFetch = YES;
+      fetchesOnLoad                = YES;
+    };
+
+    recentPostsDisplayGroup = {
+      class      = WODisplayGroup;
+      dataSource = {
+        class              = EOCoreDataSource;
+        editingContext     = session.defaultManagedObjectContext;
+        fetchSpecification = {
+          class      = EOFetchSpecification;
+          entityName = Post;
+          fetchLimit = 10;
+          isDeep     = YES;
+          sortOrderings = (
+            { class = EOSortOrdering; 
+              key = "creationDate";
+              selector = "compareDescending:";
+            }
+          );
+          qualifier = {
+            class = "EOKeyValueQualifier";
+            key   = "creationDate";
+            value = "";
+            selector = "isEqualTo:";
+          };
+        };
+      };
+      formatForLikeQualifier       = "%@*";
+      localKeys                    = ();
+      numberOfObjectsPerBatch      = 0;
+      selectsFirstObjectAfterFetch = YES;
+      fetchesOnLoad                = YES;
+    };
+
+    calendarDisplayGroup = {
+      class      = WODisplayGroup;
+      dataSource = {
+        class              = EOCoreDataSource;
+        editingContext     = session.defaultManagedObjectContext;
+        fetchSpecification = {
+          class      = EOFetchSpecification;
+          entityName = Post;
+          fetchLimit = 2;
+          isDeep     = YES;
+        };
+      };
+      formatForLikeQualifier       = "%@*";
+      localKeys                    = ();
+      numberOfObjectsPerBatch      = 0;
+      selectsFirstObjectAfterFetch = YES;
+      fetchesOnLoad                = YES;
+    };
+  };
+}

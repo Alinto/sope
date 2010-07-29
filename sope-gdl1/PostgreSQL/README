@@ -1,0 +1,71 @@
+PostgreSQL Adaptor
+==================
+
+Install PostgreSQL:
+
+  cd /INTERNET/suse72/dvd/
+  cd ap3
+  rpm -Uvh postgresql.rpm
+  cd ap2
+  rpm -Uvh postgresql-lib.rpm
+  rpm -Uvh postgresql-server.rpm
+  rpm -Uvh postgresql-devel.rpm
+
+Configure PostgreSQL:
+
+  su - postgres
+  vi .bashrc
+    -> export PGDATA=/var/lib/pgsql/data
+  source .bashrc
+  initdb
+  
+  su - root
+  /etc/rc.d/postgresql start
+  
+  su - postgres
+  createdb   OpenGroupware
+  createuser ogo
+
+  vi data/pg_hba.conf
+  > add line: "host  all  192.168.0.1   255.255.255.0       trust"
+
+PostgreSQL starten:
+  /etc/rc.d/postgresql restart
+
+Configure the Adaptor
+  PGDebugEnabled
+
+
+NOTES
+=====
+
+Querying the tables of a database
+---------------------------------
+
+SELECT  relname 
+  FROM pg_class 
+  WHERE ( relkind = 'r') AND relname !~ '^pg_'
+        AND relname !~ '^xinv[0-9]+' 
+  ORDER BY relname;
+
+und die infos dazu mit:
+
+SELECT a.attnum, a.attname, t.typname, a.attlen, a.attnotnull 
+  FROM pg_class c, pg_attribute a, pg_type t  
+  WHERE c.relname = 'TABELLENNAME_HERE' AND 
+        a.attnum > 0 AND a.attrelid = c.oid    
+        AND a.atttypid = t.oid
+  ORDER BY attnum;
+
+Quering the databases of a server
+---------------------------------
+
+  SELECT * FROM pg_database
+
+You need a database to connect PostgreSQL using libpq, but 'template1' should
+always be available.
+
+Fetch DB-names and their DBA:
+  SELECT DISTINCT dbs.datname, users.usename 
+  FROM pg_database dbs, pg_user users 
+  WHERE dbs.datdba=users.usesysid

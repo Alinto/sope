@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding">
+  <body bgcolor="#AAAACC">
+    <table border="0" cellpadding="4" cellspacing="0" bgcolor="#EEEEEE">
+      <tr>
+        <th colspan="2">Template: <var:string value="name"/></th>
+      </tr>
+      <tr bgcolor="#CCCCCC">
+        <td valign="top" align="right">clientObject:</td>
+        <td valign="top" align="left">
+          <var:string value="clientObject"/>
+        </td>
+      </tr>
+      <tr bgcolor="#CCCCCC">
+        <td valign="top" align="right">soClass:</td>
+        <td valign="top" align="left">
+          <var:string value="clientObject.soClass"/>
+        </td>
+      </tr>
+      <tr bgcolor="#CCCCCC">
+        <td valign="top" align="right">pageName:</td>
+        <td valign="top" align="left"><var:string value="context.page.name"/></td>
+      </tr>
+      <tr bgcolor="#CCCCCC">
+        <td valign="top" align="right">page:</td>
+        <td valign="top" align="left"><var:string value="context.page"/></td>
+      </tr>
+      
+      <tr><td height="4"></td></tr>
+      <tr>
+        <td bgcolor="white" colspan="2">
+          <var:component value="context.page"/>
+        </td>
+      </tr>
+      <tr><td height="4"></td></tr>
+
+      <tr>
+        <td colspan="2">
+          <a href="test.wox"   >test.wox</a>,
+          <a href="index.html" >index.html</a>,
+          <a href="/index.html">/index.html</a>,
+          <a href="embed.wox"  >embed.wox</a>,
+          <a href="accept.gif" >accept.gif</a>,
+          <a href="subdir"     >subdir</a>,
+          <a href="/subdir"    >/subdir</a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          traversal-stack:
+          <var:foreach list="context.objectTraversalStack" item="stackItem">
+            <li><var:string value="stackItem.nameInContainer" /></li>
+          </var:foreach>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

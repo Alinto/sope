@@ -1,0 +1,55 @@
+# @configure_input@
+
+prefix		= /cygnus/ObjC
+exec_prefix	= $(prefix)/bin
+libdir		= $(prefix)/lib
+includedir	= $(prefix)/include
+sharedstatedir	= $(prefix)/share/libFoundation
+srcdir		= .
+
+libext	= .a
+objext	= .o
+exeext	= .exe
+
+INSTALL		= install
+INSTALL_PROGRAM	= install
+INSTALL_DATA	= install
+
+HOST		= i386-pc-cygwin32
+HOST_CPU	= i386
+HOST_VENDOR	= pc
+HOST_OS		= cygwin32
+TARGET		= i386-pc-cygwin32
+TARGET_CPU	= i386
+TARGET_VENDOR	= pc
+TARGET_OS	= cygwin32
+
+LIB_FOUNDATION_NAME = libFoundation$(libext)
+
+CC	= gcc
+DEBUGFLAGS	= -Wall -DDEBUG
+
+MAKE	= make
+LIBTOOL	=
+RANLIB	= ranlib
+PERL	= perl
+
+ANTLR	= antlr
+DLG	= dlg
+ANTLR_FLAGS =
+DLG_FLAGS = -C2
+PCCTS_CFLAGS = -I$(TOP)/pccts
+
+OBJC_RUNTIME	= GNU
+BROKEN_COMPILER	= no
+BROKEN_BUILTIN_APPLY = no
+NO_NESTED_FUNCTIONS = no
+
+CFLAGS	= -I$(TOP) 
+LDFLAGS = 
+LIBS	= -lobjc -lwsock32 -ladvapi32
+
+MAJOR_VERSION	= 0
+MINOR_VERSION	= 7
+SUBMINOR_VERSION = 1
+VERSION		= $(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)

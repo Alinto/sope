@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETableData">
+  <binding name="sortKey" />
+  <binding name="negateSortDir" defaults="YES/NO" />
+
+  <binding name="bgColor" />
+  <binding name="upwardSortIcon" />
+  <binding name="downwardSortIcon" />
+  <binding name="nonSortIcon" />
+  <binding name="sortLabel" />
+
+  <binding name="title" />
+  <binding name="align" />
+  <binding name="valign" />
+  <binding name="isGroup" defaults="YES/NO" />
+  <binding name="otherTagString" />
+</wo>

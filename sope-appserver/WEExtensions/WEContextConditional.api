@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEContextConditional">
+  <binding name="negate" defaults="YES/NO" />
+  <binding name="contextKey" required="YES" />
+  <binding name="didMatch" />
+</wo>

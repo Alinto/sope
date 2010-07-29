@@ -1,0 +1,220 @@
+2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DOMPYXOutputter.m, DOMXMLOutputter.m: use -UTF8String instead of -cString
+	  on Apple machines to avoid a warning (v4.9.24)
+
+2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: filter out -O% flags for files using exception
+	  handlers, enable -O2 per default (v4.5.23)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.1 warnings, use %p for pointer formats (v4.5.22)
+
+2006-06-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DOMElement.m: added missing -localName implementation (v4.5.21)
+
+2005-08-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: removed duplicate definition of EDOM.h (v4.5.20)
+
+2005-08-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DOMDocumentFragment.m: fixed some prototypes (v4.5.19)
+
+2005-07-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DOMElement.m: evaluate KVC keys starting with a slash '/' as query
+	  path expressions (by stripping of the slash!), return an attribute
+	  node for keys starting with '@' (v4.5.18)
+
+	* v4.5.17
+
+	* DOMDocument.m: evaluate KVC keys starting with a slash '/' as query
+	  path expressions
+
+	* DOMNode.m: changed to return 'nil' for unknown KVC keys instead of
+	  raising an exception
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DOMTreeWalker.m: fixed a MacOSX 10.4 warning (v4.5.16)
+
+	* renamed most implementations from DOMxx to NGDOMxx to avoid linking
+	  issues with Tiger WebKit (still incomplete). Note that protocols are
+	  still the same, so 'real' DOM apps will continue to work ;-)
+	  (v4.5.15)
+
+2005-04-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed loads of @protocol related gcc 4.0 warnings (v4.5.14)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DOM.xcode: minor cleanup
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DOM.xcode: minor fixes
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* DOM.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects.
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+	  (v4.3.13)
+
+2004-08-26  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* DOM.xcode: new Xcode project
+
+2004-08-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DOMSaxHandler.m: do not print DOM parsing errors per default
+	  (consumers need to check the errors array) (v4.3.12)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved to SOPE 4.3 (v4.3.11)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.10
+
+	* GNUmakefile.preamble: added prebinding info
+
+	* GNUmakefile: moved preamble stuff to GNUmakefile.preamble, also 
+	  build DOM.framework on non-libFoundation systems
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.9)
+
+2004-02-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DOMElement.m: added -description method to 
+	  _DOMElementAttrNamedNodeMap class (v4.2.8)
+
+2003-11-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: removed autodoc target
+
+2003-10-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* DOMDocument.m, DOMElement.m DOMQueryPathExpression.m: fixed some
+	  Xcode warnings (v4.2.7)
+
+2003-07-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* DOMNode.m, DOMXMLOutputter.m: removed a warning on gstep-base, patch
+	  provided by Filip Van Raemdonck (v4.2.6)
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* common.h: removed dependency on FoundationExt on MacOSX (v4.2.5)
+
+Thu Jan  2 10:49:31 2003  Helge Hess  <helge.hess@skyrix.com>
+	
+	* changes for MacOSX, does not use RETAIN macros anymore (methods are
+	  used), -doesNotRecognizeSelector: instead of -notImplemented 
+	  (v4.2.4)
+
+2002-09-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed some compilation warnings (v4.2.3)
+
+2002-06-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* track positional information in elements
+
+Sun May  5 18:40:10 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added DOMBuilderFactory to create DOMBuilder instances
+
+Thu May  2 12:43:12 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* DOMXMLOutputter.m: added protocols to output methods
+
+	* changed to use -rangeOfString: instead of -indexOfString:
+
+Thu Apr  4 18:12:17 2002  Martin Spindler  <spindler@mdlink.de>
+
+	* DOMSaxHandler.m: added SubHandler category
+
+Tue Feb 12 20:48:41 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* made independend from EOControl/NGExtensions
+
+Tue Nov 13 16:16:26 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* DOMSaxBuilder.m: added SAX errors to DOM document
+
+	* DOMDocument.m: ivars for storing errors/warnings
+
+	* DOMSaxHandler.m: track error messages
+
+Mon Oct 22 09:54:03 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed special namespace variants of DOMAttribute/DOMElement
+
+Mon Oct  1 15:59:16 2001  Helge Hess  <helge.hess@skyrix.com>
+	
+	* DOMSaxBuilder.h: create DOM builder by MIME-type
+	
+Fri Sep 28 16:17:17 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* DOMElement.m: added -getElementsByTagName:
+
+	* DOM+JS.m: added JS bindings for DOM objects
+
+	* DOMElement.m: added JS bindings to (private) AttrNamedNodeMap class
+
+	* DOMProtocols.h: added ObjC protocols for DOM types
+	
+Thu Aug 23 12:03:41 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* DOMSaxBuilder.m: clear sax handler after parsing
+
+	* DOMSaxHandler.m added method to clear handler
+
+Sat Aug 11 13:56:47 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* DOMSaxHandler.m: changed to use less -autorelease calls
+
+Tue Jul  3 16:26:26 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* DOMElement.m: allow * pattern in -hasAttribute:namespaceURI:
+
+Thu Jun  7 19:48:41 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* DOMNode+QueryPath.m: improved query-path parsing (namespaces made
+	  possible), fixed deep child element search
+
+Thu Mar  8 12:33:27 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* DOMDocument.m: fixed bug
+
+Fri Mar  2 20:10:27 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* DOMElement.m: added ms patch
+
+Fri Feb 23 13:26:39 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* DOMElement.m: added ms bugfix
+
+	* DOMAttribute.m: improved -description
+
+Fri Feb  2 10:08:32 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* DOMNode+QueryPath.m: added partial support for NS in paths

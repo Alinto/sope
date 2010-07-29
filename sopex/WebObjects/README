@@ -1,0 +1,91 @@
+# $Id: README 1 2004-08-20 11:17:52Z znek $
+
+
+WebObjects
+==========
+
+This framework is aimed at developers seeking to replace the
+deprecated version 4.51 of Apple's WebObjects framework (WOF)
+with a feature compatible clone from OGo dubbed SOPE.
+Please note that this is an umbrella framework, aggregating several
+of SOPE's targets in a single framework so that you can actually
+link against a 'WebObjects' framework. The impact of this is that
+you possibly don't have to change your legacy build process. Also,
+by providing a WebObjects.framework, it's well possible that your
+projects will compile with minimal adjustments to the source code.
+
+
+KNOWN PROBLEMS
+==============
+
+Theoretically SOPE and Apple's WebObjects 4.51 are very similar.
+In practice there are a couple of differences between the two.
+
+Headers
+-------
+
+In an ideal world the headers in this WebObjects framework
+woule be 100% compatible with those in WOF 4.51.
+In practice there are some differences (like EOF not automatically
+getting #import'ed by WODisplayGroup). You need to circumvent these
+problems manually by adapting the source files of your legacy target.
+
+WOF 4.51 Headers:
+
+-r--r--r--  1 root  wheel   3257  7 May  1999 WOAdaptor.h
+-r--r--r--  1 root  wheel    420 18 Oct  2000 WOAdminRequestHandler.h
+-r--r--r--  1 root  wheel  32578 24 Jan  2001 WOApplication.h
+-r--r--r--  1 root  wheel   1769  4 May  1999 WOAssociation.h
+-r--r--r--  1 root  wheel   7049 20 May  1999 WOComponent.h
+-r--r--r--  1 root  wheel   3938 25 Aug  1999 WOContext.h
+-r--r--r--  1 root  wheel   3123 12 Aug  1999 WOCookie.h
+-r--r--r--  1 root  wheel   2259  4 May  1999 WODirectAction.h
+-r--r--r--  1 root  wheel  18522 30 Jul  1999 WODisplayGroup.h
+-r--r--r--  1 root  wheel   2213 25 Aug  1999 WODynamicElement.h
+-r--r--r--  1 root  wheel   1739  4 May  1999 WOElement.h
+-r--r--r--  1 root  wheel    421  1 May  1999 WOEvent.h
+-r--r--r--  1 root  wheel    996 13 Dec  1999 WOHTTPConnection.h
+-r--r--r--  1 root  wheel    351  8 Feb  2001 WOLifeBeat.h
+-r--r--r--  1 root  wheel   1644  6 May  1998 WOMailDelivery.h
+-r--r--r--  1 root  wheel   4219 25 Aug  1999 WOMessage.h
+-r--r--r--  1 root  wheel  12251  3 Nov  2000 WORequest.h
+-r--r--r--  1 root  wheel    679  4 May  1999 WORequestHandler.h
+-r--r--r--  1 root  wheel   2416 31 Aug  2000 WOResourceManager.h
+-r--r--r--  1 root  wheel   3058  7 May  1999 WOResponse.h
+-r--r--r--  1 root  wheel  10971  4 May  1999 WOSession.h
+-r--r--r--  1 root  wheel   3944 31 Aug  2000 WOSessionStore.h
+-r--r--r--  1 root  wheel   5038 23 Jun  1998 WOStatisticsStore.h
+-r--r--r--  1 root  wheel    920 21 Jul  1999 WebObjects.h
+-r--r--r--  1 root  wheel   5961 28 May  1999 WebObjectsDeprecated.h
+
+
+Symbols
+-------
+
+Of course, this umbrella framework is not 100% binary compatible with
+WOF 4.51. This is especially true for instance variables and the like.
+If you did rely on private API in WOF 4.51 you will most likely have
+to rewrite these sections. The good news is that SOPE's source code
+is available to you, so there's probably a much easier route to fix
+your original problem.
+
+Resources
+---------
+
+SOPE doesn't define the same set of resources than WOF 4.51 did.
+
+WOF 4.51 Resources:
+
+-r--r--r--  1 root  wheel   386 30 Mar  2001 Info-macos.plist
+-r--r--r--  1 root  wheel  3513  2 Sep  1998 Languages.plist
+-rw-r--r--  1 root  wheel    38 29 Aug  2002 License.key
+-r--r--r--  1 root  wheel  1412  3 Mar  1998 MIME.plist
+-r--r--r--  1 root  wheel    96 27 Apr  1999 WOApplicationEvent.description
+-r--r--r--  1 root  wheel   131 27 Apr  1999 WOAssociationEvent.description
+-r--r--r--  1 root  wheel   292 29 Apr  1999 WOComponentEvent.description
+-r--r--r--  1 root  wheel   113 28 Apr  1999 WOComponentReferenceEvent.description
+-r--r--r--  1 root  wheel  1889 28 Mar  2001 WODeploymentUserDefaults.plist
+-r--r--r--  1 root  wheel  1745 28 Mar  2001 WODeveloperUserDefaults.plist
+-r--r--r--  1 root  wheel  1768  2 Nov  2000 WOUserDefaultsKeys.plist
+-r--r--r--  1 root  wheel  2162 25 Sep  2002 taginfo.plist
+-rw-r--r--  1 root  wheel   368 30 Mar  2001 version.plist

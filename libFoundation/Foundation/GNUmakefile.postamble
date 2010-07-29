@@ -1,0 +1,71 @@
+#  GNUmakefile.postamble
+#
+#  Copyright (C) 1995, 1996, 1997 Ovidiu Predescu and Mircea Oancea.
+#  All rights reserved.
+#
+#  Author: Ovidiu Predescu <ovidiu@net-community.com>
+#  Date: October 1997
+#
+#  This file is part of libFoundation.
+#
+#  Permission to use, copy, modify, and distribute this software and its
+#  documentation for any purpose and without fee is hereby granted, provided
+#  that the above copyright notice appear in all copies and that both that
+#  copyright notice and this permission notice appear in supporting
+#  documentation.
+#
+#  We disclaim all warranties with regard to this software, including all
+#  implied warranties of merchantability and fitness, in no event shall
+#  we be liable for any special, indirect or consequential damages or any
+#  damages whatsoever resulting from loss of use, data or profits, whether in
+#  an action of contract, negligence or other tortious action, arising out of
+#  or in connection with the use or performance of this software.
+#
+
+TOP = ..
+
+before-all:: $(GNUSTEP_OBJ_DIR)/exceptions
+
+DIR_FD      = $(GNUSTEP_HEADERS)$(libFoundation_HEADER_FILES_INSTALL_DIR)
+DIR_EXT_EXC = $(DIR_FD)/extensions/exceptions
+DIR_FD_EXC  = $(DIR_FD)/Foundation/exceptions
+DIR_PLAT    = $(DIR_FD)/$(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS)/$(OBJC_RUNTIME)
+
+$(DIR_FD) :
+	@(if [ ! -d $@ ]; then \
+	  echo $(MKINSTALLDIRS) $@; \
+	  $(MKINSTALLDIRS) $@; \
+	fi)
+
+$(DIR_EXT_EXC) $(DIR_FD_EXC) $(DIR_PLAT) : $(DIR_FD)
+	@(if [ ! -d $@ ]; then \
+	  echo $(MKINSTALLDIRS) $@; \
+	  $(MKINSTALLDIRS) $@; \
+	fi)
+
+before-install:: $(DIR_EXT_EXC) $(DIR_FD_EXC) $(DIR_PLAT)
+
+CTO = $(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS)/$(OBJC_RUNTIME)
+
+after-install-patchit ::
+	$(INSTALL_DATA) $(CTO)/real_exception_file.h $(GNUSTEP_HEADERS)$(libFoundation_HEADER_FILES_INSTALL_DIR)/$(CTO)
+	$(INSTALL_DATA) $(CTO)/lfmemory.h $(GNUSTEP_HEADERS)$(libFoundation_HEADER_FILES_INSTALL_DIR)/$(CTO)
+	$(INSTALL_DATA) libFoundation.make $(INSTALL_ROOT_DIR)$(GNUSTEP_MAKEFILES)/Additional
+
+after-install :: after-install-patchit
+
+
+$(GNUSTEP_OBJ_DIR)/exceptions: $(GNUSTEP_OBJ_DIR)
+	@if [ ! -d $@ ]; then echo $(MKDIRS) $@; $(MKDIRS) $@; fi
+
+# DEPRECATED, we optimize for the classes now!
+#NSConcreteNumber.m: NSConcreteNumber.m.sh
+#	./NSConcreteNumber.m.sh >NSConcreteNumber.m
+
+after-distclean::
+	rm -rf libFoundation.make NSObject.h
+
+after-uninstall::
+	rm -f $(GNUSTEP_MAKEFILES)/Additional/libFoundation.make
+
+include fhs.make

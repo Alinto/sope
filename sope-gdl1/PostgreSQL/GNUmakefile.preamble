@@ -1,0 +1,90 @@
+# 
+# GNUmakefile
+#
+# Copyright (C) 2003-2005 SKYRIX Software AG
+#
+# Author: Helge Hess (helge.hess@skyrix.com)
+#
+# This file is part of the PostgreSQL Adaptor Library
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this library; see the file COPYING.LIB.
+# If not, write to the Free Software Foundation,
+# 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+SOPE_ROOT=../..
+
+ifeq ($(frameworks),yes)
+BUNDLE_INSTALL_DIR := $(FRAMEWORK_INSTALL_DIR)/GDLAccess.framework/Resources/GDLAdaptors/
+else
+BUNDLE_INSTALL_DIR = $(GNUSTEP_INSTALLATION_DIR)/Library/GDLAdaptors-$(MAJOR_VERSION).$(MINOR_VERSION)/
+endif
+
+
+# PG config
+
+ADDITIONAL_INCLUDE_DIRS += -I$(shell pg_config --includedir)
+PG_LIB_DIRS     += -L$(shell pg_config --libdir)
+PostgreSQL_BUNDLE_LIBS  += -lpq
+
+
+# set compile flags and go
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I../GDLAccess -I..
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I.. -I$(SOPE_ROOT)		        \
+	-I$(SOPE_ROOT)/sope-core/		\
+	-I$(SOPE_ROOT)/sope-core/NGExtensions
+
+# TODO: is this required?
+ADDITIONAL_INCLUDE_DIRS += \
+	-I/usr/local/include
+
+
+# dependencies
+
+ifneq ($(frameworks),yes)
+PostgreSQL_BUNDLE_LIBS += -lGDLAccess -lEOControl
+gdltest_TOOL_LIBS      += -lGDLAccess
+else
+PostgreSQL_BUNDLE_LIBS += -framework GDLAccess -framework EOControl
+gdltest_TOOL_LIBS      += -framework GDLAccess
+endif
+
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	../GDLAccess \
+	$(SOPE_ROOT)/sope-core/EOControl
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+
+SYSTEM_LIB_DIR += $(CONFIGURE_SYSTEM_LIB_DIR) $(PG_LIB_DIRS)
+
+# TODO: not necessary? covered by pg_config?
+#ifeq ($(FOUNDATION_LIB),apple)
+#PostgreSQL_BUNDLE_LIBS += -lssl -lcrypto
+#ADDITIONAL_INCLUDE_DIRS += -I/Library/PostgreSQL/include/
+#endif

@@ -1,0 +1,51 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className="Frame" title="name" 
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <var:rich-string value="value"
+    isBold="isBold" isItalic="isItalic" isUnderlined="isUnderlined" isSmall="isSmall"
+    size="size" color="color"/>
+  
+  <form var:action="self">
+     <table border="0">
+       <tr>
+         <td align="right">value:</td>
+         <td><input type="text" var:value="value" size="50"/></td>
+       </tr>
+       <tr>
+         <td align="right">isBold:</td>
+         <td><input type="checkbox" var:checked="isBold"/></td>
+       </tr>
+       <tr>
+         <td align="right">isItalic:</td>
+         <td><input type="checkbox" var:checked="isItalic"/></td>
+       </tr>
+       <tr>
+         <td align="right">isUnderlined:</td>
+         <td><input type="checkbox" var:checked="isUnderlined"/></td>
+       </tr>
+       <tr>
+         <td align="right">isSmall:</td>
+         <td><input type="checkbox" var:checked="isSmall"/></td>
+       </tr>
+
+       <tr>
+         <td align="right">color:</td>
+         <td><input type="text" var:value="color" size="8"/></td>
+       </tr>
+
+       <tr>
+         <td align="right">size:</td>
+         <td><input type="text" var:value="size" size="8"/></td>
+       </tr>
+
+       <tr>
+         <td colspan="2"><input type="submit" value="Apply"/></td>
+       </tr>
+     </table>
+  </form>
+
+</var:component>

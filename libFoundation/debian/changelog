@@ -1,0 +1,26 @@
+libfoundation1.1 (1.1.2-1) unstable; urgency=low
+
+  * New upstream release
+  * doesn't require libobjc-lf2 anymore
+
+ -- Frank Reppin <frank@opengroupware.org>  Thu, 13 Jul 2006 13:03:00 +0200
+
+libfoundation1.0 (1.0.76-1) unstable; urgency=low
+
+  * New upstream release
+  * Declare an existing alternative dependency to virtual package libobjc-lf-dev
+
+ -- Sebastian Ley <ley@debian.org>  Thu, 11 Aug 2005 11:48:39 +0200
+
+libfoundation1.0 (1.0.72-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Sebastian Ley <ley@debian.org>  Sun,  7 Aug 2005 23:19:43 +0200
+
+libfoundation1.0 (1.0r24-1) experimental; urgency=low
+
+  * Initial Release.
+
+ -- Sebastian Ley <ley@debian.org>  Tue, 28 Sep 2004 15:55:26 +0200
+

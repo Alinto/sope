@@ -1,0 +1,98 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {viewSource = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = MLHierarchyView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; target = id; }; 
+            SUPERCLASS = NSControl; 
+        }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {
+            ACTIONS = {
+                back = id; 
+                clear = id; 
+                editInXcode = id; 
+                openConsole = id; 
+                openStatistics = id; 
+                reload = id; 
+                restartDaemonTask = id; 
+                stopDaemonTask = id; 
+                toggleToolbar = id; 
+                viewApplication = id; 
+                viewHTML = id; 
+                viewHTTP = id; 
+                viewSource = id; 
+            }; 
+            CLASS = SOPEXAppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                aboutMenuItem = NSMenuItem; 
+                debugMenuItem = NSMenuItem; 
+                hideMenuItem = NSMenuItem; 
+                htmlView = NSTextView; 
+                mainMenu = NSMenu; 
+                mainWindow = SOPEXBrowserWindow; 
+                progressIndicator = NSProgressIndicator; 
+                quitMenuItem = NSMenuItem; 
+                responseHeaderInfoTableView = NSTableView; 
+                statusBarTextField = NSTextField; 
+                tabView = NSTabView; 
+                viewApplicationMenuItem = NSMenuItem; 
+                viewHTMLMenuItem = NSMenuItem; 
+                viewHTTPMenuItem = NSMenuItem; 
+                viewSeparatorMenuItem = NSMenuItem; 
+                viewSourceMenuItem = NSMenuItem; 
+                webView = WebView; 
+                woComponentNameField = NSTextField; 
+                woDefinitionView = NSTextView; 
+                woSourceView = NSTextView; 
+                woxNameField = NSTextField; 
+                woxSourceView = NSTextView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                back = id; 
+                editInXcode = id; 
+                reload = id; 
+                toggleToolbar = id; 
+                viewApplication = id; 
+                viewHTML = id; 
+                viewHTTP = id; 
+                viewSource = id; 
+            }; 
+            CLASS = SOPEXBrowserController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                htmlView = NSTextView; 
+                mainWindow = SOPEXBrowserWindow; 
+                progressIndicator = NSProgressIndicator; 
+                responseHeaderInfoTableView = NSTableView; 
+                statusBarTextField = NSTextField; 
+                tabView = NSTabView; 
+                webView = WebView; 
+                woComponentNameField = NSTextField; 
+                woDefinitionView = NSTextView; 
+                woSourceView = NSTextView; 
+                woxNameField = NSTextField; 
+                woxSourceView = NSTextView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = SOPEXBrowserWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {
+            CLASS = SOPEXTextView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {statusField = NSTextField; }; 
+            SUPERCLASS = NSTextView; 
+        }
+    ); 
+    IBVersion = 1; 
+}

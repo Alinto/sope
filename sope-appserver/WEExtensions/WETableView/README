@@ -1,0 +1,32 @@
+WETableView
+===========
+
+TODO: write some documentation how it works, what it supports, etc ...
+
+TODO:
+- add support for CSS
+- allow sort icon on the right
+- allow click on the whole title for sorting
+  - disable when in form mode? (could enable in JS mode?)
+
+Capabilities
+============
+
+- grouping! That is, you can join rows in row-groups which can be 
+  expanded/collapsed
+- checkbox handling
+
+FAQ
+===
+
+Q: How do I enable checkboxes?
+A: Place the tableview inside a WOForm, then set the "selection" binding to
+   an NSArray ivar in your component.
+   Everything else should work out of the box.
+
+Q: Whats is the difference between WETableView and SkyTableView as used in OGo?
+A: The SkyTableView is a component wrapping WETableView. Besides utomatically
+   binding the icons and colors of the WETableView, it also provides some
+   advanced functionality like shift-select checkboxes as well as datasource
+   support.
+   Note: 'selection' is called 'selections' in the SkyTableView ...

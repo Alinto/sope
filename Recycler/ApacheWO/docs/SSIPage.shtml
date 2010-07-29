@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Server Side Include</title>
+  </head>
+
+  <body>
+    <h3>Server Side Include</h3>
+
+    Today is <!--#echo var="DATE_LOCAL" -->
+    <br/>
+    <br/>
+    Inluded .wox page:
+    <table border="1" width="100%"><tr><td>
+    <!--#include virtual="Page2.wox" -->
+    </td></tr></table>
+  </body>
+</html>

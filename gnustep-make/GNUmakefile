@@ -1,0 +1,353 @@
+#   GNUmakefile.  Generated from GNUmakefile.in by configure.
+#
+#   Main GNUmakefile for the GNUstep GNUmakefile Package.
+#
+#   Copyright (C) 1997-2002 Free Software Foundation, Inc.
+#
+#   Author: Scott Christley <scottc@net-community.com>
+#   Author: Nicola Pero <n.pero@mi.flashnet.it>
+#
+#   This file is part of the GNUstep Makefile Package.
+#
+#   This library is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU General Public License
+#   as published by the Free Software Foundation; either version 2
+#   of the License, or (at your option) any later version.
+#   
+#   You should have received a copy of the GNU General Public
+#   License along with this library; see the file COPYING.LIB.
+#   If not, write to the Free Software Foundation,
+#   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+#
+# I've thought about using the Makefile package files
+# to install the GNUmakefile package, a cool little recursion,
+# but there is nothing to made, and the files get installed
+# in a special directory, so it was simpler this way.
+#
+include config.make
+
+
+# To install everything inside a temporary directory (say as part of
+# building a binary package - deb or rpm), use something like `make
+# install special_prefix=/var/tmp/gnustep-make'
+special_prefix = 
+
+GNUSTEP_CONFIG_FILE = $(special_prefix)/root/src/SOPE-4.7/.gsmake/GNUstep.conf
+GNUSTEP_CONFIG_FILE_DIR = $(dir $(GNUSTEP_CONFIG_FILE))
+GNUSTEP_SYSTEM_ROOT = $(special_prefix)/root/src/SOPE-4.7/.gsmake
+GNUSTEP_LOCAL_ROOT  = $(special_prefix)/root/src/SOPE-4.7/.gsmake
+GNUSTEP_NETWORK_ROOT = $(special_prefix)/root/src/SOPE-4.7/.gsmake
+makedir = $(special_prefix)/root/src/SOPE-4.7/.gsmake/Library/Makefiles
+srcdir = .
+
+
+GNUSTEP_FLATTENED = yes
+GNUSTEP_TARGET_CPU = powerpc
+GNUSTEP_TARGET_VENDOR = unknown
+GNUSTEP_TARGET_OS = linux-gnu
+
+GNUSTEP_LIB_COMBO = gnu-fd-nil
+
+ifeq ($(GNUSTEP_FLATTENED),)
+  GNUSTEP_TARGET_DIR = $(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS)
+  GNUSTEP_TARGET_LDIR = $(GNUSTEP_TARGET_DIR)/$(GNUSTEP_LIB_COMBO)
+  MAYBE_LIBRARY_COMBO = $(GNUSTEP_LIB_COMBO)
+else
+  GNUSTEP_TARGET_DIR = .
+  GNUSTEP_TARGET_LDIR = .
+  MAYBE_LIBRARY_COMBO = .
+endif
+
+export GNUSTEP_TARGET_DIR
+export GNUSTEP_TARGET_LDIR
+export MAYBE_LIBRARY_COMBO
+
+tooldir = $(GNUSTEP_SYSTEM_ROOT)/Tools
+
+INSTALL		= /usr/bin/install -c
+INSTALL_PROGRAM	= ${INSTALL}
+INSTALL_DATA	= ${INSTALL} -m 644
+
+VERTAG = $(subst .,_,$(GNUSTEP_MAKE_VERSION))
+
+SVNPREFIX=svn+ssh://svn.gna.org/svn/gnustep/tools/make
+
+MAKE_FILES = aggregate.make application.make bundle.make service.make \
+	common.make library-combo.make java.make jni.make library.make \
+	messages.make rules.make target.make names.make resource-set.make \
+	tool.make ctool.make test-library.make \
+	objc.make test-application.make test-tool.make subproject.make \
+	palette.make gswapp.make gswbundle.make clibrary.make \
+	documentation.make gcj-tool.make \
+	java-executable.template java-tool.make framework.make \
+	native-library.make spec-rules.template spec-debug-rules.template \
+        spec-debug-alone-rules.template \
+        tar-exclude-list
+
+MASTER_MAKE_FILES = \
+        aggregate.make source-distribution.make rpm.make rules.make \
+        application.make bundle.make clibrary.make ctool.make \
+        documentation.make framework.make gswapp.make gswbundle.make \
+        library.make objc.make java.make java-tool.make palette.make \
+        resource-set.make service.make subproject.make test-application.make \
+        test-library.make test-tool.make tool.make gcj-tool.make
+
+INSTANCE_MAKE_FILES = \
+        rules.make \
+        application.make bundle.make clibrary.make ctool.make \
+        documentation.make framework.make gswapp.make gswbundle.make \
+        library.make objc.make java.make java-tool.make palette.make \
+        resource-set.make service.make subproject.make test-application.make \
+        test-library.make test-tool.make tool.make gcj-tool.make
+
+INSTANCE_SHARED_MAKE_FILES = bundle.make headers.make java.make \
+                             stamp-string.make strings.make pch.make
+
+INSTANCE_DOC_MAKE_FILES = autogsdoc.make gsdoc.make install_files.make \
+                          javadoc.make latex.make texi.make
+
+all: generated-files which_lib$(EXEEXT)
+
+# Please note that you should use a bit of care in the following rule,
+# because it must work in a directory which is not the source
+# directory - so for example $<, rather than which_lib.c, must be
+# used. (I mean: 'cd core/make; cd ..; mkdir make-build; cd
+# make-build; ../make/configure --disable-import; make;' must work)
+which_lib$(EXEEXT): which_lib.c config.h
+	$(CC) -g -O2 -Wall -I. -o $@ $<
+
+ifeq ($(messages),yes)
+  EC = 
+else
+  EC = @
+endif
+
+move_obsolete:
+	$(EC)(echo "Moving paths from old heirarchy: "; \
+	 $(srcdir)/move_obsolete_paths.sh "$(GNUSTEP_SYSTEM_ROOT)" "$(GNUSTEP_LOCAL_ROOT)" "$(GNUSTEP_USER_ROOT)")
+
+install: all move_obsolete
+	$(EC)(echo "Creating system domain: $(GNUSTEP_SYSTEM_ROOT)"; \
+	 $(srcdir)/create_domain_dir_tree.sh "$(GNUSTEP_SYSTEM_ROOT)"; \
+	 echo "Creating local and network dirs: $(GNUSTEP_LOCAL_ROOT), $(GNUSTEP_NETWORK_ROOT)"; \
+	$(srcdir)/mkinstalldirs "$(GNUSTEP_LOCAL_ROOT)" "$(GNUSTEP_NETWORK_ROOT)";\
+	 echo "Creating makefile directories in: $(makedir)"; \
+	 $(srcdir)/mkinstalldirs \
+		$(makedir) \
+		$(makedir)/$(GNUSTEP_TARGET_CPU) \
+		$(makedir)/$(GNUSTEP_TARGET_DIR) \
+		$(makedir)/$(GNUSTEP_TARGET_LDIR) \
+		$(makedir)/Additional \
+		$(makedir)/Auxiliary \
+		$(makedir)/Master \
+		$(makedir)/Instance \
+		$(makedir)/Instance/Shared \
+		$(makedir)/Instance/Documentation)
+	$(EC)(echo "Installing GNUstep configuration file in $(GNUSTEP_CONFIG_FILE)"; \
+	 $(srcdir)/mkinstalldirs "$(GNUSTEP_CONFIG_FILE_DIR)"; \
+	 $(INSTALL_DATA) GNUstep.conf "$(GNUSTEP_CONFIG_FILE)")
+	-$(EC) rm -f "$(GNUSTEP_SYSTEM_ROOT)/Makefiles"
+	 $(EC)(echo "Installing gnustep-make support software"; \
+	   $(INSTALL_PROGRAM) -m 755 which_lib$(EXEEXT) \
+	     $(makedir)/$(GNUSTEP_TARGET_DIR))
+	 $(EC)(for f in config.guess config.sub install-sh mkinstalldirs \
+		clean_cpu.sh clean_os.sh \
+		clean_vendor.sh cpu.sh GNUstep-reset.sh \
+		ld_lib_path.sh os.sh transform_paths.sh vendor.sh \
+		ld_lib_path.csh relative_path.sh strip_makefiles.sh; do \
+	     $(INSTALL_PROGRAM) -m 755 $(srcdir)/$$f $(makedir); \
+	   done)
+	 $(EC)($(INSTALL_PROGRAM) -m 755 GNUstep.sh $(makedir); \
+	  $(INSTALL_PROGRAM) -m 755 GNUstep.csh $(makedir); \
+	  $(INSTALL_PROGRAM) -m 755 fixpath.sh $(makedir); \
+	  $(INSTALL_PROGRAM) -m 755 openapp $(tooldir); \
+	  $(INSTALL_PROGRAM) -m 755 debugapp $(tooldir); \
+	  $(INSTALL_PROGRAM) -m 755 opentool $(tooldir))
+	 $(EC)(echo "Installing makefiles"; \
+	   for f in $(MAKE_FILES); do \
+	     $(INSTALL_DATA) $(srcdir)/$$f $(makedir); \
+	   done; \
+	   for f in $(MASTER_MAKE_FILES); do \
+	     $(INSTALL_DATA) $(srcdir)/Master/$$f $(makedir)/Master; \
+	   done; \
+	   for f in $(INSTANCE_MAKE_FILES); do \
+	     $(INSTALL_DATA) $(srcdir)/Instance/$$f $(makedir)/Instance; \
+	   done; \
+	   for f in $(INSTANCE_SHARED_MAKE_FILES); do \
+	     $(INSTALL_DATA) $(srcdir)/Instance/Shared/$$f \
+	                     $(makedir)/Instance/Shared; \
+	   done; \
+	   for f in $(INSTANCE_DOC_MAKE_FILES); do \
+	     $(INSTALL_DATA) $(srcdir)/Instance/Documentation/$$f \
+	                     $(makedir)/Instance/Documentation; \
+	   done; \
+	   $(INSTALL_DATA) executable.template $(makedir); \
+	   $(INSTALL_DATA) config.make $(makedir)/$(GNUSTEP_TARGET_LDIR))
+	 $(EC)($(srcdir)/mkinstalldirs $(GNUSTEP_SYSTEM_ROOT)/share; \
+	   $(INSTALL_DATA) $(srcdir)/config.site $(GNUSTEP_SYSTEM_ROOT)/share)
+	$(EC)(if [ "" = "strip" ]; then \
+	   echo "Stripping makefiles and shell scripts..."; \
+	   cd $(makedir); ./strip_makefiles.sh; \
+	   fi)
+
+#
+# NICOLA - Need to clean the following message and print it at the end
+# of the install rule
+#
+#	@echo ""
+#	@echo "IMPORTANT: you need to execute a shell initialization script"
+#	@echo "before you can use gnustep-make.  The command to run the shell"
+#	@echo "initialization script is:"
+#	@echo ". $(makedir)/GNUstep.sh"
+#	@echo "(be careful to put the space after the dot)"
+#	@echo "Please run it now."
+#	@echo ""
+
+uninstall:
+	rm -f $(makedir)/$(GNUSTEP_TARGET_DIR)/which_lib$(EXEEXT)
+	for f in config.guess config.sub install-sh mkinstalldirs \
+		clean_cpu.sh clean_os.sh \
+		clean_vendor.sh cpu.sh ld_lib_path.sh os.sh \
+		transform_paths.sh vendor.sh \
+		ld_lib_path.csh fixpath.sh \
+	        GNUstep.sh GNUstep.csh GNUstep-reset.sh \
+		relative_path.sh strip_makefiles.sh; do \
+	  rm -f $(makedir)/$$f; \
+	done
+	rm -f $(tooldir)/openapp; \
+	rm -f $(tooldir)/debugapp; \
+	rm -f $(tooldir)/opentool; \
+	for f in $(MAKE_FILES); do \
+	  rm -f $(makedir)/$$f; \
+	done
+	for f in $(MASTER_MAKE_FILES); do \
+	  rm -f $(makedir)/Master/$$f; \
+	done
+	for f in $(INSTANCE_MAKE_FILES); do \
+	  rm -f $(makedir)/Instance/$$f; \
+	done
+	for f in $(INSTANCE_SHARED_MAKE_FILES); do \
+	  rm -f $(makedir)/Instance/Shared/$$f; \
+	done
+	for f in $(INSTANCE_DOC_MAKE_FILES); do \
+	  rm -f $(makedir)/Instance/Documentation/$$f; \
+	done
+	rm -f $(makedir)/executable.template
+	rm -f $(GNUSTEP_SYSTEM_ROOT)/share/config.site
+	rm -f $(makedir)/$(GNUSTEP_TARGET_LDIR)/config.make
+	-for f in $(makedir)/$(GNUSTEP_TARGET_CPU) \
+		$(makedir)/$(GNUSTEP_TARGET_DIR) \
+		$(makedir)/Additional \
+		$(makedir)/Auxiliary \
+		$(makedir)/Master \
+		$(makedir)/Instance/Shared \
+		$(makedir)/Instance/Documentation \
+		$(makedir)/Instance; do \
+	  rmdir $$f; \
+	done
+# To really uninstall all of GNUstep, a 'rm -Rf ${GNUSTEP_ROOT}' should do.
+
+clean:
+	rm -f *~ which_lib$(EXEEXT) \
+	  Master/*~ Instance/*~ Instance/Shared/*~
+
+distclean: clean
+	rm -f GNUmakefile config.make config.h
+	rm -f config.cache config.log config.status
+	rm -f openapp
+	rm -f debugapp
+	rm -f opentool
+	rm -f executable.template
+	rm -f GNUstep.sh
+	rm -f GNUstep.csh
+	rm -f fixpath.sh
+	rm -f gnustep-make.spec
+	rm -f GNUsteprc
+
+svn-tag:
+	svn copy $(SVNPREFIX)/trunk $(SVNPREFIX)/tags/make-$(VERTAG) \
+	  -m "Tag version $(VERTAG)"
+
+svn-dist:
+	svn export $(SVNPREFIX)/tags/make-$(VERTAG) \
+	  gnustep-make-$(GNUSTEP_MAKE_VERSION)
+	tar --gzip -cf gnustep-make-$(GNUSTEP_MAKE_VERSION).tar.gz gnustep-make-$(GNUSTEP_MAKE_VERSION)
+	rm -rf gnustep-make-$(GNUSTEP_MAKE_VERSION)
+
+cvs-tag:
+	cvs -z3 rtag make-$(VERTAG) make
+
+cvs-dist:
+	cvs -z3 export -r make-$(VERTAG) make
+	mv make gnustep-make-$(GNUSTEP_MAKE_VERSION)
+	tar --gzip -cf gnustep-make-$(GNUSTEP_MAKE_VERSION).tar.gz gnustep-make-$(GNUSTEP_MAKE_VERSION)
+	rm -rf gnustep-make-$(GNUSTEP_MAKE_VERSION)
+
+cvs-snapshot:
+	cvs -z3 export -D now make
+	mv make gnustep-make-$(GNUSTEP_MAKE_VERSION)
+	tar --gzip -cf gnustep-make-$(GNUSTEP_MAKE_VERSION).tar.gz gnustep-make-$(GNUSTEP_MAKE_VERSION)
+	rm -rf gnustep-make-$(GNUSTEP_MAKE_VERSION)
+
+test-RPM_TOPDIR:
+	@(if [ -z "$(RPM_TOPDIR)" ]; then                                  \
+	  echo "Error - RPM_TOPDIR variable not set.";                     \
+	  echo "You need to set it to the top of your rpm directory tree"; \
+	  exit 1;                                                          \
+	fi)
+
+# The check for rpmbuild is for old RPM versions which didn't have
+# rpmbuild and used 'rpm -ba' instead.  It can be removed when we are
+# reasonably sure no more old RPM versions (not having rpmbuild), are
+# still around.
+rpm: test-RPM_TOPDIR dist
+	cp ../gnustep-make-$(GNUSTEP_MAKE_VERSION).tar.gz $(RPM_TOPDIR)/SOURCES/
+	cp gnustep-make.spec $(RPM_TOPDIR)/SPECS/
+	cd $(RPM_TOPDIR)/SPECS/
+	if which rpmbuild > /dev/null 2>/dev/null; then \
+	  rpmbuild="rpmbuild"; \
+	else \
+	  if which rpm > /dev/null 2>/dev/null; then \
+	    rpmbuild="rpm"; \
+	  else \
+	    echo "Error: You don't have rpm installed!"; \
+	    rpmbuild="rpmbuild"; \
+	  fi; \
+	fi; \
+	$${rpmbuild} -ba gnustep-make.spec
+
+generated-files: GNUmakefile GNUstep.sh GNUstep.csh fixpath.sh config.h config.make debugapp openapp opentool gnustep-make.spec executable.template
+
+GNUmakefile: GNUmakefile.in config.status
+	$(SHELL) config.status
+
+GNUstep.sh: GNUstep.sh.in
+	$(SHELL) config.status
+
+GNUstep.csh: GNUstep.csh.in
+	$(SHELL) config.status
+
+fixpath.sh: fixpath.sh.in
+	$(SHELL) config.status
+
+config.h: config.h.in
+	$(SHELL) config.status
+
+config.make: config.make.in Version
+	$(SHELL) config.status --recheck
+
+debugapp: debugapp.in
+	$(SHELL) config.status
+
+openapp: openapp.in
+	$(SHELL) config.status
+
+opentool: opentool.in
+	$(SHELL) config.status
+
+gnustep-make.spec: gnustep-make.spec.in Version
+	$(SHELL) config.status --recheck
+
+executable.template: executable.template.in
+	$(SHELL) config.status

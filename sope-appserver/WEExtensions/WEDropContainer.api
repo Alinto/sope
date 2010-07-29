@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEDropContainer">
+  <binding name="tags" required="YES" />
+  <binding name="elementName" />
+  <binding name="isAttached" defaults="YES/NO" />
+  <binding name="effect"  />
+  <binding name="swapColor"  />
+  <binding name="action" required="YES" defaults="Actions"/>
+  <binding name="droppedObject" required="YES" />
+</wo>

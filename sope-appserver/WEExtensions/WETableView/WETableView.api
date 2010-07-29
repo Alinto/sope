@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETableView">
+  <binding name="list" required="YES" />
+  <binding name="batchSize" />
+  <binding name="currentBatch" />
+
+  <binding name="item" required="YES" />
+  <binding name="index" />
+  <binding name="identifier" />
+  <binding name="previousItem" />
+  <binding name="previousIndex" />
+
+  <binding name="indexOfFirst" />
+  <binding name="indexOfLast" />
+
+  <binding name="sortedKey" />
+  <binding name="isDescending" />
+  <binding name="groups" />
+  <binding name="showGroup" />
+
+  <binding name="selection" />
+
+  <binding name="collapseOnClient" />
+  <binding name="scrollOnClient" />
+  <binding name="autoScroll" />
+  <binding name="showBatchResizeButtons" />
+
+  <binding name="sortAction" defaults="Actions" />
+  <binding name="firstAction" defaults="Actions"  />
+  <binding name="previousAction" defaults="Actions" />
+  <binding name="nextAction" defaults="Actions" />
+  <binding name="lastAction" defaults="Actions" />
+
+  <binding name="groupColor" />
+  <binding name="fontColor" />
+  <binding name="fontFace" />
+  <binding name="fontSize" />
+
+  <binding name="groupOpenedIcon" />
+  <binding name="groupClosedIcon" />
+
+  <binding name="border" />
+  <binding name="cellspacing" />
+  <binding name="cellpadding" />
+  <binding name="showGroupTitle" />
+</wo>

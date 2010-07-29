@@ -1,0 +1,5 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WERedirect">
+  <binding name="setURL" required="YES" />
+</wo>

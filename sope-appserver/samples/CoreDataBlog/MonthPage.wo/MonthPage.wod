@@ -1,0 +1,90 @@
+// bind template to controller
+
+Posts: WORepetition {
+  list = postDisplayGroup.displayedObjects;
+  item = post;
+}
+RecentPosts: WORepetition {
+  list = recentPostsDisplayGroup.displayedObjects;
+  item = post;
+}
+
+HasDate: WOConditional {
+  condition = post.creationDate.isNotEmpty;
+}
+PostDate: WOString {
+  value          = post.creationDate;
+  valueWhenEmpty = "[no date]";
+  dateformat     = "%d.%m.%y";
+}
+
+PostTime: WOString {
+  value          = post.creationDate;
+  valueWhenEmpty = "[no time]";
+  dateformat     = "%H:%M";
+}
+
+PostTitle: WOString {
+  value          = post.title;
+  valueWhenEmpty = "[no title]";
+}
+PostBody: WOString {
+  value          = post.body;
+  valueWhenEmpty = "[no body]";
+  insertBR       = YES;
+}
+PostAuthor: WOString {
+  value = post.author.name;
+}
+
+
+// Calendar
+
+CalMonthName: WOString {
+  value      = date;
+  dateformat = "%B %Y";
+}
+
+Weeks: WORepetition {
+  list = calMatrix;
+  item = week;
+}
+Week: WORepetition {
+  list = week;
+  item = day;
+}
+Day: WOString {
+  value = day.dayOfMonth;
+}
+
+IsSameMonth: WOConditional {
+  condition = date.monthOfYear;
+  value     = day.monthOfYear;
+}
+IsOtherMonth: WOConditional {
+  condition = date.monthOfYear;
+  value     = day.monthOfYear;
+  negate    = YES;
+}
+
+SetupCalDayDisplayGroup: WOCopyValue {
+  copyValues = {
+    "calendarDisplayGroup.queryMin.creationDate" = "day.beginOfDay";
+    "calendarDisplayGroup.queryMax.creationDate" = "day.tomorrow.beginOfDay";
+  };
+  finishValues = {
+    dummy = "calendarDisplayGroup.qualifyDataSourceAndReturnDisplayCount";
+  };
+}
+
+Count: WOString {
+  value = calendarDisplayGroup.displayedObjects.count;
+}
+
+DayHasArticles: WOConditional {
+  condition = calendarDisplayGroup.displayedObjects.isNotEmpty;
+}
+DayHasNoArticles: WOConditional {
+  condition = calendarDisplayGroup.displayedObjects.isNotEmpty;
+  negate    = YES;
+}

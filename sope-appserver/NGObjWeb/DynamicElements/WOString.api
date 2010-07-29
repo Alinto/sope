@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOString">
+  <binding name="value"        passthrough="NO" required="YES"/>
+  <binding name="escapeHTML"   passthrough="NO" defaults="YES/NO"/>
+  <binding name="numberformat" passthrough="NO" defaults="Number Format Strings"/>
+  <binding name="dateformat" passthrough="NO" defaults="Date Format Strings"/>
+  <binding name="formatter"      passthrough="NO"/>
+  <binding name="valueWhenEmpty" passthrough="NO"/>
+
+  <!-- SOPE -->
+  <binding name="insertBR"       passthrough="NO" defaults="YES/NO"/>
+  <binding name="style"          passthrough="NO" />
+  <binding name="formatterClass" passthrough="NO" />
+  <binding name="format"         passthrough="NO" />
+
+  <validation message="no more than one of &apos;dateformat&apos;, &apos;numberformat&apos;, or &apos;formatter&apos; may be bound">
+    <count test="&gt;1">
+      <bound name="numberformat"/>
+      <bound name="dateformat"/>
+      <bound name="formatter"/>
+    </count>
+  </validation>
+</wo>

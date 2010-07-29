@@ -1,0 +1,8 @@
+davpropget
+==========
+
+Note: you need to use the "simple" HTTP parser:
+  Defaults write davpropget WOHTTPConnectionUseSimpleParser YES
+
+Simple example to retrieve the properties of a WebDAV URL using
+WOHTTPConnection.

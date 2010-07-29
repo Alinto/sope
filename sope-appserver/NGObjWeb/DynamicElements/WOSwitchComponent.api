@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOSwitchComponent">
+  <binding name="WOComponentName" passthrough="NO" required="YES"/>
+
+  <!-- SOPE -->
+  <binding name="otherTagString" />
+</wo>

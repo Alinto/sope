@@ -1,0 +1,3 @@
+usr/lib/*.so
+usr/include
+usr/lib/opengroupware.org/System/Library/Makefiles

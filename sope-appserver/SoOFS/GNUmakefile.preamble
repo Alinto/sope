@@ -1,0 +1,99 @@
+# compilation settings
+
+# TODO: need to fix COMPILE_FOR_GSTEP_MAKE?
+ADDITIONAL_CPPFLAGS  += -Wall -DCOMPILE_FOR_GSTEP_MAKE=1
+ADDITIONAL_OBJCFLAGS += -Wall -Wno-import -Wno-protocol
+
+SOPE_ROOT=../..
+CORE_ROOT=$(SOPE_ROOT)/sope-core
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I.			\
+	-I..			\
+	-I../NGObjWeb		\
+	-I$(CORE_ROOT)		\
+	-I$(CORE_ROOT)/NGStreams/	\
+	-I$(CORE_ROOT)/NGExtensions	\
+	-I$(SOPE_ROOT)/sope-xml
+
+
+ifneq ($(frameworks),yes)
+
+libSoOFS_LIBRARIES_DEPEND_UPON += \
+	-lNGObjWeb \
+	-lNGMime -lNGStreams -lNGExtensions -lEOControl	\
+	-lXmlRpc -lDOM -lSaxObjC
+
+$(SOPED_NAME)_TOOL_LIBS += \
+	-lSoOFS -lNGObjWeb \
+	-lNGMime -lNGStreams -lNGExtensions -lEOControl \
+	-lXmlRpc -lDOM -lSaxObjC
+
+SoOFS_WOBUNDLE_LIBS += \
+	-lSoOFS		\
+	-lNGObjWeb	\
+	-lNGMime	\
+	-lNGStreams -lNGExtensions -lEOControl \
+	-lXmlRpc -lDOM -lSaxObjC
+SoOFS_BUNDLE_LIBS   += $(SoOFS_WOBUNDLE_LIBS)
+
+else
+
+SoOFS_LIBRARIES_DEPEND_UPON += \
+	-framework NGObjWeb \
+	-framework NGMime -framework NGMail \
+	-framework NGStreams -framework NGExtensions -framework EOControl \
+	-framework XmlRpc -framework DOM -framework SaxObjC
+
+$(SOPED_NAME)_TOOL_LIBS += \
+	-framework SoOFS -framework NGObjWeb \
+	-framework NGMime -framework NGMail \
+	-framework NGStreams -framework NGExtensions -framework EOControl \
+	-framework XmlRpc -framework DOM -framework SaxObjC
+
+endif
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	. ../NGObjWeb \
+	$(SOPE_ROOT)/sope-mime			\
+	$(SOPE_ROOT)/sope-mime/NGMail		\
+	$(SOPE_ROOT)/sope-core/NGStreams	\
+	$(SOPE_ROOT)/sope-core/NGExtensions	\
+	$(SOPE_ROOT)/sope-core/EOControl	\
+	$(SOPE_ROOT)/sope-xml/DOM		\
+	$(SOPE_ROOT)/sope-xml/XmlRpc		\
+	$(SOPE_ROOT)/sope-xml/SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+ifeq ($(findstring _64, $(GNUSTEP_TARGET_CPU)), _64)
+SYSTEM_LIB_DIR += -L/usr/local/lib64 -L/usr/lib64
+else
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
+endif
+
+
+
+# platform specific settings
+
+ifneq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+# OpenBSD does not require libcrypt
+ifneq ($(findstring darwin, $(GNUSTEP_TARGET_OS)), darwin)
+# and neither does MacOSX? ...
+sope_TOOL_LIBS += -lcrypt
+endif
+endif
+
+ifeq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+$(SOPED_NAME)_TOOL_LIBS += -liconv
+endif

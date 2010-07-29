@@ -1,0 +1,9 @@
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOxExtTest: updated for SOPE:X 2.x
+
+2004-03-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WOxExtTest: Added some missing resources to the project
+
+	* ChangeLog: created.

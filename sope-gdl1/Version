@@ -1,0 +1,10 @@
+#
+# This file is included by library makefiles to set the version information 
+# of the executable.
+
+MAJOR_VERSION=4
+MINOR_VERSION=9
+# the SUBMINOR_VERSION is set by the Version file inside of a library project
+
+SOPE_MAJOR_VERSION=4
+SOPE_MINOR_VERSION=9

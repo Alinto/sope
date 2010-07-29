@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleExecutable</key>
+	<string>PostgreSQL</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.OpenGroupware.SOPE.sope-gdl1.PostgreSQL</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>4.5.48</string>
+	<key>NSPrincipalClass</key>
+	<string>PostgreSQL72Adaptor</string>
+</dict>
+</plist>

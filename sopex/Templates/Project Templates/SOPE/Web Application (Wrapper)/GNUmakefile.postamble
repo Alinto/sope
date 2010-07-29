@@ -1,0 +1,30 @@
+#
+# GNUmakefile.postamble
+# ÇPROJECTNAMEÈ
+#
+# Created by ÇUSERNAMEÈ on ÇDATEÈ
+#
+
+-include GNUmakefile.postamble.local
+
+# Add support for apple-generic versioning if
+# $(NAME)_CURRENT_PROJECT_VERSION is set
+
+ifneq ($($(NAME)_CURRENT_PROJECT_VERSION),)
+
+clean::
+	rm -f $(VERS_FILE)
+
+
+distclean:: clean
+
+
+before-$(NAME)-all::
+	@ rm -f $(VERS_FILE)
+
+
+$(VERS_FILE):
+	@ echo "Building version file"
+	@ echo " const unsigned char $(NAME)VersionString[] = \"@(#)PROGRAM:$(NAME) PROJECT:$(NAME)-$($(NAME)_CURRENT_PROJECT_VERSION) DEVELOPER:$(USER) BUILT:\" __DATE__ \" \" __TIME__ \"\n\";"  > $(VERS_FILE)
+	@ echo " const double $(NAME)VersionNumber = (double)$($(NAME)_CURRENT_PROJECT_VERSION);" >> $(VERS_FILE)
+endif

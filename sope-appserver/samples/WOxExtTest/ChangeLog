@@ -1,0 +1,51 @@
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added linking against frameworks
+
+2005-08-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed gcc 4.0 warnings
+
+2004-09-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Resources/TreeView.plist: fixed a missing semicolon (breaks on
+	  MacOSX)
+
+2004-09-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble (WOxExtTest_LIB_DIRS): fixed some linking path
+
+2004-06-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* KeyValueConditional.m: added ivars
+
+2004-03-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* added a test page for WEQualifierConditional
+
+2004-01-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use common.h instead of Foundation to improve compilation on OSX
+
+2003-12-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* general visual cleanups
+
+	* TreeView.m: added some component variables
+
+2002-10-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* TabView.wox: added demo for background-image tabs
+
+2002-08-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* added example for <var:string />
+
+Wed Jan 23 15:59:31 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NSCoding, to support WOFileSessionStore
+
+Wed Jan 23 15:59:24 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* created ChangeLog
+

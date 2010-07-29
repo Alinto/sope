@@ -1,0 +1,158 @@
+/* 
+** Plone style sheet for Netscape 4 and other non-CSS2-compatible browsers.
+** Alexander Limi, 2002 - http://limi.net
+**
+** Tip: don't use margins or floats in NS4 - it freaks out.
+*/
+
+/* DTML instructions to set caching headers.
+*/
+
+/*
+*/
+
+/* Basic Elements */
+body, td, th, div, span, table { font-family: Verdana, Helvetica, sans-serif; }
+body  { background: White; color: Black; padding: 0; }
+a     { text-decoration: none; color: #436976; }
+p     { font-family: Verdana, Helvetica, sans-serif; }
+p a   { text-decoration: underline; }
+p img { border: 0; }
+hr    { margin:0; padding: 0; }
+h1, h2, h3, h4, h5, h6 { color: Black; }
+form  { border: none; }
+textarea {  }
+input  {  }
+select {  }
+abbr, acronym, .explain { border-bottom: 1px dotted #436976; cursor: help; }
+code   { }
+pre    { padding: 1em; border: 1px solid #8cacbb; background-color: #dee7ec; }
+
+/* Structural elements */
+div.top { background: transparent; width: 100%; }
+div.searchBox { float: right; text-align: right; }
+div.tabs { padding: 0 0 0 1em; margin: 0; }
+div.tabs a { background: transparent; color: #436976; font-weight: normal; }
+div.tabs a.selected { background: #DEE7EC; color: #436976; font-weight: normal; }
+div.personalBar { text-align: right; margin: 0; }
+div.personalBar a{ font-weight: normal; }
+div.pathBar { padding: 0 0 0 1em; margin: 0;}
+table.columns { width: 100%; }
+table.columns td.left { vertical-align: top; padding-top: 2em; width: 15%; }
+table.columns td.main { vertical-align: top; padding-top: 2em; width: 70%; }
+table.columns td.right { vertical-align: top; padding-top: 2em; width: 15%; }
+div.contentTabs { padding: 0;}
+div.contentTabs a { background: transparent; color: #578308; font-weight: normal; }
+div.contentTabs a.selected { background: #CDE2A7; color: #578308; font-weight: normal; }
+div.contentTabs a:hover { background-color: #CDE2A7; }
+div.contentBar {  }
+div.document { background: White; }
+div.editableDocument { border: 1px solid #74AE0B; padding: 0em 1em 0em 1em; }
+div.message { background: #FFCE7B; font: bold 80% Verdana, Helvetica, Arial, sans-serif; padding: 0.5em 1em; vertical-align: middle; }
+.description { font-family: Verdana, Helvetica, Arial, sans-serif; display: block; }
+.footer { clear: both; float: none; padding: 0em 0em 0em 0em; text-align: center; }
+
+/* Widgets */
+div.row     { clear: both; }
+div.rowEven { clear: both; }
+div.rowOdd  { clear: both; }
+
+.group  { border: 1px solid #8cacbb; padding: 1em; }
+.legend { font-weight: bold; }
+
+input.standalone { cursor: pointer; font-weight: normal; }
+input.context    { cursor: pointer; font-weight: normal; }
+
+.error    { background: #FFCE7B; border: 1px solid #FFA500; }
+.required { background: url(required.gif) right no-repeat; }
+.label    { font-weight: bold; padding: 0em 0em; }
+.field    { padding: 0em 0em 0em 0em; text-align: left; }
+.info     { padding: 0em 0em 0.2em 0em; text-align: left; }
+div.help  { font-weight: normal; }
+span.card { 
+  background:   #DEE7EC; 
+  border-color: #8CACBB; 
+  border-width: 1px; 
+  border-style: solid; 
+  text-align:   center;
+}
+
+span.left  { 
+  float:      left; 
+  text-align: left; 
+  width:      40%; 
+}
+span.right { 
+  float:      right; 
+  text-align: right; 
+  width:      40%; 
+}
+
+table.listing { }
+table.listing th { 
+  background:  #DEE7EC; 
+  color:       Black; 
+  font-weight: normal; 
+  padding:     0em 1em 0em 1em; 
+}
+table.listing tr.odd  { background: transparent; }
+table.listing tr.even { background: #F7F9FA; }
+table.listing td      { padding: 0em 1em;}
+table.listing a:hover { text-decoration: underline; }
+div.boxDetails        { text-align: right; }
+
+div.box {
+    border: 1px solid #8CACBB;
+    margin-bottom: 1em;
+}
+
+.boxTitle {
+    background: #DEE7EC;
+}
+
+
+table.box a.comment { 
+  background-image: url(http://docs.opengroupware.org/discussionitem_icon.gif); 
+  background-position: 0px 0px; 
+  padding: 0em 0em 0.5em 2em; 
+}
+table.box a.plain { padding: 0; }
+span.folderName { 
+  font-size: 150%; 
+  font-weight: bold; 
+}
+div.spacer  { }
+.private    { color: Black;  }
+.published  { color: #74AE0B; }
+.pending    { color: #FFA500; }
+.syndicated { color: #008000; }
+.expired    { color: Red;     }
+
+/* Calendar elements */
+div.day { background-color: #FFFFBB; }
+div.date { font-weight: bold; }
+table.calendar { border: 1px solid #8CACBB; text-align: right; }
+table.calendar a { text-decoration: none; color: #436976; }
+table.calendar a:hover { text-decoration: none; }
+table.calendar th { 
+  background-color: #DEE7EC; 
+  color:            Black; 
+  font-weight:      bold; 
+  text-align:       center; 
+}
+table.calendar td { width: 1.5em; padding: 2px; }
+table.calendar td.weekdays { 
+  background-color: #DEE7EC; 
+  border:           1px solid #8CACBB; 
+  border-style:     solid none; 
+  text-align:       center; 
+}
+table.calendar td.event { background-color: #DEE7EC; font-weight: bold; }
+table.calendar td.noevent { }
+table.calendar td.othermonth { background-color: #FFFFFF; border: 1px solid #8CACBB; vertical-align: bottom; }
+table.calendar td.holiday { background-color: #CF6060; border: 1px solid #8CACBB; }
+table.calendar td.todayevent { background-color: #DEE7EC; border: 2px solid #FFA500; font-weight: bold; }
+table.calendar td.todaynoevent { border-collapse: collapse; border: 2px solid #FFA500; }
+
+/*
+*/

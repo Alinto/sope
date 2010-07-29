@@ -1,0 +1,34 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <var:week-overview list="list" item="item" weekStart="weekStart"
+                     const:titleColor="#FFDAAA" const:contentColor="#FAE8B8"
+                     headerRows="abList" footerRows="cdList"
+                     headerRow="item"    footerRow="item"
+                     columnIndex="colIndex">
+
+    <var:week-info>
+      <small><b><i>infos of day</i></b></small><br/>
+      <hr width="80%"/><br/>
+    </var:week-info>
+    
+    <var:week>
+      <b><var:string value="item.title"/></b><br/>
+      <small><var:string value="item.startDate"/></small><br/><br/>
+    </var:week>
+
+    <var:week-header>
+      Row:<var:string value="item"/><br />
+      Column:<var:string value="colIndex"/>
+    </var:week-header>
+
+    <var:week-footer>
+      Row:<var:string value="item"/><br />
+      Column:<var:string value="colIndex"/>
+    </var:week-footer>
+  </var:week-overview>
+
+</var:component>

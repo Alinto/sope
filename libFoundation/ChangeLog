@@ -1,0 +1,3506 @@
+2008-11-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSFileManager.m (createSymbolicLinkAtPath:pathContent:):
+	  fixed ordering of arguments, first argument is the link being
+	  created, second argument is the original file (API CHANGE, CAREFUL!)
+	  (v1.1.7)
+
+2008-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/PropertyListParserUnichar.m (_makeException): fixed a
+	  buffer underflow (idx variable unsigned in step down loop) (v1.1.6)
+
+2006-12-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/PrintfFormatScanner.m: improved handling of NULL valist
+	  arguments (v1.1.5)
+
+2006-08-15  Sebastian Reitenbach  <reitenbach@rapideye.de>
+
+	* Foundation/GNUmakefile (libFoundation_LIBRARIES_DEPEND_UPON): added
+	  -lm on OpenBSD3 (v1.1.4)
+
+2006-07-14  Frank Reppin  <frank@opengroupware.org>
+
+	* added RPM and Debian build specifications (v1.1.3)
+
+2006-07-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/GNUmakefile: include libFoundation.make after common.make
+	  to properly load OBJCFLAGS (fixes another issue with
+	  NSConstantString) (v1.1.2)
+
+2006-07-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* examples/GNUmakefile: properly include libFoundation.make (v1.1.1)
+
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.1.0
+
+	* Foundation/libFoundation.make.in: properly specify 
+	  -fconstant-string-class=NSConstantString to activate the new
+	  constant NSString class
+
+	* Foundation/NSConcreteString.m: activated NSConstantString,
+	  deactivated NXConstantString, this requires GCC 3 plus a matching
+	  runtime (libobjc.1), it obsoletes the lF specific libobjc.lf
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.86
+
+	* makefiles: lookup/install libraries in lib64 when compiling with a
+	  64bit target CPU
+
+	* work on 64bit port. Use %p instead of %08X, use long instead
+	  of int, etc
+
+	* fixed plenty of gcc 4.1 warnings (missing dealloc, conditional
+	  types)
+
+2006-06-22  Frank Reppin  <frank@opengroupware.org>
+
+	* config/i386/openbsd3.9.h <- adjust for 3_9
+
+2006-06-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added i386/OpenBSD 3.9 config file (v1.0.85)
+
+2005-12-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.84
+	
+	* Foundation/NSConcreteCharacterSet.m: added a -description to bitmap
+	  character set. Fixed OGo bug #1594 (checking a bitmap charsets
+	  always returned true, probably due to some gcc4 issue). Uses
+	  'unsigned char' in bitmap macros.
+
+	* Foundation/NSValue.h, NSConcreteNumber.m.sh, NSConcreteNumber.m,
+	  NSDecimalNumber.m: explicitly use 'signed char' in -charValue 
+	  method
+
+	* Foundation/NSConcreteMutableString.m, NSCharacterSet.m: minor code
+	  cleanups
+
+2005-11-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* config.guess/config.sub: updated to files from gstep-make 1.11.0
+	  (v1.0.83)
+
+	* added x86_64 config files based on the i386 ones (v1.0.82)
+
+2005-08-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.81
+
+	* Foundation/NSNotificationCenter.m: do not use NSZone to avoid an
+	  NSString issue with the gcc libobjc
+
+	* examples/Defaults.m (read_command): fixed gcc4 warnings
+
+2005-10-04  Sebastian Ley  <sebastian.ley@mmweg.rwth-aachen.de>
+
+	* config/powerpc64/linux.h: poperly include powerpc64.h instead of
+	  i386.h, fixes bug #1559 (v1.0.80)
+
+2005-09-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.79
+
+	* aclocal.m4: include stdlib.h to avoid a gcc4 warning
+
+	* *GNUmakefile: prefer GNUSTEP_MAKEFILES over GNUSTEP_SYSTEM_ROOT
+
+	* configure.in: use GNUSTEP_MAKEFILES to locate build environment
+	  instead of GNUSTEP_SYSTEM_ROOT
+
+2005-08-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/GNUmakefile: properly set SYSTEM_LIB_DIR so that a correct
+	  libobjc can be found, link against -lm (v1.0.78)
+
+2005-08-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation: removed plenty of gcc4 warnings (v1.0.77)
+
+2005-07-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSValue.h: added NSCopying / NSCoding to @interface as per
+	  Panther documentation (v1.0.76)
+
+2005-06-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m: added +fileURLWithPath: (v1.0.75)
+
+2005-05-17  Frank Reppin  <frank@opengroupware.org>
+
+	* v1.0.74
+	
+	* added OpenBSD 3.7 config file
+	
+	* Foundation/NSExceptionWithoutNested.h: patched to work with current
+	  gcc preprocessors (removed ## parameters)
+	
+2005-05-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* configure.in: check whether GNUstep.sh was sourced prior
+	  configuration but removed requirement to source GNUstep.sh during
+	  compilation (gsfix.make file)
+
+	* GNUmakefile, Foundation/GNUmakefile: stop compilation if
+	  GNUSTEP_SYSTEM_ROOT is not set
+
+2005-05-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.73
+
+	* started workon NSExpression.[hm], NSPredicate*.[hm]
+
+	* Foundation/NSString.m: fixed some gcc 4.0 warnings
+
+2005-04-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: added -initWithBytes:length:encoding: and
+	  -initWithBytesNoCopy:length:encoding:freeWhenDone: methods
+	  (added in Panther) (v1.0.72)
+
+2005-03-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m ([NSString -urlScheme]): fixed an (incorrect!)
+	  gcc warning on an uninitialized variable (v1.0.71)
+
+2005-03-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSURL.m: fixed a parsing bug with HTTP URLs containing an
+	  '@' in the path section, but not in the login/pwd one (v1.0.70)
+	  
+2005-03-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.69
+
+	* Resources/Defaults/NSGlobalDomain.plist: changed default timezone
+	  from MET to GMT
+	  
+	* Foundation/NSUserDefaults.m: some code cleanups
+	
+2005-02-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Resources/GNUmakefile: properly use GNUSTEP_INSTALLATION_DIR instead
+	  of GNUSTEP_SYSTEM_ROOT in Resource install path (OGo bug #727)
+	  (v1.0.68)
+
+2005-01-24  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Foundation/NSString.m: fixed yet another range bug, this time in
+	  compare:options:range:. The implication of this bug was that
+	  -hasSuffix _never_ worked before which probably affects code outside
+	  of lF (v1.0.67)
+
+2004-12-22  Florian G. Pflug  <fgp@phlo.org>
+
+	* Foundation/NSConcreteUnixTask.m: added a hack to avoid OGo bug #616
+	  (some edge condition in child signal handling) (v1.0.66)
+
+2004-11-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.65
+	
+	* added Unicode aware property list and strings file parser. The
+	  parser is slower but required for OGo 1.0a which uses UTF-8 encoded
+	  strings files. You can still enable the fast Latin1 parser by passing
+	  use8bitstringsparser=yes to make
+	
+	* NSDictionary.m: subminor code cleanup
+
+2004-11-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Foundation/NSProcessInfo.[hm]: added -(int)processIdentifier
+	  (v1.0.64)
+
+2004-10-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Foundation/NSConcreteMutableString.m: fixed
+	  -rangeOfCharacterFromSet:options:range:  which didn't honour the
+	  searchRange as it should. Applied some pretty printing and
+	  simplified quite a bit of range operations by using foundation
+	  macros for this purpose. Fixed typos in exception logs.  (v1.0.63)
+
+2004-10-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Foundation/{NSString.m, NSConcreteString.m}: fixed
+	  -rangeOfCharacterFromSet:options:range:  which didn't honour the
+	  searchRange as it should. (v1.0.62)
+
+2004-10-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* examples/GNUmakefile: added FHS pathes to SYSTEM_LIB_DIR, so that
+	  GS dirs are searched first (v1.0.61)
+
+2004-09-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m: added parsing of user/password for generic URLs
+	  (v1.0.60)
+
+2004-09-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v1.0.59
+
+	* Foundation/NSBundle.[hm]: added some Cocoa additions,
+	  -pathForResource:ofType:inDirectory:forLocalization: and
+	  -pathsForResourcesOfType:inDirectory:forLocalization:. Please note
+	  that the latter doesn't work at all, as the original implementation
+	  of -pathsForResourcesOfType:inDirectory: is very incomplete.
+
+2004-09-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* examples/GNUmakefile: fixed a typo (OGo bug #913) (v1.0.58)
+
+2004-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.57
+
+	* examples/GNUmakefile (ADDITIONAL_LIB_DIRS): added missing
+	  -L/usr/local/lib to pick up a libobjc installed there
+
+	* Foundation/NSBundle.m (+_fileResourceNamed:extension:inDirectory:):
+	  catch nested calls to the function (helps with some broken setup
+	  conditions)
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSBundle.m: support "combo" bundles in flattened setups
+	  (uses Info.plist to determine the NSExecutable), find libFoundation
+	  resources in GNUSTEP_PATHPREFIX_LIST and GNUSTEP_PATHLIST (v1.0.56)
+
+	* Foundation/NSBundle.m ([NSBundle +isFlattenedDirLayout]): fixed a
+	  small bug in flattened detection (v1.0.55)
+
+	* added hack to install libFoundation in FHS locations using, the
+	  library, its headers, the tools and the resources will be installed
+	  in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local) (v1.0.54)
+	
+	* v1.0.53
+
+	* Resources/GNUmakefile: added FHS_INSTALL_ROOT variable, when
+	  compiling with "make FHS_INSTALL_ROOT=/usr/local", resources will be
+	  copied to /usr/local/share/libFoundation
+
+	* Foundation/NSTimeZone.m ([NSTimeZone +defaultTimeZone]): detect an
+	  endless recursion in the setup phase if the NSGlobalDomain property
+	  list is broken
+
+	* Foundation/realpath.m: fixed a typo (resove=>resolve)
+
+	* Foundation/NSPathUtilities.m: added /usr/local/share/ and /usr/share
+	  to some Library search paths, added support for GNUSTEP_PATHLIST in
+	  addition to GNUSTEP_PATHPREFIX_LIST
+
+	* Foundation/NSBundle.m: assume flattened if no GNUSTEP_SYSTEM_ROOT is
+	  set, also look for resources in /usr/local/share/libFoundation and
+	  /usr/share/libFoundation, added +isFlattenedDirLayout method
+
+2004-07-25  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSString.m(initWithUTF8String:): check cstr argument for
+	  NULL pointer (would break on OSX?), set range location to NSNotFound
+	  when nothing was found (not checked for full coverage) (v1.0.52)
+
+2004-07-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSURL.h: added missing prototype for -initWithString: 
+	  (v1.0.51)
+
+2004-07-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.50
+	
+	* Foundation/NSString.m: log an incompatibility with MacOSX
+	
+	* Foundation/NSObject.m: fixed a compilation warning with gcc 3.4 
+
+2004-07-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Foundation/NSDebug.m: new file containing the function 
+	  _NSPrintForDebugger() which is used by gdb to print Objective-C
+	  objects via the builtin 'po' command. (v1.0.49)
+
+2004-06-24  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Foundation/NSCalendarDate.m: fixed bug in -dateByAddingYears:...
+	  where an edge case with negative month values was not being taken
+	  into account. (v1.0.48)
+
+2004-06-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Foundation/NSCalendarDateScanf.m: added private category to
+	  NSScanner, implementing
+	  -(BOOL)scanInt:(int *)_value exactNumberOfDigits:(unsigned int)_len;
+	  which is used by NSCalendarDateScanf in order to correctly parse
+	  formats which don't have break characters/delimiters between format
+	  symbols. (v1.0.47)
+
+2004-05-24  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Foundation/NSCalendarDate.m: implemented -(unsigned)hash (v1.0.46)
+
+2004-05-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NSTimeZone.h to improve Cocoa compatibility (v1.0.45)
+
+2004-04-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSCharacterSet.m (+characterSetWithContentsOfFile:):
+	  avoid recursion if character set could not be loaded in the init
+	  phase, match the Panther behaviour of returning an empty charset
+	  if the file could not be loaded. Does not throw an exception anymore
+	  (v1.0.44)
+
+2004-04-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSData.m: added support for OSX 10.2 method:
+	  -initWithBytesNoCopy:length:freeWhenDone: (v1.0.43)
+
+2004-03-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* examples/Defaults.m: minor code cleanups (v1.0.42)
+
+2004-03-31  Christian Kesselheim  <ckesselh@infeurope.lu>
+	
+	* examples/Defaults.m: minor patch to fix OGo bug #600
+
+2004-03-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSPathUtilities.m: fixed some broken edge conditions in
+	  -pathExtension and -lastPathComponent (if separators could not be 
+	  found) (v1.0.41)
+
+2004-03-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.40
+
+	* Foundation/NSCalendarDate.m(-compare:): fixed comparisons against
+	  nil (now behaves like Cocoa and returns NSOrderedSame), replaced
+	  assertion exception with an error log
+
+	* Foundation/NSDate.m: streamlined source formatting
+
+2004-03-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.39
+
+	* NSCalendarDate.m, NSConcreteTimeZone.m: minor cleanups and 
+	  improvements
+	
+	* minor speed improvement for -timeZoneForSecondsFromGMT:, minor code
+	  cleanups
+
+2004-02-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added timezone info for Europe/Brussels (v1.0.38)
+
+2004-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.37
+
+	* Foundation/NSConcreteString.m: use cached NSString class
+
+	* Foundation/NSDecimal.h: explicitly marked 'exponent' as a signed
+	  char
+
+	* Foundation/NSString+StringEncoding.m: explicitly typed "char" as
+	  "unsigned char" in some locations
+
+2004-02-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* examples/GNUmakefile: applied the patch provided by Sebastian Ley
+	  to fix compilation with gstep-make 1.9 (v1.0.36)
+
+2004-01-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSURL.m: fixed a binary bug in URL processing (v1.0.35)
+
+2004-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteMutableDictionary.m: added some selector caching
+	  for keys (v1.0.34)
+
+2003-12-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.33
+		
+	* Foundation/NSConcreteArray.m: minor optimizations/cleanups, cache
+	  -release method in dealloc
+
+	* Foundation/NSZone.h, Foundation/NSObject.m: cache NSZone class in 
+	  NSObject
+	
+	* Foundation/NSConcreteString.m: added various hardcoded methods to
+	  some (final) string subclasses for speed (located using Valgrind)
+	
+2003-12-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.32
+	  
+	* Foundation/NSString.m: use static references to NSString class
+
+	* Foundation/NSConcreteMutableDictionary.m(mdGet): cross-call selector
+	  caching of -hash and -isEqual:
+
+	* Foundation/NSConcreteString.m(hash): cross-call selector caching
+	  
+	* Foundation/NSConcreteString.m(compare:options:range:): less calls to
+	  objc_class_lookup (was 4.5% of the runtime), use own isKindOfClass 
+	  implementation (~2% of the runtime?)
+
+2003-12-07  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Foundation/GNUmakefile (libFoundation_LIBARIES_DEPEND_UPON): Added
+	  dependency on libdl (v1.0.31)
+	
+2003-11-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSBundle.m: fixed a bug introduced in v1.0.29 (sigh ..)
+	  (v1.0.30)
+
+	* Foundation/NSBundle.m: now should properly detect a flattened
+	  GNUstep environment (that is, look for the code in the proper
+	  location if GNUSTEP_FLATTENED is set in the environment) (v1.0.29)
+
+2003-11-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* applied patches of Sebastian and Nicola (v1.0.28)
+
+Thu Nov 27 13:47:54 2003  Sebastian Ley <sebastian.ley@mmweg.rwth-aachen.de>
+
+	* GNUmakefile (after-install): Prefix libFoundation.make
+	  installation directory with INSTALL_ROOT_DIR.	
+
+Thu Nov 27 01:28:06 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Foundation/GNUmakefile.postamble: Use MKDIRS and MKINSTALLDIRS.
+	
+	* examples/GNUmakefile (GNUSTEP_OBJ_DIR_NAME): Define as well as
+	  GNUSTEP_OBJ_DIR, so that the hack works with old and modern
+	  gnustep-makes.
+
+	* Foundation/libFoundation.make.in: Removed -ldl from system
+	  linking flags.
+
+	* Foundation/libFoundation.make.in: Use the new header location
+	  xxx/Library/Headers for new gnustep-makes, while still detecting
+	  old gnustep-makes and using xxx/Headers for them.
+	
+	* Foundation/GNUmakefile.postamble (after-uninstall): Remove
+	  libFoundation.make from Additional.
+	
+2003-11-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/libFoundation.make.in: added -ldl to system linking
+	  flags as suggested by Nicola (v1.0.27)
+
+	* Foundation/GNUmakefile.postamble: install libFoundation.make in 
+	  $(INSTALL_ROOT_DIR)$(GNUSTEP_MAKEFILES)/Additional as suggested by
+	  Nicola (v1.0.26)
+
+2003-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSConcreteNumber.m: fixed bug introduced in v1.0.24 (wrong
+	  string values were returned) (v1.0.25)
+
+2003-11-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Foundation/NSConcreteNumber.m: various modifications to the concrete
+	  numbers. They are not generated anymore from a shell script but are
+	  now "handwritten". Included is a fix to some formatting of "%llu"
+	  which resulted in just the string "lu" being printed in some parts of
+	  the system. Added various tweaks to improve the performance of string
+	  handling a lot (eg NSString class is cached, sprintf is used for
+	  format generation instead of stringWithFormat, a static buffer is
+	  used) (v1.0.24)
+
+2003-11-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.23
+
+	* config/i386: added solaris2.9.h (a copy of solaris2.5.1.h) 
+
+	* NSURL.m: improved description of NSURL objects
+
+2003-10-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.22
+
+	* started new classes: NSStream, NSInputStream, NSOutputStream, NSError
+	  - so far no real implementation
+
+	* Foundation: added NSSortDescriptor.m and related methods based on
+	  the implementation in skyrix-core
+
+Tue Oct 28 19:19:57 2003  Martin Hoerning  <martin@opengroupware.org>
+
+	* Foundation/NSCalendarDate.m: 
+	 (dateByAddingYears:months:days:hours:minutes:seconds:)
+	 fixed timeOfDay computation when changing timeZoneDetail
+	 (v1.0.21)
+
+2003-09-07  Marcus Mueller <znek@mulle-kybernetik.com>
+
+	* GNUmakefile: prevent GNUmakefile from getting wiped out on distclean
+
+	* Foundation/GNUmakefile: Hardcoded OBJC_RUNTIME=GNU as all other
+	  support has been removed anyways
+
+	* Foundation/libFoundation.make.in: Corrected AUXILIARY_CPPFLAGS to
+	  include the correct path
+
+	* examples/GNUmakefile: Correctly set ADDITIONAL_INCLUDE_DIRS instead
+	  of ADDITIONAL_CPPFLAGS (probably some old leftovers?). Also removed
+	  support for 'nx' and removed removal of GNUmakefile at distclean
+
+2003-08-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.20
+
+	* Foundation/NSException.m ([NSException -raise]): fixed for broken
+	  compilers (called -invokeUncaughtExceptionHandler instead of
+	  -invokeUncaughtExceptionHandlerWithException:) 
+	  (OpenBSD, may relate to OGo Bug 131)
+
+	* Foundation/NSExceptionWithoutNested.h: added prototypes for
+	  -backtrace and -printBacktrace to fix warning
+
+2003-08-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* let the makefiles grep the version from the "Version" file, so that
+	  we don't need to remake the configure script each time we want to
+	  increase the library subminor version (v1.0.19)
+
+2003-08-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: added implementation of 
+	  -stringByTrimmingCharactersInSet: method provided by Max Berger and
+	  fixed some trimming methods to use NSCharacterSet (v1.0.18)
+
+2003-08-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSUserDefaults.m ([NSUserDefaults -initWithPath:]): be
+	  tolerant when reading the Languages default (OGo Bug #11) (v1.0.17)
+
+2003-08-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/load.m (objc_load_module): added dlopen patch provided
+	  by Max Berger (v1.0.16)
+
+Tue Jul 29 17:04:14 2003  Helge Hess  <helge.hess@skyrix.com>
+
+	* applied autoconf patches provided by Marcus Mueller 
+	  (znek@mulle-kybernetik.com) to clean up the configuration patches.
+	  Note: from this point on the OGo libFoundation only works with
+	  gstep-make (v1.0.15)
+
+2003-07-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.14
+
+	* applied small FreeBSD patch to aclocal.m4 provided by Marcus Mueller
+	  (thanks!)
+
+	* Foundation/NSConcreteMutableString.m: fixed a cast warning
+
+Mon Jul 14 20:10:03 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* Foundation/NSSet.m, Foundation/PrintfFormatScanner.m: 
+	  use __va_copy to handle va_list arguments (needed for powerpc64 port)
+	
+2003-07-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSFileManager.m ([NSFileManager -removeFileAtPath:handler:]): 
+	  use unlink() instead of remove() if we know that a path is a 
+	  directory, this seems to workaround a bug in RH 9.0 glibc 2.3 ?
+	  (v1.0.13)
+
+2003-06-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: fixed some unsigned/signed bugs introduced in
+	  v1.0.10 (backward search for-loops usually check for "i >= 0" and
+	  unsigned values are always >= 0 ...) (v1.0.12)
+
+2003-06-11  Jan Reichmann <jr@skyrix.com>
+
+	* Foundation/NSCalendarDate.m ([NSCalendarDate -initWithString:calendarFormat:locale:]): 
+	  fixed a bug in parsing 2-digit years (year value was added twice 
+	  leading to wrong 4-digit year values) (v1.0.11)
+
+2003-06-06  Jan Reichmann <jr@skyrix.com>
+
+	* v1.0.10
+	
+	* major fixes for gcc 3.3 compilation in almost any source file 
+	  (signed/unsigned problems, THROW => -raise)
+
+	* Foundation/NSString.m: moved charset processing into a separate
+	  file (NSString+Encoding.m)
+
+2003-04-26  Helge Hess  <helge.hess@skyrix.com>
+	
+	* Foundation/common.h, NSDictionary.m: added a macro to copy va_list 
+	  structures (required for powerpc64) (v1.0.9)
+	
+2003-05-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSCalendarDate.m (MAX_YEAR): set back to 2038, since
+	  the timezone files contain date values ending in 2037 (v1.0.8)
+
+2003-04-30  Helge Hess  <helge.hess@skyrix.com>
+	
+	* Foundation/NSCalendarDate.m (MAX_YEAR): configured 2030 as the
+	  maximum year supported (was 2300) (v1.0.7)
+	
+2003-02-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* examples/GNUmakefile.gnustep: added examples to makefile, the 
+	  examples are only build when passing "examples=yes" to make
+
+2003-02-17  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m: do not default to port 80 for generic URLs (only
+	  with HTTP URLs) (v1.0.6)
+
+2003-02-14  Helge Hess  <helge.hess@skyrix.com>
+	
+	* Resources/TimeZoneInfo: added CLST (Chile) and SAST (South Africa)
+	  timezone files (v1.0.5)
+	
+2003-01-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.4
+	
+	* Foundation/NSURL.m: prepared _NSAbsoluteHTTPURL class for "httpu" 
+	  requests
+	
+	* Foundation/NSTimeZone.m(+initialize): do not abort program if the
+	  timezone information could not be found, instead log the problem
+	  and continue (program will probably fail later)
+	
+	* Foundation/NSString.m: removed some aborts on positions that are
+	  never entered
+	
+	* Foundation/NSArchiver.m:
+	  replaced an abort() with a NSException (program was aborted when
+	  reading some broken archives)
+	
+	* Foundation/NSCalendarDate.m:
+	  instead of aborting the program a NSRangeException is thrown if too
+	  large datevalues are passed to NSCalendarDate (eg year 5600)
+
+2003-01-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSDictionary.m: added small performance improvement for
+	  empty dictionaries, added a log if an NSNull object is encoded in a
+	  property list, use Calloc instead of Malloc for array allocations
+	  (v1.0.3)
+	
+Thu Jan 16 15:19:16 2003    <jan@skyrix.com>
+	
+	* Foundation/NSString.m: fixed dataUsingEncoding, use dynamic 
+	  allocation of memory for string-length > 200 bytes to prevent 
+	  stack overflow (v1.0.2)
+
+Thu Jan  2 10:46:21 2003  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSFuncallException.h: added explicit macros for NSAssertX
+	  to reduce compiler warnings introduced with gcc 3.2 (v1.0.1)
+
+2002-11-20  Helge Hess  <helge.hess@skyrix.com>
+	
+	* Foundation/NSURL.m: fixed a bug with invalid port numbers in
+	  -absoluteString
+	
+2002-11-13  Helge Hess  <helge.hess@skyrix.com>
+	
+	* marked libFoundation 1.0.0 - it's stable for years now, should
+	  become a proper stable version number
+	
+	**********************************************************************
+	
+	* NSURL: added support for login/password in HTTP URLs, use HTTP
+	  URL class for https scheme URLs
+	
+	* added SGT (Singapure Time) as a copy of GMT+0800
+
+2002-10-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/GNUmakefile.gnustep: define SOVERSION to be major.minor
+	  instead of just major
+
+Tue Oct 22 12:27:56 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* Foundation/NSString.m: add complete ISO-Latin-9 and Windows-1252 
+	  encoding support (v0.9.5)
+
+2002-10-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: changed so that ISO-Latin-1 is used if an
+	  unknown encoding was found (before an NSAssert threw an exception
+	  eg resulting in SuSE Bug 20913) (v0.9.4)
+
+2002-10-14  Helge Hess  <helge.hess@skyrix.com>
+	
+	* added timezone info for Europe/Berlin, Europe/Paris
+	
+	* added header file "NSScriptKeyValueCoding.h" as available in MacOSX
+
+2002-07-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteUTF16String.m: allow lossy conversion when
+	  creating cString's. This way it doesn't immedialy break applications
+	  on unicode strings but rather allows them to operate at least
+	  partially (this "fix" is probably removed when all stuff is unicode
+	  aware).
+
+2002-07-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteData.m: NSConcreteMutableData doesn't use 
+	  add_behaviour anymore ... much easier to debug
+
+	* Foundation/NSData.m ([NSData -subdataWithRange:]): use zone of
+	  parent object for allocation, not the default zone
+
+Mon Jul  8 15:15:46 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* Foundation/NSUserDefaults.m: create default directories on demand 
+          (SuSE bug 16582)
+
+2002-07-08  Jan Reichmann  <jr@skyrix.com>
+
+	* Resources/TimeZoneInfo: added half-hour timezones (eg GMT+0330)
+
+2002-07-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteData.m: added -init method
+
+2002-06-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m ([NSURL -_pathForRelativeURL:]): fixed relative
+	  path processing (a slash was always added)
+
+2002-06-13  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSTimeZone.m ([NSTimeZone +setDefaultTimeZone:]): do
+	  not write default timezone into userdefaults
+	
+	* Foundation/NSConcreteMutableString.m ([NSMutableSimple -initWithString:]): 
+	  method tried to create an instance of NSMutable8BitString, which is
+	  an abstract class (jr, explain that to me !)
+
+2002-06-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteUTF16String.m ([NSInlineUTF -stringRepresentation]): 
+	  added a preliminary implementation of -stringRepresentation (required
+	  for logging of unicode strings)
+
+2002-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m ([NSString -stringByAppendingString:]):
+	  rewrote -stringByAppendingString:
+
+Mon Jun 10 11:24:27 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* Foundation/NSConcreteMutableString.m: add initWithString for
+	  MutableString (warning: has to be moved to TempStr.)
+
+Fri Jun  7 16:24:12 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* Foundation/NSString.m ([NSString +availableStringEncodings]): added
+	  some support for ISO Latin 9 (the charset containing the Euro sign)
+
+	* Foundation/NSConcreteUTF16String.m 
+	  ([NSInlineUTF -initWithCharacters:length:]): 
+	  fixed serious copying bug (only copied half of the string ...)
+
+2002-06-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.h: added NSISOLatin9StringEncoding constant
+
+	* Foundation/NSString.m ([NSMutableString -initWithCharacters:length:]):
+	  added support for (lossy) conversion of Euro sign to Latin1
+
+	* Foundation/NSConcreteMutableString.m ([NSMutable -writeToFile:atomically:]): 
+	  write data in defaultCStringEncoding instead of Latin1
+
+2002-06-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: fixed class-cluster bugs (isa was used
+	  for +alloc instead of the cluster abstract class).
+
+2002-06-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/common.m (NSReadContentsOfFile): fixed gcc3 cpp bug
+
+2002-05-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/common.m: fixed for gcc 3.0 compilation
+
+Mon May  6 12:36:21 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m ([_NSAbsoluteFileURL -absoluteString]): fixed bug,
+	  did return file:/a.txt instead of file:///a.txt
+
+Mon Apr 29 15:35:29 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSHost.m: added a -description
+
+Sun Apr 14 19:29:57 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added fake NSAttributedString (not implemented ..) to be able to
+	  compile EDInternet
+
+Fri Apr 12 19:39:46 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NS*Exception.h: added NSParameterAssert, 
+	  NSCParameterAssert
+
+	* Foundation/libFoundation.make.in (FND_DEFINE): defines -DGNUSTEP=1
+
+Fri Apr  5 14:55:23 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteUnixTask.m: fixed yet another NSTask bug
+
+Wed Apr  3 10:33:38 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Resources/GNUmakefile.gnustep: replaced GNUSTEP_LIBRARIES_ROOT
+	  with GNUSTEP_SYSTEM_ROOT/Libraries to support gstep-make 1.3.0
+
+Thu Mar 14 13:48:03 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSException.m: copies name and reason
+
+	* Foundation/NSFuncallException.h: fixed retain/release
+
+	* Foundation/NSException.m ([NSException +exceptionWithName:reason:userInfo:]): 
+	  fixed -autorelease bug
+
+Wed Mar 13 11:19:22 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSRunLoop.m: also flush Notification ASAP queue before
+	  entering select()
+
+	* Foundation/NSConcreteUnixTask.m: fixed bug, pid-to-task map wasn't
+	  properly teared down after task shutdown ...
+
+	* Foundation/NSConcreteUnixTask.m: can handle multiple childs exiting
+	  at the same time now (check all tasks for termination on SIGCHLD)
+
+	* Foundation/UnixSignalHandler.m: save errno in signal handler
+
+Tue Mar 12 19:09:12 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/UnixSignalHandler.m: fixed bug, _dispatch: was called
+	  on UnixSignalHandler class, but defined as an instance method
+	  which accessed 'self' (so self!=sharedHandler)
+
+	* Foundation/NSNotificationQueue.m: fixed bug, notification queues
+	  didn't correctly register in the instance list ...
+	
+	* Foundation/NSConcreteUnixTask.m: do not "immediatly" notify if task
+	  terminated (previously the notify code was run in a signal handler)
+
+	* Foundation/UnixSignalHandler.m: added logging/debugging, cleanups
+
+Fri Mar  8 17:25:35 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSDictionary.m: applied SuSE patch to fix varargs on
+	  powerpc
+
+Thu Feb 14 15:21:16 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSUserDefaults.m ([NSUserDefaults +standardUserDefaults]):
+	  look for defaults in GNUSTEP_DEFAULTS_ROOT
+
+Thu Feb  7 09:25:28 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSArray.m(-sortUsingFunction:): added selector caching
+
+	* Foundation/NSArray.m(-sortedArrayUsingFunction:): improved memory
+	  usage
+
+Mon Feb  4 17:07:43 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m ([NSTemporaryString -initWithCString:length:]):
+	  fixed temporary string collect bug
+
+Fri Feb  1 11:17:21 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: added support for single-char class
+
+	* Foundation/NSConcreteString.m: added concrete class for single
+	  character strings
+
+Thu Jan 24 19:59:06 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSCalendarDate.m ([NSCalendarDate -initWithString:calendarFormat:locale:]): 
+	  release pool and date immediatly if string couldn't be parsed
+
+Wed Jan 16 16:42:33 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSUserDefaults.m ([NSUserDefaults +standardUserDefaults]): 
+	  search for user-defaults files in $GNUSTEP_USER_ROOT instead of
+	  $HOME if GNUstep compilation is enabled
+
+Wed Dec 19 16:21:11 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* Foundation/NSNotificationCenter.m: memory for object entries without 
+	observer will be freed
+
+Tue Dec 18 17:54:01 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* Foundation/NSNotificationCenter.m: fixed HashTable initialisation bug
+
+Tue Dec 18 12:16:34 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSNotificationCenter.m: added some selector caching
+
+Mon Dec 17 19:15:47 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSObjectAllocation.m (NSExtraRefCount): replaced "int"
+	  with "unsigned int"
+
+Tue Nov 27 18:57:02 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSBundle.m: added debugging info
+
+Tue Nov 27 13:00:14 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSAutoreleasePool.m, Foundation/NSObject.m:
+	  speed optimized -autorelease (avoids method calls)
+
+Fri Nov 23 14:23:27 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSCalendarDate.m ([NSCalendarDate -initWithString:calendarFormat:locale:]):
+	  added special handling for 2-digit years ...
+
+Wed Nov 21 16:07:11 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSCalendarDate.m: even more sanity checks ...
+
+Wed Nov 21 16:00:10 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSCalendarDate.m (Long2Date): added sanity check on year
+
+Tue Nov 13 17:58:37 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m ([NSTemporaryString -initWithContentsOfFile:]): 
+	  can detect/decode UTF-16 content
+
+Tue Nov 13 14:04:25 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/PropertyListParser.m: detect unicode plist files (files
+	  starting with either FFFE or FEFF
+
+Fri Nov  9 13:24:33 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSBundle.m ([NSBundle -pathsForResourcesOfType:inDirectory:]): 
+	  fixed retain bug
+
+Tue Nov  6 12:51:56 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSNull.m ([NSNull -stringRepresentation]): return '""', to
+	  be valid in plists
+
+Tue Nov  6 12:51:02 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: enabled some unicode support (was marked
+	  #if 0 ???)
+
+Mon Nov  5 14:55:55 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSNull.m: added -stringValue (empty string)
+
+Fri Nov  2 18:23:32 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteUTF16String.m: added
+	  -getCString:maxLength:range:remainingRange:
+
+Fri Nov  2 18:20:00 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteString.m: moved unicode string implementation
+	  to NSConcreteUTF16String
+
+Fri Nov  2 12:48:24 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m ([NSString +initialize]): load LC_CTYPE and
+	  LC_LOCALE from environment into C locale
+
+Thu Oct 25 09:47:37 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: zero-len strings result in 0 int/double/float
+	  values
+
+Wed Oct 24 15:43:43 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteString.m (NSInlineUTF16String): implemented
+	  getCString:, getCString:maxLength:
+	
+Tue Oct 23 14:49:25 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteTimeZone.m ([NSConcreteTimeZoneFile -timeZoneForDate:]): 
+	  fixed RETAIN bug / leak
+
+Mon Oct 22 14:37:45 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSPathUtilities.m ([NSString -stringByStandardizingPath]): 
+	  fixed bug, components-count wasn't adjusted after removing elements
+
+Thu Oct 18 16:15:40 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Resources/TimeZoneInfo/CET: fixed to use CET/CEST instead of MET
+
+Wed Oct 10 15:43:22 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m ([NSString -isAbsoluteURL]): support javascript:
+	  scheme as absolute URL
+
+Mon Oct  1 16:57:14 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m: make absolute file-urls
+
+Mon Oct  1 12:29:55 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSUtilities.m: use fprintf(stderr) for printing log ...
+
+Tue Sep 25 11:58:41 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteArray.m: reduced msg-dispatch during remove
+
+Mon Sep  3 17:16:27 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteString.m(dataUsingEncoding): determine data
+	  length using strlen instead of -cStringLength (buggy ???)
+
+Mon Aug 27 20:23:40 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: instantiate NSUTF16String if a unicode 
+	  character is found ...
+
+	* Foundation/NSString.m ([NSString -copyWithZone:]): only retain the
+	  (immutable) string and return self
+	
+Tue Aug 21 11:04:07 2001  Martin Hoerning  <mh@skyrix.com>
+
+	* Foundation/NSConcreteScanner.m ([NSConcreteScanner dealloc]): 
+	    - added (memory bug fixed)
+
+Thu Aug 16 16:22:42 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/GCArray.m: fixed malloc/calloc calls with 0-size
+
+	* NSString, NSArray, NSDictionary, NSData: added 
+	  -initWithContentsOfURL: and +*WithContentsOfURL: methods
+
+Tue Aug 14 16:14:08 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSBundle.m ([NSBundle +bundleWithPath:]): query cache,
+	  use standard RC
+
+Mon Aug 13 17:17:43 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: fixed memory leak in NSInitStringWithData
+
+Sat Aug 11 13:53:40 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSAutoreleasePool.m: added -autoreleaseCount method
+
+Wed Aug  8 10:51:50 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/UnixSignalHandler.m ([UnixSignalHandlerListItem -invokeForSignal:]): 
+	  use numberWithInt: instead of numberWithLong: for signal id
+
+Fri Jun 15 18:33:48 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m: added support for mailto URL
+
+Tue Jun 12 19:02:35 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/PropertyListParser.m: improved error output
+
+Tue Jun  5 16:07:25 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m ([NSString -writeToFile:atomically:]): generate
+	  data to write using -dataUsingEncoding:+defaultCStringEncoding
+
+Tue Jun  5 15:57:34 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSConcreteString.m: started UTF16 support
+
+Fri May 25 13:20:13 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m ([NSURL -initFileURLWithPath:]): renamed method
+
+Wed May 16 23:29:15 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSDecimalNumber.h: started NSDecimal/NSDecimalNumber
+
+Mon May 14 16:48:24 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSNumberFormatter.m: fixed bug in getObjectValue...
+
+Mon May 14 16:10:31 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSNumberFormatter.m: added capability to set decimal and
+	  thousand separator in format string
+
+Mon May  7 08:58:59 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSArray.m: added -getObjects:range:
+
+Mon May  7 02:35:58 2001  Nicola Pero  <n.pero@mi.flashnet.it>
+
+        * Foundation/lfmemory.h.in (ASSIGN), (ASSIGNCOPY): Fixed - they
+        were *not* retaining the new value when the new value is an
+        expression which returns a different object each time that it is
+        computed.
+
+Mon May  7 00:04:04 2001  Nicola Pero  <n.pero@mi.flashnet.it>
+
+        * Foundation/NSScanner.m ([-scanCharactersFromSet:intoString:]):
+        Bug fix for the case there are only characters to be skipped: move
+        the scanning location after them.
+
+Sun May  6 22:46:22 2001  Nicola Pero  <n.pero@mi.flashnet.it>
+
+        * Foundation/NSArray.m ([NSArray -getObjects:]): Implemented.
+        * Foundation/NSArray.h ([NSArray -getObjects:]): Declared.
+
+Sun May  6 13:04:45 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: smaller perf-improvements in GS support
+
+Mon Apr 30 16:25:24 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m ([NSURL -_absoluteStringForRelativeURL:]): fixed 
+	  bug with relative URL pathes
+
+Mon Apr 30 16:12:35 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSURL.m: added -initWithString:
+
+Sat Apr 21 12:40:12 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* configure.in: added checks for AR, LD, PERL as suggested by 
+	  Andreas Voegele
+
+Thu Apr  5 12:03:31 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* Foundation/NSString.m: fixed bug in -UTF8String (str was not NULL
+	  terminated)
+
+Thu Mar 15 14:06:14 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSAccount.m ([NSUserAccount +initialize]): print warning if
+	  password structure for current user could not be found
+
+Thu Mar 15 14:04:47 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSAccount.m ([NSUserAccount -initWithPasswordStructure:]): 
+	  graceful return with NULL structure as argument
+
+Mon Mar 12 18:12:40 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSDefaultZone.m ([NSDefaultZone -realloc:size:]): catch
+	  realloc with 0 extra bytes
+
+Mon Mar 12 18:11:35 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteData.m ([NSConcreteMutableData -increaseCapacityBy:]): 
+	  catch increase with 0 length
+
+	* Foundation/NSConcreteData.m ([NSConcreteMutableData -appendBytes:length:]):
+	  catch appendBytes with 0 length
+
+Tue Feb 20 18:19:58 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSString.m ([NSTemporaryString -initWithCharacters:length:]): 
+	  fail gracefully on unicode characters
+
+Wed Feb 14 14:51:05 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSNumberFormatter.m: relaxed format handling
+
+Tue Feb 13 19:27:06 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSNumberFormatter.m ([NSNumberFormatter -stringForObjectValue:]): 
+	treat 'nil' values as double 0.0
+
+Thu Feb  8 18:05:52 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteArray.m: fixed init bug in single-object array
+	  (array could contain 'nil' values)
+
+Wed Feb  7 13:06:14 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSURL.m ([_NSAbsoluteURL +URLWithString:]): allow file URL
+ 	  strings starting with '/' (without scheme)
+
+Mon Jan 29 12:01:00 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSInvocation.h: define _C_LNG_LNG if not defined by the
+	  compiler (fix submitted by Elmar Ludwig)
+
+Thu Jan 25 13:57:04 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/Foundation.h: added NSDateFormatter.h/NSNumberFormatter.h
+
+Tue Jan 16 12:41:50 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSTimer.m ([NSTimer -description]): output [self fireDate]
+	  instead of self->fireDate
+
+Mon Jan 15 20:14:56 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* moved to MOF3
+
+Thu Jan 11 11:49:05 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSURL.m: added -isEqual:, -isEqualToURL:
+
+Wed Jan 10 16:48:51 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/GNUmakefile.gnustep (libFoundation_OBJC_FILES): added
+	  NSFileURLHandle.m
+
+Wed Jan 10 16:25:36 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSURL.m: fixed bug in URL parser
+
+Tue Jan  9 18:08:09 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSURL.m: added generic URL, added handle construction
+
+Tue Jan  2 14:01:30 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSURL.m ([_NSAbsoluteFileURL +URLWithString:]): path is
+	  standardized
+
+Tue Jan  2 13:48:11 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSURL.m: fixed bug in File-URL
+
+Fri Dec 29 18:52:02 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSURL.m ([_NSAbsoluteHTTPURL +URLWithString:]): fixed bug
+
+Fri Dec 22 13:36:55 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSObject.h.in: changed inclusion of other headers (NSString,
+	  NSProcessInfo is not included anymore)
+
+	* Foundation/NSString.h: removed inclusion of NSPathUtilities.h
+
+Fri Dec 22 12:07:49 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSObject.h.in: changed include order of headers
+
+Thu Dec 21 14:31:19 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSSet.m ([NSSet -isSubsetOfSet:]): fixed bug
+
+Wed Dec 13 21:22:59 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSURL.m: added some URL parsing, handling
+
+Thu Nov 30 18:03:33 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSSerialization.m: added fake NSSerializer/NSDeserializer
+	  classes
+
+	* Foundation/NSValue.m: fixed bug in -isEqualToValue: reported by
+	  Nicola Pero
+
+	* Foundation/NSFileManager.m ([NSFileManager -fileAttributesAtPath:traverseLink:]):
+	  fixed to look at the 'traverseLink' flag (use lstat if the flag is NO)
+
+Thu Nov 30 04:46:59 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* added various methods to support JIGS
+
+	* Foundation/NSBundle.[hm]: added +allFrameworks fake method
+
+	* Foundation/NSConcreteNumber.m.sh: generate -valueBytes method
+
+Thu Nov 30 03:38:03 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/PropertyListParser.m: fixed serious property list parser
+	  bug. If '*' occured inside of multiline comments, the parser ended
+	  up in an endless loop.
+
+Thu Nov 30 00:54:19 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* added some GNUstep compatibility methods, functions, consts
+
+Wed Nov 29 14:15:39 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSString.m: fixed bug in UTF8 initialization
+
+Thu Oct 19 10:42:16 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* work on NSURL related classes
+
+Wed Oct  4 11:38:04 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSString.m: removed usage of stack-allocated buffers
+
+Tue Sep 26 20:37:23 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* added NSKeyValueCoding.h (added in MacOSX) [no implementation yet]
+
+	* added NSClassDescription class (added in MacOSX)
+
+Mon Sep 25 16:45:20 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* some modifications for Cygwin support
+
+	* Foundation/NSAccount.m: don't declare USER_INFO_11 on Windows
+
+	* added NSNull class (added in MacOSX)
+
+Wed Sep  6 21:19:39 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteString.m, Foundation/NSConcreteMutableString.m:
+ 	  made 'char' types unsigned
+
+Wed Aug 30 11:16:53 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSInvocation.h: added runtime detection macros if not
+	  compiling in the gstep-make environment
+
+	* Foundation/UnixSignalHandler.m: prefer sigaction over sigset
+
+	* fixed compilation bugs with gstep-make-less libFoundation
+
+Tue Aug 29 17:19:49 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSPathUtilities.m: added -pathsMatchingExtensions: method
+
+Tue Jun 13 18:07:11 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSString.m: caches class reference to NSString
+
+	* Foundation/NSArray.m: caches class references to NSArray,
+	  NSConcreteArray, NSMutableArray and NSConcreteMutableArray
+
+	* Foundation/NSObjCRuntime.m, Foundation/NSString.m,
+ 	  Foundation/PropertyListParser.m, Foundation/common.m: doesn't use stack
+ 	  allocated buffers anymore
+
+	* Foundation/NSUtilities.m (NSLogv): optimized, caches Class objects
+	  and doesn't make extensive use autorelease-pools anymore
+
+Fri Jun  9 17:30:49 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/PropertyListParser.m: fixed casting to void ..
+
+Wed May 24 15:14:52 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/PropertyListParser.m: add path info to exceptions in file
+ 	  parsing functions
+
+	* Foundation/NSString.m: added +stringWithUTF8String:,
+	  -initWithUTF8String: and -UTF8String methods
+
+Tue May 23 19:08:48 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/PropertyListParser.m: added duplicate key checks
+
+Wed May 10 16:52:25 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteString.m: added NSShortInline8BitString class,
+	  for 8bit strings smaller than 255 chars (this saves 3 bytes per string)
+
+	* Foundation/NSString.m ([NSString +allocWithZone:]): caches ptr to
+	  NSTemporaryString class
+
+	* Foundation/NSConcreteString.m: added some NSString cluster statistic
+	  collection
+
+	* Foundation/NSString.m (NSTemporaryString): caches ptr to 
+	  NSInline8BitString class
+
+	* Foundation/NSConcreteMutableString.m: doesn't use add_behaviour()
+	  anymore
+
+	* Foundation/NSConcreteString.m: put concrete mutable strings into a
+	  separate source file
+
+Mon May  8 14:42:23 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSUserDefaults.m: added new default keys
+
+	* Foundation/NSException.m: added new exception name constants
+
+	* Foundation/NSCharacterSet.h: added NSOpenStepUnicodeReservedBase
+
+	* Foundation/NSString.h: added new MacOSX encoding specifiers
+
+	* Foundation/NSInvocation.h: added NSObjCValue stuff
+
+	* added NSConnection and NSPortCoder dummy classes and files
+
+Wed May  3 18:21:06 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteTimeZone.m: added -copyWithZone: method (which
+	  just returns self retained)
+
+	* Foundation/NSPosixFileDescriptor.m: added code to catch a lot of
+	  lseek() errors (which were previously ignored)
+
+	* Foundation/NSPipe.m, Foundation/NSConcreteFileHandle.m:
+	  added special file-handle class for Unix pipe's
+
+	* Foundation/NSConcreteFileHandle.m ([NSConcreteFileHandle -readDataOfLength:]): 
+	  fixed bug with calls where length>LONG_MAX
+
+Fri Apr 28 14:13:44 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/FFCallInvocation.m ([FFCallInvocation -initWithSignature:]): 
+	  fixed bug in call of objc_sizeof_type()
+
+Thu Apr 27 18:51:25 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteUnixTask.m ([NSConcreteUnixTask -_execChild]): 
+	  use execvp if no environment was set
+
+Tue Apr 25 11:33:43 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSException.m: added ability to print backtraces using
+	  gdb
+	
+	* Foundation/NSProcessInfo.m ([NSProcessInfo +initializeWithArguments:count:environment:]): 
+	  store argv0 for gdb backtracing facility
+
+Thu Apr 20 15:09:09 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* added NSSocketPort,NSMessagePort classes (not yet finalized at all)
+
+Mon Apr 17 20:23:11 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSUserDefaults.[hm]: fixed spelling bug,
+	  (synchronizeUserDefaults)
+
+Wed Apr 12 11:08:59 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSFileHandle.m, Foundation/NSHost.m: these two try to
+	  startup winsock in +initialize
+
+Mon Apr 10 17:22:27 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSConcreteDictionary.m,NSConcreteMutableDictionary.m: customized
+	  copy and mutable copy methods in concrete classes.
+
+Mon Apr 10 17:07:39 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* rewrote NSConcreteDictionary and NSConcreteMutableDictionary not to
+	  use NSMapTable because of it's memory and callback overhead.
+	  NSConcreteDictionary was renamed NSConcreteHashDictionary and
+	  NSConcreteMutableDictionary was moved to a separate source file.
+
+Mon Apr 10 15:50:45 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteDictionary.m: NSMutableDictionary doesn't
+	  inherit behaviour from NSDictionary anymore
+
+Tue Mar 28 16:09:01 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSObject.m ([NSObject -methodSignatureForSelector:]):
+	  generates id-based signatures if no signature could be found in the
+	  runtime
+
+Mon Mar 20 10:57:02 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteString.m (quoteString): fixed quoting bug in
+	  generation of string representation ('\' wasn't replaced by '\\').
+
+	* Foundation/NSString.m, Foundation/NSConcreteString.m:
+	  fixed bug in UTF8 encoding
+
+Tue Feb 29 12:06:13 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* GNUmakefile.gnustep, NSInvocation.m: added FFCallInvocation support
+
+	* added FFCallInvocation class, a concrete subclass of NSInvocation which
+	  can use the ffcall library
+
+Tue Feb 29 11:45:56 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* configure.in, config.h.in, config.mak.in: added configuration for the
+	  use of the ffcall library.
+
+Tue Feb 22 18:35:56 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/GarbageCollector.m: added methods to allow or deny GC
+	
+	* Foundation/NSNotificationCenter.m ([NSNotificationCenter -postNotification:]): 
+	  disabled garbage collection during notification posting
+
+Mon Feb 21 14:12:42 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* removed calls to 'cString'
+
+Thu Feb 17 13:57:45 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteString.m ([-commonPrefixWithString:options:]): 
+	  fixed bug, cleaned up
+
+	* Foundation/NSString.m ([NSString -commonPrefixWithString:options:]):
+	  cleaned up implementation
+
+2000-02-17    <helge.hess@mdlink.de>
+
+	* added NSConcreteWindowsFileHandle.[hm]
+
+	* NSString.m: removed calls to 'cString'
+
+	* NSObject.m(-autorelease): caches a ptr to the NSAutoreleasePool class
+
+2000-02-15    <helge.hess@mdlink.de>
+
+	* fixed CR 'bugs' introduced during Win commit ..
+
+Thu Mar 10 20:51:13 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* a lot of mingw32 port work, lF is now able to compile as a DLL
+	  using a special gstep-make
+	
+Wed Feb  9 18:25:43 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/GNUmakefile.alone: fixed bug introduced by adding cvtutf.c
+
+Wed Feb  9 17:27:31 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteString.m (quoteString): only quote newlines
+	  and double-quotes
+
+Wed Feb  9 14:42:11 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* worked on mingw32 port (some fixes, support for new headers)
+
+Tue Feb  8 18:22:47 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSCalendarDate.m ([NSCalendarDate -initWithYear:month:day:hour:minute:second:timeZone:]): replaced year 0 with year 2000
+
+Mon Jan 24 15:46:44 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSString.m ([NSString +availableStringEncodings]): 
+	  updated to Unicode, UTF8, Latin1 and ASCII
+	
+	* Foundation/NSString.m ([NSString +defaultCStringEncoding]): 
+	  changed default encoding to ISOLatin1.
+
+	* Foundation/NSString.m ([NSString -dataUsingEncoding:allowLossyConversion:]): 
+	  added several string encoding formats. Assumes that the environment
+	  encoding is ISO Latin1.
+	
+	* Foundation/NSString.m ([NSMutableString -initWithData:encoding:]):
+	  added decoding of UnicodeStringEncoding and UTF8StringEncoding
+	  (both still limited since NSString can only hold 8-bit)
+
+Mon Jan 24 11:19:49 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation: added NSConnection.h and NSDistantObject.h (empty
+	  files added for header-file compatibility)
+
+	* Foundation: added file NSDebug.h (available in both, gstep-base and
+	  MacOSX-S
+
+	* Foundation/NSString: added GSAdditions category with 
+	  stringWithoutPrefix: and stringWithoutSuffix: methods.
+
+	* Foundation/lfmemory.h.in: added DESTROY and ASSIGNCOPY macros to
+	  be more compatible with GNUstep code
+
+Fri Jan 21 15:58:37 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSPathUtilities.m ([NSString +pathWithComponents:]): bugfix
+	  (method was broken)
+
+Thu Jan 20 14:31:39 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSObjCRuntime.m: avoids usage of 'cString'
+
+Wed Jan 19 16:35:47 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSObject.h.in: include lfmemory.h from Foundation if GNUSTEP is not
+	  defined (to support installations without GNUstep)
+
+Wed Jan 19 11:00:57 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSObjectAllocation.m: added allocation log facility
+	  controlled via the 'NSLogAlloc' environment variable
+
+	* Foundation/common.h: added 'WITHOUT_ZONES' define to avoid the
+	  management overhead of zones during memory allocation if they are
+ 	  not used anyway
+
+	* Foundation/GNUmakefile.alone (HFILES): added lfmemory.h to HFILES
+	  and delete it during distclean
+
+Fri Jan 14 20:46:20 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/common.m (Avsprintf): cache the object-format object
+
+	* Foundation/NSAutoreleasePool.m: added instance reuse cache for 
+	NSAutoreleasedPointer
+
+	* Foundation/NSNumber.m (makeInt): caches NSNumbers 0-63, added LRU
+	cache for smaller and bigger ones.
+
+	* Foundation/NSNumber.m ([NSTemporaryNumber -initWithBool:], [NSNumber +numberWithBool:): 
+	  added	shared objects for YES and NO (NSBoolNumber's ..)
+
+Thu Jan 13 19:27:27 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSObjectAllocation.m (NSDeallocateObject): added support
+	  for zombie objects
+
+	* Foundation/*TimeZone*|*Date*: made tz details more smart about the
+	  timezone they belong to.
+
+Wed Jan 12 18:05:50 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSConcreteTimeZone.m ([NSConcreteTimeZone -timeZoneForDate:]): added timeZoneForDate: (new in MacOSX-S)
+
+Mon Jan 10 13:05:28 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSScanner.m ([NSScanner -scanUpToString:intoString:]): 
+	  modified to return YES only if there was a match (previously empty
+	  strings counted as match too)
+
+	* sharedlib.mak (SHARED_LIB_LINK_CMD): fixed bug in linker call
+	  (-W,l,soname= was used instead of -Wl,-soname=)
+
+Tue Jan  4 17:26:37 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSString.m (-hasPrefix:,-hasSuffix:): modified to return
+	  NO if the argument has zero length, as in MacOSXS
+
+Fri Dec 17 04:13:38 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSPathUtilities.m ([NSString -stringByResolvingSymlinksInPath]): 
+	  returns 'self' on error now, as described in MacOSXS documentation.
+	  Adjusted other places in the lF to explicitly check whether the path
+	  exists.
+
+	* Foundation/NSPathUtilities.m ([NSString -stringByStandardizingPath]): 
+	  does not return 'nil', but 'self', if it cannot resolve the path
+	
+	* Foundation/NSString.m ([NSString -substringFromIndex:]): correctly
+	  does range check now (length-index could go negative which is positive
+	  in 'unsigned int' ..)
+
+	* common.h: changed name of function 'Free' to 'lfFree' since 'Free'
+	  is often used by other C libraries (eg on MacOSXS).
+
+Wed Dec 15 03:24:04 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/UnixSignalHandler.m: fixed bug introduced by new
+	  -performSelector:withObject:
+
+	* Foundation/NSTask.m ([NSTask +launchedTaskWithLaunchPath:arguments:]):
+ 	  make subtask's inherit the environment of the callee
+
+Thu Dec  9 15:30:59 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSObject.m ([NSObject -performSelector:withObject:]):
+	  changed to handle primitive argument types in target selector
+
+Thu Dec  9 01:59:24 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* added prototype of NSUndoManager (not implemented yet)
+
+Tue Dec  7 03:58:55 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSObjectInvocation.m: added -description method
+
+Thu Nov 25 15:15:56 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* fixed stuff in property list generation
+	
+	* Foundation/PropertyListParser.m: separate break-chars for unquoted
+	  strings
+
+	* Foundation/NSConcreteDictionary.m: better description in exception
+	  if nil keys/objects are added to a dictionary
+
+Wed Nov 24 00:31:36 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSBundle.m ([NSBundle -pathsForResourcesOfType:inDirectory:]): 
+	  provided basic implementation for this method
+
+Mon Nov 22 16:58:52 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSDictionary, NSConcreteDictionary: fixed bugs related to 
+	  NSSmallDictionary's (dictionaries smaller than 8 entries)
+
+Wed Nov 10 15:07:14 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* added format-scanner handlers that operate on NSEnumerator objects,
+	  not on va_lists.
+
+Wed Nov  3 17:42:24 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* bug fixed examples/GNUmakefile.alone and Foundation/GNUmakefile.alone
+
+Tue Nov  2 23:55:04 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSScanner.m ([NSScanner -scanCharactersFromSet:intoString:]): acknowledge charactersToBeSkipped
+
+	* Foundation/NSConcreteCharacterSet.m ([NSMutableBitmapCharacterSet -addCharactersInString:]): fixed out-of-range bug in for-loop
+
+Mon Nov  1 14:21:44 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSDate.m ([NSDate +timeIntervalSinceReferenceDate]): 
+	  fixed bug on Linux where gettimeofday() doesn't return timezone
+	  correction
+
+Thu Sep 30 17:56:06 1999  Ovidiu Predescu  <ovidiu@cup.hp.com>
+
+	* Foundation/lfmemory.h.in: Added emacs variables so that the file
+ 	is recognized as an Objective-C file.
+
+	* configure.in: Recognize i686 machines.
+
+Thu Sep 16 18:21:02 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* Foundation/NSUserDefaults.m: added -setSearchList: method and
+	  modified -searchList to return a non-mutable array
+
+Fri Sep 10 16:01:51 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSArray.m ([NSMutableArray +arrayWithContentsOfFile:]):
+	  fixed bug (method sometimes created non-mutable arrays)
+
+	* Foundation/NSConcreteUnixTask.m: added -interrupt method (new in
+	  MacOSX-S). Changed semantics of NSTaskDidTerminateNotification, which
+	  is send always now (previously only when -terminate was called).
+
+Fri Sep  3 19:18:26 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSConcreteString.m (quoteString): fixed bug in this func
+
+Tue Aug 31 10:35:25 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSConcreteString.m(-stringRepresentation): bugfix:
+	  some characters in string representations were not quoted correctly,
+	  including '\', leading to incorrect plist output
+
+Mon Aug 30 15:20:26 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/PropertyListParser.m (_parseString): bugfix:
+	  function didn't unquote '\r' in property-list strings
+
+Fri Aug 27 13:00:59 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSObjectInvocation.m: -invoke calls -forwardInvocation:
+	  if the target has no matching method
+
+Thu Aug 26 10:31:09 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSRunLoop.m ([NSRunLoop -acceptInputForMode:beforeDate:]):
+	  method doesn't catch exceptions anymore
+
+Wed Aug 25 18:21:27 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSMethodSignature.m: got -description method
+
+	* Foundation/NSFrameInvocation.m: verify signature before 'getting'
+	  arguments
+
+Thu Jul 22 16:33:24 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSFrameInvocation.m, NSObjectInvocation.m: added method
+	  -invokeWithTarget:lookupAtClass: (this is useful for interpreter 
+	  bindings, too)
+
+	* NSFrameInvocation.m, NSObjectInvocation.m: added method
+	  -superInvokeWithTarget: (this is useful for interpreter bindings)
+
+Fri Jul  2 19:40:42 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSZone.[hm]: avoid calling [NSZone defaultZone] in
+	  NSZone* functions (because of GNU ObjC runtime deficiencies in
+	  calling class methods ..)
+
+	* Foundation/NSArray.m, Foundation/NSConcreteArray.m:
+	  avoid allocation of '0' sized malloc blocks
+
+	* Foundation/NSSet.m: fixed bugs in set operations
+
+	* Foundation/NSSet.m, Foundation/NSConcreteSet.m: changed -*copy* to
+	  make a shallow copy, not a deep one (the elements are *not* copied).
+
+	* Foundation/NSConcreteSet.m ([NSCountedSet -initWithSet:copyItems:]):
+	  fixed RC leak in copy-mode
+
+	* Foundation/NSConcreteSet.h, Foundation/GCDictionary.m: 
+	  fixed enumerators to inherit from NSEnumerator
+
+Tue Jun 29 18:54:33 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSPathUtilities.m: added 
+	  NSSearchPathForDirectoriesInDomains() function
+
+	* Foundation/NSPathUtilities.m: added NSOpenStepRootDirectory(),
+	  NSStandardApplicationPaths() and NSStandardLibraryPaths() functions
+
+Thu Jun 24 13:04:11 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSConcreteString.m: fixed bug in -getCString:maxLength:...
+	  (the trailing zero wasn't added)
+
+	* configure.in: replaced test's with '==' with '='
+
+Mon Jun 21 14:03:49 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/GNUmakefile: export NSCalendarDate.h
+
+Fri Jun 18 13:28:34 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* added NSPortNameServer, NSPort, NSPortMessage classes. Not implemented
+	  yet
+
+	* configure.in, configure, config.h.in, config.make.in: removed --fast-rc
+
+Thu Jun 17 18:44:52 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/common.m (writeToFile): fixed bug, file was not
+	  truncated, if already existent
+
+	* Foundation/NSCalendarDateScannerHandler.m: fixed bug in %z calendar
+	  format (which is supposed to output (+/-)HHMM but did output
+	  GMT(+/-)HHMM)
+
+Tue Jun 15 12:15:13 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSBundle.m: changed notifications to behave like on
+	  MacOSX-S, notably only one notification is sent, if a bundle is loaded.
+
+Fri Jun  4 12:15:49 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSConcreteString.m: reenable old variant of NXConstantString
+	  overloading because of runtime problems during dynamic loading with
+	  the new approach
+
+	* Foundation/NSBundle.m: fixed problems with unresolved categories
+ 	  (categories for which no class is yet registered)
+
+Tue Jun  1 13:57:51 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* configure.in, aclocal.m4: added (and use) the macro 
+	  AC_COMPILE_CHECK_SIZEOF instead of AC_CHECK_SIZEOF (the macro is from
+	  the autoconf macro repository)
+
+	* Foundation/NSBundle.m: LIB_FOUNDATION_RESOURCES_PATH is now splitted
+	  using ';' on Windows (still ':' on Unix). This is required to be
+	  able to include volumes in the path on Windows (eg 'C:\lF;D:\lF')
+
+	* renamed INSTALL to INSTALL.txt
+
+	* configure, configure.in: added checks for common C type sizes
+
+	* GNUmakefile.alone, GNUmakefile.gnustep: added NSObjectInvocation.m
+	  and NSFrameInvocation.m
+
+	* NSInvocation.m, NSObject.m: NSInvocation became an abstract class
+ 	  with two concrete subclasses: NSFrameInvocation for __builtin_apply*
+ 	  based invocation and NSObjectInvocation for manual invocation 
+	  (currently only available for methods taking object parameters).
+
+	* NSMethodSignature.m, NSObject.m: moved method signature cache to
+	  from -methodSignatureForSelector: to the NSMethodSignature
+ 	  constructor.
+
+Tue May 25 13:19:56 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSObject.m, NSProxy.m: use new NSExtraRefCount() instead of
+ 	  NSGetExtraRefCount().
+
+	* NSHashMap.m, NSObject.h.in, NSZone.[hm], common.h, load.m: 
+	  use lfmemory.h instead of objcgc.h
+
+	* GNUmakefile.postamble: install lfmemory.h in an architecture dependend
+	  header directory
+
+	* GNUmakefile.alone, GNUmakefile.gnustep: added the concrete task
+	  classes to the build process
+
+	* Foundation/NSHost.m: renamed method -initWithName: to
+	  -initWithDottedRepresentation: because it conflicts with -initWithName:
+	  of NSAutoreleasedPointer.
+
+	* configure.in, configure, config.h.in: added --fast-rc configuration
+ 	  option. This
+	  is used to make the RC macros directly access the RC instead of
+	  calling the appropriate methods. This makes speedier but non-OpenStep
+	  conform code (overriding the methods has no (or invalid) effect).
+
+	* removed file objgc.h.in and added new platform dependend memory file
+	  lfmemory.h.in.
+
+	* NSObject.m, NSObjectAllocation.m, NSProxy.m, NSUtilities.h:
+	  changed NSGetExtraRefCount() to NSExtraRefCount(). NSGetExtraRefCount()
+	  is still available for linking old libraries.
+
+Fri May 21 12:16:51 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSTask.m: moved system specific parts out of NSTask.m.
+	  NSTask.m only contains the abstract NSTask class and the new files
+	  NSConcreteUnixTask.[hm] and NSConcreteWindowsTask.[hm] were added.
+
+Thu May 20 10:48:17 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSArray.m ([NSArray -componentsJoinedByString:]): returns
+	  an empty string if the array contains no elements (previously returned
+	  nil)
+
+	* Foundation/load.m: moved the #include's out of the function. This
+	  produced coredumps in mingw32-egcs (the #include of windows.h in
+	  the function)
+
+Mon May 10 19:15:08 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSFileManager.m: separate -createDirectory:atPath:
+	  method for mingw32
+
+	* config.mak.in (LIBS): added some Windows libraries when linking for
+	  mingw32
+
+Fri May  7 18:34:05 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSObject.m ([NSObject -methodSignatureForSelector:]): 
+	  NSObject now caches method signature objects.
+
+	* configure.in: when compiling without gstep-make NSException.h is
+	  now created by copying the real exception file instead of just linking
+	  it. This is required for cygwin/mingw32 where linking does not work.
+
+Wed Apr 14 18:24:04 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* configure.in, config.h.in, configure, Foundation/config.h:
+	  added --with-fast-strings option
+
+	* Foundation/NSConcreteDictionary.[hm], Foundation/NSDictionary.m: 
+	  added capability to disable 'small-dictionary' concrete subclasses.
+
+Fri Apr  9 13:36:01 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSPathUtilities.m(-isAbsolutePath): on mingw32, check for ':' in path
+
+	* configure.in: catch some undefined variables by prefixing with 'x'
+
+	* NSProcessInfo.m: on mingw32 recognize both, slash and backslash, when
+ 	  determining the process name.
+
+Fri April 8 08:21:07 1999 Ovidiu Predescu <ovidiu@cup.hp.com>
+
+        * objc-features.texi: Updated the URL to Boehm's GC page.
+
+Thu Apr  1 16:11:29 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* examples: added printenv tool. printenv prints out the environment
+	  variables as returned by NSProcessInfo.
+
+Thu Apr  1 16:09:33 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/common.m (writeToFile): modified not to use 
+	  NSPosixFileDescriptors (uses open()/CreateFile() instead).
+
+	* Foundation/NSFileManager.m: (not yet finished) support of
+	  -movePath:.. and -copyPath:.. for mingw32
+
+	* Foundation/NSFileManager.m: fixed for mingw32
+
+	* Foundation/NSGeometry.m: renamed RECT and VALID functions to lfRECT
+	  and lfVALID since they collide with windows.h types/functions.
+
+	* Foundation/NSString.m, Foundation/NSConcreteString.m, 
+	  Foundation/NSData.m: use NSReadContentsOfFile() instead of
+	  duplicated open/read/close sequences.
+
+	* Foundation/NSUserDefaults.m: various fixes, cleanups and warning
+	  fprintf(stderr)'s.
+
+	* Foundation/NSVMPage.m: added separate getpagesize() function for
+	  mingw32 compilation
+
+	* Foundation/PropertyListParser.m: print log if NSData of a property
+	  list file could not be read in.
+
+	* Foundation/common.[hm]: added NSReadContentsOfFile() function that
+	  read a whole file into a buffer allocated by NSZoneMalloc(). This
+	  function is used by -initWithContentsOfFile: methods to avoid code
+	  duplication. The function supports Windows file IO.
+
+	* Foundation/NSCharacterSet.m: added checks to warn if a set could
+	  not be created from a data object.
+
+Wed Mar 31 16:54:02 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSAccount.m: added mingw32 support
+
+	* Foundation/NSUserDefaults.m: use NSHomeDirectory() instead of
+	  NSHomeDirectoryForUser(NSUserName())
+
+	* Foundation/common.[hm]: added functions to convert between
+	  Windows wide strings and NSString objects.
+
+	* Foundation/NSProcessInfo.m: improved mingw32 support
+
+	* Foundation/NSString.m: fixed some memory related bugs in string
+	  methods
+
+Tue Mar 30 13:37:56 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* examples: added printenv tool
+
+	* configure.in, config.h.in: added check for objc_malloc
+
+	* README: updated email address of Ovidiu, added link to libFoundation
+	  home page.
+
+	* examples/Defaults.m: check return value of -synchronize
+
+	* Foundation/NSUserDefaults.m: print warnings if unable to save changes
+	  in persistent domains.
+
+	* Foundation/NSObject.h.in: only define ASSIGN,RETAIN macros if not
+	  yet defined.
+
+Wed Mar 24 18:16:50 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSTimer.h: added -timeInterval method
+
+Sun Mar 21 17:23:07 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCharacterSet.m: MT bugfix
+
+	* Foundation/libFoundation.make.in: fixed bug in makefile
+
+Fri Mar 19 12:52:11 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* added config/i386/mingw32.h (more or less a copy of cygwin.h)
+
+	* Foundation/NSAccount.m: prepared for Win32
+
+	* Foundation/NSHashMap.m: support for LIB_FOUNDATION_LEAK_GC
+
+	* Foundation/GNUmakefile.postamble: installs objcgc.h
+
+	* configure.in: generate objcgc.h from objcgc.h.in
+
+	* config.mak.in: added support for GC_INCLUDE_DIR, GC_LIB
+
+	* config.h.in: include gc.h/gc_typed.h from GC_INCLUDE_DIR determined
+	  by configure
+
+	* Foundation/load.m: include objcgc.h instead of gc.h
+
+	* added Foundation/objcgc.h.in.
+
+	* Foundation/common.h: support for LIB_FOUNDATION_LEAK_GC, include 
+	  objcgc.h instead of gc.h
+
+	* Foundation/UnixSignalHandler.m: currently unused on Mingw32, does not
+	  break during compilation (print a warning on compile)
+
+	* Foundation/UnixSignalHandler.h: included signal.h instead of
+	  sys/signal.h on mingw32
+
+	* Foundation/NSZone.h: include objcgc.h instead of gc.h
+
+	* Foundation/NSThread.m: support for Windows Sleep() function in mingw32
+
+	* Foundation/NSObjectAllocation.m: include objcgc.h instead of gc.h.
+	  Support for LIB_FOUNDATION_LEAK_GC.
+
+	* Foundation/NSHost.m, Foundation/NSPosixFileDescriptor.m: include 
+	  winsock.h if compiling for mingw32
+
+	* Foundation/NSConcreteFileHandle.m, Foundation/NSPipe.m,
+	  Foundation/NSTask.m: prepared for 
+	  mingw32 port (does compile on mingw32, but doesn't implement 
+	  everything).
+
+	* Foundation/NSAllocDebugZone.m, Foundation/NSDefaultZone.m,
+	  Foundation/NSVMPage.m, Foundation/NSZone.m, Foundation/StackZone.m: 
+	  now uses objc_* memory management functions instead of stdlib ones.
+
+Thu Mar 18 15:34:43 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSFileManager.m ([NSFileManager -contentsAtPath:]):
+	  implemented method using +[NSData dataWithContentsOfFile:]
+
+Wed Mar 17 19:02:56 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSDictionary.m(-copyWithZone:): bugfix. copy used current
+	  class to create new object. This is invalid with mutable dictionaries,
+	  the result of copy on a mutable dictionary is an immutable one.
+
+	* Foundation/NSArray.m(-copyWithZone:): copy did make a deep copy,
+	  changed to shallow copy.
+
+	* configure.in: modified GC configuration. It's now possible to specify
+	  the include path containing gc.h and the library containing GC
+	  functions (usually libgc.a)
+
+	* Foundation/NSDate.m(+timeIntervalSinceReferenceDate): 
+	  support for mingw32, uses GetSystemTime()
+	
+	* Foundation/NSNumberFormatter.m: use own index() function on mingw32
+	
+	* Foundation/NSPathUtilities.m: define PATH_MAX after including
+	  common.h. 
+	  NSTemporyDirectory() now returns C:\TEMP when compiling
+	  to mingw32 (should use GetTempPath() function).
+	  Vars pathSeparator and rootPath are set to '\' and 'C:\' on mingw32.
+	
+	* Foundation/NSUtilities.m, Foundation/NSProcessInfo.m: include 
+	  windows.h if available, use GetCurrentProcessId() instead of getpid()
+ 	  on mingw32
+
+	* Foundation/byte_order.h: include winsock.h if compiling to mingw32
+
+	* changed to configure scripts to support cross compilation, added
+	  README.mingw32.
+
+Tue Feb 23 12:59:21 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSTask.m: fixed to be able to use both, NSPipe and NSTask.
+
+	* Foundation/NSConcreteDictionary.m, Foundation/NSDictionary.m: added 
+	  new concrete classes for small, single and empty dictionaries.
+
+	* Foundation/NSCalendarDateScannerHandler.m: changed -AM_PM:scanner: 
+	  that 12:00 is 12:00PM, not 12:00AM as previously.
+
+	* Foundation/NSCalendarDateScanf.m: changed -hour method to handle
+	  '12:00 AM' for formats like '%I:%M %Z'. 12:00AM is equal to 0:00AM
+	  and required by Sybase. Note that 12:00AM is before 12:00PM.
+	  Previously 12:00AM became 12:00PM.
+
+Wed Jan 27 17:32:47 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSString: added +string method for NSString and
+	  NSMutableString
+
+Wed Jan 27 17:05:13 1999  Ovidiu Predescu  <ovidiu@cup.hp.com>
+
+	* AUTHORS: Added Helge to the list of authors as he has
+ 	contributed with lots of development work recently.
+
+Wed Jan 27 16:20:39 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSConcreteDate.m ([NSConcreteDate -compare:]): fixed
+	  method. NSDate's compare can now compare against NSCalendarDate.
+
+Mon Jan 25 11:24:13 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSException.m, Foundation/NSString.m, 
+	  Foundation/NSTimeZone.m, Foundation/NSObject.m:
+	  replaced printf(...) with fprintf(stderr, ...)
+
+	* Foundation/NSCalendarDate.m: changed NSCoding of NSCalendarDate to
+	  use timezone abbreviations instead of timezone names.
+
+Thu Jan 21 14:53:07 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSUtilities.m: added NSHostByteOrder() function
+
+	* Foundation: added NSProxy class (not yet ready)
+
+Wed Jan 20 19:16:44 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCalendarDateScannerHandler.m: changed formats for day
+	  of month and hour to be 0 padded (format is %02d) as described
+	  in the online docs from Apple.
+
+	* Foundation/PropertyListParser.m: check for 'nil' path argument
+	  (returns immediatly nil), added missing mode argument for open()
+
+	* Foundation/NSUserDefaults.m: allow property list as default values
+	  in command line user defaults
+
+	* Foundation/NSString.m: -initWithData:encoding: supported for
+	  defaultCStringEncoding (otherwise notImplemented is called),
+	  fixed RC bug in -stringByAppendingFormat:
+
+	* Foundation/NSRunLoop.m: support for -isAlive of file objects. Before
+	  file objects are added to the select mask the isAlive method is
+	  invoked to check whether the descriptor of the object is still valid.
+	  This is necessary for sockets which may shutdown unrecognized and 
+	  result in a endless loop of EBADF errors of the select() call.
+
+	* Foundation/NSConcreteString.m, Foundation/NSString.m: added missing 
+	  mode argument to open call in -initWithContentsOfFile:.
+
+Tue Jan 19 20:23:22 1999  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* Foundation/NSHost.m: Fixed for Linux as gethostbyaddr_r has a
+ 	different prototype.
+	* README.sparc: Reformatted for 80 columns.
+
+Tue Jan 19 11:38:09 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCalendarDate.m (day_in_year): fixed bug, nDays[month]
+	  was accessed instead of nDays[month - 1]
+
+Mon Jan 18 15:31:57 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/PropertyListParser.m (NSParsePropertyListFromFile): check
+	  for nil path argument (immediatly returns nil if path is nil)
+
+Fri Jan 15 08:49:49 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSConcreteDictionary.[hm]: changed superclass of
+	  _NSConcreteDictionaryKeyEnumerator and _NSDictionaryObjectEnumerator
+ 	  from NSObject to NSEnumerator, added 
+	  _NSConcreteSingleObjectDictionaryKeyEnumerator
+	  added NSConcreteEmptyDictionary, NSConcreteSingleObjectDictionary
+	  subclasses
+
+	* Foundation/NSConcreteArray.[hm]:
+	  added NSConcreteEmptyArray and NSConcreteSingleObjectArray subclasses
+
+Wed Jan 13 19:21:38 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSFileManager.m (-_copyFile:toFile:handler:):
+	  added missing zero in open() call.
+
+	* Foundation/NSHost.m: removed RC bugs in host object cache
+
+Mon Jan 11 19:23:07 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCalendarDate.m: applied patch reported by
+	  pascal@rossini.infopark.de. The patch fixes some incorrect
+	  behaviour with leap years.
+
+Sun Jan 10 12:21:52 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSUtilities.m: added NSHostByteOrder() functions
+	
+	* Foundation: added NSByteOrder.h
+
+Sun Jan 10 03:43:15 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSUserDefaults.m ([NSUserDefaults -initWithPath:]): 
+	  added support for NSArgumentDomain
+
+Fri Jan  8 14:18:35 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSDateFormatter.m ([NSDateFormatter
+ 	-stringForObjectValue:]): changed to format NSDate objects
+ 	(previously only NSCalendarDate's)
+
+Fri Jan  8 11:06:41 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSFileManager.m ([NSDirectoryEnumerator -dealloc]): 
+	  fixed bug, [super dealloc] was not called.
+
+	* Foundation/NSDictionary.m: fixed RC bug in the -descriptionWi...
+	  method.
+
+Wed Jan  6 13:23:54 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSData.m: fixed RC bug in -initWithContentsOfMappedFile:,
+	  the return value of the method was autoreleased
+
+Wed Dec 30 22:03:22 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation: added first implementation of NSNumberFormatter class
+
+Wed Dec 30 19:37:42 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSString.m: implemented -initWithCharacters.. for
+ 	characters below code value 128 (unicodes below 128 are equal to
+ 	ASCII code)
+
+Wed Dec 30 12:50:45 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSDateFormatter.m
+ 	  ([NSDateFormatter -initWithDateFormat:allowNaturalLanguage:]): 
+	  throw exception if a non-NSString and non-nil format is passed in.
+
+	* Foundation: added NSDateFormatter class
+
+Mon Dec 28 21:23:46 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSTask.m: added -description method
+
+Mon Dec 28 17:50:29 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCalendarDate.m (day_in_year): fixed operator precedence
+	  bug which leaded to incorrect results
+
+	* Foundation/NSTimeZone.m, Foundation/NSDate.h: 
+	  added some new MacOSX methods
+
+	* Foundation/NSConcreteTimeZone.m: changed -init.. to copy strings
+
+	* Foundation/NSConcreteTimeZoneDetail.m: changed -dealloc to release
+	  'name' ivar. Changed -init.. to copy strings.
+
+	* Foundation/NSCalendarDate.m: changed description methods to use
+	  their own timeZoneDetail if no timeZone was passed as a parameter.
+
+	* Foundation/NSCalendarDate.m ([NSCalendarDate -setTimeZone:]):
+	  fixed implementation, previous version allowed a 'nil' timezone
+	  (which now gets a local timezone).
+
+	* Foundation/NSCalendarDate.m
+	([NSCalendarDate
+ 	-initWithYear:month:day:hour:minute:second:timeZone:]): adjust
+ 	timeSinceRef to 'timeZone'
+
+	* Foundation/NSCalendarDate.m: fixed language bug (Thursday, not
+ 	Thusday)
+
+Wed Dec 23 11:16:15 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSThread.m: changed to throw an exception if the thread
+	  couldn't be created.
+
+Mon Dec 21 14:40:01 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSArchiver.m: changed to make encoding of multiple
+ 	root objects possible. Changed to support archive-internal
+ 	references.
+
+Mon Dec 21 12:36:47 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSArchiver.m: replaced THROW's with +raise:format:,
+ 	bugfixes in decodeClass: class name was not freed and it didn't
+ 	support decoding of Nil classes.
+
+Mon Dec 21 12:14:16 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSData.m ([NSData -encodeWithCoder:]): fixed bug,
+ 	tried to encode &bytes as array of char. 'bytes' itself is already
+ 	the array of char (no need to take the address ..)
+
+	* Foundation/NSRunLoop.m ([NSRunLoop
+ 	-acceptInputForMode:beforeDate:]): take address of
+ 	'fileObjectsCopy' to avoid warning in exception handler
+
+	* Foundation/NSDate.m ([NSDate
+ 	-descriptionWithCalendarFormat:timeZone:locale:]): assign
+ 	'timeZone' parameter to calendar object created for output
+
+	* Foundation/NSCalendarDate.m: added -timeZone method, as
+ 	described in MacOSX docs (replaces -timeZoneDetail in
+ 	MacOSX). Changed -setCalendarFormat: to copy the parameter instead
+ 	of just retaining it.
+
+	* Foundation/NSBundle.m ([NSBundle -loadCode]): set 'load_Classes' NULL
+	  after call to Free()
+
+	* Foundation/NSArchiver.m: small fix in +initialize
+
+	* Foundation/NSTimeZone.m ([NSTimeZone +defaultTimeZone]):
+	  changed to return 'NSTimeZone' instead of 'NSTimeZoneDetail', as
+	  described in MacOSX docs
+
+	* Foundation/NSDictionary.m, Foundation/NSArray.m, Foundation/NSData.m: 
+	  cleanup, assign return value of nested '-init..' invocations to self.
+
+	* Foundation/NSCalendarDateScannerHandler.m: 
+	  use detail of localTimeZone if no timezone was given to 
+	  -initForCalendarDate:timeZoneDetail:. Array of fixed strings for
+	  common output (minutes, seconds) to avoid constant creation of
+	  string objects.
+
+Sat Dec 12 01:44:43 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCalendarDate.m: changed incorrect correction of
+ 	timeSinceRef ivar (was corrected to timeZone), changed -compare:
+ 	to compare against all subclasses of NSDate, changed
+ 	+descriptionFor... to set the timeZone requested (and restore it
+ 	after string generation).
+
+Sat Dec 12 01:32:41 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSDate.m: timezone was corrected twice in 
+	  +timeIntervalSinceReferenceDate
+
+	* Foundation/NSConcreteSet.m: added initWithCapacity: method to
+ 	NSMutableSet
+
+Wed Dec  2 05:09:04 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/GarbageCollector.m, Foundation/NSAllocDebugZone.m,
+	  Foundation/NSNotificationCenter.m, NSThread.m:
+	  replaced calls to perform: with performSelector:
+
+Wed Dec  2 05:05:47 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCharacterSet.m: added +characterSetWithContensOfFile:,
+	  +characterSetWithCharactersInString: and characterSetWithRange:
+	  class methods to NSMutableCharacterSet.
+
+Wed Dec  2 03:29:17 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSObject.h.in: removed perform:.. methods from
+ 	NSObject protocol perform: is replaced by performSelector: and not
+ 	specified in MacOSX docs anymore
+
+Tue Dec  1 17:18:40 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSArchiver.[hm]: replaced with new version
+
+	* config.h.in, configure.in: added autoconf checks for
+	  gethostbyname_r(), gethostbyaddr_r(), gethostent_r(), 
+	  recreated configure
+
+	* added NSFormatter class (abstract class)
+
+Mon Nov 23 11:05:40 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCalendarDateScanf.m ([NSCalendarDateScanf +initialize]):
+	  fixed RC bug (the static variable 'blanks' was not retained),
+	  avoid multiple +initialize invocations
+
+Sun Nov 22 22:23:21 1998  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* config/i386/linux.h (FUNCTION_VALUE): Don't copy the return
+ 	value in case of structures and unions since the __builtin_apply
+ 	operation already puts the return value in the correct place.
+
+Sun Nov 22 16:19:11 1998  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* Foundation/NSInvocation.m: Applied patch from Helge Hess to
+ 	handle seeting the return value without actually invoking the
+ 	action on target. This is useful for handling returning from DO
+ 	invocations at the client side.
+
+	* Foundation/NSString.m ([NSString
+ 	-propertyListFromStringsFileFormat]): Call
+ 	NSParseStringsFromString() instead of
+ 	NSParseDictionaryFromString(). Don't create a new mutable copy
+ 	from the returned dictionary since this is already mutable.
+
+	* Foundation/ProperyListParser.[hm]: Change the return type of
+ 	NSParseStrings* methods to be id instead of NSDictionary*.
+
+	* Foundation/ProperyListParser.[hm] (_valueOfHexChar): Explicitly
+ 	specify how the return value is computed.
+	(_parseData): Correctly compute the byte's value from the two
+ 	hexadecimal digits.
+
+Mon Nov 16 13:03:18 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSDictionary.m: copyWithZone: performed a deep-copy
+ 	by calling 'initWithDictionary:self copyItems:YES'. NSDictionary
+ 	'copy' methods are assumed to do a shallow copy, so it was changed
+ 	to copyItems:NO.
+
+Thu Nov 12 22:51:39 1998  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* Foundation/GNUmakefile.gnustep: Removed the hard-coded
+ 	definitions of foundation, gui and backend.
+	* examples/GNUmakefile.gnustep: Likewise.
+
+Wed Nov 11 16:54:42 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/GNUmakefile.alone: added PropertyListParser.m
+
+Wed Nov  4 22:08:41 1998  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* Foundation/GNUmakefile.alone (clean): Don't remove the
+ 	libFoundation.make.in file.
+
+Wed Nov  4 18:08:09 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* replaced '#import' in PropertyListParser.h with '#include'
+
+Wed Nov  4 15:07:12 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSObject.m: added +isKindOfClass: method
+
+Tue Nov  3 20:19:33 1998  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* examples/GNUmakefile.alone ($(DEFAULTS)): Removed the dependency
+ 	on $(LIB)/*$(libext).
+
+Tue Nov  3 12:25:56 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSCharacterSet.m: fixed bug in
+ 	+characterSetWithCharactersInString: (only immutable charsets were
+ 	created).
+
+Thu Oct 22 19:50:06 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSMethodSignature.m: added getArgumentTypeAtIndex:, a
+	method which replaced argumentInfoAtIndex: in Rhapsody.
+
+Thu Oct 22 11:47:14 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* added README.sparc with hints about SPARC and Solaris problems
+
+Tue Oct 20 16:32:42 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSString.m: fixed bug in getCString. The terminating
+	NULL byte was set on [length-1] instead of [length]
+
+Tue Oct 20 09:31:00 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSRunLoop.m: modified to support other types of file
+	descriptor objects, not only NSPosixFileDescriptors. The runloop
+	sends out notifications if activity is found on an object other than a
+	NSPosixFileDescriptor.
+
+Tue Oct 20 09:17:40 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Integrated the new property list parser with the property classes
+	NSString, NSArray and NSDictionary. Modified the makefiles to exclude
+	the old pccts-based parser.
+
+Tue Oct 20 09:05:47 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSThread.m: fixed bug. The autorelease pool was created
+	before the current thread was set. Because of this the pool had no
+	owner and broke in 'dealloc'.
+
+Mon Oct 19 14:00:51 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/PropertyListParser.m: fixed bug in isBreakChar() function
+
+Mon Oct 19 10:21:44 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* added hand-written property list parser: PropertyList.[hm]
+
+Mon Oct 19 04:44:08 1998  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* doc/libFoundation.texi: Updated the release number.
+	* configure.in: Likewise.
+
+	* ANNOUNCE: Updated the documentation.
+	* INSTALL: Likewise.
+	* NEWS: Likewise.
+	* README: Likewise.
+	* README.gc: Likewise.
+
+Sun Oct 18 02:37:14 1998  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* doc/libFoundation.texi: Changed the @url to @uref.
+	* Foundation/NSProcessInfo.m ([NSProcessInfo -globallyUniqueString]):
+	Fixed to generate a really unique string (bug report and fix from
+ 	Helge Hess).
+
+1998-10-14  Helge Hess  <helge@trex.mdlink.de>
+
+	* Foundation/NSConcreteString.m ([NS8BitString -initWithCoder:]):
+	RC bug-fix, 'self' was not released and the replacement object was
+	autoreleased.
+	([NSMutable8BitString -initWithCoder:]): same fix as in NS8BitString.
+
+Fri Oct  9 05:09:25 1998  Ovidiu Predescu  <ovidiu@slip.net>
+
+	* sharedlib.mak: Search for linux as substring in the host OS type.
+
+	* Foundation/NSData.m ([NSData -deserializeDataAt:ofObjCType:atCursor:
+	context:]): Put a 0 after a decoded string (bug report from Helge
+	Hess).
+
+	* Foundation/common.m (Avsprintf): Create local objects for the
+ 	format and scanner to avoid multithreaded problems.
+	* Foundation/PrivateThreadData.h: Remove the objectFormat and
+ 	formatScanner private thread objects.
+	* Foundation/load.m: Include gc.h to get the dl functions defined
+ 	in libgc.a (Report from Helge Hess).
+
+Tue Jun 30 22:27:00 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* INSTALL: Updated the installation instructions.
+
+Tue Jun  2 18:48:41 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* doc/libFoundation.texi (Porting NSInvocation): Describe the
+ 	FRAME_SET_ARGUMENT and FRAME_GET_ARGUMENT macros.
+	* config/powerpc/powerpc.h: The initial implementation of the
+ 	NSInvocation's macros. Only Struct3 is not working properly in
+ 	testsuite.
+	* Foundation/NSInvocation.m (-invokeWithTarget:): Reworked to
+ 	support AIX; the code uses now objc_msg_sendv instead of
+ 	explicitly invoking __builtin_apply. This seems to make forwarding
+ 	using NSInvocation work.
+	* Foundation/NSBundle.m (-loadCode): Define environment only for
+ 	the GNUstep environment.
+
+Sun May 31 21:35:23 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* Foundation/NSScanner.m (-[NSScanner scanUpToString:intoString:]):
+	Return the remaining string if the searched string is not found.
+
+Fri May 29 13:49:09 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* Foundation/NSAccount.m (-[NSGroupAccount
+ 	initWithGroupStructure:]): Allocate the array on heap instead of
+ 	stack to avoid problems on AIX.
+	* Foundation/NSConcreteString.m: Create a new class
+ 	DummyNXConstantString used as a prototype for
+ 	NXConstantString. The dummy class is copied over to the real
+ 	constant string class in the +load method. This is done to avoid
+ 	linking errors on AIX and possibly on other systems (including
+ 	Windows). The old way defined a new NXConstantString class
+ 	inherited from NSString and we assumed this class takes precedence
+ 	in the linking process over to the one in libobjc. We now use the
+ 	class from libobjc but we modify this class to be inherited from
+ 	NSString.
+	* Foundation/NSException.m: Fixed the code that changes the top
+ 	level exception handler. The code is supposed to also work in a
+ 	multithreaded environment but is not yet tested.
+	* Foundation/PrivateThreadData.m: Changes to support the above fix.
+	* Foundation/NSString.m (substringFromRange:): Call
+ 	substringWithRange: and not substringFromRange: ;-).
+
+	* Resources/GNUmakefile.gnustep: New file based upon GNUmakefile.
+	* Resources/GNUmakefile.alone: New file based upon GNUmakefile. We
+ 	need to differentiate the installation process when the resources
+ 	are installed in a GNUstep environment and when they are alone.
+	* configure.in: Correctly create the makefile in the Resources
+ 	directory.
+
+	* config/powerpc/powerpc.h: New file. Figured out the
+ 	APPLY_RESULT_SIZE and the APPLY_ARGS_SIZE values.
+
+Wed May 27 21:16:53 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* Started the port to AIX 4.1.
+	* config.h.in (HAVE_SYS_STATVFS_H, HAVE_SYS_SELECT_H,
+ 	HAVE_STRINGS_H): New defines.
+	* configure.in: New check for for sys/statvfs.h, sys/select.h,
+	strings.h.
+	* Foundation/NSFileManager.m: Include sys/statvfs.h if exists.
+	* Foundation/NSRunLoop.m: Include sys/select.h.
+	* Foundation/NSStringPropList.g: Define
+	NSStringPropertyListParser_errors as a global symbol to avoid problems
+	on AIX.
+	* Foundation/NSThread.m: Include sys/select.h.
+	* pccts/antlr.h: Define zztoken as a global symbol.
+
+Thu May 21 14:45:43 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* doc/libFoundation.texi: Updated the documentation.
+	* Foundation/NSZone.m (+initialize): Comment out when using Boehm's GC.
+
+Wed May 20 14:25:58 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	Fixed bug reports from Helge Hess <helge@mdlink.de>.
+	* Foundation/GCZone.h: Removed.
+	* Foundation/GCZone.m: Removed.
+	* Foundation/common.h: Moved the THROW calls to __raiseMemoryException
+	to eliminate recursive definition of memoryExhaustedException.
+	* Foundation/common.m (__raiseMemoryException): Defined.
+	* Foundation/NSZone.h: Define the NSZone functions to work
+ 	directly with the Boehm's GC functions and eliminate the GCZone
+ 	previously used.
+	* Foundation/NSZone.m: Don't create the GCZone anymore.
+
+	Incorporate some bug fixes from Helge Hess <helge@mdlink.de>.
+	* Foundation/NSConcreteString.m (initWithCapacity:): Use NSZoneFree
+	instead of Free.
+	* Foundation/NSPosixFileDescriptor.m (writeString:range:): Repeat
+	the write operation until all the bytes are written or an error
+	occurs.
+	* Foundation/NSProcessInfo.m (initializeWithArguments:count:
+	environment:): Use Malloc to allocate keys and vals instead of
+	MallocAtomic.
+
+Tue May 12 11:48:44 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* doc/libFoundation.texi: New file.
+	* doc/CodingRules.pod: Removed.
+	* doc/GarbageCollector.pod: Removed.
+	* doc/NSMethodSignature.pod: Removed.
+	* doc/NSZone.pod: Removed.
+	* doc/exceptions.pod: Removed.
+	* doc/objc-runtime.pod: Removed.
+	* doc/NSInvocation.pod: Removed.
+
+	* AUTHORS: Updated.
+	* INSTALL.gc: Updated.
+	* NEWS: Updated.
+	* README: Updated.
+	* README.gc: Updated.
+
+	* Foundation/NSObject.h.in: Moved the RETAIN, RELEASE, AUTORELEASE,
+	CREATE_AUTORELEASE_POOL and ASSIGN macros from common.h.
+	* Foundation/common.h: Removed the above macros.
+
+Tue Apr 14 22:55:17 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* Foundation/NSArray.m (lastObject): Return nil when the array is
+ 	empty instead of raising an exception.
+	* Foundation/NSHashMap.m: Fix copy/paste bugs that incorrectly
+ 	create hash and map tables with both keys and values invisible to
+ 	GC when only keys where requested invisible.
+	* Foundation/NSMapTable.h (NSCreateMapTableInvisibleKeysOrValues):
+ 	Fixed the naming of the arguments.
+	* Foundation/NSNotificationCenter.m: Renamed addObjectsInList to
+ 	addObjectsToList. Move nilObjectObservers initialization out of
+ 	Boehm'GC dependent code. Likewise for nullNameToObjects.
+	* Foundation/NSString.m (getCString): Add a leading 0 to the end
+ 	of the buffer. (Bug reports from Helge Hess <hh@mdlink.de>)
+
+	* Foundation/GarbageCollector.m: Added the code that
+ 	differentiates between the list nodes used to keep the objects and
+ 	observers to be finalized and informed respectively. This code was
+ 	somehow not included in the previous version.
+	(+initialize): Use the pointer semantics for the object values
+ 	kept inside postingObjectsToObservers.
+	* Foundation/NSObjectAllocation.m (NSAllocateObject): Generate an
+ 	error if the typed memory description for the class is not already
+ 	generated by the runtime system (this indicates a bug in the runtime
+	code).
+	* Foundation/NSTask.m: Remove code that's not used when compiling with
+	Boehm GC support.
+
+	* Foundation/PrivateThreadData.h: Optimize the printf-like
+ 	formatting by creating per-thread variables for the
+ 	all the time allocated objects.
+	* Foundation/PrivateThreadData.m: Create the above variables when
+ 	requested.
+	* Foundation/common.m (Avsprintf): Use the above cached variables
+ 	instead of creating them at each invocation of the function.
+
+	* Added emacs variable for the tab width to the local variables
+ 	section in all the files.
+
+Wed Apr  1 19:51:01 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* Foundation/NSUserDefaults.m (syncronizeStandardUserDefaults:):
+	Correct typo (bug report from Helge Hess <hh@mdlink.de>).
+
+Wed Apr  1 18:51:54 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	Added emacs variables to all the files.
+
+	* TODO: Updated.
+	* Foundation/NSObjectAllocation.m: Reset the memory allocated by
+	GC_CALLOC_EXPLICTLY_TYPED because it seems this function doesn't work
+	as expected.
+	* common.h: (RETAIN, RELEASE, AUTORELEASE, CREATE_AUTORELEASE_POOL):
+	New macros.
+
+	Use the new macros above throughout all the files to be able to
+ 	disable the reference counting alocation mechanism when Boehm's
+ 	garbage collector is used.
+
+Wed Mar 11 22:59:39 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* Foundation/GNUmakefile.gnustep: Support the new 'gc' make variable.
+	When gc=yes the object files go into $processor/$os/${runtime}-gc.
+	* examples/GNUmakefile.gnustep: Likewise.
+	* Foundation/GarbageCollector.m (gcCollect): Commented out the printed
+ 	message.
+	* Foundation/NSObject.h.in: Remove the LIB_FOUNDATION_BOEHM_GC
+	definition, it is now passed by the makefile package.
+	* Foundation/NSProcessInfo.m: Set the _usesBoehmGC variable in case
+	it's not setup properly.
+	* Foundation/behavior.m (class_add_behavior): Fixed a potential bug.
+	* Foundation/libFoundation.make.in: Protect the file to multiple
+	inclusions. Define the LIBFOUNDATION_WITH_GC variable.
+	* extensions/FormatScanner.h: Make the booleans bitfields once the
+	bitfields are fully supported by the runtime.
+	* extensions/GCObject.h: Likewise.
+
+Wed Mar  4 22:40:35 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* Foundation/GarbageCollector.m (newNode): Use
+	GC_MALLOC_EXPLICTLY_TYPED and memset instead of
+	GC_CALLOC_EXPLICTLY_TYPED because the last one is different than
+ 	the expected behaviour.
+
+Wed Mar  4 16:25:40 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* Foundation/NSNotificationCenter.m (NSNotificationListItem): Add new
+	instance variable to keep track later of allocated instances.
+	(-[NSNotificationObserverRegister removeObserver:]): Changed the code
+	to use a linked list of ListItem instances instead of an array to avoid
+	allocating objects, which presents problems with GC finalization.
+	(NSNotificationObjectRegister): Changed objectObservers to a map table
+	to be able to use a map table enumerator directly. This eliminates the
+	need of creating an object for the enumerator, which has problems in
+	the presence of finalization.
+	(NSNotificationCenter): Likewise for nameToObjects.
+	* Foundation/GarbageCollector.m (-registerForFinalizationObserver:
+	selector:object:): Register finalizers only for instances because class
+	objects were not allocated by the garbage collector.
+	(unregisterObserver:forObjectFinalization:): Protect the code by
+	locking the global lock.
+
+	* Use the ASSIGN macro where is possible.
+
+Wed Mar  4 12:01:34 1998  Ovidiu Predescu  <ovidiu@aracnet.com>
+
+	* config.mak.in: Define _TS_ERRNO when compiling under Solaris.
+	* extensions/GarbageCollector.h: Added support for registering
+ 	observers of object finalization. Separated the interface for the
+ 	garbage collector using reference counting and the Boehm's
+ 	collector.
+	* extensions/GCObject.h: Temporary remove the structure to avoid the
+	problems with encoding of bitfields in runtime.
+	* extensions/FormatScanner.h: Likewise.
+	* Foundation/FormatScanner.m: Likewise.
+	* Foundation/common.h: Changed the test to use LIB_FOUNDATION_BOEHM_GC
+	instead of WITH_GC.
+	* Foundation/NSZone.m: Likewise.
+	* Foundation/NSObjectAllocation.m: Likewise.
+	* Foundation/NSObject.m: Likewise.
+	* Foundation/GarbageCollector.m: Likewise.
+	* Foundation/GCZone.m: Likewise.
+
+	* Foundation/NSZone.m: Print a warning message in case the the program
+	is linked with a non-garbage-collected aware version of runtime.
+	Implement -calloc: in terms of -malloc:.
+	* Foundation/NSObjectAllocation.m (NSAllocateObject): Use typed
+	allocation of objects.
+	(_do_finalize): Setup the isa pointer to the freed object class.
+	(__freedObjectClass): Made global variable.
+	* Foundation/NSNotificationCenter.m (+initialize): Set the 'observer'
+	variable as a GC invisible pointer.
+	(-removeObject:): New method.
+	(-init): Create the map table as partial invisible table.
+	(-addObserver:): Register the center for finalization notification.
+	(-objectWillFinalize:): New method.
+	(-observerWiFinalize:): New method.
+	* Foundation/NSMapTable.h (keysInvisible, valuesInvisible): New members
+	of the NSMapTable structure.
+	(NSCreateMapTableInvisibleKeysOrValues): New function.
+	* Foundation/NSHashTable.h (keysInvisible): New member of the
+	NSHashTable structure.
+	(NSCreateHashTableInvisibleKeys): New function.
+	* Foundation/NSHashMap.m: Support for the implementation of the above
+	functions.
+	* Foundation/NSDefaultZone.m (-mallocAtomic:): New method.
+	(-callocAtomic:byteSize:): Likewise.
+	* Foundation/GarbageCollector.m: Support code for registering and
+	unregistering observers of objects finalization. Separated the
+	implementation between the reference counting collector and the Boehm's
+	collector.
+
+Thu Feb 12 23:13:35 1998  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/GCAtomicZone.[hm]: Removed. Added the atomic allocation
+	methods to NSZone.
+
+Sun Feb  8 23:52:50 1998  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Differentiate thoughout the whole library between normal and atomic
+	allocations.
+	* Foundation/FormatScanner.m: Use AtomicMalloc() instead of Malloc().
+	The same with AtomicCalloc() and Calloc().
+	* Foundation/GCArray.m: Likewise.
+	* Foundation/NSArray.m: Likewise.
+	* Foundation/NSBundle.m: Likewise.
+	* Foundation/NSCharacterSet.m: Likewise.
+	* Foundation/NSConcreteCharacterSet.m: Likewise.
+	* Foundation/NSConcreteData.m: Likewise.
+	* Foundation/NSConcreteFileHandle.m: Likewise.
+	* Foundation/NSConcreteString.m: Likewise.
+	* Foundation/NSData.m: Likewise.
+	* Foundation/NSDictionary.m: Likewise.
+	* Foundation/NSPosixFileDescriptor.m: Likewise.
+	* Foundation/NSSet.m: Likewise.
+	* Foundation/NSString.m: Likewise.
+	* Foundation/common.h: New AtomicMalloc() and AtomicCalloc() functions.
+	* Foundation/common.h (Strdup): Use AtomicMalloc().
+
+	* Foundation/NSZone.h (NSDefaultAtomicMallocZone, NSZoneAtomicMalloc,
+	NSZoneAtomicCalloc): New functions.
+
+	Moved the private NSThread variables in an object as instance variable.
+	* Foundation/NSAutoreleasePool.m: Use the new schema.
+	* Foundation/NSException.m: Likewise.
+	* Foundation/NSNotificationCenter.m: Likewise.
+	* Foundation/NSNotificationQueue.m: Likewise.
+	* Foundation/NSThread.h: Likewise.
+	* Foundation/NSThread.m: Likewise.
+
+	Optimization: cache the temporary string variables in a per thread
+	pool.
+	* Foundation/NSConcreteString.h (NSTemporaryString): next, new instance
+	variable.
+	* Foundation/NSString.m: Support code for the above caching schema.
+
+	* Foundation/GCAtomicZone.m: Use the equivalent macros so that is
+	possible to simply recompile with the appropriate flags and get the
+	debug versions of the Boehm's allocation functions.
+	* Foundation/GCZone.m: Likewise.
+
+	* Foundation/NSArchiver.m: Explicitly catch the exceptions generated
+	and release the pointers, as we may get pointers that are kept in a
+	map table but they are no longer available.
+	* Foundation/NSData.m: Likewise.
+
+	* Foundation/GarbageCollector.m: Added a definition for _usesBoehmGC
+	even if Boehm's GC is not available.
+	* Foundation/NSException.m: Log the exception's message using printf.
+	* Foundation/NSFileManager.m: Fixed misspelling.
+	* Foundation/NSObjectAllocation.m: The initial support code for
+	invoking a finalizer on an object.
+	* Foundation/NSUserDefaults.m: Added forgot -retain message. Assign
+	the global values to their variables immediately after the allocation
+	to avoid possible recursing in the same method.
+	* Foundation/behavior.m: Use objc_alloc and the friends instead of
+	Malloc and the rest because they can now be allocated from different
+	zones.
+	* examples/GNUmakefile.gnustep: Include libFoundation.make.
+
+	* config.mak.in: Moved the variables used in the standalone version
+	so that they don't override the GNUstep makefile package ones.
+	* configure.in: Fixed bug in assigning the value to the use_gnustep and
+	use_gc variables.
+	* Foundation/GNUmakefile.alone: Added PrivateThreadData.m.
+	* Foundation/GNUmakefile.gnustep: Likewise.
+	* Foundation/GNUmakefile.postamble (after-uninstall): New target to
+	remove libFoundation.make from the installation directory.
+
+Tue Feb  3 22:53:26 1998  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/GarbageCollector.m: Added a function hook that is called
+	when garbage collection takes place.
+	* Foundation/NSBundle.m: Initialize the global variables to NULL.
+	* Foundation/NSZone.h (defaultAtomicZone): New method.
+	* Foundation/NSZone.m: Implement the above method to return a
+	GCAtomicZone used to allocate atomic memory (memory that is not scanned
+	by garbage collector for pointers).
+
+Tue Feb  3 19:27:14 1998  Ovidiu Predescu  <ovidiu@net-community.com>
+
+	* configure.in: Properly check and output a message when using
+ 	Boehm's garbage collector.
+
+Tue Feb  3 07:04:04 1998  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Integrated the Boehm's garbage collector.
+	* Foundation/GCZone.h: New file.
+	* Foundation/GCZone.m: New file.
+	* Foundation/GCAtomicZone.h: New file.
+	* Foundation/GCAtomicZone.m: New file.
+	* Foundation/libFoundation.make.in: New file.
+	* Foundation/NSObject.h.in: New file from NSObject.h.
+	* Foundation/NSObject.h: Removed.
+	* Foundation/libFoundation.make.in: New file.
+	* config.h.in: Added WITH_GC.
+	* config.mak.in: Likewise. Moved the version numbers in configure.in
+	and added support for automatically substituting them.
+	* configure.in: Support for substituting the version numbers in
+	config.make and NSObject.h. New flag --with-gc to build using the
+	Boehm's garbage collector.
+	* Foundation/GNUmakefile.alone: Remove NSObject.h and
+	libFoundation.make. Added GCZone and GCZAtomicZone.
+	* Foundation/GNUmakefile.gnustep: Likewise.
+	* extensions/GarbageCollector.h (+isBoehmGCAvailable, +usesBoehmGC):
+	New methods to determine at runtime the context in which we're running.
+	* Foundation/GarbageCollector.m: Use a mixed implementation, which
+	takes advantage of the Boehm's GC if present.
+	* Foundation/NSZone.h (+setDefaultZone:): New method.
+	* Foundation/NSZone.m: Added support for setting the default zone using
+	+setDefaultZone:.
+	* Foundation/NSDefaultZone.m: Removed unnecessary code.
+	* Foundation/NSObject.m: Skip the default implementation of -dealloc,
+	-autorelease and -retain when Boehm's GC is used.
+	* Foundation/NSObjectAllocation.m: Support for object allocation in
+	the presence of Boehm's GC. Skip the default action in
+	NSDeallocateObject(), NSDecrementExtraRefCountWasZero(),
+	NSIncrementExtraRefCount() and NSGetExtraRefCount().
+
+Fri Jan 29 13:17:37 1998  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSBundle.m: Added support for loading bundles when running
+	in the GNUstep environment.
+
+Fri Jan  9 11:27:27 1998  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSBundle.m: Fixed the searching of resources in a bundle
+	when working in a GNUstep environment.
+
+Tue Jan  6 09:51:20 1998  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Incorporate patches from Marcus Mueller <znek@object-factory.com>.
+	* Foundation/common.h: Include stdio.h.
+	* Foundation/NSFileManager.h: Declare NSFileOwnerAccountName.
+	* Foundation/NSFileManager.m (fileAttributesAtPath:traverseLink:):
+	Add a new key, NSFileOwnerAccountName, in the returned dictionary.
+
+Wed Dec  3 13:55:00 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSObject.m: Check in a bunch of methods to see if selector
+	is null to avoid a crash when working with the GNU runtime.
+
+Mon Dec  1 15:18:33 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/common.m (hashpjw): Replaced by a better hash function
+	hashjb (from Dr. Dobb's Journal January/1998).
+	* Foundation/NSConcreteValue.m: Use the new hash function.
+	* Foundation/NSData.m: Likewise.
+	* Foundation/NSMethodSignature.m: Likewise.
+
+Tue Nov 25 09:28:09 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Suggestions and bug fixes from Gregor Hoffleit
+	<flight@mathi.uni-heidelberg.de>.
+
+	* Foundation/UnixSignalHandler.m (addObserver:selector:forSignal:
+	immediatelyNotifyOnSignal:): Use sigemptyset to empty the signal action
+	set mask.
+
+	* Resources/GNUmakefile.alone: Removed.
+	* Resources/GNUmakefile.gnustep: Removed.
+	* Resources/GNUmakefile: New makefile that does not depend on how the
+	package was configured, for GNUstep or not.
+	* GNUmakefile.alone: Remove the GNUmakefile on distclean.
+	* GNUmakefile.gnustep: Likewise.
+	* Foundation/GNUmakefile.alone: Likewise.
+	* Foundation/GNUmakefile.postamble: Likewise.
+	* examples/GNUmakefile.alone: Likewise.
+	* examples/GNUmakefile.gnustep: Likewise.
+	* configure.in: Don't create the Resources/GNUmakefile from
+	GNUmakefile.gnustep.
+
+Sun Nov 16 22:22:15 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Public release 0.8.0.
+
+Sun Nov 16 20:12:05 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* configure.in: Check for sigaction system call.
+	* config.h.in: Support the above check.
+	* config/i386/gnu.h: New file.
+	* Foundation/UnixSignalHandler.m: Use sigaction under linux instead of
+	signal because the later doesn't have the BSD semantics.
+
+Sat Nov 15 21:52:55 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* config/alpha/linux-gnu.h: New  definitions needed by NSInvocation
+	and NSMethodSignature for the alpha processor.
+
+Sat Nov 15 15:50:10 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Fixes from Aleksandr Savostyanov.
+	* config.mak.in: Add -D_REENTRANT on Solaris.
+	* Foundation/NSTask.m: Properly include the exception files.
+
+	* Foundation/NSFileManager.m (-findNextFile): Don't recurse into
+	subdirectories unless the recursive flag is set.
+
+Sat Nov 15 15:34:33 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSHost.m: Include <string.h>.
+	* Foundation/NSTask.m: Include <config.h> instead of
+	<Foundation/common.h> to avoid redefinition of MIN and MAX on some
+	systems. Cast integers to long first to avoid warnings on alpha.
+	* Foundation/UnixSignalHandler.m: Likewise.
+	* Foundation/common.h: Change the definition of MIN and MAX to use
+	typeof instead of typedef.
+
+Wed Nov 12 21:34:08 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* configure.in: Checks for sigset.
+	* config.h.in: Support for the above check.
+	* Foundation/NSTask.m: Fixed the registering to UnixSignalHandler.
+	* Foundation/UnixSignalHandler.m: Use sigset on System V instead of
+	signal because the last one removes the handler after a signal is
+	executed.
+	(_execChild): Temporary disable signals before forking off the child
+	to make sure SIGCHLD is not raised before we have a chance to register
+	the task object.
+	* Foundation/load.m: The code for ELF systems also works under Solaris,
+	but GCC doesn't seem to define the __ELF__ variable.
+	* examples/Defaults.m: Move the format strings outside the exception
+	handler to workaround a bug in compiler.
+	* examples/GNUmakefile.gnustep: Added ADDITIONAL_CPPFLAGS.
+
+Tue Nov 11 22:16:39 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Finished the implementation of NSTask and NSPipe.
+	* configure.in: Added checks for determining the signal handling
+	mechanism. Also for a POSIX sys/wait.h, for a working vfork and for
+	the pid_t definition.
+	* config.h.in: Support for the above checks.
+	* Foundation/NSPipe.m: Changed the implementation to be based on
+	NSFileHandle instead of NSPosixFileDescriptor.
+	* Foundation/NSTask.m: Properly handle SIGCHLD signals generated for
+	killed children. Generate exceptions if the state is not complete.
+	Use a concrete class. Handle NSPipes when they are setup as input,
+	output or error handles.
+
+	* Foundation/UnixSignalHandler.m: New class UnixSignalHandler to
+	handle the Unix signal stuff.
+	* Foundation/NSRunLoop.m (acceptInputForMode:beforeDate:): Break the
+	loop when listening for file descriptors input if a signal appears.
+
+	* Foundation/NSAccount.m: Made the implementation thread-safe.
+	* Foundation/NSFileManager.m: Likewise.
+	* Foundation/NSNotificationCenter.m: Likewise.
+	* Foundation/NSThread.h: Add the defaultCenter ivar. New methods
+	-defaultNotificationCenter and -setDefaultNotificationCenter:.
+	* Foundation/NSThread.m: Implementation of the above.
+
+	* Foundation/common.h: Move the ASSIGN macro here.
+	* Foundation/NSConcreteFileHandle.m: Removed the ASSIGN macro.
+	* Foundation/NSRunLoop.m: Likewise.
+	(runMode:beforeDate:): Move the calling of +[NSNotificationQueue
+	runLoopASAP] to acceptInputForMode:beforeDate:.
+	* Foundation/NSNotification.h: Removed the lock ivar.
+	* Foundation/NSProcessInfo.m (initializeWithArguments:count:
+	environment:): Fixed some memory allocation bugs.
+
+Tue Nov  4 23:11:32 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSAccount.m (+currentAccount): Create an account based on
+	the password structure rather than on the user id only.
+	* Foundation/NSAllocDebugZone.m (searchHash): Cast the pointer to long
+	instead of int.
+	* Foundation/NSArchiver.m (encodeValueOfObjCType:at:): Likewise.
+	* Foundation/NSObjectAllocation.m (NSDecrementExtraRefCountWasZero,
+	NSIncrementExtraRefCount, NSGetExtraRefCount): Likewise.
+	* Foundation/NSConcreteValue.m (-[NSConcreteObjCValue hash]): Use
+	hashpjw instead of the pointer to the type, which can vary. Also cast
+	pointer values to long before returning them from -hash in some other
+	classes.
+
+Tue Nov  3 22:14:10 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSHost.h: New file.
+	* Foundation/NSHost.m: New file.
+	* Foundation/NSPipe.m: New file.
+	* Foundation/NSTask.h: New file.
+	* Foundation/NSTask.m: New file.
+
+Mon Nov  3 00:09:13 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Prepare the sources for the Alpha port.
+	* Foundation/NSAllocDebugZone.m: Cast pointers to long instead of int.
+	* Foundation/NSArray.m: Likewise.
+	* Foundation/NSHashMap.m: Likewise.
+	* Foundation/NSObject.m: Likewise.
+	* Foundation/NSString.m: Likewise.
+	* Foundation/NSAutoreleasePool.m: Use the %p specificator when
+	printf()-ing.
+	* Foundation/NSCalendarDate.m: Use a dummy va_list variable to pass
+	the arguments to stringWithFormat:arguments:.
+
+	Changed int to unsigned int to avoid compiler warnings with the newer
+	pre-2.8.0 compilers.
+	* Foundation/GCArray.m: Likewise.
+	* Foundation/GCDictionary.m: Likewise.
+	* Foundation/NSArchiver.m: Likewise.
+	* Foundation/NSCoder.m: Likewise.
+	* Foundation/NSConcreteCharacterSet.m: Likewise.
+	* Foundation/NSConcreteFileHandle.m: Likewise.
+	* Foundation/NSConcreteSet.m: Likewise.
+	* Foundation/NSConcreteTimeZone.m: Likewise.
+
+	* Foundation/NSInvocation.m (setArguments:atIndex:): Check
+	argumentLocation before copying to it.
+	* Foundation/NSLock.m (tryLockWhenCondition:): Use -tryLock instead of
+	duplicating the code (from Aleksandr Savostyanov).
+	* Foundation/NSPathUtilities.m (stringByStandardizingPath): Don't try
+	to see if the path exists or not because it could be a relative link
+	(observation from Aleksandr Savostyanov).
+	* Foundation/NSUtilities.m (NSLogv): Lock before writing to stdout.
+
+Mon Oct 27 00:26:14 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Implemented a simple defaults tool.
+	* examples/Defaults.m: New file.
+	* examples/defaults.m: Removed.
+	* Foundation/NSUserDefaults.h: Added two new ivars, domainsToRemove and
+	dirtyDomains. Removed the dirty ivar.
+	* Foundation/NSUserDefaults.m: Deal with domains removal. Fixed and
+	optimized the code that synchonizes the persistent default domains.
+
+Fri Oct 24 12:49:46 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSRunLoop.m (runMode:beforeDate:): Temporary retain
+	limitDate so that it doesn't get released accidentally in
+	acceptInputForMode:beforeDate:. Bug report from Benhur Stein
+	<Benhur-de-Oliveira.Stein@imag.fr>.
+
+Tue Oct 21 23:49:40 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Finished making the library thread-safe, using modified patches from
+	Aleksandr Savostyanov.
+	* Foundation/NSNotificationQueue.m: Made thread-safe.
+	* Foundation/NSObjectAllocation.m: Likewise.
+	* Foundation/NSObject.m: Lock the global lock when accessing
+	delayedExecutions dictionary.
+	* Foundation/NSThread.h: Added support for making other classes in
+	libFoundation thread-safe.
+	* Foundation/NSThread.m: Likewise.
+
+	* Foundation/NSPosixFileDescriptor.h: Added the 'owned' ivar to
+	properly close the file descriptor.
+	* Foundation/NSPosixFileDescriptor.m (-dealloc): New method.
+	Setup the owned ivar in various init methods.
+	* Foundation/NSProcessInfo.m: Make the name of the process being the
+	last component of the path.
+	* Foundation/NSRunLoop.m (limitDateForMode:): Catch all the exceptions
+	possibly generated by firing timers or executing operations unleashed
+	by activity on file descriptors.
+	* Foundation/NSValue.h: Declare -init methods for NSNumber.
+
+Tue Oct  7 17:06:19 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Support for the GNUstep makefile package.
+	* extensions/objc-runtime.h: Don't include the config.h file.
+	* Foundation/GarbageCollector.m: Include common.h to be provide the
+	necessary definitions to objc-runtime.h.
+	* Foundation/NSCoder.m: Likewise.
+	* Foundation/NSConcreteDictionary.m: Likewise.
+	* Foundation/NSLock.m: Likewise.
+	* Foundation/NSNotificationCenter.m: Likewise.
+	* Foundation/NSTimer.m: Likewise.
+	* Foundation/behavior.m: Likewise.
+	* Foundation/misc.m: Likewise.
+	* Foundation/NSLock.h: Make the runtime definitions opaques since we
+	no longer include the config.h file.
+	* Foundation/NSNotificationQueue.h: Add definition for the private
+	method taskNowMultiThreaded: to avoid compilation warnings.
+	* Foundation/NSRunLoop.h: Likewise.
+	* Foundation/NSRunLoop.m: Include here the objc-runtime.h file.
+	* Foundation/NSNotificationQueue.m: Implement taskNowMultiThreaded:.
+
+Sun Oct  5 20:27:10 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSBundle.m (_fileResourceNamed:extension:inDirectory:):
+	Use the Libraries/Resources/libFoundation in the GNUstep directory
+	tree.
+
+Thu Aug 21 11:48:03 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSCalendarDate.m (descriptionWithCalendarFormat:timeZone:
+	locale:): New method to avoid infinite recursion (patch from Aleksandr
+	Savostyanov).
+
+Wed Aug 20 14:24:15 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSPathUtilities.m: (pathWithComponents:): Reworked to
+	be simpler. (bug report from Aleksandr Savostyanov).
+	* Foundation/GNUmakefile: Changed to work with the supplied install-sh.
+
+Fri Aug  1 15:28:24 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSTimeZone.m: Replaced NSLog() with printf() to avoid
+	infinite recursion when the resource files are not found.
+	* Foundation/exceptions/GeneralExceptions.m (-[FileNotFoundException
+	initWithFilename:]): Don't use -stringWithFormat: to avoid infinite
+	recursion when resource files are not in the expected place.
+
+Fri Aug  1 10:32:47 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSHashMap.m (__NSHashGrow): Fixed hash value computation.
+	* Foundation/NSCalendarDate.m (-dateByAddingYears:months:days:hours:
+	minutes:seconds:): Fixed the name.
+	* Foundation/NSArray.m (makeObjectsPerformSelector:...): New methods.
+	* Foundation/NSSet.m (makeObjectsPerformSelector:...): New methods.
+	(Bug fixes from Aleksandr Savostyanov).
+
+Wed Jul  9 15:01:18 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSData.m (-[NSData hash]): New method.
+
+Fri Jun 13 19:01:27 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/scanInt.def: Fixed scanning of big numbers (bug report
+	from Balazs E. Pataki <pataki@next-1b.manuf.bme.hu>).
+
+Thu Jun 12 18:51:03 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSNotification.m (-dealloc): Also release object.
+
+Tue Jun 10 21:32:01 1997  Mircea Oancea <mircea@pathcom.com>
+
+	* Foundation/NSConcreteString.m (-[NS8BitString initWithCoder:]):
+	Allocate one more byte and set it to 0 (bug report from Chun, Sung Jin
+	<ninja@doolly.snu.ac.kr>).
+
+Tue Jun 10 15:14:49 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSAccount.m: Include common.h instead of config.h.
+	(-initWithPasswordStructure:): Duplicate the char* passwd structure
+	fields because of anoying anomalies when using them.
+	* Foundation/NSDistributedLock.m (-initWithPath:): Don't try to aquire
+	the lock here by creating the lock file, just store the file name.
+	* Foundation/NSFileManager.m: (-removeFileAtPath:handler:): Handle the
+	simple case when the file name is really a file, not a directory.
+	* Foundation/NSUserDefaults.m (-loadPersistentDomainNamed:): Replace
+	NSLog() with printf() calls to avoid recursion when resources are not
+	found.
+	(-savePersistentDomainNamed:): Likewise.
+	(-loadPersistentDomainNamed:): Don't try to lock when loading the
+	content of a file corresponding to a given domain. The locking schema
+	should be improved to be possible to determine if the application that
+	holds the lock is still alive, otherwise the lock should be removed.
+	(-savePersistentDomainNamed:): Likewise.
+	(-initWithPath:): Set appDomain to the name of the executable which is
+	the last component in the application's name.
+	* Foundation/common.m (writeToFile): Remove the destination file first
+	before renaming the source file to the destination one.
+
+Sun Jun  1 19:11:03 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	Initial implementation of NSFileHandle.
+	* Foundation/NSFileHandle.h: New file.
+	* Foundation/NSFileHandle.m: New file.
+	* Foundation/NSConcreteFileHandle.h: New file.
+	* Foundation/NSConcreteFileHandle.m: New file.
+	* Foundation/exceptions/NSFileHandleExceptions.h: New file.
+	* Foundation/exceptions/NSFileHandleExceptions.m: New file.
+	* Foundation/Foundation.h: Include NSFileHandle.h.
+	* Foundation/GNUmakefile: Add NSFileHandle, NSConcreteFileHandle and
+	NSFileHandleExceptions.
+	* Foundation/NSPosixFileDescriptor.m (-dealloc): Remove method.
+
+Thu May 30  6:28:52 1997  Ovidiu Predescu <ovidiu@net-community.com>
+
+	* Foundation/NSStringPropList.g: Add the / character to the characters
+	that are part of a string (suggestion from Aleksandr Savostyanov).
+	* Foundation/PrintfScannerHandler.m (-convertChar:scanner:): Change the
+	way characters are written to use sprintf(); this makes the code to
+	also work on Solaris (suggestion from Aleksandr Savostyanov).
+
+Thu May 29 18:53:52 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Public release 0.7.1.
+
+Tue May 27  7:20:34 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSString.m: Implemented some abstract methods for the
+	default encoding. These methods will be rewritten for Unicode but now
+	they allow user's concrete subclasses to work correctly. Patch from
+	Paul H. Kenyon <phk@hksys.com>.
+
+Mon May 26 10:04:18 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	Fixed the way in which NSInvocation and NSTimer handle retain cycles.
+	* Foundation/NSInvocation.m (-invalidate): New method.
+	* Foundation/NSInvocation.m (-setTarget:): Retain the target if
+	arguments are retained.
+	* Foundation/NSTimer.m (-invalidate): Send -invalidate to invocation
+	ivar to break the retain cycle.
+
+Sat May 24 19:47:30 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSInvocation.m (-_releaseArguments): Release the arguments
+	starting from 2 instead of 0; patch from Aleksandr Savostyanov.
+	* Foundation/NSPosixFileDescriptor.m (-setDelegate:): Don't retain the
+	delegate; patch from Aleksandr Savostyanov.
+	* Foundation/NSRunLoop.m (-[NSRunLoop acceptInputForMode:beforeDate:]):
+	Do not return from method if there are no input sources to listen to.
+	Avoid this way unnecesary computations when this method was called from
+	-runUntilDate: or -run. Patch from Aleksandr Savostyanov.
+
+Fri May 16 18:54:57 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSGeometry.m (NSPointFromString, NSSizeFromString,
+	NSRectFromString): Implemented.
+	* Foundation/NSObject.m (-performSelector:,
+	-performSelector:withObject:, -performSelector:withObject:withObject:):
+	New methods.
+	* Foundation/NSObject.m (-performSelector:object:afterDelay:,
+	+cancelPreviousPerformRequestsWithTarget:selector:object:):
+	Implemented. _NSObjectDelayedExecutionHolder: New class used for
+	delayed execution of methods.
+
+Thu May 15 18:14:24 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSDistributedLock.m (-initWithPath:): Check if the file
+	exists and create it otherwise.
+	* Foundation/NSFileManager.m (-createFileAtPath:contents:attributes:):
+	Check if the data the to be written has 0 length.
+
+Sun May 18 23:33:44 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSPosixFileDescriptor.m: Finished the implementation.
+	* Foundation/NSRunLoop.h: Changed the API to work using
+	NSPosixFileDescriptors instead of the direct Unix file descriptor.
+	* Foundation/NSRunLoop.m: Likewise.
+
+Sat May 10  8:03:14 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSObject.m (-release): Deallocate the object when the
+	reference count is 1 without decreasing it anymore, this ensures
+	OPENSTEP compatibility. Patch from Aleksandr Savostyanov.
+	* Foundation/GCObject.m (-release): Likewise.
+	* Foundation/NSRunLoop.m (-[NSRunLoop limitDateForMode:]): Reworked a
+	little based on Aleksandr Savostyanov's suggestion.
+
+Sat May  3  9:33:34 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* sharedlib.mak: Rules for making shared libraries under Solaris; patch
+	from Aleksandr Savostyanov.
+
+Thu May  1 13:54:34 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	Support the new 970318 patch for compiler and runtime.
+	* configure.in: Check for the objc_thread_create() function.
+	* Foundation/NSThread.m: Create a new thread depending on the runtime
+	API (using either objc_thread_create or objc_thread_detach).
+
+Wed Apr 30  8:07:14 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSString.m (-[NSString initWithFormat:arguments:]): Do
+	-collect after the -copyWithZone: operation; patch from Aleksandr
+	Savostyanov.
+
+Sat Apr 26 19:23:44 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSObjectAllocation.m: Align RefObjectLayout structure
+	to the align of a double; patch from Aleksandr Savostyanov.
+
+Mon Apr 21 20:43:42 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSExceptionWithoutNested.h: Fix the exception handling
+	macros because nested handlers were not supported as observed by
+	Florin Mihaila <phil@pathcom.com>.
+
+Thu Apr  3 10:45:32 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSRunLoop.m: Finished the implementation.
+
+Sat Mar 22  8:45:10 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Foundation/NSMethodSignature.m: Integrated Aleksandr Savostyanov's
+	changes for Solaris.
+	* Foundation/NSInvocation.m: Likewise.
+	* config/sparc/solaris2.4.h: Likewise.
+
+Sat Mar 15 10:33:20 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* Integrated the Jeremy Bettis' patch that make libFoundation compile
+	on Windows NT.
+
+Sat Mar  8 16:44:50 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* sharedlib.mak: Linux rule for shared libraries added.
+
+Sat Mar  8 13:41:08 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* sharedlib.mak: New file. Describes the commands to create a
+	shared library on each platform.
+	* Foundation/GNUmakefile: Added rules for creating shared libraries.
+	* configure.in: Added host variables to make information about target
+	machine available in config.mak. These variables are used by
+	sharedlib.mak to determine the commands used to create a shared lib.
+	* Foundation/NSString.h: -[NSString substringFromRange:]: New method.
+	* Foundation/NSString.m: Likewise.
+	* doc/CodingRules.pod: New file.
+	* Foundation/NSObject.h.in: Removed.
+	* Foundation/NSObject.h: Created from NSObject.h.in. The versioning
+	scheme has been changed to use major, minor and subminor numbers.
+
+Sun Feb 23 18:42:07 1997  Ovidiu Predescu <ovidiu@bx.logicnet.ro>
+
+	* First public release: 0.7.

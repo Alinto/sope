@@ -1,0 +1,14 @@
+# postprocessing makefile 
+
+WEDropScript.jsm : WEDropScript.js
+	sh js2m.sh $< $@
+	touch WEDropContainer.m
+
+calendar.jsm : calendar.js
+	sh js2m.sh $< $@
+	touch calendar.m
+
+WEDropContainer.m : WEDropScript.jsm
+
+before-all :: WEDropScript.jsm calendar.jsm
+

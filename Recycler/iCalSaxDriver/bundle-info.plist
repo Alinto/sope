@@ -1,0 +1,19 @@
+{
+  requires = {
+    bundleManagerVersion = 1;
+    classes = ( { name = NSObject; } );
+  };
+  
+  provides = {
+    SAXDrivers = ( 
+      { 
+        name        = "iCalSaxDriver";
+        sourceTypes = ( "text/calendar" ); 
+      }
+    );
+    classes = ( 
+      { name = "ICalSaxParser"; },
+      { name = "iCalSaxDriver"; } 
+    );
+  };
+}

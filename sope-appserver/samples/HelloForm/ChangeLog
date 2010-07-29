@@ -1,0 +1,8 @@
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: fixed include path of system libs
+
+2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* created by copying HelloWorld
+

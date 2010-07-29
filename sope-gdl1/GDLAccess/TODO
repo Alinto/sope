@@ -1,0 +1,15 @@
+# $Id: TODO 1 2004-08-20 10:38:46Z znek $
+
+TODO
+====
+
+- remove all things not required for OGo
+
+MacOSX
+======
+
+- replace all InvalidArgumentExceptions with proper Foundation replacements
+
+- remove dependency on FoundationExt
+  - currently the dependency is formed by the libFoundation scanner handlers
+    and format processors

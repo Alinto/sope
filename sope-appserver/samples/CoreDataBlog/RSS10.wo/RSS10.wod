@@ -1,0 +1,45 @@
+// bind template to controller
+
+SetContentType: WOSetHeader {
+  header = "content-type";
+  value  = "application/rdf+xml";
+  // value  = "text/xml"; // for debugging
+}
+
+FeedTitle: WOString {
+  value = application.name;
+}
+FeedDate: WOString {
+  value = date;
+  dateformat = "%Y-%m-%dT%H:%M:%S+00:00";
+}
+
+
+ResourceList: WORepetition {
+  list = recentPostsDisplayGroup.displayedObjects;
+  item = item;
+}
+
+
+// TODO: how to get an ID?
+ItemHref: WOString { value = "TODO"; }
+
+ItemTitle: WOString {
+  value      = item.title.stringByEscapingXMLString;
+  escapeHTML = NO;
+}
+ItemDescription: WOString { // TODO: shorten? (and _then_ escape)
+  value = item.body.stringByEscapingXMLString;
+}
+
+ItemDcSubject: WOString { value = ""; } // TODO: check spec
+
+ItemDcCreator: WOString {
+  value = item.author.name.stringByEscapingXMLString;
+  escapeHTML = NO;
+}
+
+ItemDcDate: WOString {
+  value      = item.creationDate;
+  dateformat = "%Y-%m-%dT%H:%M:%S+00:00";
+}

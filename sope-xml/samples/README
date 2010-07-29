@@ -1,0 +1,16 @@
+Examples for using skyrix-xml
+=============================
+
+saxxml		- parse a file using SAX and print out the XML
+
+xmln		- convert a give file to PYX using a SAX handler
+
+rss2plist1	- a sample for writing a "raw" SaxObjC handler
+
+rss2plist2	- a sample for writing a method-callback SaxObjC handler
+
+rssparse	- a sample for using the SaxObjectDecoder
+
+domxml		- parse a file into a DOM and print out the XML
+
+testqp		- a sample for testing DOM query pathes

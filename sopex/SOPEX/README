@@ -1,0 +1,65 @@
+ABSTRACT
+========
+
+SOPEX provides basic infrastructure for developing SOPE applications
+using Xcode on Mac OS X. SOPEX consists of a framework, a project
+template and several file templates. The SOPEX.framework provides functionality 
+for launching and debugging SOPE applications. SOPEX applications can be 
+launched as normal Desktop applications and provide their own, integrated web 
+browser (using Apple's WebKit). Doing so, SOPEX applications are fully 
+functional stand-alone HTML applications.
+
+
+PREREQUISITES
+=============
+
+SOPEX depends on SOPE being installed. Please read the accompanied
+documentation for details.
+
+
+DEBUGGING
+=========
+
+Unlike in 1.x, SOPEX 2.x applications are single process which means you can
+debug them using gdb (in Xcode or using the command line) as any other project.
+
+
+USEFUL DEBUGGING DEFAULTS
+=========================
+
+At present there's a limited set of NSUserDefaults aiding in the debugging
+of SOPEX applications. Please note that all user defaults for SOPE applications
+will work as well.
+
+-WOPort <number>:
+ if set, forces the child process to be launched on this specific port.
+ Useful for debugging with tcpdump.
+                      
+-SOPEXDebugEnabled <bool>:
+ Global debug message trigger.
+
+-SOPEXDebugWebConnection <bool>:
+ Use this to trigger debug messages in SOPEXWebConnection.
+
+
+Known BUGS
+==========
+
+
+
+Prebinding Notes
+================
+
+General technical information about prebinding is available from Apple at
+http://developer.apple.com/documentation/Performance/Conceptual/LaunchTime/Tasks/Prebinding.html#//apple_ref/doc/uid/20001858.
+
+OGo frameworks currently use the range from 0xC0000000 to 0xCFFFFFFF.
+
+Any questions and feedback regarding our use of this range should go to
+Marcus Müller <znek@mulle-kybernetik.com>.
+
+
+SOPEX: 0xC6000000 - 0xC6FFFFFF
+=============================
+
+0xC6FF0000 SOPEX

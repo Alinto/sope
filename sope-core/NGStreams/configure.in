@@ -1,0 +1,108 @@
+AC_PREREQ(2.4)
+
+AC_INIT(NGStream.m)
+
+# Determine the host, build, and target systems
+CC_TARGET=$target # use --target value for CC, not the canonical form
+AC_CANONICAL_SYSTEM
+
+AC_CONFIG_HEADER(config.h:config.h.in)
+AC_PREFIX_DEFAULT(/usr/local)
+
+# check for cross compilation
+
+if test "x$target" = "xNONE"; then
+  set target $host
+fi
+
+if test "x$host" != "x$target"; then
+	cross_defines="CROSS=-DCROSS_COMPILE"
+        cross_compiling="yes"
+        echo "cross compiling from $host to $target .."
+AC_CHECK_PROG(CC,      "${CC_TARGET}-gcc",     "${CC_TARGET}-gcc",     gcc)
+AC_CHECK_PROG(RANLIB,  "${CC_TARGET}-ranlib",  "${CC_TARGET}-ranlib",  ranlib)
+AC_CHECK_PROG(AR,      "${CC_TARGET}-ar",      "${CC_TARGET}-ar",      ar)
+AC_CHECK_PROG(DLLTOOL, "${CC_TARGET}-dlltool", "${CC_TARGET}-dlltool", dlltool)
+        CC=${CC_TARGET}-gcc
+        LD=${CC_TARGET}-ld
+        AR=${CC_TARGET}-ar
+        RANLIB=${CC_TARGET}-ranlib
+else
+AC_CHECK_PROG(CC,      "gcc",     "gcc",     gcc)
+AC_CHECK_PROG(RANLIB,  "ranlib",  "ranlib",  ranlib)
+AC_CHECK_PROG(AR,      "ar",      "ar",      ar)
+AC_CHECK_PROG(DLLTOOL, "dlltool", "dlltool", dlltool)
+fi
+
+changequote(,)dnl
+case "${host_cpu}" in
+    i[45]86*)	host_cpu=i386;;
+    hppa1.1)	host_cpu=hppa;;
+esac
+if test "x$cross_compiling" = "xyes"; then
+  case "${target_cpu}" in
+    i[45]86*)	target_cpu=i386;;
+    hppa1.1)	target_cpu=hppa;;
+  esac
+else
+  target_cpu=${host_cpu}
+  target_os=${host_os}
+  target_vendor=${host_vendor}
+fi
+case "x${target_os}" in
+  xfreebsd*) target_os=freebsd;;
+esac
+changequote([,])dnl
+
+# Assign the HOST variables for sharedlib.mak
+HOST=$host
+HOST_CPU=$host_cpu
+HOST_VENDOR=$host_vendor
+HOST_OS=$host_os
+TARGET=$target
+TARGET_CPU=$target_cpu
+TARGET_VENDOR=$target_vendor
+TARGET_OS=$target_os
+
+AC_CHECK_LIB(nsl, chown)
+AC_CHECK_LIB(socket, accept)
+AC_CHECK_LIB(wsock32)
+AC_CHECK_LIB(advapi32)
+
+transformed_target_cpu=`${GNUSTEP_MAKEFILES}/clean_cpu.sh ${TARGET_CPU}`
+ac_cv_file_output_prefix=${transformed_target_cpu}/${TARGET_OS}
+
+AC_HEADER_DIRENT
+AC_HAVE_HEADERS(dir.h libc.h time.h stdlib.h memory.h string.h dnl
+		strings.h sys/stat.h sys/fcntl.h fcntl.h dnl
+                sys/vfs.h sys/statfs.h sys/statvfs.h dnl
+		netinet/in.h windows.h winsock.h sys/socket.h dnl
+		Windows32/Sockets.h pwd.h process.h grp.h sys/param.h dnl
+		sys/file.h sys/errno.h sys/select.h sys/poll.h poll.h dnl
+                sys/time.h sys/types.h dnl
+                sys/ioctl.h sys/filio.h dnl
+                netdb.h unistd.h unistd.h limits.h)
+AC_HEADER_SYS_WAIT
+
+AC_CHECK_FUNCS(memcpy getcwd kill poll isatty ttyname ttyname_r dnl
+               gethostbyname_r gethostbyaddr_r gethostent_r)
+AC_FUNC_MMAP
+AC_FUNC_VFORK
+
+# uses AC_TRY_RUN
+if test "$cross_compiling" = yes; then
+echo "WARNING: cannot check for restartable system calls during cross compilation."
+else
+AC_SYS_RESTARTABLE_SYSCALLS
+fi
+
+AC_OUTPUT(,
+[
+. ./config.cache
+
+if test ! -d ${ac_cv_file_output_prefix}; then
+  ${GNUSTEP_MAKEFILES}/mkinstalldirs ${ac_cv_file_output_prefix}
+fi
+cp config.h ${ac_cv_file_output_prefix}
+rm -f config.h
+])

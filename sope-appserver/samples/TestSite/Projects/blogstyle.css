@@ -1,0 +1,88 @@
+/* movable type stuff */
+
+a 	  { color: #003366; text-decoration: underline; }
+a:link	  { color: #003366; text-decoration: underline; }
+a:visited { color: #003366; text-decoration: underline; }
+a:active  { color: #999999;  }
+a:hover	  { color: #999999;  }
+
+h1, h2, h3 {
+  margin:  0px;
+  padding: 0px;
+}
+
+div#banner {
+  font-family:   palatino,  georgia, verdana, arial, sans-serif;
+  color:         #333333;
+  font-size:     12pt;
+  font-weight:   normal;	
+  margin:        5px;
+  border-bottom: 1px solid #08348B;
+}
+
+div#banner a, div#banner a:link, div#banner a:visited, 
+div#banner a:active, div#banner h1 {
+  font-family:     palatino,  georgia, verdana, arial, sans-serif;
+  font-size:       12pt;
+  color:           #333333;
+  text-decoration: none;
+}
+div#banner a:hover {
+  font-family:     palatino,  georgia, verdana, arial, sans-serif;
+  font-size:       xx-large;
+  color:           #333333;
+  text-decoration: underline;
+}
+
+span.description {
+  font-family:    palatino,  georgia, times new roman, serif;
+  color:          #333333;
+  font-size:      small;
+  text-transform: none;	
+}
+
+div#content {
+  background: #FFFFFF;
+  border:     1px solid #FFFFFF;
+}
+
+div.blog {
+  padding:    15px;
+  background: #FFFFFF;
+}
+
+div.blogbody {
+  font-family: palatino, georgia, verdana, arial, sans-serif;
+  color:       #333333;
+  font-size:   small;
+  font-weight: normal;
+  background:  #FFFFFF;
+  line-height: 150%;
+}
+
+div.blogbody a,	div.blogbody a:link, div.blogbody a:visited,
+div.blogbody a:active, div.blogbody a:hover {
+  font-weight:     normal;
+  text-decoration: underline;
+}
+
+h3.title {
+  font-family: palatino, georgia, times new roman, serif;
+  font-size:   8pt;
+  color:       #666666;
+}			
+h2.projecttitle { 
+  font-family:   palatino, georgia, times new roman, serif; 
+  font-size:     11pt; 
+  color:         #333333; 
+  border-bottom: 1px solid #08348B;
+  margin-bottom: 10px;
+  font-weight:   bold;
+}			
+		
+div.projectowner { 
+  font-family:   verdana, arial, sans-serif; 
+  font-size:     x-small; 
+  color:         #000000; 
+  margin-bottom: 25px;
+}

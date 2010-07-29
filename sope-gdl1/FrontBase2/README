@@ -1,0 +1,19 @@
+# $Id: README 1 2004-08-20 10:38:46Z znek $
+
+FrontBase GDL database adaptor
+
+This package contains a GDL database adaptor for the FrontBase database 
+(www.frontbase.com). It was written with a lot of help from the people
+at Frontline Software.
+
+If you have any fixes, questions or patches to this adaptor, contact me at
+
+  helge.hess@mdlink.de
+
+Notably the development of this adaptor was supported by
+
+  MDlink online service center GmbH
+  http://www.mdlink.de/
+
+Helge Hess, helge.hess@mdlink.de
+1999-11-03

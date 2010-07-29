@@ -1,0 +1,25 @@
+{
+    EOModelVersion   = 1;
+    adaptorClassName = PostgreSQLAdaptor;
+    adaptorName      = PostgreSQL;
+
+    entities = (
+      {
+        name         = Doof;
+        externalName = doof;
+        className    = EOGenericRecord;
+        primaryKeyAttributes = ( pkey );
+        attributesUsedForLocking = ( pkey );
+        classProperties = ( pkey );
+        attributes = (
+                {
+                    valueClassName = NSNumber;
+                    columnName = pkey;
+                    name = pkey;
+                    valueType = i;
+                    externalType = INT; // t_id
+                },
+        );
+      }
+    );
+}

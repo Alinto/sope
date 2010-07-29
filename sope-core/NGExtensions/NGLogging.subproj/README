@@ -1,0 +1,31 @@
+NGLogging OVERVIEW
+==================
+
+TBD: write overview!
+
+
+NOTES
+=====
+
+NGLoggerManager:
+- provide some extra config for configuration of appenders for loggers
+
+NGLogger:
+- what about loggingPrefix?
+- provide API for setting appenders
+
+NSObject+ExtendedLogging:
+- should check if -loggingPrefix is defined. If YES should provide this to
+  logger
+
+NGLogEvent
+- should remember its logger? -> probably important for filtering
+
+
+APPENDER NOTES
+==============
+
+- We're probably not interested in providing lots of appenders for lots of
+  different loggers. Most of the time we have something like a default
+  appender, say NGLogConsoleAppender during development and NGLogSyslogAppender
+  for deployment (or file appenders)

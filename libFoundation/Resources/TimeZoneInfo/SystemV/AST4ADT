@@ -1,0 +1,30 @@
+{
+    details = {
+	ADT = {abbrev = ADT; isDST = 1; offset = "-3:00:00"; };
+	AST = {abbrev = AST; isDST = 0; offset = "-4:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Apr 27 08:00:00 1902 GMT";
+	    endDate = "Sun Oct 28 07:00:00 1973 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/8:00:00"; detail = ADT; },
+		{ date = "October/last Sunday/7:00:00"; detail = AST; }
+	    );
+	},
+	{
+	    startDate = "Sun Apr 25 08:00:00 1976 GMT";
+	    endDate = "Sun Oct 25 07:00:00 2037 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/8:00:00"; detail = ADT; },
+		{ date = "October/last Sunday/7:00:00"; detail = AST; }
+	    );
+	}
+    );
+    transitions = (
+	{ date = "Sun Jan 06 08:00:00 1974 GMT"; detail = ADT; },
+	{ date = "Sun Nov 24 07:00:00 1974 GMT"; detail = AST; },
+	{ date = "Sun Feb 23 08:00:00 1975 GMT"; detail = ADT; },
+	{ date = "Sun Oct 26 07:00:00 1975 GMT"; detail = AST; }
+    );
+}

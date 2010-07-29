@@ -1,0 +1,17 @@
+<?xml version='1.0' standalone='yes'?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:const="http://www.skyrix.com/od/constant"
+      xmlns:rsrc="OGo:url"
+      xmlns:label="OGo:label"
+>
+  <head>
+    <title><var:string value="name"/></title>
+  </head>
+
+  <body>
+    The template of Web Component <em><var:string value="name"/></em>
+    has not been edited, yet.
+  </body>
+</html>

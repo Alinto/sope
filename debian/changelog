@@ -1,0 +1,36 @@
+sope (4.7.0-0) UNRELEASED; urgency=low
+
+  * New upstream release.
+
+ -- Frank Reppin <frank@opengroupware.org>  Thu, 22 Feb 2007 14:51:52 +0100
+
+sope (4.5.5-0) UNRELEASED; urgency=low
+
+  * New upstream release.
+  * Adjust Build-Depends, that allows building in sarge
+
+ -- Sebastian Ley <ley@debian.org>  Thu, 29 Sep 2005 13:49:11 +0200
+
+sope (4.3.9-1) experimental; urgency=low
+
+  * New upstream release.
+  * Remove iCalSaxdriver (and thus the dependency on libical) in favour of
+    versitSaxDriver.
+  * Remove standard configuration files for mod_ngobjweb. Such things belong
+    to a setup of a SOPE site and not in mod_ngobjweb's default configuration.
+
+ -- Sebastian Ley <ley@debian.org>  Thu, 21 Oct 2004 17:53:54 +0200
+
+sope (4.3.8-1) experimental; urgency=low
+
+  * Initial Release. Upstream did some heavy source restructuring,
+    resulting in a greatly reduced number of source packages for SOPE and
+    OpenGroupware.org. At the same time SOPE and OpenGroupware.org will now be
+    treated different projects, since SOPE can be useful without OGo as well.
+  * A new versioning scheme has been applied to the new sources. Versions with an
+    odd number as second component denote unstable development versions.
+    Neither API nor ABI stability may be ensured in this version. Versions
+    with an even second component are the stable releases.
+  * SOPE now installs to FHS compliant paths.
+
+ -- Sebastian Ley <ley@debian.org>  Sat,  2 Oct 2004 18:14:45 +0200

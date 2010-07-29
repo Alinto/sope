@@ -1,0 +1,20 @@
+# compilation settings
+
+ifeq ($(frameworks),yes)
+BUNDLE_INSTALL_DIR := $(FRAMEWORK_INSTALL_DIR)/SaxObjC.framework/Resources/SaxDrivers/
+endif
+
+pyxSAXDriver_RESOURCE_FILES = bundle-info.plist
+pyxSAXDriver_LOCALIZED_RESOURCE_FILES =
+
+
+pyxSAXDriver_BUNDLE_LIBS += -lSaxObjC
+
+ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
+pyxSAXDriver_BUNDLE_LIBS += \
+	-lFoundation -lobjc
+endif
+
+
+ADDITIONAL_INCLUDE_DIRS += -I.. -I../..
+ADDITIONAL_LIB_DIRS     += -L../SaxObjC/$(GNUSTEP_OBJ_DIR)

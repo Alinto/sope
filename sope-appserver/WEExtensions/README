@@ -1,0 +1,9 @@
+WEExtensions
+============
+
+This framework contains various dynamic elements for use with NGObjWeb.
+
+Defaults
+========
+
+WETableView_showBlindNavigation - BOOL - NO

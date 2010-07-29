@@ -1,0 +1,8 @@
+2003-05-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* added 'htpasswd', use -clientObject
+
+2003-05-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* created ChangeLog
+

@@ -1,0 +1,24 @@
+{
+    details = {
+	NDT = {abbrev = NDT; isDST = 1; offset = "-2:30:00"; };
+	NST = {abbrev = NST; isDST = 0; offset = "-3:30:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Apr 27 07:30:00 1969 GMT";
+	    endDate = "Sun Oct 26 06:30:00 1986 GMT";
+	    transitions = (
+		{ date = "April/last Sunday/7:30:00"; detail = NDT; },
+		{ date = "October/last Sunday/6:30:00"; detail = NST; }
+	    );
+	},
+	{
+	    startDate = "Sun Apr 05 07:30:00 1987 GMT";
+	    endDate = "Sun Oct 25 06:30:00 2037 GMT";
+	    transitions = (
+		{ date = "April/first Sunday/7:30:00"; detail = NDT; },
+		{ date = "October/last Sunday/6:30:00"; detail = NST; }
+	    );
+	}
+    );
+}

@@ -1,0 +1,52 @@
+# compilation settings
+
+libXmlRpc_HEADER_FILES_DIR         = .
+libXmlRpc_HEADER_FILES_INSTALL_DIR = /XmlRpc
+libXmlRpc_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libXmlRpc_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
+XmlRpc_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+XmlRpc_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
+
+
+# disable optimization for exception handlers
+NSObject+XmlRpc.m_FILE_FILTER_OUT_FLAGS = -O%
+
+ADDITIONAL_CPPFLAGS += \
+	-O2 \
+        -Wall -DCOMPILE_FOR_GSTEP_MAKE=1        \
+        -DSOPE_MAJOR_VERSION=$(MAJOR_VERSION)   \
+        -DSOPE_MINOR_VERSION=$(MINOR_VERSION)   \
+        -DSOPE_SUBMINOR_VERSION=$(SUBMINOR_VERSION)
+
+
+# framework support
+XmlRpc_HEADER_FILES = $(libXmlRpc_HEADER_FILES)
+XmlRpc_OBJC_FILES   = $(libXmlRpc_OBJC_FILES)
+
+
+libXmlRpc_LIBRARIES_DEPEND_UPON += -lSaxObjC -lDOM
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+libXmlRpc_LIB_DIRS += \
+	-L$(GNUSTEP_BUILD_DIR)/../SaxObjC/$(GNUSTEP_OBJ_DIR_NAME) \
+	-L$(GNUSTEP_BUILD_DIR)/../DOM/$(GNUSTEP_OBJ_DIR_NAME)
+XmlRpc_LIB_DIRS += -F$(GNUSTEP_BUILD_DIR)/../SaxObjC/
+else
+libXmlRpc_LIB_DIRS += \
+	-L../SaxObjC/$(GNUSTEP_OBJ_DIR) \
+	-L../DOM/$(GNUSTEP_OBJ_DIR)
+XmlRpc_LIB_DIRS += -F../SaxObjC/
+endif
+
+
+# Apple
+
+ifeq ($(FOUNDATION_LIB),apple)
+libXmlRpc_PREBIND_ADDR="0xC0400000"
+libXmlRpc_LDFLAGS += -seg1addr $(libXmlRpc_PREBIND_ADDR)
+
+#ADDITIONAL_INCLUDE_DIRS     += -framework SaxObjC
+XmlRpc_FRAMEWORK_LIBS        += -framework SaxObjC
+XmlRpc_LIBRARIES_DEPEND_UPON += -framework SaxObjC
+
+endif

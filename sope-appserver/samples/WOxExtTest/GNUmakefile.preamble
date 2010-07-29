@@ -1,0 +1,40 @@
+# compile settings
+
+SOPE_ROOT=../../..
+APPSERVER="../.."
+
+ADDITIONAL_CPPFLAGS += -Wall
+
+
+# dependencies
+
+ifneq ($(frameworks),yes)
+WOxExtTest_TOOL_LIBS +=	-lWEExtensions -lWOExtensions
+else
+WOxExtTest_TOOL_LIBS +=	-framework WEExtensions -framework WOExtensions
+endif
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	$(APPSERVER)/WOExtensions \
+	$(APPSERVER)/WEExtensions \
+	$(APPSERVER)/NGObjWeb	\
+	$(SOPE_ROOT)/sope-mime			\
+	$(SOPE_ROOT)/sope-core/NGStreams	\
+	$(SOPE_ROOT)/sope-core/NGExtensions	\
+	$(SOPE_ROOT)/sope-core/EOControl	\
+	$(SOPE_ROOT)/sope-xml/DOM		\
+	$(SOPE_ROOT)/sope-xml/XmlRpc		\
+	$(SOPE_ROOT)/sope-xml/SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+SYSTEM_LIB_DIR += $(CONFIGURE_SYSTEM_LIB_DIR)

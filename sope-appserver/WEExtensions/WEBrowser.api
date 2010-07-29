@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEBrowser">
+  <binding name="list" passthrough="NO" required="YES"/>
+  <binding name="item" passthrough="NO" required="YES" settable="YES" />
+  <binding name="sublist" passthrough="NO"/>
+  <binding name="currentPath" passthrough="NO" required="YES" settable="YES" />
+
+  <binding name="bgColor"/>
+  <binding name="height"/>
+  <binding name="columnWidth"/>
+</wo>

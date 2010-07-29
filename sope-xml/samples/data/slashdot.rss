@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns="http://purl.org/rss/1.0/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+ xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/"
+ xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
+>
+
+<channel rdf:about="http://slashdot.org/">
+<title>Slashdot</title>
+<link>http://slashdot.org/</link>
+<description>News for nerds, stuff that matters</description>
+<dc:language>en-us</dc:language>
+<dc:rights>Copyright &amp;copy; 1997-2001, OSDN</dc:rights>
+<dc:date>2003-01-23T09:44:04+00:00</dc:date>
+<dc:publisher>OSDN</dc:publisher>
+<dc:creator>pater@slashdot.org</dc:creator>
+<dc:subject>Technology</dc:subject>
+<syn:updatePeriod>hourly</syn:updatePeriod>
+<syn:updateFrequency>1</syn:updateFrequency>
+<syn:updateBase>1970-01-01T00:00+00:00</syn:updateBase>
+<items>
+ <rdf:Seq>
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/23/0247248" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/23/0221242" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/22/2324241" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/22/2233227" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/22/1413238" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/22/2041211" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/22/1514201" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/22/1932238" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/22/196249" />
+  <rdf:li rdf:resource="http://slashdot.org/article.pl?sid=03/01/22/188234" />
+ </rdf:Seq>
+</items>
+<image rdf:resource="http://images.slashdot.org/topics/topicslashdot.gif" />
+<textinput rdf:resource="http://slashdot.org/search.pl" />
+</channel>
+
+<image rdf:about="http://images.slashdot.org/topics/topicslashdot.gif">
+<title>Slashdot</title>
+<url>http://images.slashdot.org/topics/topicslashdot.gif</url>
+<link>http://slashdot.org/</link>
+</image>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/23/0247248">
+<title>XBox Chip With Legal BIOS</title>
+<link>http://slashdot.org/article.pl?sid=03/01/23/0247248</link>
+<description>Lours writes "(OzChip, an Australian company, has a new Xbox chip which comes preinstalled with the new (Cromwell Linux BIOS. Previous chips came without (or ...</description>
+<dc:creator>timothy</dc:creator>
+<dc:subject>hardware</dc:subject>
+<dc:date>2003-01-23T07:47:14+00:00</dc:date>
+<slash:department>keeping-legal</slash:department>
+<slash:section>articles</slash:section>
+<slash:comments>92</slash:comments>
+<slash:hitparade>92,83,61,38,20,11,5</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/23/0221242">
+<title>Using Redundancies to Find Errors</title>
+<link>http://slashdot.org/article.pl?sid=03/01/23/0221242</link>
+<description>gsbarnes writes "Two Stanford researchers (Dawson Engler and Yichen Xie) have written a paper (pdf) showing that seemingly harmless redundant code is ...</description>
+<dc:creator>timothy</dc:creator>
+<dc:subject>programming</dc:subject>
+<dc:date>2003-01-23T04:20:58+00:00</dc:date>
+<slash:department>the-error-is-right-around-here</slash:department>
+<slash:section>developers</slash:section>
+<slash:comments>148</slash:comments>
+<slash:hitparade>148,138,102,65,20,11,6</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/22/2324241">
+<title>Hilary Rosen Will Step Down As RIAA Head</title>
+<link>http://slashdot.org/article.pl?sid=03/01/22/2324241</link>
+<description>Phoenix666 writes "NYT Business reports Hilary Rosen is leaving. Question is, what head will spring from the Hydra next? Could this signal a shift in the ...</description>
+<dc:creator>timothy</dc:creator>
+<dc:subject>music</dc:subject>
+<dc:date>2003-01-23T01:24:05+00:00</dc:date>
+<slash:department>yawn</slash:department>
+<slash:section>yro</slash:section>
+<slash:comments>399</slash:comments>
+<slash:hitparade>399,387,288,170,55,35,27</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/22/2233227">
+<title>Microsoft to Buy Vivendi Games Division?</title>
+<link>http://slashdot.org/article.pl?sid=03/01/22/2233227</link>
+<description>Unknown Relic writes "While far from confirmed, it is reported that Microsoft is seriously looking into buying, or may have already bought, Vivendi's Games ...</description>
+<dc:creator>timothy</dc:creator>
+<dc:subject>games</dc:subject>
+<dc:date>2003-01-22T23:59:51+00:00</dc:date>
+<slash:department>passive-voice</slash:department>
+<slash:section>articles</slash:section>
+<slash:comments>353</slash:comments>
+<slash:hitparade>353,332,235,136,48,21,15</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/22/1413238">
+<title>Elect Steve Jobs President of the United States</title>
+<link>http://slashdot.org/article.pl?sid=03/01/22/1413238</link>
+<description>Will Foster writes "There is a groundswell of support for electing Steve Jobs President of the United States." I'll vote for him if I can write in my vote -- ...</description>
+<dc:creator>pudge</dc:creator>
+<dc:subject>humor</dc:subject>
+<dc:date>2003-01-22T23:12:48+00:00</dc:date>
+<slash:department>we-need-a-megalomaniacal-leader-for-a-change</slash:department>
+<slash:section>apple</slash:section>
+<slash:comments>606</slash:comments>
+<slash:hitparade>606,593,430,255,71,49,39</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/22/2041211">
+<title>Building a Multi-Channel PVR System?</title>
+<link>http://slashdot.org/article.pl?sid=03/01/22/2041211</link>
+<description>Dr.Ruud asks: "What would be good ways to build a multichannel VCR? Think of a cluster of 4 PCs, each having 4 TV-cards (with MPEG-hardware on each) and (if ...</description>
+<dc:creator>Cliff</dc:creator>
+<dc:subject>tech</dc:subject>
+<dc:date>2003-01-22T22:35:58+00:00</dc:date>
+<slash:department>it-doesn't-HAVE-to-be-a-single-box</slash:department>
+<slash:section>askslashdot</slash:section>
+<slash:comments>301</slash:comments>
+<slash:hitparade>301,295,216,125,49,31,20</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/22/1514201">
+<title>Lucas Digital Releases OpenEXR Format</title>
+<link>http://slashdot.org/article.pl?sid=03/01/22/1514201</link>
+<description>frankie writes "Although George Lucas may have gone over to the dark side, at least some of his staff prefer Freedom and light. ILM has released OpenEXR, a ...</description>
+<dc:creator>chrisd</dc:creator>
+<dc:subject>movies</dc:subject>
+<dc:date>2003-01-22T21:08:08+00:00</dc:date>
+<slash:department>no-oscars-till-2005</slash:department>
+<slash:section>articles</slash:section>
+<slash:comments>144</slash:comments>
+<slash:hitparade>144,133,107,77,36,17,9</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/22/1932238">
+<title>Bitstream To Donate 10 Fonts To Free Software World</title>
+<link>http://slashdot.org/article.pl?sid=03/01/22/1932238</link>
+<description>21mhz writes "Posted on FootNotes: The GNOME Foundation and Bitstream Inc. announce long-term agreement to bring high quality fonts to Free Software. Ten fonts ...</description>
+<dc:creator>timothy</dc:creator>
+<dc:subject>graphics</dc:subject>
+<dc:date>2003-01-22T20:38:56+00:00</dc:date>
+<slash:department>some-gnus-is-good-gnus</slash:department>
+<slash:section>developers</slash:section>
+<slash:comments>352</slash:comments>
+<slash:hitparade>352,345,260,165,66,37,22</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/22/196249">
+<title>Congress To Consider Age Limits On Violent Games</title>
+<link>http://slashdot.org/article.pl?sid=03/01/22/196249</link>
+<description>labrat1123 writes "It looks like Congress is getting ready to revisit the 'Protect Children from Video Game Sex and Violence Act.' Cliff Notes version: It ...</description>
+<dc:creator>timothy</dc:creator>
+<dc:subject>censorship</dc:subject>
+<dc:date>2003-01-22T19:46:10+00:00</dc:date>
+<slash:department>on-this-date-in-1984</slash:department>
+<slash:section>yro</slash:section>
+<slash:comments>538</slash:comments>
+<slash:hitparade>538,531,422,258,80,54,44</slash:hitparade>
+</item>
+
+<item rdf:about="http://slashdot.org/article.pl?sid=03/01/22/188234">
+<title>SCO Group Hires Boies After All</title>
+<link>http://slashdot.org/article.pl?sid=03/01/22/188234</link>
+<description>pitr256 writes "So it seems the SCO Group has decided to hire infamous Anti-Microsoft lawyer David Boies after all. This comes upon reversal of the SCO Group ...</description>
+<dc:creator>timothy</dc:creator>
+<dc:subject>patents</dc:subject>
+<dc:date>2003-01-22T18:57:04+00:00</dc:date>
+<slash:department>mendacity-mendacity-mendacity</slash:department>
+<slash:section>articles</slash:section>
+<slash:comments>441</slash:comments>
+<slash:hitparade>441,426,313,203,66,42,24</slash:hitparade>
+</item>
+
+<textinput rdf:about="http://slashdot.org/search.pl">
+<title>Search Slashdot</title>
+<description>Search Slashdot stories</description>
+<name>query</name>
+<link>http://slashdot.org/search.pl</link>
+</textinput>
+
+</rdf:RDF>

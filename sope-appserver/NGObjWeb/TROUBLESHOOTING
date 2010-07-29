@@ -1,0 +1,20 @@
+Collect "common" issues around NGObjWeb ...
+
+___________________________________________________________________________
+* Endless Recursion in sope -authenticatorInContext:
+
+  sope coredump, endless recursion: -authenticatorInContext:
+---snip---
+#1038 0x00eda4c4 in -[OFSFolder authenticatorInContext:] (self=0x937b30, _cmd=0x3be4, _ctx=0x9387d0) at OFSFolder.m:747
+#1039 0x00ed4074 in -[OFSBaseObject authenticatorInContext:] (self=0x943f30, _cmd=0x3be4, _ctx=0x9387d0) at OFSBaseObject.m:219
+---snap---
+  - this occures if htpasswd cannot be resolved as the authenticator
+    - htpasswd will be returned as a regular file (OFSFile object) which 
+      leads to a recursion
+    use: -SoOFSDebugAuthLookup YES to detect
+    - htpasswd becomes an OFSFile instead of a OFSHttpPasswd because the
+      core SoProducts (SoOFS.sxp) are not properly found!
+    - mixed up on GNUstep on MacOSX
+    use: SoProductRegistryDebugEnabled YES to detect
+
+___________________________________________________________________________

@@ -1,0 +1,133 @@
+compare /home/helge/dev/complete/SOPE/releases/4.3.9-shapeshifter with .
+added:   config.make
+added:   config-NGStreams.log
+changed: sope-core/NGExtensions/
+     2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+     	* FdExt.subproj/NSString+URLEscaping.m: removed '&' as an URL safe
+     	  char (v4.3.126)
+changed: sope-mime/
+     2004-10-30  Thierry Delhaise  <befree_fr@mac.com>
+     	* NGImap4: fixed OGo bug #958 (IMAP4 parser broke with Courier)
+     	  (v4.3.196)
+     2004-10-29  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMime: minor cleanups (v4.3.195)
+     2004-10-28  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: added a constructor to NGImap4Envelope (v4.3.194)
+     2004-10-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: enhanced NGImap4EnvelopeAddress (v4.3.193)
+     	* NGMail: support special sendmail location on MacOSX (v4.3.192)
+     	* NGMail: fixed a bug in NGSendMail (v4.3.191)
+     	* NGMail: added NGSendMail object (v4.3.190)
+changed: sope-mime/NGMime/
+     2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMime.xcode: added NGSendMail files to Xcode build
+changed: sope-mime/NGImap4/
+     2004-10-30  Thierry Delhaise  <befree_fr@mac.com>
+     	* NGImap4ResponseParser.m: fixed OGo bug #958 (consume didn't match
+     	  SEARCH match in IMAP4 parser)
+     2004-10-28  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4Envelope.m: added constructor method:
+     	  -initWithMessageID:subject:sender:replyTo:to:cc:bcc:
+     2004-10-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4EnvelopeAddress.m: added -initWithString: method (not properly
+     	  implemented yet, should parse the string using the
+     	  NGMailAddressParser)
+changed: sope-mime/NGMail/
+     2004-10-29  Helge Hess  <helge.hess@skyrix.com>
+     	* NGSendMail.m: use fwrite() to write to pipe
+     	* NGMimeMessageGenerator.m: minor code cleanups
+     2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMail.xcode: added NGSendMail.h
+     2004-10-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGSendMail.m: use /usr/sbin/sendmail on Cocoa Foundation
+     	  (/usr/lib/sendmail on all other platforms)
+     	* NGSendMail.m: properly setup user defaults object
+     	* added new NGSendMail object (derived from mail-deliver command in
+     	  OGo Logic)
+added:   sope-mime/NGMail/NGSendMail.h
+added:   sope-mime/NGMail/NGSendMail.m
+changed: sope-xml/SaxObjC/
+     2004-10-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SaxObjectDecoder.m: fixed typo that prevented compile on non
+     	  Apple Foundation (v4.3.43)
+     	* SaxObjectDecoder.m: provide fix for discovering mutable array on
+     	  Apple/CoreFoundation - this is rather disturbing, but Apple really
+     	  broke the concept of mutability for NSArray/NSDictionary. (v4.3.42)
+changed: sope-appserver/
+     2004-11-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-appserver.xcode: adjusted the build process to new NGObjWeb
+     	  targets.
+added:   sope-appserver/WEExtensions/WEExtensions.wox
+added:   sope-appserver/WOExtensions/WOExtensions.wox
+changed: sope-appserver/NGObjWeb/
+     2004-11-03  Helge Hess  <helge.hess@skyrix.com>
+     	* WOWatchDogApplicationMain.m: disable warning on /etc server defaults
+     	  (v4.3.82)
+     2004-11-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.3.81
+     	* NGObjWeb.xcode: added new targets to the build process to make
+     	  embedding of SoProducts within the framework's wrapper possible.
+     	* SoObjects/SoProductRegistry.m: fixed crash bug on Cocoa Foundation
+     	  that occurred during product registration. As a new feature added
+     	  search for products within framework's "SoProducts" resource
+     	  directory. This can be used as a fallback, suitable for wrapper
+     	  targets that want to use "SoObjects" functionality.
+     2004-11-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoWebDAVRenderer.m: added support for multiple resource type
+     	  tags (v4.3.80)
+     2004-10-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoWebDAVRenderer.m: preserve etag in response if set (v4.3.79)
+     	* SoObjects/SoDefaultRenderer.m: fixed typo, check exceptions for 200
+     	  HTTP codes and do not return them as an error (v4.3.78)
+     2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/{WOResetButton.m, WOText.m, WOFileUpload.m,
+     	  WOGenericElement.m, _WOComplexHyperlink.m, WOHiddenField.m,
+     	  WOImageButton.m, WOCheckBoxList.m, _WOCommonStaticDAHyperlink.m,
+     	  WORadioButton.m, WOForm.m, WOMetaRefresh.m, WOJavaScript.m,
+     	  WOEmbeddedObject.m, WOImage.m, WOBrowser.m, WOVBScript.m, WOIFrame.m,
+     	  WOPasswordField.m, _WOSimpleActionHyperlink.m, WOGenericContainer.m,
+     	  WOCheckBox.m, WORadioButtonList.m, WOTextField.m, WOFrame.m,
+     	  WOBody.m, WOSubmitButton.m}:
+     	  fixed rendering of otherTagString, which was appended without
+     	  leading space before. (v4.3.77)
+     2004-10-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOxHTMLElemBuilder.m: select WOSubmitButton for
+     	  <input type="button"> in .wox files (should be fixed) (v4.3.76)
+     2004-10-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoUser.m: just return nil for unsupported KVC keys
+     	  (v4.3.75)
+     2004-10-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.3.74
+     	* WODirectAction.m: ignore requests on unbound KVC keys on non-lF
+     	  libraries
+     	* SoObjects/SoObjectXmlRpcDispatcher.m: do not call -setUserInfo: to
+     	  annotate NSException's on Cocoa Foundation
+     	* SoObjects/SoActionInvocation.m: added support for calling actions
+     	  and pages with positional parameters (eg from XML-RPC)
+     	* SoObjects/SoObjectXmlRpcDispatcher.m: when looking up a SoMethod for
+     	  an XML-RPC method name containing a dot (like system.listmethods),
+     	  first check the fully qualified name prior traversing the package
+     	  namespaces
+     	* SoObjects/SoObjectXmlRpcDispatcher.m: print a warning if server was
+     	  not linked against libNGXmlRpc
+     2004-10-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOElement.m: fixed unwanted behaviour introduced in v4.3.72 (v4.3.73)
+     	* WOElement.m: queryParameters override keys from queryDictionary in
+     	  case of conflicts (v4.3.72)
+     	* WOElement.m: if both queryDictionary and queryParameters were set on
+     	  an element, the '&' seperator wasn't rendered when it should in fact
+     	  (v4.3.71)
+     2004-10-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* Defaults.plist: only use single char prefixes for Exchange namespaces
+     	  (Connector bug #68682) (v4.3.70)
+added:   sope-appserver/samples/xmlrpc
+added:   maintenance/changes-4.3.9-to-4.3.10.txt
+changed: sope-ical/
+     2004-10-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-ical.xcode: removed iCalSaxDriver project reference
+changed: sope-ical/NGiCal/
+     2004-10-31  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalAlarm.[hm], iCalEvent.[hm], iCalToDo.[hm],
+     	  NGiCal.xmap: added recurrenceRule (v4.3.34)
+added:   debian/sope_SOPEVER_-versitsaxdriver.install
+removed: debian/sope_SOPEVER_-icalsaxdriver.install

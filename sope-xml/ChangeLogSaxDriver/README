@@ -1,0 +1,70 @@
+Overview
+========
+
+ChangeLogSaxDriver is a SAX driver for reading, well, ChangeLogs.
+
+
+Generated XML
+=============
+
+A ChangeLog like this:
+--- snip ---
+2004-11-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.97
+
+	* WOContext.m: move some categories into main class implementation
+
+	* WORequestHandler.m: bind default logger to WODebuggingEnabled
+
+2004-11-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WODirectActionRequestHandler.m: minor code cleanups (v4.5.96)
+
+--- snap ---
+
+gets tranformed into this:
+
+--- snip ---
+<changelog version="1.0">
+    <entry date="2004-11-22T12:00:00Z">
+        <author email="helge.hess@skyrix.com">
+            Helge Hess
+        </author>
+        <logs>
+            <log>
+                v4.5.97
+            </log>
+            <log>
+                WOContext.m: move some categories into main class implementation
+            </log>
+            <log>
+                WORequestHandler.m: bind default logger to WODebuggingEnabled
+            </log>
+        </logs>
+    </entry>
+    <entry date="2004-11-21T12:00:00Z">
+        <author email="helge.hess@opengroupware.org">
+            "Helge Hess"
+        </author>
+        <logs>
+            <log>
+                WODirectActionRequestHandler.m: minor code cleanups (v4.5.96)
+            </log>
+        </logs>
+    </entry>
+</changelog>
+--- snap ---
+
+
+Notes
+=====
+
+The generated date stamps follow the w3.org recommendation at
+http://www.w3.org/TR/NOTE-datetime. Specifically, this is the format described
+as "complete date plus hours, minutes and seconds", with timezone set to 'Zulu'
+(GMT).
+
+If the original format didn't contain timezone information, the resulting 
+timezone is set to GMT. If the original format didn't contain time information,
+the resulting time information is set to 12:00:00.

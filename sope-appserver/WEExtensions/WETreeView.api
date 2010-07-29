@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETreeView">
+  <binding name="list" required="YES" />
+  <binding name="item" required="YES" />
+  <binding name="sublist" />
+  <binding name="itemIsLeaf" defaults="YES/NO" />
+  <binding name="index" />
+  <binding name="zoom" defaults="YES/NO" />
+  <binding name="currentPath" />
+  <binding name="showItem" defaults="YES/NO" />
+
+  <binding name="noTable" defaults="YES/NO" />
+
+  <binding name="plusIcon" />
+  <binding name="minusIcon" />
+  <binding name="leafIcon" />
+  <binding name="junctionIcon" />
+  <binding name="cornerIcon" />
+  <binding name="cornerPlusIcon" />
+  <binding name="cornerMinusIcon" />
+  <binding name="leafCornerIcon" />
+  <binding name="lineIcon" />
+  <binding name="spaceIcon" />
+  <binding name="iconWidth" />
+
+  <binding name="otherTagString" />
+
+</wo>

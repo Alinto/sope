@@ -1,0 +1,28 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className="Frame" title="name" 
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <var:js-confirm-panel
+        const:pageName="PanelContent"
+        const:confirmMessage="Do you want to open a new target window ?"
+        const:targetWindow="panel"
+        const:string="'new page' - confirm panel"/>
+  <br/>
+  
+  <var:js-confirm-panel
+        action="countClicks"
+        const:confirmMessage="Do you want to increase the clicks?"
+        const:string="'invoke action' - confirm panel"/>
+  clicks: <b><var:string value="clicks"/></b>
+  <br/>
+
+  <var:js-confirm-panel
+        javaScriptFunction="javaScriptFunction"
+        const:confirmMessage="Do you want to invoke a javaScript function?"
+        const:string="'invoke javescript' - confirm panel"/>
+  <br/>
+
+</var:component>

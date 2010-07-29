@@ -1,0 +1,41 @@
+iCalSaxDriver
+=============
+
+IMPORTANT: iCalSaxDriver is considered DEPRECATED. SOPE/OGo now uses the
+           versitSaxDriver as its iCalendar parser.
+
+Overview
+========
+
+An SaxObjC driver for iCalendar files. It basically maps iCal 2.0
+components, properties and paraemters to the XML events according to
+the xCal 02 draft (iCal 3.0).
+
+Having a SAX driver for iCal might seem strange and a bit inefficient at
+first look, but the time saved for the application-level developer is
+significant, since he only needs to learn (or usually already knows) the
+SAX or DOM APIs and any XML API based on them (like XPATH, XQUERY).
+
+ToDo
+====
+
+The driver is by no means complete or 100% compliant to xCal (which
+isn't final anyway ...). So:
+- improve error handling (SaxExceptions !)
+- make the driver fully xCal compliant
+- recurrence rules !!!
+- implement all components supported by libical
+- make it as fast as possible ;-) (probably most gains can be made by
+  improving DOM, not iCalSaxDriver ...)
+
+Examples
+========
+
+To "convert" an iCalendar to xCal (the test programs print out some XML):
+
+  saxxml -XMLReader iCalSaxDriver test1.ics
+  domxml -XMLReader iCalSaxDriver -xml  test1.ics
+
+To "convert" an iCalendar to PYX:
+
+  domxml -XMLReader iCalSaxDriver -pyx  test1.ics

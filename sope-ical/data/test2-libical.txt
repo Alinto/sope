@@ -1,0 +1,29 @@
+start document ..
+    ns-map: =http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt
+    <vcalendar (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt) prodid="-//Microsoft Corporation//Outlook 9.0 MIMEDIR//EN" version="2.0" method="PUBLISH">
+        <vfreebusy (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+            <organizer (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "Unknown"
+            </organizer>
+            <dtstamp (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20020212T110727Z"
+            </dtstamp>
+            <dtstart (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20020131T230000Z"
+            </dtstart>
+            <dtend (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20020430T220000Z"
+            </dtend>
+            <freebusy (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20020206T113000Z/20020206T120000Z"
+            </freebusy>
+            <freebusy (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20020219T143000Z/20020219T150000Z"
+            </freebusy>
+            <freebusy (ns=http://www.ietf.org/internet-drafts/draft-ietf-calsch-many-xcal-01.txt)>
+                "20020210T143000Z/20020220T140000Z"
+            </freebusy>
+        </vfreebusy>
+    </vcalendar>
+    ns-unmap: 
+end document.

@@ -1,0 +1,345 @@
+AC_PREREQ(2.4)
+
+AC_INIT(${srcdir}/Foundation/NSObject.h.in)
+
+# ******************** GNUstep env ************************************
+
+if test "x${GNUSTEP_MAKEFILES}" = "x"; then
+  AC_MSG_ERROR(Your GNUstep.sh is not sourced, please load GNUstep.sh prior running configure!)
+fi
+
+# ******************** version ****************************************
+
+# todo: read from Version file?
+MAJOR_VERSION=1
+MINOR_VERSION=1
+SUBMINOR_VERSION=7
+
+AC_SUBST(MAJOR_VERSION)
+AC_SUBST(MINOR_VERSION)
+AC_SUBST(SUBMINOR_VERSION)
+
+
+# ******************** options ****************************************
+
+AC_ARG_WITH(ffcall,[
+--with-ffcall
+    Use the ffcall library to implement dynamic invocation of methods. Note
+    the licensing restrictions of ffcall before enabling that switch !],
+ac_cv_use_ffcall=yes,
+ac_cv_use_ffcall=no
+)
+
+AC_ARG_WITH(gc,[
+--with-gc
+--with-gc=DIR
+    Use the Boehm's garbage collector for automatic memory management instead
+    of the normal OpenStep memory management policy.
+    Search in DIR for GC include files (eg DIR=objc leads to <objc/gc.h>)],
+[ac_cv_use_gc=yes; ac_cv_link_gc=yes;
+if [ test x${withval} != xyes ]; then
+    GC_INCLUDE_DIR="${withval}/"
+else
+    GC_INCLUDE_DIR=""
+fi
+],
+[ac_cv_use_gc=no; ac_cv_link_gc=no; GC_INCLUDE_DIR=""]
+)
+
+AC_ARG_WITH(gc-lib,[
+--with-gc-lib
+--with-gc-lib=LIB
+    Link against GC library LIB. The default is 'gc'. Do not specify
+    --with-gc-lib if you have the GC contained in some of your system
+    libraries (eg libobjc.a)],
+[ac_cv_link_gc=yes;
+if [ test x${withval} != xyes ]; then
+    GC_LIB="${withval}"
+else
+    GC_LIB="gc"
+fi
+],
+[ac_cv_link_gc=no; GC_LIB=""]
+)
+
+AC_SUBST(GC_INCLUDE_DIR)
+AC_SUBST(GC_LIB)
+
+
+# ******************** system type ************************************
+
+# Determine the host, build, and target systems
+CC_TARGET=$target # use --target value for CC, not the canonical form
+AC_CANONICAL_SYSTEM
+AC_PREFIX_DEFAULT(/usr/local)
+
+AC_CONFIG_HEADER(config.h:config.h.in.sed dnl
+		 Foundation/NSObject.h:Foundation/NSObject.h.in.sed dnl
+                 Foundation/lfmemory.h:Foundation/lfmemory.h.in.sed)
+
+# check for cross compilation
+
+if [[ x$target = xNONE ]]; then
+  set target $host
+fi
+
+if test "x$host" != "x$target"; then
+	cross_defines="CROSS=-DCROSS_COMPILE"
+        cross_compiling="yes"
+        echo "cross compiling from $host to $target .."
+        CC=${CC_TARGET}-gcc
+        LD=${CC_TARGET}-ld
+        AR=${CC_TARGET}-ar
+        RANLIB=${CC_TARGET}-ranlib
+fi
+
+changequote(,)dnl
+case "x${host_cpu}" in
+    xi[456]86*)	host_cpu=i386;;
+    xhppa1.1)	host_cpu=hppa;;
+esac
+
+if test "x$cross_compiling" = xyes; then
+  case "x${target_cpu}" in
+    xi[456]86*)	target_cpu=i386;;
+    xhppa1.1)	target_cpu=hppa;;
+  esac
+else
+  target_cpu=${host_cpu}
+  target_os=${host_os}
+  target_vendor=${host_vendor}
+fi
+
+case "x${target_os}" in
+  xfreebsd*) target_os=freebsd;;
+esac
+
+changequote([,])dnl
+
+# Assign the HOST/TARGET variables for sharedlib.mak
+HOST=$host
+HOST_CPU=$host_cpu
+HOST_VENDOR=$host_vendor
+HOST_OS=$host_os
+TARGET=$target
+TARGET_CPU=$target_cpu
+TARGET_VENDOR=$target_vendor
+TARGET_OS=$target_os
+
+if test ! -f ${srcdir}/config/${target_cpu}/${target_os}.h; then
+    if test -d ${srcdir}/config/${target_cpu}; then
+	echo
+	echo '*************** Warning ****************'
+	echo This package was not ported to $target_cpu running $target_os operating system.
+	echo We\'ll use the default configuration file ${srcdir}/config/$target_cpu/$target_cpu.h.
+	echo '****************************************'
+	echo
+	target_os=$target_cpu
+    else
+	echo
+	echo '*************** Warning ****************'
+	echo This package was not ported to $target_cpu running $target_os operating system.
+	echo We\'ll use a generic configuration file, thus you will be able to compile the library, but most probably the NSInvocation, NSMethodSignature and all classes that use them will not work correctly or will not work at all.
+	echo '****************************************'
+	target_cpu=generic
+	target_os=generic
+    fi
+fi
+
+
+# ******************** autoconf vars **********************************
+
+AC_SUBST(WITH_GNUSTEP)
+WITH_GNUSTEP=yes
+AC_DEFINE(WITH_GNUSTEP)
+
+AC_SUBST(WITH_FFCALL)
+WITH_FFCALL=$ac_cv_use_ffcall
+if test "x$ac_cv_use_ffcall" = xyes; then
+  AC_DEFINE(WITH_FFCALL)
+fi
+
+AC_SUBST(WITH_GC)
+WITH_GC=$ac_cv_use_gc
+if test "$WITH_GC" = yes; then
+  AC_DEFINE(LIB_FOUNDATION_BOEHM_GC)
+fi
+
+AC_PROG_CC
+if test "x$cross_compiling" = xyes; then
+        echo "cross compiling to $target"
+fi
+
+
+# ******************** system tools ***********************************
+
+AC_ISC_POSIX
+AC_PROG_CPP
+AC_CHECK_PROGS(MAKE, gmake gnumake make)
+AC_CHECK_PROGS(AR, ar)
+AC_CHECK_PROGS(LD, ld)
+AC_CHECK_PROGS(PERL, perl)
+
+# uses AC_TRY_RUN
+
+if test "x$cross_compiling" = xyes; then
+  if [[ "x${target_cpu}" = xi386 ]]; then
+    echo "WARNING: using predefined structure alignment of 4 for i386 !"
+    ac_cv_struct_alignment=4
+    STRUCT_ALIGNMENT=4
+  elif [[ "x${target_cpu}" = xsparc ]]; then
+    echo "WARNING: using predefined structure alignment of 8 for ${target_cpu} !"
+    ac_cv_struct_alignment=8
+    STRUCT_ALIGNMENT=8
+  elif [[ "x${target_cpu}" = xmipsel ]]; then
+    echo "WARNING: using predefined structure alignment of 8 for ${target_cpu} !"
+    ac_cv_struct_alignment=8
+    STRUCT_ALIGNMENT=8
+  else
+    echo "ERROR: unknown structure alignment for CPU ${target_cpu}, using 4 !"
+    ac_cv_struct_alignment=4
+    STRUCT_ALIGNMENT=4
+  fi
+else
+  AC_STRUCT_ALIGNMENT
+fi
+
+AC_CHECK_LIB(dl, dlopen)
+AC_CHECK_LIB(pcthread, pthread_create,
+	    ,
+	    AC_CHECK_LIB(pthread, pthread_create))
+AC_CHECK_LIB(m,      sqrt)
+AC_CHECK_LIB(nsl,    chown)
+AC_CHECK_LIB(socket, accept)
+
+RUNTIME=GNU
+transformed_target_cpu=`${GNUSTEP_MAKEFILES}/clean_cpu.sh ${TARGET_CPU}`
+ac_cv_file_output_prefix=Foundation/$transformed_target_cpu/${TARGET_OS}/$RUNTIME
+
+
+AC_CHECK_NESTED_FUNCTIONS
+AC_BROKEN_COMPILER
+
+if test $target_cpu = i386; then
+    AC_BROKEN_BUILTIN_APPLY
+fi
+
+# If we're using the Boehm's GC check to see if we have the gc.h file and
+# libgc.a installed.
+AC_DEFINE(WITH_GC)
+AC_HAVE_HEADERS(${GC_INCLUDE_DIR}gc.h)
+
+if test "x$ac_cv_link_gc" = xyes; then
+    AC_CHECK_LIB(${GC_LIB}, GC_malloc)
+    if test "x$ac_cv_header_gc_h" != xyes -o "x$ac_cv_lib_gc_GC_malloc" != xyes; then
+	changequote(,)
+	AC_MSG_ERROR(It appears your system doesn't have the Boehm's garbage collector installed! Please install it first or check your paths in case it's already installed. Note that we expect the Boehm's GC library to be named so that linking using -lgc works; please be careful as the normal 'make' in Boehm's GC neither creates the library nor installs it. You should copy the files gc.h and gc.a in the appropriate directories and rename gc.a to libgc.a.)
+	changequote([,])
+    fi
+fi
+
+# uses AC_TRY_RUN
+if test x"$cross_compiling" = xyes; then
+    echo "WARNING: cannot check for byte-order during cross compilation."
+else
+    AC_C_BIGENDIAN
+fi
+
+AC_COMPILE_CHECK_SIZEOF(short)
+AC_COMPILE_CHECK_SIZEOF(int)
+AC_COMPILE_CHECK_SIZEOF(long)
+AC_COMPILE_CHECK_SIZEOF(long long)
+AC_COMPILE_CHECK_SIZEOF(float)
+AC_COMPILE_CHECK_SIZEOF(double)
+AC_COMPILE_CHECK_SIZEOF(long double)
+
+AC_HEADER_DIRENT
+AC_HAVE_HEADERS(dir.h libc.h sys/time.h stdlib.h memory.h string.h dnl
+		strings.h sys/stat.h sys/vfs.h sys/statfs.h sys/statvfs.h dnl
+		netinet/in.h windows.h dnl
+		Windows32/Sockets.h pwd.h process.h grp.h sys/param.h dnl
+		sys/file.h sys/errno.h sys/select.h)
+AC_HEADER_SYS_WAIT
+
+AC_CHECK_FUNCS(memcpy ualarm getcwd getuid getpwnam getpwuid kill raise dnl
+	       getpagesize statvfs chown symlink readlink opendir fsync dnl
+	       sysconf GetSystemInfo gettimeofday GetLocalTime sigsetmask dnl
+	       sigset sigaction sighold dnl
+               gethostbyname_r gethostbyaddr_r gethostent_r)
+AC_FUNC_MMAP
+AC_FUNC_VFORK
+AC_TYPE_SIGNAL
+
+AC_CHECK_MATH_LIB
+
+# uses AC_TRY_RUN
+if test "$cross_compiling" = yes; then
+    echo "WARNING: cannot check for restartable system calls during cross compilation."
+else
+    AC_SYS_RESTARTABLE_SYSCALLS
+fi
+
+
+# ******************** GNUstep.sh-less compilation ********************
+
+AC_SUBST(GNUSTEP_FLATTENED)
+AC_SUBST(GNUSTEP_HOST)
+AC_SUBST(GNUSTEP_HOST_CPU)
+AC_SUBST(GNUSTEP_HOST_OS)
+AC_SUBST(GNUSTEP_HOST_VENDOR)
+AC_SUBST(GNUSTEP_LOCAL_ROOT)
+AC_SUBST(GNUSTEP_MAKEFILES)
+AC_SUBST(GNUSTEP_NETWORK_ROOT)
+AC_SUBST(GNUSTEP_PATHLIST)
+AC_SUBST(GNUSTEP_ROOT)
+AC_SUBST(GNUSTEP_SYSTEM_ROOT)
+AC_SUBST(GNUSTEP_USER_ROOT)
+AC_SUBST(LIBRARY_COMBO)
+
+
+# ******************** output *****************************************
+
+AC_OUTPUT(config.h.in.sed:config.h.in config.mak gsfix.make dnl
+	  Foundation/libFoundation.make dnl
+	  Foundation/NSObject.h.in.sed:Foundation/NSObject.h.in dnl
+          Foundation/lfmemory.h.in.sed:Foundation/lfmemory.h.in,
+[rm -f config.h.in.sed Foundation/NSObject.h.in.sed Foundation/lfmemory.h.in.sed
+# Read the variables from config.cache
+. ./config.cache
+
+# Create the output directory
+if test ! -d $ac_cv_file_output_prefix; then
+  ${srcdir}/mkinstalldirs $ac_cv_file_output_prefix
+fi
+
+# Move the config.h and config.mak over to the $ac_cv_file_output_prefix
+mv config.h   $ac_cv_file_output_prefix
+mv config.mak $ac_cv_file_output_prefix
+
+#
+# create the appropriate memory management file
+#
+mv -f Foundation/lfmemory.h $ac_cv_file_output_prefix
+
+# Create the NSException.h file to include a file in
+#	$ac_cv_file_output_prefix
+# which is the actual exceptions definition file.
+(cd Foundation;
+  rm -f NSException.h;
+  echo "#include <real_exception_file.h>" >NSException.h)
+
+#
+# Now create the real_exception_file.h based upon the compiler support
+#
+rm -f Foundation/$ac_cv_file_output_prefix/real_exception_file.h
+if test ${ac_cv_nested_functions} = no; then
+  echo "creating $ac_cv_file_output_prefix/real_exception_file.h from ${srcdir}/Foundation/NSExceptionWithoutNested.h"
+  cp ${srcdir}/Foundation/NSExceptionWithoutNested.h $ac_cv_file_output_prefix/real_exception_file.h
+elif test ${ac_cv_broken_compiler} = yes; then
+  echo "creating $ac_cv_file_output_prefix/real_exception_file.h from ${srcdir}/Foundation/NSClassicException.h"
+  cp ${srcdir}/Foundation/NSClassicException.h $ac_cv_file_output_prefix/real_exception_file.h
+else
+  echo "creating $ac_cv_file_output_prefix/real_exception_file.h from ${srcdir}/Foundation/NSFuncallException.h"
+  cp ${srcdir}/Foundation/NSFuncallException.h $ac_cv_file_output_prefix/real_exception_file.h
+fi
+])

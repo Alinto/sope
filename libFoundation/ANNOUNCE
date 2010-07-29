@@ -1,0 +1,141 @@
+
+We are pleased to announce you the availability of libFoundation 0.9.0, a
+free and almost complete implementation of Foundation Kit as defined by the
+OpenStep specifications, plus more classes that come with the newest releases
+of OPENSTEP 4.x and Rhapsody. It completely or almost completely
+implements the following classes:
+
+NSObject
+NSString, NSMutableString
+NSArray, NSMutableArray
+NSDictionary, NSMutableDictionary
+NSSet, NSMutableSet
+NSData, NSMutableData
+NSValue, NSNumber
+NSDate, NSCalendarDate, NSTimeZone
+NSCharacterSet
+NSEnumerator
+NSAutoreleasePool
+NSException
+NSNotification, NSNotificationCenter
+NSCoder, NSArchiver, NSUnarchiver
+NSScanner
+NSInvocation, NSMethodSignature
+NSFileManager
+NSBundle
+NSProcessInfo
+NSAccount
+NSDistributedLock
+NSPosixFileDescriptor, NSFileHandle, NSPipe
+NSTimer
+NSRunLoop
+NSThread, NSTask
+NSUserDefaults
+NSHost
+
+Some extensions to the OpenStep specification are also present. They
+include an extended exception handling mechanism, a garbage collector
+based on reference counting and a printf-like formatting class. In
+addition to the reference counting garbage collector, the 0.9.0
+release comes with support for the Boehm's garbage collector, which
+add true garbage collection to OpenStep applications.
+
+The exception handling mechanism is very similar with those found in
+Java and C++ and requires support for nested functions from the
+compiler. The garbage collectors adds the benefits of automatic or
+pseudo-automatic garbage collection to the OpenStep programs and it is
+fully integrated with OpenStep classes. The printf-like formatting
+class is a general purpose class that can be used to do various
+operations that require parsing of format strings like in
+printf(). This class is used for example to do all the formatting jobs
+in the NSString class in libFoundation.  There is another class
+UnixSignalHandler designed for giving an object-oriented approach to
+the Unix signal handling.
+
+These extensions are also available in a separate library for other
+OpenStep Foundation implementations; the current supported Foundation
+libraries are gnustep-base and the Foundation library in OPENSTEP
+4.x. We dropped the support for the buggy implementation of the
+Foundation library that comes with NeXTSTEP 3.3; sorry for this.
+
+The library requires GCC 2.8.1 or the EGCS 1.0.x compilers if you want
+true garbage collection support. Patches for both compilers are
+included in the distribution. If you don't need true garbage
+collection you can still use the 2.7.2.1 compiler with an Objective-C
+patch from
+
+ftp://alpha.gnu.org/gnu/gnustep/contrib/gcc-2.7.2.1-objc-970318.diff.gz
+ftp://ftp.net-community.com/pub/GNUstep/gcc-2.7.2.1-objc-970318.diff.gz
+
+On NeXTStep machines the library can also be compiled with NeXT
+Objective-C runtime besides the GNU runtime although the NeXT compiler
+is not supported. Note that the library does not currently compile
+with the NeXT runtime under OPENSTEP 4.x. In the future the OPENSTEP
+4.x and NeXTSTEP 3.3 platforms will be no longer supported.
+
+The library was ported on the following platforms:
+
+- m68k-next-nextstep3
+- i386-next-nextstep3
+- i386-pc-linux-gnu
+- i386-pc-cygwin32 (Windows NT)
+- i386-unknown-solaris2.5.1
+- sparc-sun-solaris2.5
+- alpha-unknown-linux-gnu
+- powerpc-ibm-aix4.1.5.0
+
+The library also runs with GNU runtime on OPENSTEP 4.x for Mach with
+the GNU compiler (not the native one). Anybody interested in the
+compiler for OPENSTEP 4.x please contact us.
+
+Support for Distributed Objects has been delayed until the next
+release. We plan to base the code upon the Corba's IIOP, so that
+OpenStep programs using libFoundation will be able to interoperate
+with Corba programs without changes through the Distributed Objects
+mechanism.
+
+
+Changes in version 0.9.0 since version 0.8.0:
+
+* The most important change is the support for Boehm's conservative
+  garbage collector, that makes the memory management much more easier
+  than the reference counting mechanism. Many thanks to Helge Hess
+  <helge@mdlink.de> for persuading me to implement this facility and
+  also for his support.
+
+* Some portions of the code have been optimized to gain speed: objects
+  that were previously allocated in some functions or methods at each
+  invocation have been allocated once per-thread.
+
+* The library has been ported to PowerPC running AIX 4.1.5. The port is
+  complete, it also includes the NSInvocation and NSMethodSignature
+  classes. Many thanks to Steven Besler <sbesler@exchange.ml.com> and
+  Leon Salvail <lsalvail@global-village.net> for supporting this work.
+
+* Added support for dynamically loading bundles when running in the
+  GNUstep environment.
+
+* The documentation is now written in Texinfo and we documented almost
+  all of the additional features libFoundation comes with in addition
+  to the OPENSTEP implementation.
+
+* Bug fixes in several classes, including NSArray, NSString and
+  UnixSignalHandler.
+
+
+Where you can get it?
+=====================
+
+You can download the source code from
+
+http://www.slip.net/~ovidiu/libFoundation/libFoundation-0.9.0.tar.gz
+ftp://alpha.gnu.org/gnu/gnustep/libFoundation-0.9.0.tar.gz
+ftp://ftp.gnustep.org/pub/gnustep/libFoundation-0.9.0.tar.gz
+ftp://ftp.net-community.com/pub/Free/libFoundation-0.8.0.tar.gz
+
+
+Happy hacking,
+
+Ovidiu Predescu <ovidiu@slip.net>
+Mircea Oancea <mircea@pathcom.com>
+

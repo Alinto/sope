@@ -1,0 +1,50 @@
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* use %p for pointer formats (v4.5.9)
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* WOXMLMapDecoder.m: fixed a gcc 4.0 warnings, changed for the new
+	  DOM implementation naming (v4.5.8)
+
+2004-08-40  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+	  (v4.3.7)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved to SOPE 4.3 (v4.3.6)
+
+2004-07-29  Frank Reppin  <frank@opengroupware.org>
+
+	* GNUmakefile.preamble: added libWOXML_SOVERSION (v4.2.5)
+
+2004-07-29  Frank Reppin  <frank@opengroupware.org>
+
+	* GNUmakefile: inherit Version from skyrix-sope (v4.2.4)
+
+2004-06-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.prebinding: added prebinding (v4.2.3)
+
+2004-04-28  Marcus Mueller  <znek@mulle-kybernetik.com>
+	
+	* v4.2.2
+
+	* WOXML-Info.plist: new file for Xcode project
+
+	* common.h: include NGObjectMacros if NeXT_Foundation_LIBRARY is set.
+
+	* WOXMLDecoder.m: Workaround for missing subclassResponsibility: in
+	  NeXT and Apple runtimes.
+
+	* WOXMLSaxModelHandler.m: include common.h (NGObjectMacros)
+
+2004-04-24  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* added WOXML to OGo/SOPE
+
+	* created ChangeLog

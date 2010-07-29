@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WORadioButton">
+  <binding name="selection" passthrough="NO" settable="YES"/>
+  <binding name="checked" passthrough="NO" settable="YES"/>
+
+  <binding name="name"/>
+  <binding name="value"/>
+  <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
+
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <validation message="exactly one of &apos;checked&apos; or &apos;value&apos; must be bound">
+    <count test="!=1">
+      <bound name="checked"/>
+      <bound name="value"/>
+    </count>
+  </validation>
+
+  <validation message="if either &apos;selection&apos; or &apos;value&apos; is bound, then both must be bound">
+    <and>
+      <or>
+        <bound name="selection"/>
+        <bound name="value"/>
+      </or>
+      <count test="&lt;2">
+        <bound name="selection"/>
+        <bound name="value"/>
+      </count>
+    </and>
+  </validation>
+</wo>

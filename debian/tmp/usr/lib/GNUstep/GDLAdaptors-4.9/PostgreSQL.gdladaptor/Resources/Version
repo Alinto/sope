@@ -1,0 +1,5 @@
+# version file
+
+SUBMINOR_VERSION:=54
+
+# v4.5.41 requires libGDLAccess v4.5.50

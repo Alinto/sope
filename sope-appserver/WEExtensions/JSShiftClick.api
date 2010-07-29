@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="JSShiftClick">
+  <binding name="identifier" />
+  <binding name="prefix" />
+  <binding name="scriptName" required="YES" settable="YES" />
+</wo>

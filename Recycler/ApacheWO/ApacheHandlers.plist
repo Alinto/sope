@@ -1,0 +1,20 @@
+{
+  CVSID="$Id: ApacheHandlers.plist,v 1.1 2004/06/08 11:06:00 helge Exp $";
+  
+  /* Note: only lowercase letters are allowed in handler names ! */
+  
+  Name2Selector = {
+    "objc-echo"        = "performObjcEchoRequest:";
+    "sx-handler"       = "performSxHandlerRequest:config:";
+    "wox-page"         = "performWoxPageRequest:";
+    "sx-alias-handler" = "performSxAliasHandlerRequest:";
+  };
+  
+  MimeType2Selector = {
+    "application/x-httpd-wox" = "performWoxPageRequest:";
+    "application/x-httpd-wo"  = "handleApplicationXHttpdWoRequest:config:";
+    "httpd/unix-directory"    = "handleDirectoryRequest:config:";
+    "skyrix/request-handler"  = "handleSkyrixRqHandler:config:";
+//  "*/*"                     = "handleGenericRequest:config:";
+  };
+}

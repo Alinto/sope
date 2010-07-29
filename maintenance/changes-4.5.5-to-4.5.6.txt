@@ -1,0 +1,223 @@
+- fixed a plist parsing bug
+- properly decode underscores in quoted-printable data
+- some gcc4 type signed/unsigned fixes
+- added -isNotEmpty to NSSet
+- added -isNotEmpty methods to collection classes in GDLAccess
+- fixed quoted-printable handling in IMAP4 envelopes
+- properly decode QP in MIME headers (if QP starts inside the value)
+- added debug logs to SaxObjectDecoder (SaxObjectDecoderDebugEnabled default)
+- SaxObjectDecoder tag=>sel mapping is now Unicode safe
+- set LDAP options of a connection prior a bind (OGo bug #995)
+- LDAP password checks now default to UTF-8
+- properly set microseconds timeout field in LDAP enumerator (OGo bug #1588)
+- added fetch-timeout accessors to LDAP enumerator
+- added support for 'LDAPPort' default in ldapchkpwd, ldapls
+- stop path traversal for SoObjects in case an exception is returned
+- set 'public' header for WebFolders WebDAV client
+- added WebFolders XP SP2 as a known WebDAV client
+- fixed a logging bug on WOHyperlink (OGo bug #1624)
+- changed handling of -takeValues in WOSession in combination with DirectAction
+- properly consume element-id in WOSwitchComponent (OGo bug #1590)
+- added XML decoding for REPORT requests
+- changed 'disabled' handling in WORadioButtonList
+- do not push 'value' binding in WOSubmitButton (OGo bug #1568)
+- added BasicAuthSession example
+- improved error handling in VSSaxDriver
+- implemented calculation of negative byday occurrences in cycle calculator
+- added multi-window support in SOPE:X
+- added SuSE 10.0 spec file for mod_ngobjweb
+- fixed various minor warnings (eg include string.h where necessary)
+
+Major contributors for 4.5.6:
+Marcus Mueller
+Jean-Alexis Montignies
+Sebastian Ley
+Frank Reppin
+Helge Hess
+... and many more :-)
+
+===========================================================================
+compare ../complete/SOPE/releases/4.5.5-morecore with .
+r1208
+changed: sope-core/NGExtensions/
+     2006-01-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NGPropertyListParser.m (_skipComments): fixed a bug
+     	  when parsing comments which contain stars (v4.5.181)
+     2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGQuotedPrintableCoding.m (NGDecodeQuotedPrintable): properly decode
+     	  underscore as 0x20 (as per RFC 2047 4.2) (v4.5.180)
+     2005-11-21  Helge Hess  <helge.hess@skyrix.com>
+     	* NGExtensions/NSObject+Values.h: added NGBaseTypeValues protocol to
+     	  be able to refer to the statically typed 'signed' set of basetypes
+     	  (v4.5.179)
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSObject+Values.m: explicitly mark signed values as
+     	  such (most importantly char) (v4.5.178)
+     	* FdExt.subproj/NSCalendarDate+misc.m: include math.h to avoid a floor
+     	  warning (v4.5.177)
+     2005-10-05  Helge Hess  <helge.hess@skyrix.com>
+     	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty to NSSet (v4.5.176)
+changed: sope-core/EOControl/
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.62
+     	* EOKeyValueQualifier.m: fixed some SEL related warnings
+     	* common.h: properly include string.h
+changed: sope-gdl1/GDLAccess/
+     2005-10-13  Helge Hess  <helge.hess@skyrix.com>
+     	* EOArrayProxy.m, EOPrimaryKeyDictionary.m, EOExpressionArray.m,
+     	  EORecordDictionary.m: added -isNotEmpty methods (v4.5.55)
+changed: sopex/SOPEX/
+     2006-01-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v2.0.4
+     	* SOPEXBrowserController.m: added UI delegate methods for creating
+     	  new browser windows. It's possible now to have multiple targets
+     	  in a SOPE:X application.
+     	* SOPEXWebConnection.[hm]: exposed -localResourceBundle and reworked
+     	  discovery of application prefix.
+     	* NSBundle+Ext.m: minor bugfix
+changed: sope-mime/
+     2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMail: some code cleanups / reorgs (v4.5.239)
+     	* v4.5.238
+     	* NGImap4: fixed QP handling in IMAP4 envelopes (#1587)
+     	* NGMime: code cleanups
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* properly include string.h where required to avoid warnings (v4.5.237)
+changed: sope-mime/NGMime/
+     2005-12-16 Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMime.xcodeproj: synced with GNUmakefile
+     2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeAddressHeaderFieldGenerator.m: use -warnWithFormat:
+     	* NGMimeUtilities.h: code cleanups
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* properly include string.h where required to avoid warnings
+changed: sope-mime/NGImap4/
+     2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4ResponseParser.m: properly decode quoted-printable headers
+     	  when the QP marker starts somewhere inside the header value
+changed: sope-mime/NGMail/
+     2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeMessageParser.m: moved NSData QP category to own file
+     	  (NSData+MimeQP.m)
+added:   sope-mime/NGMail/NSData+MimeQP.m
+changed: sope-xml/libxmlSAXDriver/
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* properly include string.h to avoid warnings (v4.5.23)
+changed: sope-xml/XmlRpc/
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* NSMutableString+XmlRpcDecoder.m: properly include string.h to fix a
+     	  memcpy warning (v4.5.26)
+changed: sope-xml/SaxObjC/
+     2005-12-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SaxObjectDecoder.m: trigger debug logging via new
+     	  SaxObjectDecoderDebugEnabled default (v4.5.54)
+     2005-11-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* SaxMethodCallHandler.m: rewrote tag=>selector mapping function to be
+     	  Unicode safe (v4.5.53)
+changed: sope-xml/samples/
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* testqp.m: properly include string.h to fix a strlen warning
+added:   Recycler/ApacheWO
+added:   Recycler/mod_objc
+changed: sope-ldap/NGLdap/
+     2006-01-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGLdapConnection.m: set LDAP options prior performing a bind. Default
+     	  to UTF-8 credentials (can be changed back to Latin1 using the
+     	  LDAPUseLatin1Creds default). This should fix OGo bug #995 (v4.5.28)
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGLdapURL.m: properly include string.h to avoid a warning (v4.5.27)
+     2005-10-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.26
+     	* NGLdapSearchResultEnumerator.m: minor code improvements
+     2005-10-16  Jean-Alexis Montignies  <ja@sente.ch>
+     	* NGLdapSearchResultEnumerator.m: properly set microseconds field of
+     	  timeout, added accessors for fetch-timeout (OGo bug #1588)
+changed: sope-ldap/samples/
+     2006-01-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* ldapchkpwd.m, ldapls.m: added support for LDAPPort default
+changed: xmlrpc_call/
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* HandleCredentialsClient.m: properly include string.h to avoid a
+     	  warning
+changed: sope-appserver/WEExtensions/
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.84
+     	* JSStringTable.m: properly include time.h to avoid a warning
+     	* WETableCalcMatrix.m: properly include string.h to avoid a warning
+changed: sope-appserver/NGObjWeb/
+     2006-01-25  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SoObjects/SoObject+Traversal.m: stop traversal immediately if an
+     	  exception was returned (v4.5.218)
+     	* SoObjects/SoObject+Traversal.m: minor code cleanups (v4.5.217)
+     2005-11-21  Helge Hess  <helge.hess@skyrix.com>
+     	* WebDAV/SoObjectWebDAVDispatcher.m: set 'public' header in case the
+     	  WebDAV client is WebFolders (v4.5.216)
+     	* WEClientCapabilities.m: added WebFolders WinXP SP2 as a known user
+     	  agent (v4.5.215)
+     	* Associations/WOAssociation.[hm]. WOKeyPathAssociation.m: explicitly
+     	  type signed char values to avoid gcc4 warnings (v4.5.214)
+     2005-11-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.213
+     	* DynamicElements/_WOComplexHyperlink.m: fixed a logging bug of
+     	  WODebugStaticLinkProcessing (#fixes OGo bug #1624)
+     	* SoObjects/SoObjectRequestHandler.m: minor code cleanups
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.212
+     	* DynamicElements/WOCopyValue.m: fixed a gcc3 warning
+     	* include string.h where required
+     2005-11-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WORadioButton.m: added some comments and a warning
+     	  about issues wrt request handling (v4.5.211)
+     2005-11-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOSession.m ([WOSession -takeValuesFromRequest:inContext:]): changed
+     	  handling of -takeValues in combination with directaction components
+     	  (v4.5.210)
+     2005-10-16  Jean-Alexis Montignies  <ja@sente.ch>
+     	* DynamicElements/WOSwitchComponent.m: properly consume element-id
+     	  component in -invokeAction: (OGo bug #1590) (v4.5.209)
+     2005-10-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoObjectWebDAVDispatcher.m: decode XML content of REPORT
+     	  requests (v4.5.208)
+     2005-10-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOCompoundElement.m: setup defaults in +initialize
+     	  (v4.5.207)
+     2005-10-05  Helge Hess  <helge.hess@skyrix.com>
+     	* DynamicElements/WORadioButtonList.m: changed handling of 'disabled'
+     	  during -takeValuesFromRequest:. Now the index/item bindings are
+     	  pushed, and then the 'disabled' binding is checked prior setting the
+     	  'selection' to the item (the item will not get selected if its
+     	  disabled). (v4.5.206)
+     	* DynamicElements/WOSubmitButton.m: disable KVC push for 'value'
+     	  binding in -takeValuesFromRequest:inContext:. This is usually not
+     	  required but results in issue #1568 on OSX. The old behaviour can
+     	  be reenabled by settin ghte WOSubmitButtonEnableValueSync default to
+     	  YES (v4.5.205)
+added:   sope-appserver/samples/BasicAuthSession
+changed: sope-appserver/samples/HelloForm/
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: fixed include path of system libs
+added:   maintenance/changes-4.5.5-to-4.5.6.txt
+added:   maintenance/mod_ngobjweb_suse100.spec
+added:   maintenance/dummytool.c
+added:   sope-ical/data/korg-allday-bug1585.ics
+added:   sope-ical/data/kde-vcard-bug1594.vcf
+added:   sope-ical/data/korg-342-meeting.ics
+added:   sope-ical/data/chandler4979-trumba-tz1.ics
+changed: sope-ical/versitSaxDriver/
+     2005-12-05  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.21
+     	* VSSaxDriver.m: added some debug logs, throw an error if a tagline
+     	  starts with a colon/semicolon (tagname missing)
+     	* VSvCardSaxDriver.m: minor code cleanups
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* VSSaxDriver.m: renamed internal -error: method to -reportError: to
+     	  avoid a conflict with gstep-base (v4.5.20)
+changed: sope-ical/NGiCal/
+     2006-01-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalRecurrenceRule.m: properly include NSString+Ext.h to avoid a
+     	  warning during Cocoa compilation (v4.5.71)
+     2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* include string.h where required (v4.5.70)
+     2005-10-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalMonthlyRecurrenceCalculator.m: implemented calculation of
+     	  negative byday occurrences (eg -1TH) (v4.5.69)

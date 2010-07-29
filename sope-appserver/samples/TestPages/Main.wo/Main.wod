@@ -1,0 +1,19 @@
+// bind template to controller class
+
+AppName: WOString {
+  value = application.name;
+}
+
+TwoFormsLink: WOHyperlink {
+  pageName = "TwoForms";
+  string   = "two forms on one page";
+}
+
+FormDisplayLink: WOHyperlink {
+  pageName = "FormDisplay";
+  string   = "test form values";
+}
+
+SID: WOString {
+  value = existingSession.sessionID;
+}

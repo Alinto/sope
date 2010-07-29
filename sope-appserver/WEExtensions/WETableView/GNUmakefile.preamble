@@ -1,0 +1,9 @@
+# compiler flags
+
+ADDITIONAL_CPPFLAGS += -Wall
+ADDITIONAL_INCLUDE_DIRS += \
+	-I.. -I../.. -I../../NGObjWeb		\
+	-I../../../sope-core/NGStreams		\
+	-I../../../sope-core/NGExtensions	\
+	-I../../../sope-core			\
+	-I../../../sope-xml

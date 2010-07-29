@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="JSMenu">
+  <binding name="fgColor" />
+  <binding name="bgColor" />
+  <binding name="fgColorHigh" />
+  <binding name="bgColorHigh" />
+  <binding name="borderColor" />
+  <binding name="borderWidth" />
+  <binding name="fontSize" />
+  <binding name="width" />
+  <binding name="leftPadding" />
+  <binding name="string" />
+  <binding name="bindAtId" />
+  <binding name="align" />
+  <binding name="tag" />
+</wo>

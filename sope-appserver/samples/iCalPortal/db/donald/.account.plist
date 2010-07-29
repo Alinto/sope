@@ -1,0 +1,15 @@
+{
+    address = "Am Geldspeicher 1";
+    city = "Entenhausen";
+    country = "USA";
+    cryptedPassword = "hukHKVmjiZevg";
+    email = "donald.duck@entenhausen.com";
+    firstName = Donald;
+    lastName = Duck;
+    login = donald;
+    phone = "+49-391-6623-0";
+    state = SA;
+    wantIcalNews = 1;
+    wantSkyrixNews = 1;
+    zip = "39104";
+}

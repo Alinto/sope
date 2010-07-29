@@ -1,0 +1,281 @@
+.TH sope-ngobjweb 5 "October 2004" "SOPE" "User Manuals"
+.\" Copyright (c) 2004 Helge Hess. All rights reserved.
+.\" ====================================================================
+.\"
+.\" Copyright (c) 2004 Helge Hess.  All rights reserved.
+.\"
+.\" Check the COPYING file for further information.
+.\"
+.\" Created with the help of:
+.\"   http://www.schweikhardt.net/man_page_howto.html
+.\"
+
+.SH NAME
+sope-ngobjweb \- Defaults for the libNGObjWeb library (part of SOPE)
+
+.SH DESCRIPTION
+The
+.B sope-ngobjweb
+library implements the core web application server of SOPE. NGObjWeb provides
+a lot of defaults to configure operation and logging of SOPE based
+applications.
+
+.SH BUGS
+SOPE related bugs are collected in the OpenGroupware.org Bugzilla:
+  http://bugzilla.opengroupware.org/
+
+.SH Application Defaults
+This section describes defaults which are related to general application setup.
+.IP "-WOApplicationBaseURL url (empty)"
+Select a different base URL. Do not touch this option unless you know what you
+are doing. It is overridden by the application URL set by mod_ngobjweb.
+.IP "-WOApplicationSuffix suffix (.woa)"
+The default selects the extension of the application wrapper. If you use a
+different application extension (eg .app), you need to properly configure this 
+default.
+.IP "-WOAutoOpenInBrowser YES|NO (NO)"
+WOAutoOpenInBrowser is a WO compatibility default and does not do anything on
+non MacOSX platforms.
+.IP "-WOCGIAdaptorURL url (empty)"
+WOCGIAdaptorURL is a WO compatibility default and does not do anything in
+combination with SOPE. SOPE does not require those URLs because it is always
+in "direct connect mode".
+.IP "-WOContactSNS YES|NO (NO)"
+Whether the application should register with a snsd load balancing server.
+.IP "-WOCoreOnApplicationException YES|NO (NO)"
+If enabled, the application will call the system abort() function in case an
+uncatched exception occures. Abort will generate a coredump, so that you can
+analyze the cause for an exception. Only enable in development environments!
+.IP "-WODebuggingEnabled YES|NO (NO)"
+Enable NGObjWeb debug logs.
+.IP "-WODefaultSessionTimeOut duration (3600)"
+Use this option to set the default session timeout. The duration value is in
+specified seconds.
+.IP "-WODefaultLanguages array-of-language-codes"
+The language array specifies for what languages resource lookups are performed.
+.IP "-WOExpirationTimeInterval seconds (120)"
+Sets the interval in which session stores check whether sessions are expired
+and need to be shut down.
+.IP "-WOFrameworksBaseURL url (/WebObjects/Frameworks)"
+WOFrameworksBaseURL is a WO compatibility default and currently does not do
+anything in SOPE.
+.IP "-WOGenerateMissingResourceLinks YES|NO (NO)"
+If a resource (eg a filename in WOImage) could not be found, SOPE will generate
+a replacement URL.
+.IP "-WOLogDefaultsOnStartup YES|NO (NO)"
+When enabled, a SOPE will print all configured defaults to stdout on startup.
+.IP "-WOLogPageCache YES|NO (NO)"
+Print log messages when pages are stored or retrieved from the session page
+cache.
+.IP "-WONoProxySuffixes array-of-strings (empty array)"
+.IP "-WOPageCacheSize number (30)"
+.IP "-WOPageRefreshOnBacktrack YES|NO (YES)"
+.IP "-WOPermanentPageCacheSize number (30)"
+.IP "-WOProjectSearchPath array-of-pathes (empty array)"
+.IP "-WOSMTPHost hostname (mail)"
+.IP "-WOSendMail path (/usr/lib/sendmail)"
+.IP "-WOSessionStore classname (WOServerSessionStore)"
+.IP "-WOStatsStylesheetName string (WOStats.xsl)"
+
+.SH Component Defaults
+This section describes component and template related defaults.
+.IP "-WOCachingEnabled YES|NO (YES)"
+If this default is enabled SOPE will cache all templates and won't check for
+changes. So you might want to disable caching during development but you
+definitely should leaved that enabled for deployments or get a huge performance
+hit.
+.IP "-WOComponentExtensions array-of-exts ( (wo) )"
+The option specifies what directory extensions will be treated as wrapper
+components extensions.
+.IP "-WOComponentLoadWOOFiles YES|NO (NO)"
+Component wrappers can contained serialized objects like datasources in so
+called .woo files. This options enables the loading of those serialized files
+at a minor speed hit.
+.IP "-WOCompoundElementPool YES|NO (NO)"
+Wrap each rendering of a compound template element in an NSAutoreleasePool.
+This can help to find memory bugs hidden in templates. You might also want
+to enable double release checks in the NSAutoreleasePool when using this
+option
+.IP "-WOCoreOnAwakeComponentInCtxDealloc YES|NO (NO)"
+This default can be used to debug situations where a context is being
+deallocated but a component is still awake. In such a situation the framework
+will trigger a coredump using abort() which can be used to investigate.
+Never enable in deployments!
+.IP "-WOCoreOnRecursiveSubcomponents YES|NO (NO)"
+When enabled, the framework will generate a coredump if a component makes a
+recursive call to itself. Note that this is not necessarily a bug.
+.IP "-WODebugActions YES|NO (NO)"
+.IP "-WODebugComponentAwake YES|NO (NO)"
+.IP "-WODebugComponentDefinition YES|NO (NO)"
+.IP "-WODebugComponentLookup YES|NO (NO)"
+.IP "-WODebugCursor YES|NO (NO)"
+.IP "-WODebugKeyPathAssociation YES|NO (NO)"
+.IP "-WODebugResourceLookup YES|NO (NO)"
+.IP "-WODebugStaticLinkProcessing YES|NO (NO)"
+.IP "-WODebugTakeValues YES|NO (NO)"
+.IP "-WODescriptiveElementIDs YES|NO (NO)"
+.IP "-WOEnableComponentsWithoutClasses YES|NO (NO)"
+When enabled SOPE will not print a warning if it finds a template but no
+matching Objective-C class or script.
+.IP "-WOFormAlwaysPassDown YES|NO (YES)"
+Disable this option if the WOForm dynamic element should only run the take
+values phase on its child elements if the form URI or element id matches the
+request. This might confuse dynamic elements which are not form elements but
+nevertheless want to take values from the request (like the DnD elements).
+.IP "-WOLogComponents YES|NO (NO)"
+When enabled, the WOContext will log when a component enters or leaves the
+component stack. This is useful to debug how components are activated.
+.IP "-WONoSelectionString string (WONoSelectionString)"
+The string to be used for empty selections in the WOPopUpButton dynamic
+element.
+.IP "-WOParsersUseUTF8 YES|NO (NO)"
+Only affects wrapper templates (XML templates use XML to specify the charset).
+When enabled, .html and .wod files will always be parsed in the UTF-8 encoding,
+otherwise the Foundation system (cstring) encoding will be used.
+.IP "-WOResourceURLAssociationDebugEnabled YES|NO (NO)"
+.IP "-WOUseRelativeURLs YES|NO (YES)"
+.IP "-WOKeyPathAssociationsCacheSize number (200)"
+.IP "-WOValueAssociationsCacheSize number (200)"
+.IP "-WOxFileExtensions array-of-strings ( wox, xtmpl, xhtml )"
+An array of the extensions for files which are to be loaded as WOx (XML based)
+templates.
+.IP "-WOxElemBuilder_LogAssociationMapping YES|NO (NO)"
+.IP "-WOxElemBuilder_LogAssociationCreation YES|NO (NO)"
+.IP "-WOxComponentElemBuilderDebugEnabled YES|NO (NO)"
+.IP "-WOxLogBuilderQueue YES|NO (NO)"
+.IP "-WOxBuilderClasses - array-of-classnames"
+.IP "-WOxAssociationClassMapping - dict-of-uri-to-classnam"
+
+.SH Request Handler Defaults
+.IP "-WOComponentRequestHandlerKey string (wo)"
+The name to be used in the URL for component request handler URLs (action
+binding URLs).
+.IP "-WODirectActionRequestHandlerKey string (x)"
+The name to be used in the URL for direct action request handler URLs. You
+may want to set this option to 'wa' for improved WO compatibility.
+.IP "-WOResourceRequestHandlerKey string (y)"
+The name to be used in the URL for resource request handler URLs.
+.IP "-WOPageRequestHandlerDebugEnabled YES|NO (NO)"
+Enable/disable debug logs in the page request handler.
+
+.SH SoObjects Defaults
+.IP "-WOIsRedirectionEnabled YES|NO (NO)"
+.IP "-SoClassRegistryDebugEnabled YES|NO (NO)"
+.IP "-SoDebugKeyLookup YES|NO (NO)"
+.IP "-SoDebugTraversal YES|NO (NO)"
+.IP "-SoDebugProductLoading YES|NO (NO)"
+.IP "-SoDebugProductRegistry YES|NO (NO)"
+.IP "-SoDebugRequestClassification YES|NO (NO)"
+.IP "-SoLogSecurityDeclarations YES|NO (NO)"
+.IP "-SoOFSDebugFactory YES|NO (NO)"
+.IP "-SoOFSDebugPlistObject YES|NO (NO)"
+.IP "-SoOFSDebugRestore YES|NO (NO)"
+.IP "-SoOFSDebugNegotiate YES|NO (NO)"
+.IP "-SoOFSDebugAuthLookup YES|NO (NO)"
+.IP "-SoOFSWebMethodDebugEnabled YES|NO (NO)"
+.IP "-SoOFSResourceManagerDebugEnabled YES|NO (NO)"
+.IP "-SoObjCClassDebugEnabled YES|NO (NO)"
+.IP "-SoObjectSOAPDispatcherDebugEnabled YES|NO (NO)"
+.IP "-SoObjectDataSourceDebugEnabled YES|NO (NO)"
+.IP "-SoObjectRequestHandlerDebugEnabled YES|NO (NO)"
+.IP "-SoObjectMethodDispatcherDebugEnabled YES|NO (NO)"
+.IP "-SoPageInvocationDebugEnabled YES|NO (NO)"
+.IP "-SoProductResourceManagerDebugEnabled YES|NO (NO)"
+.IP "-SoRendererDebugEnabled YES|NO (NO)"
+.IP "-SoRedirectToDefaultMethods YES|NO (YES)"
+.IP "-SoSecurityManagerDebugEnabled YES|NO (NO)"
+.IP "-SoRequestDispatcherRules rules-array"
+
+.SH XML-RPC Subsystem Defaults
+.IP "-WOCoreOnXmlRpcFault YES|NO (NO)"
+.IP "-WOLogXmlRpcSelectorMapping YES|NO (NO)"
+.IP "-SoObjectXmlRpcDispatcherDebugEnabled YES|NO (NO)"
+
+.SH WebDAV Subsystem Defaults
+.IP "-SoObjectDAVDispatcherDebugEnabled YES|NO (NO)"
+.IP "-SoPreferredNamespacePrefixes dict-of-uri-to-name"
+.IP "-SoDefaultWebDAVPropertyNames array-of-fqn"
+.IP "-SoWebDAVFormatOutput YES|NO (NO)"
+.IP "-DAVParserDebugProp YES|NO (NO)"
+.IP "-SoWebDAVDefaultAllowMethods array-of-http-mehtods (GET, HEAD, ...)"
+.IP "-SoWebDAVDetectionMethods array-of-http-methods (OPTIONS,MKCOL, ...)"
+
+.SH Adaptor Defaults
+The NGObjWeb adaptor accepts requests from the outside and turns them into
+events in the SOPE application server. Do not mix up the NGObjWeb adaptor
+(which is a class inside the SOPE based server) with the mod_ngobjweb Apache
+module.
+.IP "-WOAdaptor classname (WOHttpAdaptor)"
+This argument selects the SOPE adaptor class used to receive requests from the
+outside. The only adaptor provided by SOPE itself is WOHttpAdaptor.
+.IP "-WOAdaptorLogPath path (empty)"
+Using this option you can select a path where all SOPE HTTP transactions are
+logged to.
+.IP "-WOAdditionalAdaptors array-of-strings (empty)"
+While -WOAdaptor selects the primary adaptor SOPE applications will receive
+input from, this option allows for any number of additional input ports.
+.IP "-WOCoreOnHTTPAdaptorException YES|NO (NO)"
+.IP "-WODebugHttpTransaction YES|NO (NO)"
+.IP "-WODebugZipResponse YES|NO (NO)"
+.IP "-WODontZipResponse YES|NO (NO)"
+In the default configuration SOPE compresses all responses if the browser
+supports that. Enable this option to disable compression which can be useful
+in combination with WOHttpAdaptor_LogStream.
+.IP "-WOHttpAdaptorReceiveTimeout           = 120"
+.IP "-WOHttpAdaptorSendTimeout              = 120"
+.IP "-WOHttpAdaptor_LogStream YES|NO (NO)"
+Log the complete HTTP transaction on stdout. You might also want to set
+WODontZipResponse to disable zip compression (otherwise you will only see
+'scrambled' output)
+.IP "-WOHttpAllowHost hostname|array-of-hostnames (localhost)"
+SOPE checks the IP of the client prior accepting a connection. Per default it
+only allows connects from localhost. In deployments you should always connect
+applications through Apache/mod_ngobjweb and keep the client restriction.
+.IP "-WOHttpTransactionUseSimpleParser YES|NO (NO)"
+Select whether the more complex/slow MIME parser or the new lightweight HTTP
+parser ('simple parser') should be used. The latter doesn't support all
+features required for HTML forms processing and should only be used for WebDAV
+and XML-RPC clients.
+.IP "-WOIncludeCommentsInResponse YES|NO (YES)"
+When disabled, HTML comments will be stripped from .html wrapper templates
+prior delivery to the client (WOx templates always strip comments). This might
+clash with JavaScript tags in your templates and is therefore enabled per
+default.
+.IP "-WOListenQueueSize number (5)"
+This parameter configures the backlog size of the socket listen queue. See the
+listen (2) call for further information.
+.IP "-WOOutputValidationEnabled YES|NO (NO)"
+.IP "-WOPort number (20000)"
+The port the SOPE application will listen on.
+.IP "-WORunMultithreaded YES|NO (NO)"
+Enable/disable multi threading in SOPE. Note that SOPE 4.5 is not considered
+thread safe.
+.IP "-WOWorkerThreadCount number (0)"
+Configures the number of worker threads which are used to receive/send requests
+and responses in parallel to the application processing. This is currently
+unsupported by the SOPE WOHttpAdaptor.
+.IP "-WOSimpleHTTPParserDebugEnabled YES|NO (NO)"
+.IP "-WOSimpleHTTPParserFileIOBoundary number (16384)"
+.IP "-WOSimpleHTTPParserHeavyDebugEnabled YES|NO (NO)"
+.IP "-WOSimpleHTTPParserMaxUploadSizeInKB number (262144)"
+
+.SH Profiling Defaults
+.IP "-WOProfileApplication YES|NO (NO)"
+.IP "-WOProfileComponents YES|NO (NO)"
+.IP "-WOProfileDirectActionRequestHandler YES|NO (NO)"
+.IP "-WOProfileElements YES|NO (NO)"
+.IP "-WOProfileHttpAdaptor YES|NO (NO)"
+.IP "-WOProfileLoading YES|NO (NO)"
+.IP "-WOProfileResponse YES|NO (NO)"
+
+.SH Deprecated Defaults
+.IP "-WOLogScriptDealloc YES|NO (NO)"
+.IP "-WOLogScriptInit YES|NO (NO)"
+.IP "-WOLogScriptKVC YES|NO (NO)"
+
+.SH AUTHOR
+Helge Hess <helge.hess@opengroupware.org>
+
+.SH SEE ALSO
+.BR httpd (8),
+.BR Defaults (5).

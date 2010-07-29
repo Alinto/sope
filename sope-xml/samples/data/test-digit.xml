@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<response D="DAV:">
+  <!-- this should be valid XML 1.0, but might be invalid XML NS -->
+  <D:0x1283>abc</D:0x1283>
+
+  <!-- this is invalid XML 1.0 (but submitted by Webstore?) -->
+  <0x1283>abc</0x1283>
+</response>

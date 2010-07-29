@@ -1,0 +1,30 @@
+// bind template to class
+
+Form1: WOForm {
+}
+Form2: WOForm {
+}
+
+PopUp1: WOPopUpButton {
+  list      = ( a1, b1, c1, d1, e1 );
+  item      = item;
+  selection = selection1;
+}
+PopUp2: WOPopUpButton {
+  list      = ( a2, b2, c2, d2, e2 );
+  item      = item;
+  selection = selection2;
+}
+
+Submit1: WOSubmitButton {
+  value  = "ok1";
+  action = ok1;
+}
+Submit2: WOSubmitButton {
+  value = "ok2";
+  action = ok2;
+}
+
+MainLink: WOHyperlink {
+  pageName = "Main";
+}

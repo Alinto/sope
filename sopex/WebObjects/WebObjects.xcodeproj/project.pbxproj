@@ -1,0 +1,589 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
+		8DC2EF550486A6940098B216 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B4FE84181DC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
+		AD2C4937060A065600E3ACD3 /* WebObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = AD2C4935060A065600E3ACD3 /* WebObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADAD4BDD076F4BAF00AAD24E /* DOM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD0076F4BAF00AAD24E /* DOM.framework */; };
+		ADAD4BDE076F4BAF00AAD24E /* NGExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD1076F4BAF00AAD24E /* NGExtensions.framework */; };
+		ADAD4BDF076F4BAF00AAD24E /* NGHttp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD2076F4BAF00AAD24E /* NGHttp.framework */; };
+		ADAD4BE0076F4BAF00AAD24E /* NGImap4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD3076F4BAF00AAD24E /* NGImap4.framework */; };
+		ADAD4BE1076F4BAF00AAD24E /* NGMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD4076F4BAF00AAD24E /* NGMail.framework */; };
+		ADAD4BE2076F4BAF00AAD24E /* NGMime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD5076F4BAF00AAD24E /* NGMime.framework */; };
+		ADAD4BE3076F4BAF00AAD24E /* NGObjWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD6076F4BAF00AAD24E /* NGObjWeb.framework */; };
+		ADAD4BE4076F4BAF00AAD24E /* NGStreams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD7076F4BAF00AAD24E /* NGStreams.framework */; };
+		ADAD4BE5076F4BAF00AAD24E /* NGXmlRpc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD8076F4BAF00AAD24E /* NGXmlRpc.framework */; };
+		ADAD4BE6076F4BAF00AAD24E /* SaxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BD9076F4BAF00AAD24E /* SaxObjC.framework */; };
+		ADAD4BE7076F4BAF00AAD24E /* SoObjects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BDA076F4BAF00AAD24E /* SoObjects.framework */; };
+		ADAD4BE8076F4BAF00AAD24E /* WebDAV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BDB076F4BAF00AAD24E /* WebDAV.framework */; };
+		ADAD4BE9076F4BAF00AAD24E /* XmlRpc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD4BDC076F4BAF00AAD24E /* XmlRpc.framework */; };
+		ADAD5142076F4BDF00AAD24E /* EOControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAD5141076F4BDF00AAD24E /* EOControl.framework */; };
+		ADCEA3A7061B1D9600361086 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = ADCEA3A1061B1D9500361086 /* COPYING */; };
+		ADCEA3A8061B1D9600361086 /* COPYRIGHT in Resources */ = {isa = PBXBuildFile; fileRef = ADCEA3A2061B1D9500361086 /* COPYRIGHT */; };
+		ADCEA3AB061B1D9600361086 /* README in Resources */ = {isa = PBXBuildFile; fileRef = ADCEA3A5061B1D9500361086 /* README */; };
+		EF2C4DF507CD297E002DCE7C /* NGObjWeb.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD107CD297E002DCE7C /* NGObjWeb.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DF607CD297E002DCE7C /* NGObjWebDecls.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD207CD297E002DCE7C /* NGObjWebDecls.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DF707CD297E002DCE7C /* OWResourceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD307CD297E002DCE7C /* OWResourceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DF807CD297E002DCE7C /* OWResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD407CD297E002DCE7C /* OWResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DF907CD297E002DCE7C /* OWViewRequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD507CD297E002DCE7C /* OWViewRequestHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DFA07CD297E002DCE7C /* WEClientCapabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD607CD297E002DCE7C /* WEClientCapabilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DFB07CD297E002DCE7C /* WOActionResults.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD707CD297E002DCE7C /* WOActionResults.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DFC07CD297E002DCE7C /* WOAdaptor.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD807CD297E002DCE7C /* WOAdaptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DFD07CD297E002DCE7C /* WOApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DD907CD297E002DCE7C /* WOApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DFE07CD297E002DCE7C /* WOAssociation.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DDA07CD297E002DCE7C /* WOAssociation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4DFF07CD297E002DCE7C /* WOComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DDB07CD297E002DCE7C /* WOComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0007CD297E002DCE7C /* WOComponentDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DDC07CD297E002DCE7C /* WOComponentDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0107CD297E002DCE7C /* WOComponentScript.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DDD07CD297E002DCE7C /* WOComponentScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0207CD297E002DCE7C /* WOContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DDE07CD297E002DCE7C /* WOContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0307CD297E002DCE7C /* WOCookie.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DDF07CD297E002DCE7C /* WOCookie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0407CD297E002DCE7C /* WOCoreApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE007CD297E002DCE7C /* WOCoreApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0507CD297E002DCE7C /* WODirectAction.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE107CD297E002DCE7C /* WODirectAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0607CD297E002DCE7C /* WODisplayGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE207CD297E002DCE7C /* WODisplayGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0707CD297E002DCE7C /* WODynamicElement.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE307CD297E002DCE7C /* WODynamicElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0807CD297E002DCE7C /* WOElement.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE407CD297E002DCE7C /* WOElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0907CD297E002DCE7C /* WOElementTrackingContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE507CD297E002DCE7C /* WOElementTrackingContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0A07CD297E002DCE7C /* WOHTTPConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE607CD297E002DCE7C /* WOHTTPConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0B07CD297E002DCE7C /* WOMailDelivery.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE707CD297E002DCE7C /* WOMailDelivery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0C07CD297E002DCE7C /* WOMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE807CD297E002DCE7C /* WOMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0D07CD297E002DCE7C /* WOPageGenerationContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DE907CD297E002DCE7C /* WOPageGenerationContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0E07CD297E002DCE7C /* WOProxyRequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DEA07CD297E002DCE7C /* WOProxyRequestHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E0F07CD297E002DCE7C /* WORequest.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DEB07CD297E002DCE7C /* WORequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1007CD297E002DCE7C /* WORequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DEC07CD297E002DCE7C /* WORequestHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1107CD297E002DCE7C /* WOResourceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DED07CD297E002DCE7C /* WOResourceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1207CD297E002DCE7C /* WOResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DEE07CD297E002DCE7C /* WOResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1307CD297E002DCE7C /* WOSession.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DEF07CD297E002DCE7C /* WOSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1407CD297E002DCE7C /* WOSessionStore.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DF007CD297E002DCE7C /* WOSessionStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1507CD297E002DCE7C /* WOStatisticsStore.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DF107CD297E002DCE7C /* WOStatisticsStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1607CD297E002DCE7C /* WOTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DF207CD297E002DCE7C /* WOTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1707CD297E002DCE7C /* WOTemplateBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DF307CD297E002DCE7C /* WOTemplateBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF2C4E1807CD297E002DCE7C /* WOxElemBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = EF2C4DF407CD297E002DCE7C /* WOxElemBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		08FB77B4FE84181DC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8DC2EF5B0486A6940098B216 /* WebObjects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebObjects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD2C4935060A065600E3ACD3 /* WebObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebObjects.h; sourceTree = "<group>"; };
+		AD58337B0C4F829D00745D88 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		AD58337C0C4F829D00745D88 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		AD58337D0C4F829D00745D88 /* Wrapper.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Wrapper.xcconfig; sourceTree = "<group>"; };
+		ADAD4BD0076F4BAF00AAD24E /* DOM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DOM.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/DOM.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD1076F4BAF00AAD24E /* NGExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGExtensions.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD2076F4BAF00AAD24E /* NGHttp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGHttp.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGHttp.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD3076F4BAF00AAD24E /* NGImap4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGImap4.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGImap4.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD4076F4BAF00AAD24E /* NGMail.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGMail.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGMail.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD5076F4BAF00AAD24E /* NGMime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGMime.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGMime.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD6076F4BAF00AAD24E /* NGObjWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGObjWeb.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGObjWeb.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD7076F4BAF00AAD24E /* NGStreams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGStreams.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGStreams.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD8076F4BAF00AAD24E /* NGXmlRpc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGXmlRpc.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGXmlRpc.framework"; sourceTree = "<absolute>"; };
+		ADAD4BD9076F4BAF00AAD24E /* SaxObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SaxObjC.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SaxObjC.framework"; sourceTree = "<absolute>"; };
+		ADAD4BDA076F4BAF00AAD24E /* SoObjects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SoObjects.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SoObjects.framework"; sourceTree = "<absolute>"; };
+		ADAD4BDB076F4BAF00AAD24E /* WebDAV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebDAV.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/WebDAV.framework"; sourceTree = "<absolute>"; };
+		ADAD4BDC076F4BAF00AAD24E /* XmlRpc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XmlRpc.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/XmlRpc.framework"; sourceTree = "<absolute>"; };
+		ADAD5141076F4BDF00AAD24E /* EOControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EOControl.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/EOControl.framework"; sourceTree = "<absolute>"; };
+		ADCEA3A0061B1D9400361086 /* ChangeLog */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 5; indentWidth = 8; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		ADCEA3A1061B1D9500361086 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		ADCEA3A2061B1D9500361086 /* COPYRIGHT */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = COPYRIGHT; sourceTree = "<group>"; };
+		ADCEA3A3061B1D9500361086 /* INSTALL */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = INSTALL; sourceTree = "<group>"; };
+		ADCEA3A4061B1D9500361086 /* PROJECTLEAD */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = PROJECTLEAD; sourceTree = "<group>"; };
+		ADCEA3A5061B1D9500361086 /* README */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		EF2C4DD107CD297E002DCE7C /* NGObjWeb.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = NGObjWeb.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/NGObjWeb.h"; sourceTree = "<group>"; };
+		EF2C4DD207CD297E002DCE7C /* NGObjWebDecls.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = NGObjWebDecls.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/NGObjWebDecls.h"; sourceTree = "<group>"; };
+		EF2C4DD307CD297E002DCE7C /* OWResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = OWResourceManager.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/OWResourceManager.h"; sourceTree = "<group>"; };
+		EF2C4DD407CD297E002DCE7C /* OWResponder.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = OWResponder.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/OWResponder.h"; sourceTree = "<group>"; };
+		EF2C4DD507CD297E002DCE7C /* OWViewRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = OWViewRequestHandler.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/OWViewRequestHandler.h"; sourceTree = "<group>"; };
+		EF2C4DD607CD297E002DCE7C /* WEClientCapabilities.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WEClientCapabilities.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WEClientCapabilities.h"; sourceTree = "<group>"; };
+		EF2C4DD707CD297E002DCE7C /* WOActionResults.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOActionResults.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOActionResults.h"; sourceTree = "<group>"; };
+		EF2C4DD807CD297E002DCE7C /* WOAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOAdaptor.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOAdaptor.h"; sourceTree = "<group>"; };
+		EF2C4DD907CD297E002DCE7C /* WOApplication.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOApplication.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOApplication.h"; sourceTree = "<group>"; };
+		EF2C4DDA07CD297E002DCE7C /* WOAssociation.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOAssociation.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOAssociation.h"; sourceTree = "<group>"; };
+		EF2C4DDB07CD297E002DCE7C /* WOComponent.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOComponent.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOComponent.h"; sourceTree = "<group>"; };
+		EF2C4DDC07CD297E002DCE7C /* WOComponentDefinition.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOComponentDefinition.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOComponentDefinition.h"; sourceTree = "<group>"; };
+		EF2C4DDD07CD297E002DCE7C /* WOComponentScript.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOComponentScript.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOComponentScript.h"; sourceTree = "<group>"; };
+		EF2C4DDE07CD297E002DCE7C /* WOContext.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOContext.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOContext.h"; sourceTree = "<group>"; };
+		EF2C4DDF07CD297E002DCE7C /* WOCookie.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOCookie.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOCookie.h"; sourceTree = "<group>"; };
+		EF2C4DE007CD297E002DCE7C /* WOCoreApplication.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOCoreApplication.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOCoreApplication.h"; sourceTree = "<group>"; };
+		EF2C4DE107CD297E002DCE7C /* WODirectAction.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WODirectAction.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WODirectAction.h"; sourceTree = "<group>"; };
+		EF2C4DE207CD297E002DCE7C /* WODisplayGroup.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WODisplayGroup.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WODisplayGroup.h"; sourceTree = "<group>"; };
+		EF2C4DE307CD297E002DCE7C /* WODynamicElement.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WODynamicElement.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WODynamicElement.h"; sourceTree = "<group>"; };
+		EF2C4DE407CD297E002DCE7C /* WOElement.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOElement.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOElement.h"; sourceTree = "<group>"; };
+		EF2C4DE507CD297E002DCE7C /* WOElementTrackingContext.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOElementTrackingContext.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOElementTrackingContext.h"; sourceTree = "<group>"; };
+		EF2C4DE607CD297E002DCE7C /* WOHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOHTTPConnection.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOHTTPConnection.h"; sourceTree = "<group>"; };
+		EF2C4DE707CD297E002DCE7C /* WOMailDelivery.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOMailDelivery.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOMailDelivery.h"; sourceTree = "<group>"; };
+		EF2C4DE807CD297E002DCE7C /* WOMessage.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOMessage.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOMessage.h"; sourceTree = "<group>"; };
+		EF2C4DE907CD297E002DCE7C /* WOPageGenerationContext.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOPageGenerationContext.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOPageGenerationContext.h"; sourceTree = "<group>"; };
+		EF2C4DEA07CD297E002DCE7C /* WOProxyRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOProxyRequestHandler.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOProxyRequestHandler.h"; sourceTree = "<group>"; };
+		EF2C4DEB07CD297E002DCE7C /* WORequest.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WORequest.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WORequest.h"; sourceTree = "<group>"; };
+		EF2C4DEC07CD297E002DCE7C /* WORequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WORequestHandler.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WORequestHandler.h"; sourceTree = "<group>"; };
+		EF2C4DED07CD297E002DCE7C /* WOResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOResourceManager.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOResourceManager.h"; sourceTree = "<group>"; };
+		EF2C4DEE07CD297E002DCE7C /* WOResponse.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOResponse.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOResponse.h"; sourceTree = "<group>"; };
+		EF2C4DEF07CD297E002DCE7C /* WOSession.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOSession.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOSession.h"; sourceTree = "<group>"; };
+		EF2C4DF007CD297E002DCE7C /* WOSessionStore.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOSessionStore.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOSessionStore.h"; sourceTree = "<group>"; };
+		EF2C4DF107CD297E002DCE7C /* WOStatisticsStore.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOStatisticsStore.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOStatisticsStore.h"; sourceTree = "<group>"; };
+		EF2C4DF207CD297E002DCE7C /* WOTemplate.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOTemplate.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOTemplate.h"; sourceTree = "<group>"; };
+		EF2C4DF307CD297E002DCE7C /* WOTemplateBuilder.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOTemplateBuilder.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOTemplateBuilder.h"; sourceTree = "<group>"; };
+		EF2C4DF407CD297E002DCE7C /* WOxElemBuilder.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; name = WOxElemBuilder.h; path = "../../sope-appserver/NGObjWeb/NGObjWeb/WOxElemBuilder.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DC2EF560486A6940098B216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAD4BDD076F4BAF00AAD24E /* DOM.framework in Frameworks */,
+				ADAD4BDE076F4BAF00AAD24E /* NGExtensions.framework in Frameworks */,
+				ADAD4BDF076F4BAF00AAD24E /* NGHttp.framework in Frameworks */,
+				ADAD4BE0076F4BAF00AAD24E /* NGImap4.framework in Frameworks */,
+				ADAD4BE1076F4BAF00AAD24E /* NGMail.framework in Frameworks */,
+				ADAD4BE2076F4BAF00AAD24E /* NGMime.framework in Frameworks */,
+				ADAD4BE3076F4BAF00AAD24E /* NGObjWeb.framework in Frameworks */,
+				ADAD4BE4076F4BAF00AAD24E /* NGStreams.framework in Frameworks */,
+				ADAD4BE5076F4BAF00AAD24E /* NGXmlRpc.framework in Frameworks */,
+				ADAD4BE6076F4BAF00AAD24E /* SaxObjC.framework in Frameworks */,
+				ADAD4BE7076F4BAF00AAD24E /* SoObjects.framework in Frameworks */,
+				ADAD4BE8076F4BAF00AAD24E /* WebDAV.framework in Frameworks */,
+				ADAD4BE9076F4BAF00AAD24E /* XmlRpc.framework in Frameworks */,
+				ADAD5142076F4BDF00AAD24E /* EOControl.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5B0486A6940098B216 /* WebObjects.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* WebObjects */ = {
+			isa = PBXGroup;
+			children = (
+				ADCEA3A5061B1D9500361086 /* README */,
+				ADCEA3A3061B1D9500361086 /* INSTALL */,
+				ADCEA3A1061B1D9500361086 /* COPYING */,
+				ADCEA3A2061B1D9500361086 /* COPYRIGHT */,
+				ADCEA3A4061B1D9500361086 /* PROJECTLEAD */,
+				ADCEA3A0061B1D9400361086 /* ChangeLog */,
+				08FB77AEFE84172EC02AAC07 /* Headers */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				089C1665FE841158C02AAC07 /* Resources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+				AD58337A0C4F829D00745D88 /* xcconfig */,
+			);
+			name = WebObjects;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
+				ADAD4B59076F4B4A00AAD24E /* sope-xml */,
+				ADAD4B5C076F4B4E00AAD24E /* sope-core */,
+				ADAD4B5F076F4B5100AAD24E /* sope-appserver */,
+				ADAD4B62076F4B5500AAD24E /* sope-mime */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		089C1665FE841158C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5A0486A6940098B216 /* Info.plist */,
+				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				AD2C4935060A065600E3ACD3 /* WebObjects.h */,
+				EF2C4DD107CD297E002DCE7C /* NGObjWeb.h */,
+				EF2C4DD207CD297E002DCE7C /* NGObjWebDecls.h */,
+				EF2C4DD307CD297E002DCE7C /* OWResourceManager.h */,
+				EF2C4DD407CD297E002DCE7C /* OWResponder.h */,
+				EF2C4DD507CD297E002DCE7C /* OWViewRequestHandler.h */,
+				EF2C4DD607CD297E002DCE7C /* WEClientCapabilities.h */,
+				EF2C4DD707CD297E002DCE7C /* WOActionResults.h */,
+				EF2C4DD807CD297E002DCE7C /* WOAdaptor.h */,
+				EF2C4DD907CD297E002DCE7C /* WOApplication.h */,
+				EF2C4DDA07CD297E002DCE7C /* WOAssociation.h */,
+				EF2C4DDB07CD297E002DCE7C /* WOComponent.h */,
+				EF2C4DDC07CD297E002DCE7C /* WOComponentDefinition.h */,
+				EF2C4DDD07CD297E002DCE7C /* WOComponentScript.h */,
+				EF2C4DDE07CD297E002DCE7C /* WOContext.h */,
+				EF2C4DDF07CD297E002DCE7C /* WOCookie.h */,
+				EF2C4DE007CD297E002DCE7C /* WOCoreApplication.h */,
+				EF2C4DE107CD297E002DCE7C /* WODirectAction.h */,
+				EF2C4DE207CD297E002DCE7C /* WODisplayGroup.h */,
+				EF2C4DE307CD297E002DCE7C /* WODynamicElement.h */,
+				EF2C4DE407CD297E002DCE7C /* WOElement.h */,
+				EF2C4DE507CD297E002DCE7C /* WOElementTrackingContext.h */,
+				EF2C4DE607CD297E002DCE7C /* WOHTTPConnection.h */,
+				EF2C4DE707CD297E002DCE7C /* WOMailDelivery.h */,
+				EF2C4DE807CD297E002DCE7C /* WOMessage.h */,
+				EF2C4DE907CD297E002DCE7C /* WOPageGenerationContext.h */,
+				EF2C4DEA07CD297E002DCE7C /* WOProxyRequestHandler.h */,
+				EF2C4DEB07CD297E002DCE7C /* WORequest.h */,
+				EF2C4DEC07CD297E002DCE7C /* WORequestHandler.h */,
+				EF2C4DED07CD297E002DCE7C /* WOResourceManager.h */,
+				EF2C4DEE07CD297E002DCE7C /* WOResponse.h */,
+				EF2C4DEF07CD297E002DCE7C /* WOSession.h */,
+				EF2C4DF007CD297E002DCE7C /* WOSessionStore.h */,
+				EF2C4DF107CD297E002DCE7C /* WOStatisticsStore.h */,
+				EF2C4DF207CD297E002DCE7C /* WOTemplate.h */,
+				EF2C4DF307CD297E002DCE7C /* WOTemplateBuilder.h */,
+				EF2C4DF407CD297E002DCE7C /* WOxElemBuilder.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77B4FE84181DC02AAC07 /* main.c */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		AD58337A0C4F829D00745D88 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				AD58337B0C4F829D00745D88 /* Common.xcconfig */,
+				AD58337C0C4F829D00745D88 /* Development.xcconfig */,
+				AD58337D0C4F829D00745D88 /* Wrapper.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../xcconfig;
+			sourceTree = SOURCE_ROOT;
+		};
+		ADAD4B59076F4B4A00AAD24E /* sope-xml */ = {
+			isa = PBXGroup;
+			children = (
+				ADAD4BD0076F4BAF00AAD24E /* DOM.framework */,
+				ADAD4BD9076F4BAF00AAD24E /* SaxObjC.framework */,
+				ADAD4BDC076F4BAF00AAD24E /* XmlRpc.framework */,
+			);
+			name = "sope-xml";
+			sourceTree = "<group>";
+		};
+		ADAD4B5C076F4B4E00AAD24E /* sope-core */ = {
+			isa = PBXGroup;
+			children = (
+				ADAD5141076F4BDF00AAD24E /* EOControl.framework */,
+				ADAD4BD1076F4BAF00AAD24E /* NGExtensions.framework */,
+			);
+			name = "sope-core";
+			sourceTree = "<group>";
+		};
+		ADAD4B5F076F4B5100AAD24E /* sope-appserver */ = {
+			isa = PBXGroup;
+			children = (
+				ADAD4BD2076F4BAF00AAD24E /* NGHttp.framework */,
+				ADAD4BD6076F4BAF00AAD24E /* NGObjWeb.framework */,
+				ADAD4BD7076F4BAF00AAD24E /* NGStreams.framework */,
+				ADAD4BD8076F4BAF00AAD24E /* NGXmlRpc.framework */,
+				ADAD4BDA076F4BAF00AAD24E /* SoObjects.framework */,
+				ADAD4BDB076F4BAF00AAD24E /* WebDAV.framework */,
+			);
+			name = "sope-appserver";
+			sourceTree = "<group>";
+		};
+		ADAD4B62076F4B5500AAD24E /* sope-mime */ = {
+			isa = PBXGroup;
+			children = (
+				ADAD4BD3076F4BAF00AAD24E /* NGImap4.framework */,
+				ADAD4BD4076F4BAF00AAD24E /* NGMail.framework */,
+				ADAD4BD5076F4BAF00AAD24E /* NGMime.framework */,
+			);
+			name = "sope-mime";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8DC2EF500486A6940098B216 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD2C4937060A065600E3ACD3 /* WebObjects.h in Headers */,
+				EF2C4DF507CD297E002DCE7C /* NGObjWeb.h in Headers */,
+				EF2C4DF607CD297E002DCE7C /* NGObjWebDecls.h in Headers */,
+				EF2C4DF707CD297E002DCE7C /* OWResourceManager.h in Headers */,
+				EF2C4DF807CD297E002DCE7C /* OWResponder.h in Headers */,
+				EF2C4DF907CD297E002DCE7C /* OWViewRequestHandler.h in Headers */,
+				EF2C4DFA07CD297E002DCE7C /* WEClientCapabilities.h in Headers */,
+				EF2C4DFB07CD297E002DCE7C /* WOActionResults.h in Headers */,
+				EF2C4DFC07CD297E002DCE7C /* WOAdaptor.h in Headers */,
+				EF2C4DFD07CD297E002DCE7C /* WOApplication.h in Headers */,
+				EF2C4DFE07CD297E002DCE7C /* WOAssociation.h in Headers */,
+				EF2C4DFF07CD297E002DCE7C /* WOComponent.h in Headers */,
+				EF2C4E0007CD297E002DCE7C /* WOComponentDefinition.h in Headers */,
+				EF2C4E0107CD297E002DCE7C /* WOComponentScript.h in Headers */,
+				EF2C4E0207CD297E002DCE7C /* WOContext.h in Headers */,
+				EF2C4E0307CD297E002DCE7C /* WOCookie.h in Headers */,
+				EF2C4E0407CD297E002DCE7C /* WOCoreApplication.h in Headers */,
+				EF2C4E0507CD297E002DCE7C /* WODirectAction.h in Headers */,
+				EF2C4E0607CD297E002DCE7C /* WODisplayGroup.h in Headers */,
+				EF2C4E0707CD297E002DCE7C /* WODynamicElement.h in Headers */,
+				EF2C4E0807CD297E002DCE7C /* WOElement.h in Headers */,
+				EF2C4E0907CD297E002DCE7C /* WOElementTrackingContext.h in Headers */,
+				EF2C4E0A07CD297E002DCE7C /* WOHTTPConnection.h in Headers */,
+				EF2C4E0B07CD297E002DCE7C /* WOMailDelivery.h in Headers */,
+				EF2C4E0C07CD297E002DCE7C /* WOMessage.h in Headers */,
+				EF2C4E0D07CD297E002DCE7C /* WOPageGenerationContext.h in Headers */,
+				EF2C4E0E07CD297E002DCE7C /* WOProxyRequestHandler.h in Headers */,
+				EF2C4E0F07CD297E002DCE7C /* WORequest.h in Headers */,
+				EF2C4E1007CD297E002DCE7C /* WORequestHandler.h in Headers */,
+				EF2C4E1107CD297E002DCE7C /* WOResourceManager.h in Headers */,
+				EF2C4E1207CD297E002DCE7C /* WOResponse.h in Headers */,
+				EF2C4E1307CD297E002DCE7C /* WOSession.h in Headers */,
+				EF2C4E1407CD297E002DCE7C /* WOSessionStore.h in Headers */,
+				EF2C4E1507CD297E002DCE7C /* WOStatisticsStore.h in Headers */,
+				EF2C4E1607CD297E002DCE7C /* WOTemplate.h in Headers */,
+				EF2C4E1707CD297E002DCE7C /* WOTemplateBuilder.h in Headers */,
+				EF2C4E1807CD297E002DCE7C /* WOxElemBuilder.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8DC2EF4F0486A6940098B216 /* WebObjects (Umbrella) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA07BBA0857509900993825 /* Build configuration list for PBXNativeTarget "WebObjects (Umbrella)" */;
+			buildPhases = (
+				8DC2EF500486A6940098B216 /* Headers */,
+				8DC2EF520486A6940098B216 /* Resources */,
+				8DC2EF540486A6940098B216 /* Sources */,
+				8DC2EF560486A6940098B216 /* Frameworks */,
+				8DC2EF580486A6940098B216 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WebObjects (Umbrella)";
+			productInstallPath = "$(HOME)/Library/Frameworks";
+			productName = WebObjects;
+			productReference = 8DC2EF5B0486A6940098B216 /* WebObjects.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA07BBE0857509900993825 /* Build configuration list for PBXProject "WebObjects" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* WebObjects */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			targets = (
+				8DC2EF4F0486A6940098B216 /* WebObjects (Umbrella) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DC2EF520486A6940098B216 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
+				ADCEA3A7061B1D9600361086 /* COPYING in Resources */,
+				ADCEA3A8061B1D9600361086 /* COPYRIGHT in Resources */,
+				ADCEA3AB061B1D9600361086 /* README in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		8DC2EF580486A6940098B216 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DC2EF540486A6940098B216 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC2EF550486A6940098B216 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C1667FE841158C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ADA07BBB0857509900993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD58337C0C4F829D00745D88 /* Development.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).0";
+				DYLIB_CURRENT_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).1";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Info.plist;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-seg1addr",
+					0xC6FF0000,
+					"-sub_umbrella",
+					SaxObjC,
+					"-sub_umbrella",
+					DOM,
+					"-sub_umbrella",
+					XmlRpc,
+					"-sub_umbrella",
+					EOControl,
+					"-sub_umbrella",
+					NGExtensions,
+					"-sub_umbrella",
+					NGHttp,
+					"-sub_umbrella",
+					NGObjWeb,
+					"-sub_umbrella",
+					NGStreams,
+					"-sub_umbrella",
+					NGXmlRpc,
+					"-sub_umbrella",
+					SoObjects,
+					"-sub_umbrella",
+					WebDAV,
+					"-sub_umbrella",
+					NGImap4,
+					"-sub_umbrella",
+					NGMail,
+					"-sub_umbrella",
+					NGMime,
+				);
+				PRODUCT_NAME = WebObjects;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Development;
+		};
+		ADA07BBC0857509900993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD58337D0C4F829D00745D88 /* Wrapper.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).0";
+				DYLIB_CURRENT_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).1";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Info.plist;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-seg1addr",
+					0xC6FF0000,
+					"-sub_umbrella",
+					SaxObjC,
+					"-sub_umbrella",
+					DOM,
+					"-sub_umbrella",
+					XmlRpc,
+					"-sub_umbrella",
+					EOControl,
+					"-sub_umbrella",
+					NGExtensions,
+					"-sub_umbrella",
+					NGHttp,
+					"-sub_umbrella",
+					NGObjWeb,
+					"-sub_umbrella",
+					NGStreams,
+					"-sub_umbrella",
+					NGXmlRpc,
+					"-sub_umbrella",
+					SoObjects,
+					"-sub_umbrella",
+					WebDAV,
+					"-sub_umbrella",
+					NGImap4,
+					"-sub_umbrella",
+					NGMail,
+					"-sub_umbrella",
+					NGMime,
+				);
+				PRODUCT_NAME = WebObjects;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Wrapper;
+		};
+		ADA07BBD0857509900993825 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+		ADA07BBF0857509900993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA07BC00857509900993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+		ADA07BC10857509900993825 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA07BBA0857509900993825 /* Build configuration list for PBXNativeTarget "WebObjects (Umbrella)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07BBB0857509900993825 /* Development */,
+				ADA07BBC0857509900993825 /* Wrapper */,
+				ADA07BBD0857509900993825 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		ADA07BBE0857509900993825 /* Build configuration list for PBXProject "WebObjects" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07BBF0857509900993825 /* Development */,
+				ADA07BC00857509900993825 /* Wrapper */,
+				ADA07BC10857509900993825 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

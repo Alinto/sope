@@ -1,0 +1,25 @@
+{
+    details = {
+	HDT = {abbrev = HDT; isDST = 1; offset = "-9:30:00"; };
+	HST = {abbrev = HST; isDST = 0; offset = "-10:30:00"; };
+	HST2 = {abbrev = HST; isDST = 0; offset = "-10:00:00"; };
+	HWT = {abbrev = HWT; isDST = 1; offset = "-9:30:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Mar 31 14:30:00 1918 GMT";
+	    endDate = "Sun Oct 26 13:30:00 1919 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/14:30:00"; detail = HDT; },
+		{ date = "October/last Sunday/13:30:00"; detail = HST; }
+	    );
+	}
+    );
+    transitions = (
+	{ date = "Sun Apr 30 14:30:00 1933 GMT"; detail = HDT; },
+	{ date = "Mon May 01 13:30:00 1933 GMT"; detail = HST; },
+	{ date = "Mon Feb 09 14:30:00 1942 GMT"; detail = HWT; },
+	{ date = "Sun Sep 30 13:30:00 1945 GMT"; detail = HST; },
+	{ date = "Sun Jun 08 14:30:00 1947 GMT"; detail = HST2; }
+    );
+}

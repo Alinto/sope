@@ -1,0 +1,177 @@
+{
+    details = {
+	CDT = {abbrev = CDT; isDST = 1; offset = "+10:30:00"; };
+	CST = {abbrev = CST; isDST = 0; offset = "+9:30:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sat Mar 03 18:30:00 1973 GMT";
+	    endDate = "Sat Oct 25 18:30:00 1980 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/18:30:00"; detail = CST; },
+		{ date = "October/last Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 06 18:30:00 1982 GMT";
+	    endDate = "Sat Oct 26 18:30:00 1985 GMT";
+	    transitions = (
+		{ date = "March/first Saturday/18:30:00"; detail = CST; },
+		{ date = "October/last Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 17 18:30:00 1990 GMT";
+	    endDate = "Sat Oct 19 18:30:00 1991 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 20 18:30:00 1993 GMT";
+	    endDate = "Sat Oct 22 18:30:00 1994 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/fourth Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 18 18:30:00 1995 GMT";
+	    endDate = "Sat Oct 18 18:30:00 1997 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 17 18:30:00 2001 GMT";
+	    endDate = "Sat Oct 18 18:30:00 2003 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 20 18:30:00 2004 GMT";
+	    endDate = "Sat Oct 22 18:30:00 2005 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/fourth Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 18 18:30:00 2006 GMT";
+	    endDate = "Sat Oct 18 18:30:00 2008 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 20 18:30:00 2010 GMT";
+	    endDate = "Sat Oct 22 18:30:00 2011 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/fourth Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 17 18:30:00 2012 GMT";
+	    endDate = "Sat Oct 18 18:30:00 2014 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 17 18:30:00 2018 GMT";
+	    endDate = "Sat Oct 19 18:30:00 2019 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 20 18:30:00 2021 GMT";
+	    endDate = "Sat Oct 22 18:30:00 2022 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/fourth Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 18 18:30:00 2023 GMT";
+	    endDate = "Sat Oct 18 18:30:00 2025 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 17 18:30:00 2029 GMT";
+	    endDate = "Sat Oct 18 18:30:00 2031 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 20 18:30:00 2032 GMT";
+	    endDate = "Sat Oct 22 18:30:00 2033 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/fourth Saturday/18:30:00"; detail = CDT; }
+	    );
+	},
+	{
+	    startDate = "Sat Mar 18 18:30:00 2034 GMT";
+	    endDate = "Sat Oct 18 18:30:00 2036 GMT";
+	    transitions = (
+		{ date = "March/third Saturday/18:30:00"; detail = CST; },
+		{ date = "October/third Saturday/18:30:00"; detail = CDT; }
+	    );
+	}
+    );
+    transitions = (
+	{ date = "Sat Oct 30 18:30:00 1971 GMT"; detail = CDT; },
+	{ date = "Sat Feb 26 18:30:00 1972 GMT"; detail = CST; },
+	{ date = "Sat Oct 28 18:30:00 1972 GMT"; detail = CDT; },
+	{ date = "Sat Feb 28 18:30:00 1981 GMT"; detail = CST; },
+	{ date = "Sat Oct 24 18:30:00 1981 GMT"; detail = CDT; },
+	{ date = "Sat Mar 01 18:30:00 1986 GMT"; detail = CST; },
+	{ date = "Sat Oct 18 18:30:00 1986 GMT"; detail = CDT; },
+	{ date = "Sat Mar 14 18:30:00 1987 GMT"; detail = CST; },
+	{ date = "Sat Oct 17 18:30:00 1987 GMT"; detail = CDT; },
+	{ date = "Sat Mar 19 18:30:00 1988 GMT"; detail = CST; },
+	{ date = "Sat Oct 22 18:30:00 1988 GMT"; detail = CDT; },
+	{ date = "Sat Mar 18 18:30:00 1989 GMT"; detail = CST; },
+	{ date = "Sat Oct 21 18:30:00 1989 GMT"; detail = CDT; },
+	{ date = "Sat Mar 14 18:30:00 1992 GMT"; detail = CST; },
+	{ date = "Sat Oct 17 18:30:00 1992 GMT"; detail = CDT; },
+	{ date = "Sat Mar 14 18:30:00 1998 GMT"; detail = CST; },
+	{ date = "Sat Oct 17 18:30:00 1998 GMT"; detail = CDT; },
+	{ date = "Sat Mar 20 18:30:00 1999 GMT"; detail = CST; },
+	{ date = "Sat Oct 23 18:30:00 1999 GMT"; detail = CDT; },
+	{ date = "Sat Mar 18 18:30:00 2000 GMT"; detail = CST; },
+	{ date = "Sat Oct 21 18:30:00 2000 GMT"; detail = CDT; },
+	{ date = "Sat Mar 14 18:30:00 2009 GMT"; detail = CST; },
+	{ date = "Sat Oct 17 18:30:00 2009 GMT"; detail = CDT; },
+	{ date = "Sat Mar 14 18:30:00 2015 GMT"; detail = CST; },
+	{ date = "Sat Oct 17 18:30:00 2015 GMT"; detail = CDT; },
+	{ date = "Sat Mar 19 18:30:00 2016 GMT"; detail = CST; },
+	{ date = "Sat Oct 22 18:30:00 2016 GMT"; detail = CDT; },
+	{ date = "Sat Mar 18 18:30:00 2017 GMT"; detail = CST; },
+	{ date = "Sat Oct 21 18:30:00 2017 GMT"; detail = CDT; },
+	{ date = "Sat Mar 14 18:30:00 2020 GMT"; detail = CST; },
+	{ date = "Sat Oct 17 18:30:00 2020 GMT"; detail = CDT; },
+	{ date = "Sat Mar 14 18:30:00 2026 GMT"; detail = CST; },
+	{ date = "Sat Oct 17 18:30:00 2026 GMT"; detail = CDT; },
+	{ date = "Sat Mar 20 18:30:00 2027 GMT"; detail = CST; },
+	{ date = "Sat Oct 23 18:30:00 2027 GMT"; detail = CDT; },
+	{ date = "Sat Mar 18 18:30:00 2028 GMT"; detail = CST; },
+	{ date = "Sat Oct 21 18:30:00 2028 GMT"; detail = CDT; },
+	{ date = "Sat Mar 14 18:30:00 2037 GMT"; detail = CST; },
+	{ date = "Sat Oct 17 18:30:00 2037 GMT"; detail = CDT; }
+    );
+}

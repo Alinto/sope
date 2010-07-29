@@ -1,0 +1,48 @@
+2005-03-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Project Templates/SOPE/Web Application/README: updated to reflect
+	  Xcode 1.5 (reported by Philip Moetteli, thanks!)
+
+2005-02-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README: updated with a detailed NOTE to prevent confusion
+
+	* Project Templates/SOPE/Web Application/GNUmakefile: slightly improved
+
+2004-12-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Project Templates/SOPE/Web Application/*: fixed various replacement
+	  and encoding related issues with project template
+	 
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Project Templates/SOPE/Web Application/*: updated for SOPE:X 2.x.
+
+2004-08-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* README: fixed location 1), reported by
+	  Sungjin Chun <chunsj@embian.com>
+
+2004-05-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Project Templates/SOPE/Web Application/GNUmakefile: bugfix
+
+	* Project Templates/SOPE/Web Application/{COPYING, COPYRIGHT, TODO,
+	  NOTES, PROJECTLEAD, Version}: added templates which are
+	  common in OGo
+
+	* Project Templates/SOPE/Web Application/WebApp.xcode: added new
+	  files, renamed "GNUstep Makefiles" as "Makefiles"
+
+2004-04-09  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* Project Templates/SOPE/Web Application/GNUmakefile*: added for
+	  GNUstep. It's now possible to easily deploy SOPE:X applications
+	  on non-Mac OS X targets.
+
+	* Project Templates/SOPE/Web Application/WebApp_main.m: provided
+	  definition for SOPEXMain if WITHOUT_SOPEX is defined. This is
+	  done by the GNUmakefile.preamble if the build is not done
+	  on Mac OS X.
+
+	* ChangeLog: created.

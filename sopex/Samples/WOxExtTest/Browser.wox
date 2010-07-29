@@ -1,0 +1,14 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <var:we-browser list="rootFolder" item="item" sublist="dirContents"
+                  currentPath="currentPath"
+                  const:border="1" bgColor="bgColor" 
+                  const:columnWidth="200" const:height="100">
+     <a var:action="clicked"><var:if condition="currentIsDirectory"><img var:filename="currentImage" border="0" var:alt="item"/></var:if><var:string value="item"/></a>
+  </var:we-browser>
+
+</var:component>

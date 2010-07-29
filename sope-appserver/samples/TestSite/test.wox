@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding">
+  <body>
+    <h3>Hello World</h3>
+    
+    <small>
+      I'm Component: <var:string value="self"/><br/>
+      On Client: <var:string value="clientObject"/><br/>
+      PathInfo: <var:string value="context.pathInfo"/>
+    </small>
+    
+    <h4>Embedding Components</h4>
+    <p>
+      You can embed components using the usual WOX "&lt;var:component&gt;"
+      tag. As usual subcomponents are looked up using the master components
+      WOResourceManager which in turn will usually perform a SOPE lookup
+      to find the component.
+    </p>
+    
+    <table border="1" bgcolor="#EFEFEF">
+      <tr><th>Embed</th></tr>
+      <tr><td><var:component className="embed.wox"/></td></tr>
+    </table>
+    
+    <h4>Querying Images</h4>
+    <p>
+      You should access images using the "src" attribute, but you can
+      query them using "filename". So what is the difference ? 
+      <br/>
+      Images selected using "filename" delay the resolution of the
+      query to the runtime. They construct a URI like "component/image.gif",
+      so the component will be asked during the actual image query. The
+      component then will locate the image using it's WOResourceManager.
+      <br />
+      In contrast, images selected using "src" defer the selection to the
+      browser, that is, the browser will calculate the image path based on
+      it's query URL. Of course the URL calculated by the client can still
+      be dynamic !
+    </p>
+    <p>
+      accept.gif via filename: <img filename="accept.gif"/> 
+      <br/>
+      accept.gif via src: <img src="accept.gif"/>
+    </p>
+
+    <hr />
+    <a href="test.wox"  >test.wox</a>,
+    <a href="index.html">index.html</a>,
+    <a href="embed.wox" >embed.wox</a>,
+    <a href="accept.gif">accept.gif</a>,
+    <a href="subdir/"   >subdir/</a>
+  </body>
+</html>

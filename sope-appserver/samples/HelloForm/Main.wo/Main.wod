@@ -1,0 +1,17 @@
+// bind template to controller
+
+Form: WOForm {
+  action = self;
+}
+
+TextField: WOTextField {
+  value = item;
+}
+
+Submit: WOSubmitButton {
+  value = "OK";
+}
+
+CSS: WOResourceURL {
+  filename = "Main.css";
+}

@@ -1,0 +1,402 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ADA076560857282D00993825 /* Build configuration list for PBXAggregateTarget "Wrapper Contents" */;
+			buildPhases = (
+			);
+			dependencies = (
+				ADABC8B507004F8600B582C7 /* PBXTargetDependency */,
+				ADFE531706E23396006628C4 /* PBXTargetDependency */,
+				ADFE531506E23396006628C4 /* PBXTargetDependency */,
+			);
+			name = "Wrapper Contents";
+			productName = "Wrapper Contents";
+		};
+		ADDF479906DA58D700C4E7F8 /* all */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ADA0765A0857282D00993825 /* Build configuration list for PBXAggregateTarget "all" */;
+			buildPhases = (
+			);
+			dependencies = (
+				ADDF479B06DA58DD00C4E7F8 /* PBXTargetDependency */,
+			);
+			name = all;
+			productName = all;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		ADABC8B407004F8600B582C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE530506E23356006628C4 /* SaxObjC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADABC83007003DAB00B582C7;
+			remoteInfo = all;
+		};
+		ADDF479A06DA58DD00C4E7F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADDF476A06DA572500C4E7F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADDF478006DA57DA00C4E7F8;
+			remoteInfo = "Wrapper Contents";
+		};
+		ADE6FD68081E485000F68573 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE530506E23356006628C4 /* SaxObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AD8573DB07EF567800D5FC5B;
+			remoteInfo = saxxml;
+		};
+		ADFE531406E23396006628C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE531006E2338B006628C4 /* XmlRpc.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AD0133B506DE7DB0000910D8;
+			remoteInfo = XmlRpc;
+		};
+		ADFE531606E23396006628C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE530C06E23378006628C4 /* DOM.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AD01311E06DE794E000910D8;
+			remoteInfo = DOM;
+		};
+		ADFE531806E2339E006628C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE531006E2338B006628C4 /* XmlRpc.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AD0133B606DE7DB0000910D8;
+			remoteInfo = XmlRpc;
+		};
+		ADFE531906E2339E006628C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE530506E23356006628C4 /* SaxObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADDF54A906DE727A00C4E7F8;
+			remoteInfo = SaxObjC;
+		};
+		ADFE531A06E2339E006628C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE530C06E23378006628C4 /* DOM.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AD01311F06DE794E000910D8;
+			remoteInfo = DOM;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ADDF476E06DA575700C4E7F8 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 8; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		ADDF476F06DA575700C4E7F8 /* common.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = common.make; sourceTree = "<group>"; tabWidth = 8; };
+		ADDF477006DA575700C4E7F8 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		ADDF477106DA575700C4E7F8 /* COPYRIGHT */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYRIGHT; sourceTree = "<group>"; };
+		ADDF477206DA575700C4E7F8 /* dummy.c */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.c; path = dummy.c; sourceTree = "<group>"; };
+		ADDF477306DA575700C4E7F8 /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADDF477406DA575700C4E7F8 /* PROJECTLEAD */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = PROJECTLEAD; sourceTree = "<group>"; };
+		ADDF477506DA575700C4E7F8 /* README */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		ADDF477606DA575700C4E7F8 /* README-OSX.txt */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = "README-OSX.txt"; sourceTree = "<group>"; };
+		ADDF477706DA575700C4E7F8 /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+		ADFE530506E23356006628C4 /* SaxObjC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SaxObjC.xcodeproj; path = SaxObjC/SaxObjC.xcodeproj; sourceTree = "<group>"; };
+		ADFE530C06E23378006628C4 /* DOM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DOM.xcodeproj; path = DOM/DOM.xcodeproj; sourceTree = "<group>"; };
+		ADFE531006E2338B006628C4 /* XmlRpc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XmlRpc.xcodeproj; path = XmlRpc/XmlRpc.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		ADDF476606DA572500C4E7F8 = {
+			isa = PBXGroup;
+			children = (
+				ADDF477506DA575700C4E7F8 /* README */,
+				ADDF477606DA575700C4E7F8 /* README-OSX.txt */,
+				ADDF477006DA575700C4E7F8 /* COPYING */,
+				ADDF477106DA575700C4E7F8 /* COPYRIGHT */,
+				ADDF477406DA575700C4E7F8 /* PROJECTLEAD */,
+				ADDF476E06DA575700C4E7F8 /* ChangeLog */,
+				ADDF477706DA575700C4E7F8 /* Version */,
+				ADDF477D06DA577400C4E7F8 /* Makefiles */,
+				ADDF477A06DA576E00C4E7F8 /* Classes */,
+				ADDF478306DA57F500C4E7F8 /* Projects */,
+			);
+			sourceTree = "<group>";
+		};
+		ADDF477A06DA576E00C4E7F8 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ADDF477206DA575700C4E7F8 /* dummy.c */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		ADDF477D06DA577400C4E7F8 /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADDF477306DA575700C4E7F8 /* GNUmakefile */,
+				ADDF476F06DA575700C4E7F8 /* common.make */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADDF478306DA57F500C4E7F8 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE530506E23356006628C4 /* SaxObjC.xcodeproj */,
+				ADFE530C06E23378006628C4 /* DOM.xcodeproj */,
+				ADFE531006E2338B006628C4 /* XmlRpc.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+		ADFE530606E23356006628C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE530B06E2336C006628C4 /* SaxObjC.framework */,
+				ADE6FD65081E484F00F68573 /* saxxml */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADFE530D06E23378006628C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE530F06E23379006628C4 /* DOM.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADFE531106E2338B006628C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE531306E2338C006628C4 /* XmlRpc.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		ADDF476A06DA572500C4E7F8 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA0765E0857282D00993825 /* Build configuration list for PBXProject "sope-xml" */;
+			hasScannedForEncodings = 0;
+			mainGroup = ADDF476606DA572500C4E7F8;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = ADFE530D06E23378006628C4 /* Products */;
+					ProjectRef = ADFE530C06E23378006628C4 /* DOM.xcodeproj */;
+				},
+				{
+					ProductGroup = ADFE530606E23356006628C4 /* Products */;
+					ProjectRef = ADFE530506E23356006628C4 /* SaxObjC.xcodeproj */;
+				},
+				{
+					ProductGroup = ADFE531106E2338B006628C4 /* Products */;
+					ProjectRef = ADFE531006E2338B006628C4 /* XmlRpc.xcodeproj */;
+				},
+			);
+			targets = (
+				ADDF479906DA58D700C4E7F8 /* all */,
+				ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		ADE6FD65081E484F00F68573 /* saxxml */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = saxxml;
+			remoteRef = ADE6FD68081E485000F68573 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADFE530B06E2336C006628C4 /* SaxObjC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SaxObjC.framework;
+			remoteRef = ADFE531906E2339E006628C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADFE530F06E23379006628C4 /* DOM.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DOM.framework;
+			remoteRef = ADFE531A06E2339E006628C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADFE531306E2338C006628C4 /* XmlRpc.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XmlRpc.framework;
+			remoteRef = ADFE531806E2339E006628C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXTargetDependency section */
+		ADABC8B507004F8600B582C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "all (from SaxObjC.xcodeproj)";
+			targetProxy = ADABC8B407004F8600B582C7 /* PBXContainerItemProxy */;
+		};
+		ADDF479B06DA58DD00C4E7F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */;
+			targetProxy = ADDF479A06DA58DD00C4E7F8 /* PBXContainerItemProxy */;
+		};
+		ADFE531506E23396006628C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "XmlRpc (from XmlRpc.xcodeproj)";
+			targetProxy = ADFE531406E23396006628C4 /* PBXContainerItemProxy */;
+		};
+		ADFE531706E23396006628C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DOM (from DOM.xcodeproj)";
+			targetProxy = ADFE531606E23396006628C4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ADA076570857282D00993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = "Wrapper Contents";
+			};
+			name = Development;
+		};
+		ADA076580857282D00993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				DYLIB_INSTALL_NAME_BASE = "@executable_path/../Frameworks/";
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+				);
+				PRODUCT_NAME = "Wrapper Contents";
+				SKIP_INSTALL = YES;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				UNSTRIPPED_PRODUCT = NO;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA0765B0857282D00993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = all;
+			};
+			name = Development;
+		};
+		ADA0765C0857282D00993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				DYLIB_INSTALL_NAME_BASE = "@executable_path/../Frameworks/";
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+				);
+				PRODUCT_NAME = all;
+				SKIP_INSTALL = YES;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				UNSTRIPPED_PRODUCT = NO;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA0765F0857282D00993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA076600857282D00993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA076560857282D00993825 /* Build configuration list for PBXAggregateTarget "Wrapper Contents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA076570857282D00993825 /* Development */,
+				ADA076580857282D00993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA0765A0857282D00993825 /* Build configuration list for PBXAggregateTarget "all" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA0765B0857282D00993825 /* Development */,
+				ADA0765C0857282D00993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA0765E0857282D00993825 /* Build configuration list for PBXProject "sope-xml" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA0765F0857282D00993825 /* Development */,
+				ADA076600857282D00993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADDF476A06DA572500C4E7F8 /* Project object */;
+}

@@ -1,0 +1,654 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		014CEA420018CDE011CA2923 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ZERO_LINK = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		014CEA430018CDE011CA2923 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ZERO_LINK = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+//010
+//011
+//012
+//013
+//014
+//080
+//081
+//082
+//083
+//084
+		089C1669FE841209C02AAC07 = {
+			buildSettings = {
+			};
+			buildStyles = (
+				014CEA420018CDE011CA2923,
+				014CEA430018CDE011CA2923,
+			);
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = 089C166AFE841209C02AAC07;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = ADD65A3406DA2993007161CA;
+					ProjectRef = ADD659C006DA295B007161CA;
+				},
+			);
+			targets = (
+				8D5B49AC048680CD000E48DA,
+			);
+		};
+		089C166AFE841209C02AAC07 = {
+			children = (
+				ADBE0BFF06D78ED1007C5267,
+				ADBE0BF306D78ED1007C5267,
+				ADBE0BF406D78ED1007C5267,
+				ADBE0C0606D78ED2007C5267,
+				ADBE0BF106D78ED1007C5267,
+				ADBE0C0806D78ED2007C5267,
+				ADBE0CB306D79080007C5267,
+				08FB77AFFE84173DC02AAC07,
+				ADBE0CB606D79094007C5267,
+				089C167CFE841241C02AAC07,
+				089C1671FE841209C02AAC07,
+				19C28FB8FE9D52D311CA2CBB,
+			);
+			isa = PBXGroup;
+			name = iCalSaxDriver;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 = {
+			children = (
+				ADBE0BEE06D78E75007C5267,
+				ADBE0BEC06D78E51007C5267,
+			);
+			isa = PBXGroup;
+			name = Frameworks;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 = {
+			children = (
+				ADBE0BF806D78ED1007C5267,
+				ADBE0BF006D78ED1007C5267,
+			);
+			isa = PBXGroup;
+			name = Resources;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 = {
+			children = (
+				ADBE0BF206D78ED1007C5267,
+				ADBE0C0706D78ED2007C5267,
+				ADBE0BF906D78ED1007C5267,
+				ADBE0BFA06D78ED1007C5267,
+				ADBE0BFB06D78ED1007C5267,
+				ADBE0BFC06D78ED1007C5267,
+				ADBE0BFD06D78ED1007C5267,
+				ADBE0BFE06D78ED1007C5267,
+			);
+			isa = PBXGroup;
+			name = Classes;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//080
+//081
+//082
+//083
+//084
+//190
+//191
+//192
+//193
+//194
+		19C28FB8FE9D52D311CA2CBB = {
+			children = (
+				ADD659C006DA295B007161CA,
+				8D5B49B6048680CD000E48DA,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//190
+//191
+//192
+//193
+//194
+//8D0
+//8D1
+//8D2
+//8D3
+//8D4
+		8D5B49AC048680CD000E48DA = {
+			buildPhases = (
+				8D5B49AF048680CD000E48DA,
+				8D5B49B1048680CD000E48DA,
+				8D5B49B3048680CD000E48DA,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_FILE = "iCalSaxDriver-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-4.3";
+				OTHER_CFLAGS = "-DXCODE_BUILD=1";
+				PRODUCT_NAME = iCalSaxDriver;
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = sax;
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = iCalSaxDriver;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = iCalSaxDriver;
+			productReference = 8D5B49B6048680CD000E48DA;
+			productType = "com.apple.product-type.bundle";
+		};
+		8D5B49AF048680CD000E48DA = {
+			buildActionMask = 2147483647;
+			files = (
+				ADBE0C0906D78ED2007C5267,
+				ADBE0C0A06D78ED2007C5267,
+				ADBE0C0B06D78ED2007C5267,
+				ADBE0C0C06D78ED2007C5267,
+				ADBE0C0D06D78ED2007C5267,
+				ADBE0C0E06D78ED2007C5267,
+				ADBE0C0F06D78ED2007C5267,
+				ADBE0C1006D78ED2007C5267,
+				ADBE0C1106D78ED2007C5267,
+				ADBE0C1206D78ED2007C5267,
+				ADBE0C1406D78ED2007C5267,
+				ADBE0C1606D78ED2007C5267,
+				ADBE0C1806D78ED2007C5267,
+				ADBE0C1F06D78ED2007C5267,
+				ADBE0C2006D78ED2007C5267,
+				ADBE0C2106D78ED2007C5267,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D5B49B1048680CD000E48DA = {
+			buildActionMask = 2147483647;
+			files = (
+				ADBE0C1306D78ED2007C5267,
+				ADBE0C1506D78ED2007C5267,
+				ADBE0C1706D78ED2007C5267,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D5B49B3048680CD000E48DA = {
+			buildActionMask = 2147483647;
+			files = (
+				ADBE0BEF06D78E75007C5267,
+				ADBE0BED06D78E51007C5267,
+				ADD65A3706DA29B1007161CA,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D5B49B6048680CD000E48DA = {
+			explicitFileType = wrapper.cfbundle;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = iCalSaxDriver.sax;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+//8D0
+//8D1
+//8D2
+//8D3
+//8D4
+//AD0
+//AD1
+//AD2
+//AD3
+//AD4
+		ADBE0BEC06D78E51007C5267 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = SaxObjC.framework;
+			path = /Library/Frameworks/SaxObjC.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		ADBE0BED06D78E51007C5267 = {
+			fileRef = ADBE0BEC06D78E51007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0BEE06D78E75007C5267 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = Foundation.framework;
+			path = /System/Library/Frameworks/Foundation.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		ADBE0BEF06D78E75007C5267 = {
+			fileRef = ADBE0BEE06D78E75007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0BF006D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist;
+			path = "bundle-info.plist";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BF106D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = ChangeLog;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BF206D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = common.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BF306D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = COPYING;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BF406D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = COPYRIGHT;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BF506D78ED1007C5267 = {
+			explicitFileType = sourcecode.make;
+			fileEncoding = 5;
+			indentWidth = 8;
+			isa = PBXFileReference;
+			path = GNUmakefile;
+			refType = 4;
+			sourceTree = "<group>";
+			tabWidth = 8;
+			usesTabs = 1;
+		};
+		ADBE0BF606D78ED1007C5267 = {
+			explicitFileType = sourcecode.make;
+			fileEncoding = 5;
+			indentWidth = 8;
+			isa = PBXFileReference;
+			path = GNUmakefile.postamble;
+			refType = 4;
+			sourceTree = "<group>";
+			tabWidth = 8;
+			usesTabs = 1;
+		};
+		ADBE0BF706D78ED1007C5267 = {
+			explicitFileType = sourcecode.make;
+			fileEncoding = 5;
+			indentWidth = 8;
+			isa = PBXFileReference;
+			path = GNUmakefile.preamble;
+			refType = 4;
+			sourceTree = "<group>";
+			tabWidth = 8;
+			usesTabs = 1;
+		};
+		ADBE0BF806D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text.xml;
+			path = "iCalSaxDriver-Info.plist";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BF906D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = ICalSaxParser.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BFA06D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = ICalSaxParser.m;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BFB06D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = "NSCalendarDate+ICal.h";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BFC06D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = "NSCalendarDate+ICal.m";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BFD06D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = "NSString+ICal.h";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BFE06D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			path = "NSString+ICal.m";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0BFF06D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = README;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0006D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = test1.ics;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0106D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = test2.vfb;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0206D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = test3.ics;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0306D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = test4.ics;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0406D78ED1007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = "test5-entourage.ics";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0506D78ED2007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = "test6-appleical.ics";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0606D78ED2007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = TODO;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0706D78ED2007C5267 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = unicode.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0C0806D78ED2007C5267 = {
+			explicitFileType = sourcecode.make;
+			fileEncoding = 4;
+			indentWidth = 8;
+			isa = PBXFileReference;
+			path = Version;
+			refType = 4;
+			sourceTree = "<group>";
+			tabWidth = 8;
+		};
+		ADBE0C0906D78ED2007C5267 = {
+			fileRef = ADBE0BF006D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C0A06D78ED2007C5267 = {
+			fileRef = ADBE0BF106D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C0B06D78ED2007C5267 = {
+			fileRef = ADBE0BF206D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C0C06D78ED2007C5267 = {
+			fileRef = ADBE0BF306D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C0D06D78ED2007C5267 = {
+			fileRef = ADBE0BF406D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C0E06D78ED2007C5267 = {
+			fileRef = ADBE0BF506D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C0F06D78ED2007C5267 = {
+			fileRef = ADBE0BF606D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1006D78ED2007C5267 = {
+			fileRef = ADBE0BF706D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1106D78ED2007C5267 = {
+			fileRef = ADBE0BF806D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1206D78ED2007C5267 = {
+			fileRef = ADBE0BF906D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1306D78ED2007C5267 = {
+			fileRef = ADBE0BFA06D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1406D78ED2007C5267 = {
+			fileRef = ADBE0BFB06D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1506D78ED2007C5267 = {
+			fileRef = ADBE0BFC06D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1606D78ED2007C5267 = {
+			fileRef = ADBE0BFD06D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1706D78ED2007C5267 = {
+			fileRef = ADBE0BFE06D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1806D78ED2007C5267 = {
+			fileRef = ADBE0BFF06D78ED1007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C1F06D78ED2007C5267 = {
+			fileRef = ADBE0C0606D78ED2007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C2006D78ED2007C5267 = {
+			fileRef = ADBE0C0706D78ED2007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0C2106D78ED2007C5267 = {
+			fileRef = ADBE0C0806D78ED2007C5267;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		ADBE0CB306D79080007C5267 = {
+			children = (
+				ADBE0BF506D78ED1007C5267,
+				ADBE0BF706D78ED1007C5267,
+				ADBE0BF606D78ED1007C5267,
+			);
+			isa = PBXGroup;
+			name = Makefiles;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADBE0CB606D79094007C5267 = {
+			children = (
+				ADBE0C0006D78ED1007C5267,
+				ADBE0C0106D78ED1007C5267,
+				ADBE0C0206D78ED1007C5267,
+				ADBE0C0306D78ED1007C5267,
+				ADBE0C0406D78ED1007C5267,
+				ADBE0C0506D78ED2007C5267,
+			);
+			isa = PBXGroup;
+			name = Samples;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADD659C006DA295B007161CA = {
+			isa = PBXFileReference;
+			lastKnownFileType = "wrapper.pb-project";
+			name = libical.xcode;
+			path = ../../../ThirdParty/libical/libical.xcode;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADD65A3406DA2993007161CA = {
+			children = (
+				ADD65A3506DA2993007161CA,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		ADD65A3506DA2993007161CA = {
+			fileType = wrapper.framework;
+			isa = PBXReferenceProxy;
+			path = libical.framework;
+			refType = 3;
+			remoteRef = ADD65A3606DA29B1007161CA;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADD65A3606DA29B1007161CA = {
+			containerPortal = ADD659C006DA295B007161CA;
+			isa = PBXContainerItemProxy;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = libical;
+		};
+		ADD65A3706DA29B1007161CA = {
+			fileRef = ADD65A3506DA2993007161CA;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+	};
+	rootObject = 089C1669FE841209C02AAC07;
+}

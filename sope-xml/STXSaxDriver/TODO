@@ -1,0 +1,16 @@
+TODO
+====
+
+- find out proper MIME types for STX
+
+- check why data/hhtest2.stx fails
+
+- further cleanup of the sources to OGo styleguides
+
+- remove unused classes
+
+- complete support for missing STX model classes in the SAX driver?
+
+- document the exact set of STX grammar which is supported
+
+- check for memory leaks (see TODO comments in sources)

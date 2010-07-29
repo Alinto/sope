@@ -1,0 +1,211 @@
+=========================== BIG THINGS TO DO ==================================
+
+- Distributed Objects
+- Unicode support in NSString
+- change the NSInvocation and NSMethodSignature machine dependent macros to
+  use the macros defined into the GNU compiler. This should eventually become
+  part of the GNU Objective-C runtime library.
+- locale support?
+
+========================== SMALL THINGS TO DO =================================
+
+- Bug: descriptionWithCalendarFormat:timeZone:locale: does not honor timezone
+  argument, at least with NSCalendarDate (SKYRIX Bug 1106)
+
+- finish NSFileManager
+- port to HP-UX (NSInvocation and NSMethodSignature)
+  (what about OSF/1 and Ultrix?)
+- serializer/deserializer
+- change NSZone from class to struct
+- finish NSByteOrder.h
+- HH: avoid creating/releasing the formatter objects in common.m:Avsprintf
+- HH: check return value of 'objc_thread_detach' in NSThread.m
+- HH: description methods of NSCalendarFormat must be made timezone-aware
+- HH: support GetTempPath() with mingw32
+- HH: finish NSSearchPathForDirectoriesInDomains() function
+- HH: merge implementation of -stringByTrimmingTailWhiteSpaces and 
+      -stringByTrimmingTailWhiteSpaces? Or remove them altogether (not part
+      of gstep-base anymore either?)
+
+- HH: add -replaceOccurrencesOfString:withString:options:range: 
+
+- NSCalendarDate parser can't parse '20041212' with %Y%m%d, because it uses
+  scanInt: which parses that as a complete int (needs a char-count limit)
+
+============================ general checks ===================================
+
+(The following does not necessary mean they are missing ;-). These should
+remind implementors what do they have to check for. )
+
+- implement `copyWithZone:' and `mutableCopyWithZone:' for all classes
+
+- implement `encodeWithCoder:' and `initWithCoder:' for all classes
+
+- implement meaningful `description', `descriptionWithIndent:' or
+`stringRepresentation'
+
+- revise `hash' `isEqual:' and `compare:' methods for all containers so that
+  isEqual/compare/hash shoud be consistent
+
+- check that all `dealloc' calls [super dealloc] to release memory
+
+- check that calls to [super init] are done before *any* ivar is set
+
+- check imutable `copyWithZone:' for containers so that it performs a deep
+  copy, making all its content imutable
+
+- check mutable `mutableCopyWithZone:' for containers so that it performs a
+  shallow copy, making all its content imutable
+
+- thread-safe notes (comment with `// THREAD') where we access global variables
+
+================================== CLASSES ====================================
+
+NSArchiver, NSUnarchiver
+	- more tests
+
+NSArray, NSMutableArray
+	- extended tests
+	- init* methods for immutable should throw if called twice
+
+NSAutoreleasePool
+	- OK
+
+NSBundle
+	- implement unloading of code (need some patches to objc-runtime)
+
+NSCharacterSet, NSMutableCharacterSet
+	- init* methods for immutable should throw if called twice
+	- extended tests
+
+NSCoder
+	- more tests with it and the NSArchiver for all methods
+
+NSConnection, NSDistantObject, NSProxy
+	- TODO
+
+NSData, NSMutableData
+	- extended tests
+	- init* methods for immutable should throw if called twice
+	- check subclasses for mmap and range
+
+NSDate, NSCalendarDate
+	- init* methods for immutable should throw if called twice
+	- extended tests
+
+NSDictionary, NSMutableDictionary
+	- init* methods for immutable should throw if called twice
+	- tests
+
+NSDistributedLock
+	- test that checks concurrence
+
+NSEnumerator
+	- OK
+
+NSException
+	- OK
+
+NSFileHandle
+	- tests
+
+NSFileManager
+	- tests
+	- finish implementation (2-3 methods left)
+
+NSInvocation
+	- port and test on HPPA HPUX
+	- test on Solaris
+
+NSMethodSignature
+	- port and test on HPPA HPUX
+	- test on Solaris (code was written)
+
+NSLock, NSRecursiveLock,  NSConditionLock
+	- OK
+
+NSNotification, NSNotificationCenter, NSNotificationQueue
+	- OK
+
+NSObject
+	- OK
+
+NSPipe
+	- tests
+
+NSPosixFileDescriptor
+	- tests
+
+NSProcessInfo
+	- OK
+
+NSRunLoop
+	- write code that determines when the process is idle
+
+NSScanner
+	- OK
+
+NSSerializer, NSDeserializer
+	- TODO
+
+NSSet, NSMutableSet,  NSCountedSet
+	- tests for all methods
+	- write init* in concrete classes
+	- init* methods for immutable should throw if called twice
+
+NSString, NSMutableString
+	- add support for Unicode
+
+NSTask
+	- OK
+
+NSThread
+	- tests
+
+NSTimeZone, NSTimeZoneDetail
+	- tests
+
+NSTimer
+	- tests
+
+NSUserDefaults
+	- put command-line args in NSArgument domain
+
+NSValue, NSNumber
+	- tests
+
+NSZone (NSDefaultZone)
+	- make an allocator with zones using page-allocation functions
+	- make a non-free zone and support recycle
+
+UnixSignalHandler
+	- OK
+
+NSStream, NSInputStream, NSOutputStream
+        - implement
+
+NSError, NSURLError
+        - implement
+
+================================ DOCUMENTATION ===============================
+
+- comment the headers about classes, functions, ivars
+- comment sources about class structure and general ideas
+- README.debugging
+
+================================ NEW CLASSES =================================
+
+Ascii Coder
+	- TODO: human readable and easy modifiable format. Such a class was
+	already designed and implemented and it is used for archiving
+	and unarchiving GNUstep GUI objects.
+
+Regexp support 
+	- new class and support methods in a category to NSString
+
+========================== Configure, Makefile, Porting ======================
+
+We discussed long time ago about a makefile package to help developers
+easily build libraries and applications using the current free
+libraries written in Objective-C. This was finally implemented by
+Scott Christley and Ovidiu Predescu in the GNUstep makefile package.

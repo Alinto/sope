@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOTabPanel">
+  <binding name="tabs"
+           passthrough="NO"
+           required="YES"
+  />
+  <binding name="selectedTab"
+           passthrough="NO"
+           required="YES"
+           settable="YES"
+  />
+  <binding name="tabNameKey"         passthrough="NO" />
+  <binding name="nonSelectedBgColor" passthrough="NO" />
+  <binding name="bgcolor"            passthrough="NO" />
+  <binding name="textColor"          passthrough="NO" />
+  <binding name="submitActionName"   passthrough="NO" />
+
+  <validation message="&apos;tabs&apos; must not be a constant">
+    <and>
+      <bound name="tabs"/>
+      <ungettable name="tabs"/>
+    </and>
+  </validation>
+</wo>

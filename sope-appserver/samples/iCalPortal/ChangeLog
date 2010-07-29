@@ -1,0 +1,22 @@
+2006-04-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Pages/GNUmakefile, WebDAV/GNUmakefile: properly include the SOPE
+	  config.make when available
+
+2004-01-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* iCalPortalDatabase.m, Pages/iCalPortalRegistrationPage.m: replaced 
+	  -indexOfString: with -rangeOfString:
+
+	* iCalPortalUser.h: fixed header file for MacOSX
+
+	* imported as an NGObjWeb example into OpenGroupware.org
+	
+2002-10-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* accepts OL 2000 Web Assistent Publish requests
+
+2002-10-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* created ChangeLog
+

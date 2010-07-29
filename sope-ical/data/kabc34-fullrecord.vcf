@@ -1,0 +1,54 @@
+BEGIN:VCARD
+ADR;TYPE=dom;TYPE=home;TYPE=intl;TYPE=parcel;TYPE=postal;TYPE=pref;TYPE=wor
+ k:POBOX;;Street\nABC\n;Locality;Region;12345;Germany
+ADR;TYPE=work:PO;;dsafjh\ndsafh;Entenhausen;;12345;Germany
+ADR;TYPE=postal:;;postal;Enten;;;Gabon
+BDAY:2005-05-13T00:00:00Z
+CATEGORIES:Cat mit Space,Family,Friend,Mulle
+CLASS:CONFIDENTIAL
+EMAIL;TYPE=PREF:dago@geldspeicher.ag
+EMAIL:abc@def.org
+EMAIL:nbc@obj.de
+FN:Dagobert Duck
+GEO:52.500000;13.366667
+LABEL;TYPE=dom;TYPE=home;TYPE=intl;TYPE=parcel;TYPE=postal;TYPE=pref;TYPE=w
+ ork:deliverylabel\n
+N:Duck;Dagobert;;;
+NICKNAME:Dago
+NOTE:abc\ndef\nahd\n
+ORG:Geldspeicher AG
+ROLE:Chef
+TEL;TYPE=WORK:0123-work
+TEL;TYPE=WORK:7789
+TEL;TYPE=HOME:0123-home
+TEL;TYPE=CELL:0123-mobile
+TEL;TYPE=FAX;TYPE=MODEM;TYPE=VIDEO:2348978723
+TITLE:Doctor
+UID:YWXuJsqikg
+URL:http://www.entenhausen.de/
+VERSION:3.0
+X-KADDRESSBOOK-BlogFeed:http://www.movabletype.org/
+X-KADDRESSBOOK-CRYPTOENCRYPTPREF:always
+X-KADDRESSBOOK-CRYPTOPROTOPREF:inline openpgp,openpgp/mime,s/mime,s/mime op
+ aque
+X-KADDRESSBOOK-CRYPTOSIGNPREF:always
+X-KADDRESSBOOK-X-Anniversary:2005-05-21
+X-KADDRESSBOOK-X-AssistantsName:Assistant
+X-KADDRESSBOOK-X-Department:Department
+X-KADDRESSBOOK-X-IMAddress:dago
+X-KADDRESSBOOK-X-ManagersName:Manager
+X-KADDRESSBOOK-X-Office:Office
+X-KADDRESSBOOK-X-Profession:Profession
+X-KADDRESSBOOK-X-SpousesName:Minney
+X-KADDRESSBOOK-boola:true
+X-KADDRESSBOOK-datea:2003-03-01
+X-KADDRESSBOOK-datetimea:2005-01-01T08:00:00
+X-KADDRESSBOOK-numa:42
+X-KADDRESSBOOK-texta:textavalue
+X-KADDRESSBOOK-timea:00:00:00
+X-messaging/aim-All:dago
+X-messaging/icq-All:1982981
+X-messaging/sms-All:8837216723
+X-messaging/xmpp-All:jabber://abc@def.org
+END:VCARD
+

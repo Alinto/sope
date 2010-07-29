@@ -1,0 +1,246 @@
+compare /home/helge/dev/complete/SOPE/releases/4.3.7-shapeshifter with /home/helge/dev/SOPE-4.3
+added:   debian
+changed: sope-core/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-core.xcode: Fixed wrong build order
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-core.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+changed: sope-core/NGExtensions/
+     2004-09-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBundleManager.m: removed a warning on MacOSX (v4.3.117)
+     2004-09-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGExtensions.xcode: added NGResourceLocator class
+     2004-09-23  Helge Hess  <helge.hess@skyrix.com>
+     	* added NGResourceLocator class (v4.2.116)
+     	* moved NGCString to Recycler (was not compiled since v4.2.93)
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGExtensions.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+     	* NGExtensions.xcode: minor fix
+added:   sope-core/NGExtensions/NGResourceLocator.m
+removed: sope-core/NGExtensions/NGCString.m
+added:   sope-core/NGExtensions/NGExtensions/NGResourceLocator.h
+removed: sope-core/NGExtensions/NGExtensions/NGCString.h
+changed: sope-core/NGStreams/
+     2004-09-29  Helge Hess  <helge.hess@skyrix.com>
+     	* NGInternetSocketAddress.m: _fillAddress() does not throw an
+     	  exception, just returns it. Improved -description (v4.3.46)
+changed: sope-core/samples/
+     2004-09-23  Helge Hess  <helge.hess@skyrix.com>
+     	* addd sope-rsrclookup.m tool for tetsing NGResourceLocator
+     	* fmdls.m: some code cleanups
+added:   sope-core/samples/sope-rsrclookup.m
+added:   sope-gdl1/README-OSX.txt
+changed: sope-gdl1/GDLAccess/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GDLAccess.xcode: new Xcode project
+changed: sope-gdl1/PostgreSQL/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* PostgreSQL.xcode: new Xcode project. This requires you have a recent
+     	  PostgreSQL installed in /usr/local/pgsql.
+     	* PostgreSQL-Info.plist: new bundle info for Xcode
+     	* PostgreSQL72-Info.plist: removed old bundle info
+added:   sope-gdl1/PostgreSQL/PostgreSQL-Info.plist
+removed: sope-gdl1/PostgreSQL/PostgreSQL72-Info.plist
+changed: sope-mime/
+     2004-10-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: NGImap4Client improvements (v4.3.183)
+     2004-09-30  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMime: fixed OGo buf #936 (v4.3.182)
+     2004-09-29  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: minor improvements (v4.3.181)
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-mime.xcode: fixes
+changed: sope-mime/samples/
+     2004-09-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile: added imap_tool to compilation
+     	* imap_tool.m: code cleanups
+changed: sope-mime/NGMime/
+     2004-09-30  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMimePartParser.m: fixed an issue with unlimited length parsing,
+     	  fixes OGo bug #936 (v4.3.182)
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMime.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+     	* NGMime.xcode: fixes
+changed: sope-mime/NGImap4/
+     2004-09-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.3.183
+     	* NGImap4Folder.m: use new sort API
+     	* NGImap4Client.m: deprecated -sort:qualifier: in favor of
+     	  -sort:qualifier:encoding:, code cleanups
+     2004-09-29  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4Client.m: improved -description (v4.3.181)
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* imCommon.h: Fixed duplicate interface declarations by renaming
+     	  them. I believe this was an Xcode only issue. (v4.3.180)
+changed: sope-mime/NGMail/
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMail.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+changed: sope-xml/
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-xml.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+changed: sope-xml/libxmlSAXDriver/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* libxmlSAXDriver.xcode: minor fixes
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* libxmlSAXDriver.xcode: Fixed library search path
+     	* libxmlSAXDriver.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects. Also added a new copy files phase to copy the
+     	  resulting bundle to a well-known place where the SaxObjC framework
+     	  can later pick it up for inclusion in its framework wrapper.
+changed: sope-xml/XmlRpc/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* XmlRpc.xcode: minor fixes
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* XmlRpc.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+changed: sope-xml/SaxObjC/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SaxObjC.xcode: minor fixes
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SaxObjC.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects. Also fixed cyclic dependency between the
+     	  framework and the libxmlSAXDriver, which gets copied into the
+     	  framework wrapper after compilation. This now gets achieved by two
+     	  shellscript phases, one in the framework and one as a separate
+     	  shellscript target.
+changed: sope-xml/DOM/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DOM.xcode: minor fixes
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DOM.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+added:   Recycler/Snippets
+changed: sope-ldap/NGLdap/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* README.macosx: removed obsoleted documentation
+     	* NGLdap.xcode: adjusted several build parameters
+removed: sope-ldap/NGLdap/README.macosx
+changed: sope-appserver/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* README-OSX.txt: minor changes to the prebinding documentation. The
+     	  whole document needs an overhaul, still.
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGExtensions.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+changed: sope-appserver/WEExtensions/
+     2004-09-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* common.h(WEUriOfResource): use component resource manager if
+     	  available (v4.3.60)
+     	* WETreeData.m: added new 'treeLink' association which can be used to
+     	  override the componentActionURL used for expand/collapse and therfore
+     	  allow for session less tree generation (v4.3.59)
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEExtensions.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects. Also corrected inclusion of .js resources
+     	  (these were accidentaly treated as source files before).
+added:   sope-appserver/WEExtensions/WEExtensions.wox
+changed: sope-appserver/SoOFS/
+     2004-09-29  Helge Hess  <helge.hess@skyrix.com>
+     	* fhs.make: install 'sope' tool in FHS sbin (v4.3.11)
+     2004-09-27  Helge Hess  <helge.hess@skyrix.com>
+     	* GNUmakefile: made 'sope' executable a versioned tool (now called
+     	  sope-4.3) (v4.3.10)
+changed: sope-appserver/WOExtensions/
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOExtensions.xcode: fixed dependencies
+added:   sope-appserver/WOExtensions/WOExtensions.wox
+changed: sope-appserver/NGObjWeb/
+     2004-09-30  Helge Hess  <helge.hess@skyrix.com>
+     	* WOHttpAdaptor/WOHttpAdaptor.m: print listen address as a string value
+     	  (v4.3.50)
+     	* WebDAV/SoWebDAVRenderer.m: set lock-token header on LOCK requests
+     	  (v4.3.49)
+     2004-09-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WONestedList.m: minor code cleanups (v4.3.48)
+     2004-09-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEClientCapabilities.m: added the NewsFire RSS reader as a known
+     	  user-agent (v4.3.47)
+     	* OWResourceManager.m: removed a warning on a missing path on MacOSX
+     	  (v4.3.46)
+     2004-09-24  Helge Hess  <helge.hess@skyrix.com>
+     	* SoObjects/SoProductRegistry.m: do not abort scanning for SOPE
+     	  products if GNUSTEP_PATHPREFIX_LIST is not set (to continue
+     	  searching in FHS locations) (v4.3.45)
+     	* SoObjects/SoSecurityManager.m: improved reason string of security
+     	  exceptions (v4.3.44)
+     2004-09-23  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.3.43
+     	* WOCoreApplication.m: improved handling of WOPort default (detect
+     	  numeric ports)
+     	* Defaults.plist: changed default WOPort value from '"*:20000"' to
+     	  just 20000 (which is the same like *:20000' but compatible to WO)
+     	* WOHttpAdaptor/WOHttpAdaptor.m: for numberic WOPort's, retrieve the
+     	  port from the WOApplication object
+     	* WOCoreApplication.m: use NGResourceLocator to determine search pathes
+     	  (v4.3.42)
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGObjWeb.xcode: added WOServerDefaults.m to the build
+     2004-09-21  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.3.41
+     	* WOWatchDogApplicationMain.m: added new function
+     	  WOWatchDogApplicationMainWithServerDefaults() which installs the
+     	  WOServerDefaults class as the default NSUserDefaults class
+     	* added WOServerDefaults class (not implemented yet)
+     2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.3.41
+     	* Templates/common.h, SoObjects/common.h: fixed duplicate interface
+     	  declarations by renaming them. I believe this only affected Xcode
+     	  builds.
+     	* NGObjWeb.xcode: Fixed dependencies to resemble the make process
+     	  more closely. Our aim should be to stick to the make process
+     	  as closely as possible, so we shouldn't introduce dependencies in
+     	  non-toplevel projects.
+added:   sope-appserver/NGObjWeb/WOServerDefaults.m
+changed: sope-appserver/samples/WOxExtTest/
+     2004-09-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* Resources/TreeView.plist: fixed a missing semicolon (breaks on
+     	  MacOSX)
+     2004-09-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble (WOxExtTest_LIB_DIRS): fixed some linking path
+added:   maintenance/changes-to-4.3.7.txt
+added:   maintenance/sope.spec
+added:   maintenance/mod_ngobjweb_fedora.spec
+added:   maintenance/mod_ngobjweb_suse91.spec
+changed: sope-ical/samples/
+     2004-09-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: fixed makefiles for SOPE inline compilation
+changed: sope-ical/NGiCal/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGiCal.xcode: fixed several build parameters
+changed: sope-ical/iCalSaxDriver/
+     2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.3.16
+     	* iCalSaxDriver.xcode: new definition for Xcode build (XCODE_BUILD)
+     	* ICalSaxParser.m, NSString+ICal.h, NSCalendarDate+ICal.h,
+     	  NSString+ICal.m, NSCalendarDate+ICal.m: use new XCODE_BUILD
+     	  definition to correctly include ical.h.
+     	* iCalSaxDriver.xcode: new Xcode project
+added:   sope-ical/iCalSaxDriver/English.lproj
+added:   sope-ical/iCalSaxDriver/version.plist

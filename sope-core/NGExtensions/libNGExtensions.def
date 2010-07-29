@@ -1,0 +1,21 @@
+EXPORTS
+	__objc_class_name_NGBitSet;
+	__objc_class_name_NGConcreteBitSetEnumerator;
+	__objc_class_name_NGBundleManager;
+	__objc_class_name_NGBundle;
+	__objc_class_name_NGCString;
+	__objc_class_name_NGMutableCString;
+	__objc_class_name_NGExtensions;
+	__objc_class_name_NGHashMap;
+	__objc_class_name_NGMutableHashMap;
+	__objc_class_name__NGHashMapKeyEnumerator;
+	__objc_class_name__NGHashMapObjectEnumerator;
+	__objc_class_name__NGHashMapObjectForKeyEnumerator;
+	__objc_class_name_NGMD5Generator;
+	__objc_class_name_NGStack;
+	__objc_class_name__NGConcreteStackEnumerator;
+	__objc_class_name_NGStackException;
+	NGBundleWasLoadedNotificationName;
+	NGEncodeQuotedPrintable;
+	NGDecodeQuotedPrintable;
+    EODataSourceDidChangeNotification;

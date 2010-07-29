@@ -1,0 +1,42 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+   
+   <var:table maxColumns="maxColumns" col="col" row="row" 
+              index="index" item="item"
+              list="listAsArray" horizontal="horizontal"
+              border="border">
+      (<var:string value="row"/>/<var:string value="col"/>)
+      = <var:string value="index"/>
+      <b><var:string value="item"/></b>
+   </var:table>
+   
+   <var:table maxColumns="maxColumns" col="col" row="row" 
+              index="index" item="item"
+              list="listAsArray" horizontal="horizontal"
+              border="border"
+              const:hasOwnTDs="4" width="100%">
+      <td><var:string value="row"/></td>
+      <td><var:string value="col"/></td>
+      <td><var:string value="index"/></td>
+      <td><b><var:string value="item"/></b></td>
+   </var:table>
+
+   <form var:action="self">
+     <hr/>
+     <table border="0">
+       <tr><td><i>Config Bindings</i></td></tr>
+       <tr>
+         <td>MaxColumns:</td>
+         <td><input type="text" var:value="maxColumns" size="4"/></td>
+       </tr>
+       <tr>
+         <td>Horizontal:</td>
+         <td><input type="checkbox" var:checked="horizontal"/></td>
+       </tr>
+     </table>
+     <input type="submit" var:action="self" value="apply"/>
+   </form>
+</var:component>

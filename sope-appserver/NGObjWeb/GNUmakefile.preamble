@@ -1,0 +1,121 @@
+# compilation settings
+
+ifeq ($(frameworks),yes)
+ADDITIONAL_CPPFLAGS += -DCOMPILE_AS_FRAMEWORK=1
+endif
+
+SOPE_ROOT=../..
+
+ADDITIONAL_CPPFLAGS += \
+        -Wall -DCOMPILE_FOR_GSTEP_MAKE=1        \
+        -DSOPE_MAJOR_VERSION=$(MAJOR_VERSION)   \
+        -DSOPE_MINOR_VERSION=$(MINOR_VERSION)   \
+        -DSOPE_SUBMINOR_VERSION=$(SUBMINOR_VERSION)
+
+ADDITIONAL_CPPFLAGS  += -pipe -DCOMPILING_NGOBJWEB=1
+libNGObjWeb_OBJCFLAGS += -Wall -Wno-import -Wno-protocol
+
+SOPE_ROOT=../..
+CORE_ROOT=$(SOPE_ROOT)/sope-core
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I.			\
+	-I./DynamicElements/	\
+	-I./Templates/		\
+	-I..			\
+	-I$(CORE_ROOT)		\
+	-I$(CORE_ROOT)/NGStreams/	\
+	-I$(CORE_ROOT)/NGExtensions	\
+	-I$(SOPE_ROOT)/sope-mime
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	$(SOPE_ROOT)/sope-mime/NGMail		\
+	$(SOPE_ROOT)/sope-mime			\
+	$(SOPE_ROOT)/sope-core/NGStreams	\
+	$(SOPE_ROOT)/sope-core/NGExtensions	\
+	$(SOPE_ROOT)/sope-core/EOControl	\
+	$(SOPE_ROOT)/sope-xml/DOM		\
+	$(SOPE_ROOT)/sope-xml/XmlRpc		\
+	$(SOPE_ROOT)/sope-xml/SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+SYSTEM_LIB_DIR += $(CONFIGURE_SYSTEM_LIB_DIR)
+
+
+# dependencies
+
+ifneq ($(frameworks),yes)
+sope-xml-libs  = -lXmlRpc -lDOM -lSaxObjC
+sope-core-libs = -lNGStreams -lNGExtensions -lEOControl
+sope-mime-libs = -lNGMime
+sope-ngobjweb-libs = -lNGObjWeb
+else
+sope-xml-libs  = -framework XmlRpc -framework DOM -framework SaxObjC
+sope-core-libs = \
+  -framework NGStreams -framework NGExtensions -framework EOControl
+sope-mime-libs = -framework NGMime -framework NGMail
+sope-ngobjweb-libs = -framework NGObjWeb 
+endif
+
+libNGObjWeb_LIBRARIES_DEPEND_UPON += \
+	$(sope-mime-libs) \
+	$(sope-core-libs) \
+	$(sope-xml-libs)
+NGObjWeb_LIBRARIES_DEPEND_UPON += \
+	$(sope-mime-libs) \
+	$(sope-core-libs)\
+	$(sope-xml-libs)
+
+
+ADDITIONAL_LIB_DIRS  += $(libNGObjWeb_LIB_DIRS) -F.
+
+wod_TOOL_LIBS += \
+	$(sope-ngobjweb-libs)	\
+	$(sope-mime-libs)	\
+	$(sope-core-libs)	\
+	$(sope-xml-libs)
+SoCore_BUNDLE_LIBS += \
+	$(sope-ngobjweb-libs)	\
+	$(sope-mime-libs)	\
+	$(sope-core-libs)	\
+	$(sope-xml-libs)
+
+
+# platform specific settings
+
+ifneq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+# OpenBSD does not require libcrypt
+ifneq ($(findstring darwin, $(GNUSTEP_TARGET_OS)), darwin)
+# and neither does MacOSX? ...
+libNGObjWeb_LIBRARIES_DEPEND_UPON += -lcrypt
+endif
+endif
+
+# Apple
+
+ifeq ($(FOUNDATION_LIB),apple)
+libNGObjWeb_PREBIND_ADDR="0xC4900000"
+libNGObjWeb_LDFLAGS += -seg1addr $(libNGObjWeb_PREBIND_ADDR)
+NGObjWeb_LDFLAGS += -seg1addr $(libNGObjWeb_PREBIND_ADDR)
+endif
+
+ifeq ($(FOUNDATION_LIB),nx)
+wod_TOOL_LIBS += -lDOM -lSaxObjC -lFoundationExt
+wod_LDFLAGS += -framework Foundation
+libNGObjWeb_LIBRARIES_DEPEND_UPON += -lFoundationExt
+endif
+
+ifeq ($(findstring openbsd3, $(GNUSTEP_TARGET_OS)), openbsd3)
+wod_TOOL_LIBS += -liconv
+endif

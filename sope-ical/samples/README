@@ -1,0 +1,24 @@
+sope-ical/samples
+
+This directory contains sample programs for the sope-ical libraries.
+
+Tools
+=====
+
+icalparsetest
+[args] - files to process
+
+icalds - test iCalDataSource object and run a query on it
+[args] - files to process
+-entity
+-qualifier
+-sort
+
+vcf2xml
+vcfparsetest
+
+ievalrrule
+  ievalrrule <rrule> <startdate> <enddate> <cycleend>
+  ievalrrule \
+    'FREQ=MONTHLY;UNTIL=20100131;BYDAY=-1WE' \
+    '20070101 11:00' '20070101 12:00' '20100131'

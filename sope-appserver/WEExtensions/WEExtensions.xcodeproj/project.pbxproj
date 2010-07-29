@@ -1,0 +1,1010 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AD013B8C06E20AC5000910D8 /* README in Resources */ = {isa = PBXBuildFile; fileRef = AD013B8706E20AC5000910D8 /* README */; };
+		AD3D64F0088E4AB500CBB51B /* JSStringTable.api in Resources */ = {isa = PBXBuildFile; fileRef = AD3D64EE088E4AB500CBB51B /* JSStringTable.api */; };
+		AD3D64F1088E4AB500CBB51B /* JSStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3D64EF088E4AB500CBB51B /* JSStringTable.m */; };
+		AD3EB2CD073D56C20038A3E6 /* WECase.api in Resources */ = {isa = PBXBuildFile; fileRef = AD3EB2CC073D56C20038A3E6 /* WECase.api */; };
+		AD3EB2CF073D59E10038A3E6 /* WEHSpanTableMatrix.api in Resources */ = {isa = PBXBuildFile; fileRef = AD3EB2CE073D59E10038A3E6 /* WEHSpanTableMatrix.api */; };
+		AD3EB2D1073D5A080038A3E6 /* WEVSpanTableMatrix.api in Resources */ = {isa = PBXBuildFile; fileRef = AD3EB2D0073D5A080038A3E6 /* WEVSpanTableMatrix.api */; };
+		AD3EB2D6073D5F830038A3E6 /* WETableView.api in Resources */ = {isa = PBXBuildFile; fileRef = AD3EB2D5073D5F830038A3E6 /* WETableView.api */; };
+		AD3EB2D8073D5FA90038A3E6 /* WETableData.api in Resources */ = {isa = PBXBuildFile; fileRef = AD3EB2D7073D5FA90038A3E6 /* WETableData.api */; };
+		AD3EB2DA073D5FB30038A3E6 /* WETableHeader.api in Resources */ = {isa = PBXBuildFile; fileRef = AD3EB2D9073D5FB30038A3E6 /* WETableHeader.api */; };
+		AD51824006FF7FD1006397CD /* DOM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE506DA3CDE007161CA /* DOM.framework */; };
+		AD51824106FF7FD1006397CD /* SaxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE606DA3CDE007161CA /* SaxObjC.framework */; };
+		AD51824206FF7FD1006397CD /* XmlRpc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65FE706DA3CDE007161CA /* XmlRpc.framework */; };
+		AD51824306FF7FDA006397CD /* NGExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0142CE06E21A3D000910D8 /* NGExtensions.framework */; };
+		AD51824406FF7FDA006397CD /* NGStreams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C2106E20D18000910D8 /* NGStreams.framework */; };
+		AD51824506FF8021006397CD /* NGImap4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C1B06E20D18000910D8 /* NGImap4.framework */; };
+		AD51824606FF8021006397CD /* NGMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C1D06E20D18000910D8 /* NGMail.framework */; };
+		AD51824706FF8021006397CD /* NGMime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C1E06E20D18000910D8 /* NGMime.framework */; };
+		AD51824806FF8035006397CD /* NGHttp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C1906E20D18000910D8 /* NGHttp.framework */; };
+		AD51824906FF8048006397CD /* WebDAV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD013C2306E20D18000910D8 /* WebDAV.framework */; };
+		AD51824B06FF805E006397CD /* SoObjects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD51824A06FF805E006397CD /* SoObjects.framework */; };
+		AD85C85507C5080D0036AC7A /* WEResourceKey.h in Headers */ = {isa = PBXBuildFile; fileRef = AD85C84D07C5080D0036AC7A /* WEResourceKey.h */; };
+		AD85C85607C5080D0036AC7A /* WEResourceKey.m in Sources */ = {isa = PBXBuildFile; fileRef = AD85C84E07C5080D0036AC7A /* WEResourceKey.m */; };
+		AD85C85707C5080D0036AC7A /* WEResourceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AD85C84F07C5080D0036AC7A /* WEResourceManager.h */; };
+		AD85C85807C5080D0036AC7A /* WEResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD85C85007C5080D0036AC7A /* WEResourceManager.m */; };
+		AD85C85907C5080D0036AC7A /* WEStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = AD85C85107C5080D0036AC7A /* WEStringTable.h */; };
+		AD85C85A07C5080D0036AC7A /* WEStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = AD85C85207C5080D0036AC7A /* WEStringTable.m */; };
+		AD85C85B07C5080D0036AC7A /* WEStringTableManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AD85C85307C5080D0036AC7A /* WEStringTableManager.h */; };
+		AD85C85C07C5080D0036AC7A /* WEStringTableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD85C85407C5080D0036AC7A /* WEStringTableManager.m */; };
+		ADD65F6406DA3AF6007161CA /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = ADD65C7006DA343C007161CA /* common.h */; };
+		ADD65F6506DA3B38007161CA /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = ADD65C7106DA343C007161CA /* COPYING */; };
+		ADD65F6606DA3B38007161CA /* COPYRIGHT in Resources */ = {isa = PBXBuildFile; fileRef = ADD65C7206DA343C007161CA /* COPYRIGHT */; };
+		ADD65F7506DA3C51007161CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD65F7406DA3C51007161CA /* Foundation.framework */; };
+		ADF4C9B2073A9CC30050AAEF /* JSClipboard.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9B1073A9CC30050AAEF /* JSClipboard.api */; };
+		ADF4C9B4073A9CD70050AAEF /* JSMenu.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9B3073A9CD70050AAEF /* JSMenu.api */; };
+		ADF4C9B6073A9CEB0050AAEF /* JSMenuItem.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9B5073A9CEB0050AAEF /* JSMenuItem.api */; };
+		ADF4C9B8073A9CFE0050AAEF /* JSShiftClick.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9B7073A9CFE0050AAEF /* JSShiftClick.api */; };
+		ADF4C9BA073A9D130050AAEF /* WEBrowser.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9B9073A9D130050AAEF /* WEBrowser.api */; };
+		ADF4C9BC073A9D250050AAEF /* WECalendarField.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9BB073A9D250050AAEF /* WECalendarField.api */; };
+		ADF4C9BE073A9D360050AAEF /* WECollapsibleComponentContent.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9BD073A9D360050AAEF /* WECollapsibleComponentContent.api */; };
+		ADF4C9C0073A9D470050AAEF /* WEComponentValue.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9BF073A9D470050AAEF /* WEComponentValue.api */; };
+		ADF4C9C2073A9D580050AAEF /* WEContextConditional.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9C1073A9D580050AAEF /* WEContextConditional.api */; };
+		ADF4C9C4073A9D700050AAEF /* WEContextKey.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9C3073A9D700050AAEF /* WEContextKey.api */; };
+		ADF4C9C6073A9D7D0050AAEF /* WEDateField.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9C5073A9D7D0050AAEF /* WEDateField.api */; };
+		ADF4C9C8073A9D9F0050AAEF /* WEDragContainer.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9C7073A9D9F0050AAEF /* WEDragContainer.api */; };
+		ADF4C9CA073A9DAD0050AAEF /* WEDropContainer.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9C9073A9DAD0050AAEF /* WEDropContainer.api */; };
+		ADF4C9CC073A9DD70050AAEF /* WEEpozEditor.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4C9CB073A9DD70050AAEF /* WEEpozEditor.api */; };
+		ADF4CA20073A9E8A0050AAEF /* WEMonthOverview.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA08073A9E8A0050AAEF /* WEMonthOverview.api */; };
+		ADF4CA21073A9E8A0050AAEF /* WEPageLink.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA09073A9E8A0050AAEF /* WEPageLink.api */; };
+		ADF4CA22073A9E8A0050AAEF /* WEPageView.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA0A073A9E8A0050AAEF /* WEPageView.api */; };
+		ADF4CA23073A9E8A0050AAEF /* WEQualifierConditional.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA0B073A9E8A0050AAEF /* WEQualifierConditional.api */; };
+		ADF4CA24073A9E8A0050AAEF /* WERedirect.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA0C073A9E8A0050AAEF /* WERedirect.api */; };
+		ADF4CA25073A9E8A0050AAEF /* WERichString.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA0D073A9E8A0050AAEF /* WERichString.api */; };
+		ADF4CA26073A9E8A0050AAEF /* WESwitch.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA0E073A9E8A0050AAEF /* WESwitch.api */; };
+		ADF4CA27073A9E8A0050AAEF /* WETabItem.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA0F073A9E8A0050AAEF /* WETabItem.api */; };
+		ADF4CA29073A9E8A0050AAEF /* WETableMatrix.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA11073A9E8A0050AAEF /* WETableMatrix.api */; };
+		ADF4CA2A073A9E8A0050AAEF /* WETableMatrixContent.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA12073A9E8A0050AAEF /* WETableMatrixContent.api */; };
+		ADF4CA2B073A9E8A0050AAEF /* WETableMatrixLabel.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA13073A9E8A0050AAEF /* WETableMatrixLabel.api */; };
+		ADF4CA2C073A9E8A0050AAEF /* WETabView.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA14073A9E8A0050AAEF /* WETabView.api */; };
+		ADF4CA2D073A9E8A0050AAEF /* WETimeField.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA15073A9E8A0050AAEF /* WETimeField.api */; };
+		ADF4CA2E073A9E8A0050AAEF /* WETreeData.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA16073A9E8A0050AAEF /* WETreeData.api */; };
+		ADF4CA2F073A9E8A0050AAEF /* WETreeHeader.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA17073A9E8A0050AAEF /* WETreeHeader.api */; };
+		ADF4CA31073A9E8A0050AAEF /* WETreeView.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA19073A9E8A0050AAEF /* WETreeView.api */; };
+		ADF4CA32073A9E8A0050AAEF /* WEWeekColumnView.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA1A073A9E8A0050AAEF /* WEWeekColumnView.api */; };
+		ADF4CA33073A9E8A0050AAEF /* WEWeekOverview.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CA1B073A9E8A0050AAEF /* WEWeekOverview.api */; };
+		ADF4CAFA073AC15F0050AAEF /* WEMonthLabel.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CAF9073AC15F0050AAEF /* WEMonthLabel.api */; };
+		ADF4CAFE073AC4BF0050AAEF /* WEPageItem.api in Resources */ = {isa = PBXBuildFile; fileRef = ADF4CAFD073AC4BF0050AAEF /* WEPageItem.api */; };
+		ADFE765306E2918F006628C4 /* calendar.js in Resources */ = {isa = PBXBuildFile; fileRef = ADFE760106E2918E006628C4 /* calendar.js */; };
+		ADFE765406E2918F006628C4 /* calendar.jsm in Resources */ = {isa = PBXBuildFile; fileRef = ADFE760206E2918E006628C4 /* calendar.jsm */; };
+		ADFE765506E2918F006628C4 /* calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE760306E2918E006628C4 /* calendar.m */; };
+		ADFE765606E2918F006628C4 /* js2m.sh in Resources */ = {isa = PBXBuildFile; fileRef = ADFE760406E2918E006628C4 /* js2m.sh */; };
+		ADFE765706E2918F006628C4 /* JSClipboard.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE760506E2918E006628C4 /* JSClipboard.m */; };
+		ADFE765806E2918F006628C4 /* JSMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE760606E2918E006628C4 /* JSMenu.h */; };
+		ADFE765906E2918F006628C4 /* JSMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE760706E2918E006628C4 /* JSMenu.m */; };
+		ADFE765A06E2918F006628C4 /* JSMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE760806E2918E006628C4 /* JSMenuItem.h */; };
+		ADFE765B06E2918F006628C4 /* JSMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE760906E2918E006628C4 /* JSMenuItem.m */; };
+		ADFE765C06E2918F006628C4 /* JSShiftClick.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE760A06E2918E006628C4 /* JSShiftClick.m */; };
+		ADFE765D06E2918F006628C4 /* WEBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE760B06E2918E006628C4 /* WEBrowser.m */; };
+		ADFE765E06E2918F006628C4 /* WECalendarField.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE760C06E2918E006628C4 /* WECalendarField.h */; };
+		ADFE765F06E2918F006628C4 /* WECalendarField.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE760D06E2918E006628C4 /* WECalendarField.m */; };
+		ADFE766106E2918F006628C4 /* WECollapsibleComponentContent.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE760F06E2918E006628C4 /* WECollapsibleComponentContent.m */; };
+		ADFE766206E2918F006628C4 /* WEComponentValue.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761006E2918E006628C4 /* WEComponentValue.m */; };
+		ADFE766306E2918F006628C4 /* WEContextConditional.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE761106E2918E006628C4 /* WEContextConditional.h */; };
+		ADFE766406E2918F006628C4 /* WEContextConditional.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761206E2918E006628C4 /* WEContextConditional.m */; };
+		ADFE766506E2918F006628C4 /* WEContextKey.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761306E2918E006628C4 /* WEContextKey.m */; };
+		ADFE766606E2918F006628C4 /* WEDateField.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761406E2918F006628C4 /* WEDateField.m */; };
+		ADFE766706E2918F006628C4 /* WEDragContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761506E2918F006628C4 /* WEDragContainer.m */; };
+		ADFE766806E2918F006628C4 /* WEDropContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761606E2918F006628C4 /* WEDropContainer.m */; };
+		ADFE766906E2918F006628C4 /* WEDropScript.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE761706E2918F006628C4 /* WEDropScript.h */; };
+		ADFE766A06E2918F006628C4 /* WEDropScript.js in Resources */ = {isa = PBXBuildFile; fileRef = ADFE761806E2918F006628C4 /* WEDropScript.js */; };
+		ADFE766B06E2918F006628C4 /* WEDropScript.jsm in Resources */ = {isa = PBXBuildFile; fileRef = ADFE761906E2918F006628C4 /* WEDropScript.jsm */; };
+		ADFE766C06E2918F006628C4 /* WEEpozEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761A06E2918F006628C4 /* WEEpozEditor.m */; };
+		ADFE766D06E2918F006628C4 /* WEExtensionsBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761B06E2918F006628C4 /* WEExtensionsBundle.m */; };
+		ADFE766E06E2918F006628C4 /* WEMonthOverview.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761C06E2918F006628C4 /* WEMonthOverview.m */; };
+		ADFE766F06E2918F006628C4 /* WEPageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761D06E2918F006628C4 /* WEPageLink.m */; };
+		ADFE767006E2918F006628C4 /* WEPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761E06E2918F006628C4 /* WEPageView.m */; };
+		ADFE767106E29190006628C4 /* WEQualifierConditional.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE761F06E2918F006628C4 /* WEQualifierConditional.m */; };
+		ADFE767206E29190006628C4 /* WERedirect.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762006E2918F006628C4 /* WERedirect.m */; };
+		ADFE767306E29190006628C4 /* WERichString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762106E2918F006628C4 /* WERichString.m */; };
+		ADFE767406E29190006628C4 /* WESwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762206E2918F006628C4 /* WESwitch.m */; };
+		ADFE767506E29190006628C4 /* WETabItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762306E2918F006628C4 /* WETabItem.m */; };
+		ADFE767606E29190006628C4 /* WETableCalcMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE762406E2918F006628C4 /* WETableCalcMatrix.h */; };
+		ADFE767706E29190006628C4 /* WETableCalcMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762506E2918F006628C4 /* WETableCalcMatrix.m */; };
+		ADFE767806E29190006628C4 /* WETableMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762606E2918F006628C4 /* WETableMatrix.m */; };
+		ADFE767906E29190006628C4 /* WETableMatrixContent.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762706E2918F006628C4 /* WETableMatrixContent.m */; };
+		ADFE767A06E29190006628C4 /* WETableMatrixLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762806E2918F006628C4 /* WETableMatrixLabel.m */; };
+		ADFE767E06E29190006628C4 /* WETableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE762D06E2918F006628C4 /* WETableCell.h */; };
+		ADFE767F06E29190006628C4 /* WETableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762E06E2918F006628C4 /* WETableCell.m */; };
+		ADFE768006E29190006628C4 /* WETableData.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE762F06E2918F006628C4 /* WETableData.m */; };
+		ADFE768106E29190006628C4 /* WETableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763006E2918F006628C4 /* WETableHeader.m */; };
+		ADFE768206E29190006628C4 /* WETableView+Grouping.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE763106E2918F006628C4 /* WETableView+Grouping.h */; };
+		ADFE768306E29190006628C4 /* WETableView+Grouping.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763206E2918F006628C4 /* WETableView+Grouping.m */; };
+		ADFE768406E29190006628C4 /* WETableView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE763306E2918F006628C4 /* WETableView.h */; };
+		ADFE768506E29190006628C4 /* WETableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763406E2918F006628C4 /* WETableView.m */; };
+		ADFE768606E29190006628C4 /* WETableViewButtonMode.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763506E2918F006628C4 /* WETableViewButtonMode.m */; };
+		ADFE768706E29190006628C4 /* WETableViewColorConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE763606E2918F006628C4 /* WETableViewColorConfig.h */; };
+		ADFE768806E29190006628C4 /* WETableViewColorConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763706E2918F006628C4 /* WETableViewColorConfig.m */; };
+		ADFE768906E29190006628C4 /* WETableViewConfigObject.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE763806E2918F006628C4 /* WETableViewConfigObject.h */; };
+		ADFE768A06E29190006628C4 /* WETableViewConfigObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763906E2918F006628C4 /* WETableViewConfigObject.m */; };
+		ADFE768B06E29190006628C4 /* WETableViewDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE763A06E2918F006628C4 /* WETableViewDefines.h */; };
+		ADFE768C06E29190006628C4 /* WETableViewFooterMode.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763B06E2918F006628C4 /* WETableViewFooterMode.m */; };
+		ADFE768D06E29190006628C4 /* WETableViewGroupMode.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763C06E2918F006628C4 /* WETableViewGroupMode.m */; };
+		ADFE768E06E29190006628C4 /* WETableViewIconConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE763D06E2918F006628C4 /* WETableViewIconConfig.h */; };
+		ADFE768F06E29190006628C4 /* WETableViewIconConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE763E06E2918F006628C4 /* WETableViewIconConfig.m */; };
+		ADFE769006E29190006628C4 /* WETableViewInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE763F06E2918F006628C4 /* WETableViewInfo.h */; };
+		ADFE769106E29190006628C4 /* WETableViewLabelConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE764006E2918F006628C4 /* WETableViewLabelConfig.h */; };
+		ADFE769206E29190006628C4 /* WETableViewLabelConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764106E2918F006628C4 /* WETableViewLabelConfig.m */; };
+		ADFE769306E29190006628C4 /* WETableViewState.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE764206E2918F006628C4 /* WETableViewState.h */; };
+		ADFE769406E29190006628C4 /* WETableViewState.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764306E2918F006628C4 /* WETableViewState.m */; };
+		ADFE769506E29190006628C4 /* WETableViewTitleMode.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764406E2918F006628C4 /* WETableViewTitleMode.m */; };
+		ADFE769606E29190006628C4 /* WETabView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE764506E2918F006628C4 /* WETabView.h */; };
+		ADFE769706E29190006628C4 /* WETabView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764606E2918F006628C4 /* WETabView.m */; };
+		ADFE769806E29190006628C4 /* WETimeField.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764706E2918F006628C4 /* WETimeField.m */; };
+		ADFE769906E29190006628C4 /* WETreeContextKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE764806E2918F006628C4 /* WETreeContextKeys.h */; };
+		ADFE769A06E29190006628C4 /* WETreeData.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764906E2918F006628C4 /* WETreeData.m */; };
+		ADFE769B06E29190006628C4 /* WETreeHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764A06E2918F006628C4 /* WETreeHeader.m */; };
+		ADFE769C06E29190006628C4 /* WETreeMatrixElement.h in Headers */ = {isa = PBXBuildFile; fileRef = ADFE764B06E2918F006628C4 /* WETreeMatrixElement.h */; };
+		ADFE769D06E29190006628C4 /* WETreeMatrixElement.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764C06E2918F006628C4 /* WETreeMatrixElement.m */; };
+		ADFE769E06E29190006628C4 /* WETreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764D06E2918F006628C4 /* WETreeView.m */; };
+		ADFE769F06E29190006628C4 /* WEWeekColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764E06E2918F006628C4 /* WEWeekColumnView.m */; };
+		ADFE76A006E29190006628C4 /* WEWeekOverview.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE764F06E2918F006628C4 /* WEWeekOverview.m */; };
+		ADFE76A106E29190006628C4 /* WExCalElemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE765006E2918F006628C4 /* WExCalElemBuilder.m */; };
+		ADFE76A206E29190006628C4 /* WExDnDElemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE765106E2918F006628C4 /* WExDnDElemBuilder.m */; };
+		ADFE76A306E29190006628C4 /* WExExtElemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFE765206E2918F006628C4 /* WExExtElemBuilder.m */; };
+		ADFE77B306E2977F006628C4 /* NGObjWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADFE77B106E2977A006628C4 /* NGObjWeb.framework */; };
+		ADFE77BA06E2986F006628C4 /* EOControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD6610D06DA3D1F007161CA /* EOControl.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ADFE77B606E297B2006628C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE77AE06E2975E006628C4 /* NGObjWeb.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = NGObjWeb;
+		};
+		ADFE77B706E297B2006628C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADFE77AE06E2975E006628C4 /* NGObjWeb.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADFE6FFE06E2765E006628C4;
+			remoteInfo = "SoCore (SXP)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AD013B8406E20AC5000910D8 /* GNUmakefile.postamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile.postamble; sourceTree = "<group>"; tabWidth = 8; };
+		AD013B8706E20AC5000910D8 /* README */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		AD013C1906E20D18000910D8 /* NGHttp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGHttp.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGHttp.framework"; sourceTree = "<absolute>"; };
+		AD013C1A06E20D18000910D8 /* NGiCal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGiCal.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGiCal.framework"; sourceTree = "<absolute>"; };
+		AD013C1B06E20D18000910D8 /* NGImap4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGImap4.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGImap4.framework"; sourceTree = "<absolute>"; };
+		AD013C1C06E20D18000910D8 /* NGLdap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGLdap.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGLdap.framework"; sourceTree = "<absolute>"; };
+		AD013C1D06E20D18000910D8 /* NGMail.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGMail.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGMail.framework"; sourceTree = "<absolute>"; };
+		AD013C1E06E20D18000910D8 /* NGMime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGMime.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGMime.framework"; sourceTree = "<absolute>"; };
+		AD013C2006E20D18000910D8 /* NGObjWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGObjWeb.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGObjWeb.framework"; sourceTree = "<absolute>"; };
+		AD013C2106E20D18000910D8 /* NGStreams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGStreams.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGStreams.framework"; sourceTree = "<absolute>"; };
+		AD013C2206E20D18000910D8 /* NGXmlRpc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGXmlRpc.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGXmlRpc.framework"; sourceTree = "<absolute>"; };
+		AD013C2306E20D18000910D8 /* WebDAV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebDAV.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/WebDAV.framework"; sourceTree = "<absolute>"; };
+		AD013C2406E20D18000910D8 /* WEExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WEExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/WEExtensions.framework"; sourceTree = "<absolute>"; };
+		AD013C2506E20D19000910D8 /* WOExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WOExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/WOExtensions.framework"; sourceTree = "<absolute>"; };
+		AD013C4706E20DAA000910D8 /* LDAP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LDAP.framework; path = /System/Library/Frameworks/LDAP.framework; sourceTree = "<absolute>"; };
+		AD0142CE06E21A3D000910D8 /* NGExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGExtensions.framework"; sourceTree = "<absolute>"; };
+		AD3D64EE088E4AB500CBB51B /* JSStringTable.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; path = JSStringTable.api; sourceTree = "<group>"; };
+		AD3D64EF088E4AB500CBB51B /* JSStringTable.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = JSStringTable.m; sourceTree = "<group>"; };
+		AD3EB2CC073D56C20038A3E6 /* WECase.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WECase.api; sourceTree = "<group>"; };
+		AD3EB2CE073D59E10038A3E6 /* WEHSpanTableMatrix.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEHSpanTableMatrix.api; sourceTree = "<group>"; };
+		AD3EB2D0073D5A080038A3E6 /* WEVSpanTableMatrix.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEVSpanTableMatrix.api; sourceTree = "<group>"; };
+		AD3EB2D5073D5F830038A3E6 /* WETableView.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WETableView.api; sourceTree = "<group>"; };
+		AD3EB2D7073D5FA90038A3E6 /* WETableData.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WETableData.api; sourceTree = "<group>"; };
+		AD3EB2D9073D5FB30038A3E6 /* WETableHeader.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WETableHeader.api; sourceTree = "<group>"; };
+		AD51824A06FF805E006397CD /* SoObjects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SoObjects.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SoObjects.framework"; sourceTree = "<absolute>"; };
+		AD77EC570C4F65CD0018A131 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		AD77EC580C4F65CD0018A131 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		AD77EC590C4F65CD0018A131 /* Wrapper.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = Wrapper.xcconfig; sourceTree = "<group>"; };
+		AD85C84D07C5080D0036AC7A /* WEResourceKey.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WEResourceKey.h; sourceTree = "<group>"; };
+		AD85C84E07C5080D0036AC7A /* WEResourceKey.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WEResourceKey.m; sourceTree = "<group>"; };
+		AD85C84F07C5080D0036AC7A /* WEResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WEResourceManager.h; sourceTree = "<group>"; };
+		AD85C85007C5080D0036AC7A /* WEResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WEResourceManager.m; sourceTree = "<group>"; };
+		AD85C85107C5080D0036AC7A /* WEStringTable.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WEStringTable.h; sourceTree = "<group>"; };
+		AD85C85207C5080D0036AC7A /* WEStringTable.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WEStringTable.m; sourceTree = "<group>"; };
+		AD85C85307C5080D0036AC7A /* WEStringTableManager.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WEStringTableManager.h; sourceTree = "<group>"; };
+		AD85C85407C5080D0036AC7A /* WEStringTableManager.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WEStringTableManager.m; sourceTree = "<group>"; };
+		ADD65C6F06DA343C007161CA /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 8; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		ADD65C7006DA343C007161CA /* common.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		ADD65C7106DA343C007161CA /* COPYING */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		ADD65C7206DA343C007161CA /* COPYRIGHT */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYRIGHT; sourceTree = "<group>"; };
+		ADD65C7406DA343C007161CA /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65C7506DA343C007161CA /* GNUmakefile.preamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile.preamble; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65C8A06DA343C007161CA /* TODO */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		ADD65C8B06DA343C007161CA /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+		ADD65D5806DA372D007161CA /* WEExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WEExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADD65D5A06DA372D007161CA /* WEExtensions-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WEExtensions-Info.plist"; sourceTree = "<group>"; };
+		ADD65F7406DA3C51007161CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		ADD65FE306DA3CA7007161CA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = /usr/lib/libz.dylib; sourceTree = "<absolute>"; };
+		ADD65FE506DA3CDE007161CA /* DOM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DOM.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/DOM.framework"; sourceTree = "<absolute>"; };
+		ADD65FE606DA3CDE007161CA /* SaxObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SaxObjC.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SaxObjC.framework"; sourceTree = "<absolute>"; };
+		ADD65FE706DA3CDE007161CA /* XmlRpc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XmlRpc.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/XmlRpc.framework"; sourceTree = "<absolute>"; };
+		ADD6610D06DA3D1F007161CA /* EOControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EOControl.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/EOControl.framework"; sourceTree = "<absolute>"; };
+		ADF4C9B1073A9CC30050AAEF /* JSClipboard.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = JSClipboard.api; sourceTree = "<group>"; };
+		ADF4C9B3073A9CD70050AAEF /* JSMenu.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = JSMenu.api; sourceTree = "<group>"; };
+		ADF4C9B5073A9CEB0050AAEF /* JSMenuItem.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = JSMenuItem.api; sourceTree = "<group>"; };
+		ADF4C9B7073A9CFE0050AAEF /* JSShiftClick.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = JSShiftClick.api; sourceTree = "<group>"; };
+		ADF4C9B9073A9D130050AAEF /* WEBrowser.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEBrowser.api; sourceTree = "<group>"; };
+		ADF4C9BB073A9D250050AAEF /* WECalendarField.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WECalendarField.api; sourceTree = "<group>"; };
+		ADF4C9BD073A9D360050AAEF /* WECollapsibleComponentContent.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WECollapsibleComponentContent.api; sourceTree = "<group>"; };
+		ADF4C9BF073A9D470050AAEF /* WEComponentValue.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEComponentValue.api; sourceTree = "<group>"; };
+		ADF4C9C1073A9D580050AAEF /* WEContextConditional.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEContextConditional.api; sourceTree = "<group>"; };
+		ADF4C9C3073A9D700050AAEF /* WEContextKey.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEContextKey.api; sourceTree = "<group>"; };
+		ADF4C9C5073A9D7D0050AAEF /* WEDateField.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEDateField.api; sourceTree = "<group>"; };
+		ADF4C9C7073A9D9F0050AAEF /* WEDragContainer.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEDragContainer.api; sourceTree = "<group>"; };
+		ADF4C9C9073A9DAD0050AAEF /* WEDropContainer.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEDropContainer.api; sourceTree = "<group>"; };
+		ADF4C9CB073A9DD70050AAEF /* WEEpozEditor.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEEpozEditor.api; sourceTree = "<group>"; };
+		ADF4CA08073A9E8A0050AAEF /* WEMonthOverview.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WEMonthOverview.api; sourceTree = "<group>"; };
+		ADF4CA09073A9E8A0050AAEF /* WEPageLink.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WEPageLink.api; sourceTree = "<group>"; };
+		ADF4CA0A073A9E8A0050AAEF /* WEPageView.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WEPageView.api; sourceTree = "<group>"; };
+		ADF4CA0B073A9E8A0050AAEF /* WEQualifierConditional.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WEQualifierConditional.api; sourceTree = "<group>"; };
+		ADF4CA0C073A9E8A0050AAEF /* WERedirect.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WERedirect.api; sourceTree = "<group>"; };
+		ADF4CA0D073A9E8A0050AAEF /* WERichString.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WERichString.api; sourceTree = "<group>"; };
+		ADF4CA0E073A9E8A0050AAEF /* WESwitch.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WESwitch.api; sourceTree = "<group>"; };
+		ADF4CA0F073A9E8A0050AAEF /* WETabItem.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETabItem.api; sourceTree = "<group>"; };
+		ADF4CA11073A9E8A0050AAEF /* WETableMatrix.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETableMatrix.api; sourceTree = "<group>"; };
+		ADF4CA12073A9E8A0050AAEF /* WETableMatrixContent.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETableMatrixContent.api; sourceTree = "<group>"; };
+		ADF4CA13073A9E8A0050AAEF /* WETableMatrixLabel.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETableMatrixLabel.api; sourceTree = "<group>"; };
+		ADF4CA14073A9E8A0050AAEF /* WETabView.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETabView.api; sourceTree = "<group>"; };
+		ADF4CA15073A9E8A0050AAEF /* WETimeField.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETimeField.api; sourceTree = "<group>"; };
+		ADF4CA16073A9E8A0050AAEF /* WETreeData.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETreeData.api; sourceTree = "<group>"; };
+		ADF4CA17073A9E8A0050AAEF /* WETreeHeader.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETreeHeader.api; sourceTree = "<group>"; };
+		ADF4CA19073A9E8A0050AAEF /* WETreeView.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WETreeView.api; sourceTree = "<group>"; };
+		ADF4CA1A073A9E8A0050AAEF /* WEWeekColumnView.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WEWeekColumnView.api; sourceTree = "<group>"; };
+		ADF4CA1B073A9E8A0050AAEF /* WEWeekOverview.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 5; indentWidth = 2; path = WEWeekOverview.api; sourceTree = "<group>"; };
+		ADF4CAF9073AC15F0050AAEF /* WEMonthLabel.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEMonthLabel.api; sourceTree = "<group>"; };
+		ADF4CAFD073AC4BF0050AAEF /* WEPageItem.api */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; indentWidth = 2; path = WEPageItem.api; sourceTree = "<group>"; };
+		ADFE760106E2918E006628C4 /* calendar.js */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 5; indentWidth = 2; path = calendar.js; sourceTree = "<group>"; };
+		ADFE760206E2918E006628C4 /* calendar.jsm */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 5; path = calendar.jsm; sourceTree = "<group>"; };
+		ADFE760306E2918E006628C4 /* calendar.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = calendar.m; sourceTree = "<group>"; };
+		ADFE760406E2918E006628C4 /* js2m.sh */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 5; indentWidth = 2; path = js2m.sh; sourceTree = "<group>"; };
+		ADFE760506E2918E006628C4 /* JSClipboard.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = JSClipboard.m; sourceTree = "<group>"; };
+		ADFE760606E2918E006628C4 /* JSMenu.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = JSMenu.h; sourceTree = "<group>"; };
+		ADFE760706E2918E006628C4 /* JSMenu.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = JSMenu.m; sourceTree = "<group>"; };
+		ADFE760806E2918E006628C4 /* JSMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = JSMenuItem.h; sourceTree = "<group>"; };
+		ADFE760906E2918E006628C4 /* JSMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = JSMenuItem.m; sourceTree = "<group>"; };
+		ADFE760A06E2918E006628C4 /* JSShiftClick.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = JSShiftClick.m; sourceTree = "<group>"; };
+		ADFE760B06E2918E006628C4 /* WEBrowser.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEBrowser.m; sourceTree = "<group>"; };
+		ADFE760C06E2918E006628C4 /* WECalendarField.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WECalendarField.h; sourceTree = "<group>"; };
+		ADFE760D06E2918E006628C4 /* WECalendarField.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WECalendarField.m; sourceTree = "<group>"; };
+		ADFE760F06E2918E006628C4 /* WECollapsibleComponentContent.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WECollapsibleComponentContent.m; sourceTree = "<group>"; };
+		ADFE761006E2918E006628C4 /* WEComponentValue.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEComponentValue.m; sourceTree = "<group>"; };
+		ADFE761106E2918E006628C4 /* WEContextConditional.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WEContextConditional.h; sourceTree = "<group>"; };
+		ADFE761206E2918E006628C4 /* WEContextConditional.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEContextConditional.m; sourceTree = "<group>"; };
+		ADFE761306E2918E006628C4 /* WEContextKey.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEContextKey.m; sourceTree = "<group>"; };
+		ADFE761406E2918F006628C4 /* WEDateField.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEDateField.m; sourceTree = "<group>"; };
+		ADFE761506E2918F006628C4 /* WEDragContainer.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEDragContainer.m; sourceTree = "<group>"; };
+		ADFE761606E2918F006628C4 /* WEDropContainer.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEDropContainer.m; sourceTree = "<group>"; };
+		ADFE761706E2918F006628C4 /* WEDropScript.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WEDropScript.h; sourceTree = "<group>"; };
+		ADFE761806E2918F006628C4 /* WEDropScript.js */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 5; indentWidth = 2; path = WEDropScript.js; sourceTree = "<group>"; };
+		ADFE761906E2918F006628C4 /* WEDropScript.jsm */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 5; path = WEDropScript.jsm; sourceTree = "<group>"; };
+		ADFE761A06E2918F006628C4 /* WEEpozEditor.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEEpozEditor.m; sourceTree = "<group>"; };
+		ADFE761B06E2918F006628C4 /* WEExtensionsBundle.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEExtensionsBundle.m; sourceTree = "<group>"; };
+		ADFE761C06E2918F006628C4 /* WEMonthOverview.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEMonthOverview.m; sourceTree = "<group>"; };
+		ADFE761D06E2918F006628C4 /* WEPageLink.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEPageLink.m; sourceTree = "<group>"; };
+		ADFE761E06E2918F006628C4 /* WEPageView.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEPageView.m; sourceTree = "<group>"; };
+		ADFE761F06E2918F006628C4 /* WEQualifierConditional.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEQualifierConditional.m; sourceTree = "<group>"; };
+		ADFE762006E2918F006628C4 /* WERedirect.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WERedirect.m; sourceTree = "<group>"; };
+		ADFE762106E2918F006628C4 /* WERichString.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WERichString.m; sourceTree = "<group>"; };
+		ADFE762206E2918F006628C4 /* WESwitch.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WESwitch.m; sourceTree = "<group>"; };
+		ADFE762306E2918F006628C4 /* WETabItem.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETabItem.m; sourceTree = "<group>"; };
+		ADFE762406E2918F006628C4 /* WETableCalcMatrix.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableCalcMatrix.h; sourceTree = "<group>"; };
+		ADFE762506E2918F006628C4 /* WETableCalcMatrix.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableCalcMatrix.m; sourceTree = "<group>"; };
+		ADFE762606E2918F006628C4 /* WETableMatrix.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableMatrix.m; sourceTree = "<group>"; };
+		ADFE762706E2918F006628C4 /* WETableMatrixContent.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableMatrixContent.m; sourceTree = "<group>"; };
+		ADFE762806E2918F006628C4 /* WETableMatrixLabel.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableMatrixLabel.m; sourceTree = "<group>"; };
+		ADFE762A06E2918F006628C4 /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADFE762B06E2918F006628C4 /* GNUmakefile.preamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile.preamble; sourceTree = "<group>"; tabWidth = 8; };
+		ADFE762C06E2918F006628C4 /* README */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		ADFE762D06E2918F006628C4 /* WETableCell.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableCell.h; sourceTree = "<group>"; };
+		ADFE762E06E2918F006628C4 /* WETableCell.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableCell.m; sourceTree = "<group>"; };
+		ADFE762F06E2918F006628C4 /* WETableData.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableData.m; sourceTree = "<group>"; };
+		ADFE763006E2918F006628C4 /* WETableHeader.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableHeader.m; sourceTree = "<group>"; };
+		ADFE763106E2918F006628C4 /* WETableView+Grouping.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = "WETableView+Grouping.h"; sourceTree = "<group>"; };
+		ADFE763206E2918F006628C4 /* WETableView+Grouping.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = "WETableView+Grouping.m"; sourceTree = "<group>"; };
+		ADFE763306E2918F006628C4 /* WETableView.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableView.h; sourceTree = "<group>"; };
+		ADFE763406E2918F006628C4 /* WETableView.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableView.m; sourceTree = "<group>"; };
+		ADFE763506E2918F006628C4 /* WETableViewButtonMode.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewButtonMode.m; sourceTree = "<group>"; };
+		ADFE763606E2918F006628C4 /* WETableViewColorConfig.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableViewColorConfig.h; sourceTree = "<group>"; };
+		ADFE763706E2918F006628C4 /* WETableViewColorConfig.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewColorConfig.m; sourceTree = "<group>"; };
+		ADFE763806E2918F006628C4 /* WETableViewConfigObject.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableViewConfigObject.h; sourceTree = "<group>"; };
+		ADFE763906E2918F006628C4 /* WETableViewConfigObject.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewConfigObject.m; sourceTree = "<group>"; };
+		ADFE763A06E2918F006628C4 /* WETableViewDefines.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableViewDefines.h; sourceTree = "<group>"; };
+		ADFE763B06E2918F006628C4 /* WETableViewFooterMode.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewFooterMode.m; sourceTree = "<group>"; };
+		ADFE763C06E2918F006628C4 /* WETableViewGroupMode.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewGroupMode.m; sourceTree = "<group>"; };
+		ADFE763D06E2918F006628C4 /* WETableViewIconConfig.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableViewIconConfig.h; sourceTree = "<group>"; };
+		ADFE763E06E2918F006628C4 /* WETableViewIconConfig.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewIconConfig.m; sourceTree = "<group>"; };
+		ADFE763F06E2918F006628C4 /* WETableViewInfo.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableViewInfo.h; sourceTree = "<group>"; };
+		ADFE764006E2918F006628C4 /* WETableViewLabelConfig.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableViewLabelConfig.h; sourceTree = "<group>"; };
+		ADFE764106E2918F006628C4 /* WETableViewLabelConfig.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewLabelConfig.m; sourceTree = "<group>"; };
+		ADFE764206E2918F006628C4 /* WETableViewState.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETableViewState.h; sourceTree = "<group>"; };
+		ADFE764306E2918F006628C4 /* WETableViewState.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewState.m; sourceTree = "<group>"; };
+		ADFE764406E2918F006628C4 /* WETableViewTitleMode.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETableViewTitleMode.m; sourceTree = "<group>"; };
+		ADFE764506E2918F006628C4 /* WETabView.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETabView.h; sourceTree = "<group>"; };
+		ADFE764606E2918F006628C4 /* WETabView.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETabView.m; sourceTree = "<group>"; };
+		ADFE764706E2918F006628C4 /* WETimeField.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETimeField.m; sourceTree = "<group>"; };
+		ADFE764806E2918F006628C4 /* WETreeContextKeys.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETreeContextKeys.h; sourceTree = "<group>"; };
+		ADFE764906E2918F006628C4 /* WETreeData.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETreeData.m; sourceTree = "<group>"; };
+		ADFE764A06E2918F006628C4 /* WETreeHeader.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETreeHeader.m; sourceTree = "<group>"; };
+		ADFE764B06E2918F006628C4 /* WETreeMatrixElement.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = WETreeMatrixElement.h; sourceTree = "<group>"; };
+		ADFE764C06E2918F006628C4 /* WETreeMatrixElement.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETreeMatrixElement.m; sourceTree = "<group>"; };
+		ADFE764D06E2918F006628C4 /* WETreeView.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WETreeView.m; sourceTree = "<group>"; };
+		ADFE764E06E2918F006628C4 /* WEWeekColumnView.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEWeekColumnView.m; sourceTree = "<group>"; };
+		ADFE764F06E2918F006628C4 /* WEWeekOverview.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WEWeekOverview.m; sourceTree = "<group>"; };
+		ADFE765006E2918F006628C4 /* WExCalElemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WExCalElemBuilder.m; sourceTree = "<group>"; };
+		ADFE765106E2918F006628C4 /* WExDnDElemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WExDnDElemBuilder.m; sourceTree = "<group>"; };
+		ADFE765206E2918F006628C4 /* WExExtElemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = WExExtElemBuilder.m; sourceTree = "<group>"; };
+		ADFE77AE06E2975E006628C4 /* NGObjWeb.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NGObjWeb.xcodeproj; path = ../NGObjWeb/NGObjWeb.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADD65D5606DA372D007161CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD65F7506DA3C51007161CA /* Foundation.framework in Frameworks */,
+				AD51824006FF7FD1006397CD /* DOM.framework in Frameworks */,
+				AD51824106FF7FD1006397CD /* SaxObjC.framework in Frameworks */,
+				AD51824206FF7FD1006397CD /* XmlRpc.framework in Frameworks */,
+				ADFE77BA06E2986F006628C4 /* EOControl.framework in Frameworks */,
+				AD51824306FF7FDA006397CD /* NGExtensions.framework in Frameworks */,
+				AD51824406FF7FDA006397CD /* NGStreams.framework in Frameworks */,
+				AD51824806FF8035006397CD /* NGHttp.framework in Frameworks */,
+				AD51824906FF8048006397CD /* WebDAV.framework in Frameworks */,
+				ADFE77B306E2977F006628C4 /* NGObjWeb.framework in Frameworks */,
+				AD51824506FF8021006397CD /* NGImap4.framework in Frameworks */,
+				AD51824606FF8021006397CD /* NGMail.framework in Frameworks */,
+				AD51824706FF8021006397CD /* NGMime.framework in Frameworks */,
+				AD51824B06FF805E006397CD /* SoObjects.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD013C1806E20C17000910D8 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE760606E2918E006628C4 /* JSMenu.h */,
+				ADFE760806E2918E006628C4 /* JSMenuItem.h */,
+				ADFE760C06E2918E006628C4 /* WECalendarField.h */,
+				ADFE761106E2918E006628C4 /* WEContextConditional.h */,
+				ADFE761706E2918F006628C4 /* WEDropScript.h */,
+				AD85C84D07C5080D0036AC7A /* WEResourceKey.h */,
+				AD85C84F07C5080D0036AC7A /* WEResourceManager.h */,
+				AD85C85107C5080D0036AC7A /* WEStringTable.h */,
+				AD85C85307C5080D0036AC7A /* WEStringTableManager.h */,
+				ADFE762406E2918F006628C4 /* WETableCalcMatrix.h */,
+				ADFE764506E2918F006628C4 /* WETabView.h */,
+				ADFE764806E2918F006628C4 /* WETreeContextKeys.h */,
+				ADFE764B06E2918F006628C4 /* WETreeMatrixElement.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		AD013C9E06E20E99000910D8 /* sope-core */ = {
+			isa = PBXGroup;
+			children = (
+				ADD6610D06DA3D1F007161CA /* EOControl.framework */,
+				AD0142CE06E21A3D000910D8 /* NGExtensions.framework */,
+				AD013C2106E20D18000910D8 /* NGStreams.framework */,
+			);
+			name = "sope-core";
+			sourceTree = "<group>";
+		};
+		AD013DD406E20EBA000910D8 /* sope-appserver */ = {
+			isa = PBXGroup;
+			children = (
+				AD013C2006E20D18000910D8 /* NGObjWeb.framework */,
+				AD013C2206E20D18000910D8 /* NGXmlRpc.framework */,
+				AD013C2406E20D18000910D8 /* WEExtensions.framework */,
+				AD013C2506E20D19000910D8 /* WOExtensions.framework */,
+				AD013C1906E20D18000910D8 /* NGHttp.framework */,
+				AD013C2306E20D18000910D8 /* WebDAV.framework */,
+				AD51824A06FF805E006397CD /* SoObjects.framework */,
+			);
+			name = "sope-appserver";
+			sourceTree = "<group>";
+		};
+		AD013F6A06E20F00000910D8 /* sope-ical */ = {
+			isa = PBXGroup;
+			children = (
+				AD013C1A06E20D18000910D8 /* NGiCal.framework */,
+			);
+			name = "sope-ical";
+			sourceTree = "<group>";
+		};
+		AD013FA606E20F0E000910D8 /* sope-ldap */ = {
+			isa = PBXGroup;
+			children = (
+				AD013C1C06E20D18000910D8 /* NGLdap.framework */,
+			);
+			name = "sope-ldap";
+			sourceTree = "<group>";
+		};
+		AD01401C06E20F1D000910D8 /* sope-mime */ = {
+			isa = PBXGroup;
+			children = (
+				AD013C1B06E20D18000910D8 /* NGImap4.framework */,
+				AD013C1D06E20D18000910D8 /* NGMail.framework */,
+				AD013C1E06E20D18000910D8 /* NGMime.framework */,
+			);
+			name = "sope-mime";
+			sourceTree = "<group>";
+		};
+		AD3EB2D4073D5F570038A3E6 /* Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				AD3EB2D5073D5F830038A3E6 /* WETableView.api */,
+				AD3EB2D9073D5FB30038A3E6 /* WETableHeader.api */,
+				AD3EB2D7073D5FA90038A3E6 /* WETableData.api */,
+			);
+			name = Definitions;
+			sourceTree = "<group>";
+		};
+		AD77EC560C4F65CD0018A131 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				AD77EC570C4F65CD0018A131 /* Common.xcconfig */,
+				AD77EC580C4F65CD0018A131 /* Development.xcconfig */,
+				AD77EC590C4F65CD0018A131 /* Wrapper.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../xcconfig;
+			sourceTree = "<group>";
+		};
+		ADD65B6606DA32D6007161CA = {
+			isa = PBXGroup;
+			children = (
+				AD013B8706E20AC5000910D8 /* README */,
+				ADD65C7106DA343C007161CA /* COPYING */,
+				ADD65C7206DA343C007161CA /* COPYRIGHT */,
+				ADD65C8A06DA343C007161CA /* TODO */,
+				ADD65C6F06DA343C007161CA /* ChangeLog */,
+				ADD65C8B06DA343C007161CA /* Version */,
+				ADD65C8E06DA344C007161CA /* Makefiles */,
+				ADF4C9B0073A9CA40050AAEF /* Definitions */,
+				AD013C1806E20C17000910D8 /* Headers */,
+				ADD65C9406DA34FF007161CA /* Classes */,
+				ADFE762906E2918F006628C4 /* WETableView */,
+				ADD65D5D06DA37C7007161CA /* Resources */,
+				ADFE77AD06E29709006628C4 /* Projects */,
+				ADD65D5906DA372D007161CA /* Products */,
+				ADD65F7306DA3C02007161CA /* Linked Frameworks */,
+				AD77EC560C4F65CD0018A131 /* xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		ADD65C8E06DA344C007161CA /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65C7406DA343C007161CA /* GNUmakefile */,
+				ADD65C7506DA343C007161CA /* GNUmakefile.preamble */,
+				AD013B8406E20AC5000910D8 /* GNUmakefile.postamble */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADD65C9406DA34FF007161CA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65C7006DA343C007161CA /* common.h */,
+				ADFE760306E2918E006628C4 /* calendar.m */,
+				ADFE760506E2918E006628C4 /* JSClipboard.m */,
+				ADFE760706E2918E006628C4 /* JSMenu.m */,
+				ADFE760906E2918E006628C4 /* JSMenuItem.m */,
+				ADFE760A06E2918E006628C4 /* JSShiftClick.m */,
+				AD3D64EF088E4AB500CBB51B /* JSStringTable.m */,
+				ADFE760B06E2918E006628C4 /* WEBrowser.m */,
+				ADFE760D06E2918E006628C4 /* WECalendarField.m */,
+				ADFE760F06E2918E006628C4 /* WECollapsibleComponentContent.m */,
+				ADFE761006E2918E006628C4 /* WEComponentValue.m */,
+				ADFE761206E2918E006628C4 /* WEContextConditional.m */,
+				ADFE761306E2918E006628C4 /* WEContextKey.m */,
+				ADFE761406E2918F006628C4 /* WEDateField.m */,
+				ADFE761506E2918F006628C4 /* WEDragContainer.m */,
+				ADFE761606E2918F006628C4 /* WEDropContainer.m */,
+				ADFE761A06E2918F006628C4 /* WEEpozEditor.m */,
+				ADFE761B06E2918F006628C4 /* WEExtensionsBundle.m */,
+				ADFE761C06E2918F006628C4 /* WEMonthOverview.m */,
+				ADFE761D06E2918F006628C4 /* WEPageLink.m */,
+				ADFE761E06E2918F006628C4 /* WEPageView.m */,
+				ADFE761F06E2918F006628C4 /* WEQualifierConditional.m */,
+				ADFE762006E2918F006628C4 /* WERedirect.m */,
+				AD85C84E07C5080D0036AC7A /* WEResourceKey.m */,
+				AD85C85007C5080D0036AC7A /* WEResourceManager.m */,
+				ADFE762106E2918F006628C4 /* WERichString.m */,
+				AD85C85207C5080D0036AC7A /* WEStringTable.m */,
+				AD85C85407C5080D0036AC7A /* WEStringTableManager.m */,
+				ADFE762206E2918F006628C4 /* WESwitch.m */,
+				ADFE762306E2918F006628C4 /* WETabItem.m */,
+				ADFE762506E2918F006628C4 /* WETableCalcMatrix.m */,
+				ADFE762606E2918F006628C4 /* WETableMatrix.m */,
+				ADFE762706E2918F006628C4 /* WETableMatrixContent.m */,
+				ADFE762806E2918F006628C4 /* WETableMatrixLabel.m */,
+				ADFE764606E2918F006628C4 /* WETabView.m */,
+				ADFE764706E2918F006628C4 /* WETimeField.m */,
+				ADFE764906E2918F006628C4 /* WETreeData.m */,
+				ADFE764A06E2918F006628C4 /* WETreeHeader.m */,
+				ADFE764C06E2918F006628C4 /* WETreeMatrixElement.m */,
+				ADFE764D06E2918F006628C4 /* WETreeView.m */,
+				ADFE764E06E2918F006628C4 /* WEWeekColumnView.m */,
+				ADFE764F06E2918F006628C4 /* WEWeekOverview.m */,
+				ADFE765006E2918F006628C4 /* WExCalElemBuilder.m */,
+				ADFE765106E2918F006628C4 /* WExDnDElemBuilder.m */,
+				ADFE765206E2918F006628C4 /* WExExtElemBuilder.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		ADD65D5906DA372D007161CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65D5806DA372D007161CA /* WEExtensions.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADD65D5D06DA37C7007161CA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE760106E2918E006628C4 /* calendar.js */,
+				ADFE760206E2918E006628C4 /* calendar.jsm */,
+				ADFE760406E2918E006628C4 /* js2m.sh */,
+				ADFE761806E2918F006628C4 /* WEDropScript.js */,
+				ADFE761906E2918F006628C4 /* WEDropScript.jsm */,
+				ADD65D5A06DA372D007161CA /* WEExtensions-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		ADD65F7306DA3C02007161CA /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65F7406DA3C51007161CA /* Foundation.framework */,
+				AD013C4706E20DAA000910D8 /* LDAP.framework */,
+				ADD65FE306DA3CA7007161CA /* libz.dylib */,
+				ADD6603106DA3CE2007161CA /* sope-xml */,
+				AD013C9E06E20E99000910D8 /* sope-core */,
+				AD013DD406E20EBA000910D8 /* sope-appserver */,
+				AD013F6A06E20F00000910D8 /* sope-ical */,
+				AD01401C06E20F1D000910D8 /* sope-mime */,
+				AD013FA606E20F0E000910D8 /* sope-ldap */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		ADD6603106DA3CE2007161CA /* sope-xml */ = {
+			isa = PBXGroup;
+			children = (
+				ADD65FE506DA3CDE007161CA /* DOM.framework */,
+				ADD65FE606DA3CDE007161CA /* SaxObjC.framework */,
+				ADD65FE706DA3CDE007161CA /* XmlRpc.framework */,
+			);
+			name = "sope-xml";
+			sourceTree = "<group>";
+		};
+		ADF4C9B0073A9CA40050AAEF /* Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				ADF4C9B1073A9CC30050AAEF /* JSClipboard.api */,
+				ADF4C9B3073A9CD70050AAEF /* JSMenu.api */,
+				ADF4C9B5073A9CEB0050AAEF /* JSMenuItem.api */,
+				ADF4C9B7073A9CFE0050AAEF /* JSShiftClick.api */,
+				AD3D64EE088E4AB500CBB51B /* JSStringTable.api */,
+				ADF4C9B9073A9D130050AAEF /* WEBrowser.api */,
+				ADF4C9BB073A9D250050AAEF /* WECalendarField.api */,
+				ADF4C9BD073A9D360050AAEF /* WECollapsibleComponentContent.api */,
+				ADF4C9BF073A9D470050AAEF /* WEComponentValue.api */,
+				ADF4C9C1073A9D580050AAEF /* WEContextConditional.api */,
+				ADF4C9C3073A9D700050AAEF /* WEContextKey.api */,
+				ADF4C9C5073A9D7D0050AAEF /* WEDateField.api */,
+				ADF4C9C7073A9D9F0050AAEF /* WEDragContainer.api */,
+				ADF4C9C9073A9DAD0050AAEF /* WEDropContainer.api */,
+				ADF4C9CB073A9DD70050AAEF /* WEEpozEditor.api */,
+				ADF4CA08073A9E8A0050AAEF /* WEMonthOverview.api */,
+				ADF4CAF9073AC15F0050AAEF /* WEMonthLabel.api */,
+				ADF4CA09073A9E8A0050AAEF /* WEPageLink.api */,
+				ADF4CA0A073A9E8A0050AAEF /* WEPageView.api */,
+				ADF4CAFD073AC4BF0050AAEF /* WEPageItem.api */,
+				ADF4CA0B073A9E8A0050AAEF /* WEQualifierConditional.api */,
+				ADF4CA0C073A9E8A0050AAEF /* WERedirect.api */,
+				ADF4CA0D073A9E8A0050AAEF /* WERichString.api */,
+				ADF4CA0E073A9E8A0050AAEF /* WESwitch.api */,
+				AD3EB2CC073D56C20038A3E6 /* WECase.api */,
+				ADF4CA0F073A9E8A0050AAEF /* WETabItem.api */,
+				ADF4CA11073A9E8A0050AAEF /* WETableMatrix.api */,
+				AD3EB2CE073D59E10038A3E6 /* WEHSpanTableMatrix.api */,
+				AD3EB2D0073D5A080038A3E6 /* WEVSpanTableMatrix.api */,
+				ADF4CA12073A9E8A0050AAEF /* WETableMatrixContent.api */,
+				ADF4CA13073A9E8A0050AAEF /* WETableMatrixLabel.api */,
+				ADF4CA14073A9E8A0050AAEF /* WETabView.api */,
+				ADF4CA15073A9E8A0050AAEF /* WETimeField.api */,
+				ADF4CA16073A9E8A0050AAEF /* WETreeData.api */,
+				ADF4CA17073A9E8A0050AAEF /* WETreeHeader.api */,
+				ADF4CA19073A9E8A0050AAEF /* WETreeView.api */,
+				ADF4CA1A073A9E8A0050AAEF /* WEWeekColumnView.api */,
+				ADF4CA1B073A9E8A0050AAEF /* WEWeekOverview.api */,
+			);
+			name = Definitions;
+			sourceTree = "<group>";
+		};
+		ADFE762906E2918F006628C4 /* WETableView */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE762C06E2918F006628C4 /* README */,
+				AD3EB2D4073D5F570038A3E6 /* Definitions */,
+				ADFE76B906E294DE006628C4 /* Makefiles */,
+				ADFE76C906E296D3006628C4 /* Headers */,
+				ADFE76CC06E296E5006628C4 /* Classes */,
+			);
+			path = WETableView;
+			sourceTree = "<group>";
+		};
+		ADFE76B906E294DE006628C4 /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE762A06E2918F006628C4 /* GNUmakefile */,
+				ADFE762B06E2918F006628C4 /* GNUmakefile.preamble */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADFE76C906E296D3006628C4 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE762D06E2918F006628C4 /* WETableCell.h */,
+				ADFE763106E2918F006628C4 /* WETableView+Grouping.h */,
+				ADFE763306E2918F006628C4 /* WETableView.h */,
+				ADFE763606E2918F006628C4 /* WETableViewColorConfig.h */,
+				ADFE763806E2918F006628C4 /* WETableViewConfigObject.h */,
+				ADFE763A06E2918F006628C4 /* WETableViewDefines.h */,
+				ADFE763D06E2918F006628C4 /* WETableViewIconConfig.h */,
+				ADFE763F06E2918F006628C4 /* WETableViewInfo.h */,
+				ADFE764006E2918F006628C4 /* WETableViewLabelConfig.h */,
+				ADFE764206E2918F006628C4 /* WETableViewState.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		ADFE76CC06E296E5006628C4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE762E06E2918F006628C4 /* WETableCell.m */,
+				ADFE762F06E2918F006628C4 /* WETableData.m */,
+				ADFE763006E2918F006628C4 /* WETableHeader.m */,
+				ADFE763206E2918F006628C4 /* WETableView+Grouping.m */,
+				ADFE763406E2918F006628C4 /* WETableView.m */,
+				ADFE763506E2918F006628C4 /* WETableViewButtonMode.m */,
+				ADFE763706E2918F006628C4 /* WETableViewColorConfig.m */,
+				ADFE763906E2918F006628C4 /* WETableViewConfigObject.m */,
+				ADFE763B06E2918F006628C4 /* WETableViewFooterMode.m */,
+				ADFE763C06E2918F006628C4 /* WETableViewGroupMode.m */,
+				ADFE763E06E2918F006628C4 /* WETableViewIconConfig.m */,
+				ADFE764106E2918F006628C4 /* WETableViewLabelConfig.m */,
+				ADFE764306E2918F006628C4 /* WETableViewState.m */,
+				ADFE764406E2918F006628C4 /* WETableViewTitleMode.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		ADFE77AD06E29709006628C4 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE77AE06E2975E006628C4 /* NGObjWeb.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+		ADFE77B006E2977A006628C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADFE77B106E2977A006628C4 /* NGObjWeb.framework */,
+				ADFE77B206E2977A006628C4 /* SoCore.sxp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		ADD65D5306DA372D007161CA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD65F6406DA3AF6007161CA /* common.h in Headers */,
+				ADFE765806E2918F006628C4 /* JSMenu.h in Headers */,
+				ADFE765A06E2918F006628C4 /* JSMenuItem.h in Headers */,
+				ADFE765E06E2918F006628C4 /* WECalendarField.h in Headers */,
+				ADFE766306E2918F006628C4 /* WEContextConditional.h in Headers */,
+				ADFE766906E2918F006628C4 /* WEDropScript.h in Headers */,
+				ADFE767606E29190006628C4 /* WETableCalcMatrix.h in Headers */,
+				ADFE767E06E29190006628C4 /* WETableCell.h in Headers */,
+				ADFE768206E29190006628C4 /* WETableView+Grouping.h in Headers */,
+				ADFE768406E29190006628C4 /* WETableView.h in Headers */,
+				ADFE768706E29190006628C4 /* WETableViewColorConfig.h in Headers */,
+				ADFE768906E29190006628C4 /* WETableViewConfigObject.h in Headers */,
+				ADFE768B06E29190006628C4 /* WETableViewDefines.h in Headers */,
+				ADFE768E06E29190006628C4 /* WETableViewIconConfig.h in Headers */,
+				ADFE769006E29190006628C4 /* WETableViewInfo.h in Headers */,
+				ADFE769106E29190006628C4 /* WETableViewLabelConfig.h in Headers */,
+				ADFE769306E29190006628C4 /* WETableViewState.h in Headers */,
+				ADFE769606E29190006628C4 /* WETabView.h in Headers */,
+				ADFE769906E29190006628C4 /* WETreeContextKeys.h in Headers */,
+				ADFE769C06E29190006628C4 /* WETreeMatrixElement.h in Headers */,
+				AD85C85507C5080D0036AC7A /* WEResourceKey.h in Headers */,
+				AD85C85707C5080D0036AC7A /* WEResourceManager.h in Headers */,
+				AD85C85907C5080D0036AC7A /* WEStringTable.h in Headers */,
+				AD85C85B07C5080D0036AC7A /* WEStringTableManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		ADD65D5706DA372D007161CA /* WEExtensions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA0797C085738E600993825 /* Build configuration list for PBXNativeTarget "WEExtensions" */;
+			buildPhases = (
+				ADD65D5306DA372D007161CA /* Headers */,
+				ADD65D5406DA372D007161CA /* Resources */,
+				ADD65D5506DA372D007161CA /* Sources */,
+				ADD65D5606DA372D007161CA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WEExtensions;
+			productName = WEExtensions;
+			productReference = ADD65D5806DA372D007161CA /* WEExtensions.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADD65B6A06DA32D6007161CA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA07980085738E600993825 /* Build configuration list for PBXProject "WEExtensions" */;
+			hasScannedForEncodings = 0;
+			mainGroup = ADD65B6606DA32D6007161CA;
+			productRefGroup = ADD65D5906DA372D007161CA /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = ADFE77B006E2977A006628C4 /* Products */;
+					ProjectRef = ADFE77AE06E2975E006628C4 /* NGObjWeb.xcodeproj */;
+				},
+			);
+			targets = (
+				ADD65D5706DA372D007161CA /* WEExtensions */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		ADFE77B106E2977A006628C4 /* NGObjWeb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NGObjWeb.framework;
+			remoteRef = ADFE77B606E297B2006628C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADFE77B206E2977A006628C4 /* SoCore.sxp */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SoCore.sxp;
+			remoteRef = ADFE77B706E297B2006628C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADD65D5406DA372D007161CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD65F6506DA3B38007161CA /* COPYING in Resources */,
+				ADD65F6606DA3B38007161CA /* COPYRIGHT in Resources */,
+				AD013B8C06E20AC5000910D8 /* README in Resources */,
+				ADFE765406E2918F006628C4 /* calendar.jsm in Resources */,
+				ADFE765606E2918F006628C4 /* js2m.sh in Resources */,
+				ADFE766B06E2918F006628C4 /* WEDropScript.jsm in Resources */,
+				ADFE766A06E2918F006628C4 /* WEDropScript.js in Resources */,
+				ADFE765306E2918F006628C4 /* calendar.js in Resources */,
+				ADF4C9B2073A9CC30050AAEF /* JSClipboard.api in Resources */,
+				ADF4C9B4073A9CD70050AAEF /* JSMenu.api in Resources */,
+				ADF4C9B6073A9CEB0050AAEF /* JSMenuItem.api in Resources */,
+				ADF4C9B8073A9CFE0050AAEF /* JSShiftClick.api in Resources */,
+				ADF4C9BA073A9D130050AAEF /* WEBrowser.api in Resources */,
+				ADF4C9BC073A9D250050AAEF /* WECalendarField.api in Resources */,
+				ADF4C9BE073A9D360050AAEF /* WECollapsibleComponentContent.api in Resources */,
+				ADF4C9C0073A9D470050AAEF /* WEComponentValue.api in Resources */,
+				ADF4C9C2073A9D580050AAEF /* WEContextConditional.api in Resources */,
+				ADF4C9C4073A9D700050AAEF /* WEContextKey.api in Resources */,
+				ADF4C9C6073A9D7D0050AAEF /* WEDateField.api in Resources */,
+				ADF4C9C8073A9D9F0050AAEF /* WEDragContainer.api in Resources */,
+				ADF4C9CA073A9DAD0050AAEF /* WEDropContainer.api in Resources */,
+				ADF4C9CC073A9DD70050AAEF /* WEEpozEditor.api in Resources */,
+				ADF4CA20073A9E8A0050AAEF /* WEMonthOverview.api in Resources */,
+				ADF4CA21073A9E8A0050AAEF /* WEPageLink.api in Resources */,
+				ADF4CA22073A9E8A0050AAEF /* WEPageView.api in Resources */,
+				ADF4CA23073A9E8A0050AAEF /* WEQualifierConditional.api in Resources */,
+				ADF4CA24073A9E8A0050AAEF /* WERedirect.api in Resources */,
+				ADF4CA25073A9E8A0050AAEF /* WERichString.api in Resources */,
+				ADF4CA26073A9E8A0050AAEF /* WESwitch.api in Resources */,
+				ADF4CA27073A9E8A0050AAEF /* WETabItem.api in Resources */,
+				ADF4CA29073A9E8A0050AAEF /* WETableMatrix.api in Resources */,
+				ADF4CA2A073A9E8A0050AAEF /* WETableMatrixContent.api in Resources */,
+				ADF4CA2B073A9E8A0050AAEF /* WETableMatrixLabel.api in Resources */,
+				ADF4CA2C073A9E8A0050AAEF /* WETabView.api in Resources */,
+				ADF4CA2D073A9E8A0050AAEF /* WETimeField.api in Resources */,
+				ADF4CA2E073A9E8A0050AAEF /* WETreeData.api in Resources */,
+				ADF4CA2F073A9E8A0050AAEF /* WETreeHeader.api in Resources */,
+				ADF4CA31073A9E8A0050AAEF /* WETreeView.api in Resources */,
+				ADF4CA32073A9E8A0050AAEF /* WEWeekColumnView.api in Resources */,
+				ADF4CA33073A9E8A0050AAEF /* WEWeekOverview.api in Resources */,
+				ADF4CAFA073AC15F0050AAEF /* WEMonthLabel.api in Resources */,
+				ADF4CAFE073AC4BF0050AAEF /* WEPageItem.api in Resources */,
+				AD3EB2CD073D56C20038A3E6 /* WECase.api in Resources */,
+				AD3EB2CF073D59E10038A3E6 /* WEHSpanTableMatrix.api in Resources */,
+				AD3EB2D1073D5A080038A3E6 /* WEVSpanTableMatrix.api in Resources */,
+				AD3EB2D6073D5F830038A3E6 /* WETableView.api in Resources */,
+				AD3EB2D8073D5FA90038A3E6 /* WETableData.api in Resources */,
+				AD3EB2DA073D5FB30038A3E6 /* WETableHeader.api in Resources */,
+				AD3D64F0088E4AB500CBB51B /* JSStringTable.api in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADD65D5506DA372D007161CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADFE765506E2918F006628C4 /* calendar.m in Sources */,
+				ADFE765706E2918F006628C4 /* JSClipboard.m in Sources */,
+				ADFE765906E2918F006628C4 /* JSMenu.m in Sources */,
+				ADFE765B06E2918F006628C4 /* JSMenuItem.m in Sources */,
+				ADFE765C06E2918F006628C4 /* JSShiftClick.m in Sources */,
+				ADFE765D06E2918F006628C4 /* WEBrowser.m in Sources */,
+				ADFE765F06E2918F006628C4 /* WECalendarField.m in Sources */,
+				ADFE766106E2918F006628C4 /* WECollapsibleComponentContent.m in Sources */,
+				ADFE766206E2918F006628C4 /* WEComponentValue.m in Sources */,
+				ADFE766406E2918F006628C4 /* WEContextConditional.m in Sources */,
+				ADFE766506E2918F006628C4 /* WEContextKey.m in Sources */,
+				ADFE766606E2918F006628C4 /* WEDateField.m in Sources */,
+				ADFE766706E2918F006628C4 /* WEDragContainer.m in Sources */,
+				ADFE766806E2918F006628C4 /* WEDropContainer.m in Sources */,
+				ADFE766C06E2918F006628C4 /* WEEpozEditor.m in Sources */,
+				ADFE766D06E2918F006628C4 /* WEExtensionsBundle.m in Sources */,
+				ADFE766E06E2918F006628C4 /* WEMonthOverview.m in Sources */,
+				ADFE766F06E2918F006628C4 /* WEPageLink.m in Sources */,
+				ADFE767006E2918F006628C4 /* WEPageView.m in Sources */,
+				ADFE767106E29190006628C4 /* WEQualifierConditional.m in Sources */,
+				ADFE767206E29190006628C4 /* WERedirect.m in Sources */,
+				ADFE767306E29190006628C4 /* WERichString.m in Sources */,
+				ADFE767406E29190006628C4 /* WESwitch.m in Sources */,
+				ADFE767506E29190006628C4 /* WETabItem.m in Sources */,
+				ADFE767706E29190006628C4 /* WETableCalcMatrix.m in Sources */,
+				ADFE767806E29190006628C4 /* WETableMatrix.m in Sources */,
+				ADFE767906E29190006628C4 /* WETableMatrixContent.m in Sources */,
+				ADFE767A06E29190006628C4 /* WETableMatrixLabel.m in Sources */,
+				ADFE767F06E29190006628C4 /* WETableCell.m in Sources */,
+				ADFE768006E29190006628C4 /* WETableData.m in Sources */,
+				ADFE768106E29190006628C4 /* WETableHeader.m in Sources */,
+				ADFE768306E29190006628C4 /* WETableView+Grouping.m in Sources */,
+				ADFE768506E29190006628C4 /* WETableView.m in Sources */,
+				ADFE768606E29190006628C4 /* WETableViewButtonMode.m in Sources */,
+				ADFE768806E29190006628C4 /* WETableViewColorConfig.m in Sources */,
+				ADFE768A06E29190006628C4 /* WETableViewConfigObject.m in Sources */,
+				ADFE768C06E29190006628C4 /* WETableViewFooterMode.m in Sources */,
+				ADFE768D06E29190006628C4 /* WETableViewGroupMode.m in Sources */,
+				ADFE768F06E29190006628C4 /* WETableViewIconConfig.m in Sources */,
+				ADFE769206E29190006628C4 /* WETableViewLabelConfig.m in Sources */,
+				ADFE769406E29190006628C4 /* WETableViewState.m in Sources */,
+				ADFE769506E29190006628C4 /* WETableViewTitleMode.m in Sources */,
+				ADFE769706E29190006628C4 /* WETabView.m in Sources */,
+				ADFE769806E29190006628C4 /* WETimeField.m in Sources */,
+				ADFE769A06E29190006628C4 /* WETreeData.m in Sources */,
+				ADFE769B06E29190006628C4 /* WETreeHeader.m in Sources */,
+				ADFE769D06E29190006628C4 /* WETreeMatrixElement.m in Sources */,
+				ADFE769E06E29190006628C4 /* WETreeView.m in Sources */,
+				ADFE769F06E29190006628C4 /* WEWeekColumnView.m in Sources */,
+				ADFE76A006E29190006628C4 /* WEWeekOverview.m in Sources */,
+				ADFE76A106E29190006628C4 /* WExCalElemBuilder.m in Sources */,
+				ADFE76A206E29190006628C4 /* WExDnDElemBuilder.m in Sources */,
+				ADFE76A306E29190006628C4 /* WExExtElemBuilder.m in Sources */,
+				AD85C85607C5080D0036AC7A /* WEResourceKey.m in Sources */,
+				AD85C85807C5080D0036AC7A /* WEResourceManager.m in Sources */,
+				AD85C85A07C5080D0036AC7A /* WEStringTable.m in Sources */,
+				AD85C85C07C5080D0036AC7A /* WEStringTableManager.m in Sources */,
+				AD3D64F1088E4AB500CBB51B /* JSStringTable.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADA0797D085738E600993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EC580C4F65CD0018A131 /* Development.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).0";
+				DYLIB_CURRENT_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).93";
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "WEExtensions-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-seg1addr",
+					0xC4000000,
+					"-headerpad_max_install_names",
+				);
+				PRODUCT_NAME = WEExtensions;
+			};
+			name = Development;
+		};
+		ADA0797E085738E600993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD77EC590C4F65CD0018A131 /* Wrapper.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).0";
+				DYLIB_CURRENT_VERSION = "$(SOPE_MAJOR_VERSION).$(SOPE_MINOR_VERSION).93";
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = "WEExtensions-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-seg1addr",
+					0xC4000000,
+					"-headerpad_max_install_names",
+				);
+				PRODUCT_NAME = WEExtensions;
+			};
+			name = Wrapper;
+		};
+		ADA07981085738E600993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA07982085738E600993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA0797C085738E600993825 /* Build configuration list for PBXNativeTarget "WEExtensions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA0797D085738E600993825 /* Development */,
+				ADA0797E085738E600993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA07980085738E600993825 /* Build configuration list for PBXProject "WEExtensions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA07981085738E600993825 /* Development */,
+				ADA07982085738E600993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADD65B6A06DA32D6007161CA /* Project object */;
+}

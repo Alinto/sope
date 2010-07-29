@@ -1,0 +1,10 @@
+/*
+  Main.wod
+  Project «PROJECTNAME»
+  
+  Created by «USERNAME» on «DATE»
+*/
+
+Name: WOString {
+  value = name;
+}

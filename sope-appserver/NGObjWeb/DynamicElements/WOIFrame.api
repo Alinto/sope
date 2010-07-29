@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOIFrame">
+  <binding name="pageName" passthrough="NO" defaults="Page Names"/>
+  <binding name="src"/>
+  <binding name="value" passthrough="NO"/>
+  <binding name="filename" passthrough="NO"/>
+  <binding name="directActionName" passthrough="NO" defaults="Direct Actions"/>
+  <binding name="actionClass" passthrough="NO" defaults="Direct Action Classes"/>
+
+  <binding name="queryDictionary" passthrough="NO"/>
+  <binding name="otherTagString" passthrough="NO"/>
+
+  <validation message="either one of &apos;pageName&apos;, &apos;src&apos;, &apos;value&apos; or &apos;directActionName&apos; may be bound, or either or both of &apos;actionClass&apos; and &apos;directActionName&apos;, or both of &apos;value&apos; and &apos;filename&apos; may be bound">
+    <count test="!=1">
+      <bound name="pageName"/>
+      <bound name="src"/>
+      <bound name="value"/>
+      <bound name="directActionName"/>
+      <or>
+        <bound name="actionClass"/>
+        <bound name="directActionName"/>
+      </or>
+      <or>
+        <bound name="value"/>
+        <bound name="filename"/>
+      </or>
+    </count>
+  </validation>
+
+</wo>

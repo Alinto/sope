@@ -1,0 +1,25 @@
+sope-appserver samples
+======================
+
+HelloWorld
+- simple SOPE application with a single .wo wrapper template
+
+TestPages
+- small app for testing NGObjWeb bugs
+
+TestSite
+- test site for use with the 'sope' tool
+
+WOxExtTest
+- an XML template (.wox) based application which shows the use of various
+  WEExtensions/WOExtensions reusable components
+
+davpropget
+- simple example to retrieve the properties of a WebDAV URL using
+  WOHTTPConnection.
+
+iCalPortal
+- pre-SOPE attempt to write a small iCal calendaring portal
+
+parsedav
+- a small tool to test the NGObjWeb WebDAV parser

@@ -1,0 +1,21 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WORadioButtonList">
+  <binding name="list" passthrough="NO" required="YES"/>
+  <binding name="item" passthrough="NO"/>
+  <binding name="index" passthrough="NO"/>
+  <binding name="selection" passthrough="NO" settable="YES"/>
+  <binding name="prefix" passthrough="NO"/>
+  <binding name="suffix" passthrough="NO"/>
+
+  <binding name="name" passthrough="NO"/>
+  <binding name="value" passthrough="NO"/>
+  <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
+
+  <validation message="&apos;list&apos; must not be a constant">
+    <and>
+      <bound name="list"/>
+      <ungettable name="list"/>
+    </and>
+  </validation>
+</wo>

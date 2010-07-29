@@ -1,0 +1,56 @@
+TODO
+====
+
+- remove dependency on FoundationExt on GNUstep Base and Cocoa
+  - added source of FileObjectHolder, NSRunLoop+FileObjects
+
+NSString+Encoding.m:
+- encoding support for MacOSX and other non-iconv platforms
+- add a "charset" encoding registry
+- improve error handling
+- improve buffer size handling
+
+NGLogger:
+
+- fix format bugs
+
+- fix performance
+  - running two format parsers and varargs processors is unnecessary
+    and far too expensive
+  - running seven methods calls just in logWithFormat:arguments: is expensive
+
+  - analysis: (for a simple logWithFormat:)
+    - NSObject logWithFormat:arguments:
+      - one format parser
+      - one varargs run
+      - 7 method calls
+    - NSObject logger
+      - caches in static variable, no method call after warm up
+    - NGLogger isLogInfoEnabled
+      - simple comparison (use macro or access public ivars?)
+    - NSObject loggingPrefix
+      - one autorelease string
+      - one format parser
+      - 2 method calls
+    - NGLogger logWithFormat:arguments:
+      - since we already know that logging is enabled, we do not need to check
+        again => forceLogWithPrefix:string: or -logLevel:message:
+      - one format parser
+      - one varargs run
+      - 4 method calls
+    - NGLogger logLevel:message:
+      - creates/releases a log event object
+      - calls appender
+      - 4 method calls
+    - NGLogConsoleAppender
+      - (incorrectly) calls NSLog => one varargs parser
+      - 1 method call
+    - NGLogAppender formattedEvent:
+      - 8 method calls
+      - creates an autorelease string
+    - NGLogAppender localizedNameOfLogLevel:
+      - simple switch
+  - summary: limit NGLogger to the few applications which require it
+
+- having -logWithFormat:arguments: on NSObject seems unnecessary, there is
+  no reason to override this method

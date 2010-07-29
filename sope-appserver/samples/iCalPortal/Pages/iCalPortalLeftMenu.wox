@@ -1,0 +1,62 @@
+<?xml version='1.0' standalone='yes'?>
+
+<nodig xmlns='http://www.w3.org/1999/xhtml'
+       xmlns:var='http://www.skyrix.com/od/binding'
+       xmlns:const='http://www.skyrix.com/od/constant'>
+
+  <table border="0" cellpadding="5" cellspacing="0" 
+		   height="200" width="125">
+    <tr>
+      <td valign="top" align="left" 
+		    background="/app/WebServerResources/English.lproj/back_menu.gif">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td valign="top" align="right">
+              <a directActionName="home" class="menu">Home</a>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top" align="right">
+              <a directActionName="editProfile" class="menu">Profile</a>
+            </td>
+          </tr>
+          
+          <tr>
+            <td valign="top" align="right" class="menu">Calendars</td>
+          </tr>
+          <var:foreach list="allCalendars" item="item">
+            <tr>
+              <td valign="top" align="right" 
+	          background="/app/WebServerResources/English.lproj/back_menu.gif">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td valign="top" align="right" width="75%">
+                      <font class="small">
+                        <a directActionName="showCalendar" 
+			   var:_calendarName="item"
+			   class="submenu"><var:string value="item"/></a>
+                      </font>
+                    </td>
+                    <td width="25%"> </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </var:foreach>
+	  
+          <tr>
+            <td valign="top" align="right"><a
+	      href="about/index.xhtml" class="menu"><entity 
+	      name="nbsp"/><var:entity const:name="Uuml"/>ber uns</a></td>
+          </tr>
+
+          <tr>
+            <td valign="top" align="right">
+              <a directActionName="logout" class="menu">Logout</a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</nodig>

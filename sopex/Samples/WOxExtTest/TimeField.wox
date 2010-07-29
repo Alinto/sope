@@ -1,0 +1,28 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <form var:action="self">
+
+    <var:time-field hour="hour" minute="minute" second="second"
+                    const:hourInterval="2"
+                    const:minuteInterval="10"
+                    const:secondInterval="30"
+                    useTextField="useTextField"/>
+    <br/><br/>
+
+    <var:time-field date="date"
+                    const:hourInterval="2"
+                    const:minuteInterval="10"
+                    const:secondInterval="30"
+                    useTextField="useTextField"/>
+    <br/><br/>
+
+    useTextField: <input type="checkbox" var:checked="useTextField"/>
+    <br/>
+
+    <input type="submit" value="apply"/>
+  </form>
+</var:component>

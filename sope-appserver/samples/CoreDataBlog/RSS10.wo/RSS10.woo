@@ -1,0 +1,33 @@
+{
+  variables = {
+    recentPostsDisplayGroup = {
+      class      = WODisplayGroup;
+      dataSource = {
+        class              = EOCoreDataSource;
+        editingContext     = session.defaultManagedObjectContext;
+        fetchSpecification = {
+          class      = EOFetchSpecification;
+          entityName = Post;
+          fetchLimit = 10;
+          isDeep     = YES;
+          sortOrderings = (
+            { class = EOSortOrdering; 
+              key = "creationDate";
+              selector = "compareDescending:";
+            }
+          );
+          qualifier = {
+            class = "EOKeyValueQualifier";
+            key   = "creationDate";
+            value = "";
+          };
+        };
+      };
+      formatForLikeQualifier       = "%@*";
+      localKeys                    = ();
+      numberOfObjectsPerBatch      = 0;
+      selectsFirstObjectAfterFetch = YES;
+      fetchesOnLoad                = YES;
+    };
+  };
+}

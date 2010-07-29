@@ -1,0 +1,292 @@
+2007-05-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGHttpMessageParser.m: minor code cleanups, use -warnWithFormat:
+
+2006-11-23  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+
+	* NGHttpRequest.[hm]: added DeltaV HTTP methods
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* common.h: fixed Tiger warnings
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGHttp.xcode: minor changes and updated
+
+2004-11-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGHttp.xcode: bumped the framework version
+
+2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGHttp.xcode: bumped the framework version
+
+2004-10-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGUrlFormCoder.m: print a warning if the deprecated
+	  -stringByApplyingURLEncoding method is used instead of
+	  -stringByEscapingURL, removed unused isURLSafeChar() function, fixed
+	  decoding of form values containing umlauts on MacOSX 
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGHttp.xcode: minor changes
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGHttp.xcode: new Xcode project
+
+2004-06-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: added some include pathes to allow "in-place" 
+	  compilation of SOPE (v4.2.408)
+
+2004-01-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpRequest.m, NGHttpMessage.m: minor cleanups, do not log form
+	  processing on the command line (v4.2.286)
+
+2003-10-15  Helge Hess  <helge@groove.local.>
+
+	* NGHttpHeaderFields.m: fixed warning on OSX (v4.2.227)
+
+2003-05-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpCookie.m: small cleanups (v4.2.173)
+
+2003-01-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpMessageParser.m: check superclass version
+
+	* NGHttpBodyParser.m: check superclass version
+
+2002-11-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpMessageParser.m: parses now checks the HTTP version when
+	  determining whether to parse a body of a request without content-
+	  length (v4.2.68)
+
+2002-10-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpMessageParser.m: added SUBSCRIBE/UNSCRIBE to the request 
+	  methods were no body parsing is performed (v4.2.59)
+
+2002-10-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpRequest.h: added some WebDAV/HTTP methods (v4.2.52)
+
+2002-10-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpMessageParser.m ([NGHttpMessageParser -parserForBodyOfPart:data:]): 
+	  do not parse MKCOL and DELETE HTTP requests (v4.2.40)
+
+2002-06-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpHeaderFieldParser.m: removed all -removeCommentsFromValue:
+	  calls, since HTTP doesn't allow comments in headers anyway.
+
+Fri Jun  7 17:21:59 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGHttpHeaderFieldParser.m: changes for charset NGMime support
+
+Fri May 17 15:34:51 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved as a subproject to NGObjWeb
+
+	* GNUmakefile: removed linking against NGZlib
+
+Thu Feb 21 11:19:48 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed NGHttpServer, EventHandler etc (all serving related stuff)
+
+Thu Nov 29 10:45:52 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpHeaderFieldParser.m ([NGHttpCookieFieldParser -parseValuePart:length:zone:]):
+	  improved error handling ...
+
+Wed Oct 17 01:44:40 2001  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NGUrlFormCoder.m: fixed unsigned char bug
+
+Fri Oct 12 10:29:38 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpHeaderFields.m: added +credentialsWithString:
+
+Thu Aug  9 16:19:20 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpHeaderFieldParser.m: use -stringByUnescapingURL
+
+	* NGHttpCookie.m: use -stringByEscapingURL
+
+Tue Jul 24 20:51:32 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpMessageParser.m: don't parse bodies of OPTION requests
+
+Thu Jul  5 21:15:26 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGUrlFormCoder.m: changed to break formvalues on '?' as well 
+	  (specified is '&' only ..., but sometimes incorrect URLs are 
+	  generated)
+
+Wed Jun  6 16:24:23 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpHeaderFields.m: less restrictive parsing of 'connection' header
+
+Tue May 29 18:41:42 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGHttpMessageParser.m: made less whitespace sensitive during request
+	  line parsing (since Netscape 4.77 sometimes sends broken URLs ..)
+
+Thu Feb  1 19:30:25 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpRequest.m: added MKCOL, LOCK and UNLOCK request methods
+
+Wed Jan 31 15:12:27 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpRequest.m: added PROPFIND, PROPPATCH request method
+
+Wed Dec 13 14:05:54 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpMessageParser.m: always parse response content
+
+Mon Dec  4 13:03:32 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpMessageParser.m: extracted dead code (some kind of own HTTP
+	  parser ??)
+
+Mon Sep 18 11:09:46 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpHeaderFields.m: connection-header-parser can parse 'close'
+
+Fri Sep 15 01:09:52 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpMessageParser: implemented parsing of response lines
+
+Tue Aug 15 12:06:04 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpHeaderFieldParser.m: fixed bug in header-field parser
+
+Wed Jul  5 13:47:49 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpServer.m: removed exit(0)
+
+Fri Jun 23 14:25:00 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpMessageParser.m: reverted changes for buffers
+
+Fri Jun 23 12:09:16 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpMessageParser.m: fixed malloc bug
+
+Wed Jun 14 17:30:44 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGUrlFormCoder.m: added NSString method to encode strings in URL 
+	  encoding
+
+Fri Jun  9 17:54:58 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* GNUmakefile (ADDITIONAL_CPPFLAGS): added -Wall
+
+Tue Feb 29 18:29:08 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* MOF3 import
+
+Fri Sep 17 15:05:54 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHttpHeaderFields.m: fixed bugs in -stringValue methods
+
+Mon Jul 19 10:47:16 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpEventHandler.m: disabled request logging
+
+Mon May 31 14:15:59 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpHeaderFieldParser.m: string header field parsers do not
+	  remove comments anymore (eg user-agent field)
+
+Thu Apr 22 19:02:29 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* adopted to modifications in NGMime
+
+Mon Mar 29 11:42:55 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpServer.h: fixed bug in header file
+
+	* GNUmakefile: added kit class
+
+Fri Jan 29 20:25:20 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* removed NGLog's
+
+Tue Jan 19 14:50:47 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpServer.m: support server termination
+
+	* NGHttpMessage.m: no extracted headers to keep content consistent
+
+	* NGHttpHeaderFieldParser.m: fixed some bugs
+
+Sat Jan  9 21:09:02 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpEventHandler.m: added request logging
+
+Fri Jan  8 16:26:53 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpMessage.m: added -addValue:toHeaderFieldWithName: and
+	  -removeValue:fromHeaderFieldWithName: methods
+
+Mon Jan  4 17:38:13 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpEventHandler.m: added support for local domain sockets
+
+Mon Dec 28 16:00:55 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpServer.m: added -logWithFormat:, replaced NSLog
+
+	* NGHttpEventHandler.m: added on-the-fly compression
+
+	* NGHttpEventHandler.m: added -logWithFormat: method
+
+	* NGHttpServer.m: added accessors to set/get maxThreadCount
+
+Wed Dec 16 10:39:26 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpServer.h: fixed bug in header
+
+Fri Nov 27 16:04:14 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* started WIN32 support
+
+Thu Nov 26 10:14:50 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpHeaderFieldParser.m: added 'accept-encoding' field parser,
+	  new register function for defaultParserSet
+
+Wed Nov 11 16:21:14 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* GNUmakefile: uses ../kit.make, ../common.make now
+
+Wed Nov  4 14:48:16 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpRequest.m: added capability to decode URL form parameters
+
+	* added NGUrlFormCoder to unescape/decode x-www-form-urlencoded strings
+
+	* NGHttpBodyParser.m: added FORM Url Body parser
+
+Wed Oct 28 18:35:34 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpServer.m: added methods to manually add services and mappings
+
+	* NGHttpServer.m: added request timing
+
+1998-10-19  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHttpServer.m: prepared for multi-threading
+
+1998-10-09  Helge Hess  <helge@trex.mdlink.de>
+
+	* moved NSRunLoop outside NGHttpServer
+
+	* created ChangeLog

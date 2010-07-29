@@ -1,0 +1,112 @@
+- improved quoted printable handling (OGo bug #1753)
+- changed PostgreSQL adaptor to use UTF-8, cleaned up PG adaptor
+- added support for OR qualifiers in GDLContentStore
+- improvements in sort handling of WETableView
+- filter out -O flags in relevant sope-xml makefile sections
+- added 'fragmentIdentifier' binding to WOForm
+- added 'suffix' label binding to WOCheckBoxList
+- added <prototype-script> tag (WEPrototypeScript) to WOx
+- added support for gnustep-make 1.13
+- fixed XCode projects
+
+Major contributors on the SOPE 4.5.9 release:
+Wolfgang Sourdeau
+Marcus Mueller
+Sebastian Reitenbach
+Helge Hess
+... and many more :-)
+
+===========================================================================
+compare /home/helge/dev/complete/SOPE/releases/4.5.9-maple with .
+changed: sope-core/NGExtensions/
+     2006-11-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGQuotedPrintableCoding.m: added NSData method to decode QP as per
+     	  RFC 2045: -dataByDecodingQuotedPrintableTransferEncoding, related to
+     	  OGo bug #1753 (v4.5.189)
+changed: sope-core/EOControl/
+     2006-09-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyGlobalID.m: print a warning if a key-gid is created with a nil
+     	  value, improved -description (v4.5.68)
+changed: sope-gdl1/PostgreSQL/
+     2006-09-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* v.4.5.48
+     	* always use UTF-8 as the transport encoding (was Latin1 before),
+     	  enforce that by setting the connection client encoding (when
+     	  possible)
+     	* added category to convert EOKeyGlobalIDs to SQL (required by OGo
+     	  trunk)
+     	* moved NSNull/pgval category to own file
+     	* moved PostgreSQL version detection to pgconfig.h file, properly
+     	  detect new PostgreSQL versions by a missing PG_MAJOR_VERSION
+     	  define (and enable NG_SET_CLIENT_ENCODING etc in this case)
+added:   sope-gdl1/PostgreSQL/pgconfig.h
+added:   sope-gdl1/PostgreSQL/NSNull+PGVal.m
+added:   sope-gdl1/PostgreSQL/PGResultSet.m
+added:   sope-gdl1/PostgreSQL/PostgreSQL72DataTypeMappingException.m
+added:   sope-gdl1/PostgreSQL/EOKeyGlobalID+PGVal.m
+removed: sope-gdl1/PostgreSQL/PostgreSQL72Values.m
+changed: sope-gdl1/GDLContentStore/
+     2006-08-31  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* EOQualifier+GCS.m: added support for OR qualifiers and for case
+     	  insensitive-like qualifiers on PostgreSQL (v4.5.37)
+changed: sope-gdl1/SQLite3/
+     2006-10-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SQLite3.xcodeproj: link against the system version of sqlite3 rather
+     	  than a custom version in /usr/local.
+changed: sope-xml/XmlRpc/
+     2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: filter out -O% flags for files using exception
+     	  handlers, enable -O2 per default (v4.5.30)
+changed: sope-xml/SaxObjC/
+     2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: filter out -O% flags for files using exception
+     	  handlers, enable -O2 per default (v4.5.61)
+changed: sope-xml/DOM/
+     2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: filter out -O% flags for files using exception
+     	  handlers, enable -O2 per default (v4.5.23)
+changed: sope-appserver/WEExtensions/
+     2006-09-30  Helge Hess  <helge.hess@opengroupware.org>
+     	* WETableView/WETableCell.m: improved sortkey handling for keypathes
+     	  (v4.5.91)
+changed: sope-appserver/NGObjWeb/
+     2006-11-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.254
+     	* DynamicElements/WOInput.m: changed to use -warnWithFormat:
+     	* DynamicElements/WOCheckBox.m: subminor code cleanup
+     2006-11-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* woapp-gs.make: fixed a bug in a variable test for which_lib, note
+     	  that WHICH_LIB_SCRIPT must be defined for older gnustep-make versions
+     	  (v4.5.253)
+     2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements: filter out -O% flags for files using exception
+     	  handlers, enable -O2 per default (v4.5.252)
+     2006-09-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* wobundle-gs.make: basically reverted to r103, but with the
+     	  WHICH_LIB_SCRIPT check enabled - the rest was garbage which
+     	  accidentaly got committed, unsure how that happened in the
+     	  first place (v4.5.251)
+     2006-09-18  Helge Hess  <helge.hess@opengroupware.org>
+        * removed deprecated woapp.make, wobundle.make (v4.5.250)
+     2006-09-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* woapp-gs.make, wobundle-gs.make: play nicely with
+     	  gnustep-make 1.13.0, where WHICH_LIB_SCRIPT has been removed
+     	  (v4.5.249)
+     2006-09-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOForm.m: added 'fragmentIdentifier' binding to
+     	  generate actions which contains a named link (#tasks) (v4.5.248)
+     2006-09-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOCheckBoxList.m: fixed a typo (v4.5.247)
+     2006-08-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoObjectWebDAVDispatcher.m: code cleanups, use -isNotEmpty
+     	  (v4.5.246)
+     2006-08-31  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* DynamicElements/WOCheckBoxList.m: embed 'suffix' label binding in
+     	  a label tag enclosing the checkbox (v4.5.245)
+removed: sope-appserver/NGObjWeb/wobundle.make
+removed: sope-appserver/NGObjWeb/woapp.make
+changed: sope-appserver/WEPrototype/
+     2006-08-28  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEPrototypeElemBuilder.m: added "prototype-script" reference to
+     	  WEPrototypeScript element. (v4.5.8)
+

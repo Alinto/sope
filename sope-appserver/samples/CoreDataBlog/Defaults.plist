@@ -1,0 +1,4 @@
+{
+  WOComponentLoadWOOFiles   = YES;
+  WOKeyPathAssociationClass = WOKeyPathAssociationSystemKVC;
+}

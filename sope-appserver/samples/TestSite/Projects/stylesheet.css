@@ -1,0 +1,36 @@
+/* common stuff */
+
+body {
+  font-size: 12px;
+}
+
+/* header */
+
+div#header {
+  margin-left:  5px;
+  margin-right: 5px;
+  padding:      0;
+  border-bottom: 1px solid #000000;
+}
+div#header img.headerlogo {
+  float:  right; 
+  width:  182px; 
+  height: 30px;
+}
+
+div#header div#headerhistory {
+  font-size:   11px;
+  color:       #000000;
+  margin:      0px;
+  padding-top: 18px;
+  height:      12px;
+}
+div#header a, div#header span {
+  margin:      0px;
+}
+div#header span#navtitle {
+  font-weight: bold;
+}
+div#header a:hover {
+  text-decoration: none;
+}

@@ -1,0 +1,52 @@
+{
+  CVSID = "$Id$";
+  bundleHandler = "ODXHTMLNodeRenderFactory";
+
+  requires = {
+    bundleManagerVersion = 1;
+    
+    classes = (
+      { name = NSObject; }
+    );
+  };
+
+  provides = {
+    ODRendererFactory = (
+      { 
+        name = "XHTML"; 
+        class = "ODXHTMLNodeRenderFactory"; 
+      }
+    );
+    
+    ODRenderer = (
+      { name = "{http://www.w3.org/1999/xhtml}a";        },
+      { name = "{http://www.w3.org/1999/xhtml}button";   },
+      { name = "{http://www.w3.org/1999/xhtml}form";     },
+      { name = "{http://www.w3.org/1999/xhtml}img";      },
+      { name = "{http://www.w3.org/1999/xhtml}input";    },
+      { name = "{http://www.w3.org/1999/xhtml}option";   },
+      { name = "{http://www.w3.org/1999/xhtml}select";   },
+      { name = "{http://www.w3.org/1999/xhtml}textarea"; },
+      { name = "{http://www.w3.org/TR/REC-html40}a";        },
+      { name = "{http://www.w3.org/TR/REC-html40}button";   },
+      { name = "{http://www.w3.org/TR/REC-html40}form";     },
+      { name = "{http://www.w3.org/TR/REC-html40}img";      },
+      { name = "{http://www.w3.org/TR/REC-html40}input";    },
+      { name = "{http://www.w3.org/TR/REC-html40}option";   },
+      { name = "{http://www.w3.org/TR/REC-html40}select";   },
+      { name = "{http://www.w3.org/TR/REC-html40}textarea"; },
+    );
+    classes = (
+      { name = ODRDynamicXHTMLTag;       },
+      { name = ODR_XHTML_a;              },
+      { name = ODR_XHTML_button;         },
+      { name = ODR_XHTML_form;           },
+      { name = ODR_XHTML_img;            },
+      { name = ODR_XHTML_input;          },
+      { name = ODR_XHTML_option;         },
+      { name = ODR_XHTML_select;         },
+      { name = ODR_XHTML_textarea;       },
+      { name = ODXHTMLNodeRenderFactory; },
+    );
+  };
+}

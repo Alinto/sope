@@ -1,0 +1,235 @@
+#!/bin/sh
+#
+# @configure_input@
+#
+# Copyright (C) 1997 Free Software Foundation, Inc.
+#
+# Author: Ovidiu Predescu <ovidiu@net-community.com>
+# Date: October 1997
+# 
+# This file is part of the GNUstep Makefile Package.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# You should have received a copy of the GNU General Public
+# License along with this library; see the file COPYING.LIB.
+# If not, write to the Free Software Foundation,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+# Execute gdb for the application passed as argument. The application is
+# searched through the GNUstep directories if a complete or relative path name
+# is not specified. The arguments passed after the application name are passed
+# unmodified to the application.
+
+if [ -z "$1" ]; then
+  echo usage: `basename "$0"` [--library-combo=...] [--gdb=...] application [arguments...]
+  echo `basename "$0"` --help for help
+  exit 1
+fi
+
+if [ -z "$EXEEXT" ]; then
+  EXEEXT=@EXEEXT@
+fi
+if [ -z "$LIBRARY_COMBO" ]; then
+  LIBRARY_COMBO=@ac_cv_library_combo@
+fi
+if [ -z "$GDB" ]; then
+  GDB=gdb
+fi
+
+# Read command line arguments now
+while [ x"$1" != x ]; do
+  case "$1" in
+    --help)
+      echo usage: `basename "$0"` [--library-combo=...] [--gbd=...] application [arguments...]
+      echo
+      echo [--library-combo=...] specifies a GNUstep backend to use.
+      echo It overrides the default LIBRARY_COMBO environment variable.
+      echo --library-combo=gnu for GNUstep 
+      echo --library-combo=nx for NeXT OPENSTEP
+      echo --library-combo=apple for Apple OSX
+      echo
+      echo [--gdb=...] specifies the debugger to use.
+      echo It overrides the default GDB environment variable.  If the --gdb=...
+      echo flag is not used, and the GDB variable is not set, then the program
+      echo called \"gdb\" is invoked.
+      echo
+      echo application is the complete or relative name of the application
+      echo program with the .app or .debug extension, like Edit.debug.
+      echo
+      echo [arguments...] are the arguments to the application.
+      exit 0
+      ;;
+
+    --library-combo=*)
+      LIBRARY_COMBO=`echo "$1" | sed 's/--library-combo=//'`
+      shift;;
+
+    --gdb=*)
+      GDB=`echo "$1" | sed 's/--gdb=//'`
+      shift;;
+
+    *)
+      app="$1";
+      shift;;
+  esac
+done
+
+if [ "$LIBRARY_COMBO" = nx ]; then
+  LIBRARY_COMBO=nx-nx-nx
+elif [ "$LIBRARY_COMBO" = gnu ]; then
+  LIBRARY_COMBO=gnu-gnu-gnu
+elif [ "$LIBRARY_COMBO" = fd ]; then
+  LIBRARY_COMBO=gnu-fd
+elif [ "$LIBRARY_COMBO" = apple ]; then
+  LIBRARY_COMBO=apple-apple-apple
+fi
+
+# Remove leading slashes at the end of the application name
+app="`echo \"$app\" | sed 's%/*$%%'`"
+
+case "$app" in
+  /*)	# An absolute path.
+	full_appname="$app";;
+  */*)	# A relative path
+	full_appname="`(cd \"$app\"; pwd)`";;
+  *)	# A path that should be searched into the GNUstep paths
+	if [ -n "$GNUSTEP_PATHLIST" ]; then
+	    SPATH="$GNUSTEP_PATHLIST"
+	else
+	    SPATH="$PATH"
+	fi
+	SPATH=".:$SPATH"
+	IFS=:
+	for dir in $SPATH; do
+	  if [ -d "$dir/Applications/$app" ]; then
+	    full_appname="`(cd \"$dir/Applications/$app\"; pwd)`"
+	    break;
+	  fi
+	  if [ -d "$dir/$app" ]; then
+	    full_appname="`(cd \"$dir/$app\"; pwd)`"
+	    break;
+	  fi
+	done;;
+esac
+
+# Search for a core file in the current directory.
+corearg=
+corefiles="core*"
+for corefile in $corefiles; do
+  if [ -f "$corefile" ]; then
+    echo -e "Core image ($corefile) has been found in working directory. Use it (y/n)? ";
+    # Need an argument here for Solaris
+    read REPLY;
+    if [ $REPLY = y ]; then
+      echo -e "Using it.";
+      corearg="--core=$corefile";
+      break;
+    else
+      echo -e "Ignoring it.";
+    fi
+  fi
+done
+unset corefile
+unset corefiles
+
+if [ -z "$full_appname" ]; then
+  echo "Can't find the required application: $app!"
+  exit 1
+fi
+
+if [ -z "$GNUSTEP_MAKEFILES" ]; then
+  GNUSTEP_MAKEFILES = $GNUSTEP_SYSTEM_ROOT/Library/Makefiles
+fi
+
+if [ -z "$GNUSTEP_FLATTENED" ]; then
+	#
+	# Determine the host information
+	#
+	if [ -z "$GNUSTEP_HOST" ]; then
+	    GNUSTEP_HOST=`$GNUSTEP_MAKEFILES/config.guess`
+	    GNUSTEP_HOST=`$GNUSTEP_MAKEFILES/config.sub $GNUSTEP_HOST`
+	    export GNUSTEP_HOST
+	fi
+	if [ -z "$GNUSTEP_HOST_CPU" ]; then
+	    GNUSTEP_HOST_CPU=`$GNUSTEP_MAKEFILES/cpu.sh $GNUSTEP_HOST`
+	    GNUSTEP_HOST_CPU=`$GNUSTEP_MAKEFILES/clean_cpu.sh $GNUSTEP_HOST_CPU`
+	    export GNUSTEP_HOST_CPU
+	fi
+	if [ -z "$GNUSTEP_HOST_VENDOR" ]; then
+	    GNUSTEP_HOST_VENDOR=`$GNUSTEP_MAKEFILES/vendor.sh $GNUSTEP_HOST`
+	    GNUSTEP_HOST_VENDOR=`$GNUSTEP_MAKEFILES/clean_vendor.sh $GNUSTEP_HOST_VENDOR`
+	    export GNUSTEP_HOST_VENDOR
+	fi
+	if [ -z "$GNUSTEP_HOST_OS" ]; then
+	    GNUSTEP_HOST_OS=`$GNUSTEP_MAKEFILES/os.sh $GNUSTEP_HOST`
+	    GNUSTEP_HOST_OS=`$GNUSTEP_MAKEFILES/clean_os.sh $GNUSTEP_HOST_OS`
+	   export GNUSTEP_HOST_OS
+	fi
+	
+	if [ "$LIBRARY_COMBO" = nx-nx-nx -a "$GNUSTEP_HOST_OS" = nextstep4 ]; then
+	  if [ -f "$full_appname/library_paths.openapp" ]; then
+	    additional_library_paths="`cat \"$full_appname/library_paths.openapp\"`"
+	  fi
+	fi
+else
+  if [ -f "$full_appname/library_paths.openapp" ]; then
+    additional_library_paths="`cat \"$full_appname/library_paths.openapp\"`"
+  fi
+fi
+
+appname="`echo \"$app\" | sed 's/\.[a-z]*$//'`"
+appname="`basename \"$appname\"`"
+appname="$appname$EXEEXT"
+. "$GNUSTEP_MAKEFILES/ld_lib_path.sh"
+
+
+if [ "$LIBRARY_COMBO" = "apple-apple-apple" ]; then
+  if [ ! -f "$full_appname/Contents/MacOS/$appname" ]; then
+    echo "$full_appname application does not have a binary for this kind of machine and operating system."
+    exit 1
+  fi
+
+  if [ -z "$corearg" ]; then
+    "$GDB" "$full_appname/Contents/MacOS/$appname"
+  else
+    "$GDB" "$full_appname/Contents/MacOS/$appname" "$corearg"
+  fi
+
+else
+  # Determine if the application has a binary for this operating system
+  if [ -z "$GNUSTEP_FLATTENED" -a ! -d "$full_appname/$GNUSTEP_HOST_CPU/$GNUSTEP_HOST_OS" ]; then
+    echo "$full_appname application does not have a binary for this kind of machine and operating system."
+    exit 1
+  fi
+
+  if [ -z "$GNUSTEP_FLATTENED" -a ! -d "$full_appname/$GNUSTEP_HOST_CPU/$GNUSTEP_HOST_OS/$LIBRARY_COMBO" ]; then
+    echo "$full_appname application does not have a binary for this combination of libraries: $LIBRARY_COMBO."
+    exit 1
+  fi
+
+  if [ -z "$GNUSTEP_FLATTENED" ]; then
+    file_appname="$full_appname/$GNUSTEP_HOST_CPU/$GNUSTEP_HOST_OS/$LIBRARY_COMBO/$appname"
+  else
+    file_appname="$full_appname/$appname"
+  fi
+
+  # Old versions of gdb don't support --args, so we only use it if
+  # 'gdb --help' lists it.
+  args=
+  if (gdb --help | grep -e '\-\-args' > /dev/null); then
+    args="--args"
+  fi
+
+  if [ -z "$corearg" ]; then
+
+    # Arguments passed to debugapp are passed over to the
+    # application, in the same way as it happens for openapp.
+    "$GDB" $args "$file_appname" "$@"
+  else
+    "$GDB" "$file_appname" "$corearg"
+  fi
+fi

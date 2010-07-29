@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOConditional">
+  <binding name="negate" passthrough="NO" defaults="YES/NO"/>
+  <binding name="condition" passthrough="NO" required="YES"/>
+  
+  <!-- SOPE -->
+  <binding name="value" />
+</wo>

@@ -1,0 +1,7 @@
+# Version file
+
+SUBMINOR_VERSION:=31
+
+# v4.7.31 requires libNGObjWeb v4.7.5
+# v4.5.23 requires libNGObjWeb v4.5.145
+# v4.5.22 requires libNGObjWeb v4.5.106

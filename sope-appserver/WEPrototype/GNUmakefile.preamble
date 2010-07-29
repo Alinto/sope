@@ -1,0 +1,98 @@
+# compiler flags
+
+SOPE_ROOT=../..
+
+# TODO: remove for framework builds?
+ADDITIONAL_CPPFLAGS += \
+        -DCOMPILE_FOR_GSTEP_MAKE=1
+
+ADDITIONAL_CPPFLAGS += \
+        -Wall \
+        -DSOPE_MAJOR_VERSION=$(MAJOR_VERSION)   \
+        -DSOPE_MINOR_VERSION=$(MINOR_VERSION)   \
+        -DWEP_SUBMINOR_VERSION=$(SUBMINOR_VERSION)
+
+ADDITIONAL_CPPFLAGS += -Wall
+ADDITIONAL_INCLUDE_DIRS += \
+	-I.. -I$(SOPE_ROOT) -I../NGObjWeb	\
+	-I$(SOPE_ROOT)/sope-core/NGStreams	\
+	-I$(SOPE_ROOT)/sope-core/NGExtensions	\
+	-I$(SOPE_ROOT)/sope-core		\
+	-I$(SOPE_ROOT)/sope-xml
+
+
+libWEPrototype_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libWEPrototype_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
+
+libWEPrototype_LIBRARIES_DEPEND_UPON += \
+	-lNGObjWeb	\
+	-lNGMime	\
+	-lNGStreams -lNGExtensions -lEOControl \
+	-lXmlRpc -lDOM -lSaxObjC
+
+
+ifeq ($(frameworks),yes)
+WEPrototype_LIBRARIES_DEPEND_UPON += \
+	-framework NGObjWeb	\
+	-framework NGMime -framework NGMail \
+	-framework NGStreams -framework NGExtensions -framework EOControl \
+	-framework XmlRpc -framework DOM -framework SaxObjC
+endif
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	../NGObjWeb \
+	$(SOPE_ROOT)/sope-mime			\
+	$(SOPE_ROOT)/sope-mime/NGMail		\
+	$(SOPE_ROOT)/sope-core/NGStreams	\
+	$(SOPE_ROOT)/sope-core/NGExtensions	\
+	$(SOPE_ROOT)/sope-core/EOControl	\
+	$(SOPE_ROOT)/sope-xml/DOM		\
+	$(SOPE_ROOT)/sope-xml/XmlRpc		\
+	$(SOPE_ROOT)/sope-xml/SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+ifeq ($(findstring _64, $(GNUSTEP_TARGET_CPU)), _64)
+SYSTEM_LIB_DIR += -L/usr/local/lib64 -L/usr/lib64
+else
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
+endif
+
+
+# bundle dependencies
+
+ifneq ($(frameworks),yes)
+
+WEPrototype_BUNDLE_LIBS   += \
+	-lWEPrototype	\
+	-lNGObjWeb	\
+	-lNGMime	\
+	-lNGStreams -lNGExtensions -lEOControl \
+	-lXmlRpc -lDOM -lSaxObjC
+WEPrototype_WOBUNDLE_LIBS += $(WEPrototype_BUNDLE_LIBS)
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+WEPrototype_LIB_DIRS += -L$(GNUSTEP_OBJ_DIR)
+else
+WEPrototype_LIB_DIRS += -L./$(GNUSTEP_OBJ_DIR)
+endif
+
+endif
+
+
+# Apple
+
+#ifeq ($(FOUNDATION_LIB),apple)
+#libWEPrototype_PREBIND_ADDR="TODO TODO"
+#libWEPrototype_LDFLAGS += -seg1addr $(libWEPrototype_PREBIND_ADDR)
+#endif

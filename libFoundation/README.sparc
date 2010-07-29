@@ -1,0 +1,137 @@
+GNU Objective-C/libFoundation on SPARC README
+=============================================
+
+Intro
+=====
+
+    Some people may have problems with libFoundation together with
+    SPARC machines and/or with GNU Objective-C on SPARC in
+    general. Here are collected some known issues.
+
+Dates
+=====
+
+    There may be a problem with incorrect dates, but I couldn't
+    reproduce it on our SPARC/Solaris 2.6. If you want to ensure that
+    it works on your system, try this:
+
+      if (time(NULL) != (time_t)([[NSDate date] timeIntervalSince1970]))
+        NSLog(@"timezone correction error");
+
+    If this shows the error, something is probably wrong.
+
+ObjC-Runtime
+============
+
+    Sometimes the Objective-C runtime of gcc/egcs is configured incorrectly.
+    In this case configure won't be able to run some libFoundation tests,
+    eg the check for the Objective-C runtime and the check whether nested
+    functions work in cc1obj.
+    
+    The output of configure looks like this:
+
+        checking for the Objective-C runtime... 
+        Cannot determine the Objective-C runtime! Probably you have to specify 
+        some additional libraries needed to link an ObjC program, so please take
+        a look in the config.log file to see the reason and try again.
+        
+        ... and ...
+        
+        checking if the Objective-C compiler crashes with nested functions... yes
+
+    Usually this happens if the runtime was configured to be threaded, in this
+    case a combination of -lthread, -lposix or -lposix4 may be necessary or if
+    no threading is required, egcs should be recompiled with the configure option
+    --with-threads=single.
+
+Multithreading
+==============
+
+    If you want to use the NSThread class in libFoundation you have to
+    do several things, it applies to Solaris in general:
+
+       - Compile the GNU Objective-C runtime with either
+         --enable-threads=solaris or --enable-threads=posix (I would
+         recommend 'solaris', Posix is just a layer on top of it).
+         Watch out that the runtime files are compiled with
+         -D_REENTRANT, otherwise something is wrong.
+
+       - Compile _all_ your files (including libraries) with the
+         -D_REENTRANT preprocessor flag. This makes the Solaris system
+         libraries thread-safe (like stdio.h or stdlib.h). In the future
+         the gstep-make package should do this automatically, but watch
+         out that the compilation is actually done this way !  - Do
+         never forget to link against 'thread' and if you selected
+         'posix' for the runtime against 'posix' (use the LDFLAGS
+         -lthread). There won't be any linking error if you don't, the
+         program just won't be able to fork new threads. Thread creation
+         errors are not catched by some versions of the runtime and/or
+         library.
+
+    If you watch out for these things Solaris will be one of the best
+    MT environments because of it's M-M threading approach.  For more
+    Solaris threading info take a look on:
+
+        http://www.sun.com/workshop/threads/index.html
+
+    It contains some of the information mentioned above and much more.
+
+Dynamic Invocations (forward::, forwardInvocation:)
+===================================================
+
+    There are problems related to SPARC with the Objective-C runtime
+    and there may be problems with NSMethodSignature and/or
+    NSInvocation.
+
+    First the runtime probably won't work correctly (to be exact, the
+    objc_msg_sendv function). According to Richard Henderson from
+    Cygnus this is because:
+
+        "__builtin_apply will not work on any machine that doesn't simply push 
+         arguments on the stack."
+
+    Since objc_msg_sendv relies on __builtin_apply it won't work too. There is
+    a patch for gcc-2.8.0 on
+
+        ftp://alpha.gnu.org/pub/gnu/gnustep/contrib/gcc-2.8.0-sparc.diff
+
+    which apparently fixed the problem for me. The patch works with
+    egcs-1.0.3 as well and for egcs>1.1 with small modifications. It
+    works on the machine description file (gcc/config/sparc/sparc.md)
+    for SPARC.  Regarding this patch Richard Henderson said:
+
+        "The extention is an abomination and should be removed."
+
+    and
+      ---snip---
+        I should have mentioned that the proper way to do something
+        like what objc is trying to do with __builtin_apply is to use
+        a library like libffi.
+
+           ftp://ftp.cygnus.com/pub/home/green/libffi-1.20.tar.gz
+      ---snap---
+    
+    So apparently there is a much bigger problem with it in general. I
+    found the homepage of libffi on this URL:
+
+        http://www.cygnus.com/~green/libffi.html
+
+    Maybe one should take a look whether this library can be
+    integrated with the runtime.
+
+    Addition: After some discussion with Ovidiu it seems that
+    __builtin_apply is really broken. Libffi is a library which is
+    somewhat like NSMethodSignature and NSInvocation, it's nice, but
+    not 'what objc is trying to do'. Forwarding just saves/restores
+    all args and doesn't attempt to process them, as libffi
+    does. Libffi might be used to implement NSInvocation on system for
+    which no port exists.
+
+---
+1999-05-25
+Helge Hess (hh@mdlink.de)
+MDlink online service center
+
+! Local variables:
+! mode: indented-text
+! End:

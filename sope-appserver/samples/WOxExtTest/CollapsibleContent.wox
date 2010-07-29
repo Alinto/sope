@@ -1,0 +1,77 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <form var:action="self">
+    <var:collapsible
+       const:condition  ="NO"
+       visibility       = "firstVisibility"
+       submitActionName ="clearClicks"
+       const:openedLabel = "first opened"
+       const:closedLabel = "first closed"
+       const:openedImageFileName = "expanded.gif"
+       const:closedImageFileName = "collapsed.gif">
+
+       <table border="0" bgcolor="#FAE8B8">
+         <tr>
+           <td>
+             content of the <b>first</b> component
+             <input type="checkbox" var:checked="isFirstChecked"/>
+           </td>
+         </tr>
+         <tr>
+           <td align="center"><a var:action="increaseClicks">click</a></td>
+         </tr>
+       </table>
+    </var:collapsible>
+  
+    <var:collapsible 
+       const:condition  = "YES"
+       visibility       = "secondVisibility"
+       submitActionName = "clearClicks"
+       const:openedLabel = "second opened"
+       const:closedLabel = "second closed"
+       const:openedImageFileName = "expanded.gif"
+       const:closedImageFileName = "collapsed.gif">
+       
+       <table border="0" bgcolor="#FAE8B8">
+         <tr>
+           <td>
+             content of the <b>second</b> component
+             <input type="checkbox" var:checked="isSecondChecked"/>
+           </td>
+         </tr>
+         <tr>
+           <td align="center"><a var:action="increaseClicks">click</a></td>
+         </tr>
+       </table>
+    </var:collapsible>
+    
+    <var:collapsible
+       const:condition="NO"
+       visibility="thirdVisibility"
+       submitActionName="clearClicks"
+       const:openedLabel = "third open"
+       const:closedLabel = "third closed"
+       const:openedImageFileName = "expanded.gif"
+       const:closedImageFileName = "collapsed.gif">
+
+       <table border="0" bgcolor="#FAE8B8">
+         <tr>
+           <td>
+             content of the <b>third</b> component
+             <input type="checkbox" var:checked="isThirdChecked"/>
+           </td>
+         </tr>
+         <tr>
+           <td align="center"><a var:action="increaseClicks">click</a></td>
+         </tr>
+       </table>
+    </var:collapsible>
+  </form>
+  
+  <br/>
+  clicks: <var:string value="clicks"/>
+</var:component>

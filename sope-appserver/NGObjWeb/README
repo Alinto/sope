@@ -1,0 +1,85 @@
+NGObjWeb Library
+  Part of the SKYRiX Object Publishing Environment
+  Copyright (C) 2000-2005 SKYRIX Software AG - http://www.skyrix.com/
+
+Subprojects
+===========
+
+- DynamicElements
+- Associations
+- Templates
+- NGHttp
+- WOHttpAdaptor
+- NGXmlRpc
+- SoObjects
+- WebDAV
+- SoOFS
+
+UserDefaults
+============
+
+    Default                 | Type   | Example Value
+    =============================================================
+    WOAdaptor               | String | WOHttpAdaptor
+    WOCachingEnabled        | bool   | NO
+    WODebuggingEnabled      | bool   | YES
+    WODefaultSessionTimeOut | int    | 3600
+    WOIsRedirectionEnabled  | bool   | NO
+    WOPort                  | String | "*:20000"
+    WOResourcePrefix        | String | "http://localhost:9000"
+    WORunMultithreaded      | bool   | NO
+    WOSendMail              | String | /usr/lib/sendmail
+    WOSMTPHost              | String | mail
+    SNSPort                 | String | "/tmp/.snsd"
+    SNSPingInterval         | int    | 10
+    SNSLogActivity          | bool   | NO
+    WORequestValueSessionID | string | wosid
+    WORequestValueInstance  | string | woinst
+    WOProxyServer           | string | 
+    WONoProxySuffixes	    | array  |
+    WODebugHttpTransaction  | bool   |
+    WOHttpAdaptor_LogStream | bool   |
+    WOProjectDirectory      | String | /Users/znek/Projects/Foo
+
+Class-Hierachy
+==============
+
+    NSObject
+      WOApplication
+      WOContext
+      WOElement                 < OWResponder >
+        WOComponent             < WOActionResults >
+        WODynamicElement
+      WOAssociation
+        WOKeyPathAssociation
+        WOValueAssociation
+      WORequest
+      WOResponse                < WOActionResults >
+      WOResourceManager
+      WOSession
+      WOSessionStore
+        WOServerSessionStore
+
+  Categories
+
+  Protocols
+
+    OWResponder
+    WOActionResults
+
+  Log Topics
+
+
+Localization
+============
+
+From WO 3.5 to WO 4.0 the localization mechanism was changed. Prior 4.0 the
+language.lproj was stored inside the .wo wrapper. Afterwards its the other way
+around.
+  http://developer.apple.com/documentation/LegacyTechnologies/WebObjects/
+    WebObjects_4.0/System/Documentation/Developer/WebObjects/DeltaDoc/
+    NewInWO4.051.html#28715
+
+--
+Helge Hess (helge.hess@skyrix.com)
+SKYRIX Software AG, 2003-01-06

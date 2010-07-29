@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOEntity">
+  <binding name="name" required="YES" />
+
+  <binding name="otherTagString" />
+</wo>

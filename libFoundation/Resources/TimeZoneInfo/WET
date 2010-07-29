@@ -1,0 +1,24 @@
+{
+    details = {
+	WET = {abbrev = WET; isDST = 0; offset = "+0:00:00"; };
+	"WET DST" = {abbrev = "WET DST"; isDST = 1; offset = "+1:00:00"; };
+    };
+    rules = (
+	{
+	    startDate = "Sun Mar 30 03:00:00 1986 GMT";
+	    endDate = "Sun Sep 24 03:00:00 1995 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/3:00:00"; detail = "WET DST"; },
+		{ date = "September/last Sunday/3:00:00"; detail = WET; }
+	    );
+	},
+	{
+	    startDate = "Sun Mar 31 03:00:00 1996 GMT";
+	    endDate = "Sun Oct 25 03:00:00 2037 GMT";
+	    transitions = (
+		{ date = "March/last Sunday/3:00:00"; detail = "WET DST"; },
+		{ date = "October/last Sunday/3:00:00"; detail = WET; }
+	    );
+	}
+    );
+}

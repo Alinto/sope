@@ -1,0 +1,11 @@
+# compilation settings
+
+# Parameters for WOxBuilder lookups
+
+ifneq ($(FHS_INSTALL_ROOT),)
+ADDITIONAL_CPPFLAGS += -DFHS_INSTALL_ROOT=\@\"$(FHS_INSTALL_ROOT)\"
+endif
+
+ifeq ($(CONFIGURE_64BIT),yes)
+ADDITIONAL_CPPFLAGS += -DCONFIGURE_64BIT=1
+endif

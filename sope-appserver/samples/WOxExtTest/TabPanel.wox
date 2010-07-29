@@ -1,0 +1,50 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  
+  <var:tab-panel tabs="tabKeys" selectedTab="selection"
+                 nonSelectedBgColor="nonSelectedBgColor"
+                 bgcolor="bgcolor" textColor="textColor">
+    
+    <var:if-key const:key="selection" const:value="first">
+        ------------------ <br/>
+        This is the content<br/>for the <b>first</b> tab.<br/>
+        ------------------ <br/>
+    </var:if-key>
+    
+    <var:if-key const:key="selection" const:value="second">
+        ****************** <br/>
+        This is the content<br/>for the <b>second</b> tab.<br/>
+        ****************** <br/>
+    </var:if-key>
+
+    <var:if-key const:key="selection" const:value="third">
+        ++++++++++++++++++ <br/>
+        This is the content<br/>for the <b>third</b> tab.<br/>
+        ++++++++++++++++++ <br/>
+    </var:if-key>
+
+  </var:tab-panel>
+
+  <form var:action="self">
+    <table border='0'>
+      <tr>
+        <td align='right'>non selected bg color:</td>
+        <td><input type="text" var:value="nonSelectedBgColor" size="8"/></td>
+      </tr>
+      <tr>
+        <td align='right'>selected bg color:</td>
+        <td><input type="text" var:value="bgcolor" size="8"/></td>
+      </tr>
+      <tr>
+        <td align='right'>textColor:</td>
+        <td><input type="text" var:value="textColor" size="8"/></td>
+      </tr>
+      <tr>
+        <td colspan='2'><input type="submit" var:action="self" value="apply"/></td>
+      </tr>
+    </table>
+  </form>
+</var:component>

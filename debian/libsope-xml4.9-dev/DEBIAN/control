@@ -1,0 +1,17 @@
+Package: libsope-xml4.9-dev
+Source: sope
+Version: 4.7.0-0
+Architecture: powerpc
+Maintainer: Sebastian Ley <ley@debian.org>
+Installed-Size: 296
+Depends: libsope-xml4.9 (= 4.7.0-0)
+Conflicts: libsope-xml-dev
+Provides: libsope-xml-dev
+Section: libdevel
+Priority: extra
+Description: Development files for the SOPE XML libraries
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the development files of the SOPE
+ XML libraries.

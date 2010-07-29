@@ -1,0 +1,56 @@
+# TODO for NGImap4
+
+TODO: update todo file! ;-)
+
+- OGo bug #660
+
+- SkyImapMailActions does mail discovery based on an IMAP4 URL
+  /OpenGroupware/x/SkyImapMailActions/viewImapMail?listName=MailList&\
+    url=imap%3A%2F%2Flocalhost%2FINBOX%2FGNUstep%2F999
+  - this uses NGImap4Message +messageWithURL:context:
+  - TODO: should be invoke messageWithURL:context: on context?
+    - done: NGImap4Message constructors deprecated, added new ctx methods
+
+- check qualifier processing, eg "flags='unseen'" etc
+
+NGImap4Message
+==============
+- find out who actually instantiates a message
+- find out whether a folder is always attached to a message
+  OpenGroupware.org> find . -name "*.m" -exec grep -l " initWithUid" \{\} \;
+  ./SOPE/skyrix-core/NGMime/NGImap4/NGImap4Folder.m
+  ./SOPE/skyrix-core/NGMime/NGImap4/NGImap4Message.m
+
+- where is NGImap4Message referenced?:
+  - skyrix-core/NGMime/NGImap4
+  - WebUI/Common/BaseUI/SkyFavorites (why?)
+    - calculates a "favorite" drag type - might use the entityName of the gid?
+    - does not use message GID for activation
+  - WebUI/Mailer/OGoWebMail
+  - SandStorm/skymaild/DirectAction+Mail.m
+
+NGImap4Folder
+=============
+- replace notification center
+- make flags array a specialized object, use bits for flag storage?
+  - persistent custom flags are possible in Cyrus? (eg junk?)
+- document flags array
+- maybe add a "folderstate" object containing 'exists', 'recent', 'unseen'
+- remove all that message-cache thing?!
+
+NGImap4Context
+==============
+- document content of capability header in @interface
+- find out about -folderForRefresh
+- move sentFolderName, trashFolderName to a separate Imap4ContextConfig object
+- add a more generic "capability" object
+  - move canSort, canQuota into that
+- make "int" bitfield flags
+
+NGImap4Client
+=============
+- move "normalize" stuff to a separate "normalizer" object
+- use NSURL for keeping connection info?
+- use bitfield flags for debug, useSSL or isLogin
+- can we remove the dependency of the back-link to NGImap4Context?
+- should have an async API!

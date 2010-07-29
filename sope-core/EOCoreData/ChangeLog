@@ -1,0 +1,88 @@
+2007-12-03  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* fixed Leopard compilation issues (v4.5.12)
+
+2005-10-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.11
+
+	* EOFetchSpecification+CoreData.m: only transfer limit to
+	  NSFetchRequest if its != 0
+
+	* EOCompoundQualifiers.m: added support for qualifier=>predicate
+	  conversion
+
+	* improved qualifier=>predicate conversion support (v4.5.10)
+
+2005-08-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.9
+
+	* added NSString+CoreData.m: for string related CD methods
+
+	* EOCoreDataSource.m: added 'EOCoreDataSourceDebugEnabled' default to
+	  enable debugging
+
+2005-08-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOCoreData-Info.plist: new Xcode Info.plist file
+
+	* EOCoreData.xcodeproj: new Xcode 2.1 project
+
+	* README.txt: fixed a typo
+
+2005-08-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.8
+	
+	* NSEntityDescription+EO.m: added -isReadOnly, -classPropertyNames,
+	  -primaryKeyAttributeNames, -relationships, -attributes
+	
+	* added NSAttributeDescription+EO category containing the -width
+	  and -allowsNull methods
+
+	* added NSRelationshipDescription+EO category containing the
+	  -sourceAttributes method
+	
+2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOCoreDataSource.m: print a warning if no object-context was decoded
+	  from an archive, improved decoding of 'isFetchEnabled' (set to yes in
+	  case no value was set) (v4.5.7)
+
+	* NSEntityDescription+EO.m: added EO compatible attribute/relship 
+	  lookup methods (v4.5.6)
+
+2005-08-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSPredicate+EO.m: also check 'selectorName' key during unarchiving
+	  (v4.5.5)
+
+2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSExpression+EO.m: added EOKeyValueArchiving (v4.5.4)
+
+	* NSPredicate+EO.m: added EOKeyValueArchiving to NSComparisonPredicate
+	  (v4.5.3)
+
+2005-08-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.2
+	
+	* EOFetchSpecification+CoreData.m: implemented -initWithFetchRequest:
+	
+	* EOCoreDataSource.m: added key/value archiving, added ability to
+	  retrieve the entity from the fetch specification, added support for
+	  qualifier bindings (v4.5.2)
+
+	* EOSortOrdering+CoreData.m: implemented conversion methods
+
+	* EOQualifier+CoreData.m: implemented conversion methods
+
+	* moved NS* categories to own files
+	
+	* v4.5.1
+
+	* moved in implementation prototypes from CoreDataBlog
+
+	* started EOCoreData library

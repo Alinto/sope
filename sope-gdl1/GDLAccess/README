@@ -1,0 +1,194 @@
+NOTE: this file is outdated!
+
+GNU Database Library Access Layer - MDlink patch Version
+
+  Contained code is derived from GDL - GNU Database Library and is therefore
+  LGPL license. Copyright for GDL has the Free Software Foundation.
+
+  Changes
+
+    There are no EOJoin's anymore (only for compability). EORelationships
+    cannot be compound and store source and destination themselves.
+    
+    No compound primary keys are allowed.
+    
+    Uniquing is always enabled.
+
+    Added "abcX" methods which do not raise exceptions but return them.
+
+  Static Linking
+
+    uncomment '#imports' in EOModel.m
+
+  Intro
+
+    The GNUstep Database Library is a hierarchy of Objective-C classes
+    that provide a three-tiered architecture for developing database
+    applications.
+    
+    The three-tier architecture is a flexible paradigm for building
+    robust and scalable client/server applications; the three tiers refer
+    to the database, the Application Objects, and the user interface.  The
+    separation of the database from the user interface through intermediary
+    Application Objects allows the data to be distributed appropriately
+    across database servers and still have the user interface display data
+    cohesively for the end-user.  Business logic, as implemented in the
+    Application Objects, provides the mechanism for consistency and
+    reusability across all your business applications.
+    
+    Entity-relationship modelling is used for describing the Application
+    Objects and how they are mapped to database fields.  The GNUstep
+    Database Library represents these models as plain ASCII text files; this
+    allows external programs to be used for constructing and maintaining the
+    models separate from the applications which use them.
+
+  Differences to GNUstep gdl
+
+    Datasource objects are missing.
+
+  ToDo
+
+    EOQualifier:
+      `isValidQualifierType' from EOAdaptor is not used now. This method
+      is supposed to verify, when a qualifier is constructed, if an
+      attribute can appear inside an expression.
+
+      Make the relationshipPaths of type GCMutableSet.
+
+    EOSQLExpresion
+      There is no support now for specifying properties for the tables
+      that appear in the FROM clause; I am thinking specifically at the
+      OUTER specifier required by some servers when you use outer joins.
+
+      Optimize the generated WHERE clause when the same relationship
+      appears more than one time in the entity.
+
+      The external query from EOEntity is not used when a fetch
+      operation is unrestricted, i.e. it fetches all the records from
+      the table
+
+  Class Hierachy
+
+    NSObject
+      DefaultScannerHandler
+        EOInsertUpdateScannerHandler
+        EOQualifierScannerHandler
+        EOSelectScannerHandler
+      EOAdaptor
+      EOAdaptorChannel
+      EOAdaptorContext
+      EOAttributeOrdering
+      EODatabase
+      EODatabaseChannel
+      EODatabaseContext
+      EOFaultResolver
+        EOArrayFault
+        EOObjectFault
+      EOGenericRecord
+      EOKeySortOrdering
+      EONull                    < NSCopying >
+      EOObjectUniquer
+      EOQualifierJoinHolder
+      EOQuotedExpression        < NSCopying >
+      EOSQLExpression           < EOExpressionContext >
+        EODeleteSQLExpression
+        EOInsertSQLExpression
+        EOSelectSQLExpression
+        EOUpdateSQLExpression
+      NSDictionary
+        EOPrimaryKeyDictionary
+          EOSinglePrimaryKeyDictionary
+          EOMultiplePrimaryKeyDictionary
+      NSEnumerator
+        EOSinglePrimaryKeyDictionaryEnumerator
+      EOAttribute
+      EOEntity
+      EOModel
+      EOQualifier
+        EOSQLQualifier          < NSCopying >
+      EORelationship
+      EOExpressionArray
+
+    GCObject
+      GCMutableArray
+
+    EOFault
+
+    NSException
+      EOFException
+        DestinationEntityDoesntMatchDefinitionException
+        EOAdaptorException
+        InvalidAttributeException
+        InvalidQualifierException
+        ObjectNotAvailableException
+        PropertyDefinitionException
+        PropertyDefinitionException
+          InvalidNameException
+          InvalidPropertyException
+          InvalidValueTypeException
+          RelationshipMustBeToOneException
+        EOAdaptorException
+          CannotFindAdaptorBundleException
+          DataTypeMappingNotSupportedException
+          InvalidAdaptorBundleException
+          InvalidAdaptorStateException
+          InvalidAdaptorStateException
+            AdaptorIsFetchingException
+            AdaptorIsNotFetchingException
+            ChannelIsNotOpenedException 
+            NoTransactionInProgressException
+          TooManyOpenedChannelsException
+
+  Categories
+
+    EOAdaptor+Private
+    EOAdaptorContext+Private
+    EOAttribute+EOAttributePrivate
+    EOAttribute+ValuesConversion
+    EODatabase+Private
+    EODatabaseChannel+Private
+    EODatabaseContext+Private
+    EOEntity+EOEntityPrivate
+    EOEntity+ValuesConversion
+    EOJoin+EOJoinPrivate
+    EOModel+EOModelPrivate
+    EORelationship+EORelationshipPrivate
+    NSArray+EOKeyBasedSorting
+    NSData+EOCustomValues
+    NSDictionary+EOKeyValueCoding
+    NSMutableArray+EOKeyBasedSorting
+    NSMutableDictionary+EOKeyValueCoding
+    NSNumber+EOCustomValues
+    NSObject+EOExpression
+    NSObject+EOAdaptorChannelDelegation
+    NSObject+EOAdaptorContextDelegate
+    NSObject+EOAdaptorDelegate
+    NSObject+EOCustomValues
+    NSObject+EODatabaseChannelDelegateProtocol
+    NSObject+EODatabaseChannelNotification
+    NSObject+EODatabaseCustomValues
+    NSObject+EOGenericRecord
+    NSObject+EOKeyValueCoding
+    NSObject+EOKeyValueCodingEONull
+    NSObject+EOUnableToFaultToOne
+    NSString+EOAttributeTypeCheck
+    NSString+EOCustomValues
+
+  Protocols
+
+    EOExpressionContext
+
+  Informal Protocols    
+
+    EOClassMapping
+    EOCustomValues
+    EODatabaseChannelNotification
+    EODatabaseCustomValues
+    EOExpression
+    EOKeyValueCoding
+    EOKeyValueCodingEONull
+    EOUnableToFaultToOne
+
+--
+Helge Hess (helge@mdlink.de)
+MDlink online service center, 1998-11-01

@@ -1,0 +1,40 @@
+# compilation settings
+
+libSxComponents_LIBRARIES_DEPEND_UPON = \
+	-lNGObjWeb -lXmlRpc \
+	-lNGMime -lNGStreams -lNGExtensions -lEOControl \
+	-lDOM -lSaxObjC
+
+ADDITIONAL_TOOL_LIBS += \
+	-lSxComponents -lNGObjWeb -lNGXmlRpc -lNGMime \
+	-lNGStreams -lNGExtensions -lEOControl \
+	-lXmlRpc -lDOM -lSaxObjC
+
+ADDITIONAL_INCLUDE_DIRS += -I..
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+RELBUILD_DIR_JS=$(GNUSTEP_BUILD_DIR)/../../../ThirdParty/js-1.5
+RELBUILD_DIR_SOPE=$(GNUSTEP_BUILD_DIR)/..
+RELBUILD_DIR_SxCore=$(GNUSTEP_BUILD_DIR)/../../sope-core
+RELBUILD_DIR_SxXml=$(GNUSTEP_BUILD_DIR)/../../sope-xml
+
+ADDITIONAL_LIB_DIRS += \
+	-L$(GNUSTEP_OBJ_DIR)                                           	\
+	-L$(RELBUILD_DIR_SOPE)/NGObjWeb/$(GNUSTEP_OBJ_DIR_NAME)		\
+	-L$(RELBUILD_DIR_SxXml)/DOM/$(GNUSTEP_OBJ_DIR_NAME)
+else
+ADDITIONAL_LIB_DIRS += \
+	-L./$(GNUSTEP_OBJ_DIR)               \
+	-L../NGObjWeb/$(GNUSTEP_OBJ_DIR)     \
+	-L../NGJavaScript/$(GNUSTEP_OBJ_DIR) \
+	-L../NGScripting/$(GNUSTEP_OBJ_DIR)
+endif
+
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
+
+# Apple
+
+ifeq ($(FOUNDATION_LIB),apple)
+libSxComponents_PREBIND_ADDR="0xC4900000"
+libSxComponents_LDFLAGS += -seg1addr $(libSxComponents_PREBIND_ADDR)
+endif

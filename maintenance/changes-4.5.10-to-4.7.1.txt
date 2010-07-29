@@ -1,0 +1,744 @@
+- bug ids touched by ChangeLog (check Bugzilla for the complete list):
+  1829, 1850, 1856, 1866, 1867, 1873, 1875
+
+- various fixes for gnustep-base compatibility
+- various code cleanups
+- fixed PostgreSQL adaptor for PostgreSQL 8.1
+- fixed computeXYZ KVC methods
+- added support for ACLs in GCS
+- fixed some issues with quoted-printable encoding
+- improved charset handling in MIME bodies
+- libXMLSaxDriver: fixed decoding of #%i; values in attributes
+- STXSaxDriver: improved API
+- added a few standard namespaces
+- bumped contained gnustep-make to 1.13.0
+- added isRenderingDisabled / fragment API to template rendering
+- some improvements to OFS subsystem
+- improved handling of 'charset' parameter in HTTP request processing
+- mapped a set of new WebDAV properties
+- added support for class names in template hash syntax (eg <#MyClass/>)
+- fixed a bug in the WebDAV renderer to honour the WOUseRelativeURLs default
+- improved handling of photo fields in vCards
+- fixed byday calculation in rrules
+
+Major contributors on the SOPE 4.7.1 release:
+Wolfgang Sourdeau
+Marcus Mueller
+Stephane Corthesy
+Sebastian Reitenbach
+Helge Hess
+... and many more :-)
+
+===========================================================================
+compare ../releases/4.5.10-unie with .
+changed: sope-core/NGExtensions/
+     2007-05-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSString+Encoding.m: added gnustep-base and
+     	  libFoundation implementations for
+     	  [NSString +stringEncodingForEncodingNamed:] (v4.7.194)
+     2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGCalendarDateRange.m: return nil for undefined KVC keys (v4.7.193)
+     2007-04-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGExtensions/NSString+Ext.h: expose a few GNUstep NSString
+     	  extensions (v4.7.192)
+     2006-11-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.191
+     	* NGRuleEngine.subproj/NGRuleContext.m: allow keypathes in rule values,
+     	  not just keys
+     	* FdExt.subproj/NSString+misc.m: fixed a quote-skipping issue
+     2006-11-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOExt.subproj/EOCacheDataSource.m: the NSTimer of the datasource
+     	  does not retain the datasource anymore to avoid keeping them around
+     	  w/o any other refers (fixes a buserror on MacOS) (v4.5.190)
+changed: sope-core/EOControl/
+     2007-04-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyValueCoding.m: fixed a gcc4 warning (v4.7.73)
+     2007-01-15  Stephane Corthesy  <stephane@sente.ch>
+     	* EOQualifierParser.m (_parseValue): fixed a bug in the qualifier
+     	  parser (v4.5.72)
+     2006-12-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* EOKeyValueCoding.m: fixed a runtime portability issue - removed
+     	  +initialize on NSArray category (v4.5.71)
+     2006-12-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* EOKeyValueCoding.m: fixed numerous bugs in the computeXXX: methods
+     	  and provided proper implementations according to the WO4.5 specs
+     	  for gnustep-base and Apple Foundation (v4.5.70)
+     2006-12-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyValueCoding.m: added NSDecimalNumber implementation for
+     	  -computeSumForKey: (TBD: implementations for the other methods)
+     	  (v4.5.69)
+changed: sope-gdl1/PostgreSQL/
+     2007-06-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* added NSNumber+ExprValue.m which returns 0/1 for bool values on
+     	  GNUstep-Base (v4.7.50)
+     2007-03-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAttribute+PostgreSQL72.m: removed sql3types.h from inclusion (which
+     	  was not available on Ubuntu/PG 8.1.4), hopefully it still compiles
+     	  with all relevant PG versions (v4.5.49)
+added:   sope-gdl1/PostgreSQL/NSNumber+ExprValue.m
+changed: sope-gdl1/GDLAccess/
+     2007-06-10  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.7.61
+     	* EOAttribute.m: minor code cleanups
+     	* EOExpressionArray.m: copy prefix/suffix/infix strings in accessor
+     	  methods
+     2007-06-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOEntity.m, EOAttribute.m: minor improvements/comments on value
+     	  encoding (v4.7.60)
+     2007-04-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOSQLExpression.m: fixed a gcc4 warning (v4.7.59)
+changed: sope-gdl1/GDLContentStore/
+     2007-04-25  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* GCSFolder.[hm]: added methods to delete ACL records (OGo bug #1866)
+     	  (v4.7.44)
+     2007-04-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* GCSChannelManager.m: improved error log (v4.7.43)
+     2007-04-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* fixed a few GNUstep compilation warnings (v4.7.42)
+     2007-03-21  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* GCSFolder.[hm], GCSFolderManager.[hm]: added ability to create and
+     	  delete GCS folders programmatically (OGo bug #1850) (v4.7.41)
+     2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* GCSFolder.m: fixed a gnustep-base compilation warning (v4.7.40)
+     2007-02-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* use -errorWithFormat:, fixed a few logging crashes (incomplete format
+     	  strings) (v4.5.39)
+     2007-02-08  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* GCSFolder.m: added a gnustep-base hack to properly format bool
+     	  numbers for SQL. Base returns YES or NO in -stringValue while
+     	  libFoundation/NGExt returns 0 or 1 (v4.5.39)
+     2007-01-15  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* GCSFolder.[hm], GCSFolderManager.m: added support for content table
+     	  ACLs (v4.5.38)
+changed: sope-mime/
+     2007-06-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: code refactoring, fixed OGo bug #1856 (QP decoding)
+     	  (v4.7.248)
+     2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: fixed compilation on gnustep-base (v4.7.247)
+     	* NGMime: improved text body encoding (v4.7.246)
+     2007-05-15  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* NGMime.m: encode string body contents using the charset
+     	  of the content-type (when available) (OGo bug #1873) (v4.7.245)
+     2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: changed behaviour wrt bug 1875 (v4.7.244)
+     2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: fixed a gstep-base compilation warning (v4.7.243)
+changed: sope-mime/NGMime/
+     2007-06-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimePartParser.m: moved processing of content-transfer-encoding
+     	  to an NSData category, fixed OGo bug #1856 (use correct quoted
+     	  printable decoder!)
+     2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeTextBodyGenerator.m: fixed compilation on gnustep-base
+     2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeTextBodyGenerator.m: reworked body contents encoding using the
+     	  character encoding support in NGExtension/NSString+Encoding
+     	* NGMimeBodyGenerator.m: moved contained classes to own .m files
+     2007-05-15  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* NGMimeBodyGenerator.m: encode string body contents using the charset
+     	  of the content-type (when available) (OGo bug #1873)
+added:   sope-mime/NGMime/NGMimeRfc822BodyGenerator.m
+added:   sope-mime/NGMime/NGMimeTextBodyGenerator.m
+changed: sope-mime/NGImap4/
+     2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4ResponseNormalizer.m: changed not to throw an exception in the
+     	  situation described in OGo bug 1875
+     2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4Functions.m, NGSieveClient.m: fixed a gstep-base compilation
+     	  warning
+changed: sope-xml/libxmlSAXDriver/
+     2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* libXMLSaxDriver.m: fixed last changes for libFoundation (v4.5.24)
+     2007-03-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* libxmlSAXDriver.m: rewrote decoding of hexadecimal entities as
+     	  this used functionality not present in libFoundation (v4.7.26)
+     2007-03-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* libxmlSAXDriver.m: properly decode #%i; values in attributes -
+     	  libxml2 doesn't decode them properly, but the driver is expected
+     	  to do so. While fixing this also refrained from using the global
+     	  uniqued string cache for these values (I guess the former is
+     	  correct for tags and attribute names, but using it for values
+     	  feels somewhat odd). (v4.7.25)
+changed: sope-xml/STXSaxDriver/
+     2007-02-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.7.15
+     	* STXSaxDriver.m, ExtraSTX/StructuredTextRenderingDelegate.h: changed
+     	  the API, which was broken by design, to properly deal with block
+     	  elements (which can be nested).
+     	* Model/{StructuredTextBodyElement.[hm], StructuredTextParagraph.m}:
+     	  changed API and implementation to properly deal with block elements.
+     	* data/znektest1.stx: trimmed testcase
+     2007-02-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* data/znektest1.stx: added testcase demonstrating a bug in conjunction
+     	  with lists and hyperlinks
+     2007-02-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* STXSaxDriver.xcodeproj: added Xcode 2.4 project file
+added:   sope-xml/STXSaxDriver/STXSaxDriver.xcodeproj
+changed: sope-xml/XmlRpc/
+     2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* XmlRpcSaxHandler.m, XmlRpcDecoder.m: fixed a few gnustep-base
+     	  compilation warnings (v4.7.31)
+changed: sope-xml/SaxObjC/
+     2007-03-28  Helge Hess  <helge.hess@opengroupware.org>
+       * XMLNamespaces.h: added XMLNS_MXML_2006 namespace (4.7.66)
+     2007-02-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* XMLNamespaces.h: added XMLNS_CARDDAV namespace (v4.5.65)
+     	* XMLNamespaces.h: added XMLNS_AppleCalApp namespace (v4.5.64)
+     	* XMLNamespaces.h: added XMLNS_GROUPDAV namespace (v4.5.63)
+     	* XMLNamespaces.h: added XMLNS_AppleCalServer namespace (v4.5.62)
+changed: gnustep-make/
+     2006-12-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* bumped gnustep-make to 1.13.0 vendor branch. This most likely breaks
+     	  own additions but is required to make SOPE compile properly.
+     	  Conflicting files were: configure, rules.make, Instance/rules.make,
+     	  Instance/library.make. Conflicts got resolved by using the 1.13.0
+     	  versions of the files.
+     	  This also breaks specfiles. The major new change in 1.13.0 is that
+     	  the _d suffix for shared libraries got removed!
+     2006-03-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* Instance/library.make: added a hack to redefine CC to gcj in case
+     	  the shared library build includes AOT_JAVA_FILES.
+     	* gcj-tool.make, Instance/gcj-tool.make, Master/gcj-tool.make,
+     	  GNUmakefile.in: added special AOT tool makefile
+     	* Instance/rules.make, common.make, rules.make: added support for
+     	  ahead-of-time Java compilation (AOT_JAVA_FILES), aka GCJ compilation
+     2005-08-29  Helge Hess  <helge.hess@opengroupware.org>
+     	* Instance/subproject.make: moved include of Shared/pch.make up (to
+     	  make it available prior use)
+     	* Instance/framework.make: enabled compilation of PCH
+     2005-08-29  Helge Hess  <helge.hess@skyrix.com>
+     	* Instance/Shared/headers.make: fixed HEADER_FILES_INSTALL_DIR not to
+     	  include HEADER_FILES_DIR
+     	* Instance/Shared/headers.make (.PHONY): removed all/clean targets (now
+     	  in pch.make)
+     	* Instance/Shared/pch.make: removed PCH debug logs
+     	* which_lib.c: fixed gcc4 warnings
+     2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* configure.ac: replaced gcc-version check with a --enable-pch option
+     	* Master/*.make: delete derived sources directory during clean in
+     	  relevant project files
+     	* Instance/*.make: include pch.make in relevant project files
+     	* GNUmakefile.in: properly install pch.make
+     	* Instance/Shared/headers.make: moved PCH stuff to an own Shared file
+     	  (pch.make)
+     2005-08-26  Helge Hess  <helge.hess@skyrix.com>
+     	* configure.ac/config.make.in: enable PRECOMPILED_HEADERS if gcc
+     	  version is >=4
+     	* Instance/Shared/headers.make: added shared-instance-headers-all/clean
+     	  phony targets, added ability to compile a PCH_FILE
+     	* Instance/library.make: moved internal-library-clean out of the
+     	  old-dll section (but this doesn't get called?). Make 
+     	  shared-instance-headers-all a dependency of internal-library-all_
+     	* Master/library.make (internal-clean): delete $(DERIVED_SOURCES_DIR)
+     	  directory (which contains the precompiled header if one was created)
+     	* rules.make: added a rule to compile a precompiled header (.h header
+     	  to .gch), added a flag to ObjC file compilation to include a PCH
+     2006-08-28  Adam Fedor  <fedor@gnu.org>
+     	* Version 1.13.0
+     2006-08-24  Adam Fedor  <fedor@gnu.org>
+     	* common.make: Remove 'd' suffix for debug libraries.
+     	* which_lib.c: Don't search for debug libraries in case there are
+     	old ones still around.
+     	* Documentation/news.texi: Update for new release.
+     2006-08-21  Adam Fedor  <fedor@gnu.org>
+     	* target.make: Add dragonfly OS.
+     	* Documentation/machine.texi: Updates.
+     2006-07-29 10:51-EDT Gregory John Casamento <greg_casamento@yahoo.com>
+     	* configure: Changed "cp -p" to "cp -rp" to correct breakage
+     	when the file being linked is a directory.
+     2006-07-06  Richard Frith-Macdonald <rfm@gnu.org>
+     	* configure.ac: Prevent bad characters in paths
+     	* configure: regenerate
+     	* GNUstep.csh.in: remove use of obsolete substitutions
+     	* GNUstep.sh.in: ditto
+     	* GNUstep.conf.in: ditto
+     	The use of backslash or space characters in a path/filename can
+     	confuse make and shell scripts, so we check for them and prevent
+     	them from being specified at configure time and/or built in to
+     	scripts.  Hopefully this will prevent much confusion on windows.
+     2006-07-05  Richard Frith-Macdonald <rfm@gnu.org>
+     	* GNUmakefile.in: install config.make in library combo specific
+     	directory so that non-flattened builds can pick up the correct
+     	config info for the library combo being used.
+     	* common.make: pick up config.make from new location
+     	* rules.make: know about new location for config.make
+     2006-06-14  Richard Frith-Macdonald <rfm@gnu.org>
+     	* common.make: determine host/target info before trying to load
+     	host/target specific configuration.
+     2006-05-01  Richard Frith-Macdonald <rfm@gnu.org>
+     	* configure.ac: Change --with... options specifying paths so that if
+     	someone oddly uses --without... we treat it as if they had specified
+     	nothing.
+     2006-04-26  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/gnustep-howto.texi: Fix node link
+     2006-04-26  Saso Kiselkov
+     	* common.make: Add option to turn on native exceptions.
+     2006-04-25  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/gnustep-howto.texi: Update windowmaker address
+     2006-04-07  Adam Fedor  <fedor@gnu.org>
+     	* Documentation/README.MinGW: Correct typo in xml instructions.
+     2006-04-06  Adam Fedor  <fedor@gnu.org>
+     	* config.make.in: Set GNUSTEP_HOME to $(HOME). Fix if statements
+     	with filter in them. Fixes bug #16010.
+     2006-03-27  Adam Fedor  <fedor@gnu.org>
+     	* target.make (openbsd): Add additional link flags for bundle
+     	loading. Patch #4989 from Andrew Sveikauskas.
+     2006-03-27  Adam Fedor  <fedor@gnu.org>
+     	* Master/source-distribution.make (svn-tag): Add comment line
+     	(svn-dist): Simplify checkout.
+     	* Master/framework.make: Add build-headers rules
+     	* GNUmakefile: Add special_prefix to GNUSTEP_MAKEFILES
+     2006-03-17  Richard Frith-Macdonald <rfm@gnu.org>
+     	* Documentation/README.MinGW: Attempt to clarify versions to be used.
+     2006-03-13  Adam Fedor  <fedor@gnu.org>
+     	* Version 1.12.0
+     2006-03-09  Adam Fedor  <fedor@gnu.org>
+     	* target.make (openbsd): Add specific EXTACT_CLASS_NAMES_COMMAND.
+     	Patch #4957 from Andrew Sveikauskas.
+     2006-03-07  Jeremy Bettis  <jeremy@deadbeef.com>
+     	* Instance/framework.make: Only copy headers if they changed.
+     	Delete framework.dll if the compile fails.
+     	* Instance/subproject.make: Only copy headers if they changed
+     	* Master/framework.make: make
+     	$(FRAMEWORK_NAME:=.all.framework.variables) depend on
+     	$(FRAMEWORK_NAME:=.build-headers.framework.variables), sometimes
+     	the copying of header files would happen too late.
+     	* target.make: Added -Wl,--enable-auto-image-base to link command
+     	for shared libs & bundles on mingw32.
+     2006-02-23  Adam Fedor  <fedor@gnu.org>
+     	* Master/source-distribution.make: Add svn tag/dist rules
+     	* Documentation/userfaq.texi: updates.
+     2006-01-11  Richard Frith-Macdonald <rfm@gnu.org>
+     	* Documentation/README.MinGW: Update with information on libxml2
+     2006-01-05  Adam Fedor  <fedor@gnu.org>
+     	* Instance/bundle.make: Always link agains all libs when using
+     	Apple's CC.
+     2006-01-01  Richard Frith-Macdonald <rfm@gnu.org>
+     	* openapp.in: Remove IFS setting and search again ... it prevented
+     	windows paths from working (which was why it was removed in the first
+     	place).  Also removed insertion of '.' as a path to search ... since
+     	this is generally considered a security flaw.
+     	Removed some code to search in odd subdirectories.
+     	Added code to search the directories specified in PATH as well as the
+     	standard locations.  Does this need a different path separator on
+     	mingw?  Can't remember and I don't currently have a windows system to
+     	test on.
+     2005-12-30  Adam Fedor  <fedor@gnu.org>
+     	* openapp.in: Re-add IFS setting and search in current dir
+     	(Fixes Bug #15289).
+     2005-12-21  Adam Fedor  <fedor@gnu.org>
+     	* Version 1.11.2
+     2005-12-20  Adam Fedor  <fedor@gnu.org>
+     	* configure.ac: Check for objc-gnu in the GNUstep libraries dir.
+     	* Instance/bundle.make: Always link againt all libs on darwin.
+     2005-12-20  Adam Fedor  <fedor@gnu.org>
+     	* configure.ac: Don't strip -g from CFLAGS. Someone might want it
+     	without using debug=yes.
+     2005-12-06  Richard Frith-Macdonald <rfm@gnu.org>
+     	* configure.ac: On mingw32, if we don't get the config file location
+     	from an earlier installatioin or a command line option, use
+     	/c/GNUstep/GNUstep.conf-dev ... assuming a development version
+     	rather than a version for distribution.
+     	* target.m: add -SystemStubs to bundle libraries on MacOS-X tiger ...
+     	as linking of stdio functions seems to fail otherwise.
+     2005-12-05  Richard Frith-Macdonald <rfm@gnu.org>
+     	* Documentation/filesystem.texi: Initial attempt at adding
+     	documentation on how the filesystem layout is controlled by
+     	the GNUstep config file.
+     2005-12-05  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Display a message with the GNUSTEP_MAKEFILES that
+     	is used.  In psychological preparation for when it will actually
+     	be configurable. ;-)
+     	* configure: Regenerated.
+     2005-12-05  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* Instance/library.make (internal-library-uninstall_): Fixed
+     	uninstallation of dll on windows.  (Suggested by Frode
+     	<frode@bredband.net>).
+     2005-12-02  Richard Frith-Macdonald <rfm@gnu.org>
+     	* opentool.in:
+     	* openapp.in:
+     	* config.make.in:
+     	Honor the GNUSTEP_CONFIG_FILE environment variable.
+     2005-11-28  Richard Frith-Macdonald <rfm@gnu.org>
+     	* GNUstep.conf.in: Use new variables for handling backslashes in
+     	paths.
+     	* GNUstep.csh.in: ditto
+     	* GNUstep.sh.in: ditto
+     	* GNUmakefile.in: Quote paths when we use them .. to avoid backslashes
+     	being removed when they should be present in the path.
+     	* configure.ac: Always make GNUSTEP_MAKEFILES the Library/Makefiles
+     	subdirectory of the system root.  Create new variables containing
+     	escaped backslashes to handle being given a backslash in a path.
+     	* configure: regenerate
+     2005-11-21  Richard Frith-Macdonald <rfm@gnu.org>
+     	* opentool.in:
+     	* openapp.in:
+     	Changed to use new GNUstep.conf configuration file to obtain the
+     	directories to search.
+     2005-10-28  Richard Frith-Macdonald <rfm@gnu.org>
+     	* configure.ac: Set up a sensible default location for GNUstep.conf
+     	on mingw32 systems (C:\GNUstep\GNUstep.conf).
+     	* configure: ditto
+     2005-10-27  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Standardized the format of option help, and also
+     	written fairly complete help on each and every option.
+     	* configure: Regenerated.
+     2005-10-26  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* common.make: Removed checks for GNUSTEP_*_ROOT variables
+     	top-level, they are now automatically and always set by
+     	config.make, no need to check for them here in the new system.
+     2005-10-26  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* Master/rules.make: Rewritten code that determines if this the
+     	top-level make invocation (in order to have the dependencies
+     	install: check-install-permissions all, and distclean: clean
+     	top-level), so that it also works when gnustep-make is invoked
+     	from within a makefile itself (this fixes 'make distclean' in
+     	gnustep-make's own Documentation/GNUmakefile).
+     	* common.make: Updated similar checks.
+     2005-10-26  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* Documentation/GNUmakefile: Updated commands to create temporary
+     	gnustep-make installation.  Also, do not source GNUstep.sh but rely
+     	just on passing GNUSTEP_MAKEFILES on the make command line.
+     2005-10-26  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* GNUmakefile.in (install): Fixed installing GNUstep.conf
+     	when the build directory is different from the source directory.
+     2005-10-23  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Fixed error in the documentation of
+     	--with-user-config-file option.
+     	* configure: Regenerated.
+     2005-10-23  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* config.make.in: Removed code to compute GNUSTEP_HOST,
+     	GNUSTEP_HOST_CPU, etc, when in GNUSTEP_MULTI_PLATFORM mode -- this
+     	is already done by names.make later.
+     2005-10-23  Nicola Pero  <n.pero@mi.flashnet.it>
+     	This change is key to no longer having to source GNUstep.sh when
+     	compiling stuff using gnustep-make.  Please understand this is all
+     	very experimental so don't upgrade yet if you need stability.
+     	* config.make.in (GNUSTEP_CONFIG_FILE): Read configuration files
+     	directly and get all required information from there; only
+     	GNUSTEP_MAKEFILES is assumed to be set.
+     	* common.make: Include config.make first because until we include
+     	that one, we can no longer assume anything.
+     2005-10-23  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* which_lib.c (search_for_lib_with_suffix_and_ext): Enhanced
+     	changes to make the code simpler and easier to understand and
+     	avoid duplicate checks for static libs.  Needs testing.
+     2005-10-23  Richard Frith-Macdonald <rfm@gnu.org>
+     	* which_lib.c: Tidied a little on lines suggested by David Ayers
+     	* configure.ac: Check for ctype.h
+     	* configure: regenerate
+     	* config.h.in: regenerate
+     2005-10-23  Jeremy Bettis
+     	* configure.ac: 
+     	* rules.make: 
+     	* target.make: 
+     	Use install -p so that doing a make install doesn't change the
+     	timestamp on all the headers and cause everything to need rebuilt.
+     	Don't create the obj dir (symlink) on mingw.
+     	Add -Wl,--enable-auto-import to link commands to make the compiler be
+     	quiet.
+     	* which_lib.c: Fixes to support other library types on mingw.
+     	Patches applied and edited to conform to GNUstep coding standard.
+     2005-10-20  Adam Fedor  <fedor@gnu.org>
+     	* config.make.in (GNUSTEP_CONFIG_FILE): Correct capitaliztion
+     	of substitution variable.
+     2005-10-19  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* config.guess: Updated to latest version.
+     	* config.sub: Idem.
+     2005-10-18  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Make sure that --prefix=xxx takes precedence over
+     	paths read from GNUstep.conf or inherited from the environment.
+     	* configure: Regenerated.
+     2005-10-17  Adam Fedor  <fedor@gnu.org>
+     	* target.make (netbsd): Remove static libs version of netbsd
+     	target and make (netbsdelf) work for all netbsd versions.
+     	* clean_os.sh: Don't clean netbsd targets. Fixes Bug #14635.
+     2005-10-14  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* GNUstep.sh.in: Export GNUSTEP_USER_ROOT after setting it (Bug
+     	reported by Fred Kiefer <fredkiefer@gmx.de>).
+     2005-10-13  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* GNUstep.sh.in: Read system, local, network, user paths from
+     	configuration files and use the configuration files settings in
+     	preference to the hardcoded ones.
+     	* GNUstep.csh.in: Same changes, where we use sed to convert on the
+     	fly the sh syntax of config files to csh syntax, then we eval the
+     	result.
+     	* GNUmakefile.in: Do not compile, install and clean user_home.
+     	* user_home.c: Removed.
+     	* GNUstep-reset.sh (GNUSTEP_USER_CONFIG_FILE, GNUSTEP_USER_DIR,
+     	GNUSTEP_USER_DEFAULTS_DIR, GNUSTEP_CONFIG_FILE): Unset.
+     2005-10-13  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* GNUmakefile.in (GNUSTEP_CONFIG_FILE): Fixed replacing this variable.
+     2005-10-13  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Added --with-user-config-file, --with-user-dir,
+     	--with-user-defaults-dir options.  Remove --with-user-root option.
+     	Simplified implementation of --with-config-file option.  Do not
+     	generate GNUsteprc.
+     	* configure: Regenerated.
+     	* GNUstep.conf.in (GNUSTEP_USER_CONFIG_FILE): New variable.
+     	(GNUSTEP_USER_DIR): New variable.
+     	(GNUSTEP_USER_DEFAULTS_DIR): New variable.
+     	* GNUsteprc.in: Removed.
+     2005-10-13  Nicola Pero  <n.pero@mi.flashnet.it>
+     	Warning: --prefix=/usr/GNUstep/System no longer works.  Please use
+     	--prefix=/usr/GNUstep or --with-system-root=/usr/GNUstep/System.
+     	* configure.ac: Simplified management of --prefix.  Do not try
+     	setting default prefix from an existing GNUSTEP_SYSTEM_ROOT as
+     	that is read from the config file after the default prefix is set.
+     	Do not set $prefix variable that it not used anywhere.  Fixed bug
+     	in setting GNUSTEP_SYSTEM_ROOT introduced in previous changes.
+     	* configure: Regenerated.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* .cvsignore: Ignore GNUstep.conf
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Use the GNUSTEP_CONFIG_FILE environment variable
+     	to choose the location of the config file, if no configure option
+     	is given.  Automatically import the settings from an existing
+     	GNUstep config file if one exists, and use them for anything not
+     	specified.  Added --disable-importing-config-file option to
+     	disable this behaviour.
+     	* configure: Regenerated.	
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Added --with-system-root=xxx option.
+     	* configure: Regenerated.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	Removed obsolete public variable GNUSTEP_ROOT.
+     	* configure.ac: Do not replace GNUSTEP_ROOT in generate files.
+     	* configure: Regenerated.
+     	* GNUstep.csh.in: Do not define GNUSTEP_ROOT.
+     	* GNUstep.sh.in: Do not define GNUSTEP_ROOT.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Define GNUSTEP_SYSTEM_ROOT from prefix.  Export
+     	and reference it instead of exporting and referencing 'prefix' to
+     	clarify what is happening.  Reordered some configure stages to
+     	prepare it for further changes.
+     	* configure: Regenerated.
+     	* GNUmakefile.in: Use GNUSTEP_SYSTEM_ROOT instead of prefix.
+     	* GNUstep.csh.in: Same change.
+     	* GNUstep.sh.in: Same change.
+     	* GNUstep.conf.in: Same change.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac (MAKEFILE_SUFFIX): Variable removed.
+     	(GNUSTEP_MAKEFILES): New variable (that is more standard and more
+     	suited to make it a configure option in the future).  Replace it
+     	in generated files.
+     	* configure: Regenerated.
+     	* debugapp.in: Use everywhere GNUSTEP_MAKEFILES, not
+     	MAKEFILE_SUFFIX.
+     	* opentool.in: Same change.
+     	* GNUmakefile.in: Same change.
+     	* executable.template.in: Same change.
+     	* GNUstep.sh.in: Same change.
+     	* GNUstep.csh.in: Same change.
+     	* gnustep-make.spec.in: Removed MAKEFILE_SUFFIX, use Library/Makefiles
+     	directly.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Removed obsolete --without-system-root option.
+     	* configure: Regenerated.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac (root_prefix): Variable removed.  Wasn't used or
+     	replaced anywhere.
+     	* configure: Regenerated.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Use /usr/pkg/etc/GNUstep.conf instead of
+     	/usr/pkg/etc as GNUstep config file on NetBSD (Suggestion by David
+     	Ayers).
+     	* configure: Regenerated.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Generate GNUstep.conf from GNUstep.conf.in
+     	so that GNUstep.conf gets properly setup with the paths that
+     	are configured into gnustep-make
+     	* GNUstep.conf.in: New file.
+     	* GNUstep.conf: Removed.
+     	* configure: Regenerated.
+     	* GNUmakefile.in (install): Install the GNUstep.conf file
+     	in the chosen location for the GNUstep config file.
+     2005-10-12  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* configure.ac: Added --with-config-file=xxx (code partially taken
+     	from gnustep-base) option.
+     	* config.make.ac: Added GNUSTEP_CONFIG_FILE variable holding the
+     	configured location of the config file for this installation.
+     	* configure: Regenerated.
+     2005-10-06 Tom MacSween <macsweent@sympatico.ca>
+     	* Fixes for cygwin.
+     	* Instance/rules.make: Add Windows resource files for cygwin
+     	* config.make.in: Cygwin does not have ln-s
+     	* rules.make: Add Windows resource rules for cygwin
+     	* target.make (cygwin): Fix shared link cmd.
+     2005-10-06  Nicola Pero  <n.pero@mi.flashnet.it>
+     	* rules.make (ALL_OBJCCFLAGS, $(GNUSTEP_OBJ_DIR)/%${OEXT}): When
+     	compiling ObjC++ files, don't use the additional ObjC flags but
+     	only the internal/system ones, to make it easier/possible for end
+     	users to add different flags to ObjC and ObjC++ compilations.
+     2005-10-06  Nicola Pero  <n.pero@mi.flashnet.it>
+     	Added support for ObjC++.  You should list the ObjC++ .mm files in
+     	the xxx_OBJCC_FILES variable, and put extra ObjC++ flags in
+     	xxx_OBJCCFLAGS or ADDITI
+added:   gnustep-make/GNUstep.conf.in
+removed: gnustep-make/GNUstep.conf
+changed: xmlrpc_call/
+     2007-03-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* XmlRpcClientTool.m: fixed a gstep-base compilation warning
+changed: sope-appserver/WEExtensions/
+     2007-03-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* *.m: ported all elements to honour the new
+     	  -[WOContext isRenderingDisabled] flag. (v4.7.93)
+     2006-11-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* WETableView/WETableCell.m: fixed a MacOS compilation warning
+     	  (v4.5.92)
+changed: sope-appserver/mod_ngobjweb/
+     2007-01-15  Helge Hess  <helge@perform>
+     	* added ngobjweb.load configuration file for Apache2 setups which
+     	  support a2enmod (eg Ubuntu)
+added:   sope-appserver/mod_ngobjweb/ngobjweb.load
+changed: sope-appserver/SoOFS/
+     2006-12-31  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.25
+     	* OFSResourceManager.m: try to locate component class in runtime,
+     	  according to the name of the template. If that cannot be found,
+     	  fall back to WOComponent.
+     	* sope.m: accept --bundle <path> commandline parameters for loading
+     	  custom classes, i.e. custom component classes.
+     2006-12-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* OFSResourceManager.m: assign self as resourceManager to components
+     	  created by it. (v4.5.24)
+     	* sope.m: changed to use the new user defaults registration mechanism
+     	  of WOCoreApplication (v4.5.23)
+changed: sope-appserver/NGObjWeb/
+     2007-05-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.7.11
+     	* NGHttp+WO.m, WOSimpleHTTPParser.m: process the 'charset' parameter
+     	  of the request content type to extract the content encoding of the
+     	  request
+     	* WOMessage.m: print a warning if -contentAsString got called but the
+     	  content could not be converted using the charset assigned to the
+     	  WORequest
+     	* WORequest.m: minor code cleanups, use isNotEmpty
+     2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* DAVPropMap.plist: added HTTPMail junkemail property (v4.7.10)
+     2007-05-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGHttp+WO.m, WORequest.m, NGHttp: minor code cleanups (v4.7.9)
+     2007-05-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOSession.m: do not attempt to process 'nil' keys when working on
+     	  extra variables (lead to NSDictionary exceptions) (v4.7.8)
+     2007-05-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOApplication.m: properly call +_setupSNS method
+     	  (fixes OGo bug #1867) (v4.7.7)
+     2007-03-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* WORequest.m, WebDAV/SoWebDAVRenderer.m: fixed a gcc 4.1 warning
+     	  (v4.7.6)
+     2007-03-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.7.5
+     	* WOContext.[hm]: added fragmentID API from JOPE. This API provides a
+     	  means for conditionally suppressing the rendering of WOElements -
+     	  this is triggered by a 'wofid' URL parameter; comes in very
+     	  handy when dealing with AJAX.
+     	* WORequest.[hm]: added -fragmentID API.
+     	* WOResponse+private.h: added new convenience macros
+     	* DynamicElements/WOFragment.[m,api]: new dynamic element for
+     	  triggering render state
+     	* WOChildComponentReference.m, WEClientCapabilities.m,
+     	  DynamicElements/*.m: all elements obey WOContext's new
+     	  -isRenderingDisabled flag now
+     2007-03-13  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WORepetition.m: Reverted 'list' binding extensions as this had side
+     	  effects with existing code. I advise using 'asArray' trampolines in
+     	  situations where the 'list extension' was helpful. (v4.7.4)
+     2007-03-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* Templates/WOWrapperTemplateBuilder.m: allow component classes in
+     	  <#hash/> references (eg <#Frame>) (v4.7.3)
+     2007-02-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WORepetition.m: minor code cleanup. Extended the 'list' binding
+     	  so that it's possible now to bind any object as a list - this helps
+     	  in cases where provided objects are either arrays or ordinary
+     	  objects. (v4.7.2)
+     2007-02-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.266
+     	* SoObject.m, SoWebDAVRenderer.m: made the URL generation honour the
+     	  WOUseRelativeURLs default (which is on by default, so all generated
+     	  WebDAV URLs now do not include the hostname)
+     	* DAVPropMap.plist: mapped calendar-color WebDAV property
+     	* WebDAV/SoWebDAVRenderer.m: added support for XML properties which
+     	  contain values (v4.5.265)
+     	* DAVPropMap.plist: added mappings for calendar-home-set,
+     	  dropbox-home-URL and notifications-URL CalDAV properties (v4.5.264)
+     2007-01-17  Helge Hess  <helge@perform>
+     	* WebDAV/SoObjectWebDAVDispatcher.m: never report 404 WebDAV properties
+     	  in combination with <allprop/> requests (this hacks in the 'brief'
+     	  header into the request) (v4.5.263)
+     2006-12-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.262
+     	* WOCoreApplication.m: Removed the +_initDefaults class method and
+     	  instead added a new -registerUserDefaults method which provides a
+     	  sane hook to alter/extend registration of userDefaults in
+     	  subclasses. Registration is called very early by -init, though, so
+     	  subclassers must still act very carefully. Removed the braindead
+     	  +_initializeClass method, instead moved the proper initialization
+     	  code into -init.
+     	* WOCoreApplication.h: exposed -registerUserDefaults to subclassers.
+     	* WOApplication.m: removed +_initializeWOApp, instead moved
+     	  initialization code to the proper place in -init (after super has
+     	  been initialized and user defaults have been set in a proper manner).
+     2006-12-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/WORepetition.m: fixed another bug when using count
+     	  without index and list (v4.5.261)
+     2006-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/WORepetition.m: fixed a bug when using count without
+     	  index and list (v4.5.260)
+     2006-12-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* Templates/WOHTMLParser.m: fixed a bug with lowercase NAME tags in
+     	  wrapper templates (v4.5.259)
+     2006-11-23  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* NGHttp: added DeltaV HTTP methods (v4.5.258)
+     	* SoObjects/SoProductClassInfo.m: enable the use of arrays in the
+     	  declaration of default roles for a permission in product.plist files
+     	  (v4.5.257)
+     2006-11-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEClientCapabilities.m: added Sunbird as a known user-agent
+     	  (v4.5.256)
+     2006-11-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOCopyValue.m: fixed an uninitialized local
+     	  (v4.5.255)
+added:   sope-appserver/NGObjWeb/DynamicElements/WOFragment.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOFragment.m
+changed: sope-appserver/NGObjWeb/NGHttp/
+     2007-05-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGHttpMessageParser.m: minor code cleanups, use -warnWithFormat:
+     2006-11-23  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* NGHttpRequest.[hm]: added DeltaV HTTP methods
+changed: sope-appserver/WOExtensions/
+     2007-03-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* *.m: ported all elements to honour the new
+     	  -[WOContext isRenderingDisabled] flag. (v4.7.31)
+changed: sope-appserver/WEPrototype/
+     2007-03-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEPrototypeScript.m, WELiveLink.m: obey WOContext's new
+     	  -isRenderingDisabled flag (v4.7.9)
+changed: sope-appserver/NGXmlRpc/
+     2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGXmlRpcClient.m: fixed a gnustep-base compilation warning (v4.7.16)
+changed: maintenance/
+     2007-02-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* syncXcodeVersions.sh: fixed substitution bug in case of
+     	  SUBMINOR_VERSION overflow (>255) - also check if resulting plist
+     	  is syntactically correct, abort on error
+changed: sope-ical/NGiCal/
+     2007-05-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGVCardValue.m: return nil for unknown KVC keys on Cocoa (v4.7.82)
+     2007-03-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGVCard.h: added missing declaration of NSData type (v4.7.81)
+     2007-02-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.7.80
+     	* NGVCard.[hm]: Added API for properly dealing with photos and
+     	  associated MIME types
+     	* NGVCardSaxHandler.m: added support for parsing photo types (section
+     	  3.1.4 in RFC2426). Also cleaned up some logging related code.
+     2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalMonthlyRecurrenceCalculator.m: fixed byday calculation for days
+     	  which overflow the number of days in a month. Should fix OGo bug
+     	  #1829. (v4.7.79)
+     	* iCalRecurrenceCalculator.m: added -description (v4.7.78)
+     2006-11-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalRecurrenceRule.m: parse (but not process or store) 'bymonth'
+     	  rrules (v4.5.77)

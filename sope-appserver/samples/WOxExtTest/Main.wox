@@ -1,0 +1,94 @@
+<?xml version='1.0' standalone='yes'?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:const="OGo:value"
+      xmlns:rsrc="OGo:url"
+>
+  <head>
+    <title>WOExtensions / WEExtensions</title>
+
+    <meta name="author" content="SKYRIX Software AG" />
+    <meta name="robots" content="stop" />
+
+    <link type="text/css" rel="stylesheet" rsrc:href="site.css"    />
+    <link href="mailto:helge.hess@opengroupware.org" rev="made" />
+    <link rel="shortcut icon" rsrc:href="favicon.ico" />
+  </head>
+
+  <body>
+    <div id="header">
+      <img filename="OGoLogo.gif" class="headerlogo" alt="Logo" />
+      <div id="headerhistory">
+        <span id="navtitle">WOxExtTest - Dynamic Element Demonstration</span>
+      </div>
+    </div>
+    <br />
+    
+    <h2>WOExtensions/WEExtensions Test (Oeffner)</h2>
+
+    <table width="100%" border="0" cellspacing="3">
+      <tr>
+	<td valign="top">
+          <h4>JavaScript Elements</h4>
+            <li><a pageName="ValidatedField">var:js-validated-field</a></li>
+            <li><a pageName="AlertPanel"    >var:js-alert-panel</a></li>
+            <li><a pageName="ConfirmPanel"  >var:js-confirm-panel</a></li>
+            <li><a pageName="ModalWindow"   >var:js-modal-window</a></li>
+            <li><a pageName="ImageFlyover"  >var:js-img-flyover</a></li>
+            <li><a pageName="TextFlyover"   >var:js-text-flyover</a></li>
+            <li><a pageName="DnD"           >Drag'n'Drop</a></li>
+            <li><a pageName="ShiftClick"    >var:js-shiftclick</a></li>
+        </td>
+        <td valign="top">
+          <h4>Misc Control Elements</h4>
+            <li><a pageName="KeyValueConditional"   >var:if-key</a></li>
+            <li><a pageName="QualifierConditional"  >var:if-qualifier</a></li>
+            <li><a pageName="Switch"                >var:switch</a></li>
+            <li><a pageName="DictionaryRepetition"  >var:foreach-key</a></li>
+
+          <h4>Misc Elements</h4>
+            <li>WORedirect</li>
+            <li><a pageName="TabPanel"              >var:tab-panel</a></li>
+            <li><a pageName="Table"                 >var:table</a></li>
+            <li><a pageName="CollapsibleContent"    >var:collapsible</a></li>
+            <li><a pageName="ThresholdColoredNumber">var:threshold-colored-number</a></li>
+            <li><a pageName="RichString">var:rich-string</a></li>
+          <h4>Misc Form Elements</h4>
+            <li><a pageName="RadioButtonMatrix">var:radio-button-matrix</a></li>
+            <li><a pageName="CheckBoxMatrix">var:checkbox-matrix</a></li>
+	  <br />
+	</td>
+      </tr>
+
+      <tr>
+	<td valign="top">
+          <h4>Complex Elements (WEExtensions)</h4>
+            <li><a pageName="TableView">var:tableview</a></li>
+            <li><a pageName="TreeView" >var:treeview</a></li>
+            <li><a pageName="TabView"  >var:tabview</a></li>
+            <li><a pageName="Browser"  >var:we-browser</a></li>
+            <li><a pageName="CollapsibleContentExt">var:we-collapsible</a></li>
+            <li><a pageName="PageView"   >var:pageview</a></li>
+            <li><a pageName="TableMatrix">var:table-matrix</a></li>
+        </td>
+        <td valign="top">
+          <h4>Scheduling Elements (WEExtensions)</h4>
+            <li><a pageName="WeekOverview"  >var:week-overview</a></li>
+            <li><a pageName="WeekColumnView">var:weekcol-view</a></li>
+            <li><a pageName="MonthOverview" >var:month-overview</a></li>
+            <li><a pageName="TimeField"     >var:time-field</a></li>
+            <li><a pageName="DateField"     >var:date-field</a></li>
+            <li><a pageName="CalendarField" >var:cal-field</a></li>
+  	</td>
+      </tr>
+
+      <tr>
+	<td valign="top">
+          <h4>Standard Elements (NGObjWeb)</h4>
+	  <li><a pageName="VarString">var:string</a></li>
+	</td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+How to build a DOM tree ?
+=========================
+
+1. get a factory
+
+  DOMBuilderFactory *factory
+    = [DOMBuilderFactory standardDOMBuilderFactory];
+
+2. get a builder for your resource type
+
+  id<DOMBuilder> builder
+    = [factory createDOMBuilderForMimeType:@"text/xml"];
+
+3. parse what you have:
+
+  id<DOMDocument> document
+    = [builder buildFromSource:@"myfile.xml"];
+
+
+KVC
+===
+
+You can navigate the DOM tree with standard key/value coding. The NGDOMDocument
+will treat all KVC keys starting with a "/" as query path expressions.
+
+Samples:
+  document.documentElement             => root DOMElement
+  document.documentElement.childNodes  => NSArray containing the root children
+  document./uid                        => DOMElement or array! matching 'uid'
+  document./uid.textValue              => text-value of 'uid' element
+
+  element.@value.textValue    => text-value of 'value' attribute of element
+  element./subnode.textValue  => lookup subnode (strips of the /) using QP
+
+
+Some info on classes ...
+========================
+
+Nodes with children
+
+  Document
+  DocumentFragment
+  EntityReference
+  Element
+  Attr
+  Entity
+
+Nodes without children
+
+  DocumentType
+  ProcessingInstruction
+  Comment
+  Text
+  CDATASection
+  Notation
+
+Nodes with parent
+
+  DocumentType
+  EntityReference
+  Element
+  ProcessingInstruction
+  Comment
+  Text
+  CDATASection
+
+Nodes without parent
+
+  Document
+  DocumentFragment
+  Attr
+  Entity
+  Notation

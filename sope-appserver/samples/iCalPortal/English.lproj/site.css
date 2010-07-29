@@ -1,0 +1,120 @@
+body {
+  color:            #000000;
+  font-family:      Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        10pt;
+  background-color: #FFFFFF;
+}
+
+font.header {
+  letter-spacing:   0pt;
+  color:            #034EA2;
+  font-family:      Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        12pt;
+  font-weight:      bold;
+}
+tablink {
+  letter-spacing:   0pt;
+  font-color:       #000000;
+  color:            #000000;
+  font-family:      Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        9pt;
+  font-weight:      bold;
+  text-decoration:  none;
+}
+
+a:link {
+  color:       #034EA2;
+  font-family: Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing:   0pt;
+}
+
+a:visited {
+  color:       #034EA2;
+  font-family: Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing:   0pt;
+}
+
+a:hover {
+  color:       #034EA2;
+  font-family: Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing:   0pt;
+}
+
+a:link.submenu {
+  color:       #034EA2;
+  font-family: Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: none;
+  font-size:        8pt;
+  letter-spacing:   0pt;
+}
+
+a:visited.submenu {
+  color:       #034EA2;
+  font-family: Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        8pt;
+  text-decoration: none;
+  letter-spacing:   0pt;
+}
+
+a:hover.submenu {
+  color:           #000000;
+  font-family:     Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: underline;
+  font-size:        8pt;
+  letter-spacing:   0pt;
+}
+
+ul {
+  list-style-type:  disc;
+}
+
+pre {
+  letter-spacing:   0;
+  font-family:      monospace;
+  font-size:        7.5pt;
+  line-height:      10pt;
+  text-align:       left;
+  color:            #000000;
+}
+
+.default {
+  letter-spacing:   0.5pt;
+  font-family:      Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        8pt;
+  line-height:      12pt;
+  color:            #000000;
+}
+
+.small {
+  font-family:      Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        8pt;
+  color:            #000000;
+  text-decoration: none;
+}
+
+.menu {
+  letter-spacing:   0.5pt;
+  font-family:      Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        10pt;
+  line-height:      12pt;
+  color:            #034EA2;
+  text-decoration:  none;
+  font-weight:      bold; 
+}
+
+.big {
+  letter-spacing:   0.5pt;
+  font-family:      Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        10pt;
+  line-height:      12pt;
+  color:            #000000;
+}
+
+.news {
+  letter-spacing:   0pt;
+  font-family:      Arial, Helvetica, Verdana, Geneva, Tahoma, sans-serif;
+  font-size:        8pt;
+  line-height:      10pt;
+  text-align:       justify;
+  color:            #000000;
+}

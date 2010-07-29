@@ -1,0 +1,23 @@
+# compilation flags
+
+ADDITIONAL_CPPFLAGS += -pipe 
+# -DHTML_DEBUG=1
+# -DPROFILE_CLUSTERS=1
+
+
+# disable optimization for exception handlers
+SaxDefaultHandler.m_FILE_FILTER_OUT_FLAGS = -O%
+WOCompoundElement.m_FILE_FILTER_OUT_FLAGS = -O%
+WOImage.m_FILE_FILTER_OUT_FLAGS           = -O%
+
+
+ADDITIONAL_CPPFLAGS += -pipe -Wall -funsigned-char -O2
+ADDITIONAL_CPPFLAGS += -DCOMPILING_NGOBJWEB=1
+
+DynamicElements_INCLUDE_DIRS += \
+	-I.. -I. -I../..	\
+	-I../../../sope-core			\
+	-I../../../sope-core/NGStreams		\
+	-I../../../sope-core/NGExtensions	\
+	-I../../../sope-mime			\
+	-I../../../sope-xml

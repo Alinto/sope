@@ -1,0 +1,9 @@
+libxmlSAXDriver
+===============
+
+This directory contains the sources for a SAX driver bundle that works on
+top of the libxml2 library. It can be used for processing XML, but also
+for parsing HTML.
+
+Requirements:
+- libxml2

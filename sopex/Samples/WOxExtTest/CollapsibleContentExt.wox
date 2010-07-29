@@ -1,0 +1,132 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame"
+           title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+  some text <br />
+
+  <form var:action="self">
+    <br/>
+
+    <var:we-collapsible const:condition="NO" 
+                        visibility="firstVisibility"
+                        const:allowScript="YES">
+
+        <var:we-collapsible-title NAME="TitleMode">
+          <var:we-collapsible-action
+             const:openedLabel         = "first opened"
+             const:closedLabel         = "first closed"
+             const:openedImageFileName = "expanded.gif"
+             const:closedImageFileName = "collapsed.gif"
+             submitActionName    = "clearClicks"/>
+
+          first collapsible (javaScript: only IE)<br/>
+        </var:we-collapsible-title>
+        
+        <var:we-collapsible-content NAME="ContentMode">
+           content of the <b>first</b> collapsible
+           some text, some text, some text <br/>
+           some text, some text, some text <br/>
+           some text, some text, some text <br/>
+           some text, some text, some text <br/>
+           some text, some text, some text <br/>
+           <input type="checkbox" var:checked="isFirstChecked"/>
+           <a var:action="increaseClicks">increase clicks</a>
+        </var:we-collapsible-content>
+    </var:we-collapsible>
+
+    <br/>
+
+    <var:we-collapsible NAME="SecondCollapsibleContent">
+
+        <var:we-collapsible-title NAME="TitleMode">
+          <var:we-collapsible-action
+             const:openedLabel         = "second opened"
+             const:closedLabel         = "second closed"
+             const:openedImageFileName = "expanded.gif"
+             const:closedImageFileName = "collapsed.gif"
+             submitActionName    = "clearClicks"
+             isLastClicked       = "isSecondLastClicked"
+             const:fragmentIdentifier  = "second"/>
+
+           second collapsible (javaScript: only IE)<br/>
+        </var:we-collapsible-title>
+
+        <var:we-collapsible-content NAME="ContentMode">
+           content of the <b>second</b> collapsible
+           some text, some text, some text <br/>
+           some text, some text, some text <br/>
+           some text, some text, some text <br/>
+           some text, some text, some text <br/>
+           some text, some text, some text <br/>
+           <input type="checkbox" var:checked="isSecondChecked"/>
+           <a var:action="increaseClicks">increase clicks</a>
+        </var:we-collapsible-content>
+
+    </var:we-collapsible>
+
+    <br/>
+    
+    <var:we-collapsible NAME="ThirdCollapsibleContent">
+
+        <var:we-collapsible-title NAME="TitleMode">
+          <var:we-collapsible-action
+             const:openedLabel         = "third opened"
+             const:closedLabel         = "third closed"
+             const:openedImageFileName = "expanded.gif"
+             const:closedImageFileName = "collapsed.gif"
+             submitActionName    = "clearClicks"
+             isLastClicked       = "isThirdLastClicked"
+             const:fragmentIdentifier  = "third"/>
+          <br/>
+        </var:we-collapsible-title>
+
+        <var:we-collapsible-content NAME="ContentMode">
+           content of the <b>third</b> collapsible
+           <input type="checkbox" var:checked="isThirdChecked"/>
+           <a var:action="increaseClicks">increase clicks</a>
+        </var:we-collapsible-content>
+
+    </var:we-collapsible>
+
+  </form> <!--Form-->
+
+  <br/>
+  clicks: <var:string value="clicks"/>
+
+</var:component>

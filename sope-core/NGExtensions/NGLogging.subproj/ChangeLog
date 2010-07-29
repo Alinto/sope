@@ -1,0 +1,105 @@
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLogEventDetailedFormatter.m: added comment regarding process name.
+
+2004-11-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* *.h: added detailed documentation
+
+	* *.m: added -description where appropriate
+
+	* NGLogger.m: removed +defaultLogger from the API, it's used
+	  internally though.
+
+	* NGLoggerManager.m: reinstated caching of loggers. Added optimization
+	  to reuse a "default" logger when no config is available.
+
+	* NGLogEvent.[hm]: changed -date to return NSCalendarDate instead of
+	  NSDate.
+
+	* NGLogEventFormatter.[hm]: new base class for implementing formatters.
+	  Also offers a factory for creating log event formatter instances
+	  from configurations.
+
+	* NGLogEventDetailedFormatter.m: offers rich logging, similar to what
+	  NSLog() in libFoundation has to offer.
+
+	* NGLogConsoleAppender.m: removed, obsoleted by NGLogStdoutAppender.
+
+	* NGLogFileHandleAppender.[hm]: new base class for implementing file
+	  handle based appenders.
+
+	* NGLogStdoutAppender.m, NGLogStderrAppender.m: appenders for logging
+	  to stdout/stderr.
+
+2004-11-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGLoggerManager.m: use default logger if none is registered
+
+	* NGLogger.m: cleaned up -init, added default logger
+
+	* NGLogConsoleAppender.m: removed the bug with using a message in
+	  place of a format, rewrote logger to be sufficiently fast
+
+2004-11-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLogLevel.h: new header bearing the log levels
+
+	* NSObject+ExtendedLogging.[hm]: removed. All equivalent functionality
+	  is now in NSObject+Logs.[hm].
+
+	* NGLogger.[hm]: changed API to that required by NSObject+Logs.m.
+
+2004-11-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* *.h: provided some documentation
+
+	* NGLoggerManager.[hm]: new method -loggerForFacilityNamed: for
+	  sharing/referencing instances based on names.
+
+	* NSObject+NGExtendedLogging.h: fixed some serious misordering in
+	  log levels (thanks to Helge Hess for reporting this! ;-)
+
+	* NSObject+NGExtendedLogging.m: some optimizations to default logging
+	  facilities (check wheter loglevel is enabled before allocating
+	  strings which is expensive).
+
+	* NGLogger.m: changed some code to address changes in NGLogLevel,
+	  shortcut logging immediately if minimum log level is not met.
+
+2004-11-12  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* deprecated -defaultManager in favor of -defaultLoggerManager
+
+	* code cleanups for SOPE styleguides
+
+2004-11-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NSObject+ExtendedLogging.[hm]: -(id)logger queries NGLoggerManager
+	  now. Also, a new default "NGDefaultLogLevel" triggers default
+	  NSObject based logging now.
+
+	* README: new file
+
+2004-11-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLoggerManager.[hm]: controller providing loggers based on
+	  information from user defaults (currently)
+
+2004-05-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLogAppender.[hm]: introduced -formattedEvent:, currently not
+	  configurable.
+
+	* NGLogSyslogAppender.m: works as expected now.
+
+	* NGLogger.m: uses new default (see README) to select the default
+	  appender. Not optimal, but sufficient.
+
+	* NGLogConsoleAppender.m: changed to use -formattedEvent: now.
+
+2004-05-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLogSyslogAppender.[hm]: syslog appender, untested.
+
+	* ChangeLog: created

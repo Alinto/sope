@@ -1,0 +1,30 @@
+BEGIN:VCARD
+ADR;TYPE=home:pobox;;Am Geldspeicher 1;locality;region;12345;Germany
+BDAY:1976-02-16T00:00:00Z
+CATEGORIES:Business\,Customer
+CLASS:PUBLIC
+EMAIL:donald@geldspeicher.ag
+FN:Donald Duck
+N:Duck;Donald;;;
+NICKNAME:donny
+NOTE:a note\nwith multiple lines\n
+ORG:Geldspeicher AG
+ROLE:Donalds Role
+TEL;TYPE=WORK:54321
+TEL;TYPE=HOME:12345
+TEL;TYPE=CELL:0151-12345
+TITLE:Prof. Dr.
+UID:RGBMkcPsfg
+URL:http://www.donald.de/
+VERSION:3.0
+X-KADDRESSBOOK-BlogFeed:http://www.donald.de/blog/
+X-KADDRESSBOOK-X-Anniversary:2007-01-16
+X-KADDRESSBOOK-X-AssistantsName:Hot Assistant
+X-KADDRESSBOOK-X-IMAddress:donald@googlemail.com
+X-KADDRESSBOOK-X-ManagersName:Cool Manager
+X-KADDRESSBOOK-X-Office:office
+X-KADDRESSBOOK-X-Profession:profession
+X-KADDRESSBOOK-X-SpousesName:Minney Mouse
+X-KADDRESSBOOK-hhtestextra1:extraval
+END:VCARD
+

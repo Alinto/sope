@@ -1,0 +1,7 @@
+{
+  hostName     = "localhost";
+  userName     = "helge";
+  password     = "helgehelge";
+  databaseName = "hhtest1";
+  port         = 5432;
+}

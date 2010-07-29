@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WORepetition">
+  <binding name="item" passthrough="NO" settable="YES"/>
+  <binding name="list" passthrough="NO"/>
+  <binding name="count" passthrough="NO"/>
+  <binding name="index" passthrough="NO"/>
+  <binding name="identifier" passthrough="NO"/>
+
+  <!-- SOPE -->
+  <binding name="startIndex" passthrough="NO"/>
+  <binding name="separator" passthrough="NO"/>
+
+  <validation message="&apos;list&apos; must not be a constant">
+    <and>
+      <bound name="list"/>
+      <ungettable name="list"/>
+    </and>
+  </validation>
+
+  <validation message="exactly one of &apos;count&apos; or &apos;list&apos; must be bound">
+    <count test="!=1">
+      <bound name="list"/>
+      <bound name="count"/>
+    </count>
+  </validation>
+
+  <validation message="&apos;item&apos; must be bound when &apos;list&apos; is bound">
+    <and>
+      <bound name="list"/>
+      <unbound name="item"/>
+    </and>
+  </validation>
+</wo>

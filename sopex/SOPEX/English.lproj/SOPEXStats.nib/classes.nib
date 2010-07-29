@@ -1,0 +1,22 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {openApplicationInBrowser = id; orderFront = id; performRefresh = id; }; 
+            CLASS = SOPEXStatisticsController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                applicationStatsTableView = NSTableView; 
+                baseURLTextField = NSTextField; 
+                lastRefreshDateTextField = NSTextField; 
+                pageStatsOutlineView = NSOutlineView; 
+                pidTextField = NSTextField; 
+                refreshButton = NSButton; 
+                refreshProgressIndicator = NSProgressIndicator; 
+                window = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

@@ -1,0 +1,22 @@
+BEGIN:VCARD
+VERSION:2.1
+N:Kontact;Outlook
+FN:Outlook Kontact
+NICKNAME:Nickname
+ORG:OutlookCompany;abteilung
+TITLE:OutlookPosition
+NOTE;ENCODING=QUOTED-PRINTABLE:Kommentar=0D=0A=0D=0A
+TEL;WORK;VOICE:busiphone
+TEL;HOME;VOICE:privphone
+TEL;CELL;VOICE:mobile
+TEL;WORK;FAX:faxbusi
+ADR;WORK:;office;street;City;State;12345;Germany
+LABEL;WORK;ENCODING=QUOTED-PRINTABLE:office=0D=0Astreet=0D=0ACity, State 12345=0D=0AGermany
+URL;WORK:http://www.opengroupware.org
+ROLE:profession
+BDAY:20050624
+EMAIL;PREF;INTERNET:outlook@ogo.com
+FBURL;ENCODING=QUOTED-PRINTABLE:???????y=04=04A=08?=FB?=FBA?
+REV:20050602T135331Z
+END:VCARD
+

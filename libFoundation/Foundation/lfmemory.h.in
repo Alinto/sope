@@ -1,0 +1,171 @@
+/* 
+   lfmemory.h
+
+   Copyright (C) 1999 Helge Hess and MDlink online service center GmbH.
+   All rights reserved.
+
+   Author: Helge Hess <helge.hess@mdlink.de>
+
+   This file is part of libFoundation.
+
+   Permission to use, copy, modify, and distribute this software and its
+   documentation for any purpose and without fee is hereby granted, provided
+   that the above copyright notice appear in all copies and that both that
+   copyright notice and this permission notice appear in supporting
+   documentation.
+
+   We disclaim all warranties with regard to this software, including all
+   implied warranties of merchantability and fitness, in no event shall
+   we be liable for any special, indirect or consequential damages or any
+   damages whatsoever resulting from loss of use, data or profits, whether in
+   an action of contract, negligence or other tortious action, arising out of
+   or in connection with the use or performance of this software.
+*/
+
+/*
+   This file defines various wrapper macros around the reference counting
+   methods of NSObject.
+   It also includes the appropriate garbage collector header files if the
+   GC support is enabled
+*/
+
+#ifndef __libFoundation_lfmemory_H__
+#define __libFoundation_lfmemory_H__
+
+#include <stdio.h>
+#include <objc/objc.h>
+#include <objc/objc-api.h>
+#include <Foundation/NSObject.h>
+
+@class NSAutoreleasePool;
+
+/* Define it if we use the Boehm's garbage collector */
+#undef WITH_GC
+
+extern void NSIncrementExtraRefCount(id anObject);
+extern BOOL NSDecrementExtraRefCountWasZero(id anObject);
+extern unsigned NSExtraRefCount(id anObject);
+extern unsigned NSAutoreleaseCountForObject(id object);
+
+/*
+ * When an object is deallocated, its class pointer points to the FREED_OBJECT
+ * class.
+ */
+
+@interface FREED_OBJECT
+{
+@public
+  Class isa;
+  Class oldIsa;
+}
+@end
+
+/*
+ * Reference counting can be done in two ways:
+ *  (1) increasing the size of NSObject by allocating a "hidden" int
+ *      before the pointer. This has the disadvantage that the pointers
+ *      returned by malloc differ from those kept by the program, making
+ *      the use of NeXT's MallocDebug program unusable :-)
+ *  (2) keeping a global hash with object pointers as keys and reference
+ *      counts as values.
+ *
+ * This mecanisms are controlled by one compile time defines and one 
+ * environment variable as follows:
+ *  OBJECT_REFCOUNT	(define)
+ *	1			=> mecanism is controlled by hash
+ *	0			=> mechanism is controlled by extra ref-count
+ *	*			=> mecanism controlled by environment variable
+ *  OBJECT_REFCOUNT (environment variable)
+ *	defined		=> mecanism is controlled by hash
+ *	undefined	=> mechanism is controlled by extra ref-count
+ *
+ */
+
+/*
+ * OBJ2PTR(p) : id object --> real allocated pointer used by Malloc/Free
+ * PTR2HSH(p) : id object --> pointer kept as key in hashtable
+ */
+
+#define OBJ2PTR(p) ((struct RefObjectLayout*)((char*)p - @STRUCT_ALIGNMENT@))
+#define PTR2HSH(p) ((void*)((char*)p - @STRUCT_ALIGNMENT@))
+
+struct RefObjectLayout {
+    unsigned	ref_count;	/*  <---- Malloc/Free pointer */
+    Class	class_pointer __attribute__ ((aligned (@STRUCT_ALIGNMENT@)));
+				/*  <---- id pointer  */
+    char	extra[0];
+};
+
+struct HashObjectLayout {
+    Class	class_pointer;	/*  <---- id pointer == Malloc/Free pointer */
+    char	extra[0];
+};
+
+#if LIB_FOUNDATION_BOEHM_GC
+#  include <@GC_INCLUDE_DIR@gc.h>
+#  include <@GC_INCLUDE_DIR@gc_typed.h>
+
+#  ifndef ASSIGN
+#    define ASSIGN(object, value) (object = value)
+#  endif
+#  ifndef ASSIGNCOPY
+#    define ASSIGNCOPY(object, value) (object = [value copy])
+#  endif
+#  ifndef RETAIN
+#    define RETAIN(object) ((id)object)
+#  endif
+#  ifndef RELEASE
+#    define RELEASE(object)
+#  endif
+#  ifndef AUTORELEASE
+#    define AUTORELEASE(object) ((id)object)
+#  endif
+#  ifndef DESTROY
+#    define DESTROY(object) (object = nil)
+#  endif
+
+#  if !defined(CREATE_AUTORELEASE_POOL)
+#    define CREATE_AUTORELEASE_POOL(pool)
+#  endif
+
+#else /* !LIB_FOUNDATION_BOEHM_GC */
+
+#  ifndef ASSIGN
+#    define ASSIGN(object, value) \
+       ({id __object = (id)object;    \
+         id __value = (id)value;      \
+         if (__value != __object) { if (__value) [__value retain]; \
+          if (__object) [__object release]; \
+          object = __value;}})
+#  endif
+#  ifndef ASSIGNCOPY
+#    define ASSIGNCOPY(object, value) \
+       ({id __object = (id)object;    \
+         id __value = (id)value;      \
+         if (__value != __object) { if (__value) __value = [__value copy];   \
+          if (__object) [__object release]; \
+          object = __value;}})
+#  endif
+
+#  ifndef RETAIN
+#    define RETAIN(object)      [object retain]
+#  endif
+#  ifndef RELEASE
+#    define RELEASE(object)     [object release]
+#  endif
+#  ifndef AUTORELEASE
+#    define AUTORELEASE(object) [object autorelease]
+#  endif
+#  ifndef DESTROY
+#    define DESTROY(_object_) \
+        ({if (_object_) { id _tmp_=_object_; _object_=nil; [_tmp_ release]; }})
+#  endif
+
+#  ifndef CREATE_AUTORELEASE_POOL
+#    define CREATE_AUTORELEASE_POOL(pool) \
+              id pool = [[NSAutoreleasePool alloc] init]
+#  endif
+
+#endif /* !LIB_FOUNDATION_BOEHM_GC */
+
+#endif /* __libFoundation_lfmemory_H__ */

@@ -1,0 +1,60 @@
+2006-01-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ldapchkpwd.m, ldapls.m: added support for LDAPPort default
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile, GNUmakefile.preamble: added OSX framework compilation
+
+2005-07-23  Sebastian Reitenbach  <reitenbach@rapideye.de>
+
+	* GNUmakefile.preamble: added OpenBSD linking flags
+
+2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: minor changes for inline compilation with
+	  GNUSTEP_BUILD_DIR set elsewhere.
+
+2004-08-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: added library search pathes for FHS install
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the tools in FHS locations - the executables
+	  will be installed in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved in NGLdap samples from sope-core
+
+2004-06-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ldap2dsml.m: fixed a compile warning
+
+2004-06-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* common.h: fixed compatibility with gstep-base
+
+2004-01-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ldapls.m: minor fixes (moved NSAutoreleasePool to correct place)
+
+2004-01-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* minor cleanups to log messages
+
+2003-05-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* some gcc 3.3 warnings fixed
+
+2003-04-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: added ldapchkpwd tool
+
+	* ldap2dsml.m: added autorelease-pool to main()
+
+2002-11-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* added ldapls, ldap2dsml as examples for NGLdap

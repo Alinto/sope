@@ -1,0 +1,18 @@
+{
+  requires = {
+    bundleManagerVersion = 1;
+    classes = (
+      { name = NSObject;    }
+    );
+  };
+  
+  provides = {
+    SAXDrivers = ( 
+      { 
+        name        = pyxSAXDriver; 
+        sourceTypes = ( "text/pyx" );
+      }
+    );
+    classes    = ( { name = pyxSAXDriver; } );
+  };
+}

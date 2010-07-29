@@ -1,0 +1,15 @@
+NGMail
+======
+
+Class-Hierachy
+  
+  NSObject
+    NGMBoxReader
+    NGPop3Client
+    NGPop3MessageInfo
+    NGSmtpClient
+    NGSmtpResponse
+  
+  NSException
+    NGPop3Exception
+      NGPop3StateException

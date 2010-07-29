@@ -1,0 +1,10 @@
+# $Id$
+
+CFXMLSaxDriver
+==============
+
+This directory contains the sources for a SAX driver bundle which is based
+on the MacOSX CoreFoundation XML parser.
+
+Requirements:
+- MacOSX

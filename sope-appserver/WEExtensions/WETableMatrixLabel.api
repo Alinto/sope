@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETableMatrixLabel">
+  <binding name="position" />
+  <binding name="elementName" />
+  <binding name="span" />
+  <binding name="string" />
+</wo>

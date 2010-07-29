@@ -1,0 +1,6 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOSetCursor">
+  <binding name="object" passthrough="NO" required="YES" />
+  <binding name="extraAttributes" passthrough="NO" />
+</wo>

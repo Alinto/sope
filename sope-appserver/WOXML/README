@@ -1,0 +1,7 @@
+WOXML
+=====
+
+This directory contains a reimplementation of the WOXML framework in
+Objective-C.
+It is discouraged to use this framework in OGo, its intended for legacy
+ObjC web applications. Please let us know whether it works for you.

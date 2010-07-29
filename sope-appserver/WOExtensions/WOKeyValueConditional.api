@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOKeyValueConditional">
+  <binding name="key" required="YES" />
+  <binding name="value" required="YES" />
+  <binding name="negate" defaults="YES/NO"/>
+</wo>

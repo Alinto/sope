@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEEpozEditor">
+  <binding name="name" />
+  <binding name="value" required="YES" settable="YES" />
+  <binding name="disabled" defaults="YES/NO" />
+  <binding name="rows" />
+  <binding name="cols" />
+  <binding name="epozCharset" />
+  <binding name="epozButtonStyle" />
+  <binding name="epozStyle" />
+  <binding name="otherTagString" />
+</wo>

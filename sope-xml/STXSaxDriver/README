@@ -1,0 +1,103 @@
+Note: this is the initial release, it should contain some bugs ;-)
+
+STXSaxDriver
+============
+
+This project contains a skyrix-xml/SaxObjC SAX driver bundle which can process
+so called "structured text" files, or in short "STX". The parsing events are
+reported as XHTML tags.
+
+Example:
+---snip---
+* item A
+
+* item B
+---snap---
+will be reported as SAX events similiar to such an HTML file:
+---snip---
+<ul>
+  <li>item A</li>
+  <li>item B</li>
+</ul>
+---snap---
+
+The basis for this driver bundle, the StructuredText framework, was initially
+written by Mirko Viviani and Giulio Cesare Solaroli and sponsored by eXtrapola
+Srl.
+Note that the "original" StructuredText framework is much more capable and 
+generic than what this SAX driver provides. On the pro side, your applications
+do not need to care about the actual tag format if you use SaxObjC. Your
+applications can use either, XHTML, HTML, PYX or STX files using the available
+SaxObjC drivers without any additional work.
+
+Supported MIME Types
+====================
+
+Not sure what the correct MIME type for structured text is supposed to be, for
+now we register this driver for the
+
+  "text/structured"
+
+MIME type.
+
+How to try
+==========
+
+Just use the saxxml or domxml tools which are part of skyrix-xml, eg:
+  
+  saxxml -XMLReader STXSaxDriver data/hhtest1.stx
+  
+This will print the XHTML representation of the STX file on stdout.
+
+STX Functionality which is implemented
+======================================
+
+Guilio writes:
+---snip---
+Anyway, we used this document as "reference":
+
+  http://plone.org/documentation/howto/FrontPage/UsingStructuredText
+
+of the construct defined there, we have skipped just the table construct.
+
+But we have added a few thinks:
+- it is possible to use quotes in link url (es: if you have 
+  "Link":http://www.url.com, the comma will end up into the link; to avoid 
+  this, we can parse a string like that: "Link":'http://www.url.com', and the 
+  comma will be left out of the link).
+- link target: they are not a first class citizen (specially in XHTML), but 
+  sometime they are very usefull. To define a target, you can add it after a 
+  link: "Link":'http://www.url.com'::'target'. Also the target can be quoted 
+  in order to avoid problems with punctuation.
+- Image link: in order to create a link around an image, we have defined the 
+  following sintax: 
+    ["Alt text":http://www.url.com/image.gif]:'http://www.url.com'. 
+  Here too, quoting and target are supported.
+---snap---
+
+Defaults
+========
+
+STXDebugEnabled          YES|NO
+STXSaxDriverDebugEnabled YES|NO
+
+Structured Text Links
+=====================
+
+http://www.zope.org/Members/millejoh/structuredText
+http://plone.org/documentation/howto/FrontPage/UsingStructuredText
+
+Classes
+=======
+  
+  NSObject
+    STXSaxDriver < SaxXMLReader >
+
+  NSObject
+    StructuredLine
+    StructuredStack
+    StructuredText
+    StructuredTextRenderingDelegate
+      StructuredTextRenderingDelegate_XHTML
+
+  NSString(STX)

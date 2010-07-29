@@ -1,0 +1,60 @@
+{
+    EOModelVersion   = 1;
+    adaptorClassName = FrontBase2Adaptor;
+    adaptorName      = FrontBase;
+
+    pkeyGeneratorDictionary = {
+        newKeyExpression = "SELECT UNIQUE FROM key_generator";
+    };
+
+    entities = (
+        {
+            externalName = person;
+            className    = EOGenericRecord;
+            name         = Person;
+            attributes = (
+                {
+                    valueClassName = NSNumber;
+                    columnName     = person_id;
+                    name           = personId;
+                    valueType      = i;
+                    externalType   = int;
+                },
+                {
+                    valueClassName = NSNumber;
+                    columnName     = blah;
+                    name           = blah;
+                    valueType      = i;
+                    externalType   = int;
+                },
+                {
+                    valueClassName = NSString;
+                    columnName     = pname;
+                    name           = pname;
+                    externalType   = varchar;
+                },
+                {
+                    valueClassName = NSString;
+                    columnName     = street;
+                    name           = street;
+                    externalType   = varchar;
+                },
+                {
+                    valueClassName = NSString;
+                    columnName     = city;
+                    name           = city;
+                    externalType   = varchar;
+                }
+            );
+            classProperties = (
+                personId,blah,pname,street,city
+            );
+            relationships = (
+            );
+            primaryKeyAttributes = ( personId );
+            attributesUsedForLocking = (
+                personId
+            );
+        }
+    );
+}

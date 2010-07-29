@@ -1,0 +1,385 @@
+2008-07-02  Adam Williams  <awilliam@whitemice.org>
+
+	* NSString+PGVal.m: quote single quote in expressions with double
+	  quote (was backslash) (v4.7.54)
+
+2008-02-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSCalendarDate+PGVal.m: rewrote date parsing to use strsep(),
+	  now works with date strings containing milliseconds (which we ignore)
+	  (v4.7.53)
+
+	* v4.7.52
+
+	* NSString+PostgreSQL72.m: properly use -length, not -cStringLength
+
+	* PostgreSQL72Channel+Model.m, PGResultSet.m: use -UTF8String instead
+	  of -cString
+
+2007-09-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* PostgreSQL72Context.m: changed to use -evaluateExpressionX: for
+	  transaction queries, log error exceptions (v4.7.51)
+
+2007-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added NSNumber+ExprValue.m which returns 0/1 for bool values on
+	  GNUstep-Base (v4.7.50)
+
+2007-03-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAttribute+PostgreSQL72.m: removed sql3types.h from inclusion (which
+	  was not available on Ubuntu/PG 8.1.4), hopefully it still compiles
+	  with all relevant PG versions (v4.5.49)
+
+2006-09-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.48
+
+	* always use UTF-8 as the transport encoding (was Latin1 before),
+	  enforce that by setting the connection client encoding (when
+	  possible)
+
+	* added category to convert EOKeyGlobalIDs to SQL (required by OGo
+	  trunk)
+
+	* moved NSNull/pgval category to own file
+
+	* moved PostgreSQL version detection to pgconfig.h file, properly
+	  detect new PostgreSQL versions by a missing PG_MAJOR_VERSION
+	  define (and enable NG_SET_CLIENT_ENCODING etc in this case)
+
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed some 64bit issues (v4.5.47)
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings (v4.5.46)
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added OSX framework compilation (v4.5.45)
+
+2005-08-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed CVS Id fields (v4.5.44)
+
+2005-08-08  Sebastian Ley  <sebastian@withouthat.org>
+
+	* GNUmakefile.preamble: use 'pg_config' tool to determine PostgreSQL
+	  include/lib locations (v4.5.43)
+
+2005-07-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.5.42
+
+	* PostgreSQL72Channel+Model.m: fixed an EOJoin related gcc 4.0 warning
+
+	* NSCalendarDate+PGVal.m: fixed gcc 4.0 signed-warnings
+
+2005-04-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* PostgreSQL72Channel.m: changed for -describeResults: API (v4.5.41)
+
+2005-01-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAttribute+PostgreSQL72.m: map PG oid's to NSStrings (avoids issues
+	  when fetching from core PG tables) (v4.5.40)
+
+2005-01-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSCalendarDate+PGVal.m: fixed a warning on Xcode (v4.5.39)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* PostgreSQL.xcode: minor fixes and updated
+
+2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* use Version file for install directory location
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* PostgreSQL.xcode: new Xcode project. This requires you have a recent
+	  PostgreSQL installed in /usr/local/pgsql.
+
+	* PostgreSQL-Info.plist: new bundle info for Xcode
+
+	* PostgreSQL72-Info.plist: removed old bundle info
+
+2004-09-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: minor changes for inline compilation with
+	  GNUSTEP_BUILD_DIR set elsewhere (v1.1.38)
+
+2004-09-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAttribute+PostgreSQL72.m: use same exception handling on all
+	  Foundations (v1.1.37)
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* added hack to install the project in FHS locations - the DB adaptor
+	  will be installed in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local) (v1.1.36)
+	
+2004-08-27  Helge Hess  <helge@dogbert.in.skyrix.com>
+
+	* GNUmakefile*: renamed bundle to PostgreSQL, now installs in
+	  Library/GDLAdaptors-1.1/ (v1.1.35)
+
+2004-08-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* renamed from (misleading name) PostgreSQL72 to PostgreSQL
+
+	* fixed for SOPE 3.3 directory layout (v1.0.34)
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved from ThirdParty to SOPE/sope-gdl1 (v1.0.33)
+
+2004-07-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* PostgreSQL72Channel.m: ensure that the port is passed to the 
+	  connection as a string object (v1.0.32)
+
+2004-06-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: added include path to SOPE/skyrix-core for
+	  "inline" compilation (v1.0.31)
+
+2004-06-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* PostgreSQL72Channel.m: do not raise errors in handler methods, but 
+	  return them for processing by the new X methods (v1.0.30)
+	
+	* PostgreSQL72Channel.m: implement a specific -evaluateExpressionX:,
+	  use that in -primaryKeyForNewRowWithEntity: (v1.0.29)
+
+2004-06-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.28
+
+	* PostgreSQL72Adaptor.m: some code cleanups
+	
+	* PostgreSQL72Channel+Model.m: fixed a gstep-base warning
+
+	* NSNumber+PGVal.m ([NSNumber -stringValueForPostgreSQLType:attribute:]):
+	  fixed rendering of bool numbers for gstep-base (-stringValue of
+	  bool numbers return 'YES'/'NO' on gstep-base while 1 or 0 on Cocoa
+	  and libFoundation)
+
+2004-06-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOAttribute+PostgreSQL72.m: added "cardinal_number", "character_data"
+	  as known types (v1.0.27)
+
+	* PostgreSQL72Channel+Model.m: code cleanups (v1.0.26)
+
+2004-06-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSString+PGVal.m, PGConnection.m: fixed some gcc 3.4 warnings 
+	  (v1.0.25)
+
+2004-06-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.24
+
+	* PostgreSQL72Channel: rewrote to use PGResultSet. Removed processing
+	  of oid-status which apparently was completely broken before!
+
+	* PGConnection.m: added new PGResultSet object
+
+2004-06-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.23
+	
+	* PostgreSQL72Channel+Model.m: added -describeDatabaseNames and
+	  -describeUserNames methods
+	
+	* PostgreSQL72Adaptor.m: minor code cleanups
+
+	* v1.0.22
+
+	* various files: fixed warnings on MacOSX with gstep-make
+	
+	* PostgreSQL72Channel.h: rewritten to use PGConnection object
+	
+	* started PGConnection object to remove low-level libpq things from
+	  the channel (which can then concentrate on implementing the API)
+
+2004-06-06  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed some MacOSX compilation warnings (v1.0.21)
+
+2004-05-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble (PostgreSQL72_BUNDLE_LIBS): added missing libs
+	  for current Panther PostgreSQL compilation (v1.0.20)
+
+2004-03-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: fixed makefile for "inline" compilation
+	  (v1.0.19)
+
+2004-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.18
+
+	* EOAttribute+PostgreSQL72.m: fixed exception for MacOSX
+
+	* GNUmakefile.preamble: added yet another special case to locate the
+	  PostgreSQL header files ...
+
+2004-02-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* PostgreSQL72Channel.m: only set client encoding when being compiled 
+	  with PostgreSQL 7.3+ (seems to have problems with umlauts on Debian 
+	  7.2) (v1.0.17)
+
+2004-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* PostgreSQL72Channel.m: explicitly set connection encoding to Latin1
+	  to avoid problems with databases created as Unicode (v1.0.16)
+
+2004-01-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* PostgreSQL72Exception.m: minor cleanup, include stdarg.h for varargs
+	  processing (might fix compilation on Solaris) (v1.0.15)
+
+2004-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* PostgreSQL72Channel.m: do cache attribute name field indices during
+	  invocations, minor performance optimization to fetch method (which
+	  requires that the attributes argument is constant!) (v1.0.14)
+	
+	* PostgreSQL72Channel.m: raise default value for max-connection count
+	  to 50, various cleanups and minor fixes (v1.0.13)
+
+2003-12-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSData+PGVal.m ([NSData -stringValueForPostgreSQLType:attribute:]): 
+	  fixed a bug in the data=>string conversion. Types like 
+	  "VARCHAR(4000)" where not properly converted, eg a long obj_property 
+	  value (v1.0.12)
+
+2003-12-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: fixed include flags, so that GDLAccess must not
+	  be installed prior compiling the adaptor (v1.0.11)
+
+2003-12-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile (BUNDLE_INSTALL_DIR): install into 
+	  GNUSTEP_INSTALLATION_DIR instead of GNUSTEP_SYSTEM_ROOT (v1.0.10)
+
+2003-09-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble: added /usr/include/postgresql as an include
+	  search path - this is the position of the headers under Debian
+	  (v1.0.9)
+
+2003-07-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSCalendarDate+PGVal.m: added support for 4 digit timezone offsets
+	  (eg +09:30) when parsing PG date values (v1.0.8)
+
+2003-07-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSCalendarDate+PGVal.m: fixed two more bugs introduced in 1.0.5 ...
+	  (v1.0.7)
+
+2003-07-28  Bjoern Stierand  <bjoern@opengroupware.org>
+	
+	* NSCalendarDate+PGVal.m: fixed release bug introduced in 1.0.5, wrong 
+	  variable was returned leading to a memory error (v1.0.6)
+
+2003-07-27  Helge Hess  <helge.hess@skyrix.com>
+	
+	* PostgreSQL72Values.m: split up into separate files, added several
+	  performance optimizations to base value creation code (v1.0.5)
+
+2003-07-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* more fixes to the include pathes, do not include using <pgsql/xxx.h>
+	  but always using <xxx.h> (v1.0.4)
+
+2003-07-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* some include cleanups for FreeBSD (reported by Mirko Viviani),
+	  fixed some warnings (v1.0.3)
+
+Wed May 14 11:27:21 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* PostgreSQL72Values.m: use lowercase type to determine sql type 
+	  (bug 126) (v1.0.2)
+
+2003-05-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.1
+
+	* PostgreSQL72Channel.m: small cleanups, speed improvement on attrname
+	  creation (used no autorelease pools ...)
+
+	* GNUmakefile (PostgreSQL72_RESOURCE_FILES): added a Version file
+
+Mon May  5 16:27:40 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* PostgreSQL72Values.m: implement valueFromCString, valueFromBytes, 
+	  stringValueForPostgreSQLType for NSData+PostgreSQL72Values (bug 126)
+
+Mon Dec 23 18:20:13 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* ported to MacOSX 10.2.3 (do not use <EOAccess, include common.h)
+
+Tue Nov 26 12:01:49 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* EOAttribute+PostgreSQL72.m: add timestamptz type
+
+Tue Nov  5 10:02:45 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* PostgreSQLChannel.m: add PGMaxOpenConnectionCount - Default to
+	set the max number of open postgres connections
+
+Fri Oct 18 19:15:15 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* EOAttribute+PostgreSQL72.m: add postgres types
+
+Thu Aug 22 11:08:35 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* PostgreSQL72Channel.m, PostgreSQL72Values.m: 
+	-fixed bug (attributes with the same name were not fetched 
+	(both attrs. where set to the first attr.-value)
+	-fixed escape-bug
+
+Thu Jun 13 14:57:10 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* PostgreSQL72Values.m: remove Logs
+
+Tue Jun 11 14:43:14 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* PostgreSQL72Context.m: remove abort() :(
+
+Mon Mar 18 12:53:42 CET 2002 Jan41 Reichmann  <jan@skyrix.com>
+
+	* PostgreSQLValues.m, *Channel.*: add caches for attributes/ 
+	add get primary key infos
+
+Mon Mar 11 12:02:24 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* PostgreSQLValues.m: fixed CAL-FORMAT Entry
+
+Thu Aug 16 14:13:10 2001  Martin Hoerning  <mh@skyrix.com>
+
+	* PostgreSQLChannel.m: fixed RETAIN-BUGS, removed LOGS
+
+Fri Jul 27 17:32:17 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* EOAttribute+PostgreSQL.m: fixed timezone bugs
+
+Thu Jul  5 14:08:11 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* reactivated for SkyDev41
+
+Tue Feb  2 09:01:10 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* created ChangeLog

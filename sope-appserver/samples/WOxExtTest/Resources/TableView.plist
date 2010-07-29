@@ -1,0 +1,83 @@
+(
+   {
+     firstName  = "Donald";
+     name       = "Duck";
+     street     = "Mainst. 1";
+     city       = "Hamburg";
+     zip        = "01234";
+     identifier = "object1";
+   },
+   {
+     firstName  = "Heinz";
+     name       = "Mueller";
+     street     = "Hauptstrasse 34";
+     city       = "Hannover";
+     zip        = "54222";
+     identifier = "object2";
+   },
+   {
+     firstName  = "Johanna";
+     name       = "Buttelmann";
+     street     = "Dorfstrasse 3";
+     city       = "Magdeburg";
+     zip        = "39120";
+     identifier = "object3";
+   },
+   {
+     firstName  = "Steffen";
+     name       = "Kohlau";
+     street     = "Buchenweg 28";
+     city       = "Hannover";
+     zip        = "54222";
+     identifier = "object4";
+   },
+   {
+     firstName  = "Klaus";
+     name       = "Burger";
+     street     = "Alleestrasse 6";
+     city       = "Hamburg";
+     zip        = "01234";
+     identifier = "object5";
+   },
+   {
+     firstName  = "Dieter";
+     name       = "Hundertgross";
+     street     = "Hummelweg 5";
+     city       = "Magdeburg";
+     zip        = "39120";
+     identifier = "object6";
+   },
+  {
+     firstName  = "Heidrun";
+     name       = "Kleinmann";
+     street     = "Buttergasse 23";
+     city       = "Magdeburg";
+     zip        = "39122";
+     identifier = "object7";
+   },
+   {
+     firstName  = "Joerg";
+     name       = "Zunder";
+     street     = "Breitstrasse 4a";
+     city       = "Hannover";
+     zip        = "54222";
+     identifier = "object8";
+   },
+  {
+     firstName  = "Paul";
+     name       = "Mann";
+     street     = "Einsteinstrasse 7";
+     city       = "Hamburg";
+     zip        = "01231";
+     identifier = "object9";
+   },
+   {
+     firstName  = "Paula";
+     name       = "Frau";
+     street     = "Gareisstrasse 11";
+     city       = "Hannover";
+     zip        = "54112";
+     identifier = "object10";
+   },
+
+)

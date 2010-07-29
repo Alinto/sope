@@ -1,0 +1,34 @@
+2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* use Version file for install directory location
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* added hack to install the project in FHS locations - the SAX driver
+	  will be installed in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local)
+	
+2004-08-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: install SAX driver in Library/SaxDrivers-4.3/
+	
+	* GNUmakefile: install SAX driver in Library/SaxDrivers/4.3/
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package.
+
+2003-12-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile: include common.make from GNUSTEP_MAKEFILES
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed a compilation bug, maybe the driver needs to be updated to
+	  the current SAX API
+
+	* created ChangeLog
+
+

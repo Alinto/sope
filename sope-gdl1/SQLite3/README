@@ -1,0 +1,103 @@
+# SQLite3 Adaptor
+
+Note: this is far from being complete! The adaptor is currently a fork of
+      the PostgreSQL adaptor.
+
+TODO
+====
+- check EOAttribute+SQLite:
+  -loadValueClassAndTypeUsingSQLiteType:...
+- SQLiteChannel.m:
+  -primaryFetchAttributes => check field name processing
+- rewrite for exception less operation
+- implement more methods in SQLiteChannel+Model (hard with SQLite though)
+
+Basics
+======
+
+Open a Shell:
+
+  sqlite3 OGo
+  > insert schema
+  > select * from date_x;
+
+Configure the Adaptor (below does not work yet for SQLite3!)
+
+  Defaults write ogo-webui-1.0a LSAdaptor SQLite3
+
+  Defaults write ogo-webui-1.0a LSConnectionDictionary \
+	'{ databaseName = OGo; }'
+
+  Defaults write ogo-webui-1.0a PKeyGeneratorDictionary \
+	"{ newKeyExpression=\"select nextval(\\'key_generator\\');\" }"
+
+  SQLiteDebugEnabled
+
+
+Setup gdltest Database
+======================
+sqlite3 Test.sqldb 
+sqlite> CREATE TABLE my_table ( pkey INT PRIMARY KEY );
+
+
+
+Sequential execution
+====================
+http://www.hwaci.com/sw/sqlite/c_interface.html
+
+---snip---
+typedef struct sqlite_vm sqlite_vm;
+
+int sqlite_compile(
+  sqlite *db,              /* The open database */
+  const char *zSql,        /* SQL statement to be compiled */
+  const char **pzTail,     /* OUT: uncompiled tail of zSql */
+  sqlite_vm **ppVm,        /* OUT: the virtual machine to execute zSql */
+  char **pzErrmsg          /* OUT: Error message. */
+);
+
+int sqlite_step(
+  sqlite_vm *pVm,          /* The virtual machine to execute */
+  int *pN,                 /* OUT: Number of columns in result */
+  const char ***pazValue,  /* OUT: Column data */
+  const char ***pazColName /* OUT: Column names and datatypes */
+);
+
+int sqlite_finalize(
+  sqlite_vm *pVm,          /* The virtual machine to be finalized */
+  char **pzErrMsg          /* OUT: Error message */
+);
+---snap---
+
+
+Error-Codes
+===========
+
+---snip---
+#define SQLITE_OK           0   /* Successful result */
+#define SQLITE_ERROR        1   /* SQL error or missing database */
+#define SQLITE_INTERNAL     2   /* An internal logic error in SQLite */
+#define SQLITE_PERM         3   /* Access permission denied */
+#define SQLITE_ABORT        4   /* Callback routine requested an abort */
+#define SQLITE_BUSY         5   /* The database file is locked */
+#define SQLITE_LOCKED       6   /* A table in the database is locked */
+#define SQLITE_NOMEM        7   /* A malloc() failed */
+#define SQLITE_READONLY     8   /* Attempt to write a readonly database */
+#define SQLITE_INTERRUPT    9   /* Operation terminated by sqlite_interrupt() */
+#define SQLITE_IOERR       10   /* Some kind of disk I/O error occurred */
+#define SQLITE_CORRUPT     11   /* The database disk image is malformed */
+#define SQLITE_NOTFOUND    12   /* (Internal Only) Table or record not found */
+#define SQLITE_FULL        13   /* Insertion failed because database is full */
+#define SQLITE_CANTOPEN    14   /* Unable to open the database file */
+#define SQLITE_PROTOCOL    15   /* Database lock protocol error */
+#define SQLITE_EMPTY       16   /* (Internal Only) Database table is empty */
+#define SQLITE_SCHEMA      17   /* The database schema changed */
+#define SQLITE_TOOBIG      18   /* Too much data for one row of a table */
+#define SQLITE_CONSTRAINT  19   /* Abort due to contraint violation */
+#define SQLITE_MISMATCH    20   /* Data type mismatch */
+#define SQLITE_MISUSE      21   /* Library used incorrectly */
+#define SQLITE_NOLFS       22   /* Uses OS features not supported on host */
+#define SQLITE_AUTH        23   /* Authorization denied */
+#define SQLITE_ROW         100  /* sqlite_step() has another row ready */
+#define SQLITE_DONE        101  /* sqlite_step() has finished executing */
+---snap---

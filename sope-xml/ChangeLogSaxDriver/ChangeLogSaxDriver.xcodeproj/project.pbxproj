@@ -1,0 +1,338 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ADB078C70765E90E003C5ACF /* bundle-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADB078C60765E90E003C5ACF /* bundle-info.plist */; };
+		ADB078CB0765E936003C5ACF /* ChangeLogSaxDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB078C90765E936003C5ACF /* ChangeLogSaxDriver.m */; };
+		ADB0790A0765EBA0003C5ACF /* SaxObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB079090765EBA0003C5ACF /* SaxObjC.framework */; };
+		ADB0790C0765EBD1003C5ACF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB0790B0765EBD1003C5ACF /* Foundation.framework */; };
+		ADB07A800766076A003C5ACF /* NGExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB07A7F0766076A003C5ACF /* NGExtensions.framework */; };
+		ADB07B430766144A003C5ACF /* NSCalendarDate+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB07B410766144A003C5ACF /* NSCalendarDate+Extensions.m */; };
+		ADB07B470766145E003C5ACF /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB07B450766145E003C5ACF /* NSString+Extensions.m */; };
+		ADB07DB20766619F003C5ACF /* README in Resources */ = {isa = PBXBuildFile; fileRef = ADB07DB10766619F003C5ACF /* README */; };
+		ADB07DB4076661A8003C5ACF /* COPYRIGHT in Resources */ = {isa = PBXBuildFile; fileRef = ADB07DB3076661A8003C5ACF /* COPYRIGHT */; };
+		ADB07DB6076661B2003C5ACF /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = ADB07DB5076661B2003C5ACF /* COPYING */; };
+		ADB07DB8076661BB003C5ACF /* AUTHORS in Resources */ = {isa = PBXBuildFile; fileRef = ADB07DB7076661BB003C5ACF /* AUTHORS */; };
+		ADB07DBA076661CF003C5ACF /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = ADB07DB9076661CF003C5ACF /* ChangeLog */; };
+		ADB07DBC076661DB003C5ACF /* Version in Resources */ = {isa = PBXBuildFile; fileRef = ADB07DBB076661DB003C5ACF /* Version */; };
+		ADB07E5107666A25003C5ACF /* default.locale in Resources */ = {isa = PBXBuildFile; fileRef = ADB07E5007666A25003C5ACF /* default.locale */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8D5B49B6048680CD000E48DA /* ChangeLogSaxDriver.sax */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChangeLogSaxDriver.sax; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADB078C60765E90E003C5ACF /* bundle-info.plist */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = text.plist; path = "bundle-info.plist"; sourceTree = "<group>"; };
+		ADB078C80765E936003C5ACF /* ChangeLogSaxDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogSaxDriver.h; sourceTree = "<group>"; };
+		ADB078C90765E936003C5ACF /* ChangeLogSaxDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLogSaxDriver.m; sourceTree = "<group>"; };
+		ADB079050765EAC0003C5ACF /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; path = GNUmakefile; sourceTree = "<group>"; };
+		ADB079090765EBA0003C5ACF /* SaxObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SaxObjC.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/SaxObjC.framework"; sourceTree = "<absolute>"; };
+		ADB0790B0765EBD1003C5ACF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		ADB079110765EDB6003C5ACF /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		ADB07A7F0766076A003C5ACF /* NGExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NGExtensions.framework; path = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks/Wrapper/NGExtensions.framework"; sourceTree = "<absolute>"; };
+		ADB07B400766144A003C5ACF /* NSCalendarDate+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendarDate+Extensions.h"; sourceTree = "<group>"; };
+		ADB07B410766144A003C5ACF /* NSCalendarDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendarDate+Extensions.m"; sourceTree = "<group>"; };
+		ADB07B440766145E003C5ACF /* NSString+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
+		ADB07B450766145E003C5ACF /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
+		ADB07DB10766619F003C5ACF /* README */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		ADB07DB3076661A8003C5ACF /* COPYRIGHT */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYRIGHT; sourceTree = "<group>"; };
+		ADB07DB5076661B2003C5ACF /* COPYING */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		ADB07DB7076661BB003C5ACF /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		ADB07DB9076661CF003C5ACF /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 8; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		ADB07DBB076661DB003C5ACF /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+		ADB07DBE07666204003C5ACF /* GNUmakefile.preamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; path = GNUmakefile.preamble; sourceTree = "<group>"; };
+		ADB07DC00766620F003C5ACF /* GNUmakefile.postamble */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; path = GNUmakefile.postamble; sourceTree = "<group>"; };
+		ADB07DC307666236003C5ACF /* fhs.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; path = fhs.make; sourceTree = "<group>"; };
+		ADB07E5007666A25003C5ACF /* default.locale */ = {isa = PBXFileReference; explicitFileType = text.plist; fileEncoding = 5; indentWidth = 2; path = default.locale; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D5B49B3048680CD000E48DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADB0790A0765EBA0003C5ACF /* SaxObjC.framework in Frameworks */,
+				ADB0790C0765EBD1003C5ACF /* Foundation.framework in Frameworks */,
+				ADB07A800766076A003C5ACF /* NGExtensions.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* ChangeLogSaxDriver */ = {
+			isa = PBXGroup;
+			children = (
+				ADB07DB10766619F003C5ACF /* README */,
+				ADB07DB3076661A8003C5ACF /* COPYRIGHT */,
+				ADB07DB5076661B2003C5ACF /* COPYING */,
+				ADB07DB7076661BB003C5ACF /* AUTHORS */,
+				ADB07DB9076661CF003C5ACF /* ChangeLog */,
+				ADB07DBB076661DB003C5ACF /* Version */,
+				ADB079040765EAA0003C5ACF /* Makefiles */,
+				ADB078C50765E8B7003C5ACF /* Headers */,
+				08FB77AFFE84173DC02AAC07 /* Classes */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = ChangeLogSaxDriver;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADB0790B0765EBD1003C5ACF /* Foundation.framework */,
+				ADB079090765EBA0003C5ACF /* SaxObjC.framework */,
+				ADB07A7F0766076A003C5ACF /* NGExtensions.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D5B49B7048680CD000E48DA /* Info.plist */,
+				ADB078C60765E90E003C5ACF /* bundle-info.plist */,
+				ADB07E5007666A25003C5ACF /* default.locale */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ADB079110765EDB6003C5ACF /* common.h */,
+				ADB078C90765E936003C5ACF /* ChangeLogSaxDriver.m */,
+				ADB07B450766145E003C5ACF /* NSString+Extensions.m */,
+				ADB07B410766144A003C5ACF /* NSCalendarDate+Extensions.m */,
+			);
+			fileEncoding = 5;
+			indentWidth = 2;
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D5B49B6048680CD000E48DA /* ChangeLogSaxDriver.sax */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADB078C50765E8B7003C5ACF /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				ADB078C80765E936003C5ACF /* ChangeLogSaxDriver.h */,
+				ADB07B440766145E003C5ACF /* NSString+Extensions.h */,
+				ADB07B400766144A003C5ACF /* NSCalendarDate+Extensions.h */,
+			);
+			fileEncoding = 5;
+			indentWidth = 2;
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		ADB079040765EAA0003C5ACF /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADB079050765EAC0003C5ACF /* GNUmakefile */,
+				ADB07DBE07666204003C5ACF /* GNUmakefile.preamble */,
+				ADB07DC00766620F003C5ACF /* GNUmakefile.postamble */,
+				ADB07DC307666236003C5ACF /* fhs.make */,
+			);
+			indentWidth = 8;
+			name = Makefiles;
+			sourceTree = "<group>";
+			tabWidth = 8;
+			usesTabs = 1;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D5B49AC048680CD000E48DA /* ChangeLogSaxDriver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA076C2085728F500993825 /* Build configuration list for PBXNativeTarget "ChangeLogSaxDriver" */;
+			buildPhases = (
+				8D5B49AF048680CD000E48DA /* Resources */,
+				8D5B49B1048680CD000E48DA /* Sources */,
+				8D5B49B3048680CD000E48DA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChangeLogSaxDriver;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = ChangeLogSaxDriver;
+			productReference = 8D5B49B6048680CD000E48DA /* ChangeLogSaxDriver.sax */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA076C6085728F500993825 /* Build configuration list for PBXProject "ChangeLogSaxDriver" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* ChangeLogSaxDriver */;
+			projectDirPath = "";
+			targets = (
+				8D5B49AC048680CD000E48DA /* ChangeLogSaxDriver */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D5B49AF048680CD000E48DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADB078C70765E90E003C5ACF /* bundle-info.plist in Resources */,
+				ADB07E5107666A25003C5ACF /* default.locale in Resources */,
+				ADB07DB20766619F003C5ACF /* README in Resources */,
+				ADB07DB4076661A8003C5ACF /* COPYRIGHT in Resources */,
+				ADB07DB6076661B2003C5ACF /* COPYING in Resources */,
+				ADB07DB8076661BB003C5ACF /* AUTHORS in Resources */,
+				ADB07DBA076661CF003C5ACF /* ChangeLog in Resources */,
+				ADB07DBC076661DB003C5ACF /* Version in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D5B49B1048680CD000E48DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADB078CB0765E936003C5ACF /* ChangeLogSaxDriver.m in Sources */,
+				ADB07B430766144A003C5ACF /* NSCalendarDate+Extensions.m in Sources */,
+				ADB07B470766145E003C5ACF /* NSString+Extensions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADA076C3085728F500993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-4.5";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = ChangeLogSaxDriver;
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = sax;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		ADA076C4085728F500993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-4.5";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = ChangeLogSaxDriver;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = sax;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA076C5085728F500993825 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = common.h;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/SaxDrivers-4.5";
+				OTHER_CFLAGS = (
+					"-DNeXT_RUNTIME=1",
+					"-DAPPLE_RUNTIME=1",
+					"-DNeXT_Foundation_LIBRARY=1",
+					"-DCOCOA_Foundation_LIBRARY=1",
+				);
+				PRODUCT_NAME = ChangeLogSaxDriver;
+				WARNING_CFLAGS = "-Wmost";
+				WRAPPER_EXTENSION = sax;
+			};
+			name = Default;
+		};
+		ADA076C7085728F500993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA076C8085728F500993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+		ADA076C9085728F500993825 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA076C2085728F500993825 /* Build configuration list for PBXNativeTarget "ChangeLogSaxDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA076C3085728F500993825 /* Development */,
+				ADA076C4085728F500993825 /* Wrapper */,
+				ADA076C5085728F500993825 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		ADA076C6085728F500993825 /* Build configuration list for PBXProject "ChangeLogSaxDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA076C7085728F500993825 /* Development */,
+				ADA076C8085728F500993825 /* Wrapper */,
+				ADA076C9085728F500993825 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

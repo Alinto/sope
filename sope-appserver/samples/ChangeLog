@@ -1,0 +1,18 @@
+2006-04-02  Philippe Laval  <philippe.laval@free.fr>
+	
+	* BasicAuthSession/NSString+BasicAuth.m: replaced usage of non-Cocoa
+	  -indexOfString: with -rangeOfString:
+
+2004-02-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added the HelloWorld application example - the simplest application 
+	  possible ;-)
+
+2003-10-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* added "davpropget" example - useful for fetching DAV properties from
+	  a DAV server and an example which demonstrates the usage of 
+	  WOHTTPConnection
+	
+	* created ChangeLog
+

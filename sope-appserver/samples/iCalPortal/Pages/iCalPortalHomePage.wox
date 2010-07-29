@@ -1,0 +1,39 @@
+<?xml version='1.0' standalone='yes'?>
+
+<var:component className='iCalPortalFrame' title='localizedTitle'
+               xmlns='http://www.w3.org/1999/xhtml'
+               xmlns:var='http://www.skyrix.com/od/binding'
+               xmlns:const='http://www.skyrix.com/od/constant'>
+  
+  <h3>
+    Welcome 
+    <var:string value="user.firstName"/>
+    <var:string value="user.lastName"/>
+    !
+  </h3>
+  
+  <var:component className="iCalPortalBox" const:title="Info">
+
+    <a directActionName="editProfile">edit profile</a>
+  
+  </var:component>
+
+  <br />
+
+  <var:component className="iCalPortalBox" const:title="Published">
+    <ul>
+      <var:foreach list="session.user.calendarNames" item="item">
+        <li>
+          <a directActionName="showCalendar" var:_calendarName="item"
+	     ><var:string value="item"/></a></li>
+      </var:foreach>
+    </ul>
+  </var:component>
+
+  <br />
+
+  <var:component className="iCalPortalBox" const:title="Directory">
+  
+  </var:component>
+  
+</var:component>

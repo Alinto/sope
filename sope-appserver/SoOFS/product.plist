@@ -1,0 +1,110 @@
+{
+  requires = ( SoCore );
+  
+  classes = {
+
+    OFSBaseObject = {
+      protectedBy = "<public>";
+
+      methods = {
+	DELETE = { protectedBy = "Delete Objects"; };
+      };
+    };
+    
+    OFSFile = {
+      protectedBy = "<public>";
+
+      methods = {
+        GET = {
+	  protectedBy = "View"; 
+        };
+        view = {
+	  protectedBy = "View"; 
+        };
+	DELETE = { 
+	  protectedBy = "Delete Objects"; 
+	};
+        PUT = {
+	  protectedBy = "Change Images and Files"; 
+        };
+      };
+      
+      defaultRoles = {
+        "WebDAV Access"           = "Authenticated";
+        "Change Images and Files" = "Owner";
+        "Delete Objects"          = "Owner";
+        "View"                    = "Owner";
+        "WebDAV Lock Items"       = "Authenticated";
+        "WebDAV Unlock Items"     = "Authenticated";
+      };
+    };
+    
+    OFSPropertyListObject = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+      extension   = plist;
+    };
+    
+    OFSImage = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+      extensions  = ( gif, jpg, jpeg, png, ico );
+    };
+    
+    OFSFolder = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+      
+      methods = {
+        GET = {
+          protectedBy = "View";
+        };
+        PUT = {
+	  protectedBy = "Change Images and Files";
+        };
+        DELETE = {
+	  protectedBy = "Delete Objects";
+        };
+        MKCOL = {
+	  protectedBy = "Add Folders";
+        };
+      };
+      
+      defaultRoles = {
+        "WebDAV Access"                   = "Authenticated";
+        "Change Images and Files"         = "Owner";
+        "Delete Objects"                  = "Owner";
+        "View"                            = "Owner";
+	"Add Documents, Images and Files" = "Owner";
+	"Add Folders"                     = "Owner";
+      };
+    };
+    
+    OFSWebMethod = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+      extensions    = ( wox );
+    };
+    OFSWebDocument = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+      extensions    = ( xhtml );
+    };
+    OFSWebTemplate = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+      extensions    = ( xtmpl );
+    };
+    
+    OFSHttpPasswd = {
+      protectedBy    = "<private>";
+      defaultAccess  = "deny";
+      extensions     = ( htpasswd ); // either blah.htpasswd
+      exactFilenames = ( htpasswd ); // or just "htpasswd"
+    };
+    OFSChangeLog = {
+      extensions     = ( changelog ); // either blah.changelog
+      exactFilenames = ( ChangeLog ); // or just "ChangeLog"
+    };
+  };
+}

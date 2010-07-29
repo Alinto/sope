@@ -1,0 +1,23 @@
+{
+  CVS = "$Id: bundle-info.plist 4 2004-08-20 17:04:31Z helge $";
+  //bundleHandler = NSObject;
+
+  requires = {
+    bundleManagerVersion = 1;
+    classes = (
+      { name = NSObject;    }
+    );
+  };
+
+  provides = {
+    SAXDrivers = ( 
+        { 
+          name        = ExpatSaxDriver;
+          sourceTypes = ( "text/xml" ); 
+        },
+    );
+    classes    = ( 
+        { name = ExpatSaxDriver;     },
+    );
+  };
+}

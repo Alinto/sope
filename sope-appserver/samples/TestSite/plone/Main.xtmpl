@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xml:lang="en" lang="en"
+>
+  <head>
+    <!-- CONFLICTS: meta http-equiv="Content-Type" content="text/html; charset=utf-8" / -->
+    <title>OGo Docs - BlahBlah</title>
+    
+    <!-- Basic crude style for Netscape4.x - This can be removed
+         if you don't want the special NS4 look - it will still work,
+	 just be plain text instead. -->
+    <link rel="Stylesheet" type="text/css"
+          href="ploneNS4.css" />
+
+    <!-- Main style sheets for CSS2 capable browsers -->
+    <style type="text/css" media="all"> @import url(plone.css);</style>
+
+    <!-- Custom style sheet if available -->
+    <style type="text/css" media="all">@import url(ploneCustom.css);</style>
+
+    <!-- Style sheet used for printing -->
+    <link rel="stylesheet" type="text/css" media="print"
+          href="plonePrint.css" />
+
+    <!-- Style sheet used for presentations (Opera is the only browser supporting this at the moment) -->
+    <link rel="stylesheet" type="text/css"
+          media="projection"
+          href="plonePresentation.css" />
+
+    <link rel="shortcut icon"
+          href="../favicon.ico"
+          type="image/x-icon" />
+
+    <link rel="home" href="http://docs.opengroupware.org"
+          title="Front Page" />
+    <link rel="search"
+          href="http://docs.opengroupware.org/search_form"
+          title="Search this site" />
+    
+    <!-- Disable IE6 image toolbar -->
+    <!-- CONFLICTS: meta http-equiv="imagetoolbar" content="no" / -->
+    
+    <!-- Common Plone ECMAScripts -->
+    <script type="text/javascript" src="plone_javascripts.js" />
+    <script type="text/javascript" src="plone_formtooltip.js" />
+  </head>
+
+  <body>
+    <div>
+      <div class="top">
+         <div class="searchBox">
+            <form name="searchform"
+                  href="http://docs.opengroupware.org/search">
+
+                    <input id="searchGadget"
+                           name="SearchableText" type="text"
+                           size="20" tabindex="30001" />
+
+                    <input class="context searchButton"
+                           type="submit" value="Search"
+                           tabindex="30002" />
+                </form>
+            </div>
+
+            <a href="http://docs.opengroupware.org">
+                <img src="http://docs.opengroupware.org/logo.jpg?skin="
+                     class="logo" border="0" alt=""
+                     height="56" width="356" />
+            </a>
+        </div>
+
+        <hr size="" class="netscape4" />
+
+        <div class="tabs">
+            <a href="http://docs.opengroupware.org"
+               class="plain">
+                Welcome
+            </a>
+            <a href="http://docs.opengroupware.org/news"
+               class="plain">
+                News
+            </a>
+            <a href="http://docs.opengroupware.org/search_form"
+               class="plain">
+                Search
+            </a>
+            <a href="http://docs.opengroupware.org/docs"
+               class="plain">
+                User Docs
+            </a>
+            <a href="http://docs.opengroupware.org/develdocs"
+               class="plain">
+                Dev Docs
+            </a>
+            <a href="http://docs.opengroupware.org/support"
+               class="plain">
+                Support
+            </a>
+        </div>
+
+        <div class="personalBar"><entity name="nbsp" />
+            <span>You are not logged in</span>
+            
+            <a href="http://docs.opengroupware.org/login_form">
+                <img src="http://docs.opengroupware.org/linkOpaque.gif" alt="" title="" height="11" width="6" border="0" />
+
+                Log in
+            </a>
+            
+            
+            <a href="http://docs.opengroupware.org/portal_form/join_form">
+                <img src="http://docs.opengroupware.org/linkOpaque.gif" alt="" title="" height="11" width="6" border="0" />
+
+                Join
+            </a>
+            
+        </div>
+
+        <div class="pathBar">
+	    You are here:
+                <a href="http://docs.opengroupware.org">Home</a>
+                <strong><entity name="raquo"/></strong>
+            <span>
+                <a href="http://docs.opengroupware.org/Members/view">Members</a>
+                <strong> <entity name="raquo"/> </strong>
+            </span>
+            <span>
+                <span>helge's Home</span>
+            </span>
+        </div>
+        <hr size="" class="netscape4" />
+    </div>
+
+<table class="columns">
+    <tbody>
+        <tr>
+            <td class="left">
+    <div class="box">
+        <h5>Navigation</h5>
+        <div class="body">
+            <div class="content odd">
+                <div style="white-space: nowrap;">
+                    <span>
+                        <a href="http://docs.opengroupware.org/"
+                           title="">
+                            <img src="http://docs.opengroupware.org/site_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />OGo Docs
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/"
+                           class="plain" title="">
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />Members
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                           <span class="currentNavItem">
+                        </span>
+                        <a href="http://docs.opengroupware.org/Members/helge/"
+                           class="plain" title="">
+                
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" /><span
+    class="currentNavItem">helge's Home</span>
+                        </a>
+                        
+                        
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/helge/DocumentAPI/"
+                           class="plain" title="">
+                
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />DocumentAPI
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/helge/Forms/"
+                           class="plain" title="">
+                
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />Forms
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/helge/Logic/"
+                           class="plain" title="">
+                
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />Logic
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/helge/Tools/"
+                           class="plain" title="">
+                
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />OGo Tools
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/helge/Pictures/"
+                           class="plain" title="">
+                
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />Pictures
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                               
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/helge/SOPE/"
+                           class="plain" title="">
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />SOPE
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/helge/xmlrpc/"
+                           class="plain" title="">
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />XML-RPC
+                        </a>
+                    </span>
+                </div>
+                <div style="white-space: nowrap;">
+                    <span>
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <entity name="nbsp" />
+                        <a href="http://docs.opengroupware.org/Members/helge/ZideStore/"
+                           class="plain" title="">
+                            <img src="http://docs.opengroupware.org/folder_icon.gif" alt="" title="" height="16" width="16" border="0" /><entity name="nbsp" />ZideStore
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h5>Log in</h5>
+        <div class="body">
+            <div class="content odd">
+                <form href="http://docs.opengroupware.org/logged_in"
+                      method="post">
+                    <strong>Name</strong> <br />
+                    <input type="text" name="__ac_name"
+                           size="12" tabindex="10001"
+                           value="" />
+                    <br />
+    
+                    <strong>Password</strong>  <br />
+                    <input type="password"
+                           name="__ac_password" size="12"
+                           tabindex="10002" />
+    
+                    <br />
+                    <entity name="nbsp" />
+                    <br />
+    
+                    <input class="context searchButton"
+                           type="submit" name="submit"
+                           value="Log in" tabindex="10003" />
+                </form>
+            </div>
+    
+            <div class="content even"> 
+                <a href="http://docs.opengroupware.org/mail_password_form">
+                   <img src="http://docs.opengroupware.org/linkTransparent.gif" alt="" title="" height="11" width="6" border="0" />
+                   Forgot your password?
+                </a>
+            </div>
+
+            <div class="content odd">
+          
+                <a href="http://docs.opengroupware.org/portal_form/join_form">
+                    <img src="http://docs.opengroupware.org/linkTransparent.gif" alt="" title="" height="11" width="6" border="0" />
+                    New user?
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h5>About</h5>
+        <div class="body">
+            <div class="content odd">
+                <strong>Created by</strong> <br />
+                <img src="http://docs.opengroupware.org/user.gif" alt="" title="" height="12" width="8" border="0" />            
+                
+                <a href="http://docs.opengroupware.org/Members/chris">chris</a>
+            </div>
+        
+            <div class="content even">
+                <img src="http://docs.opengroupware.org/document_icon.gif"
+                     alt="Document" /><entity name="nbsp" />Document
+            </div>
+            
+            <div class="content odd">
+                <strong>Last modified</strong> <br />
+                2003-12-04
+            </div>
+        
+            <div class="content even">
+                <strong>State</strong> <br />
+                <span class="visible">visible</span>
+            </div>
+        </div>
+    </div>
+            </td>
+            <td class="main">
+                <div class="document">
+                    <div id="content">
+                        <div class="documentActions">
+                            <a href="javascript:this.print();">
+                                <img alt="Print"
+    src="http://docs.opengroupware.org/print_icon.gif"
+    title="Print this page" />
+                            </a>
+                        </div>
+
+  <!-- the content page -->
+  <var:component value="context.page"/>
+
+                        <div>
+</div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr size="" class="netscape4" />
+
+<div class="footer">
+
+<a href="http://plone.org">
+<img src="http://docs.opengroupware.org/plone_powered.gif"
+     height="30" width="96" border="0"
+     alt="Powered by Plone"
+     title="This site was built using the Plone Content Management System. Click for more information." />
+</a>
+
+<!-- 
+     
+     Please keep the Plone Powered button (or a textual link to us) if you use 
+     Plone on your site. It's a nice token of gratitude, and we appreciate your
+     help in promoting the Plone name. 
+     
+     Plone is powered by the combined forces of Zope and CMF, two absolutely
+     great systems made by Zope Corporation (http://zope.com) and they in turn
+     are based on the best programming language in the world - Python
+     (http://www.python.org). We owe these guys a lot, thanks for making Plone
+     possible!
+     
+ -->
+
+<br />
+
+
+Plone is Copyright <entity name="copy"/> 2000-<span>2003</span>
+by
+<a href="http://limi.net">Alexander Limi</a>,
+<a href="http://www.runyaga.com">Alan Runyan</a>,
+<a href="http://blacktar.com">Vidar Andersen</a>.
+
+
+<hr size="" class="netscape4" />
+
+<strong class="netscape4">
+If you can read this text, it means you are not experiencing the Plone design at its best.
+Plone makes heavy use of CSS, which means it is accessible to any internet browser, 
+but the design needs a 
+<a href="http://www.webstandards.org/upgrade/">standards-compliant browser to look like we intended it</a>. 
+Just so you know ;)
+</strong>
+ 
+</div>
+  </body>
+</html>

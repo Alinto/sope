@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOSetHeader">
+  <binding name="header"        required="YES"/>
+  <binding name="value"         required="YES"/>
+  <binding name="addToExisting" defaults="YES/NO"/>
+  <binding name="object"        required="NO"/>
+</wo>

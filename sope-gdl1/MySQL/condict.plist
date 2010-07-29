@@ -1,0 +1,6 @@
+{
+  hostName     = "127.0.0.1";
+  userName     = "OGo";
+  password     = "OGo";
+  databaseName = "OGo";
+}

@@ -1,0 +1,10 @@
+# GNUstep makefile
+
+NGHttp_INCLUDE_DIRS += \
+	-I.. -I../..	\
+	-I../../../sope-core			\
+	-I../../../sope-core/NGStreams		\
+	-I../../../sope-core/NGExtensions	\
+	-I../../../sope-mime			\
+
+ADDITIONAL_CPPFLAGS += -Wall -pipe

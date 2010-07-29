@@ -1,0 +1,19 @@
+NGLdap
+======
+
+NGLdap is a thin wrapper library around the libldap C client library for
+LDAP directory servers.
+
+Examples
+========
+
+  ldapls
+  ldap2dsml
+
+Defaults
+========
+
+  LDAPDebugEnabled       - debug mode, log operations
+  LDAPLoginAttributeName - the name of the attribute which stores login
+                           names for password checks (default: uid)
+

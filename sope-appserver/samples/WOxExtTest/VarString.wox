@@ -1,0 +1,76 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  Samples for the &lt;var:string&gt; tag ...
+
+  <pre>Bindings:
+value;        // object
+escapeHTML;   // BOOL
+numberformat; // string
+dateformat;   // string
+formatter;    // WO4: NSFormatter object
+</pre>
+
+  <table border="1" width="100%">
+    <tr>
+      <td width="40%">var:string on val</td>
+      <td><var:string value="val" escapeHTML="escapeHTML" 
+		      insertBR="insertBR" nilString="nilString"/></td>
+    </tr>
+    <tr>
+      <td width="40%">var:string on date (dateformatter)</td>
+      <td><var:string value="now" escapeHTML="escapeHTML"
+		      insertBR="insertBR" dateformat="dateformat"
+		      nilString="nilString"/></td>
+    </tr>
+    <tr>
+      <td width="40%">var:string on None (nilString)</td>
+      <td><var:string value="nil" escapeHTML="escapeHTML"
+		      insertBR="insertBR"
+		      nilString="nilString"/></td>
+    </tr>
+  </table>
+
+  <form var:action="self">
+    <hr />
+    <table border="0">
+      <tr>
+	<th>Binding</th>
+	<th>Value</th>
+      </tr>
+      <tr>
+        <td align="right">value:</td>
+        <td><textarea var:value="val" cols="40" rows="3"/></td>
+      </tr>
+      <tr>
+        <td align="right">escape HTML:</td>
+        <td><input type="checkbox" var:checked="escapeHTML"/></td>
+      </tr>
+      <tr>
+        <td align="right">insert &lt;BR&gt;:</td>
+        <td><input type="checkbox" var:checked="insertBR"/></td>
+      </tr>
+      <tr>
+        <td align="right">nilString:</td>
+        <td><input type="text" var:value="nilString" const:size="40"/></td>
+      </tr>
+      <tr>
+        <td align="right">dateformat:</td>
+        <td><input type="text" var:value="dateformat" const:size="40"/></td>
+      </tr>
+    </table>
+    <input type="submit" var:action="self" value="apply"/>
+  </form>
+  
+  <var:script><![CDATA[
+    var now        = SkyDate();
+    var val        = "a value";
+    var escapeHTML = true;
+    var insertBR   = true;
+    var nilString  = "no value set !";
+    var dateformat = "%Y-%m-%d !";
+  ]]></var:script>
+</var:component>

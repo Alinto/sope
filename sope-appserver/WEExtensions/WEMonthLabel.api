@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WEMonthLabel">
+  <binding name="orientation" />
+  <binding name="dayOfWeek" settable="YES" />
+  <binding name="weekOfYear" settable="YES" />
+  <binding name="colspan" />
+</wo>

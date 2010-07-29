@@ -1,0 +1,286 @@
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* deprecated and moved to Recycler
+
+	* moved to SOPE 4.3 (v4.3.31)
+
+2004-08-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Core+JS.subproj/NSNumber+JS.m: check whether bool NSNumbers are 
+	  singletons on MacOSX - they are, so we could remove a compilation
+	  warning (v4.2.30)
+
+2004-07-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* Core+JS.subproj/EODataSource+JS.m: fixed a gcc 3.4 warning (v4.2.29)
+
+2004-06-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Core+JS.subproj/GNUmakefile (CoreJS_HEADER_FILES_DIR): added some
+	  include pathes to allow "in-place" compilation of SOPE (v4.2.28)
+
+2004-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGJavaScriptObject.m: fixed some gcc 3.4 warning (v4.2.27)
+
+2004-06-10  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* GNUmakefile.preamble: added prebinding (v4.2.26)
+	
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile, GNUmakefile.preamble: added support for building
+	  with GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.25)
+
+2004-03-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Core+JS.subproj/EODataSource+JS.m: fixed not to use deprecated
+	  EOControl API (v4.2.24)
+
+2003-12-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile (BUNDLE_INSTALL_DIR): use GNUSTEP_INSTALLATION_DIR
+	  (v4.2.23)
+
+2003-11-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGJavaScriptObjectMappingContext.m: added minor patch provided by
+	  chunsj@embian.com to use the gstep-base behaviour functions when
+	  compiling for gstep-base (v4.2.22)
+
+2003-11-18  Helge Hess  <helge@groove.local>
+
+	* Core+JS.subproj/EODataSource+JS.m: replaces some retain macros with 
+	  methods (v4.2.21)
+
+2003-10-14  Helge Hess  <helge@groove.local.>
+
+	* NGJavaScriptObjectHandler.m, NGJavaScriptObjCClassInfo.m, 
+	  NGJavaScriptShadow.m: use proper ObjC runtime functions on
+	  MacOSX (v4.2.20)
+
+2003-10-13  Helge Hess  <helge@opengroupware.org>
+
+	* EODataSource+JS.m, common.h: fixed compilation on MacOSX (v4.2.19)
+
+2003-09-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGJavaScriptContext.m: returned a value in a void function (v4.2.18)
+
+2003-09-06 Helge Hess  <helge.hess@skyrix.com>
+
+        * fixed some warnings on MacOSX (v4.2.17)
+
+2003-07-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* applied GNUstep patches provided by Filip Van Raemdonck for improved
+	  compilation with gstep-base (v4.2.16)
+
+2003-06-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.15
+	
+	* NGJavaScriptObjectMappingContext.m: added even more logging
+
+	* Core+JS.subproj/NSString+JS.m: improved performance of ObjC->JS
+	  conversion by using -getCString: instead of -cString
+
+2003-06-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.14
+	
+	* tests/JSBridgeTests.m: added a test for the string slice problem
+	  (works in the test though), the dict test fails
+
+	* NGJavaScriptObjectHandler.m, NGJavaScriptShadow: print logs if 
+	  errors occure during attaching of funcs
+
+	* NGJavaScriptObjCClassInfo.m: improved logging (print funcname)
+
+	* NGJavaScriptLanguage.m: load standard classes into JS-Context if a 
+	  new mapping context is created
+
+	* NGJavaScriptContext.m: added NSLogs if loading of standard classes
+	  fails
+
+	* added a lot of logging and notes to locate a weird bug (see TODO)
+	  (v4.2.13)
+
+2003-05-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGJavaScriptObjectMappingContext.m: added a fix for MacOSX (v4.2.12)
+
+Mon Dec 23 15:42:16 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* Core+JS.subproj: includes ../common.h instead of common.h (v4.2.11)
+
+2002-12-02  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved to skyrix-sope-42 (v4.2.10)
+
+2002-10-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGJavaScriptArray.m: improved NSArray compatibility, added
+	  - containsObject: and -subarrayWithRange: (v4.2.9)
+
+2002-08-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved NGJavaScriptError to separate file, fixed some gcc 3.2 warnings
+
+2002-08-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.7
+
+	* NGJavaScriptObject.h: added some declarations for NSJavaScriptArray
+	
+	* NGJavaScriptObject.m: 
+	  - the JavaScript class is returned by a method now, so we can create
+	    subclasses that override the class
+	  - splitted NSCoding in a JavaScript encoding part and in an ObjC
+	    encoding part. This way subclasses can decide which JS things to
+	    archive (eg NSJavaScriptArray only archives values stored at
+	    array indices, no properties)
+	  - added "greedy archiving" which also archives parent and prototype
+	    objects
+	  - very much improved -objectForKey: etc, they worked for string
+	    keys only. They still only work for string keys, but are prepared
+	    for more ;-)
+	
+	* NGJavaScriptContext.m: improved JavaScript error handling (eg by
+	  adding the NGJavaScriptError class)
+	
+	* NGJavaScriptArray.m:
+	  - create array objects using JS_NewArrayObject instead of
+	    JS_NewObject
+	  - properly return the js_ArrayClass (added -jsObjectClass method)
+	  - added -addObject: method to simulate NSMutableArray
+	  - improved NSCoding (index based encoding/decoding)
+
+2002-08-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* testjs.m: cleanup test program, prepared for inclusion in OCUnit
+	  like environments
+	
+	* v4.2.6 (major feature: first working NSCoding support)
+	
+	* Core+JS.subproj/NSNumber+JS.m: assume that YES/NO NSNumbers are
+	  implemented as singletons in Foundation to map JS boolean values
+	
+	* NGJavaScriptShadow.m: added NSCoding
+
+	* NGJavaScriptObjectMappingContext: added some docu, changed back
+	  to use _js_parentObject instead of -parentObject (sigh), properly
+	  map JS functions to NGJavaScriptFunction objects
+
+	* NGJavaScriptObjectHandler: added some docu, initialize some 
+	  local vars so that gcc doesn't complain
+
+	* NGJavaScriptObject: added new methods: -allKeys, -allValues,
+	  -convertToNSDictionary, fixed NSCoding, improved -description
+
+	* NGJavaScriptObjCClassInfo: added some docu, cleanup of property
+	  and function "apply" code
+
+	* NGJavaScriptFunction: NGJavaScriptFunction now inherits from
+	  NGJavaScriptObject, fixed the ivars etc to match this fact
+
+2002-08-20  Helge Hess  <helge.hess@skyrix.com>
+	
+	* started implementation of NSCoding (v4.2.5)
+
+	* NGJavaScriptObjectMappingContext.m: use -parentObject instead of
+	  -_js_parentObject
+
+2002-08-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* Core+JS.subproj/NSDate+JS.m: added JavaScript function to create
+	  NSCalendarDate objects ...
+
+2002-06-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGJavaScriptObjectHandler.m: fixed serious bug with incorrectly
+	  defined JavaScript class flags
+
+Mon Jun 10 13:04:19 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved NGScripting to separate library
+
+2002-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* heavy reworks towards a pluggable scripting system
+
+Mon Dec 17 15:22:59 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGFileManager+JS.m: added trash() function for moving files to
+	  trash
+
+Tue Nov 27 16:42:20 2001  Bjoern Stierand <bjoern@skyrix.com>
+
+	* NGFileManager+JS.m: fixed wrong destination path in _jsfunc_mv()
+
+Tue Sep 25 12:55:53 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* added bindings for NGFileManager ...
+
+	* NGJavaScriptArray.m: added -insertObject:atIndex:
+
+Fri Jul 13 17:19:18 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGJavaScriptObjCClassInfo.m: added support for JSPROP_SHARED instead
+	  of JSPROP_NOSLOT
+
+Thu Jun 14 12:51:26 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSUserDefaults+JS.m: added JS docu
+
+Sat May  5 17:04:24 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSArray+JS.m: auto-transform NSArray's into JavaScript arrays (note 
+	  that mutable array's are also transformed into a copy, too !!!)
+
+Wed May  2 17:06:04 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* disable abort's in non-debug mode
+
+Mon Apr 30 21:31:18 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGJavaScriptObjectHandler.m, NGJavaScriptShadow.m: better exception
+	  handling
+
+Fri Apr 27 14:27:11 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* EODataSource+JS.m: improved error handling
+
+Thu Apr  5 15:40:11 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* EODataSource+JS.m ([EODataSource -_updateFetchSpecWithEntityName:qualifier:sortOrderings:]): 
+	  added support for setting/getting hints
+
+Fri Mar  9 12:06:08 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSNumber+JS.m: convert NSBoolNumber to JS bools
+
+Mon Mar  5 19:43:18 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGJavaScriptArray: add NSMutableArray as behaviour
+
+Thu Feb 22 18:56:47 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* detect JavaScript construction calls (eg 'new Blah()')
+
+Mon Feb 12 18:28:10 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGJavaScriptObjectHandler.m: fixed remove-root bug
+
+Mon Jan  8 16:22:49 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* fixed compilation
+
+Fri Oct 13 17:16:42 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* use hashtable to map ObjC context wrapper
+
+Tue Sep 12 18:51:47 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* created ChangeLog, modified to use MOF3 internal JS library

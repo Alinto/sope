@@ -1,0 +1,8 @@
+SKYRiX Libraries for XML Processing
+===================================
+
+This directory contains libraries for processing XML files and other tagged
+file formats like HTML, iCalendar, PYX or STX using Objective-C.
+
+For more information, please follow up on the webpage:
+  http://www.opengroupware.org/en/devs/sope/skyrix_xml/

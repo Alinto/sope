@@ -1,0 +1,41 @@
+# compilation settings
+
+ifeq ($(frameworks),yes)
+BUNDLE_INSTALL_DIR := $(FRAMEWORK_INSTALL_DIR)/SaxObjC.framework/Resources/SaxDrivers/
+endif
+
+
+SOPE_ROOT=../..
+SOPE_OBJ_ROOT=$(GNUSTEP_BUILD_DIR)/$(SOPE_ROOT)
+
+ADDITIONAL_INCLUDE_DIRS +=			\
+	-I$(SOPE_ROOT)/sope-xml			\
+	-I$(SOPE_ROOT)/sope-core/NGExtensions
+
+
+# dependencies
+
+ifneq ($(frameworks),yes)
+BUNDLE_LIBS += -lSaxObjC $(libxml_LIBS)
+else
+BUNDLE_LIBS += -framework SaxObjC $(libxml_LIBS)
+endif
+
+
+ADDITIONAL_BUNDLE_LIBS += $(BUNDLE_LIBS)
+
+
+# library/framework search pathes
+
+DEP_DIRS = ../SaxObjC ../../sope-core/NGExtensions
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib

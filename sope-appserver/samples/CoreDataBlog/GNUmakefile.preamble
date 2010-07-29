@@ -1,0 +1,62 @@
+# compile settings
+
+# Note: a lot of this stuff is only necessary for 'inline compilation', that is
+#       compiling the sample without having SOPE installed in advance.
+
+SOPE_ROOT=../../..
+
+
+# CoreData files
+
+$(WOAPP_NAME)_MOM_FILES += \
+	$(patsubst %.xcdatamodel,%.mom,$($(WOAPP_NAME)_COREDATA_MODELS))
+
+$(WOAPP_NAME)_RESOURCE_FILES += \
+	$($(WOAPP_NAME)_MOM_FILES)
+
+
+# static references required for Mach linker
+
+ADDITIONAL_TOOL_LIBS += \
+	-framework CoreData	\
+	-framework CoreServices
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_TOOL_LIBS += \
+	-lEOCoreData	\
+	-lNGExtensions	\
+	-lEOControl	\
+	-lDOM -lXmlRpc -lSaxObjC
+else
+ADDITIONAL_TOOL_LIBS += \
+	-framework NGExtensions	\
+	-framework EOCoreData	\
+	-framework EOControl	\
+	-framework XmlRpc -framework DOM -framework SaxObjC
+endif
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	$(SOPE_ROOT)/sope-appserver/NGObjWeb	\
+	$(SOPE_ROOT)/sope-mime			\
+	$(SOPE_ROOT)/sope-mime/NGMail		\
+	$(SOPE_ROOT)/sope-core/EOCoreData	\
+	$(SOPE_ROOT)/sope-core/NGStreams	\
+	$(SOPE_ROOT)/sope-core/NGExtensions	\
+	$(SOPE_ROOT)/sope-core/EOControl	\
+	$(SOPE_ROOT)/sope-xml/DOM		\
+	$(SOPE_ROOT)/sope-xml/XmlRpc		\
+	$(SOPE_ROOT)/sope-xml/SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib

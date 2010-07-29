@@ -1,0 +1,14 @@
+91d6d17a2a8b284770d00288c64a2c3d  usr/include/GNUstep/NGLdap/NGLdapSearchResultEnumerator.h
+a4726c5829197310b3b51dd2a55ca20e  usr/include/GNUstep/NGLdap/NGLdapGlobalID.h
+7fea1b85b52fb79081cd604600b9cb89  usr/include/GNUstep/NGLdap/NSString+DN.h
+4df35edb70325664cbdf1613fafb472c  usr/include/GNUstep/NGLdap/NGLdapEntry.h
+3649ca59033f314e518b155578773920  usr/include/GNUstep/NGLdap/NGLdapDataSource.h
+489ef7c8a63b7e7114a46da555cde989  usr/include/GNUstep/NGLdap/NGLdapURL.h
+cfe721cead015f4fc6676ba954ee2efc  usr/include/GNUstep/NGLdap/NGLdapModification.h
+75bc945158dc0dd29dccd5e5a2c9e2df  usr/include/GNUstep/NGLdap/NGLdapAttribute.h
+1bcd3e4771b0f77446a179955dfc3792  usr/include/GNUstep/NGLdap/NGLdap.h
+bef12693e15e6bfaa1428d6cb4b15e96  usr/include/GNUstep/NGLdap/EOQualifier+LDAP.h
+971e9092e683ac116e36acf7f8483a98  usr/include/GNUstep/NGLdap/NGLdapFileManager.h
+a11066e3d0ec60ec49fdc3964bdbd5bb  usr/include/GNUstep/NGLdap/NGLdapConnection.h
+4723d2c2571a340236d09ab9919ca6bc  usr/share/doc/libsope-ldap4.9-dev/changelog.Debian.gz
+5febdfc2b4212decafd2e6d5f16eeee8  usr/share/doc/libsope-ldap4.9-dev/copyright

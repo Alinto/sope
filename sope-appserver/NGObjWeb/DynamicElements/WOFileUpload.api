@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="WOFileUpload">
+  <binding name="data" settable="YES" required="YES" />
+  <binding name="filePath" settable="YES" required="YES" />
+
+  <!-- SOPE -->
+  <binding name="name"/>
+  <binding name="value" />
+  <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
+
+  <binding name="otherTagString" passthrough="NO"/>
+</wo>

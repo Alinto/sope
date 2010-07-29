@@ -1,0 +1,132 @@
+# $Id$
+
+Objective-C / JavaScript bridge
+===============================
+
+This code implements an Objective-C/JavaScript bridge that uses the
+SpiderMonkey JavaScript engine from the Mozilla project. It's used
+for scripted NGObjWeb components and for SKYRiX forms.
+
+It works pretty well so far, but currently requires a bit of work 
+to expose functions and properties from ObjC to JavaScript. Note that
+it's by intention that not all selectors of an ObjC class are exposed
+automatically as JavaScript functions primarily for security reasons
+(we want to support JavaScript 'sandboxes').
+
+In later versions I would like to move to mapping code to a configuration
+file and maybe add some security assertions. Pretty much like the Zope
+security system ... I'm not sure yet how/whether we could use the builtin
+security principal objects of SpiderMoneky.
+Further the bridge could/should get more AppleScript API like, that is,
+it should build scriptClassDescriptions and maybe use the Foundation
+ValueCoercionHandler.
+
+The bridge is not thread safe in the moment. At least one thing: the
+current mapping context is stored in a global variable.
+
+TRAPS:
+======
+  - do never use things as properties which reference the property owner, since
+    properties are cached by SpiderMonkey, you are going to have a cycle. Eg:
+
+      dom.all['blah']
+
+    If the 'all' proxy retains the 'dom' object, we are going to have a cycle.
+    'all' may only have a weak reference to 'dom' !
+    => this could be improved now be using the new deallochack from 
+       MulleKybernetik
+    => Brendan Eich also added some kind of pass-through flag were a backend
+       class can be the only property store and therefore disable the
+       described caching ?
+
+Archiving
+=========
+
+See archiving in Rhino to understand the difficulties:
+
+  http://mozilla.org/rhino/serialization.html
+  
+NSArchiver makes some things easier by providing conditional
+archiving. Eg the prototype and parent object are encoded that
+way. Besides that the mapping context is never encoded - you need
+to create one before you unarchive JS objects.
+
+Currently function objects are never archived. To be fixed.
+
+BUGS
+====
+
+- objectForKey:functionName does not return a NGJavaScriptFunction ?
+- during large exports with SkyPublisher either the bridge or SpiderMonkey
+  sometimes dump core in some AddRootObject call
+- function objects are not archived
+
+TODO
+====
+
+- we should probably create one JS class for each Objective-C
+  class, so that we don't need to define all the hooks again
+  and again (but instead use the class prototype object) !
+  (needs to be recreated if bundles are loaded)
+- BUGS first ! ;-)
+- speed, NGJavaScript currently is not optimized at all
+- thread safety
+- better AppleScript class compatibility
+- improved mapping facilities (mapping rule files)
+- archiving of additional native objects (dates, functions, ...)
+- combined objects
+- add dealloc-hack to improve tracking of objects
+
+Internals
+=========
+
+NGJavaScript is based on the NGScripting library which already provides
+the high-level API to load and execute scripts in any language.
+
+Classes
+  NGJavaScriptObject
+  
+  NGJavaScriptArray
+  NGJavaScriptArray(NSArrayCompatibility)
+  NGJavaScriptArray(NSMutableArrayCompatibility)
+  - a JavaScript array. this class inherits from NGJavaScriptObject
+    and "aquires" the methods of NSMutableArray using add_behaviour,
+    which is unsupported on NeXT runtime
+  
+  NGJavaScriptCallable
+  - a JavaScript "callable", that is, a JavaScript function or method
+  
+  NGJavaScriptContext
+  NGJavaScriptFunction
+  NSObject(JSFuncTyping)
+  NGJavaScriptLanguage
+  NGJavaScriptObjCClassInfo
+  JSIDEnum
+  JSObjChainEnum
+  NGJavaScriptObjectHandler
+  NGJavaScriptObjectMappingContext
+  NGJavaScriptObjectMappingContext(CombinedObjects)
+  NSObject(JSCombinedObjects)
+  JSCombinedObjectBehaviour
+  NGJavaScriptRuntime
+  NGJavaScriptShadow
+
+Some JS Samples
+===============
+
+  Exception Handling:
+    throw myObject;
+    try {} catch (localException) { };
+    - localException is the exception itself, not a switch on 
+      it's class
+    - throw can take any object, eg: "throw 5"
+
+Defaults
+========
+
+  JSAbortOnError        (abort on "JS ERROR" logs)
+  JSDebugContextDealloc (enable some logs in -dealloc of the JS Context Wrap)
+  jsLogPropDef         bool
+  jsLogFuncDef         bool
+  JSLogHandleForObject bool  log calls to -handleForObject:
+  JSLogValueConversion bool  log calls to jsValue:forObject:

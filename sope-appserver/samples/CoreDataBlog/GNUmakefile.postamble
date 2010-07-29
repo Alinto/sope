@@ -1,0 +1,17 @@
+# compilation targets
+
+compile-coredata-models :: $($(WOAPP_NAME)_MOM_FILES)
+
+clean ::
+	rm -f $(patsubst %.xcdatamodel,%.mom,$($(WOAPP_NAME)_COREDATA_MODELS))
+
+
+# this is triggered by woapp.make
+woapp-resource-files :: compile-coredata-models
+
+
+MOMC="/Library/Application Support/Apple/Developer Tools/Plug-ins/XDCoreDataModel.xdplugin/Contents/Resources/momc"
+
+# rule for compilation of CoreData models
+%.mom :: %.xcdatamodel
+	$(MOMC) $< $@

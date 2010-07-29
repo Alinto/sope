@@ -1,0 +1,36 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <form var:action="self">
+    <var:checkbox-matrix list="list" item="item" 
+                         maxColumns="maxColumns"
+                         selections="selections"
+                         horizontal="horizontal">
+       <var:string value="item"/>
+       <a var:action="increaseClicks">increase clicks</a>
+    </var:checkbox-matrix>
+    <br/>
+
+    clicks: <var:string value="clicks"/>
+    <br/>
+
+    <var:string value="selections"/>
+
+    <table border="0">
+       <tr><td></td><td></td></tr>
+       <tr>
+         <td>MaxColumns:</td>
+         <td><input type="text" var:value="maxColumns" size="4"/></td>
+       </tr>
+       <tr>
+         <td>Horizontal:</td>
+         <td><input type="checkbox" var:checked="horizontal"/></td>
+       </tr>
+     </table>
+    <input type="submit" var:action="self" value="apply"/>
+  </form>
+
+</var:component>

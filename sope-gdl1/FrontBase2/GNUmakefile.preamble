@@ -1,0 +1,56 @@
+# $Id: GNUmakefile.preamble 1 2004-08-20 10:38:46Z znek $
+
+FRONTBASE  = ./fb2/$(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS)
+
+ADDITIONAL_INCLUDE_DIRS += -I.. -I../GDLAccess
+
+ADDITIONAL_LIB_DIRS += \
+	-L../GDLAccess/$(GNUSTEP_OBJ_DIR)	\
+	-L../$(GNUSTEP_OBJ_DIR)			\
+
+FrontBase2_BUNDLE_LIBS += \
+	-lEOControl		\
+	-lNGExtensions		\
+	-lNGStreams		\
+	-lGDLAccess		\
+
+ifeq ($(FOUNDATION_LIB),nx)
+
+FrontBase2_BUNDLE_LIBS += -lFoundationExt
+FrontBase2_LDFLAGS += -framework FBCAccess -framework Foundation
+
+else
+
+ifeq ($(uselib),yes)
+
+FrontBase2_BUNDLE_LIBS += -lFBCAccess
+
+else
+
+ADDITIONAL_INCLUDE_DIRS += -I$(FRONTBASE)/include
+ADDITIONAL_LIB_DIRS     += -L$(FRONTBASE)/lib
+
+ifneq ($(GNUSTEP_TARGET_OS),mingw32)
+FrontBase2_LDFLAGS += $(FRONTBASE)/lib/FBCAccess.o
+FrontBase2_BUNDLE_LIBS += -lGDLAccess
+else
+FrontBase2_LIB_DIRS    += -L$(FRONTBASE)/lib
+FrontBase2_BUNDLE_LIBS += \
+	-lFBCAccessImp \
+	-lGDLAccess \
+	-lEOControl -lFoundation -lobjc
+endif
+
+endif # uselib,yes
+endif # FOUNDATION_LIB,nx
+
+#ifeq ($(GNUSTEP_TARGET_OS),mingw32)
+#fbtest_LIB_DIRS  += -L$(FRONTBASE)/lib
+#fbtest_TOOL_LIBS += -lFBCAccessImp
+#endif
+
+ADDITIONAL_TOOL_LIBS += \
+	-lEOControl		\
+	-lNGExtensions		\
+	-lNGStreams		\
+	-lGDLAccess		\

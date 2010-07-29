@@ -1,0 +1,240 @@
+libFoundation Library README
+============================
+
+
+History
+=======
+
+    This library is derived from an old library we designed, wrote and
+    used for developing a commercial application during 1995.
+
+    That time we needed a small library that had some general
+    containers and strong support for distributed objects. We needed
+    to write code that runs on different machines, not only on NeXT.
+
+    Also we needed to write programs that communicate via general Unix
+    IPC channels. So we designed a library that had support for
+    distributed objects on different channels of communication like
+    Internet or Unix domain stream sockets or socketpairs.
+
+    We also experimented some ideas, such as calling the exception
+    handlers as functions and returning from them, choosing the best
+    communication channel when a connection is established and some
+    other interesting ideas.
+
+
+The design of the library
+=========================
+
+    We have followed two important points in designing this
+    library. The first is runtime independence. The second is to write
+    the code without using extensions to the OpenStep spec, or if we
+    are using such extensions, we provide a separate library
+    containing them that allows porting of the code written for
+    libFoundation to another implementation of Foundation.
+
+    We wanted to give people a library that compiles and runs in the
+    both worlds of Objective-C: NeXT and GNU. This will allow one to
+    write programs that mix together the code that exists for NeXT and
+    the code that runs only on the GNU runtime. libFoundation compiles
+    with both runtimes using different compilers. If all the other
+    GNUstep work would be done to allow easy porting of programs, then
+    one can move easily from NeXT's OpenStep to GNUstep.
+
+    The library includes a header file that allows you to write the
+    programs portable across runtimes. If you write the programs using
+    only the GNU API without some GNU runtime dependent facilities
+    your programs will also run without modifications on both GNU and
+    NeXT runtime.
+
+    The actual extensions are the exception handling mechanism and the
+    garbage collector based on reference counting. The exception
+    handling mechanism offers a better approach to exception handling
+    than that found in the OpenStep specification by using a more
+    intuitive syntax. In addition the exception handler is invoked as
+    a function so you can see in debugger where the exception was
+    generated from.
+
+    The garbage collector works in conjunction with the reference
+    counting mechanism and releases you from thinking on how to solve
+    the cycles in your program, thus saving time and code to write and
+    maintain.
+
+    For all these extensions we provide a separate library that
+    compiles with other implementations of Foundation.
+
+    Starting with version 0.9.0 support for Boehm's garbage collector
+    has been added; see
+
+	http://reality.sgi.com/employees/boehm_mti/
+
+    for more information on this collector. The support in
+    libFoundation includes the possibility of registering an object
+    for the finalization of another object, which is very important
+    for the implementation of classes like NSNotificationCenter in
+    libFoundation and EOObjectUniquer in GDL. See the documentation
+    for more details about this facitity.
+
+
+The current status
+==================
+
+    Almost all of the classes from the original OpenStep specification
+    are implemented. We also implemented several classes found in the
+    NeXT's OPENSTEP implementation like NSFileManager, NSFileHandle,
+    NSTask and NSPipe. We estimate the library is completed in
+    proportion of 80% from the original OpenStep specification;
+    extensions are not counted.
+
+    Almost all of the classes are thoroughly tested using a special
+    testing framework we designed.
+
+
+Future work
+===========
+
+    Starting with 0.8.0 libFoundation was made thread-safe. More
+    testing should be done: we need to come up with some automated
+    tests for checking the thread-safety of the library.
+
+    At this time libFoundation does not provide an implementation of
+    Distributed Objects (DO) and Unicode strings.
+
+    A small implementation for DO was written by Helge Hess and it
+    will eventually become part of libFoundation. This implementation
+    will be further worked on to be based upon the Corba's IIOP, which
+    will allow libFoundation's Distributed Objects clients to
+    communicate directly with Corba clients written in other
+    languages, that run using a variety of Corba implementations.
+
+    Mircea wrote most of the Unicode implementation but we still need
+    to come up with some good algorithms for searching Unicode
+    strings.
+
+Resources
+=========
+
+    Snapshots/releases of libFoundation will usually become available in
+    the contrib directory of the GNUstep site (ftp.gnustep.org).
+    There is also a web page on
+
+    http://www.geocities.com/SiliconValley/Monitor/7464/libFoundation/index.html
+
+Remote access to the sources through CVS
+========================================
+
+    You can have read-only access to the most recent developments on 
+    libFoundation using anonymous CVS. To be able to do this setup the 
+    CVSROOT environment variable like this (a Bourne shell is assumed): 
+
+      CVSROOT=:pserver:anoncvs@cvs.net-community.com:/libFoundation
+      export CVSROOT
+
+    Then do a 'cvs login'. You will be prompted to introduce a password, 
+    enter anoncvs.
+
+    Then issue this command to get the sources: 
+
+      cvs -z 3 checkout libFoundation
+
+    Once you have the sources checked out you can update them to the 
+    recent changes by running inside of libFoundation source tree: 
+
+      cvs -z 3 update
+
+GNUstep makefile package (gstep-make)
+=====================================
+
+    GNUstep includes a makefile package, called gstep-make, which is
+    supported by the libFoundation. The package is available at the
+    GNUstep site (ftp.gnustep.org).
+    Take a look at the libFoundation INSTALL file on how to compile
+    lF using gstep-make.
+
+Ports
+=====
+
+    This package was compiled and tested on these machines:
+
+    m68k-next-nextstep3
+
+	The package was compiled and tested successfully using the
+	2.6.3 and 2.7.2 versions of compiler and with both NeXT and
+	GNU runtimes.  Returning of aggregates of all sizes works well
+	with both runtimes.
+
+    i386-next-nextstep3
+
+	The package was compiled and tested successfully using the
+	2.6.3 and 2.7.2 versions of compiler and with both NeXT and
+	GNU runtimes.  Returning of aggregates of all sizes works well
+	with both runtimes.
+
+    i386-next-nextstep4
+
+	The package was compiled and tested successfully using the
+	2.7.2.1 version of compiler with GNU runtime. The port of GNU
+	compiler on this machine does not work with nested functions
+	so parts of exception handling facility don't work.
+
+    i386-pc-linux-gnu
+
+	The package was compiled on linux with ELF using the 2.7.2.1,
+	with GCC 2.8.1 and with EGCS 1.0.3. All the tests ran
+	successfully, except some NSInvocation tests that crash when
+	returning some structures.
+
+    i386-pc-cygwin32
+
+	The package was compiled using the Cygnus Win32 beta 17.1
+	binaries, with the libobjc.a built from the newer gcc sources
+	with the 960906 runtime patch applied.
+
+    i386-pc-mingw32
+
+        The port to mingw32 is currently in progress. See README.mingw32 
+        for information. The package is cross-compiled using egcs 1.1.1.
+
+    i386-sun-solaris2.5.1
+
+	The package was compiled with the 2.7.2.1 compiler with the
+	970317 runtime patch applied.
+
+    sparc-sun-solaris2.5
+
+	The package was compiled with the 2.7.2.1 compiler with the
+	960906 runtime patch applied.
+        See README.sparc for more information.
+
+    sparc-sun-solaris2.6
+
+	The package was compiled with a modified egcs 1.1.1 compiler.
+        See README.sparc for more information.
+
+    alpha-unknown-linux-gnu
+
+	The package was compiled using a pre-release of GCC version
+	2.8. Still needs some work to finish the NSInvocation and
+	NSMethodSignature machine dependent macros.
+
+    powerpc-ibm-aix4.1.5.0
+
+	The package was compiled using the EGCS 1.0.3a compiler with a
+	patch applied to it; the patch can be found in the
+	libFoundation's distribution. NSInvocation and
+	NSMethodSignature have been ported.
+    
+    Some preliminary work has been done on HPUX 9. This platform is
+    obsolete and we'll try to port the library to 10.20 and 11.0.
+
+
+    Happy hacking,
+
+    Ovidiu Predescu <ovidiup@altavista.net>
+    Mircea Oancea   <mircea@pathcom.com>
+    Helge Hess      <helge.hess@skyrix.com>
+
+
+! Local variables:
+! mode: indented-text
+! End:

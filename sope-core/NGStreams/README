@@ -1,0 +1,119 @@
+SKYRiX IO Streaming Library
+===========================
+
+Introduction
+============
+
+This library contains Objective-C classes to access files and
+network sockets using a java.io like streaming mechanism.
+It also abstracts the Unix socket API (that is, we have extensible
+classes for socket domains, addresses etc)
+
+TODO
+====
+
+Should we remove serialization ? It's not available with Jaguar
+(MacOSX 10.2) anymore. Currently is turned off on Jaguar.
+
+Removed functionality
+=====================
+
+Removed in 4.1, available in MOF3:
+
+  NGUrl related things
+
+... idn't make much sense anymore, now that Foundation has NSURL
+
+Defaults:
+=========
+
+  ProfileByteBufferEnabled = NO;
+
+Protocols
+=========
+
+  NGSerializer
+  NGActiveSocket
+  NGPositionableStream
+  NGDatagramPacket
+  NGSocketAddress
+  NGSocketDomain
+
+Class Hierachy
+==============
+  
+  NSObject
+    NGStream < NGStream, NGByteSequenceStream > (serialization) <NGSerializer>
+      NGFileStream          < NGPositionableStream >
+      NGDataStream          < NGPositionableStream >
+      NGTaskStream
+      NGFilterStream
+        NGBase64Stream
+        NGBufferedStream
+        NGByteBuffer
+        NGByteCountStream
+        NGLockingStream
+    NGSocket                < NGSocket >
+      NGActiveSocket        < NGActiveSocket > (serialization) < NGSerializer >
+      NGPassiveSocket       < NGPassiveSocket >
+      NGDatagramSocket
+    NGTextStream            < NGExtendedTextStream >
+      NGStringTextStream
+      NGCTextStream
+      NGFilterTextStream
+        NGCharBuffer
+    NGDatagramPacket        < NGDatagramPacket >
+    NGInternetSocketAddress < NSCopying, NSCoding, NGSocketAddress >
+    NGInternetSocketDomain  < NSCoding, NSCopying, NGSocketDomain >
+    NGLocalSocketAddress    < NSCopying, NGSocketAddress >
+    NGLocalSocketDomain     < NSCopying, NSCoding, NGSocketDomain >
+    NSFileHandle
+      NGConcreteStreamFileHandle
+    NSCoder
+      NGStreamCoder         < NSObjCTypeSerializationCallBack >
+    NSPipe
+      NGStreamPipe          < NGStream, NGByteSequenceStream >
+
+Exceptions
+==========
+
+  NSException
+    NGIOException
+      NGStreamException
+        NGEndOfStreamException
+          NGSocketShutdownException
+            NGSocketShutdownDuringReadException
+            NGSocketShutdownDuringWriteException
+            NGSocketTimedOutException
+            NGSocketConnectionResetException
+        NGCouldNotOpenStreamException
+        NGCouldNotCloseStreamException
+        NGStreamNotOpenException
+        NGStreamErrorException
+          NGStreamReadErrorException
+          NGStreamWriteErrorException
+          NGStreamSeekErrorException
+        NGStreamModeException
+          NGUnknownStreamModeException
+          NGReadOnlyStreamException
+          NGWriteOnlyStreamException
+      NGIOAccessException
+        NGIOSearchAccessException
+      NGSocketException
+        NGCouldNotResolveHostNameException
+        NGDidNotFindServiceException
+        NGInvalidSocketDomainException
+        NGCouldNotCreateSocketException
+        NGSocketBindException
+          NGSocketAlreadyBoundException
+          NGCouldNotBindSocketException
+        NGSocketConnectException
+          NGSocketNotConnectedException
+          NGSocketAlreadyConnectedException
+          NGCouldNotConnectException
+        NGSocketIsAlreadyListeningException
+        NGCouldNotListenException
+        NGCouldNotAcceptException
+        NGSocketOptionException
+          NGCouldNotSetSocketOptionException
+          NGCouldNotGetSocketOptionException

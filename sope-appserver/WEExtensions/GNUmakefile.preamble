@@ -1,0 +1,110 @@
+# compiler flags
+
+SOPE_ROOT=../..
+
+ADDITIONAL_CPPFLAGS += -Wall
+ADDITIONAL_INCLUDE_DIRS += \
+	-I.. -I$(SOPE_ROOT) -I../NGObjWeb	\
+	-I$(SOPE_ROOT)/sope-core/NGStreams	\
+	-I$(SOPE_ROOT)/sope-core/NGExtensions	\
+	-I$(SOPE_ROOT)/sope-core		\
+	-I$(SOPE_ROOT)/sope-xml
+
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+after-WEExtensions-all ::
+	@(cp bundle-info.plist \
+	  $(GNUSTEP_BUILD_DIR)/$(BUNDLE_NAME)$(BUNDLE_EXTENSION))
+else
+after-WEExtensions-all ::
+	@(cd $(BUNDLE_NAME)$(BUNDLE_EXTENSION);\
+	  cp ../bundle-info.plist .)
+endif
+
+libWEExtensions_SOVERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
+libWEExtensions_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
+
+
+# Parameters for resource lookup
+
+ifneq ($(FHS_INSTALL_ROOT),)
+ADDITIONAL_CPPFLAGS += -DFHS_INSTALL_ROOT=\@\"$(FHS_INSTALL_ROOT)\"
+endif
+
+ifeq ($(CONFIGURE_64BIT),yes)
+ADDITIONAL_CPPFLAGS += -DCONFIGURE_64BIT=1
+endif
+
+
+# dependencies
+
+libWEExtensions_LIBRARIES_DEPEND_UPON += \
+	-lNGObjWeb	\
+	-lNGMime	\
+	-lNGStreams -lNGExtensions -lEOControl \
+	-lXmlRpc -lDOM -lSaxObjC
+
+ifeq ($(frameworks),yes)
+WEExtensions_LIBRARIES_DEPEND_UPON += \
+	-framework NGObjWeb	\
+	-framework NGMime -framework NGMail \
+	-framework NGStreams -framework NGExtensions -framework EOControl \
+	-framework XmlRpc -framework DOM -framework SaxObjC
+endif
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	../NGObjWeb \
+	$(SOPE_ROOT)/sope-mime			\
+	$(SOPE_ROOT)/sope-mime/NGMail		\
+	$(SOPE_ROOT)/sope-core/NGStreams	\
+	$(SOPE_ROOT)/sope-core/NGExtensions	\
+	$(SOPE_ROOT)/sope-core/EOControl	\
+	$(SOPE_ROOT)/sope-xml/DOM		\
+	$(SOPE_ROOT)/sope-xml/XmlRpc		\
+	$(SOPE_ROOT)/sope-xml/SaxObjC
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+ifeq ($(findstring _64, $(GNUSTEP_TARGET_CPU)), _64)
+SYSTEM_LIB_DIR += -L/usr/local/lib64 -L/usr/lib64
+else
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
+endif
+
+
+# bundle dependencies
+
+ifneq ($(frameworks),yes)
+
+WEExtensions_BUNDLE_LIBS   += \
+	-lWEExtensions	\
+	-lNGObjWeb	\
+	-lNGMime	\
+	-lNGStreams -lNGExtensions -lEOControl \
+	-lXmlRpc -lDOM -lSaxObjC
+WEExtensions_WOBUNDLE_LIBS += $(WEExtensions_BUNDLE_LIBS)
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+WEExtensions_LIB_DIRS += -L$(GNUSTEP_OBJ_DIR)
+else
+WEExtensions_LIB_DIRS += -L./$(GNUSTEP_OBJ_DIR)
+endif
+endif
+
+
+# Apple
+
+ifeq ($(FOUNDATION_LIB),apple)
+libWEExtensions_PREBIND_ADDR="0xC4000000"
+libWEExtensions_LDFLAGS += -seg1addr $(libWEExtensions_PREBIND_ADDR)
+endif

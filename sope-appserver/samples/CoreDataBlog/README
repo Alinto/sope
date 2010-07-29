@@ -1,0 +1,13 @@
+CoreDataBlog
+============
+
+A sample SOPE application which access some CoreData storage.
+
+Works on the same data like:
+  http://www.cocoadevcentral.com/articles/000085.php
+
+
+Required defaults:
+  defaults write CoreDataBlog WOComponentLoadWOOFiles YES
+  defaults write CoreDataBlog \
+    WOKeyPathAssociationClass WOKeyPathAssociationSystemKVC

@@ -1,0 +1,737 @@
+compare ../complete/SOPE/releases/4.3.9-shapeshifter with .
+added:   config-NGStreams.log
+added:   TODO.txt
+removed: TODO-4.3.txt
+added:   debian/ngobjweb.load
+added:   debian/libapache2-mod-ngobjweb.prerm
+added:   debian/libsope-gdl1-_SOPEVER_.install
+added:   debian/libapache2-mod-ngobjweb.install
+added:   debian/libsope-gdl1-_SOPEVER_-dev.install
+added:   debian/libapache2-mod-ngobjweb.postinst
+added:   debian/sope_SOPEVER_-versitsaxdriver.install
+added:   debian/libapache2-mod-ngobjweb.dirs
+removed: debian/libsope-gdl1-_GDL1VER_-dev.install
+removed: debian/sope_SOPEVER_-icalsaxdriver.install
+removed: debian/libsope-gdl1-_GDL1VER_.install
+removed: debian/patches/01_build_modngobjweb.dpatch
+changed: sope-ical/
+     2004-10-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-ical.xcode: removed iCalSaxDriver project reference
+changed: sope-ical/NGiCal/
+     2004-12-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalPerson.[hm]: formalized participationStatus according to RFC2445.
+     	  Provided convenience API to set status without concrete knowledge
+     	  of string values involved. (v4.5.38)
+     2004-12-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.37
+     	* iCalEvent.[hm]: Added transparency 'TRANSP'. Also multiple
+     	  convenience methods provided.
+     	* NGiCal.xmap: added proper mapping for 'transp'.
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGiCal.xcode: minor changes and updated
+     2004-12-13  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalPerson.[hm]: added -cnWithoutQuotes and -rfc822Email convenience
+     	  methods to simplify client code dealing with these properties
+     	  (v4.5.36)
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGiCal.xcode: provide SOPE_{MAJOR,MINOR}_VERSION to the build
+     2004-11-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* iCalRenderer.m: use SOPE version defines for iCalendar product id
+     	  (v4.5.35)
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location of sax mapping
+     2004-10-31  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* iCalAlarm.[hm], iCalEvent.[hm], iCalToDo.[hm],
+     	  NGiCal.xmap: added recurrenceRule (v4.3.34)
+changed: sope-ical/versitSaxDriver/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* versitSaxDriver.xcode: minor changes and updated
+added:   sope-ical/data/test-noodle1.ics
+added:   sope-xml/ChangeLogSaxDriver
+changed: sope-xml/XmlRpc/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* XmlRpc.xcode: minor cleanup
+changed: sope-xml/STXSaxDriver/
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location
+changed: sope-xml/DOM/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DOM.xcode: minor cleanup
+changed: sope-xml/pyxSAXDriver/
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location
+changed: sope-xml/SaxObjC/
+     2004-11-12  Max Berger  <max@berger.name>
+     	* SaxXMLReaderFactory.m: fixed SaxDriver lookup for gstep-base on
+     	  MingW32 (OGo bug #979) (v4.5.47)
+     2004-11-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* SaxXMLReaderFactory.m: cleanup of driver path processing (v4.5.46)
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SaxObjC.xcode: added SOPE_MAJOR/MINOR definitions for the build
+     2004-11-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* SaxXMLReaderFactory.m: fixed a bug in FHS bundle lookup (v4.5.45)
+     2004-11-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* SaxObjectModel.m, SaxXMLReaderFactory.m: use SOPE version defines
+     	  for object model lookup (v4.5.44)
+     2004-10-30  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SaxObjectDecoder.m: fixed typo that prevented compile on non
+     	  Apple Foundation (v4.3.43)
+     	* SaxObjectDecoder.m: provide fix for discovering mutable array on
+     	  Apple/CoreFoundation - this is rather disturbing, but Apple really
+     	  broke the concept of mutability for NSArray/NSDictionary. (v4.3.42)
+changed: sope-xml/libxmlSAXDriver/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* libxmlSAXDriver.xcode: minor fixes
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* fhs.make, GNUmakefile: use Version file to set install dir
+changed: maintenance/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* znek-fix-xcode-projects.sh: added my personal pre-commit Xcode
+     	  check & fix script
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* syncXcodeVersions.sh: script file to adjust the framework versions
+     	  used in the Xcode files to those used by the GNUmakefile process
+added:   maintenance/changes-4.3.9-to-4.5a.1.txt
+added:   maintenance/changes-4.3.9-to-4.3.10.txt
+added:   maintenance/syncXcodeVersions.sh
+added:   maintenance/znek-fix-xcode-projects.sh
+added:   maintenance/mod_ngobjweb_rhel3.spec
+added:   maintenance/mod_ngobjweb_suse92.spec
+added:   maintenance/mod_ngobjweb_redhat9.spec
+added:   maintenance/sope-fixcopyright.sh
+changed: sope-appserver/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGXmlRpc/NGXmlRpc.xcode: minor changes and updated
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-appserver.xcode: added NGXmlRpc product
+     	* README-OSX.txt: updated prebinding information
+     2004-11-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* sope-appserver.xcode: adjusted the build process to new NGObjWeb
+     	  targets.
+added:   sope-appserver/NGObjWeb.tgz
+added:   sope-appserver/samples/xmlrpc
+changed: sope-appserver/samples/HelloWorld/
+     2004-11-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* GNUmakefile.preamble: fixed for FHS setups
+changed: sope-appserver/samples/TestPages/
+     2004-11-16  Helge Hess  <helge.hess@opengroupware.org>
+     	* Main.wo: show session id on main page
+     	* GNUmakefile.preamble: fixed for FHS layouts
+changed: sope-appserver/NGXmlRpc/
+     2005-01-02  Helge Hess  <helge.hess@opengroupware.org>
+     	* WODirectAction+XmlRpc.m: minor code cleanups (v4.5.9)
+     2004-11-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGXmlRpc.xcode: fixed a subtle bug that prevent Xcode from being
+     	  loaded correctly.
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.8
+     	* NGXmlRpc.xcode: new Xcode project
+     	* common.h: fixed for multiple inclusion during Xcode
+     	  build (common.h is the prefix header)
+changed: sope-appserver/SoOFS/
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location
+changed: sope-appserver/WOExtensions/
+     2004-12-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOKeyValueConditional.[api,m]: added "negate" binding (v4.5.21)
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOExtensions.xcode: minor fixes and updated
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOExtensions.xcode: bumped the framework version
+     2004-11-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.3.20
+     	* *.api: new formal definitions for WOElements defined in this
+     	  framework
+     	* WOExtensions.xcode: added .api files
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location
+added:   sope-appserver/WOExtensions/WOTable.api
+added:   sope-appserver/WOExtensions/WOExtensions.wox
+added:   sope-appserver/WOExtensions/JSModalWindow.api
+added:   sope-appserver/WOExtensions/WORedirect.api
+added:   sope-appserver/WOExtensions/WOCollapsibleComponentContent.api
+added:   sope-appserver/WOExtensions/WODictionaryRepetition.api
+added:   sope-appserver/WOExtensions/JSTextFlyover.api
+added:   sope-appserver/WOExtensions/JSValidatedField.api
+added:   sope-appserver/WOExtensions/JSConfirmPanel.api
+added:   sope-appserver/WOExtensions/WOKeyValueConditional.api
+added:   sope-appserver/WOExtensions/WOCheckBoxMatrix.api
+added:   sope-appserver/WOExtensions/WOThresholdColoredNumber.api
+added:   sope-appserver/WOExtensions/JSAlertPanel.api
+added:   sope-appserver/WOExtensions/WORadioButtonMatrix.api
+added:   sope-appserver/WOExtensions/JSImageFlyover.api
+added:   sope-appserver/WOExtensions/WOTabPanel.api
+changed: sope-appserver/NGObjWeb/
+     2004-12-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOMessage.m: added 'WOMessageUseUTF8' bool default to enable UTF-8
+     	  as the default message encoding (v4.5.104)
+     2004-12-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.103
+     	* WOContext.m: fixed bug in -pushCursor:, first element in newly
+     	  allocated stack was never set
+     	* DynamicElements/WORepetition.m: reverted use of -pushCursor/
+     	  -popCursor for ComplexRepetition, but only in case index is not used.
+     2004-12-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/WORepetition.m: bugfix in -appendToResponse:... for
+     	  case when only "count" and "index" are set (this didn't work because
+     	  of erroneous use of -pushCursor/-popCursor) (v4.5.102)
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGObjWeb.xcode: minor changes and updated
+     	* WebDAV/WebDAV.xcode: minor changes and updated
+     	* SoObjects/SoObjects.xcode: minor changes and updated
+     	* NGHttp/NGHttp.xcode: minor changes and updated
+     2004-11-25  Helge Hess  <helge.hess@skyrix.com>
+     	* Defaults.plist: set WOHttpAllowHost per default to ( localhost,
+     	  localhost.localdomain ) (v4.5.101)
+     2004-11-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOForm.m: minor code cleanups (v4.5.100)
+     2004-11-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* WORequestHandler.m: properly check whether logger is available
+     	  prior running debugWithFormat: to avoid excessive logging in OGo
+     	  (v4.5.99)
+     2004-11-23  Helge Hess  <helge.hess@skyrix.com>
+     	* WOComponent.m: reapplied change in v4.2.423 which got lost in some
+     	  4.5 logging change (v4.5.98)
+     2004-11-22  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.97
+     	* WOContext.m: move some categories into main class implementation
+     	* WORequestHandler.m: bind default logger to WODebuggingEnabled
+     2004-11-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* WODirectActionRequestHandler.m: minor code cleanups (v4.5.96)
+     2004-11-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.95
+     	* Defaults.plist: new defaults for NGLogging
+     	* WOHttpAdaptor/WOHttpAdaptor.m: rewrote transaction logging to use
+     	  NGLogging. Configuration for transActionLogger is stored in
+     	  Defaults.plist.
+     	  NOTE: no profiling has been done, yet - thus the profiling
+     	  information needs to be updated (a TODO has been placed at the
+     	  appropriate place).
+     	* DynamicElements/_WOTemporaryHyperlink.m: added correct cast to
+     	  circumvent gcc bug (false warning).
+     2004-11-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.94
+     	* NGHttp+WO.m: minor improvements to cookie handling
+     	* WORequestHandler.m: cleaned up cookie adder
+     	* v4.5.93
+     	* WOApplication.m: print a note if debug logging is enabled
+     	* WOComponentRequestHandler.m: removed usage of unavailabel
+     	  -logInfoWithFormat: (replaced with logWithFormat:)
+     	* WOStatisticsStore.m: fixed a new warning due to incompatible pointer
+     	  types
+     	* WOComponentRequestHandler.m: append session-id cookies to response,
+     	  reject favicon requests, added some logs, minor cleanups (v4.5.92)
+     2004-11-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.91
+     	* Associations/{WOKeyPathAssociation.m, WOLabelAssociation.m,
+     	  WOResourceURLAssociation.m, common.h},
+     	  DynamicElements/{WOForm.m, WOGenericElement.m, WOImage.m,
+     	  WOPopUpButton.m, WOString.m, WOxHTMLElemBuilder.m,
+     	  WOxMiscElemBuilder.m, _WOTemporaryHyperlink.m},
+     	  NGObjWeb/WOxElemBuilder.h,
+     	  SoObjects/{SoActionInvocation.m, SoClassSecurityInfo.m,
+     	  SoComponent.m, SoObject+Traversal.m, SoObject.m,
+     	  SoObjectRequestHandler.m, SoObjectSOAPDispatcher.m,
+     	  SoObjectXmlRpcDispatcher.m, SoPageInvocation.m, SoProduct.m,
+     	  SoProductClassInfo.m, SoProductRegistry.m,
+     	  SoProductResourceManager.m, SoSelectorInvocation.m},
+     	  Templates/{WOApplication+Builders.m, WOComponentScriptPart.m,
+     	  WODParser.m, WOHTMLParser.m, WOWrapperTemplateBuilder.m,
+     	  WOxComponentElemBuilder.m, WOxElemBuilder.m, common.h},
+     	  WebDAV/{SaxDAVHandler.m, SoDAVSQLParser.m, SoObject+SoDAV.m,
+     	  SoObject+SoDAVQuery.m, SoObjectWebDAVDispatcher.m,
+     	  SoWebDAVRenderer.m},
+     	  WOHttpAdaptor/{WOHttpAdaptor.m, WOHttpTransaction.m,
+     	  WORequestParser.m},
+     	  NGHttp+WO.m, OWResourceManager.m, SNSConnection.m,
+     	  WEClientCapabilities.m, WOApplication.m, WOChildComponentReference.m,
+     	  WOComponent.m, WOComponentDefinition.m, WOComponentRequestHandler.m,
+     	  WOContext.m, WOCoreApplication+Bundle.m, WOCoreApplication.m,
+     	  WODirectAction.m, WODirectActionRequestHandler.m, WODisplayGroup.m,
+     	  WODynamicElement.m, WOElementID.m, WOFileSessionStore.m,
+     	  WOMessage.m, WOPageRequestHandler.m, WORequest.m, WORequestHandler.m,
+     	  WOResourceManager.m, WORunLoop.m, WOServerSessionStore.m,
+     	  WOSimpleHTTPParser.m, _WOStringTable.m, common.h:
+     	  changed to use new logging API, various code cleanup.
+     	* NGObjWeb.xcode, SoObjects/SoObjects.xcode, WebDAV/WebDAV.xcode:
+     	  bumped framework version
+     2004-11-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* WORequestHandler.m: removed double click hack, not necessary anymore
+     	  (v4.5.90)
+     2004-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* WORequestHandler.m: added 'WOUseGlobalCookiePath' default to
+     	  configure whether the application URL (NO) or "/" (YES) should be
+     	  used as the path for the session-id cookie (related to OGo bug #914
+     	  (v4.5.89)
+     2004-11-15  Helge Hess  <helge.hess@skyrix.com>
+     	* WOSimpleHTTPParser.m: set a default file boundary size and max upload
+     	  size if the Defaults.plist was not loaded (eg in xmlrpc_call with
+     	  WOHTTPConnectionUseSimpleParser) (v4.5.88)
+     2004-11-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.87
+     	* WOCoreApplication.m: needed to define a private +logger to enable
+     	  proper logging in class methods.
+     	* WOHttpAdaptor/common.h: add new logging API to common includes
+     	* WOHttpAdaptor/WOHttpAdaptor.m: rewrote logging to use new logging
+     	  API. Added an own (conditional) logger for performance logging.
+     2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOApplication.m: changed wrapper-missing-log from warn to debug
+     	  (v4.5.86)
+     2004-11-13  Helge Hess  <helge@groove.local>
+     	* WOApplication.m, WOCoreApplication.m: do not use deprecated logger
+     	  API (v4.5.85)
+     2004-11-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOApplication.m, WOCoreApplication.m: use new NGLogging API from
+     	  NGExtensions (v4.5.84)
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGObjWeb.xcode: declared several So* headers as public - these were
+     	  already public in the GNUmakefiles but declared as project headers
+     	  in Xcode - fixed this incompatibility.
+     	* NGObjWeb.xcode: fixed incorrect SOPE_MINOR_VERSION
+     	* NGObjWeb.xcode, WebDAV/WebDAV.xcode, SoObjects/SoObjects.xcode:
+     	  bumped the framework version
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location
+     2004-11-03  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/*.api: provided formal specifications for all
+     	  dynamic elements in a format borrowed from WebObjects 4.51.
+     	  (v4.5.83)
+     2004-11-03  Helge Hess  <helge.hess@skyrix.com>
+     	* branched 4.3 into 4.4 and 4.5
+     2004-11-03  Helge Hess  <helge.hess@skyrix.com>
+     	* WOWatchDogApplicationMain.m: disable warning on /etc server defaults
+     	  (v4.3.82)
+     2004-11-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.3.81
+     	* NGObjWeb.xcode: added new targets to the build process to make
+     	  embedding of SoProducts within the framework's wrapper possible.
+     	* SoObjects/SoProductRegistry.m: fixed crash bug on Cocoa Foundation
+     	  that occurred during product registration. As a new feature added
+     	  search for products within framework's "SoProducts" resource
+     	  directory. This can be used as a fallback, suitable for wrapper
+     	  targets that want to use "SoObjects" functionality.
+     2004-11-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoWebDAVRenderer.m: added support for multiple resource type
+     	  tags (v4.3.80)
+     2004-10-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoWebDAVRenderer.m: preserve etag in response if set (v4.3.79)
+     	* SoObjects/SoDefaultRenderer.m: fixed typo, check exceptions for 200
+     	  HTTP codes and do not return them as an error (v4.3.78)
+     2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/{WOResetButton.m, WOText.m, WOFileUpload.m,
+     	  WOGenericElement.m, _WOComplexHyperlink.m, WOHiddenField.m,
+     	  WOImageButton.m, WOCheckBoxList.m, _WOCommonStaticDAHyperlink.m,
+     	  WORadioButton.m, WOForm.m, WOMetaRefresh.m, WOJavaScript.m,
+     	  WOEmbeddedObject.m, WOImage.m, WOBrowser.m, WOVBScript.m, WOIFrame.m,
+     	  WOPasswordField.m, _WOSimpleActionHyperlink.m, WOGenericContainer.m,
+     	  WOCheckBox.m, WORadioButtonList.m, WOTextField.m, WOFrame.m,
+     	  WOBody.m, WOSubmitButton.m}:
+     	  fixed rendering of otherTagString, which was appended without
+     	  leading space before. (v4.3.77)
+     2004-10-26  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOxHTMLElemBuilder.m: select WOSubmitButton for
+     	  <input type="button"> in .wox files (should be fixed) (v4.3.76)
+     2004-10-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoUser.m: just return nil for unsupported KVC keys
+     	  (v4.3.75)
+     2004-10-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.3.74
+     	* WODirectAction.m: ignore requests on unbound KVC keys on non-lF
+     	  libraries
+     	* SoObjects/SoObjectXmlRpcDispatcher.m: do not call -setUserInfo: to
+     	  annotate NSException's on Cocoa Foundation
+     	* SoObjects/SoActionInvocation.m: added support for calling actions
+     	  and pages with positional parameters (eg from XML-RPC)
+     	* SoObjects/SoObjectXmlRpcDispatcher.m: when looking up a SoMethod for
+     	  an XML-RPC method name containing a dot (like system.listmethods),
+     	  first check the fully qualified name prior traversing the package
+     	  namespaces
+     	* SoObjects/SoObjectXmlRpcDispatcher.m: print a warning if server was
+     	  not linked against libNGXmlRpc
+     2004-10-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOElement.m: fixed unwanted behaviour introduced in v4.3.72 (v4.3.73)
+     	* WOElement.m: queryParameters override keys from queryDictionary in
+     	  case of conflicts (v4.3.72)
+     	* WOElement.m: if both queryDictionary and queryParameters were set on
+     	  an element, the '&' seperator wasn't rendered when it should in fact
+     	  (v4.3.71)
+     2004-10-22  Helge Hess  <helge.hess@opengroupware.org>
+     	* Defaults.plist: only use single char prefixes for Exchange namespaces
+     	  (Connector bug #68682) (v4.3.70)
+removed: sope-appserver/NGObjWeb/Templates/GNUmakefile.preamble
+changed: sope-appserver/NGObjWeb/NGHttp/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGHttp.xcode: minor changes and updated
+     2004-11-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGHttp.xcode: bumped the framework version
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGHttp.xcode: bumped the framework version
+added:   sope-appserver/NGObjWeb/DynamicElements/WOJavaScript.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOString.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WORadioButtonList.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOResourceURL.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WONestedList.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOEmbeddedObject.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOImage.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOQuickTime.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOVBScript.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOHiddenField.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOPasswordField.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WORepetition.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOConditional.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOCheckBox.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOTextField.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOFrame.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOForm.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOSwitchComponent.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOMetaRefresh.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOEntity.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOResetButton.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOBrowser.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOText.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOFileUpload.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOGenericContainer.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOGenericElement.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOIFrame.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOHyperlink.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOImageButton.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOComponentReference.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOCheckBoxList.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOSetCursor.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WORadioButton.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOBody.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOPopUpButton.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOSubmitButton.api
+added:   sope-appserver/NGObjWeb/DynamicElements/WOActionURL.api
+changed: sope-appserver/mod_ngobjweb/
+     2004-11-17  Helge Hess  <helge.hess@skyrix.com>
+     	* handler.c (_connectInstance): fixed apr_sleep for Apache 2 which now
+     	  requires microseconds (thanks Christophe Bernard for pointing that
+     	  out!)
+changed: sope-appserver/WEExtensions/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEExtensions.xcode: minor changes and updated
+     2004-11-23  Helge Hess  <helge.hess@opengroupware.org>
+     	* WETabItem.[hm]: added support for href and direct actions (v4.5.64)
+     	* v4.5.63
+     	* removed WEClientCapabilities.h (lives in NGObjWeb for quite some time          now)
+     	* WETabView.m: code cleanups, added a way to disable certain tabs
+     	  (disabledTabKeys association)
+     2004-11-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WEExtensions.xcode: bumped the framework version
+     2004-11-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.62
+     	* WETreeView.m, WETreeHeader.m, WEEpozEditor.m, WETreeData.m,
+     	  WEPageLink.m, WETableView/WETableHeader.m: fixes for incorrect
+     	  rendering of otherTagString attribute.
+     	* *.api: new formal definitions for WOElements defined in this
+     	  framework
+     	* WEExtensions.xcode: added .api files
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location
+added:   sope-appserver/WEExtensions/WEExtensions.wox
+added:   sope-appserver/WEExtensions/WECase.api
+added:   sope-appserver/WEExtensions/WEVSpanTableMatrix.api
+added:   sope-appserver/WEExtensions/WECalendarField.api
+added:   sope-appserver/WEExtensions/WEDragContainer.api
+added:   sope-appserver/WEExtensions/WEBrowser.api
+added:   sope-appserver/WEExtensions/WEEpozEditor.api
+added:   sope-appserver/WEExtensions/WEComponentValue.api
+added:   sope-appserver/WEExtensions/WEPageLink.api
+added:   sope-appserver/WEExtensions/WEPageItem.api
+added:   sope-appserver/WEExtensions/WEContextKey.api
+added:   sope-appserver/WEExtensions/WEQualifierConditional.api
+added:   sope-appserver/WEExtensions/WEContextConditional.api
+added:   sope-appserver/WEExtensions/WEWeekOverview.api
+added:   sope-appserver/WEExtensions/WETabItem.api
+added:   sope-appserver/WEExtensions/WEMonthLabel.api
+added:   sope-appserver/WEExtensions/WETimeField.api
+added:   sope-appserver/WEExtensions/JSMenu.api
+added:   sope-appserver/WEExtensions/WEHSpanTableMatrix.api
+added:   sope-appserver/WEExtensions/WETableMatrixContent.api
+added:   sope-appserver/WEExtensions/WEDropContainer.api
+added:   sope-appserver/WEExtensions/WEPageView.api
+added:   sope-appserver/WEExtensions/WEMonthOverview.api
+added:   sope-appserver/WEExtensions/JSShiftClick.api
+added:   sope-appserver/WEExtensions/JSMenuItem.api
+added:   sope-appserver/WEExtensions/WETreeData.api
+added:   sope-appserver/WEExtensions/WETreeView.api
+added:   sope-appserver/WEExtensions/JSClipboard.api
+added:   sope-appserver/WEExtensions/WETabView.api
+added:   sope-appserver/WEExtensions/WEWeekColumnView.api
+added:   sope-appserver/WEExtensions/WETreeHeader.api
+added:   sope-appserver/WEExtensions/WETableMatrix.api
+added:   sope-appserver/WEExtensions/WERichString.api
+added:   sope-appserver/WEExtensions/WETableMatrixLabel.api
+added:   sope-appserver/WEExtensions/WEDateField.api
+added:   sope-appserver/WEExtensions/WESwitch.api
+added:   sope-appserver/WEExtensions/WERedirect.api
+added:   sope-appserver/WEExtensions/WECollapsibleComponentContent.api
+removed: sope-appserver/WEExtensions/WEClientCapabilities.h
+added:   sope-appserver/WEExtensions/WETableView/WETableHeader.api
+added:   sope-appserver/WEExtensions/WETableView/WETableData.api
+added:   sope-appserver/WEExtensions/WETableView/WETableView.api
+added:   xmlrpc_call/HandleCredentialsClient.h
+added:   xmlrpc_call/HandleCredentialsClient.m
+added:   xmlrpc_call/XmlRpcClientTool.h
+added:   xmlrpc_call/XmlRpcClientTool.m
+added:   xmlrpc_call/NSObject+Printing.m
+added:   xmlrpc_call/README
+added:   xmlrpc_call/ChangeLog
+changed: sope-ldap/NGLdap/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGLdap.xcode: minor fixes and updated
+changed: sope-mime/
+     2004-12-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: fixed an issue with future date headers and libFoundation
+     	  (v4.5.204)
+     2004-12-03  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: fixed an error handler in the Sieve client (v4.5.203)
+     2004-11-30  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMail: fixed a bug in NGSendMail (v4.5.202)
+     2004-11-28  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: improvements in the Sieve client (v4.5.201)
+     2004-11-19  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: minor code cleanups (v4.5.200)
+     2004-11-16  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: minor code cleanups in NGSieveClient (v4.5.199)
+     2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: added  support for 'reply-type' parameter in text MIME types
+     	  (v4.5.198)
+     2004-11-08  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: fixed a bug with parsing envelopes that are reported with
+     	  data headers ({count} syntax) (v4.5.197)
+     2004-10-30  Thierry Delhaise  <befree_fr@mac.com>
+     	* NGImap4: fixed OGo bug #958 (IMAP4 parser broke with Courier)
+     	  (v4.3.196)
+     2004-10-29  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMime: minor cleanups (v4.3.195)
+     2004-10-28  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4: added a constructor to NGImap4Envelope (v4.3.194)
+     2004-10-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4: enhanced NGImap4EnvelopeAddress (v4.3.193)
+     	* NGMail: support special sendmail location on MacOSX (v4.3.192)
+     	* NGMail: fixed a bug in NGSendMail (v4.3.191)
+     	* NGMail: added NGSendMail object (v4.3.190)
+changed: sope-mime/NGMail/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMail.xcode: minor fixes and updated
+     2004-11-30  Helge Hess  <helge.hess@skyrix.com>
+     	* NGSendMail.m: properly pass the command line to sendmail
+     2004-10-29  Helge Hess  <helge.hess@skyrix.com>
+     	* NGSendMail.m: use fwrite() to write to pipe
+     	* NGMimeMessageGenerator.m: minor code cleanups
+     2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMail.xcode: added NGSendMail.h
+     2004-10-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGSendMail.m: use /usr/sbin/sendmail on Cocoa Foundation
+     	  (/usr/lib/sendmail on all other platforms)
+     	* NGSendMail.m: properly setup user defaults object
+     	* added new NGSendMail object (derived from mail-deliver command in
+     	  OGo Logic)
+added:   sope-mime/NGMail/NGSendMail.h
+added:   sope-mime/NGMail/NGSendMail.m
+changed: sope-mime/NGImap4/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGImap4.xcode: minor fixes and updated
+     2004-12-03  Helge Hess  <helge.hess@skyrix.com>
+     	* NGSieveClient.m: fixed error processing on missing scripts
+     2004-11-28  Helge Hess  <helge.hess@skyrix.com>
+     	* NGSieveClient.m: can init using a URL, prepared some parsing methods,
+     	  open connection on demand when login:password: is called, added
+     	  support for -listScripts and -getScript:
+     	* NGSieveClient.m: added a buffered stream for raw IO, added proper
+     	  error handling in some methods, added support for 'NSData commands',
+     	  properly convert commands to UTF-8
+     2004-11-19  Helge Hess  <helge.hess@skyrix.com>
+     	* NGSieveClient.m, NGImap4Client.m: minor code cleanups
+     2004-11-16  Helge Hess  <helge.hess@skyrix.com>
+     	* NGSieveClient.m: some code cleanups, needs fixes for UTF-8 scripts
+     2004-11-08  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4ResponseParser.m(_parseQuotedStringOrNIL): added support for
+     	  parsing "data" strings (those which begin with {count})
+     2004-10-30  Thierry Delhaise  <befree_fr@mac.com>
+     	* NGImap4ResponseParser.m: fixed OGo bug #958 (consume didn't match
+     	  SEARCH match in IMAP4 parser)
+     2004-10-28  Helge Hess  <helge.hess@skyrix.com>
+     	* NGImap4Envelope.m: added constructor method:
+     	  -initWithMessageID:subject:sender:replyTo:to:cc:bcc:
+     2004-10-27  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4EnvelopeAddress.m: added -initWithString: method (not properly
+     	  implemented yet, should parse the string using the
+     	  NGMailAddressParser)
+changed: sope-mime/NGMime/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMime.xcode: minor fixes and updated
+     2004-12-09  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeRFC822DateHeaderFieldParser.m: fix spam mail date header
+     	  parsing for libFoundation
+     2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGConcreteMimeType.m: added support for 'reply-type' parameter in
+     	  text MIME types
+     2004-10-27  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGMime.xcode: added NGSendMail files to Xcode build
+added:   sope-mime/samples/sievetool.m
+changed: sopex/SOPEX/
+     2004-11-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v2.0.0
+     	* CHANGES: new file providing an overview of the architectural changes
+     	  between 1.x and 2.x in form of an overview
+     	* TODO: new file
+     	* SOPEXBrowserController.[hm]: new controller responsible for managing
+     	  the contents of a WebView. For each "target" window in an application
+     	  a new controller is created and assigned. NOTE: there's a major
+     	  bug that causes the controller's to be released at the end of a
+     	  load. The reason for the bug is still unclear, but it's something
+     	  that is caused by WebKit (by its resource loading delegate
+     	  mechanism). As long as this isn't fixed, the -release method is
+     	  overwritten to do nothing.
+     	* English.lproj/SOPEXBrowserController.nib: accompanying NIB for the
+     	  SOPEXBrowserController
+     	* SOPEXConsoleAppender.m: new appender for the SOPEXConsole
+     	* SOPEXConsoleEventFormatter.m: special event formatter, providing
+     	  required formatting for the SOPEXConsole
+     	* SOPEXConsole.[hm]: basically rewritten, doesn't work on file handles
+     	  any more but instead uses its own SOPEXConsoleAppender to receive
+     	  log output.
+     	* SOPEXAppController.[hm]: substantially rewritten. SOPEXAppController
+     	  only cares for stuff happening on an app level (setup, connecting to
+     	  the SOPE thread, notifications). All other stuff (WebKit) is handled
+     	  by SOPEXBrowserController now.
+     	* SOPEX_Prefix.pch: renamed - is common.h now
+     	* SOPEXSNSController.[hm]: removed, obsoleted due to technical changes
+     	* SOPEXApplication.[hm]: removed, obsoleted due to technical changes
+     	* English.lproj/SOPEXMainMenu.nib: removed, this is part of a new
+     	  project's template now.
+     	* *.m: major code cleanup, reformatting.
+     	* *.h: proper safeguarding headers against double inclusion.
+added:   sopex/SOPEX/CHANGES
+added:   sopex/SOPEX/SOPEXConsoleAppender.m
+added:   sopex/SOPEX/SOPEXBrowserController.h
+added:   sopex/SOPEX/SOPEXBrowserController.m
+added:   sopex/SOPEX/TODO
+added:   sopex/SOPEX/common.h
+added:   sopex/SOPEX/SOPEXConsoleEventFormatter.m
+removed: sopex/SOPEX/SOPEX_Prefix.pch
+removed: sopex/SOPEX/SOPEXSNSController.h
+removed: sopex/SOPEX/SOPEXSNSController.m
+removed: sopex/SOPEX/SOPEXApplication.h
+removed: sopex/SOPEX/SOPEXApplication.m
+added:   sopex/SOPEX/English.lproj/SOPEXBrowserController.nib
+removed: sopex/SOPEX/English.lproj/SOPEXMainMenu.nib
+changed: sopex/Templates/
+     2004-12-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* Project Templates/SOPE/Web Application/*: fixed various replacement
+     	  and encoding related issues with project template
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* Project Templates/SOPE/Web Application/*: updated for SOPE:X 2.x.
+added:   sopex/Templates/Project Templates/SOPE/Web Application/Main.wox
+added:   sopex/Templates/Project Templates/SOPE/Web Application/common.h
+removed: sopex/Templates/Project Templates/SOPE/Web Application/Main.wo
+removed: sopex/Templates/Project Templates/SOPE/Web Application/WebApp_Prefix.pch
+removed: sopex/Templates/Project Templates/SOPE/Web Application/Main.h
+added:   sopex/Templates/Project Templates/SOPE/Web Application/English.lproj/MainMenu.nib
+changed: sopex/WebObjects/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WebObjects.xcode: updated for SOPE 4.5
+added:   sopex/WebObjects/Version
+removed: sopex/WebObjects/WebObjects_Prefix.pch
+changed: sopex/Samples/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WOxExtTest: updated for SOPE:X 2.x
+removed: sopex/Samples/WOxExtTest/WOExtTest_Prefix.pch
+added:   sopex/Samples/WOxExtTest/English.lproj/MainMenu.nib
+changed: sope-gdl1/PostgreSQL/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* PostgreSQL.xcode: minor fixes and updated
+     2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+     	* use Version file for install directory location
+changed: sope-gdl1/GDLAccess/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.43
+     	* GDLAccess.xcode: minor fixes and updated
+     	* EOAttribute.m: changed usage of -timeZoneName (deprecated) to -name
+     	  for Foundations different to libFoundation.
+     2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAdaptor.m: fixed a bug in the lookup of GDL adaptor bundles
+     	  (v4.5.42)
+     2004-11-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GDLAccess.xcode: fixed Xcode build by providing all necessary
+     	  major/minor numbers and bumped the framework revision
+     2004-11-09  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.41
+     	* bumped version from 1.3 to 4.5 to be consistent with the remaining
+     	  SOPE versions (the "super major version" is still gdl1)
+     	* EOAdaptor.m: fixed adaptor lookup path
+changed: sope-core/NGStreams/
+     2004-11-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGStreams.xcode: properly link against libssl/libcrypto and set
+     	  HAVE_OPENSSL=1, this enables SSL support on MacOSX
+changed: sope-core/NGExtensions/
+     2004-12-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGCalendarDateRange.[hm]: new convenience method -containsDateRange:
+     	  (v4.5.140)
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGExtensions.xcode: minor fixes and updated
+     2004-12-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOFilterDataSource.m, EOCacheDataSource.m: minor code cleanups
+     	  (v4.5.139)
+     2004-11-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* FdExt.subproj/NSObject+Logs.m: fixed debug logging to be compatible
+     	  with existing code (v4.5.138)
+     	* NGBundleManager.m: subminor code cleanups (v4.5.137)
+     2004-11-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGLogging: updated - API considered stable now.
+     	  NOTE: "make distclean" is required this time. (v4.5.136)
+     2004-11-19  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.135
+     	* FdExt.subproj/NSObject+Logs.m: fixed a bug in default logger creation
+     	  (incorrect static variable)
+     	* NGLogging: fixed bug in console appender, increased speed, avoid
+     	  different logger objects for each class
+     2004-11-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.134
+     	* NGLogging: updated
+     	* NGExtensions/NSObject+Logs.h, FdExt.subproj/NSObject+Logs.m:
+     	  changed existing implementation to use NGLogging by default. Added
+     	  some more methods to support different log levels. Also added
+     	  -logger and -debugLogger which are used to provide the default
+     	  loggers for the desired purpose.
+     	* FdExt.subproj/NGBundleManager.m: fixed wrong include
+     2004-11-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBundleManager.m: fixed a bug in the bundle type check when the
+     	  cached bundle is NSNull (v4.5.133)
+     2004-11-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGLogging: updated (v4.5.132)
+     	* NGLogging: updated (v4.5.131)
+     2004-11-17  Matthew Joyce  <mjoyce@aboveit.nl>
+     	* NGBundleManager.m: check whether bundle is nil prior running a type
+     	  check (v4.5.130)
+     2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBundleManager.m: some code cleanups (v4.5.129)
+     2004-11-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGLogging: code cleanup (v4.5.128)
+     2004-11-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* GNUmakefile: added NGLogging.subproj (v4.5.127)
+     2004-11-01  Helge Hess  <helge.hess@opengroupware.org>
+     	* branched 4.3 to 4.4 and 4.5
+     2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+     	* FdExt.subproj/NSString+URLEscaping.m: removed '&' as an URL safe
+     	  char (v4.3.126)
+added:   sope-core/NGExtensions/NGLogging.subproj
+added:   sope-core/NGExtensions/NGExtensions/NGLogger.h
+added:   sope-core/NGExtensions/NGExtensions/NGLoggerManager.h
+added:   sope-core/NGExtensions/NGExtensions/NGLogEventFormatter.h
+added:   sope-core/NGExtensions/NGExtensions/NGLogging.h
+added:   sope-core/NGExtensions/NGExtensions/NGLogSyslogAppender.h
+added:   sope-core/NGExtensions/NGExtensions/NGLogEvent.h
+added:   sope-core/NGExtensions/NGExtensions/NGLogAppender.h
+added:   sope-core/NGExtensions/NGExtensions/NGLogLevel.h
+added:   sope-core/NGExtensions/NGExtensions/NGLogFileHandleAppender.h
+changed: sope-core/EOControl/
+     2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* EOControl.xcode: minor changes and updated
+     2004-12-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyGlobalID.m: minor code cleanup (v4.5.49)

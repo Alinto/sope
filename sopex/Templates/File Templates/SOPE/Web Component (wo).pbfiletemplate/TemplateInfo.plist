@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Web Component consisting of .html and .wod files.</string>
+	<key>EnclosingGroupName</key>
+	<string>%@</string>
+	<key>FileToDisplay</key>
+	<string>%@.wo/%1$@.html</string>
+	<key>ImplicitCounterpartTemplateFiles</key>
+	<dict>
+		<key>wo.h</key>
+		<string>%@.h</string>
+		<key>wo.m</key>
+		<string>%@.m</string>
+		<key>wo.wo</key>
+		<string>%@.wo</string>
+	</dict>
+	<key>ImplicitExtraTemplateFiles</key>
+	<dict>
+		<key>wo.html</key>
+		<string>%@.wo/%1$@.html</string>
+		<key>wo.wod</key>
+		<string>%@.wo/%1$@.wod</string>
+	</dict>
+</dict>
+</plist>

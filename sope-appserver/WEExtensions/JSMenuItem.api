@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="JSMenuItem">
+  <binding name="action" defaults="Actions"/>
+  <binding name="href" />
+
+  <binding name="string" required="YES" />
+
+  <validation message="either one of &apos;action&apos;, or &apos;href&apos; may be bound">
+    <count test="!=1">
+      <bound name="action"/>
+      <bound name="href"/>
+    </count>
+  </validation>
+</wo>

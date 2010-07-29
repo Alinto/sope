@@ -1,0 +1,25 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <var:month-overview list="list" item="item" index="index" 
+                      currentDay="currentDay"
+                      const:year="2000" const:month="11"
+                      const:labelColor="#DDAAAA" contentColor="contentColor">
+
+    <var:month-info>
+      <small><b><i>infos of day</i></b></small><br/><br/>
+    </var:month-info>
+    
+    <var:month>
+      <b><var:string value="item.title"/></b>
+      <br/>
+      <small><var:string value="item.startDate"/></small>
+      <br/><br/>
+    </var:month>
+
+  </var:month-overview>
+
+</var:component>

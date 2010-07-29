@@ -1,0 +1,64 @@
+{
+  CVSID = "$Id$";
+  bundleHandler = "ODXULNodeRenderFactory";
+
+  requires = {
+    bundleManagerVersion = 1;
+    
+    classes = (
+      { name = NSObject; }
+    );
+  };
+
+  provides = {
+    ODRendererFactory = (
+      { 
+        name  = "XUL"; 
+        class = "ODXULNodeRenderFactory";
+      }
+    );
+    
+    ODRenderer = (
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}box"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}hbox"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}vbox"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}button"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}column"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}columns"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}grid"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}image"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}spring"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}tabbox"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}tabpanel"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}tab"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}tabcontrol"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}text"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}textfield"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}title"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}titledbox"; },
+      { name = "{http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul}window"; },
+    );
+    classes = (
+      { name = ODRDynamicXULTag;       },
+      { name = ODR_XUL_box;            },
+      { name = ODR_XUL_hbox;           },
+      { name = ODR_XUL_vbox;           },
+      { name = ODR_XUL_button;         },
+      { name = ODR_XUL_column;         },
+      { name = ODR_XUL_columns;        },
+      { name = ODR_XUL_grid;           },
+      { name = ODR_XUL_image;          },
+      { name = ODR_XUL_spring;         },
+      { name = ODR_XUL_tabbox;         },
+      { name = ODR_XUL_tabpanel;       },
+      { name = ODR_XUL_tab;            },
+      { name = ODR_XUL_tabcontrol;     },
+      { name = ODR_XUL_text;           },
+      { name = ODR_XUL_textfield;      },
+      { name = ODR_XUL_title;          },
+      { name = ODR_XUL_titledbox;      },
+      { name = ODR_XUL_window;         },
+      { name = ODXULNodeRenderFactory; },
+    );
+  };
+}

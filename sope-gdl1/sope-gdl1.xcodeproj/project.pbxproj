@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ADA079B50857390000993825 /* Build configuration list for PBXAggregateTarget "Wrapper Contents" */;
+			buildPhases = (
+			);
+			dependencies = (
+				AD8BF8460701AD5D00EC239A /* PBXTargetDependency */,
+				ADAF204A0701B62D0072AFC6 /* PBXTargetDependency */,
+				AD86230407C9F2A9004CD707 /* PBXTargetDependency */,
+			);
+			name = "Wrapper Contents";
+			productName = "Wrapper Contents";
+		};
+		ADDF479906DA58D700C4E7F8 /* all */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ADA079B90857390000993825 /* Build configuration list for PBXAggregateTarget "all" */;
+			buildPhases = (
+			);
+			dependencies = (
+				ADDF479B06DA58DD00C4E7F8 /* PBXTargetDependency */,
+			);
+			name = all;
+			productName = all;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		AD7BA67F076F8683008F4F3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADAF20470701B6230072AFC6 /* PostgreSQL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AD8BF94C0701B04C00EC239A;
+			remoteInfo = PostgreSQL;
+		};
+		AD86230307C9F2A9004CD707 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8622FF07C9F294004CD707 /* SQLite3.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AD50D60107C9EB8500C9F415;
+			remoteInfo = SQLite3;
+		};
+		AD86230507C9F2B1004CD707 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8622FF07C9F294004CD707 /* SQLite3.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AD50D60207C9EB8500C9F415;
+			remoteInfo = SQLite3;
+		};
+		AD8BF8450701AD5D00EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BF8420701AD5100EC239A /* GDLAccess.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = GDLAccess;
+		};
+		AD8BF8590701AD9700EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BF8420701AD5100EC239A /* GDLAccess.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = GDLAccess;
+		};
+		ADAF20490701B62D0072AFC6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADAF20470701B6230072AFC6 /* PostgreSQL.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AD8BF94B0701B04C00EC239A;
+			remoteInfo = PostgreSQL;
+		};
+		ADDF479A06DA58DD00C4E7F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADDF476A06DA572500C4E7F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADDF478006DA57DA00C4E7F8;
+			remoteInfo = "Wrapper Contents";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AD8622FF07C9F294004CD707 /* SQLite3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite3.xcodeproj; path = SQLite3/SQLite3.xcodeproj; sourceTree = "<group>"; };
+		AD8BF53B0701AAEE00EC239A /* README-OSX.txt */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 2; lastKnownFileType = text; path = "README-OSX.txt"; sourceTree = "<group>"; };
+		AD8BF8420701AD5100EC239A /* GDLAccess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GDLAccess.xcodeproj; path = GDLAccess/GDLAccess.xcodeproj; sourceTree = "<group>"; };
+		ADAF20470701B6230072AFC6 /* PostgreSQL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PostgreSQL.xcodeproj; path = PostgreSQL/PostgreSQL.xcodeproj; sourceTree = "<group>"; };
+		ADDF476F06DA575700C4E7F8 /* common.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = common.make; sourceTree = "<group>"; tabWidth = 8; };
+		ADDF477306DA575700C4E7F8 /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADDF477706DA575700C4E7F8 /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		AD86230007C9F294004CD707 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD86230207C9F296004CD707 /* SQLite3.gdladaptor */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD8BF8430701AD5100EC239A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD8BF8470701AD7A00EC239A /* GDLAccess.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADAF20480701B6230072AFC6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD7BA674076F8665008F4F3D /* PostgreSQL.gdladaptor */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADDF476606DA572500C4E7F8 = {
+			isa = PBXGroup;
+			children = (
+				AD8BF53B0701AAEE00EC239A /* README-OSX.txt */,
+				ADDF477706DA575700C4E7F8 /* Version */,
+				ADDF477D06DA577400C4E7F8 /* Makefiles */,
+				ADDF478306DA57F500C4E7F8 /* Projects */,
+			);
+			sourceTree = "<group>";
+		};
+		ADDF477D06DA577400C4E7F8 /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADDF477306DA575700C4E7F8 /* GNUmakefile */,
+				ADDF476F06DA575700C4E7F8 /* common.make */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADDF478306DA57F500C4E7F8 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				AD8BF8420701AD5100EC239A /* GDLAccess.xcodeproj */,
+				ADAF20470701B6230072AFC6 /* PostgreSQL.xcodeproj */,
+				AD8622FF07C9F294004CD707 /* SQLite3.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		ADDF476A06DA572500C4E7F8 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA079BD0857390000993825 /* Build configuration list for PBXProject "sope-gdl1" */;
+			hasScannedForEncodings = 0;
+			mainGroup = ADDF476606DA572500C4E7F8;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AD8BF8430701AD5100EC239A /* Products */;
+					ProjectRef = AD8BF8420701AD5100EC239A /* GDLAccess.xcodeproj */;
+				},
+				{
+					ProductGroup = ADAF20480701B6230072AFC6 /* Products */;
+					ProjectRef = ADAF20470701B6230072AFC6 /* PostgreSQL.xcodeproj */;
+				},
+				{
+					ProductGroup = AD86230007C9F294004CD707 /* Products */;
+					ProjectRef = AD8622FF07C9F294004CD707 /* SQLite3.xcodeproj */;
+				},
+			);
+			targets = (
+				ADDF479906DA58D700C4E7F8 /* all */,
+				ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AD7BA674076F8665008F4F3D /* PostgreSQL.gdladaptor */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PostgreSQL.gdladaptor;
+			remoteRef = AD7BA67F076F8683008F4F3D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AD86230207C9F296004CD707 /* SQLite3.gdladaptor */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SQLite3.gdladaptor;
+			remoteRef = AD86230507C9F2B1004CD707 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AD8BF8470701AD7A00EC239A /* GDLAccess.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GDLAccess.framework;
+			remoteRef = AD8BF8590701AD9700EC239A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXTargetDependency section */
+		AD86230407C9F2A9004CD707 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SQLite3 (from SQLite3.xcodeproj)";
+			targetProxy = AD86230307C9F2A9004CD707 /* PBXContainerItemProxy */;
+		};
+		AD8BF8460701AD5D00EC239A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "GDLAccess (from GDLAccess.xcodeproj)";
+			targetProxy = AD8BF8450701AD5D00EC239A /* PBXContainerItemProxy */;
+		};
+		ADAF204A0701B62D0072AFC6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "PostgreSQL (from PostgreSQL.xcodeproj)";
+			targetProxy = ADAF20490701B62D0072AFC6 /* PBXContainerItemProxy */;
+		};
+		ADDF479B06DA58DD00C4E7F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */;
+			targetProxy = ADDF479A06DA58DD00C4E7F8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ADA079B60857390000993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = "Wrapper Contents";
+			};
+			name = Development;
+		};
+		ADA079B70857390000993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				DYLIB_INSTALL_NAME_BASE = "@executable_path/../Frameworks/";
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+				);
+				PRODUCT_NAME = "Wrapper Contents";
+				SKIP_INSTALL = YES;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				UNSTRIPPED_PRODUCT = NO;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA079BA0857390000993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = all;
+			};
+			name = Development;
+		};
+		ADA079BB0857390000993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				DYLIB_INSTALL_NAME_BASE = "@executable_path/../Frameworks/";
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+				);
+				PRODUCT_NAME = all;
+				SKIP_INSTALL = YES;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				UNSTRIPPED_PRODUCT = NO;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA079BE0857390000993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA079BF0857390000993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA079B50857390000993825 /* Build configuration list for PBXAggregateTarget "Wrapper Contents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA079B60857390000993825 /* Development */,
+				ADA079B70857390000993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA079B90857390000993825 /* Build configuration list for PBXAggregateTarget "all" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA079BA0857390000993825 /* Development */,
+				ADA079BB0857390000993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA079BD0857390000993825 /* Build configuration list for PBXProject "sope-gdl1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA079BE0857390000993825 /* Development */,
+				ADA079BF0857390000993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADDF476A06DA572500C4E7F8 /* Project object */;
+}

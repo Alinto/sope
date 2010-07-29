@@ -1,0 +1,109 @@
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved from ThirdParty to SOPE/sope-gdl1 (v1.0.2)
+
+2003-05-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* v1.0.1
+
+	* replaced all THROW macros with -raise calls, this was necessary with
+	  the new gcc 3.3 preprocessor for compilation
+
+	* GNUmakefile (FrontBase2_RESOURCE_FILES): added a Version file
+
+Mon May  5 16:08:07 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* FBValues.m: code cleanups, fixed retain bug (NSData valueFromBytes)
+
+Wed Mar 26 10:23:53 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* FBChannel.m: add debugging-logs if channel will be closed
+
+Mon Dec 23 18:22:18 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* FBChannel.m: fixed a gcc 3.2 warning
+
+Fri Nov 29 15:17:04 2002    <jan@skyrix.com>
+
+	* FBChannel.m: from 4.1
+
+Tue Sep  3 15:32:24 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* FBChannel.m: values comes now from self->selectedAttributes
+	* FBValues.m: add missing Frontbase type to NSNumber -valueFromBytes 
+	(FB_VCharacter)
+
+2002-08-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile.preamble (FrontBase2_BUNDLE_LIBS): fixed a bug in the
+	  Makefile (did compile without prior installation of GDLAccess)
+
+Wed Aug 21 17:55:25 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* FBChannel.m: (from 4.1) 
+	-use _attributes-var (model) for creating attr-row
+	-fixed '\0' bug (empty password must be set to '\0')
+	-fixed login with passwd bug (pwd will be only accepted,
+	if it isn`t crypted with fbcDigestPassword
+
+Fri Jul 27 10:22:18 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* FBChannel.m: close channel on -dealloc
+
+Wed Jan  3 19:15:59 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* FBChannel.m, FBChannel+Model.m: cache table informations
+
+Wed Jan  3 18:51:28 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* FBAdaptor+Types.m, EOAttribute+FB.m: INT -> INTEGER
+
+Tue Jan  2 14:42:20 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* FBChannel.m: fixed core dump if password is wrong
+
+Wed Dec  6 12:48:58 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* renamed file FBAdaptor to FrontBase2Adaptor, renamed FrontBaseAdaptor
+	  class to FrontBase2Adaptor
+
+Mon Dec  4 13:31:07 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* GNUmakefile: added cancompile.sh script and support
+
+Fri Nov 17 15:46:43 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* created FB2 adaptor out of FB1 adaptor ..
+
+Wed Aug 23 16:56:28 2000  Joerg Grimm  <joerg@trex2>
+
+	* FBAdaptor.m: formatting for text attributes added
+
+Mon May 29 15:56:58 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* FBChannel.m: automagically add sort-ordering attributes to query set
+
+Mon Apr 10 17:54:39 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* FBValues.m ([NSCalendarDate -stringValueForFrontBaseType:attribute:]):
+ 	  removed a NSLog
+
+Mon Apr 10 12:25:38 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* FBChannel.m: fixed memory free bug
+
+Tue Feb 29 19:30:46 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* MOF3 import
+
+Fri Nov 12 14:35:05 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* added support for user and database authentication
+
+Tue Nov  2 16:52:47 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* FBAdaptor.m: fixed -charConvertExpression..
+
+Thu Oct  7 13:50:48 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* created ChangeLog for FrontBase adaptor

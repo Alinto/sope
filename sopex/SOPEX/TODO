@@ -1,0 +1,14 @@
+TODO
+====
+
+High Prio
+---------
+
+- make targets work
+
+Low Prio
+--------
+
+- preferences (optional debugging options, etc.)
+- session statistics, resource consumption (real mem, virtual mem)
+- working auth panel

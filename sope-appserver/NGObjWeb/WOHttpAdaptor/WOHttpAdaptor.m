@@ -1,0 +1,667 @@
+/*
+  Copyright (C) 2000-2005 SKYRIX Software AG
+
+  This file is part of SOPE.
+
+  SOPE is free software; you can redistribute it and/or modify it under
+  the terms of the GNU Lesser General Public License as published by the
+  Free Software Foundation; either version 2, or (at your option) any
+  later version.
+
+  SOPE is distributed in the hope that it will be useful, but WITHOUT ANY
+  WARRANTY; without even the implied warranty of MERCHANTABILITY or
+  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
+  License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with SOPE; see the file COPYING.  If not, write to the
+  Free Software Foundation, 59 Temple Place - Suite 330, Boston, MA
+  02111-1307, USA.
+*/
+
+#include <NGObjWeb/WOAdaptor.h>
+#include <NGObjWeb/WOCoreApplication.h>
+#include <NGObjWeb/WORequest.h>
+#include <NGObjWeb/WOResponse.h>
+#include <NGObjWeb/WOCookie.h>
+
+#include "common.h"
+#include "WORunLoop.h"
+#include "NGHttp+WO.h"
+
+#if LIB_FOUNDATION_LIBRARY
+#  import <Foundation/UnixSignalHandler.h>
+#else
+#  include "UnixSignalHandler.h"
+#endif
+
+//#define USE_POOLS 1
+
+#if USE_POOLS
+#  warning extensive pools are enabled ...
+#endif
+
+#include "WOHttpAdaptor.h"
+#include "WORecordRequestStream.h"
+#include "WOHttpTransaction.h"
+
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+@interface WOHttpAdaptor(Server)
+
+/* accessors */
+
+- (id<NGPassiveSocket>)socket;
+- (id<NGSocketAddress>)serverAddress;
+
+- (void)setSendTimeout:(NSTimeInterval)_timeout;
+- (NSTimeInterval)sendTimeout;
+- (void)setReceiveTimeout:(NSTimeInterval)_timeout;
+- (NSTimeInterval)receiveTimeout;
+
+@end /* WOHttpAdaptor */
+
+@interface WOCoreApplication(Port)
+- (NSNumber *)port;
+@end
+
+@implementation WOHttpAdaptor
+
+static NGLogger *logger                      = nil;
+static NGLogger *perfLogger                  = nil;
+static BOOL     WOHttpAdaptor_LogStream      = NO;
+static BOOL     WOContactSNS                 = NO;
+static BOOL     WOCoreOnHTTPAdaptorException = NO;
+static int      WOHttpAdaptorSendTimeout     = 10;
+static int      WOHttpAdaptorReceiveTimeout  = 10;
+static int      WOHttpAdaptorForkCount       = 0;
+static id       allow                        = nil;
+static BOOL     debugOn                      = NO;
+
++ (BOOL)optionLogStream {
+  return WOHttpAdaptor_LogStream;
+}
++ (BOOL)optionLogPerf {
+  return perfLogger != nil ? YES : NO;
+}
+
++ (int)version {
+  return [super version] + 1 /* v2 */;
+}
++ (void)initialize {
+  NSUserDefaults  *ud;
+  NGLoggerManager *lm;
+  static BOOL     didInit = NO;
+
+  if (didInit) return;
+  didInit = YES;
+
+  NSAssert2([super version] == 1,
+            @"invalid superclass (%@) version %i !",
+            NSStringFromClass([self superclass]), [super version]);
+
+  ud = [NSUserDefaults standardUserDefaults];
+  lm = [NGLoggerManager defaultLoggerManager];
+  
+  logger     = [lm loggerForClass:self];
+  perfLogger = [lm loggerForDefaultKey:@"WOProfileHttpAdaptor"];
+
+  WOHttpAdaptor_LogStream = [ud boolForKey:@"WOHttpAdaptor_LogStream"];
+
+  // TODO: this should be queried on demand to allow different defaults
+  WOContactSNS = [[ud objectForKey:@"WOContactSNS"] boolValue];
+
+  WOCoreOnHTTPAdaptorException = 
+    [[ud objectForKey:@"WOCoreOnHTTPAdaptorException"] boolValue] ? 1 : 0;
+  
+  WOHttpAdaptorSendTimeout    = 
+    [ud integerForKey:@"WOHttpAdaptorSendTimeout"];
+  WOHttpAdaptorReceiveTimeout = 
+    [ud integerForKey:@"WOHttpAdaptorReceiveTimeout"];
+  
+  if (allow == nil) {
+    if ((allow = [ud objectForKey:@"WOHttpAllowHost"]) == nil) {
+      allow = [NSArray arrayWithObjects:
+                         @"localhost", @"localhost.localdomain",
+		         @"127.0.0.1", nil];
+    }
+    
+    if (![allow isKindOfClass:[NSArray class]])
+      allow = [NSArray arrayWithObject:allow];
+      
+    allow = [allow copy];
+  }
+  
+  WOHttpAdaptorForkCount = 
+    [[ud objectForKey:@"WOHttpAdaptorForkCount"] intValue];
+  
+  if (WOCoreOnHTTPAdaptorException)
+    [logger warnWithFormat:@"will dump core on HTTP adaptor exception!"];
+}
+
+- (id)autoBindAddress {
+  NGInternetSocketAddress *addr;
+  addr = [[NGInternetSocketAddress alloc] initWithPort:0 onHost:@"127.0.0.1"];
+  return [addr autorelease];
+}
+
+- (void)_registerForSignals {
+#if !defined(__MINGW32__)
+  UnixSignalHandler *us = [UnixSignalHandler sharedHandler];
+      
+  [us addObserver:self selector:@selector(handleSIGPIPE:)
+      forSignal:SIGPIPE immediatelyNotifyOnSignal:NO];
+#endif
+}
+
+- (id<NGSocketAddress>)addressFromDefaultsOfApplication:(WOCoreApplication*)_a{
+  id                  woport;
+  id<NGSocketAddress> lAddress = nil;
+  const char *cstr;
+  
+  woport = [[NSUserDefaults standardUserDefaults] stringForKey:@"WOPort"];
+  if ([woport isEqualToString:@"auto"]) {
+    if ((lAddress = [self autoBindAddress]) != nil)
+      return lAddress;
+  }
+  
+  if ((cstr = [woport cString]) != NULL) {
+    if (isdigit(*cstr) && index(cstr, ':') == NULL) {
+      NSNumber *p;
+          
+      p = [(WOCoreApplication *)[_a class] port];
+      if (p == nil) p = (id)woport;
+          
+      lAddress =
+	[NGInternetSocketAddress wildcardAddressWithPort:[p intValue]];
+      if (lAddress != nil)
+	return lAddress;
+    }
+  }
+  
+  return NGSocketAddressFromString(woport);
+}
+
+- (id<NGSocketAddress>)addressFromArguments:(NSDictionary *)_args {
+  id<NGSocketAddress> lAddress = nil;
+  NSString *arg = nil;
+  const char *cstr;
+      
+  if ((arg = [_args objectForKey:@"-p"]) != nil)
+    return [NGInternetSocketAddress wildcardAddressWithPort:[arg intValue]];
+  
+  if ((arg = [_args objectForKey:@"-WOPort"]) == nil)
+    return nil;
+  
+  lAddress = nil;
+  if ([arg isEqualToString:@"auto"])
+    lAddress = [self autoBindAddress];
+        
+  if ((lAddress == nil) && (cstr = [arg cString])) {
+    if (isdigit(*cstr)) {
+      lAddress =
+	[NGInternetSocketAddress wildcardAddressWithPort:[arg intValue]];
+    }
+  }
+  if (lAddress == nil)
+    lAddress = NGSocketAddressFromString(arg);
+  return lAddress;
+}
+
+- (id)initWithName:(NSString *)_name
+  arguments:(NSDictionary *)_args
+  application:(WOCoreApplication *)_application
+{
+  if ((self = [super initWithName:_name
+                     arguments:_args
+                     application:_application])) {
+    id arg = nil;
+    
+    if ([[_application recordingPath] length] > 0)
+      WOHttpAdaptor_LogStream = YES;
+    
+    [self _registerForSignals];
+    
+    if ([_args count] < 1)
+      self->address = [self addressFromDefaultsOfApplication:_application];
+    else
+      self->address = [self addressFromArguments:_args];
+    
+    self->address = [self->address retain];
+    
+    if (self->address == nil) {
+      [_application errorWithFormat:
+                      @"got no address for HTTP server (using arg '%@')", arg];
+      [self release];
+      return nil;
+    }
+    
+    if (!WOContactSNS) {
+      [_application logWithFormat:@"%@ listening on address %@",
+                      NSStringFromClass([self class]),
+                      [(id)self->address stringValue]];
+    }
+    
+    self->lock = [[NSRecursiveLock alloc] init];
+    
+    self->maxThreadCount = [[WOCoreApplication workerThreadCount] intValue];
+    
+    [self setSendTimeout:WOHttpAdaptorSendTimeout];
+    [self setReceiveTimeout:WOHttpAdaptorReceiveTimeout];
+  }
+  return self;
+}
+
+- (void)dealloc {
+  [[UnixSignalHandler    sharedHandler] removeObserver:self];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self->lock    release];
+  [self->socket  release];
+  [self->address release];
+  [super dealloc];
+}
+
+/* accessors */
+
+- (id<NGSocketAddress>)socketAddress {
+  /* used by sns */
+  return self->address;
+}
+
+/* forking */
+
+static pid_t *childPIDs       = NULL;
+static BOOL  isForkMaster     = YES;
+
+- (void)forkChildren {
+  unsigned i;
+
+  if (WOHttpAdaptorForkCount == 0)
+    return;
+
+  [self logWithFormat:@"Note: forking %d children for socket processing.",
+	  WOHttpAdaptorForkCount];
+  
+#if !defined(__MINGW32__)
+  [[UnixSignalHandler sharedHandler]
+    addObserver:self selector:@selector(handleSIGCHLD:)
+    forSignal:SIGCHLD immediatelyNotifyOnSignal:NO];
+#endif
+  
+  childPIDs = calloc(WOHttpAdaptorForkCount + 1, sizeof(pid_t));
+  for (i = 0; i < WOHttpAdaptorForkCount; i++) {
+    childPIDs[i] = fork();
+    
+    if (childPIDs[i] == 0) {
+      /* child */
+      isForkMaster = NO;
+      return;
+    }
+    else if (childPIDs[i] > 0)
+      printf("Note: successfully forked child: %i\n", childPIDs[i]);
+    else
+      [self errorWithFormat:@"failed to fork child %i.", i];
+  }
+}
+- (void)killChildren {
+  int i;
+  
+  if (!isForkMaster)
+    return;
+  
+  for (i = 0; i < WOHttpAdaptorForkCount; i++) {
+    if (childPIDs[i] != 0)
+      kill(childPIDs[i], SIGKILL);
+  }
+}
+
+- (void)checkStatusOfChildren {
+  /*
+    Note: currently this does not refork crashed processes. Reforking is harder
+          than it may sound because the crash can happen at arbitary execution
+	  states.
+	  That is, the "master process" is not virgin anymore, eg it might have
+	  open database connections.
+	  
+	  So the solution might be to refork the whole cluster once a minimum
+	  backend threshold is reached.
+  */
+  unsigned int i;
+  
+  if (!isForkMaster)
+    return;
+  
+  for (i = 0; i < WOHttpAdaptorForkCount; i++) {
+    pid_t result;
+    int   status;
+    
+    if (childPIDs[i] == 0)
+      continue;
+    
+    result = waitpid(childPIDs[i], &status, WNOHANG);
+    if (result == 0) /* did not exit yet */
+      continue;
+    
+    if (result == -1) { /* error */
+      [self errorWithFormat:@"failed to get status of child %i: %s", 
+	      childPIDs[i], strerror(errno)];
+      continue;
+    }
+
+    [self logWithFormat:@"Note: child %i terminated.", childPIDs[i]];
+    childPIDs[i] = 0;
+  }
+}
+
+/* events */
+
+- (void)handleSIGPIPE:(int)_signal {
+  [self warnWithFormat:@"caught SIGPIPE !"];
+}
+- (void)handleSIGCHLD:(int)_signal {
+  [self checkStatusOfChildren];
+}
+
+- (void)registerForEvents {
+  int backlog;
+  
+  backlog = [[WOCoreApplication listenQueueSize] intValue];
+  
+  if (backlog == 0)
+    backlog = 5;
+  
+  [self->socket release]; self->socket = nil;
+  
+  self->socket =
+    [[NGPassiveSocket alloc] initWithDomain:[self->address domain]];
+  
+  [self->socket bindToAddress:self->address];
+  
+  if ([[self->address domain] isEqual:[NGInternetSocketDomain domain]]) {
+    if ([(NGInternetSocketAddress *)self->address port] == 0) {
+      /* let the kernel choose an IP address */
+      
+      [self debugWithFormat:@"bound to wildcard: %@", self->address];
+      [self debugWithFormat:@"got local: %@", [self->socket localAddress]];
+      
+      self->address = [[self->socket localAddress] retain];
+      
+      [self logWithFormat:@"bound to kernel assigned address %@: %@",
+              self->address, self->socket];
+    }
+  }
+  
+  [self->socket listenWithBacklog:backlog];
+  
+  [[NSNotificationCenter defaultCenter]
+                         addObserver:self selector:@selector(acceptConnection:)
+                         name:NSFileObjectBecameActiveNotificationName
+                         object:self->socket];
+  [(WORunLoop *)[WORunLoop currentRunLoop]
+              addFileObject:self->socket
+              activities:NSPosixReadableActivity
+              forMode:NSDefaultRunLoopMode];
+  
+  [self forkChildren];
+}
+- (void)unregisterForEvents {
+  [self killChildren];
+  
+  [(WORunLoop *)[WORunLoop currentRunLoop]
+              removeFileObject:self->socket forMode:NSDefaultRunLoopMode];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  [self->lock   release]; self->lock   = nil;
+  [self->socket release]; self->socket = nil;
+}
+
+/* debugging */
+
+- (BOOL)isDebuggingEnabled {
+  return debugOn;
+}
+
+/* description */
+
+- (NSString *)description {
+  return [NSString stringWithFormat:@"<%@[0x%p]: address=%@>",
+                     NSStringFromClass([self class]), self,
+                     self->address];
+}
+
+/* Server */
+
+/* accessors */
+
+- (id<NGPassiveSocket>)socket {
+  return self->socket;
+}
+- (id<NGSocketAddress>)serverAddress {
+  return [self->socket localAddress];
+}
+
+- (void)setSendTimeout:(NSTimeInterval)_timeout {
+  self->sendTimeout = _timeout;
+}
+- (NSTimeInterval)sendTimeout {
+  return self->sendTimeout;
+}
+
+- (void)setReceiveTimeout:(NSTimeInterval)_timeout {
+  self->receiveTimeout = _timeout;
+}
+- (NSTimeInterval)receiveTimeout {
+  return self->receiveTimeout;
+}
+
+- (void)setMaxThreadCount:(int)_count {
+  self->maxThreadCount = _count;
+}
+- (int)maxThreadCount {
+  return self->maxThreadCount;
+}
+
+/* run-loop */
+
+- (void)_serverCatched:(NSException *)_exc {
+  [self errorWithFormat:@"http server caught: %@", _exc];
+  if (WOCoreOnHTTPAdaptorException) abort();
+}
+
+- (BOOL)runConnection:(id<NGActiveSocket>)_socket {
+  WOHttpTransaction *tx;
+  
+  if (_socket == nil) {
+    [self errorWithFormat:@"got no socket for transaction ??"];
+    return NO;
+  }
+  
+  tx = [[WOHttpTransaction alloc] initWithSocket:_socket
+                                  application:self->application];
+  
+  if (![tx run])
+    [self _serverCatched:[tx lastException]];
+  
+  [tx release];
+  
+  if ([self->application isTerminating])
+    self->isTerminated = YES;
+  
+  return YES;
+}
+
+- (void)_handleAcceptedConnection:(NGActiveSocket *)_connection {
+#if USE_POOLS
+  NSAutoreleasePool *pool = nil;
+#endif
+  NSTimeInterval t;
+  
+  if (perfLogger)
+    *(&t) = [[NSDate date] timeIntervalSince1970];
+  
+  [self->lock lock];
+  self->activeThreadCount++;
+  [self->lock unlock];
+  
+#if USE_POOLS
+  pool = [[NSAutoreleasePool alloc] init];
+#endif
+  {
+    [*(&_connection) autorelease];
+    
+    NS_DURING {
+      [_connection setReceiveTimeout:self->receiveTimeout];
+      [_connection setSendTimeout:self->sendTimeout];
+      
+      [self runConnection:_connection];
+    }
+    NS_HANDLER {
+      [self _serverCatched:localException];
+    }
+    NS_ENDHANDLER;
+  }
+#if USE_POOLS
+  [pool release]; pool = nil;
+#endif
+
+  [self->lock lock];
+  self->activeThreadCount--;
+  [self->lock unlock];
+
+  if (perfLogger) {
+    t = [[NSDate date] timeIntervalSince1970] - t;
+    [perfLogger logWithFormat:@"handling of request took %4.3fs.",
+                  t < 0.0 ? -1.0 : t];
+  }
+}
+- (void)_handleAcceptedConnectionInThread:(NGActiveSocket *)_connection {
+  /* ensure that the top-level pool is properly setup */
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  [self _handleAcceptedConnection:_connection];
+  [pool release];
+}
+
+- (NSArray *)allowedHostNames {
+  return allow;
+}
+
+- (id<NGActiveSocket>)_checkAccessOnConnection:(id<NGActiveSocket>)_connection{
+  static NGInternetSocketDomain *ipDomain = nil;
+  id<NGSocketAddress> remote;
+
+  if ((remote = [_connection remoteAddress]) == nil) {
+    [self errorWithFormat:@"missing remote address for connection: %@",
+            _connection];
+    return nil;
+  }
+
+  if (ipDomain == nil)
+    ipDomain = [[NGInternetSocketDomain domain] retain];
+  
+  /* always allow access for Unix domain sockets */
+  if (![[remote domain] isEqual:ipDomain])
+    return _connection;
+  
+  {
+    /* check access */
+    NGInternetSocketAddress *ipAddr = (id)remote;
+    NSArray *allow = nil;
+    unsigned i, count;
+    NSString *rh, *ra;
+    
+    allow = [self allowedHostNames];
+    
+    rh = [ipAddr hostName];
+    ra = [ipAddr address];
+    
+    /* first check address */
+    
+    for (i = 0, count = [allow count]; i < count; i++) {
+      NSString *h;
+      
+      h = [[allow objectAtIndex:i] stringValue];
+      if ([h isEqualToString:ra])
+        return _connection;
+    }
+    
+    /* now check DNS names */
+    
+    for (i = 0, count = [allow count]; i < count; i++) {
+      NSString *h;
+      
+      h = [[allow objectAtIndex:i] stringValue];
+      if ([h isEqualToString:rh])
+        return _connection;
+    }
+    
+    [self errorWithFormat:@"ACCESS DENIED: %@", ipAddr];
+    _connection = nil;
+  }
+  
+  return _connection;
+}
+
+- (void)acceptConnection:(id)_notification {
+#if USE_POOLS
+  NSAutoreleasePool *pool;
+  *(&pool) = [[NSAutoreleasePool alloc] init];
+#endif
+  {
+    NGActiveSocket *connection;
+    
+    NS_DURING {
+      *(&connection) = (NGActiveSocket *)[self->socket accept];
+      if (connection == nil)
+        [self _serverCatched:[self->socket lastException]];
+      else
+        [self debugWithFormat:@"accepted connection: %@", connection];
+    }
+    NS_HANDLER {
+      connection = nil;
+      [self _serverCatched:localException];
+    }
+    NS_ENDHANDLER;
+    
+    connection = (NGActiveSocket *)[self _checkAccessOnConnection:connection];
+    
+    if (connection != nil) {
+      if (self->maxThreadCount <= 1) {
+        NS_DURING
+          [self _handleAcceptedConnection:[connection retain]];
+        NS_HANDLER
+          [self _serverCatched:localException];
+        NS_ENDHANDLER;
+      }
+      else {
+        [NSThread detachNewThreadSelector:
+		    @selector(_handleAcceptedConnectionInThread:)
+                  toTarget:self
+                  withObject:[connection retain]];
+        [self logWithFormat:@"detached new thread for request."];
+        //[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+      }
+      connection = nil;
+    }
+  }
+#if USE_POOLS
+  [pool release]; pool = nil;
+#endif
+  
+  if (self->isTerminated) {
+    if (self->socket) {
+      [[NSNotificationCenter defaultCenter]
+                             removeObserver:self
+                             name:NSFileObjectBecameActiveNotificationName
+                             object:self->socket];
+      [self->socket close];
+      [self->socket release]; self->socket = nil;
+    }
+    [self logWithFormat:@"adaptor stops application: %@ ...",
+            self->application];
+    exit(0);
+  }
+}
+
+@end /* WOHttpAdaptor */

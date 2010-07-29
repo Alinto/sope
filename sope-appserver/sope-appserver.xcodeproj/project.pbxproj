@@ -1,0 +1,651 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ADA078C1085738B000993825 /* Build configuration list for PBXAggregateTarget "Wrapper Contents" */;
+			buildPhases = (
+			);
+			dependencies = (
+				AD8BEFF807005E1A00EC239A /* PBXTargetDependency */,
+				AD8BEFFA07005E2500EC239A /* PBXTargetDependency */,
+				AD8BEFFC07005E2D00EC239A /* PBXTargetDependency */,
+				AD20BB4C0737E7DA002A6594 /* PBXTargetDependency */,
+				AD915D2B06E29B83004720C2 /* PBXTargetDependency */,
+				AD915D2906E29B83004720C2 /* PBXTargetDependency */,
+				AD0B07E308929FB600D4A2A4 /* PBXTargetDependency */,
+				ADBFE95F073EA9BE00E7F7CA /* PBXTargetDependency */,
+				ADEAC660078A327000097697 /* PBXTargetDependency */,
+			);
+			name = "Wrapper Contents";
+			productName = "Wrapper Contents";
+		};
+		ADDF479906DA58D700C4E7F8 /* all */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ADA078C5085738B000993825 /* Build configuration list for PBXAggregateTarget "all" */;
+			buildPhases = (
+			);
+			dependencies = (
+				ADDF479B06DA58DD00C4E7F8 /* PBXTargetDependency */,
+			);
+			name = all;
+			productName = all;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		AD0B07DE08929F9400D4A2A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD0B07D808929F9400D4A2A4 /* WEPrototype.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = WEPrototype;
+		};
+		AD0B07E208929FB600D4A2A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD0B07D808929F9400D4A2A4 /* WEPrototype.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = WEPrototype;
+		};
+		AD20BB4B0737E7DA002A6594 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD915D0A06E29B43004720C2 /* NGObjWeb.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AD20BADF0737DB50002A6594;
+			remoteInfo = all;
+		};
+		AD8BEFF307005DDF00EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BEFED07005D9B00EC239A /* NGHttp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = NGHttp;
+		};
+		AD8BEFF407005DDF00EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BEFEF07005DBE00EC239A /* SoObjects.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = SoObjects;
+		};
+		AD8BEFF707005E1A00EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BEFED07005D9B00EC239A /* NGHttp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = NGHttp;
+		};
+		AD8BEFF907005E2500EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BEFF507005E0200EC239A /* WebDAV.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = WebDAV;
+		};
+		AD8BEFFB07005E2D00EC239A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BEFEF07005DBE00EC239A /* SoObjects.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = SoObjects;
+		};
+		AD915D2806E29B83004720C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD915D0C06E29B51004720C2 /* WEExtensions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = WEExtensions;
+		};
+		AD915D2A06E29B83004720C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD915D0E06E29B5D004720C2 /* WOExtensions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = WOExtensions;
+		};
+		AD915D2C06E29BAC004720C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD915D0A06E29B43004720C2 /* NGObjWeb.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = NGObjWeb;
+		};
+		AD915D2D06E29BAC004720C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD915D0A06E29B43004720C2 /* NGObjWeb.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADFE6FFE06E2765E006628C4;
+			remoteInfo = "SoCore (SXP)";
+		};
+		AD915D2E06E29BAC004720C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD915D0C06E29B51004720C2 /* WEExtensions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = WEExtensions;
+		};
+		AD915D2F06E29BAC004720C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD915D0E06E29B5D004720C2 /* WOExtensions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = WOExtensions;
+		};
+		ADBFE6FD073EA57900E7F7CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD8BEFF507005E0200EC239A /* WebDAV.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = WebDAV;
+		};
+		ADBFE95E073EA9BE00E7F7CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADBFE95B073EA9AD00E7F7CA /* NGXmlRpc.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = NGXmlRpc;
+		};
+		ADBFE960073EA9CD00E7F7CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADBFE95B073EA9AD00E7F7CA /* NGXmlRpc.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = NGXmlRpc;
+		};
+		ADDC021807A49341009A7741 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADEAC65B078A325700097697 /* SoOFS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AD5529E1079447410037E121;
+			remoteInfo = "sope-4.5";
+		};
+		ADDF479A06DA58DD00C4E7F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADDF476A06DA572500C4E7F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADDF478006DA57DA00C4E7F8;
+			remoteInfo = "Wrapper Contents";
+		};
+		ADEAC65F078A327000097697 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADEAC65B078A325700097697 /* SoOFS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = ADD65D5706DA372D007161CA;
+			remoteInfo = SoOFS;
+		};
+		ADEAC665078A327A00097697 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADEAC65B078A325700097697 /* SoOFS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADD65D5806DA372D007161CA;
+			remoteInfo = SoOFS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AD0B07D808929F9400D4A2A4 /* WEPrototype.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WEPrototype.xcodeproj; path = WEPrototype/WEPrototype.xcodeproj; sourceTree = "<group>"; };
+		AD8BEFED07005D9B00EC239A /* NGHttp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NGHttp.xcodeproj; path = NGObjWeb/NGHttp/NGHttp.xcodeproj; sourceTree = "<group>"; };
+		AD8BEFEF07005DBE00EC239A /* SoObjects.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoObjects.xcodeproj; path = NGObjWeb/SoObjects/SoObjects.xcodeproj; sourceTree = "<group>"; };
+		AD8BEFF507005E0200EC239A /* WebDAV.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WebDAV.xcodeproj; path = NGObjWeb/WebDAV/WebDAV.xcodeproj; sourceTree = "<group>"; };
+		AD915D0A06E29B43004720C2 /* NGObjWeb.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NGObjWeb.xcodeproj; path = NGObjWeb/NGObjWeb.xcodeproj; sourceTree = "<group>"; };
+		AD915D0C06E29B51004720C2 /* WEExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WEExtensions.xcodeproj; path = WEExtensions/WEExtensions.xcodeproj; sourceTree = "<group>"; };
+		AD915D0E06E29B5D004720C2 /* WOExtensions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WOExtensions.xcodeproj; path = WOExtensions/WOExtensions.xcodeproj; sourceTree = "<group>"; };
+		ADBFE95B073EA9AD00E7F7CA /* NGXmlRpc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NGXmlRpc.xcodeproj; path = NGXmlRpc/NGXmlRpc.xcodeproj; sourceTree = "<group>"; };
+		ADDF476E06DA575700C4E7F8 /* ChangeLog */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 8; lastKnownFileType = text; path = ChangeLog; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		ADDF476F06DA575700C4E7F8 /* common.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = common.make; sourceTree = "<group>"; tabWidth = 8; };
+		ADDF477006DA575700C4E7F8 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		ADDF477106DA575700C4E7F8 /* COPYRIGHT */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = COPYRIGHT; sourceTree = "<group>"; };
+		ADDF477306DA575700C4E7F8 /* GNUmakefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = GNUmakefile; sourceTree = "<group>"; tabWidth = 8; };
+		ADDF477406DA575700C4E7F8 /* PROJECTLEAD */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = PROJECTLEAD; sourceTree = "<group>"; };
+		ADDF477606DA575700C4E7F8 /* README-OSX.txt */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = "README-OSX.txt"; sourceTree = "<group>"; };
+		ADDF477706DA575700C4E7F8 /* Version */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 5; indentWidth = 8; path = Version; sourceTree = "<group>"; tabWidth = 8; };
+		ADEAC65B078A325700097697 /* SoOFS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoOFS.xcodeproj; path = SoOFS/SoOFS.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		AD0B07D908929F9400D4A2A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD0B07DF08929F9400D4A2A4 /* WEPrototype.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD8BEFEE07005D9B00EC239A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD8BEFF207005DC000EC239A /* NGHttp.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD8BEFF007005DBE00EC239A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD8BEFF107005DC000EC239A /* SoObjects.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD8BEFF607005E0200EC239A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADBFE6F6073EA55B00E7F7CA /* WebDAV.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD915D0B06E29B43004720C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD915D2006E29B62004720C2 /* NGObjWeb.framework */,
+				AD915D2106E29B62004720C2 /* SoCore.sxp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD915D0D06E29B51004720C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD915D2306E29B6C004720C2 /* WEExtensions.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD915D0F06E29B5D004720C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD915D2506E29B6D004720C2 /* WOExtensions.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADBFE95C073EA9AD00E7F7CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADBFE95D073EA9B000E7F7CA /* NGXmlRpc.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADDF476606DA572500C4E7F8 = {
+			isa = PBXGroup;
+			children = (
+				ADDF477606DA575700C4E7F8 /* README-OSX.txt */,
+				ADDF477006DA575700C4E7F8 /* COPYING */,
+				ADDF477106DA575700C4E7F8 /* COPYRIGHT */,
+				ADDF477406DA575700C4E7F8 /* PROJECTLEAD */,
+				ADDF476E06DA575700C4E7F8 /* ChangeLog */,
+				ADDF477706DA575700C4E7F8 /* Version */,
+				ADDF477D06DA577400C4E7F8 /* Makefiles */,
+				ADDF478306DA57F500C4E7F8 /* Projects */,
+			);
+			sourceTree = "<group>";
+		};
+		ADDF477D06DA577400C4E7F8 /* Makefiles */ = {
+			isa = PBXGroup;
+			children = (
+				ADDF477306DA575700C4E7F8 /* GNUmakefile */,
+				ADDF476F06DA575700C4E7F8 /* common.make */,
+			);
+			name = Makefiles;
+			sourceTree = "<group>";
+		};
+		ADDF478306DA57F500C4E7F8 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				AD8BEFF507005E0200EC239A /* WebDAV.xcodeproj */,
+				AD8BEFED07005D9B00EC239A /* NGHttp.xcodeproj */,
+				AD8BEFEF07005DBE00EC239A /* SoObjects.xcodeproj */,
+				AD915D0A06E29B43004720C2 /* NGObjWeb.xcodeproj */,
+				ADBFE95B073EA9AD00E7F7CA /* NGXmlRpc.xcodeproj */,
+				AD915D0E06E29B5D004720C2 /* WOExtensions.xcodeproj */,
+				AD915D0C06E29B51004720C2 /* WEExtensions.xcodeproj */,
+				AD0B07D808929F9400D4A2A4 /* WEPrototype.xcodeproj */,
+				ADEAC65B078A325700097697 /* SoOFS.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+		ADEAC65C078A325700097697 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADEAC65E078A325900097697 /* SoOFS.framework */,
+				ADDC021007A49332009A7741 /* sope-4.7 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		ADDF476A06DA572500C4E7F8 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ADA078CA085738B000993825 /* Build configuration list for PBXProject "sope-appserver" */;
+			hasScannedForEncodings = 0;
+			mainGroup = ADDF476606DA572500C4E7F8;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AD8BEFEE07005D9B00EC239A /* Products */;
+					ProjectRef = AD8BEFED07005D9B00EC239A /* NGHttp.xcodeproj */;
+				},
+				{
+					ProductGroup = AD915D0B06E29B43004720C2 /* Products */;
+					ProjectRef = AD915D0A06E29B43004720C2 /* NGObjWeb.xcodeproj */;
+				},
+				{
+					ProductGroup = ADBFE95C073EA9AD00E7F7CA /* Products */;
+					ProjectRef = ADBFE95B073EA9AD00E7F7CA /* NGXmlRpc.xcodeproj */;
+				},
+				{
+					ProductGroup = AD8BEFF007005DBE00EC239A /* Products */;
+					ProjectRef = AD8BEFEF07005DBE00EC239A /* SoObjects.xcodeproj */;
+				},
+				{
+					ProductGroup = ADEAC65C078A325700097697 /* Products */;
+					ProjectRef = ADEAC65B078A325700097697 /* SoOFS.xcodeproj */;
+				},
+				{
+					ProductGroup = AD8BEFF607005E0200EC239A /* Products */;
+					ProjectRef = AD8BEFF507005E0200EC239A /* WebDAV.xcodeproj */;
+				},
+				{
+					ProductGroup = AD915D0D06E29B51004720C2 /* Products */;
+					ProjectRef = AD915D0C06E29B51004720C2 /* WEExtensions.xcodeproj */;
+				},
+				{
+					ProductGroup = AD0B07D908929F9400D4A2A4 /* Products */;
+					ProjectRef = AD0B07D808929F9400D4A2A4 /* WEPrototype.xcodeproj */;
+				},
+				{
+					ProductGroup = AD915D0F06E29B5D004720C2 /* Products */;
+					ProjectRef = AD915D0E06E29B5D004720C2 /* WOExtensions.xcodeproj */;
+				},
+			);
+			targets = (
+				ADDF479906DA58D700C4E7F8 /* all */,
+				ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AD0B07DF08929F9400D4A2A4 /* WEPrototype.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WEPrototype.framework;
+			remoteRef = AD0B07DE08929F9400D4A2A4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AD8BEFF107005DC000EC239A /* SoObjects.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SoObjects.framework;
+			remoteRef = AD8BEFF407005DDF00EC239A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AD8BEFF207005DC000EC239A /* NGHttp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NGHttp.framework;
+			remoteRef = AD8BEFF307005DDF00EC239A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AD915D2006E29B62004720C2 /* NGObjWeb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NGObjWeb.framework;
+			remoteRef = AD915D2C06E29BAC004720C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AD915D2106E29B62004720C2 /* SoCore.sxp */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SoCore.sxp;
+			remoteRef = AD915D2D06E29BAC004720C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AD915D2306E29B6C004720C2 /* WEExtensions.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WEExtensions.framework;
+			remoteRef = AD915D2E06E29BAC004720C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AD915D2506E29B6D004720C2 /* WOExtensions.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WOExtensions.framework;
+			remoteRef = AD915D2F06E29BAC004720C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADBFE6F6073EA55B00E7F7CA /* WebDAV.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WebDAV.framework;
+			remoteRef = ADBFE6FD073EA57900E7F7CA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADBFE95D073EA9B000E7F7CA /* NGXmlRpc.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NGXmlRpc.framework;
+			remoteRef = ADBFE960073EA9CD00E7F7CA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADDC021007A49332009A7741 /* sope-4.7 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "sope-4.7";
+			remoteRef = ADDC021807A49341009A7741 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ADEAC65E078A325900097697 /* SoOFS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SoOFS.framework;
+			remoteRef = ADEAC665078A327A00097697 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXTargetDependency section */
+		AD0B07E308929FB600D4A2A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WEPrototype;
+			targetProxy = AD0B07E208929FB600D4A2A4 /* PBXContainerItemProxy */;
+		};
+		AD20BB4C0737E7DA002A6594 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "all (from NGObjWeb.xcodeproj)";
+			targetProxy = AD20BB4B0737E7DA002A6594 /* PBXContainerItemProxy */;
+		};
+		AD8BEFF807005E1A00EC239A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "NGHttp (from NGHttp.xcodeproj)";
+			targetProxy = AD8BEFF707005E1A00EC239A /* PBXContainerItemProxy */;
+		};
+		AD8BEFFA07005E2500EC239A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "WebDAV (from WebDAV.xcodeproj)";
+			targetProxy = AD8BEFF907005E2500EC239A /* PBXContainerItemProxy */;
+		};
+		AD8BEFFC07005E2D00EC239A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SoObjects (from SoObjects.xcodeproj)";
+			targetProxy = AD8BEFFB07005E2D00EC239A /* PBXContainerItemProxy */;
+		};
+		AD915D2906E29B83004720C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "WEExtensions (from WEExtensions.xcodeproj)";
+			targetProxy = AD915D2806E29B83004720C2 /* PBXContainerItemProxy */;
+		};
+		AD915D2B06E29B83004720C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "WOExtensions (from WOExtensions.xcodeproj)";
+			targetProxy = AD915D2A06E29B83004720C2 /* PBXContainerItemProxy */;
+		};
+		ADBFE95F073EA9BE00E7F7CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "NGXmlRpc (from NGXmlRpc.xcodeproj)";
+			targetProxy = ADBFE95E073EA9BE00E7F7CA /* PBXContainerItemProxy */;
+		};
+		ADDF479B06DA58DD00C4E7F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADDF478006DA57DA00C4E7F8 /* Wrapper Contents */;
+			targetProxy = ADDF479A06DA58DD00C4E7F8 /* PBXContainerItemProxy */;
+		};
+		ADEAC660078A327000097697 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SoOFS (from SoOFS.xcodeproj)";
+			targetProxy = ADEAC65F078A327000097697 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ADA078C2085738B000993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = "Wrapper Contents";
+			};
+			name = Development;
+		};
+		ADA078C3085738B000993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				DYLIB_INSTALL_NAME_BASE = "@executable_path/../Frameworks/";
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+				);
+				PRODUCT_NAME = "Wrapper Contents";
+				SKIP_INSTALL = YES;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				UNSTRIPPED_PRODUCT = NO;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA078C6085738B000993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = all;
+			};
+			name = Development;
+		};
+		ADA078C7085738B000993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_LOCATION = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				DYLIB_INSTALL_NAME_BASE = "@executable_path/../Frameworks/";
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"APPLE_RUNTIME=1",
+					"NeXT_Foundation_LIBRARY=1",
+					"COCOA_Foundation_LIBRARY=1",
+					"NeXT_RUNTIME=1",
+					"COMPILE_AS_FRAMEWORK=1",
+				);
+				PRODUCT_NAME = all;
+				SKIP_INSTALL = YES;
+				SYMROOT = "$(USER_LIBRARY_DIR)/EmbeddedFrameworks";
+				TEMP_DIR = "$(SYMROOT)/$(PROJECT_NAME).build";
+				UNSTRIPPED_PRODUCT = NO;
+				ZERO_LINK = NO;
+			};
+			name = Wrapper;
+		};
+		ADA078CB085738B000993825 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		ADA078CC085738B000993825 /* Wrapper */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Wrapper;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADA078C1085738B000993825 /* Build configuration list for PBXAggregateTarget "Wrapper Contents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA078C2085738B000993825 /* Development */,
+				ADA078C3085738B000993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA078C5085738B000993825 /* Build configuration list for PBXAggregateTarget "all" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA078C6085738B000993825 /* Development */,
+				ADA078C7085738B000993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		ADA078CA085738B000993825 /* Build configuration list for PBXProject "sope-appserver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA078CB085738B000993825 /* Development */,
+				ADA078CC085738B000993825 /* Wrapper */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADDF476A06DA572500C4E7F8 /* Project object */;
+}

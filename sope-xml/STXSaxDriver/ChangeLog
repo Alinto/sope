@@ -1,0 +1,268 @@
+2007-02-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.7.15
+
+	* STXSaxDriver.m, ExtraSTX/StructuredTextRenderingDelegate.h: changed
+	  the API, which was broken by design, to properly deal with block
+	  elements (which can be nested).
+
+	* Model/{StructuredTextBodyElement.[hm], StructuredTextParagraph.m}:
+	  changed API and implementation to properly deal with block elements.
+
+	* data/znektest1.stx: trimmed testcase
+
+2007-02-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* data/znektest1.stx: added testcase demonstrating a bug in conjunction
+	  with lists and hyperlinks
+
+2007-02-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* STXSaxDriver.xcodeproj: added Xcode 2.4 project file
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.1 warnings, use %p for pointers formats (v4.5.14)
+
+2005-08-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added common.h in project subdirs for PCH support (v4.5.13)
+
+2005-08-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.12
+
+	* install into SaxObjC framework Resources when being used with OSX
+
+	* bumped version to 4.5 to be consistent with the remaining SOPE
+	  versioning
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* Model/StructuredTextBodyElement.m: fixed a gcc 4.0 warning (v1.0.11)
+
+2004-11-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* use Version file for install directory location
+
+2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* ExtraSTX/GNUmakefile, Model/GNUmakefile: fixed for config.make
+	  compilation (v1.0.10)
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* added hack to install the project in FHS locations - the SAX driver
+	  will be installed in FHS_INSTALL_ROOT if specified (eg make
+	  FHS_INSTALL_ROOT=/usr/local) (v1.0.9)
+	
+2004-08-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: install SAX driver in Library/SaxDrivers-4.3/ (v1.0.8)
+
+	* GNUmakefile: install SAX driver in Library/SaxDrivers/4.3/ (v1.0.7)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble, GNUmakefile.postamble: added support for
+	  building with GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v1.0.6)
+
+2004-03-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* bundle-info.plist: fixed a type in the bundle-info.plist (v1.0.5)
+
+2004-03-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* STXSaxDriver.m: fixed a bug with header generation (header 
+	  subelements did not properly generate) (v1.0.4)
+
+	* STXSaxDriver.m: added proper error handling for missing files 
+	  (v1.0.3)
+
+2004-03-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* ExtraSTX/StructuredText.m: applied a bugfix on the header processing
+	  by Mirko (v1.0.2)
+
+2004-02-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v1.0.1
+
+	* initial import of the SAX driver into OpenGroupware.org - many thanks
+	  go to extrapola for contributing the STX framework to OGo
+	
+	* removed things unnecessary for the SAX driver
+	
+	* replace some -rangeOfString: NSNotFound checks which do not work with
+	  libFoundation (need to check for range.length==0 instead!)
+	
+	* added the STXSaxDriver, an application of the StructuredText code
+	
+	* reformatted code according to OGo styleguides
+	
+2004-02-15  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredTextBodyElement.m: implementato link image ed escaping 
+	  stile C.
+	
+	* NSString_StructuredText_Extra.m: implementato escaping di stringhe.
+
+2004-02-10  Giulio Cesare Solaroli  <gc.solaroli@extrapola.com>
+
+	* Aggiunti alcuni test per la verifica della gestione dei link
+	  attorno alle immagini.
+
+2004-01-16  Giulio Cesare Solaroli  <gc.solaroli@extrapola.com>
+
+	* Aggiunto un test (test__characterEscaping) che fallisce, mostrando
+	  un problema nella gestione nell'escape dei caratteri.
+
+2004-01-13  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.m ([-separateIntoBlocks]): ignora linee contenente
+	  solo spazi o tab.
+
+2004-01-12  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.m ([-separateIntoBlocks]): rimuove \r dal testo.
+
+2004-01-08  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.subproj/StructuredTextBodyElement.m: fix del link 
+	  target.
+
+2003-12-19  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.subproj/StructuredTextBodyElement.m: aggiunto
+	  riconoscimento chiavi dinamiche.
+
+	* StructuredTextRenderingDelegate.h: aggiunto metodo chiamato per 
+	  chiavi dinamiche.
+
+2003-12-18  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredTextRenderingDelegate.m ([-insertPreprocessedTextForKey:
+	  inContext:]): metodo chiamato dal preprocessore per sostituire le
+	  chiavi.
+
+	* StructuredText.subproj/StructuredTextBodyElement.m: implementato
+	  preprocessore.
+
+2003-12-16  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* Test.subproj/Test_StructuredText.m: aggiunto test per link Extrapola.
+
+	* StructuredTextRenderingDelegate.h: corretto metodo per link Extrapola
+	  e aggiunto parametro target al link.
+
+	* StructuredText.subproj/StructuredTextBodyElement.m: implementato link
+	  Extrapola.
+
+2003-12-11  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.subproj/StructuredTextHeader.m: implementato rendering
+	  con delegate.
+
+	* StructuredText.subproj/StructuredTextListItem.m: come sopra.
+
+	* StructuredText.subproj/StructuredTextBodyElement.m: Spostato il 
+	  parser da StructuredTextParagraph.
+
+2003-12-08  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.subproj/StructuredTextParagraph.m: implementati link.
+
+	* Test.subproj/StructuredText_TEST.m ([StructuredTextListItem
+	  -toTestInContext:]): fix per liste nidificate.
+	
+	* StructuredText_XHTML.m ([StructuredTextListItem -toXhtmlInContext:]):
+	  come sopra.
+
+	* Test.subproj/Test_StructuredText.m: corretti vari tests.
+
+	* StructuredLine.m ([-setText:]): setta correttamente il numero di 
+	  spazi	iniziali.
+
+	* StructuredText.m ([-buildList], [-checkForListItem:]): implementata
+	  lista numerata.
+	  ([-adjustLineLevels]): setta i livelli correttamente anche per liste.
+	  ([-lineType]): fix per liste.
+	  ([-checkForListItem]): spostato codice in listItemTypology:
+	  ([-buildList]): fix per liste nidificate.
+
+	* StructuredStack.m ([-pop]): posiziona correttamente il cursore.
+
+
+2003-12-08  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.subproj/StructuredTextParagraph.m
+	([-parseText:inContext:]): modificato in metodo ricorsivo. Implementato
+	bold, underline e italico.
+	([-findBoldSubstring:]: Ricerca terminatore stringa in grassetto.
+	([-findItalicsSubstring:]: Ricerca terminatore stringa in italico.
+	([-findUnderlineSubstring:]:  Ricerca terminatore stringa in
+	sottolineato.
+	([-boldText:inContext]): formatta il testo con il delegato.
+	([-italicsText:inContext]): come sopra.
+	([-underlineText:inContext]): come sopra.
+
+2003-12-05  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText_XHTML.m ([StructuredTextListItem -toXhtmlInContext]):
+	  fix per list item.
+
+	* StructuredText.m ([-buildLiteralBlock]): aggiunto newline a fine
+	  riga.
+
+2003-12-04  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.subproj/StructuredTextHeader.m: modificato
+	  inizializzatore per settare il livello dell'header. Vari fix.
+
+	* StructuredText.m: implementate le liste di tipo DEFINITION, i blocchi
+	  preformattati e gli header.
+
+	* StructuredLine.m ([-setText:]: setta il testo originale.
+	  ([-text]): ritorna il testo privo di spazi iniziali/finali e newline.
+	  ([-originalText]): ritorna il testo originale.
+
+	* StructuredText.subproj/StructuredTextLiteralBlock.m
+	  ([-initWithString:]: inizializza il blocco.
+
+	* StructuredText.subproj/StructuredTextListItem.m: aggiunto testo del
+	  list item per i tipi DEFINITION.
+
+	* StructuredStack.m ([-objectRelativeToCursorAtIndex:]: ritorna
+	  l'oggetto con un indice relativo alla posizione corrente del cursore.
+
+2003-12-01  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredText.subproj/StructuredTextBodyElement.m: metodi per la
+	  gestione degli elementi figli.
+
+	* StructuredText.m: fix delle strutture di stack, una (paragraphs) per
+	  la gestione delle linee di testo da processare, l'altra (stack) per 
+	  la posizione nell'albero del documento.
+
+	* StructuredStack.m ([StructuredStack -currentObject], [StructuredStack
+	  -nextObject]): fix per fine array.
+
+	* StructuredText.subproj/StructuredTextList.h: fix typo.
+
+	* StructuredText.subproj/StructuredTextListItem.m.|.h: inizializzazione
+	  e settaggio lista di appartenenza. _list non deve essere rilasciato.
+
+2003-11-27  Mirko Viviani  <mirko.viviani@e-cremona.it>
+
+	* StructuredTextRenderingDelegate.m ([StructuredTextRenderingDelegate
+	  -insertExtrapolaLink:withAction:parameters:inContext:]): uso di
+	  NSStringFromClass() per ottenere nome di classe.
+
+	* StructuredText.subproj/StructuredTextParagraph.m: inizializzazione e
+	  minimo uso del delegate per il test.
+
+	* StructuredText.subproj/StructuredTextDocument.m|.h
+	  ([-addBodyElement]): aggiunge un elemento al documento.
+
+	* PB.project, GSmakefile, Makefile: Aggiunto framework IBNExtensions

@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {orderFront = id; }; 
+            CLASS = SOPEXConsole; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {text = NSTextView; window = NSWindow; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

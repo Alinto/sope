@@ -1,0 +1,46 @@
+{
+  DirectoryConfigClass = "AWODirectoryConfig";
+  ServerConfigClass    = "AWOServerConfig";
+  
+  /* directory config */
+  SetSxApplication = {
+    selector = "SetSxApplication:";
+    overrides = ( ACCESS_CONF, OR_OPTIONS );
+    argspec   = "TAKE1";
+    usage     = "usage: SetSxApplication <appname>";
+  };
+  SetSxRequestHandler = {
+    selector = "SetSxRequestHandler:";
+    overrides = ( ACCESS_CONF, OR_OPTIONS );
+    argspec   = "TAKE1";
+    usage     = "usage: SetSxRequestHandler <rqhandlerclass>";
+  };
+  LogText = {
+    selector = "LogText:";
+    overrides = ( ACCESS_CONF, OR_OPTIONS );
+    argspec   = "TAKE1";
+    usage     = "usage: LogText <sometext>";
+  };
+
+  /* server config */
+
+  LoadBundle = {
+    selector = "LoadBundle:";
+    overrides = ( RSRC_CONF );
+    argspec   = "TAKE1";
+    usage     = "usage: LoadBundle <bundleName|bundlePath>";
+  };
+
+  SxApplicationAlias = {
+    selector = "SxApplicationAlias::";
+    overrides = ( RSRC_CONF );
+    argspec   = "TAKE2";
+    usage     = "usage: SxApplicationAlias <appkey> <baseuri>";
+  };
+  SxHandlerAlias = {
+    selector = "SxHandlerAlias::";
+    overrides = ( RSRC_CONF );
+    argspec   = "TAKE2";
+    usage     = "usage: SxHandlerAlias <handlerkey> <baseuri>";
+  };
+}

@@ -1,0 +1,30 @@
+Templates
+=========
+
+XCode project template and several file templates.
+
+
+INSTALLATION
+============
+
+There are two places where you can install the templates contained
+in this directory:
+
+1) /Library/Application Support/Apple/Developer Tools/
+2) ~/Library/Application Support/Apple/Developer Tools/
+
+Templates installed in 1) are available for all developers working
+on this machine. Templates installed in 2) are available for you,
+only.
+
+NOTE: installing templates means to copy them - there's no other magic
+involved, no need to compile anything etc. Simply copy them to one of the two
+destinations above. I usually do a
+find . -type d -name .svn -exec rm -rf {} \;
+afterwards in order to remove the Subversion metadata. This metadata would
+get copied to the new projects destination otherwise, probably causing
+confusion if you plan on using Subversion in your projects.
+
+Whether you copy the templates with 'cp' or 'gnutar' is up to you, there are
+no special files involved.
+

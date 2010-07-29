@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="JSImageFlyover">
+  <binding name="action" passthrough="NO" defaults="Actions"/>
+  <binding name="pageName" passthrough="NO" defaults="Page Names"/>
+  <binding name="javaScriptFunction"/>
+
+  <binding name="selectedImage"   required="YES"/>
+  <binding name="unselectedImage" required="YES" />
+  <binding name="framework" defaults="Frameworks"/>
+  <binding name="targetWindow"/>
+
+  <!-- SOPE -->
+  <binding name="directActionName" passthrough="NO" defaults="Direct Actions"/>
+  <binding name="actionClass" passthrough="NO" defaults="Direct Action Classes"/>
+  <binding name="queryDictionary" passthrough="NO"/>
+
+  <validation message="either one of &apos;action&apos;, &apos;pageName&apos;, or &apos;javaScriptFunction&apos; may be bound, or either or both of &apos;actionClass&apos; and &apos;directActionName&apos; may be bound">
+    <count test="!=1">
+      <bound name="action"/>
+      <bound name="javaScriptFunction"/>
+      <bound name="pageName"/>
+      <or>
+        <bound name="actionClass"/>
+        <bound name="directActionName"/>
+      </or>
+    </count>
+  </validation>
+</wo>

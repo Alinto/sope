@@ -1,0 +1,364 @@
+2007-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XmlRpcSaxHandler.m, XmlRpcDecoder.m: fixed a few gnustep-base
+	  compilation warnings (v4.7.31)
+
+2006-09-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* GNUmakefile.preamble: filter out -O% flags for files using exception
+	  handlers, enable -O2 per default (v4.5.30)
+
+2006-08-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSObject+XmlRpc.m: added support for 'nil' type as submitted by
+	  xmlrpclib with the 'allow_none' option set (v4.5.29)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.1 warnings, use %p for pointer formats (v4.5.28)
+
+2006-02-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* XmlRpcValue.m: fixed stupid bugs in -isException and -isDictionary,
+	  which formerly lead to unreadable exception garbage whenever a
+	  remote exception occured. NOTE: have we had proper unit tests,
+	  this probably wouldn't have splipped through so easily. :-)
+	  (v4.5.27)
+
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSMutableString+XmlRpcDecoder.m: properly include string.h to fix a
+	  memcpy warning (v4.5.26)
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NSObject+XmlRpc.m, XmlRpcSaxHandler.m: fixed gcc 4.0 warnings
+	  (v4.5.25)
+
+2005-04-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcDecoder.m: fixed duplicate decoding of base64 values in XML-RPC
+	  results (v4.5.24)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* XmlRpc.xcode: minor cleanup
+
+2004-09-22  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* XmlRpc.xcode: minor fixes
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* XmlRpc.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects.
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+	  (v4.3.23)
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* XmlRpc.xcode: moved unused source into Unused group. Fixed
+	  file encodings.
+
+2004-08-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XmlRpc.xcode: fixed Xcode project
+
+2004-08-26  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* XmlRpc.xcode: new Xcode project
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* moved to SOPE 4.3 (v4.3.22)
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.21
+
+	* GNUmakefile.preamble: added prebinding info
+
+	* GNUmakefile: moved preamble stuff to GNUmakefile.preamble, also 
+	  build XmlRpc.framework on non-libFoundation systems
+
+2004-05-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XmlRpcDecoder.m: do not print a compile warning if NSXMLParser is 
+	  used (on MacOSX) (v4.2.20)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>  
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.19)
+
+2003-11-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* GNUmakefile: removed autodoc target
+
+2003-11-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.18
+
+	* XmlRpcDecoder.m: can use NSXMLParser for parsing, if available
+
+	* XmlRpcMethodResponse: now accepts an NSData object for parsing, this
+	  avoids costly conversions between NSString and NSData for parsing
+	  ...
+
+	* XmlRpcRequestDecoder.m, XmlRpcSaxHandler.m: added debug logging 
+	  facilities
+
+2003-10-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XmlRpcDecoder.m: fixed some Xcode warnings (v4.2.17)
+
+2003-08-29  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed an MacOSX warning in XmlRpcEncoder (v4.2.16)
+
+2003-08-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.15
+	
+	* NSObject+XmlRpc.m: catch year-values bigger than 2033 or smaller than
+	  1900 and transform them into something usable by libFoundation 
+	  (problem exposed by JOGI)
+
+	* XmlRpcEncoder.m: moved string category to separate file
+	
+	* XmlRpcDecoder.m: smaller cleanups
+
+2003-08-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.14
+
+	* NSObject+XmlRpc.m: map XML-RPC "value" type to "NSString". This 
+	  happens if the XML-RPC client does not send the "string" tag
+	  (<value>abc</value> instead of <value><string>abc</string></value>)
+
+2003-07-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSNotification+XmlRpcCoding.m: use -name instead of -notificationName
+	  to get the name of the notification for encoding (required for
+	  gstep-base, Cocoa, also works on lF) (v4.2.13)
+
+2003-04-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcEncoder.m: fixed a bug in encode-datetime (wrong timezone was
+	  used due to a bug in libFoundation), smaller speed optimizations
+	  (v4.2.12)
+
+2003-02-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.11
+
+	* XmlRpcSaxHandler.m: if an incorrect fault object is returned, try to
+	  transform it to a exception
+
+	* XmlRpcEncoder.m: renamed -appendHTMLString: to -appendXmlRpcString:,
+	  added specialized methods for adding int and double members (since
+	  performSelector:withObject: doesn't coerce arguments on Cocoa)
+
+2003-01-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcMethodCall.m: removed dependency on -shallowCopy (dependency
+	  to EOControl being linked in ...) (v4.2.10)
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.9
+
+	* NSDate+XmlRpcCoding.m: fixed a warning on MacOSX
+
+	* common.h: removed dependency on FoundationExt on MacOSX
+
+Thu Jan  2 10:52:41 2003  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.8
+	
+	* common.h: defined ASSIGN macro if missing
+
+	* XmlRpcValue.m, XmlRpcDecoder.m: do not use AUTORELEASE macros
+
+Fri Dec 27 10:56:51 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcEncoder.m: added a new escaping function which works with
+	  unicode strings (v4.2.7)
+
+2002-09-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed some compilation warnings (v4.2.6)
+
+2002-09-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* made docs AutoDoc compliant
+
+2002-08-08  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcDecoder.m: fixed major bugs in the XML-RPC decoding code,
+	  when contained in structures, base types like int,bool resulted 
+	  in a core dump (basetypes were handled like objects)
+
+2002-07-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSException+XmlRpcCoding.m: improved mapping of NSException's to
+	  XML-RPC faults
+
+	* XmlRpcMethodResponse.m: added better -description
+
+Tue Jul  2 16:09:45 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* fixed a bug with exception encoding/decoding
+
+2002-07-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* replaced -initWithXmlRpcDecoder: with -decodeObjectWithXmlRpcCoder:
+	  due to a problem with releasing newly allocated objects in MacOSX
+
+Fri May 17 11:03:12 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcValue.m: added some stuff for the fix below
+
+	* XmlRpcSaxHandler.m: added a fixup to end_fault that turns 
+	  NSDictionary XmlRpcValues into NSExceptions
+
+	* XmlRpcResponseDecoder.m: pass string directly to the parser, not an
+	  NSData generated using NSASCIIStringEncoding ...
+
+Thu May  2 12:58:59 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* changed to use -rangeOfString: instead of -indexOfString:
+
+Thu Feb 28 15:16:21 2002  Jan41 Reichmann  <jan@skyrix.com>
+
+	* NSException+XmlRpcCoding.m: fixed encode bug
+
+Wed Feb 27 11:51:17 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added -xmlRpcType method to determine the "default" type which
+	  will result in encoding the object as XML-RPC
+
+Tue Feb 26 10:18:50 2002  Bjoern Stierand  <bjoern@skyrix.com>
+
+	* XmlRpcEncoder.m: removed newlines created during en-/decoding
+
+Mon Feb 25 17:41:03 2002  Martin Spindler  <spindler@mdlink.de>
+
+	* XmlRpcSaxHandler.m: decode <value>test</value> as string
+
+Wed Feb 13 13:52:09 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved generic stuff to XML/XmlRpc
+
+Sat Feb  9 13:00:11 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcSaxHandler.m: added warning and error handlers ...
+
+	* XmlRpcDecoder.m: improved error output
+
+Fri Feb  8 17:35:05 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcDecoder.m: fixed charset problems
+
+Fri Feb  8 12:29:28 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpcIntrospection.m: changed to return "string"
+	  signature for object types
+
+Thu Feb  7 20:19:55 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: autogenerate SandStorm component name
+
+Wed Jan 30 18:16:31 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpcIntrospection.m: fixed bug with method names
+
+	* NGXmlRpcInvocation.m: convert types prior to call, if signature
+	  is available
+
+Tue Jan 29 18:30:56 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NGXmlRpcInvocation, NGXmlRpcMethodSignature
+
+Mon Jan 28 18:46:34 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: improved reflection capabilities
+
+	* WODirectAction+XmlRpc.m: support a GET action for dynamic reflection
+
+	* WODirectAction+XmlRpc.m: added method to define component prefix
+
+Fri Jan 25 18:36:58 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* WODirectAction+XmlRpc.m: use RPC2 as action name ...
+
+	* added NGXmlRpcClient class
+
+Thu Jan 17 17:23:09 2002  Martin Spindler  <spindler@mdlink.de>
+
+	* NSObject+XmlRpc.m: raise exception if coding methods arn't supported
+
+Tue Nov 13 09:34:54 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOKeyGlobalID+XmlRpcCoding.m: removed unnecessary retain/autorelease
+
+Tue Nov 13 01:06:50 2001  Jan41 Reichmann  <jan@skyrix.com>
+
+	* EOKeyGlobalID+XmlRpcCoding.m: fixed decoding bug
+
+Wed Oct 24 13:23:54 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* XmlRpcSaxHandler.m: fixed multiple call of -characters:length:
+
+Mon Oct 22 20:53:33 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcEncoder.m: normalize NSString subclasses
+
+Mon Oct 22 18:20:54 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcMethodResponse+WO.m: enabled UTF-8 for result encoding
+
+Wed Oct 10 19:42:17 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* XmlRpcEncoder.m: use -classForCoder instead of -class
+
+Tue Aug 28 15:38:05 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* changed 'timeZone' - tag into 'timeZone' - attribute
+
+Tue Aug 28 14:21:54 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* support of 'timeZone' - tag (not xmlprc compatible!)
+
+	* XmlRpcCoder: added accessors for defaultTimeZone
+
+Mon Aug 27 10:47:03 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved SKYRiX Logic categories back to skyxmlrpcd
+
+Wed Aug 22 15:41:39 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* XmlRpcDecoder.m: decode dates as calendar-dates
+
+Wed Aug 22 14:56:22 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* use ObjC base-types for decoding/encoding numbers
+
+Wed Aug 22 11:36:02 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSDate+XmlRpcCoding.m: fixed NSTimeZone decoding
+
+	* NSArray+XmlRpcCoding.m: fixed NSEnumerator coding, fixed RC bugs
+
+Mon Aug 20 21:55:41 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* created ChangeLog
+

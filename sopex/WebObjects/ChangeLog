@@ -1,0 +1,19 @@
+2005-03-10  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WebObjects.xcode: headers are now properly copied from NGObjWeb,
+	  thanks to Philip Moetteli for changing this.
+
+	* INSTALL: updated
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* WebObjects.xcode: updated for SOPE 4.5
+
+2004-04-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile: Added GNUmakefile to allow building of a
+	  compatibility library.
+
+2004-03-31  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* ChangeLog: created.

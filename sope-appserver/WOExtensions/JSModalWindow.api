@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="JSModalWindow">
+  <binding name="action" passthrough="NO" defaults="Actions"/>
+  <binding name="pageName" passthrough="NO" defaults="Page Names"/>
+
+  <binding name="height" />
+  <binding name="width" />
+  <binding name="windowName" />
+  <binding name="isResizable" />
+  <binding name="showLocation" />
+  <binding name="showMenuBar" />
+  <binding name="showScrollbars" />
+  <binding name="showStatus" />
+  <binding name="showToolbar" />
+
+  <!-- SOPE -->
+  <binding name="href" />
+  <binding name="top" />
+  <binding name="left" />
+  <binding name="isCenter" />
+  <binding name="filename" />
+  <binding name="string" />
+  <binding name="framework" defaults="Frameworks"/>
+
+  <validation message="exactly one of &apos;action&apos;, &apos;pagename&apos;, or &apos;href&apos; may be bound">
+    <count test="!=1">
+      <bound name="action"/>
+      <bound name="pageName"/>
+      <bound name="href"/>
+    </count>
+  </validation>
+</wo>

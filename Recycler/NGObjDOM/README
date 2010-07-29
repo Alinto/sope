@@ -1,0 +1,60 @@
+
+NGObjDOM XML Rendering Framework
+================================
+
+Note: while NGObjDOM *is* useful it is more or less deprecated in the places
+      where it is currently used, which are: OGo forms and OGo publisher.
+      In both cases the NGObjDOM implementation of the templates should be
+      replaced using NGObjWeb XML DOM builders for a major speedup and far
+      better integration into the NGObjWeb server.
+
+NGObjDOM is a framework which works together with NGObjWeb to render
+XML content represented as DOM trees.
+It can be used to create templates (WODynamicElement's) represented
+as XML files instead of .wo components.
+
+To render a DOM tree you can use the WORenderDOM dynamic element, eg:
+
+  <#DOMContent />
+
+  DOMContent: WORenderDOM {
+    domDocument = domTree;
+    factory     = passThroughHTMLRenderer;
+  }
+
+The DOM is processed using so called 'node renderers', which are roughly
+identical to WODynamicElements but differ in that they only perform the
+operation and do not represent the template tree (WODynamic elements are
+tree nodes with behaviour, this is separated in NGObjDOM: the tree is the
+DOM, the behaviour are the renderers).
+
+The superclass for all node renderers is ODNodeRenderer and already provides
+some convinience methods for accessing attributes and such. The ODR class
+prefix stands in for 'ObjDOM Renderer'.
+
+A bridge to dynamic elements in the other direction (embedding 
+WODynamicElement's in DOM trees) is the ODRWebObject renderer.
+
+Profiling
+=========
+
+You can profile the renderer using the defaults
+
+  ODProfileRenderer    - bool
+and
+  ODProfileRendererMin - double
+
+Defaults
+========
+
+  ODNodeRendererDebugCursor - bool
+
+ODProfileRenderer - Bool - log render profiling information
+
+ODNodeRenderer Debug Defaults
+  ODEvalAttrValuesInExceptionHandler - bool
+  ODDebugJSAttrEval - bool
+  ODLogAttrValues   - bool
+
+---
+hh, 2001-05-30

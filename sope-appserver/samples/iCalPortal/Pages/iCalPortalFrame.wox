@@ -1,0 +1,114 @@
+<?xml version='1.0' standalone='yes'?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:const="http://www.skyrix.com/od/constant">
+  <head>
+    <title><var:string value="title"/></title>
+    <meta name="description" content="SKYRiX iCalendar Portal" />
+    <meta name="author"      content="SKYRIX Software AG" />
+    <meta name="robots"      content="stop" />
+    
+    <!-- link rel="shortcut icon" href="/favicon.ico" -->
+    <link type="text/css" 
+          rel="stylesheet" 
+          href="/iCalPortal.woa/WebServerResources/English.lproj/site.css" />
+    <link href="mailto:webmaster@skyrix.com" rev="made" />
+  </head>
+  
+  <body bgcolor="white">
+
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img filename="banner_a.gif" width="1" height="123"/></td>
+      <td><img filename="banner_b.gif" width="125" height="123"/></td>
+      <td><img filename="banner_c.gif" width="1" height="123"/></td>
+      <td colspan="2"><img filename="banner_d.gif" width="672" height="123"/></td>
+      <td><img filename="banner_e.gif" width="1" height="123"/></td>
+    </tr>
+    <tr>
+      <td background="/iCalPortal.woa/WebServerResources/English.lproj/line.gif"
+         ><img filename="pixel.gif"/></td>
+      <td valign="top"
+          background="/iCalPortal.woa/WebServerResources/English.lproj/back_menu.gif">
+        <var:component className="iCalPortalLeftMenu"/>
+      </td>
+      <td background="/iCalPortal.woa/WebServerResources/English.lproj/line.gif"
+         ><img filename="pixel.gif"/></td>
+      <td width="10"><img filename="pixel.gif"/></td>
+      <td valign="top">
+        <span>
+          <table border="0" width="662" cellspacing="0" cellpadding="0">
+            <tr>
+              <td><font class="default"></font></td>
+              <td align="right"><font class="default">
+                <a href="mailto:?body=http://www.xml-rpc.de/index.xhtml&amp;subject=XML-RPC HomePage">mail to...</a
+>
+                |
+                <a href="print/index.xhtml" target="printer">Druckansicht</a><entity name="nbsp"/></font>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" height="1" background="/iCalPortal.woa/WebServerResources/English.lproj/line.gif"><img filename="pixel.gif"/></td>
+            </tr>
+            <tr>
+              <td colspan="2" height="3"><img filename="pixel.gif" height="3" /></td>
+            </tr>
+          </table>
+        </span>
+
+        <!-- the content title -->
+        <font class="header"><var:string value="title"/></font>
+
+        <table border="0" cellpadding="0" cellspacing="0" width="640">
+          <tr>
+            <td height="1" 
+	        background="/iCalPortal.woa/WebServerResources/English.lproj/line.gif"
+	       ><img filename="pixel.gif" /></td>
+            <td height="1" width="1"
+	        background="/iCalPortal.woa/WebServerResources/English.lproj/line.gif"
+	       ><img filename="pixel.gif" /></td>
+            <var:if condition="showRightMenu">
+              <td height="1"><img filename="pixel.gif" /></td>
+            </var:if>
+          </tr>
+          <tr>
+            <!-- the content area -->
+            <!-- td align="left" valign="top" width="464" -->
+            <td align="left" valign="top" bgcolor="#FCF8DF">
+              <table border="0" cellpadding="0" cellspacing="10" width="100%">
+                <tr>
+                  <td align="left" valign="top" width="100%">
+                    <font class="default"><var:component-content/></font>
+                  </td>
+                </tr>
+              </table>
+            </td>
+    
+            <var:if condition="showRightMenu">
+              <!-- horizontal line ! -->
+              <td width="1" 
+        	  background="/iCalPortal.woa/WebServerResources/English.lproj/line.gif"
+	         ><img filename="pixel.gif" /></td>
+              
+              <!-- right menu -->
+              <td align="left" valign="top" width="146">
+                <table width="100%" cellpadding="1" cellspacing="5" border="0">
+                  <tr>
+                    <td><var:component className="iCalPortalRightMenu"/></td>
+                  </tr>
+                </table>
+              </td>
+            </var:if>
+          </tr>
+        </table>
+      </td>
+
+      <td background="/iCalPortal.woa/WebServerResources/English.lproj/line.gif"><img filename="pixel.gif"/></td>
+    </tr>
+    <tr>
+      <td background="/iCalPortal.woa/WebServerResources/English.lproj/line.gif" colspan="6"><img filename="pixel.gif"/></td>
+    </tr>
+  </table>
+
+ </body>
+</html>

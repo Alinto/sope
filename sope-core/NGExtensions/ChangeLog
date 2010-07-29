@@ -1,0 +1,1704 @@
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGQuotedPrintableCoding.m: encode '_' as '=5F', so that it is not
+	  decoded as a space (v4.7.203)
+
+2009-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGCalendarDateRange.m ([NGCalendarDateRange -dealloc]): release
+	  endDate and startDate. (v4.7.202)
+
+2008-03-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSArray+enumerator.m: fixed for MacOS 10.5 (v4.7.201)
+
+2008-02-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+Escaping.m: fixed a free() bug introduced in
+	  the unichar conversion of v4.7.197 (v4.7.200)
+
+2008-02-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NGPropertyListParser.m: fixed NSException not to use
+	  -setUserInfo: (v4.7.199)
+
+2008-02-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOExt.subproj/EOGlobalID+Ext.m: explicitly include NSString.h to
+	  please GNUstep (v4.7.198)
+
+2008-02-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.7.197
+
+	* FdExt.subproj/NSString+misc.m: rewrote -bindingVariables and
+	  stringByReplacingVariablesWithBindings:stringForUnknownBindings:
+	  to use unichar (needs testing, might be buggy)
+
+	* NGQuotedPrintableCoding.m: rewritten to use -dataUsingEncoding:
+	  methods instead of working on -cString buffers (Note: encoding
+	  selection is dubious)
+
+	* FdExt.subproj/NSString+Escaping.m: rewrote -stringByApplyingCEscaping
+	  to work on unichars
+
+	* added EOExt.subproj/EOGlobalID+Ext.m category to streamline KVC on
+	  non-lF environments
+
+2007-12-03  Helge Hess  <me@helgehess.eu>
+	
+	* NGExtensions/NSString+Formatting.h: replaced usage of deprecated
+	  -getCString: method on MacOS 10.4 and later (v4.7.196)
+
+2007-07-31  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* FdExt.subproj/NSMethodSignature+misc.m: added warning and bogus
+	  implementation of -objCTypes for Leopard (v4.7.195)
+
+2007-05-31  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+Encoding.m: added gnustep-base and
+	  libFoundation implementations for
+	  [NSString +stringEncodingForEncodingNamed:] (v4.7.194)
+
+2007-05-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGCalendarDateRange.m: return nil for undefined KVC keys (v4.7.193)
+
+2007-04-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGExtensions/NSString+Ext.h: expose a few GNUstep NSString
+	  extensions (v4.7.192)
+
+2006-11-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.191
+
+	* NGRuleEngine.subproj/NGRuleContext.m: allow keypathes in rule values,
+	  not just keys
+
+	* FdExt.subproj/NSString+misc.m: fixed a quote-skipping issue
+
+2006-11-16  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOExt.subproj/EOCacheDataSource.m: the NSTimer of the datasource
+	  does not retain the datasource anymore to avoid keeping them around
+	  w/o any other refers (fixes a buserror on MacOS) (v4.5.190)
+
+2006-11-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGQuotedPrintableCoding.m: added NSData method to decode QP as per
+	  RFC 2045: -dataByDecodingQuotedPrintableTransferEncoding, related to
+	  OGo bug #1753 (v4.5.189)
+
+2006-07-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: fixed a minor 64bit printing issue (v4.5.188)
+
+2006-07-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGResourceLocator.m: added FHS_INSTALL_ROOT to lookup path (v4.5.187)
+
+2006-07-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: added more debug logs which can be triggered using
+	  NGBundleManagerDebugEnabled (v4.5.186)
+
+	* 64bit fixes (v4.5.185)
+
+2006-07-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.184
+
+	* NGHashMap.m: improved memory management with exceptions
+
+	* FdExt.subproj/NSSet+enumerator.m: code cleanups
+
+	* use %p for pointer formats, fixed gcc 4.1 warnings
+
+2006-05-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* *.h, *m: changed EOControl related includes into imports
+	  to enable compilation against MulleEOF (v4.5.183)
+
+2006-02-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: minor code cleanups (v4.5.182)
+
+2006-01-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NGPropertyListParser.m (_skipComments): fixed a bug
+	  when parsing comments which contain stars (v4.5.181)
+
+2005-12-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGQuotedPrintableCoding.m (NGDecodeQuotedPrintable): properly decode
+	  underscore as 0x20 (as per RFC 2047 4.2) (v4.5.180)
+
+2005-11-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGExtensions/NSObject+Values.h: added NGBaseTypeValues protocol to
+	  be able to refer to the statically typed 'signed' set of basetypes
+	  (v4.5.179)
+
+2005-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSObject+Values.m: explicitly mark signed values as
+	  such (most importantly char) (v4.5.178)
+
+	* FdExt.subproj/NSCalendarDate+misc.m: include math.h to avoid a floor
+	  warning (v4.5.177)
+
+2005-10-05  Helge Hess  <helge.hess@skyrix.com>
+
+	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty to NSSet (v4.5.176)
+
+2005-09-28  Helge Hess  <helge.hess@skyrix.com>
+
+	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty to NSData (v4.5.175)
+
+2005-09-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: avoid an autorelease call in class lookup, added
+	  some lookup hacks for Tiger Foundation (v4.5.174)
+
+2005-08-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added common.h files to support PCH compilation of subprojects (just
+	  include the parent common.h and are not required for Xcode builds)
+	  (v4.5.173)
+
+2005-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOExt.subproj: code cleanups, added a README.txt (v4.5.172)
+
+2005-08-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added method to calculate a calendar matrix for a date representing
+	  a month (-calendarMatrixWithStartDayOfWeek:onlyCurrentMonth:),
+	  added a method to turn an English/German string into a day-of-a-week
+	  number (0=Sun-6=Sat) (v4.5.171)
+
+2005-08-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGExtensions.xcodeproj: moved NGRuleParser.h from source to header
+	  section
+
+2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGRuleEngine.subproj/NGRuleModel.m: added EOKeyValueArchiving, added
+	  method to load from such an archive, added -addRules: to add a set
+	  of rules (v4.5.170)
+
+2005-08-04  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGRuleEngine.subproj/NGRuleContext.m: added new method
+	  -allPossibleValuesForKey: to calculate all possible values for a
+	  given key, not just the first matching one (v4.5.169)
+
+2005-08-04  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOFilterDataSource.m, EOCompoundDataSource.m: code cleanups
+	  (v4.5.168)
+
+2005-08-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* added EOKeyValueArchiving support to NGRuleEngine objects (v4.5.167)
+
+2005-07-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSException+misc.m: added -isException and
+	  -isExceptionOrNull methods to NSObject to check whether a given
+	  object is an exception (v4.5.166)
+
+2005-07-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSNull+misc.m: fixed a stupid bug in -isNotEmpty
+	  (v4.5.165)
+
+	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty for NSArray and
+	  NSDictionary (return YES in case they have no elements) (v4.5.164)
+
+2005-07-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+misc.m: use -valueForKeyPath: instead of
+	  -valueForKey: to retrieve string binding patterns (might give issues
+	  in case you had keys with dots inside before) (v4.5.163)
+
+2005-07-18  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty to all objects. Its
+	  similiar to -isNotNull but also checks for strings composed of just
+	  spaces (v4.5.162)
+
+2005-07-11  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGResourceLocator.m: added -description, added method
+	  -lookupAllFilesWithExtension:doReturnFullPath: to discover all
+	  available files in a search hierarchy (v4.5.161)
+
+2005-05-20  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved NGStringScanEnumerator to Recycler (was not in makefile)
+
+2005-05-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 warnings (v4.5.160)
+
+	* XmlExt.subproj/DOMNode+EOQualifier.m: reworked for new DOM
+	  (v4.5.159)
+
+2005-04-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* fixed gcc 4.0 warnings (v4.5.158)
+
+2005-04-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* FdExt.subproj/NSObject+Logs.m: fixed previously broken implementation
+	  of -logger which now has an NSMapTable for class <-> logger
+	  lookup. (v4.5.157)
+
+2005-03-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.156
+	
+	* NGBundleManager.m: implemented -classesProvidedByBundle:
+	
+	* NGRuleEngine.subproj/NGRuleParser.m: fixed parsing of array and
+	  dictionary plist rule values
+
+2005-03-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGExtensions/NGObjectMacros.h: fixed ASSIGN, ASSIGNCOPY macros to
+	  avoid an unset LHS as requested by Stephane (v4.5.155)
+
+2005-03-02  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGCalendarDateRange.m: Bugfix for -containsDate: (v4.5.154)
+
+2005-03-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m (-pathForResource:ofType:inDirectory:languages:):
+	  changed resource lookup to look in Contents/Resources or Resources
+	  depending on the Foundation library when no inDirectory: has been
+	  given (v4.5.153)
+
+2005-02-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSNull+misc.m: added -hasPrefix: / -hasSuffix:, should
+	  fix OGo bug #1080 (v4.5.152)
+
+2005-02-21  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+URLEscaping.m: changed to escape '+' chars
+	  in URLs - this is required since the same methods are used for forms
+	  which treat spaces as "+" (OGo bug #1260) (v4.5.151)
+
+2005-02-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: added some debugging code, minor code cleanups
+	  (v4.5.150)
+
+2005-02-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGObjCRuntime.m: fixed some issue with the last commit (v4.5.149)
+
+2005-02-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGObjCRuntime.m: decoupled some varargs processing (v4.5.148)
+
+2005-02-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGExtensions/NGCalendarDateRange.h: fixed header file for MacOSX
+	  (v4.5.147)
+
+2005-02-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBase64Coding.m: added method -dataByEncodingBase64WithLineLength:
+	  to support the fix for OGo bug #1228 (v4.5.146)
+
+2005-02-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGCalendarDateRange.[hm]: new method -duration (v4.5.145)
+
+2005-02-09  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* FdExt.subproj/NSCalendarDate+misc.m: Julian number <-> date
+	  conversion methods (v4.5.144)
+
+2005-02-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+misc.m: do not quote the last newline if the
+	  newline is the last char in the string (v4.5.143)
+
+2005-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+misc.m: added new method
+	  -stringByApplyingMailQuoting for placing "> " in front of each line
+	  contained in the string (v4.5.142)
+
+2005-01-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGExtensions/AutoDefines.h, common.h: fixed defines on MacOSX (fixes
+	  OGo bug #912 (v4.5.141)
+
+2004-12-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGCalendarDateRange.[hm]: new convenience method -containsDateRange:
+	  (v4.5.140)
+
+2004-12-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGExtensions.xcode: minor fixes and updated
+
+2004-12-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOFilterDataSource.m, EOCacheDataSource.m: minor code cleanups
+	  (v4.5.139)
+
+2004-11-24  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSObject+Logs.m: fixed debug logging to be compatible
+	  with existing code (v4.5.138)
+
+	* NGBundleManager.m: subminor code cleanups (v4.5.137)
+
+2004-11-19  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLogging: updated - API considered stable now.
+	  NOTE: "make distclean" is required this time. (v4.5.136)
+
+2004-11-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.5.135
+	
+	* FdExt.subproj/NSObject+Logs.m: fixed a bug in default logger creation
+	  (incorrect static variable)
+	
+	* NGLogging: fixed bug in console appender, increased speed, avoid
+	  different logger objects for each class
+
+2004-11-18  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.5.134
+
+	* NGLogging: updated
+
+	* NGExtensions/NSObject+Logs.h, FdExt.subproj/NSObject+Logs.m:
+	  changed existing implementation to use NGLogging by default. Added
+	  some more methods to support different log levels. Also added
+	  -logger and -debugLogger which are used to provide the default
+	  loggers for the desired purpose.
+
+	* FdExt.subproj/NGBundleManager.m: fixed wrong include
+
+2004-11-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: fixed a bug in the bundle type check when the
+	  cached bundle is NSNull (v4.5.133)
+
+2004-11-17  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGLogging: updated (v4.5.132)
+
+	* NGLogging: updated (v4.5.131)
+
+2004-11-17  Matthew Joyce  <mjoyce@aboveit.nl>
+
+	* NGBundleManager.m: check whether bundle is nil prior running a type
+	  check (v4.5.130)
+
+2004-11-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: some code cleanups (v4.5.129)
+
+2004-11-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGLogging: code cleanup (v4.5.128)
+
+2004-11-12  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile: added NGLogging.subproj (v4.5.127)
+
+2004-11-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* branched 4.3 to 4.4 and 4.5
+
+2004-10-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* FdExt.subproj/NSString+URLEscaping.m: removed '&' as an URL safe
+	  char (v4.3.126)
+
+2004-10-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* FdExt.subproj/NSString+Escaping.m: minor code cleanups, removed a
+	  superfluous statement (v4.3.125)
+
+2004-10-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+Escaping.m: minor code cleanups, removed a
+	  superflous if() condition (v4.3.124)
+
+2004-10-14  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.3.123
+
+	* FdExt.subproj/NSString+Escaping.m, NGExtensions/NSString+Escaping.h:
+	  new category and protocol to do generic escaping. The category is
+	  Unicode safe and optimized for performance.
+	
+	* FdExt.subproj/NSString+misc.m, NGExtensions/NSString+misc.h: moved
+	  -stringByApplyingCEscaping to new NSString+Escaping.
+
+2004-10-11  Matthew Joyce  <mjoyce@aboveit.nl>
+
+	* FdExt.subproj/NSCalendarDate+misc.m: fixed -isAfternoon (all dates
+	  were reported as forenoon) (v4.3.122)
+
+2004-10-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+URLEscaping.m: do not escape URL safe chars
+	  (fixes a WebDAV issue with Cadaver) (v4.3.121)
+
+2004-10-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGExtensions.xcode: updated to the current build version
+
+2004-10-03  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSURL+misc.m: fixed URL processing in some edge case
+	  (v4.3.120)
+
+2004-10-02  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGQuotedPrintableCoding.m: minor code cleanups (v4.3.119)
+
+2004-10-01  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSException+misc.m: check whether nil is being passed
+	  in as the exception format (v4.3.118)
+
+2004-09-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: removed a warning on MacOSX (v4.3.117)
+
+2004-09-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGExtensions.xcode: added NGResourceLocator class
+
+2004-09-23  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NGResourceLocator class (v4.2.116)
+
+	* moved NGCString to Recycler (was not compiled since v4.2.93)
+
+2004-09-21  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGExtensions.xcode: Fixed dependencies to resemble the make process
+	  more closely. Our aim should be to stick to the make process
+	  as closely as possible, so we shouldn't introduce dependencies in
+	  non-toplevel projects.
+
+	* NGExtensions.xcode: minor fix
+
+2004-09-20  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.3.115
+	
+	* NGExtensions/NSBundle+misc.h, FdExt.subproj/NSBundle+misc.m: new
+	  NSBundle method -pathForResource:ofType:inDirectory:forLocalizations:
+
+	* NGExtensions/NGExtensions.h: added NSBundle+misc.h to the public
+	  headers
+
+2004-09-06  Helge Hess  <helge.hess@skyrix.com>
+	
+	* FdExt.subproj/NSFileManager+Extensions.m: added new method:
+	  -createDirectoriesAtPath:attributes: (comparable to mkdirs)
+	  (v4.3.114)
+	
+	* NGBundleManager.m: changed bundle resource lookup to check loaded
+	  bundles before scanning the NGBundlePath resources (is faster and
+	  fixes an issue with a bundle loaded but not in the search path)
+	  (v4.3.113)
+	
+2004-09-05  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.3.112
+
+	* NGBundleManager.m: code cleanups, added -setBundleSearchPaths: and
+	  -bundleSearchPaths to allow bundle path modifications from code
+
+	* NGHashMap.m: removed libFoundation specific exception handling, the
+	  same exceptions are now thrown for all runtimes
+
+2004-08-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: fixed yet another bug in NGBundleManager path
+	  lookup (v4.3.111)
+
+2004-08-29  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: fixed an issue when running without GNUstep
+	  environment (v4.3.110)
+
+	* v4.3.109
+
+	* NGBundleManager.m: look for bundles in GNUSTEP_PATHPREFIX_LIST and
+	  GNUSTEP_PATHLIST
+
+	* added hack to install the project in FHS locations - the library,
+	  its headers, the tools and the resources will be installed in
+	  FHS_INSTALL_ROOT if specified (eg make FHS_INSTALL_ROOT=/usr/local)
+
+2004-08-29  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGExtensions.xcode: various fixes for project settings
+
+2004-08-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSURL+misc.m: fixed some URL processing methods
+	  (v4.3.108)
+
+2004-08-25  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGCalendarDateRange.m: properly fixed intersectionDateRange: to not
+	  return pseudo-ranges. (v4.3.107)
+
+2004-08-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.3.106
+
+	* NGCalendarDateRange.m: changed -containsDate: in a way that the range
+	  is treated as a half-open interval (including startDate, excluding
+	  endDate). 
+
+	* v4.3.105
+
+	* NGExtensions.xcode: new Xcode project
+
+	* NGStringScanEnumerator.m: compile bugfix
+
+	* NGExtensions-Info.plist: new version and bundle identifier
+
+2004-08-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* XmlExt.subproj/GNUmakefile: added include path for "inline" SOPE 4.3
+	  compilation (v4.3.104)
+
+	* moved to SOPE 4.3 (v4.3.103)
+
+2004-08-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGCalendarDateRange.m: added range category on NSArray, added some
+	  methods to daterange (v4.2.102)
+
+2004-08-16  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* added NGCalendarDateRange class (v4.2.101)
+
+2004-07-26  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSObject+Values.m([NSString -unsignedCharValue]): added
+	  a specific implementation for NSString to support KVC bool operations
+	  (because BOOL values are represented as 'unsigned char' values at
+	  runtime, [self takeValue:@"YES" ...] coercion did fail for bool
+	  methods) (v4.2.100)
+
+2004-07-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOExt.subproj/EOKeyMapDataSource.m: fixed a gcc 3.4 warning (v4.2.99)
+
+2004-07-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+Encoding.m: improved error logs in case an
+	  iconv buffer is too small (v4.2.98)
+
+2004-06-27  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGExtensions/FdExt.subproj/NGPropertyListParser.m: minor cleanups to
+	  log messages (v4.2.97)
+
+2004-06-22  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.96
+
+	* FdExt.subproj/NSArray+enumerator.m: fixed a bug with array capacity
+	  initialization (used an uninitialized variable leading to a virtual
+	  memory exhausted on gstep-base)
+
+	* FdExt.subproj/NGPropertyListParser.m (_makeException): be more
+	  tolerant about nil results in NSString creation (fixes an exception
+	  with gstep-base)
+
+2004-06-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSURL+misc.m: add a hack to work around a bug in NSURL
+	  on Cocoa Foundation, added a lot of debug logs (v4.2.95)
+
+2004-06-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGObjCRuntime.m: fixed hack for dynamic class loading with gcc 3.4
+	  (type signature of the privates changed or is more strictly checked)
+	  (v4.2.94)
+
+	* v4.2.93
+
+	* GNUmakefile: removed NGCString from compilation
+
+	* NGExtensions/NGExtensions.h: do not include NGCString.h
+
+2004-06-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGExtensions/GNUmakefile.preamble: added prebinding (v4.2.92)
+
+2004-06-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj: include NGPropertyListParser categories when compiling
+	  for libFoundation (v4.2.91)
+
+	* v4.2.90
+
+	* GNUmakefile.preamble: fixed path to DOM library, added explicit 
+	  dependency to SaxObjC for MacOSX
+
+	* NGBundleManager.m: logging can now be enabled using the 
+	  NGBundleManagerDebugEnabled default, some code cleanups
+
+2004-06-07  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* NGExtensions/NSString+misc.[hm]: improved, now works with any object
+	  which supports KVC (v4.2.89)
+	
+2004-06-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBundleManager.m: fixed gcc 3.4 warnings (v4.2.88)
+
+2004-06-05  Stephane Corthesy  <stephane@sente.ch>
+
+	* NGBundleManager.m(-bundleForClass:): added basic support for classes
+	  defined in frameworks (v4.2.87)
+
+2004-06-03  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGObjCRuntime.m: added a hack to make NGObjCRuntime.m compile with
+	  gcc 3.4.0 (v4.2.86)
+
+2004-06-01  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* NGExtensions/NSCalendarDate+misc.h,
+	  FdExt.subproj/NSCalendarDate+misc.m: new method -(BOOL)isInLeapYear,
+	  utilized by rewritten -(int)numberOfDaysInMonth. 
+	  -(NSCalendarDate *)lastDayOfMonth uses -(int)numberOfDaysInMonth now
+	  instead of the other way round as before. -lastDayOfMonth turned
+	  out to be non-portable to gnustep-base, the new implementation works
+	  with all foundation and is far more time/memory efficient. (v4.2.85)
+
+2004-05-17  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSNull+misc.m: added 'NSNullAbortOnMessage' default to
+	  enable abort()'s if a message is sent to NSNull (useful for debugging
+	  NSNull issues on MacOSX (v4.2.84)
+
+2004-05-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGObjCRuntime.m: fixed a bug in GNU runtime method addition, added
+	  a class enumerator for the GNU runtime (v4.2.83)
+
+	* NGObjCRuntime.m: added an implementation of +addMethods for the
+	  Apple runtime (v4.2.82)
+
+2004-05-05  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* GNUmakefile.preamble: added support for building with
+	  GNUSTEP_BUILD_DIR environment variable set for recent
+	  gnustep-make package. (v4.2.81)
+
+2004-05-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* EOExt.subproj/EOSortOrdering+plist.m: fixed wrong mappings for
+	  case insensitive sortOrderings (v4.2.80)
+
+2004-05-01  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.79
+
+	* EOExt.subproj/EOSortOrdering+plist.m: fixed wrong key argument to
+	  initWithKey:selector: in initWithDictionary:.
+
+	* EOExt.subproj/EOFetchSpecification+plist.m: testing for
+	  respondsToSelector(objectEnumerator) matches dictionaries as well,
+	  resulting in improper behavior. Narrowed to testing for kind of
+	  NSArray now.
+
+2004-05-01  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* NGObjCRuntime.m: improved support for Apple runtime (v4.2.78)
+	
+2004-04-07  Jean-Alexis Montignies  <ja@sente.ch>
+	
+	* NGHashMap: added because used in NGObjWeb
+	  -asDictionaryWithArraysForValues (v4.2.77)
+	
+2004-04-07  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGExtensions/NSString+Encoding.h: exported 
+	  +stringEncodingForEncodingNamed: on Cocoa (v4.2.76)
+
+2004-04-01  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* NGHashMap: some code cleanups, made the code a bit more fault
+	  tolerant (check for some NULL references, as suggest by Jean-Alexis 
+	  Montignies), fixed missing class in header file (v4.2.75)
+	
+2004-03-24  Helge Hess  <helge.hess@skyrix.com>
+
+	* FdExt: added NSString+German category which contains some methods to
+	  deal with ASCII representations of German umlauts (useful for some
+	  searches) (v4.2.74)
+
+2004-03-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.73
+
+	* FdExt.subproj/NSString+HTMLEscaping.m: added escaping for some
+	  missing umlauts
+
+	* FdExt.subproj/NSObject+Values.m: minor speed optimization to NSString
+	  -boolValue
+
+2004-03-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOExt: moved in property list initializer methods from EOControl (to
+	  make them available for GDL2)
+
+2004-03-14  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: print an error log if we were unable to get the 
+	  system NSUserDefaults object, as it currently happens with 
+	  gstep-base, added a hack not to create the NGBundleManager if the
+	  NSUserDefaults object could not be retrieved (v4.2.71)
+
+2004-03-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* EOFilterDataSource: code cleanups, added -description method 
+	  (v4.2.70)
+
+2004-03-11  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBundleManager.m: disabled a debug log (v4.2.69)
+
+2004-03-10  Donald Duck  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: print a warning if the NGBundlePath default is not
+	  configured (v4.2.68)
+
+2004-03-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSException+misc.m: added a -copyWithZone: method,
+	  as used by the XML-RPC client (v4.2.67)
+
+2004-03-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* FdExt.subproj/NSException+misc.m: added a -setReason: implementation
+	  for gnustep-base - thanks to chunsj for pointing that out (v4.2.66)
+
+2004-02-24  Helge Hess  <helge@mac.in.skyrix.com>
+
+	* FdExt.subproj/NSNull+misc.m: added -descriptionWithLocale: on MacOSX
+	  (v4.2.65)
+
+2004-02-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSNull+misc.m: added -descriptionWithLocale: for
+	  Cocoa Foundation (v4.2.65)
+
+	* FdExt.subproj/NSNull+misc.m: added various "ignore that" methods for 
+	  MacOSX: -isEqualToString:, -characterAtIndex:, 
+	  -descriptionWithLocale:indent:, added -respondsToSelector: (always
+	  returns YES on MacOSX) - Note: this is to be considered a workaround,
+	  we need to find out, why OGo calls such methods on NSString with
+	  Cocoa Foundation (v4.2.64)
+
+2004-02-19  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSCalendarDate+misc.m, NSString+Ext.m: added KVC 
+	  default handlers for Cocoa Foundation (avoids some exceptions, 
+	  libFoundation is much more tolerant regarding missing KVC keys than 
+	  Cocoa) (v4.2.63)
+
+2004-02-13  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.62
+
+	* NGBundleManager.m: do not report missing resources on MacOSX (reduced
+	  debug level)
+
+	* FdExt.subproj/NSArray+enumerator.m: added implementation of 
+	  -map:... (to be considered deprecated ...) for the MacOSX port
+
+2004-02-12  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: disabled class-hook debugging on OSX (v4.2.61)
+
+2004-02-10  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGStack.m: fixed minor compilation warning on OSX (v4.2.60)
+
+2004-02-08  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+Encoding.m: cleanups, use ucs-2-internal
+	  instead of ucs-2 on non-Linux platforms and detect platform byte
+	  ordering and use ucs-2le or ucs-2be depending on that - should fix
+	  OGo bugs #580 (does not fix #145) (v4.2.59)
+
+2004-01-23  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSFileManager+Extensions.m: renamed category to
+	  ExtendedFileManagerImp to avoid gcc warnings (v4.2.58)
+
+2003-12-28  Helge Hess  <helge.hess@opengroupware.org>
+
+	* NGBundleManager.m: minor cleanups (v4.2.57)
+
+2003-11-30  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+misc.m, 
+	  FdExt.subproj/NSMethodSignature+misc.m: applied some minor patches
+	  for gstep-base provided by chunsj@embian.com (v4.2.56)
+
+2003-11-20  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+URLEscaping.m: added UTF-8 URL escaping
+	  (v4.2.55)
+
+	* v4.2.54
+	
+	* NSString+URLEscaping.m: added default 'NGUseUTF8AsURLEncoding' to
+	  unescape URL strings as UTF-8 entities. This is usually the right
+	  thing to do for WebDAV servers like ZideStore. Note that encoding
+	  is still always done in ISO-Latin-1 (to be fixed)
+	
+	* FdExt.subproj/NSString+misc.m: moved the various string escaping
+	  implementations (URL, HTML and XML) into separate NSString categories
+
+2003-11-09  Helge Hess  <helge.hess@opengroupware.org>
+
+	* FdExt.subproj/NSString+Formatting.m: minor speed and MacOSX
+	  compatibility improvements (v4.2.53)
+
+2003-10-27  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBase64Coding.m: bad day, fixed the new -dataByDecodingBase64
+	  (v4.2.52)
+
+	* NGBase64Coding.m: added -dataByDecodingBase64 to NSString, since
+	  a base64 string can (of course!) contain zero bytes. 
+	  -stringByDecodingBase64 now returns nil if it encounteres such a 
+	  situation (v4.2.51)
+
+	* NGBase64Coding.m: fixed a major bug in the base64 encoding (which did
+	  not handle empty values properly!) (v4.2.50)
+
+2003-10-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* v4.2.49
+
+	* FdExt.subproj/NSException+misc.m: fixed ZNeK's setReason:
+	  implementation for gstep-make
+
+	* moved NGPropertyListParser.h to NGExtensions and made it a
+	  public header
+
+2003-10-13  Helge Hess  <helge@opengroupware.org>
+
+	* compile and link NGPropertyListParser in case we are not on
+	  libFoundation, compile and link FileObjectHolder on Cocoa
+	  (v4.2.48)
+
+2003-10-11  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* FdExt.subproj/NSException+misc.m: Provided implementation for
+	  setReason: (as needed with COCOA_Foundation_LIBRARY) and provided
+	  interface declaration in case of GNUSTEP_BASE_LIBRARY. (v4.2.47)
+
+2003-09-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.46
+
+	* NGBundleManager.m, NGHashMap.m, NGObjCRuntime.m, NGStack.m,
+	  EOExt.subproj/EOQualifier+CtxEval.m, FdExt.subproj/NSNull+misc.m,
+	  FdExt.subproj/NSProcessInfo+misc.m, FdExt.subproj/NSString+misc.m:
+	  Fixed outdated references to FoundationExt and pointed to
+	  NGExtensions where appropriate.
+	  Also, added defines for NeXT_RUNTIME.
+ 
+	* EOExt.subproj/EOKeyMapDataSource.m: Fixed problem with method
+	  not returning value when not void.
+
+2003-09-06  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.45
+
+	* NGExtensions.h: do not include FoundationExt but NGObjectMacros.h
+          instead
+
+        * added NGObjectMacros.h which contains the RC macros 
+
+	* FdExt.subproj/NSString+Formatting.m: cache the NSString class
+          object, use less autorelease, fixed a nil-parameter bug on MacOSX,
+          added some hacks to implement unicode format scanning (v4.2.44)
+
+2003-09-06  Marcus Mueller  <znek@mulle-kybernetik.com>
+
+	* v4.2.43
+
+	* GNUmakefile.preamble: added iconv to the list of necessary
+	  libraries on FreeBSD (4.x/5.x)
+
+	* FdExt.subproj/NSString+Encoding.m: do not use iconv on Apple,
+	  instead use CoreFoundation's
+	  CFStringConvertIANACharSetNameToEncoding()
+
+2003-07-18  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.42
+
+	* FdExt.subproj/NSData+gzip.m: removed dependency on zutil.h,
+	  patch provided by Filip Van Raemdonck
+
+	* NGHashMap.m, NSNull+misc.m: fixed gstep-base compilation problems, 
+	  patch provided by Filip Van Raemdonck
+
+Wed Jul 16 16:03:47 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* FdExt.subproj/NSString+Formatting.m: use ISERIES/USE_VA_LIST_PTR 
+	 defines to handle va_list structures (v4.2.41)
+
+Wed Jul 16 15:00:16 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* FdExt.subproj/NSString+Formatting.m: fixed a bug regarding iSeries 
+	  port, copy va_list structure before give it to a function and read 
+	  one argument from the original va_list (v4.2.40)
+
+Tue Jul 15 21:09:26 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* FdExt.subproj/NSString+Formatting.m: replace *va_list function 
+	  arguments with va_list (iSeries port) (v4.2.39)
+
+Mon Jul 14 18:21:55 2003  Jan Reichmann  <jr@skyrix.com>
+
+	* NGBundleManager.m: cache bundle using name.extension instead of name 
+	  only (v4.2.38)
+
+2003-06-23  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NGFileManager.m: ignore empty strings during path standardization
+	  (reason for publisher bug 1778) (v4.2.37)
+	
+2003-06-06  Jan Reichmann <jr@skyrix.com>
+	
+	* NSString+Encoding.m: added a category to encode/decode string from
+	  arbitary encoding formats using libiconv (v4.2.36)
+
+2003-05-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* updated MacOSX port, some smaller modification to compile without 
+	  FoundationExt (exceptions, memory allocation, plist parsing) 
+	  (v4.2.35)
+
+2003-05-19  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.34
+
+	* NGRuleEngine.subproj/NGRuleContext.m: added a flag to enable 
+	  debugging on a per-context base, added some logging
+
+	* NGRuleEngine.subproj/NGRuleModel.m: during sorting of rules also 
+	  consider how specific a qualifier is (by calling -count on the 
+	  qualifier)
+
+	* v4.2.33
+
+	* NGRuleEngine: fixed default priorities
+	
+	* NGRuleEngine/NGRuleParser: fixed bug in rule-model parsing, added
+	  a "reset" method to reset stored variables
+
+	* NGRuleContext: added some constructors (v4.2.32)
+
+2003-05-16  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGRuleEngine: added parsing of rule-models (v4.2.31)
+
+	* v4.2.30
+	
+	* EOExt.subproj/NSArray+EOGrouping.m: fixed a bug introduced by
+	  clean ups in v4.2.26
+
+	* EOExt: added EOTrueQualifier (used in rule system for *true*)
+
+	* added simple NGRule parser
+
+2003-05-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* FdExt.subproj/NSString+misc.m: added a new scanning method,
+	  -rangeOfString:skipQuotes:escapedByChar: for easier parsing of
+	  common quoted languages (v4.2.29)
+
+2003-05-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved headers to "NGExtensions" subdirectory (v4.2.28)
+
+	* started to add NGRuleEngine, a KVC/EOQualifier based evaluation 
+	  system (v4.2.27)
+
+	* cleaned up source organization, created three subprojects,
+	  FdExt, EOExt and XmlExt for Foundation, EOControl and skyrix-xml
+	  additions (v4.2.26)
+
+2003-04-09  GNUstep User  <helge.hess@skyrix.com>
+
+	* fixed unsigned/signed warnings for gcc 3.3 (v4.2.25)
+
+	* NSProcessInfo+misc.m: small fix for gstep-base (use 
+	  -stringByTrimmingSpaces instead of ..WhiteSpaces..) (v4.2.24)
+
+2003-04-01  GNUstep User  <helge.hess@skyrix.com>
+
+	* NGObjCRuntime.m: added a hack for GNUstep Base with the incomplete
+	  FoundationExt library (v4.2.23)
+
+2003-04-01  Helge Hess  <helge.hess@skyrix.com>
+
+	* added compilation support for GNUstep base (v4.2.22)
+
+2003-03-14  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSString+misc.m: do not encode umlaut entities in XML output 
+	  (v4.2.21)
+
+2003-03-09  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBase64Coding.m: added -stringByEncodingBase64 and 
+	  -stringByDecodingBase64 to NSData (v4.2.20)
+
+Tue Mar  4 13:53:40 2003  Jan Reichmann  <jan@skyrix.com>
+
+	* GNUmakefile, NGFileManager+JS.m: add JS functions 
+	  (copied from NGJavaScript/Core+JS/NGFileManager+JS.m) (bug 712) 
+          (v4.2.19)
+
+Tue Feb  4 11:56:34 2003    <jan@skyrix.com>
+
+	* NGHashMap.m: disable throwing exception in objectForKey: if 
+	  more than one object exsist, print out a warning only (bug 981) 
+	  (v4.2.18)
+
+Fri Jan 17 16:43:13 2003  Martin Hoerning  <mh@skyrix.com>
+
+	* NSCalendarDate+misc.m 
+	([NSCalendarDate -dateByAddingYears:months:days:]): 
+	  fixed month overflow (bug 871) (v4.2.17)
+
+2003-01-10  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBundleManager.m: do not print a warning if the principal class of a
+	  bundle could not be found (since the bundle might have none ...) and
+	  use the NGBundle class as the default handler (v4.2.16)
+
+2003-01-07  Helge Hess  <helge.hess@skyrix.com>
+
+	* v4.2.15
+
+	* changes for improved compilation on MacOSX, replaced RETAIN macros
+	  with methods
+	
+	* common.h: does not include anything from FoundationExt (required
+	  includes were moved to the .m files)
+
+Fri Dec 27 10:42:11 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* fixed Copyright headers in most files (v4.2.14)
+
+Mon Dec 23 15:34:51 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSObject+Logs.m: print a warning if DEBUG is disabled (v4.2.13)
+
+	* NSFileManager+Extensions.m: correctly implement NGFileManager (some
+	  trash related fixes)
+
+2002-11-25  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSString+misc.m: added some methods for processing fully qualified
+	  XML names (v4.2.12)
+	
+2002-11-22  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOKeyMapDataSource.m: finished EOKeyMapDataSource (v4.2.11)
+	
+	* EOKeyMapDataSource.m: started EOKeyMapDataSource (v4.2.10)
+
+	* EOCacheDataSource.m: tiny code cleanups
+
+2002-11-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSURL+misc.m: fixed an index bug in URL string processing (v4.2.9)
+
+2002-10-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSDictionary+misc: added a method 
+	  -dictionaryByExchangingKeysAndValues to reverse the mapping of a
+	  dictionary (v4.2.8)
+
+2002-10-21  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGStringScanEnumerator.m: properly clear data when being passed an
+	  empty NSData (v4.2.7)
+
+Thu Oct 17 16:18:49 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added Bjoern's excellent NGStringScanEnumerator for scanning binaries
+	  for printable strings (useful for extracting version information of
+	  executables that have no --version support ..) (v4.2.6)
+
+2002-09-30  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSEnumerator+misc.m, NSProcessInfo+misc.m: removed some compilation
+	  warnings (v4.2.5)
+
+Fri Aug 30 11:40:59 2002  Jan Reichmann  <jan@skyrix.com>
+
+	* NGQuotedPrintableCoding.m: (Suse Bug 18600) fixed 
+	  'Soft line Breaks'-Bug (v4.2.4)
+
+2002-08-15  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSFileManager+Extensions.m: added support for GlobalIDs, make
+	  relative pathes absolute before calling standarizePath (v4.2.3)
+
+2002-07-12  Helge Hess  <helge.hess@skyrix.com>
+
+	* moved tools/tests to skyrix-core/samples
+
+2002-05-31  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBundleManager.m: changed to work with gstep-base library
+
+2002-05-23 Helge Hess  <helge.hess@skyrix.com>
+
+	* moved from Skyrix-dev-42 repository to skyrix-core (v4.2.2)
+
+Fri May 17 14:51:13 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NSData+gzip category from NGZlib
+
+Thu May  2 15:21:00 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NSURL+misc for handling relative NSURLs
+
+Thu May  2 13:38:11 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* made some modifications to support gstep-base
+
+Mon Apr 29 11:35:31 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSProcessInfo+misc.m: added convenience methods: 
+	  -argumentsWithoutDefaults
+
+Tue Apr 16 13:13:05 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSString+misc.m: fixed bug with HTML escaping \n \r etc
+
+Tue Feb 12 21:04:16 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSObject+Values.m: the -stringValue of NSMutableString now returns an
+	  immutable copy
+	
+	* added DOM extensions
+
+Sat Feb  9 12:25:57 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* added object logging methods
+
+Wed Feb  6 11:54:04 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSProcessInfo+misc.m: added -temporaryFileName
+
+Mon Jan  7 15:33:41 2002  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBundleManager.m: use a set for resource lookup to avoid duplicates
+
+Mon Dec 17 15:19:23 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGFileManager.m: added -trashFileAtPath:handler: method
+
+Tue Nov 27 19:30:29 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBundleManager: made NGBundle class public
+
+	* NSProcessInfo+misc.m: speed optimized /proc processing ...
+
+Thu Nov 22 10:48:29 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSCalendarDate+misc.m: added method for calculation of
+	  easter
+
+Tue Nov  6 12:06:49 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed NGFileManager*Tools from Sascha, too many dependencies on
+	  SkyProject ...
+
+Tue Nov  6 12:00:11 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NGFileManager*Tools from Sascha
+
+Thu Oct 18 15:34:13 2001  Helge Hess  <helge.hess@skyrix.com>
+	
+	* NSNull+misc.m: added forwarding code to catch unknown selectors
+	
+Tue Oct 16 16:34:25 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOQualifier+CtxEval.m ([NSArray -filteredArrayUsingQualifier:context:]): 
+	  return empty array instead of nil if no object matches
+
+Mon Oct 15 15:59:42 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSNull+misc.m: implemented KVC for NSNull ...
+
+Mon Oct 15 15:33:52 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSNull+misc.m: added -count,-length implementations
+	  to improve stability against typing bugs (calls get
+	  logged using NSLog)
+
+Tue Aug 28 11:32:06 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSString+misc.m: added Unicode support to HTML escaping
+
+	* NSString+misc.h: added methods to do HTML escaping
+
+Mon Aug 20 17:59:49 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOCompoundDataSource.m: fixed bug: remove from notification center
+	  in -dealloc
+	  
+	* EOFilterDataSource.m ([NSDictionary -flattenedArrayWithHint:andKeys:]): 
+	  fixed allocation bug (missing -autorelease)
+
+Fri Aug 17 12:47:07 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NSProcessInfo+misc for querying the /proc filesystem
+
+Fri Aug 10 13:31:28 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* added NGFileManager class
+
+Thu Aug  9 13:49:30 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSString+misc.m (NGUnescapeUrlBuffer): added URL escaping/unescaping
+
+Tue Jul 31 11:27:46 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* EOFilterDataSource.m: can handle groupings now
+
+Tue Jul 10 11:56:18 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NSCalendarDate+misc.m(firstMondayAndLastWeekInYear:): do not dump
+	  core if passed NULL
+
+2001-06-26  Helge Hess  <helge.hess@skyrix.com>
+
+	* removed NGNil, NGArchiver
+
+	* moved to SkyDev41
+
+Wed May 30 14:47:11 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOFilterDataSource.m: completed
+
+Thu May 10 11:23:57 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGBundleManager.m: improved error handling
+
+Mon Apr 30 10:44:02 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* EOCacheDataSource.m: added -description
+
+Thu Apr 19 11:58:57 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* EOCompoundDataSource.m: insert mh bugfix (return empty array instead 
+	of nil); fixed sources notification bug
+	
+Tue Apr 10 13:15:38 2001  Helge Hess  <helge.hess@skyrix.com>
+
+	* NGFileManager.h: completed NGFileManager protocol
+
+Mon Mar 26 12:29:14 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* added NSNull+misc with -isNotNull
+
+Thu Mar  8 16:51:31 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* EOKeyGrouping.m: fixed bug with 'nil' in -addObject:
+
+Tue Feb 13 10:51:03 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* EOGrouping.m: added -setGroupings/-groupings to EOFetchSpecification
+
+Tue Feb 13 10:31:29 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* fixed bugs in grouping stuff
+
+Tue Feb  6 18:18:48 2001  Martin Spindler  <spindler@mdlink.de>
+
+	* NSArray+Grouping.[hm], EO*Grouping.[hm]: added
+
+Mon Jan 29 15:36:07 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSFileManager+Extensions.m: added trash-folder support
+
+Wed Jan 24 19:35:43 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NSString+misc.[mh]: add FilePathVersioningMethods
+
+Wed Jan 24 19:35:00 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* NSFileManager+Extensions.h: add fileAttributesAtPath:traverseLink:
+	version:
+
+Tue Jan 23 18:04:35 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* EOQualifier+CtxEval.m: fixed bug in parameter countin
+
+Thu Jan 18 17:04:07 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSFileManager+Extensions: changed feature-check methods
+
+Tue Jan 16 11:28:38 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* EOCacheDataSource.m: fixed timeout bug
+
+Mon Jan 15 14:24:45 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSFileManager+Extensions.h: added locking protocol
+
+Mon Jan 15 12:54:54 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSFileManager+Extensions.h: added methods for versioning
+
+Sun Jan 14 19:27:23 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* EOCacheDataSource.[mh]: improved timeout
+
+Fri Jan 12 18:29:33 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* EOCacheDataSource.[hm]: timeout
+
+Wed Jan 10 15:56:40 2001  Helge Hess  <helge.hess@mdlink.de>
+
+	* EODataSource+NGExtensions.m: added EONoFetchWithEmptyQualifierHint
+
+Wed Jan  3 15:36:40 2001  Jan Reichmann  <jan@skyrix.com>
+
+	* EOCacheDataSource.m: fixed dealloc bug
+
+Thu Oct 26 20:00:41 2000  Jan Reichmann  <jan@skyrix.com>
+
+	* EOQualifier+CtxEval.m: fixed log bug
+
+Thu Oct 19 14:31:48 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSString+misc.m: added changes of Jan
+
+Mon Oct 16 19:30:30 2000  Martin Spindler  <spindler@mdlink.de>
+
+	* EODataSource+NGExtensions.m: added
+
+Mon Oct  2 18:04:28 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSString+Formatting.m: added %ll specifier for long-long types
+
+Thu Aug 31 17:54:59 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSEnumerator+misc: added this new category/classes
+
+Fri Aug 18 15:09:14 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGBundleManager.m: cache bundle manager object
+
+Thu Aug 17 13:43:06 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGBundleManager.m: always search in $GSROOT/Library/Bundles
+
+Wed Jul  5 20:32:24 2000  Martin Hoerning  <mh@mdlink.de>
+
+	* NSCalendarDate+misc.m: fixed -numberOfWeeksInYear
+
+Wed Jun 28 15:24:46 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSCalendarDate+misc.m: added -numberOfWeeksInYear
+
+Tue Jun 13 18:34:04 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGObjCRuntime.m, NSString+Formatting.m: doesn't use stack allocated
+	  buffers anymore
+
+Fri Jun  9 17:37:09 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGQuotedPrintableCoding.m: changed 'char' type to 'signed char'
+
+Wed May 31 16:33:53 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSCalendarDate+misc.h: added -firstDayOfMonth and -weekOfMonth
+
+Wed May 17 11:54:20 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSCalendarDate+misc.m: added -isForenoon and -isAfternoon
+
+Wed May  3 17:45:19 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSCalendarDate+misc.m: fixed mondays-of-year calculation to respect
+	  the DST timezones
+
+Wed May  3 17:14:32 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSCalendarDate+misc.m: added week-calculation methods
+
+Tue May  2 17:24:09 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGBundleManager.m ([NGBundleManager -providedResourcesOfType:inBundle:]): 
+	  fixed bug, didn't qualify based on type
+
+Tue May  2 14:00:45 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NSString+misc.m: fixed possible buffer overflow bug
+
+Tue May  2 13:24:40 2000  Jan Reichmann  <jan@mdlink.de>
+
+	* NGHashMap.m: fixed RC-Bug in allObjects and _NGHashMapObjectEnumerator 
+	-nextObject
+
+Tue May  2 13:12:11 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGHashMap.m: added NSAssert's to check for a valid 'table'
+
+Fri Apr 28 19:00:52 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSString+misc.m: added placeholder replacement stuff, removed string
+ 	  debugging stuff
+
+Wed Apr 12 19:33:26 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSCalendarDate+misc.m: added -isToday method
+
+Tue Feb 29 17:12:15 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* MOF3 import
+
+Mon Feb 21 13:49:40 2000  Helge Hess  <helge.hess@mdlink.de>
+	
+	* removed -cString calls
+
+2000-02-17    <helge.hess@mdlink.de>
+
+	* NSString+Formatting.m, NSBase64Coding.m, NGBundleManager.m, NSString+misc:
+ 	  removed a lot of 'cString' usage
+
+Thu Jan 20 18:44:27 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* added NGObjCRuntime category. Contains ObjC runtime manipulation stuff
+
+Mon Jan 10 12:44:10 2000  Helge Hess  <helge.hess@mdlink.de>
+
+	* NSCalendarDate+misc.m: added Y2K support method
+
+Mon Dec  6 19:15:27 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* NGBundleManager.m: added support for EOQualifier queries
+
+Thu Sep 16 18:14:39 1999  Helge Hess  <helge.hess@mdlink.de>
+
+	* removed NGTool.[hm], NGProxy.[hm], NGMainMacros.h
+
+Mon Jul 26 12:21:44 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGBundleManager.m: added -principalObject method
+
+Thu Jul 22 14:31:36 1999  Jan Reichmann  <jan@mdlink.de>
+
+	* NGQuotedPrintableCoding.m: fixed NGEncodeQuotedPrintable
+
+Thu Jul  8 10:23:52 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGBundleManager.m: send notification if bundle did load
+
+Wed Jun 30 15:20:05 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* added NGBundleManager
+
+Fri Jun 25 19:58:14 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSString+Formatting.m: fixed bug (formatter looks for empty format)
+
+Tue Jun 15 10:38:05 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* added NGQuotedPrintableCoding categories
+
+Fri May 21 16:13:52 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* make it compile with gstep-base
+
+Fri May 21 13:19:10 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* changed OPENSTEP macro to WITH_OPENSTEP
+
+Tue Mar 16 12:43:03 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* common.h: added support for mingw32
+
+Tue Jan 12 13:19:36 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHashMap.m: added -asDictionary method
+
+Fri Jan  8 14:42:31 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSSet+enumerator.m: implemented mapping methods
+
+Thu Jan  7 16:14:55 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGBase64Coding.m: use +stringWithCStringNoCopy:...
+
+Wed Jan  6 18:54:50 1999  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSString+Formatting.m: use Objective-C allocation functions
+
+	* NGMemoryAllocation.h: use Objective-C allocation functions
+
+	* NSAutoreleasePool+misc.m: content is ignored if Boehm GC is used
+
+Wed Dec 30 09:54:51 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* fixed exception creation, cleanups in NSAttributedString
+
+Mon Dec 28 09:51:24 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* replaced THROW with -raise
+
+	* replaced TRY with NS_DURING
+
+	* removed GNU regex library because of license issues
+
+Wed Dec 23 12:13:07 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSArray+enumerator.m: added methods to create sets using selector
+	  mapping
+
+Wed Dec 16 12:23:24 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSArray+enumerator.m: added methods to create arrays using selector
+	  mapping
+
+Fri Dec 11 18:58:35 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSCalendarDate+misc.m: added -hour:minute:second:, -hour:minute:
+
+Tue Dec  8 19:23:23 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSCalendarDate+misc.m: fixed -tomorrow, -yesterday which was broken
+
+	* NSCalendarDate+misc.m: added various methods: 
+	  -isDateOnSameDay, -isDateInSameWeek, -yesterday, -tomorrow
+
+	* added NSCalendarDate+misc category
+
+Fri Nov 27 15:53:48 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGExtensions.h: added 'index()' function for WIN32
+
+Thu Nov 26 13:48:35 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSException+misc.h: removed FINALLY from SYNCHRONIZED macros
+
+	* GNUmakefile: added install capability
+
+Tue Nov 24 11:51:08 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSAutoreleasePool+misc.m: added category linking function
+
+	* NGStack.m: fixed RC bug (elements were not released on dealloc)
+
+Mon Nov 23 10:37:55 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSString+misc.m: added string debugging methods (init replacements)
+	  which were in libFoundation-mof2 before
+
+	* added NSAutoreleasePool+misc.[hm]
+
+Mon Nov 16 18:41:15 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGCharBuffers.h: fixed bug in initialization
+
+Fri Nov 13 10:44:03 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGExtensions.h: made NoZone a libFoundation specific
+
+	* Makefile.preamble: added -Wno-protocol switch
+
+	* NGTool.m: getpid() replaced for WIN32
+
+Tue Nov 10 17:01:20 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGTool.m: signal handler sets itself again after signal is executed
+
+Fri Nov  6 11:07:03 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGArchiver.m: added proper Copyright information
+
+Thu Nov  5 08:28:07 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGArchiver.m: reformatted for inclusion in libFoundation
+
+Wed Oct 28 14:57:40 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGHashMap.m: added -initWithDictionary:, +hashMapWithDictionary: methods
+
+Thu Oct 22 14:07:32 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* added NSDictionary+misc category
+
+Tue Oct 20 19:34:33 1998  Helge Hess  <helge@trex.mdlink.de>
+
+	* added xor digests in MD5 generator
+
+1998-10-19  Helge Hess  <helge@trex.mdlink.de>
+
+	* NSObject+Values.m: modified values method to use only intValue,
+	  floatValue and doubleValue.
+
+	* NSException+misc.h: added synchronized macros
+	
+	* removed property list parser (now in libFoundation)
+
+1998-10-15  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGStack.m: made category on NSMutableArray to make it conform to
+	  stack protocol
+
+	* added NSString+misc category. Contains a method to return a
+	  string escaped using C rules (newline becomes '\n', ..)
+
+1998-10-11  Helge Hess  <helge@trex.mdlink.de>
+
+	* started Rhapsody support
+
+1998-10-10  Helge Hess  <helge@trex.mdlink.de>
+
+	* NGBase64Coding.m: removed generation of newline at end of encoding,
+	                    cleaned up, removed MAXLINE constant
+
+1998-10-09  Helge Hess  <helge@trex.mdlink.de>
+
+	* reformatted NGArchiver.m
+
+	* created ChangeLog

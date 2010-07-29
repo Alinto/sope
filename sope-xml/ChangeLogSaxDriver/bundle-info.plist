@@ -1,0 +1,23 @@
+{
+  CVS = "$Id: bundle-info.plist 429 2004-12-08 22:36:03Z znek $";
+  //bundleHandler = NSObject;
+
+  requires = {
+    bundleManagerVersion = 1;
+    classes = (
+      { name = NSObject;    }
+    );
+  };
+
+  provides = {
+    SAXDrivers = ( 
+        { 
+          name        = ChangeLogSaxDriver;
+          sourceTypes = ( "application/x-changelog" ); 
+        },
+    );
+    classes    = ( 
+        { name = ChangeLogSaxDriver; },
+    );
+  };
+}

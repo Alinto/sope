@@ -1,0 +1,333 @@
+- fixed issues with the new logging framework
+- properly implemented -classesProvidedByBundle: in bundle manager
+- fixed parsing of array/dict plist rule values in the rule engine
+- improved ASSIGN macros for some edge conditions
+- added MySQL adaptor
+- added GDLContentStore
+- improved -describeResults: method in sope-gdl1
+- removed some unused features in EOAttribute
+- fixed some header issue in WebObjects.xcode
+- fixed support for multi value MIME header fields (#1324)
+- fixed issues with incorrect MIME header termination
+- improved URL handling in NGImap4
+- fixed memory leaks in SaxObjectDecoder
+- updated some makefiles in Recycler wastebin
+- fixed unauthenticated binds in NGLdap (#957)
+- added manpages for all .api files
+- added support for XHTML and HTML in dynamic elements
+- changed mod_ngobjweb to transfer SSL client certificate headers
+- woapi2man.py, a tool to generate man-pages from .api XML files
+- enhanced WOPopUpButton to allow static options
+- added 'disabled'/'checked' bindings in radio/checkbox elements
+- added 'selected'/'itemGroup' bindings in WOPopUpButton/WOBrowser
+- fixed a memory leak in SoObjectDataSource
+- changed default strings table to 'Localizable.strings'
+- added support for extra attrs in WOJavaScript, use 'type' attribute
+- added support for 'disabled' binding in input elements
+- generate <img> if a WOImageButton is 'disabled'
+- changed default query parameter separator to &amp;
+- deliver proper SOPE version in 'user-agent' and 'server' headers
+- explicitly set charset in WOStats and SoWebDAVRenderer results
+- fixed ordering of propstat result elements in SoWebDAVRenderer
+- fixed some common.h Xcode issues
+- WOForm consumes 'multipleSubmit' binding (noop)
+- added support for auto-forked child processes for session less servers
+- fixed some interoperability issue with AJR (#1175)
+- bumped max element nesting to 126 (#1281)
+- proected component against duplicate -awake in same context
+- added 'escapeJS'/'framework' bindings to dynamic JS* elements
+- fixed numerous dealloc bugs/leaks in NGiCal
+
+Major contributors for 4.5a.3:
+Marcus Mueller
+Mont Rothstein
+Stephane Corthesy
+Helge Hess
+... and many more :-)
+
+===========================================================================
+compare ../releases/4.5alpha.2-nevermind with .
+r759
+changed: sope-core/NGExtensions/
+     2005-04-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* FdExt.subproj/NSObject+Logs.m: fixed previously broken implementation
+     	  of -logger which now has an NSMapTable for class <-> logger
+     	  lookup. (v4.5.157)
+     2005-03-17  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.156
+     	* NGBundleManager.m: implemented -classesProvidedByBundle:
+     	* NGRuleEngine.subproj/NGRuleParser.m: fixed parsing of array and
+     	  dictionary plist rule values
+     2005-03-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGExtensions/NGObjectMacros.h: fixed ASSIGN, ASSIGNCOPY macros to
+     	  avoid an unset LHS as requested by Stephane (v4.5.155)
+added:   sope-gdl1/MySQL
+added:   sope-gdl1/GDLContentStore
+changed: sope-gdl1/GDLAccess/
+     2005-04-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOAdaptorChannel.[hm]: added -describeResults: as a public method,
+     	  implemented -describeResults based on that (adaptors now need to
+     	  override -describeResults:) (v4.5.50)
+     2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.49
+     	* fixed various gcc 3.4.3 warnings
+     	* removed support for unused EOAttribute features like flattened, 
+     	  derived, read-only, insert/update formats, definition
+     2005-03-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* FoundationExt/GNUmakefile: properly include config.make (v4.5.48)
+changed: sope-gdl1/PostgreSQL/
+     2005-04-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* PostgreSQL72Channel.m: changed for -describeResults: API (v4.5.41)
+changed: sope-gdl1/SQLite3/
+     2005-04-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.17
+     	* NSString+SQLiteVal.m: fixed a gcc 3.4.3 warning
+     	* SQLiteChannel.m: changed for -describeResults: API
+     2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* SQLiteChannel.m: bumped max connection count from 15 to 150 (v4.5.16)
+     2005-04-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* SQLiteChannel.h, SQLiteAdaptor.m: removed unused ivars (v4.5.15)
+changed: sopex/WebObjects/
+     2005-03-10  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* WebObjects.xcode: headers are now properly copied from NGObjWeb,
+     	  thanks to Philip Moetteli for changing this.
+     	* INSTALL: updated
+changed: sopex/Templates/
+     2005-03-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* Project Templates/SOPE/Web Application/README: updated to reflect
+     	  Xcode 1.5 (reported by Philip Moetteli, thanks!)
+changed: sope-mime/
+     2005-03-24  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMime, NGMail: fixed OGo bug #1324 by adding support for multivalue
+     	  header fields (v4.5.219)
+     	* NGMime: minor code cleanups (v4.5.218)
+     2005-03-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMime: fixed an issue with incorrect header field termination
+     	  (v4.5.217)
+     	* NGImap4: fixed a MacOSX incompatibility (v4.5.216)
+changed: sope-mime/NGMime/
+     2005-03-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimePartGenerator.m: minor improvement in field generation API,
+     	  added support for multivalue headers (related to #1324)
+     2005-03-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimePartGenerator.m: properly terminate header fields with \r\n
+     	  (OGo bug #1282)
+changed: sope-mime/NGImap4/
+     2005-03-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOQualifier+IMAPAdditions.m: fixed a warning
+     2005-03-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGImap4Folder.m: properly create NSURL if the absolute name doesn't
+     	  start with a slash
+     	* NGImap4Context.m: initialize NSURL with a path to avoid an issue on
+     	  MacOSX
+changed: sope-mime/NGMail/
+     2005-03-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGMimeMessageGenerator.m: mark To, Cc and Bcc as multivalue header
+     	  fields to fix #1324
+     2005-03-24  Helge Hess  <helge.hess@skyrix.com>
+     	* NGMimeMessageGenerator.m: minor code cleanups
+changed: sope-xml/SaxObjC/
+     2005-03-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SaxObjectDecoder.m: fixed remaining leaks (v4.5.49)
+changed: Recycler/NGObjDOM/
+     2005-03-23  Helge Hess  <helge.hess@skyrix.com>
+     	* added FHS and config.make support, fixed compilation (v4.5.26)
+added:   Recycler/NGObjDOM/fhs.make
+changed: Recycler/SxComponents/
+     2005-03-23  Helge Hess  <helge.hess@skyrix.com>
+     	* added FHS and config.make support, fixed compilation (v4.5.29)
+added:   Recycler/SxComponents/fhs.make
+changed: Recycler/NGScripting/
+     2005-03-23  Helge Hess  <helge.hess@skyrix.com>
+     	* added FHS and config.make support, fixed compilation (v4.5.12)
+added:   Recycler/NGScripting/fhs.make
+changed: sope-ldap/NGLdap/
+     2005-03-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGLdapConnection.m: fixed not to do unauthenticated binds (related to
+     	  OGo bug #957) (v4.5.22)
+changed: sope-appserver/WEExtensions/
+     2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.71
+     	* added generated manpages for all .api files
+     	* WETabView.m, WETableView.m: minor code cleanups
+     2005-04-08  Helge Hess  <helge.hess@opengroupware.org>
+     	* WETableView/WETableData.m, WETableCell.m: some code cleanups
+     	  (v4.5.70)
+     2005-03-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* added some support for -generateXMLStyleEmptyElements (v4.5.69)
+added:   sope-appserver/WEExtensions/doc
+changed: sope-appserver/mod_ngobjweb/
+     2005-04-15  Helge Hess  <helge.hess@skyrix.com>
+     	* handler.c: deliver Apache SSL environment as HTTP headers, either
+     	  using x-webobjects- headers or using SSL_CLIENT_xxx headers (when no
+     	  proper x-webobjects- header is known)
+     	* NGBufferedDescriptor.c: escape headers containing '\r' or '\n' (using
+     	  %10, %13), required for transporting the certificate header ...
+     	* GNUmakefile: autolocate apxs2 (tested on SuSE 9.1)
+     	* handler.c: minor code cleanups
+changed: sope-appserver/NGObjWeb/
+     2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.151
+     	* added generated manpages for all .api files
+     	* added woapi2man.py, a tool to generate man-pages from .api XML files
+     	  (used for describing the bindings of dynamic elements)
+     2005-04-12  Helge Hess  <helge.hess@skyrix.com>
+     	* v4.5.150
+     	* fhs.make: install manpages
+     	* sope-ngobjweb-defaults: fixed a syntax error
+     2005-04-05  Helge Hess  <helge.hess@opengroupware.org>
+     	* DynamicElements/WOPopUpButton.m: added a template so that static
+     	  <option> elements can be embedded inside the <select> (v4.5.149)
+     2005-04-04  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* SoObjects/SoObjectRequestHandler.m: properly setup NGLogging so
+     	  logging works again. (v4.5.148)
+     2005-03-31  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.147
+     	* DynamicElements/WOCheckBox.m, DynamicElements/WOCheckBoxList.m,
+     	  DynamicElements/WORadioButton.m, DynamicElements/WORadioButtonList.m:
+     	  added support for empty 'disabled' and 'checked' attributes, removed
+     	  '\n' after generated tag
+     	* DynamicElements/WOBrowser.m, DynamicElements/WOPopUpButton.m: added
+     	  support for empty "selected" attribute
+     	* WOContext.m: added new flag/accessor 'generateEmptyAttributes' to
+     	  put elements into a mode where they do not render XHTML style
+     	  attributes (just 'selected' instead of 'selected="selected"')
+     2005-03-30  Stephane Corthesy  <stephane@sente.ch>
+     	* DynamicElements/WOPopUpButton.m, DynamicElements/WOPopUpButton.api: 
+     	  added new binding 'itemGroup' which allows generation of the
+     	  <optgroup> element in a <select> element. Fixed a bug where 
+     	  displayed value '<nil>' was not HTML-escaped, in some cases
+     	  (v4.5.146)
+     2005-03-28  Stephane Corthesy  <stephane@sente.ch>
+     	* added NSString category NSString+JavaScriptEscaping (v4.5.145)
+     2005-03-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOComponentDefinition.m: moved WONoContentElement and
+     	  _WOStaticHTMLElement classes to own files in DynamicElements
+     	  (v4.5.144)
+     2005-03-25  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoObjectDataSource.m: fixed a small memory leak (v4.5.143)
+     	* SoObjects/SoObject+Traversal.m, WebDAV/SoObjectWebDAVDispatcher.m: 
+     	  minor code cleanups (v4.5.142)
+     2005-03-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* OWResourceManager.m, WOResourceManager.m: changed table name for
+     	  default strings lookups from "default.strings" to
+     	  "Localizable.strings" in order to be compatible to WebObjects 4.51.
+     	  (v4.5.141)
+     2005-03-21  Helge Hess  <helge.hess@skyrix.com>
+     	* DynamicElements/WOJavaScript.m: added support for extra attributes,
+     	  generate script 'type' field as 'text/javascript' instead of
+     	  'language', as suggested by Mont (v4.5.140)
+     2005-03-20  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.139
+     	* DynamicElements/WOCheckboxList.m, DynamicElements/WOBrowser.m,
+     	  DynamicElements/WOCheckbox.m, DynamicElements/WOPopUpButton.m,
+     	  DynamicElements/WORadioButton.m, DynamicElements/WORadioButtonList.m,
+     	  DynamicElements/WOSubmitButton.m, DynamicElements/WOText.m,
+     	  DynamicElements/WOTextField.m: code cleanups, minor perf
+     	  improvements, generate 'disabled' <input> attribute
+     	* DynamicElements/WOImageButton.m: generate <img> instead of <input>
+     	  if 'disabled' binding evaluates to true
+     	* WOContext.m: changed default query parameter separator to &amp; as
+     	  suggested by Stephane (v4.5.138)
+     2005-03-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* NGObjWeb.xcode: added WOWatchDogApplicationMainOSX.m and removed
+     	  WOWatchDogApplicationMain.m from Xcode build. Added
+     	  SOPE_SUBMINOR_VERSION build flag for Xcode.
+     2005-03-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOApplication.m: added some ObjC runtime profiling support (moved in
+     	  from OGo main object) (v4.5.137)
+     2005-03-14  Helge Hess  <helge.hess@opengroupware.org>
+     	* SoObjects/SoSubContext.m: updated superclass version check (v4.5.136)
+     2005-03-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.135
+     	* WOHTTPConnection.m: deliver proper SOPE version in 'user-agent'
+     	* SoWebDAVRenderer.m: deliver proper SOPE version in 'server' header
+     	* WOStats.m, SoWebDAVRenderer.m: explicitly specify charset of text/xml
+     	  result
+     2005-03-11  Helge Hess  <helge.hess@opengroupware.org>
+     	* WebDAV/SoWebDAVRenderer.m: fixed ordering of propstat result elements
+     	  (<status/> must come after <prop/>) (v4.5.134)
+     2005-03-08  Helge Hess  <helge.hess@skyrix.com>
+     	* DynamicElements/common.h, DynamicElements/*.m: renamed to decommon.h
+     	  to avoid issues with Xcode, fixed broken compile due to missing
+     	  header file (v4.5.133)
+     2005-03-07  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* DynamicElements/common.h: added missing #include's for
+     	  Xcode build (v4.5.132)
+     2005-03-07  Helge Hess  <helge.hess@opengroupware.org>
+     	* v4.5.131
+     	* WOElementID.h: lowered max element nesting to 126 due to limited
+     	  scope of ivar (hopefully doesn't trigger #1281)
+     	* DynamicElements: added support for empty non-XML tags (generate
+     	  empty tags without the " />")
+     	* WOContext.m: changed ivars (bumped class version to 8), added a flag
+     	  for generating XML empty elements (to be checked by dynamic elements)
+     	* DynamicElements/WOForm.m: consume 'multipleSubmit' association for
+     	  WO compatibility as requested by Stephane (v4.5.130)
+     	* WOHttpAdaptor/WOHttpAdaptor.m: added the ability to fork multiple
+     	  child servers listing on the same passive socket. The OS will
+     	  distribute the load between such processes. Note that this only
+     	  works for session less processes (like ZideStore) and that automatic
+     	  restarts are not yet implemented. The number of processes can be
+     	  controlled using the 'WOHttpAdaptorForkCount' default (v4.5.129)
+     2005-03-06  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOWatchDogApplicationMainOSX.m: fixed some minor issues, still need
+     	  a fix to allow for starts without a full path (v4.5.128)
+     2005-03-06  Mont Rothstein  <mont_rothstein@yahoo.com>
+     	* added an MacOSX specific WOWatchDogApplicationMain, this fixes some
+     	  issue when linking against the AJR libraries (see OGo bug #1175)
+     	  (v4.5.127)
+     2005-03-04  Helge Hess  <helge.hess@opengroupware.org>
+     	* WOElementID.h (NGObjWeb_MAX_ELEMENT_ID_COUNT): bumped max element
+     	  nesting to 128 wrt bug #1281 (v4.5.126)
+     	* WOContext.m: added -setQueryPathSeparator:/-queryPathSeparator
+     	  methods as requested by Stephane (v4.5.125)
+     	* WOComponent.m: protect component against duplicate -awake in the
+     	  same context as suggested by Stephane (v4.5.124)
+     2005-03-03  Helge Hess  <h
+added:   sope-appserver/NGObjWeb/doc
+added:   sope-appserver/NGObjWeb/woapi2man.py
+added:   sope-appserver/NGObjWeb/WOWatchDogApplicationMainOSX.m
+added:   sope-appserver/NGObjWeb/NSString+JavaScriptEscaping.m
+added:   sope-appserver/NGObjWeb/NGObjWeb/NSString+JavaScriptEscaping.h
+added:   sope-appserver/NGObjWeb/DynamicElements/decommon.h
+added:   sope-appserver/NGObjWeb/DynamicElements/WONoContentElement.h
+added:   sope-appserver/NGObjWeb/DynamicElements/_WOStaticHTMLElement.h
+added:   sope-appserver/NGObjWeb/DynamicElements/_WOStaticHTMLElement.m
+added:   sope-appserver/NGObjWeb/DynamicElements/WONoContentElement.m
+removed: sope-appserver/NGObjWeb/DynamicElements/common.h
+changed: sope-appserver/WOExtensions/
+     2005-04-12  Helge Hess  <helge.hess@opengroupware.org>
+     	* added generated manpages for all .api files (v4.5.24)
+     2005-03-28  Stephane Corthesy  <stephane@sente.ch>
+     	* v4.5.23
+     	* JSAlertPanel: added new bindings, escapeJS and framework;
+     	  fixed html 'onclick' attribute
+     	* JSConfirmPanel: added new bindings, escapeJS and framework; replaced
+     	  deprecated 'language' html attribute by 'type'
+     	* JSImageFlyover.m: replaced deprecated 'language' html attribute by
+     	  'type'
+     	* JSModalWindow: added 'framework' binding
+     	* JSValidatedField: added new binding, escapeJS; replaced deprecated
+     	  'language' html attribute by 'type'
+     	* JSImageFlyover.api, WOCollapsibleComponentContent.api: added
+     	  defaults to framework binding
+     2005-03-28  Helge Hess  <helge.hess@opengroupware.org>
+     	* JSValidatedField.m, JSModalWindow.m, JSAlertPanel.m,
+     	  JSConfirmPanel.m, JSImageFlyover.m, WOCheckBoxMatrix.m,
+     	  WORadioButtonMatrix.m, WOTabPanel.m: minor code cleanups, added some
+     	  support for non-xml style elements
+added:   sope-appserver/WOExtensions/doc
+changed: maintenance/
+     2005-03-15  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* syncXcodeVersions.sh: update SOPE* versions if necessary
+added:   maintenance/changes-4.5a.2-to-4.5a.3.txt
+added:   maintenance/dummytool.m
+added:   maintenance/mod_ngobjweb_suse93.spec
+changed: sope-ical/NGiCal/
+     2005-03-23  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* v4.5.50
+     	* iCalRenderer.h: added missing paranthesis for iVar declarations
+     	* iCalTrigger.m, iCalEntityObject.m, iCalToDo.m,
+     	  iCalRecurrenceCalculator.m, iCalDateHolder.m, iCalDataSource.m,
+     	  iCalPerson.m, iCalCalendar.m: numerous dealloc bugs/leaks fixed

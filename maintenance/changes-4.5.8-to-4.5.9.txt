@@ -1,0 +1,84 @@
+- fixed a small 64bit logging issue
+- -valueForKey on mutable arrays now returns mutable arrays (WO 4.5)
+- added table reflection support to MySQL adaptor
+- fixed NSString handling in EOCustomValues (fixes OGo bug #1701)
+- improved handling of IMAP4 subfolders
+- added support for 'nil' XML-RPC type
+- fixed a bug in WECalendarField CSS
+- HTML escape JavaScript contents in <script> sections
+- added ability to forward request to other hosts in mod_ngobjweb
+- fixed compilation warnings on BSD
+- improved handling of 0-port values in SoWebDAVRenderer
+- fixed a runaway with multiline comments in .wod files
+- fixed an issue with preserving parse results in the vCard parser
+
+Major contributors on the SOPE 4.5.9 release:
+Wolfgang Sourdeau
+Marcus Mueller
+Sebastian Reitenbach
+Helge Hess
+... and many more :-)
+
+===========================================================================
+compare ../complete/SOPE/releases/4.5.8-sixtyfour with .
+changed: sope-core/NGExtensions/
+     2006-07-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGBundleManager.m: fixed a minor 64bit printing issue (v4.5.188)
+changed: sope-core/EOControl/
+     2006-08-18  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOKeyValueCoding.m: -valueForKey: now returns mutable arrays when
+     	  being called on mutable arrays (WO 4.5 compatibility) (v4.5.67)
+changed: sope-gdl1/MySQL/
+     2006-07-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* MySQL4Channel+Model.m: added SHOW TABLES to retrieve MySQL table
+     	  names (v4.5.14)
+changed: sope-gdl1/GDLAccess/
+     2006-08-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* EOCustomValues.m: added special support for lF NSTemporaryString
+     	  to fix OGo bug #1701 (v4.5.58)
+changed: sope-mime/
+     2006-08-03  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* NGImap4: improved subfolder handling (v4.5.242)
+changed: sope-mime/NGImap4/
+     2006-08-03  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* NGImap4Connection.m: check for \noinferiors flags when traversing
+     	  subfolders
+changed: sope-xml/XmlRpc/
+     2006-08-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* NSObject+XmlRpc.m: added support for 'nil' type as submitted by
+     	  xmlrpclib with the 'allow_none' option set (v4.5.29)
+changed: sope-appserver/WEExtensions/
+     2006-08-17  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* WECalendarField.m: do not use "<!--" in <style> tags, those comments
+     	  are not valid in CSS (v4.5.90)
+     	* JSStringTable.m: properly HTML escape JavaScript inside <script>
+     	  sections (v4.5.89)
+     2006-07-24  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEWeekOverview.m: use -warnWithFormat:, minor code cleanups (v4.5.88)
+changed: sope-appserver/mod_ngobjweb/
+     2006-08-21  Helge Hess  <helge.hess@opengroupware.org>
+     	* handler.c: added ability to forward app requests to other hosts
+     	  (using IP:port syntax)
+changed: sope-appserver/NGObjWeb/
+     2005-08-15  Sebastian Reitenbach  <reitenbach@rapideye.de>
+     	* WOWatchDogApplicationMain.m: include <unistd.h> instead of
+     	  <sys/unistd.h>, fixes warnings on BSD and works with Linux too
+     	  (v4.5.244)
+     2006-08-15  Helge Hess  <helge.hess@opengroupware.org>
+     	* WEClientCapabilities.m: properly mark Safari as a JavaScript capable
+     	  browser (v4.5.243)
+     2006-08-03  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
+     	* WebDAV/SoWebDAVRenderer.m: added special handling for 0-port values
+     	  in URLs (v4.5.242)
+     2006-07-25  Marcus Mueller  <znek@mulle-kybernetik.com>
+     	* Templates/WODParser.m: fixed an infinite loop bug during comment
+     	  scanning that occured when a multiline comment contained a '*'
+     	  (v4.5.241)
+added:   sope-ical/data/synthesis-syncml1.xml
+added:   sope-ical/data/evo26-multilinefields1-bug1714.ics
+changed: sope-ical/NGiCal/
+     2006-08-03  Helge Hess  <helge.hess@opengroupware.org>
+     	* NGVCardSaxHandler.m: fixed a bug with returning parsing results.
+     	  Properly make a copy of the vCard array so that -clear doesn't
+     	  destroy references. Thanks go to Wolfgang Sourdeau for documenting
+     	  the issue! (v4.5.76)

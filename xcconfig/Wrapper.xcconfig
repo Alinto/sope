@@ -1,0 +1,62 @@
+#include "Common"
+
+// Target and SDK
+MACOSX_DEPLOYMENT_TARGET = 10.4
+SDKROOT                  = /Developer/SDKs/MacOSX10.4u.sdk
+PREBINDING               = NO
+
+// Tuning
+GCC_MODEL_TUNING_ppc = G5
+
+ARCHS = i386 ppc
+
+GCC_ENABLE_FIX_AND_CONTINUE    = NO
+GCC_GENERATE_DEBUGGING_SYMBOLS = NO
+GCC_OPTIMIZATION_LEVEL         = 3
+
+COPY_PHASE_STRIP   = YES
+SKIP_INSTALL       = YES
+UNSTRIPPED_PRODUCT = NO
+
+DEPLOYMENT_LOCATION       = NO
+DEPLOYMENT_POSTPROCESSING = YES
+DSTROOT                   = /
+
+ZERO_LINK = NO
+
+// the directory, where the built product can be fetched later
+// TARGET_BUILD_DIR = $(USER_LIBRARY_DIR)/EmbeddedFrameworks/$(CONFIGURATION)
+
+SYMROOT                 = $(USER_LIBRARY_DIR)/EmbeddedFrameworks
+EMBEDDED_FRAMEWORKS_DIR = $(SYMROOT)
+UMBRELLA_DEPLOYMENT_DIR = $(SYMROOT)/Wrapper
+
+// install_header
+DYLIB_INSTALL_NAME_BASE = $(EMBEDDED_FRAMEWORKS_DIR)
+// if you need to have the frameworks separate for AppWrapper inclusion, use
+// this:
+// DYLIB_INSTALL_NAME_BASE = @executable_path/../Frameworks/
+
+
+// the following build variables appear to look normal, but when omitted
+// the Xcode build engine fails miserably. It appears that Xcode tries to
+// evaluate these variables several times and mysterious substitutions to
+// the effect of having built products in directories named like
+// $(CONFIGURATION)/$(CONFIGURATION) (where these are properly substituted
+// as in i.e. "Wrapper") occur... having these variables defined here
+// seems to eliminate the problem.
+// Problem verified with Xcode build 2.4.1, later versions might be ok.
+
+OBJROOT                 = $(SYMROOT)/build
+TEMP_DIR                = $(SYMROOT)/$(PROJECT_NAME).build
+PROJECT_TEMP_DIR        = $(SYMROOT)/$(PROJECT_NAME).build
+
+CONFIGURATION_BUILD_DIR = $(BUILD_DIR)
+CONFIGURATION_TEMP_DIR  = $(PROJECT_TEMP_DIR)
+FRAMEWORK_SEARCH_PATHS  = $(EMBEDDED_FRAMEWORKS_DIR)
+
+// for reference - the old way to do it:
+//EMBEDDED_FRAMEWORKS_DIR = $(SYMROOT)/$(CONFIGURATION)
+//CONFIGURATION_BUILD_DIR = $(BUILD_DIR)/$(CONFIGURATION)
+//CONFIGURATION_TEMP_DIR  = $(PROJECT_TEMP_DIR)/$(CONFIGURATION)
+//FRAMEWORK_SEARCH_PATHS  = $(USER_LIBRARY_DIR)/EmbeddedFrameworks/$(CONFIGURATION)

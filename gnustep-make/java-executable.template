@@ -1,0 +1,115 @@
+#!/bin/sh
+#
+# Copyright (C) 2001 Free Software Foundation, Inc.
+#
+# Author: Nicola Pero <nicola@brainstorm.co.uk>
+# Date: April 2001
+# 
+# This file is part of the GNUstep Makefile Package.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# You should have received a copy of the GNU General Public
+# License along with this library; see the file COPYING.LIB.
+# If not, write to the Free Software Foundation,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+# This is a shell script which attempts to execute a specific Java
+# class (hardcoded when the shell script is installed), preparing
+# CLASSPATH and LD_LIBRARY_PATH for it.
+
+#
+# The name of the script
+#
+tool=$0
+
+#
+# The directory we are in
+#
+tool_dir=`dirname $tool`
+
+#
+# The java class to execute - harcoded when the template is intalled 
+# by java-tool.make.
+#
+java_obj_file=JAVA_OBJ_FILE
+
+#
+# Check that the java class exists
+#
+full_java_obj_file=${tool_dir}/Java/${java_obj_file}.class
+
+if [ ! -f "$full_java_obj_file" ]; then
+  echo "$tool: Installation problem: Can't find java class $java_obj_file !"
+  exit 1
+fi
+
+#
+# Determine the host information if needed
+#
+if [ -z "$GNUSTEP_HOST" ]; then
+    GNUSTEP_HOST=`(cd /tmp; $GNUSTEP_SYSTEM_ROOT/Library/Makefiles/config.guess)`
+    GNUSTEP_HOST=`(cd /tmp; $GNUSTEP_SYSTEM_ROOT/Library/Makefiles/config.sub $GNUSTEP_HOST)`
+    export GNUSTEP_HOST
+fi
+if [ -z "$GNUSTEP_HOST_CPU" ]; then
+    GNUSTEP_HOST_CPU=`$GNUSTEP_SYSTEM_ROOT/Library/Makefiles/cpu.sh $GNUSTEP_HOST`
+    GNUSTEP_HOST_CPU=`$GNUSTEP_SYSTEM_ROOT/Library/Makefiles/clean_cpu.sh $GNUSTEP_HOST_CPU`
+    export GNUSTEP_HOST_CPU
+fi
+if [ -z "$GNUSTEP_HOST_VENDOR" ]; then
+    GNUSTEP_HOST_VENDOR=`$GNUSTEP_SYSTEM_ROOT/Library/Makefiles/vendor.sh $GNUSTEP_HOST`
+    GNUSTEP_HOST_VENDOR=`$GNUSTEP_SYSTEM_ROOT/Library/Makefiles/clean_vendor.sh $GNUSTEP_HOST_VENDOR`
+    export GNUSTEP_HOST_VENDOR
+fi
+if [ -z "$GNUSTEP_HOST_OS" ]; then
+    GNUSTEP_HOST_OS=`$GNUSTEP_SYSTEM_ROOT/Library/Makefiles/os.sh $GNUSTEP_HOST`
+    GNUSTEP_HOST_OS=`$GNUSTEP_SYSTEM_ROOT/Library/Makefiles/clean_os.sh $GNUSTEP_HOST_OS`
+   export GNUSTEP_HOST_OS
+fi
+
+#
+# Load up LD_LIBRARY_PATH
+#
+. $GNUSTEP_SYSTEM_ROOT/Library/Makefiles/ld_lib_path.sh
+
+#
+# Load up CLASSPATH
+#
+gnustep_class_path="$GNUSTEP_USER_ROOT/Library/Libraries/Java:$GNUSTEP_LOCAL_ROOT/Library/Libraries/Java:$GNUSTEP_NETWORK_ROOT/Library/Libraries/Java:$GNUSTEP_SYSTEM_ROOT/Library/Libraries/Java"
+
+if [ -z "$CLASSPATH" ]; then
+  CLASSPATH="$gnustep_class_path"
+else
+  if ( echo ${CLASSPATH} | grep -v "${gnustep_class_path}" >/dev/null ); then
+    CLASSPATH="$CLASSPATH:$gnustep_class_path"
+  fi
+fi
+
+if ( echo ${CLASSPATH} | grep -v "\./" >/dev/null ); then
+  CLASSPATH="$CLASSPATH:./"
+fi
+
+export CLASSPATH
+
+#
+# Find java
+#
+java_vm=java
+if [ ! -z "$JAVA_HOME" ]; then
+  java_vm=${JAVA_HOME}/bin/java
+else
+  if [ ! -z "$JDK_HOME" ]; then
+    java_vm=${JDK_HOME}/bin/java
+  fi
+fi
+
+#
+# Run java on the object file
+#
+cd ${tool_dir}/Java
+exec $java_vm $java_obj_file "$@"
+

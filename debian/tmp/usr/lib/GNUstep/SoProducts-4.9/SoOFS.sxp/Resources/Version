@@ -1,0 +1,5 @@
+# version file
+
+SUBMINOR_VERSION:=25
+
+# v4.5.23 requires libNGObjWeb v4.5.263

@@ -1,0 +1,1881 @@
+\input texinfo
+
+@c %**start of header
+@settitle libFoundation Library Manual
+@setfilename libFoundation.info
+@c %**end of header
+
+
+@set version 0.9.0
+@set update-month October 1998
+
+@ifinfo
+@format
+START-INFO-DIR-ENTRY
+* libFoundation::                      An OpenStep Foundation library.
+END-INFO-DIR-ENTRY
+@end format
+@end ifinfo
+
+@ifinfo
+This file documents the features of the libFoundation library.
+
+Copyright (C) 1995, 1996, 1997, 1998 Ovidiu Predescu and Mircea Oancea.
+All rights reserved.
+
+Permission to use, copy, modify, and distribute this software and its
+documentation for ANY purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation. This softare may be included in any commercial
+product provided that its distribution contain the libFoundation
+copyright notice and this permission notice.
+
+@sp 2
+
+The libFoundation Library Manual may be reproduced and distributed in
+whole or in part, in any medium, physical or electronic, so long as this
+copyright notice remains intact and unchanged on all copies.
+
+@end ifinfo
+
+
+@iftex
+@finalout
+@c @smallbook
+@end iftex
+
+@titlepage
+@title libFoundation Library Manual
+@subtitle for libFoundation version @value{version}
+@subtitle @value{update-month}
+@author by Ovidiu Predescu and Mircea Oancea 
+@page
+
+@vskip 0pt plus 1filll
+
+Copyright @copyright{} 1995, 1996, 1997, 1998 Ovidiu Predescu and Mircea
+Oancea.  All rights reserved.
+
+Permission to use, copy, modify, and distribute this software and its
+documentation for ANY purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation. This softare may be included in any commercial
+product provided that its distribution contain the libFoundation
+copyright notice and this permission notice.
+
+@sp 2
+
+The libFoundation Library Manual may be reproduced and distributed in
+whole or in part, in any medium, physical or electronic, so long as this
+copyright notice remains intact and unchanged on all copies.
+
+@end titlepage
+
+@tex
+\global\parindent 0pt
+\global\parskip 8pt plus 2pt
+@end tex
+
+
+
+@ifinfo
+@node	 Top, Introduction, (dir), (dir)
+@comment node-name,	next,		previous,	up
+@top Top
+@end ifinfo
+
+@menu
+* Introduction::	        About libFoundation and this documentation.
+* Coding with libFoundation::   How to write code for libFoundation.
+* Exception handling::          The extended exception handling mechanism.
+* Garbage collecting::          Two garbage collecting techniques.
+* NSZone::                      Implementation details.
+* NSInvocation::                Features of the NSInvocation class.
+* NSMethodSignature::           Features of the NSMethodSignature class.
+@end menu
+
+
+@c =========================================================================
+@node	 Introduction, Coding with libFoundation, Top, Top
+@comment node-name, next, previous, up
+
+@chapter Introduction
+
+This document describes some of the features and particularities
+implemented in @emph{libFoundation}; they are also available in the
+FoundationExtensions library so that users of @emph{libFoundation} can
+use their code with other OpenStep Foundation implementations.
+
+This documentation does not provide yet a full description of all the
+classes throughout the library. However any documentation that describes
+the OpenStep's Foundation library should be good enough for the classes
+implemented by @emph{libFoundation}.
+
+Below are some resources that provide additional information about the
+OpenStep Foundation classes:
+
+@itemize @bullet
+
+@item
+The original OpenStep specification can be found at:
+
+@uref{http://www.gnustep.org/GNUOpenStep/OpenStepSpec/OpenStepSpec.html}.
+
+@item
+OPENSTEP/Rhapsody related documentation, you can find here a very good
+documentation for Foundation:
+
+@uref{http://developer.apple.com/techpubs/rhapsody/rhapsody.html}.
+
+@item
+The GNUstep site, @uref{http://www.gnustep.org} or the European
+mirror-site,
+
+@uref{http://www.nmr.embl-heidelberg.de/GNUstep}.
+
+@end itemize
+
+
+@c =========================================================================
+@node	 Coding with libFoundation, Preprocessor defines, Introduction, Top
+@comment node-name, next, previous, up
+@chapter Coding with libFoundation
+
+There are some things one has to know when porting an OpenStep program
+to work with @emph{libFoundation}. These things do not change the
+general behavior of the program, they only make the program work
+properly with the library.
+
+@menu
+* Preprocessor defines::
+* Initializing your program::
+* Specifying the resources directory::
+* Objective-C runtime support::
+@end menu
+
+
+@c =========================================================================
+@node	 Preprocessor defines, Initializing your program, Coding with libFoundation, Coding with libFoundation
+@comment node-name, next, previous, up
+
+@section Preprocessor defines
+
+@emph{libFoundation} defines some preprocessor values so you can check
+for them if you want to conditionally pass some code to the
+compiler. The following macros are defined in
+@code{Foundation/NSObject.h}:
+
+@example
+#define LIB_FOUNDATION_LIBRARY 1
+    
+#define LIB_FOUNDATION_MAJOR_VERSION 0
+#define LIB_FOUNDATION_MINOR_VERSION 9
+#define LIB_FOUNDATION_SUBMINOR_VERSION 0
+@end example
+
+If you want to include a portion of code that is specific to
+@emph{libFoundation} you should put it inside an @code{#ifdef}
+preprocessor command:
+
+@example
+#ifdef LIB_FOUNDATION_LIBRARY
+...
+#endif
+@end example
+
+This way you the code inside @code{#ifdef} is compiled only in the
+presence of @emph{libFoundation} and will not affect other libraries.
+
+Another macro which is defined only when the Boehm's garbage collector
+is used (@xref{Boehm garbage collector}) is
+@code{LIB_FOUNDATION_BOEHM_GC}. You can use it to check in your code
+whether the code is compiled with support for Boehm's garbage collector
+or not.
+
+@c =========================================================================
+@node	 Initializing your program, Specifying the resources directory, Preprocessor defines, Coding with libFoundation
+@comment node-name, next, previous, up
+
+@section Initializing your program
+
+It is very important to properly initialize some @emph{libFoundation}
+internal data structures when the program starts. These information
+are mainly related to the @code{NSProcessInfo} class. Because not on all
+platforms is possible to find out the arguments and the environment
+variables passed to the program, we have chosen to explicitly delegate
+this task to user. The first lines in a @emph{libFoundation} program,
+before creating any other objects, should be the following:
+
+@example
+int main (int argc, char** argv, char** env)
+@{
+    /* Declarations here */
+...
+
+#ifdef LIB_FOUNDATION_LIBRARY
+    [NSProcessInfo initializeWithArguments:argv
+                   count:argc
+                   environment:env];
+#endif
+
+    /* Objects initialization and other instructions here */
+    ...
+@}
+@end example 
+
+@c =========================================================================
+@node	 Specifying the resources directory, Objective-C runtime support, Initializing your program, Coding with libFoundation
+@comment node-name, next, previous, up
+
+@section Specifying the resources directory
+
+It is common to want to try the tests before you have installed the
+library in its default place. @emph{libFoundation} however requires to
+have access to the resource files to function correctly. You can install
+only the resources in the installation directory, but there is a more
+convenient way to let the library where are its resources. You can
+specify an environment variable that indicates where is the resource
+directory; the name of this variable is
+@code{LIB_FOUNDATION_RESOURCES_PATH} and it should indicate the
+@code{Resources} directory. In a @code{sh}-like shell for example, you can do:
+
+@example
+LIB_FOUNDATION_RESOURCES_PATH=/home/ovidiu\
+        /libFoundation-@value{version}/libFoundation/Resources
+export LIB_FOUNDATION_RESOURCES_PATH
+@end example
+
+This environment variable is similar with the @code{PATH} variable: you
+can specify more directories by separating them using @code{:}
+character. Specifying resource directories this way takes precedence
+over the default installation directory. You can use this to change the
+resources if you want.
+
+
+@c =========================================================================
+@node	 Objective-C runtime support, Exception handling, Specifying the resources directory, Coding with libFoundation
+@comment node-name, next, previous, up
+
+@section Objective-C runtime support
+
+Currently there are two different Objective-C runtimes supported by
+@emph{libFoundation}: the original NeXT runtime and the GNU runtime
+which is modelled after it.
+
+The differences between the two runtimes resides mainly in the naming of
+functions. However there are differences that make the two runtimes
+incompatible. The most important one is how the selectors are kept.
+
+On NeXT runtime a selector is simply a unique string that represents its
+name. On GNU runtime, a selector is a structure consisting from a
+selector id (that is not its name) and a string describing its
+types. The both approaches have advantages and disadvantages. In the
+NeXT approach no matter how many times you request a selector (either
+using the @code{@@selector} directive or by @code{sel_getUid()}, you get
+the same selector. This is possible because the selector is simply
+represented as a unique string. On the GNU runtime each time you request
+a selector using the @code{@@selector} directive you get a different
+selector. Moreover the obtained selector has the @code{types} member set
+to @code{NULL}.
+
+In the NeXT approach the encoding of the selector's types are bound to
+each class that has a corresponding method. In the GNU approach the
+selector's types are bound to the selector.
+
+This differences have deep implication on how the @code{NSProxy} class
+handle a method call in the @code{forwardInvocation:} method. On the
+NeXT runtime, the proxy should make a request to the remote side to
+obtain the types of the method. The types are used locally by a
+@code{NSMethodSignature} object to determine an encoding. This encoding
+is used to access correctly the arguments on the stack. However you have
+the possibility to set a protocol to the @code{NSProxy} object at which
+the remote object answer. This should be done to avoid asking the true
+object about its selector types and so to increase performance.
+
+On the GNU runtime this is not necessarily because in the
+@code{forwardInvocation:} method the selector usually comes with types
+in it. However there are cases when this is not true and the same
+mechanism like in the NeXT case should be applied.
+
+Because the remote machine could be different than the local one, the
+@code{NSMethodSignature} class should be able to create the correct
+encoding from the types received from remote. Thus the
+@code{NSMethodSignature} class is dependent on the target machine.
+
+This implementation of Foundation works with both runtimes. The
+@code{extensions/objc-runtime.h} file defines the runtime functions to
+be those from the GNU runtime. All the NeXT runtime functions are
+defined in terms of GNU runtime functions.
+
+In order to write portable programs for both runtimes you should never
+use functions in the GNU runtime that work with the types associated
+with the selector. So the @code{sel_get_type}, @code{sel_get_any_uid}
+and @code{sel_get_typed_uid} cannot be used in programs. Also you should
+never use functions like @code{objc_msgSend} or
+@code{objc_msgSendv}. Use the @code{objc_msg_sendv} function or the
+@code{NSInvocation} class instead.
+
+Never use types like @code{Method} in the NeXT runtime or
+@code{Method_t} in the GNU runtime. Use instead the type @code{struct
+objc_method*}. This exists in both runtimes.
+
+
+@c =========================================================================
+@node	 Exception handling, Garbage collecting, Objective-C runtime support, Top
+@comment node-name, next, previous, up
+
+@chapter Exception handling
+
+The exception handling mechanism provides several powerful features
+found in languages like C++ or Java. It extends the normal OpenStep
+exception handling, while still maintaining the backward compatibility
+with this. A program using the extended exception handling mechanism is
+still able to work with the normal OpenStep exception handling and
+viceversa.
+
+The first powerful feature is that you have exceptions grouped by
+classes. This means you can group exceptions in a hierarchy; not only
+a tree like but even as a general graph. This feature is present in
+C++ and with some restrictions in Java.
+
+Another feature is that the exception handler is called as a
+function. So if you are in debugger you can see the whole stack frame
+from the point that generated the exception up to the exception
+handler. So you are able to see what were the conditions that made the
+exception to be raised.
+
+The actual mechanism is based on nested functions, an extension to the
+C language. This extension is currently supported by the GNU C
+Compiler. The actual mechanism is written using macros, so there is no
+need for special support from the compiler.
+
+A code written using these macros looks like this:
+
+@example
+
+TRY @{
+    some code that can generate an exception
+@} END_TRY
+CATCH(ExceptionClass1) @{
+    code to handle an exception of class ExceptionClass1
+@}
+CATCH(ExceptionClass2) @{
+    code to handle an exception of class ExceptionClass2
+@}
+...
+OTHERWISE @{
+    catch all exceptions not handled above
+@}
+END_CATCH
+
+@end example
+
+In the @code{TRY} block the code that is supposed to generate an
+exception is executed. You can nest @code{TRY} blocks by entering other
+blocks of code in @code{TRY} blocks. All @code{TRY} blocks form a stack
+with the most recent @code{TRY} block which is executing on the top of
+the stack.
+
+If nothing happens during the execution of code inside a @code{TRY}
+block, the program continues with the first statement after the
+@code{END_CATCH} label. When this thing happens the topmost @code{TRY}
+block is popped off the exception handlers stack.
+
+To generate an exception you should allocate an exception object and
+pass it to the @code{THROW} function. This is called raising an
+exception. When an exception is raised the exception handler blocks are
+searched for the one that can @emph{catch} the exception. This means to
+find the first @code{CATCH} block that match the exception object
+class. This matching is done by sending the exception object the
+@code{exceptionIsKindOf:} message having as argument the class specified
+as parameter to @code{CATCH} block. If the result of this message is
+true then the @code{CATCH} block matches the exception.
+
+The @code{exceptionIsKindOf:} method is implemented at the
+@code{NSException} class to return the result of @code{isKindOf:}. So
+implicitly the exceptions are grouped after their inheritance
+hierarchy. Some specific exception classes could implement the
+@code{exceptionIsKindOf:} method and simulate a graph inheritance, which
+is like the multiple inheritance in C++.
+
+Inside the @code{CATCH} and @code{OTHERWISE} blocks you have one hidden
+parameter, the exception object, which has the name
+@code{localException}. You can do the following actions inside an
+exception handler:
+
+
+@itemize @bullet
+
+@item
+you can go immediately after the @code{END_CATCH} statement if it does
+not issue any of @code{RETURN} or @code{RETRY} statements
+
+@item
+you can reraise the exception by issuing the @code{RERAISE} if you want
+to generate an exception with the same object, or you can use
+@code{THROW} to generate an exception with a different object
+
+@end itemize
+
+
+You cannot execute a jump with the @code{goto} statement from the
+@code{TRY}, @code{CATCH} or @code{OTHERWISE} blocks outside them. These
+jumps are permitted only locally in the block. Also, do not return from
+@code{TRY} or @code{CATCH} blocks with ordinary return statements.
+
+You can jump outside the @code{TRY} block with the @code{BREAK}
+statement that will go to the first statement following the
+@code{END_CATCH} statement.
+
+Another construction allows you to specify a block of code that will be
+executed when an exception is caught by an upper exception handler. This
+allows you to do some cleanup, for example to release all the resources
+acquired from the system (such as memory allocation or file
+descriptors). This block is introduced by the @code{CLEANUP} label.
+
+Another construction is the @code{FINALLY} block. It is equivalent with
+the @code{finally} block in Java. The code inside this block is called
+whenever either an exception is raised and caught by an upper handler or
+when the code inside a @code{TRY} block runs successfully.
+
+The @code{FINALLY} construct is equivalent with the following @code{CLEANUP}
+construct:
+
+@example
+TRY @{
+    some code that can generate an exception
+@} END_TRY
+...
+CLEANUP @{
+    sequence of code
+@}
+END_CATCH
+the same sequence of code from inside the CLEANUP block
+@end example
+
+If several exception handlers are nested the order in which the cleanup
+and finally blocks are called is the same with the order in which the
+functions containing them will normally return.
+
+There are situations when you acquire some resources and you want to be
+sure that they are released in case of an exception that is caught above
+you in the stack frame. So you don' t need the @code{CATCH} or
+@code{OTHERWISE} blocks. You could simply write:
+
+@example
+TRY @{
+    some code that can generate an exception
+@} END_TRY
+CLEANUP @{
+    code to release acquired resources
+@}
+END_CATCH
+@end example
+
+You could use the @code{FINALLY} construct when the resource is acquired
+and also released in the same function. For example:
+
+@example
+acquire the resource
+TRY @{
+    some code that can generate an exception
+@}
+FINALLY @{
+    code to release the resource
+@}
+END_CATCH
+@end example
+
+With these constructions the exception handling macros has the
+following syntax:
+
+@example
+TRY @{
+    some code that can generate an exception
+@} END_TRY
+CATCH(ExceptionClass1) @{
+    code to handle an exception of class ExceptionClass1
+@}
+CATCH(ExceptionClass2) @{
+    code to handle an exception of class ExceptionClass2
+@}
+...
+OTHERWISE @{
+    catch all exceptions not handled above
+@}
+CLEANUP @{
+    ...
+@}
+FINALLY @{
+    ...
+@}
+END_CATCH
+@end example
+
+@section OpenStep exceptions
+
+The OpenStep exceptions are defined in the terms of the above macros.
+
+@example
+#define NS_DURING	TRY
+
+#define NS_HANDLER \
+    END_TRY \
+    OTHERWISE
+
+#define NS_ENDHANDLER   END_CATCH
+@end example
+
+In the actual implementation you can also use the @code{NS_VALRETURN}
+and @code{NS_VOIDRETURN} macros inside the @code{TRY} block,
+respectively inside @code{NS_DURING} block.
+
+When you use @code{NS_VALRETURN} or @code{NS_VOIDRETURN} macros inside a
+@code{TRY} block, be aware that before the function returns, the code
+inside all @code{FINALLY} blocks associated with the @code{TRY} block
+are executed first. However, because of a bug in the GNU compiler that
+causes the compiler to crash when it compiles Objective-C programs with
+nested functions for the NeXT runtime, this behavior is not implemented
+for the programs compiled with the NeXT runtime.
+
+
+@c =========================================================================
+@node	 Garbage collecting, Garbage collector based on reference counting, Exception handling, Top
+@comment node-name, next, previous, up
+
+@chapter Garbage collecting
+
+Starting with version 0.9.0, @emph{libFoundation} comes with two garbage
+collecting mechanisms that provide you with the ability to solve the
+memory management problem.
+
+The first garbage collector works with the default memory management
+policy in OpenStep, the reference counting model. Reference counting is
+a simple model for keeping track of objects and works good enough unless
+you have cyclic data structures in your program, aka graphs of
+objects. These cyclic graphs of objects cannot be collected by the
+normal reference counting mechanism provided by OpenStep
+Foundation. @emph{libFoundation} comes with a garbage collector based on
+reference counting, that's fully integrated with the reference counting
+model in OpenStep Foundation.
+
+While reference counting is a simple and good technique for small to
+medium programs, it's usually hard to write programs using it because,
+as every human activity, is error-prone. The programmer can easily
+forget to retain or release an object, thus leading to memory leaks. A
+true garbage collector would solve the problem and would release the
+programmer from manually keeping track of the allocated
+memory. @emph{libFoundation} comes with support for Boehm's garbage
+collector, a conservative collector available from
+@uref{http://reality.sgi.com/boehm_mti/gc.html}.
+
+There is only one source tree for the both versions of the library, the
+normal OpenStep compatibility library and the support for the Boehm's
+garbage collector library. To build the last type of library you just
+have to type:
+
+@example
+  $ make gc=yes
+@end example
+
+This will build and install the library in a separate directory in the
+GNUstep system tree. For all the GNUstep package that you want to run in
+a garbage collected environment you will have to add @samp{gc=yes} as an
+additional argument to make.
+
+The next chapter present the garbage collector based on reference
+counting. The classes and protocols presented here are only useful when
+the garbage collector based on reference counting is used.
+
+@menu
+* Garbage collector based on reference counting::
+* Boehm garbage collector::
+@end menu
+
+@c =========================================================================
+@node	 Garbage collector based on reference counting, The GarbageCollector class, Garbage collecting, Garbage collecting
+@comment node-name, next, previous, up
+
+@section Garbage collector based on reference counting
+
+@emph{libFoundation} contains some classes that allow you to write code
+without explicitly managing cyclic references between objects. Usually
+you have to manage explicitly the reference counts when you have objects
+that form cyclic graphs.
+
+The garbage collector neither maintains explicitly all the pointers in
+your program nor it collects all the memory allocated by you in the
+program. Instead it collects and maintains only some special kind of
+objects, that are garbage collectable.
+
+The algorithm was inspired from a similar one found in the OATH C++
+library written by Brian M. Kennedy's @w{@email{bmk@@csc.ti.com}}. It
+works in three passes. Suppose that all the objects that are garbage
+collectable are known. Also each object has an additional flag, used for
+determining if the object was already visited.
+
+During the first pass, all objects that are garbage collectable clears
+the associated flag and receive the message
+@code{-gcDecrementRefCountOfContainedObjects}. In this method the object
+decrements the reference count of every garbage collectable object it
+contains. After this pass all the objects that have the reference count
+0 are part of cyclic graphs. Such objects have their reference count due
+only to another objects from graph.
+
+In the second pass we have to restore the original reference counts and
+to isolate the nodes from cyclic graphs. In this pass all the objects
+that have the reference count greater than 0 receive the message
+@code{-gcIncrementRefCountOfContainedObjects}. In this method the object
+check the flag if it's set. This flag tells if the object was visited
+previously. If the flag is set, the method returns, else the flag is
+set. Then the reference count of every garbage collectable object
+contained is incremented and the message
+@code{-gcIncrementRefCountOfContainedObjects} is sent to those objects.
+
+After this pass all the objects that are reachable from `outside' have
+their reference count greater than 0. All the objects that still have
+their reference count equal with 0 are part of cyclic graphs and there is no
+reference from `outside' to an object from these graphs.
+
+In the third pass all the objects that have their reference count equal
+with 0 receive the @code{-dealloc} message. In this method the objects
+should send the @code{-release} message to all contained objects that
+are not garbage collectable. This because the order of deallocation is
+not known and you can send @code{-release} to an already deallocated
+object. So if a class contains both normal objects and garbage
+collectable objects, it should maintain their collectable status when
+the objects are retained.
+
+@menu
+* The GarbageCollector class::
+* The GarbageCollector protocol::
+* Support classes::
+@end menu
+
+@c =========================================================================
+@node	 The GarbageCollector class, The GarbageCollector protocol, Garbage collector based on reference counting, Garbage collector based on reference counting
+@comment node-name, next, previous, up
+
+@subsection The @code{GarbageCollector} class
+
+The class @code{GarbageCollector} implements the garbage collector. It
+has the following interface:
+
+@example
+@@interface GarbageCollector : NSObject
+
++ (void)addObject:(id)anObject;
++ (void)objectWillBeDeallocated:(id)anObject;
+
++ (void)collectGarbages;
+
+@@end
+@end example
+
+A new garbage collectable object has to be made know to the
+@code{GarbageCollector} collector by sending it the @code{+addObject:}
+message with self as argument. When the object is deallocated it should
+inform the @code{GarbageCollector} class about this by sending it the
+@code{+objectWillBeDeallocated:} message with self as argument.
+
+The @code{+collectGarbages} should be send to the
+@code{GarbageCollector} class to collect the garbages. You can send it
+whenever you want. If you are using a run loop in your program you can
+set a timer to be called periodically. Or you can call the garbage
+collector when the program is idle.
+
+In the current implementation the garbage collector is not
+thread-safe, so please don't use it in multi-threaded programs, unless
+you use garbage collectable objects only in one thread.
+
+
+@c =========================================================================
+@node	 The GarbageCollector protocol, Support classes, The GarbageCollector class, Garbage collector based on reference counting
+@comment node-name, next, previous, up
+
+@subsection The @code{GarbageCollecting} protocol
+
+To allow instances of a class to be garbage collectable, the class
+should implement the following protocol:
+
+@example
+@@protocol GarbageCollecting
+
+- gcSetNextObject:(id)anObject;
+- gcSetPreviousObject:(id)anObject;
+- (id)gcNextObject;
+- (id)gcPreviousObject;
+
+- (void)gcIncrementRefCount;
+- (void)gcDecrementRefCount;
+
+- (void)gcDecrementRefCountOfContainedObjects;
+- (BOOL)gcIncrementRefCountOfContainedObjects;
+
+- (BOOL)isGarbageCollectable;
+
+@@end
+@end example
+
+The @code{GarbageCollector} class uses a double linked list to maintain
+the objects. The @code{gcSetNextObject:}, @code{gcSetPreviousObject:},
+@code{gcNextObject} and @code{gcPreviousObject} are used by the
+collector to add or remove objects in its list. This could change in the
+future.
+
+The @code{gcIncrementRefCount} and @code{gcDecrementRefCount} methods
+should increment, respectively decrement the reference count of
+receiver.
+
+The @code{gcDecrementRefCountOfContainedObjects} method should decrement
+the reference count of all garbage collectable objects contained, by
+sending them the message @w{@code{-gcDecrementRefCount}} to them.
+
+The @code{gcIncrementRefCountOfContainedObjects} method should check the
+flag. If this is true, the method should return @code{NO}; it this is
+false the method should set it. Then it should increment the reference
+count of garbage collectable objects contained by sending them the
+@code{-gcIncrementRefCount} message. After this it should send the
+@code{-gcIncrementRefCountOfContainedObjects} message to the same
+objects. Then it should return @code{YES}.
+
+The object should respond @code{YES} at the @code{-isGarbageCollectable}
+message if it is garbage collectable. The NSObject class responds
+@code{NO} to this message.
+
+You should note the asymmetry between the
+@code{gcDecrementRefCountOfContainedObjects} and
+@code{gcIncrementRefCountOfContainedObjects} methods. This makes the
+algorithm to work. So be careful if you're using copy/paste operations
+to write them in your editor :-)!
+
+
+@c =========================================================================
+@node	 Support classes, Boehm garbage collector, The GarbageCollector protocol, Garbage collector based on reference counting
+@comment node-name, next, previous, up
+
+@subsection Support classes
+
+There is a class @code{GCObject} from which you could inherit your own
+classes. This class implements the @code{GarbageCollecting} protocol.
+
+Using this class, you could write a class whose instances hold other
+objects. This class is safe to cyclic references. Here is its
+implementation:
+
+@example
+@@interface MyGCObject : GCObject
+@{
+    id object;
+    BOOL isGarbageCollectable;
+@}
+
+- (void)setObject:(id)anObject;
+- (id)object;
+
+@@end
+
+
+@@implementation MyGCObject
+
+- (void)setObject:(id)anObject
+@{
+    [anObject retain];
+    [object release];
+    object = anObject;
+    isGarbageCollectable = [object isGarbageCollectable];
+@}
+
+- (id)object
+@{
+    return object;
+@}
+
+- (void)decrementRefCountOfContainedObjects
+@{
+    [object gcDecrementRefCount];
+@}
+
+- (BOOL)incrementRefCountOfContainedObjects
+@{
+    if(![super incrementRefCountOfContainedObjects])
+        return NO;
+    [object gcIncrementRefCount];
+    [object incrementRefCountOfContainedObjects];
+    return YES;
+@}
+
+- (void)dealloc
+@{
+    if(!isGarbageCollectable)
+        [object release];
+    [super dealloc];
+@}
+
+@@end
+@end example
+
+There are also concrete subclasses of @code{NSArray} and
+@code{NSDictionary} named @code{GCArray} and @code{GCDictionary}
+respectively, together with their mutable classes @code{GCMutableArray}
+and @code{GCMutableDictionary}. Their instances could hold both normal
+and garbage collectable objects.
+
+
+
+@c =========================================================================
+@node	 Boehm garbage collector, Atomic memory allocation, Support classes, Garbage collecting
+@comment node-name, next, previous, up
+
+@section Boehm's garbage collector
+
+Starting with version 0.9.0 @emph{libFoundation} comes with support for the
+Boehm's garbage collector. It is available from
+
+@uref{http://reality.sgi.com/boehm_mti/gc.html}
+
+It is a conservative garbage collector that works by replacing the
+system memory allocation routines
+(@code{malloc}/@code{calloc}/@code{realloc}) with the ones that come
+with the collector. The memory allocation works as before, you allocate
+memory using the @code{GC_malloc()} function instead of @code{malloc()},
+@code{GC_calloc()} instead of @code{calloc()} and @code{GC_realloc()}
+instead of @code{realloc()}. The difference comes from the fact that
+you're no longer required to call a @code{free} function. The collector
+takes care of no longer reachable portions of the allocated memory by
+monitoring the memory allocation of your program and trying to collect
+the garbages when certain conditions are met. You can also explicitly
+invoke the collection the garbages by calling the @code{GC_collect()}
+function.
+
+The collection can also occur in another thread on systems that support
+multi-threading. You can disable the collection in the main thread by
+setting the value of a variable (@code{GC_dont_gc}) and invoke the
+collection in a separate thread when you wish, perhaps on a time basis
+or when some other conditions are met.
+
+Another feature is that the collection can be done incrementally, ie not
+all the memory is collected at once. This can be done by calling the
+@code{GC_collect_a_little()} function. One can use this feature in the
+program's run loop of an interactive program to make sure the collection
+will not make the program stop while the collection is in progress.
+
+Memory allocation functions are described in @file{gc.h}.
+
+@menu
+* Atomic memory allocation::
+* Typed memory allocation::
+* Finalization::
+* GC support in GNU Objective-C::
+* GC support in libFoundation::
+* Useful macros::
+@end menu
+
+@c =========================================================================
+@node	 Atomic memory allocation, Typed memory allocation, Boehm garbage collector, Boehm garbage collector
+@comment node-name, next, previous, up
+
+@subsection Atomic memory allocation
+
+The Boehm's garbage collector normally assumes that all the memory
+allocated potentially contains pointers. However this is not always
+true. For memory zones that one knows they don't contain pointers to
+other allocated memory, the @code{GC_malloc_atomic()} can be used. This
+function marks the returned memory zone as not containing any
+pointer. Use this function for allocating strings and memory zones that
+does not contain pointers.
+
+@c =========================================================================
+@node	 Typed memory allocation, Finalization, Atomic memory allocation, Boehm garbage collector
+@comment node-name, next, previous, up
+
+@subsection Typed memory allocation
+
+There are many cases when the allocated memory may contain both data and
+pointers. In this case the memory can be allocated using the normal
+@code{GC_malloc()} function and let the collector assume that all the
+contained data are pointers. This is both inefficient and error-prone
+because it is possible, even with a small probability, that integers
+have the same value as an existing pointer, thus keeping a reference to
+a memory zone and preventing it to be deallocated.
+
+Fortunately there's a better approach for this. At the time of the
+allocation, it is possible to inform the collector where the pointers
+are located inside it. This mechanism is called @emph{typed memory}.
+
+To describe a memory zone a descriptor of it has to be constructed
+first. The @code{GC_make_descriptor()} function is used for this; it
+takes as arguments a bitmap describing the memory zone and the number of
+meaningful bits in the bitmap. The less signifiant bit in the bitmap
+corresponds to the first word in the memory zone.
+
+The descriptor returned by the @code{GC_make_descriptor()} function is
+then passed to the @code{GC_malloc_explicitly_typed()} or
+@code{GC_calloc_explicitly_typed()}functions to allocate a memory
+zone. One caveat though, the memory returned by these functions cannot
+be reallocated at a later point in time.
+
+The typed memory functions have their prototypes in the
+@file{gc_typed.h} file.
+
+@c =========================================================================
+@node	 Finalization, GC support in GNU Objective-C, Typed memory allocation, Boehm garbage collector
+@comment node-name, next, previous, up
+
+@subsection Finalization
+
+The Boehm's collector provides a facility that allows a function to be
+called just before a memory zone is collected. The
+@code{GC_register_finalizer()} takes as arguments the function to be
+called when the memory zone is being collected, the address of the
+memory zone, a client data that's passed to the function when it is
+called together with the address of the memory zone. There two more
+arguments to this function, that are used as out arguments: the old
+finalizer function and the old client data. Pass @code{NULL} to these
+arguments if you're not interested in their values.
+
+Be careful with what you do in the finalizer function. In general don't
+assume that the finalizers are invoked in any particular order. More
+important @strong{don't do any memory allocation inside the finalizer
+function}. This would case the finalizer to be invoked again which is
+not probably what you want (this may be a bug in the collector).
+
+More explanation for the public functions can be found in both
+@file{gc.h} and @file{gc_typed.h}.
+
+@c =========================================================================
+@node	 GC support in GNU Objective-C, GC support in libFoundation, Finalization, Boehm garbage collector
+@comment node-name, next, previous, up
+
+@subsection Boehm's garbage collector support in the GNU Objective-C compiler and runtime
+
+The GNU Objective-C runtime and compiler have been enhanced to support
+the Boehm's garbage collector. To gain speed and to be able to implement
+some special facilities like @strong{weak pointers} (pointers that are
+invisible to the garbage collector), the GNU Objective-C runtime uses
+typed memory to allocate all the instances of the classes.
+
+The typed memory descriptor for each class is computed once per class,
+immediately after the object has been initialized. The descriptor is
+computed from the information about instance variables available in the
+class. To correctly handle all the type information, the Objective-C
+encoding for bitfields has been changed to include description of the
+type holding the bitfield and the position of the bitfield inside the
+corresponding value.
+
+To mark a pointer inside an instance as a weak pointer, the function
+@code{class_ivar_set_gcinvisible()} from the GNU runtime should be
+used. This function takes as argument the class whose instances contain
+the weak pointer, the name of the instance variable and a boolean flag
+that marks or unmarks the instance variable as a weak pointer.
+
+See the documentation in the GNU Objective-C compiler for a description
+of the new encoding of bitfields and for an example of the
+@code{class_ivar_set_gcinvisible()} function.
+
+@c =========================================================================
+@node	 GC support in libFoundation, Useful macros, GC support in GNU Objective-C, Boehm garbage collector
+@comment node-name, next, previous, up
+
+@subsection Boehm's garbage collector support in @emph{libFoundation}
+
+@emph{libFoundation} hides a lot of the interface with the Boehm's
+garbage collector by providing the same API for the memory management
+functions no matter what is the model used, the reference counting
+mechanism or the Boehm's garbage collector.
+
+The objects are allocated by the library using the normal
+@code{NSAllocateObject()} function. In the case of Boehm's garbage
+collector a typed memory object is properly allocated.
+
+Internally the memory allocation for things other than objects is
+performed using the @code{Malloc}, @code{Calloc}, @code{Realloc} and
+@code{Free} inline functions. There are also versions that are used to
+allocate atomic memory, @code{MallocAtomic} and
+@code{CallocAtomic}. These pseudo-functions are not exported but one can
+create similar functions for other libraries or applications.
+
+If you need to know when a given object will be finalized, you just have
+to make the class adopt the @code{GCFinalization} protocol. This
+protocol defines a single method, @code{-gcFinalize}, that is invoked by
+the garbage collector when an object is about to finalize.
+
+In addition to finalization, the @code{GarbageCollector} class provides
+a powerful mechanism that allows objects to be registered as observers
+of other objects finalization. Here are the specific methods:
+
+@example
+
+@@interface GarbageCollector (BoehmGCSupport)
+
++ (void)registerForFinalizationObserver:(id)observer
+  selector:(SEL)selector
+  object:(id)object;
++ (void)unregisterObserver:(id)observer
+  forObjectFinalization:(id)object;
+
+@@end
+
+@end example
+
+When the @code{observer} object is registered for observing the
+finalization of @code{object}, the @code{observer}'s method whose
+selector is represented by @code{selector} is automatically called when
+@code{object} is about to finalize.
+
+You can manually unregister an object as the observer of an object
+finalization by using the
+@code{+unregisterObserver:forObjectFinalization:} method. If you provide
+@code{nil} for the object then @code{observer} will be unregistered for
+all the objects it has been previously registered as observer.
+
+If an object registered as observer of another objects finalizes, the
+@code{GarbageCollector} class automatically unregisters the observer for
+all the objects it was observer. You don't have to take any special
+actions to remove the observer except if it's kept in the internal
+structures of your program. In this case you should register another
+object as an observer of the original's observer finalization and remove
+it from your structures. As you can see an object can be simultaneously
+both an observed and an observer object, there's no restriction in doing
+this.
+
+@c =========================================================================
+@node	 Useful macros, NSZone, GC support in libFoundation, Boehm garbage collector
+@comment node-name, next, previous, up
+
+@subsection Useful macros
+
+When working with the Boehm's garbage collector, the messages used by
+the reference counting mechanism are obsolete and they simply introduce
+an unnecessary overhead. That's why instead of sending the
+@code{retain}, @code{release} and @code{autorelease} messages you'd
+better use the macros with the similar names, @code{RETAIN},
+@code{RELEASE} and @code{AUTORELEASE}. When the code is compiled with
+support for Boehm's garbage collector the correspondent messages are not
+sent at all.
+
+In addition to the above macros, another macro should be used to make
+the code cleaner. The @code{ASSIGN} macro can be used whenever an object
+value is assigned to an object variable and the old value of the
+variable needs to be release and the new value retained. The definition
+of this macro is:
+
+@example
+#define ASSIGN(object, value) \
+  (@{if (value) [value retain]; \
+    if (object) [object release]; \
+    object = value;@})
+@end example
+
+When Boehm's garbage collector is used the definition of the macro is
+simply:
+
+@example
+#define ASSIGN(object, value) \
+  object = value
+@end example
+
+Another macro can be used whenever the code requires the creation of an
+autorelease pool. This pool is not needed when the code works in the
+presence of Boehm's garbage collector. The macro is
+@code{CREATE_AUTORELEASE_POOL} and should be used as a variable
+definition and must placed the last in the variables definition
+list. Use the @code{RELEASE} macro to release the pool.
+
+The preprocessor define @code{LIB_FOUNDATION_BOEHM_GC} can be used to
+find out if the program is compiled with support for Boehm's garbage
+collector (@xref{Preprocessor defines} for other preprocessor
+defines). If you need to find out at runtime if the program was compiled
+with support for Boehm's collector you can access the read-only variable
+@code{_usesBoehmGC}.
+
+@c =========================================================================
+@node	 NSZone, The NSZone class, Useful macros, Top
+@comment node-name, next, previous, up
+
+@chapter The @code{NSZone} class and memory allocation
+
+Object allocation is performed from @emph{zones} that group related
+objects in a zone of memory. A zone is represented in
+@emph{libFoundation} by an instance of a subclass of @code{NSZone}. A
+zone is an object that not only keeps the memory zone from which the
+objects are allocated, but also encapsulates the algorithms that manage
+the memory allocation from that zone.
+
+Traditionally, @code{NSZone} is implemented as a structure. In
+@emph{libFoundation}, @code{NSZone} is a class instead of a struct, and
+the related zone functions are static inline functions that invoke the
+corresponding methods of the zone instance. The idea behind the
+definition of the @code{NSZone} as a class and not as a struct is to
+offer the user of the library the possibility to build his own allocator
+and to let current and future allocators coexist.
+
+Currently three zones are available: @code{NSDefaultZone},
+@code{NSAllocDebugZone} and @code{StackZone}. The first two they can be
+used only through the @code{NSZone} class and not directly. When
+@emph{libFoundation} is compiled with support for the Boehm's garbage
+collector the allocation is done using only the collector's allocation
+functions and the entire mechanism described below for the @code{NSZone}
+classes is completely unused.
+
+When the program first starts a default zone is created
+automatically. This zone is either an instance of the
+@code{NSDefaultZone} or of the @code{NSAllocDebugZone} class, depending
+on the mode in which the program is run. If the program runs using the
+reference counting mechanism, the environment variable @code{ALLOCDEBUG}
+is checked. If the variable exists in your environment then the default
+zone will be an instance of @code{NSAllocDebugZone}. If this environment
+variable is not defined then an instance of @code{NSDefaultZone} becomes
+the default zone. If the program runs using the Boehm's garbage
+collector, no zones are used; for more information see @ref{Zones and
+garbage collection}.
+
+You can change the default zone from which the future objects will be
+allocated using the @code{setDefaultZone:} method. To do this you have
+to create an instance of the zone you want to allocate objects from and
+call the @code{+setDefaultZone:} method of @code{NSZone} with the new
+instance. The zones are kept into a stack, the most recent zone being
+passed to @code{setDefaultZone:} being the top of the stack. When you
+release a zone and it has to be deallocated, the zone is removed from
+the stack of zones. If the zone object happens to be the top of the
+stack, the zone under it becomes the new default zone.
+
+@menu
+* The NSZone class::
+* The NSZone functions::
+* The NSAllocDebugZone class::
+* Zones and garbage collection::
+@end menu
+
+
+@c =========================================================================
+@node	 The NSZone class, The NSZone functions, NSZone, NSZone
+@comment node-name, next, previous, up
+
+@section The @code{NSZone} class
+
+@code{NSZone} is an abstract class that defines the basic behavior for
+all the memory allocators.
+
+@itemize @bullet
+
+@item
+@code{+(void)@strong{setDefaultZone}:(NSZone*)@emph{zone};}
+
+@quotation
+Sets the default zone from which the subsequent memory allocation takes
+place.
+@end quotation
+
+@item
+@code{+(NSZone*)@strong{defaultZone};}
+
+@quotation
+Returns the default zone.
+@end quotation
+
+@item
+@code{+(NSZone*)@strong{zoneFromPointer}:(void*)@emph{pointer};}
+
+@quotation
+Returns the zone from which @emph{pointer} was allocated. Care should be
+taken as the zones are asked (using @code{-pointerInZone:}) in order if
+the pointer was allocated by them. See the @code{-pointerInZone:} method
+description for more information.
+@end quotation
+
+@item
+@code{+(BOOL)@strong{checkZone};}
+
+@quotation
+Check the memory allocated by all the zones. See the @code{-checkZone}
+method description for more information.
+@end quotation
+
+@item
+@code{+(id)@strong{allocZoneInstance};}
+
+@quotation
+This is the low level method used to allocate a zone instance. This is
+used because allocation of zone instances is done in a special way to
+avoid the chicken and egg problem (from which zone a zone instance is
+allocated?)
+@end quotation
+
+@item
+@code{-(id)@strong{initForSize}:(unsigned)@emph{startSize} @strong{granularity}:(unsigned)@emph{granularity} @* @strong{canFree}:(BOOL)@emph{canFree};}
+
+@quotation
+This is the designated initialization method. Creates a zone that can
+allocate as much as @emph{startSize} memory initially. The memory can
+grow or shrink in increments of @emph{granularity}. If @emph{canFree} is
+set to @code{YES} the memory is freed when when @code{-free:} is sent,
+otherwise the memory is never freed.
+@end quotation
+
+@item
+@code{-(void*)@strong{malloc}:(unsigned)@emph{size};}
+
+@quotation
+Allocate a memory zone of @emph{size} bytes and return it. Returns
+@code{NULL} if this is not possible.
+@end quotation
+
+@item
+@code{-(void*)@strong{mallocAtomic}:(unsigned)@emph{size};}
+
+@quotation
+Similar with @code{-malloc:} but allocate a memory zone that's not
+searched by the garbage collector for pointers.
+@end quotation
+
+@item
+@code{-(void*)@strong{calloc}:(unsigned)@emph{numElems} @strong{byteSize}:(unsigned)@emph{byteSize};}
+
+@quotation
+Allocate a memory zone that holds @emph{numElems} elements, each of
+@emph{byteSize}, set all the bytes in it to @code{0} and return
+it. Returns @code{NULL} if the allocation fails.
+@end quotation
+
+@item
+@code{-(void*)@strong{callocAtomic}:(unsigned)@emph{numElems} @strong{byteSize}:(unsigned)@emph{byteSize};}
+
+@quotation
+Similar with @code{-calloc:byteSize:} but return a memory zone that's
+not searched by the garbage collector for pointers.
+@end quotation
+
+
+@item
+@code{-(void*)@strong{realloc}:(void*)@emph{pointer} @strong{size}:(unsigned)@emph{size};}
+
+@quotation
+Grow or shrink the size of the memory zone pointed to by @emph{pointer}
+to have the new size @emph{size}.
+@end quotation
+
+@item
+@code{-(void)@strong{recycle};}
+
+@quotation
+Frees the receiving zone after adding the still alive allocated zones to
+the default zone. Currently there are no zones in @emph{libFoundation}
+that implement this algorithm.
+@end quotation
+
+@item
+@code{-(BOOL)@strong{pointerInZone}:(void*)@emph{pointer};}
+
+@quotation
+Returns @code{YES} if @emph{pointer} points to a memory zone allocated
+by the receiving zone. Some zones are not able to reliably determine if
+the pointer is theirs or not. For example @code{NSDefaultZone} always
+returns true since few libc malloc implementation provide the capability
+to identify if a pointer is valid or not.
+@end quotation
+
+@item
+@code{-(void)@strong{freePointer}:(void*)@emph{pointer};}
+
+@quotation
+If the zone was initialized to free pointers, free the memory zone
+pointed to by @emph{pointer}. Otherwise do nothing.
+@end quotation
+
+@item
+@code{-(void)@strong{setName}:(NSString*)@emph{name};}
+
+@quotation
+Set the name of the receiving zone.
+@end quotation
+
+@item
+@code{-(NSString*)@strong{name};}
+
+@quotation
+Return the name of the receiving zone.
+@end quotation
+
+@item
+@code{-(BOOL)@strong{checkZone};}
+
+@quotation
+Checks the consistency of the memory allocated by the zone. Some
+classes, notably @code{NSAllocDebugZone}, when you request memory from
+them, they allocate more memory that is marked in a special way. In
+@code{-checkZone} they check if the marked zones are altered in which
+case they output an error message.
+@end quotation
+
+@end itemize
+
+
+@c =========================================================================
+@node	 The NSZone functions, The NSAllocDebugZone class, The NSZone class, NSZone
+@comment node-name, next, previous, up
+
+@section The @code{NSZone} functions
+
+The OpenStep specification defines several functions that deal with
+zones. In @emph{libFoundation} these functions are implemented as inline
+functions that send the corresponding message to the zone instance or
+directly to the @code{NSZone} class. The correspondency between them is
+straightforward so check the method description for more information.
+
+Here are the functions used to manipulate a zone:
+
+@itemize @bullet
+
+@item
+@code{NSZone* @strong{NSCreateZone}(unsigned @emph{startSize}, unsigned @emph{granularity}, BOOL @emph{canFree});}
+
+@item
+@code{NSZone* @strong{NSDefaultMallocZone}(void);}
+
+@item
+@code{NSZone* @strong{NSZoneFromPointer}(void* @emph{pointer});}
+
+@item
+@code{void* @strong{NSZoneMalloc}(NSZone* @emph{zone}, unsigned @emph{size});}
+
+@item
+@code{void* @strong{NSZoneMallocAtomic}(NSZone* @emph{zone}, unsigned @emph{size});}
+
+@item
+@code{void* @strong{NSZoneCalloc}(NSZone* @emph{zone}, unsigned @emph{numElems}, unsigned @emph{byteSize});}
+
+@item
+@code{void* @strong{NSZoneCallocAtomic}(NSZone* @emph{zone}, unsigned @emph{numElems}, @* unsigned @emph{byteSize});}
+
+@item
+@code{void* @strong{NSZoneRealloc}(NSZone* @emph{zone}, void* @emph{pointer}, unsigned @emph{size});}
+
+@item
+@code{void @strong{NSZoneFree}(NSZone* @emph{zone}, void* @emph{pointer});}
+
+@item
+@code{void @strong{NSRecycleZone}(NSZone* @emph{zone});}
+
+@item
+@code{void @strong{NSSetZoneName}(NSZone* @emph{zone}, NSString* @emph{name});}
+
+@item
+@code{NSString* @strong{NSZoneName}(NSZone* @emph{zone});}
+
+@end itemize
+
+
+@c =========================================================================
+@node	 The NSAllocDebugZone class, Zones and garbage collection, The NSZone functions, NSZone
+@comment node-name, next, previous, up
+
+
+@section The @code{NSAllocDebugZone} class
+
+The @code{NSDefaultZone} uses system @code{malloc}, @code{calloc},
+@code{realloc} and @code{free} directly, without any checks.
+
+The @code{NSAllocDebugZone} is used to help in tracking down memory
+allocation bugs. It provides the following features:
+
+
+@itemize @bullet
+
+@item
+check double deallocation for pointers
+
+@item
+check deallocation of non-existing pointers
+
+@item
+use a block of memory past its margins
+
+@item
+list blocks allocated since a moment (marked by a special call)
+
+@item
+each allocated pointer has a serial number
+
+@item
+stop when alloc-ing a pointer with a certain serial number
+
+@item
+do @code{SYSTEM_MALLOC_CHECK} and internal checks every count operation
+
+@item
+be able to control things from gdb
+
+@item
+be able to control things from environment variables
+
+@end itemize
+
+The @code{NSAllocDebugZone} is controlled by the following environment
+variables:
+
+@itemize @bullet
+
+@item
+@code{ALLOCDEBUG}: must be set to something to use the alloc debug zone
+
+@item
+@code{ALLOCDEBUG_STOP}: stop in debugger @code{SIGINT} when alloc-ing
+pointer with given serial number (this serial number is reported when
+and error with that pointer occurs). Undefined or 0 means no stop.
+
+@item
+@code{ALLOCDEBUG_COUNT}: number of passes inside allocation/deallocation
+functions to @code{SYSTEM_MALLOC_CHECK} and internal check. Undefined or
+0 means no checks.
+
+@item
+@code{ALLOCDEBUG_UPPER} and @code{ALLOCDEBUG_LOWER}: number of bytes to alloc at top/bottom of
+object block. These bytes are set to a given value (0x88) and checked at
+free and internal check to guard against using memory past the
+limit. Undefined or zero means no margin. Note that this size must be
+multiples of the machine address alignment (4, 8, 16 are recommended
+values).
+
+@end itemize
+
+The @code{NSAllocDebugZone} provides these functions to be used from the
+GNU debugger.
+
+@itemize @bullet
+
+@item
+@code{debuggerStopMark(unsigned mark)}: overrides @code{ALLOCDEBUG_STOP}
+
+@item
+@code{debuggerCheckTime(unsigned count)}: overrides @code{ALLOCDEBUG_COUNT}
+
+@item
+@code{debuggerDescription(id obj)}: performs @code{printf("%s\n", [obj description])}
+
+@item
+@code{debuggerPerform(id obj, char* sel)}: performs @code{[obj sel]}
+
+@item
+@code{debuggerPerformWith(id obj, char* sel, id arg)}: performs @* 
+@w{@code{[obj sel:(id)atoi(arg)]}}
+
+@end itemize
+
+The program instantiates two zones: one @code{NSDefaultZone} and one
+@code{NSAllocDebugZone}, and uses one or the other depending on the
+@code{ALLOCDEBUG} environment variable. If this variable exists in your
+environment then the @code{NSAllocDebugZone} instance will be
+used.
+
+Below are some setting you might find useful when working with the
+@code{NSAllocDebugZone} class.
+
+@example
+# must be set to something to use alloc debug zone
+ALLOCDEBUG=YES
+export ALLOCDEBUG=YES
+
+# stop in debugger (SIGINT) when alloc-ing pointer number *
+# nil or 0 means no stop
+ALLOCDEBUG_STOP=0
+export ALLOCDEBUG_STOP
+
+# stop in debugger (SIGINT) when alloc-ing pointer number *
+# nil or 0 means no stop
+ALLOCDEBUG_MARK=0
+export ALLOCDEBUG_MARK
+
+# number of passes inside allocation/deallocation functions
+# to SYSTEM_MALLOC_CHECK and internal check
+# nil or 0 means no checks
+ALLOCDEBUG_COUNT=16
+export ALLOCDEBUG_COUNT
+
+# number of bytes to alloc at top/bottom of object block
+# these bytes are set to a given value (0x88) and checked
+# at free and internal check to guard against using memory
+# past the limit.
+ALLOCDEBUG_UPPER=8
+ALLOCDEBUG_LOWER=8
+export ALLOCDEBUG_UPPER ALLOCDEBUG_LOWER
+@end example
+
+
+@c =========================================================================
+@node	 Zones and garbage collection, NSInvocation, The NSAllocDebugZone class, NSZone
+@comment node-name, next, previous, up
+
+@section Zones and garbage collection
+
+The zone mechanism provides a way to group related pointers in a
+program.  For example different portions of an application which do not
+have much in common, can use different zones. This improves the memory
+localization in the virtual memory system of the operating system and
+lowers the mapping in and out of the memory pages.
+
+In the current implementation, both garbage collectors, the Boehm's
+collector and the one based on reference counting, do not take advantage
+of this behavior. When a collection starts searching for the unused
+pointers can spread over all the existing zones.
+
+Because of this, when @emph{libFoundation} is compiled with support for
+the Boehm's collector, the zones are completely disabled. The
+@code{NSZone} functions that perform memory allocation simply invoke the
+collector's functions.
+
+
+@c =========================================================================
+@node	 NSInvocation, Porting NSInvocation, Zones and garbage collection, Top
+@comment node-name, next, previous, up
+
+@chapter Features of the @code{NSInvocation} class
+
+The ability to dynamically construct method invocations is an important
+feature in Objective-C libraries. This ability is used by various
+applications like distributed objects and various language interpreters
+to provide interface with the native methods or functions. In
+@emph{libFoundation} the @code{NSInvocation} class is designed to
+provide this important facility.
+
+In the OpenStep specification and some OpenStep Foundation
+implementations, the @code{NSInvocation} class is only used to
+encapsulate the arguments and return value of a forwarded message and to
+allow sending a different message in the context of the forwarding. The
+normal usage of the @code{NSInvocation} is in the
+@code{-forwardInvocation:} method:
+
+@example
+- (void)forwardInvocation:(NSInvocation*)anInvocation
+@{
+    [anInvocation setTarget:anotherObject];
+    [anInvocation setSelector:anotherSelector];
+    [anInvocation invoke];
+@}
+@end example
+
+In this example the @code{NSInvocation} object is created automatically
+by the Foundation library, with the help of the Objective-C runtime
+library, when a message is sent to an object that does not implement
+it. The actual implementation assumes the stack frame for the arguments
+of the method already exists @footnote{On many systems this is only a
+partial picture, because the native convention calls can also use
+registers to pass arguments to a function.}. All the further changes to
+the method's arguments using the @code{NSInvocation}'s methods are
+performed on that stack frame. After the method invocation returns you
+can access the return value and possibly change it, using the
+@code{getReturnValue:} and @code{setReturnValue:} methods.
+
+The situation is different when you build a dynamic method invocation.
+
+@example
+    BOOL flag = YES;
+    int anInt = 1234;
+    float aFloat = 12345.0;
+    double aDouble = 98765.0;
+    id invocation = [[NSInvocation new] autorelease];
+
+    [invocation setSelector:
+                @@selector(setFlag:intValue:floatValue:doubleValue:)];
+    [invocation setTarget:object];
+    [invocation setArgument:&flag atIndex:2];
+    [invocation setArgument:&anInt atIndex:3];
+    [invocation setArgument:&aFloat atIndex:4];
+    [invocation setArgument:&aDouble atIndex:5];
+    [invocation invoke];
+@end example
+
+In this example the dynamic method invocation is constructed from
+scratch, by providing the object, the message selector and the arguments
+of the message. Then you can invoke the message and, after the message
+returns, you can access the return value.
+
+It is very important to set the target and selector @emph{before}
+setting the arguments. The @code{NSInvocation} is not otherwise able to
+construct the stack and registers frame and set the arguments of the
+method invocation.
+
+@menu
+* Porting NSInvocation::
+@end menu
+
+
+@c =========================================================================
+@node	 Porting NSInvocation, NSMethodSignature, NSInvocation, NSInvocation
+@comment node-name, next, previous, up
+
+
+@section Porting @code{NSInvocation}
+
+The @code{NSInvocation} is highly dependent on the target machine. The
+code that depends on the target machine is carefully separated from the
+independent part of the class. This code is written as macros in the
+@file{config/@emph{processor}/@emph{operating-system}}.
+
+
+@code{NSInvocation} is implemented using the @code{__builtin_apply} and
+@code{__builtin_return} built-in pseudo-functions that are available in
+the GNU C compiler. See the GNU C compiler documentation of these
+functions.
+
+The following macros have to be defined for a given target
+machine. Defining them is a though process, they closely follow the
+native convention calls defined for the target in the GCC target
+dependent files. We intend to take advantage of the knowledge that's
+already in the compiler and move the @code{NSInvocation}'s code into the
+Objective-C runtime library.
+
+@itemize @bullet
+
+@item
+@code{FUNCTION_VALUE}
+
+@item
+@code{FUNCTION_SET_VALUE}
+
+@item
+@code{GET_STRUCT_VALUE_ADDRESS}
+
+@item
+@code{SET_STRUCT_VALUE_ADDRESS}
+
+@end itemize
+
+In addition, if the target system does not work as expected copying the
+arguments onto and from the @code{__builtin_apply}'s frame, you can
+define in addition the @code{FRAME_SET_ARGUMENT} and
+@code{FRAME_GET_ARGUMENT} macros.
+
+@code{FUNCTION_VALUE} should copy the return value from the result frame
+returned by the @code{__builtin_apply} pseudo-function into a memory
+zone received as argument. This macro has the following arguments:
+
+@itemize @bullet
+
+@item
+@code{TYPE} (@code{char*}): the Objective-C encoding of the return value
+type
+
+@item
+@code{ARGS} (@code{void*}): the arguments frame passed to
+@code{__builtin_apply}
+
+@item
+@code{RESULT_FRAME} (@code{void*}): the result frame returned by
+@code{__builtin_apply}
+
+@item
+@code{RETURN_VALUE} (@code{void*}): the memory zone where the value
+should be set. This zone is already allocated.
+
+@end itemize
+
+
+@code{FUNCTION_SET_VALUE} should set the return value into the result
+frame returned by the @code{__builtin_apply}. It has the following
+arguments:
+
+@itemize @bullet
+
+@item
+@code{TYPE} (@code{char*}): the Objective-C encoding of the return value
+type
+
+@item
+@code{ARGS} (@code{void*}): the arguments frame passed to
+@code{__builtin_apply}
+
+@item
+@code{RESULT_FRAME} (@code{void*}): the result frame returned by
+@code{__builtin_apply}
+
+@item
+@code{RETURN_VALUE} (@code{void*}): the memory zone where the returned
+value should be copied from.
+
+@end itemize
+
+
+@code{GET_STRUCT_VALUE_ADDRESS} is an expression that should produce the
+return value address in the case this is returned by reference or
+@code{NULL} if the return value is not returned by reference. Usually
+only the aggregates (structures and unions) are returned by
+reference. This macro has the following arguments:
+
+@itemize @bullet
+
+@item
+@code{ARGS} (@code{void*}): the arguments frame passed to
+@code{__builtin_apply}. Usually the address of return value is set here
+by the @code{__builtin_apply_args} pseudo-function
+
+@item
+@code{RETTYPE} (@code{char*}): the Objective-C encoding of the return
+value type.
+
+@end itemize
+
+
+@code{SET_STRUCT_VALUE_ADDRESS} should set in the arguments frame that
+will be passed to @code{__builtin_apply} the address of the return value
+if this is returned by reference. The arguments are:
+
+@itemize @bullet
+
+@item
+@code{ARGS} (@code{void*}): the arguments frame that will be passed to
+@code{__builtin_apply}
+
+@item
+@code{ADDR} (@code{void*}): the address of the zone where the called
+function should set the return value. This zone is already allocated.
+
+@item
+@code{RETTYPE} (@code{char*}): the Objective-C encoding of the return
+value type
+
+@end itemize
+
+
+@code{FRAME_SET_ARGUMENT} should be used whenever the default mechanism
+of copying the argument onto the @code{__builtin_apply}'s frame is not
+working. The default mechanism is implemented in the
+@code{NSInvocation}'s @code{-setArgument:atIndex:} method. If you do not
+define this macro the default mechanism is used.
+
+The arguments of this macro are:
+
+@itemize @bullet
+
+@item
+@code{FRAME_DATA} (@code{void*}): The address in the
+@code{__builtin_apply}'s frame where the argument's value has to be copied.
+
+@code{ARGUMENT_LOCATION} (@code{void*}): The address where the argument
+to be copied is located.
+
+@code{ARG_INFO} (@code{NSArgumentInfo}): Describes the type of the
+argument.
+
+@end itemize
+
+The @code{FRAME_GET_ARGUMENT} macros is similar with
+@code{FRAME_SET_ARGUMENT} but does the opposite job.
+
+For an example of how the above macros are implemented you can take a
+look in the @file{config} directory in the @emph{libFoundation}'s
+distribution.
+
+
+@c =========================================================================
+@node	 NSMethodSignature, Porting NSMethodSignature, Porting NSInvocation, Top
+@comment node-name, next, previous, up
+
+@chapter Features of the @code{NSMethodSignature} class
+
+@code{NSMethodSignature} provides information about the type signature
+of a method. The Objective-C type encoding of a method is a C string
+that contains an encoding of the return value type and type of the
+arguments including information about how to access them on the stack
+and registers frames. See the Objective-C documentation in the GCC
+runtime for more information about method type encoding.
+
+Below is an example of how to create a @code{NSMethodSignature} instance
+for a given method of an object:
+
+@example
+    id anObject;
+    struct objc_method* mth
+         = class_get_instance_method(self->isa, aSelector);
+    const char* types = mth->method_types;
+    id signature = [NSMethodSignature signatureWithObjCTypes:types];
+@end example
+
+The above code is implemented by the @code{NSObject}'s
+@code{methodSignatureForSelector:} method. If you send this method to a
+class, the method searches for a class method whose selector is the same
+as the argument. If the message is sent to an instance, the method
+searches for an instance method. If you don't want to create an instance
+of a class just to find out what is the signature of an instance method,
+you can use the @code{instanceMethodForSelector:} method, that searches
+in the class for an instance method with the same selector as the
+argument.
+
+In addition to providing information about already existing method
+encodings that are available for compiled methods, the
+@code{NSMethodSignature} class from @emph{libFoundation} allows you to
+construct method signatures for new methods, that could be created for
+example by an interpreter. Suppose one wants to create a method encoding
+that has arguments an integer and its return type is @code{void}; you
+can do like this:
+
+@example
+    id signature = [NSMethodSignature signatureWithObjCTypes:"v@:i"];
+@end example
+
+The @code{NSMethodSignature} class computes the full signature that
+contains the offsets of the arguments on the stack and registers
+frames. This code is dependent on the target machine so the result may
+be different between various processors and even on the same processor
+but different OSes.
+
+@menu
+* Porting NSMethodSignature::
+@end menu
+
+@c =========================================================================
+@node	 Porting NSMethodSignature, , NSMethodSignature, NSMethodSignature
+@comment node-name, next, previous, up
+
+@section Porting NSMethodSignature
+
+Porting @code{NSMethodSignature} implies defining the below macros,
+similar with the way @code{NSInvocation} is ported to a new platform. As
+with the @code{NSInvocation}'s macros, this code will probably also move
+in the Objective-C runtime library, to take advantage of the compiler's
+knowledge on the target system.
+
+@itemize @bullet
+
+@item
+@code{CUMULATIVE_ARGS}
+
+@item
+@code{INIT_CUMULATIVE_ARGS}
+
+@item
+@code{FUNCTION_ARG_ENCODING}
+
+@end itemize
+
+The name of this macros are the same with the similar ones from the GNU
+CC compiler. However they don't correspond neither in semantics nor in
+the argument types.
+
+@code{CUMULATIVE_ARGS} is the data type of a variable used to hold about
+arguments processed so far. On a machine where all the arguments are
+passed on stack, this type is usually @code{int}.
+
+@code{INIT_CUMULATIVE_ARGS} should initialize the variable of type
+@code{CUMULATIVE_ARGS} described above.
+
+@code{FUNCTION_ARG_ENCODING} determines the encoding of the next
+argument of a method. It must produce a @code{NSString} describing the
+Objective-C encoding and position of the argument in the arguments frame
+of the method.
+
+If you want to determine how to write the encoding for a new machine you
+could use the program generated by signature-test.pl perl script in
+@emph{FoundationTestsuite}. This generates a class with a lot of
+methods. You can look at the output of the program to see how the
+compiler encodes the methods. Also take a look in the @file{objc-act.c}
+file in the compiler to see how the methods are encoded.
+
+
+@c =========================================================================
+
+@contents
+
+@bye

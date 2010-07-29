@@ -1,0 +1,54 @@
+# compilation settings
+
+#libNGObjDOM_LIBRARIES_DEPEND_UPON += \
+#        -lNGScripting
+
+libNGObjDOM_LIBRARIES_DEPEND_UPON += \
+        -lNGObjWeb \
+	-lNGMime -lNGStreams -lNGExtensions -lEOControl	\
+	-lXmlRpc -lDOM -lSaxObjC
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I.. 		\
+	-I../XML	\
+	-I../NGObjWeb	\
+	-I../NGStreams	\
+
+ifneq ($(GNUSTEP_BUILD_DIR),)
+RELBUILD_DIR_SOPE=$(GNUSTEP_BUILD_DIR)/..
+RELBUILD_DIR_SxCore=$(GNUSTEP_BUILD_DIR)/../../sope-core
+RELBUILD_DIR_SxXml=$(GNUSTEP_BUILD_DIR)/../../sope-xml
+
+ADDITIONAL_LIB_DIRS += \
+	-L$(GNUSTEP_OBJ_DIR)                                            \
+        -L$(RELBUILD_DIR_SOPE)/NGObjWeb/$(GNUSTEP_OBJ_DIR_NAME)		\
+        -L$(RELBUILD_DIR_SOPE)/NGJavaScript/$(GNUSTEP_OBJ_DIR_NAME)	\
+        -L$(RELBUILD_DIR_SOPE)/NGScripting/$(GNUSTEP_OBJ_DIR_NAME)      \
+        -L$(RELBUILD_DIR_SxCore)/NGMime/$(GNUSTEP_OBJ_DIR_NAME)      	\
+        -L$(RELBUILD_DIR_SxCore)/NGStreams/$(GNUSTEP_OBJ_DIR_NAME)      \
+        -L$(RELBUILD_DIR_SxCore)/NGExtensions/$(GNUSTEP_OBJ_DIR_NAME)   \
+        -L$(RELBUILD_DIR_SxCore)/EOControl/$(GNUSTEP_OBJ_DIR_NAME)     	\
+        -L$(RELBUILD_DIR_SxXml)/XmlRpc/$(GNUSTEP_OBJ_DIR_NAME)     	\
+        -L$(RELBUILD_DIR_SxXml)/DOM/$(GNUSTEP_OBJ_DIR_NAME)     	\
+        -L$(RELBUILD_DIR_SxXml)/SaxObjC/$(GNUSTEP_OBJ_DIR_NAME)
+else
+ADDITIONAL_LIB_DIRS += 				\
+	-L./$(GNUSTEP_OBJ_DIR)			\
+	-L../NGScripting/$(GNUSTEP_OBJ_DIR)	\
+	-L../NGObjWeb/$(GNUSTEP_OBJ_DIR)
+endif
+
+ADDITIONAL_CPPFLAGS += -pipe -Wall
+
+
+NGObjDOM_BUNDLE_LIBS += -lNGObjDOM
+
+SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
+
+
+# Apple
+
+ifeq ($(FOUNDATION_LIB),apple)
+libNGObjDOM_PREBIND_ADDR="0xC4600000"
+libNGObjDOM_LDFLAGS += -seg1addr $(libNGObjDOM_PREBIND_ADDR)
+endif

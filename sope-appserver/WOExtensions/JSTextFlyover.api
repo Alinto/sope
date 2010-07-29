@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="yes"?> 
+
+<wo class="JSTextFlyover">
+  <binding name="action" passthrough="NO" defaults="Actions"/>
+  <binding name="pageName" passthrough="NO" defaults="Page Names"/>
+  <binding name="javaScriptFunction"/>
+
+  <binding name="selectedColor" required="YES" />
+  <binding name="unselectedColor" required="YES" />
+  <binding name="targetWindow" />
+  <binding name="string" />
+
+  <validation message="either one of &apos;action&apos;, &apos;pageName&apos;, or &apos;javaScriptFunction&apos; may be bound">
+    <count test="!=1">
+      <bound name="action"/>
+      <bound name="javaScriptFunction"/>
+      <bound name="pageName"/>
+    </count>
+  </validation>
+</wo>

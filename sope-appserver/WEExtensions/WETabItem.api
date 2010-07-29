@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETabItem">
+  <binding name="key" required="YES" />
+  <binding name="icon" />
+  <binding name="label" />
+  <binding name="action" />
+  <binding name="isScript" defaults="YES/NO" />
+
+  <binding name="tabIcon" />
+  <binding name="leftTabIcon" />
+  <binding name="selectedTabIcon" />
+
+  <binding name="asBackground" />
+  <binding name="width" />
+  <binding name="height" />
+  <binding name="activeBgColor" />
+  <binding name="inactiveBgColor" />
+</wo>

@@ -1,0 +1,25 @@
+The SOPE Object File System (OFS)
+=================================
+
+First note that SOPE OFS is different from Zope OFS. Zope OFS is basically a
+filesystem view on the ZODB Python object database while SOPE OFS is SoObject
+support for filesystem based entities (so basically the reverse, Zope OFS
+provides a FS view on objects, SOPE OFS provides an object view on FS objects)
+
+Note that you can use any filemanager class as a storage for SOPE objects, not
+only NSFileManager, eg NGImap4FileManager or NGLdapFileManager. On the other
+side you are not required to use OFS for storing SOPE objects.
+
+OFS itself does no caching and conflict detection beyond the life of the 
+context, this is the task of either an own OFS subclass or of the filemanager
+depending on the requirements.
+
+Class Hierarchy:
+  OFSBaseObject		    (keeps name, container, fm and storage path)
+    OFSFile		    (has a BLOB and attributes)
+      OFSImage		    (different class since different methods are bound)
+      OFSPropertyListObject (objects stored as a plist)
+      OFSWebMethod	    (handles component templates inside OFS)
+    OFSFolder		    (collections of OFSFile's and OFSFolder's)
+  OFSFactoryContext	    (keeps instantiation state)
+  OFSFactoryRegistry	    (select a factory object)

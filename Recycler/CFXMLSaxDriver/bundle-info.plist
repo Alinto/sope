@@ -1,0 +1,20 @@
+{
+  "__cvs__" = "$Id$";
+
+  requires = {
+    bundleManagerVersion = 1;
+    classes = (
+      { name = NSObject;    }
+    );
+  };
+  
+  provides = {
+    SAXDrivers = ( 
+        { 
+          name        = CFXMLSaxDriver;
+          sourceTypes = ( "text/xml" ); 
+        }
+    );
+    classes = ( { name = CFXMLSaxDriver;  } );
+  };
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WESwitch">
+  <binding name="selection" />
+  <binding name="selections" />
+
+  <validation message="either &apos;selection&apos; or &apos;selections&apos; may be bound">
+    <count test="!=1">
+      <bound name="selection" />
+      <bound name="selections" />
+    </count>
+  </validation>
+</wo>

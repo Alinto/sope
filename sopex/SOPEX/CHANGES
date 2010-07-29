@@ -1,0 +1,19 @@
+CHANGES
+=======
+
+CHANGES BETWEEN 1.x and 2.x:
+----------------------------
+
+SOPE:X 2.x has been redesigned to be single process. SOPE:X 2.x is threaded
+now, the main thread being AppKit related and the second thread being
+responsible for running NGObjWeb's WORunLoop.
+
+Because of this, SNS has been removed from SOPE:X. Also, the SOPEXConsole has
+been rewritten from using pipes to utilizing a new SOPEXConsoleAppender (and
+related formatter). This is limited to NGLogging, however. NSLog() won't
+work in this context - however NGLogging is supposed to be the new standard
+and is supported throughout SOPE.
+
+The MainMenu.nib is no longer located in the SOPE:X framework, it's a resource
+of the main bundle now. This leads to much easier customization for those who
+need it.

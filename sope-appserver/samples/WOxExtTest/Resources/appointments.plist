@@ -1,0 +1,100 @@
+(
+        {
+            dateId = 126646;
+            endDate = "2000-11-02 12:00:00 +0100";
+            location = magdeburg;
+            startDate = "2000-11-02 11:00:00 +0100";
+            title = "collapsible cyclic";
+        },
+        {
+            dateId = 127000;
+            endDate = "2000-11-04 12:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-04 11:00:00 +0100";
+            title = test;
+        },
+        {
+            dateId = 127046;
+            endDate = "2000-11-06 12:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-06 11:00:00 +0100";
+            title = "monday test";
+        },
+        {
+            dateId = 127073;
+            endDate = "2000-11-06 14:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-06 13:00:00 +0100";
+            title = "test termin 2";
+        },
+        {
+            dateId = 127065;
+            endDate = "2000-11-06 17:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-06 15:00:00 +0100";
+            title = dfgdfgdfg;
+        },
+        {
+            dateId = 127080;
+            endDate = "2000-11-07 10:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-07 09:00:00 +0100";
+            title = asdasdasd;
+        },
+        {
+            dateId = 127061;
+            endDate = "2000-11-07 12:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-07 11:00:00 +0100";
+            title = sdfsdfsdf;
+        },
+        {
+            dateId = 127090;
+            endDate = "2000-11-08 18:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-08 17:00:00 +0100";
+            title = dsfdsfdsf;
+        },
+        {
+            dateId = 127041;
+            endDate = "2000-11-09 12:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-09 11:00:00 +0100";
+            title = test;
+        },
+        {
+            dateId = 127154;
+            endDate = "2000-11-11 12:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-09 11:00:00 +0100";
+            title = "di-do";
+        },
+        {
+            dateId = 127103;
+            endDate = "2000-11-11 12:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-11 11:00:00 +0100";
+            title = "saturday am";
+        },
+        {
+            dateId = 127107;
+            endDate = "2000-11-11 23:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-11 22:00:00 +0100";
+            title = "saturday pm";
+        },
+        {
+            dateId = 127098;
+            endDate = "2000-11-12 12:00:00 +0100";
+            location = " ";
+            startDate = "2000-11-12 11:00:00 +0100";
+            title = "sunday am test";
+        },
+        {
+            dateId   = 127111;
+            endDate  = "2000-11-12 23:59:00 +0100";
+            location = " ";
+            startDate = "2000-11-12 23:00:00 +0100";
+            title = "sunday pm";
+        }
+)

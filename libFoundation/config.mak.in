@@ -1,0 +1,78 @@
+# @configure_input@
+
+# preparations for GNUstep.sh-less compilation
+#GNUSTEP_FLATTENED    = @GNUSTEP_FLATTENED@
+#GNUSTEP_HOST         = @GNUSTEP_HOST@
+#GNUSTEP_HOST_CPU     = @GNUSTEP_HOST_CPU@
+#GNUSTEP_HOST_OS      = @GNUSTEP_HOST_OS@
+#GNUSTEP_HOST_VENDOR  = @GNUSTEP_HOST_VENDOR@
+#GNUSTEP_LOCAL_ROOT   = @GNUSTEP_LOCAL_ROOT@
+#GNUSTEP_MAKEFILES    = @GNUSTEP_MAKEFILES@
+#GNUSTEP_NETWORK_ROOT = @GNUSTEP_NETWORK_ROOT@
+#GNUSTEP_PATHLIST     = @GNUSTEP_PATHLIST@
+#GNUSTEP_ROOT         = @GNUSTEP_ROOT@
+#GNUSTEP_SYSTEM_ROOT  = @GNUSTEP_SYSTEM_ROOT@
+#GNUSTEP_USER_ROOT    = @GNUSTEP_USER_ROOT@
+#LIBRARY_COMBO        = @LIBRARY_COMBO@
+
+# avoid a gstep-make warning in some setups
+#PATH:=$(GNUSTEP_SYSTEM_ROOT)/Tools:$(PATH)
+
+# libFoundation options
+WITH_GNUSTEP    = @WITH_GNUSTEP@
+WITH_FFCALL     = @WITH_FFCALL@
+WITH_GC         = @WITH_GC@
+GC_INCLUDE_DIR  = @GC_INCLUDE_DIR@
+GC_LIB          = @GC_LIB@
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+libdir		= @libdir@
+bindir		= @bindir@
+includedir	= @includedir@
+sharedstatedir	= @datadir@/libFoundation
+srcdir		= @srcdir@
+
+HOST		= @HOST@
+HOST_CPU	= @HOST_CPU@
+HOST_VENDOR	= @HOST_VENDOR@
+HOST_OS		= @HOST_OS@
+TARGET		= @TARGET@
+TARGET_CPU	= @TARGET_CPU@
+TARGET_VENDOR	= @TARGET_VENDOR@
+TARGET_OS	= @TARGET_OS@
+
+LIB_FOUNDATION_NAME = libFoundation$(libext)
+
+PERL	= @PERL@
+
+ANTLR	        = antlr
+DLG	        = dlg
+ANTLR_FLAGS     =
+DLG_FLAGS       = -C2
+PCCTS_CFLAGS    = -I$(TOP)/pccts
+
+OBJC_RUNTIME	     = GNU
+BROKEN_COMPILER	     = @BROKEN_COMPILER@
+BROKEN_BUILTIN_APPLY = @BROKEN_BUILTIN_APPLY@
+NO_NESTED_FUNCTIONS  = @NO_NESTED_FUNCTIONS@
+
+CFLAGS	= @OBJC_RUNTIME_FLAG@ -I$(TOP) @CFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS	= @LIBS@
+
+ifeq ($(findstring mingw32, $(TARGET_OS)), mingw32)
+LIBS    += \
+	-lwsock32 -ladvapi32 -lcomctl32 -luser32 -lcomdlg32 \
+	-lmpr -lnetapi32 \
+	-lm
+endif
+
+ifeq ($(findstring solaris, $(TARGET_OS)), solaris)
+CFLAGS	+= -D_REENTRANT -D_TS_ERRNO
+endif
+
+MAJOR_VERSION	 = @MAJOR_VERSION@
+MINOR_VERSION	 = @MINOR_VERSION@
+SUBMINOR_VERSION = @SUBMINOR_VERSION@
+VERSION		 = $(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)

@@ -1,0 +1,24 @@
+{
+    CleanToolbarItem = {
+        label           = "Clean";
+        paletteLabel    = "Clean";
+        toolTip         = "Clean";
+        imageName       = "Clean.tiff";
+        action          = "clear:";
+    };
+
+    defaultItems = (
+        CleanToolbarItem,
+        NSToolbarFlexibleSpaceItem,
+        NSToolbarCustomizeToolbarItem
+    );
+
+    allowedItems = (
+        CleanToolbarItem,
+        NSToolbarCustomizeToolbarItem,
+        NSToolbarFlexibleSpaceItem,
+        NSToolbarSpaceItem,
+        NSToolbarSeparatorItem,
+        NSToolbarCustomizeToolbarItem
+    );
+}

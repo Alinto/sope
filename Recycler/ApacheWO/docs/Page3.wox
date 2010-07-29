@@ -1,0 +1,32 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:js="http://www.skyrix.com/od/javascript"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  
+  <form href="Page3.wox/add" method="post">
+    <input type="text" name="a" var:value="a"/><br/>
+    <input type="text" name="b" var:value="b"/><br/>
+    <input type="submit" name="ok" value="ok"/><br/>
+    <var:string value="c"/>
+  </form>
+  
+  <var:script><![CDATA[
+    var a = 3;
+    var b = 10;
+    var c = 0;
+    
+    function addAction() {
+      c = a + b;
+      return this;
+    }
+    function calcC() {
+      return a + b;
+    }
+  ]]></var:script>
+
+  a: <var:string value="a"/><br/>
+  b: <var:string value="b"/><br/>
+  c: <var:string value="calcC"/><br/>
+</var:component>

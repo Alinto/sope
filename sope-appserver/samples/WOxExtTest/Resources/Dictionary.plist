@@ -1,0 +1,9 @@
+{
+  name      = "Brown";
+  title     = "Doc.";
+  firstName = "James";
+  age       = "42";
+  street    = "Mainst. 1";
+  city      = "New York";
+  zip       = "01234";
+}

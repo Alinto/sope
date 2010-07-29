@@ -1,0 +1,26 @@
+{
+  requires = {
+    bundleManagerVersion = 1;
+    classes = (
+      { name = NSObject;    }
+    );
+  };
+
+  provides = {
+    SAXDrivers = ( 
+        { 
+          name        = libxmlSAXDriver;
+          sourceTypes = ( "text/xml" ); 
+        },
+        {
+          name        = libxmlHTMLSAXDriver; 
+          sourceTypes = ( "text/html" );
+        },
+    );
+    classes    = ( 
+        { name = libxmlSAXDriver;     },
+        { name = libxmlDocSAXDriver;  },
+        { name = libxmlHTMLSAXDriver; },
+    );
+  };
+}

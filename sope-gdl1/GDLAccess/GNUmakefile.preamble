@@ -1,0 +1,69 @@
+# compilation settings
+
+SOPE_ROOT=../..
+
+ADDITIONAL_CPPFLAGS += -Wall
+
+ADDITIONAL_CPPFLAGS += \
+        -DGDL_MAJOR_VERSION=$(MAJOR_VERSION)   \
+        -DGDL_MINOR_VERSION=$(MINOR_VERSION)   \
+        -DGDL_SUBMINOR_VERSION=$(SUBMINOR_VERSION)
+
+ADDITIONAL_CPPFLAGS += \
+        -DSOPE_MAJOR_VERSION=$(SOPE_MAJOR_VERSION)   \
+        -DSOPE_MINOR_VERSION=$(SOPE_MINOR_VERSION)   \
+        -DSOPE_SUBMINOR_VERSION=$(SOPE_SUBMINOR_VERSION)
+
+ADDITIONAL_INCLUDE_DIRS += \
+        -I. -I.. 		\
+	-I./FoundationExt	\
+	-I$(SOPE_ROOT)/sope-core/	\
+	-I$(SOPE_ROOT)/sope-core/NGExtensions/
+
+
+# Parameters for EOAdaptor lookup
+
+ifneq ($(FHS_INSTALL_ROOT),)
+ADDITIONAL_CPPFLAGS += -DFHS_INSTALL_ROOT=\@\"$(FHS_INSTALL_ROOT)\"
+endif
+
+ifeq ($(CONFIGURE_64BIT),yes)
+ADDITIONAL_CPPFLAGS += -DCONFIGURE_64BIT=1
+endif
+
+
+# dependencies
+
+libGDLAccess_LIBRARIES_DEPEND_UPON += -lEOControl
+GDLAccess_LIBRARIES_DEPEND_UPON    += -framework EOControl
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_TOOL_LIBS += -lGDLAccess -lEOControl
+else
+ADDITIONAL_TOOL_LIBS += -framework GDLAccess -framework EOControl
+endif
+
+
+# library/framework search pathes
+
+DEP_DIRS = . $(SOPE_ROOT)/sope-core/EOControl
+
+ifneq ($(frameworks),yes)
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),\
+	  -L$(GNUSTEP_BUILD_DIR)/$(dir)/$(GNUSTEP_OBJ_DIR_NAME))
+else
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))
+endif
+
+SYSTEM_LIB_DIR += $(CONFIGURE_SYSTEM_LIB_DIR)
+
+
+# TODO: add prebinding address
+
+ifeq ($(FOUNDATION_LIB),apple)
+#libGDLAccess_PREBIND_ADDR="0x??"
+#libGDLAccess_LDFLAGS += -seg1addr $(libGDLAccess_PREBIND_ADDR)
+#GDLAccess_LDFLAGS += -seg1addr $(libGDLAccess_PREBIND_ADDR)
+endif

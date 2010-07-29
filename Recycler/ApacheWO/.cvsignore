@@ -1,0 +1,4 @@
+*.apache
+*_module_structure.m
+logs
+shared_debug_obj

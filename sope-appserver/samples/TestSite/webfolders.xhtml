@@ -1,0 +1,23 @@
+<span xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding">
+  <br />
+
+  M$ Webfolder Behavior is described on:
+  <a href="http://msdn.microsoft.com/workshop/author/behaviors/overview/webfolder.asp">MSDN</a>.
+  <br />
+  Some interesting mail:
+  <a href="http://lists.w3.org/Archives/Public/w3c-dist-auth/2000JanMar/0247.html">Mail on WebFolders</a>
+  
+  <br />
+  <br />
+  
+  <style>
+  A { behavior: url(#default#AnchorClick);}
+  </style>
+  
+  <a var:href="baseURL" var:folder="baseURL" 
+     target="_top">Open in WebFolder View (target is _top)</a>
+  <br />
+  <a var:href="baseURL" var:folder="baseURL" 
+     target="newwin">Open in WebFolder View (target is newwin)</a>
+</span>

@@ -1,0 +1,46 @@
+
+How to use
+==========
+
+1. get a string in structured text format:
+   NSString *s = "a\nb\nc"
+
+2. parse it into "StructuredText" object:
+     StructuredText *stx = [s structuredText];
+   or:
+     StructuredText *stx = [[StructuredText alloc] initWithString:s];
+
+3. render the object, eg using -toXhtmlInContext:
+
+Defaults
+========
+
+STXDebugEnabled YES|NO
+
+Links
+=====
+
+http://www.zope.org/Members/millejoh/structuredText
+http://plone.org/documentation/howto/FrontPage/UsingStructuredText
+
+Classes
+=======
+
+  NSObject
+    StructuredLine
+    StructuredStack
+    StructuredText
+    StructuredTextRenderingDelegate
+      StructuredTextRenderingDelegate_XHTML
+
+  NSString(NSString_StructuredText_Extra)
+
+  NSArray(StructuredText_XHTML)
+  StructuredText(StructuredText_XHTML)
+  StructuredTextDocument(StructuredText_XHTML)
+  StructuredTextBodyElement(StructuredText_XHTML)
+  StructuredTextHeader(StructuredText_XHTML)
+  StructuredTextParagraph(StructuredText_XHTML)
+  StructuredTextList(StructuredText_XHTML)
+  StructuredTextListItem(StructuredText_XHTML)
+  StructuredTextLiteralBlock(StructuredText_XHTML)

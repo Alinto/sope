@@ -1,0 +1,38 @@
+# compilation settings
+
+SOPE_ROOT=../..
+
+SOPEX_LIBRARIES_DEPEND_UPON += \
+	-framework WebKit	\
+	-framework AppKit	\
+	-framework NGObjWeb	\
+	-framework NGMime	\
+	-framework NGMail	\
+	-framework NGStreams -framework NGExtensions -framework EOControl \
+	-framework XmlRpc -framework DOM -framework SaxObjC
+
+# we need this until the framework switches work for PCH:
+
+ADDITIONAL_INCLUDE_DIRS += \
+	-I$(SOPE_ROOT)/sope-appserver/NGObjWeb	\
+	-I$(SOPE_ROOT)/sope-core/NGExtensions	\
+	-I$(SOPE_ROOT)/sope-core/NGStreams	\
+	-I$(SOPE_ROOT)/sope-core		\
+	-I$(SOPE_ROOT)/sope-xml
+
+
+# library/framework search pathes
+
+DEP_DIRS = \
+	$(SOPE_ROOT)/sope-appserver/NGObjWeb	\
+	$(SOPE_ROOT)/sope-mime/NGMail		\
+	$(SOPE_ROOT)/sope-mime			\
+	$(SOPE_ROOT)/sope-core/NGStreams	\
+	$(SOPE_ROOT)/sope-core/NGExtensions	\
+	$(SOPE_ROOT)/sope-core/EOControl	\
+	$(SOPE_ROOT)/sope-xml/DOM		\
+	$(SOPE_ROOT)/sope-xml/XmlRpc		\
+	$(SOPE_ROOT)/sope-xml/SaxObjC
+
+ADDITIONAL_LIB_DIRS += \
+	$(foreach dir,$(DEP_DIRS),-F$(GNUSTEP_BUILD_DIR)/$(dir))

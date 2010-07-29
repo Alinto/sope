@@ -1,0 +1,99 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+  
+  Clicks: <var:string value="clicks"/><br />
+
+  <var:tabview selection="selection" bgColor="bgColor"
+               const:leftCornerIcon  = "corner_left.gif"
+               const:rightCornerIcon = "corner_right.gif">
+     
+     <var:tab const:key="news" const:label="news tab"
+              isScript="useJavaScriptTabs"
+              const:tabIcon         = "tab_news.gif"
+              const:selectedTabIcon = "tab_news_selected.gif"
+              const:leftTabIcon     = "tab_news_left.gif">
+       content of <b>news</b> tab
+       <a var:action="increaseClicks">click</a>
+     </var:tab>
+
+     <var:tab const:key="persons" const:label="persons tab"
+              isScript="useJavaScriptTabs"
+              const:tabIcon         = "tab_persons.gif"
+              const:selectedTabIcon = "tab_persons_selected.gif"
+              const:leftTabIcon     = "tab_persons_left.gif">
+       content of <b>persons</b> tab
+       <a var:action="increaseClicks">click</a>
+     </var:tab>
+
+     <var:tab const:key="projects" const:label="projects tab"
+              isScript="useJavaScriptTabs"
+              const:tabIcon         = "tab_projects.gif"
+              const:selectedTabIcon = "tab_projects_selected.gif"
+              const:leftTabIcon     = "tab_projects_left.gif">
+       content of <b>projects</b> tab
+     </var:tab>
+
+  </var:tabview>
+
+  <hr />
+
+  <var:tabview selection="selection" bgColor="bgColor"
+	       const:fontSize="3" const:fontColor="#000000"
+               const:leftCornerIcon  = "corner_left.gif"
+               const:rightCornerIcon = "corner_right.gif">
+     
+     <var:tab const:key="news" const:label="news"
+              isScript="useJavaScriptTabs" const:asBackground="1"
+	      const:width="100" const:height="22"
+              const:tabIcon         = "tab_.gif"
+              const:selectedTabIcon = "tab_selected.gif"
+              const:leftTabIcon     = "tab_left.gif">
+       content of <b>news</b> tab
+       <a var:action="increaseClicks">click</a>
+     </var:tab>
+     
+     <var:tab const:key="persons" const:label="persons"
+              isScript="useJavaScriptTabs" const:asBackground="1"
+	      const:width="100" const:height="22"
+              const:tabIcon         = "tab_.gif"
+              const:selectedTabIcon = "tab_selected.gif"
+              const:leftTabIcon     = "tab_left.gif">
+       content of <b>persons</b> tab
+       <a var:action="increaseClicks">click</a>
+     </var:tab>
+
+     <var:tab const:key="projects" const:label="projects"
+              isScript="useJavaScriptTabs" const:asBackground="1"
+	      const:width="100" const:height="22"
+              const:tabIcon         = "tab_.gif"
+              const:selectedTabIcon = "tab_selected.gif"
+              const:leftTabIcon     = "tab_left.gif">
+       content of <b>projects</b> tab
+     </var:tab>
+
+  </var:tabview>
+  
+  <form var:action="self">
+    <hr />
+    
+    <table border="0">
+      <tr>
+        <td align="right">bg color:</td>
+        <td><input type="text" var:value="bgColor" const:size="8"/></td>
+      </tr>
+      <tr>
+        <td align="right">JS tabs:</td>
+        <td><input type="checkbox" var:checked="useJavaScriptTabs"/></td>
+      </tr>
+      <tr>
+        <td align="right"></td><td></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="submit" var:action="self" value="Apply"/></td>
+      </tr>
+    </table>
+  </form>
+</var:component>

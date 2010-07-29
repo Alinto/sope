@@ -1,0 +1,9 @@
+2004-11-16  Helge Hess  <helge.hess@opengroupware.org>
+	
+	* Main.wo: show session id on main page
+	
+	* GNUmakefile.preamble: fixed for FHS layouts
+
+2004-06-15  Helge Hess  <helge.hess@opengroupware.org>
+
+	* created app from HelloWorld as a container for testing pages

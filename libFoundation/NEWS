@@ -1,0 +1,128 @@
+Changes in version 1.0.0 since version 0.9.0:
+
+* The focus of this version is a bug-free and stable code base, only
+  few new features were added, but a *lot* of bugs were fixed and some
+  important performance improvements were added. 1.0 can be considered
+  production quality.
+
+* Support for some new Cocoa classes, like NSURL
+
+* Improved compatibility with gstep-base
+
+* more and fixed timezone files
+
+* support for read-only strings in UTF-8 and UTF-16
+
+* some fixes for warnings thrown in new gcc (gcc3+) compilers
+
+
+
+Changes in version 0.9.0 since version 0.8.0:
+
+* The most important change is the support for Boehm's conservative
+  garbage collector, that makes the memory management much more easier
+  than the reference counting mechanism. Many thanks to Helge Hess
+  <helge@mdlink.de> for persuading me to implement this facility and
+  also for his support.
+
+* Some portions of the code have been optimized to gain speed: objects
+  that were previously allocated in some functions or methods at each
+  invocation have been allocated once per-thread.
+
+* The library has been ported to PowerPC running AIX 4.1.5. The port is
+  complete, it also includes the NSInvocation and NSMethodSignature
+  classes. Many thanks to Steven Besler <sbesler@exchange.ml.com> and
+  Leon Salvail <lsalvail@global-village.net> for supporting this work.
+
+* Added support for dynamically loading bundles when running in the
+  GNUstep environment.
+
+* The documentation is now written in Texinfo and we documented almost
+  all of the additional features libFoundation comes with in addition
+  to the OPENSTEP implementation.
+
+* Bug fixes in several classes, including NSArray, NSString and
+  UnixSignalHandler.
+
+
+
+Changes in version 0.8.0 since version 0.7.1:
+
+* The library has been made thread-safe; much of the work has been done by 
+  Aleksandr Savostyanov <sav@conextions.com>.
+
+* New classes NSFileHandle, NSHost, NSPipe and NSTask have been added. These
+  classes are new in the OPENSTEP 4.x and Rhapsody implementation from
+  NeXT/Apple.
+
+* A new class UnixSignalHandler which provides an object oriented approach
+  for dealing with the Unix signals. The class works with both BSD and System V
+  ways of handling signals and allows messages to be sent both immediately
+  after the signal has been received or after the run loop finishes the current
+  loop.
+
+* The library was partially ported over to Alpha machines running Linux. The
+  code is 64-bit clean but I still need to finish the NSInvocation and
+  NSMethodSignature Alpha dependent macros. The library was also ported to
+  Intel/Solaris 2.5.1.
+
+* A new program for managing the defaults database system was added. It works
+  much like the defaults program under OPENSTEP 4.x. You can also compile it
+  for other implementations of the Foundation library since it does not use
+  any features specific to libFoundation.
+
+* NSNotificationQueue has been integrated with the NSRunLoop class. You can now
+  use the various ways of posting notifications as described by the
+  documentation of this class.
+
+* The testsuite was ported to work with the Foundation on OPENSTEP 4.x using
+  the native compiler. Thus we have an easy way to ensure the compatibility of
+  various OpenStep Foundation library implementations. We have split the
+  test suite in two parts: a general library and some scripts that are
+  general enough so they can be also used by other libraries to write DejaGnu
+  test for Objective-C programs and the test suite itself, specific for the
+  Foundation library. In order to compile and run the tests you should have to
+  install the GNUstep makefile package first and then the objc-test library.
+  If you're using it for other libraries than libFoundation you should also
+  get and compile the FoundationExtensions library.
+
+* The library has been ported over to the GNUstep makefile package so one can
+  use libFoundation as a Foundation library in GNUstep applications (support
+  for libFoundation is already included in the makefile package).
+
+* Bug fixes and improvements in a lot of classes.
+
+
+
+Changes in version 0.7.1 since version 0.7:
+
+* The port to Solaris has been completed thanks to Aleksandr Savostyanov
+  <sav@conextions.com>.
+
+* libFoundation was ported to Windows NT; thanks to Jeremy R. Bettis
+  <jeremy@hksys.com>.
+
+* Shared library support has been added. New makefile targets exist on systems
+  that support shared libraries (`shared' and `install_shared'). The currently
+  supported systems are Linux ELF, Solaris and OPENSTEP 4.x.
+
+* NSRunLoop and NSPosixFileDescriptor classes has been finished. The NSRunLoop
+  API has been changed to work with NSPosixFileDescriptor objects instead of
+  Unix file descriptors.
+
+* Delayed execution of methods in NSObject is now working.
+
+* The library now works with both 960906 and 960318 Objective-C runtime
+  patches. (You must have either one of these patches applied to the compiler
+  before compiling libFoundation; see the INSTALL file for more info.)
+
+* Many bug fixes and improvements in NSInvocation, NSTimer, exception handling
+  without nested functions support, NSString, geometry functions,
+  NSDistributedLock, NSFileManager and NSRunLoop. See the ChangeLog file for a
+  complete list of the changes.
+
+
+
+! Local variables:
+! mode: indented-text
+! End:

@@ -1,0 +1,91 @@
+{
+  classes = {
+    
+    NSObject = {
+      defaultRoles = {
+        "WebDAV Access"               = "Authenticated";
+        "Change Images and Files"     = "Owner";
+        "Delete Objects"              = "Owner";
+        "View"                        = "Authenticated";
+        "WebDAV Lock Items"           = "Authenticated";
+        "WebDAV Unlock Items"         = "Authenticated";
+        "Access Contents Information" = "Authenticated";
+      };
+    };
+    NSException = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+    };
+    
+    WOComponent = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+      defaultRoles = {
+        "View" = "Anonymous";
+      };
+    };
+    WOApplication = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+    };
+    WOResourceManager = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    WOResponse = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+    };
+    WOContext = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+    };
+    
+    SoApplication = {
+      superclass = "WOApplication";
+      slots = {
+        ControlPanel = {
+	  protectedBy = "<public>";
+        };
+      };
+    };
+    SoObjectRequestHandler = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+    };
+    SoControlPanel = {
+      protectedBy = "<public>";
+      defaultAccess = "allow";
+      slots = {
+        Products = {
+	  protectedBy = "<public>";
+        };
+      };
+    };
+    SoActionInvocation = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    SoPageInvocation = {
+      superclass    = "SoActionInvocation";
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    SoProduct = {
+      protectedBy = "<public>";
+      slots = {
+	Resources = {
+	  protectedBy = "<public>";
+        };
+      };
+    };
+    SoProductRegistry = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+    SoProductResourceManager = {
+      protectedBy   = "<public>";
+      defaultAccess = "allow";
+    };
+  };
+}

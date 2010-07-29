@@ -1,0 +1,7 @@
+# $Id: README,v 1.1 2004/06/08 11:15:59 helge Exp $
+
+TODO
+- resolve mem-leaks created by handler and command tables
+
+Last change: 20011126?
+

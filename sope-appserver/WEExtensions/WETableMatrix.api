@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes"?>
+
+<wo class="WETableMatrix">
+  <binding name="list" required="YES" />
+  <binding name="item" required="YES" />
+
+  <binding name="rows" />
+  <binding name="columns" />
+  <binding name="row" />
+  <binding name="column" />
+
+  <binding name="itemActive" defaults="YES/NO" />
+  <binding name="isRowActive" defaults="YES/NO" />
+  <binding name="isColumnActive" defaults="YES/NO" />
+</wo>

@@ -1,0 +1,102 @@
+
+
+
+
+body {
+    background: White url(logo.jpg) no-repeat fixed 95% 95%;
+    font-family: Verdana Helvetica Arial sans-serif;
+    font-size: 40px;
+    color: Black;
+    margin: 5%;
+    
+}
+
+h1 {
+	font-size: 40px;
+    background: #DEE7EC;
+    border-color: #8CACBB;
+    border-style: solid;
+    border-width: 1px;
+    padding-top: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-top: 1em;
+    page-break-before : always;
+}
+
+h2 {
+    font-size: 30px;	
+}
+
+p, dl, ol, ul {
+    font-size: 30px;
+    text-align: left;
+}
+
+.description {
+    font-size: 30px;
+    font-weight: normal;
+}
+
+div.top,
+.netscape4,
+.tabs,
+.personalBar,
+.pathBar,
+td.left,
+td.right,
+.footer,
+.help,
+.legend,
+div.message,
+div.documentActions,
+input
+{
+    display: none;
+}
+
+#contentTabs,
+#contentBar
+{
+    display: none;
+}
+
+ul { 
+    list-style-type: square;
+}
+
+pre { 
+    font-size: 20px;
+    padding: 1em;
+}
+
+div.editableDocument,
+div.document,
+.group {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+table.listing,
+table.listing td
+ {
+	border: 1pt solid black;
+    border-collapse: collapse;
+}
+
+a:link, a:visited {
+	color: #520;
+	background: transparent;
+	font-weight: bold;
+	text-decoration: underline;
+	}
+
+div.document a:link:after, 
+div.document a:visited:after {
+   content: " (" attr(href) ") ";
+   font-size: 90%;
+   }
+
+

@@ -1,0 +1,46 @@
+<?xml version='1.0' standalone='yes'?>
+<var:component className="Frame" title="name"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:var="http://www.skyrix.com/od/binding"
+           xmlns:const="http://www.skyrix.com/od/constant">
+
+  <var:js-text-flyover
+     const:pageName     = "PanelContent"
+     const:targetWindow = "panel"
+     selectedColor      = "selectedColor"
+     unselectedColor    = "unselectedColor"
+     const:string       = "'new page' - text flyover"/>
+  <br/>
+  
+  <var:js-text-flyover
+     action          = "countClicks"
+     selectedColor   = "selectedColor"
+     unselectedColor = "unselectedColor"
+     const:string    = "'invoke action' - text flyover"/>
+  
+  clicks: <b><var:string value="clicks"/></b>
+  <br/>
+
+  <var:js-text-flyover
+     javaScriptFunction = "javaScriptFunction"
+     selectedColor      = "selectedColor"
+     unselectedColor    = "unselectedColor"
+     const:string       = "'invoke javescript' - text flyover"/>
+  <br/>
+
+  <form var:action="self">
+    <table border="0">
+      <tr>
+        <td align="right">selected color:</td>
+        <td><input type="text" size="10" var:value="selectedColor"/></td>
+      </tr>
+      <tr>
+        <td align="right">unselected color:</td>
+        <td><input type="text" size="10" var:value="unselectedColor"/></td>
+      </tr>
+      <tr><td colspan="2">
+        <input type="submit" value="apply" var:action="self"/>
+      </td></tr>
+     </table>
+  </form>
+</var:component>

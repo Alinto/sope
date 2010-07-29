@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:var="http://www.skyrix.com/od/binding"
+      xmlns:const="http://www.skyrix.com/od/constant">
+  <head>
+    <title>Page: <var:string value="context.page.name"/></title>
+  </head>
+  <body bgcolor="#BBBBBB">
+    <b><var:string value="context.page.name"/></b>
+    <hr/>
+    
+    <var:component-content/>
+
+    <hr/>
+
+    <a href=".">docs</a> |
+    <a href="test.wox">test</a> |
+    <a href="requests.wox">requests</a> |
+    <a href="Page2.wox">Page2</a> |
+    <a href="Page3.wox">Page3</a> |
+    <a href="WoPage1.wo">WoPage1</a>
+  </body>
+  
+  <var:script><![CDATA[
+    var title = "<no title>";
+  ]]></var:script>
+</html>
