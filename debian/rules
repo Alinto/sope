@@ -57,7 +57,7 @@ clean-controlfiles:
 debian/control: debian/control.in debian/rules
 	sed -e s/_SOPEVER_/$(SOPEVER)/g < debian/control.in > debian/control
 
-config.make: patch-stamp
+config.make:
 	dh_testdir
 	CFLAGS="$(CFLAGS)" . $(GNUSTEP_SETUP); \
 		./configure --with-gnustep --enable-debug --disable-strip
@@ -85,7 +85,7 @@ build-stamp:
 
 	touch build-stamp
 
-clean: unpatch clean-controlfiles
+clean: clean-controlfiles
 	dh_testdir
 	dh_testroot
 	rm -f configure-stamp
