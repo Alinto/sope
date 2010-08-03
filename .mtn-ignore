@@ -9,3 +9,7 @@ diff
 .*\.d$
 .*\.log$
 .*\.old$
+.*\.sax$
+.*\.sxp$
+.*\.wox$
+.*\.gdladaptor$
