@@ -1,0 +1,11 @@
+config.make
+shared_debug_obj
+obj
+err
+build\.log
+diff
+.*\.bak$
+.*\.diff$
+.*\.d$
+.*\.log$
+.*\.old$
