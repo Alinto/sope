@@ -996,7 +996,9 @@ static NSMutableDictionary *namespaces;
   }
 
   // TODO: fix this junk, do not treat the message as a string, its NSData
-  message = [(NSString *)[NSString alloc] initWithUTF8String:new];
+  message = [[NSString alloc] initWithBytes: new
+                                     length: cntNew
+                                   encoding: NSISOLatin1StringEncoding];
   if (new != NULL) free(new); new = NULL;
 
   icmd = [NSString stringWithFormat:@"append \"%@\" (%@) {%d}",

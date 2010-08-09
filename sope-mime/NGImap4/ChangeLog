@@ -1,3 +1,9 @@
+2010-08-09  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m (-append:toFolder:withFlags:): convert the
+	string to an ISO 8859-1 instance rather than UTF-8, since the
+	latter could fail with an ISO content.
+
 2010-04-07  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGImap4Client.m (-list:pattern:, -lsub:pattern:): use an empty
