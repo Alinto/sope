@@ -162,6 +162,7 @@
   "{urn:ietf:params:xml:ns:caldav}schedule-calendar-transp" = davScheduleCalendarTransparency;
 
   /* CardDAV */
+  "{urn:ietf:params:xml:ns:carddav}address-data" = davAddressData;
   "{urn:ietf:params:xml:ns:carddav}addressbook-home-set" = davAddressbookHomeSet;
   "{urn:ietf:params:xml:ns:carddav}supported-address-data" =
      davSupportedAddressDataTypes;
