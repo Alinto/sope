@@ -415,10 +415,13 @@
 - (NSException *)sendMailData:(NSData *)_data toRecipients:(NSArray *)_to
   sender:(NSString *)_sender
 {
+  NSMutableData *cleaned_data;
   NSMutableString *sendmail;
   FILE            *toMail       = NULL;
   NSException     *error;
-  int  errorCode;
+  int  errorCode, len, mlen, i;
+  const char *bytes;
+  char *mbytes;
   BOOL ok;
   
   if (_data == nil)
@@ -432,7 +435,39 @@
   
   if ([self isSendLoggingEnabled]) [self _logMailSend:sendmail ofData:_data];
   
-  ok = [self _appendData:_data to:toMail];
+  //
+  // SOPE sucks in many ways and that is one of them. The headers are actually
+  // correctly encoded (trailing \r\n is inserted) but not the base64 encoded
+  // data since it uses SOPE's dataByEncodingBase64 function which says:
+  //
+  // NGBase64Coding.h:- (NSData *)dataByEncodingBase64; /* Note: inserts '\n' every 72 chars */
+  //
+  len = [_data length];
+  i = mlen = 0;
+  
+  cleaned_data = [NSMutableData dataWithLength: len];
+  
+  bytes = [_data bytes];
+  mbytes = [cleaned_data mutableBytes];
+  
+  while (i < len-1)
+    {
+      if (*bytes == '\r' && *(bytes+1) == '\n')
+	{
+	  bytes++;
+	  i++;
+	}
+  
+      *mbytes = *bytes;
+      mbytes++; bytes++;
+      i++;
+      mlen++;
+    }
+  
+  [cleaned_data setLength: mlen];
+  
+
+  ok = [self _appendData:cleaned_data to:toMail];
   
   error = nil;
   if ((errorCode = [self closeStreamToSendMail:toMail]) != 0) {

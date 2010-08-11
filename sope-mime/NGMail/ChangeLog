@@ -1,3 +1,9 @@
+2010-08-11  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* NGSendMail.m (sendMailData:toRecipients:sender):
+	we now correctly replace \r\n with \n everywhere
+	in the content.
+
 2010-04-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NSData+MimeQP.m (-decodeQuotedPrintableValueOfMIMEHeaderField:):

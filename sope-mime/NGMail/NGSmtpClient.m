@@ -541,7 +541,7 @@
     //
     // SOPE sucks in many ways and that is one of them. The headers are actually
     // correctly encoded (trailing \r\n is inserted) but not the base64 encoded
-    // data since it uses GNUstep's dataByEncodingBase64 function which says:
+    // data since it uses SOPE's dataByEncodingBase64 function which says:
     //
     // NGBase64Coding.h:- (NSData *)dataByEncodingBase64; /* Note: inserts '\n' every 72 chars */
     //
