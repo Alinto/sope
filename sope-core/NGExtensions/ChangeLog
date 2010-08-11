@@ -1,3 +1,9 @@
+2010-08-11  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGBase64Coding.m (-[NSString dataByDecodingBase64]): make use of
+	-length rather than -[NSString lengthOfBytesUsingEncoding:
+	NSISOLatin1StringEncoding] to avoid a crash within GNUstep.
+
 2010-07-16  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGBase64Coding.m (-dataByDecodingBase64)

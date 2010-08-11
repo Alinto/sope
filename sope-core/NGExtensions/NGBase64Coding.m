@@ -135,7 +135,7 @@ static int NSStringMaxLineWidth = 1024;
 
   if (StringClass == Nil) StringClass = [NSString class];
   
-  if ((len = [self lengthOfBytesUsingEncoding: NSISOLatin1StringEncoding]) == 0)
+  if ((len = [self length]) == 0)
     return [NSData data];
 
   destSize = (len / 4 + 1) * 3 + 1;
