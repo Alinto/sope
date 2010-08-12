@@ -10,7 +10,7 @@ Section: libdevel
 Architecture: all
 Provides: libsope-dev
 Conflicts: libsope-dev
-Depends: libsope-appserver_SOPEVER_-dev, libsope-core_SOPEVER_-dev, libsope-xml_SOPEVER_-dev, libsope-mime_SOPEVER_-dev, libsope-ldap_SOPEVER_-dev, libsope-ical_SOPEVER_-dev, libsope-gdl1-_SOPEVER_-dev
+Depends: libsope-appserver_SOPEVER_-dev, libsope-core_SOPEVER_-dev, libsope-xml_SOPEVER_-dev, libsope-mime_SOPEVER_-dev, libsope-ldap_SOPEVER_-dev, libsope-gdl1-_SOPEVER_-dev
 Description: Development files for all SOPE libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
@@ -159,30 +159,6 @@ Description: SOPE libraries for MIME processing
   * classes for processing MIME entities
   * a full IMAP4 implementation
   * prototypical POP3 and SMTP processor
-
-Package: libsope-ical_SOPEVER_-dev
-Section: libdevel
-Architecture: any
-Provides: libsope-ical-dev
-Conflicts: libsope-ical-dev
-Depends: libsope-ical_SOPEVER_ (= ${binary:Version})
-Description: Development files for the SOPE iCal libraries
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the development files of the SOPE
- iCal libraries.
-
-Package: libsope-ical_SOPEVER_
-Section: libs
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: SOPE libraries for iCal handling
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- The SOPE libraries for iCal handling contain  classes for iCalendar and
- vCard objects.
 
 Package: libsope-gdl1-_SOPEVER_-dev
 Section: libdevel
