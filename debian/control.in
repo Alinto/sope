@@ -231,14 +231,3 @@ Description: XML Parser for SOPE's SAX engine
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
  .
  This parser enables SOPE's SAX engine to parse XML files.
-
-Package: sope_SOPEVER_-versitsaxdriver
-Section: web
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Provides: sope-versitsaxdriver
-Description: iCal and vCard Parser for SOPE's SAX engine
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This parser enables SOPE's SAX engine to parse iCal and vCard files.
