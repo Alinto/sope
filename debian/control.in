@@ -49,18 +49,6 @@ Description: SOPE application server libraries
   * scripting extensions for Foundation, JavaScript bridge
   * DOM tree rendering library
 
-Package: sope-tools
-Section: web
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Tools shipped with SOPE application server
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains some tools shipped with the SOPE application
- server framework, which are mostly useful for development and debugging
- of SOPE applications.
-
 Package: sope_SOPEVER_-appserver
 Section: web
 Architecture: any

@@ -1,3 +1,8 @@
+2010-08-12  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+        * Dropped the sope-tools debian package and
+	all references to it
+
 2010-07-29  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* Initial import of the SOPE source based on
