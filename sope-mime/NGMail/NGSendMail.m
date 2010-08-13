@@ -450,9 +450,9 @@
   bytes = [_data bytes];
   mbytes = [cleaned_data mutableBytes];
   
-  while (i < len-1)
+  while (i < len)
     {
-      if (*bytes == '\r' && *(bytes+1) == '\n')
+      if (*bytes == '\r' && (i+1 < len) && *(bytes+1) == '\n')
 	{
 	  bytes++;
 	  i++;
