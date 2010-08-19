@@ -475,7 +475,8 @@ checkDependencies() {
     checkLinking "ssl"         required; # TODO: make optional
   fi
   checkLinking "pq"          optional;
-  checkLinking "sqlite3"     optional;
+#  checkLinking "sqlite3"     optional;
+  cfgwrite "HAS_LIBRARY_sqlite3=no"
   checkLinking "mysqlclient" optional;
 }
 
