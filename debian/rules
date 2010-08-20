@@ -14,7 +14,7 @@ RPATCHES = debian-build-mysql.diff sope-patchset-r1664.diff sope-gsmake2.diff
 
 CFLAGS = -Wall -g
 #WARN: doesn't compile/package if HAS_LIBRARY_* options not present (since we use configure now)
-MAKE_FLAGS = messages=yes OPTFLAG=-O0 HAS_LIBRARY_ldap=yes HAS_LIBRARY_pq=yes HAS_LIBRARY_xml2=yes
+MAKE_FLAGS = -j 2 messages=yes OPTFLAG=-O2 HAS_LIBRARY_ldap=yes HAS_LIBRARY_pq=yes HAS_LIBRARY_xml2=yes
 
 GNUSTEP_SETUP=/usr/share/GNUstep/Makefiles/GNUstep.sh
 
