@@ -1,3 +1,9 @@
+2010-08-23  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGSmtpClient.m (-quit): we must accept both "connected" and
+	"transaction" states as the latter is a substate of the former and
+	because SOPE so violently crashes otherwise.
+
 2010-08-11  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* NGSendMail.m (sendMailData:toRecipients:sender):

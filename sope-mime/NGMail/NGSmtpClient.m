@@ -356,7 +356,7 @@
 - (BOOL)quit {
   NGSmtpResponse *reply = nil;
 
-  [self requireState:NGSmtpState_connected];
+  [self denyState:NGSmtpState_unconnected];
   
   reply = [self sendCommand:@"QUIT"];
   if (self->isDebuggingEnabled) [NGTextErr writeFormat:@"S: %@\n", reply];
