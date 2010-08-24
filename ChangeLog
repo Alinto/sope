@@ -1,3 +1,10 @@
+2010-08-24  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m,
+	sope-core/NGStreams/NGActiveSSLSocket.m,
+	sope-core/NGStreams/NGSocket.m
+	Added TLS support for IMAP4 clients.
+
 2010-08-12  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
         * Dropped the sope-tools debian package and

@@ -20,6 +20,7 @@
 */
 
 #include <unistd.h>
+#include <fcntl.h>
 
 #include "NGImap4Client.h"
 #include "NGImap4Context.h"
@@ -34,6 +35,10 @@
 #include "imCommon.h"
 #include <sys/time.h>
 #include "imTimeMacros.h"
+
+#include <NGStreams/NGSocket.h>
+#include <NGStreams/NGActiveSSLSocket.h>
+
 
 @interface EOQualifier(IMAPAdditions)
 - (NSString *)imap4SearchString;
@@ -121,6 +126,10 @@ static NSMutableDictionary *namespaces;
   return self->useSSL;
 }
 
+- (BOOL)useTLS {
+  return self->useTLS;
+}
+
 + (int)version {
   return 2;
 }
@@ -191,6 +200,9 @@ static NSMutableDictionary *namespaces;
   }
   else
     port = self->useSSL ? 993 : 143;
+
+  if ([[_url query] isEqualToString:@"tls=YES"])
+    self->useTLS = YES;
   
   self->login    = [[_url user]     copy];
   self->password = [[_url password] copy];
@@ -218,6 +230,7 @@ static NSMutableDictionary *namespaces;
   [self->text             release];
   [self->address          release];
   [self->socket           release];
+  [self->previous_socket  release];
   [self->parser           release];
   [self->responseReceiver release];
   [self->login            release];
@@ -293,7 +306,7 @@ static NSMutableDictionary *namespaces;
     : [NGActiveSocket class];
   
   NS_DURING {
-    sock = [socketClass socketConnectedToAddress:self->address];
+      sock = [socketClass socketConnectedToAddress:self->address];
   }
   NS_HANDLER {
     [self->context setLastException:localException];
@@ -314,6 +327,56 @@ static NSMutableDictionary *namespaces;
     hm = [self->parser parseResponseForTagId:-1 exception:&e];
     [e raise];
     res = [self->normer normalizeOpenConnectionResponse:hm];
+
+    // If we're using TLS, we start it here
+    if ([self useTLS])
+      {
+	Class socketClass;
+	NSDictionary *d;
+
+
+	d = [self->normer normalizeResponse:[self processCommand: @"STARTTLS"]];
+	socketClass = NSClassFromString(@"NGActiveSSLSocket");
+
+	if ([[d valueForKey:@"result"] boolValue] && socketClass)
+	  {
+	    int oldopts;
+	    id o;
+
+	    o = [[socketClass alloc] initWithDomain: [self->address domain]];
+	    [o setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
+	    
+	    // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
+	    // SOPE will break on SSL-sockets.
+	    oldopts = fcntl([(NGSocket*)self->socket fileDescriptor], F_GETFL, 0);
+	    fcntl([(NGSocket*)self->socket fileDescriptor], F_SETFL, oldopts & !O_NONBLOCK);
+	    
+	    if ([o startTLS])
+	      {
+		NGBufferedStream *buffer;
+		
+		// We keep a reference to our previous instance of NGActiveSocket as
+		// it's still being used. NGActiveSSLSocket's read/write methods are
+		// being used but the rest is coming of directly from NGActiveSocket
+		self->previous_socket = self->socket;
+		self->socket = o;
+		[self->text release];
+		[self->parser release];
+		
+		buffer = [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource: self->socket];
+		self->text = [(NGCTextStream *)[NGCTextStream alloc] initWithSource: buffer];
+		[buffer release];
+		buffer = nil;
+		
+		self->parser = [[NGImap4ResponseParser alloc] initWithStream: self->socket];
+		[self logWithFormat:@"TLS started successfully."];
+	      }
+	    else
+	      [self logWithFormat:@"Could not start TLS."];
+	  }
+	else
+	  [self logWithFormat:@"Could not start TLS."];
+      }
   }
   NS_HANDLER
     [self->context setLastException:localException];
@@ -321,7 +384,7 @@ static NSMutableDictionary *namespaces;
   
   if (!_checkResult(self->context, res, __PRETTY_FUNCTION__))
     return nil;
-  
+
   return res;
 }
 
@@ -336,6 +399,7 @@ static NSMutableDictionary *namespaces;
     ti =  (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0);
   }
   [self->socket release]; self->socket = nil;
+  [self->previous_socket release]; self->previous_socket = nil;
   [self->parser release]; self->parser = nil;
   [self->text   release]; self->text   = nil;
   
@@ -407,16 +471,19 @@ static NSMutableDictionary *namespaces;
   
   NS_DURING
     [self->socket close];
+    [self->previous_socket close];
   NS_HANDLER
     [[self _handleSocketCloseException:localException] raise];
   NS_ENDHANDLER;
   
   NS_DURING
     [self->socket release];
+    [self->previous_socket release];
   NS_HANDLER
     [[self _handleSocketReleaseException:localException] raise];
   NS_ENDHANDLER;
   self->socket = nil;
+  self->previous_socket = nil;   
   
   [self->parser    release]; self->parser    = nil;
   [self->delimiter release]; self->delimiter = nil;
@@ -1317,7 +1384,7 @@ static NSMutableDictionary *namespaces;
         }
         else if ([_sortSpec rangeOfString: @"SIZE"].length) {
           s = [o objectForKey: @"size"];
-          [dict setObject: (s != nil ? s : [NSNumber numberWithInt: 0])
+          [dict setObject: (s != nil ? (NSNumber *)s : [NSNumber numberWithInt: 0])
                    forKey: uid];
           b = NO;
         }

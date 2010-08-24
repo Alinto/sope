@@ -120,6 +120,7 @@
 - (SOCKET)fileDescriptor;
 #else
 - (int)fileDescriptor;
+- (void)setFileDescriptor: (int) theFd;
 #endif
 
 // ************************* options *************************

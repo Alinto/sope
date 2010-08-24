@@ -25,6 +25,7 @@
 #if HAVE_OPENSSL
 #  define id openssl_id
 #  include <openssl/ssl.h>
+#  include <openssl/err.h>
 #  undef id
 #endif
 
@@ -94,6 +95,8 @@ static BIO_METHOD streamBIO = {
       [self release];
       return nil;
     }
+
+    SSL_CTX_set_verify(self->ctx, SSL_VERIFY_NONE, NULL);
   }
   return self;
 }
@@ -124,6 +127,42 @@ static BIO_METHOD streamBIO = {
 - (BOOL)markNonblockingAfterConnect {
   return NO;
 }
+
+- (BOOL) startTLS
+{
+  int ret;
+
+  if (self->ctx == NULL) {
+    NSLog(@"ERROR(%s): ctx isn't setup yet !",
+          __PRETTY_FUNCTION__);
+    return NO;
+  }
+
+  if ((self->ssl = SSL_new(self->ctx)) == NULL) {
+    // should set exception !
+    NSLog(@"ERROR(%s): couldn't create SSL socket structure ...",
+          __PRETTY_FUNCTION__);
+    return NO;
+  }
+
+  if (SSL_set_fd(self->ssl, self->fd) <= 0) {
+    // should set exception !
+    NSLog(@"ERROR(%s): couldn't set FD ...",
+          __PRETTY_FUNCTION__);
+    return NO;
+  }
+ 
+  ret = SSL_connect(self->ssl);
+  if (ret <= 0) {
+    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)...",
+	  __PRETTY_FUNCTION__, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
+    [self shutdown];
+    return NO;
+  }
+  
+  return YES;
+}
+
 - (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
   if (self->ctx == NULL) {
     NSLog(@"ERROR(%s): ctx isn't setup yet !",

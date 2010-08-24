@@ -56,6 +56,7 @@ typedef enum {
 @interface NGImap4Client : NSObject
 {
   id<NGActiveSocket>        socket;
+  id<NGActiveSocket>        previous_socket;
   id<NGExtendedTextStream>  text;
   id<NGSocketAddress>       address;
   NGImap4ResponseParser     *parser;
@@ -74,6 +75,7 @@ typedef enum {
 
   BOOL debug;
   BOOL useSSL;
+  BOOL useTLS;
 
   NGImap4Context *context; /* not retained, used to store exceptions */
   EOGlobalID *serverGID;

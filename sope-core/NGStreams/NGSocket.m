@@ -388,6 +388,11 @@ static void _killWinSock(void) {
   return self->fd;
 }
 
+- (void)setFileDescriptor: (int) theFd
+{
+  self->fd = theFd;
+}
+
 - (void)resetFileHandle { // called by the NSFileHandle on dealloc
   self->fileHandle = nil;
 }

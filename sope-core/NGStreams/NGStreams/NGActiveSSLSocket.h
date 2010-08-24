@@ -30,6 +30,8 @@
   void *sbio;  /* real type: BIO (basic input/output) */
 }
 
+- (BOOL) startTLS;
+
 @end
 
 #endif /* __NGNet_NGActiveSSLSocket_H__ */
