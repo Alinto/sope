@@ -1,5 +1,12 @@
 2010-08-26  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* NGBundleManager.m (+load): removed method.
+	(+defaultBundleManager): removed the hack with the objective-c
+	class load hook since it uses memory and slows SOPE down for
+	nothing.
+	(_addMainBundlePathToPathArray:): we now ignore empty paths, since
+	we actually don't want to scan the CWD for bundles.
+
 	* sope-appserver/NGObjWeb/SNSConnection.m: removed obsolete class.
 
 	* sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m

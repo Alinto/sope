@@ -103,57 +103,6 @@ static int _getClassHook(const char *className) {
 
 #endif
 
-#if GNU_RUNTIME
-#include <objc/objc-api.h>
-
-static Class (*oldClassLoadHook)(const char *_name) = NULL;
-
-static inline BOOL _isValidClassName(const char *_name) {
-  register int len;
-
-  if (_name == NULL) return NO;
-
-  for (len = 0; (len < 256) && (*_name != '\0'); len++, _name++) {
-    if (*_name != '_') {
-      if (!isalnum((int)*_name))
-        return NO;
-    }
-  }
-  return (len == 256) ? NO : YES;
-}
-
-static Class _classLoadHook(const char *_name) {
-  if (_isValidClassName(_name)) {
-    static NGBundleManager *manager = nil;
-    NSBundle *bundle;
-    
-    //NSLog(@"%s: look for class %s", __PRETTY_FUNCTION__, _name);
-    if (manager == nil)
-      manager = [NGBundleManager defaultBundleManager];
-    
-    bundle  = [manager bundleForClassNamed:[NSString stringWithCString:_name]];
-    if (bundle != nil) {
-#if 0
-      NSLog(@"%s: found bundle %@", __PRETTY_FUNCTION__, [bundle bundlePath]);
-#endif
-      
-      if ([manager loadBundle:bundle]) {
-        Class clazz;
-        void *hook;
-
-        hook = _objc_lookup_class;
-        _objc_lookup_class = NULL;
-        clazz = objc_lookup_class(_name);
-        _objc_lookup_class = hook;
-
-        if (clazz) return clazz;
-      }
-    }
-  }
-  return (oldClassLoadHook != NULL) ? oldClassLoadHook(_name) : Nil;
-}
-#endif // GNU_RUNTIME
-
 NSString *NGBundleWasLoadedNotificationName = @"NGBundleWasLoadedNotification";
 
 @interface NSBundle(NGBundleManagerPrivate)
@@ -232,35 +181,11 @@ static NSString *NGEnvVarPathSeparator = @":";
   debugOn = [ud boolForKey:@"NGBundleManagerDebugEnabled"];
 }
 
-#if GNU_RUNTIME && 0
-+ (void)load {
-  if (_objc_lookup_class != _classLoadHook) {
-    oldClassLoadHook = _objc_lookup_class;
-    _objc_lookup_class = _classLoadHook;
-  }
-}
-#endif
-
 + (id)defaultBundleManager {
   if (defaultManager == nil) {
     defaultManager = [[NGBundleManager alloc] init];
-
-#if NeXT_RUNTIME || APPLE_RUNTIME
-    {
-      static BOOL didRegisterCallback = NO;
-      
-      if (!didRegisterCallback) {
-	didRegisterCallback = YES;
-	objc_setClassHandler(_getClassHook);
-      }
-    }
-#elif GNU_RUNTIME
-    if (_objc_lookup_class != _classLoadHook) {
-      oldClassLoadHook = _objc_lookup_class;
-      _objc_lookup_class = _classLoadHook;
-    }
-#endif
   }
+
   return defaultManager;
 }
 
@@ -273,11 +198,8 @@ static NSString *NGEnvVarPathSeparator = @":";
   pi   = [NSProcessInfo processInfo];
   path = [[pi arguments] objectAtIndex:0];
   path = [path stringByDeletingLastPathComponent];
-  
-  if ([path isEqual:@""])
-    path = @".";
-#if WITH_GNUSTEP
-  else {
+
+  if ([path length] > 0) {
     // TODO: to be correct this would need to read the bundle-info
     //       NSExecutable?!
     /*
@@ -285,15 +207,11 @@ static NSString *NGEnvVarPathSeparator = @":";
        processor, the OS and the library combo. Strip these directories
        from the main bundle's path.
     */
-#if LIB_FOUNDATION_LIBRARY
-    if (![NSBundle isFlattenedDirLayout])
-#endif
     path = [[[path stringByDeletingLastPathComponent]
                    stringByDeletingLastPathComponent]
                    stringByDeletingLastPathComponent];
+    [_paths addObject:path];
   }
-#endif
-  [_paths addObject:path];
 }
 
 - (void)_addBundlePathDefaultToPathArray:(NSMutableArray *)_paths {
@@ -361,7 +279,7 @@ static NSString *NGEnvVarPathSeparator = @":";
       tmp = [tmp stringByAppendingPathComponent:@"Bundles"];
       if ([self->bundleSearchPaths containsObject:tmp])
 	continue;
-      
+
       [self->bundleSearchPaths addObject:tmp];
     }
   }
@@ -681,49 +599,6 @@ static NSString *NGEnvVarPathSeparator = @":";
   
   if ((bundle = NSMapGet(self->classNameToBundle, _className)) != nil)
     return bundle;
-  
-#if GNU_RUNTIME
-  /* then look in runtime, reset load callback to avoid recursion */
-  {
-    // THREAD
-    void  *loadCallback;
-    Class clazz;
-    
-    loadCallback = _objc_lookup_class;
-    _objc_lookup_class = NULL;
-    clazz = NSClassFromString(_className);
-    _objc_lookup_class = loadCallback;
-
-    if (clazz != Nil) {
-      /* the class is already loaded */
-      bundle = [self bundleForClass:clazz];
-      NSMapInsert(self->classNameToBundle, _className, bundle);
-      return bundle;
-    }
-  }
-#elif NeXT_RUNTIME || APPLE_RUNTIME
-  {
-    Class clazz;
-    
-    hookDoLookup = NO; // THREAD
-    clazz = NSClassFromString(_className);
-    hookDoLookup = YES;
-    
-    if (clazz != Nil) {
-      /* the class is already loaded */
-#if 0
-      printf("found class in runtime: %s\n", [_className cString]);
-#endif
-      bundle = [self bundleForClass:clazz];
-      NSMapInsert(self->classNameToBundle, _className, bundle);
-      return bundle;
-    }
-#if 0
-    else
-      printf("did NOT find class in runtime: %s\n", [_className cString]);
-#endif
-  }
-#endif
   
   path = [self pathForBundleProvidingResource:_className
                ofType:@"classes"
