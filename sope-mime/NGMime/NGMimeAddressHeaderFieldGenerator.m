@@ -21,6 +21,7 @@
 
 #include "NGMimeHeaderFieldGenerator.h"
 #include "NGMimeHeaderFields.h"
+#include <NGMail/NGMailAddress.h>
 #include <NGMime/NGMimePartParser.h>
 #include "common.h"
 #include <string.h>
@@ -73,7 +74,7 @@ static int UseLFSeperatedAddressEntries = -1;
 #endif
   NSMutableString     *result;
   NSData              *data;
-  id                  obj;
+  NGMailAddress *address;
   NSEnumerator        *enumerator;
   
 #if MOVED_TO_NGMAIL
@@ -90,9 +91,10 @@ static int UseLFSeperatedAddressEntries = -1;
   
   enumerator = [[parser parseAddressList] objectEnumerator];
   result     = [[NSMutableString alloc] initWithCapacity:128];
-  
-  while ((obj = [enumerator nextObject]) != nil) {
+
+  while ((address = [enumerator nextObject]) != nil) {
     NSString   *tmp;
+    unichar *uniBuffer;
     char       *buffer;
     unsigned   bufLen, cnt;
     BOOL       doEnc;
@@ -104,11 +106,11 @@ static int UseLFSeperatedAddressEntries = -1;
         [result appendString:@", "];
     }
     
-    tmp    = [obj displayName];
-    bufLen = [tmp lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
+    tmp    = [address displayName];
+    bufLen = [tmp length];
     
-    buffer = calloc(bufLen, sizeof(char));
-    [tmp getCString: buffer maxLength: bufLen encoding: NSUTF8StringEncoding];
+    uniBuffer = calloc(bufLen, sizeof(unichar));
+    [tmp getCharacters: uniBuffer];
     
     cnt   = 0;
     doEnc = NO;
@@ -117,17 +119,19 @@ static int UseLFSeperatedAddressEntries = -1;
       /* must encode chars outside ASCII 33..60, 62..126 ranges [RFC 2045, Sect. 6.7]
        * RFC 2047, Sect. 4.2 also requires chars 63 and 95 to be encoded
        * For spaces, quotation is fine */
-      if ((unichar)buffer[cnt] < 32 ||
-	  (unichar)buffer[cnt] == 61 ||
-	  (unichar)buffer[cnt] == 63 ||
-          (unichar)buffer[cnt] == 95 ||
-	  (unichar)buffer[cnt] > 126) {
+      if (uniBuffer[cnt] < 32 ||
+	  uniBuffer[cnt] == 61 ||
+	  uniBuffer[cnt] == 63 ||
+          uniBuffer[cnt] == 95 ||
+	  uniBuffer[cnt] > 126) {
         doEnc = YES;
         break;
       }
       cnt++;
     }
     
+    buffer = NULL;
+  
     if (doEnc) {
       /* FIXME - better use UTF8 encoding! */
 #if NeXT_Foundation_LIBRARY
@@ -142,7 +146,6 @@ static int UseLFSeperatedAddressEntries = -1;
       unsigned      desLen;
       unsigned char *des;
       
-      if (buffer != NULL) free(buffer); buffer = NULL;
       {
         NSData *data;
 
@@ -185,13 +188,13 @@ static int UseLFSeperatedAddressEntries = -1;
       if (!doEnc) [result appendString:@"\""];
       [result appendString:tmp];
       if (!doEnc) [result appendString:@"\""];
-      if ((tmp = [(NSHost *)obj address])) {
+      if ((tmp = [(NSHost *)address address])) {
         [result appendString:@" <"];
         [result appendString:tmp];
         [result appendString:@">"];
       }
     }
-    else if ((tmp = [(NSHost *)obj address])) {
+    else if ((tmp = [(NSHost *)address address])) {
       [result appendString:tmp];
     }
   }

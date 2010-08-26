@@ -73,9 +73,14 @@ int NGEncodeQuotedPrintableMime
     }
     else { // need to be quoted
       if (_destLen - destCnt > 2) {
-        _dest[destCnt] = '='; destCnt++;
-        _dest[destCnt] = hexT[(c >> 4) & 15]; destCnt++;
-        _dest[destCnt] = hexT[c & 15]; destCnt++;
+        if (c == ' ') {
+          _dest[destCnt] = '_'; destCnt++;
+        }
+        else {
+          _dest[destCnt] = '='; destCnt++;
+          _dest[destCnt] = hexT[(c >> 4) & 15]; destCnt++;
+          _dest[destCnt] = hexT[c & 15]; destCnt++;
+        }
       }
       else 
         break;
