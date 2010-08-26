@@ -16,7 +16,6 @@
   WOComponentLoadWOOFiles               = NO;
   WOComponentRequestHandlerKey          = "wo";
   WOCompoundElementPool                 = NO;
-  WOContactSNS                          = NO;
   WOContextClass                        = WOContext;
   WOCoreOnApplicationException          = NO;
   WOCoreOnAwakeComponentInCtxDealloc    = NO;

@@ -47,7 +47,6 @@
 - (id)_loadComponentDefinitionWithName:(NSString *)_name
   language:(NSArray *)_langs;
 - (NSDictionary *)memoryStatistics;
-- (void)_setupSNS;
 @end
 
 static NSRecursiveLock *classLock           = nil;
@@ -71,21 +70,6 @@ static NSString *defaultCompRqHandlerClassName = @"WOComponentRequestHandler";
 
 + (int)version {
   return [super version] + 5 /* v6 */;
-}
-
-+ (void)_setupSNS {
-  Class clazz;
-  id c;
-  
-  clazz = NSClassFromString(@"SNSConnection");
-  c = [(id<NSObject>)clazz performSelector:@selector(defaultSNSConnection)];
-
-  if (c == nil) {
-    [[self logger] fatalWithFormat:@"could not connect SNS, exiting .."];
-    exit(20);
-  }
-  
-  [[self logger] logWithFormat:@"SNS enabled"];
 }
 
 /* old license checks */
@@ -226,13 +210,6 @@ static NSString *defaultCompRqHandlerClassName = @"WOComponentRequestHandler";
       [[self logger] logWithFormat:@"WOApplication debugging is enabled."];
     
     if (classLock == nil) classLock = [[NSRecursiveLock alloc] init];
-    
-    /* setup SNSConnection */
-    
-    if ([ud boolForKey:@"WOContactSNS"])
-      [[self class] _setupSNS];
-    else
-      [[self logger] logWithFormat:@"SNS support disabled."];
     
     NSDateClass         = [NSDate class];
     WOTemplateClass     = [WOTemplate class];

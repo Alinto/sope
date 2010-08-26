@@ -1,5 +1,7 @@
 2010-08-26  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-appserver/NGObjWeb/SNSConnection.m: removed obsolete class.
+
 	* sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m
 	(-generateDataForHeaderFieldNamed:value:): fixed a bug where the
 	buffer was treated as an unicode buffer (right) but where bytes

@@ -110,7 +110,6 @@ libNGObjWeb_OBJC_FILES = \
 	NGObjWeb.m 			\
 	OWViewRequestHandler.m		\
 	OWResourceManager.m		\
-	SNSConnection.m			\
 	UnixSignalHandler.m		\
 	WEClientCapabilities.m		\
 	WOAdaptor.m			\

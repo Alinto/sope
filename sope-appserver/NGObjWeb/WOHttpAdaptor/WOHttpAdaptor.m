@@ -71,7 +71,6 @@
 
 static NGLogger *logger                      = nil;
 static NGLogger *perfLogger                  = nil;
-static BOOL     WOContactSNS                 = NO;
 static BOOL     WOCoreOnHTTPAdaptorException = NO;
 static int      WOHttpAdaptorSendTimeout     = 10;
 static int      WOHttpAdaptorReceiveTimeout  = 10;
@@ -102,9 +101,6 @@ static BOOL     debugOn                      = NO;
   
   logger     = [lm loggerForClass:self];
   perfLogger = [lm loggerForDefaultKey:@"WOProfileHttpAdaptor"];
-
-  // TODO: this should be queried on demand to allow different defaults
-  WOContactSNS = [[ud objectForKey:@"WOContactSNS"] boolValue];
 
   WOCoreOnHTTPAdaptorException = 
     [[ud objectForKey:@"WOCoreOnHTTPAdaptorException"] boolValue] ? 1 : 0;
@@ -225,11 +221,9 @@ static BOOL     debugOn                      = NO;
         return nil;
       }
     
-      if (!WOContactSNS) {
-        [_application logWithFormat:@"%@ listening on address %@",
-                      NSStringFromClass([self class]),
-                      [(id)self->address stringValue]];
-      }
+      [_application logWithFormat:@"%@ listening on address %@",
+                    NSStringFromClass([self class]),
+                    [(id)self->address stringValue]];
     }
     
     self->lock = [[NSRecursiveLock alloc] init];
