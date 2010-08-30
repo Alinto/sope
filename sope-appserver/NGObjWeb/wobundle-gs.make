@@ -131,7 +131,12 @@ ALL_WOBUNDLE_LIBS = \
 	shared_libext=$(SHARED_LIBEXT))
 endif
 
-internal-wobundle-all_:: $(GNUSTEP_OBJ_DIR) \
+# order is important
+# GNUSTEP_OBJ_INSTANCE_DIR, OBJ_DIRS_TO_CREATE required for gnustep-make >= 2.2
+# GNUSTEP_OBJ_DIR required for gnustep-make < 2.2
+internal-wobundle-all_:: $(GNUSTEP_OBJ_INSTANCE_DIR) \
+                          $(OBJ_DIRS_TO_CREATE) \
+                          $(GNUSTEP_OBJ_DIR) \
                           build-bundle-dir \
                           build-bundle
 
