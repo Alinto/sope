@@ -145,7 +145,7 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
   char *newString, *digits;
   const char *p;
   NSTimeZone *tz;
-  unsigned int hours, minutes, seconds, remaining;
+  NSInteger hours, minutes, seconds, remaining;
   int sign;
 
   sign = 1;

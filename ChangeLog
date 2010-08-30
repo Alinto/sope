@@ -1,5 +1,9 @@
 2010-08-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
+	(parseTimeZone): we must use signed types for time units to avoid
+	a sign-bit "overflow".
+
 	* sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m:
 	enhanced to support the "long long" fundamental type.
 
