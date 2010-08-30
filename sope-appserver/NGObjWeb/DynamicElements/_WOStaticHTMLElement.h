@@ -38,8 +38,8 @@
   NSString *text;
 }
 
-- (id)initWithBuffer:(const char *)_buffer length:(unsigned)_len;
-- (id)initWithCharacters:(const unichar *)_buffer length:(unsigned)_len;
+- (id)initWithBuffer:(const char *)_buffer length:(NSUInteger)_len;
+- (id)initWithCharacters:(const unichar *)_buffer length:(NSUInteger)_len;
 
 @end
 

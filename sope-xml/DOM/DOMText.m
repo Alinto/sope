@@ -50,7 +50,7 @@
   return nil;
 }
 
-- (id<NSObject,DOMText>)splitText:(unsigned)_offset {
+- (id<NSObject,DOMText>)splitText:(NSUInteger)_offset {
   [self doesNotRecognizeSelector:_cmd];
   return nil;
 }

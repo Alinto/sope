@@ -28,8 +28,8 @@
 
 @protocol SaxLocator
 
-- (int)columnNumber;
-- (int)lineNumber;
+- (NSInteger)columnNumber;
+- (NSInteger)lineNumber;
 - (NSString *)publicId;
 - (NSString *)systemId;
 
@@ -49,10 +49,10 @@
 - (id)init;
 - (id)initWithLocator:(id<SaxLocator>)_locator;
 
-- (void)setColumnNumber:(int)_col;
-- (int)columnNumber;
-- (void)setLineNumber:(int)_line;
-- (int)lineNumber;
+- (void)setColumnNumber:(NSInteger)_col;
+- (NSInteger)columnNumber;
+- (void)setLineNumber:(NSInteger)_line;
+- (NSInteger)lineNumber;
 - (void)setPublicId:(NSString *)_pubId;
 - (NSString *)publicId;
 - (void)setSystemId:(NSString *)_sysId;

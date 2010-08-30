@@ -50,14 +50,14 @@
 + (id)bitSet {
   return [[[self alloc] init] autorelease];
 }
-+ (id)bitSetWithCapacity:(unsigned)_capacity {
++ (id)bitSetWithCapacity:(NSUInteger)_capacity {
   return [[[self alloc] initWithCapacity:_capacity] autorelease];
 }
 + (id)bitSetWithBitSet:(NGBitSet *)_set {
   return [[[self alloc] initWithBitSet:_set] autorelease];
 }
 
-- (id)initWithCapacity:(unsigned)_capacity {
+- (id)initWithCapacity:(NSUInteger)_capacity {
   if ((self = [super init])) {
     self->universe = (_capacity / NGBitsPerEntry + 1) * NGBitsPerEntry;
     storage  = NGMallocAtomic(NGByteSize);
@@ -102,7 +102,7 @@
 
 /* storage */
 
-- (void)_expandToInclude:(unsigned int)_element {
+- (void)_expandToInclude:(NSUInteger)_element {
   unsigned int nu = (_element / NGBitsPerEntry + 1) * NGBitsPerEntry;
   if (nu > self->universe) {
     void *old = storage;
@@ -119,20 +119,20 @@
 
 /* accessors */
 
-- (unsigned int)capacity {
+- (NSUInteger)capacity {
   return self->universe;
 }
-- (unsigned int)count {
+- (NSUInteger)count {
   return count;
 }
 
 /* membership */
 
-- (BOOL)isMember:(unsigned int)_element {
+- (BOOL)isMember:(NSUInteger)_element {
   return (_element >= self->universe) ? NO : NGTestBit(_element);
 }
 
-- (void)addMember:(unsigned int)_element {
+- (void)addMember:(NSUInteger)_element {
   register unsigned int subIdxPattern = 1 << (_element % NGBitsPerEntry);
 
   if (_element >= self->universe)
@@ -178,7 +178,7 @@
   }
 }
 
-- (void)removeMember:(unsigned int)_element {
+- (void)removeMember:(NSUInteger)_element {
   register unsigned int subIdxPattern = 1 << (_element % NGBitsPerEntry);
 
   if (_element >= self->universe)
@@ -211,7 +211,7 @@
   count = 0;
 }
 
-- (unsigned int)firstMember {
+- (NSUInteger)firstMember {
   register unsigned int element;
 
   for (element = 0; element < self->universe; element++) {
@@ -221,7 +221,7 @@
   return NSNotFound;
 }
 
-- (unsigned int)lastMember {
+- (NSUInteger)lastMember {
   register unsigned int element;
 
   for (element = (self->universe - 1); element >= 0; element--) {
@@ -285,11 +285,11 @@
   unsigned int element;
   register unsigned int found;
 
-  [_coder encodeValueOfObjCType:@encode(unsigned int) at:&count];
+  [_coder encodeValueOfObjCType:@encode(NSUInteger) at:&count];
 
   for (element = 0, found = 0; (element < self->universe) && (found < count); element++) {
     if (NGTestBit(element)) {
-      [_coder encodeValueOfObjCType:@encode(unsigned int) at:&element];
+      [_coder encodeValueOfObjCType:@encode(NSUInteger) at:&element];
       found++;
     }
   }
@@ -303,11 +303,11 @@
     storage  = NGMallocAtomic(NGByteSize);
     memset(storage, 0, NGByteSize);
 
-    [_coder decodeValueOfObjCType:@encode(unsigned int) at:&nc];
+    [_coder decodeValueOfObjCType:@encode(NSUInteger) at:&nc];
 
     for (cnt = 0; cnt < nc; cnt++) {
       unsigned int member;
-      [_coder decodeValueOfObjCType:@encode(unsigned int) at:&member];
+      [_coder decodeValueOfObjCType:@encode(NSUInteger) at:&member];
       [self addMember:member];
     }
   }

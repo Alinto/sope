@@ -68,7 +68,7 @@ static unsigned      tmpmask  = 0600;
 }
 
 - (id)initWithBytes:(const void*)_bytes
-  length:(unsigned int)_length
+  length:(NSUInteger)_length
 {
   NSString *filename = nil;
   int      fd;
@@ -84,7 +84,12 @@ static unsigned      tmpmask  = 0600;
     return nil;
   }
   if (write(fd, _bytes, _length) != (int)_length) {
-    fprintf(stderr, "Failed to write %i bytes to %s: %s\n",
+    fprintf(stderr,
+#if GS_64BIT_OLD
+            "Failed to write %i bytes to %s: %s\n",
+#else
+            "Failed to write %li bytes to %s: %s\n",
+#endif
             _length, [filename fileSystemRepresentation], strerror(errno));
     close(fd);
     [self release];
@@ -150,8 +155,8 @@ static unsigned      tmpmask  = 0600;
   }
 
   NS_DURING {
-    int read;
-    int alreadyRead;
+    NSInteger read;
+    NSInteger alreadyRead;
 
     alreadyRead = 0;
     
@@ -160,7 +165,12 @@ static unsigned      tmpmask  = 0600;
     while ((read = [fs readBytes:buffer count:read])) {
       alreadyRead += read;
       if (write(_fd, buffer, read) != read) {
-        fprintf(stderr, "%s: Failed to write %i bytes to file\n",
+        fprintf(stderr,
+#if GS_64BIT_OLD
+                "%s: Failed to write %i bytes to file\n",
+#else
+                "%s: Failed to write %li bytes to file\n",
+#endif
                 __PRETTY_FUNCTION__, read);
         result = NO;
         break;

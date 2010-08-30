@@ -19,7 +19,6 @@ FdExt_OBJC_FILES = \
 	NSEnumerator+misc.m		\
 	NSException+misc.m		\
 	NSFileManager+Extensions.m	\
-	NSMethodSignature+misc.m	\
 	NSNull+misc.m			\
 	NSObject+Logs.m			\
 	NSObject+Values.m		\

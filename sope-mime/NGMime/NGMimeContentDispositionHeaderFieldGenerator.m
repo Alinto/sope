@@ -57,8 +57,7 @@
     [data appendBytes:"; " length:2];
     [data appendBytes:"filename=\"" length:10];
     
-    NSData *d;
-    unsigned char* bytes;
+    const char* bytes;
     unsigned length;
     int  cnt;
     BOOL doEnc;

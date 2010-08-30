@@ -32,7 +32,7 @@
 @interface EOPrimaryKeyDictionary : NSDictionary
 {
     @public
-    unsigned fastHash;
+    NSUInteger fastHash;
     @protected
 }
 

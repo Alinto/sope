@@ -198,7 +198,7 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
 - (id)parseValue:(id)_data ofHeaderField:(NSString *)_field {
   // TODO: use UNICODE
   NSCalendarDate *date       = nil;
-  char	         *bytes, *pe;
+  char	*allocBytes, *bytes, *pe;
   unsigned       length = 0;
   NSTimeZone     *tz = nil;
   char  dayOfMonth, monthOfYear, hour, minute, second;
@@ -206,7 +206,8 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
   BOOL  flag;
 
   length = [_data lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
-  bytes = [_data cStringUsingEncoding: NSUTF8StringEncoding];
+  allocBytes = strdup ([_data cStringUsingEncoding: NSUTF8StringEncoding]);
+  bytes = allocBytes;
 
   /* remove leading chars (skip to first digit, the day of the month) */
   while (length > 0 && (!isdigit(*bytes))) {
@@ -347,7 +348,8 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
 	    bytes, _data];
     tz = gmt;
   }
-  
+
+  free (allocBytes);
   /* construct and return */
  finished:  
   date = [NSCalendarDate dateWithYear:year month:monthOfYear day:dayOfMonth

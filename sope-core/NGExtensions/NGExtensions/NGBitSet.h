@@ -33,14 +33,14 @@ typedef unsigned int NGBitSetStorage;
 
 // state
 
-- (unsigned int)count;
+- (NSUInteger)count;
 
 // membership
 
-- (BOOL)isMember:(unsigned int)_element;
-- (void)addMember:(unsigned int)_element;
+- (BOOL)isMember:(NSUInteger)_element;
+- (void)addMember:(NSUInteger)_element;
 - (void)addMembersInRange:(NSRange)_range;
-- (void)removeMember:(unsigned int)_element;
+- (void)removeMember:(NSUInteger)_element;
 - (void)removeMembersInRange:(NSRange)_range;
 - (void)removeAllMembers;
 
@@ -55,21 +55,21 @@ typedef unsigned int NGBitSetStorage;
 }
 
 + (id)bitSet;
-+ (id)bitSetWithCapacity:(unsigned)_capacity;
++ (id)bitSetWithCapacity:(NSUInteger)_capacity;
 + (id)bitSetWithBitSet:(NGBitSet *)_set;
 - (id)init;
-- (id)initWithCapacity:(unsigned)_capacity; // designated initializer
+- (id)initWithCapacity:(NSUInteger)_capacity; // designated initializer
 - (id)initWithBitSet:(NGBitSet *)_set;
 - (id)initWithNullTerminatedArray:(unsigned int *)_array;
 
 // state
 
-- (unsigned int)capacity;
+- (NSUInteger)capacity;
 
 // membership
 
-- (unsigned int)firstMember;
-- (unsigned int)lastMember;
+- (NSUInteger)firstMember;
+- (NSUInteger)lastMember;
 - (void)addMembersFromBitSet:(NGBitSet *)_set;
 
 // equality

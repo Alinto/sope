@@ -92,7 +92,7 @@ static void freeMods(LDAPMod **mods) {
     self->handle = NULL;
   }
   
-  self->handle = ldap_init((char *)[self->hostName UTF8String], self->port);
+  self->handle = ldap_init([self->hostName UTF8String], self->port);
   if (self->handle == NULL)
     return NO;
   
@@ -282,10 +282,10 @@ static void freeMods(LDAPMod **mods) {
     /* unknown method */
     return NO;
   
-  l = (char *)[_login UTF8String];
+  l = [_login UTF8String];
   p = LDAPUseLatin1Creds
-    ? (char *)[_cred  cString]
-    : (char *)[_cred  UTF8String];
+    ? [_cred  cString]
+    : [_cred  UTF8String];
   
   err = (method == LDAP_AUTH_SIMPLE)
     ? ldap_simple_bind_s(self->handle, l, p)
@@ -332,13 +332,13 @@ static void freeMods(LDAPMod **mods) {
   char **refs = NULL;
   struct berval	passwd = { 0, NULL };
 
-  l = (char *)[_login UTF8String];
+  l = [_login UTF8String];
   p = LDAPUseLatin1Creds
-    ? (char *)[_cred  cString]
-    : (char *)[_cred  UTF8String];
+    ? [_cred  cString]
+    : [_cred  UTF8String];
   
   *_perr = -1;
-  passwd.bv_val = p;
+  passwd.bv_val = (char *) p;
   passwd.bv_len = strlen(p);
 
 
@@ -428,12 +428,13 @@ static void freeMods(LDAPMod **mods) {
 		       perr: (LDAPPasswordPolicyError *) _perr
   
 {
-  const char *user, *p;
+  char *p;
+  const char *user;
   int rc;
 
   *_perr = -1;
   
-  user = (char *)[_dn UTF8String];
+  user = [_dn UTF8String];
   p = LDAPUseLatin1Creds ? (char *)[_oldPassword  cString] : (char *)[_oldPassword  UTF8String];
   
   if (!self->flags.isBound)

@@ -100,7 +100,7 @@
 - (unsigned int)indexOfObject:(id)_object;
 - (id)objectAtIndex:(unsigned int)_idx;
 - (id)lastObject;
-- (unsigned int)count;
+- (NSUInteger)count;
 - (NSEnumerator *)objectEnumerator;
 - (NSEnumerator *)reverseObjectEnumerator;
 

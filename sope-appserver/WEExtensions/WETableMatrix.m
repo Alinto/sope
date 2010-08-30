@@ -439,7 +439,11 @@ static NSNumber *numForUInt(unsigned int i) {
       
       spans = [_spans objectAtIndex:x];
       
-      sprintf(buf, "%d", [spans count]);
+#if GS_64BIT_OLD
+      sprintf(buf, "%ld", [spans count]);
+#else
+      sprintf(buf, "%ld", [spans count]);
+#endif
       s = [[StrClass alloc] initWithCString:buf];
       [_ctx setObject:s forKey:WETableMatrix_ColSpan];
       

@@ -86,7 +86,7 @@ static void uniquerNoAction(NSMapTable * t, const void *_object) {
 }
 
 static NSMapTableKeyCallBacks uniquerKeyMapCallbacks = {
-    (unsigned(*)(NSMapTable *, const void *))uniquerHash,
+    (NSUInteger(*)(NSMapTable *, const void *))uniquerHash,
     (BOOL(*)(NSMapTable *, const void *, const void *))uniquerCompare,
     (void (*)(NSMapTable *, const void *))uniquerNoAction,
     (void (*)(NSMapTable *, void *))uniquerNoAction,

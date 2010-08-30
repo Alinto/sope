@@ -45,17 +45,17 @@
 
 /* accessors */
 
-- (void)setColumnNumber:(int)_col {
+- (void)setColumnNumber:(NSInteger)_col {
   self->column = _col;
 }
-- (int)columnNumber {
+- (NSInteger)columnNumber {
   return self->column;
 }
 
-- (void)setLineNumber:(int)_line {
+- (void)setLineNumber:(NSInteger)_line {
   self->line = _line;
 }
-- (int)lineNumber {
+- (NSInteger)lineNumber {
   return self->line;
 }
 

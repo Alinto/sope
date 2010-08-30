@@ -43,7 +43,7 @@
 - retain;
 - (void)release;
 - autorelease;
-- (unsigned)retainCount;
+- (NSUInteger)retainCount;
 - (NSZone*)zone;
 
 - (BOOL)isProxy;

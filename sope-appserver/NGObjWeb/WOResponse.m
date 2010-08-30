@@ -125,7 +125,12 @@ static __inline__ char *monthName(int m) {
     now = [[NSCalendarDate alloc] initWithTimeIntervalSinceNow:-3600.0];
     [now setTimeZone:gmt];
     
-    sprintf(buf, "%s, %02i %s %04i %02i:%02i:%02i GMT",
+    sprintf(buf,
+#if GS_64BIT_OLD
+            "%s, %02i %s %04i %02i:%02i:%02i GMT",
+#else
+            "%s, %02li %s %04li %02li:%02li:%02li GMT",
+#endif
             weekdayName([now dayOfWeek]),
             [now dayOfMonth], 
             monthName([now monthOfYear]),

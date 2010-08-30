@@ -69,15 +69,15 @@ typedef enum {
 
 @protocol DOMNodeList
 
-- (unsigned)length;
-- (id)objectAtIndex:(unsigned)_idx; // returns the proper attribute node
+- (NSUInteger)length;
+- (id)objectAtIndex:(NSUInteger)_idx; // returns the proper attribute node
 
 @end /* DOMNodeList */
 
 @protocol DOMNamedNodeMap
 
-- (unsigned)length;
-- (id)objectAtIndex:(unsigned)_idx; // returns the proper attribute node
+- (NSUInteger)length;
+- (id)objectAtIndex:(NSUInteger)_idx; // returns the proper attribute node
 
 - (IDOMNode)namedItem:(NSString *)_name;
 - (IDOMNode)setNamedItem:(IDOMNode)_node;
@@ -148,13 +148,13 @@ typedef enum {
 
 - (void)setData:(NSString *)_data;
 - (NSString *)data;
-- (unsigned)length;
+- (NSUInteger)length;
 
-- (NSString *)substringData:(unsigned)_offset count:(unsigned)_count;
+- (NSString *)substringData:(NSUInteger)_offset count:(NSUInteger)_count;
 - (void)appendData:(NSString *)_data;
-- (void)insertData:(NSString *)_data offset:(unsigned)_offset;
-- (void)deleteData:(unsigned)_offset count:(unsigned)_count;
-- (void)replaceData:(unsigned)_offs count:(unsigned)_count with:(NSString *)_s;
+- (void)insertData:(NSString *)_data offset:(NSUInteger)_offset;
+- (void)deleteData:(NSUInteger)_offset count:(NSUInteger)_count;
+- (void)replaceData:(NSUInteger)_offs count:(NSUInteger)_count with:(NSString *)_s;
 
 @end /* DOMCharacterData */
 
@@ -163,7 +163,7 @@ typedef enum {
 
 @protocol DOMText < DOMCharacterData >
 
-- (id<NSObject,DOMText>)splitText:(unsigned)_offset;
+- (id<NSObject,DOMText>)splitText:(NSUInteger)_offset;
 
 /* DOM Level 3 */
 

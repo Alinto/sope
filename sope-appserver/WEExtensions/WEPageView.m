@@ -764,7 +764,11 @@ static inline NSString *WEPageLabelForKey(NSString *_key, WOContext *_ctx) {
   if ((k = [self->key stringValueInComponent:[_ctx component]]) == nil) {
     /* auto-assign a key */
     char kb[16];
+#if GS_64BIT_OLD
     sprintf(kb, "%d", [keys count]);
+#else
+    sprintf(kb, "%ld", [keys count]);
+#endif
     k = [NSString stringWithCString:kb];
   }
   [_ctx appendElementIDComponent:k];

@@ -52,7 +52,7 @@ static NSDictionary *emptyDict = nil;
 }
 
 - (id)initWithObjects:(id *)_objects forKeys:(id *)_keys 
-  count:(unsigned int)_count
+  count:(NSUInteger)_count
 {
   if (_count == 0) {
         RELEASE(self);
@@ -186,7 +186,7 @@ static NSDictionary *emptyDict = nil;
   return nil;
 }
 
-- (unsigned int)count {
+- (NSUInteger)count {
   return self->count;
 }
 - (BOOL)isNotEmpty {

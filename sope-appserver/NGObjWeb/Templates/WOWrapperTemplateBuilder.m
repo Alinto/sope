@@ -399,6 +399,7 @@ static NSDictionary *defaultAssocMap = nil;
   
   self->iTemplate = [[WOTemplate alloc] initWithURL:_url rootElement:nil];
   
+  rootElement = nil;
   NS_DURING
     rootElement = [self parseWithHTMLData:htmlFile declarationData:wodFile];
   NS_HANDLER

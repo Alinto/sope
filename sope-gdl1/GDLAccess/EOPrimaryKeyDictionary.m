@@ -111,7 +111,7 @@
   return YES;
 }
 
-- (unsigned int)hash {
+- (NSUInteger)hash {
     return 1;
 }
 

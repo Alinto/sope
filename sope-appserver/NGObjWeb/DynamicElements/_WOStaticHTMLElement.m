@@ -32,13 +32,13 @@ static Class StrClass = Nil;
   StrClass = [NSString class];
 }
 
-- (id)initWithBuffer:(const char *)_buffer length:(unsigned)_len {
+- (id)initWithBuffer:(const char *)_buffer length:(NSUInteger)_len {
   self->text = (_len > 0)
     ? [[StrClass alloc] initWithCString:_buffer length:_len]
     : nil;
   return self;
 }
-- (id)initWithCharacters:(const unichar *)_buffer length:(unsigned)_len {
+- (id)initWithCharacters:(const unichar *)_buffer length:(NSUInteger)_len {
   self->text = (_len > 0)
     ? [[StrClass alloc] initWithCharacters:_buffer length:_len]
     : nil;

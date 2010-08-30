@@ -30,13 +30,13 @@
 
 @protocol SaxAttributeList
 
-- (NSString *)nameAtIndex:(unsigned int)_idx;
-- (NSString *)typeAtIndex:(unsigned int)_idx;
-- (NSString *)valueAtIndex:(unsigned int)_idx;
+- (NSString *)nameAtIndex:(NSUInteger)_idx;
+- (NSString *)typeAtIndex:(NSUInteger)_idx;
+- (NSString *)valueAtIndex:(NSUInteger)_idx;
 - (NSString *)typeForName:(NSString *)_name;
 - (NSString *)valueForName:(NSString *)_name;
 
-- (unsigned int)count;
+- (NSUInteger)count;
 
 @end
 

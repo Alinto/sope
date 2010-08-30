@@ -220,14 +220,14 @@ typedef enum {
 
   runLoop = [NSRunLoop currentRunLoop];
   if (controlSocket)
-    [runLoop removeEvent: (void *) [controlSocket fileDescriptor]
+    [runLoop removeEvent: (void *) ((long) [controlSocket fileDescriptor])
                     type: ET_RDESC
                  forMode: NSDefaultRunLoopMode
                      all: YES];
   [controlSocket close];
   ASSIGN (controlSocket, newSocket);
   if (controlSocket)
-    [runLoop addEvent: (void *) [controlSocket fileDescriptor]
+    [runLoop addEvent: (void *) ((long) [controlSocket fileDescriptor])
                  type: ET_RDESC
               watcher: self
               forMode: NSDefaultRunLoopMode];
@@ -415,7 +415,7 @@ typedef enum {
 - (void) _releaseListeningSocket
 {
   if (listeningSocket) {
-    [[NSRunLoop currentRunLoop] removeEvent: (void *) [listeningSocket fileDescriptor]
+    [[NSRunLoop currentRunLoop] removeEvent: (void *) ((long) [listeningSocket fileDescriptor])
                                        type: ET_RDESC
                                     forMode: NSDefaultRunLoopMode
                                         all: YES];
@@ -475,7 +475,7 @@ typedef enum {
   [loopTimer invalidate];
   loopTimer = nil;
   runLoop = [NSRunLoop currentRunLoop];
-  [runLoop removeEvent: (void *) [listeningSocket fileDescriptor]
+  [runLoop removeEvent: (void *) ((long) [listeningSocket fileDescriptor])
                   type: ET_RDESC
                forMode: NSDefaultRunLoopMode
                    all: YES];
@@ -675,7 +675,7 @@ typedef enum {
     if (!address)
       address = @"*";
     [self logWithFormat: @"listening on %@:%d", address, [addr port]];
-    [[NSRunLoop currentRunLoop] addEvent: (void *) [listeningSocket fileDescriptor]
+    [[NSRunLoop currentRunLoop] addEvent: (void *) ((long) [listeningSocket fileDescriptor])
                                     type: ET_RDESC
                                  watcher: self
                                  forMode: NSDefaultRunLoopMode];

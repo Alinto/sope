@@ -43,8 +43,8 @@
 @end /* _DOMElementAttrNamedNodeMap */
 
 @interface NGDOMElement(Privates)
-- (unsigned)_numberOfAttributes;
-- (id)_attributeNodeAtIndex:(unsigned)_idx;
+- (NSUInteger)_numberOfAttributes;
+- (id)_attributeNodeAtIndex:(NSUInteger)_idx;
 - (id)attributeNode:(NSString *)_localName;
 - (id)attributeNode:(NSString *)_localName namespaceURI:(NSString *)_ns;
 @end
@@ -104,10 +104,10 @@ static NSNull *null = nil;
   return self->namespaceURI;
 }
 
-- (void)setLine:(unsigned)_line {
+- (void)setLine:(NSUInteger)_line {
   self->line = _line;
 }
-- (unsigned)line {
+- (NSUInteger)line {
   return self->line;
 }
 
@@ -189,10 +189,10 @@ static NSNull *null = nil;
 - (void)_attributeSetChanged {
 }
 
-- (unsigned)_numberOfAttributes {
+- (NSUInteger)_numberOfAttributes {
   return [self->attributes count];
 }
-- (id)_attributeNodeAtIndex:(unsigned)_idx {
+- (id)_attributeNodeAtIndex:(NSUInteger)_idx {
   if (_idx >= [self->attributes count])
     return nil;
   return [self->attributes objectAtIndex:_idx];
@@ -587,11 +587,11 @@ static NSString *_XNSLocalName(NSString *_name) {
     : [_name substringFromIndex:(r.location + r.length)];
 }
 
-- (unsigned)length {
+- (NSUInteger)length {
   _checkValid(self);
   return [self->element _numberOfAttributes];
 }
-- (id)objectAtIndex:(unsigned)_idx {
+- (id)objectAtIndex:(NSUInteger)_idx {
   _checkValid(self);
   return [self->element _attributeNodeAtIndex:_idx];
 }
@@ -653,7 +653,7 @@ static NSString *_XNSLocalName(NSString *_name) {
 
 /* mimic NSArray */
 
-- (unsigned)count {
+- (NSUInteger)count {
   _checkValid(self);
   return [self->element _numberOfAttributes];
 }

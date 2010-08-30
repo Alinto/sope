@@ -46,16 +46,6 @@ typedef struct objc_method      *Method_t;
                      + __GNUC_MINOR__ * 100 \
                      + __GNUC_PATCHLEVEL__)
 
-#if GNUSTEP_BASE_LIBRARY
-/* this is a hack for the extensions 0.8.6 library */
-
-void class_add_behavior(Class class, Class behavior) {
-  extern void behavior_class_add_class (Class class, Class behavior);
-  behavior_class_add_class(class, behavior);
-}
-
-#endif
-
 @interface _NGMethodNameEnumerator : NSEnumerator
 {
   Class        clazz;

@@ -165,7 +165,7 @@ static inline NSData *_quotedPrintableEncoding(NSData *_data) {
 }
 
 static inline NSData *_rfc2047Decoding(char _enc, const char *_bytes,
-				       unsigned int _length) 
+				       NSUInteger _length) 
 {
   NSData *data = nil;
 

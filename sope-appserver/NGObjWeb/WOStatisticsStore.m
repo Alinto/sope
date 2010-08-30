@@ -399,7 +399,11 @@ static id mkdbl(double d) {
   
   [result appendString:remoteHost];
   sprintf(buf, 
+#if GS_64BIT_OLD
 	  " - - [%02i/%s/%04i:%02i:%02i:%02i GMT] ",
+#else
+	  " - - [%02li/%s/%04li:%02li:%02li:%02li GMT] ",
+#endif
 	  [now dayOfMonth], monthAbbr[[now monthOfYear]], 
 	  [now yearOfCommonEra],
 	  [now hourOfDay], [now minuteOfHour], [now secondOfMinute]);

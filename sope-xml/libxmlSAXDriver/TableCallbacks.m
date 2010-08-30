@@ -58,7 +58,7 @@ static NSString *__describe(void *table, const void *anObject) {
 }
 
 const NSMapTableKeyCallBacks libxmlNonOwnedCStringMapKeyCallBacks =  {
-    (unsigned(*)(NSMapTable *, const void *))__hashCString,
+    (NSUInteger(*)(NSMapTable *, const void *))__hashCString,
     (BOOL(*)(NSMapTable *, const void *, const void *))__compareCString,
     (void (*)(NSMapTable *, const void *anObject))__retain,
     (void (*)(NSMapTable *, void *anObject))TableCallbacksRelease,

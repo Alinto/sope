@@ -85,7 +85,7 @@
 
 /* Equality */
 
-- (unsigned)hash {
+- (NSUInteger)hash {
   return [self->entityName hash] - [self->values[0] hash];
 }
 

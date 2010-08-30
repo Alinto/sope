@@ -193,10 +193,10 @@ typedef struct {
     faultResolver->faultReferences--;
 }
 
-+ (unsigned)retainCount {
++ (NSUInteger)retainCount {
   return 1;
 }
-- (unsigned)retainCount {
+- (NSUInteger)retainCount {
   // For instance
   return faultResolver->faultReferences+1;
 }

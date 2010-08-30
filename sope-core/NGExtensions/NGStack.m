@@ -40,7 +40,7 @@
 
 @implementation NGStack
 
-+ (id)stackWithCapacity:(unsigned int)_capacity {
++ (id)stackWithCapacity:(NSUInteger)_capacity {
   return [[[self alloc] initWithCapacity:_capacity] autorelease];
 }
 + (id)stack {
@@ -53,7 +53,7 @@
 - (id)init {
   return [self initWithCapacity:256];
 }
-- (id)initWithCapacity:(unsigned int)_capacity {
+- (id)initWithCapacity:(NSUInteger)_capacity {
   if ((self = [super init])) {
     stackPointer = 0;
     capacity     = (_capacity > 0) ? _capacity : 16;
@@ -93,13 +93,13 @@
 
 /* state */
 
-- (unsigned int)capacity {
+- (NSUInteger)capacity {
   return capacity;
 }
-- (unsigned int)stackPointer {
+- (NSUInteger)stackPointer {
   return stackPointer;
 }
-- (unsigned int)count {
+- (NSUInteger)count {
   return stackPointer;
 }
 - (BOOL)isEmpty {
@@ -172,8 +172,8 @@
 - (void)encodeWithCoder:(NSCoder *)_encoder {
   unsigned cnt;
   
-  [_encoder encodeValueOfObjCType:@encode(unsigned int) at:&capacity];
-  [_encoder encodeValueOfObjCType:@encode(unsigned int) at:&stackPointer];
+  [_encoder encodeValueOfObjCType:@encode(NSUInteger) at:&capacity];
+  [_encoder encodeValueOfObjCType:@encode(NSUInteger) at:&stackPointer];
 
   for (cnt = 1; cnt <= stackPointer; cnt++) {
     id obj = stack[cnt];
@@ -185,8 +185,8 @@
   int tmpCapacity;
   int tmpStackPointer;
 
-  [_decoder decodeValueOfObjCType:@encode(unsigned int) at:&tmpCapacity];
-  [_decoder decodeValueOfObjCType:@encode(unsigned int) at:&tmpStackPointer];
+  [_decoder decodeValueOfObjCType:@encode(NSUInteger) at:&tmpCapacity];
+  [_decoder decodeValueOfObjCType:@encode(NSUInteger) at:&tmpStackPointer];
 
   self = [self initWithCapacity:tmpCapacity];
   {
@@ -284,7 +284,7 @@
 
 /* state */
 
-- (unsigned int)stackPointer {
+- (NSUInteger)stackPointer {
   return ([self count] - 1);
 }
 

@@ -383,7 +383,7 @@ static Class      DispClass = Nil;
   NSString   *s;
   unsigned   urilen;
   char       *uribuf;
-  const char *p = uribuf;
+  const char *p;
   NGHashMap  *map;
 
   if ((s = [self uri]) == nil)

@@ -39,7 +39,7 @@
 + (id)hashMapWithDictionary:(NSDictionary *)_dict;
 
 - (id)init;
-- (id)initWithCapacity:(unsigned int)_size;
+- (id)initWithCapacity:(NSUInteger)_size;
 - (id)initWithObjects:(NSArray *)_objects forKey:(id)_key;
 - (id)initWithHashMap:(NGHashMap *)_hashMap;
 - (id)initWithDictionary:(NSDictionary *)_dictionary;
@@ -49,7 +49,7 @@
 
 - (id)objectForKey:(id)_key;
 - (NSArray *)objectsForKey:(id)_key;
-- (id)objectAtIndex:(unsigned int)_index forKey:(id)_key;
+- (id)objectAtIndex:(NSUInteger)_index forKey:(id)_key;
 
 - (NSArray *)allKeys;
 - (NSArray *)allObjects;
@@ -63,9 +63,9 @@
 - (NSDictionary *)asDictionary;
 - (NSDictionary *)asDictionaryWithArraysForValues;
 
-- (unsigned int)hash;
-- (unsigned int)count; // returns the number of keys
-- (unsigned int)countObjectsForKey:(id)_key;
+- (NSUInteger)hash;
+- (NSUInteger)count; // returns the number of keys
+- (NSUInteger)countObjectsForKey:(id)_key;
 
 @end
 
@@ -73,19 +73,19 @@
 {
 }
 
-+ (id)hashMapWithCapacity:(unsigned int)_numItems;
++ (id)hashMapWithCapacity:(NSUInteger)_numItems;
 
 - (id)init;
  
-- (void)insertObject:(id)_object atIndex:(unsigned int)_index forKey:(id)_key;
+- (void)insertObject:(id)_object atIndex:(NSUInteger)_index forKey:(id)_key;
 - (void)insertObjects:(NSArray *)_object
-  atIndex:(unsigned int)_index forKey:(id)_key;
-- (void)insertObjects:(id*)_objects count:(unsigned int)_count
-  atIndex:(unsigned int)_index forKey:(id)_key;
+  atIndex:(NSUInteger)_index forKey:(id)_key;
+- (void)insertObjects:(id*)_objects count:(NSUInteger)_count
+  atIndex:(NSUInteger)_index forKey:(id)_key;
 
 - (void)addObject:(id)_object forKey:(id)_key;
 - (void)addObjects:(NSArray *)_objects forKey:(id)_key;
-- (void)addObjects:(id*)_objects count:(unsigned int)_count
+- (void)addObjects:(id*)_objects count:(NSUInteger)_count
   forKey:(id)_key;
 
 - (void)setObject:(id)_object forKey:(id)_key;

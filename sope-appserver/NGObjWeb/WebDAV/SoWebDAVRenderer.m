@@ -184,7 +184,11 @@ static BOOL         useRelativeURLs = YES;
     [r setHeader:[self mimeTypeForData:_object inContext:_ctx]
        forKey:@"content-type"];
     
+#if GS_64BIT_OLD
     sprintf((char *)buf, "%d", [_object length]);
+#else
+    sprintf((char *)buf, "%ld", [_object length]);
+#endif
     s = [[NSString alloc] initWithCString:(const char *)buf];
     if (s != nil) [r setHeader:s forKey:@"content-length"];
     [s release];
@@ -200,7 +204,7 @@ static BOOL         useRelativeURLs = YES;
        forKey:@"content-type"];
     
     data = [_object dataUsingEncoding:NSUTF8StringEncoding];
-    sprintf((char *)buf, "%d", [data length]);
+    sprintf((char *)buf, "%ld", [data length]);
     s = [[NSString alloc] initWithCString:(const char *)buf];
     [r setHeader:s forKey:@"content-length"];
     [s release];

@@ -257,7 +257,7 @@
 - (id)lastObject {
     return [self->array lastObject];
 }
-- (unsigned int)count {
+- (NSUInteger)count {
     return [self->array count];
 }
 - (BOOL)isNotEmpty {

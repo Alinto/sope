@@ -584,7 +584,7 @@ static inline NSString *_nameOfLocalhost(void) {
 
 /* comparing */
 
-- (unsigned)hash {
+- (NSUInteger)hash {
   return [self port];
 }
 

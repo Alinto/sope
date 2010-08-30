@@ -106,7 +106,7 @@
   class = object_is_instance(_fault) ? [self targetClass] : (Class)_fault;
   for (protos = class->protocols; protos; protos = protos->next) {
     for (i = 0; i < protos->count; i++) {
-      if ([protos->list[i] conformsTo:_protocol])
+      if ([protos->list[i] conformsToProtocol:_protocol])
         return YES;
     }
   }

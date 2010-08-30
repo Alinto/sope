@@ -31,7 +31,6 @@
 #include "NSArray+enumerator.h"
 #include "NSData+misc.h"
 #include "NSException+misc.h"
-#include "NSMethodSignature+misc.h"
 #include "NSObject+Values.h"
 #include "NSSet+enumerator.h"
 #include "NSString+Formatting.h"

@@ -122,6 +122,7 @@ static BOOL useRedirectsForDefaultMethods = NO;
     */
     NSString *defaultName;
     
+    methodObject = nil;
     defaultName = [self->object defaultMethodNameInContext:_ctx];
     if ([defaultName isNotEmpty]) {
       WOResponse *r;

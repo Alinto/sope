@@ -100,7 +100,6 @@ FdExt_HEADER_FILES = \
 	NSEnumerator+misc.h		\
 	NSException+misc.h		\
 	NSFileManager+Extensions.h	\
-	NSMethodSignature+misc.h	\
 	NSNull+misc.h			\
 	NSObject+Logs.h			\
 	NSObject+Values.h		\

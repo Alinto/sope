@@ -135,14 +135,14 @@
   
   if (self->searchPathes != nil)
     return self->searchPathes;
+
+  ma  = [NSMutableArray arrayWithCapacity:6];
   
   if ([self->productDirectoryName isNotEmpty]) {
     BOOL hasGNUstepEnv;
     
     hasGNUstepEnv = [[[[NSProcessInfo processInfo] environment]
   		     objectForKey:@"GNUSTEP_USER_ROOT"] isNotEmpty];
-    
-    ma  = [NSMutableArray arrayWithCapacity:6];
     
     if (hasGNUstepEnv)
       [self _addGNUstepSearchPathesToArray:ma];

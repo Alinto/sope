@@ -32,8 +32,8 @@
 
 // state
 
-- (unsigned int)stackPointer;
-- (unsigned int)count;
+- (NSUInteger)stackPointer;
+- (NSUInteger)count;
 - (BOOL)isEmpty;
 
 // operations
@@ -58,19 +58,19 @@
   id           *stack;
 }
 
-+ (id)stackWithCapacity:(unsigned int)_capacity;
++ (id)stackWithCapacity:(NSUInteger)_capacity;
 + (id)stack;
 + (id)stackWithArray:(NSArray *)_array;
 - (id)init;
-- (id)initWithCapacity:(unsigned int)_capacity; // designated initializer
+- (id)initWithCapacity:(NSUInteger)_capacity; // designated initializer
 - (id)initWithArray:(NSArray *)_array;
 
 // state
 
-- (unsigned int)capacity;
+- (NSUInteger)capacity;
 
-- (unsigned int)stackPointer;
-- (unsigned int)count;
+- (NSUInteger)stackPointer;
+- (NSUInteger)count;
 - (BOOL)isEmpty;
 
 // elements

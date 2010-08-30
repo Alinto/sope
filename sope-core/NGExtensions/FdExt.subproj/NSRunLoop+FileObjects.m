@@ -69,14 +69,14 @@ NSString *NSFileObjectBecameActiveNotificationName =
 /* implement using -addEvent:type:watcher:forMode: */
 
 - (void)addFileObject:(id)_fileObject
-  activities:(unsigned int)_activities
+  activities:(NSUInteger)_activities
   forMode:(NSString *)_mode
 {
-  int evType = 0;
+  NSInteger evType = 0;
   
   _fileObject = RETAIN(_fileObject);
   
-  [self addEvent:(void *)[_fileObject fileDescriptor]
+  [self addEvent:(void *) ((NSInteger) [_fileObject fileDescriptor])
         type:evType
         watcher:_fileObject
         forMode:_mode];
@@ -87,7 +87,7 @@ NSString *NSFileObjectBecameActiveNotificationName =
   int evType = 0;
   
   _fileObject = AUTORELEASE(_fileObject);
-  [self removeEvent:(void *)[_fileObject fileDescriptor]
+  [self removeEvent:(void *) ((NSInteger) [_fileObject fileDescriptor])
         type:evType
         forMode:_mode
         all:NO];

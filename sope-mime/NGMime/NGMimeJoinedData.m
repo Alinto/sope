@@ -56,8 +56,8 @@
   return self->joinedDataObjects;
 }
 
-- (unsigned int)length {
-  unsigned int i, count, size;
+- (NSUInteger)length {
+  NSUInteger i, count, size;
 
   for (i = 0, count = [self->joinedDataObjects count], size = 0; i < count;i++)
     size += [[self->joinedDataObjects objectAtIndex:i] length];
@@ -126,7 +126,12 @@
 
     if ([data isKindOfClass:[NGMimeFileData class]]) {
       if (![(NGMimeFileData *)data appendDataToFileDesc:fd]) {
-        fprintf(stderr, "Failed to write %i bytes to %s: %s\n",
+        fprintf(stderr,
+#if GS_64BIT_OLD
+                "Failed to write %i bytes to %s: %s\n",
+#else
+                "Failed to write %li bytes to %s: %s\n",
+#endif
                 [data length],
                 [filename fileSystemRepresentation], strerror(errno));
         close(fd);

@@ -47,7 +47,7 @@
 }
 
 - (id)initWithPath:(NSString *)_path removeFile:(BOOL)_remove;
-- (id)initWithBytes:(const void *)_bytes length:(unsigned int)_length;
+- (id)initWithBytes:(const void *)_bytes length:(NSUInteger)_length;
 
 /* operations */
 

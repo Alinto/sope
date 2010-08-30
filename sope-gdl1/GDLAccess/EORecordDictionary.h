@@ -20,12 +20,12 @@ typedef struct _EORecordDictionaryEntry {
 
 /* Allocating and Initializing an Dictionary */
 - (id)initWithObjects:(id*)objects forKeys:(id*)keys 
-  count:(unsigned int)count;
+  count:(NSUInteger)count;
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
 /* Accessing keys and values */
 - (id)objectForKey:(id)aKey;
-- (unsigned int)count;
+- (NSUInteger)count;
 - (NSEnumerator *)keyEnumerator;
 
 @end /* EORecordDictionary */

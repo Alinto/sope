@@ -41,7 +41,7 @@ extern NSString *NSFileObjectBecameActiveNotificationName;
 /* Monitoring file objects */
 
 - (void)addFileObject:(id)_fileObject
-  activities:(unsigned int)_activities
+  activities:(NSUInteger)_activities
   forMode:(NSString *)_mode;
   
 - (void)removeFileObject:(id)_fileObject

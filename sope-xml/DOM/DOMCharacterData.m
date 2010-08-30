@@ -46,13 +46,13 @@
   return self->data;
 }
 
-- (unsigned)length {
+- (NSUInteger)length {
   return [self->data length];
 }
 
 /* operations */
 
-- (NSString *)substringData:(unsigned)_offset count:(unsigned)_count {
+- (NSString *)substringData:(NSUInteger)_offset count:(NSUInteger)_count {
   NSRange r;
 
   r.location = _offset;
@@ -68,11 +68,11 @@
   [old release];
 }
 
-- (void)insertData:(NSString *)_data offset:(unsigned)_offset {
+- (void)insertData:(NSString *)_data offset:(NSUInteger)_offset {
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)deleteData:(unsigned)_offset count:(unsigned)_count {
+- (void)deleteData:(NSUInteger)_offset count:(NSUInteger)_count {
   NSRange r;
   id new, old;
   
@@ -85,7 +85,7 @@
   [old release];
 }
 
-- (void)replaceData:(unsigned)_offset count:(unsigned)_c with:(NSString *)_s {
+- (void)replaceData:(NSUInteger)_offset count:(NSUInteger)_c with:(NSString *)_s {
   [self doesNotRecognizeSelector:_cmd];
 }
 

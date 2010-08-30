@@ -201,7 +201,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   return [self initWithCapacity:0];
 }
 
-- (id)initWithCapacity:(unsigned int)_size {
+- (id)initWithCapacity:(NSUInteger)_size {
   if ((self = [super init])) {
     self->table = NSCreateMapTableWithZone(NSObjectMapKeyCallBacks,
                                            NSNonOwnedPointerMapValueCallBacks, 
@@ -322,7 +322,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
 
 /* equality */
 
-- (unsigned int)hash {
+- (NSUInteger)hash {
   return [self count];
 }
 
@@ -400,7 +400,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   return array;
 }
 
-- (id)objectAtIndex:(unsigned int)_index forKey:(id)_key {
+- (id)objectAtIndex:(NSUInteger)_index forKey:(id)_key {
   LList *list = NULL;
   
   if (!(list = __structForKey(self, _key)))
@@ -452,7 +452,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   return [result autorelease];
 }
 
-- (unsigned int)countObjectsForKey:(id)_key {
+- (NSUInteger)countObjectsForKey:(id)_key {
   return __countObjectsForKey(self, _key);
 }
 
@@ -594,7 +594,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   return [[self propertyList] description];
 }
 
-- (unsigned int)count {
+- (NSUInteger)count {
   return self->table ? NSCountMapTable(table) : 0;
 }
 
@@ -676,7 +676,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
 
 @implementation NGMutableHashMap
 
-+ (id)hashMapWithCapacity:(unsigned int)_numItems {
++ (id)hashMapWithCapacity:(NSUInteger)_numItems {
   return [[[self alloc] initWithCapacity:_numItems] autorelease];
 }
 
@@ -686,11 +686,11 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
 
 /* inserting objects */
 
-- (void)insertObject:(id)_object atIndex:(unsigned int)_index forKey:(id)_key {
+- (void)insertObject:(id)_object atIndex:(NSUInteger)_index forKey:(id)_key {
   [self insertObjects:&_object count:1 atIndex:_index forKey:_key];
 }
 
-- (void)insertObjects:(NSArray *)_objects atIndex:(unsigned int)_index
+- (void)insertObjects:(NSArray *)_objects atIndex:(NSUInteger)_index
   forKey:(id)_key 
 {
   id  *objects = NULL;
@@ -706,8 +706,8 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   if (objects) free(objects);
 }
 
-- (void)insertObjects:(id*)_objects count:(unsigned int)_count
-  atIndex:(unsigned int)_index forKey:(id)_key 
+- (void)insertObjects:(id*)_objects count:(NSUInteger)_count
+  atIndex:(NSUInteger)_index forKey:(id)_key 
 {
   id            object  = nil;
   LList *root    = NULL;
@@ -768,7 +768,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
 
 /* adding objects */
 
-- (void)addObjects:(id*)_objects count:(unsigned int)_count forKey:(id)_key {
+- (void)addObjects:(id*)_objects count:(NSUInteger)_count forKey:(id)_key {
   LList *root     = NULL;
   LList *element  = NULL;
   unsigned i      = 0;

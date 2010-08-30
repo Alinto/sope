@@ -34,16 +34,16 @@
 
 /* lookup indices */
 
-- (unsigned int)indexOfRawName:(NSString *)_rawName;
-- (unsigned int)indexOfName:(NSString *)_localPart uri:(NSString *)_uri;
+- (NSUInteger)indexOfRawName:(NSString *)_rawName;
+- (NSUInteger)indexOfName:(NSString *)_localPart uri:(NSString *)_uri;
 
 /* lookup data by index */
 
-- (NSString *)nameAtIndex:(unsigned int)_idx;
-- (NSString *)rawNameAtIndex:(unsigned int)_idx;
-- (NSString *)typeAtIndex:(unsigned int)_idx;
-- (NSString *)uriAtIndex:(unsigned int)_idx;
-- (NSString *)valueAtIndex:(unsigned int)_idx;
+- (NSString *)nameAtIndex:(NSUInteger)_idx;
+- (NSString *)rawNameAtIndex:(NSUInteger)_idx;
+- (NSString *)typeAtIndex:(NSUInteger)_idx;
+- (NSString *)uriAtIndex:(NSUInteger)_idx;
+- (NSString *)valueAtIndex:(NSUInteger)_idx;
 
 /* lookup data by name */
 
@@ -54,7 +54,7 @@
 
 /* list size */
 
-- (unsigned int)count;
+- (NSUInteger)count;
 
 @end
 

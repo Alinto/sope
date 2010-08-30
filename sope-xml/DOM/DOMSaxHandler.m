@@ -440,7 +440,7 @@ static BOOL printErrors = NO;
 
 @implementation DOMSaxHandler(SubHandler)
 
-- (unsigned)tagDepth {
+- (NSUInteger)tagDepth {
   return self->tagDepth;
 }
 

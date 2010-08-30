@@ -224,7 +224,7 @@ static EONull     *null = nil;
 
 /* BDControl additions */
 
-- (unsigned int)count {
+- (NSUInteger)count {
   return [[self subqualifiers] count];
 }
 - (NSArray *)subqualifiers {

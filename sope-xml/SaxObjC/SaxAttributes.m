@@ -110,10 +110,10 @@
 
 /* lookup indices */
 
-- (unsigned int)indexOfRawName:(NSString *)_rawName {
+- (NSUInteger)indexOfRawName:(NSString *)_rawName {
   return [self->rawNames indexOfObject:_rawName];
 }
-- (unsigned int)indexOfName:(NSString *)_localPart uri:(NSString *)_uri
+- (NSUInteger)indexOfName:(NSString *)_localPart uri:(NSString *)_uri
 {
   unsigned int i, c;
   
@@ -141,19 +141,19 @@
 
 /* lookup data by index */
 
-- (NSString *)nameAtIndex:(unsigned int)_idx {
+- (NSString *)nameAtIndex:(NSUInteger)_idx {
   return [self->names objectAtIndex:_idx];
 }
-- (NSString *)rawNameAtIndex:(unsigned int)_idx {
+- (NSString *)rawNameAtIndex:(NSUInteger)_idx {
   return [self->rawNames objectAtIndex:_idx];
 }
-- (NSString *)typeAtIndex:(unsigned int)_idx {
+- (NSString *)typeAtIndex:(NSUInteger)_idx {
   return [self->types objectAtIndex:_idx];
 }
-- (NSString *)uriAtIndex:(unsigned int)_idx {
+- (NSString *)uriAtIndex:(NSUInteger)_idx {
   return [self->uris objectAtIndex:_idx];
 }
-- (NSString *)valueAtIndex:(unsigned int)_idx {
+- (NSString *)valueAtIndex:(NSUInteger)_idx {
   return [self->values objectAtIndex:_idx];
 }
 
@@ -195,7 +195,7 @@
 
 /* list size */
 
-- (unsigned int)count {
+- (NSUInteger)count {
   return [self->names count];
 }
 

@@ -85,7 +85,7 @@
 
 /* BDControl additions */
 
-- (unsigned int)count;
+- (NSUInteger)count;
 - (NSArray *)subqualifiers;
 
 /* debugging */
