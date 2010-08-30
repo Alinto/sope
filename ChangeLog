@@ -1,5 +1,8 @@
 2010-08-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m:
+	enhanced to support the "long long" fundamental type.
+
 	* sope-appserver/NGObjWeb/DynamicElements/_WOStaticHTMLElement.m,
 	sope-appserver/NGObjWeb/NGHttp+WO.m,
 	sope-appserver/NGObjWeb/SoObjects/SoObjectMethodDispatcher.m,

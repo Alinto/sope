@@ -102,6 +102,8 @@ typedef union {
   unsigned char  (*ucmethod)(id, SEL);
   int            (*imethod) (id, SEL);
   unsigned int   (*uimethod)(id, SEL);
+  long long      (*llmethod) (id, SEL);
+  unsigned long long (*ullmethod)(id, SEL);
   short          (*smethod) (id, SEL);
   unsigned short (*usmethod)(id, SEL);
   const char *   (*strmethod)(id, SEL);
@@ -116,6 +118,8 @@ typedef union {
   void (*ucmethod) (id, SEL, unsigned char);
   void (*imethod)  (id, SEL, int);
   void (*uimethod) (id, SEL, unsigned int);
+  void (*llmethod) (id, SEL, long long);
+  void (*ullmethod) (id, SEL, unsigned long long);
   void (*smethod)  (id, SEL, short);
   void (*usmethod) (id, SEL, unsigned short);
   void (*strmethod)(id, SEL, const char *);
@@ -145,6 +149,8 @@ typedef union {
   const char     *cstr;
   int            sint;
   unsigned int   uint;
+  long long      llong;
+  unsigned long long ullong;
   short          ss;
   unsigned short us;
   unsigned char  c;
@@ -554,6 +560,13 @@ static WOReturnValueHolder _getComponentValue(WOKeyPathAssociation *self,
             retValue.uint = info->access.uimethod(object, info->extra.sel.get);
             break;
 
+          case _C_LNG_LNG:
+            retValue.llong = info->access.llmethod(object, info->extra.sel.get);
+            break;
+          case _C_ULNG_LNG:
+            retValue.ullong = info->access.ullmethod(object, info->extra.sel.get);
+            break;
+
           case _C_SHT:
             retValue.ss = info->access.smethod(object, info->extra.sel.get);
             break;
@@ -652,6 +665,12 @@ static inline id _objectify(unsigned char _type, WOReturnValueHolder *_value) {
       break;
     case _C_UINT:
       result = uintNumObj(_value->uint);
+      break;
+    case _C_LNG_LNG:
+      result = [NumberClass numberWithLongLong:_value->llong];
+      break;
+    case _C_ULNG_LNG:
+      result = [NumberClass numberWithUnsignedLongLong:_value->llong];
       break;
     case _C_SHT:
       result = [NumberClass numberWithShort:_value->ss];
@@ -834,6 +853,13 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
             sm.uimethod(object, setSel, [_value unsignedIntValue]);
             break;
 
+          case _C_LNG_LNG:
+            sm.llmethod(object, setSel, [_value longLongValue]);
+            break;
+          case _C_ULNG_LNG:
+            sm.ullmethod(object, setSel, [_value unsignedLongLongValue]);
+            break;
+
           case _C_FLT:
             sm.fmethod(object, setSel, [_value floatValue]);
             break;
@@ -1007,7 +1033,8 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
     
   if (info->type == WOKeyType_method) { /* determine set-selector */
     if (info->retType == _C_CHR || info->retType == _C_UCHR ||
-	info->retType == _C_INT || info->retType == _C_UINT) {
+	info->retType == _C_INT || info->retType == _C_UINT ||
+	info->retType == _C_LNG_LNG || info->retType == _C_ULNG_LNG) {
       SEL             setSel;
       WOSetMethodType sm;
         
@@ -1036,6 +1063,14 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
           }
           case _C_UINT: {
             sm.uimethod(_wo, setSel, (unsigned int)_value);
+            break;
+          }
+          case _C_LNG_LNG: {
+            sm.llmethod(_wo, setSel, (long long)_value);
+            break;
+          }
+          case _C_ULNG_LNG: {
+            sm.ullmethod(_wo, setSel, (unsigned long long)_value);
             break;
           }
 
@@ -1085,6 +1120,8 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
     switch (info->retType) {
       case _C_UINT: return retValue.uint;
       case _C_INT:  return retValue.sint;
+      case _C_ULNG_LNG: return (unsigned int) retValue.ullong;
+      case _C_LNG_LNG:  return (signed int) retValue.llong;
       case _C_UCHR: return retValue.c;
       case _C_CHR:  return retValue.c;
       case _C_SHT:  return retValue.ss;
@@ -1120,7 +1157,8 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
     
   if (info->type == WOKeyType_method) { // determine set-selector
       if (info->retType == _C_CHR || info->retType == _C_UCHR ||
-          info->retType == _C_INT || info->retType == _C_UINT) {
+          info->retType == _C_INT || info->retType == _C_UINT ||
+          info->retType == _C_LNG_LNG || info->retType == _C_ULNG_LNG) {
         SEL             setSel;
         WOSetMethodType sm;
         
@@ -1149,6 +1187,14 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
           }
           case _C_UINT: {
             sm.uimethod(_wo, setSel, (unsigned int)_value);
+            break;
+          }
+          case _C_LNG_LNG: {
+            sm.llmethod(_wo, setSel, (long long)_value);
+            break;
+          }
+          case _C_ULNG_LNG: {
+            sm.ullmethod(_wo, setSel, (unsigned long long)_value);
             break;
           }
 
@@ -1201,6 +1247,8 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
   switch (info->retType) {
     case _C_UINT: return retValue.uint;
     case _C_INT:  return retValue.sint;
+    case _C_ULNG_LNG: return (unsigned int) retValue.ullong;
+    case _C_LNG_LNG:  return (signed int) retValue.llong;
     case _C_UCHR: return retValue.c;
     case _C_CHR:  return retValue.c;
     case _C_SHT:  return retValue.ss;
@@ -1227,7 +1275,8 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
     
   if (info->type == WOKeyType_method) { // determine set-selector
       if (info->retType == _C_CHR || info->retType == _C_UCHR ||
-          info->retType == _C_INT || info->retType == _C_UINT) {
+          info->retType == _C_INT || info->retType == _C_UINT ||
+          info->retType == _C_LNG_LNG || info->retType == _C_ULNG_LNG) {
         SEL             setSel;
         WOSetMethodType sm;
         
@@ -1252,6 +1301,12 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
             sm.uimethod(_wo, setSel, (unsigned int)_value);
             break;
           }
+          case _C_LNG_LNG:
+            sm.llmethod(_wo, setSel, (long long)_value);
+            break;
+          case _C_ULNG_LNG:
+            sm.ullmethod(_wo, setSel, (unsigned long long)_value);
+            break;
 
           default:
             [NSException raise:@"WORuntimeException"
@@ -1297,6 +1352,8 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
       switch (info->retType) {
         case _C_UINT: return retValue.uint;
         case _C_INT:  return retValue.sint;
+        case _C_ULNG_LNG: return (retValue.ullong != 0);
+        case _C_LNG_LNG:  return (retValue.llong != 0);
         case _C_UCHR: return retValue.c;
         case _C_CHR:  return retValue.c;
         case _C_SHT:  return retValue.ss;
@@ -1340,6 +1397,12 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
     case _C_INT:
       if (IS_NUMSTR(retValue.sint)) return numStrings[retValue.sint];
       return [StringClass stringWithFormat:@"%d", retValue.sint];
+    case _C_ULNG_LNG:
+      if (IS_NUMSTR(retValue.ullong)) return numStrings[retValue.ullong];
+      return [StringClass stringWithFormat:@"%ull", retValue.ullong];
+    case _C_LNG_LNG:
+      if (IS_NUMSTR(retValue.llong)) return numStrings[retValue.llong];
+      return [StringClass stringWithFormat:@"%ll", retValue.llong];
     case _C_UCHR:
       if (IS_UNUMSTR(retValue.c)) return numStrings[retValue.c];
       return [StringClass stringWithFormat:@"%d", (int)retValue.c];
