@@ -201,8 +201,12 @@ static NSMutableDictionary *namespaces;
   else
     port = self->useSSL ? 993 : 143;
 
-  if ([[_url query] isEqualToString:@"tls=YES"])
+  if ([[_url query] isEqualToString:@"tls=YES"]) {
     self->useTLS = YES;
+
+    if ([tmp intValue] <= 0)
+      port = 143;
+  }
   
   self->login    = [[_url user]     copy];
   self->password = [[_url password] copy];
@@ -301,9 +305,10 @@ static NSMutableDictionary *namespaces;
   Class socketClass = Nil;
   id sock;
 
-  socketClass = [self useSSL] 
-    ? NSClassFromString(@"NGActiveSSLSocket")
-    : [NGActiveSocket class];
+  socketClass = [NGActiveSocket class];
+  
+  if ([self useSSL] && ![self useTLS])
+    socketClass = NSClassFromString(@"NGActiveSSLSocket");
   
   NS_DURING {
       sock = [socketClass socketConnectedToAddress:self->address];
