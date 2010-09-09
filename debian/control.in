@@ -2,8 +2,19 @@ Source: sope
 Section: web
 Priority: extra
 Maintainer: Inverse Support <support@inverse.ca>
-Build-Depends: debhelper (>= 4.0.0), gnustep-make, libgnustep-base-dev, gobjc | objc-compiler, libxml2-dev, libldap2-dev | libldap-dev, libssl-dev, zlib1g-dev, libpq-dev | postgresql-dev, libmysqlclient-dev (>= 5.0) | libmysqlclient15-dev (>= 5.0), autotools-dev
-Standards-Version: 3.8.2
+Build-Depends: debhelper (>= 7.0.50), gnustep-make, libgnustep-base-dev, gobjc | objc-compiler, libxml2-dev, libldap2-dev | libldap-dev, libssl-dev, zlib1g-dev, libpq-dev | postgresql-dev, libmysqlclient-dev (>= 5.0) | libmysqlclient15-dev (>= 5.0), autotools-dev
+Standards-Version: 3.9.1
+
+Package: sope_SOPEVER_-dbg
+Section: debug
+Architecture: any
+Priority: extra
+Depends: libsope_SOPEVER_-dev (= ${binary:Version}), ${misc:Depends}
+Description: Debugging files
+ SOPE is a framework for developing web applications and services. The
+ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
+ .
+ This package contains the debugging symbols for all SOPE packages.
 
 Package: libsope_SOPEVER_-dev
 Section: libdevel
@@ -48,17 +59,6 @@ Description: SOPE application server libraries
   * session management
   * scripting extensions for Foundation, JavaScript bridge
   * DOM tree rendering library
-
-Package: sope_SOPEVER_-dbg
-Section: debug
-Architecture: all
-Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for all SOPE packages.
 
 Package: sope_SOPEVER_-appserver
 Section: web
