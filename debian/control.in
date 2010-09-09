@@ -49,7 +49,7 @@ Description: SOPE application server libraries
   * scripting extensions for Foundation, JavaScript bridge
   * DOM tree rendering library
 
-Package: sope-_SOPEVER_-dbg
+Package: sope_SOPEVER_-dbg
 Section: debug
 Architecture: all
 Priority: extra
