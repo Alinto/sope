@@ -157,7 +157,7 @@ binary-arch: build install
 #	dh_installinfo
 	dh_installman
 	dh_link
-	dh_strip --dbg-package=sope-dbg
+	dh_strip --dbg-package=sope$(SOPEVER)-dbg
 	dh_compress
 	dh_fixperms
 #	dh_perl
