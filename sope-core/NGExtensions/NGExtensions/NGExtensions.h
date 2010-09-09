@@ -53,7 +53,6 @@
 #include <NGExtensions/NSURL+misc.h>
 #include <NGExtensions/NSEnumerator+misc.h>
 #include <NGExtensions/NSException+misc.h>
-#include <NGExtensions/NSMethodSignature+misc.h>
 #include <NGExtensions/NSNull+misc.h>
 #include <NGExtensions/NSObject+Logs.h>
 #include <NGExtensions/NGLogging.h>
