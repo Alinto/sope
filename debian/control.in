@@ -21,7 +21,7 @@ Section: libdevel
 Architecture: all
 Provides: libsope-dev
 Conflicts: libsope-dev
-Depends: libsope-appserver_SOPEVER_-dev, libsope-core_SOPEVER_-dev, libsope-xml_SOPEVER_-dev, libsope-mime_SOPEVER_-dev, libsope-ldap_SOPEVER_-dev, libsope-gdl1-_SOPEVER_-dev
+Depends: libsope-appserver_SOPEVER_-dev, libsope-core_SOPEVER_-dev, libsope-xml_SOPEVER_-dev, libsope-mime_SOPEVER_-dev, libsope-ldap_SOPEVER_-dev, libsope-gdl1-_SOPEVER_-dev, ${misc:Depends}
 Description: Development files for all SOPE libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
@@ -34,7 +34,7 @@ Section: libdevel
 Architecture: any
 Provides: libsope-appserver-dev
 Conflicts: libsope-appserver-dev
-Depends: libsope-appserver_SOPEVER_ (= ${binary:Version})
+Depends: libsope-appserver_SOPEVER_ (= ${binary:Version}), ${misc:Depends}
 Description: Development files for the SOPE libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
@@ -75,7 +75,7 @@ Section: libdevel
 Architecture: any
 Provides: libsope-core-dev
 Conflicts: libsope-core-dev
-Depends: libsope-core_SOPEVER_ (= ${binary:Version})
+Depends: libsope-core_SOPEVER_ (= ${binary:Version}), ${misc:Depends}
 Description: Development files for the SOPE core libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
@@ -98,7 +98,7 @@ Section: libdevel
 Architecture: any
 Provides: libsope-xml-dev
 Conflicts: libsope-xml-dev
-Depends: libsope-xml_SOPEVER_ (= ${binary:Version})
+Depends: libsope-xml_SOPEVER_ (= ${binary:Version}), ${misc:Depends}
 Description: Development files for the SOPE XML libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
@@ -125,7 +125,7 @@ Section: libdevel
 Architecture: any
 Provides: libsope-ldap-dev
 Conflicts: libsope-ldap-dev
-Depends: libsope-ldap_SOPEVER_ (= ${binary:Version})
+Depends: libsope-ldap_SOPEVER_ (= ${binary:Version}), ${misc:Depends}
 Description: Development files for the SOPE LDAP libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
@@ -149,7 +149,7 @@ Section: libdevel
 Architecture: any
 Provides: libsope-mime-dev
 Conflicts: libsope-mime-dev
-Depends: libsope-mime_SOPEVER_ (= ${binary:Version})
+Depends: libsope-mime_SOPEVER_ (= ${binary:Version}), ${misc:Depends}
 Description: Development files for the SOPE MIME libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
@@ -176,7 +176,7 @@ Section: libdevel
 Architecture: any
 Provides: libsope-gdl1-dev
 Conflicts: libsope-gdl1-dev
-Depends: libsope-gdl1-_SOPEVER_ (= ${binary:Version})
+Depends: libsope-gdl1-_SOPEVER_ (= ${binary:Version}), ${misc:Depends}
 Description: Development files for the GNUstep database libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
