@@ -9,7 +9,7 @@ Package: sope_SOPEVER_-dbg
 Section: debug
 Architecture: any
 Priority: extra
-Depends: libsope_SOPEVER_-dev (= ${binary:Version}), ${misc:Depends}
+Depends: libsope-appserver_SOPEVER_ (= ${binary:Version}) | sope_SOPEVER_-appserver (= ${binary:Version}) | libsope-core_SOPEVER_ (= ${binary:Version}) | libsope-xml_SOPEVER_ (= ${binary:Version}) | libsope-ldap_SOPEVER_ (= ${binary:Version}) | libsope-mime_SOPEVER_ (= ${binary:Version}) | libsope-gdl1-_SOPEVER_ (= ${binary:Version}) | sope_SOPEVER_-gdl1-postgresql (= ${binary:Version}) | sope_SOPEVER_-gdl1-mysql (= ${binary:Version}) | sope_SOPEVER_-stxsaxdriver (= ${binary:Version}) | sope_SOPEVER_-libxmlsaxdriver (= ${binary:Version}), ${misc:Depends}
 Description: Debugging files
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
