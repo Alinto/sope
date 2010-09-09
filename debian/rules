@@ -157,7 +157,7 @@ binary-arch: build install
 #	dh_installinfo
 	dh_installman
 	dh_link
-	dh_strip
+        dh_strip --dbg-package=sope-dbg
 	dh_compress
 	dh_fixperms
 #	dh_perl
@@ -171,8 +171,5 @@ binary-arch: build install
 	dh_md5sums
 	dh_builddeb
 
-override_dh_strip:
-        dh_strip --dbg-package=sogo-dbg
-
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure override_dh_strip
+.PHONY: build clean binary-indep binary-arch binary install configure

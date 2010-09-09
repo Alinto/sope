@@ -49,15 +49,16 @@ Description: SOPE application server libraries
   * scripting extensions for Foundation, JavaScript bridge
   * DOM tree rendering library
 
-Package: libsope-appserver_SOPEVER_-dbg
+Package: sope-_SOPEVER_-dbg
 Section: debug
 Architecture: all
-Depends: libsope-appserver_SOPEVER_ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Priority: extra
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Debugging files
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
  .
- This package contains the debugging symbols for libsope-appserver_SOPEVER_.
+ This package contains the debugging symbols for all SOPE packages.
 
 Package: sope_SOPEVER_-appserver
 Section: web
@@ -92,16 +93,6 @@ Description: Core libraries of the SOPE application server
   * various Foundation extensions
   * a java.io like stream and socket library
 
-Package: libsope-core_SOPEVER_-dbg
-Section: debug
-Architecture: all
-Depends: libsope-core_SOPEVER_ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for libsope-core_SOPEVER_.
-
 Package: libsope-xml_SOPEVER_-dev
 Section: libdevel
 Architecture: any
@@ -129,16 +120,6 @@ Description: SOPE libraries for XML processing
   * an attempt to implement DOM on top of SaxObjC
   * an XML-RPC implementation (without a transport layer)
 
-Package: libsope-xml_SOPEVER_-dbg
-Section: debug
-Architecture: all
-Depends: libsope-xml_SOPEVER_ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for libsope-xml_SOPEVER_.
-
 Package: libsope-ldap_SOPEVER_-dev
 Section: libdevel
 Architecture: any
@@ -162,16 +143,6 @@ Description: SOPE libraries for LDAP access
  .
  The SOPE libraries for LDAP access contain an Objective-C wrapper for
  LDAP directory services.
-
-Package: libsope-ldap_SOPEVER_-dbg
-Section: debug
-Architecture: all
-Depends: libsope-ldap_SOPEVER_ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for libsope-ldap_SOPEVER_.
 
 Package: libsope-mime_SOPEVER_-dev
 Section: libdevel
@@ -200,16 +171,6 @@ Description: SOPE libraries for MIME processing
   * a full IMAP4 implementation
   * prototypical POP3 and SMTP processor
 
-Package: libsope-mime_SOPEVER_-dbg
-Section: debug
-Architecture: all
-Depends: libsope-mime_SOPEVER_ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for libsope-mime_SOPEVER_.
-
 Package: libsope-gdl1-_SOPEVER_-dev
 Section: libdevel
 Architecture: any
@@ -234,16 +195,6 @@ Description: GNUstep database libraries for SOPE
  This package contains a fork of the GNUstep database libraries used
  by the SOPE application server.
 
-Package: libsope-gdl1_SOPEVER_-dbg
-Section: debug
-Architecture: all
-Depends: libsope-gdl1_SOPEVER_ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for libsope-gdl1_SOPEVER_.
-
 Package: sope_SOPEVER_-gdl1-postgresql
 Section: web
 Architecture: any
@@ -256,16 +207,6 @@ Description: PostgreSQL connector for SOPE's fork of the GNUstep database enviro
  .
  This package contains the postgresql connector for SOPE's fork of the
  GNUstep database libraries.
-
-Package: sope_SOPEVER_-gdl1-postgresql-dbg
-Section: debug
-Architecture: all
-Depends: sope_SOPEVER_-gdl1-postgresql (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for sope_SOPEVER_-gdl1-postgresql.
 
 Package: sope_SOPEVER_-gdl1-mysql
 Section: web
@@ -280,16 +221,6 @@ Description: MySQL connector for SOPE's fork of the GNUstep database environment
  This package contains the mysql connector for SOPE's fork of the
  GNUstep database libraries.
 
-Package: sope_SOPEVER_-gdl1-mysql-dbg
-Section: debug
-Architecture: all
-Depends: sope_SOPEVER_-gdl1-mysql (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for sope_SOPEVER_-gdl1-mysql.
-
 Package: sope_SOPEVER_-stxsaxdriver
 Section: web
 Architecture: any
@@ -301,16 +232,6 @@ Description: Structured Text Parser for SOPE's SAX engine
  . 
  This parser enables SOPE's SAX engine to parse structured text files.
 
-Package: sope_SOPEVER_-stxsaxdriver-dbg
-Section: debug
-Architecture: all
-Depends: sope_SOPEVER_-stxsaxdriver (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for sope_SOPEVER_-stxsaxdriver.
-
 Package: sope_SOPEVER_-libxmlsaxdriver
 Section: web
 Architecture: any
@@ -321,13 +242,3 @@ Description: XML Parser for SOPE's SAX engine
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
  .
  This parser enables SOPE's SAX engine to parse XML files.
-
-Package: sope_SOPEVER_-libxmlsaxdriver-dbg
-Section: debug
-Architecture: all
-Depends: sope_SOPEVER_-libxmlsaxdriver (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Debugging files
- SOPE is a framework for developing web applications and services. The
- name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
- .
- This package contains the debugging symbols for sope_SOPEVER_-libxmlsaxdriver.
