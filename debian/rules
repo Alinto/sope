@@ -6,12 +6,6 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-# Include dpatch stuff.
-# include /usr/share/dpatch/dpatch.make
-
-PATCHES = sope-gsmake2.diff sope-patchset-r1664.diff debian-build-mysql.diff
-RPATCHES = debian-build-mysql.diff sope-patchset-r1664.diff sope-gsmake2.diff
-
 CFLAGS = -Wall -g
 #WARN: doesn't compile/package if HAS_LIBRARY_* options not present (since we use configure now)
 MAKE_FLAGS = messages=yes OPTFLAG=-O2 HAS_LIBRARY_ldap=yes HAS_LIBRARY_pq=yes HAS_LIBRARY_xml2=yes
@@ -177,28 +171,8 @@ binary-arch: build install
 	dh_md5sums
 	dh_builddeb
 
-patch-stamp: patch
-patch:
-	for patch in $(PATCHES); \
-	do \
-	  if ! test -f debian/patches/$$patch.stamp; \
-	  then \
-	      patch -p0 < debian/patches/$$patch; \
-	      touch debian/patches/$$patch.stamp; \
-	  fi; \
-	done
-	touch patch-stamp
-
-unpatch:
-	if test -f patch-stamp; \
-	then \
-	    for patch in $(RPATCHES); \
-	    do \
-	      patch -p0 -R < debian/patches/$$patch; \
-	      rm -f debian/patches/$$patch.stamp; \
-	    done; \
-	    rm -f patch-stamp; \
-	fi
+override_dh_strip:
+        dh_strip --dbg-package=sogo-dbg
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure
+.PHONY: build clean binary-indep binary-arch binary install configure override_dh_strip
