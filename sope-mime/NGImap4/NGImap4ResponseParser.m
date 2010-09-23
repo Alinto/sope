@@ -1874,8 +1874,21 @@ static NSString *_parseBodyDecodeString(NGImap4ResponseParser *self,
     if ([data isKindOfClass: [NSString class]])
       return (NSString *) data;
     else
-      return [[[StrClass alloc] initWithData:data encoding:encoding]
-	       autorelease];
+      {
+	NSString *s;
+	
+	// Let's try with the supplied encoding. If it doesn't work,
+	// we'll then try UTF-8 or fallback to ISO-8859-1
+	s = [[StrClass alloc] initWithData:data encoding:encoding];
+
+	if (!s && encoding != NSUTF8StringEncoding)
+	  s = [[StrClass alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	
+	if (!s)
+	  s = [[StrClass alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
+	
+	return [s autorelease];
+      }
   }
   else {
     str = _parseUntil2(self, ' ', ')');
