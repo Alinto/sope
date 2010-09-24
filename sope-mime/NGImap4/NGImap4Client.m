@@ -1581,13 +1581,7 @@ static NSMutableDictionary *namespaces;
     command = _command;
 
   if (self->debug) {
-    if ([_txt length] > 5000) {
-      fprintf(stderr, "C[%p]: %s...\n", self, [[_txt substringToIndex:5000]
-                                                  cString]);
-    }
-    else {
       fprintf(stderr, "C[%p]: %s\n", self, [_txt cString]);
-    }
   }
   
   if (![txtStream writeString:command])

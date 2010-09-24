@@ -1,3 +1,11 @@
+2010-09-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m
+	We now try harder to get a string out of
+	an encoded string by trying the supplied encoding,
+	trying next UTF-8 and finally giving up with
+	ISO-8859-1.
+
 2010-08-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
