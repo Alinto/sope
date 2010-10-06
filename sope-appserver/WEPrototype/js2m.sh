@@ -32,5 +32,5 @@ $ECHOCMD >$mfile "/* automatically generated from ${jsfile}, do not edit ! */"
 for i in `cat ${jsfile} | ${SEDCMD} "$BACKPAT" | ${SEDCMD} "s|\\"|$replaceto|g"`; do
   $ECHOCMD -n >>$mfile "@\""
   $ECHOCMD -n >>$mfile "${i}"
-  $ECHOCMD >>$mfile "\\n\""
+  $ECHOCMD >>$mfile "\\\n\""
 done

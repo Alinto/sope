@@ -1,3 +1,7 @@
+2010-10-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* js2m.sh (mfile): fixed generation of line endings.
+
 2007-03-17  Marcus Mueller  <znek@mulle-kybernetik.com>
 
 	* WEPrototypeScript.m, WELiveLink.m: obey WOContext's new
