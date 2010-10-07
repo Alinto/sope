@@ -26,8 +26,8 @@
 #include "common.h"
 #import "EOAttribute+MySQL4.h"
 
-static NSString *SQLITE3_DATETIME_FORMAT  = @"%b %d %Y %I:%M:%S:000%p";
-static NSString *SQLITE3_TIMESTAMP_FORMAT = @"%Y-%m-%d %H:%M:%S%z";
+static NSString *MYSQL4_DATETIME_FORMAT  = @"%b %d %Y %I:%M:%S:000%p";
+static NSString *MYSQL4_TIMESTAMP_FORMAT = @"%Y-%m-%d %H:%M:%S%z";
 
 @implementation EOAttribute(MySQL4AttributeAdditions)
 
@@ -37,6 +37,9 @@ static NSString *SQLITE3_TIMESTAMP_FORMAT = @"%Y-%m-%d %H:%M:%S%z";
   binary:(BOOL)_isBinary
 {
   /* This method makes no sense with MySQL4? */
+  [NSException raise: @"EOAttributeMySQL4ImplementationException"
+              format: @"this method (%s) is not expected to be invoked",
+               __PRETTY_FUNCTION__];
   
   if (_isBinary)
     [self setValueClassName:@"NSData"];
@@ -99,34 +102,39 @@ static NSString *SQLITE3_TIMESTAMP_FORMAT = @"%Y-%m-%d %H:%M:%S%z";
     case DATEOID:
       [self setExternalType:@"datetime"];
       [self setValueClassName:@"NSCalendarDate"];
-      [self setCalendarFormat:SQLITE3_DATETIME_FORMAT];
+      [self setCalendarFormat:MYSQL4_DATETIME_FORMAT];
       break;
     case TIMEOID:
       [self setExternalType:@"time"];
       [self setValueClassName:@"NSCalendarDate"];
-      [self setCalendarFormat:SQLITE3_DATETIME_FORMAT];
+      [self setCalendarFormat:MYSQL4_DATETIME_FORMAT];
       break;
     case TIMESTAMPOID:
       [self setExternalType:@"timestamp"];
       [self setValueClassName:@"NSCalendarDate"];
-      [self setCalendarFormat:SQLITE3_DATETIME_FORMAT];
+      [self setCalendarFormat:MYSQL4_DATETIME_FORMAT];
       break;
     case TIMESTAMPTZOID:
       [self setExternalType:@"timestamptz"];
       [self setValueClassName:@"NSCalendarDate"];
-      [self setCalendarFormat:SQLITE3_DATETIME_FORMAT];
+      [self setCalendarFormat:MYSQL4_DATETIME_FORMAT];
       break;
     case BITOID:
       [self setExternalType:@"bit"];
       break;
     default:
-    NSLog(@"What is SQLITE3 Oid %i ???", _type);
+    NSLog(@"What is MYSQL4 Oid %i ???", _type);
     break;
   }
 #endif
 }
 
 - (void)loadValueClassForExternalMySQL4Type:(NSString *)_type {
+  /* This method makes no sense with MySQL4? */
+  [NSException raise: @"EOAttributeMySQL4ImplementationException"
+              format: @"this method (%s) is not expected to be invoked",
+               __PRETTY_FUNCTION__];
+
   if ([_type isEqualToString:@"bool"]) {
     [self setValueClassName:@"NSNumber"];
     [self setValueType:@"i"];
@@ -135,9 +143,17 @@ static NSString *SQLITE3_TIMESTAMP_FORMAT = @"%Y-%m-%d %H:%M:%S%z";
     [self setValueClassName:@"NSNumber"];
     [self setValueType:@"i"];
   }
+  else if ([_type isEqualToString:@"int2 unsigned"]) {
+    [self setValueClassName:@"NSNumber"];
+    [self setValueType:@"I"];
+  }
   else if ([_type isEqualToString:@"int4"]) {
     [self setValueClassName:@"NSNumber"];
     [self setValueType:@"i"];
+  }
+  else if ([_type isEqualToString:@"int4 unsigned"]) {
+    [self setValueClassName:@"NSNumber"];
+    [self setValueType:@"I"];
   }
   else if ([_type isEqualToString:@"float4"]) {
     [self setValueClassName:@"NSNumber"];
@@ -169,15 +185,15 @@ static NSString *SQLITE3_TIMESTAMP_FORMAT = @"%Y-%m-%d %H:%M:%S%z";
   }
   else if ([_type isEqualToString:@"timestamp"]) {
     [self setValueClassName:@"NSCalendarDate"];
-    [self setCalendarFormat:SQLITE3_TIMESTAMP_FORMAT];
+    [self setCalendarFormat:MYSQL4_TIMESTAMP_FORMAT];
   }
   else if ([_type isEqualToString:@"timestamptz"]) {
     [self setValueClassName:@"NSCalendarDate"];
-    [self setCalendarFormat:SQLITE3_TIMESTAMP_FORMAT];
+    [self setCalendarFormat:MYSQL4_TIMESTAMP_FORMAT];
   }
   else if ([_type isEqualToString:@"datetime"]) {
     [self setValueClassName:@"NSCalendarDate"];
-    [self setCalendarFormat:SQLITE3_DATETIME_FORMAT];
+    [self setCalendarFormat:MYSQL4_DATETIME_FORMAT];
   }
   else if ([_type isEqualToString:@"date"]) {
     [self setValueClassName:@"NSString"];

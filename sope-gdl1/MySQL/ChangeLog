@@ -1,3 +1,16 @@
+2010-10-07  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* EOAttribute+MySQL4.m
+	(-loadValueClassAndTypeUsingMySQL4Type:size:modification:binary:):
+	invalidated method.
+	(-loadValueClassForExternalMySQL4Type:) idem.
+
+	* NSNumber+MySQL4Val.m (-): added support for unsigned
+	types.
+
+	* MySQL4Channel.m (-describeResults): added support for unsigned
+	types.
+
 2006-07-24  Helge Hess  <helge.hess@opengroupware.org>
 
 	* MySQL4Channel+Model.m: added SHOW TABLES to retrieve MySQL table
@@ -30,7 +43,7 @@
 
 	* GNUmakefile.preamble: use mysql_config --cflags instead of --include,
 	  the former is also available with MySQL 3.x
-	
+
 	* MySQL4Channel.m: added a -describeResults: method to allow
 	  descriptions without beautified names
 

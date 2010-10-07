@@ -25,6 +25,7 @@
 
 
 #import <Foundation/NSCalendarDate.h>
+#include <mysql/mysql.h>
 #include "MySQL4Channel.h"
 #include "common.h"
 
@@ -53,7 +54,7 @@ static NSTimeZone *gmt01 = nil;
 static NSTimeZone *gmt02 = nil;
 #endif
 
-- (id)initWithMySQL4Type:(int)_type value:(const void *)_v length:(int)_len {
+- (id)initWithMySQL4Field:(MYSQL_FIELD *)_field value:(const void *)_v length:(int)_len {
   NSString *s;
   NSString *calfmt;
   

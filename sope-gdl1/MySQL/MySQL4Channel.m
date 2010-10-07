@@ -324,11 +324,6 @@ static int openConnectionCount = 0;
 	is zero-fill
 	is unsigned
     */
-    if (mfields[cnt].flags & UNSIGNED_FLAG) {
-      NSLog(@"ERROR: MySQL4 field is marked unsigned (unsupported): %@",
-	    attribute);
-    }
-    
     switch (mfields[cnt].type) {
     case FIELD_TYPE_STRING:
       [attribute setExternalType:@"CHAR"];
@@ -342,29 +337,64 @@ static int openConnectionCount = 0;
       break;
       
     case FIELD_TYPE_TINY:
-      [attribute setExternalType:@"TINY"];
-      [attribute setValueClassName:@"NSNumber"];
-      [attribute setValueType:@"c"];
+      if ((mfields[cnt].flags & UNSIGNED_FLAG)) {
+        [attribute setExternalType:@"TINY UNSIGNED"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"C"];
+      }
+      else {
+        [attribute setExternalType:@"TINY"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"c"];
+      }
       break;
     case FIELD_TYPE_SHORT:
-      [attribute setExternalType:@"SHORT"];
-      [attribute setValueClassName:@"NSNumber"];
-      [attribute setValueType:@"s"];
+      if ((mfields[cnt].flags & UNSIGNED_FLAG)) {
+        [attribute setExternalType:@"SHORT UNSIGNED"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"S"];
+      }
+      else {
+        [attribute setExternalType:@"SHORT"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"s"];
+      }
       break;
     case FIELD_TYPE_LONG:
-      [attribute setExternalType:@"LONG"];
-      [attribute setValueClassName:@"NSNumber"];
-      [attribute setValueType:@"l"];
+      if ((mfields[cnt].flags & UNSIGNED_FLAG)) {
+        [attribute setExternalType:@"LONG UNSIGNED"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"L"];
+      }
+      else {
+        [attribute setExternalType:@"LONG"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"l"];
+      }
       break;
     case FIELD_TYPE_INT24:
-      [attribute setExternalType:@"INT"];
-      [attribute setValueClassName:@"NSNumber"];
-      [attribute setValueType:@"i"]; // bumped
+      if ((mfields[cnt].flags & UNSIGNED_FLAG)) {
+        [attribute setExternalType:@"INT UNSIGNED"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"I"];
+      }
+      else {
+        [attribute setExternalType:@"INT"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"i"]; // bumped
+      }
       break;
     case FIELD_TYPE_LONGLONG:
-      [attribute setExternalType:@"LONGLONG"];
-      [attribute setValueClassName:@"NSNumber"];
-      [attribute setValueType:@"q"];
+      if ((mfields[cnt].flags & UNSIGNED_FLAG)) {
+        [attribute setExternalType:@"LONGLONG UNSIGNED"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"Q"];
+      }
+      else {
+        [attribute setExternalType:@"LONGLONG"];
+        [attribute setValueClassName:@"NSNumber"];
+        [attribute setValueType:@"q"];
+      }
       break;
     case FIELD_TYPE_DECIMAL:
       [attribute setExternalType:@"DECIMAL"];
@@ -522,7 +552,7 @@ static int openConnectionCount = 0;
 	continue;
       }
 
-      value = [[valueClass alloc] initWithMySQL4Type:mfield.type
+      value = [[valueClass alloc] initWithMySQL4Field:&mfield
 				  value:rawRow[cnt] length:lengths[cnt]];
       
       if (value == nil) {

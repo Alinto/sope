@@ -30,26 +30,36 @@
 
 @implementation NSNumber(MySQL4Values)
 
-- (id)initWithMySQL4Type:(int)_type value:(const void *)_v length:(int)_len {
+- (id)initWithMySQL4Field:(MYSQL_FIELD *)_field value:(const void *)_v length:(int)_len {
   if (_v == NULL) {
     [self release];
     return nil;
   }
 
-  switch (_type) {
-  case FIELD_TYPE_TINY:   return [self initWithChar:atoi(_v)];
-  case FIELD_TYPE_SHORT:  return [self initWithShort:atoi(_v)];
-  case FIELD_TYPE_LONG:   return [self initWithLong:strtol(_v, NULL, 10)];
-
+  switch (_field->type) {
+  case FIELD_TYPE_TINY:
+    return ((_field->flags & UNSIGNED_FLAG)
+            ? [self initWithUnsignedChar:atoi(_v)]
+            : [self initWithChar:atoi(_v)]);
+  case FIELD_TYPE_SHORT:
+    return ((_field->flags & UNSIGNED_FLAG)
+            ? [self initWithUnsignedShort:atoi(_v)]
+            : [self initWithShort:atoi(_v)]);
+  case FIELD_TYPE_LONG:
+    return ((_field->flags & UNSIGNED_FLAG)
+            ? [self initWithUnsignedLong:strtoul(_v, NULL, 10)]
+            : [self initWithLong:strtol(_v, NULL, 10)]);
   case FIELD_TYPE_LONGLONG: 
-    return [self initWithLongLong:strtoll(_v, NULL, 10)];
-    
+    return ((_field->flags & UNSIGNED_FLAG)
+            ? [self initWithUnsignedLong:strtoull(_v, NULL, 10)]
+            : [self initWithLongLong:strtoll(_v, NULL, 10)]);
+
   case FIELD_TYPE_FLOAT:  return [self initWithFloat:atof(_v)];
   case FIELD_TYPE_DOUBLE: return [self initWithDouble:atof(_v)];
     
   default:
     NSLog(@"ERROR(%s): unsupported MySQL type: %i (len=%d)", 
-          __PRETTY_FUNCTION__, _type, _len);
+          __PRETTY_FUNCTION__, _field->type, _len);
     [self release];
     return nil;
   }

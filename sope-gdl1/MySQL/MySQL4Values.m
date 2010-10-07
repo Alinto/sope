@@ -73,7 +73,7 @@
 
 @implementation NSObject(MySQL4Values)
 
-- (id)initWithMySQL4Type:(int)_type value:(const void *)_v length:(int)_len {
+- (id)initWithMySQL4Field:(MYSQL_FIELD *)_field value:(const void *)_v length:(int)_len {
   /* Note: called for NSTemporaryString! */
 
   if (![self respondsToSelector:@selector(initWithUTF8String:)]) {
@@ -84,15 +84,15 @@
     NSLog(@"WARNING(%s): %@ falling back to NSString for MySQL4 value"
           @" (type %i, 0x%p, len=%d)",
           __PRETTY_FUNCTION__, NSStringFromClass([self class]),
-          _type, _v, _len);
+          _field->type, _v, _len);
     
     [self release];
-    return [[NSString alloc] initWithMySQL4Type:_type value:_v length:_len];
+    return [[NSString alloc] initWithMySQL4Field:_field value:_v length:_len];
   }
 
   /* we assume NSTemporaryString here */
   
-  switch (_type) {
+  switch (_field->type) {
   case FIELD_TYPE_BLOB:
   case FIELD_TYPE_TINY_BLOB:
   case FIELD_TYPE_MEDIUM_BLOB:

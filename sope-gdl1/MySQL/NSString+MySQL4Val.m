@@ -33,14 +33,14 @@
 
 static Class EOExprClass = Nil;
 
-- (id)initWithMySQL4Type:(int)_type value:(const void *)_v length:(int)_len {
+- (id)initWithMySQL4Field:(MYSQL_FIELD *)_field value:(const void *)_v length:(int)_len {
   // Note: never used on lF (NSTemporaryString!)
   if (_v == NULL) {
     [self release];
     return nil;
   }
 
-  switch (_type) {
+  switch (_field->type) {
   case FIELD_TYPE_BLOB:
   case FIELD_TYPE_TINY_BLOB:
   case FIELD_TYPE_MEDIUM_BLOB:

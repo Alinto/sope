@@ -30,7 +30,7 @@
 
 @implementation NSData(MySQL4Values)
 
-- (id)initWithMySQL4Type:(int)_type value:(const void *)_v length:(int)_len {
+- (id)initWithMySQL4Field:(MYSQL_FIELD *)_field value:(const void *)_v length:(int)_len {
   // Note: never used on lF (NSTemporaryString!)
   if (_v == NULL) {
     [self release];
