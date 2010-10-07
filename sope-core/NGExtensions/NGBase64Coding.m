@@ -23,6 +23,7 @@
 #include "common.h"
 #import <Foundation/NSString.h>
 #import <Foundation/NSException.h>
+#import <NGExtensions/NSObject+Logs.h>
 
 static inline BOOL isbase64(char a) {
   if (('A' <= a) && (a <= 'Z'))
@@ -46,116 +47,124 @@ static inline int decode_base64(const char *_src, size_t _srcLen, char *_dest,
 
 static Class StringClass = Nil;
 static int NSStringMaxLineWidth = 1024;
-  
+
 - (NSString *)stringByEncodingBase64 {
   unsigned len;
   size_t destSize;
   size_t destLength = -1;
-  char   *dest, *src;
-  
-  if ((len = [self lengthOfBytesUsingEncoding: NSISOLatin1StringEncoding]) == 0)
-    return @"";
-  
-  destSize = (len + 2) / 3 * 4; // 3:4 conversion ratio
-  destSize += destSize / NSStringMaxLineWidth + 2; // space for '\n' and '\0'
-  destSize += 64;
-  dest = malloc(destSize + 4);
-  if (dest == NULL) return nil;
+  const char *src;
+  char *dest;
+  NSString *result;
 
-  NSAssert(destSize > 0, @"invalid buffer size ..");
-  NSAssert(dest,         @"invalid buffer ..");
-
-  src = malloc(len + 4);
-  [self getCString:src];
-  src[len] = '\0';
-  
-  if (encode_base64(src, len,
-                    dest, destSize, &destLength, NSStringMaxLineWidth) == 0) {
-    if (src) free(src);
-    return [[[NSString alloc]
-                       initWithCStringNoCopy:dest
-                       length:destLength
-                       freeWhenDone:YES] autorelease];
+  src = [self UTF8String];
+  len = strlen (src);
+  if (len > 0) {
+    destSize = ((len + 2) * 4) / 3; // 3:4 conversion ratio
+    destSize += destSize / NSStringMaxLineWidth + 2; // space for '\n' and '\0'
+    destSize += 64;
+    dest = malloc (destSize + 4);
+    NSAssert(dest, @"invalid buffer ..");
+    if (encode_base64 (src, len,
+                       dest, destSize,
+                       &destLength, NSStringMaxLineWidth)
+        == 0) {
+      // base64 must *always* be transported as ascii
+      result = [[NSString alloc]
+                     initWithBytesNoCopy:dest
+                                  length:destLength
+                                encoding:NSASCIIStringEncoding
+                            freeWhenDone:YES];
+      [result autorelease];
+    }
+    else {
+      free(dest);
+      result = nil;
+    }
   }
+  else
+    result = @"";
 
-  if (src) free(src);
-  if (dest) free((void *)dest); dest = NULL;
-  return nil;
+  return result;
 }
 
 - (NSString *)stringByDecodingBase64 {
   unsigned len;
   size_t destSize;
   size_t destLength = -1;
-  char   *dest, *src;
+  const char *src;
+  char *dest;
+  NSString *result;
 
   if (StringClass == Nil) StringClass = [NSString class];
   
-  if ((len = [self lengthOfBytesUsingEncoding: NSISOLatin1StringEncoding]) == 0)
-    return @"";
-  
-  destSize = (len / 4 + 1) * 3 + 1;
-  dest = malloc(destSize + 1);
+  src = [self UTF8String];
+  len = strlen (src);
+  if (len > 0) {
+    destSize = ((len * 3 ) / 4) + 4;
+    dest = malloc (destSize + 1);
+    NSAssert(dest, @"invalid buffer ..");
 
-  NSAssert(destSize > 0, @"invalid buffer size ..");
-  NSAssert(dest,         @"invalid buffer ..");
-
-  src = malloc(len + 4);
-  [self getCString:src];
-  src[len] = '\0';
-  
-  if (decode_base64(src, len, dest, destSize, &destLength) == 0) {
-    if (src) free(src);
-    
-    if (*dest == '\0' && destLength > 0) {
-      NSLog(@"ERROR(%s): could not decode %@ as string (contains \\0 bytes)!", 
-            __PRETTY_FUNCTION__, self);
-      abort();
-      if (dest) free(dest);
-      return nil;
+    if (decode_base64(src, len, dest, destSize, &destLength) == 0) {
+      if (*dest == '\0' && destLength > 0) {
+        [self errorWithFormat: @"(%s): could not decode '%@' as string (contains \\0 bytes)!", 
+              __PRETTY_FUNCTION__, self];
+        abort(); // not executed past this point
+        result = nil;
+      }
+      else {
+        result = [[StringClass alloc]
+                   initWithBytesNoCopy:dest
+                                length:destLength
+                              encoding:NSUTF8StringEncoding
+                          freeWhenDone:YES];
+        // we fallback on latin 1
+        if (!result)
+          result = [[StringClass alloc]
+                     initWithBytesNoCopy:dest
+                                  length:destLength
+                                encoding:NSISOLatin1StringEncoding
+                            freeWhenDone:YES];
+        [result autorelease];
+      }
     }
-    
-    return [[[StringClass alloc]
-              initWithCStringNoCopy:dest
-              length:destLength
-              freeWhenDone:YES] autorelease];
+    else {
+      free(dest);
+      result = nil;
+    }
   }
-  else {
-    if (src) free(src);
-    if (dest) free(dest);
-    return nil;
-  }
+  else
+    result = @"";
+
+  return result;
 }
 
 - (NSData *)dataByDecodingBase64 {
   unsigned len;
   size_t destSize;
   size_t destLength = -1;
-  char   *dest, *src;
+  const char *src;
+  char *dest;
+  NSData *result;
 
   if (StringClass == Nil) StringClass = [NSString class];
-  
-  if ((len = [self length]) == 0)
-    return [NSData data];
 
-  destSize = (len / 4 + 1) * 3 + 1;
-  dest = malloc(destSize + 1);
+  src = [self UTF8String];
+  len = strlen(src);
+  if (len > 0) {
+    destSize = ((len * 3) / 4) + 4;
+    dest = malloc(destSize + 1);
+    NSAssert(dest, @"invalid buffer ..");
 
-  NSAssert(destSize > 0, @"invalid buffer size ..");
-  NSAssert(dest,         @"invalid buffer ..");
-
-  src = malloc(len + 4);
-  [self getCString:src];
-  src[len] = '\0';
-  
-  if (decode_base64(src, len, dest, destSize, &destLength) == 0) {
-    if (src) free(src);
-    return [NSData dataWithBytesNoCopy:dest length:destLength];
+    if (decode_base64(src, len, dest, destSize, &destLength) == 0)
+      result = [NSData dataWithBytesNoCopy:dest length:destLength];
+    else
+      result = nil;
+    free (dest);
   }
-  
-  if (src)  free(src);
-  if (dest) free(dest);
-  return nil;
+  else
+    result = [NSData data];
+
+  return result;
 }
 
 @end /* NSString(Base64Coding) */
@@ -218,24 +227,39 @@ static int NSDataMaxLineWidth = 72;
 }
 
 - (NSString *)stringByEncodingBase64 {
-  NSData   *data;
-  NSString *s;
-  
-  if ((data = [self dataByEncodingBase64]) == nil)
-    return nil;
-  s = [[NSString alloc] initWithData:data 
-                        encoding:[NSString defaultCStringEncoding]];
-  return [s autorelease];
+  NSData *data;
+  NSString *result;
+
+  data = [self dataByEncodingBase64];
+  if (data) {
+    // base64 must *always* be transported as ascii
+    result = [[NSString alloc] initWithData:data 
+                                   encoding:NSASCIIStringEncoding];
+    [result autorelease];
+  }
+  else
+    result = nil;
+
+  return result;
 }
+
 - (NSString *)stringByDecodingBase64 {
-  NSData   *data;
-  NSString *s;
-  
-  if ((data = [self dataByDecodingBase64]) == nil)
-    return nil;
-  s = [[NSString alloc] initWithData:data
-                        encoding:[NSString defaultCStringEncoding]];
-  return [s autorelease];
+  NSData *data;
+  NSString *result;
+ 
+  data = [self dataByDecodingBase64];
+  if (data) {
+    result = [[NSString alloc] initWithData:data 
+                                   encoding:NSUTF8StringEncoding];
+    if (!result)
+      result = [[NSString alloc] initWithData:data 
+                                     encoding:NSISOLatin1StringEncoding];
+    [result autorelease];
+  }
+  else
+    result = nil;
+ 
+  return result;
 }
 
 @end /* NSData(Base64Coding) */

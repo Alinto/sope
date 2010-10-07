@@ -1,3 +1,17 @@
+2010-10-07  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGBase64Coding.m (-[NSString stringByEncodingBase64]): we treat
+	the input string as utf8, which is a superset of ascii anyway,
+	instead of using the default cstring encoding. Removed some
+	useless calls to NSAssert. The result string is encoded in
+	NSASCIIStringEncoding. In short, the output is now always a
+	base64-encoded utf-8 string.
+	(-[NSData stringByEncodingBase64]): same as the above.
+	(-[NSString stringByDecodingBase64]): reverse of the above but assume
+	the input string is in utf-8 and then in iso-latin-1, instead of
+	the default cstring encoding.
+	(-[NSData stringByDecodingBase64]): same as the above.
+
 2010-08-11  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGBase64Coding.m (-[NSString dataByDecodingBase64]): make use of
