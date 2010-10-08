@@ -1351,7 +1351,7 @@ static NSMutableDictionary *namespaces;
 
   // _sortSpec: [REVERSE] {DATE,FROM,SUBJECT}
   d = [self searchWithQualifier: _qual];
-    
+ 
   if ((d = [d objectForKey: @"RawResponse"])) {
     NSMutableDictionary *dict;
     NSArray *a, *s_a;
@@ -1360,52 +1360,61 @@ static NSMutableDictionary *namespaces;
 
     a = [d objectForKey: @"search"];
     if ([a isNotEmpty]) {
-      d = [self fetchUids: a
-                    parts: [NSArray arrayWithObjects: @"ENVELOPE",
-                                    @"RFC822.SIZE", nil]];
-      a = [d objectForKey: @"fetch"];
 
-      dict = [NSMutableDictionary dictionary];
-      b = YES;
-
-      for (i = 0; i < [a count]; i++) {
-        NGImap4Envelope *env;
-        id o, uid, s;
-
-        o = [a objectAtIndex: i];
-        env = [o objectForKey: @"envelope"];
-        uid = [o objectForKey: @"uid"];
-
-        if ([_sortSpec rangeOfString: @"SUBJECT"].length) {
-          s = [env subject];
-          if ([s isKindOfClass: [NSData class]])
-            s = [[[NSString alloc] initWithData: s  encoding: NSUTF8StringEncoding] autorelease];
-	      
-          [dict setObject: (s != nil ? s : (id)@"")  forKey: uid];
-        }
-        else if ([_sortSpec rangeOfString: @"FROM"].length) {
-          s =  [[[env from] lastObject] email];
-          [dict setObject: (s != nil ? s : (id)@"")  forKey: uid];
-        }
-        else if ([_sortSpec rangeOfString: @"SIZE"].length) {
-          s = [o objectForKey: @"size"];
-          [dict setObject: (s != nil ? (NSNumber *)s : [NSNumber numberWithInt: 0])
-                   forKey: uid];
-          b = NO;
-        }
-        else {
-          envDate = [env date];
-          if (!envDate)
-            envDate = [NSCalendarDate date];
-          [dict setObject: envDate forKey: uid];
-          b = NO;
-        }
+      // If we are sorting by DATE or REVERSE DATE, we do NOT fetch all the body envelope
+      // and we assume the server returns us the fetched UIDs in the right order.
+      if ([_sortSpec caseInsensitiveCompare: @"DATE"] == NSOrderedSame || 
+	  [_sortSpec caseInsensitiveCompare: @"REVERSE DATE"]  == NSOrderedSame) {
+	s_a = a; 
       }
-      
-      if (b)
-      	s_a = [dict keysSortedByValueUsingSelector: @selector(caseInsensitiveCompare:)];
-      else
-      	s_a = [dict keysSortedByValueUsingSelector: @selector(compare:)];
+      else {
+	d = [self fetchUids: a
+		  parts: [NSArray arrayWithObjects: @"ENVELOPE",
+				  @"RFC822.SIZE", nil]];
+	a = [d objectForKey: @"fetch"];
+	
+	dict = [NSMutableDictionary dictionary];
+	b = YES;
+	
+	for (i = 0; i < [a count]; i++) {
+	  NGImap4Envelope *env;
+	  id o, uid, s;
+	  
+	  o = [a objectAtIndex: i];
+	  env = [o objectForKey: @"envelope"];
+	  uid = [o objectForKey: @"uid"];
+	  
+	  if ([_sortSpec rangeOfString: @"SUBJECT"].length) {
+	    s = [env subject];
+	    if ([s isKindOfClass: [NSData class]])
+	      s = [[[NSString alloc] initWithData: s  encoding: NSUTF8StringEncoding] autorelease];
+	    
+	    [dict setObject: (s != nil ? s : (id)@"")  forKey: uid];
+	  }
+	  else if ([_sortSpec rangeOfString: @"FROM"].length) {
+	    s =  [[[env from] lastObject] email];
+	    [dict setObject: (s != nil ? s : (id)@"")  forKey: uid];
+	  }
+	  else if ([_sortSpec rangeOfString: @"SIZE"].length) {
+	    s = [o objectForKey: @"size"];
+	    [dict setObject: (s != nil ? (NSNumber *)s : [NSNumber numberWithInt: 0])
+		  forKey: uid];
+	    b = NO;
+	  }
+	  else {
+	    envDate = [env date];
+	    if (!envDate)
+	      envDate = [NSCalendarDate date];
+	    [dict setObject: envDate forKey: uid];
+          b = NO;
+	  }
+	}
+	
+	if (b)
+	  s_a = [dict keysSortedByValueUsingSelector: @selector(caseInsensitiveCompare:)];
+	else
+	  s_a = [dict keysSortedByValueUsingSelector: @selector(compare:)];
+      }
 
       if ([_sortSpec rangeOfString: @"REVERSE"].length)	{
         s_a = [[s_a reverseObjectEnumerator] allObjects];

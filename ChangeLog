@@ -1,3 +1,15 @@
+2010-10-08  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m
+	We "assume" the server returns us UIDs sorted
+	by date when we only ask for this. This is the
+	case for GMail and Courier and makes initial mail
+	loading much faster
+	* sope-mime/NGImap4/NGImap4ResponseParser.m 
+	Fixed a _consume(self, 1); in _parseEnvelopeAddressStructures
+	when _parseEnvelopeAddressStructure returns nil in order
+	to consume the space.
+
 2010-09-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4ResponseParser.m

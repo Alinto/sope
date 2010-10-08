@@ -62,7 +62,6 @@
 
 static __inline__ int _la(NGImap4ResponseParser *self, unsigned _laCnt) {
   register unsigned char c = __la(self, _laCnt);
-  
   return (c == '\r')
     ? _la(self, _laCnt + 1)
     : c;
@@ -1405,6 +1404,7 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
 	if (qpData != data) return qpData;
       }
     }
+    NSLog(@"returning: %@", _string);
     return _string;
   }
   
@@ -1483,8 +1483,10 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
   while (_la(self, 0) != ')') {
     NGImap4EnvelopeAddress *address;
     
-    if ((address = [self _parseEnvelopeAddressStructure]) == nil)
+    if ((address = [self _parseEnvelopeAddressStructure]) == nil) {
+      _consume(self, 1);
       continue; // TODO: should we stop parsing?
+    }
     if (![address isNotNull])
       continue;
     
