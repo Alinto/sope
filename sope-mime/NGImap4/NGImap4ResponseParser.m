@@ -1404,7 +1404,6 @@ static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
 	if (qpData != data) return qpData;
       }
     }
-    NSLog(@"returning: %@", _string);
     return _string;
   }
   
