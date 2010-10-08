@@ -105,6 +105,7 @@ static int NSStringMaxLineWidth = 1024;
     NSAssert(dest, @"invalid buffer ..");
 
     if (decode_base64(src, len, dest, destSize, &destLength) == 0) {
+      NSAssert (destLength < destSize, @"buffer overflow");
       if (*dest == '\0' && destLength > 0) {
         [self errorWithFormat: @"(%s): could not decode '%@' as string (contains \\0 bytes)!", 
               __PRETTY_FUNCTION__, self];
@@ -155,11 +156,14 @@ static int NSStringMaxLineWidth = 1024;
     dest = malloc(destSize + 1);
     NSAssert(dest, @"invalid buffer ..");
 
-    if (decode_base64(src, len, dest, destSize, &destLength) == 0)
+    if (decode_base64(src, len, dest, destSize, &destLength) == 0) {
+      NSAssert (destLength < destSize, @"buffer overflow");
       result = [NSData dataWithBytesNoCopy:dest length:destLength];
-    else
+    }
+    else {
+      free(dest);
       result = nil;
-    free (dest);
+    }
   }
   else
     result = [NSData data];
@@ -183,17 +187,17 @@ static int NSDataMaxLineWidth = 72;
   if ((len = [self length]) == 0)
     return [NSData data];
   
-  destSize   = (len + 2) / 3 * 4; // 3:4 conversion ratio
+  destSize   = ((len + 2) * 4) / 3; // 3:4 conversion ratio
   destSize += destSize / _lineLength + 2; // space for newlines and '\0'
   destSize += 64;
 
   dest = malloc(destSize + 4);
 
-  NSAssert(destSize > 0, @"invalid buffer size ..");
   NSAssert(dest,         @"invalid buffer ..");
   
   if (encode_base64([self bytes], len,
                     dest, destSize, &destLength, _lineLength) == 0) {
+    NSAssert (destLength < destSize, @"buffer overflow");
     return [NSData dataWithBytesNoCopy:dest length:destLength];
   }
 
@@ -216,11 +220,12 @@ static int NSDataMaxLineWidth = 72;
   destSize = (len / 4 + 1) * 3 + 1;
   dest = malloc(destSize + 4);
 
-  NSAssert(destSize > 0, @"invalid buffer size ..");
-  NSAssert(dest,         @"invalid buffer ..");
+  NSAssert(dest, @"invalid buffer ..");
   
-  if (decode_base64([self bytes], len, dest, destSize, &destLength) == 0)
+  if (decode_base64([self bytes], len, dest, destSize, &destLength) == 0) {
+    NSAssert (destLength < destSize, @"buffer overflow");
     return [NSData dataWithBytesNoCopy:dest length:destLength];
+  }
 
   if (dest) free(dest);
   return nil;
@@ -276,7 +281,7 @@ int NGEncodeBase64(const void *_source, unsigned _len,
   
   { // check whether buffer is big enough
     size_t outSize;
-    outSize =  (_len + 2) / 3 * 4;            // 3:4 conversion ratio
+    outSize =  ((_len + 2) * 4) / 3;            // 3:4 conversion ratio
     outSize += (outSize / _maxLineWidth) + 2; // Space for newlines and NUL
 
     if (_bufferCapacity < outSize)
