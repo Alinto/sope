@@ -1,5 +1,8 @@
 2010-10-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* WOHttpAdaptor/WOHttpAdaptor.m (-acceptControlMessage:): added
+	some debugging messages when a control message fails to pass.
+
 	* WOWatchDogApplicationMain.m (-_setupProcessName): removed method
 	as differentiating between watchdog and children via
 	-[NSProcessInfo processName] is not reliable.
