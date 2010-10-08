@@ -806,20 +806,6 @@ typedef enum {
   }
 }
 
-- (void) _setupProcessName
-{
-  NSProcessInfo *processInfo;
-  NSString *name;
-
-  /* this does not seem to work */
-  processInfo = [NSProcessInfo processInfo];
-  name = [processInfo processName];
-  if (!name)
-    name = @"";
-  [processInfo setProcessName: [NSString stringWithFormat: @"%@: %@ watchdog",
-                                         name, appName]];
-}
-
 - (int) run: (NSString *) newAppName
        argc: (int) newArgC argv: (const char **) newArgV
 {
@@ -832,7 +818,6 @@ typedef enum {
   willTerminate = NO;
 
   ASSIGN (appName, newAppName);
-  [self _setupProcessName];
 
   argc = newArgC;
   argv = newArgV;
