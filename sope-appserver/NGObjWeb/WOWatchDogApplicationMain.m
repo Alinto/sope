@@ -299,12 +299,16 @@ typedef enum {
 {
   WOChildMessage message;
   BOOL rc;
+  NSException *e;
 
   if ([controlSocket readBytes: &message
                          count: sizeof (WOChildMessage)] == NGStreamError) {
     rc = NO;
     [self errorWithFormat: @"FAILURE receiving status for child %d", pid];
     [self errorWithFormat: @"  socket: %@", controlSocket];
+    e = [controlSocket lastException];
+    if (e)
+      [self errorWithFormat: @"  exception: %@", e];
     [self _kill];
   }
   else {

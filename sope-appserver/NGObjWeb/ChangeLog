@@ -3,6 +3,8 @@
 	* WOWatchDogApplicationMain.m (-_setupProcessName): removed method
 	as differentiating between watchdog and children via
 	-[NSProcessInfo processName] is not reliable.
+	(-readMessage): added display of the [controlSocket lastException]
+	when a status read error occurred.
 
 2010-02-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
