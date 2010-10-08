@@ -569,16 +569,22 @@ static BOOL     debugOn                      = NO;
     // [self logWithFormat:@"child accepting message from socket: %@", controlSocket];
     while (![controlSocket safeReadBytes: &message
                                    count: sizeof (WOChildMessage)])
-      NSLog (@"renotifying watchdog");
+      [self errorWithFormat:
+              @"failure reading watchdog message (retrying...): %@",
+            [controlSocket lastException]];
     if (message == WOChildMessageAccept) {
       pool = [NSAutoreleasePool new];
       connection = [self _accept];
-      if ([controlSocket safeWriteBytes: &message
+      if (![controlSocket safeWriteBytes: &message
                                   count: sizeof (WOChildMessage)])
-        ;
+        [self errorWithFormat: @"failure notifying watchdog we are busy: %@",
+              [controlSocket lastException]];
       [self _handleConnection: connection];
       message = WOChildMessageReady;
-      [controlSocket safeWriteBytes: &message count: sizeof (WOChildMessage)];
+      if (![controlSocket safeWriteBytes: &message
+                                  count: sizeof (WOChildMessage)])
+        [self errorWithFormat: @"failure notifying watchdog we are ready: %@",
+              [controlSocket lastException]];
       [pool release];
     }
     else if (message == WOChildMessageShutdown) {
