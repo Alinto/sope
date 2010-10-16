@@ -25,7 +25,7 @@
 #include "SoObject+SoDAV.h"
 #include "EOFetchSpecification+SoDAV.h"
 #include "NSException+HTTP.h"
-#include <NGObjWeb/SoObject.h>
+#include <NGObjWeb/SoObjects/SoObject.h>
 #include <NGObjWeb/WOContext.h>
 #include <NGObjWeb/WOResponse.h>
 #include <NGObjWeb/WORequest.h>
