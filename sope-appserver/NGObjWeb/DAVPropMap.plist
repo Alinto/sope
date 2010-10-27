@@ -184,5 +184,5 @@
   "{http://groupdav.org/}component-set"     = gdavComponentSet;
 
   /* Inverse */
-  "{urn:ietf:params:xml:ns:inverse-dav}contacts-categories" = davContactsCategories;
+  "{urn:inverse:params:xml:ns:inverse-dav}contacts-categories" = davContactsCategories;
 }
