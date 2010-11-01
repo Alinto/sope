@@ -1,5 +1,7 @@
 # GNUstep makefile
 
+-include ../../../config.make
+
 include $(GNUSTEP_MAKEFILES)/common.make
 
 LIBRARY_NAME = SBJson
