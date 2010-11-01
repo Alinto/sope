@@ -1,3 +1,7 @@
+2010-11-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-json/SBJSon/: Inclusion of Stig Brautaset's SBJson library.
+
 2010-10-08  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4Client.m
