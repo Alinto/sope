@@ -21,7 +21,7 @@ Section: libdevel
 Architecture: all
 Provides: libsope-dev
 Conflicts: libsope-dev
-Depends: libsope-appserver_SOPEVER_-dev, libsope-core_SOPEVER_-dev, libsope-xml_SOPEVER_-dev, libsope-mime_SOPEVER_-dev, libsope-ldap_SOPEVER_-dev, libsope-gdl1-_SOPEVER_-dev, libsope-sbjson-dev, ${misc:Depends}
+Depends: libsope-appserver_SOPEVER_-dev, libsope-core_SOPEVER_-dev, libsope-xml_SOPEVER_-dev, libsope-mime_SOPEVER_-dev, libsope-ldap_SOPEVER_-dev, libsope-gdl1-_SOPEVER_-dev, libsbjson-dev, ${misc:Depends}
 Description: Development files for all SOPE libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
