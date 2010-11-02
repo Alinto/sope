@@ -77,7 +77,6 @@ static NGMimeHeaderFieldGeneratorSet *rfc822Set = nil;
     [rfc822Set setGenerator:gen forField:@"bcc"];
     [rfc822Set setGenerator:gen forField:Fields->from];
     [rfc822Set setGenerator:gen forField:@"reply-to"];
-    [rfc822Set setGenerator:gen forField:@"in-reply-to"];
     [rfc822Set setGenerator:gen forField:@"Disposition-Notification-To"];
   }
   

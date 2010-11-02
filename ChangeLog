@@ -1,3 +1,10 @@
+2010-11-02  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGMime/NGMimeHeaderFieldGeneratorSet.m
+	We no longer use NGMimeAddressHeaderFieldGenerator
+	for in-reply-to fields as they aren't "email addresses"
+	but rather "message ids".
+
 2010-11-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-json/SBJSon/: Inclusion of Stig Brautaset's SBJson library.
