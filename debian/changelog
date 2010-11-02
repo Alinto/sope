@@ -1,3 +1,9 @@
+sope (4.9.r1664) unstable; urgency=low
+
+  * added package for SBJson
+
+ -- Inverse Support <support@inverse.ca>  Tue, 02 Nov 2010 14:49:27 -0500
+
 sope (4.9.r1664-1) unstable; urgency=low
 
   * updated SOPE patchset for SOGo 1.2.0.

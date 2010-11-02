@@ -21,7 +21,7 @@ Section: libdevel
 Architecture: all
 Provides: libsope-dev
 Conflicts: libsope-dev
-Depends: libsope-appserver_SOPEVER_-dev, libsope-core_SOPEVER_-dev, libsope-xml_SOPEVER_-dev, libsope-mime_SOPEVER_-dev, libsope-ldap_SOPEVER_-dev, libsope-gdl1-_SOPEVER_-dev, ${misc:Depends}
+Depends: libsope-appserver_SOPEVER_-dev, libsope-core_SOPEVER_-dev, libsope-xml_SOPEVER_-dev, libsope-mime_SOPEVER_-dev, libsope-ldap_SOPEVER_-dev, libsope-gdl1-_SOPEVER_-dev, libsope-sbjson-dev, ${misc:Depends}
 Description: Development files for all SOPE libraries
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
@@ -242,3 +242,23 @@ Description: XML Parser for SOPE's SAX engine
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
  .
  This parser enables SOPE's SAX engine to parse XML files.
+
+Package: libsbjson2.3
+Section: web
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: libsbjson
+Description: High performance Objective-C JSON library
+ The BSJson library is a very fast JSON library in Objective-C.
+ .
+ url: http://code.google.com/p/json-framework/
+
+Package: libsbjson2.3-dev
+Section: libdevel
+Architecture: any
+Depends: libsbjson2.3 (= ${binary:Version}), ${misc:Depends}
+Provides: libsbjson-dev
+Description: High performance Objective-C JSON library
+ The BSJson library is a very fast JSON library in Objective-C.
+ .
+ url: http://code.google.com/p/json-framework/
