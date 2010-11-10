@@ -76,6 +76,7 @@ typedef enum {
   BOOL debug;
   BOOL useSSL;
   BOOL useTLS;
+  BOOL useUTF8;
 
   NGImap4Context *context; /* not retained, used to store exceptions */
   EOGlobalID *serverGID;

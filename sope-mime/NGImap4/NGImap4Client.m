@@ -223,6 +223,7 @@ static NSMutableDictionary *namespaces;
     self->normer = [[NGImap4ResponseNormalizer alloc] initWithClient:self];
     self->loggedIn	   = NO;
     self->context	   = nil;
+    self->useUTF8          = YES;
   }
   return self;
 }
@@ -333,6 +334,10 @@ static NSMutableDictionary *namespaces;
     [e raise];
     res = [self->normer normalizeOpenConnectionResponse:hm];
 
+    // If using Courier, we disable UTF-8
+    if ([[res objectForKey:@"serverKind"] isEqual: @"courier"])
+      self->useUTF8 = NO;
+    
     // If we're using TLS, we start it here
     if ([self useTLS])
       {
@@ -1187,17 +1192,28 @@ static NSMutableDictionary *namespaces;
      Eg: UID SORT ( DATE REVERSE SUBJECT ) UTF-8 TODO
   */
   NSMutableString *sortStr;
+  NSUserDefaults *ud;
 
   if (![_encoding   isNotNull]) _encoding   = @"UTF-8";
   if (![_qualString isNotNull]) _qualString = @" ALL";
   
+  // Prior sending the SORT command, we make sure it really supports
+  // SORT UTF-8. We could have received that no matter what is supported
+  if (!self->useUTF8)
+    _encoding = @"US-ASCII";
+
+  // If we forced an encoding, we ignore everything and uses that
+  ud = [NSUserDefaults standardUserDefaults];
+  if ([ud stringForKey:@"ImapSortEncoding"])
+    _encoding = [ud stringForKey:@"ImapSortEncoding"];
+
   sortStr = [NSMutableString stringWithCapacity:128];
   
   [sortStr appendString:@"UID SORT ("];
   if (_sort != nil) [sortStr appendString:_sort];
   [sortStr appendString:@") "];
   
-  [sortStr appendString:_encoding];   /* eg 'UTF-8' */
+  [sortStr appendString:_encoding];   /* eg 'UTF-8' or '' */
   
   /* Note: this is _space sensitive_! to many spaces lead to error! */
   [sortStr appendString:_qualString]; /* eg ' ALL' or ' TEXT "abc"' */
@@ -1254,17 +1270,16 @@ static NSMutableDictionary *namespaces;
     tmp = @"DATE";
   }
   
-
-  return [self primarySort:tmp 
-			   qualifierString:[self _searchExprForQual:_qual]
-			   encoding:_encoding];
+  return [self primarySort: tmp 
+	       qualifierString: [self _searchExprForQual:_qual]
+	       encoding: _encoding];
 }
 - (NSDictionary *)sort:(NSArray *)_sortOrderings
   qualifier:(EOQualifier *)_qual
 {
-  // DEPRECATED, should not use context!
-  return [self sort:_sortOrderings qualifier:_qual
-	       encoding:[[self context] sortEncoding]];
+  return [self sort:_sortOrderings
+	       qualifier:_qual
+	       encoding: (self->useUTF8 ? @"UTF-8" : nil)];
 }
 
 - (NSDictionary *)searchWithQualifier:(EOQualifier *)_qualifier {

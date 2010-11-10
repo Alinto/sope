@@ -1,3 +1,12 @@
+
+2010-11-10  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m 
+	If we use Courier, we now avoid using UTF-8
+	SORT as it's a compile-time option not that common
+	This can be nonetheless forced using the
+	ImapSortEncoding.
+
 2010-11-02  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-mime/NGMime/NGMimeHeaderFieldGeneratorSet.m
