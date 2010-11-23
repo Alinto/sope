@@ -1,3 +1,12 @@
+2010-11-23  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* scanhttp.c (NGScanHeaders): make use of apr_table_add, rather
+	than .._set to make sure "set-cookie" headers are put each in
+	their individual slot, as many browsers break the HTTP spec and
+	ignore such headers in merged form.
+
+	* handler.c (_copyHeadersToRequest): same as above.
+
 2008-03-29  Wolfgang Sourdeau  <WSourdeau@Inverse.CA>
 
 	* config.c, NGBufferedDescriptor.c: include common.h, minor code cleanups

@@ -109,8 +109,8 @@ apr_table_t *NGScanHeaders(apr_pool_t *_pool, NGBufferedDescriptor *_in) {
 
   headers = apr_table_make(_pool, 64);
   if (headers) {
-    unsigned char name[256];
-    unsigned char value[8000];
+    char name[256];
+    char value[8000];
     int c;
 
     while (1) {
@@ -171,7 +171,7 @@ apr_table_t *NGScanHeaders(apr_pool_t *_pool, NGBufferedDescriptor *_in) {
         break;
 
       // store value
-      apr_table_set(headers, (char *)name, (char *)value);
+      apr_table_add(headers, name, value);
     }
   }
   return headers;
