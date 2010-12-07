@@ -98,7 +98,9 @@ OFILES = \
 	config.o		\
 	ngobjweb_module.o	\
 
-product = mod_ngobjweb$(SHARED_LIBEXT)
+module = ngobjweb
+
+product = mod_$(module)$(SHARED_LIBEXT)
 
 all :: $(product)
 
@@ -112,6 +114,7 @@ apache-dir :
 	$(MKDIRS) $(GNUSTEP_INSTALLATION_DIR)
 
 install ::
+	$(APXS) -i -n $(module) $(product)
 
 install-usr-libexec :: all
 	$(INSTALL_PROGRAM) $(product) /usr/libexec/httpd/

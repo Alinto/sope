@@ -146,9 +146,9 @@ _copyHeadersToRequest(request_rec *r, apr_table_t *headers, int *contentLength)
   entries = (apr_table_entry_t *)array->elts;
 
   for (i = 0; i < array->nelts; i++) {
-    apr_table_entry_t *entry = &(entries[i]);
+    apr_table_entry_t *entry = entries + i;
 
-    apr_table_set(r->headers_out, entry->key, entry->val);
+    apr_table_add(r->headers_out, entry->key, entry->val);
   }
   // _logTable("out", r->headers_out);
 }
