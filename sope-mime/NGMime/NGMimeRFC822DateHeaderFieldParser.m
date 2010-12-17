@@ -206,6 +206,13 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
   BOOL  flag;
 
   length = [_data lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
+
+  if (length == 0) {
+    NSLog(@"WARNING(%s): empty value for header field %@ ..",
+          __PRETTY_FUNCTION__, _field);
+    return [NSCalendarDate date];
+  }
+
   allocBytes = strdup ([_data cStringUsingEncoding: NSUTF8StringEncoding]);
   bytes = allocBytes;
 
@@ -213,12 +220,6 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
   while (length > 0 && (!isdigit(*bytes))) {
     bytes++;
     length--;
-  }
-  
-  if (length == 0) {
-    NSLog(@"WARNING(%s): empty value for header field %@ ..",
-          __PRETTY_FUNCTION__, _field);
-    return [NSCalendarDate date];
   }
   
   // TODO: should be a category on NSCalendarDate

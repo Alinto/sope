@@ -1,3 +1,9 @@
+2010-12-17  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
+	Fixed a braindead error where the data lenght was
+	verified after the strdup() call when it was equal
+	to 0 - generating a segfault in rare occasions.
 
 2010-11-10  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
