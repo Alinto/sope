@@ -1,3 +1,19 @@
+2010-12-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+	(-[EOKeyValueQualifier
+	imap4OperatorForDateKeyword:andComparisonSelector:]): consider
+	the EOQualifierOperatorGreaterThanOrEqualTo and
+	EOQualifierOperatorLessThanOrEqualTo operators.
+	(-[EOKeyValueQualifier appendToImap4SearchString:insertNot:]): Use
+	a minimalist english locale for generating date description to
+	avoid taking the active locale into account. The locale is
+	generated from the new function below.
+	Consider the EOQualifierOperatorCaseInsensitiveLike operator where
+	appropriate.
+	(initDateLocale): new function that generates a minimalist english
+	locale with the "NSShortMonthNameArray" key/value.
+
 2010-12-17  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
@@ -7,7 +23,7 @@
 
 2010-11-10  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
-	* sope-mime/NGImap4/NGImap4Client.m 
+	* sope-mime/NGImap4/NGImap4Client.m
 	If we use Courier, we now avoid using UTF-8
 	SORT as it's a compile-time option not that common
 	This can be nonetheless forced using the
@@ -31,7 +47,7 @@
 	by date when we only ask for this. This is the
 	case for GMail and Courier and makes initial mail
 	loading much faster
-	* sope-mime/NGImap4/NGImap4ResponseParser.m 
+	* sope-mime/NGImap4/NGImap4ResponseParser.m
 	Fixed a _consume(self, 1); in _parseEnvelopeAddressStructures
 	when _parseEnvelopeAddressStructure returns nil in order
 	to consume the space.

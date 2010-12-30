@@ -37,6 +37,21 @@
 
 @implementation EOQualifier(IMAPAdditions)
 
+static NSDictionary *dateLocale = nil;
+
+static void
+initDateLocale()
+{
+  NSArray *shortMonthNames;
+
+  shortMonthNames = [NSArray arrayWithObjects: @"Jan", @"Feb", @"Mar", @"Apr",
+			     @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct",
+			     @"Nov", @"Dec", nil];
+  dateLocale = [NSDictionary dictionaryWithObject: shortMonthNames
+					   forKey: @"NSShortMonthNameArray"];
+  [dateLocale retain];
+}
+
 - (BOOL)isImap4UnseenQualifier { /* a special key/value qualifier */
   return NO;
 }
@@ -286,9 +301,11 @@ andComparisonSelector:(SEL)lselector {
 
   if (sel_eq(lselector, EOQualifierOperatorEqual))
     dateOperator = @"ON";
-  else if (sel_eq(lselector, EOQualifierOperatorGreaterThan))
+  else if (sel_eq(lselector, EOQualifierOperatorGreaterThan)
+	   || sel_eq(lselector, EOQualifierOperatorGreaterThanOrEqualTo))
     dateOperator = @"SINCE";
-  else if (sel_eq(lselector, EOQualifierOperatorLessThan))
+  else if (sel_eq(lselector, EOQualifierOperatorLessThan)
+	   || sel_eq(lselector, EOQualifierOperatorLessThanOrEqualTo))
     dateOperator = @"BEFORE";
   else
     dateOperator = nil;
@@ -345,7 +362,10 @@ andComparisonSelector:(SEL)lselector {
     [search appendString:s];
     
     // TODO: much faster without descriptionWithCalendarFormat:?!
-    s = [lvalue descriptionWithCalendarFormat:@"\"%d-%b-%Y\""];
+    if (!dateLocale)
+      initDateLocale();
+
+    s = [lvalue descriptionWithCalendarFormat:@"\"%d-%b-%Y\"" locale:dateLocale];
     [search appendString:s];
     return nil;
   }
@@ -361,9 +381,11 @@ andComparisonSelector:(SEL)lselector {
   }
   
   if ([lkey isEqualToString:@"SIZE"]) {
-    if (sel_eq(lselector, EOQualifierOperatorGreaterThan))
+    if (sel_eq(lselector, EOQualifierOperatorGreaterThan)
+	|| sel_eq(lselector, EOQualifierOperatorGreaterThanOrEqualTo))
       [search appendString:@"LARGER "];
-    else if (sel_eq(lselector, EOQualifierOperatorLessThan))
+    else if (sel_eq(lselector, EOQualifierOperatorLessThan)
+	     || sel_eq(lselector, EOQualifierOperatorLessThanOrEqualTo))
       [search appendString:@"SMALLER "];
     else
       return [self invalidImap4SearchQualifier:@"unexpected qualifier 3"];
@@ -385,6 +407,7 @@ andComparisonSelector:(SEL)lselector {
        Would be: "a caseInsensitiveLike: '*ABC*'"
     */
     if (!sel_eq(lselector, EOQualifierOperatorEqual) &&
+	!sel_eq(lselector, EOQualifierOperatorCaseInsensitiveLike) &&
 	!sel_eq(lselector, EOQualifierOperatorContains)) {
       [self logWithFormat:@"IMAP4 generation: got: %@, allowed: %@", 
 	    NSStringFromSelector(lselector),
@@ -402,7 +425,8 @@ andComparisonSelector:(SEL)lselector {
   }
   
   
-  if (!sel_eq(lselector, EOQualifierOperatorEqual))
+  if (!sel_eq(lselector, EOQualifierOperatorEqual) &&
+      !sel_eq(lselector, EOQualifierOperatorCaseInsensitiveLike))
     return [self invalidImap4SearchQualifier:@"unexpected qualifier 5"];
   
   [search appendString:@"HEADER "];
