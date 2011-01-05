@@ -1,3 +1,10 @@
+2011-01-05  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-core/NGExtensions/NGQuotedPrintableCoding.m
+	Applied a patch from Marcel Waldvogel
+	Marcel.Waldvogel@uni-konstanz.de which fixes
+	bug #1009.
+
 2010-12-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGImap4/EOQualifier+IMAPAdditions.m

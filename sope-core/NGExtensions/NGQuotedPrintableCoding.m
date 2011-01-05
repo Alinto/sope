@@ -98,11 +98,12 @@
   char         *des    = NULL;
   unsigned int desLen  = 0;
 
-  desLen = length *3;
+  // length/64*3 should be plenty for soft newlines
+  desLen = (length + length/64) *3;
   des = NGMallocAtomic(sizeof(char) * desLen);
 
   desLen = NGEncodeQuotedPrintable(bytes, length, des, desLen);
-  
+
   return (int)desLen != -1
     ? [NSData dataWithBytesNoCopy:des length:desLen]
     : nil;
@@ -270,25 +271,43 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
                             char *_dest, unsigned _destLen) {
   unsigned cnt      = 0;
   unsigned destCnt  = 0;
+  unsigned lineStart= destCnt;
   char     hexT[16] = {'0','1','2','3','4','5','6','7','8',
                        '9','A','B','C','D','E','F'};
-  
+
   if (_srcLen > _destLen)
     return -1;
-  
+
   for (cnt = 0; (cnt < _srcLen) && (destCnt < _destLen); cnt++) {
+    if (destCnt - lineStart > 70) { // Possibly going to exceed 76 chars this line
+      if (_destLen - destCnt > 2) {
+        _dest[destCnt++] = '=';
+        _dest[destCnt++] = '\r';
+        _dest[destCnt++] = '\n';
+        lineStart = destCnt;
+      }
+      else
+        break;
+    }
     char c = _src[cnt];
     if (c == 95) {  // we encode the _, otherwise we'll always decode it as a space!
-      _dest[destCnt++] = '=';
-      _dest[destCnt++] = '5';
-      _dest[destCnt++] = 'F';
+      if (_destLen - destCnt > 2) {
+        _dest[destCnt++] = '=';
+        _dest[destCnt++] = '5';
+        _dest[destCnt++] = 'F';
+      }
+      else
+        break;
     }
     else if ((c == 9)  ||
-        (c == 10) ||
         (c == 13) ||
         ((c > 31) && (c < 61)) ||
         ((c > 61) && (c < 127))) { // no quoting
       _dest[destCnt++] = c;
+    }
+    else if (c == 10) { // Reset line length counter
+      _dest[destCnt++] = c;
+      lineStart = destCnt;
     }
     else { // need to be quoted
       if (_destLen - destCnt > 2) {
@@ -296,7 +315,7 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
         _dest[destCnt++] = hexT[(c >> 4) & 15];
         _dest[destCnt++] = hexT[c & 15];
       }
-      else 
+      else
         break;
     }
   }
