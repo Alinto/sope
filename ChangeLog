@@ -1,3 +1,9 @@
+2011-02-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+        * sope-mime/NGMail/NGSmtpClient.m
+	Removed the Bcc stripping code as it's now
+	done within SOGo.
+
 2011-01-05  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-core/NGExtensions/NGQuotedPrintableCoding.m

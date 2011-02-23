@@ -521,7 +521,7 @@
 - (BOOL)sendData:(NSData *)_data {
   NGSmtpResponse *reply = nil;
   NSMutableData *cleaned_data;
-  NSRange r1, r2;
+  NSRange r1;
   
   const char *bytes;
   char *mbytes;
@@ -575,9 +575,6 @@
     // sequence "<CRLF>.<CRLF>"; any occurrence have its period duplicated
     // to avoid data transparency.
     //
-    // The following code was copied from Pantomime (and also the one
-    // that strips Bcc: headers from the mail's content)
-    //
     r1 = [cleaned_data rangeOfCString: "\r\n."];
     
     while (r1.location != NSNotFound)
@@ -588,28 +585,6 @@
 			   options: 0 
 			   range: NSMakeRange(NSMaxRange(r1)+1, [cleaned_data length]-NSMaxRange(r1)-1)];
       }
-    
-    //
-    // We now look for the Bcc: header. If it is present, we remove it.
-    // Some servers, like qmail, do not remove it automatically.
-    //
-    r1 = [cleaned_data rangeOfCString: "\r\n\r\n"];
-    r1 = [cleaned_data rangeOfCString: "\r\nBcc: "
-		       options: 0
-		       range: NSMakeRange(0,r1.location-1)];
-    
-    if (r1.location != NSNotFound)
-      {
-	// We search for the first \r\n AFTER the Bcc: header and
-	// replace the whole thing with \r\n.
-	r2 = [cleaned_data rangeOfCString: "\r\n"
-			   options: 0
-			   range: NSMakeRange(NSMaxRange(r1)+1,[cleaned_data length]-NSMaxRange(r1)-1)];
-	[cleaned_data replaceBytesInRange: NSMakeRange(r1.location, NSMaxRange(r2)-r1.location)
-		      withBytes: "\r\n"
-		      length: 2];
-      }
-    
     
     if (self->isDebuggingEnabled)
       [NGTextErr writeFormat:@"C: data(%i bytes) ..\n", [cleaned_data length]];

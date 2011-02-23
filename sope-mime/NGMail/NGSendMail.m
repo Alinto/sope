@@ -465,8 +465,7 @@
     }
   
   [cleaned_data setLength: mlen];
-  
-
+ 
   ok = [self _appendData:cleaned_data to:toMail];
   
   error = nil;
