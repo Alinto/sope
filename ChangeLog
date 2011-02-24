@@ -1,3 +1,8 @@
+2011-02-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMail/NGImap4Connection.m (-selectFolder:): compare
+	folder names in their utf-7 form.
+
 2011-02-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
         * sope-mime/NGMail/NGSmtpClient.m

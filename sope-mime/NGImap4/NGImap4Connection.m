@@ -350,7 +350,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
     : (NSString *)_url;
   
   if (!alwaysSelect) {
-    if ([[[self client] selectedFolderName] isEqualToString:newFolder])
+    if ([[[[self client] selectedFolderName] stringByDecodingImap4FolderName] isEqualToString:newFolder])
       return YES;
   }
   
