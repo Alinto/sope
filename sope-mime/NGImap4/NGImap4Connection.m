@@ -23,6 +23,7 @@
 #include "NGImap4MailboxInfo.h"
 #include "NGImap4Client.h"
 #include "NGImap4Functions.h"
+#include "NSString+Imap4.h"
 #include "imCommon.h"
 
 @implementation NGImap4Connection
@@ -578,7 +579,8 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 - (NSData *)fetchContentOfBodyPart:(NSString *)_partId atURL:(NSURL *)_url {
   NSString *key;
   NSArray  *parts;
-  id result, fetch, body;
+  id result, body;
+  NSUInteger count, max;
   
   if (_partId == nil) return nil;
   
@@ -598,16 +600,21 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
     return nil;
   }
   
-  fetch = [result objectAtIndex:0];
-  if ((body = [(NSDictionary *)fetch objectForKey:@"body"]) == nil) {
+  max = [result count];
+  body = nil;
+  for (count = 0; !body && count < max; count++) {
+    body = [[result objectAtIndex:count] objectForKey:@"body"];
+  }
+  if (body == nil) {
     [self errorWithFormat:@"did not find body in response: %@", result];
     return nil;
   }
   
   if ((result = [(NSDictionary *)body objectForKey:@"data"]) == nil) {
-    [self errorWithFormat:@"did not find data in body: %@", fetch];
+    [self errorWithFormat:@"did not find data in body: %@", body];
     return nil;
   }
+
   return result;
 }
 

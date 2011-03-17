@@ -1,5 +1,9 @@
 2011-03-17  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-mime/NGImap4/NGImap4Connection.m (-fetchContentOfBodyPart):
+	wander through the whole list of responses since the requested
+	body part might be returned after one or more untagged responses.
+
 	* sope-appserver/NGObjWEb/WOWatchDogApplicationMain.m
 	(-[WOWatchDogChild terminate]): no longer release the control
 	socket from here as the child's signal handle will try to notify
