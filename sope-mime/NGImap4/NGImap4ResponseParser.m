@@ -770,16 +770,29 @@ _purifyQuotedString(NSMutableString *quotedString) {
       questionMarks = 1;
     }
 
-    currentChar++;
-
     if (skipSpaces) {
-      while (currentChar < maxC
-	     && (*currentChar == ' '
-		 || *currentChar == '\t'))
-	currentChar++;
-      skipSpaces = NO;
+      /* This part is about skipping the spaces separating two encoded chunks,
+         which occurs when the chunks are on different lines. However we
+         cannot ignore them if the next chunk is not encoded. Basically, we
+         can deduce a case from the other by the fact that it makes no sense
+         per se to have a space separating two encoded chunks. */
       startC = currentChar;
+      while (currentChar < maxC
+             && (*currentChar == ' ' || *currentChar == '\t'))
+	currentChar++;
+      if (currentChar != startC) {
+        if (currentChar < maxC && *currentChar != '=')
+          [newString appendString: [NSString stringWithCharacters: startC
+                                             length: (currentChar - startC)]];
+        startC = currentChar;
+      }
+      else
+        currentChar++;
+
+      skipSpaces = NO;
     }
+    else
+      currentChar++;
   }
 
   if (startC < maxC)
@@ -820,6 +833,7 @@ _purifyQuotedString(NSMutableString *quotedString) {
 
   return quotedString;
 }
+
 - (NSString *)_parseQuotedStringOrNIL {
   unsigned char c0;
   

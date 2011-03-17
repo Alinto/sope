@@ -1,5 +1,9 @@
 2011-03-17  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-mime/NGImap4/NGImap4ResponseParser.m (_purifyQuotedString):
+	fixed to accept spaces between quoted and unquoted chunks (bug
+	#723).
+
 	* sope-core/NGExtensions/NGQuotedPrintableCoding.m
 	(NGDecodeQuotedPrintableX): be tolerant for certain mailers that
 	define the final line as a folded one...
