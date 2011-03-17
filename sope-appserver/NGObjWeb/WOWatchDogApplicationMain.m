@@ -360,7 +360,6 @@ typedef enum {
   if (status == WOChildStatusDown) {
     [self logWithFormat: @"child is already down"];
   } else {
-    [self setControlSocket: nil];
     [self _kill];
   }
 }
@@ -472,7 +471,6 @@ typedef enum {
 
 - (void) _cleanupSignalAndEventHandlers
 {
-  int count;
   NSRunLoop *runLoop;
 
   [[UnixSignalHandler sharedHandler] removeObserver: self];
@@ -483,9 +481,6 @@ typedef enum {
                   type: ET_RDESC
                forMode: NSDefaultRunLoopMode
                    all: YES];
-
-  for (count = 0; count < numberOfChildren; count++)
-    [[children objectAtIndex: count] setControlSocket: nil];
 }
 
 - (BOOL) _spawnChild: (WOWatchDogChild *) child
@@ -503,7 +498,23 @@ typedef enum {
       setsid ();
       isChild = YES;
       [self _cleanupSignalAndEventHandlers];
+
+      [child retain];
+      [pair[0] retain];
+
+      [children release];
+      children = nil;
+      [readyChildren release];
+      readyChildren = nil;
+      [downChildren release];
+      downChildren = nil;
+      
+      [[NSAutoreleasePool currentPool] emptyPool];
+
       [self _runChildWithControlSocket: pair[0]];
+
+      [pair[0] autorelease];
+      [child autorelease];
     } else if (childPid > 0) {
       [self logWithFormat: @"child spawned with pid %d", childPid];
       [child setPid: childPid];

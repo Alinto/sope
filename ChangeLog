@@ -1,3 +1,18 @@
+2011-03-17  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWEb/WOWatchDogApplicationMain.m
+	(-[WOWatchDogChild terminate]): no longer release the control
+	socket from here as the child's signal handle will try to notify
+	us that it is terminating. The control socket is released later in
+	-handleProcessStatus.
+	(-[WOWatchDog _cleanupSignalHandlers]): no longer release the control sockets
+	from here as the excessive children will be released fully when
+	releasing the children accounting arrays.
+	(-[WOWatchDog _spawnChild]): the children accounting arrays are
+	released and the current child is retained so that the excessive
+	control sockets, watchdog timers and memory are all removed from
+	memory.
+
 2011-02-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGMail/NGImap4Connection.m (-selectFolder:): compare
