@@ -181,7 +181,7 @@ int NGDecodeQuotedPrintableX(const char *_src, unsigned _srcLen,
         break;
     }
   }
-  if (cnt < _srcLen)
+  if (cnt < _srcLen && ((_srcLen - cnt) > 1 || _src[_srcLen-1] != '='))
     return -1;
   return destCnt;
 }

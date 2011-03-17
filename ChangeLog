@@ -1,5 +1,9 @@
 2011-03-17  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-core/NGExtensions/NGQuotedPrintableCoding.m
+	(NGDecodeQuotedPrintableX): be tolerant for certain mailers that
+	define the final line as a folded one...
+
 	* sope-mime/NGImap4/NGImap4Connection.m (-fetchContentOfBodyPart):
 	wander through the whole list of responses since the requested
 	body part might be returned after one or more untagged responses.
