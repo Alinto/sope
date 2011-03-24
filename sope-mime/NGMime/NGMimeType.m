@@ -59,7 +59,8 @@ classForType(NSString *_type, NSString *_subType, NSDictionary *_parameters)
       return [NGConcreteAppOctetMimeType class];
   }
   if ([_type isEqualToString:NGMimeTypeText]) {
-    if ([_subType isEqualToString:@"x-vcard"])
+    if ([_subType isEqualToString:@"x-vcard"]
+        || [_subType isEqualToString:@"vcard"])
       return [NGConcreteTextVcardMimeType class];
   }
   
