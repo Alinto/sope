@@ -1,6 +1,7 @@
 2011-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
-	* sope-mime/NGMime/NGMimeType.m (classForType): accept "text/vcard" type.
+	* sope-mime/NGMime/NGMimeType.m (classForType): accept
+	"text/vcard" type.
 
 2011-03-17  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
