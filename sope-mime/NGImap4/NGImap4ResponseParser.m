@@ -2107,12 +2107,15 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
       [dict setObject:result forKey:@"subject"];
       _consumeIfMatch(self, ' ');
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"from"];
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"sender"];
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       [dict setObject:_parseParenthesizedAddressList(self)
             forKey:@"reply-to"];
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"to"];
       _consumeIfMatch(self, ' ');
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"cc"];
@@ -2127,9 +2130,11 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
       if (result == nil) result = @"";
       [dict setObject:result forKey:@"messageId"];
       _consumeIfMatch(self, ')');
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       [dict setObject:_parseBody(self, isBodyStructure) forKey:@"body"];
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       result = _parseBodyString(self, YES);
       if (result == nil) result = @"";
       [dict setObject:result forKey:@"bodyLines"];

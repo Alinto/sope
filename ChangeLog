@@ -3,6 +3,11 @@
 	* sope-mime/NGMime/NGMimeType.m (classForType): accept
 	"text/vcard" type.
 
+	* sope-mime/NGImap4/NGImap4ResponseParser.m (_parseSingleBody): be
+	tolerant for mail servers that don't separate the response member
+	with a space character (like dbmail): don't use consumeIfMatch,
+	which raises an exception if the requested char is not found.
+
 2011-03-17  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4ResponseParser.m (_purifyQuotedString):
