@@ -117,6 +117,7 @@
   WOSimpleHTTPParserMaxUploadSizeInKB   = 262144;
   WOStatsStylesheetName                 = "WOStats.xsl";
   WOSubmitButtonEnableValueSync         = NO;
+  WOWatchDogRequestTimeout              = 10;
   WOUseRelativeURLs                     = YES;
   WOUseGlobalCookiePath                 = YES;
   WOValueAssociationsCacheSize          = 200;

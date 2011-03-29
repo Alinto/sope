@@ -6,6 +6,15 @@
 	"cString" methods, which return a wrong number of bytes in a non
 	8bit environments.
 
+	* sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+	(-[WOWatchDogChild readMessage]):
+	don't set the watchdog timeout if watchDogRequestTimeout is less
+	than 1.
+	(-[WOWatchDogChild _safetyBeltIteration]): renamed from
+	"_killKill" and made a multi-iteration callback. Warns the user
+	each minute about request still hanging. Kills the child once
+	watchDogRequestTimeout has been reached for "killTimerIteration".
+
 2011-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGMime/NGMimeType.m (classForType): accept

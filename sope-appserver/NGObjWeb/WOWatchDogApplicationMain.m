@@ -62,6 +62,7 @@ int WOWatchDogApplicationMain
 
 static NSTimeInterval respawnDelay; /* seconds */
 static const char *pidFile = NULL;
+NSInteger watchDogRequestTimeout;
 
 typedef enum {
   WOChildStatusDown = 0,
@@ -82,6 +83,7 @@ typedef enum {
   NGActiveSocket *controlSocket;
   WOChildStatus status;
   NSTimer *killTimer;
+  NSUInteger killTimerIteration;
   WOWatchDog *watchDog;
   NSCalendarDate *lastSpawn;
   BOOL loggedNotRespawn;
@@ -145,6 +147,17 @@ typedef enum {
 
 @implementation WOWatchDogChild
 
++ (void) initialize
+{
+  watchDogRequestTimeout = [[NSUserDefaults standardUserDefaults]
+                             integerForKey: @"WOWatchDogRequestTimeout"];
+  if (watchDogRequestTimeout > 0)
+    [self logWithFormat: @"watchdog request timeout set to %d minutes",
+          watchDogRequestTimeout];
+  else
+    [self warnWithFormat: @"watchdog request timeout not set"];
+}
+
 + (WOWatchDogChild *) watchDogChild
 {
   WOWatchDogChild *newChild;
@@ -163,6 +176,7 @@ typedef enum {
       controlSocket = nil;
       status = WOChildStatusDown;
       killTimer = nil;
+      killTimerIteration = 0;
       counter = 0;
       lastSpawn = nil;
       loggedNotRespawn = NO;
@@ -212,6 +226,8 @@ typedef enum {
           WSTOPSIG (processStatus)];
   [self setStatus: WOChildStatusDown];
   [self setControlSocket: nil];
+  [killTimer invalidate];
+  killTimer = nil;
 }
 
 - (void) setControlSocket: (NGActiveSocket *) newSocket
@@ -276,13 +292,22 @@ typedef enum {
     }
 }
 
-- (void) _killKill
+- (void) _safetyBeltIteration
 {
-  if (status != WOChildStatusDown) {
-    [self warnWithFormat: @"safety belt -- sending KILL signal to pid %d",
-          pid];
-    kill (pid, SIGKILL);
-    killTimer = nil;
+  killTimerIteration++;
+  if (killTimerIteration < watchDogRequestTimeout) {
+    [self warnWithFormat:
+            @"pid %d has been used in the same request for %d minutes",
+          pid, killTimerIteration];
+  }
+  else {
+    if (status != WOChildStatusDown) {
+      [self warnWithFormat: @"safety belt -- sending KILL signal to pid %d",
+            pid];
+      kill (pid, SIGKILL);
+      [killTimer invalidate];
+      killTimer = nil;
+    }
   }
 }
 
@@ -292,6 +317,8 @@ typedef enum {
     [self logWithFormat: @"sending terminate signal to pid %d", pid];
     status = WOChildStatusTerminating;
     kill (pid, SIGTERM);
+    [killTimer invalidate];
+    killTimer = nil;
   }
 }
 
@@ -315,15 +342,18 @@ typedef enum {
     rc = YES;
     if (message == WOChildMessageAccept) {
       status = WOChildStatusBusy;
-      /* We schedule a 10 minutes grace period while the child is processing
-         the request. This enables long requests to complete while providing a
-         safety belt for children gone rogue. */
-      killTimer
-        = [NSTimer scheduledTimerWithTimeInterval: 10.0 * 60
-                                           target: self
-                                         selector: @selector (_killKill)
-                                         userInfo: nil
-                                          repeats: NO];
+      if (watchDogRequestTimeout > 0) {
+        /* We schedule a 10 minutes grace period while the child is processing
+           the request. This enables long requests to complete while providing
+           a safety belt for children gone rogue. */
+        killTimer
+          = [NSTimer scheduledTimerWithTimeInterval: 60
+                                             target: self
+                                           selector: @selector (_safetyBeltIteration)
+                                           userInfo: nil
+                                            repeats: YES];
+        killTimerIteration = 0;
+      }
     }
     else if (message == WOChildMessageReady) {
       status = WOChildStatusReady;
