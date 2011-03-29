@@ -150,30 +150,28 @@
 
 - (id)initWithValue:(WOAssociation *)_value escapeHTML:(BOOL)_flag {
   if ((self = [super initWithName:nil associations:nil template:nil])) {
-    // ENCODING, UNICODE
     NSString *v;
     unsigned length;
 
     v = [_value stringValueInComponent:nil];
-    length = [v cStringLength];
+    length = [v length];
 
     if (length == 0) {
       v = @"";
     }
     else if (_flag) {
-      char buffer[length * 6]; /* longest-encoding: '&quot;' */
-      unsigned clen = [v cStringLength];
-      char     *cbuf;
-      register char *cstr;
+      unichar buffer[length * 6]; /* longest-encoding: '&quot;' */
+      unichar     *cbuf;
+      register unichar *cstr;
       register unsigned i;
-      register char *bufPtr;
+      register unichar *bufPtr;
 
 #if NeXT_Foundation_LIBRARY
-      cbuf = malloc(clen + 1);
+      cbuf = malloc((length + 1) * sizeof (unichar));
 #else
-      cbuf = NGMallocAtomic(clen + 1);
+      cbuf = NGMallocAtomic((length + 1) * sizeof (unichar));
 #endif
-      [v getCString:cbuf]; cbuf[clen] = '\0';
+      [v getCharacters:cbuf]; cbuf[length] = '\0';
       cstr = cbuf;
       
       for (i = 0, bufPtr = buffer; i < length; i++) {
@@ -212,8 +210,8 @@
       if (cbuf) NGFree(cbuf);
 #endif
       self->value = [[NSString allocWithZone:[self zone]]
-                               initWithCString:&(buffer[0])
-                               length:(bufPtr - &(buffer[0]))];
+                      initWithCharacters: buffer
+                                  length: (bufPtr - buffer)];
     }
     else {
       self->value = [v copyWithZone:[self zone]];

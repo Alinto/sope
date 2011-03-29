@@ -1,3 +1,11 @@
+2011-03-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/DynamicElements/DynamicElements/WOString.m
+	(-[_WOSimpleStaticString initWithValue:escapeHTML:]): perform
+	string manipulations on an array of unichar instead of using the
+	"cString" methods, which return a wrong number of bytes in a non
+	8bit environments.
+
 2011-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGMime/NGMimeType.m (classForType): accept
