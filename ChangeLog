@@ -10,10 +10,16 @@
 	(-[WOWatchDogChild readMessage]):
 	don't set the watchdog timeout if watchDogRequestTimeout is less
 	than 1.
-	(-[WOWatchDogChild _safetyBeltIteration]): renamed from
+	(-[WOWatchDogChild _safetyBeltIteration:]): renamed from
 	"_killKill" and made a multi-iteration callback. Warns the user
 	each minute about request still hanging. Kills the child once
 	watchDogRequestTimeout has been reached for "killTimerIteration".
+	When occurring from a child, display a warning and invalidate the
+	faulty timer, although this should never occur.
+	(-[WOWatchDog _spawnChild:]): make all children release their kill
+	timer as they will otherwise be retained and their timer will be
+	triggered. This fixes a bug that was introduced in the last
+	change where children would attempt to kill one another.
 
 2011-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 

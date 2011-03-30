@@ -78,7 +78,7 @@ typedef enum {
 
 @interface WOWatchDogChild : NSObject <RunLoopEvents>
 {
-  int pid;
+  pid_t pid;
   int counter;
   NGActiveSocket *controlSocket;
   WOChildStatus status;
@@ -93,6 +93,8 @@ typedef enum {
 
 - (void) setPid: (int) newPid;
 - (int) pid;
+
+- (void) revokeKillTimer;
 
 - (void) handleProcessStatus: (int) status;
 
@@ -120,6 +122,7 @@ typedef enum {
   int argc;
   const char **argv;
 
+  pid_t pid;
   NSTimer *loopTimer;
   BOOL terminate;
   BOOL willTerminate;
@@ -135,6 +138,8 @@ typedef enum {
 }
 
 + (id) sharedWatchDog;
+
+- (pid_t) pid;
 
 - (void) declareChildReady: (WOWatchDogChild *) readyChild;
 - (void) declareChildDown: (WOWatchDogChild *) readyChild;
@@ -187,6 +192,7 @@ typedef enum {
 
 - (void) dealloc
 {
+  // [self logWithFormat: @"-dealloc (pid: %d)", pid];
   [killTimer invalidate];
   [self setControlSocket: nil];
   [lastSpawn release];
@@ -208,6 +214,12 @@ typedef enum {
   return pid;
 }
 
+- (void) revokeKillTimer
+{
+  [killTimer invalidate];
+  killTimer = nil;
+}
+
 - (void) handleProcessStatus: (int) processStatus
 {
   int code;
@@ -226,8 +238,7 @@ typedef enum {
           WSTOPSIG (processStatus)];
   [self setStatus: WOChildStatusDown];
   [self setControlSocket: nil];
-  [killTimer invalidate];
-  killTimer = nil;
+  [self revokeKillTimer];
 }
 
 - (void) setControlSocket: (NGActiveSocket *) newSocket
@@ -292,22 +303,29 @@ typedef enum {
     }
 }
 
-- (void) _safetyBeltIteration
+- (void) _safetyBeltIteration: (NSTimer *) aKillTimer
 {
-  killTimerIteration++;
-  if (killTimerIteration < watchDogRequestTimeout) {
-    [self warnWithFormat:
-            @"pid %d has been used in the same request for %d minutes",
-          pid, killTimerIteration];
+  if ([watchDog pid] == getpid ()) {
+    killTimerIteration++;
+    if (killTimerIteration < watchDogRequestTimeout) {
+      [self warnWithFormat:
+              @"pid %d has been hanging in the same request for %d minutes",
+            pid, killTimerIteration];
+    }
+    else {
+      if (status != WOChildStatusDown) {
+        [self warnWithFormat: @"safety belt -- sending KILL signal to pid %d",
+              pid];
+        kill (pid, SIGKILL);
+        [self revokeKillTimer];
+      }
+    }
   }
   else {
-    if (status != WOChildStatusDown) {
-      [self warnWithFormat: @"safety belt -- sending KILL signal to pid %d",
-            pid];
-      kill (pid, SIGKILL);
-      [killTimer invalidate];
-      killTimer = nil;
-    }
+    [self errorWithFormat:
+        @"messy processes: safety belt iteration occurring on child: %d",
+          pid];
+    [self revokeKillTimer];
   }
 }
 
@@ -317,8 +335,7 @@ typedef enum {
     [self logWithFormat: @"sending terminate signal to pid %d", pid];
     status = WOChildStatusTerminating;
     kill (pid, SIGTERM);
-    [killTimer invalidate];
-    killTimer = nil;
+    [self revokeKillTimer];
   }
 }
 
@@ -340,16 +357,17 @@ typedef enum {
   }
   else {
     rc = YES;
+    [self revokeKillTimer];
     if (message == WOChildMessageAccept) {
       status = WOChildStatusBusy;
       if (watchDogRequestTimeout > 0) {
-        /* We schedule a 10 minutes grace period while the child is processing
+        /* We schedule an X minutes grace period while the child is processing
            the request. This enables long requests to complete while providing
            a safety belt for children gone rogue. */
         killTimer
           = [NSTimer scheduledTimerWithTimeInterval: 60
                                              target: self
-                                           selector: @selector (_safetyBeltIteration)
+                                           selector: @selector (_safetyBeltIteration:)
                                            userInfo: nil
                                             repeats: YES];
         killTimerIteration = 0;
@@ -357,20 +375,11 @@ typedef enum {
     }
     else if (message == WOChildMessageReady) {
       status = WOChildStatusReady;
-      [killTimer invalidate];
-      killTimer = nil;
       [watchDog declareChildReady: self];
     }
   }
 
   return rc;
-}
-
-- (BOOL) _sendMessage: (WOChildMessage) message
-{
-  return ([controlSocket writeBytes: &message
-                              count: sizeof (WOChildMessage)] != NGStreamError
-          && [self readMessage]);
 }
 
 - (void) notify
@@ -379,7 +388,9 @@ typedef enum {
 
   counter++;
   message = WOChildMessageAccept;
-  if (![self _sendMessage: message]) {
+  if ([controlSocket writeBytes: &message
+                          count: sizeof (WOChildMessage)] == NGStreamError
+      || ![self readMessage]) {
     [self errorWithFormat: @"FAILURE notifying child %d", pid];
     [self _kill];
   }
@@ -467,6 +478,11 @@ typedef enum {
   [super dealloc];
 }
 
+- (pid_t) pid
+{
+  return pid;
+}
+
 - (void) _runChildWithControlSocket: (NGActiveSocket *) controlSocket
 {
   WOApplication *app;
@@ -490,9 +506,11 @@ typedef enum {
 {
   int nextId;
   WOWatchDogChild *child;
+  NSUInteger max;
 
-  nextId = [readyChildren count] - 1;
-  if (nextId > -1) {
+  max = [readyChildren count];
+  if (max > 0) {
+    nextId = max - 1;
     child = [readyChildren objectAtIndex: nextId];
     [readyChildren removeObjectAtIndex: nextId];
     [child notify];
@@ -532,13 +550,14 @@ typedef enum {
       [child retain];
       [pair[0] retain];
 
+      [children makeObjectsPerformSelector: @selector (revokeKillTimer)];
       [children release];
       children = nil;
       [readyChildren release];
       readyChildren = nil;
       [downChildren release];
       downChildren = nil;
-      
+
       [[NSAutoreleasePool currentPool] emptyPool];
 
       [self _runChildWithControlSocket: pair[0]];
@@ -637,7 +656,7 @@ typedef enum {
           [child logNotRespawn];
         }
       }
-      if (!delayed)
+      if (!(delayed || isChild))
         [downChildren removeObjectAtIndex: count];
     }
   }
@@ -878,7 +897,8 @@ typedef enum {
     }
   }
   if (listening) {
-    [self logWithFormat: @"watchdog process pid: %d", getpid ()];
+    pid = getpid ();
+    [self logWithFormat: @"watchdog process pid: %d", pid];
     [self _setupSignals];
     [self _ensureWorkersCount];
 
@@ -926,8 +946,7 @@ typedef enum {
       [pool release];
     }
 
-    [loopTimer invalidate];
-    [[UnixSignalHandler sharedHandler] removeObserver: self];
+    [self _cleanupSignalAndEventHandlers];
   }
   else
     [self errorWithFormat: @"unable to listen on specified port,"
