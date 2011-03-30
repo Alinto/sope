@@ -318,7 +318,8 @@ genConfigMake() {
   cfgwrite "# Note: you can override any option as a 'make' parameter, eg:"
   cfgwrite "#         make debug=yes"
   cfgwrite ""
-  
+
+  cfgwrite "NEEDS_GUI=no"
   #cfgwrite "# print on the cmdline that this file is being used"
   #cfgwrite "all :: "
   #cfgwrite "	@echo Local GNUstep config.make is active"
