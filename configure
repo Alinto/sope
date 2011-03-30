@@ -469,11 +469,7 @@ checkDependencies() {
   cfgwrite "# library dependencies"
   checkLinking "xml2"        optional;
   checkLinking "ldap"        optional;
-  if [ `uname` = "OpenBSD" ];then
-    checkLinking "ssl crypto"  required; # TODO: make optional
-  else
-    checkLinking "ssl"         required; # TODO: make optional
-  fi
+  checkLinking "ssl"         required; # TODO: make optional
   checkLinking "pq"          optional;
 #  checkLinking "sqlite3"     optional;
   cfgwrite "HAS_LIBRARY_sqlite3=no"
