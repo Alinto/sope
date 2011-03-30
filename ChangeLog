@@ -1,6 +1,6 @@
 2011-03-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
-	* sope-core/NGStreams/cvonfigure: updated config.guess and
+	* sope-core/NGStreams/configure: updated config.guess and
 	config.sub in order to support more modern architectures. Removed
 	useless creation of arch-dependent subdirs containing config.h.
 
@@ -27,6 +27,10 @@
 	timer as they will otherwise be retained and their timer will be
 	triggered. This fixes a bug that was introduced in the last
 	change where children would attempt to kill one another.
+	(WOWatchDogApplicationMain): invoke "applicationWillStart" on the
+	WOApplication class when available, in order to let it perform
+	initialization tasks after the user defaults and the logging
+	channels have been setup propertly.
 
 2011-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 

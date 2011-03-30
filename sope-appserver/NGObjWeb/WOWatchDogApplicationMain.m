@@ -976,6 +976,7 @@ int WOWatchDogApplicationMain
   int rc;
   pid_t childPid;
   NSProcessInfo *processInfo;
+  Class WOAppClass;
 
   pool = [[NSAutoreleasePool alloc] init];
 
@@ -990,7 +991,7 @@ int WOWatchDogApplicationMain
   /* This invocation forces the class initialization of WOCoreApplication,
      which causes the NSUserDefaults to be initialized as well with
      Defaults.plist. */
-  [NSClassFromString (appName) class];
+  WOAppClass = [NSClassFromString (appName) class];
 
   ud = [NSUserDefaults standardUserDefaults];
   processInfo = [NSProcessInfo processInfo];
@@ -1023,6 +1024,10 @@ int WOWatchDogApplicationMain
       respawnDelay = [ud integerForKey: @"WORespawnDelay"];
       if (!respawnDelay)
         respawnDelay = 5;
+
+      if ([WOAppClass respondsToSelector: @selector (applicationWillStart)])
+        [WOAppClass applicationWillStart];
+
       /* default is to use the watch dog! */
       if ([ud objectForKey:@"WOUseWatchDog"] != nil
           && ![ud boolForKey:@"WOUseWatchDog"])

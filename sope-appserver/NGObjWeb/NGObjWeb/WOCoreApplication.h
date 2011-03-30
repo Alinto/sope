@@ -172,4 +172,10 @@ int WOWatchDogApplicationMainWithServerDefaults
 
 @end
 
+@interface WOCoreApplication(ExtraHelpers)
+
++ (void) applicationWillStart;
+
+@end
+
 #endif /* __NGObjWeb_WOCoreApplication_H__ */
