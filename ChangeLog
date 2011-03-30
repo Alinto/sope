@@ -1,5 +1,8 @@
 2011-03-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-mime/NGImap4/NGImap4ResponseParser.m (_parseSingleBody): be
+	even more tolerant with responses from dbmail.
+
 	* sope-appserver/NGObjWeb/DynamicElements/DynamicElements/WOString.m
 	(-[_WOSimpleStaticString initWithValue:escapeHTML:]): perform
 	string manipulations on an array of unichar instead of using the

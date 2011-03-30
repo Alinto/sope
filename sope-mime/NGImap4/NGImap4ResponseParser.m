@@ -2117,15 +2117,19 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
       if (_la(self, 0) == ' ')
         _consume(self, 1);
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"to"];
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"cc"];
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       [dict setObject:_parseParenthesizedAddressList(self) forKey:@"bcc"];
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       result = _parseBodyString(self, YES);
       if (result == nil) result = @"";
       [dict setObject:result forKey:@"in-reply-to"];
-      _consumeIfMatch(self, ' ');
+      if (_la(self, 0) == ' ')
+        _consume(self, 1);
       result = _parseBodyString(self, YES);
       if (result == nil) result = @"";
       [dict setObject:result forKey:@"messageId"];
