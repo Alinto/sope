@@ -1,5 +1,9 @@
 2011-03-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-core/NGStreams/cvonfigure: updated config.guess and
+	config.sub in order to support more modern architectures. Removed
+	useless creation of arch-dependent subdirs containing config.h.
+
 	* sope-mime/NGImap4/NGImap4ResponseParser.m (_parseSingleBody): be
 	even more tolerant with responses from dbmail.
 

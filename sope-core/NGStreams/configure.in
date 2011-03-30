@@ -69,9 +69,6 @@ AC_CHECK_LIB(socket, accept)
 AC_CHECK_LIB(wsock32)
 AC_CHECK_LIB(advapi32)
 
-transformed_target_cpu=`${GNUSTEP_MAKEFILES}/clean_cpu.sh ${TARGET_CPU}`
-ac_cv_file_output_prefix=${transformed_target_cpu}/${TARGET_OS}
-
 AC_HEADER_DIRENT
 AC_HAVE_HEADERS(dir.h libc.h time.h stdlib.h memory.h string.h dnl
 		strings.h sys/stat.h sys/fcntl.h fcntl.h dnl
@@ -96,13 +93,4 @@ else
 AC_SYS_RESTARTABLE_SYSCALLS
 fi
 
-AC_OUTPUT(,
-[
-. ./config.cache
-
-if test ! -d ${ac_cv_file_output_prefix}; then
-  ${GNUSTEP_MAKEFILES}/mkinstalldirs ${ac_cv_file_output_prefix}
-fi
-cp config.h ${ac_cv_file_output_prefix}
-rm -f config.h
-])
+AC_OUTPUT

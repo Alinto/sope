@@ -1,17 +1,11 @@
 # compilation settings
 
-# MACHCPU = $(shell echo $$MACHTYPE | cut -f 1 -d '-')
-MACHCPU = $(shell uname -m)
-
 libNGStreams_INCLUDE_DIRS += \
-	-I$(GNUSTEP_TARGET_CPU)/$(GNUSTEP_TARGET_OS) \
-	-I./$(MACHCPU)/$(GNUSTEP_TARGET_OS) \
 	-INGStreams		\
 	-I../NGExtensions	\
 	-I..
 
 NGStreams_INCLUDE_DIRS += $(libNGStreams_INCLUDE_DIRS)
-
 
 # dependencies
 
