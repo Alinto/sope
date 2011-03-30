@@ -32,6 +32,7 @@
 #elif defined(NeXT) || NeXT_Foundation_LIBRARY
 #  include <netinet/in.h>
 #else
+#  include <netinet/in.h>
 #  include <arpa/inet.h>
 #endif
 

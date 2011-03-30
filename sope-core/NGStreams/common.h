@@ -106,6 +106,7 @@
 #endif
 
 #if !defined(WIN32) || defined(__CYGWIN32__)
+#  include <netinet/in.h>
 #  include <arpa/inet.h>
 #  include <sys/un.h>
 #endif
