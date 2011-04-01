@@ -59,11 +59,7 @@
   WOHttpAdaptorReceiveTimeout           = 120;
   WOHttpAdaptorSendTimeout              = 120;
   WOHttpAdaptor_LogStream               = NO;
-  WOHttpAllowHost                       = ( 
-    "localhost", 
-    "localhost.localdomain",
-    "127.0.0.1"
-  );
+  WOHttpAllowHost                       = ();
   WOHttpTransactionUseSimpleParser      = NO;
   WOHttpTransactionLoggerConfig         = {
     "LogLevel"  = "INFO";

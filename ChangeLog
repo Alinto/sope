@@ -1,3 +1,12 @@
+2011-04-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/Defaults.plist: WOHttpAllowHost now set
+	to an empty array.
+
+	* sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+	(-_listeningAddress): don't warn about WOHttpAllowHost when its
+	value is an empty array.
+
 2011-03-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-core/NGStreams/configure: updated config.guess and

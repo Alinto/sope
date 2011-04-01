@@ -684,7 +684,7 @@ typedef enum {
       port = @"auto";
   }
   allow = [ud objectForKey:@"WOHttpAllowHost"];
-  if (allow && !warnedAboutAllow) {
+  if ([allow count] > 0 && !warnedAboutAllow) {
     [self warnWithFormat: @"'WOHttpAllowHost' is ignored in watchdog mode,"
           @" use a real firewall instead"];
     warnedAboutAllow = YES;
