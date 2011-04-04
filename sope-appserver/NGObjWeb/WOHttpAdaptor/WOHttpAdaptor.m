@@ -74,7 +74,6 @@ static NGLogger *perfLogger                  = nil;
 static BOOL     WOCoreOnHTTPAdaptorException = NO;
 static int      WOHttpAdaptorSendTimeout     = 10;
 static int      WOHttpAdaptorReceiveTimeout  = 10;
-static id       allow                        = nil;
 static BOOL     debugOn                      = NO;
 
 + (BOOL)optionLogPerf {
@@ -109,19 +108,6 @@ static BOOL     debugOn                      = NO;
     [ud integerForKey:@"WOHttpAdaptorSendTimeout"];
   WOHttpAdaptorReceiveTimeout = 
     [ud integerForKey:@"WOHttpAdaptorReceiveTimeout"];
-  
-  if (allow == nil) {
-    if ((allow = [ud objectForKey:@"WOHttpAllowHost"]) == nil) {
-      allow = [NSArray arrayWithObjects:
-                         @"localhost", @"localhost.localdomain",
-		         @"127.0.0.1", nil];
-    }
-    
-    if (![allow isKindOfClass:[NSArray class]])
-      allow = [NSArray arrayWithObject:allow];
-      
-    allow = [allow copy];
-  }
   
   if (WOCoreOnHTTPAdaptorException)
     [logger warnWithFormat:@"will dump core on HTTP adaptor exception!"];
@@ -457,75 +443,23 @@ static BOOL     debugOn                      = NO;
   [pool release];
 }
 
-- (NSArray *)allowedHostNames {
-  return allow;
-}
-
-- (id<NGActiveSocket>)_checkAccessOnConnection:(id<NGActiveSocket>)_connection{
-  static NGInternetSocketDomain *ipDomain = nil;
-  id<NGSocketAddress> remote;
-
-  if ((remote = [_connection remoteAddress]) == nil) {
-    [self errorWithFormat:@"missing remote address for connection: %@",
-            _connection];
-    return nil;
-  }
-
-  if (ipDomain == nil)
-    ipDomain = [[NGInternetSocketDomain domain] retain];
-  
-  /* always allow access for Unix domain sockets */
-  if (![[remote domain] isEqual:ipDomain])
-    return _connection;
-  
-  {
-    /* check access */
-    NGInternetSocketAddress *ipAddr = (id)remote;
-    NSArray *allow = nil;
-    unsigned i, count;
-    NSString *rh, *ra;
-    
-    allow = [self allowedHostNames];
-    
-    rh = [ipAddr hostName];
-    ra = [ipAddr address];
-    
-    /* first check address */
-    
-    for (i = 0, count = [allow count]; i < count; i++) {
-      NSString *h;
-      
-      h = [[allow objectAtIndex:i] stringValue];
-      if ([h isEqualToString:ra])
-        return _connection;
-    }
-    
-    /* now check DNS names */
-    
-    for (i = 0, count = [allow count]; i < count; i++) {
-      NSString *h;
-      
-      h = [[allow objectAtIndex:i] stringValue];
-      if ([h isEqualToString:rh])
-        return _connection;
-    }
-    
-    [self errorWithFormat:@"ACCESS DENIED: %@", ipAddr];
-    _connection = nil;
-  }
-  
-  return _connection;
-}
-
 - (NGActiveSocket *)_accept {
   NGActiveSocket *connection;
+  id<NGSocketAddress> remote;
 
   NS_DURING {
     connection = [self->socket accept];
     if (!connection)
       [self _serverCatched:[self->socket lastException]];
-    else
-      [self debugWithFormat:@"accepted connection: %@", connection];
+    else {
+      if ((remote = [connection remoteAddress]) != nil)
+        [self debugWithFormat:@"accepted connection: %@", connection];
+      else {
+        [self errorWithFormat:@"missing remote address for connection: %@",
+              connection];
+        connection = nil;
+      }
+    }
   }
   NS_HANDLER {
     connection = nil;
@@ -596,16 +530,12 @@ static BOOL     debugOn                      = NO;
 }
 
 - (void)acceptConnection:(id)_notification {
-  NGActiveSocket *connection;
 #if USE_POOLS
   NSAutoreleasePool *pool;
 
   pool = [[NSAutoreleasePool alloc] init];
 #endif
-  {
-    connection = [self _checkAccessOnConnection:[self _accept]];
-    [self _handleConnection: connection];
-  }
+  [self _handleConnection: [self _accept]];
 #if USE_POOLS
   [pool release]; pool = nil;
 #endif

@@ -1,3 +1,11 @@
+2011-04-04  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
+	(+iniitialize): we no longer make use of "WOHttpAllowHost".
+	(-_accept): included remote address verification code from
+	_checkAccessOnConnection:
+	(-_checkAccessOnConnection:): removed obsolete method.
+
 2011-04-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-appserver/NGObjWeb/Defaults.plist: WOHttpAllowHost now set
