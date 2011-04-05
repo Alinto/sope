@@ -782,34 +782,38 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   int count, max;
   BOOL found;
 
-  found = NO;
+  folderName = [self imap4FolderNameForURL:_url];
+  if ([[[self->client selectedFolderName] stringByDecodingImap4FolderName]
+        isEqualToString:folderName])
+    found = YES;
+  else {
+    found = NO;
 
-  /* check in hierarchy cache */
-  caches = [self->subfolders allValues];
-  max = [caches count];
-  for (count = 0; !found && count < max; count++) {
-    NSString *p;
+    /* check in hierarchy cache */
+    caches = [self->subfolders allValues];
+    max = [caches count];
+    for (count = 0; !found && count < max; count++) {
+      NSString *p;
 
-    result = [[caches objectAtIndex: count] objectForKey:@"list"];
-    p      = [_url path];
-    /* normalized results already have the / in front on libFoundation?! */
-    if ([p hasPrefix:@"/"]) 
-      p = [p substringFromIndex:1];
-    if ([p hasSuffix:@"/"])
-      p = [p substringToIndex:[p length]-1];
-    found = ([(NSDictionary *)result objectForKey:p] != nil);
-  }
+      result = [[caches objectAtIndex: count] objectForKey:@"list"];
+      p      = [_url path];
+      /* normalized results already have the / in front on libFoundation?! */
+      if ([p hasPrefix:@"/"]) 
+        p = [p substringFromIndex:1];
+      if ([p hasSuffix:@"/"])
+        p = [p substringToIndex:[p length]-1];
+      found = ([(NSDictionary *)result objectForKey:p] != nil);
+    }
 
-  if (!found) {
-    /* check using IMAP4 select */
-    // TODO: we should probably just fetch the whole hierarchy?
+    if (!found) {
+      /* check using IMAP4 select */
+      // TODO: we should probably just fetch the whole hierarchy?
   
-    folderName = [self imap4FolderNameForURL:_url];
+      result = [self->client status: folderName
+                    flags: [NSArray arrayWithObject: @"UIDVALIDITY"]];
 
-    result = [self->client status: folderName
-                            flags: [NSArray arrayWithObject: @"UIDVALIDITY"]];
-
-    found =([[result valueForKey: @"result"] boolValue]);
+      found =([[result valueForKey: @"result"] boolValue]);
+    }
   }
 
   return found;

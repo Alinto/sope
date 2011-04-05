@@ -1,5 +1,10 @@
 2011-04-04  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-mime/NGImap4/NGImap4Connection.m (-doesMailboxExistAtURL:):
+	if the mailbox is already counted as selected by the NGImap4Client
+	instance, we return YES directly to avoid a costly UIDVALIDITY
+	operation.
+
 	* sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
 	(+iniitialize): we no longer make use of "WOHttpAllowHost".
 	(-_accept): included remote address verification code from
