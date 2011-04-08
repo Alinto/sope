@@ -1,3 +1,15 @@
+2011-04-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-core/NGExtensions/FdExt.subproj/NSString+URLEscaping.m
+	(-containsURLInvalidCharacters): we wander the string as an array
+	of utf8 bytes, replacing the previous method that wrongfully
+	casted "unichar" into "char" data, leading to false negatives
+	for certain characters.
+	(-stringByEscapingURL): simplified and fixed method, that
+	wrongfully used the generic "-cStringXXX" methods. From now on,
+	the string is converted to an NSData, and the encoding is either
+	latin-1 or utf-8 based on doUseUTF8Encoding().
+
 2011-04-04  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4Connection.m (-doesMailboxExistAtURL:):
