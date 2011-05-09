@@ -221,14 +221,14 @@ NGUnescapeUrlBuffer(const unsigned char *_source, unsigned char *_dest)
   return NO;
 }
 - (BOOL)containsURLInvalidCharacters {
-  register unsigned i, len;
-  register unichar (*charAtIdx)(id,SEL,unsigned);
+  register NSUInteger i, len;
+  const char *utf8String;
   
-  if ((len = [self length]) == 0) return NO;
-  
-  charAtIdx = (void*)[self methodForSelector:@selector(characterAtIndex:)];
+  utf8String = [self UTF8String];
+  len = strlen (utf8String);
+
   for (i = 0; i < len; i++) {
-    if (isToBeEscaped(charAtIdx(self, @selector(characterAtIndex:), i)))
+    if (isToBeEscaped(utf8String[i]))
       return YES;
   }
   return NO;
@@ -278,46 +278,38 @@ NGUnescapeUrlBuffer(const unsigned char *_source, unsigned char *_dest)
 - (NSString *)stringByEscapingURL {
   unsigned len;
   NSString *s;
+  NSData *data;
   char     *buffer = NULL;
+  NSStringEncoding encoding;
   
   if ((len = [self length]) == 0) return @"";
   
   if (![self containsURLInvalidCharacters]) // needs to be escaped ?
     return [[self copy] autorelease];
+
+  // steps:
+  // a) encode into a data buffer! (eg UTF8 or ISO)
+  // b) encode that buffer into URL encoding
+  // c) create an ASCII string from that
   
-  if (doUseUTF8Encoding()) {
-    // steps:
-    // a) encode into a data buffer! (eg UTF8 or ISO)
-    // b) encode that buffer into URL encoding
-    // c) create an ASCII string from that
-    NSData *data;
+  encoding = (doUseUTF8Encoding()
+              ? NSUTF8StringEncoding
+              : NSISOLatin1StringEncoding);
     
-    if ((data = [self dataUsingEncoding:NSUTF8StringEncoding]) == nil)
-      return nil;
-    if ((len = [data length]) == 0)
-      return @"";
+  if ((data = [self dataUsingEncoding:encoding]) == nil)
+    return nil;
+  if ((len = [data length]) == 0)
+    return @"";
     
-    buffer = malloc(len * 3 + 2);
-    NGEscapeUrlBuffer([data bytes], (unsigned char *)buffer, len);
-  }
-  else {
-    unsigned char *cstr;
-    
-    len  = [self cStringLength];
-    cstr = malloc(len + 4);
-    [self getCString:(char *)cstr]; // Unicode!
-    cstr[len] = '\0';
-    
-    buffer = malloc(len * 3 + 2);
-    NGEscapeUrlBuffer(cstr, (unsigned char *)buffer, len);
-    if (cstr) free(cstr);
-  
-  }
+  buffer = malloc(len * 3 + 2);
+  NGEscapeUrlBuffer([data bytes], (unsigned char *)buffer, len);
+
   /* the following assumes that the default-encoding is ASCII compatible */
   s = [[NSString alloc]
-	         initWithCStringNoCopy:buffer
-	         length:strlen(buffer)
-	         freeWhenDone:YES];
+        initWithBytesNoCopy:buffer
+                     length:strlen(buffer)
+                   encoding:NSASCIIStringEncoding
+               freeWhenDone:YES];
   return [s autorelease];
 }
 
