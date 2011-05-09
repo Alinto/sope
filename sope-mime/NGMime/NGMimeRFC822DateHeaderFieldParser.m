@@ -165,8 +165,11 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
       sign = -sign;
     p++;
   }
-  digits = digitsString(p);
-  p = digits;
+  digits = NULL;
+  if (strlen(p)) {
+    digits = digitsString(p);
+    p = digits;
+  }
   remaining = strlen(p);
   switch(remaining) {
   case 6: /* hhmmss */
@@ -186,7 +189,9 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
   default:
     NSLog (@"parseTimeZone: cannot parse time notation '%s'", newString);
   }
-  free(digits);
+  if (digits != NULL) {
+    free(digits);
+  }
 
   seconds += sign * (3600 * hours + 60 * minutes);
   tz = [NSTimeZone timeZoneForSecondsFromGMT: seconds];
