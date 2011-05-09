@@ -19,28 +19,12 @@
   02111-1307, USA.
 */
 
-#ifdef HAVE_STRNDUP
-#define _GNU_SOURCE 1
-#endif
-
 #include <string.h>
 
 #include "NGMimeHeaderFieldParser.h"
 #include "NGMimeHeaderFields.h"
 #include "NGMimeUtilities.h"
 #include "common.h"
-
-#ifndef HAVE_STRNDUP
-char *strndup(const char *str, size_t len)
-{
-  char *dup = (char *)malloc(len+1);
-  if (dup) {
-    strncpy(dup,str,len);
-    dup[len]= '\0';
-  }
-  return dup;
-}
-#endif
 
 @implementation NGMimeRFC822DateHeaderFieldParser
 
