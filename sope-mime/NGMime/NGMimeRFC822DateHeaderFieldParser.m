@@ -173,9 +173,7 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
   default:
     NSLog (@"parseTimeZone: cannot parse time notation '%s'", newString);
   }
-  if (digits != NULL) {
-    free(digits);
-  }
+  free(digits);
 
   seconds += sign * (3600 * hours + 60 * minutes);
   tz = [NSTimeZone timeZoneForSecondsFromGMT: seconds];
