@@ -156,7 +156,8 @@ typedef enum {
 - (NSDictionary *)append:(NSData *)_message toFolder:(NSString *)_folder
   withFlags:(NSArray *)_flags;
 - (NSDictionary *)threadBySubject:(BOOL)_bySubject
-  charset:(NSString *)_charSet;
+                          charset:(NSString *)_charSet
+                        qualifier:(EOQualifier *)_qual;
 - (NSDictionary *)getQuotaRoot:(NSString *)_folder;
 
 - (NSDictionary *)searchWithQualifier:(EOQualifier *)_qualifier;

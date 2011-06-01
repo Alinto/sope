@@ -462,8 +462,9 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 
 /* message operations */
 
-- (NSArray *)fetchUIDsInURL:(NSURL *)_url qualifier:(id)_qualifier
-  sortOrdering:(id)_so
+- (NSArray *)fetchUIDsInURL:(NSURL *)_url
+                  qualifier:(id)_qualifier
+               sortOrdering:(id)_so
 {
   /* 
      sortOrdering can be an NSString, an EOSortOrdering or an array of EOS.
@@ -497,6 +498,92 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   }
   
   /* cache */
+  
+  [self cacheUIDs:uids forURL:_url qualifier:_qualifier sortOrdering:_so];
+  return uids;
+}
+
+/**
+ * Fetch a threaded view of the folder and sort the root messages.
+ * @param _url the URL of the IMAP folder
+ * @param _qualifier a EOQualifier defining a search constraint
+ * @param _so either an NSString, an EOSortOrdering or an array of EOSortOrdering
+ * @return a threaded view of the messages UIDs using interleaved arrays.
+ */
+- (NSArray *)fetchThreadedUIDsInURL:(NSURL *)_url
+                          qualifier:(id)_qualifier
+                       sortOrdering:(id)_so
+{
+  NSDictionary *result;
+  NSArray *uids;
+  NSMutableArray *sortedThreads;
+  NSMutableDictionary *threads;
+  NSEnumerator *threadsEnum, *threadEnum;
+  id rootThread, thread;
+  unsigned int i;
+
+  // Check cache
+  
+  uids = [self cachedUIDsForURL:_url qualifier:_qualifier sortOrdering:_so];
+  if (uids != nil) {
+    if (debugCache) [self logWithFormat:@"reusing uid cache!"];
+    return [uids isNotNull] ? uids : (NSArray *)nil;
+  }
+  
+  // Select folder and fetch
+  
+  if (![self selectFolder:_url])
+    return nil;
+  
+  result = [[self client] threadBySubject: NO charset: @"UTF-8" qualifier: _qualifier]; 
+  if ([[result valueForKey:@"result"] boolValue])
+    {
+      // Sort the threads in two steps :
+      
+      // 1. Build a dictionary with the root threads
+
+      uids = [result valueForKey: @"thread"];
+      threads = [NSMutableDictionary dictionaryWithCapacity: [uids count]];
+      threadsEnum = [uids objectEnumerator];
+      i = 0;
+      while ((rootThread = [threadsEnum nextObject]))
+        {
+          thread = rootThread;
+          while ([thread respondsToSelector: @selector(objectEnumerator)])
+            {
+              threadEnum = [thread objectEnumerator];
+              thread = [threadEnum nextObject];
+            }
+          [threads setObject: rootThread forKey: thread];
+        }
+
+      // 2. Sort the threads based on an IMAP SORT
+
+      uids = [self fetchUIDsInURL: _url qualifier: _qualifier sortOrdering: _so];
+      sortedThreads = [NSMutableArray arrayWithCapacity: [threads count]];
+      for (i = 0; i < [uids count]; i++)
+        {
+          thread = [threads objectForKey: [uids objectAtIndex: i]];
+          if (thread)
+            [sortedThreads addObject: thread];
+        }
+
+      uids = sortedThreads;
+    }
+  else
+    {
+      // No THREAD support; rollback to a simple SORT
+      [self warnWithFormat: @"No THREAD support for %@", _url];
+      uids = [self fetchUIDsInURL: _url qualifier: _qualifier sortOrdering: _so];
+    }
+  
+  if (![uids isNotNull])
+    {
+      [self errorWithFormat: @"got no UIDs for URL: %@: %@", _url, result];
+      return nil;
+    }
+  
+  // Update cache
   
   [self cacheUIDs:uids forURL:_url qualifier:_qualifier sortOrdering:_so];
   return uids;

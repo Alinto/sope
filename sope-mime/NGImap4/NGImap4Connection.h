@@ -98,8 +98,12 @@
 
 /* message operations */
 
-- (NSArray *)fetchUIDsInURL:(NSURL *)_url qualifier:(id)_qualifier
-  sortOrdering:(id)_so;
+- (NSArray *)fetchUIDsInURL:(NSURL *)_url
+                  qualifier:(id)_qualifier
+               sortOrdering:(id)_so;
+- (NSArray *)fetchThreadedUIDsInURL:(NSURL *)_url
+                          qualifier:(id)_qualifier
+                       sortOrdering:(id)_so;
 - (NSArray *)fetchUIDs:(NSArray *)_uids inURL:(NSURL *)_url
   parts:(NSArray *)_parts;
 - (id)fetchURL:(NSURL *)_url parts:(NSArray *)_parts;

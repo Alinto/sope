@@ -1,3 +1,13 @@
+2011-06-01  Francis Lachapelle  <flachapelle@inverse.ca>
+
+	* NGImap4Client.m (-threadBySubject:charset:qualifier:): verify
+	IMAP server capabilities with respect to threading. Return nil if
+	threading is not supported.
+
+	* NGImap4Connection.m
+	(-fetchThreadedUIDsInURL:qualifier:sortOrdering:): new method that
+	returns a threaded and sorted representation of an IMAP folder.
+
 2010-08-09  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGImap4Client.m (-append:toFolder:withFlags:): convert the

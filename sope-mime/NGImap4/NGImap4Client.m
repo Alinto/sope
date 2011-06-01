@@ -1136,8 +1136,9 @@ static NSMutableDictionary *namespaces;
   return [@" " stringByAppendingString:result];
 }
 
-- (NSDictionary *)threadBySubject:(BOOL)_bySubject
-  charset:(NSString *)_charSet
+- (NSDictionary *)threadBySubject: (BOOL)_bySubject
+                          charset: (NSString *)_charSet
+                        qualifier: (EOQualifier *)_qual
 {
   /*
     http://www.ietf.org/proceedings/03mar/I-D/draft-ietf-imapext-thread-12.txt
@@ -1145,7 +1146,7 @@ static NSMutableDictionary *namespaces;
     Returns an array of uids in sort order.
 
     Parameters:
-      _bySubject - if yes, use "REFERENCES" else "ORDEREDSUBJECT" (TODO: ?!)
+      _bySubject - if yes, use "REFERENCES" else "ORDEREDSUBJECT"
       _charSet   - default: "UTF-8"
     
     Generates:
@@ -1153,19 +1154,32 @@ static NSMutableDictionary *namespaces;
   */
   NSString *threadStr;
   NSString *threadAlg;
+  NSArray *capa;
   
-  threadAlg = (_bySubject)
-    ? @"REFERENCES"
-    : @"ORDEREDSUBJECT";
+  threadAlg = (_bySubject) ? @"ORDEREDSUBJECT" : @"REFERENCES";
   
   if (![_charSet isNotEmpty])
     _charSet = @"UTF-8";
+
+  // Verify server capablities
+  capa = [[self capability] objectForKey: @"capability"];
+  if ([capa indexOfObject: [NSString stringWithFormat: @"thread=%@", [threadAlg lowercaseString]]] == NSNotFound)
+    {
+      [self logWithFormat: @"WARNING: No support for THREAD %@ for %@", threadAlg, [self->address description]];
+      threadAlg = (_bySubject) ? @"REFERENCES" : @"ORDEREDSUBJECT";        
+      if ([capa indexOfObject: [NSString stringWithFormat: @"thread=%@", [threadAlg lowercaseString]]] == NSNotFound)
+        {
+          [self errorWithFormat: @"No support for THREAD %@ for %@", threadAlg, [self->address description]];
+          return nil;
+        }
+    }
   
-  threadStr = [NSString stringWithFormat:@"UID THREAD %@ %@ ALL",
-                      threadAlg, _charSet];
+  threadStr = [NSString stringWithFormat:@"UID THREAD %@ %@ (%@)",
+                        threadAlg, _charSet,
+               [[self _searchExprForQual: _qual] substringFromIndex: 1]];
   
   return [self->normer normalizeThreadResponse:
-		[self processCommand:threadStr]];
+                          [self processCommand: threadStr]];
 }
 
 - (NSString *)_generateIMAP4SortOrdering:(EOSortOrdering *)_sortOrdering {

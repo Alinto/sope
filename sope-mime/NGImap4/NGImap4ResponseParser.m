@@ -44,6 +44,7 @@
 - (BOOL)_parseSortResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseQuotaRootResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseStatusResponseIntoHashMap:(NGMutableHashMap *)result_;
+- (BOOL)_parseThreadResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseByeUntaggedResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseACLResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseMyRightsResponseIntoHashMap:(NGMutableHashMap *)result_;
@@ -109,8 +110,6 @@ static BOOL _parseBadUntaggedResponse(NGImap4ResponseParser *self,
                                       NGMutableHashMap *result_);
 static BOOL _parseNoUntaggedResponse(NGImap4ResponseParser *self,
                                      NGMutableHashMap *result_);
-static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
-                                 NGMutableHashMap *result_);
 static NSNumber *_parseUnsigned(NGImap4ResponseParser *self);
 static NSString *_parseUntil(NGImap4ResponseParser *self, char _c);
 static NSString *_parseUntil2(NGImap4ResponseParser *self, char _c1, char _c2);
@@ -669,7 +668,7 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
     break;
 
   case 'T':
-    if (_parseThreadResponse(self, result_))         // la: 6
+    if ([self _parseThreadResponseIntoHashMap:result_])    // la: 6
       return;
     break;
     
@@ -1299,38 +1298,29 @@ _purifyQuotedString(NSMutableString *quotedString) {
 }
 
 
-static BOOL _parseThreadResponse(NGImap4ResponseParser *self,
-                                 NGMutableHashMap *result_) {
-  if ((_la(self, 0) == 'T')
-      && (_la(self, 1) == 'H')
-      && (_la(self, 2) == 'R')
-      && (_la(self, 3) == 'E')
-      && (_la(self, 4) == 'A')
-      && (_la(self, 5) == 'D')) {
+- (BOOL)_parseThreadResponseIntoHashMap:(NGMutableHashMap *)result_ {
+  NSMutableArray *msn;
 
-    NSMutableArray *msn;
+  if (!_matchesString(self, "THREAD"))
+    return NO;
+  
+  _consume(self, 6);
 
-    _consume(self, 6);
-
-    if (_la(self, 0) == ' ') {
-      _consume(self, 1);
-    }
-    else {
-      [result_ addObject:[NSArray array] forKey:@"thread"];
-      return YES;
-    }
-    msn = [NSMutableArray arrayWithCapacity:64];
-    while ((_la(self, 0) == '(')) {
-      NSArray *array;
-      
-      if ((array = [self _parseThread]) != nil)
-        [msn addObject:array];
-    }
-    _parseUntil(self, '\n');
-    [result_ addObject:msn forKey:@"thread"];
-    return YES;
+  if (_la(self, 0) == ' ') {
+    _consume(self, 1);
   }
-  return NO;
+  
+  msn = [NSMutableArray arrayWithCapacity:64];
+  
+  while ((_la(self, 0) == '(')) {
+    NSArray *array;
+    
+    if ((array = [self _parseThread]) != nil)
+      [msn addObject:array];
+  }
+  _parseUntil(self, '\n');
+  [result_ addObject:msn forKey:@"thread"];
+  return YES;
 }
 
 - (BOOL)_parseStatusResponseIntoHashMap:(NGMutableHashMap *)result_ {
