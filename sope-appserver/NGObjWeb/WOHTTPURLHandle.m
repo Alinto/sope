@@ -50,6 +50,14 @@
   return [[_url scheme] isEqualToString:@"http"];
 }
 
++ (NSURLHandle*) cachedHandleForURL: (NSURL*)newUrl
+{
+  NSURLHandle   *obj = nil;
+  NSLog(@"NOTE: WOHTTPURLHandle.m: cachedHandleForURL: caching not yet not yet implemented");
+  return obj;
+}
+
+
 - (id)initWithURL:(NSURL *)_url cached:(BOOL)_flag {
   if (![[_url scheme] hasPrefix:@"http"]) {
     NSLog(@"%s: invalid URL scheme %@ for WOHTTPURLHandle !",
