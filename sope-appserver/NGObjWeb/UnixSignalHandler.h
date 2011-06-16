@@ -37,7 +37,8 @@
 #if defined(__MINGW32__)
 #  include <signal.h>
 #else
-#  include <sys/signal.h>
+#  include <sys/types.h>
+#  include <signal.h>
 #endif
 #import <Foundation/NSObject.h>
 
