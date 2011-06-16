@@ -256,7 +256,7 @@ static char *iconv_wrapper(id self, char *_src, unsigned _srcLen,
   return outbuf;
   
  CLEAR_AND_RETURN:
-  if (type)
+  if (type && (type != (iconv_t)-1))
     iconv_close(type);
   
   if (outbuf) {
