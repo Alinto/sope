@@ -57,6 +57,7 @@ typedef enum {
 
   BOOL     isLogin;
 
+  NSString *authname;
   NSString *login;
   NSString *password;
 
@@ -91,6 +92,8 @@ typedef enum {
 /* commands */
 
 - (NSDictionary *)login:(NSString *)_login password:(NSString *)_passwd;
+- (NSDictionary *)login:(NSString *)_login authname:(NSString *)_authname password:(NSString *)_passwd;
+
 - (NSDictionary *)logout;
 
 - (NSString *)getScript:(NSString *)_scriptName;

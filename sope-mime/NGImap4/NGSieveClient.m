@@ -155,6 +155,7 @@ static BOOL     debugImap4         = NO;
   [self->io       release];
   [self->socket   release];
   [self->parser   release];
+  [self->authname release];
   [self->login    release];
   [self->password release];
   [super dealloc];
@@ -260,14 +261,20 @@ static BOOL     debugImap4         = NO;
 }
 
 - (NSDictionary *)login:(NSString *)_login password:(NSString *)_passwd {
+  return [self login: _login  authname: _login  password: _passwd];
+}
+
+- (NSDictionary *)login:(NSString *)_login authname:(NSString *)_authname password:(NSString *)_passwd {
   /* login with plaintext password authenticating */
   
   if ((_login == nil) || (_passwd == nil))
     return nil;
   
+  [self->authname release]; self->authname = nil;
   [self->login    release]; self->login    = nil;
   [self->password release]; self->password = nil;
   
+  self->authname = [_authname copy];
   self->login    = [_login  copy];
   self->password = [_passwd copy];
   return [self login];
@@ -283,7 +290,7 @@ static BOOL     debugImap4         = NO;
   NGHashMap *map  = nil;
   NSData    *auth;
   char      *buf;
-  int       bufLen, logLen;
+  int       bufLen, logLen, authLen;
   
   if (![self->socket isConnected]) {
     NSDictionary *con;
@@ -294,8 +301,9 @@ static BOOL     debugImap4         = NO;
       return con;
   }
   
+  authLen = [self->authname lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
   logLen = [self->login lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
-  bufLen = (logLen * 2) + [self->password lengthOfBytesUsingEncoding: NSUTF8StringEncoding] +2;
+  bufLen = (logLen+authLen) + [self->password lengthOfBytesUsingEncoding: NSUTF8StringEncoding] +2;
   
   buf = calloc(bufLen + 2, sizeof(char));
   
@@ -307,11 +315,11 @@ static BOOL     debugImap4         = NO;
   */
   sprintf(buf, "%s %s %s", 
           [self->login cStringUsingEncoding:NSUTF8StringEncoding],
-          [self->login cStringUsingEncoding:NSUTF8StringEncoding],
+          [self->authname cStringUsingEncoding:NSUTF8StringEncoding],
           [self->password cStringUsingEncoding:NSUTF8StringEncoding]);
   
   buf[logLen] = '\0';
-  buf[logLen * 2 + 1] = '\0';
+  buf[logLen+authLen + 1] = '\0';
   
   auth = [NSData dataWithBytesNoCopy:buf length:bufLen];
   auth = [auth dataByEncodingBase64WithLineLength:4096 /* 'unlimited' */];

@@ -1,3 +1,8 @@
+2011-06-29  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGSieveClient.{h,m}: Implemented
+	correctly the PLAIN authentication to support proxying
+
 2011-04-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-core/NGExtensions/FdExt.subproj/NSString+URLEscaping.m
