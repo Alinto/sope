@@ -1032,41 +1032,44 @@ _purifyQuotedString(NSMutableString *quotedString) {
 - (BOOL)_parseACLResponseIntoHashMap:(NGMutableHashMap *)result_ {
   /*
     21 GETACL INBOX
-    * ACL INBOX test.et.di.cete-lyon lrswipcda helge lrwip
+    * ACL INBOX test.et.di.cete-lyon lrswipcda helge lrwip "a group" lrs fred ""
   */
-  NSString       *acls;
-  NSEnumerator   *enumerator;
-  id             obj;
+  NSString       *uid;
+  NSString       *userRights;
+  NSString       *mailbox;
   NSMutableArray *uids;
   NSMutableArray *rights;
   NSDictionary   *result;
-  int length;
   
   if (!_matchesString(self, "ACL "))
     return NO;
   _consume(self, 4);
   
-  if ((obj = _parseBodyString(self, YES)) != nil)
-    [result_ setObject:obj forKey:@"mailbox"];
+  if ((mailbox = _parseBodyString(self, YES)) != nil)
+    [result_ setObject:mailbox forKey:@"mailbox"];
   _consumeIfMatch(self, ' ');
-  
-  acls = _parseUntil(self, '\n');
   
   uids   = [[NSMutableArray alloc] initWithCapacity:8];
   rights = [[NSMutableArray alloc] initWithCapacity:8];
   
-  enumerator = [[acls componentsSeparatedByString:@" "] objectEnumerator];
-  while ((obj = [enumerator nextObject]) != nil) {
-    if ([obj characterAtIndex: 0] == '"') {
-      length = [obj length];
-      if ([obj characterAtIndex: length - 1] == '"') {
-	obj = [obj substringFromRange: NSMakeRange (1, length - 2)];
-      }
+  while (_la(self, 0) != '\n') {
+    if (_la(self, 0) == '"') {
+      uid = [self _parseQuotedString];
+      _consumeIfMatch(self, ' ');
     }
-    [uids  addObject:obj];
-    obj = [enumerator nextObject];
-    [rights addObject:(obj != nil ? obj : (id)@"")];
+    else
+      uid = _parseUntil(self, ' ' );
+
+    if (_la(self, 0) == '"')
+      userRights = [self _parseQuotedString];
+    else
+      userRights = _parseUntil2(self, ' ', '\n');
+    [self _consumeOptionalSpace];
+
+    [uids addObject:uid];
+    [rights addObject:userRights];
   }
+  _consume(self,1);
   
   result = [[NSDictionary alloc] initWithObjects:rights forKeys:uids];
   [result_ addObject:result forKey:@"acl"];
