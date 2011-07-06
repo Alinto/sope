@@ -1,3 +1,11 @@
+2011-07-06  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m
+	(-_parseSearchResponseIntoHashMap:) we make sure
+	that we've got a MSN before adding it to the 
+	array of MSNs. This can happen when servers
+	just return "* SEARCH" with no MSN.
+
 2011-07-05  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4ResponseParser.m

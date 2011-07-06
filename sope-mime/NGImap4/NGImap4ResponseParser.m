@@ -1139,7 +1139,8 @@ _purifyQuotedString(NSMutableString *quotedString) {
 
 - (BOOL)_parseSearchResponseIntoHashMap:(NGMutableHashMap *)result_ {
   NSMutableArray *msn = nil;
-  
+  NSNumber *n;
+
   if (!_matchesString(self, "SEARCH"))
     return NO;
 
@@ -1149,7 +1150,9 @@ _purifyQuotedString(NSMutableString *quotedString) {
 
   while (_la(self, 0) == ' ') {
       _consume(self, 1);
-      [msn addObject:_parseUnsigned(self)];
+      n = _parseUnsigned(self);
+      if (n)
+	[msn addObject:n];
   }
   _parseUntil(self, '\n');
   [result_ addObject:msn forKey:@"search"];
