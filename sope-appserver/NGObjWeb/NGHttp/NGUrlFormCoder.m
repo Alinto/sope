@@ -154,7 +154,7 @@ NGHashMap *NGDecodeUrlFormParameters(const unsigned char *_buffer,
       value = len > 0 ? urlStringFromBuffer(buffer, len) : (NSString *)@"";
       
       // skip '&'
-      if (_buffer[pos] == '&' || _buffer[pos] == '?') pos++;
+      if ((pos < _len) && (_buffer[pos] == '&' || _buffer[pos] == '?')) pos++;
     }
     
     if (value == nil)
