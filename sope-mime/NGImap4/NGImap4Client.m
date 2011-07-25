@@ -681,6 +681,17 @@ static NSMutableDictionary *namespaces;
   return result;
 }
 
+- (NSDictionary *)enable:(NSString *)_extension {
+  NSDictionary *result;
+  NSString *cmd;
+
+
+  cmd = [NSString stringWithFormat:@"ENABLE %@", [_extension uppercaseString]];
+  result = [self->normer normalizeResponse:[self processCommand:cmd]];
+  
+  return result;
+}
+
 - (NSDictionary *)namespace {
   NSArray *capabilities;
   NGHashMap *namesres;

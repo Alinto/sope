@@ -1,3 +1,8 @@
+2011-07-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m (-enable:): new method enabling IMAP extensions
+	following rfc5161.
+
 2011-06-01  Francis Lachapelle  <flachapelle@inverse.ca>
 
 	* NGImap4Client.m (-threadBySubject:charset:qualifier:): verify

@@ -122,6 +122,8 @@ typedef enum {
 - (NSDictionary *)noop;
   
 - (NSDictionary *)capability;
+- (NSDictionary *)enable:(NSString *)_extension;
+
 - (NSDictionary *)namespace;
 - (NSDictionary *)list:(NSString *)_folder pattern:(NSString *)_pattern;
 - (NSDictionary *)lsub:(NSString *)_folder pattern:(NSString *)_pattern;
