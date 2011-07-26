@@ -1683,6 +1683,11 @@ _purifyQuotedString(NSMutableString *quotedString) {
     else if ([key isEqualToString:@"uid"]) {
       [fetch setObject:_parseUnsigned(self) forKey:key];
     }
+    else if ([key isEqualToString:@"modseq"]) {
+      _consumeIfMatch(self, '(');
+      [fetch setObject:_parseUnsigned(self) forKey:key];
+      _consumeIfMatch(self, ')');
+    }
     else if ([key isEqualToString:@"rfc822.size"]) {
       [fetch setObject:_parseUnsigned(self) forKey:key];
     }

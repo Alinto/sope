@@ -379,6 +379,16 @@ andComparisonSelector:(SEL)lselector {
     [search appendString:[lvalue stringValue]];
     return nil;
   }
+
+  if ([lkey isEqualToString:@"MODSEQ"]) {
+    if (!sel_eq(lselector, EOQualifierOperatorGreaterThanOrEqualTo)) {
+      return [self invalidImap4SearchQualifier:@"'MODSEQ' can only take 'EOQualifierOperatorGreaterThanOrEqualTo' as qualifier operator"];
+    }
+    
+    [search appendString:@"MODSEQ "];
+    [search appendString:[lvalue stringValue]];
+    return nil;
+  }
   
   if ([lkey isEqualToString:@"SIZE"]) {
     if (sel_eq(lselector, EOQualifierOperatorGreaterThan)

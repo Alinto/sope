@@ -44,7 +44,8 @@ static NSArray *AllowedSortKeys = nil;
   
   AllowedSortKeys = [[NSArray alloc] initWithObjects:
                                          @"ARRIVAL", @"CC", @"DATE", @"FROM",
-                                         @"SIZE", @"SUBJECT", @"TO", nil];
+                                     @"SIZE", @"SUBJECT", @"TO", @"MODSEQ",
+                                     nil];
 }
 
 - (NSString *)imap4SortString {

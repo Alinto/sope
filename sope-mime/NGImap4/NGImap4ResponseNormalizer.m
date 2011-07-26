@@ -399,6 +399,11 @@ static int      LogImapEnabled = -1;
 	  values[count] = objForKey(obj, @selector(objectForKey:), key);
 	  count++;
 	}
+        else if (klen == 6 && [key isEqualToString:@"modseq"]) {
+	  keys[count] = @"modseq";
+	  values[count] = objForKey(obj, @selector(objectForKey:), key);
+	  count++;
+	}
 	break;
       case 'r':
 	if (klen == 6 && [key isEqualToString:@"rfc822"]) {
