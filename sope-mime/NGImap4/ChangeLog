@@ -1,5 +1,8 @@
 2011-07-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* NGImap4Connection.m (-enableExtension:): new method to issue a
+	"ENABLE [extension]" command.
+
 	* NGImap4ResponseParser.m (_parseNumberUntaggedResponse:): added
 	support for "MODSEQ" attribute.
 

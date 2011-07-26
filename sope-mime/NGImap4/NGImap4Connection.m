@@ -64,6 +64,8 @@ static NSString *imap4Separator = nil;
   if ((self = [super init])) {
     self->client   = [_client retain];
     self->password = [_pwd    copy];
+
+    self->enabledExtensions = [NSMutableArray new];
     
     self->creationTime = [[NSDate alloc] init];
     
@@ -85,6 +87,7 @@ static NSString *imap4Separator = nil;
   [self->uidSortOrdering release];
   [self->creationTime    release];
   [self->subfolders      release];
+  [self->enabledExtensions release];
   [self->password        release];
   [self->client          release];
   [super dealloc];
@@ -208,6 +211,25 @@ static NSString *imap4Separator = nil;
   return [NSException exceptionWithName:@"NGImap4Exception"
 		      reason:r userInfo:ui];
 }
+
+/* extensions methods */
+- (NSException *)enableExtension:(NSString *)_extension {
+  NSDictionary *result;
+
+  if ([self->enabledExtensions containsObject: _extension])
+    return nil;
+
+  result = [self->client enable: _extension];
+  if (![[result valueForKey:@"result"] boolValue]) {
+    return (id)[self errorForResult:result 
+		     text:@"Failed to enable requested extension"];
+  }
+
+  [self->enabledExtensions addObject: _extension];
+
+  return nil;
+}
+
 
 /* IMAP4 path/url processing methods */
 

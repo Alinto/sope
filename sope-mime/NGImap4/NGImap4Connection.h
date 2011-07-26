@@ -39,7 +39,7 @@
    ?
 */
 
-@class NSString, NSDate, NSArray, NSDictionary, NSURL, NSMutableDictionary;
+@class NSString, NSDate, NSArray, NSDictionary, NSMutableArray, NSURL, NSMutableDictionary;
 @class NSException, NSData;
 @class NGImap4Client;
 
@@ -50,6 +50,9 @@
   NSString      *password;
   NSDate        *creationTime;
   NSString      *separator;
+
+  /* Enabled extensions cache */
+  NSMutableArray *enabledExtensions;
 
   /* hierarchy cache */
   NSMutableDictionary  *subfolders;
