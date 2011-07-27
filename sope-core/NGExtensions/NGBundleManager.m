@@ -28,11 +28,6 @@
 #import <EOControl/EOQualifier.h>
 #include <ctype.h>
 
-#if 0 && GNUSTEP_BASE_LIBRARY /* supported in repository since 19990916-2254-MET */
-/* hack until GNUstep provides the necessary callbacks */
-#  define NSNonRetainedObjectMapValueCallBacks NSObjectMapValueCallBacks
-#endif
-
 #if NeXT_Foundation_LIBRARY || COCOA_Foundation_LIBRARY
 #  include <NGExtensions/NGPropertyListParser.h>
 #endif
@@ -2010,7 +2005,11 @@ static BOOL debugLanguageLookup = NO;
   
   sprintf (buffer,
 	   "<%s %p fullPath: %s infoDictionary: %p loaded=%s>",
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
+	   (char*)class_getName([self class]),
+#else
 	   (char*)object_get_class_name(self),
+#endif
 	   self,
 	   [[self bundlePath] cString],
 	   [self infoDictionary], 

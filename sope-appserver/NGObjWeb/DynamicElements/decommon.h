@@ -22,7 +22,6 @@
 #ifndef __NGObjWeb_DynElem_common_H__
 #define __NGObjWeb_DynElem_common_H__
 
-#include <objc/objc-api.h>
 #import <Foundation/Foundation.h>
 
 #if !LIB_FOUNDATION_LIBRARY && !GNUSTEP_BASE_LIBRARY

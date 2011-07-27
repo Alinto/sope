@@ -38,7 +38,7 @@
 #include "common.h"
 #include <time.h>
 
-#if GNU_RUNTIME
+#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__)
 #  include <objc/sarray.h>
 #endif
 

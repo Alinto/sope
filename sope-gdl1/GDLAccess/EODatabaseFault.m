@@ -66,15 +66,22 @@ typedef struct {
     
     if (fault == nil)
         return nil;
-    
-    if ([fault class]->instance_size < ((Class)self)->instance_size) {
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
+    if (class_getInstanceSize([fault class]) < class_getInstanceSize([self class])) {
+#else
+	if ([fault class]->instance_size < ((Class)self)->instance_size) {
+#endif
         [fault autorelease];
 	[NSException raise:NSInvalidArgumentException
 		     format:
 		       @"Instances from class %@ must be at least %d in size "
 		       @"to fault",
-		       NSStringFromClass([fault class]), 
-		       ((Class)self)->instance_size];
+		       NSStringFromClass([fault class]),
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+		       class_getInstanceSize([self class])];
+#else
+			   ((Class)self)->instance_size];
+#endif
     }
     fault->faultResolver = [[EOObjectFault alloc] initWithPrimaryKey:key
         entity:entity databaseChannel:channel zone:zone 
@@ -125,14 +132,22 @@ typedef struct {
     
   fault = [NSMutableArray allocWithZone:zone];
 
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
+  if (class_getInstanceSize([fault class]) < class_getInstanceSize([self class])) {
+#else
   if ([fault class]->instance_size < ((Class)(self))->instance_size) {
+#endif
         (void)[fault autorelease];
 	[NSException raise:NSInvalidArgumentException
 		     format:
                     @"Instances from class %s must be at least %d "
                     @"in size to fault",
                     NSStringFromClass([fault class]),
-                    ((Class)self)->instance_size];
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
+                    class_getInstanceSize([self class])];
+#else
+					((Class)self)->instance_size];
+#endif
   }
   fault->faultResolver = [[EOArrayFault alloc] initWithQualifier:qualifier
         fetchOrder:fetchOrder databaseChannel:channel zone:zone 

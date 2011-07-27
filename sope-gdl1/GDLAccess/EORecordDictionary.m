@@ -39,6 +39,13 @@
 #  include <NGExtensions/NGObjectMacros.h>
 #endif
 
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#  include <objc/runtime.h>
+#  define method_get_imp method_getImplementation
+#  define class_get_instance_method class_getInstanceMethod
+#endif
+
+
 #include "EORecordDictionary.h"
 
 @implementation EORecordDictionary

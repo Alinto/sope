@@ -19,7 +19,6 @@
   02111-1307, USA.
 */
 
-#include <objc/objc-api.h>
 #include <NGStreams/NGConcreteStreamFileHandle.h>
 #include <NGStreams/NGStreamProtocols.h>
 #include <NGStreams/NGStreamExceptions.h>

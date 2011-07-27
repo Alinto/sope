@@ -28,7 +28,6 @@
 #  include <objc/gc.h>
 #endif
 
-#import <objc/objc-api.h>
 #include "common.h"
 #import "NSString+PostgreSQL72.h"
 

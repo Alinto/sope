@@ -21,7 +21,6 @@
 
 #include "SoObjCClass.h"
 #include "SoSelectorInvocation.h"
-#include <NGExtensions/NGObjCRuntime.h>
 #include <NGExtensions/NSString+Ext.h>
 #include "common.h"
 
@@ -38,6 +37,39 @@
   return [self initWithSoSuperClass:_soClass class:nil];
 }
 
+- (NSEnumerator *) _methodsFromClass: (Class) c {
+  NSMutableArray *a;
+  int i;
+
+  a = [NSMutableArray array];
+
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+  Method *p, *m;
+  int count;
+   
+  p = m = class_copyMethodList(c, &count);
+
+  for (i = 0; i < count; i++) {
+    [a addObject: NSStringFromSelector(method_getName(*m))];
+    m++
+  }
+
+  free(p);
+#else
+  struct objc_method_list *methods; 
+  Method method; 
+  for (methods = c->methods; methods != NULL; methods = methods->method_next) {
+    for (i = 0; i < methods->method_count; i++) {
+	  method = &(methods->method_list[i]);
+      [a addObject: NSStringFromSelector(method->method_name)];
+	}
+  }
+
+#endif
+
+  return [a objectEnumerator];
+}
+
 - (void)rescanClass {
   NSMutableDictionary *prefixMap;
   NSEnumerator *e;
@@ -47,7 +79,7 @@
   
   [self debugWithFormat:@"scanning ObjC class %@ for SoObject methods ...",
 	  NSStringFromClass(self->clazz)];
-  e = [self->clazz methodNameEnumerator];
+  e = [self _methodsFromClass: self->clazz];
   while ((methodName = [e nextObject])) {
     SoSelectorInvocation *invocation;
     NSString *methodPrefix;

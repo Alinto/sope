@@ -70,7 +70,7 @@ static Class NSDateClass = Nil;
 - (BOOL)isComponentClass:(Class)_clazz {
   if (_clazz == Nil) 
     return NO;
-  while ((_clazz = _clazz->super_class) != Nil) {
+  while ((_clazz = class_getSuperclass(_clazz)) != Nil) {
     if (_clazz == [WOComponent    class]) return YES;
     if (_clazz == [WODirectAction class]) return NO;
     if (_clazz == [NSObject       class]) return NO;

@@ -25,22 +25,29 @@
 #include "common.h"
 #include <string.h>
 
-#if LIB_FOUNDATION_BOEHM_GC
-#  if LIB_FOUNDATION_LIBRARY
-#    include <extensions/GarbageCollector.h>
-#  else
-#    error no BoehmGC support on this Foundation!
-#  endif
+#if __GNU_LIBOBJC__ == 20100911
+#define METHOD_NULL NULL
+#define object_is_instance(XXX) (XXX != nil)
+#define class_get_class_method    class_getClassMethod
+#define class_get_instance_method class_getInstanceMethod
+#define sel_get_uid               sel_getUid
+#define method_get_imp			  method_getImplementation	
+typedef struct objc_method      *Method_t;
+
 #endif
 
-#if NeXT_RUNTIME || APPLE_RUNTIME
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
 #  include <objc/objc.h>
 #  include <objc/objc-api.h>
+#  define object_is_instance(XXX) (XXX != nil)
+#if defined(APPLE_RUNTIME)
 #  include <objc/objc-class.h>
-
-#  define METHOD_NULL NULL
 #  define object_is_instance(XXX) \
-     ((XXX != nil) && CLS_ISCLASS(*((Class *)XXX)))
+    ((XXX != nil) && CLS_ISCLASS(*((Class *)XXX)))
+#endif
+
+#define method_get_imp            method_getImplementation  
+#  define METHOD_NULL NULL
 #  define sel_get_uid               sel_getUid
 #  define class_get_class_method    class_getClassMethod
 #  define class_get_instance_method class_getInstanceMethod
@@ -385,8 +392,8 @@ static inline void _fillInfo(WOKeyPathAssociation *self, id object,
     return;
 
   {
-#if NeXT_RUNTIME
-    struct objc_method *method = NULL;
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+	struct objc_method *method = NULL;
 #else
     Method_t method = METHOD_NULL;
 #endif
@@ -471,12 +478,8 @@ static inline void _fillInfo(WOKeyPathAssociation *self, id object,
     info->isFault = [object isFault];
     
     if (method != METHOD_NULL) {
-#if NeXT_RUNTIME
-      info->access.method = method->method_imp;
-#else
       info->access.method = method_get_imp(method);
-#endif
-      info->retType = *(method->method_types);
+      info->retType = *(method_getTypeEncoding(method));
     }
 
 #if HEAVY_DEBUG
