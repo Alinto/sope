@@ -1171,7 +1171,16 @@ _purifyQuotedString(NSMutableString *quotedString) {
 
   while (_la(self, 0) == ' ') {
     _consume(self, 1);
-    [msn addObject:_parseUnsigned(self)];
+    if (_la(self, 0) == '(') {
+      _consume(self, 1);
+      if (!_matchesString(self, "MODSEQ "))
+        return NO;
+      _consume(self, 7);
+      [result_ addObject:_parseUnsigned(self) forKey:@"modseq"];
+      _consume(self, 1); /* final ')' */
+    }
+    else
+      [msn addObject:_parseUnsigned(self)];
   }
   _parseUntil(self, '\n');
   [result_ addObject:msn forKey:@"sort"];
