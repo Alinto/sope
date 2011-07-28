@@ -51,7 +51,7 @@
 
   for (i = 0; i < count; i++) {
     [a addObject: NSStringFromSelector(method_getName(*m))];
-    m++
+    m++;
   }
 
   free(p);
