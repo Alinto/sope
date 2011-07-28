@@ -1,3 +1,8 @@
+2011-07-27  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4ResponseParser.m (_parseSortResponseIntoHashMap:): handle
+	the "MODSEQ" element from the response, if present.
+
 2011-07-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGImap4Connection.m (-enableExtension:): new method to issue a
