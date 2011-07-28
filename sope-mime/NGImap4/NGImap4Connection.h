@@ -89,6 +89,9 @@
 
 - (void)flushMailCaches;
 
+/* extensions methods */
+- (NSException *)enableExtension:(NSString *)_extension;
+
 /* folder operations */
 
 - (NSArray *)subfoldersForURL:(NSURL *)_url;
