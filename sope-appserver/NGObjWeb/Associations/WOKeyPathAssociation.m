@@ -479,7 +479,11 @@ static inline void _fillInfo(WOKeyPathAssociation *self, id object,
     
     if (method != METHOD_NULL) {
       info->access.method = method_get_imp(method);
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
       info->retType = *(method_getTypeEncoding(method));
+#else
+	  info->retType = *(method->method_types);
+#endif
     }
 
 #if HEAVY_DEBUG
