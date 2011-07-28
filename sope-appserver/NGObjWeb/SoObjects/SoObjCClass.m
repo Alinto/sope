@@ -57,7 +57,7 @@
   free(p);
 #else
   struct objc_method_list *methods; 
-  Method method; 
+  Method_t method; 
   for (methods = c->methods; methods != NULL; methods = methods->method_next) {
     for (i = 0; i < methods->method_count; i++) {
 	  method = &(methods->method_list[i]);
