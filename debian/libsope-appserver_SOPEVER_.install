@@ -1,10 +1,6 @@
 usr/lib/libNGObjWeb.so.*
-usr/lib/libWOXML.so.*
 usr/lib/libWOExtensions.so.*
 usr/lib/libWEExtensions.so.*
-usr/lib/libNGXmlRpc.so.*
-usr/lib/libSoOFS.so.*
-usr/lib/libWEPrototype.so.*
 usr/lib/GNUstep/Libraries/Resources/NGObjWeb/*
 usr/lib/GNUstep/SoProducts-*/*
 usr/lib/GNUstep/WOxElemBuilders-*/*
