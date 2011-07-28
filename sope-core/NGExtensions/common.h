@@ -41,9 +41,13 @@
 #endif
 
 #if GNU_RUNTIME
+#if __GNU_LIBOBJC__ == 20100911
+#  include <objc/runtime.h>
+#else
 #  import <objc/objc-api.h>
 #  import <objc/objc.h>
 #  import <objc/encoding.h>
+#endif
 #endif
 
 #if LIB_FOUNDATION_LIBRARY

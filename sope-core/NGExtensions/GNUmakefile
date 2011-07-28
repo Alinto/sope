@@ -36,7 +36,6 @@ libNGExtensions_HEADER_FILES = \
 	NGHashMap.h				\
 	NGMemoryAllocation.h			\
 	NGMerging.h				\
-	NGObjCRuntime.h				\
 	NGQuotedPrintableCoding.h		\
 	NGStack.h				\
 	NGObjectMacros.h			\
@@ -56,7 +55,6 @@ libNGExtensions_OBJC_FILES = \
 	NGFileManagerURL.m			\
 	NGHashMap.m				\
 	NGMerging.m				\
-	NGObjCRuntime.m				\
 	NGQuotedPrintableCoding.m		\
 	NGStack.m				\
 	NGCalendarDateRange.m			\

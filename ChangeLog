@@ -1,3 +1,11 @@
+2011-07-27  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* Dropped useless stuff in SOPE
+	* Made sure everything would compile and work
+	  on GCC's runtime (< 4.6 and >= 4.6) and the
+	  GNUstep runtime (libobjc2-1.5). This is an initial effort
+	  as things should still be cleaned up in SOPE.
+
 2011-07-18  Francis Lachapelle  <flachapelle@inverse.ca>
 
 	* NGUrlFormCoder.m (NGDecodeUrlFormParameters): applied a patch from

@@ -27,13 +27,9 @@
 #ifndef ___PostgreSQL_common_H___
 #define ___PostgreSQL_common_H___
 
-#import <objc/objc-api.h>
-
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
-
-#import <Foundation/Foundation.h>
 
 #if !LIB_FOUNDATION_LIBRARY
 #  include <NGExtensions/NGObjectMacros.h>

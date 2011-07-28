@@ -29,7 +29,6 @@
 
 #include "NSString+MySQL4.h"
 #include "common.h"
-#import <objc/objc-api.h>
 
 @implementation NSString(MySQL4MiscStrings)
 

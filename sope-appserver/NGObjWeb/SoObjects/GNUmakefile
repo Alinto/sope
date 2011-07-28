@@ -57,7 +57,6 @@ SoObjects_OBJC_FILES = \
 	SoObject.m			\
 	SoObjectMethodDispatcher.m	\
 	SoObjectRequestHandler.m	\
-	SoObjectXmlRpcDispatcher.m	\
 	SoObjectSOAPDispatcher.m	\
 	SoPageInvocation.m		\
 	SoActionInvocation.m		\

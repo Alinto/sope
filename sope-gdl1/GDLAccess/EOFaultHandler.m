@@ -29,11 +29,24 @@
 #include "EOFault.h"
 #include "common.h"
 
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#  define METHOD_NULL NULL
+#  define class_get_super_class class_getSuperclass
+#  define object_is_instance(object) (object!=nil?YES:NO)
+#  define class_get_instance_method  class_getInstanceMethod
+typedef struct objc_method      *Method_t;
+#endif
+
 #if NeXT_RUNTIME
 #  if !defined(METHOD_NULL)
 #    define METHOD_NULL NULL
 #  endif
 #endif
+
+#if defined (__GNUSTEP_RUNTIME__)
+#  define class_get_instance_method class_getInstanceMethod
+#endif
+
 
 @implementation EOFaultHandler
 
@@ -65,7 +78,9 @@
 /* fault reflection */
 
 - (Class)classForFault:(EOFault *)_fault {
-#if GNU_RUNTIME
+
+#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__)
+
   return (object_is_instance(_fault))
     ? [self targetClass]
     : (*(Class *)_fault);
@@ -79,7 +94,7 @@
   Class class;
 
   /* first check whether fault itself responds to selector */
-#if GNU_RUNTIME
+#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__)
   if (class_get_instance_method(*(Class *)_fault, _selector) != METHOD_NULL)
     return YES;
 #else
@@ -88,7 +103,7 @@
 
   /* then check whether the target class does */
   class = [self targetClass];
-#if GNU_RUNTIME
+#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__)
   return (class_get_instance_method(class, _selector) != NULL) ? YES : NO;
 #else
 #  warning TODO: use NeXT/Apple runtime function
@@ -99,7 +114,7 @@
 - (BOOL)conformsToProtocol:(Protocol *)_protocol forFault:(EOFault *)_fault {
   Class class, sClass;
 
-#if GNU_RUNTIME
+#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__) && __GNU_LIBOBJC__ != 20100911
   struct objc_protocol_list* protos;
   int i;
   
@@ -123,7 +138,7 @@
 - (BOOL)isKindOfClass:(Class)_class forFault:(EOFault *)_fault {
   Class class;
 
-#if GNU_RUNTIME
+#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__)
   class = object_is_instance(_fault) ? [self targetClass] : (Class)_fault;
   for (; class != Nil; class = class_get_super_class(class)) {
     if (class == _class)
@@ -138,7 +153,7 @@
 
 - (BOOL)isMemberOfClass:(Class)_class forFault:(EOFault *)_fault {
   Class class;
-#if GNU_RUNTIME
+#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__)
   class = object_is_instance(_fault) ? [self targetClass] : (Class)_fault;
 #else
 #  warning TODO: add implementation for NeXT/Apple runtime!
@@ -150,7 +165,7 @@
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)_selector
   forFault:(EOFault *)_fault
 {
-#if NeXT_Foundation_LIBRARY
+#if NeXT_Foundation_LIBRARY || defined(__GNUSTEP_RUNTIME__)
   // probably incorrect
   return [_fault methodSignatureForSelector:_selector];
 #else
@@ -165,7 +180,8 @@
 #endif
 
   /* first check for EOFault's own methods */
-  
+
+#if __GNU_LIBOBJC__ != 20100911
   if (types == NULL) {
     // lookup method for selector
     struct objc_method *mth;
@@ -181,7 +197,8 @@
     mth = class_get_instance_method([self targetClass], _selector);
     if (mth) types = mth->method_types;
   }
-  
+#endif 
+ 
 #if GNU_RUNTIME
   // GNU runtime selectors may be typed, a lookup may not be necessary
   if (types == NULL)

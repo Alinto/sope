@@ -24,8 +24,15 @@
 #include "common.h"
 
 #if GNU_RUNTIME
-#  include <objc/objc-api.h>
+
+#if __GNU_LIBOBJC__ == 20100911
+#  define sel_get_any_uid sel_getUid
+#  include <objc/runtime.h>
+#else
 #  include <objc/encoding.h>
+#  include <objc/objc-api.h>
+#endif
+
 #endif
 
 static EONull *null = nil;

@@ -26,13 +26,9 @@
 #ifndef ___MySQL4_common_H___
 #define ___MySQL4_common_H___
 
-#import <objc/objc-api.h>
-
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
-
-#import <Foundation/Foundation.h>
 
 #include <GDLAccess/GDLAccess.h>
 #include <NGExtensions/NGExtensions.h>

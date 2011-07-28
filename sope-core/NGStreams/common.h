@@ -40,9 +40,13 @@
 #endif
 
 #ifdef GNU_RUNTIME
+#if __GNU_LIBOBJC__ == 20100911
+#  include <objc/runtime.h>
+#else
 #  include <objc/objc-api.h>
 #  include <objc/objc.h>
 #  include <objc/encoding.h>
+#endif
 #endif
 
 #if WITH_FOUNDATION_EXT
