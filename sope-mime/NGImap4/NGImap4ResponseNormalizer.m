@@ -434,6 +434,13 @@ static int      LogImapEnabled = -1;
 	  count++;
 	}
 	break;
+      case 'v':
+	if ([key isEqualToString:@"vanished"]) {
+	  keys[count]   = key;
+	  values[count] = objForKey(obj, @selector(objectForKey:), key);
+	  count++;
+	}
+	break;
       }
     }
     
@@ -488,7 +495,7 @@ static int      LogImapEnabled = -1;
   NSMutableDictionary *result;
   id                  obj;
   NSEnumerator        *enumerator;
-  NSMutableArray      *fetchResponseRecords;
+  NSMutableArray      *fetchResponseRecords, *fetchResponseVanishedRecords;
 
   // TODO: describe what the generic normalize does.
   //       Q: do we need to run this before the following section or can we
@@ -510,12 +517,23 @@ static int      LogImapEnabled = -1;
     [fetchResponseRecords addObject:entry];
     [entry release]; entry = nil;
   }
-  
+
   /* make response array immutable and add to normalized result */
   obj = [fetchResponseRecords copy];
   [fetchResponseRecords release];
   [result setObject:obj forKey:@"fetch"];
   [obj release];
+  
+  /* walk over each response tag which is keyed by 'vanished' in the hashmap */
+  fetchResponseVanishedRecords = [[NSMutableArray alloc] initWithCapacity:512];
+  enumerator = [_map objectEnumeratorForKey:@"vanished"];
+  while ((obj = [enumerator nextObject]) != nil) {
+    [fetchResponseVanishedRecords addObjectsFromArray:obj];
+  }
+
+  /* add response array to normalized result */
+  [result setObject:fetchResponseVanishedRecords forKey:@"vanished"];
+  [fetchResponseVanishedRecords release];
   
   return [[result copy] autorelease];
 }

@@ -942,6 +942,25 @@ static NSMutableDictionary *namespaces;
   return [result autorelease];
 }
 
+- (NSDictionary *)fetchVanished:(uint64_t)_modseq
+{
+  NSAutoreleasePool *pool;
+  NSString          *cmd;
+  NSDictionary      *result;
+  id fetchres;
+  
+  pool = [[NSAutoreleasePool alloc] init];
+  
+  cmd  = [NSString stringWithFormat:
+                     @"UID FETCH 1:* (UID) (CHANGEDSINCE %llu VANISHED)",
+                   _modseq];
+  fetchres = [self processCommand:cmd];
+  result   = [[self->normer normalizeFetchResponse:fetchres] retain];
+  [pool release];
+  
+  return [result autorelease];
+}
+
 - (NSDictionary *)storeUid:(unsigned)_uid add:(NSNumber *)_add
   flags:(NSArray *)_flags
 {

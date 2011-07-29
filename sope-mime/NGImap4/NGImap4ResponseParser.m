@@ -45,6 +45,7 @@
 - (BOOL)_parseQuotaRootResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseStatusResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseThreadResponseIntoHashMap:(NGMutableHashMap *)result_;
+- (BOOL)_parseVanishedResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseByeUntaggedResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseACLResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseMyRightsResponseIntoHashMap:(NGMutableHashMap *)result_;
@@ -669,6 +670,11 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
 
   case 'T':
     if ([self _parseThreadResponseIntoHashMap:result_])    // la: 6
+      return;
+    break;
+    
+  case 'V':
+    if ([self _parseVanishedResponseIntoHashMap:result_])    // la: 6
       return;
     break;
     
@@ -1335,6 +1341,59 @@ _purifyQuotedString(NSMutableString *quotedString) {
   }
   _parseUntil(self, '\n');
   [result_ addObject:msn forKey:@"thread"];
+  return YES;
+}
+
+- (BOOL)_parseVanishedResponseIntoHashMap:(NGMutableHashMap *)result_ {
+  // VANISHED (EARLIER) 1:53,55:56,58:113,115,120,126,128'
+  NSMutableArray *uids;
+  NSNumber *uid;
+  NSUInteger count, max;
+
+  if (!_matchesString(self, "VANISHED"))
+    return NO;
+  
+  _consume(self, 8);
+
+  if (_la(self, 0) == ' ') {
+    _consume(self, 1);
+  }
+
+  if (_la(self, 0) == '(') {
+    _consume(self, 1);
+    if (!_matchesString(self, "EARLIER"))
+      return NO;
+    _consume(self, 7); /* EARLIER */
+    _consumeIfMatch(self, ')');
+    if (_la(self, 0) == ' ') {
+      _consume(self, 1);
+    }
+  }
+
+  uids = [NSMutableArray new];
+  
+  while ((_la(self, 0) != '\n')) {
+    uid = _parseUnsigned(self);
+    [uids addObject:uid];
+    if (_la(self, 0) == ':') {
+      _consume(self, 1);
+      count = [uid unsignedIntValue] + 1;
+      uid = _parseUnsigned(self);
+      max = [uid unsignedIntValue];
+      while (count < max) {
+        [uids addObject: [NSNumber numberWithUnsignedInt: count]];
+        count++;
+      }
+      [uids addObject: uid];
+    }
+    if (_la(self, 0) == ',') {
+      _consume(self, 1);
+    }
+  }
+  _consume(self, 1);
+  [result_ addObject:uids forKey:@"vanished"];
+  [uids release];
+
   return YES;
 }
 
