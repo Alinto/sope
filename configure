@@ -426,7 +426,6 @@ checkLinking() {
   cd $tmpdir
   cp ../maintenance/dummytool.c .
 
-  OLDLIBS=$LIBS
   for LIB in $1;do
     LIBS="$LIBS -l${LIB}"
   done
@@ -459,14 +458,11 @@ checkLinking() {
     else
       echo "failed to link $2 library: $1"
       cfgwrite "HAS_LIBRARY_$1=no"
-      LIBS=$OLDLIBS
     fi
   fi
   
   cd $oldpwd
   rm -rf $tmpdir
-
-  return $LINK_RESULT
 }
 
 checkDependencies() {
@@ -474,10 +470,7 @@ checkDependencies() {
   cfgwrite "# library dependencies"
   checkLinking "xml2"        optional;
   checkLinking "ldap"        optional;
-  checkLinking "gnutls"      optional;
-  if test $? != 0; then
-      checkLinking "ssl"      required;
-  fi
+  checkLinking "ssl"         required; # TODO: make optional
   checkLinking "pq"          optional;
 #  checkLinking "sqlite3"     optional;
   cfgwrite "HAS_LIBRARY_sqlite3=no"
