@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
+  Copyright (C) 2011 Jeroen Dekkers <jeroen@dekkers.ch>
 
   This file is part of SOPE.
 
@@ -22,7 +23,9 @@
 #include <NGStreams/NGActiveSSLSocket.h>
 #include "common.h"
 
-#if HAVE_OPENSSL
+#if HAVE_GNUTLS
+#  include <gnutls/gnutls.h>
+#elif HAVE_OPENSSL
 #  define id openssl_id
 #  include <openssl/ssl.h>
 #  include <openssl/err.h>
@@ -35,7 +38,144 @@
 
 @implementation NGActiveSSLSocket
 
-#if HAVE_OPENSSL
+#if HAVE_GNUTLS
+- (id)initWithDomain:(id<NGSocketDomain>)_domain {
+  if ((self = [super initWithDomain:_domain])) {
+    //BIO *bio_err;
+    static BOOL didGlobalInit = NO;
+    int ret;
+
+    if (!didGlobalInit) {
+      /* Global system initialization*/
+      if (gnutls_global_init()) {
+	[self release];
+	return nil;
+      }
+
+      didGlobalInit = YES;
+    }
+
+    ret = gnutls_certificate_allocate_credentials ((gnutls_certificate_credentials_t *) &self->cred);
+    if ( ret)
+      {
+	NSLog(@"ERROR(%s): couldn't create GnuTLS credentials (%s)",
+	      __PRETTY_FUNCTION__, gnutls_strerror(ret));
+	[self release];
+	return nil;
+      }
+
+    self->session = NULL;
+  }
+  return self;
+}
+
+- (void)dealloc {
+  if (self->session) {
+    gnutls_deinit((gnutls_session_t) self->session);
+    self->session = NULL;
+  }
+  if (self->cred) {
+    gnutls_certificate_free_credentials((gnutls_certificate_credentials_t) self->cred);
+    self->cred = NULL;
+  }
+  [super dealloc];
+}
+
+/* basic IO, reading and writing bytes */
+
+- (unsigned)readBytes:(void *)_buf count:(unsigned)_len {
+  ssize_t ret;
+
+  if (self->session == NULL)
+    // should throw error
+    return NGStreamError;
+
+
+  ret = gnutls_record_recv((gnutls_session_t) self->session, _buf, _len);
+  if (ret < 0)
+    return NGStreamError;
+  else
+    return ret;
+}
+- (unsigned)writeBytes:(const void *)_buf count:(unsigned)_len {
+  ssize_t ret;
+
+  if (self->session == NULL)
+    // should throw error
+    return NGStreamError;
+
+  ret = gnutls_record_send((gnutls_session_t) self->session, _buf, _len);
+  if (ret < 0)
+    return NGStreamError;
+  else
+    return ret;
+}
+
+/* connection and shutdown */
+
+- (BOOL)markNonblockingAfterConnect {
+  return NO;
+}
+
+- (BOOL) startTLS
+{
+  int ret;
+
+  ret = gnutls_init((gnutls_session_t *) &self->session, GNUTLS_CLIENT);
+  if (ret) {
+    // should set exception !
+    NSLog(@"ERROR(%s): couldn't create GnuTLS session (%s)",
+          __PRETTY_FUNCTION__, gnutls_strerror(ret));
+    return NO;
+  }
+
+  gnutls_priority_set_direct (session, "NORMAL", NULL);
+
+  ret = gnutls_credentials_set((gnutls_session_t) self->session, GNUTLS_CRD_CERTIFICATE, (gnutls_certificate_credentials_t) self->cred);
+  if (ret) {
+    // should set exception !
+    NSLog(@"ERROR(%s): couldn't set GnuTLS credentials (%s)",
+          __PRETTY_FUNCTION__, gnutls_strerror(ret));
+    return NO;
+  }
+
+  gnutls_transport_set_ptr((gnutls_session_t) self->session, (gnutls_transport_ptr_t) self->fd);
+
+  ret = gnutls_handshake((gnutls_session_t) self->session);
+  if (ret) {
+    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)",
+	  __PRETTY_FUNCTION__, gnutls_strerror(ret));
+    if (ret == GNUTLS_E_FATAL_ALERT_RECEIVED) {
+      NSLog(@"Alert: %s", gnutls_alert_get_name(gnutls_alert_get(self->session)));
+    }
+    [self shutdown];
+    return NO;
+  }
+
+  return YES;
+}
+
+- (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
+  if (![super primaryConnectToAddress:_address])
+    /* could not connect to Unix socket ... */
+    return NO;
+
+  return [self startTLS];
+}
+
+- (BOOL)shutdown {
+  if (self->session) {
+    gnutls_deinit((gnutls_session_t) self->session);
+    self->session = NULL;
+  }
+  if (self->cred) {
+    gnutls_certificate_free_credentials((gnutls_certificate_credentials_t) self->cred);
+    self->cred = NULL;
+  }
+  return [super shutdown];
+}
+
+#elif HAVE_OPENSSL
 
 #if STREAM_BIO
 static int streamBIO_bwrite(BIO *, const char *, int) {

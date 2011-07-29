@@ -1,3 +1,8 @@
+2011-07-29  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* Added patch from http://www.sogo.nu/bugs/view.php?id=1390
+	  to add GNU TLS support.
+
 2011-07-27  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* Dropped useless stuff in SOPE
