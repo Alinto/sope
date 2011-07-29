@@ -1,3 +1,8 @@
+2011-07-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGImap4Client.m (-fetchVanished:): new method to retrieve
+	vanished uids.
+
 2011-07-27  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGImap4ResponseParser.m (_parseSortResponseIntoHashMap:): handle
