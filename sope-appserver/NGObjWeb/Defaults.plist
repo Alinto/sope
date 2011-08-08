@@ -244,18 +244,9 @@
   );
   
   SoRequestDispatcherRules = (
-    "result.isOFSWebMethod=1 => renderer = 'OFSWebMethodRenderer' ; very high",
-    "object.isOFSWebMethod=1 => renderer = 'SoTemplateRenderer' ; high",
-
-    "object.soClassName='OFSPropertyListObject' => renderer = 'SoTemplateRenderer' ; very high",
-
-    "object.soClassName='OFSFile'  => renderer = 'OFSFileRenderer'",
-    "object.soClassName='OFSImage' => renderer = 'OFSFileRenderer'",
-
     "context.soRequestType='WebDAV'  => renderer = 'SoWebDAVRenderer' ; high",
     "context.soRequestType='XML-RPC' => renderer = 'SoXmlRpcRenderer' ; high",
     "context.soRequestType='SOAP'    => renderer = 'SoSOAPRenderer' ;   high",
-    "context.soRequestType='WCAP'    => renderer = 'SoWCAPRenderer' ;   high",
     "*true* => renderer = 'SoDefaultRenderer' ; fallback",
     
     "request.isSoSOAPRequest=YES   => dispatcher = 'SoObjectSOAPDispatcher'",
