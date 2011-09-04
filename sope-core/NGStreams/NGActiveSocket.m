@@ -847,7 +847,7 @@
      : (int)(self->sendTimeout * 1000.0);
    
  wretry: 
-   writeResult = NGDescriptorSend(self->fd, _buf, _len, 0, timeOut);
+   writeResult = NGDescriptorSend(self->fd, _buf, _len, MSG_NOSIGNAL, timeOut);
    
    if (writeResult == 0) {
      [self _shutdownDuringOperation];
