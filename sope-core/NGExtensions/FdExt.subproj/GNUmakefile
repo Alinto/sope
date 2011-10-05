@@ -15,6 +15,7 @@ FdExt_OBJC_FILES = \
 	NSCalendarDate+matrix.m		\
 	NSData+gzip.m			\
 	NSData+misc.m			\
+	NSDictionary+KVC.m		\
 	NSDictionary+misc.m		\
 	NSEnumerator+misc.m		\
 	NSException+misc.m		\
