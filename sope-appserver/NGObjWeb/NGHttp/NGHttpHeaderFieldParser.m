@@ -190,7 +190,7 @@ static Class NSArrayClass = Nil;
     const unsigned char *startPos = NULL;
     
     // strip leading spaces
-    while ((*src != '\0') && isRfc822_LWSP(*src) && (len > 0)) {
+    while ((len > 0) && (*src != '\0') && isRfc822_LWSP(*src)) {
       src++;
       len--;
     }
@@ -199,7 +199,7 @@ static Class NSArrayClass = Nil;
     else
       startPos = src;
     
-    while ((*src != self->splitChar) && !isRfc822_LWSP(*src) && (len > 0)) {
+    while ((len > 0) && (*src != self->splitChar) && !isRfc822_LWSP(*src)) {
       src++;
       len--;
     }
@@ -235,7 +235,7 @@ static Class NSArrayClass = Nil;
       }
     }
   }
-  while ((*src != '\0') && (len > 0));
+  while ((len > 0) && (*src != '\0'));
 
   return array;
 }
