@@ -1,3 +1,9 @@
+2011-10-17  Francis Lachapelle  <flachapelle@inverse.ca>
+
+	* WebDAV/SoObjectWebDAVDispatcher.m
+	(-extractDestinationPath:fromContext:): Don't fail if none of the
+	source and destination port is undefined.
+
 2010-10-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* WOHttpAdaptor/WOHttpAdaptor.m (-acceptControlMessage:): added

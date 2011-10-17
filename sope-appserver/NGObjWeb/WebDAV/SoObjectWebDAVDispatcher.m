@@ -871,8 +871,9 @@ static NSTimeZone                *gmt      = nil;
 	  [srvURL absoluteString]];
   
   /* check whether URL is on the same server ... */
-  if (![[srvURL host] isEqualToString:[destURL host]] ||
-      ![[srvURL port] isEqual:[destURL port]]) {
+  if (![[srvURL host] isEqualToString:[destURL host]]
+      || !(([srvURL port] == [destURL port])
+           || [[srvURL port] isEqual:[destURL port]])) {
     /* 
        The WebDAV spec is not really clear on what we should return in this
        case? Let me know if anybody has a suggestion ...
