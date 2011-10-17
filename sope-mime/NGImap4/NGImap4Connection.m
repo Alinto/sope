@@ -780,22 +780,10 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   
   if (![self selectFolder:[self imap4FolderNameForURL:_url]])
     return [self errorCouldNotSelectURL:_url];
-  
-  /* fetch all sequence numbers */
-  
-  result = [client searchWithQualifier:nil /* means: ALL */];
-  if (![[result valueForKey:@"result"] boolValue]) {
-    return [self errorForResult:result 
-		 text:@"Could not search in IMAP4 folder"];
-  }
-  
-  result = [result valueForKey:@"search"];
-  if (![result isNotEmpty]) /* no messages in there, nothin' to be done */
-    return nil;
-  
+    
   /* store flags */
   
-  result = [[self client] storeFlags:_f forUIDs:result addOrRemove:YES];
+  result = [[self client] storeFlags:_f forUIDs:@"1:*" addOrRemove:YES];
   if (![[result valueForKey:@"result"] boolValue]) {
     return [self errorForResult:result 
 		 text:@"Failed to change flags of IMAP4 message"];

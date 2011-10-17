@@ -1,3 +1,9 @@
+2011-10-17  Francis Lachapelle  <flachapelle@inverse.ca>
+
+	* NGImap4Connection.m (-addFlags:toAllMessagesInURL:): instead of
+	fetching all the sequence numbers and storing the deleted flag on
+	the returned list, we specify a range that covers all messages (1:*).
+
 2011-07-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGImap4Client.m (-fetchVanished:): new method to retrieve
