@@ -845,7 +845,7 @@ static NSTimeZone                *gmt      = nil;
 {
   NSString *absDestURL;
   NSURL    *destURL, *srvURL;
-  
+
   if (path_) *path_ = nil;
   
   /* TODO: check proper permission prior attempting a move */
@@ -938,7 +938,9 @@ static NSTimeZone                *gmt      = nil;
   
   /* TODO: we should probably use a subcontext?! */
   [_ctx setObject:yesNum forKey:@"isDestinationPathLookup"];
-  *target_ = [root traversePathArray:targetPath
+
+  /* We check if the destination collection exist */
+  *target_ = [root traversePathArray: [targetPath subarrayWithRange: NSMakeRange(0, [targetPath count]-1)]
 		   inContext:_ctx
 		   error:&error
 		   acquire:NO];
