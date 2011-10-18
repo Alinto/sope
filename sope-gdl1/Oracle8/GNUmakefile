@@ -29,7 +29,7 @@ SOPE_ROOT=../..
 ORACLE_VERSION=$(shell echo /usr/include/oracle/* | awk '{ print $$NF }' | awk -F / '{ print $$NF }')
 #ORACLE_VERSION=10.2.0.3
 #ORACLE_VERSION=11.1.0.1
-ADDITIONAL_INCLUDE_DIRS += -I../../sope-core -I../../sope-core/NGExtensions -I../GDLAccess -I.. -I/usr/include/oracle/$(ORACLE_VERSION)/client
+ADDITIONAL_INCLUDE_DIRS += -I../../sope-core -I../../sope-core/NGExtensions -I../GDLAccess -I.. -I/usr/include/oracle/$(ORACLE_VERSION)/client64 -I/usr/include/oracle/$(ORACLE_VERSION)/client
 
 local_arch = $(subst 64,,$(shell uname -m))
 
