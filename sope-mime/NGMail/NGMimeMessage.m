@@ -52,7 +52,7 @@ static NGMimeType *defaultDataType = nil;
 }
 - (id)initWithHeader:(NGHashMap *)_header {
   if ((self = [super init])) {
-    self->header = [_header copy];
+    self->header = [_header retain];
   }
   return self;
 }
