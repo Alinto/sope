@@ -1,3 +1,9 @@
+2011-10-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMime/NGMimeMultipartBody.m (-initWithPart:): removed
+	useless constraint on the _part parameter, since it's not even
+	used.
+
 2011-10-26  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGMail/NGMimeMessage.m (-initWithHeader:): invoke

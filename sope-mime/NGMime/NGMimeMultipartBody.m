@@ -30,12 +30,6 @@
 }
 
 - (id)initWithPart:(id<NGMimePart>)_part {
-  if (_part == nil) {
-    NSLog(@"ERROR(%s): no part provided for multipart body !",
-	  __PRETTY_FUNCTION__);
-    [self release];
-    return nil;
-  }
   if ((self = [super init])) {
     self->flags.isParsed = YES;
   }
