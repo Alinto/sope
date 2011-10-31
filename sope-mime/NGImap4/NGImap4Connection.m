@@ -686,16 +686,26 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 }
 
 - (NSData *)fetchContentOfBodyPart:(NSString *)_partId atURL:(NSURL *)_url {
-  NSString *key;
+  return [self fetchContentOfBodyPart:_partId atURL:_url withPeek: NO];
+}
+
+- (NSData *)fetchContentOfBodyPart:(NSString *)_partId atURL:(NSURL *)_url
+                          withPeek:(BOOL)_withPeek {
+  NSString *bodyToken, *key;
   NSArray  *parts;
   id result, body;
   NSUInteger count, max;
   
   if (_partId == nil) return nil;
-  
-  key   = [@"body[" stringByAppendingString:_partId];
-  key   = [key stringByAppendingString:@"]"];
-  parts = [NSArray arrayWithObjects:&key count:1];
+
+  if (_withPeek) {
+    bodyToken = @"body.peek";
+  }
+  else {
+    bodyToken = @"body";
+  }
+  key = [NSString stringWithFormat: @"%@[%@]", bodyToken, _partId];
+  parts = [NSArray arrayWithObject:key];
   
   /* fetch */
   

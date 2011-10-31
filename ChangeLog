@@ -1,3 +1,9 @@
+2011-10-31  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Connection.m
+	(-fetchContentOfBodyPart:atURL:withPeek:): new method that enables
+	the use of either "BODY" or "BODY.PEEK" as body part prefixes.
+
 2011-10-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGMime/NGMimeMultipartBody.m (-initWithPart:): removed

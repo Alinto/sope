@@ -118,6 +118,8 @@
   parts:(NSArray *)_parts;
 - (id)fetchURL:(NSURL *)_url parts:(NSArray *)_parts;
 - (NSData *)fetchContentOfBodyPart:(NSString *)_partId atURL:(NSURL *)_url;
+- (NSData *)fetchContentOfBodyPart:(NSString *)_partId atURL:(NSURL *)_url
+                          withPeek:(BOOL)_withPeek;
 
 /* message flags */
 
