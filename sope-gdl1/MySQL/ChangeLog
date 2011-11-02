@@ -1,3 +1,8 @@
+2011-11-02  Francis Lachapelle  <flachapelle@inverse.ca>
+
+	* NSNumber+MySQL4Val.m (-stringValueForMySQL4Type:attribute:):
+	boolean values are now converted to 0 or 1, as in NSNumber+PGVal.m.
+
 2010-10-07  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* EOAttribute+MySQL4.m

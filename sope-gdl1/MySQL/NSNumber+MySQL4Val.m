@@ -77,7 +77,22 @@
   if ((len = [_type length]) == 0)
     return [self stringValue];
   if (len < 4)
-    return [self stringValue];
+    {
+#if GNUSTEP_BASE_LIBRARY
+    /*
+       on gstep-base -stringValue of bool's return YES or NO, which seems to
+       be different on Cocoa and liBFoundation.
+    */
+    {
+      Class BoolClass = Nil;
+      
+      if (BoolClass == Nil) BoolClass = NSClassFromString(@"NSBoolNumber");
+      if ([self isKindOfClass:BoolClass])
+	return [self boolValue] ? @"1" : @"0";
+    }
+#endif
+      return [self stringValue];
+    }
 
   c1 = [_type characterAtIndex:0];
   switch (c1) {
