@@ -475,6 +475,7 @@ static void DBTerminate()
   OracleAdaptor *o;
   
   const char *username, *password, *database;
+  sword status;
 
   if (![super openChannel] || [self isOpen])
     {
@@ -508,12 +509,13 @@ static void DBTerminate()
     database = [[o databaseName] UTF8String];
 
   // We logon to the database.
-  if (OCILogon(_oci_env, _oci_err, &_oci_ctx, (const OraText*)username, strlen(username),
-	       (const OraText*)password, strlen(password), (const OraText*)database, strlen(database)))
+  if ((status = OCILogon(_oci_env, _oci_err, &_oci_ctx, (const OraText*)username, strlen(username),
+	       (const OraText*)password, strlen(password), (const OraText*)database, strlen(database))))
     {
       NSLog(@"FAILED: OCILogon(). username = %s  password = %s"
 	    @"  database = %s", username, password, database);
-      [self closeChannel];
+      checkerr(_oci_err, status);
+	  [self closeChannel];
       return NO;
     }
   
