@@ -99,10 +99,8 @@ static id    (*ctor)(id, SEL, const char *) = NULL;
     
     /* TODO: creates too many autoreleased strings :-( */
     
-    s = [self stringByReplacingString:@"\\" withString:@"\\\\"];
-    
     if (EOExprClass == Nil) EOExprClass = [EOQuotedExpression class];
-    expr = [[EOExprClass alloc] initWithExpression:s quote:@"'" escape:@"''"];
+    expr = [[EOExprClass alloc] initWithExpression:self quote:@"'" escape:@"''"];
     s = [[expr expressionValueForContext:nil] retain];
     [expr release];
     return [s autorelease];
