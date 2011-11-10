@@ -1,3 +1,9 @@
+2011-11-10  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/NSString+PGVal.m
+	(stringValueForPostgreSQLType:attribute:): we don't need to escape
+	"\" with postgres.
+
 2011-10-31  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4Connection.m
