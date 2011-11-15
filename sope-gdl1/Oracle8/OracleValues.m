@@ -39,7 +39,7 @@
        on gstep-base -stringValue of bool's return YES or NO, which seems to
        be different on Cocoa and liBFoundation.
     */
-      Class BoolClass = Nil;
+      static Class BoolClass = Nil;
       if (BoolClass == Nil) BoolClass = NSClassFromString(@"NSBoolNumber");
       if ([self isKindOfClass: BoolClass])
         return [self boolValue] ? @"1" : @"0";

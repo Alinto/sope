@@ -131,7 +131,7 @@ static NSNumber *noNum        = nil;
        be different on Cocoa and liBFoundation.
     */
     {
-      Class BoolClass = Nil;
+      static Class BoolClass = Nil;
       
       if (BoolClass == Nil) BoolClass = NSClassFromString(@"NSBoolNumber");
       if ([self isKindOfClass:BoolClass])
