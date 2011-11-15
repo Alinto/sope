@@ -30,21 +30,20 @@
 - (NSString *) stringValueForOracleType: (ub2) theType
                               attribute: (EOAttribute *) theAttribute
 {
-
-  switch (theType)
-    {
-    case SQLT_INT:
 #if GNUSTEP_BASE_LIBRARY
-    /*
-       on gstep-base -stringValue of bool's return YES or NO, which seems to
-       be different on Cocoa and liBFoundation.
-    */
+  /*
+    on gstep-base -stringValue of bool's return YES or NO, which seems to
+    be different on Cocoa and liBFoundation.
+  */
+  if (theType == SQLT_INT)
+    {
       static Class BoolClass = Nil;
+  
       if (BoolClass == Nil) BoolClass = NSClassFromString(@"NSBoolNumber");
       if ([self isKindOfClass: BoolClass])
         return [self boolValue] ? @"1" : @"0";
-#endif
     }
+#endif
 
   return [self stringValue];
 }
