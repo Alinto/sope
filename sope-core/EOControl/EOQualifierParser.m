@@ -353,7 +353,6 @@ static NSString *_parseOp(const char *_buf, unsigned _bufLen,
   unsigned    length = 0;
   const char  *buf;
   unsigned    bufLen;
-  char        *cbuf;
 
   _setupLiterals();
   if (StringClass == Nil) StringClass = [NSString class];
