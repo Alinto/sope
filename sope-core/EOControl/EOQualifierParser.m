@@ -357,12 +357,10 @@ static NSString *_parseOp(const char *_buf, unsigned _bufLen,
 
   _setupLiterals();
   if (StringClass == Nil) StringClass = [NSString class];
-  
-  bufLen = [_qualifierFormat cStringLength];
-  cbuf   = malloc(bufLen + 1);
-  [_qualifierFormat getCString:cbuf]; cbuf[bufLen] = '\0';
-  buf = cbuf;
-  
+
+  buf = [_qualifierFormat cStringUsingEncoding: NSUTF8StringEncoding];
+  bufLen = strlen(buf);
+
   va_start(va, _qualifierFormat);
   qualifier =
     _parseQualifiers([EOQualifierVAParserContext contextWithVaList:&va],
@@ -391,7 +389,7 @@ static NSString *_parseOp(const char *_buf, unsigned _bufLen,
 	    __PRETTY_FUNCTION__);
     }
   }
-  free(cbuf);
+
   return qualifier;
 }
 
