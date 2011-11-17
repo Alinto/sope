@@ -763,7 +763,13 @@ static BOOL         useRelativeURLs = YES;
       Note: we always need to apply XML escaping (even though higher-level
             characters might be already encoded)!
     */
-    [r appendContentXMLString:[href stringValue]];
+    [r appendContentXMLString: [NSString stringWithFormat: @"%@/%@",
+					 [[href stringValue] stringByDeletingLastPathComponent],
+					 [[[href stringValue] lastPathComponent] stringByEscapingURL]]];
+
+    if ([[href stringValue] hasSuffix: @"/"])
+      [r appendContentXMLString: @"/"];
+
     [r appendContentString:@"</D:href>"];
     if (formatOutput) [r appendContentCharacter:'\n'];
   }
