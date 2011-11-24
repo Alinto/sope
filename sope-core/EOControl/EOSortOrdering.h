@@ -28,20 +28,10 @@
 
 @class NSDictionary, NSString;
 
-#if NeXT_RUNTIME || APPLE_RUNTIME
 #define EOCompareAscending  @selector(compareAscending:)
 #define EOCompareDescending @selector(compareDescending:)
 #define EOCompareCaseInsensitiveAscending  @selector(compareCaseInsensitiveAscending:)
 #define EOCompareCaseInsensitiveDescending @selector(compareCaseInsensitiveDescending:)
-#else
-#  ifdef __APPLE__
-#    warning did you define the proper runtime ? (eg APPLE_RUNTIME)
-#  endif
-EOControl_EXPORT SEL EOCompareAscending;
-EOControl_EXPORT SEL EOCompareDescending;
-EOControl_EXPORT SEL EOCompareCaseInsensitiveAscending;
-EOControl_EXPORT SEL EOCompareCaseInsensitiveDescending;
-#endif
 
 @interface EOSortOrdering : NSObject < EOKeyValueArchiving >
 {

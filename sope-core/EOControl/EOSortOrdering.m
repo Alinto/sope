@@ -30,21 +30,10 @@
 
 #ifndef SEL_EQ
 #  if GNU_RUNTIME
-#    define SEL_EQ(sel1,sel2) sel_eq(sel1,sel2)
+#    define SEL_EQ(sel1,sel2) sel_isEqual(sel1,sel2)
 #  else
 #    define SEL_EQ(sel1,sel2) (sel1 == sel2)
 #  endif
-#endif
-
-#if !NeXT_RUNTIME
-EOControl_DECLARE SEL EOCompareAscending                 = 
-  @selector(compareAscending:);
-EOControl_DECLARE SEL EOCompareDescending                = 
-  @selector(compareDescending:);
-EOControl_DECLARE SEL EOCompareCaseInsensitiveAscending  =
-  @selector(compareCaseInsensitiveAscending:);
-EOControl_DECLARE SEL EOCompareCaseInsensitiveDescending = 
-  @selector(compareCaseInsensitiveDescending:);
 #endif
 
 @implementation EOSortOrdering
