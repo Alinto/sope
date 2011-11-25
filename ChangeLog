@@ -1,3 +1,9 @@
+2011-11-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+	(-deliverResponse:toRequest:onStream:): capitalize header names if
+	"WOHTTPAdaptorCapitalizeHeaders" is set.
+
 2011-11-10  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-gdl1/PostgreSQL/NSString+PGVal.m
