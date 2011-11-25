@@ -673,7 +673,7 @@ static int logCounter = 0;
   const char *reason;
   
   switch (_status) {
-    case 200: reason = "Ok";           break;
+    case 200: reason = "OK";           break;
     case 201: reason = "Created";      break;
     case 204: reason = "No Content";   break;
     case 207: reason = "Multi-Status"; break;
@@ -684,8 +684,8 @@ static int logCounter = 0;
     case 401: reason = "Authorization Required"; break;
     case 402: reason = "Payment Required";       break;
     case 403: reason = "Forbidden";              break;
-    case 404: reason = "Not found";              break;
-    case 405: reason = "Method not allowed";     break;
+    case 404: reason = "Not Found";              break;
+    case 405: reason = "Method Not Allowed";     break;
     case 409: reason = "Conflict";               break;
     case 412: reason = "Precondition Failed";    break;
     case 415: reason = "Unsupported Media Type"; break;
@@ -695,9 +695,9 @@ static int logCounter = 0;
     
     default:
       if (_status < 300)
-        reason = "Request was sucessful";
+        reason = "Request Was Successful";
       else
-        reason = "Request failed";
+        reason = "Request Failed";
       break;
   }
   return (const unsigned char *) reason;

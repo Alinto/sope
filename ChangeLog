@@ -3,6 +3,7 @@
 	* sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 	(-deliverResponse:toRequest:onStream:): capitalize header names if
 	"WOHTTPAdaptorCapitalizeHeaders" is set.
+	(-_reasonForStatus:): improved certain "reasons" for picky clients.
 
 2011-11-10  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
