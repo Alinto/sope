@@ -22,6 +22,7 @@
   "{DAV:}contentclass"         = "davContentClass";
   "{DAV:}isstructureddocument" = "davIsStructuredDocument";
   "{DAV:}status"               = "davStatus";
+  "{DAV:}resource-id"          = "davResourceId";
   "{http://apache.org/dav/props/}executable" = "davIsExecutable";
 
   /* RFC 3253 - Versioning Extensions to WebDAV (DeltaV) */
@@ -174,6 +175,7 @@
   "{http://calendarserver.org/ns/}getctag" = davCollectionTag;
   "{http://calendarserver.org/ns/}calendar-proxy-read-for" = davCalendarProxyReadFor;
   "{http://calendarserver.org/ns/}calendar-proxy-write-for" = davCalendarProxyWriteFor;
+  "{http://calendarserver.org/ns/}allowed-sharing-modes" = davAllowedSharingModes;
 
   /* Apple extensions */
   "{http://apple.com/ns/ical/}calendar-color" = davCalendarColor;

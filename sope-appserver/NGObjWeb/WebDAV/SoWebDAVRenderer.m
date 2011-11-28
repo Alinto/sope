@@ -835,7 +835,7 @@ static BOOL         useRelativeURLs = YES;
     
     [r appendContentString:@"<D:propstat>"];
     [r appendContentString:
-	 @"<D:status>HTTP/1.1 404 Resource Not Found</D:status>"];
+	 @"<D:status>HTTP/1.1 404 Not Found</D:status>"];
     [r appendContentString:@"<D:prop>"];
     if (formatOutput) [r appendContentCharacter:'\n'];
     

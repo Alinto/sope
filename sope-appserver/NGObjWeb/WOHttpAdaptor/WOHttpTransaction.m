@@ -38,6 +38,39 @@
 #include <string.h>
 #include <sys/time.h>
 
+static inline NSString *
+capitalizeHeaderName (NSString *headerName)
+{
+  NSString *result;
+  NSUInteger count, max;
+  unichar *chars;
+  BOOL capitalize = YES;
+
+  max = [headerName length];
+  if (max == 3 && [[headerName lowercaseString] isEqualToString: @"dav"])
+    result = @"DAV";
+  else
+    {
+      chars = malloc (max * sizeof (unichar));
+      [headerName getCharacters: chars];
+      for (count = 0; count < max; count++)
+        {
+          if (capitalize)
+            {
+              if (chars[count] >= 97 && chars[count] <= 122)
+                chars[count] -= 32;
+              capitalize = NO;
+            }
+          else if (chars[count] == '-')
+            capitalize = YES;
+        }
+      result = [NSString stringWithCharacters: chars length: max];
+      free (chars);
+    }
+
+  return result;
+}
+
 @interface WORequest(UsedPrivates)
 - (NSCalendarDate *)startDate;
 - (id)startStatistics;
@@ -61,6 +94,7 @@ static BOOL     WOHttpAdaptor_LogStream      = NO;
 static NSMutableDictionary *pendingTransactions = nil; // THREAD
 static BOOL useSimpleParser = YES;
 static int  doCore  = -1;
+static BOOL capitalizeHeaders;
 static NSString *adLogPath         = nil;
 static NGLogger *debugLogger       = nil;
 static NGLogger *perfLogger        = nil;
@@ -85,6 +119,7 @@ static NGLogger *transActionLogger = nil;
   ud = [NSUserDefaults standardUserDefaults];
   useSimpleParser = [ud boolForKey:@"WOHttpTransactionUseSimpleParser"];
   doCore = [[ud objectForKey:@"WOCoreOnHTTPAdaptorException"] boolValue]?1:0;
+  capitalizeHeaders = [[ud objectForKey:@"WOHTTPAdaptorCapitalizeHeaders"] boolValue];
   WOHttpAdaptor_LogStream = [ud boolForKey:@"WOHttpAdaptor_LogStream"];
   
   adLogPath = [[ud stringForKey:@"WOAdaptorLogPath"] copy];
@@ -638,7 +673,7 @@ static int logCounter = 0;
   const char *reason;
   
   switch (_status) {
-    case 200: reason = "Ok";           break;
+    case 200: reason = "OK";           break;
     case 201: reason = "Created";      break;
     case 204: reason = "No Content";   break;
     case 207: reason = "Multi-Status"; break;
@@ -649,8 +684,8 @@ static int logCounter = 0;
     case 401: reason = "Authorization Required"; break;
     case 402: reason = "Payment Required";       break;
     case 403: reason = "Forbidden";              break;
-    case 404: reason = "Not found";              break;
-    case 405: reason = "Method not allowed";     break;
+    case 404: reason = "Not Found";              break;
+    case 405: reason = "Method Not Allowed";     break;
     case 409: reason = "Conflict";               break;
     case 412: reason = "Precondition Failed";    break;
     case 415: reason = "Unsupported Media Type"; break;
@@ -660,9 +695,9 @@ static int logCounter = 0;
     
     default:
       if (_status < 300)
-        reason = "Request was sucessful";
+        reason = "Request Was Successful";
       else
-        reason = "Request failed";
+        reason = "Request Failed";
       break;
   }
   return (const unsigned char *) reason;
@@ -789,7 +824,8 @@ static int logCounter = 0;
 #if HEAVY_DEBUG
 	  NSLog(@"    VAL: %@", value);
 #endif
-          addStr(header, @selector(appendString:), fieldName);
+          addStr(header, @selector(appendString:),
+                 capitalizeHeaders ? capitalizeHeaderName (fieldName) : fieldName);
           addStr(header, @selector(appendString:), @": ");
           addStr(header, @selector(appendString:), value);
           addStr(header, @selector(appendString:), @"\r\n");
