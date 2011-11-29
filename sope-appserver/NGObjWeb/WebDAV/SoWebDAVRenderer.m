@@ -374,7 +374,7 @@ static BOOL         useRelativeURLs = YES;
 	  [ms appendString:davNS];
 	  [ms appendString:@":"];
 	  [ms appendString:item];
-	  [ms appendString:@" />"];
+	  [ms appendString:@"/>"];
 	}
 	else
 	  [ms appendString:[item stringByEscapingXMLString]];
@@ -431,7 +431,7 @@ static BOOL         useRelativeURLs = YES;
       }
       else {
 	/* no value, close tag */
-	[ms appendString:@" />"];      
+	[ms appendString:@"/>"];
       }
     }
     return ms;

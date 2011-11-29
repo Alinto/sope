@@ -6,6 +6,11 @@
 	* sope-appserver/NGObjWeb/WOResponse.m (-init): set version to
 	"HTTP/1.1" instead of "...1.0".
 
+	* sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
+	(-stringForValue:ofProperty:prefixes:requireTagValue:): don't
+	append a space to singletons tags as html clients from the 90's
+	are no longer used for anything serious nowadays.
+
 2011-11-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
