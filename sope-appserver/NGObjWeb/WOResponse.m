@@ -57,7 +57,7 @@ static BOOL          debugZip = NO;
 - (id)init {
   if ((self = [super init])) {
     [self setStatus:200];
-    [self setHTTPVersion:@"HTTP/1.0"];
+    [self setHTTPVersion:@"HTTP/1.1"];
     //[self setHeader:@"text/html" forKey:@"content-type"];
   }
   return self;

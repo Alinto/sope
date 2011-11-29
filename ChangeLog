@@ -1,3 +1,11 @@
+2011-11-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WOMessage.m (-init): set version to
+	"HTTP/1.1" instead of "...1.0".
+
+	* sope-appserver/NGObjWeb/WOResponse.m (-init): set version to
+	"HTTP/1.1" instead of "...1.0".
+
 2011-11-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m

@@ -110,7 +110,7 @@ static __inline__ NSMutableData *_checkBody(WOMessage *self) {
       [self methodForSelector:@selector(appendContentCString:)];
     
     self->header  = [[NGMutableHashMap allocWithZone:[self zone]] init];
-    self->version = @"HTTP/1.0";
+    self->version = @"HTTP/1.1";
   }
   return self;
 }
