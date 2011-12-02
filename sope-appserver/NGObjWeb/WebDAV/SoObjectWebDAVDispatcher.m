@@ -1579,12 +1579,12 @@ static NSTimeZone                *gmt      = nil;
   /* check for lookup errors */
   
   if (method == nil || [method isKindOfClass:[NSException class]]) {
-    [self logWithFormat:@"did not find a method to server the REPORT"];
+    [self logWithFormat:@"did not find a method to serve the REPORT (%@)", mname];
     return [NSException exceptionWithHTTPStatus:501 /* not implemented */
 			reason:@"did not find the specified REPORT"];
   }
   else if ([method isKindOfClass:[NSException class]]) {
-    [self logWithFormat:@"failed to lookup the REPORT: %@", method];
+    [self logWithFormat:@"failed to lookup the REPORT: %@ (%@)", method, mname];
     return method;
   }
   else if (![method isCallable]) {
