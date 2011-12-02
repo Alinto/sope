@@ -40,9 +40,9 @@ PPC_LDFLAGS=
 endif
 
 ifneq ($(frameworks),yes)
-common_LIBS = -L/usr/lib/oracle/$(ORACLE_VERSION)/client64/lib/ -L/usr/lib/oracle/$(ORACLE_VERSION)/client/lib/ -locci -lociei -lclntsh -lnnz10 -L../GDLAccess/obj -lGDLAccess -L../../sope-core/EOControl/obj -lEOControl $(PPC_LDFLAGS)
+common_LIBS = -L/usr/lib/oracle/$(ORACLE_VERSION)/client64/lib/ -L/usr/lib/oracle/$(ORACLE_VERSION)/client/lib/ -locci -lociei -lclntsh -lnnz11 -L../GDLAccess/obj -lGDLAccess -L../../sope-core/EOControl/obj -lEOControl $(PPC_LDFLAGS)
 else
-common_LIBS = -L/usr/lib/oracle/$(ORACLE_VERSION)/client64/lib/ -L/usr/lib/oracle/$(ORACLE_VERSION)/client/lib/ -locci -lociei -lclntsh -lnnz10 -framework GDLAccess -framework EOControl $(PPC_LDFLAGS)
+common_LIBS = -L/usr/lib/oracle/$(ORACLE_VERSION)/client64/lib/ -L/usr/lib/oracle/$(ORACLE_VERSION)/client/lib/ -locci -lociei -lclntsh -lnnz11 -framework GDLAccess -framework EOControl $(PPC_LDFLAGS)
 endif
 Oracle8_BUNDLE_LIBS += $(common_LIBS)
 otest_TOOL_LIBS   += $(common_LIBS)
