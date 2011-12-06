@@ -98,12 +98,21 @@ static BOOL debugOn = NO;
 }
 // TODO: add method for polling connect status
 
+
+- (void)_setupPrivateOptions
+{
+  [self clearRawResults:
+          [self rawExecute: @"set standard_conforming_strings = 'on'"]];
+}
+
 - (NSException *)connectWithInfo:(NSString *)_conninfo {
   [self _disconnect];
   
   self->_connection = PQconnectdb([self _cstrFromString:_conninfo]);
   if (self->_connection == NULL)
     return [self _makeConnectException:__PRETTY_FUNCTION__];
+  [self _setupPrivateOptions];
+
   return nil;
 }
 
@@ -123,6 +132,8 @@ static BOOL debugOn = NO;
 				   [self _cstrFromString:_pwd]);
   if (self->_connection == NULL)
     return [self _makeConnectException:__PRETTY_FUNCTION__];
+  [self _setupPrivateOptions];
+
   return nil;
 }
 

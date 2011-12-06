@@ -1,3 +1,11 @@
+2011-12-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/PGConnection.m (-connectWithInfo:)
+	(-connectWithHostName:port:options:tty:database:login:password:):
+	set "standard_conforming_strings" pg options to "on" to avoid
+	warnings on < 9.x and useless interpretation of backslashes as
+	escaping sequences.
+
 2011-11-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-appserver/NGObjWeb/WOMessage.m (-init): set version to
