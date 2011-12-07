@@ -479,7 +479,7 @@ _applyIndex(_WOComplexRepetition *self, WOComponent *sComponent, unsigned _idx)
 
   doRender   = ![_ctx isRenderingDisabled];
   sComponent = [_ctx component];
-  array      = [self->list valueInContext:_ctx];
+  array      = [[self->list valueInContext:_ctx] retain];
   aCount     = [array count];
   startIdx   = [self->startIndex unsignedIntValueInComponent:sComponent];
 
@@ -581,7 +581,7 @@ _applyIndex(_WOComplexRepetition *self, WOComponent *sComponent, unsigned _idx)
       WOResponse_AddCString(_response, "<!-- repetition with no contents -->");
   }
 #endif
-  
+  [array release];
   [pool release];
   
 #if DEBUG
@@ -787,9 +787,9 @@ _sapplyIndex(_WOSimpleRepetition *self, WOComponent *sComponent, NSArray *array,
   pool       = [[NSAutoreleasePool alloc] init];
   
   sComponent = [_ctx component];
-  array      = [self->list valueInContext:_ctx];
+  array      = [[self->list valueInContext:_ctx] retain];
   aCount     = [array count];
-  
+
   if (aCount > 0) {
     unsigned cnt;
 
@@ -841,6 +841,7 @@ _sapplyIndex(_WOSimpleRepetition *self, WOComponent *sComponent, NSArray *array,
   }
 #endif
   
+  [array release];
   [pool release];
   
 #if DEBUG
