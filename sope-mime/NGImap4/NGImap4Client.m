@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2007 SKYRIX Software AG
+  Copyright (C) 2007-2011 Inverse inc.
 
   This file is part of SOPE.
 

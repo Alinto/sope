@@ -50,6 +50,7 @@ typedef enum {
 {
 @protected
   id<NGActiveSocket>    socket;
+  id<NGActiveSocket>    previous_socket;
   NGBufferedStream      *io;
   id<NGSocketAddress>   address;
   NGImap4ResponseParser *parser;
@@ -62,6 +63,7 @@ typedef enum {
   NSString *password;
 
   BOOL debug;
+  BOOL useTLS;
 }
 
 + (id)clientWithURL:(id)_url;

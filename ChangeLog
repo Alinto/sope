@@ -1,3 +1,8 @@
+2011-12-15  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGSieveClient.{h,m} - added TLS support
+	to the Sieve code.
+
 2011-12-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-gdl1/PostgreSQL/PGConnection.m (-connectWithInfo:)
