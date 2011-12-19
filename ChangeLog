@@ -1,3 +1,9 @@
+2011-12-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m (-nextObject):
+	initialise rptr and ctrl to NULL in order to make sure they are
+	initialised even when the search did not succeed.
+
 2011-12-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-gdl1/PostgreSQL/PGConnection.m (-connectWithInfo:)
