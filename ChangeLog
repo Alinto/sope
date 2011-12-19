@@ -4,6 +4,11 @@
 	initialise rptr and ctrl to NULL in order to make sure they are
 	initialised even when the search did not succeed.
 
+2011-12-15  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGSieveClient.{h,m} - added TLS support
+	to the Sieve code.
+
 2011-12-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-gdl1/PostgreSQL/PGConnection.m (-connectWithInfo:)

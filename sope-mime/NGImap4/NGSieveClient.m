@@ -1,6 +1,8 @@
 /*
   Copyright (C) 2000-2007 SKYRIX Software AG
   Copyright (C) 2007      Helge Hess
+  Copyright (C) 2007-2011 Inverse inc.
+
 
   This file is part of SOPE.
 
@@ -21,6 +23,7 @@
 */
 
 #include <unistd.h>
+#include <fcntl.h>
 
 #include "NGSieveClient.h"
 #include "NGImap4Support.h"
@@ -28,6 +31,9 @@
 #include "NSString+Imap4.h"
 #include "imCommon.h"
 #include <sys/time.h>
+
+#include <NGStreams/NGSocket.h>
+#include <NGStreams/NGActiveSSLSocket.h>
 
 @interface NGSieveClient(Private)
 
@@ -119,6 +125,11 @@ static BOOL     debugImap4         = NO;
   if ((self = [self initWithAddress:a])) {
     self->login    = [[_url user]     copy];
     self->password = [[_url password] copy];
+
+      if ([[_url query] isEqualToString:@"tls=YES"])
+	self->useTLS = YES;
+      else
+	self->useTLS = NO;
   }
   return self;
 }
@@ -154,6 +165,7 @@ static BOOL     debugImap4         = NO;
   [self->address  release];
   [self->io       release];
   [self->socket   release];
+  [self->previous_socket   release];
   [self->parser   release];
   [self->authname release];
   [self->login    release];
@@ -209,9 +221,13 @@ static BOOL     debugImap4         = NO;
 }
 
 - (NSDictionary *)openConnection {
+  NSDictionary *res;
+
   struct timeval tv;
-  double         ti = 0.0;
-  
+  double ti;
+
+  ti = 0.0;
+
   if (ProfileImapEnabled) {
     gettimeofday(&tv, NULL);
     ti =  (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0);
@@ -219,6 +235,8 @@ static BOOL     debugImap4         = NO;
   
   [self resetStreams];
   
+  [self->previous_socket release];
+  self->previous_socket = nil;
   self->socket =
     [[NGActiveSocket socketConnectedToAddress:self->address] retain];
   if (self->socket == nil) {
@@ -238,8 +256,60 @@ static BOOL     debugImap4         = NO;
     fprintf(stderr, "[%s] <openConnection> : time needed: %4.4fs\n",
            __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);    
   }
-  return [self normalizeOpenConnectionResponse:
-               [self->parser parseSieveResponse]];
+
+  res = [self normalizeOpenConnectionResponse:
+		[self->parser parseSieveResponse]];
+
+  // If we're using TLS, we start it here
+  if (self->useTLS)
+    {
+      Class socketClass;
+      NSDictionary *d;
+      
+      d = [self normalizeResponse:[self processCommand: @"STARTTLS"]];
+      socketClass = NSClassFromString(@"NGActiveSSLSocket");
+      
+      if ([[d valueForKey:@"result"] boolValue] && socketClass)
+	{
+	  int oldopts;
+	  id o;
+	  
+	  o = [[socketClass alloc] initWithDomain: [self->address domain]];
+	  [o setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
+	  
+	  // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
+	  // SOPE will break on SSL-sockets.
+	  oldopts = fcntl([(NGSocket*)self->socket fileDescriptor], F_GETFL, 0);
+	  fcntl([(NGSocket*)self->socket fileDescriptor], F_SETFL, oldopts & !O_NONBLOCK);
+	    
+	  if ([o startTLS])
+	    {
+	      //NGBufferedStream *buffer;
+	      
+	      // We keep a reference to our previous instance of NGActiveSocket as
+	      // it's still being used. NGActiveSSLSocket's read/write methods are
+	      // being used but the rest is coming of directly from NGActiveSocket
+	      self->previous_socket = self->socket;
+	      self->socket = o;
+	      //[self->text release];
+	      [self->parser release];
+	      
+	      self->io = [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource: self->socket];
+	      //self->text = [(NGCTextStream *)[NGCTextStream alloc] initWithSource: buffer];
+	      //[buffer release];
+	      //buffer = nil;
+	      
+	      self->parser = [[NGImap4ResponseParser alloc] initWithStream: self->socket];
+	      [self logWithFormat:@"TLS started successfully."];
+	    }
+	  else
+	    [self logWithFormat:@"Could not start TLS."];
+	}
+      else
+	[self logWithFormat:@"Could not start TLS."];
+    }
+
+  return res;
 }
 
 - (NSNumber *)isConnected {
@@ -257,6 +327,10 @@ static BOOL     debugImap4         = NO;
 - (void)closeConnection {
   [self->socket close];
   [self->socket release]; self->socket = nil;
+  
+  [self->previous_socket close];
+  [self->previous_socket release]; self->previous_socket = nil;
+   
   [self->parser release]; self->parser = nil;
 }
 
