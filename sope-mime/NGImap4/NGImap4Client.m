@@ -540,7 +540,7 @@ static NSMutableDictionary *namespaces;
   [self->serverGID release]; self->serverGID = nil;
   
   self->login    = [_login copy];
-  self->password = [[_passwd stringByEscapingImap4Password] copy];
+  self->password = [_passwd copy];
   
   return [self login];
 }
@@ -570,21 +570,23 @@ static NSMutableDictionary *namespaces;
       'expunge'     - an array (containing what?)
       'RawResponse' - the raw IMAP4 response
   */
-  NGHashMap *map;
-  NSString  *s, *log;
   NSDictionary *response;
+  NGHashMap *map;
+  NSString  *s;
 
   if (self->isLogin )
     return nil;
   
   self->isLogin = YES;
   
-  s = [NSString stringWithFormat:@"login \"%@\" \"%@\"",
-		  self->login, self->password];
-  log = [NSString stringWithFormat:@"login %@ <%@>",
-		    self->login,
-		    (self->password != nil) ? @"PASSWORD" : @"NO PASSWORD"];
-  map = [self processCommand:s logText:log];
+  s = [NSString stringWithFormat:@"login \"%@\" {%d}",
+		  self->login, [self->password length]];
+  map = [self processCommand: s
+                 withTag:YES
+		 withNotification:NO];
+  
+  if ([[map objectForKey:@"ContinuationResponse"] boolValue])
+    map = [self processCommand:self->password withTag:NO];
   
   if (self->selectedFolder != nil)
     [self select:self->selectedFolder];

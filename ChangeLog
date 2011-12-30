@@ -1,3 +1,11 @@
+2011-12-30  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NSString+Imap4.m - dropped
+	the IMAP4 password escaping method - it was just plain braindead
+
+	* sope-mime/NGImap4/NGImap4Client.m - now use IMAP4
+	continuation when sending over the password
+
 2011-12-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m (-nextObject):

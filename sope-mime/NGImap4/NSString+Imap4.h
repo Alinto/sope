@@ -30,8 +30,6 @@
 - (NSString *)stringByEncodingImap4FolderName;
 - (NSString *)stringByDecodingImap4FolderName;
 
-- (NSString *)stringByEscapingImap4Password;
-
 @end
 
 #endif /* __NGImap4_NSString_Imap4_H__ */
