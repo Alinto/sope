@@ -906,7 +906,7 @@ static void freeMods(LDAPMod **mods) {
   msg = NULL;
   res = ldap_result(self->handle, msgid, 0, NULL /* timeout */, &msg);
 
-  if (res == -1) {
+  if (res != LDAP_SUCCESS) {
     /* error */
     int err;
 
@@ -1052,9 +1052,9 @@ static void freeMods(LDAPMod **mods) {
 
   /* check result */
   
-  if (res == -1) {
+  if (res != LDAP_SUCCESS) {
     [[self _exceptionForErrorCode:
-	     0 /* was in v1: ((LDAP *)self->handle)->ld_errno */
+	     res /* was in v1: ((LDAP *)self->handle)->ld_errno */
            operation:@"modify"
            userInfo:[NSDictionary dictionaryWithObject:_dn forKey:@"dn"]]
            raise];
