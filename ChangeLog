@@ -1,3 +1,14 @@
+2011-12-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-ldap/NGLdap/NGLdapEntry.m (-initWithDN:attributes:): use
+	the original attributes array, in order to enable further
+	modifications thereof.
+
+	* sope-ldap/NGLdap/NGLdapAttribute.m (-allStringValues): do not
+	attempt to create an array when the resulting string is nil.
+	(-isEqual:): overridden comparator method in order to take the
+	attribute name and values into account.
+
 2011-12-30  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-mime/NGImap4/NSString+Imap4.m - dropped
