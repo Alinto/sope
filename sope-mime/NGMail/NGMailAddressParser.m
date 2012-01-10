@@ -62,8 +62,9 @@ static inline id parseWhiteSpaces(NGMailAddressParser *self, BOOL _guessMode) {
   char text[self->maxLength];
   int  length      = 0;
   
-  while ((self->data[self->dataPos] == ' ')  ||
-         (self->data[self->dataPos] == '\n')) {
+  while (self->dataPos < self->maxLength
+         && ((self->data[self->dataPos] == ' ')  ||
+             (self->data[self->dataPos] == '\n'))) {
     text[length++] = ' ';    
     self->dataPos++;
   }
@@ -289,10 +290,14 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   BOOL            returnOK         = NO;
 
   if (_guessMode) {
-    if (self->data[self->dataPos] != '[')
+    if (self->dataPos >= self->maxLength || self->data[self->dataPos] != '[')
       return nil;
 
     (self->dataPos)++; // skip starting '"'
+
+    if (self->dataPos >= self->maxLength) {
+      return nil;
+    }
 
     // parses: "suafdjksfd \"sdafsadf"
     while (self->data[self->dataPos] != ']') {
@@ -308,7 +313,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     returnValue = yesNum;
   }
   else {
-    if (self->data[self->dataPos++] == '[') {
+    if (self->dataPos < self->maxLength && self->data[self->dataPos++] == '[') {
       NSMutableString *ms;
       id result = nil;
       
@@ -421,7 +426,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   if (_guessMode)
     return [self _parseQuotedStringInGuessMode];
 
-  if (data[dataPos++] == '"') {
+  if (self->dataPos < self->maxLength && data[dataPos++] == '"') {
     NSMutableString *ms;
     id result = nil;
     
@@ -437,7 +442,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     while (result);
     returnValue = ms;
     
-    if (data[dataPos++] == '"')
+    if (self->dataPos < self->maxLength && data[dataPos++] == '"')
       returnOK = YES;
   }
   if (!returnOK) {
@@ -449,9 +454,14 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 
 - (id)parseWord:(BOOL)_guessMode {
   id returnValue;
-  
-  if ((returnValue = [self parseQuotedString:_guessMode]) == nil)
-    returnValue = parseAtom(self, _guessMode);
+
+  if (self->dataPos < self->maxLength)
+    {  
+      if ((returnValue = [self parseQuotedString:_guessMode]) == nil)
+        returnValue = parseAtom(self, _guessMode);
+    }
+  else
+    returnValue = nil;
   
   return returnValue;
 }
@@ -530,7 +540,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 
   do {
     result = nil;
-    if (self->data[self->dataPos] == '.') {
+    if (self->dataPos < self->maxLength && self->data[self->dataPos] == '.') {
       self->dataPos++;
       result = [self parseWord:YES];
     }
@@ -552,24 +562,26 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     return nil;
   
   ms = [[returnValue mutableCopy] autorelease];
-      
-  do {
-    if (self->data[self->dataPos] == '.') {
-      self->dataPos++;
-      result = [self parseWord:NO];
-      
-      if (result) {
-	NSAssert([result isKindOfClass:StrClass],
-		 @"parseWord should return string");
-            
-	[ms appendString:@"."];
-	[ms appendString:result];
+
+  if (self->dataPos < self->maxLength) {
+    do {
+      if (self->data[self->dataPos] == '.') {
+        self->dataPos++;
+        result = [self parseWord:NO];
+        
+        if (result) {
+          NSAssert([result isKindOfClass:StrClass],
+                   @"parseWord should return string");
+          
+          [ms appendString:@"."];
+          [ms appendString:result];
+        }
       }
+      else
+        result = nil;
     }
-    else
-      result = nil;
-  } 
-  while (result != nil);
+    while (result != nil);
+  }
   
   return ms;
 }
@@ -578,21 +590,22 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   id returnValue = nil;
   id result      = nil;
 
-    returnValue = parseAtom(self, YES);
-    if (!result)
-      returnValue = parseDomainLiteral(self, YES);
-    if (returnValue) {
-      do {
-        result = nil;
-        if (self->data[self->dataPos] == '.') {
-          self->dataPos++;
-          result = parseAtom(self,YES);
-          if (!result)
-            result = parseDomainLiteral(self, YES);
-        }
-      } while (result);
-    }
-    return returnValue;
+  returnValue = parseAtom(self, YES);
+  if (!result)
+    returnValue = parseDomainLiteral(self, YES);
+  if (returnValue) {
+    do {
+      result = nil;
+      if (self->dataPos < self->maxLength
+          && self->data[self->dataPos] == '.') {
+        self->dataPos++;
+        result = parseAtom(self,YES);
+        if (!result)
+          result = parseDomainLiteral(self, YES);
+      }
+    } while (result);
+  }
+  return returnValue;
 }
 
 - (id)parseDomain:(BOOL)_guessMode {
@@ -610,7 +623,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 
   ms = [[result mutableCopyWithZone:[self zone]] autorelease];
   do {
-    if (self->data[self->dataPos] == '.') {
+    if (self->dataPos < self->maxLength && self->data[self->dataPos] == '.') {
       self->dataPos++;
           
       result = parseAtom(self,NO);
@@ -640,7 +653,8 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     
     ret = nil;
     if ([self parseLocalPart:YES]) {
-      if (self->data[self->dataPos] == '@') {
+      if (self->dataPos < self->maxLength
+          && self->data[self->dataPos] == '@') {
         dataPos++;
         if ([self parseDomain:YES]) {
           ret = yesNum;
@@ -654,7 +668,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     returnValue = [[result mutableCopy] autorelease];
     result = nil;
     
-    if (self->data[self->dataPos] == '@') {
+    if (self->dataPos < self->maxLength && self->data[self->dataPos] == '@') {
       self->dataPos++;
 	
       if ((result = [self parseDomain:NO])) {
@@ -702,7 +716,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 
   keepPos     = self->dataPos;
   returnValue = [NSMutableString stringWithCapacity:10];
-  if (self->data[self->dataPos] == '@') {
+  if (self->dataPos < self->maxLength && self->data[self->dataPos] == '@') {
       status = NO;
       self->dataPos++;
       if ((result = [self parseDomain:NO])) {
@@ -712,7 +726,8 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   }
   if (status) {
       parseWhiteSpaces(self,NO);
-      if (self->data[self->dataPos] == ':') {
+      if (self->dataPos < self->maxLength
+          && self->data[self->dataPos] == ':') {
         status = YES;
         self->dataPos++;        
       }
@@ -733,33 +748,33 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   id   result       = nil;
   BOOL returnStatus = NO;
 
-    if (self->data[self->dataPos] == '<') {
-      dataPos++;
-      result = [self parseRoute:YES];
-      parseWhiteSpaces(self, YES);      
-      if ((result = [self parseAddrSpec:YES])) {
-        parseWhiteSpaces(self, YES);
-        if (self->data[self->dataPos] == '>') {
-          self->dataPos++;
-          returnStatus = YES;
-        }
-      }
-      else if ((result = [self parseWord:YES])) {
-        parseWhiteSpaces(self, YES);
-        if (self->data[self->dataPos] == '>') {
-          self->dataPos++;
-          returnStatus = YES;
-        }
+  if (self->dataPos < self->maxLength && self->data[self->dataPos] == '<') {
+    dataPos++;
+    result = [self parseRoute:YES];
+    parseWhiteSpaces(self, YES);      
+    if ((result = [self parseAddrSpec:YES])) {
+      parseWhiteSpaces(self, YES);
+      if (self->data[self->dataPos] == '>') {
+        self->dataPos++;
+        returnStatus = YES;
       }
     }
-    if (returnStatus) {
-      returnValue = yesNum;
+    else if ((result = [self parseWord:YES])) {
+      parseWhiteSpaces(self, YES);
+      if (self->data[self->dataPos] == '>') {
+        self->dataPos++;
+        returnStatus = YES;
+      }
     }
-    else {
-      returnValue = nil;
-      dataPos     = keepPos;      
-    }
-    return returnValue;
+  }
+  if (returnStatus) {
+    returnValue = yesNum;
+  }
+  else {
+    returnValue = nil;
+    dataPos     = keepPos;      
+  }
+  return returnValue;
 }
 
 - (id)parseRouteAddr:(BOOL)_guessMode {
@@ -773,27 +788,29 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 
   keepPos     = self->dataPos;
   returnValue = [NSMutableDictionary dictionaryWithCapacity:2];
-  if (self->data[self->dataPos] == '<') {
+  if (self->dataPos < self->maxLength && self->data[self->dataPos] == '<') {
     dataPos++;
     if ((result = [self parseRoute:NO]))
       [returnValue setObject:result forKey:@"route"];
-
+    
     parseWhiteSpaces(self, NO);
     if ((result = [self parseAddrSpec:NO])) {
-        parseWhiteSpaces(self, NO);
-        if (self->data[self->dataPos] == '>') {
-          self->dataPos++;
-          [returnValue setObject:result forKey:@"address"];
-          returnStatus = YES;
-        }
+      parseWhiteSpaces(self, NO);
+      if (self->dataPos < self->maxLength
+          && self->data[self->dataPos] == '>') {
+        self->dataPos++;
+        [returnValue setObject:result forKey:@"address"];
+        returnStatus = YES;
+      }
     }
     else if ((result = [self parseWord:NO])) {
-        parseWhiteSpaces(self, NO);
-        if (self->data[self->dataPos] == '>') {
-          self->dataPos++;
-          [returnValue setObject:result forKey:@"address"];
-          returnStatus = YES;
-        }
+      parseWhiteSpaces(self, NO);
+      if (self->dataPos < self->maxLength
+          && self->data[self->dataPos] == '>') {
+        self->dataPos++;
+        [returnValue setObject:result forKey:@"address"];
+        returnStatus = YES;
+      }
     }
   }
   if (!returnStatus) {
@@ -899,21 +916,24 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   
   if (_guessMode) {
     if ((result = [self parsePhrase:YES])) {
-      if (self->data[self->dataPos] == ':') { 
+      if (self->dataPos < self->maxLength
+          && self->data[self->dataPos] == ':') { 
         self->dataPos++;
         parseWhiteSpaces(self, YES);                      
         if ((result = [self parseMailBox:YES])) {
           do {
             parseWhiteSpaces(self, YES);              
             result = nil;
-            if (self->data[self->dataPos] == ',') {
+            if (self->dataPos < self->maxLength
+                && self->data[self->dataPos] == ',') {
               self->dataPos++;
               parseWhiteSpaces(self, YES);              
               result = [self parseMailBox:YES];
             }
           } while (result);
           parseWhiteSpaces(self, YES);                        
-          if (self->data[self->dataPos] == ';') {
+          if (self->dataPos < self->maxLength
+              && self->data[self->dataPos] == ';') {
             self->dataPos++;
             returnStatus = YES;
           }
@@ -932,7 +952,8 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     returnValue = [[[NGMailAddressList alloc] init] autorelease];
     if ((result = [self parsePhrase:NO])) {
       [returnValue setGroupName:result];
-      if (self->data[self->dataPos] == ':') {
+      if (self->dataPos < self->maxLength
+          && self->data[self->dataPos] == ':') {
         self->dataPos++;
         parseWhiteSpaces(self, NO);
         if ((result = [self parseMailBox:NO])) {
@@ -940,7 +961,8 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
           do {
             parseWhiteSpaces(self, NO);
             result = nil;            
-            if (self->data[self->dataPos] == ',') {
+            if (self->dataPos < self->maxLength
+                && self->data[self->dataPos] == ',') {
               self->dataPos++;
               parseWhiteSpaces(self, NO);              
               result = [self parseMailBox:NO];
@@ -950,7 +972,8 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
             }
           } while (result);
           parseWhiteSpaces(self, NO);                        
-          if (self->data[self->dataPos] == ';') {
+          if (self->dataPos < self->maxLength
+              && self->data[self->dataPos] == ';') {
             self->dataPos++;
             returnStatus = YES;
           }
@@ -1000,12 +1023,10 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     
     if (self->dataPos < self->maxLength) {
       parseWhiteSpaces(self, NO);
-      if (self->dataPos < self->maxLength) {
-        if (self->data[self->dataPos] == ',') {
-          self->dataPos++;
-          if (self->dataPos < self->maxLength)
-            parseWhiteSpaces(self, NO);
-        }
+      if (self->dataPos < self->maxLength && self->data[self->dataPos] == ',') {
+        self->dataPos++;
+        if (self->dataPos < self->maxLength)
+          parseWhiteSpaces(self, NO);
       }
     }
   }

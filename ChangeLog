@@ -1,3 +1,8 @@
+2012-01-10  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMail/NGMailAddressParser.m: perform a check on the
+	char pointer to ensure the buffer is never read beyond its bounds.
+
 2011-12-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-ldap/NGLdap/NGLdapEntry.m (-initWithDN:attributes:): use
