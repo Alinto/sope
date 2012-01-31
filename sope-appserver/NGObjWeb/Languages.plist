@@ -108,8 +108,10 @@
   "na"    = "Nauru";
   "nb"    = "NorwegianBokmal";
   "ne"    = "Nepali";    
-  "nl"    = "Dutch";                           
-  "nl-nl" = "Dutch";                           
+  "nl"    = "Dutch";
+  "nl-nl" = "Dutch";
+  "nn"    = "NorwegianNynorsk";
+  "nn-no" = "NorwegianNynorsk";
   "no"    = "Norwegian";    
   "no-no" = "Norwegian";    
   "oc"    = "Occitan";                           

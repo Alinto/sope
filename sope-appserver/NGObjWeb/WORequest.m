@@ -517,7 +517,7 @@ static BOOL debugOn = NO;
 
 - (NSString *)languageForBrowserLanguageCode:(NSString *)_e {
   static NSDictionary *langMap = nil;
-  NSString *lang;
+  NSString *le, *lang;
   
   if (_e == nil) return nil;
   
@@ -530,16 +530,24 @@ static BOOL debugOn = NO;
     }
   }
   
-  _e = [_e lowercaseString];
+  le = [_e lowercaseString];
   
-  lang = [langMap objectForKey:_e];
-  if (lang == nil && [_e length] > 2) {
+  lang = [langMap objectForKey:le];
+  if (lang == nil && [le length] > 2) {
     /* process constructs like 'de-ch' */
-    if ([_e characterAtIndex:2] == '-') {
+    if ([le characterAtIndex:2] == '-') {
       NSString *ek;
       
-      ek = [_e substringToIndex:2];
+      ek = [le substringToIndex:2];
       lang = [langMap objectForKey:ek];
+    }
+    else {
+      /* check if the code is actually the language (ex: Danish) */
+      NSArray *codes;
+
+      codes = [langMap allKeysForObject: _e];
+      if ([codes count])
+        lang = _e;
     }
   }
   if (lang == nil && ![_e isEqualToString:@"*"]) {
