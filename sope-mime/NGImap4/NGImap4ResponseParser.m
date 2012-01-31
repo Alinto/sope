@@ -456,7 +456,6 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
       { <uint> } \n
   */
   // TODO: split up method
-  NSData   *result;
   unsigned size;
   NSNumber *sizeNum;
 
@@ -466,7 +465,6 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
   if (debugDataOn) [self logWithFormat:@"parse data ..."];
 
   /* got header */
-  result = nil;  
   
   _consume(self, 1); // '{'
   if ((sizeNum = _parseUnsigned(self)) == nil) {
