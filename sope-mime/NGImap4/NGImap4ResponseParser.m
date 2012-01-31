@@ -512,8 +512,8 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
   result = nil;  
 
   /* We skip until we're ready to parse {length}. We must be careful
-     here and not assume with have a valid lenght - we could well 
-     receive NIL from the server */
+     here and not assume we will have a valid length - we could very 
+     well receive NIL from the server */
   _parseUntil(self, ' ');
   
   if ((_la(self,0)) == '{')
