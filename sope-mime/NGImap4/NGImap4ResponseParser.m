@@ -509,32 +509,41 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
   unsigned size;
   NSNumber *sizeNum;
 
-  /* we skip until we're ready to parse {length} */
-  _parseUntil(self, '{');
-  
   result = nil;  
 
-  if ((sizeNum = _parseUnsigned(self)) == nil) {
-    NSException *e;
+  /* We skip until we're ready to parse {length}. We must be careful
+     here and not assume with have a valid lenght - we could well 
+     receive NIL from the server */
+  _parseUntil(self, ' ');
+  
+  if ((_la(self,0)) == '{')
+    {
+      _consume(self, 1);
 
-    e = [[NGImap4ParserException alloc] 
-	    initWithFormat:@"expect a number between {}"];
-    [self setLastException:[e autorelease]];
-    return nil;
-  }
-  _consumeIfMatch(self, '}');
-  _consumeIfMatch(self, '\n');
+      if ((sizeNum = _parseUnsigned(self)) == nil) {
+	NSException *e;
+	
+	e = [[NGImap4ParserException alloc] 
+	      initWithFormat:@"expect a number between {}"];
+	[self setLastException:[e autorelease]];
+	return nil;
+      }
+      _consumeIfMatch(self, '}');
+      _consumeIfMatch(self, '\n');
+      
+      if ((size = [sizeNum intValue]) == 0) {
+	[self logWithFormat:@"ERROR(%s): got content size '0'!", 
+	      __PRETTY_FUNCTION__];
+	return nil;
+      }
+      
+      if (UseMemoryMappedData && (size > Imap4MMDataBoundary))
+	return [self _parseDataToFile:size];
+      
+      return [self _parseDataIntoRAM:size];
+    }
   
-  if ((size = [sizeNum intValue]) == 0) {
-    [self logWithFormat:@"ERROR(%s): got content size '0'!", 
-            __PRETTY_FUNCTION__];
-    return nil;
-  }
-  
-  if (UseMemoryMappedData && (size > Imap4MMDataBoundary))
-    return [self _parseDataToFile:size];
-  
-  return [self _parseDataIntoRAM:size];
+  return result;
 }
 
 static int _parseTaggedResponse(NGImap4ResponseParser *self,
