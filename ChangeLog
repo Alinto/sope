@@ -1,5 +1,11 @@
 2012-02-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
+	* sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+	(-davFlatQuery:inContext:): don't escape url components from here,
+	as they will be re-escaped in the webdav renderer.
+
+2012-02-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
 	* sope-ldap/NGLdap/NSString+DN.m (-escapedForLDAPDN): new helper
 	method to properly escape dn members following rfc.
 
