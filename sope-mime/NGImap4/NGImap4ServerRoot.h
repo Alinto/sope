@@ -94,7 +94,7 @@
 - (int)exists;
 - (int)recent;
 - (int)unseen;
-- (void)status;
+- (BOOL)status;
 - (void)select;
 - (void)expunge;
 
