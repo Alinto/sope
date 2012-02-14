@@ -1,3 +1,10 @@
+2012-02-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/Oracle8/OracleValues.m (-[NSString
+	stringValueForOracleType:attribute:]): propertly escape quote
+	("'") characters in strings and return the result between a new
+	pair of quotes.
+
 2012-02-13  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4ResponseParser.m: added parsing of
