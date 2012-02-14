@@ -103,6 +103,8 @@ static int _parseTaggedResponse(NGImap4ResponseParser *self,
 static void _parseUntaggedResponse(NGImap4ResponseParser *self,
                                    NGMutableHashMap *result_);
 static NSArray *_parseFlagArray(NGImap4ResponseParser *self);
+static BOOL _parseEnabledUntaggedResponse(NGImap4ResponseParser *self,
+                                          NGMutableHashMap *result_);
 static BOOL _parseFlagsUntaggedResponse(NGImap4ResponseParser *self,
                                         NGMutableHashMap *result_);
 static BOOL _parseOkUntaggedResponse(NGImap4ResponseParser *self,
@@ -617,6 +619,11 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
 
   case 'C':
     if ([self _parseCapabilityResponseIntoHashMap:result_])       // la: 10
+      return;
+    break;
+
+  case 'E':
+    if (_parseEnabledUntaggedResponse(self, result_))  // la: 7
       return;
     break;
     
@@ -2351,6 +2358,36 @@ static NSArray *_parseFlagArray(NGImap4ResponseParser *self) {
   }
   else
     return [[flags lowercaseString] componentsSeparatedByString:@" "];
+}
+
+static BOOL _parseEnabledUntaggedResponse(NGImap4ResponseParser *self,
+                                          NGMutableHashMap *result_) {
+  NSMutableArray *extensions;
+  NSString *extension;
+
+  if ((_la(self, 0) == 'E')
+      && (_la(self, 1) == 'N')
+      && (_la(self, 2) == 'A')
+      && (_la(self, 3) == 'B')
+      && (_la(self, 4) == 'L')      
+      && (_la(self, 5) == 'E')
+      && (_la(self, 6) == 'D')) {
+    extensions = [NSMutableArray new];
+    [result_ setObject: extensions forKey: @"extensions"];
+    [extensions release];
+
+    _consume(self, 7);
+    while (_la(self, 0) == ' ') {
+      _consume(self, 1);
+      extension = _parseUntil2(self, ' ', '\n');
+      if ([extension length] > 0) {
+        [extensions addObject: extension];
+      }
+    }
+    _consumeIfMatch(self, '\n');
+    return YES;
+  }
+  return NO;
 }
 
 static BOOL _parseFlagsUntaggedResponse(NGImap4ResponseParser *self,

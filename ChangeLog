@@ -1,3 +1,8 @@
+2012-02-13  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m: added parsing of
+	untagged response to the "ENABLE" command.
+
 2012-02-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
