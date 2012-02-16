@@ -4,6 +4,12 @@
 	(-[NSStringstringValueForOracleType:attribute:]): return the
 	escaped value rather than "self", in order for the code to be
 	actually effective.
+	Accept additional types SQLT_VCS and SQLT_LVC.
+
+	* sope-gdl1/Oracle8/OracleAdaptor.m (-typeForName:): fixed mapping
+	for VARCHAR, added VARCHAR2 and LONG VARCHAR and a fallback to
+	SQLT_CHR if the type in question is not supported. Enhanced type
+	detection with hasPrefix, to enable count for fix values.
 
 2012-02-15  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
