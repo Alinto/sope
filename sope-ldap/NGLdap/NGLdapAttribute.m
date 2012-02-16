@@ -200,21 +200,22 @@
     id       *objs;
     unsigned i;
     NSArray  *vals, *a;
-    
+    NSData *data;
+
     vals = [self allValues];
     
-#warning this code might crash as array cannot contain nil objects
     objs = calloc(cnt, sizeof(id));
     for (i = 0; i < cnt; i++) {
-      NSData *data;
 
-      if ((data = [vals objectAtIndex:i]) == nil) {
-        NSLog(@"missing data for value at index %i", i);
-        objs[i] = [[NSString alloc] initWithString:@""];
-      }
-      else {
-        objs[i] = [data isNotNull]
-	  ? [self stringFromData:data] : (NSString *)@"";
+      objs[i] = nil;	
+      data = [vals objectAtIndex: i];
+      
+      if (data)
+	objs[i] = [self stringFromData: data];
+
+      if (!objs[i]) {
+	NSLog(@"missing data for value at index %i", i);
+	objs[i] = [[NSString alloc] initWithString: @""];
       }
     }
     
