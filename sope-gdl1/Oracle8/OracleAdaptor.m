@@ -179,7 +179,7 @@
   s = [theValue stringValueForOracleType: [self typeForName: [theAttribute externalType]]
 		attribute: theAttribute];
   
-  NSLog(@"Formatted %@ (%@) to %@ (NSString)", theValue, NSStringFromClass([theValue class]), s);
+  // NSLog(@"Formatted %@ (%@) to %@ (NSString)", theValue, NSStringFromClass([theValue class]), s);
 
   return s;
 }
