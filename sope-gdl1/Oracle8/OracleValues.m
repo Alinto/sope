@@ -66,7 +66,7 @@
   else
     value = self;
 
-  return self;
+  return value;
 }
 
 @end

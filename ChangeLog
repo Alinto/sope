@@ -1,3 +1,10 @@
+2012-02-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/Oracle8/OracleValues.m
+	(-[NSStringstringValueForOracleType:attribute:]): return the
+	escaped value rather than "self", in order for the code to be
+	actually effective.
+
 2012-02-15  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-gdl1/PostgreSQL/NSString+PGVal.m
