@@ -1,3 +1,13 @@
+2012-02-15  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/NSString+PGVal.m
+	(-stringValueForPostgreSQLType:attribute:): properly escape and
+	quote strings in a way that is supported by all know versions of
+	PostgreSQL, from 8.1 (or even before) up to 9.1.
+
+	* sope-gdl1/PostgreSQL/PGConnection.m (-_setupPrivateOptions):
+	removed method, made obsolete by the above.
+
 2012-02-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-gdl1/Oracle8/OracleValues.m (-[NSString
