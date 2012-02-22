@@ -168,6 +168,7 @@
   "{urn:ietf:params:xml:ns:carddav}supported-address-data" =
      davSupportedAddressDataTypes;
   "{urn:ietf:params:xml:ns:carddav}addressbook-description" = davDescription;
+  "{http://calendarserver.org/ns/}email-address-set" = davEmailAddressSet;
 
   /* Apple CalServer */
   "{http://calendarserver.org/ns/}dropbox-home-URL" = davDropboxHomeURL;
@@ -187,4 +188,6 @@
 
   /* Inverse */
   "{urn:inverse:params:xml:ns:inverse-dav}contacts-categories" = davContactsCategories;
+  "{urn:inverse:params:xml:ns:inverse-dav}events-default-classification" = davEventsDefaultClassification;
+  "{urn:inverse:params:xml:ns:inverse-dav}tasks-default-classification" = davTasksDefaultClassification;
 }
