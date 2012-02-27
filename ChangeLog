@@ -1,3 +1,18 @@
+2012-02-27  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-enable:): now takes an array
+	instead of a single string and populate the new
+	"enabledExtensions" ivar with the name of enabled extensions,
+	ensuring first that they are not listed more than once.
+	(-closeConnection): released and nilify the new
+	"enabledExtensions" ivar.
+	(-reconnect): when the enabledExtensions ivar is not empty,
+	reenable the extensions after relogin.
+
+	* sope-mime/NGImap4/NGImap4Connection.m (-enableExtensions:): now
+	takes an array instead of a single string.
+	(-init): removed the "enabledExtensions" ivar.
+
 2012-02-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-gdl1/Oracle8/OracleValues.m

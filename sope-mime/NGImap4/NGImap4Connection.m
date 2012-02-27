@@ -65,8 +65,6 @@ static NSString *imap4Separator = nil;
     self->client   = [_client retain];
     self->password = [_pwd    copy];
 
-    self->enabledExtensions = [NSMutableArray new];
-    
     self->creationTime = [[NSDate alloc] init];
     
     // TODO: retrieve from IMAP4 instead of using a default
@@ -87,7 +85,6 @@ static NSString *imap4Separator = nil;
   [self->uidSortOrdering release];
   [self->creationTime    release];
   [self->subfolders      release];
-  [self->enabledExtensions release];
   [self->password        release];
   [self->client          release];
   [super dealloc];
@@ -213,19 +210,14 @@ static NSString *imap4Separator = nil;
 }
 
 /* extensions methods */
-- (NSException *)enableExtension:(NSString *)_extension {
+- (NSException *)enableExtensions:(NSArray *)_extensions {
   NSDictionary *result;
 
-  if ([self->enabledExtensions containsObject: _extension])
-    return nil;
-
-  result = [self->client enable: _extension];
+  result = [self->client enable: _extensions];
   if (![[result valueForKey:@"result"] boolValue]) {
     return (id)[self errorForResult:result 
 		     text:@"Failed to enable requested extension"];
   }
-
-  [self->enabledExtensions addObject: _extension];
 
   return nil;
 }

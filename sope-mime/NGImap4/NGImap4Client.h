@@ -73,6 +73,8 @@ typedef enum {
   NSString *login;
   NSString *password;
 
+  NSMutableArray *enabledExtensions;
+
   BOOL debug;
   BOOL useSSL;
   BOOL useTLS;
@@ -122,7 +124,7 @@ typedef enum {
 - (NSDictionary *)noop;
   
 - (NSDictionary *)capability;
-- (NSDictionary *)enable:(NSString *)_extension;
+- (NSDictionary *)enable:(NSArray *)_extensions;
 
 - (NSDictionary *)namespace;
 - (NSDictionary *)list:(NSString *)_folder pattern:(NSString *)_pattern;

@@ -232,6 +232,7 @@ static NSMutableDictionary *namespaces;
 - (void)dealloc {
   if (self->loggedIn) [self logout];
   [self removeFromConnectionRegister];
+  [self->enabledExtensions release];
   [self->normer           release];
   [self->text             release];
   [self->address          release];
@@ -435,6 +436,9 @@ static NSMutableDictionary *namespaces;
     fprintf(stderr, "[%s] <openConnection> : time needed: %4.4fs\n",
            __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);    
   }
+
+  self->enabledExtensions = [[NSMutableArray alloc] init];
+
   [self registerConnection];
   [self->context resetLastException];
   
@@ -498,6 +502,8 @@ static NSMutableDictionary *namespaces;
   
   [self->parser    release]; self->parser    = nil;
   [self->delimiter release]; self->delimiter = nil;
+  [self->enabledExtensions release]; self->enabledExtensions = nil;
+
   [self removeFromConnectionRegister];
 }
 
@@ -546,8 +552,13 @@ static NSMutableDictionary *namespaces;
 }
 
 - (void)reconnect {
+  NSArray *extensions;
+
   if ([self->context lastException] != nil)
     return;
+
+  extensions = self->enabledExtensions;
+  [extensions retain];
 
   [self closeConnection];
   self->tagId = 0;
@@ -557,6 +568,11 @@ static NSMutableDictionary *namespaces;
     return;
   
   [self login];
+
+  if (self->loggedIn && [extensions count] > 0) {
+    [self enable: extensions];
+  }
+  [extensions autorelease];
 }
 
 - (NSDictionary *)login {
@@ -684,13 +700,16 @@ static NSMutableDictionary *namespaces;
   return result;
 }
 
-- (NSDictionary *)enable:(NSString *)_extension {
+- (NSDictionary *)enable:(NSArray *)_extensions {
   NSDictionary *result;
   NSString *cmd;
 
-
-  cmd = [NSString stringWithFormat:@"ENABLE %@", [_extension uppercaseString]];
+  cmd = [NSString stringWithFormat:@"ENABLE %@", [_extensions componentsJoinedByString: @" "]];
   result = [self->normer normalizeResponse:[self processCommand:cmd]];
+  if ([[result valueForKey:@"result"] boolValue]) {
+    [enabledExtensions removeObjectsInArray: _extensions];
+    [enabledExtensions addObjectsFromArray: _extensions];
+  }
   
   return result;
 }
@@ -1572,7 +1591,9 @@ static NSMutableDictionary *namespaces;
             exception    = localException;
           }
         }
-	[self closeConnection];
+        else {
+          [self closeConnection];
+        }
 	[self->context setLastException:localException];
       }
     }
