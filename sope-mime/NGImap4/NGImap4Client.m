@@ -589,19 +589,25 @@ static NSMutableDictionary *namespaces;
   NSDictionary *response;
   NGHashMap *map;
   NSString  *s;
+  NSUInteger plength;
 
   if (self->isLogin )
     return nil;
   
   self->isLogin = YES;
   
-  s = [NSString stringWithFormat:@"login \"%@\" {%d}",
-		  self->login, [self->password length]];
+  plength = [self->password length];
+  if (plength > 0)
+    s = [NSString stringWithFormat:@"login \"%@\" {%d}",
+		  self->login, plength];
+  else
+    s = [NSString stringWithFormat:@"login \"%@\" \"\"", self->login];
+
   map = [self processCommand: s
-                 withTag:YES
-		 withNotification:NO];
+                     withTag: YES
+            withNotification: NO];
   
-  if ([[map objectForKey:@"ContinuationResponse"] boolValue])
+  if (plength > 0 && [[map objectForKey:@"ContinuationResponse"] boolValue])
     map = [self processCommand:self->password withTag:NO];
   
   if (self->selectedFolder != nil)

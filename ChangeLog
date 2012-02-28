@@ -1,3 +1,10 @@
+2012-02-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-login): when the password is
+	empty, use a simple pair of dquotes as password parameter, as
+	servers consider "{0}" as missing string instead of just an empty
+	one.
+
 2012-02-27  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4Client.m (-enable:): now takes an array
