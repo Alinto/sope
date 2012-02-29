@@ -591,12 +591,16 @@ static NSMutableDictionary *namespaces;
   NSString  *s;
   NSUInteger plength;
 
-  if (self->isLogin )
+  if (self->isLogin)
     return nil;
   
   self->isLogin = YES;
-  
-  plength = [self->password length];
+
+  if (self->useUTF8)
+    plength = [self->password lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
+  else
+    plength = [self->password length];
+
   if (plength > 0)
     s = [NSString stringWithFormat:@"login \"%@\" {%d}",
 		  self->login, plength];

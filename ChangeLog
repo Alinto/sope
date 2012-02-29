@@ -1,3 +1,9 @@
+2012-02-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-login): when "useUTF8" is
+	set to YES, we need to specify the password length using the
+	NSUTF8StringEncoding.
+
 2012-02-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4Client.m (-login): when the password is
