@@ -31,6 +31,7 @@
 #include <NGExtensions/NGResourceLocator.h>
 #include "WORunLoop.h"
 #include "common.h"
+#include "signal.h"
 
 static volatile BOOL shouldTerminate = NO;
 static volatile BOOL shouldReload = NO;
