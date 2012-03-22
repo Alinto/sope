@@ -1,3 +1,9 @@
+2012-03-22  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-appserver/NGObjWeb/UnixSignalHandler.{h,m} - entirely
+	dropped that class as it was utterly broken. Replaced the
+	callers with standard signal() calls.
+
 2012-02-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGImap4/NGImap4Client.m (-login): when "useUTF8" is

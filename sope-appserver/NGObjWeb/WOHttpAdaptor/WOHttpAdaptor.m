@@ -29,12 +29,6 @@
 #include "WORunLoop.h"
 #include "NGHttp+WO.h"
 
-#if LIB_FOUNDATION_LIBRARY
-#  import <Foundation/UnixSignalHandler.h>
-#else
-#  include "UnixSignalHandler.h"
-#endif
-
 //#define USE_POOLS 1
 
 #if USE_POOLS
@@ -48,6 +42,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+
+void handle_SIGPIPE(int signum)
+{
+  NSLog(@"caught SIGPIPE - ignoring!");
+}
 
 @interface WOHttpAdaptor(Server)
 
@@ -120,12 +119,7 @@ static BOOL     debugOn                      = NO;
 }
 
 - (void)_registerForSignals {
-#if !defined(__MINGW32__)
-  UnixSignalHandler *us = [UnixSignalHandler sharedHandler];
-      
-  [us addObserver:self selector:@selector(handleSIGPIPE:)
-      forSignal:SIGPIPE immediatelyNotifyOnSignal:NO];
-#endif
+  signal(SIGPIPE, handle_SIGPIPE);
 }
 
 - (id<NGSocketAddress>)addressFromDefaultsOfApplication:(WOCoreApplication*)_a{
@@ -223,7 +217,8 @@ static BOOL     debugOn                      = NO;
 }
 
 - (void)dealloc {
-  [[UnixSignalHandler    sharedHandler] removeObserver:self];
+  signal(SIGPIPE, SIG_DFL);
+    
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self->lock    release];
   [self->socket  release];
@@ -240,11 +235,6 @@ static BOOL     debugOn                      = NO;
 }
 
 /* events */
-
-- (void)handleSIGPIPE:(int)_signal {
-  [self warnWithFormat:@"caught SIGPIPE !"];
-}
-
 - (void)registerForEvents {
   int backlog;
   WOChildMessage message;

@@ -110,7 +110,6 @@ libNGObjWeb_OBJC_FILES = \
 	NGObjWeb.m 			\
 	OWViewRequestHandler.m		\
 	OWResourceManager.m		\
-	UnixSignalHandler.m		\
 	WEClientCapabilities.m		\
 	WOAdaptor.m			\
 	WOApplicationMain.m		\
@@ -175,9 +174,6 @@ TOOL_NAME = wod
 
 wod_PCH_FILE    += common.h
 wod_OBJC_FILES  += wod.m $(NGObjWebCore_OBJC_FILES)
-ifeq ($(FOUNDATION_LIB),gnu)
-wod_OBJC_FILES  += UnixSignalHandler.m
-endif
 wod_SUBPROJECTS = Templates Associations
 
 
