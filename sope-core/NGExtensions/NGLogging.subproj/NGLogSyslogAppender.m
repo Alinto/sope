@@ -86,7 +86,7 @@ static NSString *defaultSyslogIdentifier = nil;
   
   formattedMsg = [self formattedEvent:_event];
   level = [self syslogLevelForLogLevel:[_event level]];
-  syslog(level, [formattedMsg cString]);
+  syslog(level, "%s", [formattedMsg cString]);
 }
 
 - (int)syslogLevelForLogLevel:(NGLogLevel)_level {

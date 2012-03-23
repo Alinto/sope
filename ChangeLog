@@ -1,3 +1,7 @@
+2012-03-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+    * Applied patch for bug http://www.sogo.nu/bugs/view.php?id=1670
+
 2012-03-22  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-appserver/NGObjWeb/UnixSignalHandler.{h,m} - entirely
