@@ -32,7 +32,12 @@
     va_list va;
 
 #ifdef __va_copy
-    __va_copy(va, args);
+    // args being NULL breaks heavily on amd64
+    if (args != NULL) {
+        __va_copy(va, args);
+    } else {
+	return format;
+    }
 #else
     va = args;
 #endif
