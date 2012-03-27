@@ -169,6 +169,7 @@
   "{urn:ietf:params:xml:ns:carddav}supported-address-data" =
      davSupportedAddressDataTypes;
   "{urn:ietf:params:xml:ns:carddav}addressbook-description" = davDescription;
+  "{urn:ietf:params:xml:ns:carddav}directory-gateway" = davDirectoryGateway;
 
   /* Apple CalServer */
   "{http://calendarserver.org/ns/}dropbox-home-URL" = davDropboxHomeURL;
