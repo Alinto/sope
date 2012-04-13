@@ -195,4 +195,5 @@
   "{urn:inverse:params:xml:ns:inverse-dav}contacts-categories" = davContactsCategories;
   "{urn:inverse:params:xml:ns:inverse-dav}events-default-classification" = davEventsDefaultClassification;
   "{urn:inverse:params:xml:ns:inverse-dav}tasks-default-classification" = davTasksDefaultClassification;
+  "{urn:inverse:params:xml:ns:inverse-dav}calendar-show-alarms" = davCalendarShowAlarms;
 }
