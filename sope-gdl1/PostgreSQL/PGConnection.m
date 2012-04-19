@@ -94,6 +94,7 @@ static BOOL debugOn = NO;
   self->_connection = PQconnectStart([self _cstrFromString:_conninfo]);
   if (self->_connection == NULL)
     return [self _makeConnectException:__PRETTY_FUNCTION__];
+
   return nil;
 }
 // TODO: add method for polling connect status
@@ -105,6 +106,8 @@ static BOOL debugOn = NO;
   self->_connection = PQconnectdb([self _cstrFromString:_conninfo]);
   if (self->_connection == NULL)
     return [self _makeConnectException:__PRETTY_FUNCTION__];
+
+  [self execute: @"SET standard_conforming_strings TO 'on'"];
 
   return nil;
 }
@@ -125,6 +128,11 @@ static BOOL debugOn = NO;
 				   [self _cstrFromString:_pwd]);
   if (self->_connection == NULL)
     return [self _makeConnectException:__PRETTY_FUNCTION__];
+
+  /* The PG adaptor always produce conform strings. We set this parameter to
+     make sure the "\" character is never interpreted as an escape character,
+     unless otherwise specified (by using E'...'). */
+  [self execute: @"SET standard_conforming_strings TO 'on'"];
 
   return nil;
 }
