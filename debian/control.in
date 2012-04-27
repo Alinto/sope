@@ -213,7 +213,7 @@ Section: web
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Provides: sope_SOPEVER_-db-connector
-Recommends: mysql-server (>= 5.0)
+Suggests: mysql-server (>= 5.0)
 Description: MySQL connector for SOPE's fork of the GNUstep database environment
  SOPE is a framework for developing web applications and services. The
  name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
