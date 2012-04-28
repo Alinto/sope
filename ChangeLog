@@ -1,3 +1,144 @@
+2012-04-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/PGConnection.m
+	(-connectWithHostName:port:options:tty:database:login:password:)
+	(-connectWithInfo:): make sure that "standard_conforming_strings"
+	is set to 'on' for new connections.
+
+2012-03-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+    * Applied patch for bug http://www.sogo.nu/bugs/view.php?id=1670
+	* Applied patch for bug http://www.sogo.nu/bugs/view.php?id=1671
+	* Applied patch for bug http://www.sogo.nu/bugs/view.php?id=1672
+
+2012-03-22  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-appserver/NGObjWeb/UnixSignalHandler.{h,m} - entirely
+	dropped that class as it was utterly broken. Replaced the
+	callers with standard signal() calls.
+
+2012-02-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-login): when "useUTF8" is
+	set to YES, we need to specify the password length using the
+	NSUTF8StringEncoding.
+
+2012-02-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-login): when the password is
+	empty, use a simple pair of dquotes as password parameter, as
+	servers consider "{0}" as missing string instead of just an empty
+	one.
+
+2012-02-27  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-enable:): now takes an array
+	instead of a single string and populate the new
+	"enabledExtensions" ivar with the name of enabled extensions,
+	ensuring first that they are not listed more than once.
+	(-closeConnection): released and nilify the new
+	"enabledExtensions" ivar.
+	(-reconnect): when the enabledExtensions ivar is not empty,
+	reenable the extensions after relogin.
+
+	* sope-mime/NGImap4/NGImap4Connection.m (-enableExtensions:): now
+	takes an array instead of a single string.
+	(-init): removed the "enabledExtensions" ivar.
+
+2012-02-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/Oracle8/OracleValues.m
+	(-[NSStringstringValueForOracleType:attribute:]): return the
+	escaped value rather than "self", in order for the code to be
+	actually effective.
+	Accept additional types SQLT_VCS and SQLT_LVC.
+
+	* sope-gdl1/Oracle8/OracleAdaptor.m (-typeForName:): fixed mapping
+	for VARCHAR, added VARCHAR2 and LONG VARCHAR and a fallback to
+	SQLT_CHR if the type in question is not supported. Enhanced type
+	detection with hasPrefix, to enable count for fix values.
+
+2012-02-15  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/NSString+PGVal.m
+	(-stringValueForPostgreSQLType:attribute:): properly escape and
+	quote strings in a way that is supported by all know versions of
+	PostgreSQL, from 8.1 (or even before) up to 9.1.
+
+	* sope-gdl1/PostgreSQL/PGConnection.m (-_setupPrivateOptions):
+	removed method, made obsolete by the above.
+
+2012-02-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/Oracle8/OracleValues.m (-[NSString
+	stringValueForOracleType:attribute:]): propertly escape quote
+	("'") characters in strings and return the result between a new
+	pair of quotes.
+
+2012-02-13  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m: added parsing of
+	untagged response to the "ENABLE" command.
+
+2012-02-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+	(-davFlatQuery:inContext:): don't escape url components from here,
+	as they will be re-escaped in the webdav renderer.
+
+2012-02-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-ldap/NGLdap/NSString+DN.m (-escapedForLDAPDN): new helper
+	method to properly escape dn members following rfc.
+
+2012-01-31  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m (_parseBodyHeaderFields:)
+	We now correctly handle responses with no size parameters.
+
+2012-01-10  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMail/NGMailAddressParser.m: perform a check on the
+	char pointer to ensure the buffer is never read beyond its bounds.
+
+2011-12-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-ldap/NGLdap/NGLdapEntry.m (-initWithDN:attributes:): use
+	the original attributes array, in order to enable further
+	modifications thereof.
+
+	* sope-ldap/NGLdap/NGLdapAttribute.m (-allStringValues): do not
+	attempt to create an array when the resulting string is nil.
+	(-isEqual:): overridden comparator method in order to take the
+	attribute name and values into account.
+
+2011-12-30  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NSString+Imap4.m - dropped
+	the IMAP4 password escaping method - it was just plain braindead
+
+	* sope-mime/NGImap4/NGImap4Client.m - now use IMAP4
+	continuation when sending over the password
+
+2011-12-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m (-nextObject):
+	initialise rptr and ctrl to NULL in order to make sure they are
+	initialised even when the search did not succeed.
+
+2011-12-15  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGSieveClient.{h,m} - added TLS support
+	to the Sieve code.
+
+2011-12-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/PGConnection.m (-connectWithInfo:)
+	(-connectWithHostName:port:options:tty:database:login:password:):
+	set "standard_conforming_strings" pg options to "on" to avoid
+	warnings on < 9.x and useless interpretation of backslashes as
+	escaping sequences.
+
 2011-11-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-appserver/NGObjWeb/WOMessage.m (-init): set version to

@@ -41,7 +41,8 @@
   "en-us" = "English";
   "en-gb" = "English";
   "eo"    = "Esperanto";
-  "es"    = "Spanish";
+  "es"    = "SpanishSpain";
+  "es-ar" = "SpanishArgentina";
   "es-cl" = "Spanish";
   "es-es" = "Spanish";
   "et"    = "Estonian";
@@ -106,10 +107,12 @@
   "mt"    = "Maltese";
   "my"    = "Burmese";  
   "na"    = "Nauru";
-  "nb"    = "NorwegianBokmaal";
+  "nb"    = "NorwegianBokmal";
   "ne"    = "Nepali";    
-  "nl"    = "Dutch";                           
-  "nl-nl" = "Dutch";                           
+  "nl"    = "Dutch";
+  "nl-nl" = "Dutch";
+  "nn"    = "NorwegianNynorsk";
+  "nn-no" = "NorwegianNynorsk";
   "no"    = "Norwegian";    
   "no-no" = "Norwegian";    
   "oc"    = "Occitan";                           

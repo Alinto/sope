@@ -51,9 +51,6 @@
   NSDate        *creationTime;
   NSString      *separator;
 
-  /* Enabled extensions cache */
-  NSMutableArray *enabledExtensions;
-
   /* hierarchy cache */
   NSMutableDictionary  *subfolders;
 
@@ -94,7 +91,7 @@
 - (NSString *)imap4FolderNameForURL:(NSURL *)_url removeFileName:(BOOL)_delfn;
 
 /* extensions methods */
-- (NSException *)enableExtension:(NSString *)_extension;
+- (NSException *)enableExtensions:(NSArray *)_extensions;
 
 /* folder operations */
 

@@ -193,8 +193,8 @@
 #if defined(LDAP_RES_SEARCH_REFERENCE)
   case LDAP_RES_SEARCH_REFERENCE: {
     int         rres;
-    char        **rptr;
-    LDAPControl **ctrl;
+    char        **rptr = NULL;
+    LDAPControl **ctrl = NULL;
 
     rres = ldap_parse_reference(self->handle, msg, &rptr, &ctrl,
 				0 /* don't free msg */);

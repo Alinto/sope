@@ -30,7 +30,6 @@
 @implementation NSString(PostgreSQL72Values)
 
 static Class NSStringClass = Nil;
-static Class EOExprClass   = Nil;
 static id    (*ctor)(id, SEL, const char *) = NULL;
 
 + (id)valueFromCString:(const char *)_cstr length:(int)_length
@@ -73,9 +72,12 @@ static id    (*ctor)(id, SEL, const char *) = NULL;
   attribute:(EOAttribute *)_attribute
 {
   // TODO: all this looks slow ...
-  unsigned len;
+  NSUInteger len, i, strLen, destI;
   unichar  c1;
-  
+  NSString *format, *result;
+  BOOL escaped;
+  unichar *sourceStr, *destStr;
+ 
   if ((len = [_type length]) == 0)
     return self;
   
@@ -84,9 +86,6 @@ static id    (*ctor)(id, SEL, const char *) = NULL;
   case 'c': case 'C':
   case 'v': case 'V':
   case 't': case 'T': {
-    NSString           *s;
-    EOQuotedExpression *expr;
-    
     if (len < 4)
       return self;
     
@@ -97,13 +96,36 @@ static id    (*ctor)(id, SEL, const char *) = NULL;
 	[_type hasPrefix:@"text"]))
       break;
     
-    /* TODO: creates too many autoreleased strings :-( */
-    
-    if (EOExprClass == Nil) EOExprClass = [EOQuotedExpression class];
-    expr = [[EOExprClass alloc] initWithExpression:self quote:@"'" escape:@"''"];
-    s = [[expr expressionValueForContext:nil] retain];
-    [expr release];
-    return [s autorelease];
+    escaped = NO;
+    strLen = [self length];
+    sourceStr = malloc (sizeof (unichar) * strLen);
+    [self getCharacters: sourceStr];
+
+    destStr = malloc (sizeof (unichar) * strLen * 2);
+    destI = 0;
+    for (i = 0; i < strLen; i++)
+      switch (sourceStr[i])
+        {
+        case '\\':
+          escaped = YES;
+        case '\'':
+          destStr[destI] = sourceStr[i];
+          destI++;
+        default:
+          destStr[destI] = sourceStr[i];
+          destI++;
+        }
+
+    free (sourceStr);
+    result = [[NSString alloc] initWithCharactersNoCopy: destStr
+                                                 length: destI
+                                           freeWhenDone: YES];
+    [result autorelease];
+    if (escaped)
+      format = @"E'%@'";
+    else
+      format = @"'%@'";
+    return [NSString stringWithFormat: format, result];
   }
   case 'm': case 'M': {
     if (len < 5) {

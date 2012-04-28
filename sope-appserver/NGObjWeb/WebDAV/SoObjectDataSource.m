@@ -114,7 +114,10 @@ static BOOL debugOn = NO;
   if (debugOn)
     [self logWithFormat:@"using base-url: %@", entityURL];
   
-  doEscape = YES;
+  /* wsourdeau, 20120206: if we enable escaping here, the resulting URL in
+     PROPFIND responses will be escaped twice, so I disabled it. Maybe it will
+     break something else? */
+  doEscape = NO;
   
   /* retrieve child names (calls -toOneRelationshipKeys and -toManyRel...) */
   

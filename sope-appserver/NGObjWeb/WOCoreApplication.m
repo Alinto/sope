@@ -31,12 +31,20 @@
 #include <NGExtensions/NGResourceLocator.h>
 #include "WORunLoop.h"
 #include "common.h"
+#include "signal.h"
 
-#if LIB_FOUNDATION_LIBRARY
-#  import <Foundation/UnixSignalHandler.h>
-#else
-#  include "UnixSignalHandler.h"
-#endif
+static volatile BOOL shouldTerminate = NO;
+static volatile BOOL shouldReload = NO;
+
+void handle_terminate(int signum)
+{
+  shouldTerminate = YES;
+}
+
+void handle_reload(int signum)
+{
+  shouldReload = YES;
+}
 
 NGObjWeb_DECLARE NSString *WOApplicationDidFinishLaunchingNotification =
   @"WOApplicationDidFinishLaunching";
@@ -182,23 +190,11 @@ static NSMutableArray *activeApps = nil; // THREAD
     }
     
     /* handle signals */
-#if !defined(__MINGW32__) && !defined(NeXT_Foundation_LIBRARY)
-    {
-      UnixSignalHandler *us = [UnixSignalHandler sharedHandler];
-      
-      [us addObserver:self selector:@selector(terminateOnSignal:)
-          forSignal:SIGTERM immediatelyNotifyOnSignal:YES];
-      [us addObserver:self selector:@selector(terminateOnSignal:)
-          forSignal:SIGINT immediatelyNotifyOnSignal:YES];
-      [us addObserver:self selector:@selector(terminateOnSignal:)
-          forSignal:SIGQUIT immediatelyNotifyOnSignal:YES];
-      [us addObserver:self selector:@selector(terminateOnSignal:)
-          forSignal:SIGILL immediatelyNotifyOnSignal:YES];
-      
-      [us addObserver:self selector:@selector(processHupSignal:)
-          forSignal:SIGHUP immediatelyNotifyOnSignal:NO];
-    }
-#endif
+    signal(SIGTERM, handle_terminate);
+    signal(SIGINT, handle_terminate);
+    signal(SIGQUIT, handle_terminate);
+    signal(SIGILL, handle_terminate);
+    signal(SIGHUP, handle_reload);
     
     controlSocket = nil;
     listeningSocket = nil;
@@ -207,9 +203,12 @@ static NSMutableArray *activeApps = nil; // THREAD
 }
 
 - (void)dealloc {
-#if !defined(__MINGW32__) && !defined(NeXT_Foundation_LIBRARY)
-  [[UnixSignalHandler sharedHandler] removeObserver:self];
-#endif
+  signal(SIGTERM, SIG_DFL);
+  signal(SIGINT, SIG_DFL);
+  signal(SIGQUIT, SIG_DFL);
+  signal(SIGILL, SIG_DFL);
+  signal(SIGHUP, SIG_DFL);
+
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self->adaptors    release];
   [self->requestLock release];
@@ -557,6 +556,12 @@ static NSMutableArray *activeApps = nil; // THREAD
   while (![self isTerminating]) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
+    if (shouldTerminate)
+      {
+	self->cappFlags.isTerminating = 1;
+	[self->listeningSocket close];
+      }
+
     if ([self shouldTerminate]) {
       /* check whether we should still process requests */
       [self terminate];

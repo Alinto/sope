@@ -144,7 +144,6 @@
   if (enc == 0) enc = [NSString defaultCStringEncoding];
   
   if (_data == nil) return nil;
-  *(&s) = nil;
   NS_DURING
     s = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
   NS_HANDLER {
@@ -154,6 +153,7 @@
   NS_ENDHANDLER;
   if (s == nil)
     s = [[NSString alloc] initWithData:_data encoding:enc];
+
   return s;
 }
 
@@ -184,28 +184,38 @@
       return nil;
     
     s = [self stringFromData:data];
-    a = [[NSArray alloc] initWithObjects:&s count:1];
-    [s release];
-    return [a autorelease];
+    if (s)
+      {
+        a = [[NSArray alloc] initWithObjects:&s count:1];
+        [s release];
+        return [a autorelease];
+      }
+    else
+      {
+        [self errorWithFormat: @"cound not convert value of %@ to string", [self attributeName]];
+        return nil;
+      }
   }
   else {
     id       *objs;
     unsigned i;
     NSArray  *vals, *a;
-    
+    NSData *data;
+
     vals = [self allValues];
     
     objs = calloc(cnt, sizeof(id));
     for (i = 0; i < cnt; i++) {
-      NSData *data;
 
-      if ((data = [vals objectAtIndex:i]) == nil) {
-        NSLog(@"missing data for value at index %i", i);
-        objs[i] = [[NSString alloc] initWithString:@""];
-      }
-      else {
-        objs[i] = [data isNotNull]
-	  ? [self stringFromData:data] : (NSString *)@"";
+      objs[i] = nil;	
+      data = [vals objectAtIndex: i];
+      
+      if (data)
+	objs[i] = [self stringFromData: data];
+
+      if (!objs[i]) {
+	NSLog(@"missing data for value at index %i", i);
+	objs[i] = [[NSString alloc] initWithString: @""];
       }
     }
     
@@ -221,6 +231,39 @@
 }
 - (NSEnumerator *)stringValueEnumerator {
   return [[self allStringValues] objectEnumerator];
+}
+
+/* NSObject */
+- (BOOL) isEqual: (id)aAttribute
+{
+  BOOL rc = NO;
+  NSArray *otherValues;
+  id value, otherValue;
+  NSUInteger count, max;
+
+  if (aAttribute == self)
+    rc = YES;
+  else
+    {
+      if ([name isEqualToString: [aAttribute attributeName]])
+        {
+          max = [values count];
+          otherValues = [aAttribute allValues];
+          if (max == [otherValues count])
+            {
+              rc = YES;
+              for (count = 0; rc && count < max; count++)
+                {
+                  value = [values objectAtIndex: count];
+                  otherValue = [otherValues objectAtIndex: count];
+                  if (value != otherValue && ![value isEqual: otherValue])
+                    rc = NO;
+                }
+            }
+        }
+    }
+
+  return rc;
 }
 
 /* NSCopying */

@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2007 SKYRIX Software AG
+  Copyright (C) 2007-2011 Inverse inc.
 
   This file is part of SOPE.
 
@@ -231,6 +232,7 @@ static NSMutableDictionary *namespaces;
 - (void)dealloc {
   if (self->loggedIn) [self logout];
   [self removeFromConnectionRegister];
+  [self->enabledExtensions release];
   [self->normer           release];
   [self->text             release];
   [self->address          release];
@@ -434,6 +436,9 @@ static NSMutableDictionary *namespaces;
     fprintf(stderr, "[%s] <openConnection> : time needed: %4.4fs\n",
            __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);    
   }
+
+  self->enabledExtensions = [[NSMutableArray alloc] init];
+
   [self registerConnection];
   [self->context resetLastException];
   
@@ -497,6 +502,8 @@ static NSMutableDictionary *namespaces;
   
   [self->parser    release]; self->parser    = nil;
   [self->delimiter release]; self->delimiter = nil;
+  [self->enabledExtensions release]; self->enabledExtensions = nil;
+
   [self removeFromConnectionRegister];
 }
 
@@ -539,14 +546,19 @@ static NSMutableDictionary *namespaces;
   [self->serverGID release]; self->serverGID = nil;
   
   self->login    = [_login copy];
-  self->password = [[_passwd stringByEscapingImap4Password] copy];
+  self->password = [_passwd copy];
   
   return [self login];
 }
 
 - (void)reconnect {
+  NSArray *extensions;
+
   if ([self->context lastException] != nil)
     return;
+
+  extensions = self->enabledExtensions;
+  [extensions retain];
 
   [self closeConnection];
   self->tagId = 0;
@@ -556,6 +568,11 @@ static NSMutableDictionary *namespaces;
     return;
   
   [self login];
+
+  if (self->loggedIn && [extensions count] > 0) {
+    [self enable: extensions];
+  }
+  [extensions autorelease];
 }
 
 - (NSDictionary *)login {
@@ -569,21 +586,33 @@ static NSMutableDictionary *namespaces;
       'expunge'     - an array (containing what?)
       'RawResponse' - the raw IMAP4 response
   */
-  NGHashMap *map;
-  NSString  *s, *log;
   NSDictionary *response;
+  NGHashMap *map;
+  NSString  *s;
+  NSUInteger plength;
 
-  if (self->isLogin )
+  if (self->isLogin)
     return nil;
   
   self->isLogin = YES;
+
+  if (self->useUTF8)
+    plength = [self->password lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
+  else
+    plength = [self->password length];
+
+  if (plength > 0)
+    s = [NSString stringWithFormat:@"login \"%@\" {%d}",
+		  self->login, plength];
+  else
+    s = [NSString stringWithFormat:@"login \"%@\" \"\"", self->login];
+
+  map = [self processCommand: s
+                     withTag: YES
+            withNotification: NO];
   
-  s = [NSString stringWithFormat:@"login \"%@\" \"%@\"",
-		  self->login, self->password];
-  log = [NSString stringWithFormat:@"login %@ <%@>",
-		    self->login,
-		    (self->password != nil) ? @"PASSWORD" : @"NO PASSWORD"];
-  map = [self processCommand:s logText:log];
+  if (plength > 0 && [[map objectForKey:@"ContinuationResponse"] boolValue])
+    map = [self processCommand:self->password withTag:NO];
   
   if (self->selectedFolder != nil)
     [self select:self->selectedFolder];
@@ -681,13 +710,16 @@ static NSMutableDictionary *namespaces;
   return result;
 }
 
-- (NSDictionary *)enable:(NSString *)_extension {
+- (NSDictionary *)enable:(NSArray *)_extensions {
   NSDictionary *result;
   NSString *cmd;
 
-
-  cmd = [NSString stringWithFormat:@"ENABLE %@", [_extension uppercaseString]];
+  cmd = [NSString stringWithFormat:@"ENABLE %@", [_extensions componentsJoinedByString: @" "]];
   result = [self->normer normalizeResponse:[self processCommand:cmd]];
+  if ([[result valueForKey:@"result"] boolValue]) {
+    [enabledExtensions removeObjectsInArray: _extensions];
+    [enabledExtensions addObjectsFromArray: _extensions];
+  }
   
   return result;
 }
@@ -1569,7 +1601,9 @@ static NSMutableDictionary *namespaces;
             exception    = localException;
           }
         }
-	[self closeConnection];
+        else {
+          [self closeConnection];
+        }
 	[self->context setLastException:localException];
       }
     }

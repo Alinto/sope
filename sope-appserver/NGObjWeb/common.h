@@ -35,7 +35,6 @@
 #  include <NGExtensions/NGObjectMacros.h>
 #  include <NGExtensions/NSString+Ext.h>
 #  include <NGExtensions/NSRunLoop+FileObjects.h>
-#  include "UnixSignalHandler.h"
 #endif
 
 #if !LIB_FOUNDATION_LIBRARY

@@ -329,7 +329,8 @@ static int FetchNewUnseenMessagesInSubFoldersOnDemand = -1;
 - (void)select {
 }
 
-- (void)status {
+- (BOOL)status {
+  return YES;
 }
 
 /* actions */

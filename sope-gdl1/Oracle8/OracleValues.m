@@ -58,7 +58,15 @@
 - (NSString *) stringValueForOracleType: (ub2) theType
                               attribute: (EOAttribute *) theAttribute
 {
-  return self;
+  NSString *value;
+
+  if (theType == SQLT_CHR || theType == SQLT_STR || theType == SQLT_CLOB || theType == SQLT_VCS || theType == SQLT_LVC)
+    value = [NSString stringWithFormat: @"'%@'",
+                      [self stringByReplacingString: @"'" withString: @"''"]];
+  else
+    value = self;
+
+  return value;
 }
 
 @end

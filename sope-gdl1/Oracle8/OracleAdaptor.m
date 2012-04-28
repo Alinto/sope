@@ -44,9 +44,17 @@
 
   theName = [theName uppercaseString];
 
-  if ([theName isEqualToString: @"VARCHAR"])
+  if ([theName hasPrefix: @"VARCHAR2"])
     {
       t = SQLT_CHR;
+    }
+  else if ([theName hasPrefix: @"VARCHAR"])
+    {
+      t = SQLT_VCS;
+    }
+  else if ([theName isEqualToString: @"LONG VARCHAR"])
+    {
+      t = SQLT_LVC;
     }
   else if ([theName isEqualToString: @"CLOB"])
     {
@@ -79,6 +87,11 @@
   else if ([theName isEqualToString: @"TIMESTAMP WITH LOCAL TIME ZONE"])
     {
       t = SQLT_TIMESTAMP_LTZ;
+    }
+  else
+    {
+      [self logWithFormat: @"unknown Oracle type: %@ (fallback to SQLT_CHR)", theName];
+      t = SQLT_CHR;
     }
 
   return t;
@@ -166,7 +179,7 @@
   s = [theValue stringValueForOracleType: [self typeForName: [theAttribute externalType]]
 		attribute: theAttribute];
   
-  NSLog(@"Formatted %@ (%@) to %@ (NSString)", theValue, NSStringFromClass([theValue class]), s);
+  // NSLog(@"Formatted %@ (%@) to %@ (NSString)", theValue, NSStringFromClass([theValue class]), s);
 
   return s;
 }

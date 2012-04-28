@@ -40,6 +40,8 @@
 
 - (NSDate *)ldapTimestamp;
 
+- (NSString *) escapedForLDAPDN;
+
 @end
 
 #endif /* __NSString_DN_H__ */

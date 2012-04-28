@@ -161,6 +161,7 @@
   "{urn:ietf:params:xml:ns:caldav}calendar-timezone" = davCalendarTimeZone;
   "{urn:ietf:params:xml:ns:caldav}schedule-default-calendar-URL" = davScheduleDefaultCalendarURL;
   "{urn:ietf:params:xml:ns:caldav}schedule-calendar-transp" = davScheduleCalendarTransparency;
+  "{urn:ietf:params:xml:ns:caldav}calendar-user-type" = davCalendarUserType;
 
   /* CardDAV */
   "{urn:ietf:params:xml:ns:carddav}address-data" = davAddressData;
@@ -168,6 +169,7 @@
   "{urn:ietf:params:xml:ns:carddav}supported-address-data" =
      davSupportedAddressDataTypes;
   "{urn:ietf:params:xml:ns:carddav}addressbook-description" = davDescription;
+  "{urn:ietf:params:xml:ns:carddav}directory-gateway" = davDirectoryGateway;
 
   /* Apple CalServer */
   "{http://calendarserver.org/ns/}dropbox-home-URL" = davDropboxHomeURL;
@@ -176,6 +178,10 @@
   "{http://calendarserver.org/ns/}calendar-proxy-read-for" = davCalendarProxyReadFor;
   "{http://calendarserver.org/ns/}calendar-proxy-write-for" = davCalendarProxyWriteFor;
   "{http://calendarserver.org/ns/}allowed-sharing-modes" = davAllowedSharingModes;
+  "{http://calendarserver.org/ns/}first-name" = davFirstName;
+  "{http://calendarserver.org/ns/}last-name" = davLastName;
+  "{http://calendarserver.org/ns/}email-address-set" = davEmailAddressSet;
+  "{http://calendarserver.org/ns/}record-type" = davRecordType;
 
   /* Apple extensions */
   "{http://apple.com/ns/ical/}calendar-color" = davCalendarColor;
@@ -187,4 +193,7 @@
 
   /* Inverse */
   "{urn:inverse:params:xml:ns:inverse-dav}contacts-categories" = davContactsCategories;
+  "{urn:inverse:params:xml:ns:inverse-dav}events-default-classification" = davEventsDefaultClassification;
+  "{urn:inverse:params:xml:ns:inverse-dav}tasks-default-classification" = davTasksDefaultClassification;
+  "{urn:inverse:params:xml:ns:inverse-dav}calendar-show-alarms" = davCalendarShowAlarms;
 }

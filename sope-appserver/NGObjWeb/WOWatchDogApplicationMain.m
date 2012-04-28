@@ -41,7 +41,21 @@
 #import <NGStreams/NGNetUtilities.h>
 #import <NGStreams/NGPassiveSocket.h>
 
-#import "UnixSignalHandler.h"
+/* for signal handlers */
+static volatile int pendingSIGHUP = 0;
+static volatile BOOL shouldTerminate = NO;
+
+void handle_SIGINTTERM(int signum)
+{
+  shouldTerminate = YES;
+}
+
+void handle_SIGHUP(int signum)
+{
+  pendingSIGHUP++;
+}
+
+extern void handle_SIGPIPE(int signum);
 
 #if defined(__CYGWIN32__) || defined(__MINGW32__)
 
@@ -126,8 +140,6 @@ typedef enum {
   NSTimer *loopTimer;
   BOOL terminate;
   BOOL willTerminate;
-  NSNumber *terminationSignal;
-  int pendingSIGHUP;
 
   NGPassiveSocket *listeningSocket;
 
@@ -444,7 +456,7 @@ typedef enum {
       listeningSocket = nil;
       terminate = NO;
       willTerminate = NO;
-      terminationSignal = nil;
+      shouldTerminate = NO;
       pendingSIGHUP = 0;
 
       numberOfChildren = 0;
@@ -472,7 +484,6 @@ typedef enum {
 - (void) dealloc
 {
   [self _releaseListeningSocket];
-  [terminationSignal release];
   [appName release];
   [children release];
   [super dealloc];
@@ -521,7 +532,11 @@ typedef enum {
 {
   NSRunLoop *runLoop;
 
-  [[UnixSignalHandler sharedHandler] removeObserver: self];
+  signal(SIGHUP, SIG_DFL);
+  signal(SIGINT, SIG_DFL);
+  signal(SIGTERM, SIG_DFL);
+  signal(SIGPIPE, SIG_DFL);
+  
   [loopTimer invalidate];
   loopTimer = nil;
   runLoop = [NSRunLoop currentRunLoop];
@@ -768,37 +783,12 @@ typedef enum {
   return child;
 }
 
-- (void) _handleSIGPIPE:(NSNumber *)_signal {
-  [self logWithFormat: @"received SIGPIPE (ignored)"];
-}
-
-- (void) _handleTermination:(NSNumber *)_signal {
-  if (!terminationSignal) {
-    ASSIGN (terminationSignal, _signal);
-    if (pidFile)
-      unlink (pidFile);
-  }
-}
-
-- (void) _handleSIGHUP:(NSNumber *)_signal {
-  pendingSIGHUP++;
-}
-
 - (void) _setupSignals
 {
-#if !defined(__MINGW32__) && !defined(NeXT_Foundation_LIBRARY)
-  UnixSignalHandler *us;
-
-  us = [UnixSignalHandler sharedHandler];
-  [us addObserver:self selector:@selector(_handleSIGPIPE:)
-        forSignal:SIGPIPE immediatelyNotifyOnSignal:YES];
-  [us addObserver:self selector:@selector(_handleTermination:)
-        forSignal:SIGINT immediatelyNotifyOnSignal:YES];
-  [us addObserver:self selector:@selector(_handleTermination:)
-        forSignal:SIGTERM immediatelyNotifyOnSignal:YES];
-  [us addObserver:self selector:@selector(_handleSIGHUP:)
-        forSignal:SIGHUP immediatelyNotifyOnSignal:YES];
-#endif
+  signal(SIGHUP, handle_SIGHUP);
+  signal(SIGINT, handle_SIGINTTERM);
+  signal(SIGTERM, handle_SIGINTTERM);
+  signal(SIGPIPE, handle_SIGPIPE);
 }
 
 - (void) declareChildReady: (WOWatchDogChild *) readyChild
@@ -835,7 +825,7 @@ typedef enum {
   WOWatchDogChild *child;
   int count;
 
-  [self logWithFormat: @"Terminating with signal %@", terminationSignal];
+  [self logWithFormat: @"Terminating with SIGINT or SIGTERM"];
   [self _releaseListeningSocket];
   for (count = 0; count < numberOfChildren; count++) {
     child = [children objectAtIndex: count];
@@ -843,8 +833,7 @@ typedef enum {
         && [child status] != WOChildStatusTerminating)
       [child terminate];
   }
-  [terminationSignal release];
-  terminationSignal = nil;
+
   if ([downChildren count] == numberOfChildren) {
     [self logWithFormat: @"all children exited. We now terminate."];
     terminate = YES;
@@ -922,6 +911,9 @@ typedef enum {
         pendingSIGHUP--;
       }
 
+      if (shouldTerminate && pidFile)
+	unlink(pidFile);
+
       // [self logWithFormat: @"watchdog loop"];
       NS_DURING {
         terminate = [self _ensureChildren];
@@ -938,7 +930,7 @@ typedef enum {
       NS_ENDHANDLER;
 
       if (!terminate) {
-        if (terminationSignal)
+        if (shouldTerminate)
           [self _handlePostTerminationSignal];
         [self _checkProcessesStatus];
       }

@@ -63,7 +63,7 @@
 - (id)init {
   NSString *p;
   
-  p = [[NSUserDefaults standardUserDefaults] stringForKey:@"SendmailPath"];
+  p = [[NSUserDefaults standardUserDefaults] stringForKey:@"WOSendMail"];
   return [self initWithExecutablePath:p];
 }
 

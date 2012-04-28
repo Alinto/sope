@@ -20,11 +20,15 @@
   02111-1307, USA.
 */
 
+#import <Foundation/NSCharacterSet.h>
+
 #include "NSString+DN.h"
 #include <NGExtensions/NSString+Ext.h>
 #include "common.h"
 
 static NSString *dnSeparator = @",";
+
+static NSCharacterSet *escapableChars = nil;
 
 static NSArray *cleanDNComponents(NSArray *_components) {
   unsigned i, count;
@@ -114,6 +118,44 @@ static NSArray *cleanDNComponents(NSArray *_components) {
   return [NSCalendarDate dateWithYear:year month:month
                          day:day hour:hour minute:minute second:second
                          timeZone:tz];
+}
+
+- (NSString *) escapedForLDAPDN
+{
+  NSMutableString *newString;
+  NSString *format;
+  unichar *uniString;
+  unichar currentChar;
+  NSUInteger count, length;
+
+  if (!escapableChars)
+    {
+      escapableChars = [NSCharacterSet
+                         characterSetWithCharactersInString: @"\"+,;<>\\"];
+      [escapableChars retain];
+    }
+
+  length = [self length];
+  newString = [NSMutableString stringWithCapacity: length];
+
+  uniString = NSZoneMalloc (NULL, sizeof (unichar) * length);
+  [self getCharacters: uniString];
+
+  /* see rfc4514, section 2.4 */
+  for (count = 0; count < length; count++)
+    {
+      currentChar = uniString[count];
+      if ((currentChar == ' ' && (count == 0 || count == (length - 1)))
+          || [escapableChars characterIsMember: currentChar])
+        format = @"\\%Lc";
+      else
+        format = @"%Lc";
+      [newString appendFormat: format, currentChar];
+    }
+
+  NSZoneFree (NULL, uniString);
+
+  return newString;
 }
 
 @end /* NSString(DNSupport) */

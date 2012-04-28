@@ -30,7 +30,9 @@
 - (id)initWithDN:(NSString *)_dn attributes:(NSArray *)_attrs {
   _dn = [_dn lowercaseString];
   self->dn         = [[[_dn dnComponents] componentsJoinedByString:@","] copy];
-  self->attributes = [_attrs copy];
+  self->attributes = _attrs;
+  [self->attributes retain];
+
   return self;
 }
 - (id)init {
