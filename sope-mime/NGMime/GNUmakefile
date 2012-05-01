@@ -32,6 +32,8 @@ NGMime_HEADER_FILES = \
 	NGPart.h			\
 	NGMimeFileData.h		\
 	NGMimeJoinedData.h		\
+	\
+	NSData+RFC822.h
 
 NGMime_OBJC_FILES = \
 	NGMime.m			\
@@ -74,6 +76,8 @@ NGMime_OBJC_FILES = \
 	NGMimeMultipartBodyGenerator.m			\
 	NGMimeTextBodyGenerator.m			\
 	NGMimeRfc822BodyGenerator.m			\
+	\
+	NSData+RFC822.m
 
 -include GNUmakefile.preamble
 ifneq ($(FHS_INSTALL_ROOT),)

@@ -39,7 +39,7 @@
 
 #include <NGStreams/NGSocket.h>
 #include <NGStreams/NGActiveSSLSocket.h>
-
+#include <NGMime/NSData+RFC822.h>
 
 @interface EOQualifier(IMAPAdditions)
 - (NSString *)imap4SearchString;
@@ -1100,58 +1100,31 @@ static NSMutableDictionary *namespaces;
   NSArray   *flags;
   NGHashMap *result;
   NSString  *message, *icmd;
-  char       *new;
-  const char *old;
-  int         cntOld   = 0;
-  int         cntNew   = 0;
-  int         len      = 0;
+  NSData *rfc822Data;
 
   flags   = _flags2ImapFlags(self, _flags);
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-  
+
   /* Remove bare newlines */
-  old = [_message bytes];
-  len = [_message length];
-
-  new = calloc(len * 2 + 4, sizeof(char));
-
-  while (cntOld < (len - 1)) {
-    if (old[cntOld] == '\n') {
-      new[cntNew] = '\r'; cntNew++;
-      new[cntNew] = '\n'; cntNew++;
-    }
-    else if (old[cntOld] != '\r') {
-      new[cntNew] = old[cntOld]; cntNew++;
-    }
-    cntOld++;
-  }
-  if (old[cntOld] == '\n') {
-    new[cntNew] = '\r'; cntNew++;
-    new[cntNew] = '\n'; cntNew++;
-  }
-  else if (old[cntOld] != '\r') {
-    new[cntNew] = old[cntOld]; cntNew++;
-  }
-
-  // TODO: fix this junk, do not treat the message as a string, its NSData
-  message = [[NSString alloc] initWithBytes: new
-                                     length: cntNew
-                                   encoding: NSISOLatin1StringEncoding];
-  if (new != NULL) free(new); new = NULL;
-
+  rfc822Data = [_message dataByEnsuringCRLFLineEndings];
+  
   icmd = [NSString stringWithFormat:@"append \"%@\" (%@) {%d}",
-                     _folder,
-                     [flags componentsJoinedByString:@" "],
-                     cntNew];
+                   _folder, [flags componentsJoinedByString:@" "],
+                   [rfc822Data length]];
   result = [self processCommand:icmd
                  withTag:YES withNotification:NO];
   
   // TODO: explain that
   if ([[result objectForKey:@"ContinuationResponse"] boolValue])
-    result = [self processCommand:message withTag:NO];
-
-  [message release]; message = nil;
+    {
+      // TODO: fix this junk, do not treat the message as a string, its NSData
+      message = [[NSString alloc] initWithData: rfc822Data
+                                      encoding: NSISOLatin1StringEncoding];
+      result = [self processCommand:message withTag:NO];
+      
+      [message release]; message = nil;
+    }
 
   return [self->normer normalizeResponse:result];
 }

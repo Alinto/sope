@@ -1,3 +1,8 @@
+2012-05-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMime/NSData+RFC822.m: new category module for rfc822
+	utility methods.
+
 2012-04-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-gdl1/PostgreSQL/PGConnection.m
