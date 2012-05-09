@@ -93,6 +93,7 @@ NGStreams_EXPORT void NGInitTextStdio(void);
 - (BOOL)flush;
 
 - (BOOL)writeNewline;
+- (void)setEncoding: (NSStringEncoding) theEncoding;
 
 @end
 

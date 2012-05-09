@@ -360,6 +360,11 @@ static void _flushAtExit(void) {
   return YES;
 }
 
+- (void) setEncoding: (NSStringEncoding) theEncoding
+{
+  self->encoding = theEncoding;
+}
+
 @end /* NGCTextStream */
 
 @implementation _NGCTextStreamLineEnumerator

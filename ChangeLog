@@ -1,3 +1,12 @@
+2012-05-09  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-core/NGStreams/NGCTextStream.m and:1
+	sope-mime/NGImap4/NGImap4Client.m - we now permit setting
+	the encoding instead of using the default one in NGCTextStream
+	as whenever we APPEND a message over IMAP, we use
+	NSISOLatin1StringEncoding while SOGo forces NSUTF8StringEncoding. This
+	create size mismatches and literal errors during the APPEND operation.
+
 2012-05-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-mime/NGMime/NSData+RFC822.m: new category module for rfc822

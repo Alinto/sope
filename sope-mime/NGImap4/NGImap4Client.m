@@ -1121,6 +1121,7 @@ static NSMutableDictionary *namespaces;
       // TODO: fix this junk, do not treat the message as a string, its NSData
       message = [[NSString alloc] initWithData: rfc822Data
                                       encoding: NSISOLatin1StringEncoding];
+      [[self textStream] setEncoding: NSISOLatin1StringEncoding];
       result = [self processCommand:message withTag:NO];
       
       [message release]; message = nil;
