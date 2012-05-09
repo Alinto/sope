@@ -185,7 +185,7 @@
   return [self valueAtIndex:i];
 }
 - (NSString *)valueForName:(NSString *)_localName uri:(NSString *)_uri {
-  unsigned int i;
+  NSUInteger i;
   
   if ((i = [self indexOfName:_localName uri:_uri]) == NSNotFound)
     return nil;
