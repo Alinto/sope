@@ -24,7 +24,7 @@
 #include "EONull.h"
 #include "common.h"
 
-#if __GNU_LIBOBJC__ == 20100911
+#if __GNU_LIBOBJC__ >= 20100911
 #  define sel_get_any_uid sel_getUid
 #endif
 

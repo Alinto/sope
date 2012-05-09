@@ -22,7 +22,7 @@
 #ifndef __NGExtensions_NGMemoryAllocation_H__
 #define __NGExtensions_NGMemoryAllocation_H__
 
-#if __GNU_LIBOBJC__ != 20100911
+#if !(__GNU_LIBOBJC__ >= 20100911)
 #include <objc/objc-api.h>
 #endif
 

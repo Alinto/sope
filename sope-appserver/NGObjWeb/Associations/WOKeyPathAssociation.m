@@ -25,7 +25,7 @@
 #include "common.h"
 #include <string.h>
 
-#if __GNU_LIBOBJC__ == 20100911
+#if __GNU_LIBOBJC__ >= 20100911
 #define METHOD_NULL NULL
 #define object_is_instance(XXX) (XXX != nil)
 #define class_get_class_method    class_getClassMethod
@@ -479,7 +479,7 @@ static inline void _fillInfo(WOKeyPathAssociation *self, id object,
     
     if (method != METHOD_NULL) {
       info->access.method = method_get_imp(method);
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
       info->retType = *(method_getTypeEncoding(method));
 #else
 	  info->retType = *(method->method_types);

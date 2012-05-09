@@ -39,6 +39,12 @@
 #  endif
 #endif
 
+#if __GNU_LIBOBJC__ >= 20100911
+#  ifndef sel_eq
+#    define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
+#  endif
+#endif
+
 #ifndef ASSIGN
 #  define ASSIGN(object, value) \
        ({id __object = (id)object;    \

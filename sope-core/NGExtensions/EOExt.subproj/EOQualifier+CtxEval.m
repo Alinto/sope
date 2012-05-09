@@ -29,7 +29,7 @@
 #  import <objc/objc.h>
 #  import <extensions/objc-runtime.h>
 #elif GNUSTEP_BASE_LIBRARY
-#if __GNU_LIBOBJC__ == 20100911
+#if __GNU_LIBOBJC__ >= 20100911
 #  define sel_get_name sel_getName
 #  import <objc/runtime.h>
 #else

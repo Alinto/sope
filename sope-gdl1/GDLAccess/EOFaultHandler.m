@@ -29,7 +29,7 @@
 #include "EOFault.h"
 #include "common.h"
 
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
 #  define METHOD_NULL NULL
 #  define class_get_super_class class_getSuperclass
 #  define object_is_instance(object) (object!=nil?YES:NO)
@@ -47,6 +47,9 @@ typedef struct objc_method      *Method_t;
 #  define class_get_instance_method class_getInstanceMethod
 #endif
 
+#if !(__GNU_LIBOBJC__ >= 20100911)
+#  define sel_getTypeEncoding(selector) ((selector)->sel_types)
+#endif
 
 @implementation EOFaultHandler
 
@@ -114,7 +117,7 @@ typedef struct objc_method      *Method_t;
 - (BOOL)conformsToProtocol:(Protocol *)_protocol forFault:(EOFault *)_fault {
   Class class, sClass;
 
-#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__) && __GNU_LIBOBJC__ != 20100911
+#if GNU_RUNTIME && !defined(__GNUSTEP_RUNTIME__) && !(__GNU_LIBOBJC__ >= 20100911)
   struct objc_protocol_list* protos;
   int i;
   
@@ -181,7 +184,7 @@ typedef struct objc_method      *Method_t;
 
   /* first check for EOFault's own methods */
 
-#if __GNU_LIBOBJC__ != 20100911
+#if !(__GNU_LIBOBJC__ >= 20100911)
   if (types == NULL) {
     // lookup method for selector
     struct objc_method *mth;
@@ -202,7 +205,7 @@ typedef struct objc_method      *Method_t;
 #if GNU_RUNTIME
   // GNU runtime selectors may be typed, a lookup may not be necessary
   if (types == NULL)
-    types = _selector->sel_types;
+    types = sel_getTypeEncoding(_selector);
 #endif
   if (types == NULL)
     return nil;

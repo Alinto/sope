@@ -26,6 +26,10 @@
 #define sel_eq(sel1, sel2) ((sel1)) == ((sel2))
 #endif
 
+#if __GNU_LIBOBJC__ >= 20100911
+#  define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
+#endif
+
 @interface EOQualifier(LDAPPrivates)
 
 - (void)addToLDAPFilterString:(NSMutableString *)_s inContext:(id)_ctx;

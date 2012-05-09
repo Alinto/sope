@@ -43,6 +43,12 @@
 #  endif
 #endif
 
+#if __GNU_LIBOBJC__ >= 20100911
+#  ifndef sel_eq
+#    define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
+#  endif
+#endif
+
 @interface NSObject(NGImap4_OSXHacks)
 - (void)subclassResponsibility:(SEL)_acmd;
 - (void)notImplemented:(SEL)_acmd;

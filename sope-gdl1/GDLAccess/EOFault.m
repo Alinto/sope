@@ -38,7 +38,7 @@ typedef struct {
     Class isa;
 } *my_objc_object;
 
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
 #  warning TODO: implement for NeXT/Apple runtime!
 #  define object_is_instance(object) (object!=nil?YES:NO)
 #  define class_get_super_class class_getSuperclass
@@ -51,7 +51,7 @@ typedef struct objc_method      *Method_t;
       ((object!=nil)&&CLS_ISCLASS(((my_objc_object)object)->isa))
 #endif
 
-#if __GNU_LIBOBJC__ == 20100911
+#if __GNU_LIBOBJC__ >= 20100911
 #  define METHOD_NULL NULL
 #  define class_get_super_class class_getSuperclass
 #  define object_is_instance(object) (object!=nil?YES:NO)
@@ -111,7 +111,7 @@ typedef struct objc_method      *Method_t;
   if (fault == nil) return NO;
   if (EOFaultClass == Nil) EOFaultClass = [EOFault class];
 
-#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
   for (clazz = ((EOFault *)fault)->isa; clazz; clazz = class_getSuperclass(clazz)) {
 #else
   for (clazz = ((EOFault *)fault)->isa; clazz; clazz = clazz->super_class) {

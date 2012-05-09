@@ -70,7 +70,7 @@ static Class NSDateClass = Nil;
 - (BOOL)isComponentClass:(Class)_clazz {
   if (_clazz == Nil) 
     return NO;
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
   while ((_clazz = class_getSuperclass(_clazz)) != Nil) {
 #else
   while ((_clazz = _clazz->super_class) != Nil) {

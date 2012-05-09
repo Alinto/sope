@@ -2005,7 +2005,7 @@ static BOOL debugLanguageLookup = NO;
   
   sprintf (buffer,
 	   "<%s %p fullPath: %s infoDictionary: %p loaded=%s>",
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
 	   (char*)class_getName([self class]),
 #else
 	   (char*)object_get_class_name(self),

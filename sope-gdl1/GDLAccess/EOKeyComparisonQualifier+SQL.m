@@ -28,12 +28,6 @@
 #import "EOSQLQualifier.h"
 #include "common.h"
 
-#if NeXT_RUNTIME || APPLE_RUNTIME
-#  ifndef SEL_EQ
-#    define SEL_EQ(__A__,__B__) (__A__==__B__?YES:NO)
-#  endif
-#endif
-
 @implementation EOKeyComparisonQualifier(SQLQualifier)
 
 /* SQL qualifier generation */

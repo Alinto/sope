@@ -262,7 +262,7 @@ static int descriptiveIDs = -1;
             printf("  ");
 #endif
           printf("  Child of 0x%p: i[%i] %s <%s>: %0.3fs\n",
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
 				 self, i, [[_ctx elementID] cString], class_getName([child class]),
 #else
                  self, i, [[_ctx elementID] cString], [child class]->name,

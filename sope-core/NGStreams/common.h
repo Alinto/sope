@@ -40,7 +40,7 @@
 #endif
 
 #ifdef GNU_RUNTIME
-#if __GNU_LIBOBJC__ == 20100911
+#if __GNU_LIBOBJC__ >= 20100911
 #  include <objc/runtime.h>
 #else
 #  include <objc/objc-api.h>

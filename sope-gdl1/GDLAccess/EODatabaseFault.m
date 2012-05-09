@@ -66,7 +66,7 @@ typedef struct {
     
     if (fault == nil)
         return nil;
-#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
     if (class_getInstanceSize([fault class]) < class_getInstanceSize([self class])) {
 #else
 	if ([fault class]->instance_size < ((Class)self)->instance_size) {
@@ -77,7 +77,7 @@ typedef struct {
 		       @"Instances from class %@ must be at least %d in size "
 		       @"to fault",
 		       NSStringFromClass([fault class]),
-#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
 		       class_getInstanceSize([self class])];
 #else
 			   ((Class)self)->instance_size];
@@ -132,7 +132,7 @@ typedef struct {
     
   fault = [NSMutableArray allocWithZone:zone];
 
-#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
   if (class_getInstanceSize([fault class]) < class_getInstanceSize([self class])) {
 #else
   if ([fault class]->instance_size < ((Class)(self))->instance_size) {
@@ -143,7 +143,7 @@ typedef struct {
                     @"Instances from class %s must be at least %d "
                     @"in size to fault",
                     NSStringFromClass([fault class]),
-#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
+#if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
                     class_getInstanceSize([self class])];
 #else
 					((Class)self)->instance_size];

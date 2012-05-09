@@ -179,7 +179,7 @@ _updateComponent(WOComponentReference *self, WOContext *_ctx)
         printf("  ");
       printf("[%s %s]: %0.3fs\n",
              [[child name] cString], 
-#if APPLE_RUNTIME || NeXT_RUNTIME
+#if APPLE_RUNTIME || NeXT_RUNTIME || (__GNU_LIBOBJC__ >= 20100911)
 	     sel_getName(_cmd), 
 #else
 	     sel_get_name(_cmd), 

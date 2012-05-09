@@ -28,7 +28,7 @@
 #include <DOM/EDOM.h>
 #include "common.h"
 
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
 #  define sel_get_any_uid   sel_getUid
 #  define sel_register_name sel_registerName
 #endif

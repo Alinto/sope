@@ -23,7 +23,7 @@
 #include <NGObjWeb/WOAssociation.h>
 #include "common.h"
 
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ == 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
 #  include <objc/objc.h>
 #  define class_get_instance_method class_getInstanceMethod
 #  define method_get_imp method_getImplementation
