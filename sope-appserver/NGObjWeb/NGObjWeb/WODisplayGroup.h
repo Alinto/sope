@@ -33,14 +33,14 @@
   EODataSource *dataSource;
   NSArray      *sortOrderings;
   NSDictionary *insertedObjectDefaults;
-  unsigned     numberOfObjectsPerBatch;
+  NSUInteger   numberOfObjectsPerBatch;
   NSArray      *selectionIndexes;
   NSArray      *objects;
   NSArray      *displayObjects;
   EOQualifier  *qualifier;
   NSString     *defaultStringMatchFormat;
   NSString     *defaultStringMatchOperator;
-  unsigned     currentBatchIndex;
+  NSUInteger   currentBatchIndex;
 
   NSMutableDictionary *_queryBindings;
   NSMutableDictionary *_queryMatch;
@@ -74,8 +74,8 @@
 - (void)setInsertedObjectDefaultValues:(NSDictionary *)_values;
 - (NSDictionary *)insertedObjectDefaultValues;
 
-- (void)setNumberOfObjectsPerBatch:(unsigned)_count;
-- (unsigned)numberOfObjectsPerBatch;
+- (void)setNumberOfObjectsPerBatch:(NSUInteger)_count;
+- (NSUInteger)numberOfObjectsPerBatch;
 
 - (void)setSelectsFirstObjectAfterFetch:(BOOL)_flag;
 - (BOOL)selectsFirstObjectAfterFetch;
@@ -90,11 +90,11 @@
 /* batches */
 
 - (BOOL)hasMultipleBatches;
-- (unsigned)batchCount;
-- (void)setCurrentBatchIndex:(unsigned)_currentBatchIndex;
-- (unsigned)currentBatchIndex;
-- (unsigned)indexOfFirstDisplayedObject;
-- (unsigned)indexOfLastDisplayedObject;
+- (NSUInteger)batchCount;
+- (void)setCurrentBatchIndex:(NSUInteger)_currentBatchIndex;
+- (NSUInteger)currentBatchIndex;
+- (NSUInteger)indexOfFirstDisplayedObject;
+- (NSUInteger)indexOfLastDisplayedObject;
 - (id)displayNextBatch;
 - (id)displayPreviousBatch;
 - (id)displayBatchContainingSelectedObject;
@@ -161,14 +161,14 @@
 /* object creation */
 
 - (id)insert;
-- (id)insertObjectAtIndex:(unsigned)_idx;
-- (void)insertObject:(id)_object atIndex:(unsigned)_idx;
+- (id)insertObjectAtIndex:(NSUInteger)_idx;
+- (void)insertObject:(id)_object atIndex:(NSUInteger)_idx;
 
 /* object deletion */
 
 - (id)delete;
 - (BOOL)deleteSelection;
-- (BOOL)deleteObjectAtIndex:(unsigned)_idx;
+- (BOOL)deleteObjectAtIndex:(NSUInteger)_idx;
 
 @end
 
@@ -182,7 +182,7 @@
 - (void)displayGroup:(WODisplayGroup *)_dg didFetchObjects:(NSArray *)_objects;
 
 - (BOOL)displayGroup:(WODisplayGroup *)_dg shouldInsertObject:(id)_object
-  atIndex:(unsigned int)_idx;
+  atIndex:(NSUInteger)_idx;
 - (void)displayGroup:(WODisplayGroup *)_dg didInsertObject:(id)_object;
 
 - (BOOL)displayGroup:(WODisplayGroup *)_dg shouldDeleteObject:(id)_object;

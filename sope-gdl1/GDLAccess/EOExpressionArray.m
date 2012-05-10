@@ -68,7 +68,7 @@
 	[[self objectAtIndex:0] isKindOfClass:[EORelationship class]])
 	    return [ctx expressionValueForAttributePath:self->array];
     else {
-	int i, count;
+	NSUInteger i, count;
 	id  result;
 	SEL sel;
 	IMP imp;
@@ -236,7 +236,7 @@
     [self->array addObjectsFromArray:_array->array];
 }
 
-- (void)insertObject:(id)_obj atIndex:(unsigned int)_idx {
+- (void)insertObject:(id)_obj atIndex:(NSUInteger)_idx {
     [self->array insertObject:_obj atIndex:_idx];
 }
 - (void)addObjectsFromArray:(NSArray *)_array {
@@ -247,11 +247,11 @@
     [self->array addObject:_object];
 }
 
-- (unsigned int)indexOfObject:(id)_object {
+- (NSUInteger)indexOfObject:(id)_object {
     return [self->array indexOfObject:_object];
 }
 
-- (id)objectAtIndex:(unsigned int)_idx {
+- (id)objectAtIndex:(NSUInteger)_idx {
     return [self->array objectAtIndex:_idx];
 }
 - (id)lastObject {

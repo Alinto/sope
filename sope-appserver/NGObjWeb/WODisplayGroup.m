@@ -55,7 +55,7 @@ static NSArray  *uint0Array = nil;
 
 + (void)initialize {
   if (uint0 == nil)
-    uint0 = [[NSNumber alloc] initWithUnsignedInt:0];
+    uint0 = [[NSNumber alloc] initWithUnsignedInteger:0];
   if (uint0Array == nil)
     uint0Array = [[NSArray alloc] initWithObjects:&uint0 count:1];
 }
@@ -192,10 +192,10 @@ static NSArray  *uint0Array = nil;
   return self->insertedObjectDefaults;
 }
 
-- (void)setNumberOfObjectsPerBatch:(unsigned)_count {
+- (void)setNumberOfObjectsPerBatch:(NSUInteger)_count {
   self->numberOfObjectsPerBatch = _count;
 }
-- (unsigned)numberOfObjectsPerBatch {
+- (NSUInteger)numberOfObjectsPerBatch {
   return self->numberOfObjectsPerBatch;
 }
 
@@ -218,8 +218,8 @@ static NSArray  *uint0Array = nil;
 - (BOOL)hasMultipleBatches {
   return [self batchCount] > 1 ? YES : NO;
 }
-- (unsigned)batchCount {
-  unsigned doc, nob;
+- (NSUInteger)batchCount {
+  NSUInteger doc, nob;
   
   doc = [[self allObjects] count];
   nob = [self numberOfObjectsPerBatch];
@@ -229,22 +229,22 @@ static NSArray  *uint0Array = nil;
     : doc / nob + ((doc % nob) ? 1 : 0) ;
 }
 
-- (void)setCurrentBatchIndex:(unsigned)_index {
+- (void)setCurrentBatchIndex:(NSUInteger)_index {
   self->currentBatchIndex = (_index <= [self batchCount]) ? _index : 1;
 }
-- (unsigned)currentBatchIndex {
+- (NSUInteger)currentBatchIndex {
   if (self->currentBatchIndex > [self batchCount])
     self->currentBatchIndex = 1;
   return self->currentBatchIndex;
 }
 
-- (unsigned)indexOfFirstDisplayedObject {
+- (NSUInteger)indexOfFirstDisplayedObject {
   return ([self currentBatchIndex] - 1) * [self numberOfObjectsPerBatch];
 }
 
-- (unsigned)indexOfLastDisplayedObject {
-  unsigned nob = [self numberOfObjectsPerBatch];
-  unsigned cnt = [[self allObjects] count];
+- (NSUInteger)indexOfLastDisplayedObject {
+  NSUInteger nob = [self numberOfObjectsPerBatch];
+  NSUInteger cnt = [[self allObjects] count];
 
   if (nob == 0)
     return cnt-1;
@@ -323,7 +323,7 @@ static NSArray  *uint0Array = nil;
 }
 
 - (id)selectNext {
-  unsigned int idx;
+  NSUInteger idx;
   
   if (![self->displayObjects isNotEmpty])
     return nil;
@@ -333,7 +333,7 @@ static NSArray  *uint0Array = nil;
     return nil;
   }
   
-  idx = [[self->selectionIndexes lastObject] unsignedIntValue];
+  idx = [[self->selectionIndexes lastObject] unsignedIntegerValue];
   if (idx >= ([self->displayObjects count] - 1)) {
     /* last object is already selected, select first one */
     [self setSelectionIndexes:uint0Array];
@@ -342,12 +342,12 @@ static NSArray  *uint0Array = nil;
   
   /* select next object .. */
   [self setSelectionIndexes:
-          [NSArray arrayWithObject:[NSNumber numberWithUnsignedInt:(idx + 1)]]];
+          [NSArray arrayWithObject:[NSNumber numberWithUnsignedInteger:(idx + 1)]]];
   return nil;
 }
 
 - (id)selectPrevious {
-  unsigned int idx;
+  NSUInteger idx;
   
   if (![self->displayObjects isNotEmpty])
     return nil;
@@ -357,29 +357,29 @@ static NSArray  *uint0Array = nil;
     return nil;
   }
   
-  idx = [[self->selectionIndexes objectAtIndex:0] unsignedIntValue];
+  idx = [[self->selectionIndexes objectAtIndex:0] unsignedIntegerValue];
   if (idx == 0) {
     /* first object is selected, now select last one */
     NSNumber *sidx;
-    sidx = [NSNumber numberWithUnsignedInt:([self->displayObjects count] - 1)];
+    sidx = [NSNumber numberWithUnsignedInteger:([self->displayObjects count] - 1)];
     [self setSelectionIndexes:[NSArray arrayWithObject:sidx]];
   }
   
   /* select previous object .. */
   [self setSelectionIndexes:
-          [NSArray arrayWithObject:[NSNumber numberWithUnsignedInt:(idx - 1)]]];
+          [NSArray arrayWithObject:[NSNumber numberWithUnsignedInteger:(idx - 1)]]];
   return nil;
 }
 
 - (void)setSelectedObject:(id)_obj {
-  unsigned idx;
+  NSUInteger idx;
   NSNumber *idxNumber;
   
   // TODO: maybe we need to retain the selection array and just swap the first
   
   idx = [self->objects indexOfObject:_obj];
   idxNumber = (idx != NSNotFound)
-    ? [NSNumber numberWithUnsignedInt:idx] : (NSNumber *)nil;
+    ? [NSNumber numberWithUnsignedInteger:idx] : (NSNumber *)nil;
 
   if (idxNumber != nil) {
     NSArray *a;
@@ -392,12 +392,12 @@ static NSArray  *uint0Array = nil;
     [self setSelectionIndexes:nil];
 }
 - (id)selectedObject {
-  unsigned int i, sCount;
+  NSUInteger i, sCount;
   
   if ((sCount = [self->selectionIndexes count]) == 0)
     return nil;
   
-  i = [[self->selectionIndexes objectAtIndex:0] unsignedIntValue];
+  i = [[self->selectionIndexes objectAtIndex:0] unsignedIntegerValue];
   if (i >= [self->objects count])
     return nil;
   
@@ -411,16 +411,16 @@ static NSArray  *uint0Array = nil;
 }
 - (NSArray *)selectedObjects {
   NSMutableArray *result;
-  unsigned int i, sCount, oCount;
+  NSUInteger     i, sCount, oCount;
 
   sCount = [self->selectionIndexes count];
   oCount = [self->objects count];
   result = [NSMutableArray arrayWithCapacity:sCount];
   
   for (i = 0; i < sCount; i++) {
-    unsigned int idx;
+    NSUInteger idx;
 
-    idx = [[self->selectionIndexes objectAtIndex:i] unsignedIntValue];
+    idx = [[self->selectionIndexes objectAtIndex:i] unsignedIntegerValue];
     if (idx < oCount)
       [result addObject:[self->objects objectAtIndex:idx]];
   }
@@ -429,15 +429,15 @@ static NSArray  *uint0Array = nil;
 
 - (BOOL)selectObject:(id)_obj {
   /* returns YES if displayedObjects contains _obj otherwise NO */
-  NSNumber *idxNumber;
-  unsigned idx;
+  NSNumber   *idxNumber;
+  NSUInteger idx;
   
   if (![self->displayObjects containsObject:_obj])
     return NO;
   
   idx = [self->objects indexOfObject:_obj];
   idxNumber = (idx != NSNotFound) 
-    ? [NSNumber numberWithUnsignedInt:idx] : (NSNumber *)nil;
+    ? [NSNumber numberWithUnsignedInteger:idx] : (NSNumber *)nil;
 
   // TODO: should we just exchange the first item and/or call
   //       -setSelectedObject: ?
@@ -463,7 +463,7 @@ static NSArray  *uint0Array = nil;
 /* returns YES if at least one obj matches otherwise NO */
 - (BOOL)selectObjectsIdenticalTo:(NSArray *)_objs {
   NSMutableArray *newIndexes;
-  unsigned       i, cnt;
+  NSUInteger       i, cnt;
   BOOL           ok = NO;
 
   cnt = [_objs count];
@@ -474,9 +474,9 @@ static NSArray  *uint0Array = nil;
   newIndexes = [NSMutableArray arrayWithCapacity:cnt];
   
   for (i=0; i<cnt; i++) {
-    NSNumber *idxNumber;
-    unsigned idx;
-    id       obj;
+    NSNumber   *idxNumber;
+    NSUInteger idx;
+    id         obj;
 
     obj = [_objs objectAtIndex:i];
     if (![self->objects containsObject:obj])
@@ -484,7 +484,7 @@ static NSArray  *uint0Array = nil;
 
     ok = YES;
     idx = [self->objects indexOfObject:obj];
-    idxNumber = [NSNumber numberWithUnsignedInt:idx];
+    idxNumber = [NSNumber numberWithUnsignedInteger:idx];
     
     if ([self->selectionIndexes containsObject:idxNumber])
       continue;
@@ -599,8 +599,8 @@ static NSArray  *uint0Array = nil;
 
     /* apply batch */
     if ([self batchCount] > 1) {
-      unsigned first = [self indexOfFirstDisplayedObject];
-      unsigned last  = [self indexOfLastDisplayedObject];
+      NSUInteger first = [self indexOfFirstDisplayedObject];
+      NSUInteger last  = [self indexOfLastDisplayedObject];
 
       darray = [darray subarrayWithRange:NSMakeRange(first, last-first+1)];
     }
@@ -865,22 +865,22 @@ static NSArray  *uint0Array = nil;
      'void' methods in .wod files.
   */
   [self qualifyDataSource];
-  return [NSNumber numberWithUnsignedInt:[[self displayedObjects] count]];
+  return [NSNumber numberWithUnsignedInteger:[[self displayedObjects] count]];
 }
 
 /* object creation */
 
 - (id)insert {
-  unsigned idx;
+  NSUInteger idx;
 
   idx = [self->selectionIndexes isNotEmpty]
-    ? ([[self->selectionIndexes objectAtIndex:0] unsignedIntValue] + 1)
+    ? ([[self->selectionIndexes objectAtIndex:0] unsignedIntegerValue] + 1)
     : [self->objects count];
   
   return [self insertObjectAtIndex:idx]; /* returns 'nil' */
 }
 
-- (id)insertObjectAtIndex:(unsigned)_idx {
+- (id)insertObjectAtIndex:(NSUInteger)_idx {
   id newObject;
   
   if ((newObject = [[self dataSource] createObject]) == nil) {
@@ -906,7 +906,7 @@ static NSArray  *uint0Array = nil;
   return nil /* refresh page */;
 }
 
-- (void)insertObject:(id)_o atIndex:(unsigned)_idx {
+- (void)insertObject:(id)_o atIndex:(NSUInteger)_idx {
   NSMutableArray *ma;
   
   /* ask delegate whether we should insert */
@@ -951,13 +951,13 @@ static NSArray  *uint0Array = nil;
 }
 
 - (BOOL)deleteSelection {
-  NSArray  *objsToDelete;
-  unsigned i, count;
+  NSArray    *objsToDelete;
+  NSUInteger i, count;
   
   objsToDelete = [[[self selectedObjects] shallowCopy] autorelease];
 
   for (i = 0, count = [objsToDelete count]; i < count; i++) {
-    unsigned idx;
+    NSUInteger idx;
     
     idx = [self->objects indexOfObject:[objsToDelete objectAtIndex:i]];
     if (idx == NSNotFound) {
@@ -972,7 +972,7 @@ static NSArray  *uint0Array = nil;
   return YES;
 }
 
-- (BOOL)deleteObjectAtIndex:(unsigned)_idx {
+- (BOOL)deleteObjectAtIndex:(NSUInteger)_idx {
   NSMutableArray *ma;
   id   object;
   BOOL ok;
@@ -1153,7 +1153,7 @@ static NSArray  *uint0Array = nil;
   [_archiver encodeObject:[self dataSource]
              forKey:@"dataSource"];
   [_archiver encodeObject:
-               [NSNumber numberWithUnsignedInt:[self numberOfObjectsPerBatch]]
+               [NSNumber numberWithUnsignedInteger:[self numberOfObjectsPerBatch]]
              forKey:@"numberOfObjectsPerBatch"];
   [_archiver encodeBool:[self fetchesOnLoad]
              forKey:@"fetchesOnLoad"];
@@ -1182,8 +1182,8 @@ static NSArray  *uint0Array = nil;
 }
 
 - (BOOL)editingContext:(id)_ec
-  shouldContinueFetchingWithCurrentObjectCount:(unsigned)_oc
-  originalLimit:(unsigned)_olimit
+  shouldContinueFetchingWithCurrentObjectCount:(NSUInteger)_oc
+  originalLimit:(NSUInteger)_olimit
   objectStore:(id)_store
 {
   return NO;

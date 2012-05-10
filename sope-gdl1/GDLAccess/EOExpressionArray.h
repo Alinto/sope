@@ -94,11 +94,11 @@
 
 - (void)addObjectsFromExpressionArray:(EOExpressionArray *)_array;
 
-- (void)insertObject:(id)_obj atIndex:(unsigned int)_idx;
+- (void)insertObject:(id)_obj atIndex:(NSUInteger)_idx;
 - (void)addObjectsFromArray:(NSArray *)_array;
 - (void)addObject:(id)_object;
-- (unsigned int)indexOfObject:(id)_object;
-- (id)objectAtIndex:(unsigned int)_idx;
+- (NSUInteger)indexOfObject:(id)_object;
+- (id)objectAtIndex:(NSUInteger)_idx;
 - (id)lastObject;
 - (NSUInteger)count;
 - (NSEnumerator *)objectEnumerator;
