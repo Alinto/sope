@@ -1,3 +1,11 @@
+2012-05-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* WEResourceManager.m
+	(_urlForResourceNamed:inFramework:language:applicationName:):
+	append "lm=" + the unix timestamp of the file last modification
+	date to force a reload of the file each time it is modified, no
+	matter what expiry date the browsers are using in their cache.
+
 2010-01-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* WEResourceManager.m
