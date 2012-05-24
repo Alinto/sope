@@ -575,8 +575,7 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
       }
       [ms appendString:_name];
       
-      url = [ms copy];
-      [ms release]; ms = nil;
+      url = ms;
       if (debugOn) [self debugWithFormat:@"FOUND: '%@'", url];
       goto done;
     }
@@ -589,6 +588,7 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
   while ((path = [e nextObject])) {
     NSMutableString *ms;
     NSString *fpath, *basepath;
+    NSDate *lastModified;
     
     /* check language */
     if (_lang) {
@@ -608,7 +608,11 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
     
     if (![fm fileExistsAtPath:fpath])
       continue;
-      
+
+    lastModified = [[fm fileAttributesAtPath: fpath
+                                traverseLink: YES]
+                     fileModificationDate];
+
     ms = [[NSMutableString alloc] initWithCapacity:256];
       
     if (prefix) [ms appendString:prefix];
@@ -622,9 +626,10 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
       [ms appendString:@".lproj/"];
     }
     [ms appendString:_name];
+    [ms appendFormat: @"?lm=%u",
+        (NSUInteger) [lastModified timeIntervalSince1970]];
       
-    url = [ms copy];
-    [ms release]; ms = nil;
+    url = ms;
     if (debugOn) [self debugWithFormat:@"FOUND: '%@'", url];
     goto done;
   }
