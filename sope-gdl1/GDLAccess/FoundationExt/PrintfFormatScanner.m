@@ -33,7 +33,7 @@
 
 #ifdef __va_copy
     // args being NULL breaks heavily on amd64
-    if (args != NULL) {
+    if (args) {
         __va_copy(va, args);
     } else {
 	return format;
