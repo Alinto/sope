@@ -59,7 +59,7 @@
     : nil;
 }
 - (id<NSObject,DOMNode>)lastChild {
-  unsigned count;
+  NSUInteger count;
 
   return (count = [self->childNodes count]) > 0 
     ? [self->childNodes objectAtIndex:(count - 1)]
@@ -69,7 +69,7 @@
 /* modification */
 
 - (id<NSObject,DOMNode>)removeChild:(id<NSObject,DOMNode>)_node {
-  unsigned idx;
+  NSUInteger idx;
 
   if (self->childNodes == nil)
     /* this node has no childnodes ! */
@@ -93,7 +93,7 @@
   
   if ([_node nodeType] == DOM_DOCUMENT_FRAGMENT_NODE) {
     id             fragNodes;
-    unsigned       i, count;
+    NSUInteger     i, count;
     NSMutableArray *cache;
     
     fragNodes = [_node childNodes];
@@ -133,7 +133,7 @@
 /* sibling navigation */
 
 - (id)_domNodeBeforeNode:(id)_node {
-  unsigned idx;
+  NSUInteger idx;
   
   if ((idx = [self->childNodes indexOfObject:_node]) == NSNotFound)
     /* given node isn't a child of this node */
@@ -145,7 +145,7 @@
   return [self->childNodes objectAtIndex:(idx - 1)];
 }
 - (id)_domNodeAfterNode:(id)_node {
-  unsigned idx, count;
+  NSUInteger idx, count;
 
   if ((count = [self->childNodes count]) == 0)
     /* this node has no children at all .. */

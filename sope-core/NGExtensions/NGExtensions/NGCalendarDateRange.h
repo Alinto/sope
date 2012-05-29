@@ -67,7 +67,7 @@
 - (NSArray *)arrayByCreatingDateRangesFromObjectsWithStartDateKey:(NSString *)s
   andEndDateKey:(NSString *)e;
 
-- (unsigned)indexOfFirstIntersectingDateRange:(NGCalendarDateRange *)_range;
+- (NSUInteger)indexOfFirstIntersectingDateRange:(NGCalendarDateRange *)_range;
 - (BOOL)dateRangeArrayContainsDate:(NSCalendarDate *)_date;
 
 - (NSArray *)arrayByCompactingContainedDateRanges;

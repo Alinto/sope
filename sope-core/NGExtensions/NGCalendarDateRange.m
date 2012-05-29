@@ -217,7 +217,7 @@
   andEndDateKey:(NSString *)e
 {
   NSMutableArray *ma;
-  unsigned i, count;
+  NSUInteger     i, count;
   
   count = [self count];
   ma    = [NSMutableArray arrayWithCapacity:count];
@@ -243,7 +243,7 @@
 }
 
 - (BOOL)dateRangeArrayContainsDate:(NSCalendarDate *)_date {
-  unsigned i, count;
+  NSUInteger i, count;
   
   if (_date == nil) 
     return NO;
@@ -256,8 +256,8 @@
   }
   return NO;
 }
-- (unsigned)indexOfFirstIntersectingDateRange:(NGCalendarDateRange *)_range {
-  unsigned i, count;
+- (NSUInteger)indexOfFirstIntersectingDateRange:(NGCalendarDateRange *)_range {
+  NSUInteger i, count;
   
   if (_range == nil)
     return NO;
@@ -276,7 +276,7 @@
   // TODO: this is a candidate for unit testing ...
   // TODO: pretty "slow" algorithm, improve
   NSMutableArray *ma;
-  unsigned i, count;
+  NSUInteger     i, count;
   
   count = [self count];
   if (count < 2)
@@ -289,7 +289,7 @@
     NGCalendarDateRange *rangeToAdd;
     NGCalendarDateRange *availRange;
     NGCalendarDateRange *newRange;
-    unsigned idx;
+    NSUInteger idx;
     
     rangeToAdd = [self objectAtIndex:i];
     idx = [ma indexOfFirstIntersectingDateRange:rangeToAdd];

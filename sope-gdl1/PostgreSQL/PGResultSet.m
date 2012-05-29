@@ -98,12 +98,7 @@
 }
 
 - (int)indexOfFieldNamed:(NSString *)_name {
-#if LIB_FOUNDATION_LIBRARY
-  // TBD: might be wrong even in this case?
-  return PQfnumber(self->results, [_name cString]);
-#else
   return PQfnumber(self->results, [_name UTF8String]);
-#endif
 }
 
 - (int)fieldSizeAtIndex:(unsigned int)_idx {

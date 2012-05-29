@@ -145,7 +145,7 @@
 
 - (NSString *)stringValue {
   NSMutableString *str = [[NSMutableString allocWithZone:[self zone]] init];
-  int  cnt, count = [self->charsets count];
+  NSUInteger  cnt, count = [self->charsets count];
 
   for (cnt = 0; cnt < count; cnt++) {
     if (cnt != 0) [str appendString:@","];
@@ -201,7 +201,7 @@
 
 - (NSString *)stringValue {
   NSMutableString *str;
-  int  cnt, count;
+  NSUInteger      cnt, count;
 
   str = [[NSMutableString allocWithZone:[self zone]] init];
   count = [self->types count];
@@ -260,7 +260,7 @@
 
 - (NSString *)stringValue {
   NSMutableString *str = [[NSMutableString allocWithZone:[self zone]] init];
-  int  cnt, count = [self->languages count];
+  NSUInteger      cnt, count = [self->languages count];
 
   for (cnt = 0; cnt < count; cnt++) {
     if (cnt != 0) [str appendString:@", "];
@@ -283,8 +283,8 @@ static void _parseUserAgent(NGHttpUserAgent *self) {
 
   if ([self->value hasPrefix:@"Mozilla"]) {
     // Mozilla Browser or compatible
-    NSRange r;
-    int idx, av, iv;
+    NSRange    r;
+    NSUInteger idx, av, iv;
 
     r = [self->value rangeOfString:@"/"];
     idx = r.location;
@@ -299,7 +299,7 @@ static void _parseUserAgent(NGHttpUserAgent *self) {
 
       self->browser = @"Mozilla";
 
-      sscanf([tmp cString], "%i.%i", &av, &iv);
+      sscanf([tmp cString], "%"PRIuPTR".%"PRIuPTR"", &av, &iv);
       self->majorVersion = av;
       self->minorVersion = iv;
 
@@ -310,7 +310,7 @@ static void _parseUserAgent(NGHttpUserAgent *self) {
           tmp = [self->value substringFromIndex:(idx + 5)];
           self->browser = @"MSIE";
 
-          sscanf([tmp cString], "%i.%i", &av, &iv);
+          sscanf([tmp cString], "%"PRIuPTR".%"PRIuPTR"", &av, &iv);
           self->majorVersion = av;
           self->minorVersion = iv;
         }
@@ -553,8 +553,8 @@ static void _parseUserAgent(NGHttpUserAgent *self) {
     NSData *data = [_credentials dataByDecodingBase64];
 
     if (data) {
-      char *str   = (char *)[data bytes];
-      int  len    = [data length];
+      char *str = (char *)[data bytes];
+      NSUInteger len = [data length];
       char *start = str;
 
       while ((*str != '\0') && (*str != ':') && (len > 0)) {

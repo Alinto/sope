@@ -394,21 +394,29 @@ static int openConnectionCount = 0;
   
   for (cnt = 0; cnt < attrCount; cnt++) {
     EOAttribute *attribute;
+#ifndef GDL_USE_PQFNUMBER_INDEX
+    NSUInteger  res;
+#endif
     
     attribute = [_attributes objectAtIndex:cnt];
 #if GDL_USE_PQFNUMBER_INDEX
     self->fieldIndices[cnt] = 
       [self->resultSet indexOfFieldNamed:[attribute columnName]];
-#else
-    self->fieldIndices[cnt] = 
-      [fieldNames indexOfObject:[attribute columnName]];
-#endif
-    
-    if (self->fieldIndices[cnt] == NSNotFound) {
+    if (self->fieldIndices[cnt] == -1) {
       [PostgreSQL72Exception raiseWithFormat:
                                @"attribute %@ not covered by query",
                              attribute];
     }
+#else
+    res = [fieldNames indexOfObject:[attribute columnName]];
+    
+    if (res == NSNotFound) {
+      [PostgreSQL72Exception raiseWithFormat:
+                               @"attribute %@ not covered by query",
+                             attribute];
+    }
+    self->fieldIndices[cnt] = (int)res;
+#endif
     [fieldNames replaceObjectAtIndex:self->fieldIndices[cnt] withObject:null];
   }
   [fieldNames release]; fieldNames = nil;

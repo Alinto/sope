@@ -589,8 +589,8 @@ static BOOL  doDebug         = NO;
   int result;
   
   if ((newValue = [self beginDecodingKey:_key]) == nil)
-    /* any useful alternatives ? */
-    return NSNotFound;
+    /* NSKeyedArchiver returns 0, we too */
+    return 0;
   
   result = [self decodeInt];
   [self finishedDecodingKey];

@@ -62,7 +62,7 @@
 
 - (void)parse;
 
-- (int)lineType:(StructuredLine *)_line;
+- (NSUInteger)lineType:(StructuredLine *)_line;
 
 - (void)separateIntoBlocks;
 - (void)adjustLineLevels;
@@ -78,7 +78,7 @@
 - (StructuredTextLiteralBlock *)buildLiteralBlock;
 - (StructuredTextList *)buildList;
 
-- (int)listItemTypology:(StructuredLine *)_line;
+- (NSUInteger)listItemTypology:(StructuredLine *)_line;
 
 @end
 

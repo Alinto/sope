@@ -36,7 +36,7 @@
 }
 - (id)initWithAttributes:(id<SaxAttributes>)_attrs {
   if ((self = [self init])) {
-    int i, c;
+    NSUInteger i, c;
     
     for (i = 0, c = [_attrs count]; i < c; i++) {
       [self addAttribute:[_attrs nameAtIndex:i]
@@ -51,7 +51,7 @@
 
 - (id)initWithAttributeList:(id<SaxAttributeList>)_attrList {
   if ((self = [self init])) {
-    unsigned i;
+    NSUInteger i;
     
     for (i = 0; i < [_attrList count]; i++) {
       [self addAttribute:[_attrList nameAtIndex:i] uri:@""
@@ -115,7 +115,7 @@
 }
 - (NSUInteger)indexOfName:(NSString *)_localPart uri:(NSString *)_uri
 {
-  unsigned int i, c;
+  NSUInteger i, c;
   
   for (i = 0, c = [self count]; i < c; i++) {
     NSString *name;
@@ -160,7 +160,7 @@
 /* lookup data by name */
 
 - (NSString *)typeForRawName:(NSString *)_rawName {
-  unsigned int i;
+  NSUInteger i;
 
   if ((i = [self indexOfRawName:_rawName]) == NSNotFound)
     return nil;
@@ -168,7 +168,7 @@
   return [self typeAtIndex:i];
 }
 - (NSString *)typeForName:(NSString *)_localName uri:(NSString *)_uri {
-  unsigned int i;
+  NSUInteger i;
   
   if ((i = [self indexOfName:_localName uri:_uri]) == NSNotFound)
     return nil;
@@ -177,7 +177,7 @@
 }
 
 - (NSString *)valueForRawName:(NSString *)_rawName {
-  unsigned int i;
+  NSUInteger i;
 
   if ((i = [self indexOfRawName:_rawName]) == NSNotFound)
     return nil;
@@ -210,7 +210,7 @@
 - (NSString *)description {
   NSMutableString *s;
   NSString        *is;
-  int i, c;
+  NSUInteger i, c;
   
   s = [[NSMutableString alloc] init];
   [s appendFormat:@"<%08X[%@]:", self, NSStringFromClass([self class])];

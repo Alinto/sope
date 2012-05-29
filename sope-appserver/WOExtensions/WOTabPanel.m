@@ -82,7 +82,7 @@
   {
     WOComponent *sComponent;
     NSArray     *ttabs;
-    unsigned    i;
+    NSUInteger  i;
     
     sComponent = [_ctx component];
     ttabs      = [self->tabs valueInComponent:sComponent];
@@ -118,17 +118,17 @@
   if ([section isEqualToString:@"tab"]) {
     WOComponent *sComponent;
     NSArray *ttabs;
-    int idx;
+    NSUInteger idx;
     
     [_ctx consumeElementID]; // consume 'tab'
     
     sComponent = [_ctx component];
     ttabs = [self->tabs valueInComponent:sComponent];
 
-    idx = [[_ctx currentElementID] intValue];
+    idx = [[_ctx currentElementID] unsignedIntegerValue];
     [_ctx consumeElementID]; // consume index
 
-    if (idx >= (int)[ttabs count]) {
+    if (idx >= [ttabs count]) {
       /* index out of range */
       idx = 0;
     }
@@ -156,7 +156,7 @@
   WOComponent *sComponent;
   NSArray     *ttabs;
   BOOL        isInForm;
-  unsigned    i, selIdx;
+  NSUInteger  i, selIdx;
   NSString    *selColor, *unselColor, *s;
   
   if ([_ctx isRenderingDisabled]) {

@@ -33,7 +33,7 @@
 }
 - (id)initWithAttributeList:(id<SaxAttributeList>)_attrList {
   if ((self = [self init])) {
-    unsigned i;
+    NSUInteger i;
 
     for (i = 0; i < [_attrList count]; i++) {
       [self->names  addObject:[_attrList nameAtIndex:i]];
@@ -46,7 +46,7 @@
 
 - (id)initWithAttributes:(id<SaxAttributes>)_attrList {
   if ((self = [self init])) {
-    int i, c;
+    NSUInteger i, c;
 
     for (i = 0, c = [_attrList count]; i < c; i++) {
       [self->names  addObject:[_attrList rawNameAtIndex:i]];
@@ -67,7 +67,7 @@
 /* modify operations */
 
 - (void)setAttributeList:(id<SaxAttributeList>)_attrList {
-  unsigned i;
+  NSUInteger i;
 
   [self clear];
   
@@ -95,7 +95,7 @@
 }
 
 - (void)removeAttribute:(NSString *)_name {
-  int idx;
+  NSUInteger idx;
 
   if ((idx = [self->names indexOfObject:_name]) == NSNotFound)
     return;
@@ -118,7 +118,7 @@
 }
 
 - (NSString *)typeForName:(NSString *)_name {
-  int i;
+  NSUInteger i;
 
   if ((i = [self->names indexOfObject:_name]) == NSNotFound)
     return nil;
@@ -126,7 +126,7 @@
   return [self typeAtIndex:i];
 }
 - (NSString *)valueForName:(NSString *)_name {
-  int i;
+  NSUInteger i;
 
   if ((i = [self->names indexOfObject:_name]) == NSNotFound)
     return nil;
@@ -157,7 +157,7 @@
 - (NSString *)description {
   NSMutableString *s;
   NSString        *is;
-  int i, c;
+  NSUInteger i, c;
   
   s = [[NSMutableString alloc] init];
   [s appendFormat:@"<%08X[%@]:", self, NSStringFromClass([self class])];

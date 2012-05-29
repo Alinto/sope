@@ -31,25 +31,25 @@
 @interface NSString(XmlRpcParsing)
 - (id)initWithXmlRpcType:(NSString *)_type
   characters:(unichar *)_chars
-  length:(int)_len;
+  length:(NSUInteger)_len;
 @end
 
 @interface NSDate(XmlRpcParsing)
 - (id)initWithXmlRpcType:(NSString *)_type
   characters:(unichar *)_chars
-  length:(int)_len;
+  length:(NSUInteger)_len;
 @end
 
 @interface NSNumber(XmlRpcParsing)
 - (id)initWithXmlRpcType:(NSString *)_type
   characters:(unichar *)_chars
-  length:(int)_len;
+  length:(NSUInteger)_len;
 @end
 
 @interface NSData(XmlRpcParsing)
 - (id)initWithXmlRpcType:(NSString *)_type
   characters:(unichar *)_chars
-  length:(int)_len;
+  length:(NSUInteger)_len;
 @end
 
 @interface NSData(UsedNGExtensions)
@@ -132,7 +132,7 @@
 }
 
 + (id)objectWithXmlRpcType:(NSString *)_type
-  characters:(unichar *)_chars length:(int)_len
+  characters:(unichar *)_chars length:(NSUInteger)_len
 {
   static NSDictionary *typeToClass = nil;
   Class ObjClass = Nil;
@@ -171,7 +171,7 @@
 }
 
 - (id)initWithXmlRpcType:(NSString *)_type
-  characters:(unichar *)_chars length:(int)_len
+  characters:(unichar *)_chars length:(NSUInteger)_len
 {
   if ([self respondsToSelector:@selector(initWithString:)]) {
     NSString *s;
@@ -194,7 +194,7 @@
 /* NSData represents the xml-rpc base type 'base64' */
 
 - (id)initWithXmlRpcType:(NSString *)_type
-  characters:(unichar *)_chars length:(int)_len
+  characters:(unichar *)_chars length:(NSUInteger)_len
 {
   NSString *v;
 
@@ -215,7 +215,7 @@
 
 /* NSDate represents the xml-rpc type dateTime.iso8601: */
 - (id)initWithXmlRpcType:(NSString *)_type
-  characters:(unichar *)_chars length:(int)_len
+  characters:(unichar *)_chars length:(NSUInteger)_len
 {
   /* eg 19980717T14:08:55 */
   if (_len < 17) {
@@ -283,7 +283,7 @@
 /* NSNumber represents the xml-rpc base types: 'int', 'double', 'boolean': */
 
 - (id)initWithXmlRpcType:(NSString *)_type
-  characters:(unichar *)_chars length:(int)_len
+  characters:(unichar *)_chars length:(NSUInteger)_len
 {
   if ([_type isEqualToString:@"boolean"]) {
     BOOL v;
@@ -318,7 +318,7 @@
 @implementation NSString(XmlRpcParsing)
 
 - (id)initWithXmlRpcType:(NSString *)_type
-  characters:(unichar *)_chars length:(int)_len
+  characters:(unichar *)_chars length:(NSUInteger)_len
 {
   /* this is *never* called, since NSString+alloc returns a NSTemporaryString*/
   return [self initWithCharacters:_chars length:_len];

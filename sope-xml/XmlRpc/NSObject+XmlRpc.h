@@ -29,7 +29,7 @@
 @interface NSObject(XmlRpcValues)
 
 + (id)objectWithXmlRpcType:(NSString *)_type
-  characters:(unichar *)_chars length:(int)_len;
+  characters:(unichar *)_chars length:(NSUInteger)_len;
 
 @end
 

@@ -158,7 +158,7 @@ static BOOL  doDebug         = NO;
 - (void)end_name {
   self->nextCharactersProcessor = NULL;
 }
-- (void)_name:(unichar *)_chars length:(int)_len {
+- (void)_name:(unichar *)_chars length:(NSUInteger)_len {
   NSString *name;
   name = [NSString stringWithCharacters:_chars length:_len];
   [self->memberNameStack addObject:name];
@@ -184,7 +184,7 @@ static BOOL  doDebug         = NO;
   self->valueNestingLevel--;
 }
 
-- (void)_dateValue:(unichar *)_chars length:(int)_len {
+- (void)_dateValue:(unichar *)_chars length:(NSUInteger)_len {
   if (self->dateTime)
     return;
   
@@ -193,7 +193,7 @@ static BOOL  doDebug         = NO;
                               retain];
 }
 
-- (void)_baseValue:(unichar *)_chars length:(int)_len {
+- (void)_baseValue:(unichar *)_chars length:(NSUInteger)_len {
   id value;
 
   if (self->valueNestingLevel == 0) {
@@ -239,8 +239,8 @@ static BOOL  doDebug         = NO;
   self->nextCharactersProcessor = @selector(_baseValue:length:);
 }
 - (void)start_dateTime:(id<SaxAttributes>)_attrs {
-  NSString *tz;
-  int      idx;
+  NSString   *tz;
+  NSUInteger idx;
   
   [self->timeZone release]; self->timeZone = nil;
   [self->dateTime release]; self->dateTime = nil;
@@ -467,7 +467,7 @@ static BOOL  doDebug         = NO;
 - (void)end_methodName {
   self->nextCharactersProcessor = NULL;
 }
-- (void)_methodName:(unichar *)_chars length:(int)_len {
+- (void)_methodName:(unichar *)_chars length:(NSUInteger)_len {
   [self->methodName release];
   self->methodName = [[NSString alloc] initWithCharacters:_chars length:_len];
 }
@@ -529,8 +529,8 @@ static BOOL  doDebug         = NO;
   attributes:(id<SaxAttributes>)_attrs
 {
   NSString *tmp = nil;
-  SEL      sel;
-  int      idx;
+  SEL        sel;
+  NSUInteger idx;
   
   [self->tagStack addObject:_rawName];
 
@@ -559,14 +559,14 @@ static BOOL  doDebug         = NO;
   namespace:(NSString *)_ns
   rawName:(NSString *)_rawName
 {
-  unsigned stackDepth, lastIdx;
+  NSUInteger stackDepth, lastIdx;
   NSString *tmp;
   SEL sel;
 
   if (self->nextCharactersProcessor != NULL) {
-    void (*m)(id, SEL, unichar *, int);
+    void (*m)(id, SEL, unichar *, NSUInteger);
     unichar *chars;
-    unsigned len;
+    NSUInteger len;
 
     len   = [self->characters length];
     chars = malloc(sizeof(unichar)*len);
@@ -606,7 +606,7 @@ static BOOL  doDebug         = NO;
   }
 }
 
-- (void)characters:(unichar *)_chars length:(int)_len {
+- (void)characters:(unichar *)_chars length:(NSUInteger)_len {
   if (_len > 0) {
     [self->characters appendString:
          [NSString stringWithCharacters:_chars length:_len]];

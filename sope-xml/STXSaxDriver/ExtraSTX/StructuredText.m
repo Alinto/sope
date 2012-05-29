@@ -105,7 +105,7 @@
   NSString	  *text, *currentLine, *trimmedLine;
   NSMutableString *buf;
   NSCharacterSet  *set;
-  int i, count;
+  NSUInteger      i, count;
   
   set   = [NSCharacterSet characterSetWithCharactersInString:@"\r"];
   buf   = [NSMutableString stringWithCapacity:256];
@@ -278,7 +278,7 @@
   [objectStack release];
 }
 
-- (int)lineType:(StructuredLine *)aLine {
+- (NSUInteger)lineType:(StructuredLine *)aLine {
   if ([self checkForListItem:aLine])
     return StructuredTextParserLine_List;
   
@@ -357,7 +357,7 @@
   
   if ([[text stringByTrimmingCharactersInSet:
 	       [NSCharacterSet whitespaceCharacterSet]] hasSuffix:@"::"]) {
-    int length;
+    NSUInteger length;
 
     length = [text length];
     text   = [text substringToIndex:length - 2];
@@ -384,7 +384,7 @@
   StructuredLine	 *line, *prevLine = nil;
   StructuredTextListItem *item = nil;
   StructuredStack	 *paragraphs;
-  int type;
+  NSUInteger		 type;
   
   result     = nil;
   paragraphs = [self paragraphs];
@@ -428,7 +428,7 @@
       break;
     case StructuredTextList_DEFINITION: {
       NSArray *components;
-      int i, count;
+      NSUInteger i, count;
 
       components = [text componentsSeparatedByString:@" -- "];
       count = [components count];
@@ -477,10 +477,10 @@
   return [result autorelease];
 }
 
-- (int)listItemTypology:(StructuredLine *)aLine {
-  NSString *text;
-  int      type = NSNotFound;
-  int      i, h, length;
+- (NSUInteger)listItemTypology:(StructuredLine *)aLine {
+  NSString   *text;
+  NSUInteger type = NSNotFound;
+  NSUInteger i, h, length;
   NSRange  range;
 
   text = [aLine text];
