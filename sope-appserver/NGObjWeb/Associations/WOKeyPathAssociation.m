@@ -939,8 +939,7 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
 		handleUnknownKey stuff ...
     */
     
-#if GNUSTEP_BASE_LIBRARY && ((GNUSTEP_BASE_MAJOR_VERSION >= 1) && \
-			     (GNUSTEP_BASE_MINOR_VERSION >= 11))
+#if GNUSTEP_BASE_LIBRARY
     // TODO: also do this for OSX 10.4? probably
     [object setValue:_value forKey:info->extra.key];
 #else
@@ -1097,9 +1096,9 @@ static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {
     return;
   }
 
-  if (info->type == WOKeyType_kvc) { // takeValue:forKey:..
+  if (info->type == WOKeyType_kvc) { // setValue:forKey:
     NSCAssert(info->extra.key, @"no key object set ..");
-    [_wo takeValue:uintNumObj(_value) forKey:info->extra.key];
+    [_wo setValue:uintNumObj(_value) forKey:info->extra.key];
     return;
   }
   if (info->type == WOKeyType_binding) { // setValue:forBinding:
