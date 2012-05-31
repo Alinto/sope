@@ -22,6 +22,7 @@
 #ifndef __NGHttp_common_H__
 #define __NGHttp_common_H__
 
+#include <inttypes.h>
 #include <string.h>
 
 #if !defined(__MINGW32__)
