@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
+  Copyright (C) 2012 Inverse inc.
 
   This file is part of SOPE.
 
@@ -218,6 +219,31 @@
   [s appendString:@">"];
 
   return s;
+}
+
+- (NSMutableDictionary *) asDictionary
+{
+  NSMutableDictionary *ldapRecord;
+  NSDictionary *ldapAttributes;
+  NSArray *keys;
+  NSString *key;
+  NSUInteger count, max;
+  id value;
+  
+  ldapAttributes = [self attributes];
+  keys = [ldapAttributes allKeys];
+  max = [keys count];
+
+  ldapRecord = [NSMutableDictionary dictionaryWithCapacity: max];
+  for (count = 0; count < max; count++)
+    {
+      key = [keys objectAtIndex: count];
+      value = [[ldapAttributes objectForKey: key] asArrayOrString];
+      if (value)
+        [ldapRecord setObject: value forKey: [key lowercaseString]];
+    }
+
+  return ldapRecord;
 }
 
 @end /* NGLdapEntry */

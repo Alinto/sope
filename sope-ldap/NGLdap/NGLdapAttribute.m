@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
+  Copyright (C) 2012 Inverse inc.
 
   This file is part of SOPE.
 
@@ -309,6 +310,20 @@
   [s appendString:@">"];
 
   return s;
+}
+
+- (id) asArrayOrString
+{
+  NSArray *arrayValue;
+  id value;
+
+  arrayValue = [self allStringValues];
+  if ([arrayValue count] == 1)
+    value = [arrayValue objectAtIndex: 0];
+  else
+    value = arrayValue;
+
+  return value;
 }
 
 @end /* NGLdapAttribute */

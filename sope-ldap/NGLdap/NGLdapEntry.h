@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
+  Copyright (C) 2012 Inverse inc.
 
   This file is part of SOPE.
 
@@ -24,7 +25,7 @@
 
 #import <Foundation/NSObject.h>
 
-@class NSString, NSDictionary, NSArray;
+@class NSString, NSDictionary, NSMutableDictionary, NSArray;
 @class NGLdapAttribute;
 
 @interface NGLdapEntry : NSObject < NSCopying >
@@ -57,6 +58,8 @@
 /* LDIF */
 
 - (NSString *)ldif;
+
+- (NSMutableDictionary *) asDictionary;
 
 @end
 

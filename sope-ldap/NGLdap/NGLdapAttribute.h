@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
+  Copyright (C) 2012 Inverse inc.
 
   This file is part of SOPE.
 
@@ -60,6 +61,8 @@
 - (NSArray *)allStringValues;
 - (NSEnumerator *)stringValueEnumerator;
 - (NSString *)stringValueAtIndex:(unsigned)_idx;
+
+- (id) asArrayOrString;
 
 @end
 
