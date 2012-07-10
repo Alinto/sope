@@ -196,4 +196,8 @@
   "{urn:inverse:params:xml:ns:inverse-dav}events-default-classification" = davEventsDefaultClassification;
   "{urn:inverse:params:xml:ns:inverse-dav}tasks-default-classification" = davTasksDefaultClassification;
   "{urn:inverse:params:xml:ns:inverse-dav}calendar-show-alarms" = davCalendarShowAlarms;
+  "{urn:inverse:params:xml:ns:inverse-dav}notify-on-personal-modifications" = davNotifyOnPersonalModifications;
+  "{urn:inverse:params:xml:ns:inverse-dav}notify-on-external-modifications" = davNotifyOnExternalModifications;
+  "{urn:inverse:params:xml:ns:inverse-dav}notify-user-on-personal-modifications" = davNotifyUserOnPersonalModifications;
+  "{urn:inverse:params:xml:ns:inverse-dav}notified-user-on-personal-modifications" = davNotifiedUserOnPersonalModifications;
 }
