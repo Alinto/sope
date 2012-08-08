@@ -68,6 +68,8 @@ NGObjWeb_EXPORT NSString *WOApplicationDidTerminateNotification;
 - (void)setListeningSocket: (NGPassiveSocket *) newSocket;
 - (NGPassiveSocket *)listeningSocket;
 
+- (BOOL) shouldSetupSignalHandlers;
+
 /* adaptors */
 
 - (NSArray *)adaptors;

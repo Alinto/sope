@@ -1,3 +1,10 @@
+2012-08-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WOCoreApplication.m
+	(-shouldSetupSignalHandlers): new method that gives the
+	possibility for the applications not to setup the signal handlers
+	for SIGTERM/-INT/-ILL ...
+
 2012-05-09  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* sope-core/NGStreams/NGCTextStream.m and:1
