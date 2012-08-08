@@ -104,7 +104,7 @@ static NSNull *null = nil;
   return self->namespaceURI;
 }
 
-- (void)setLine:(NSUInteger)_line {
+- (void)setLine:(NSInteger)_line {
   self->line = _line;
 }
 - (NSUInteger)line {
