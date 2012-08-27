@@ -362,12 +362,109 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 }
 
 + (id)mailAddressParserWithString:(NSString *)_string {
-  return [[(NGMailAddressParser *)[self alloc] initWithString:_string] 
+
+  return [[(NGMailAddressParser *)[self alloc] initWithString: [NGMailAddressParser sanitizeMailAddresses:_string]] 
 	   autorelease];
+}
+
++ (id) sanitizeMailAddresses:(NSString *)_string
+{
+  // Remove quotes and double quotes - we'll add them back later
+  NSMutableString* _addr = [NSMutableString stringWithString: _string];
+  [_addr replaceString: @"'" withString: @""];
+  [_addr replaceString: @"\"" withString: @""];
+  NSString* addresses = (NSString *)_addr;
+
+  // Init
+  BOOL isDisplayNameEnd = NO;
+  BOOL hasAt = NO;
+  long lastPos = 0;
+  long displayNameEndPos = 0;
+  long mailEndPos = 0;
+  long len = [addresses length];
+  NSString* mailAdr= @"";
+  NSString* displayName = @"";
+  NSMutableArray* _addressList = [NSMutableArray arrayWithCapacity: 1];
+
+  // Step through the chars
+  long i;
+  for (i = 0; i < len; i++)
+    {
+      char cai = [addresses characterAtIndex: i]; // get every char
+
+      if (cai == ' ') continue; // skip spaces
+
+      if (cai == '@')
+        {
+          hasAt = YES;
+          continue;
+        }
+
+      if (cai == '<')
+        {
+          isDisplayNameEnd = YES;
+          displayNameEndPos = i;
+        }
+        
+      if (cai == '>')
+        {
+          mailEndPos = i;
+        }
+
+      if ((cai == ',' && hasAt) || ((i + 1) == len))
+        {
+          mailAdr = @"";
+          displayName = @"";
+
+          if (isDisplayNameEnd)
+            {
+              displayName = [[addresses substringWithRange: NSMakeRange(lastPos, displayNameEndPos - lastPos)] 
+                              stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            }
+
+          // If there's a displayname, extract the mail address from the other portion
+          if ([displayName length] > 0)
+            {
+              mailAdr = [[addresses stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] 
+                          substringWithRange: NSMakeRange(displayNameEndPos + 1, mailEndPos - displayNameEndPos - 1)];
+            }
+          else
+            {
+              mailAdr = [[addresses substringWithRange: NSMakeRange(lastPos, i-lastPos)]
+                          stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            }
+
+          // Trim spaces of mail address
+          mailAdr = [mailAdr stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+          // Format new mail string into an array
+          if([displayName length] == 0)
+            {
+              [_addressList addObject: [NSString stringWithFormat: @"%@",mailAdr]];
+            }
+          else
+            {
+              // Surround displayname with double-quotes
+              [_addressList addObject: [NSString stringWithFormat: @"\"%@\" <%@>", displayName, mailAdr]];    
+            }
+
+          lastPos = i+1;
+          hasAt = NO;
+          isDisplayNameEnd = NO;   
+
+          continue;
+        }
+    }
+
+  // Concatenate the array items to a string by comma and returns it
+  return [_addressList componentsJoinedByString:@","];
 }
 
 - (id)initWithString:(NSString *)_str {
   if ((self = [super init])) {
+
+    _str = [NGMailAddressParser sanitizeMailAddresses:_str];
+
     // TODO: remember some string encoding?
     self->maxLength = [_str length];
     self->data      = malloc(self->maxLength*sizeof(unichar));

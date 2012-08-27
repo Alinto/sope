@@ -1,3 +1,8 @@
+2012-08-27  Francis Lachapelle  <flachapelle@inverse.ca>
+
+	* NGMailAddressParser.m (+sanitizeMailAddresses:): new method to
+	properly split email addresses from a string. Fixes #1340.
+
 2010-08-23  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGSmtpClient.m (-quit): we must accept both "connected" and
