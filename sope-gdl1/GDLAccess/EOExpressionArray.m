@@ -140,14 +140,16 @@
   relationshipPaths:(NSMutableArray *)relationshipPaths  
 {
     EOExpressionArray *exprArray;
-    unsigned char buf[[expression cStringLength] + 4]; // TODO: not too good
+    unsigned char buf[[expression lengthOfBytesUsingEncoding:NSUTF8StringEncoding] + 4]; // TODO: not too good
     const unsigned char *s, *start;
     id objectToken;
     NSAutoreleasePool *pool;
     
     exprArray = [[EOExpressionArray new] autorelease];
     pool = [[NSAutoreleasePool alloc] init];
-    [expression getCString:(char *)buf];
+    [expression getCString:(char *)buf 
+		maxLength:[expression lengthOfBytesUsingEncoding:NSUTF8StringEncoding] + 4
+		encoding:NSUTF8StringEncoding];
     s = buf;
     
     /* Divide the expression string in alternating substrings that obey the
