@@ -373,6 +373,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   NSMutableString* _addr = [NSMutableString stringWithString: _string];
   [_addr replaceString: @"'" withString: @""];
   [_addr replaceString: @"\"" withString: @""];
+  [_addr replaceString: @"\\" withString: @""];
   NSString* addresses = (NSString *)_addr;
 
   // Init
@@ -430,7 +431,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
             }
           else
             {
-              mailAdr = [[addresses substringWithRange: NSMakeRange(lastPos, i-lastPos)]
+              mailAdr = [[addresses substringWithRange: NSMakeRange(lastPos, i-lastPos+1)]
                           stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
             }
 
