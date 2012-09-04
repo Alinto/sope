@@ -329,8 +329,11 @@
     /* Wget */
     self->browser = WEUA_Wget;
   }
-  else if (strstr(ua, "DAVAccess") || strstr(ua, "CardDAVPlugin")
-           || strstr(ua, "CalendarStore") || strstr(ua, "CoreDAV/")) {
+  else if (strstr(ua, "DAVAccess")
+           || strstr(ua, "CardDAVPlugin")
+           || strstr(ua, "CalendarStore")
+           || strstr(ua, "CoreDAV/")
+           || (strstr(ua, "AddressBook") || strstr(ua, "Calendar")) && strstr(ua, "Mac OS X")) {
     /* Apple MacOSX 10.2.1 / iCal 1.0 DAV Access Framework */
     self->browser = WEUA_AppleDAVAccess;
   }
