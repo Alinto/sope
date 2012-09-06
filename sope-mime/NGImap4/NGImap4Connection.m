@@ -70,6 +70,7 @@ static NSString *imap4Separator = nil;
     // TODO: retrieve from IMAP4 instead of using a default
     self->separator = [imap4Separator copy];
     self->subfolders = [NSMutableDictionary new];
+    self->enabledExtensions = [NSMutableDictionary new];
   }
   return self;
 }
@@ -87,6 +88,7 @@ static NSString *imap4Separator = nil;
   [self->subfolders      release];
   [self->password        release];
   [self->client          release];
+  [self->enabledExtensions release];
   [super dealloc];
 }
 
@@ -211,14 +213,37 @@ static NSString *imap4Separator = nil;
 
 /* extensions methods */
 - (NSException *)enableExtensions:(NSArray *)_extensions {
-  NSDictionary *result;
+  NSMutableArray *extensionsToEnable;
+  NSString *s;
 
-  result = [self->client enable: _extensions];
-  if (![[result valueForKey:@"result"] boolValue]) {
-    return (id)[self errorForResult:result 
-		     text:@"Failed to enable requested extension"];
-  }
+  int i, count;
 
+  extensionsToEnable = [NSMutableArray arrayWithArray: _extensions];
+  count = [extensionsToEnable count];
+
+  /* we don't enable extensions that have already been enabled for 
+     this particular connection */
+  for (i = count-1; i >= 0; i--)
+    {
+      s = [extensionsToEnable objectAtIndex: i];
+      if ([enabledExtensions objectForKey: s])
+	[extensionsToEnable removeObjectAtIndex: i];
+      else
+	[enabledExtensions setObject: [NSNumber numberWithBool: YES]
+			      forKey: s];
+    }
+
+  if ([extensionsToEnable count])
+    {
+      NSDictionary *result;
+      
+      result = [self->client enable: _extensions];
+      if (![[result valueForKey:@"result"] boolValue]) {
+	return (id)[self errorForResult:result 
+				   text:@"Failed to enable requested extension"];
+      }
+    }
+      
   return nil;
 }
 
@@ -395,9 +420,12 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   NSString *prefix;
   
   if ((result = [self cachedHierarchyResultsForURL:_url]) != nil)
-    return [result isNotNull] ? result : (NSDictionary *)nil;
+    {
+      if (debugCache) [self logWithFormat: @"primaryFetchMailboxHierarchyForURL - cache hit for URL: %@", _url];
+      return [result isNotNull] ? result : (NSDictionary *)nil;
+    }
   
-  if (debugCache) [self logWithFormat:@"  no folders cached yet .."];
+  if (debugCache) [self logWithFormat: @"primaryFetchMailboxHierarchyForURL - cache miss for URL: %@", _url];
 
   prefix = [_url path];
   if ([prefix hasPrefix: @"/"])
@@ -457,6 +485,14 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   NSDictionary *result;
   NSString *baseFolder;
 
+  if ((result = [self cachedHierarchyResultsForURL:_url]) != nil)
+    {
+      if (debugCache) [self errorWithFormat: @"subfoldersForURL - cache hit for URL: %@", _url];
+      return [self extractSubfoldersForURL:_url fromResultSet: result];
+    }
+
+  if (debugCache) [self errorWithFormat: @"subfoldersForURL - cache miss for URL: %@", _url];
+  
   baseFolder = [self imap4FolderNameForURL:_url removeFileName:NO];
   if (_subscribedFoldersOnly)
     result = [[self client] lsub:baseFolder pattern:@"%"];
@@ -466,6 +502,9 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
     [self errorWithFormat:@"Could not list mailbox hierarchy!"];
     return nil;
   }
+
+  if ([result isNotNull])
+    [self cacheHierarchyResults:result forURL:_url];
 
   return [self extractSubfoldersForURL:_url fromResultSet: result];
 }
@@ -876,43 +915,30 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 
 - (BOOL)doesMailboxExistAtURL:(NSURL *)_url {
   NSString *folderName;
-  NSArray *caches;
-  id result;
-  int count, max;
   BOOL found;
+  id result;
 
   folderName = [self imap4FolderNameForURL:_url];
   if ([[[self->client selectedFolderName] stringByDecodingImap4FolderName]
         isEqualToString:folderName])
     found = YES;
-  else {
-    found = NO;
-
+  else {    
     /* check in hierarchy cache */
-    caches = [self->subfolders allValues];
-    max = [caches count];
-    for (count = 0; !found && count < max; count++) {
-      NSString *p;
-
-      result = [[caches objectAtIndex: count] objectForKey:@"list"];
-      p      = [_url path];
-      /* normalized results already have the / in front on libFoundation?! */
-      if ([p hasPrefix:@"/"]) 
-        p = [p substringFromIndex:1];
-      if ([p hasSuffix:@"/"])
-        p = [p substringToIndex:[p length]-1];
-      found = ([(NSDictionary *)result objectForKey:p] != nil);
-    }
+    found = ([self cachedHierarchyResultsForURL: _url] != nil);
 
     if (!found) {
+      if (debugCache) [self errorWithFormat: @"doesMailboxExistAtURL - cache miss for URL: %@", _url];
+
       /* check using IMAP4 select */
       // TODO: we should probably just fetch the whole hierarchy?
-  
+      
       result = [self->client status: folderName
                     flags: [NSArray arrayWithObject: @"UIDVALIDITY"]];
 
-      found =([[result valueForKey: @"result"] boolValue]);
-    }
+      found = ([[result valueForKey: @"result"] boolValue]);
+      
+    } else if (debugCache)
+      [self errorWithFormat: @"doesMailboxExistAtURL - cache hit for URL: %@", _url];
   }
 
   return found;
