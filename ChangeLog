@@ -1,3 +1,10 @@
+2012-09-06  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Connection.m - reworked a bit the
+	code to have more cache hits. Also added a cache of enabled
+	extensions to avoid enabling them over and over using the
+	same IMAP connection.
+
 2012-08-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* sope-appserver/NGObjWeb/WOCoreApplication.m

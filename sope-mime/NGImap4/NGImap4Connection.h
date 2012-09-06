@@ -61,6 +61,9 @@
   NSArray *cachedUIDs;
   NSURL   *uidFolderURL;
   id      uidSortOrdering;
+
+  /* enabled extensions */
+  NSMutableDictionary *enabledExtensions;
 }
 
 - (id)initWithClient:(NGImap4Client *)_client password:(NSString *)_pwd;
