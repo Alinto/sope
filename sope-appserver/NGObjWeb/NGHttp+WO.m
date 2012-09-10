@@ -381,28 +381,22 @@ static Class      DispClass = Nil;
 - (NGHashMap *)_decodeFormContentURLParameters:(id)formContent {
   /* all this sounds expensive ;-) */
   NSString   *s;
-  unsigned   urilen;
-  char       *uribuf;
-  const char *p;
   NGHashMap  *map;
+  const char *cstr;
+  const unsigned char *pos;
 
   if ((s = [self uri]) == nil)
     return formContent;
   if ([s rangeOfString:@"?"].length == 0)
     return formContent;
 
-  urilen = [s cStringLength];
-  p = uribuf = malloc(urilen + 4);
-  [s getCString:uribuf]; // UNICODE?
-  
-  if ((p = index(p, '?')) == NULL) {
-    if (uribuf) free(uribuf);
-    return formContent;
+  map = nil;
+  cstr = [s cString];
+  pos  = (const unsigned char *)index(cstr, '?');
+  if (pos != NULL) {
+    pos++;
+    map = NGDecodeUrlFormParameters(pos, strlen((char*)pos));
   }
-  
-  p++; // skip the '?'
-  map = NGDecodeUrlFormParameters((unsigned char *)p, strlen((char *)p));
-  if (uribuf != NULL) free(uribuf); uribuf = NULL; p = NULL;
 
   if (map == nil) 
     return formContent;

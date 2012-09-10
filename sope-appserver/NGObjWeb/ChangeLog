@@ -1,3 +1,8 @@
+2012-09-10  Francis Lachapelle  <flachapelle@inverse.ca>
+
+	* NGHttp+WO.m (-_decodeFormContentURLParameters:): fixed decoding
+	of unicode characters in URI.
+
 2012-09-04  Francis Lachapelle  <flachapelle@inverse.ca>
 
 	* WEClientCapabilities.m (-initWithRequest): recognize OS X 10.8
