@@ -169,14 +169,6 @@
 
 @end /* NSString(Values) */
 
-@implementation NSMutableString(NGValues)
-
-- (NSString *)stringValue {
-  return [[self copy] autorelease];
-}
-
-@end /* NSMutableString(Values) */
-
 void __link_NGExtensions_NSObjectValues(void) {
   /* required for static linking */
   __link_NGExtensions_NSObjectValues();
