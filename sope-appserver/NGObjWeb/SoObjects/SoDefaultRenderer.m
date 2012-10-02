@@ -128,7 +128,12 @@ static int debugOn = 0;
     [self debugWithFormat:
 	    @"    as component (use appendToResponse:inContext:)"];
   }
-  [r setHeader:@"text/html" forKey:@"content-type"];
+
+  if ([r contentEncoding] == NSUTF8StringEncoding)
+    [r setHeader:@"text/html; charset=utf-8" forKey:@"content-type"];
+  else
+    [r setHeader:@"text/html" forKey:@"content-type"];
+
   [_ctx setPage:_c];
   [_ctx enterComponent:_c content:nil];
   [_c appendToResponse:r inContext:_ctx];
