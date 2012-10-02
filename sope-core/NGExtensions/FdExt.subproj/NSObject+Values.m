@@ -167,6 +167,10 @@
   return [self intValue];
 }
 
+- (unsigned long long)unsignedLongLongValue {
+  return strtoull([self lossyCString], NULL, 0);
+}
+
 @end /* NSString(Values) */
 
 void __link_NGExtensions_NSObjectValues(void) {
