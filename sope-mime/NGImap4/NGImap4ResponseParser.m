@@ -2326,13 +2326,19 @@ static NSDictionary *_parseBody(NGImap4ResponseParser *self, BOOL isBodyStructur
 
 - (NSDictionary *)_parseBodyContent {
   NSData *data;
+  unsigned char c0;
   
-  if (_la(self, 0) == '"') {
+  c0 = _la(self, 0);
+  if (c0 == '"') {
     NSString *str;
     _consume(self,1);
     
     str = _parseUntil(self, '"');
     data = [str dataUsingEncoding:defCStringEncoding];
+  }
+  else if (c0 == 'N' && _matchesString(self, "NIL")) {
+    _consume(self, 3);
+    return nil;
   }
   else 
     data = [self _parseData];
