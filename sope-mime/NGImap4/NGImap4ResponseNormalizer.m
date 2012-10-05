@@ -371,7 +371,7 @@ static int      LogImapEnabled = -1;
 	  count++;
 	}
 	else if (klen > 3 && [key hasPrefix:@"body"]) {
-	  keys[count]   = @"body";
+          keys[count] = key;
 	  values[count] = objForKey(obj, @selector(objectForKey:), key);
 	  count++;
 	}

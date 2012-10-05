@@ -816,7 +816,7 @@ static int FetchNewUnseenMessagesInSubFoldersOnDemand = -1;
   // TODO: using 'lastObject' is certainly wrong? need to search for body
   result = [fetchResults lastObject];
   
-  if ((result = [result objectForKey:@"body"]) == nil)
+  if ((result = [result objectForKey: _part ? bodyKey : @"body"]) == nil)
     [self debugWithFormat:@"found no body in fetch results: %@", fetchResults];
   
   return [result objectForKey:@"data"];

@@ -722,20 +722,15 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 
 - (NSData *)fetchContentOfBodyPart:(NSString *)_partId atURL:(NSURL *)_url
                           withPeek:(BOOL)_withPeek {
-  NSString *bodyToken, *key;
+  NSString *key;
   NSArray  *parts;
   id result, body;
   NSUInteger count, max;
   
   if (_partId == nil) return nil;
 
-  if (_withPeek) {
-    bodyToken = @"body.peek";
-  }
-  else {
-    bodyToken = @"body";
-  }
-  key = [NSString stringWithFormat: @"%@[%@]", bodyToken, _partId];
+  key = [NSString stringWithFormat: @"body%@[%@]",
+                  _withPeek ? @".peek" : @"", _partId];
   parts = [NSArray arrayWithObject:key];
   
   /* fetch */
@@ -752,8 +747,12 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   
   max = [result count];
   body = nil;
+
+  /* no matter whether peek was used or not, the resulting key seems to always
+     be "body[xxx]" */
+  key = [NSString stringWithFormat: @"body[%@]", _partId];
   for (count = 0; !body && count < max; count++) {
-    body = [[result objectAtIndex:count] objectForKey:@"body"];
+    body = [[result objectAtIndex:count] objectForKey:key];
   }
   if (body == nil) {
     [self errorWithFormat:@"did not find body in response: %@", result];
