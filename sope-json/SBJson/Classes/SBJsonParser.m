@@ -92,7 +92,7 @@ static char ctrl[0x22];
     NSAssert1(o, @"Should have a valid object from %@", repr);
     
     // Check that the object we've found is a valid JSON container.
-    if (![o isKindOfClass:[NSDictionary class]] && ![o isKindOfClass:[NSArray class]]) {
+    if (![o isKindOfClass:[NSDictionary class]] && ![o isKindOfClass:[NSArray class]] && ![o isKindOfClass:[NSNull class]]) {
         [self addErrorWithCode:EFRAGMENT description:@"Valid fragment, but not JSON"];
         return nil;
     }
