@@ -535,7 +535,7 @@ static int      LogImapEnabled = -1;
   [result setObject:fetchResponseVanishedRecords forKey:@"vanished"];
   [fetchResponseVanishedRecords release];
   
-  return [[result copy] autorelease];
+  return result;
 }
 
 - (NSDictionary *)normalizeQuotaResponse:(NGHashMap *)_map {
@@ -576,7 +576,7 @@ static int      LogImapEnabled = -1;
     [tmp setObject:qDesc forKey:[self->client _imapFolder2Folder:obj]];
   }
   [result setObject:tmp forKey:@"quotas"];
-  return [[result copy] autorelease];
+  return result;
 }
 
 
@@ -675,16 +675,10 @@ static int      LogImapEnabled = -1;
               forKey:[self->client _imapFolder2Folder:[o objectForKey:@"folderName"]]];
     }
     
-    {
-      NSDictionary *f;
-      
-      f = [folder copy];
-      [result setObject:f forKey:@"list"];
-      [f release];      f      = nil;
-      [folder release]; folder = nil;
-    }
+    [result setObject:folder forKey:@"list"];
+    [folder release];
   }
-  rr = [result copy];
+  rr = [result retain];
   [pool release];
   
   return [rr autorelease];
