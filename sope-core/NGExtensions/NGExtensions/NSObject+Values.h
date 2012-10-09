@@ -59,6 +59,8 @@
 
 @interface NSString(NGValues)
 
++ (NSString *) stringWithUnsignedLongLong: (unsigned long long)value;
+
 - (BOOL)boolValue;
 - (NSString *)stringValue;
 

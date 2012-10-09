@@ -78,6 +78,11 @@
 
 @implementation NSString(NGValues)
 
++ (NSString *) stringWithUnsignedLongLong: (unsigned long long)value
+{
+  return [NSString stringWithFormat: @"0x%.16"PRIx64, value];
+}
+
 - (BOOL)boolValue {
   unsigned len;
   unichar  c1;
