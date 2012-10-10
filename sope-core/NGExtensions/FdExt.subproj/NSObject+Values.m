@@ -19,6 +19,8 @@
   02111-1307, USA.
 */
 
+#include <inttypes.h>
+
 #include "NSObject+Values.h"
 #include "common.h"
 
