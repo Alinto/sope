@@ -413,43 +413,34 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
 }
 - (NSData *)_parseDataIntoRAM:(unsigned)_size {
   /* parses data into a RAM buffer (NSData) */
-  unsigned char *buf = NULL;
-  unsigned char *tmpBuf;
-  unsigned      wasRead   = 0;
-  unsigned      cnt, tmpBufCnt, tmpSize;
-  NSData        *result;
-          
-  buf = calloc(_size + 10, sizeof(char));
-    
+  unsigned char *buf;
+  NSUInteger wasRead, cnt, offset;
+  NSData *result;
+
+  buf = malloc((_size + 1) * sizeof(char));
+
+  wasRead = 0;
   while (wasRead < _size) {
     [self->buffer la:(_size - wasRead <  LaSize) ? (_size - wasRead) : LaSize];
-            
     wasRead += [self->buffer readBytes:(buf + wasRead) count:(_size-wasRead)];
   }
-  
+  *(buf + _size) = '\0';
+ 
   /* normalize response  \r\n -> \n */
-	
-  tmpBuf    = calloc(_size + 10, sizeof(char));
-  cnt       = 0;
-  tmpBufCnt = 0;
-  tmpSize   = _size == 0 ? 0 : _size - 1;
-  while (tmpBufCnt < tmpSize && cnt < _size) {
+
+  offset = 0;
+  for (cnt = 0; cnt < wasRead; cnt++) {
     if ((buf[cnt] == '\r') && (buf[cnt + 1] == '\n'))
-      cnt++; /* skip \r */
-      
-    tmpBuf[tmpBufCnt] = buf[cnt];
-    tmpBufCnt++;
-    cnt++;
+      offset++; /* skip \r */
+    else if (offset > 0) {
+      buf[cnt-offset] = buf[cnt];
+    }
   }
-  if (cnt < _size) {
-    tmpBuf[tmpBufCnt] = buf[cnt];
-    tmpBufCnt++;
-    cnt++;
-  }
-    
-  result = [DataClass dataWithBytesNoCopy:tmpBuf length:tmpBufCnt];
-    
-  if (buf != NULL) free(buf); buf = NULL;
+
+  result = [DataClass dataWithBytesNoCopy:buf
+                      length:wasRead-offset
+                      freeWhenDone:YES];
+
   return result;
 }
 - (NSData *)_parseData {
