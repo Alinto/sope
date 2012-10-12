@@ -88,47 +88,42 @@ static int parseMonthOfYear(char *s, unsigned int len) {
   }
 }
 
-static int offsetFromTZAbbreviation(const char **p) {
+static int offsetFromTZAbbreviation(const char *s, size_t len, size_t *next_pos) {
   NSString *abbreviation;
   NSTimeZone *offsetTZ;
-  unsigned int length;
+  size_t length;
 
   length = 0;
-  while (isalpha(*(*p+length)))
+  while (length < len && isalpha(*(s+length)))
     length++;
-  abbreviation = [[NSString alloc] initWithBytes: *p
-				   length: length - 1
-				   encoding: NSISOLatin1StringEncoding];
+  abbreviation = [[NSString alloc] initWithBytes: s
+                                          length: length
+                                        encoding: NSISOLatin1StringEncoding];
   offsetTZ = [NSTimeZone timeZoneWithAbbreviation: abbreviation];
   [abbreviation release];
-  *p += length;
+  *next_pos = length;
 
   return [offsetTZ secondsFromGMT];
 }
 
-static inline char *digitsString(const char *string) {
-  const char *p;
-  unsigned int len;
+static inline size_t findDigitsString(const char *s, size_t len) {
+  size_t pos;
 
-  p = string;
-  while (!isdigit(*p))
-    p++;
-  len = 0;
-  while (isdigit(*(p + len)))
-    len++;
+  for (pos = 0; pos < len && !isdigit(*(s+pos));)
+    pos++;
 
-  return strndup(p, len);
+  return pos;
 }
  
-static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
+static NSTimeZone *parseTimeZone(const char *s, size_t len) {
   /*
     WARNING: failed to parse RFC822 timezone: '+0530' \
              (value='Tue, 13 Jul 2004 21:39:28 +0530')
     TODO: this is because libFoundation doesn't accept 'GMT+0530' as input.
   */
-  char *newString, *digits;
-  const char *p;
   NSTimeZone *tz;
+  register size_t pos;
+  size_t new_pos;
   NSInteger hours, minutes, seconds, remaining;
   int sign;
 
@@ -137,47 +132,44 @@ static NSTimeZone *parseTimeZone(const char *s, unsigned int len) {
   minutes = 0;
   seconds = 0;
 
-  newString = strndup(s, len);
-  p = newString;
+  pos = 0;
 
-  if (isalpha(*p))
-    seconds = offsetFromTZAbbreviation(&p);
-  while (isspace(*p))
-    p++;
-  while (*p == '+' || *p == '-') {
-    if (*p == '-')
+  if (isalpha(s[pos])) {
+    seconds = offsetFromTZAbbreviation (s+pos, len-pos, &new_pos);
+    pos = new_pos;
+  }
+  while (pos < len && isspace(*(s+pos)))
+    pos++;
+  while (pos < len && (*(s+pos) == '+' || *(s+pos) == '-')) {
+    if (*(s+pos) == '-')
       sign = -sign;
-    p++;
+    pos++;
   }
-  digits = NULL;
-  if (strlen(p)) {
-    digits = digitsString(p);
-    p = digits;
+  if (pos < len) {
+    pos += findDigitsString(s+pos, len-pos);
   }
-  remaining = strlen(p);
+  remaining = len - pos;
   switch(remaining) {
   case 6: /* hhmmss */
-    seconds += (10 * (*(p + remaining - 2) - 48)
-		+ *(p + remaining - 1) - 48);
+    seconds += (10 * (*(s + pos + remaining - 2) - 48)
+		+ *(s + pos + remaining - 1) - 48);
   case 4: /* hhmm */
-    hours += 10 * (*p - 48);
-    p++;
+    hours += 10 * (*(s + pos) - 48);
+    pos++;
   case 3: /* hmm */
-    hours += (*p - 48);
-    p++;
-    minutes += 10 * (*p - 48) + *(p + 1) - 48;
+    hours += *(s + pos) - 48;
+    pos++;
+    minutes += 10 * (*(s + pos) - 48) + *(s + pos + 1) - 48;
     break;
   case 2: /* hh */
-    hours += 10 * (*p - 48) + *(p + 1) - 48;
+    hours += 10 * (*(s + pos) - 48) + *(s + pos + 1) - 48;
     break;
   default:
-    NSLog (@"parseTimeZone: cannot parse time notation '%s'", newString);
+    NSLog (@"parseTimeZone: cannot parse time notation '%.*s'", len, s);
   }
-  free(digits);
 
   seconds += sign * (3600 * hours + 60 * minutes);
   tz = [NSTimeZone timeZoneForSecondsFromGMT: seconds];
-  free(newString);
 
   return tz;
 }
