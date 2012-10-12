@@ -198,8 +198,8 @@ static NGLogger *transActionLogger = nil;
   if (perfLogger) {
       struct timeval tv;
       gettimeofday(&tv, NULL);
-      self->t = (((double)tv.tv_sec) * ((double)tv.tv_usec) / 1000.0)  - 
-        self->t;
+      self->t = (((double)tv.tv_sec) + ((double)tv.tv_usec)
+                 / 1000000.0) - self->t;
       [perfLogger logWithFormat:@"processing of request took %4.3fs.", 
 	                  self->t < 0.0 ? -self->t : self->t];
   }
