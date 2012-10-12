@@ -89,8 +89,11 @@ static Class NSStringClass = Nil;
 }
 
 - (id)init {
+  NGMimeMessageParserDelegate *localDelegate;
   if ((self = [super init])) {
-    [self setDelegate:[NGMimeMessageParserDelegate new]];
+    localDelegate = [NGMimeMessageParserDelegate new];
+    [self setDelegate:localDelegate];
+    [localDelegate release];
   }
   return self;
 }
