@@ -49,9 +49,6 @@ struct NGByteBufferLA;
   BOOL     wasEOF;
   unsigned headIdx;
   unsigned sizeLessOne;
-
-  int (*readByte)(id, SEL);
-  int (*laFunction)(id, SEL, unsigned);
 }
 
 /*

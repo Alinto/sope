@@ -80,14 +80,6 @@ static Class DataStreamClass = Nil;
     self->sizeLessOne = self->bufLen - 1;
     self->headIdx     = 0;
     self->wasEOF      = NO;
-    if ([self->source respondsToSelector:@selector(methodForSelector:)]) {
-      self->readByte = (int(*)(id, SEL))
-        [(NSObject *)self->source methodForSelector:@selector(readByte)];
-    }
-    if ([self respondsToSelector:@selector(methodForSelector:)]) {
-      self->laFunction = (int(*)(id, SEL, unsigned))
-        [(NSObject *)self methodForSelector:@selector(la:)];
-    }
   }
   return self;
 }
@@ -124,9 +116,7 @@ static Class DataStreamClass = Nil;
 /* operations */
 
 - (int)readByte {
-  int byte = (self->laFunction == NULL)
-    ? [self la:0]
-    : self->laFunction(self, @selector(la:), 0);
+  int byte = [self la:0];
   [self consume];
   return byte;
 }
@@ -211,9 +201,7 @@ static Class DataStreamClass = Nil;
         ti =  (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0);
       }
 #endif
-      byte = (self->readByte == NULL)
-        ? [self->source readByte]
-        : (int)self->readByte(self->source, @selector(readByte));
+      byte = [self->source readByte];
 
 #if DEBUG
       if (ProfileByteBuffer) {
@@ -252,10 +240,7 @@ static Class DataStreamClass = Nil;
       // TODO: check whether malloc is used for sufficiently large blocks!
       tmpBuffer = malloc(desiredBytes + 2);
 
-      cntReadBytes = (self->readBytes == NULL)
-        ? [self->source readBytes:tmpBuffer count:desiredBytes]
-        : self->readBytes(self->source, @selector(readBytes:count:),
-                          tmpBuffer, desiredBytes);
+      cntReadBytes = [self->source readBytes:tmpBuffer count:desiredBytes];
           
       if (cntReadBytes == NGStreamError) {
         exc = [[self->source lastException] retain];
@@ -302,9 +287,7 @@ static Class DataStreamClass = Nil;
   int idx = self->headIdx & sizeLessOne;
   
   if (!(self->la[idx].isFetched)) {
-    (self->laFunction == NULL)
-      ? [self la:0]
-      : self->laFunction(self, @selector(la:), 0);
+    [self la:0];
   }
   self->la[idx].isFetched = 0;
   self->headIdx++;
@@ -315,9 +298,7 @@ static Class DataStreamClass = Nil;
     int idx = self->headIdx & sizeLessOne;
     
     if (!(self->la[idx].isFetched))
-      (self->laFunction == NULL)
-        ? [self la:0]
-        : self->laFunction(self, @selector(la:), 0);
+      [self la:0];
 
     self->la[idx].isFetched = 0;
     self->headIdx++;
