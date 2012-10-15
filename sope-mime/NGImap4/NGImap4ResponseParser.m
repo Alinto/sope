@@ -273,6 +273,7 @@ static NSNull           *null   = nil;
     l0 = _la(self, 0);
     
     if (l0 == '*') { /* those starting with '* ' */
+      _consume(self, 1);
       _parseUntaggedResponse(self, result);
       if ([result objectForKey:@"bye"]) {
         endOfCommand = YES;
@@ -594,10 +595,13 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
   // TODO: is it really required by IMAP4 that responses are uppercase?
   // TODO: apparently this code *breaks* with lowercase detection on!
   unsigned char l0, l1 = 0;
-  _consumeIfMatch(self, '*');
-  _consumeIfMatch(self, ' ');
-  
+
   l0 = _la(self, 0);
+  if (l0 == ' ') {
+    _consume(self, 1);
+    l0 = _la(self, 0);
+  }
+  
   switch (l0) {
   case 'A':
     if ([self _parseACLResponseIntoHashMap:result_])
@@ -2503,9 +2507,10 @@ static BOOL _parseNoUntaggedResponse(NGImap4ResponseParser *self,
 }
 
 static BOOL _parseOkUntaggedResponse(NGImap4ResponseParser *self,
-                                     NGMutableHashMap *result_) 
+                                     NGMutableHashMap *result_)
 {
-  if (!((_la(self, 0)=='O') && (_la(self, 1)=='K') && (_la(self, 2)==' ')))
+  /* we know the first element is 'O', since the caller has tested it */
+  if (!((_la(self, 1)=='K') && (_la(self, 2)==' ')))
     return NO;
   
   _consume(self, 3);
