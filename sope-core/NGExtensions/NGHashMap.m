@@ -787,13 +787,8 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   else {
     root->count += _count;
     element = initLListElement(_objects[0], NULL);
-    if (root->next == NULL) {
-      root->next = element;
-    }
-    else {
-      root->last->next = element;
-      root->last = element;
-    }
+    root->last->next = element;
+    root->last = element;
   }
   for (i = 1; i < _count; i++) {
     checkForAddErrorMessage(self, _objects[i], _key);
@@ -814,7 +809,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   int cntI     = 0;
   
   cntI    = [_objects count];
-  objects = malloc(cntI + 1, sizeof(id));
+  objects = malloc((cntI + 1) * sizeof(id));
   for (i = 0 ; i < cntI; i++) 
     objects[i] = [_objects objectAtIndex:i];
 
