@@ -30,6 +30,7 @@
 
 typedef struct _LList {
   struct _LList *next;
+  struct _LList *last;
   id            object;
   unsigned int  count;
 } LList;
@@ -780,22 +781,25 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   if ((root = [self __structForKey:_key]) == NULL) {
     root        = initLListElement(_objects[0], NULL);
     root->count = _count;
+    root->last = root;
     NSMapInsert(self->table, _key, root);
   }
   else {
     root->count += _count;
-    while (root->next)
-      root = root->next;
-    
-    element    = initLListElement(_objects[0], NULL);
-    root->next = element;
-    root       = root->next;
+    element = initLListElement(_objects[0], NULL);
+    if (root->next == NULL) {
+      root->next = element;
+    }
+    else {
+      root->last->next = element;
+      root->last = element;
+    }
   }
   for (i = 1; i < _count; i++) {
     checkForAddErrorMessage(self, _objects[i], _key);
     element    = initLListElement(_objects[i], NULL);
-    root->next = element;
-    root       = element;
+    root->last->next = element;
+    root->last = element;
   }
 }
 
@@ -810,12 +814,12 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   int cntI     = 0;
   
   cntI    = [_objects count];
-  objects = calloc(cntI + 1, sizeof(id));
+  objects = malloc(cntI + 1, sizeof(id));
   for (i = 0 ; i < cntI; i++) 
     objects[i] = [_objects objectAtIndex:i];
 
   [self addObjects:objects count:cntI forKey:_key];
-  if (objects) free(objects);
+  free(objects);
 }
 
 /* setting objects */
