@@ -414,6 +414,7 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
 - (NSData *)_parseDataIntoRAM:(unsigned)_size {
   /* parses data into a RAM buffer (NSData) */
   unsigned char *buf;
+  register unsigned char firstChar, nextChar;
   NSUInteger wasRead, cnt, offset;
   NSData *result;
 
@@ -429,12 +430,15 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
   /* normalize response  \r\n -> \n */
 
   offset = 0;
+  firstChar = buf[0];
   for (cnt = 0; cnt < wasRead; cnt++) {
-    if ((buf[cnt] == '\r') && (buf[cnt + 1] == '\n'))
+    nextChar = buf[cnt + 1];
+    if ((firstChar == '\r') && (nextChar == '\n'))
       offset++; /* skip \r */
     else if (offset > 0) {
-      buf[cnt-offset] = buf[cnt];
+      buf[cnt-offset] = firstChar;
     }
+    firstChar = nextChar;
   }
 
   result = [DataClass dataWithBytesNoCopy:buf
