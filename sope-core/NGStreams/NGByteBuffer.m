@@ -153,11 +153,11 @@ static Class DataStreamClass = Nil;
 
 - (int)la:(unsigned)_la {
   // TODO: huge method, should be split up
-  volatile unsigned result, idx;
+  unsigned result, idx;
   unsigned i = 0;
   
   result = -1;
-  *(&idx) = (_la + self->headIdx) & self->sizeLessOne;
+  idx = (_la + self->headIdx) & self->sizeLessOne;
   
   if (_la > self->sizeLessOne) {
     [NSException raise:NSRangeException
@@ -176,7 +176,6 @@ static Class DataStreamClass = Nil;
     return result;
   }
 
-  *(&i) = 0;
   for (i = 0;
        i < _la &&
          self->la[(self->headIdx + i) & self->sizeLessOne].isFetched;
