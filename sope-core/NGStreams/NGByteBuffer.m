@@ -74,8 +74,7 @@ static Class DataStreamClass = Nil;
     // Find first power of 2 >= to requested size
     for (size = 2; size < _la; size *=2);
     
-    self->la = malloc(sizeof(LA_NGByteBuffer) * size + 4);
-    memset(self->la, 0, sizeof(LA_NGByteBuffer) * size);
+    self->la = calloc(sizeof(LA_NGByteBuffer) * size + 4);
 
     self->bufLen      = size;
     self->sizeLessOne = self->bufLen - 1;
