@@ -201,6 +201,8 @@
         [NGTextErr writeFormat:@"S: help extension supported.\n"];
       if (self->extensions.hasExpand)
         [NGTextErr writeFormat:@"S: expand extension supported.\n"];
+      if (self->extensions.hasAuthPlain)
+        [NGTextErr writeFormat:@"S: plain auth extension supported.\n"];
     }
     return YES;
   }
@@ -214,6 +216,43 @@
   [text   flush];
   [socket close];
   [self gotoState:NGSmtpState_unconnected];
+}
+
+// authentication
+- (BOOL) plainAuthenticateUser: (NSString *) username
+                  withPassword: (NSString *) password {
+  BOOL rc;
+
+  if (self->extensions.hasAuthPlain && [username length] > 0) {
+    char *buffer;
+    const char *utf8Username, *utf8Password;
+    size_t buflen, lenUsername, lenPassword;
+    NSData *authString;
+    NGSmtpResponse *reply;
+
+    utf8Username = [username UTF8String];
+    utf8Password = [password UTF8String];
+    if (!utf8Password)
+      utf8Password = 0;
+
+    lenUsername = strlen (utf8Username);
+    lenPassword = strlen (utf8Password);
+    buflen = lenUsername * 2 + lenPassword + 2;
+    buffer = malloc (sizeof (char) * (buflen + 1));
+    sprintf (buffer, "%s%c%s%c%s",
+             utf8Username, 0, utf8Username, 0, utf8Password);
+    authString = [NSData dataWithBytesNoCopy: buffer
+                                      length: buflen
+                                freeWhenDone: YES];
+    reply = [self sendCommand: @"AUTH PLAIN"
+                     argument: [authString stringByEncodingBase64]];
+    rc = ([reply code] == NGSmtpAuthenticationSuccess);
+  }
+  else {
+    rc = NO;
+  }
+
+  return rc;
 }
 
 // state
@@ -312,7 +351,7 @@
   reply = [self sendCommand:@"EHLO" argument:hostName];
   if ([reply code] == NGSmtpActionCompleted) {
     NSEnumerator *lines = [[[reply text] componentsSeparatedByString:@"\n"]
-                                   objectEnumerator];
+                            objectEnumerator];
     NSString     *line = nil;
 
     if (self->isDebuggingEnabled) [NGTextErr writeFormat:@"S: %@\n", reply];
@@ -326,6 +365,11 @@
         self->extensions.hasPipelining = YES;
       else if ([line hasPrefix:@"HELP"])
         self->extensions.hasHelp = YES;
+      else if ([line hasPrefix:@"AUTH"]) {
+        NSArray *methods;
+        methods = [line componentsSeparatedByString: @" "];
+        self->extensions.hasAuthPlain = [methods containsObject: @"PLAIN"];
+      }
     }
     lines = nil;
   }

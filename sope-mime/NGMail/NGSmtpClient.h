@@ -56,6 +56,7 @@ typedef enum {
     BOOL hasSize:1;
     BOOL hasHelp:1;
     BOOL hasPipelining;
+    BOOL hasAuthPlain;
   } extensions;
 }
 
@@ -75,6 +76,10 @@ typedef enum {
 - (BOOL)connectToHost:(id)_host;
 - (BOOL)connectToAddress:(id<NGSocketAddress>)_address;
 - (void)disconnect;
+
+// authentication
+- (BOOL) plainAuthenticateUser: (NSString *) username
+                  withPassword: (NSString *) password;
 
 // state
 

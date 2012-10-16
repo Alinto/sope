@@ -104,6 +104,7 @@ typedef enum {
   NGSmtpHelpMessage               = 214,
   NGSmtpServiceReady              = 220,
   NGSmtpServiceClosingChannel     = 221,
+  NGSmtpAuthenticationSuccess     = 235,
   NGSmtpActionCompleted           = 250,
   NGSmtpUserNotLocalWillForward   = 251,
 
