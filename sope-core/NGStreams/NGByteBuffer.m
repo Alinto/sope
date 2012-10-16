@@ -23,12 +23,6 @@
 #include "common.h"
 #include <sys/time.h>
 
-typedef struct NGByteBufferLA {
-  unsigned char byte;
-  char          isEOF:1;
-  char          isFetched:1;
-} LA_NGByteBuffer;
-
 @implementation NGByteBuffer
 
 static BOOL  ProfileByteBuffer = NO;
@@ -74,11 +68,14 @@ static Class DataStreamClass = Nil;
     // Find first power of 2 >= to requested size
     for (size = 2; size < _la; size *=2);
     
-    self->la = calloc(size + 4, sizeof(LA_NGByteBuffer));
+    self->la = malloc(size * sizeof(unsigned char));
+    // self->flags = calloc(size + 4, sizeof(struct NGByteBufferFlags));
 
     self->bufLen      = size;
     self->sizeLessOne = self->bufLen - 1;
     self->headIdx     = 0;
+    self->freeIdx = 0;
+    self->EOFIdx = 0;
     self->wasEOF      = NO;
   }
   return self;
@@ -110,6 +107,7 @@ static Class DataStreamClass = Nil;
 
 - (void)dealloc {
   if (self->la) free(self->la);
+  // if (self->flags) free(self->flags);
   [super dealloc];
 }
 
@@ -125,7 +123,7 @@ static Class DataStreamClass = Nil;
   if (_len == 0)
     return 0;
 
-  if (!(self->la[(self->headIdx & self->sizeLessOne)].isFetched)) {
+  if (self->headIdx >= self->freeIdx) {
     int byte = [self readByte];
 
     if (byte == -1)
@@ -135,16 +133,21 @@ static Class DataStreamClass = Nil;
     return 1;
   }
   else {
-    unsigned      cnt    = 0;
-    int           idxCnt = self->headIdx & sizeLessOne;
-    unsigned char buffer[self->bufLen];
-    
-    while (self->la[idxCnt].isFetched && cnt < _len && cnt < bufLen) {
-      buffer[cnt] = self->la[idxCnt].byte;
-      cnt++;
-      idxCnt = (cnt + self->headIdx) & sizeLessOne;
-    }
-    memcpy(_buf, buffer, cnt);
+    unsigned idx, localIdx, cnt, max, localMax;
+
+    idx = self->headIdx;
+
+    cnt = _len;
+    max = self->freeIdx - idx;
+    if (cnt > max)
+      cnt = max;
+
+    localIdx = idx & sizeLessOne;
+    localMax = self->bufLen - localIdx;
+    if (cnt > localMax)
+      cnt = localMax;
+
+    memcpy(_buf, self->la + localIdx, cnt);
     [self consume:cnt];
     return cnt;
   }
@@ -153,46 +156,44 @@ static Class DataStreamClass = Nil;
 
 - (int)la:(unsigned)_la {
   // TODO: huge method, should be split up
-  unsigned result, idx;
-  unsigned i = 0;
-  
-  result = -1;
-  idx = (_la + self->headIdx) & self->sizeLessOne;
+  int result;
+  unsigned idx, max;
   
   if (_la > self->sizeLessOne) {
     [NSException raise:NSRangeException
                  format:@"tried to look ahead too far (la=%d, max=%d)", 
                   _la, self->bufLen];
   }
-  
+
+  idx = self->headIdx + _la;
   if (self->wasEOF) {
-    result = (!self->la[idx].isFetched || self->la[idx].isEOF)
-      ? -1 : self->la[idx].byte;
+    if (idx < self->freeIdx && idx < self->EOFIdx) {
+      result = self->la[idx & self->sizeLessOne];
+    }
+    else
+      result = -1;
     return result;
   }
   
-  if (self->la[idx].isFetched) {
-    result = (self->la[idx].isEOF) ? -1 : self->la[idx].byte;
+  if (idx < self->freeIdx) {
+    result = self->la[idx & self->sizeLessOne];
     return result;
   }
 
-  for (i = 0;
-       i < _la &&
-         self->la[(self->headIdx + i) & self->sizeLessOne].isFetched;
-       i++);
-  
   /* 
      If we should read more than 5 bytes, we take the time costs of an
      exception handler 
   */
-  if ((_la - i + 1) <= 5) {
-    while (i <= _la) {
+  max = idx - self->freeIdx + 1;
+  if (max < 6) {
+    /* TODO: can be optimized by removing the "&" operation */
+    for (; self->freeIdx <= idx; self->freeIdx++) {
 #if DEBUG
       struct timeval tv;
       double         ti = 0.0;
 #endif
           
-      int byte = 0;
+      int byte;
 
 #if DEBUG
       if (ProfileByteBuffer) {
@@ -216,93 +217,95 @@ static Class DataStreamClass = Nil;
     
       if (byte == -1) {  // EOF was reached
         self->wasEOF = YES;
+        self->EOFIdx = self->freeIdx;
         break;
       }
       else {
-        int ix = (self->headIdx + i) & self->sizeLessOne;
-        self->la[ix].byte      = byte;
-        self->la[ix].isFetched = 1;
+        self->la[self->freeIdx & self->sizeLessOne] = byte;
       }
-      i++;
     }
   }
   else {
-    BOOL readStream = YES;
+    unsigned localFreeIdx, len;
+    int readCnt, totalReadCnt;
     NSException *exc = nil;
     
-    while (readStream) {
-      int  cntReadBytes  = 0;
-      int  cnt           = 0;
-      int  desiredBytes  = _la - i+1;
-      char *tmpBuffer;
+    localFreeIdx = self->freeIdx & self->sizeLessOne;
+    len = self->bufLen - localFreeIdx;
+    if (len > max) {
+      len = max;
+    }
 
-      // TODO: check whether malloc is used for sufficiently large blocks!
-      tmpBuffer = malloc(desiredBytes + 2);
-
-      cntReadBytes = [self->source readBytes:tmpBuffer count:desiredBytes];
-          
-      if (cntReadBytes == NGStreamError) {
+    totalReadCnt = 0;
+    while (len > 0) {
+      readCnt = [self->source readBytes: (self->la + totalReadCnt
+                                          + localFreeIdx)
+                                  count: len];
+      if (readCnt == NGStreamError) {
         exc = [[self->source lastException] retain];
         break;
       }
-      else {
-        if (cntReadBytes == desiredBytes)
-          readStream = NO;
 
-        cnt = 0;
-        while (cntReadBytes > 0) {
-          int ix = (self->headIdx + i) & self->sizeLessOne;
-          self->la[ix].byte      = tmpBuffer[cnt];
-          self->la[ix].isFetched = 1;
-          i++;
-          cnt++;
-          cntReadBytes--;
-        }
-      }
-          
-      if (tmpBuffer) free(tmpBuffer);
+      self->freeIdx += readCnt;
+      totalReadCnt += readCnt;
+      len -= readCnt;
     }
+
+    if (!exc && totalReadCnt < max) {
+      len = max - totalReadCnt;
+      totalReadCnt = 0;
+      while (len > 0) {
+        readCnt = [self->source readBytes: self->la + totalReadCnt
+                                    count: len];
+        if (readCnt == NGStreamError) {
+          exc = [[self->source lastException] retain];
+          break;
+        }
+      
+        self->freeIdx += readCnt;
+        totalReadCnt += readCnt;
+        len -= readCnt;
+      }
+    }
+
     if (exc) {
       if (![exc isKindOfClass:[NGEndOfStreamException class]]) {
         [self setLastException:exc];
         return NGStreamError;
       }
       self->wasEOF = YES;
+      self->EOFIdx = self->freeIdx;
     }
   }
-  
-  if (self->wasEOF) {
-    while (i <= _la) {
-      self->la[(self->headIdx + i) & self->sizeLessOne].isEOF = YES;
-      i++;
-    }
-  }
-  
-  result = (self->la[idx].isEOF) ? -1 : self->la[idx].byte;
+
+  if (!self->wasEOF || idx < self->EOFIdx)
+    result = self->la[idx & self->sizeLessOne];
+  else
+    result = -1;
+
   return result;
 }
 
 - (void)consume {
-  int idx = self->headIdx & sizeLessOne;
-  
-  if (!(self->la[idx].isFetched)) {
+  if (self->headIdx == self->freeIdx) {
     [self la:0];
   }
-  self->la[idx].isFetched = 0;
+  else if (self->headIdx > self->freeIdx) {
+    [NSException raise: NSRangeException
+                format: @"a buffer inconsistency was detected"];
+  }
   self->headIdx++;
 }
 
 - (void)consume:(unsigned)_cnt {
-  while (_cnt > 0) {
-    int idx = self->headIdx & sizeLessOne;
-    
-    if (!(self->la[idx].isFetched))
-      [self la:0];
+  unsigned nextHead, needed;
 
-    self->la[idx].isFetched = 0;
-    self->headIdx++;
-    _cnt--;
+  nextHead = self->headIdx + _cnt;
+  if (nextHead >= self->freeIdx) {
+    needed = nextHead - self->freeIdx + 1;
+    [self la: needed];
   }
+  self->headIdx = nextHead;
 }
 
 /* description */

@@ -43,11 +43,13 @@ struct NGByteBufferLA;
 @interface NGByteBuffer : NGFilterStream
 {
 @protected
-  struct NGByteBufferLA *la;
+  unsigned char *la;
 
   unsigned bufLen;
   BOOL     wasEOF;
   unsigned headIdx;
+  unsigned freeIdx; /* first byte index that has not been fetched */
+  unsigned EOFIdx; /* max byte index ever + 1 */
   unsigned sizeLessOne;
 }
 
