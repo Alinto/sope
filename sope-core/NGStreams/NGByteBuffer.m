@@ -155,7 +155,8 @@ static Class DataStreamClass = Nil;
 - (int)la:(unsigned)_la {
   // TODO: huge method, should be split up
   int result;
-  unsigned idx, max;
+  register unsigned idx;
+  unsigned max;
   
   if (_la > self->sizeLessOne) {
     [NSException raise:NSRangeException
@@ -164,8 +165,14 @@ static Class DataStreamClass = Nil;
   }
 
   idx = self->headIdx + _la;
+  if (idx < self->freeIdx) {
+    result = self->la[idx & self->sizeLessOne];
+    return result;
+  }
+
   if (self->wasEOF) {
-    if (idx < self->freeIdx && idx < self->EOFIdx) {
+    if (idx < self->EOFIdx) {
+      /* EOFIdx is always equal to freeIdx when wasEOF is set */
       result = self->la[idx & self->sizeLessOne];
     }
     else
@@ -173,11 +180,6 @@ static Class DataStreamClass = Nil;
     return result;
   }
   
-  if (idx < self->freeIdx) {
-    result = self->la[idx & self->sizeLessOne];
-    return result;
-  }
-
   /* 
      If we should read more than 5 bytes, we take the time costs of an
      exception handler 
@@ -224,8 +226,10 @@ static Class DataStreamClass = Nil;
     }
   }
   else {
-    unsigned localFreeIdx, len;
-    int readCnt, totalReadCnt;
+    unsigned localFreeIdx;
+    register unsigned len, totalReadCnt;
+    register int readCnt;
+    unsigned char *bufferEnd;
     NSException *exc = nil;
     
     localFreeIdx = self->freeIdx & self->sizeLessOne;
@@ -234,36 +238,36 @@ static Class DataStreamClass = Nil;
       len = max;
     }
 
+    /* 1. fill last bytes of buffer, from the position pointed at by freeIdx */
     totalReadCnt = 0;
-    while (len > 0) {
-      readCnt = [self->source readBytes: (self->la + totalReadCnt
-                                          + localFreeIdx)
-                                  count: len];
+    bufferEnd = self->la + localFreeIdx;
+    while (totalReadCnt < len) {
+      readCnt = [self->source readBytes: bufferEnd + totalReadCnt
+                                  count: len - totalReadCnt];
       if (readCnt == NGStreamError) {
         exc = [[self->source lastException] retain];
         break;
       }
 
-      self->freeIdx += readCnt;
       totalReadCnt += readCnt;
-      len -= readCnt;
     }
+    self->freeIdx += totalReadCnt;
 
+    /* 2. if needed fill first bytes of buffer */
     if (!exc && totalReadCnt < max) {
       len = max - totalReadCnt;
       totalReadCnt = 0;
-      while (len > 0) {
+      while (totalReadCnt < len) {
         readCnt = [self->source readBytes: self->la + totalReadCnt
-                                    count: len];
+                                    count: len - totalReadCnt];
         if (readCnt == NGStreamError) {
           exc = [[self->source lastException] retain];
           break;
         }
       
-        self->freeIdx += readCnt;
         totalReadCnt += readCnt;
-        len -= readCnt;
       }
+      self->freeIdx += totalReadCnt;
     }
 
     if (exc) {
