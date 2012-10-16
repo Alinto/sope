@@ -69,7 +69,6 @@ static Class DataStreamClass = Nil;
     for (size = 2; size < _la; size *=2);
     
     self->la = malloc(size * sizeof(unsigned char));
-    // self->flags = calloc(size + 4, sizeof(struct NGByteBufferFlags));
 
     self->bufLen      = size;
     self->sizeLessOne = self->bufLen - 1;
@@ -107,7 +106,6 @@ static Class DataStreamClass = Nil;
 
 - (void)dealloc {
   if (self->la) free(self->la);
-  // if (self->flags) free(self->flags);
   [super dealloc];
 }
 
