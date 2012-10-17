@@ -51,6 +51,10 @@ struct NGByteBufferLA;
   unsigned freeIdx; /* first byte index that has not been fetched */
   unsigned EOFIdx; /* max byte index ever + 1 */
   unsigned sizeLessOne;
+
+  int (*laImpl)(id, SEL, unsigned);
+  int (*sourceReadByte)(id, SEL);
+  int (*sourceReadBytes)(id, SEL, void *, unsigned);
 }
 
 /*
