@@ -188,10 +188,6 @@ static size_t readAllFromSource(NGByteBuffer *self,
   if (self->wasEOF && self->headIdx == self->EOFIdx)
     [NGEndOfStreamException raiseWithStream:self->source];
 
-  if (_len == 1111097) {
-    printf ("coucou\n");
-  }
-
   totalReadCnt = readAllFromBuffer(self, _buf, _len);
   self->headIdx += totalReadCnt;
   if (totalReadCnt < _len) {
