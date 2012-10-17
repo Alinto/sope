@@ -57,17 +57,16 @@
 
 @implementation NGImap4ResponseParser
 
-#define __la(__SELF__, __PEEKPOS) \
-  ((__SELF__->la == NULL) \
-    ? [__SELF__->buffer la:__PEEKPOS]\
-    : __SELF__->la(__SELF__->buffer, @selector(la:), __PEEKPOS))
-
 static __inline__ int _la(NGImap4ResponseParser *self, unsigned _laCnt) {
-  register unsigned char c = __la(self, _laCnt);
-  return (c == '\r')
-    ? _la(self, _laCnt + 1)
-    : c;
+  register unsigned char c;
+  register unsigned pos = _laCnt;
+
+  while ((c = self->la(self->buffer, @selector(la:), pos)) == '\r')
+    pos++;
+
+  return c;
 }
+
 static __inline__ BOOL _matchesString(NGImap4ResponseParser *self, 
 				      const char *s)
 {
@@ -167,7 +166,7 @@ static NSNull           *null   = nil;
   
   if (Imap4MMDataBoundary < 10)
     /* Note: this should be larger than a usual header size! */
-    Imap4MMDataBoundary = 2 * LaSize;
+    Imap4MMDataBoundary = 1 << 20;
   
   StrClass  = [NSString class];
   NumClass  = [NSNumber class];
@@ -195,13 +194,11 @@ static NSNull           *null   = nil;
     id s;
     
     s = [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource:_stream];
-    self->buffer = [NGByteBuffer alloc];
-    self->buffer = [self->buffer initWithSource:s la:LaSize];
+    self->buffer = [[NGByteBuffer alloc] initWithSource:s la:LaSize];
     [s release];
     
-    if ([self->buffer respondsToSelector:@selector(methodForSelector:)])
-      self->la = (int(*)(id, SEL, unsigned))
-        [self->buffer methodForSelector:@selector(la:)];
+    self->la = (int(*)(id, SEL, unsigned))
+      [self->buffer methodForSelector:@selector(la:)];
     
     self->debug = debugOn;
   }
@@ -337,17 +334,41 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
     return;
 }
 
+static NSUInteger _removeCRLF(unsigned char *buffer, size_t len) {
+  NSUInteger offset;
+  register size_t new_pos, last_pos;
+  unsigned char *chr_ptr;
+
+  new_pos = 0;
+  offset = 0;
+  chr_ptr = memchr(buffer, '\r', len);
+  while (chr_ptr) {
+    last_pos = new_pos;
+    new_pos = (chr_ptr - buffer);
+    if (last_pos) {
+      memmove(buffer + last_pos - offset, buffer + last_pos + 1,
+              (new_pos - last_pos -1));
+    }
+    offset++;
+    chr_ptr = memchr(chr_ptr + 1, '\r', len - new_pos);
+  }
+  if (new_pos > 0) {
+    last_pos = new_pos;
+    memmove(buffer + last_pos - offset, buffer + last_pos + 1, len - last_pos - 1);
+  }
+
+  return offset;
+}
+
 - (NSData *)_parseDataToFile:(unsigned)_size {
   // TODO: move to own method
   // TODO: do not use NGFileStream but just fopen/fwrite
   static NSProcessInfo *Pi = nil;
   NGFileStream  *stream;
   NSData        *result;
-  unsigned char buf[LaSize + 2];
-  unsigned char tmpBuf[LaSize + 2];
-  unsigned      wasRead = 0;
+  unsigned char buf[LaSize + 1];
+  unsigned      remaining;
   NSString      *path;
-  signed char   lastChar; // must be signed
       
   if (debugDataOn) [self logWithFormat:@"  using memory mapped data  ..."];
       
@@ -366,44 +387,19 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
     [self setLastException:[e autorelease]];
     return nil;
   }
-      
-  lastChar = -1;
-  while (wasRead < _size) {
-    unsigned readCnt, bufCnt, tmpSize, cnt, tmpBufCnt;
 
-    bufCnt = 0;
-        
-    if (lastChar != -1) {
-      buf[bufCnt++] = lastChar;
-      lastChar = -1;
-    }
-        
-    [self->buffer la:(_size - wasRead <  LaSize) 
-	 ? (_size - wasRead)
-	 : LaSize];
-        
-    readCnt = [self->buffer readBytes:buf+bufCnt count:_size - wasRead];
-        
-    wasRead+=readCnt;
-    bufCnt +=readCnt;
+  remaining = _size;
+  buf[LaSize] = '\0';
+  while (remaining > 0) {
+    unsigned readCnt;
+    NSUInteger offset;
 
-    tmpSize   = bufCnt - 1;
-    cnt       = 0;
-    tmpBufCnt = 0;
-        
-    while (cnt < tmpSize) {
-      if ((buf[cnt] == '\r') && (buf[cnt+1] == '\n')) {
-	cnt++;
-      }
-      tmpBuf[tmpBufCnt++] = buf[cnt++];
-    }
-    if (cnt < bufCnt) {
-      lastChar = buf[cnt];
-    }
-    [stream writeBytes:tmpBuf count:tmpBufCnt];
+    readCnt = [self->buffer readBytes:buf count:(remaining < LaSize) ? remaining : LaSize];
+    offset = _removeCRLF(buf, readCnt);
+    remaining -= readCnt;
+    
+    [stream writeBytes:buf count:readCnt-offset];
   }
-  if (lastChar != -1)
-    [stream writeBytes:&lastChar count:1];
   
   [stream close];
   [stream release]; stream = nil;
@@ -414,34 +410,23 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
 }
 - (NSData *)_parseDataIntoRAM:(unsigned)_size {
   /* parses data into a RAM buffer (NSData) */
-  unsigned char *buf;
-  register unsigned char firstChar, nextChar;
-  NSUInteger wasRead, cnt, offset;
+  register unsigned char *buf;
+  // register unsigned char firstChar, nextChar;
+  NSUInteger wasRead, offset;
   NSData *result;
 
   buf = malloc((_size + 1) * sizeof(char));
 
   wasRead = 0;
   while (wasRead < _size) {
-    [self->buffer la:(_size - wasRead <  LaSize) ? (_size - wasRead) : LaSize];
+    self->la(self->buffer, @selector (la:), (_size - wasRead <  LaSize) ? (_size - wasRead) : LaSize);
     wasRead += [self->buffer readBytes:(buf + wasRead) count:(_size-wasRead)];
   }
   *(buf + _size) = '\0';
  
   /* normalize response  \r\n -> \n */
 
-  offset = 0;
-  firstChar = buf[0];
-  for (cnt = 0; cnt < wasRead; cnt++) {
-    nextChar = buf[cnt + 1];
-    if ((firstChar == '\r') && (nextChar == '\n'))
-      offset++; /* skip \r */
-    else if (offset > 0) {
-      buf[cnt-offset] = firstChar;
-    }
-    firstChar = nextChar;
-  }
-
+  offset = _removeCRLF(buf, wasRead);
   result = [DataClass dataWithBytesNoCopy:buf
                       length:wasRead-offset
                       freeWhenDone:YES];
@@ -2687,9 +2672,11 @@ static __inline__ void _consume(NGImap4ResponseParser *self, unsigned _cnt) {
 
   if (_cnt == 0)
     return;
-  
-  _cnt +=  (__la(self, _cnt - 1) == '\r') ? 1 : 0;
-  
+
+  if (self->la(self->buffer, @selector(la:), _cnt - 1) == '\r') {
+    _cnt++;
+  }
+
   if (self->debug) {
     unsigned cnt;
     
