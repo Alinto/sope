@@ -23,7 +23,6 @@ endif
 
 libNGExtensions_LIBRARIES_DEPEND_UPON += \
 	-lEOControl -lDOM -lSaxObjC \
-	-lobjc \
 	-lz
 
 NGExtensions_LIBRARIES_DEPEND_UPON += \
