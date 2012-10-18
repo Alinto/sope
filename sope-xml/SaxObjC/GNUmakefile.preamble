@@ -67,3 +67,5 @@ ifeq ($(FOUNDATION_LIB),nx)
 saxxml_LDFLAGS += -framework Foundation
 xmln_LDFLAGS   += -framework Foundation
 endif
+
+libSaxObjC_LIBRARIES_DEPEND_UPON += -lgnustep-base -lobjc

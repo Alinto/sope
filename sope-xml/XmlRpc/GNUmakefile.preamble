@@ -27,7 +27,7 @@ XmlRpc_HEADER_FILES = $(libXmlRpc_HEADER_FILES)
 XmlRpc_OBJC_FILES   = $(libXmlRpc_OBJC_FILES)
 
 
-libXmlRpc_LIBRARIES_DEPEND_UPON += -lSaxObjC -lDOM
+libXmlRpc_LIBRARIES_DEPEND_UPON += -lSaxObjC -lgnustep-base -lobjc
 
 ifneq ($(GNUSTEP_BUILD_DIR),)
 libXmlRpc_LIB_DIRS += \

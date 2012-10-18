@@ -41,16 +41,15 @@ endif
 
 libWEExtensions_LIBRARIES_DEPEND_UPON += \
 	-lNGObjWeb	\
-	-lNGMime	\
-	-lNGStreams -lNGExtensions -lEOControl \
-	-lXmlRpc -lDOM -lSaxObjC
+	-lNGExtensions -lEOControl \
+	-lgnustep-base -lobjc -lm
 
 ifeq ($(frameworks),yes)
 WEExtensions_LIBRARIES_DEPEND_UPON += \
 	-framework NGObjWeb	\
 	-framework NGMime -framework NGMail \
 	-framework NGStreams -framework NGExtensions -framework EOControl \
-	-framework XmlRpc -framework DOM -framework SaxObjC
+	-framework DOM -framework SaxObjC
 endif
 
 
@@ -64,7 +63,6 @@ DEP_DIRS = \
 	$(SOPE_ROOT)/sope-core/NGExtensions	\
 	$(SOPE_ROOT)/sope-core/EOControl	\
 	$(SOPE_ROOT)/sope-xml/DOM		\
-	$(SOPE_ROOT)/sope-xml/XmlRpc		\
 	$(SOPE_ROOT)/sope-xml/SaxObjC
 
 ifneq ($(frameworks),yes)
@@ -92,7 +90,7 @@ WEExtensions_BUNDLE_LIBS   += \
 	-lNGObjWeb	\
 	-lNGMime	\
 	-lNGStreams -lNGExtensions -lEOControl \
-	-lXmlRpc -lDOM -lSaxObjC
+	-lDOM -lSaxObjC
 WEExtensions_WOBUNDLE_LIBS += $(WEExtensions_BUNDLE_LIBS)
 
 ifneq ($(GNUSTEP_BUILD_DIR),)
