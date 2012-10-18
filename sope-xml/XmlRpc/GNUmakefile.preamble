@@ -11,9 +11,6 @@ XmlRpc_INTERFACE_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION)
 XmlRpc_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 
 
-# disable optimization for exception handlers
-NSObject+XmlRpc.m_FILE_FILTER_OUT_FLAGS = -O%
-
 ADDITIONAL_CPPFLAGS += \
 	-O2 \
         -Wall -DCOMPILE_FOR_GSTEP_MAKE=1        \

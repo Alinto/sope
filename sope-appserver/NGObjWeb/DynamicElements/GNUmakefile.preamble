@@ -5,12 +5,6 @@ ADDITIONAL_CPPFLAGS += -pipe
 # -DPROFILE_CLUSTERS=1
 
 
-# disable optimization for exception handlers
-SaxDefaultHandler.m_FILE_FILTER_OUT_FLAGS = -O%
-WOCompoundElement.m_FILE_FILTER_OUT_FLAGS = -O%
-WOImage.m_FILE_FILTER_OUT_FLAGS           = -O%
-
-
 ADDITIONAL_CPPFLAGS += -pipe -Wall -funsigned-char -O2
 ADDITIONAL_CPPFLAGS += -DCOMPILING_NGOBJWEB=1
 
