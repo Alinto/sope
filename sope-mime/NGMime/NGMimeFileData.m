@@ -119,7 +119,7 @@ static unsigned      tmpmask  = 0600;
   return [[self _data] bytes];
 }
 
-- (unsigned int)length {
+- (NSUInteger)length {
   if (self->length == -1) {
     self->length = [[[[NSFileManager defaultManager]
                                      fileAttributesAtPath:self->path
