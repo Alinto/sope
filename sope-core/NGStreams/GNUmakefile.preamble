@@ -70,12 +70,3 @@ libNGStreams_PREBIND_ADDR="0xC1400000"
 libNGStreams_LDFLAGS += -seg1addr $(libNGStreams_PREBIND_ADDR)
 NGStreams_LDFLAGS += -seg1addr $(libNGStreams_PREBIND_ADDR)
 endif
-
-# Windows
-
-ifeq ($(GNUSTEP_TARGET_OS),mingw32)
-libNGStreams_LIBRARIES_DEPEND_UPON += -lFoundation -lobjc
-endif
-ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
-libNGStreams_LIBRARIES_DEPEND_UPON += -lFoundation -lobjc
-endif

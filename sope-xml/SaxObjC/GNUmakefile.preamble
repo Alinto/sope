@@ -67,13 +67,3 @@ ifeq ($(FOUNDATION_LIB),nx)
 saxxml_LDFLAGS += -framework Foundation
 xmln_LDFLAGS   += -framework Foundation
 endif
-
-# Windows
-
-ifeq ($(GNUSTEP_TARGET_OS),mingw32)
-libSaxObjC_LIBRARIES_DEPEND_UPON += -lobjc
-endif
-
-ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
-libSaxObjC_LIBRARIES_DEPEND_UPON += -lobjc
-endif

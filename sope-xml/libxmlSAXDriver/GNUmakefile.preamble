@@ -43,12 +43,6 @@ endif
 
 # platform specific options
 
-ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
-libxmlSAXDriver_BUNDLE_LIBS += \
-	-lz \
-	-lFoundation -lobjc
-endif
-
 ifeq ($(GNUSTEP_TARGET_OS),darwin6)
 ADDITIONAL_LIB_DIRS += -L/sw/lib
 endif

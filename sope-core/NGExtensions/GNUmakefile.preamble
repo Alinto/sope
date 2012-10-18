@@ -63,13 +63,6 @@ endif
 
 # platform specific settings
 
-ifeq ($(GNUSTEP_TARGET_OS),mingw32)
-libNGExtensions_LIBRARIES_DEPEND_UPON += -lFoundation -lobjc
-endif
-ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
-libNGExtensions_LIBRARIES_DEPEND_UPON += -lFoundation -lobjc
-endif
-
 ifeq ($(GNUSTEP_HOST_OS),rhapsody5.5)
 #libNGExtensions_LIBRARIES_DEPEND_UPON += -lFoundationExt
 endif

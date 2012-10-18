@@ -60,9 +60,3 @@ ifeq ($(FOUNDATION_LIB),nx)
 domxml_LDFLAGS += -framework Foundation
 testqp_LDFLAGS += -framework Foundation
 endif
-
-# Windows
-
-ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
-libDOM_LIBRARIES_DEPEND_UPON += -lFoundation -lobjc
-endif

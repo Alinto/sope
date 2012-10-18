@@ -26,12 +26,3 @@ ifeq ($(FOUNDATION_LIB),apple)
 libEOControl_PREBIND_ADDR="0xC1000000"
 libEOControl_LDFLAGS += -seg1addr $(libEOControl_PREBIND_ADDR)
 endif
-
-# Windows
-
-ifeq ($(GNUSTEP_TARGET_OS),mingw32)
-libEOControl_LIBRARIES_DEPEND_UPON += -lobjc
-endif
-ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
-libEOControl_LIBRARIES_DEPEND_UPON += -lobjc
-endif

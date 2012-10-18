@@ -48,12 +48,3 @@ endif
 
 ADDITIONAL_LDFLAGS += -framework CoreData
 endif
-
-# Windows
-
-ifeq ($(GNUSTEP_TARGET_OS),mingw32)
-libEOCoreData_LIBRARIES_DEPEND_UPON += -lobjc
-endif
-ifeq ($(GNUSTEP_TARGET_OS),cygwin32)
-libEOCoreData_LIBRARIES_DEPEND_UPON += -lobjc
-endif
