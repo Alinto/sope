@@ -26,10 +26,6 @@
 
 @implementation NGMimeHeaderFieldGeneratorSet
 
-+ (int)version {
-  return 2;
-}
-
 static NGMimeHeaderFieldGeneratorSet *rfc822Set = nil;
 
 + (id)headerFieldGenerator {

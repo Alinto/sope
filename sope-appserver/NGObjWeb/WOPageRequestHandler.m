@@ -50,14 +50,8 @@ static BOOL  debugOn             = NO;
 
 @implementation WOPageRequestHandler
 
-+ (int)version {
-  return [super version] + 0 /* 2 */;
-}
 + (void)initialize {
   NSUserDefaults *ud;
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
 
   NSDateClass = [NSDate class];
   ud = [NSUserDefaults standardUserDefaults];

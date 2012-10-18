@@ -29,9 +29,6 @@
 static BOOL StripLeadingSpaces = NO;
 static BOOL MimeLogEnabled     = NO;
 
-+ (int)version {
-  return 2;
-}
 + (void)initialize {
   StripLeadingSpaces = [self doesStripLeadingSpaces];
   MimeLogEnabled     = [self isMIMELogEnabled];

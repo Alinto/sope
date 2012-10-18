@@ -27,10 +27,6 @@
 
 @implementation NGPop3Client
 
-+ (int)version {
-  return 2;
-}
-
 + (id)pop3Client {
   NGActiveSocket *s;
   

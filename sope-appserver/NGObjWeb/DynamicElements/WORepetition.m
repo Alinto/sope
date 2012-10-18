@@ -137,14 +137,7 @@ static inline Class _classForConfig(NSDictionary *_config) {
 
 @implementation WORepetition
 
-+ (int)version {
-  return [super version] + 1 /* v3 */;
-}
 + (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-
   if (debugTakeValues == -1) {
     debugTakeValues = 
       [[NSUserDefaults standardUserDefaults] boolForKey:@"WODebugTakeValues"]

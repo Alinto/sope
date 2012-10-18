@@ -28,15 +28,6 @@
 
 @implementation WOProxyRequestHandler
 
-+ (int)version {
-  return [super version] + 0 /* v2 */;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (id)initWithHost:(NSString *)_hostName onPort:(unsigned int)_port {
   if ((self = [super init])) {
     self->client = 

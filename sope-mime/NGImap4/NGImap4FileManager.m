@@ -44,15 +44,8 @@
 
 static BOOL debugOn = NO;
 
-+ (int)version {
-  return [super version] + 0 /* v0 */;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  
-  NSAssert2([super version] == 0,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
   
   if ((debugOn = [ud boolForKey:@"NGImap4FileManagerDebugEnabled"]))
     NSLog(@"NGImap4FileManager debugging is enabled.");

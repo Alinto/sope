@@ -45,10 +45,6 @@
 
 static NSString *prefix = @"0xHIGHFLYx";
 
-+ (int)version {
-  return 1;
-}
-
 /* HTTP basic authentication */
 
 - (NSString *)cookieNameInContext:(WOContext *)_ctx {

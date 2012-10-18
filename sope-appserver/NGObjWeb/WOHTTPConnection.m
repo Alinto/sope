@@ -66,10 +66,6 @@ static NSArray  *noProxy     = nil;
 static BOOL doDebug   = NO;
 static BOOL logStream = NO;
 
-+ (int)version {
-  return 3;
-}
-
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   static BOOL didInit = NO;

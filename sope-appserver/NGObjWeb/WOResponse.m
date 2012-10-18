@@ -34,18 +34,12 @@ static unsigned int  OWMinimumZipSize  = 1024;
 static BOOL          dontZip  = NO;
 static BOOL          debugZip = NO;
 
-+ (int)version {
-  return [super version] + 1 /* v6 */;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   static BOOL didInit = NO;
   if (didInit) return;
   didInit = YES;
-  NSAssert2([super version] == 5,
-	    @"invalid superclass (%@) version %i !",
-	    NSStringFromClass([self superclass]), [super version]);
-  
+
   dontZip  = [ud boolForKey:@"WODontZipResponse"];
   debugZip = [ud boolForKey:@"WODebugZipResponse"];
 }

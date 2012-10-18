@@ -24,10 +24,6 @@
 
 @implementation WOTemplateBuilder
 
-+ (int)version {
-  return 2;
-}
-
 /* building */
 
 - (WOTemplate *)buildTemplateAtURL:(NSURL *)_url {

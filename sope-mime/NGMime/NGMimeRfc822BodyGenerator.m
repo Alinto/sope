@@ -26,15 +26,6 @@
 
 @implementation NGMimeRfc822BodyGenerator
 
-+ (int)version {
-  return 2;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (id<NGMimePartGenerator>)generatorForPart:(id<NGMimePart>)_part {
   id g;
   

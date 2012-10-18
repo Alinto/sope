@@ -27,17 +27,9 @@
 
 static BOOL debugActionExecute = NO;
 
-+ (int)version {
-  return [super version] + 0 /* v2 */;
-}
-
 + (void)initialize {
   NSUserDefaults *ud;
     
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-  
   ud = [NSUserDefaults standardUserDefaults];
   debugActionExecute = [ud boolForKey:@"WODebugActions"];
 }

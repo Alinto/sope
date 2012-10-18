@@ -49,10 +49,6 @@ static Class WOAppClass = Nil;
 
 @implementation WOContext
 
-+ (int)version {
-  return 9;
-}
-
 static Class    WOContextClass       = Nil;
 static Class    MutableStrClass      = Nil;
 static int      contextCount         = 0;

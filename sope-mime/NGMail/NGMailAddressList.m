@@ -24,10 +24,6 @@
 
 @implementation NGMailAddressList
 
-+ (int)version {
-  return 2;
-}
-
 + (id)mailAddressListWithAddresses:(NSSet *)_addresses
   groupName:(NSString *)_groupName {
   return [[[NGMailAddressList alloc] initWithAddresses:_addresses

@@ -67,10 +67,6 @@ static BOOL  abortOnAwakeComponentInCtxDealloc = NO;
 static BOOL  abortOnMissingCtx                 = NO;
 static BOOL  wakeupPageOnCreation              = NO;
 
-+ (int)version {
-  // TODO: is really v4 for baseURL/cycleContext ivar changes
-  return [super version] + 0 /* v2 */;
-}
 + (void)initialize {
   NSUserDefaults  *ud;
   NGLoggerManager *lm;
@@ -78,10 +74,6 @@ static BOOL  wakeupPageOnCreation              = NO;
 
   if (didInit) return;
   didInit = YES;
-  
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
 
   ud = [NSUserDefaults standardUserDefaults];
   lm = [NGLoggerManager defaultLoggerManager];

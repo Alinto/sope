@@ -31,9 +31,6 @@
 
 static NGInternetSocketDomain *domain = nil;
 
-+ (int)version {
-  return 1;
-}
 + (void)initialize {
   if (domain == nil) domain = [[NGInternetSocketDomain alloc] init];
 }

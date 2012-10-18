@@ -26,10 +26,6 @@
 
 @implementation NGMimeBodyParser
 
-+ (int)version {
-  return 2;
-}
-
 - (id)parseBodyOfPart:(id<NGMimePart>)_part
   data:(NSData *)_data
   delegate:(id)_d
@@ -43,15 +39,9 @@
 
 static int UseFoundationStringEncodingForMimeText = -1;
 
-+ (int)version {
-  return 2;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
   if (UseFoundationStringEncodingForMimeText == -1) {
     UseFoundationStringEncodingForMimeText =
       [ud boolForKey:@"UseFoundationStringEncodingForMimeText"]?1:0;

@@ -25,15 +25,6 @@
 
 @implementation NGMimeMessageTextBodyGenerator
 
-+ (int)version {
-  return 2;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (NSData *)encodeData:(NSData *)_data
   forPart:(id<NGMimePart>)_part
   additionalHeaders:(NGMutableHashMap *)_addHeaders

@@ -29,16 +29,9 @@
 
 static BOOL debugOn = NO;
 
-+ (int)version {
-  return 2;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
 
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-  
   debugOn = [ud boolForKey:@"NGMimeGeneratorDebugEnabled"];
   if (debugOn)
     NSLog(@"WARNING[%@]: NGMimeGeneratorDebugEnabled is enabled!", self);

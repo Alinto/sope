@@ -77,10 +77,6 @@
 
 @implementation WOResourceManager
 
-+ (int)version {
-  return 4;
-}
-
 static Class    UrlClass             = Nil;
 static NSString *resourcePrefix      = @"";
 static NSString *rapidTurnAroundPath = nil;

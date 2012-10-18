@@ -79,9 +79,6 @@ static BOOL     debugOn                      = NO;
   return perfLogger != nil ? YES : NO;
 }
 
-+ (int)version {
-  return [super version] + 1 /* v2 */;
-}
 + (void)initialize {
   NSUserDefaults  *ud;
   NGLoggerManager *lm;
@@ -89,10 +86,6 @@ static BOOL     debugOn                      = NO;
 
   if (didInit) return;
   didInit = YES;
-
-  NSAssert2([super version] == 1,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
 
   ud = [NSUserDefaults standardUserDefaults];
   lm = [NGLoggerManager defaultLoggerManager];

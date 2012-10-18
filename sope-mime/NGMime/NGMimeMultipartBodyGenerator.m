@@ -34,16 +34,9 @@ static Class NGMimeFileDataClass   = Nil;
 static Class NGMimeJoinedDataClass = Nil;
 static BOOL  debugOn = NO;
 
-+ (int)version {
-  return 2;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-
   NGMimeFileDataClass   = [NGMimeFileData class];
   NGMimeJoinedDataClass = [NGMimeJoinedData class];
   

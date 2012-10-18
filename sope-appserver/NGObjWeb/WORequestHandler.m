@@ -51,9 +51,6 @@ static Class    NSDateClass        = Nil;
 static NGLogger *logger            = nil;
 static NGLogger *perfLogger        = nil;
 
-+ (int)version {
-  return 2;
-}
 + (void)initialize {
   NSUserDefaults  *ud;
   NGLoggerManager *lm;
@@ -62,7 +59,6 @@ static NGLogger *perfLogger        = nil;
   if (didInit)
     return;
   didInit = YES;
-
   NSDateClass = [NSDate class];
   
   lm         = [NGLoggerManager defaultLoggerManager];

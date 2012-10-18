@@ -35,9 +35,6 @@ static BOOL  heavyDebugOn   = NO;
 static int   fileIOBoundary = 0;
 static int   maxUploadSize  = 0;
 
-+ (int)version {
-  return 1;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   

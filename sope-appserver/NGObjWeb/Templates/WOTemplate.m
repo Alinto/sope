@@ -24,15 +24,6 @@
 
 @implementation WOTemplate
 
-+ (int)version {
-  return [super version] + 1 /* v3 */;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (id)initWithURL:(NSURL *)_url rootElement:(WOElement *)_element {
   if ((self = [super init])) {
     self->url         = [_url     copy];

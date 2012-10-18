@@ -48,15 +48,6 @@
 
 @implementation JSImageFlyover
 
-+ (int)version {
-  return [super version] + 0 /* v2 */;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-	    @"invalid superclass (%@) version %i !",
-	    NSStringFromClass([self superclass]), [super version]);
-}
-
 - (NSDictionary *)extractQueryParameters: (NSDictionary *)_set {
   NSMutableDictionary *paras = nil;
   NSMutableArray      *paraKeys = nil;

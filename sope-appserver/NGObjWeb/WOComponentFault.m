@@ -28,10 +28,6 @@
 
 @implementation WOComponentFault
 
-+ (int)version {
-  return 2;
-}
-
 - (id)initWithResourceManager:(WOResourceManager *)_rm
   pageName:(NSString *)_name
   languages:(NSArray *)_langs

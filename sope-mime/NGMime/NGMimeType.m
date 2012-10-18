@@ -39,10 +39,6 @@ static BOOL _parseMimeType(id self, NSString *_str, NSString **type,
 
 @implementation NGMimeType
 
-+ (int)version {
-  return 2;
-}
-
 static NSMutableDictionary *typeToClass = nil;
 
 static inline Class

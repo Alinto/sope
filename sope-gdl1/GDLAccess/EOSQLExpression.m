@@ -154,10 +154,6 @@ NSString *EOBindVariableValueKey       = @"value";
 
 @implementation EOSQLExpression
 
-+ (int)version {
-  return 1;
-}
-
 + (void)initialize {
   if (null == nil) null = [[NSNull null] retain];
 }

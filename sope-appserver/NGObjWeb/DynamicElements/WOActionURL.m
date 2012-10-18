@@ -57,15 +57,6 @@
 
 @implementation WOActionURL
 
-+ (int)version {
-  return 1;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 + (BOOL)containsLinkInAssociations:(NSDictionary *)_assocs {
   if (_assocs == nil) return NO;
   if ([_assocs objectForKey:@"href"])             return YES;

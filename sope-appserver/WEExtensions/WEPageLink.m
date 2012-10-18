@@ -54,15 +54,6 @@
 
 @implementation WEPageLink
 
-+ (int)version {
-  return [super version] + 0 /* v2 */;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (id)initWithName:(NSString *)_name
   associations:(NSDictionary *)_config
   template:(WOElement *)_t

@@ -100,9 +100,6 @@ static NGLogger *debugLogger       = nil;
 static NGLogger *perfLogger        = nil;
 static NGLogger *transActionLogger = nil;
 
-+ (int)version {
-  return 2;
-}
 + (void)initialize {
   NSUserDefaults  *ud;
   NGLoggerManager *lm;

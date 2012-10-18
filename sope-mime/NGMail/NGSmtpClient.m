@@ -106,10 +106,6 @@
 
 @implementation NGSmtpClient
 
-+ (int)version {
-  return 2;
-}
-
 + (id)smtpClient {
   NGActiveSocket *s;
   s = [NGActiveSocket socketInDomain:[NGInternetSocketDomain domain]];

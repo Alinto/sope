@@ -131,9 +131,6 @@ static NSMutableDictionary *namespaces;
   return self->useTLS;
 }
 
-+ (int)version {
-  return 2;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   static BOOL didInit = NO;

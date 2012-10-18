@@ -60,10 +60,6 @@ NGObjWeb_DECLARE
 
 @implementation WOSession
 
-+ (int)version {
-  return 5;
-}
-
 static int   profileComponents = -1;
 static int   logPageCache      = -1;
 static Class NSDateClass = Nil;

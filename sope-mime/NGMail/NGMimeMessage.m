@@ -27,19 +27,15 @@
 static NGMimeType *defaultTextType = nil;
 static NGMimeType *defaultDataType = nil;
 
-+ (int)version {
-  return 2;
-}
-
 + (void)initialize {
   static BOOL isInitialized = NO;
   if (!isInitialized) {
     isInitialized = YES;
     
-    defaultTextType = 
-      [[NGMimeType mimeType:@"text/plain; charset=us-ascii"] retain];
-    defaultDataType = 
-      [[NGMimeType mimeType:@"application/octet-stream"] retain];
+  defaultTextType = 
+    [[NGMimeType mimeType:@"text/plain; charset=us-ascii"] retain];
+  defaultDataType = 
+    [[NGMimeType mimeType:@"application/octet-stream"] retain];
   }
 }
   

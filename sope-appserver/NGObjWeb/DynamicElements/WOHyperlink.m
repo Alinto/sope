@@ -65,15 +65,6 @@
 
 @implementation WOHyperlink
 
-+ (int)version {
-  return [super version] + 2 /* v4 */;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 + (id)allocWithZone:(NSZone *)zone {
   static Class WOHyperlinkClass = Nil;
   static _WOTemporaryHyperlink *temporaryHyperlink = nil;

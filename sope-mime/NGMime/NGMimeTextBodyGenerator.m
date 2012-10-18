@@ -27,15 +27,6 @@
 
 @implementation NGMimeTextBodyGenerator
 
-+ (int)version {
-  return 2;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (NSStringEncoding)_encodingFromContentType:(NGMimeType *)_type {
   NSStringEncoding encoding;
   NSString *charset;

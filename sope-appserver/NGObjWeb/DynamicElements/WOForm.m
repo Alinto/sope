@@ -31,10 +31,6 @@
 
 static int debugTakeValues = -1;
 
-+ (int)version {
-  return 5;
-}
-
 - (id)initWithName:(NSString *)_name
   associations:(NSDictionary *)_config
   template:(WOElement *)_c

@@ -615,7 +615,7 @@ static NSString *NGEnvVarPathSeparator = @":";
 
 // dependencies
 
-+ (NSInteger)version {
++ (int)version {
   return 2;
 }
 

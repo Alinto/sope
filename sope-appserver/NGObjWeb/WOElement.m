@@ -26,10 +26,6 @@
 
 @implementation WOElement
 
-+ (int)version {
-  return 2;
-}
-
 static id numStrings[100];
 
 + (void)initialize {

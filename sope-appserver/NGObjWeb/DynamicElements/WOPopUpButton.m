@@ -68,15 +68,7 @@ static Class NSDateClass = Nil;
 static NSNumber *yesNum = nil;
 static BOOL debugPopUp = NO;
 
-+ (int)version {
-  return [super version] + 0 /* v2 */;
-}
-
 + (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-  
   if (yesNum == nil) yesNum = [[NSNumber numberWithBool:YES] retain];
 }
 

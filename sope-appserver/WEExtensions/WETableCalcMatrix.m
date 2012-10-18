@@ -461,10 +461,6 @@ static NSNull *null = nil;
 
 @implementation WETableCalcMatrix
 
-+ (int)version {
-  return 0;
-}
-
 static inline MatrixEntry *entryAt(WETableCalcMatrix *self, unsigned x, 
 				   unsigned y) {
   return self->matrix +

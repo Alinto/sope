@@ -98,15 +98,8 @@ static NSNotificationCenter *getNC(void ) {
 }
 
 + (void)initialize {
-  NSAssert2([super version] == 1,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-
   null = [[EONull null] retain];
   NSCalendarDateClass = [NSCalendarDate class];
-}
-+ (int)version {
-  return [super version] + 1; /* v2 */
 }
 
 - (id)initWithAdaptorName:(NSString *)_adName

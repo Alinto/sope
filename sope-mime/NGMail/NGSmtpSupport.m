@@ -117,10 +117,6 @@ NSString *NGSmtpDescriptionForReplyCode(NGSmtpReplyCode _code) {
 
 @implementation NGSmtpResponse
 
-+ (int)version {
-  return 2;
-}
-
 - (id)initWithCode:(NGSmtpReplyCode)_code text:(NSString *)_text {
   if ((self = [super init])) {
     self->code = _code;

@@ -25,10 +25,6 @@
 
 @implementation NGMimeMultipartBody
 
-+ (int)version {
-  return 2;
-}
-
 - (id)initWithPart:(id<NGMimePart>)_part {
   if ((self = [super init])) {
     self->flags.isParsed = YES;

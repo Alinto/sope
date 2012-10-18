@@ -26,10 +26,6 @@
 
 @implementation NGMimeContentLengthHeaderFieldParser
 
-+ (int)version {
-  return 2;
-}
-
 - (id)parseValue:(id)_data ofHeaderField:(NSString *)_field {
   const char *buf, *ptr;
     

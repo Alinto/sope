@@ -27,10 +27,6 @@
 
 @implementation NGDataStream
 
-+ (int)version {
-  return [super version] + 2;
-}
-
 + (id)dataStream {
   return [self streamWithData:[NSMutableData dataWithCapacity:1024]];
 }

@@ -55,15 +55,6 @@
 
 static BOOL logExpire = YES;
 
-+ (int)version {
-  return [super version] + 0;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (id)initWithSessionPath:(NSString *)_path {
   NSFileManager *fm;
   BOOL isDir;

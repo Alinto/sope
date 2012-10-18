@@ -28,19 +28,6 @@
 
 @implementation SoComponent
 
-+ (int)version {
-  return [super version] + 0 /* v2 */;
-}
-+ (void)initialize {
-  static BOOL didInit = NO;
-  
-  if (didInit) return;
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-  didInit = YES;
-}
-
 - (void)dealloc {
   [self->soResourceManager release];
   [self->soTemplate        release];

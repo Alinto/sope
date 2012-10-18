@@ -48,7 +48,7 @@ static WOMessageProfileInfo profiletot = { 0, 0, 0, 0, 0 };
 
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  
+   
   if (NSStringClass == Nil)
     NSStringClass = [NSString class];
   
@@ -83,10 +83,6 @@ static __inline__ NSMutableData *_checkBody(WOMessage *self) {
       [self->content methodForSelector:@selector(appendBytes:length:)];
   }
   return self->content;
-}
-
-+ (int)version {
-  return 5;
 }
 
 + (void)setDefaultEncoding:(NSStringEncoding)_encoding {

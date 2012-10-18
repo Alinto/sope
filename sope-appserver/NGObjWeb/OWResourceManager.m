@@ -84,10 +84,6 @@
 
 @implementation OWResourceManager
 
-+ (int)version {
-  return 4;
-}
-
 static NSFileManager *fm                = nil;
 static Class    UrlClass                = Nil;
 static NSString *resourcePrefix         = @"";

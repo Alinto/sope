@@ -29,15 +29,9 @@
 
 static int MimeLogEnabled = -1;
 
-+ (int)version {
-  return [super version] + 0 /* v2 */;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
   MimeLogEnabled = [ud boolForKey:@"MimeLogEnabled"] ? 1 : 0;
 }
 

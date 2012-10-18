@@ -31,10 +31,6 @@
 
 @implementation WOAdaptor
 
-+ (int)version {
-  return 1;
-}
-
 - (id)initWithName:(NSString *)_name arguments:(NSDictionary *)_args
   application:(WOCoreApplication *)_application
 {

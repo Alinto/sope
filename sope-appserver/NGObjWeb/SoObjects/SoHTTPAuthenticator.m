@@ -39,10 +39,6 @@
 
 @implementation SoHTTPAuthenticator
 
-+ (int)version {
-  return 1;
-}
-
 /* HTTP basic authentication */
 
 - (NSString *)authRealm {

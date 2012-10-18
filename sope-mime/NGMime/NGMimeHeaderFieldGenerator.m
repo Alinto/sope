@@ -25,10 +25,6 @@
 
 @implementation NGMimeHeaderFieldGenerator
 
-+ (int)version {
-  return 2;
-}
-
 + (id)headerFieldGenerator {
   return [[[self alloc] init] autorelease];
 }

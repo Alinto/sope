@@ -25,10 +25,6 @@
 
 @implementation EODataSource
 
-+ (int)version {
-  return 1;
-}
-
 /* reflection */
 
 - (EOClassDescription *)classDescriptionForObjects {

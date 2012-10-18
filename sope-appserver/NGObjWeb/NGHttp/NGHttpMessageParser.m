@@ -47,10 +47,6 @@ static inline void NGAddChar(NSMutableData *_data, int c) {
 
 @implementation NGHttpMessageParser
 
-+ (int)version {
-  return [super version] + 0 /* v3 */;
-}
-
 static NGMimeType           *wwwFormUrlEncoded = nil;
 static NGMimeType           *multipartFormData = nil;
 static id<NGMimeBodyParser> wwwFormUrlParser   = nil;
@@ -61,10 +57,6 @@ static id<NGMimeBodyParser> multipartFormDataParser = nil;
   if (!isInitialized) {
     isInitialized = YES;
 
-    NSAssert2([super version] == 3,
-	      @"invalid superclass (%@) version %i !",
-	      NSStringFromClass([self superclass]), [super version]);
-    
     wwwFormUrlEncoded = 
       [[NGMimeType mimeType:@"application/x-www-form-urlencoded"] retain];
     multipartFormData = [[NGMimeType mimeType:@"multipart/form-data"] retain];

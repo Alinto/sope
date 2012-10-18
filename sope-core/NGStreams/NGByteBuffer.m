@@ -38,10 +38,6 @@ static Class DataStreamClass = Nil;
   DataStreamClass   = NSClassFromString(@"NGDataStream");
 }
 
-+ (int)version {
-  return [super version] + 1;
-}
-
 + (id)byteBufferWithSource:(id<NGStream>)_source la:(unsigned)_la {
   if (_source            == nil)            return nil;
   if (*(Class *)_source == DataStreamClass) return _source;

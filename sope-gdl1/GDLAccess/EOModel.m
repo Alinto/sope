@@ -402,10 +402,6 @@ void EOModel_linkCategories(void) {
   return ents;
 }
 
-+ (int)version {
-  return 1;
-}
-
 /* description */
 
 - (NSString *)description {

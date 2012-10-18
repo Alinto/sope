@@ -64,10 +64,6 @@
 static BOOL    isInitialized = NO;
 static WSADATA wsaData;
 
-+ (int)version {
-  return 2;
-}
-
 + (void)initialize {
   if (!isInitialized) {
     isInitialized = YES;

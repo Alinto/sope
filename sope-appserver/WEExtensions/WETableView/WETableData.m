@@ -57,15 +57,6 @@
 
 @implementation WETableData
 
-+ (int)version {
-  return [super version] + 1 /* v3 */;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (id)_initWithName:(NSString *)_name
   associations:(NSDictionary *)_config
   template:(WOElement *)_c

@@ -27,10 +27,6 @@
 
 @implementation NGMBoxReader
 
-+ (int)version {
-  return 2;
-}
-
 static inline int __readByte(NGMBoxReader *self);
 static inline void
 __appendByte(NGMBoxReader *self, NSMutableData *_data, IMP _readBytes, int _c);

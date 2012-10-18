@@ -26,15 +26,6 @@
 
 @implementation SoLookupAssociation
 
-+ (int)version {
-  return [super version] /* v2 */;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 - (id)initWithTraversalPath:(NSArray *)_tp acquire:(BOOL)_ac {
   if ((self = [super init])) {
     self->traversalPath = [_tp copy];

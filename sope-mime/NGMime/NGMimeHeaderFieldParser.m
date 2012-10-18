@@ -45,10 +45,6 @@ static int StripLeadingSpaces = -1;
   return StripLeadingSpaces ? YES : NO;
 }
 
-+ (int)version {
-  return 2;
-}
-
 - (NSString *)removeCommentsFromValue:(NSString *)_rawValue {
   unsigned int len = [_rawValue length];
   unichar      bytes[len + 1];

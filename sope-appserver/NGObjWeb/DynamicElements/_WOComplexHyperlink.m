@@ -97,13 +97,7 @@ static Class NSURLClass = Nil;
 
 @implementation _WOComplexHyperlink
 
-+ (int)version {
-  return [super version] /* v4 */;
-}
 + (void)initialize {
-  NSAssert2([super version] == 4,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
   if (NSURLClass == Nil)
     NSURLClass = [NSURL class];
 }
@@ -407,7 +401,7 @@ static BOOL debugStaticLinks = NO;
   if (hrefValue == nil)
     return NO;
   
-  if ((*(Class *)hrefValue == NSURLClass) ||
+  if ([hrefValue isMemberOfClass:NSURLClass] ||
       [hrefValue isKindOfClass:NSURLClass]) {
     s = [hrefValue stringValueRelativeToURL:base];
   }

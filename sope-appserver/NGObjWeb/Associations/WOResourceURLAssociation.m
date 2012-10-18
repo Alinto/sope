@@ -32,15 +32,8 @@
 
 static BOOL doDebug = NO;
 
-+ (int)version {
-  return [super version] + 0 /* v2 */;
-}
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-  
   doDebug = [ud boolForKey:@"WOResourceURLAssociationDebugEnabled"];
 }
 

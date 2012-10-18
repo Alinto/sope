@@ -43,10 +43,6 @@
 static Class    StrClass = Nil;
 static NSNumber *yesNum  = nil;
 
-+ (int)version {
-  return 2;
-}
-
 + (void)initialize {
   if (yesNum == nil) yesNum = [[NSNumber numberWithBool:YES] retain];
   StrClass = [NSString class];

@@ -61,10 +61,6 @@ static NSArray           *rfc822NameArray  = nil;
 static BOOL              debugFlags        = NO;
 static BOOL              ImapDebugEnabled  = NO;
 
-+ (int)version {
-  return 2;
-}
-
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   static BOOL didInit = NO;

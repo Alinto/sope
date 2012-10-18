@@ -88,15 +88,6 @@
 
 @implementation WOString
 
-+ (int)version {
-  return [super version] + 1 /* v3 */;
-}
-+ (void)initialize {
-  NSAssert2([super version] == 2,
-            @"invalid superclass (%@) version %i !",
-            NSStringFromClass([self superclass]), [super version]);
-}
-
 + (id)allocWithZone:(NSZone *)zone {
   static Class WOStringClass = Nil;
   static _WOTemporaryString *temporaryString = nil;
