@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
+  Copyright (C) 2011 Jeroen Dekkers <jeroen@dekkers.ch>
 
   This file is part of SOPE.
 
@@ -22,12 +23,18 @@
 #define __NGNet_NGActiveSSLSocket_H__
 
 #include <NGStreams/NGActiveSocket.h>
+#include "../config.h"
 
 @interface NGActiveSSLSocket : NGActiveSocket
 {
+#ifdef HAVE_GNUTLS
+  void *cred; /* real type: gnutls_certificate_credentials_t */
+  void *session; /* real type: gnutls_session_t */
+#else
   void *ctx;   /* real type: SSL_CTX */
   void *ssl;   /* real type: SSL */
   void *sbio;  /* real type: BIO (basic input/output) */
+#endif
 }
 
 - (BOOL) startTLS;
