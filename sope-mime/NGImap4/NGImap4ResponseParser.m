@@ -337,24 +337,27 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
 static NSUInteger _removeCRLF(unsigned char *buffer, size_t len) {
   NSUInteger offset;
   register size_t new_pos, last_pos;
-  unsigned char *chr_ptr;
+  unsigned char *chr_ptr, *src_ptr;
 
   new_pos = 0;
   offset = 0;
   chr_ptr = memchr(buffer, '\r', len);
   while (chr_ptr) {
-    last_pos = new_pos;
+    last_pos = new_pos + 1;
     new_pos = (chr_ptr - buffer);
     if (last_pos) {
-      memmove(buffer + last_pos - offset, buffer + last_pos + 1,
-              (new_pos - last_pos -1));
+      src_ptr = buffer + last_pos;
+      memmove(src_ptr - offset, src_ptr, (new_pos - last_pos));
+      offset++;
     }
-    offset++;
-    chr_ptr = memchr(chr_ptr + 1, '\r', len - new_pos);
+    chr_ptr = memchr(chr_ptr + 1, '\r', len - new_pos - 1);
   }
   if (new_pos > 0) {
-    last_pos = new_pos;
-    memmove(buffer + last_pos - offset, buffer + last_pos + 1, len - last_pos - 1);
+    last_pos = new_pos + 1;
+    if (last_pos < len) {
+      src_ptr = buffer + last_pos;
+      memmove(src_ptr - offset, src_ptr, len - last_pos);
+    }
   }
 
   return offset;
