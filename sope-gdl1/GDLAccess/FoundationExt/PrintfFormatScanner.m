@@ -32,12 +32,18 @@
     va_list va;
 
 #ifdef __va_copy
-    // args being NULL breaks heavily on amd64
-    if (args != NULL) {
-        __va_copy(va, args);
-    } else {
-	return format;
-    }
+    // args being NULL breaks heavily on amd64. It shouldn't be
+    // possible to be NULL at all, but we're called with an array as
+    // argument instead of a va_list in EOSQLQualifier and are thus
+    // calling __va_copy on an array, which is something that really
+    // shouldn't be done. Checking whether args is NULL breaks on arm
+    // and alpha however, because a va_list isn't a pointer, so we
+    // don't do the check on arm and alpha.
+#if !defined(__arm__) && !defined(__alpha__)
+    if (!args)
+      return format;
+#endif
+    __va_copy(va, args);
 #else
     va = args;
 #endif
