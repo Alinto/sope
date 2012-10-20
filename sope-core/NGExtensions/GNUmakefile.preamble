@@ -23,7 +23,7 @@ endif
 
 libNGExtensions_LIBRARIES_DEPEND_UPON += \
 	-lEOControl -lDOM -lSaxObjC \
-	-lz
+	-lz -lgnustep-base -lm
 
 NGExtensions_LIBRARIES_DEPEND_UPON += \
 	-framework EOControl \

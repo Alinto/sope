@@ -20,11 +20,8 @@ libWOExtensions_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 # dependencies
 
 libWOExtensions_LIBRARIES_DEPEND_UPON += \
-	-lWEExtensions	\
 	-lNGObjWeb	\
-	-lNGMime	\
-	-lNGStreams -lNGExtensions -lEOControl \
-	-lXmlRpc -lDOM -lSaxObjC
+	-lgnustep-base -lobjc
 
 ifeq ($(frameworks),yes)
 WOExtensions_LIBRARIES_DEPEND_UPON += \
@@ -32,7 +29,7 @@ WOExtensions_LIBRARIES_DEPEND_UPON += \
 	-framework NGObjWeb	\
 	-framework NGMime -framework NGMail \
 	-framework NGStreams -framework NGExtensions -framework EOControl \
-	-framework XmlRpc -framework DOM -framework SaxObjC
+	-framework DOM -framework SaxObjC
 endif
 
 
@@ -48,7 +45,6 @@ DEP_DIRS = \
 	$(SOPE_ROOT)/sope-core/NGExtensions	\
 	$(SOPE_ROOT)/sope-core/EOControl	\
 	$(SOPE_ROOT)/sope-xml/DOM		\
-	$(SOPE_ROOT)/sope-xml/XmlRpc		\
 	$(SOPE_ROOT)/sope-xml/SaxObjC
 
 ifneq ($(frameworks),yes)
@@ -72,11 +68,10 @@ endif
 ifneq ($(frameworks),yes)
 
 WOExtensions_BUNDLE_LIBS += \
-	-lWOExtensions -lWEExtensions \
 	-lNGObjWeb	\
 	-lNGMime	\
 	-lNGStreams -lNGExtensions -lEOControl \
-	-lXmlRpc -lDOM -lSaxObjC
+	-lDOM -lSaxObjC
 WOExtensions_WOBUNDLE_LIBS += $(WOExtensions_BUNDLE_LIBS)
 
 endif

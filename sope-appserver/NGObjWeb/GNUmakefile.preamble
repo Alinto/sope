@@ -38,7 +38,6 @@ DEP_DIRS = \
 	$(SOPE_ROOT)/sope-core/NGExtensions	\
 	$(SOPE_ROOT)/sope-core/EOControl	\
 	$(SOPE_ROOT)/sope-xml/DOM		\
-	$(SOPE_ROOT)/sope-xml/XmlRpc		\
 	$(SOPE_ROOT)/sope-xml/SaxObjC
 
 ifneq ($(frameworks),yes)
@@ -53,12 +52,12 @@ endif
 # dependencies
 
 ifneq ($(frameworks),yes)
-sope-xml-libs  = -lXmlRpc -lDOM -lSaxObjC
+sope-xml-libs  = -lDOM -lSaxObjC
 sope-core-libs = -lNGStreams -lNGExtensions -lEOControl
 sope-mime-libs = -lNGMime
 sope-ngobjweb-libs = -lNGObjWeb
 else
-sope-xml-libs  = -framework XmlRpc -framework DOM -framework SaxObjC
+sope-xml-libs  = -framework DOM -framework SaxObjC
 sope-core-libs = \
   -framework NGStreams -framework NGExtensions -framework EOControl
 sope-mime-libs = -framework NGMime -framework NGMail
@@ -68,7 +67,8 @@ endif
 libNGObjWeb_LIBRARIES_DEPEND_UPON += \
 	$(sope-mime-libs) \
 	$(sope-core-libs) \
-	$(sope-xml-libs)
+	$(sope-xml-libs) \
+	-lgnustep-base -lobjc
 NGObjWeb_LIBRARIES_DEPEND_UPON += \
 	$(sope-mime-libs) \
 	$(sope-core-libs)\
@@ -89,16 +89,6 @@ SoCore_BUNDLE_LIBS += \
 	$(sope-core-libs)	\
 	$(sope-xml-libs)
 
-
-# platform specific settings
-
-ifneq ($(findstring openbsd, $(GNUSTEP_TARGET_OS)), openbsd)
-# OpenBSD does not require libcrypt
-ifneq ($(findstring darwin, $(GNUSTEP_TARGET_OS)), darwin)
-# and neither does MacOSX? ...
-libNGObjWeb_LIBRARIES_DEPEND_UPON += -lcrypt
-endif
-endif
 
 # Apple
 
