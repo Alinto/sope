@@ -15,7 +15,7 @@ ADDITIONAL_CPPFLAGS += -Wall -Wno-protocol
 
 libNGLdap_LIBRARIES_DEPEND_UPON += \
 	-lNGExtensions -lEOControl	\
-	-lDOM -lSaxObjC
+	-lgnustep-base -lobjc
 NGLdap_LIBRARIES_DEPEND_UPON += \
 	-framework NGExtensions -framework EOControl	\
 	-framework DOM -framework SaxObjC

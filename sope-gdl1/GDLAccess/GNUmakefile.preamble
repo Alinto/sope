@@ -29,7 +29,7 @@ endif
 
 # dependencies
 
-libGDLAccess_LIBRARIES_DEPEND_UPON += -lEOControl
+libGDLAccess_LIBRARIES_DEPEND_UPON += -lEOControl -lgnustep-base -lobjc
 GDLAccess_LIBRARIES_DEPEND_UPON    += -framework EOControl
 
 ifneq ($(frameworks),yes)

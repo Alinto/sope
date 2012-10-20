@@ -33,7 +33,6 @@ endif
 
 MySQL_BUNDLE_LIBS += \
 	-lGDLAccess	\
-	-lEOControl	\
 	`mysql_config --libs`
 
 MySQLD_BUNDLE_LIBS += \
