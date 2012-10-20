@@ -16,11 +16,6 @@ libSaxObjC_HEADER_FILES_INSTALL_DIR = /SaxObjC
 SaxObjC_HEADER_FILES = $(libSaxObjC_HEADER_FILES)
 SaxObjC_OBJC_FILES   = $(libSaxObjC_OBJC_FILES)
 
-# disable optimization for exception handlers
-SaxDefaultHandler.m_FILE_FILTER_OUT_FLAGS = -O%
-SaxHandlerBase.m_FILE_FILTER_OUT_FLAGS    = -O%
-SaxObjectDecoder.m_FILE_FILTER_OUT_FLAGS  = -O%
-
 ADDITIONAL_CPPFLAGS += \
 	-O2 \
         -Wall -DCOMPILE_FOR_GSTEP_MAKE=1        \

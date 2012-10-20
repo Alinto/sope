@@ -16,13 +16,6 @@ DOM_HEADER_FILES = $(libDOM_HEADER_FILES)
 DOM_OBJC_FILES   = $(libDOM_OBJC_FILES)
 
 
-# disable optimization for exception handlers
-DOMPYXOutputter.m_FILE_FILTER_OUT_FLAGS        = -O%
-DOMXMLOutputter.m_FILE_FILTER_OUT_FLAGS        = -O%
-DOMQueryPathExpression.m_FILE_FILTER_OUT_FLAGS = -O%
-DOMSaxHandler.m_FILE_FILTER_OUT_FLAGS          = -O%
-NSObject+QPEval.m_FILE_FILTER_OUT_FLAGS        = -O%
-
 ADDITIONAL_CPPFLAGS += \
 	-O2 \
         -Wall -DCOMPILE_FOR_GSTEP_MAKE=1        \
