@@ -40,9 +40,6 @@ ifneq ($(FOUNDATION_LIB),nx)
 ifeq ($(sasl),yes)
 libNGLdap_LIBRARIES_DEPEND_UPON += -lsasl
 endif
-ifneq ($(nossl),yes)
-libNGLdap_LIBRARIES_DEPEND_UPON += -lssl
-endif
 
 else # is NeXT/Apple Foundation
 

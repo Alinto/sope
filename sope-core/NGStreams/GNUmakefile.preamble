@@ -45,9 +45,13 @@ endif
 
 
 # activating SSL support
-ifneq ($(ssl),no)
 libNGStreams_OBJC_FILES += NGActiveSSLSocket.m
 NGStreams_OBJC_FILES += NGActiveSSLSocket.m
+ifeq ($(HAS_LIBRARY_gnutls),yes)
+ADDITIONAL_CPPFLAGS += -DHAVE_GNUTLS=1
+libNGStreams_LIBRARIES_DEPEND_UPON += -lgnutls
+NGStreams_LIBRARIES_DEPEND_UPON += -lgnutls
+else
 ADDITIONAL_CPPFLAGS += -DHAVE_OPENSSL=1 -DOPENSSL_NO_KRB5
 libNGStreams_LIBRARIES_DEPEND_UPON += -lssl -lcrypto
 NGStreams_LIBRARIES_DEPEND_UPON += -lssl -lcrypto
