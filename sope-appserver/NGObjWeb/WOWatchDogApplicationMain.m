@@ -965,7 +965,7 @@ int WOWatchDogApplicationMain
   NSAutoreleasePool *pool;
   NSUserDefaults *ud;
   NSString *logFile, *nsPidFile;
-  int rc;
+  int rc, i;
   pid_t childPid;
   NSProcessInfo *processInfo;
   Class WOAppClass;
@@ -993,6 +993,11 @@ int WOWatchDogApplicationMain
     logFile = [NSString stringWithFormat: @"/var/log/%@/%@.log",
                         [processInfo processName],
                         [processInfo processName]];
+
+  /* Close all open file descriptors */
+  for (i = getdtablesize(); i >= 3; --i)
+    close(i);
+  freopen("/dev/null", "a", stdin);
   if (![logFile isEqualToString: @"-"]) {
     freopen([logFile cString], "a", stdout);
     freopen([logFile cString], "a", stderr);
