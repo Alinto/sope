@@ -96,7 +96,6 @@
     return;
   }
   
-  uUri = [self->src      stringValueInComponent:[_ctx component]];
   uFi  = [self->filename stringValueInComponent:[_ctx component]];
   
   WOResponse_AddCString(_response, "<body");
@@ -131,15 +130,18 @@
             [_ctx component],
             [self->filename stringValueInComponent:[_ctx component]],
             [languages componentsJoinedByString:@","]);
-      uFi = uUri;
+      uFi = [self->src      stringValueInComponent:[_ctx component]];
     }
     [_response appendContentHTMLAttributeValue:uFi];
     WOResponse_AddChar(_response, '"');
   }
-  else if ([uUri length] > 0) {
-    WOResponse_AddCString(_response, " background=\"");
-    [_response appendContentHTMLAttributeValue:uUri];
-    WOResponse_AddChar(_response, '"');
+  else {
+    uUri = [self->src      stringValueInComponent:[_ctx component]];
+    if ([uUri length] > 0) {
+      WOResponse_AddCString(_response, " background=\"");
+      [_response appendContentHTMLAttributeValue:uUri];
+      WOResponse_AddChar(_response, '"');
+    }
   }
   
   [self appendExtraAttributesToResponse:_response inContext:_ctx];
