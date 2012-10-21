@@ -97,7 +97,7 @@
 
 - (void)outputElementNode:(id<DOMElement>)_node to:(id)_target {
   NSString *tagName;
-  NSString *ns;
+  // NSString *ns;
   
   /* needs to declare namespaces !!! */
   tagName = [_node tagName];
@@ -107,15 +107,15 @@
     p       = [p stringByAppendingString:@":"];
     tagName = [p stringByAppendingString:tagName];
 
-    ns = [NSString stringWithFormat:@" xmlns:%@=\"%@\"",
-                     [_node prefix],
-                     [_node namespaceURI]];
+    // ns = [NSString stringWithFormat:@" xmlns:%@=\"%@\"",
+    //                  [_node prefix],
+    //                  [_node namespaceURI]];
   }
-  else if ([[_node namespaceURI] length] > 0) {
-    ns = [NSString stringWithFormat:@" xmlns=\"%@\"", [_node namespaceURI]];
-  }
-  else
-    ns = nil;
+  // else if ([[_node namespaceURI] length] > 0) {
+    // ns = [NSString stringWithFormat:@" xmlns=\"%@\"", [_node namespaceURI]];
+  // }
+  // else
+  //   ns = nil;
 
   [self write:@"("    to:_target];
   [self write:tagName to:_target];

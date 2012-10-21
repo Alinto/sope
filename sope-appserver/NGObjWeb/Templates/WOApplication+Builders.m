@@ -67,7 +67,6 @@
 - (void)loadBuilderBundles {
   // TODO: DUP to SoProductRegistry.m
   NSFileManager *fm;
-  NSProcessInfo *pi;
   NSArray       *pathes;
   NSString      *relPath;
   unsigned      i;
@@ -75,7 +74,7 @@
   /* scan library pathes */
   
   fm = [NSFileManager defaultManager];
-  pi = [NSProcessInfo processInfo];
+
 #if ! GNUSTEP_BASE_LIBRARY  
 #if COCOA_Foundation_LIBRARY
   /* 
@@ -87,6 +86,10 @@
 					       NSAllDomainsMask,
 					       YES);
 #else
+  NSProcessInfo *pi;
+
+  pi = [NSProcessInfo processInfo];
+
   pathes = [[pi environment] objectForKey:@"GNUSTEP_PATHPREFIX_LIST"];
   if (pathes == nil)
     pathes = [[pi environment] objectForKey:@"GNUSTEP_PATHLIST"];

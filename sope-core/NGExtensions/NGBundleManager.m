@@ -281,10 +281,6 @@ static NSString *NGEnvVarPathSeparator = @":";
 }
 
 - (void)_setupBundleSearchPathes {
-  NSProcessInfo *pi;
-  
-  pi = [NSProcessInfo processInfo];
-  
   /* setup bundle search path */
 
   self->bundleSearchPaths = [[NSMutableArray alloc] initWithCapacity:16];
@@ -615,7 +611,7 @@ static NSString *NGEnvVarPathSeparator = @":";
 
 // dependencies
 
-+ (int)version {
++ (NSInteger)version {
   return 2;
 }
 
@@ -1049,12 +1045,10 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
   NSString     *infoPath;
   NSEnumerator *providedResources;
   NSArray      *rnKeys = nil;
-  int          rnKeyCount = 0;
   id           info;
 
   if ([_resource respondsToSelector:@selector(objectForKey:)]) {
     rnKeys     = [_resource allKeys];
-    rnKeyCount = [rnKeys count];
   }
   
   infoPath = [self makeBundleInfoPath:[_bundle bundlePath]];
@@ -1319,7 +1313,6 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
   NSEnumerator  *e;
   NSString      *path;
   NSArray       *rnKeys = nil;
-  int           rnKeyCount = 0;
   
   if (debugOn) {
     NSLog(@"BM LOOKUP path (%d bundles loaded): %@ / %@", 
@@ -1336,7 +1329,6 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
   
   if ([_resourceName respondsToSelector:@selector(objectForKey:)]) {
     rnKeys     = [_resourceName allKeys];
-    rnKeyCount = [rnKeys count];
   }
   
   fm = [NSFileManager defaultManager];

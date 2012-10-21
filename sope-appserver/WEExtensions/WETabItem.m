@@ -225,7 +225,6 @@ static NSString *retStrForInt(int i) {
 /* info collection */
 
 - (void)_collectInContext:(WOContext *)_ctx key:(NSString *)k {
-  BOOL  isLeft = NO;
   NSMutableArray *keys;
   WETabItemInfo  *info;
   WOComponent    *cmp;
@@ -235,7 +234,6 @@ static NSString *retStrForInt(int i) {
   if (keys == nil) {
     keys = [[[NSMutableArray alloc] init] autorelease];
     [_ctx setObject:keys forKey:WETabView_KEYS];
-    isLeft = YES;
   }
       
   if (k == nil) {
@@ -392,7 +390,6 @@ static NSString *retStrForInt(int i) {
 
 - (void)appendToResponse:(WOResponse *)_response inContext:(WOContext *)_ctx {
   NSString *k;
-  BOOL     doForm;
   id       tmp;
 
   if ([_ctx isRenderingDisabled]) {
@@ -400,7 +397,6 @@ static NSString *retStrForInt(int i) {
     return;
   }
 
-  doForm = [_ctx isInForm];
   k      = [self->key stringValueInComponent:[_ctx component]];
 
   if ((tmp = [_ctx objectForKey:WETabView_HEAD])) {

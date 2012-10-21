@@ -171,7 +171,7 @@ static BOOL _isDebugOn(void) {
   BOOL      isCreateIfMissingMethod = NO;
   BOOL      isCreateMethod = NO;
   unsigned  i, count;
-  id        root, currentObject, clientObject;
+  id        currentObject, clientObject;
 
   if (NSExceptionClass == Nil) {
     NSExceptionClass = [NSException class];
@@ -210,7 +210,6 @@ static BOOL _isDebugOn(void) {
     }
   }
   
-  root          = self;
   currentObject = self;
   clientObject  = nil;
   [_ctx addObjectToTraversalStack:currentObject];

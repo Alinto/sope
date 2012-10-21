@@ -141,7 +141,6 @@ static void processFile(NSString *path) {
 int main(int argc, char **argv, char **env) {
   NSUserDefaults *ud;
   NSAutoreleasePool *pool;
-  NSArray      *args;
   id           paths;
   NSString     *path;
   int          i;
@@ -151,7 +150,6 @@ int main(int argc, char **argv, char **env) {
 #endif
 
   pool = [[NSAutoreleasePool alloc] init];
-  args = [[NSProcessInfo processInfo] arguments];
 
   if (argc < 1)
     exit(0);

@@ -184,15 +184,13 @@ static const NSTimeInterval NGNoTimeout = 0.0;
 // sending
 
 - (void)primarySendPacket:(id<NGDatagramPacket>)_packet {
-  int bytesWritten;
-
   NSAssert([_packet receiver], @"packet has no destination !");
 
-  bytesWritten = sendto(self->fd, // socket
-                        [[_packet data] bytes], [[_packet data] length],
-                        0, // flags
-                        [[_packet receiver] internalAddressRepresentation],
-                        [[_packet receiver] addressRepresentationSize]);
+  sendto(self->fd, // socket
+         [[_packet data] bytes], [[_packet data] length],
+         0, // flags
+         [[_packet receiver] internalAddressRepresentation],
+         [[_packet receiver] addressRepresentationSize]);
 
   if (!self->flags.isBound) // was not explictly bound, so get local address
     [self kernelBoundAddress];

@@ -61,13 +61,13 @@
   
   attrs = [_element attributes];
   if ((len = [attrs length]) > 0) {
-    id<NSObject,DOMAttr> talDefine     = nil; // len=6,  d, define
-    id<NSObject,DOMAttr> talCondition  = nil; // len=9,  c, condition
-    id<NSObject,DOMAttr> talRepeat     = nil; // len=6,  r, repeat
-    id<NSObject,DOMAttr> talContent    = nil; // len=7,  c, content
-    id<NSObject,DOMAttr> talReplace    = nil; // len=7,  r, replace
-    id<NSObject,DOMAttr> talAttributes = nil; // len=10, a, attributes
-    id<NSObject,DOMAttr> talOmitTag    = nil; // len=8,  o, omit-tag
+    // id<NSObject,DOMAttr> talDefine     = nil; // len=6,  d, define
+    // id<NSObject,DOMAttr> talCondition  = nil; // len=9,  c, condition
+    // id<NSObject,DOMAttr> talRepeat     = nil; // len=6,  r, repeat
+    // id<NSObject,DOMAttr> talContent    = nil; // len=7,  c, content
+    // id<NSObject,DOMAttr> talReplace    = nil; // len=7,  r, replace
+    // id<NSObject,DOMAttr> talAttributes = nil; // len=10, a, attributes
+    // id<NSObject,DOMAttr> talOmitTag    = nil; // len=8,  o, omit-tag
     unsigned i;
     
     /* collect TAL attributes */
@@ -112,32 +112,32 @@
       //       the element itself would be dynamic and resolve the binding
       //       => eg: <var:if> aka WOConditional and 'tal:condition'
       
-      switch (c0) {
-      case 'd':
-        if (alen == 6 && [aname isEqualToString:@"define"])
-          talDefine = attr;
-        break;
-      case 'c':
-        if (alen == 7 && [aname isEqualToString:@"content"])
-          talContent = attr;
-        else if (alen == 9 && [aname isEqualToString:@"condition"])
-          talCondition = attr;
-        break;
-      case 'r':
-        if (alen == 6 && [aname isEqualToString:@"repeat"])
-          talRepeat = attr;
-        else if (alen == 7 && [aname isEqualToString:@"replace"])
-          talReplace = attr;
-        break;
-      case 'a':
-        if (alen == 10 && [aname isEqualToString:@"attributes"])
-          talAttributes = attr;
-        break;
-      case 'o':
-        if (alen == 8 && [aname isEqualToString:@"omit-tag"])
-          talOmitTag = attr;
-        break;
-      }
+      // switch (c0) {
+      // case 'd':
+      //   if (alen == 6 && [aname isEqualToString:@"define"])
+      //     talDefine = attr;
+      //   break;
+      // case 'c':
+      //   if (alen == 7 && [aname isEqualToString:@"content"])
+      //     talContent = attr;
+      //   else if (alen == 9 && [aname isEqualToString:@"condition"])
+      //     talCondition = attr;
+      //   break;
+      // case 'r':
+      //   if (alen == 6 && [aname isEqualToString:@"repeat"])
+      //     talRepeat = attr;
+      //   else if (alen == 7 && [aname isEqualToString:@"replace"])
+      //     talReplace = attr;
+      //   break;
+      // case 'a':
+      //   if (alen == 10 && [aname isEqualToString:@"attributes"])
+      //     talAttributes = attr;
+      //   break;
+      // case 'o':
+      //   if (alen == 8 && [aname isEqualToString:@"omit-tag"])
+      //     talOmitTag = attr;
+      //   break;
+      // }
     }
     
     /* process TAL attributes */

@@ -1069,12 +1069,12 @@ int WOWatchDogApplicationMainWithServerDefaults
 #endif
   
   if ((defClass = NSClassFromString(@"WOServerDefaults")) != nil) {
-    NSUserDefaults *ud, *sd;
+    NSUserDefaults *ud;
     
     ud = [NSUserDefaults standardUserDefaults];
-    sd = [defClass hackInServerDefaults:ud
-                      withAppDomainPath:appDomainPath
-                       globalDomainPath:globalDomainPath];
+    [defClass hackInServerDefaults:ud
+              withAppDomainPath:appDomainPath
+              globalDomainPath:globalDomainPath];
 
 #if 0    
     if (((sd == nil) || (sd == ud)) && (appDomainPath != nil)) {
@@ -1083,6 +1083,8 @@ int WOWatchDogApplicationMainWithServerDefaults
     }
 #endif
   }
-  
+ 
+  [pool release];
+
   return WOWatchDogApplicationMain(appName, argc, argv);
 }

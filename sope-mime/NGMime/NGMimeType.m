@@ -91,9 +91,7 @@ static Class NSStringClass  = Nil;
 + (NSStringEncoding)stringEncodingForCharset:(NSString *)_s {
   NSString         *charset;
   NSStringEncoding encoding;
-  BOOL             foundUnsupported;
 
-  foundUnsupported = NO;  
   charset          = [_s lowercaseString];
   
   if ([charset length] == 0)
@@ -118,7 +116,6 @@ static Class NSStringClass  = Nil;
   /* some unsupported, but known encoding */
   else if ([charset isEqualToString:@"ks_c_5601-1987"]) {
     encoding = NSISOLatin1StringEncoding;
-    foundUnsupported = YES;
   }
   else if ([charset isEqualToString:@"euc-kr"]) {
     encoding = NSKoreanEUCStringEncoding;

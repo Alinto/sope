@@ -381,7 +381,6 @@ _applyIndex(WEWeekOverview *self, WOComponent *comp, unsigned _idx)
   // THREAD: uses temporary ivars
   WOComponent    *comp;
   NSCalendarDate *startWeek;
-  NSCalendarDate *endWeek;
   NSArray        *array;
   NSString       *startKey;
   NSString       *endKey;
@@ -406,7 +405,6 @@ _applyIndex(WEWeekOverview *self, WOComponent *comp, unsigned _idx)
   startWeek = (self->weekStart)
     ? [self->weekStart valueInComponent:comp]
     : [NSCalendarDate calendarDate];
-  endWeek   = [startWeek addTimeInterval:SecondsPerWeek];
   
   for (i = 0, cnt = [array count]; i < cnt; i++) {
     id             app;

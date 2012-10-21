@@ -104,7 +104,6 @@ static BOOL   debugOn = NO;
 /* labels */
 
 - (NSString *)labelForKey:(NSString *)_key component:(WOComponent *)_component{
-  WOApplication   *app;
   NSArray         *langs;
   NSBundle        *bundle;
   id              value = nil;
@@ -135,8 +134,6 @@ static BOOL   debugOn = NO;
   }
   
   /* lookup bundle */
-  
-  app = [WOApplication application];
   
   bm = [NGBundleManager defaultBundleManager];
   bundle = [bm bundleProvidingResource:cname ofType:@"WOComponents"];
@@ -382,15 +379,12 @@ static BOOL   debugOn = NO;
   e = [_languages objectEnumerator];
   while ((language = [e nextObject]) != nil) {
     WEStringTable *table;
-    NSArray  *ls;
     NSRange  r;
     NSString *tname;
       
     r = [language rangeOfString:@"_"];
     if (r.length > 0)
       language = [language substringToIndex:r.location];
-    
-    ls = [NSArray arrayWithObject:language];
     
     // TODO: add support for .po
     path = [_tableName stringByAppendingPathExtension:@"strings"];

@@ -156,7 +156,6 @@
   StructuredStack	*paragraphs;
   StructuredStack	*stack;
   StructuredLine	*line;
-  StructuredLine	*lastParagraph = nil;
   int level = 0;
 
   stack = [self stack];
@@ -185,7 +184,6 @@
       [stack push:line];
       break;
     case StructuredTextParserLine_Paragraph:
-      lastParagraph = line;
     case StructuredTextParserLine_LiteralBlock:
       [line setLevel:level];
       break;
@@ -253,17 +251,19 @@
       if ([object isKindOfClass:[StructuredTextHeader class]]
           /* || [object isKindOfClass:[StructuredTextList class]] */) {
         while ((tmpLine = [stack currentObject])) {
-          id currentObject;
-
           if ([line level] > [tmpLine level])
             break;
 	  
           [stack pop];
-          currentObject = [objectStack pop];
+          [objectStack pop];
 
 #if DISABLE_BUG_FIX
-          if ([currentObject isKindOfClass:[StructuredTextHeader class]])
-            currentHeaderLevel--;
+          {
+            id currentObject = [objectStack pop];
+            
+            if ([currentObject isKindOfClass:[StructuredTextHeader class]])
+              currentHeaderLevel--;
+          }
 #endif
         }
 

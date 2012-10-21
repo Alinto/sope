@@ -751,7 +751,6 @@ static int openConnectionCount = 0;
           key = [null retain];
         else {
           const char *pvalue;
-          int         vallen;
           
           if (self->containsBinaryData) {
 #if COCOA_Foundation_LIBRARY || NeXT_Foundation_LIBRARY
@@ -762,7 +761,6 @@ static int openConnectionCount = 0;
           }
           
 	  pvalue = [self->resultSet rawValueOfTuple:0 atIndex:0];
-	  vallen = [self->resultSet lengthOfTuple:0   atIndex:0];
 	  
           if (pvalue)
             key = [[NSNumber alloc] initWithInt:atoi(pvalue)];

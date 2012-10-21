@@ -168,9 +168,6 @@ static BOOL isPListObject(id _obj) {
     /* then check some hardcoded prefixes */
     
     if ([_name hasPrefix:@"com.webobjects.directtoweb"]) {
-      NSString *s;
-      
-      s = [@"D2W" stringByAppendingString:lastComponent];
       if ((clazz = NSClassFromString(lastComponent)) != Nil)
 	return clazz;
     }

@@ -245,7 +245,6 @@ static NSNotificationCenter *getNC(void ) {
   NSMutableString  *expression  = nil;
   NSMutableArray   *result      = nil;
   NSArray          *attrs       = nil;
-  EOAdaptor        *adaptor     = nil;
   NSArray          *pKeys       = nil;
   EOQualifier      *qual        = nil;
   EOAdaptorChannel *adChan      = nil;
@@ -306,7 +305,6 @@ static NSNotificationCenter *getNC(void ) {
   tz = [[self->fetchSpecification hints] objectForKey:EOFetchResultTimeZone];
     
   ASSIGN(self->__attributes, attrs);
-  adaptor = [[adChan adaptorContext] adaptor];
   {
     NSArray *a;
     NSSet *tableKeys     = nil;

@@ -122,7 +122,6 @@ _applyPathAppenedByItem(WEBrowser *self, NSArray *path, id obj, id cmp) {
   id             result;
   id             obj = nil;
   int            col, row;
-  BOOL           isScroll = NO;
 
   cmp     = [_ctx component];
   selects = [self->currentPath valueInComponent:cmp];
@@ -130,8 +129,6 @@ _applyPathAppenedByItem(WEBrowser *self, NSArray *path, id obj, id cmp) {
   cid = [_ctx currentElementID];
   
   if ([cid isEqualToString:@"scroll"]) {
-    isScroll = YES;
-
     [_ctx appendElementIDComponent:cid];   // append scroll
     cid = [_ctx consumeElementID];         // get currentPath index (=column)
     col = [cid intValue];                  //
@@ -362,7 +359,7 @@ _applyPathAppenedByItem(WEBrowser *self, NSArray *path, id obj, id cmp) {
 
       // append template
       if (subCount > i) {
-        NSString *k;
+        // NSString *k;
         id       obj;
 
         obj = [subarray objectAtIndex:i];
@@ -371,14 +368,14 @@ _applyPathAppenedByItem(WEBrowser *self, NSArray *path, id obj, id cmp) {
 
         // is current object in currentPath?
         
-        if ((j < (int)[selects count]) && 
-            [[selects objectAtIndex:j] isEqual:obj]) {
-          k = (j < selectCnt-1)
-            ? WEBrowser_Minus
-            : WEBrowser_Plus;
-        }
-        else
-          k = WEBrowser_Plus;
+        // if ((j < (int)[selects count]) && 
+        //     [[selects objectAtIndex:j] isEqual:obj]) {
+        //   k = (j < selectCnt-1)
+        //     ? WEBrowser_Minus
+        //     : WEBrowser_Plus;
+        // }
+        // else
+        //   k = WEBrowser_Plus;
         
         bg = [self->bgColor stringValueInComponent:cmp];
 

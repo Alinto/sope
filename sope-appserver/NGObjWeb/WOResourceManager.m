@@ -920,7 +920,6 @@ _pathExists(WOResourceManager *self, NSFileManager *fm, NSString *path)
 {
   // TODO: this method is definitely too big! => refacture
   WOApplication         *app;
-  NSFileManager         *fm            = nil;
   WOComponentDefinition *cdef          = nil;
   NSURL                 *componentURL;
   NSURL                 *appUrl;
@@ -951,8 +950,6 @@ _pathExists(WOResourceManager *self, NSFileManager *fm, NSString *path)
     cdef = [self _definitionForPathlessComponent:_name languages:_languages];
     return cdef;
   }
-  
-  fm = [self fileManager];
   
   /* ensure that the component exists */
 

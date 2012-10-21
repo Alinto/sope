@@ -170,9 +170,7 @@
       }
       else {
         NSString *nname;
-        NSString *qname;
-        
-        qname = _name;
+
         nname = [child nodeName];
 
         if ([nname isEqualToString:_name]) {

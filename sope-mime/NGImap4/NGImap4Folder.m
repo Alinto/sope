@@ -1116,11 +1116,10 @@ static int FetchNewUnseenMessagesInSubFoldersOnDemand = -1;
 }
 
 - (void)initializeSubFolders {
-  NSString     *n;
   NSEnumerator *folders;
   NSDictionary *res;
   id           folder, *objs;
-  unsigned     cnt, nl;
+  unsigned     cnt;
   BOOL         showSubsrcFolders;
   NSString     *pattern;
   
@@ -1157,10 +1156,6 @@ static int FetchNewUnseenMessagesInSubFoldersOnDemand = -1;
   }
   
   cnt = 0;
-  if (showSubsrcFolders) {
-    n  = [self absoluteName];
-    nl = [n length];
-  }
   
   while ((folder = [folders nextObject])) {
     NGImap4Folder *newFolder;

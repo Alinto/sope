@@ -306,17 +306,17 @@ static int _compareByName(id obj1, id obj2, void * context);
   
   for (i = 0; i < n; i++) {
     EOAttribute *attribute;
-    NSString *columnName;
     NSString *attributeName;
     id value;
 
     attribute     = [array objectAtIndex:i];
-    columnName    = [attribute columnName];
     attributeName = [attribute name];
 
     value = [aRow objectForKey:attributeName];
 
 #if DEBUG
+    NSString *columnName;
+    columnName    = [attribute columnName];
     NSAssert1(columnName, @"missing column name in attribute %@ !", attribute);
     NSAssert3(value, @"missing value for column '%@' (attr '%@') in row %@",
               columnName, attribute, aRow);

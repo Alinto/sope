@@ -19,8 +19,10 @@
   02111-1307, USA.
 */
 
+#include "NGStreamProtocols.h"
 #include "NGByteBuffer.h"
 #include "common.h"
+
 #include <sys/time.h>
 
 @implementation NGByteBuffer
@@ -44,7 +46,7 @@ static Class DataStreamClass = Nil;
   return [[[self alloc] initWithSource:_source la:_la] autorelease];
 }
 
-- (id)initWithSource:(id<NGStream>)_source la:(unsigned)_la {
+- (id)initWithSource:(NSObject <NGStream> *)_source la:(unsigned)_la {
   if (_source == nil) {
     [self release];
     return nil;

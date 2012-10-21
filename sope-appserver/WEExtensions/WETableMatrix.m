@@ -217,7 +217,7 @@ static NSNumber *numForUInt(unsigned int i) {
   NSAutoreleasePool  *pool;
   WETableCalcMatrix *matrix;
   NSArray            *allSpans;
-  unsigned           rowCount, colCount, count;
+  unsigned           rowCount, colCount;
   
   if ([_ctx isRenderingDisabled]) {
     [self->template appendToResponse:_response inContext:_ctx];
@@ -232,7 +232,6 @@ static NSNumber *numForUInt(unsigned int i) {
   self->_cols     = 
     [[[self->columns valueInComponent:self->component] copy] autorelease];
   
-  count    = [self->objs count];
   rowCount = [self->_rows count];
   colCount = [self->_cols count];
   

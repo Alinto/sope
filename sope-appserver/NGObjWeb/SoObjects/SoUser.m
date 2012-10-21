@@ -58,7 +58,8 @@
 }
 
 - (NSArray *)rolesForObject:(id)_object inContext:(id)_ctx {
-  NSArray *aroles, *localRoles;
+  NSArray *aroles// , *localRoles
+    ;
   
   aroles = [self rolesInContext:_ctx];
   if (aroles == nil) aroles = [NSArray array];
@@ -68,7 +69,7 @@
      roles are stored in __ac_local_roles__ of the object in Zope. Note
      that this attribute can be a callable returning the roles !
   */
-  localRoles = nil;
+  // localRoles = nil;
   
   return aroles;
 }

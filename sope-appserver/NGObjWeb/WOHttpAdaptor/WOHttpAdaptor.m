@@ -382,7 +382,7 @@ static BOOL     debugOn                      = NO;
   NSTimeInterval t;
   
   if (perfLogger)
-    *(&t) = [[NSDate date] timeIntervalSince1970];
+    t = [[NSDate date] timeIntervalSince1970];
   
   [self->lock lock];
   self->activeThreadCount++;

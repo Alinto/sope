@@ -133,16 +133,10 @@
   
   pool = [[NSAutoreleasePool alloc] init];
   {
-    NSDate *date;
-    NSTimeInterval duration;
-
-    date = [NSDate date];
     _path = [@"file://" stringByAppendingString:_path];
     
     [self->parser parseFromSystemId:_path];
     doc = [[self _docAfterParsing] retain];
-    
-    duration = [[NSDate date] timeIntervalSinceDate:date];
   }
   [pool release];
   
@@ -160,15 +154,8 @@
   
   pool = [[NSAutoreleasePool alloc] init];
   {
-    NSDate *date;
-    NSTimeInterval duration;
-
-    date = [NSDate date];
-    
     [self->parser parseFromSource:_source systemId:_sysId];
     doc = [[self _docAfterParsing] retain];
-    
-    duration = [[NSDate date] timeIntervalSinceDate:date];
   }
   [pool release];
   
@@ -187,15 +174,8 @@
   
   pool = [[NSAutoreleasePool alloc] init];
   {
-    NSDate *date;
-    NSTimeInterval duration;
-
-    date = [NSDate date];
-    
     [self->parser parseFromSystemId:_sysId];
     doc = [[self _docAfterParsing] retain];
-    
-    duration = [[NSDate date] timeIntervalSinceDate:date];
   }
   [pool release];
   

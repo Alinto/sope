@@ -206,7 +206,6 @@ static int debugOn = 0;
 
 - (void)scanForAvailableProducts {
   NSFileManager *fm;
-  NSProcessInfo *pi;
   NSArray  *pathes;
   NSBundle *bundle;
   NSString *relPath;
@@ -230,7 +229,6 @@ static int debugOn = 0;
   /* scan library pathes */
   
   fm = [NSFileManager defaultManager];
-  pi = [NSProcessInfo processInfo];
 #if ! GNUSTEP_BASE_LIBRARY  
 #if COCOA_Foundation_LIBRARY && !COMPILE_FOR_GNUSTEP
   /* 
@@ -243,12 +241,17 @@ static int debugOn = 0;
 					       YES);
   relPath = @"";
 #else
-  pathes = [[pi environment] objectForKey:@"GNUSTEP_PATHPREFIX_LIST"];
-  if (pathes == nil)
-    pathes = [[pi environment] objectForKey:@"GNUSTEP_PATHLIST"];
-  
-  pathes = [[pathes stringValue] componentsSeparatedByString:@":"];
-  relPath = @"Library/";
+  {
+    NSProcessInfo *pi;
+    
+    pi = [NSProcessInfo processInfo];
+    pathes = [[pi environment] objectForKey:@"GNUSTEP_PATHPREFIX_LIST"];
+    if (pathes == nil)
+      pathes = [[pi environment] objectForKey:@"GNUSTEP_PATHLIST"];
+    
+    pathes = [[pathes stringValue] componentsSeparatedByString:@":"];
+    relPath = @"Library/";
+  }
 #endif
   relPath = [relPath stringByAppendingFormat:@"SoProducts-%i.%i/",
                         SOPE_MAJOR_VERSION, SOPE_MINOR_VERSION];

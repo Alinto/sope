@@ -66,9 +66,7 @@ static Class NSCFArrayClass = Nil;
 + (NSArray *)saxMappingSearchPathes {
   if (searchPathes == nil) {
     NSMutableArray *ma;
-    NSDictionary   *env;
-    
-    env = [[NSProcessInfo processInfo] environment];
+
     ma  = [NSMutableArray arrayWithCapacity:6];
 
 #if COCOA_Foundation_LIBRARY
@@ -95,7 +93,10 @@ static Class NSCFArrayClass = Nil;
     while ((directory = [libraryPaths nextObject]))
       [ma addObject: [directory stringByAppendingPathComponent: suffix]];
 #else
+    NSDictionary   *env;
     id tmp;
+    
+    env = [[NSProcessInfo processInfo] environment];
     if ((tmp = [env objectForKey:@"GNUSTEP_PATHPREFIX_LIST"]) == nil)
       tmp = [env objectForKey:@"GNUSTEP_PATHLIST"];
     tmp = [tmp componentsSeparatedByString:@":"];

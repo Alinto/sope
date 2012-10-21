@@ -397,12 +397,10 @@ static WOAssociation *yesAssoc = nil;
 }
 
 - (WOAssociation *)associationForAttribute:(id<DOMAttr>)_attribute {
-  NSString      *nsuri;
   NSString      *value;
   WOAssociation *assoc;
   Class c;
   
-  nsuri = [_attribute namespaceURI];
   value = [_attribute nodeValue];
   
   c = [self associationClassForNamespaceURI:[_attribute namespaceURI]];

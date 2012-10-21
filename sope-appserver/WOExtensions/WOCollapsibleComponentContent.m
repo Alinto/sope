@@ -116,11 +116,8 @@
 
 - (id)invokeActionForRequest:(WORequest *)_request inContext:(WOContext *)_ctx {
   NSString *state;
-  NSString *eid;
 
   state = [[_ctx currentElementID] stringValue];
-
-  eid = [_ctx elementID];
 
   if (state) {
     BOOL doForm;

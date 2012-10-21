@@ -343,27 +343,9 @@ NSString *EOBindVariableValueKey       = @"value";
     NSEnumerator    *enumerator;
     BOOL            first = YES;
     EOAttribute     *attribute;
-    BOOL            isDistinct;
 
     selectList = [NSMutableString stringWithCapacity:128];
-    isDistinct = [qualifier usesDistinct];
 
-    /* check whether DISTINCT is allowed */
-    enumerator = [attributes objectEnumerator];
-    while ((attribute = [enumerator nextObject])) {
-      if (self->adaptor) {
-        if (![self->adaptor attributeAllowedInDistinctSelects:attribute]) {
-#if DEBUG && 0
-          NSLog(@"WARNING: tried to select attribute type %@ with DISTINCT "
-                @"which is not allowed, disabling DISTINCT: %@",
-                [attribute externalType], [attribute name]);
-#endif
-          isDistinct = NO;
-          break;
-        }
-      }
-    }
-    
     enumerator = [attributes objectEnumerator];
     while ((attribute = [enumerator nextObject])) {
         if(first)
@@ -1204,12 +1186,10 @@ NSString *EOBindVariableValueKey       = @"value";
 - (NSString *)sqlStringForKeyComparisonQualifier:(EOKeyComparisonQualifier *)_q {
   NSMutableString *s;
   NSString        *sql;
-  EOAttribute     *a;
   
   s = [NSMutableString stringWithCapacity:64];
   
   sql = [self sqlStringForAttributeNamed:[_q leftKey]];
-  a   = [[self entity] attributeNamed:[_q leftKey]]; /* relationships ? */
   sql = [[self class] formatSQLString:sql format:nil];
   [s appendString:sql];
   
@@ -1218,7 +1198,6 @@ NSString *EOBindVariableValueKey       = @"value";
   [s appendString:@" "];
   
   sql = [self sqlStringForAttributeNamed:[_q rightKey]];
-  a   = [[self entity] attributeNamed:[_q rightKey]]; /* relationships ? */
   sql = [[self class] formatSQLString:sql format:nil];
   [s appendString:sql];
   
@@ -1228,14 +1207,12 @@ NSString *EOBindVariableValueKey       = @"value";
 - (NSString *)sqlStringForKeyValueQualifier:(EOKeyValueQualifier *)_q {
   NSMutableString *s;
   NSString        *sql;
-  EOAttribute     *a;
   id              v;
 
   v = [_q value];
   s = [NSMutableString stringWithCapacity:64];
 
   sql = [self sqlStringForAttributeNamed:[_q key]];
-  a   = [[self entity] attributeNamed:[_q key]]; /* relationships ? */
   sql = [[self class] formatSQLString:sql format:nil];
   [s appendString:sql];
   

@@ -27,7 +27,6 @@
 - (void)appendXmlRpcString:(NSString *)_value {
 #if 1 // TODO: to be tested !
   unsigned i, j, len;
-  BOOL     didEscape = NO;
   unichar  *buf, *escbuf = NULL;
   
   if ((len = [_value length]) == 0)
@@ -57,7 +56,6 @@
       case '<':
       case '>':
       case '"': {
-        didEscape = YES;
         if (escbuf == NULL) {
           /* worst case: string consists of quotes */
           escbuf = calloc(len * 6 + 2, sizeof(unichar));

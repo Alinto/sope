@@ -197,7 +197,6 @@
 }
 
 - (WOResponse *)preprocessCredentialsInContext:(WOContext *)_ctx {
-  WOResponse *r;
   NSString *auth;
   NSString *k;
   NSString *user, *pwd;
@@ -221,7 +220,6 @@
   
   /* authentication provided, check whether it's valid */
   
-  r = [_ctx response];
   if ([auth length] < 6) {
     [self logWithFormat:@"tried unknown authentication method: %@ (A)", auth];
     return [self unauthorized:@"unsupported authentication method"

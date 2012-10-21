@@ -74,16 +74,14 @@
 }
 
 - (NGCalendarDateRange *)intersectionDateRange:(NGCalendarDateRange *)other {
-  NSCalendarDate *a, *b, *c, *d;
+  NSCalendarDate *b, *c, *d;
     
   if ([self compare:other] == NSOrderedAscending) {
-    a = self->startDate;
     b = self->endDate;
     c = [other startDate];
     d = [other endDate];
   }
   else {
-    a = [other startDate];
     b = [other endDate];
     c = self->startDate;
     d = self->endDate;
@@ -112,18 +110,16 @@
 }
 
 - (NGCalendarDateRange *)unionDateRange:(NGCalendarDateRange *)other {
-  NSCalendarDate *a, *b, *c, *d;
+  NSCalendarDate *a, *b, *d;
     
   if ([self compare:other] == NSOrderedAscending) {
     a = self->startDate;
     b = self->endDate;
-    c = [other startDate];
     d = [other endDate];
   }
   else {
     a = [other startDate];
     b = [other endDate];
-    c = self->startDate;
     d = self->endDate;
   }
   if ([b compare:d] == NSOrderedAscending)

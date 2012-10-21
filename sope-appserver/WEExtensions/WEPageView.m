@@ -440,7 +440,6 @@ static inline NSString *WEPageLabelForKey(NSString *_key, WOContext *_ctx) {
 - (void)appendToResponse:(WOResponse *)_response inContext:(WOContext *)_ctx {
   WOComponent    *cmp;
   BOOL           indentContent;
-  BOOL           doForm;
   NSString       *bgcolor;
   id             nestedState;
   NSString       *activeKey;
@@ -455,7 +454,6 @@ static inline NSString *WEPageLabelForKey(NSString *_key, WOContext *_ctx) {
   
   [self updateConfigInContext:_ctx];
   
-  doForm        = NO;  /* generate form controls ? */
   indentContent = YES; /* put additional padding table into content */
   cmp           = [_ctx component];
   

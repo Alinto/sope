@@ -894,11 +894,10 @@ _takeValuesInCell(WEMonthOverview *self, WORequest *request,
   WOComponent *comp;
   NSString    *s;
   NSArray     *array;
-  int         i, cnt, count;
+  int         i, cnt;
 
   comp  = [_ctx component];
   array = [self->list valueInComponent:comp];
-  count = [array count];
   
   [_ctx appendElementIDComponent:@"c"]; // append content mode
   

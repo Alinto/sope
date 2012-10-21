@@ -157,6 +157,7 @@ static unsigned int _encodeToModifiedUTF7(unichar *_char, unsigned char *result_
   processedDest = 0;
   cycle = 0;
   leftover = 0;
+  hasLeftOver = NO;
 
   c = *_char;
   while (c > 126 || (c > 0 && c < 32)) {

@@ -116,10 +116,6 @@ _updateComponent(WOComponentReference *self, WOContext *_ctx)
 /* handling requests */
 
 - (void)takeValuesFromRequest:(WORequest *)_req inContext:(WOContext *)_ctx {
-  WOComponent *parent;
-
-  parent = [_ctx component];
-  
   _updateComponent(self, _ctx);
 
   if (self->child != nil) {
@@ -130,10 +126,7 @@ _updateComponent(WOComponentReference *self, WOContext *_ctx)
 }
 
 - (id)invokeActionForRequest:(WORequest *)_req inContext:(WOContext *)_ctx {
-  WOComponent *parent;
   id result    = nil;
-
-  parent = [_ctx component];
 
   _updateComponent(self, _ctx);
 

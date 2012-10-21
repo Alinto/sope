@@ -76,9 +76,7 @@
 
 - (void)cancel {
   if (self->handle) {
-    int res;
-    
-    res = ldap_abandon(self->handle, self->msgid);
+    ldap_abandon(self->handle, self->msgid);
     
     self->handle = NULL;
     [self->connection release]; self->connection = nil;
@@ -239,10 +237,6 @@
           
       if ((result = ldap_first_entry(self->handle, msg)) == NULL) {
 	/* could not get entry */
-	int err;
-            
-	err = ldap_result2error(self->handle, msg, 1 /* free msg */);
-            
 	[[self->connection _exceptionForErrorCode:resultCount
 	      operation:@"fetch"
 	      userInfo:nil]

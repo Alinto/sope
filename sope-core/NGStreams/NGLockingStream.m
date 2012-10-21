@@ -112,12 +112,12 @@
 }
 
 - (BOOL)safeReadBytes:(void *)_buf  count:(unsigned)_len {
-  BOOL res;
+  BOOL res = NO;
   
   [readLock lock];
 
   NS_DURING {
-    *(&res) = [super safeReadBytes:_buf count:_len];
+    res = [super safeReadBytes:_buf count:_len];
   }
   NS_HANDLER {
     [readLock unlock];

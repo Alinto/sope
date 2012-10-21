@@ -179,7 +179,6 @@ static NSString *prefix = @"0xHIGHFLYx";
     This is called by SoObjectRequestHandler prior doing any significant
     processing to allow the authenticator to reject invalid requests.
   */
-  WOResponse *r;
   NSString *auth;
   NSString *k;
   NSString *user, *pwd;
@@ -198,7 +197,6 @@ static NSString *prefix = @"0xHIGHFLYx";
   
   /* authentication provided, check whether it's valid */
   
-  r = [_ctx response];
   if ([auth length] < 6) {
     [self logWithFormat:@"tried unknown authentication method: %@ (A)", auth];
     return [self unauthorized:@"unsupported authentication method"

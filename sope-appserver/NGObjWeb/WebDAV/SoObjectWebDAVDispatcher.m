@@ -746,7 +746,6 @@ static NSTimeZone                *gmt      = nil;
   NSException       *e;
   SoDAVLockManager *lockManager;
   WORequest  *rq;
-  WOResponse *r;
   NSString   *ifValue, *lockDepth;
   id token;
   
@@ -766,7 +765,6 @@ static NSTimeZone                *gmt      = nil;
   }
   
   rq = [_ctx request];
-  r  = [_ctx response];
   
   lockDepth = [rq headerForKey:@"depth"];
   ifValue   = [rq headerForKey:@"if"];
@@ -1153,7 +1151,6 @@ static NSTimeZone                *gmt      = nil;
 - (id)doSUBSCRIBE:(WOContext *)_ctx {
   SoSubscriptionManager *sm;
   WORequest  *rq;
-  WOResponse *r;
   NSURL    *url;
   id       callback;
   NSString *notificationType;
@@ -1162,7 +1159,6 @@ static NSTimeZone                *gmt      = nil;
   NSString *subscriptionID;
   
   rq  = [_ctx request];
-  r   = [_ctx response];
   sm  = [SoSubscriptionManager sharedSubscriptionManager];
   url = [NSURL URLWithString:[self->object baseURLInContext:_ctx]];
   

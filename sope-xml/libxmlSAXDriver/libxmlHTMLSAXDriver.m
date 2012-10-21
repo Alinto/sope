@@ -594,13 +594,11 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
 }
 
 - (BOOL)processElementNode:(xmlNodePtr)node {
-  const htmlElemDesc *tagInfo;
   NSString *tagName, *xhtmlName;
   BOOL     result;
   
   self->depth++;
   
-  tagInfo   = htmlTagLookup(node->name);
   tagName   = xmlCharsToString(node->name);
   xhtmlName = [tagName lowercaseString];
   

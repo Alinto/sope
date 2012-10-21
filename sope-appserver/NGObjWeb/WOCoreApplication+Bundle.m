@@ -49,12 +49,12 @@
     [chkPathes addObject:_bundleName];
   }
   else {
+    [chkPathes addObject:@"."];
+#if COCOA_FRAMEWORK
     NSDictionary *env;
     
     env = [[NSProcessInfo processInfo] environment];
     
-    [chkPathes addObject:@"."];
-#if COCOA_FRAMEWORK
     bp = [env objectForKey:@"HOME"];
     bp = [bp stringByAppendingPathComponent:@"Library"];
     bp = [bp stringByAppendingPathComponent:_domain];
@@ -77,6 +77,10 @@
 
     }
 #else
+    NSDictionary *env;
+    
+    env = [[NSProcessInfo processInfo] environment];
+    
     NSEnumerator *e;
     id tmp;
     if ((tmp = [env objectForKey:@"GNUSTEP_PATHPREFIX_LIST"]) == nil)

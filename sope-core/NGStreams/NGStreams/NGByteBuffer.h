@@ -61,7 +61,7 @@ struct NGByteBufferLA;
   Initialize a byte buffer with a lookahead depth of _la bytes.
 */
 + (id)byteBufferWithSource:(id<NGStream>)_stream la:(unsigned)_la;
-- (id)initWithSource:(id<NGStream>)_stream la:(unsigned)_la;
+- (id)initWithSource:(NSObject <NGStream> *)_stream la:(unsigned)_la;
 
 // LA
 - (int)la:(unsigned)_lookaheadPosition;

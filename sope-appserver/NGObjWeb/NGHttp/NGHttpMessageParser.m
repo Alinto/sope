@@ -434,7 +434,7 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
   }
 
   { /* process HTTP status */
-    char buf[5];
+    char buf[6];
     int  i = 0;
     
     do {
@@ -519,7 +519,7 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
 }
 
 - (void)parseBodyOfPart:(id<NGMimePart>)_part {
-  BOOL doParse, hasCLenHeader;
+  BOOL doParse;
   id   clenValues;
   
   if (_part == nil) {
@@ -529,7 +529,6 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
   
   /* parse only if content-length > 0 */
   clenValues = [_part valuesOfHeaderFieldWithName:@"content-length"];
-  hasCLenHeader = clenValues ? YES : NO;
   if ((clenValues = [clenValues nextObject])) {
     if ([(id)_part contentLength] > 0)
       doParse = YES;

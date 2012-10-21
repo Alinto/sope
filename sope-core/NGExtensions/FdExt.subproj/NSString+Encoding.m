@@ -169,7 +169,6 @@ static char *iconv_wrapper(id self, char *_src, unsigned _srcLen,
   size_t     inbytesleft, outbytesleft, write, outlen;
   const char *fromEncode, *toEncode;
   char       *inbuf, *outbuf, *tm;
-  NSString   *result;
 
   checkDefaults();
 
@@ -190,7 +189,7 @@ static char *iconv_wrapper(id self, char *_src, unsigned _srcLen,
     
     return outbuf;
   }
-  result     = nil;
+
   fromEncode = [_fromEncode cString];
   toEncode   = [_toEncode   cString];
   

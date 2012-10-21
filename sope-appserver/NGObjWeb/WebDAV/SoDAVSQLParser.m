@@ -407,7 +407,7 @@ static inline BOOL isTokStopChar(unichar c) {
   unsigned slen;
   NSString *entityName;
   BOOL isShallow = NO;
-  BOOL isDeep    = NO;
+  // BOOL isDeep    = NO;
   
   if (_scope)  *_scope  = nil;
   if (_entity) *_entity = nil;
@@ -427,9 +427,11 @@ static inline BOOL isTokStopChar(unichar c) {
   if ([self parseToken:"SHALLOW" from:&scur length:&slen consume:YES])
     isShallow = YES;
   else if ([self parseToken:"HIERARCHICAL" from:&scur length:&slen consume:YES])
-    isDeep = YES;
+    ;
+    // isDeep = YES;
   else if ([self parseToken:"DEEP" from:&scur length:&slen consume:YES])
-    isDeep = YES;
+    ;
+  // isDeep = YES;
   else
     /* unknown traveral key */
     return NO;
@@ -475,7 +477,7 @@ static inline BOOL isTokStopChar(unichar c) {
   BOOL hasSelect = NO;
   BOOL hasFrom   = NO;
   BOOL missingByOfOrder = NO;
-  BOOL missingByOfGroup = NO;
+  // BOOL missingByOfGroup = NO;
   
   *result = nil;
   
@@ -565,7 +567,7 @@ static inline BOOL isTokStopChar(unichar c) {
   if ([self parseToken:"GROUP" from:pos length:len consume:YES]) {
     if (![self parseToken:"BY" from:pos length:len consume:YES]) {
       if (beStrict) return NO;
-      missingByOfGroup = YES;
+      // missingByOfGroup = YES;
     }
   }
   
@@ -589,16 +591,17 @@ static inline BOOL isTokStopChar(unichar c) {
   }
   if (orderList) {
     NSMutableArray *ma;
-    unsigned i, len;
+    unsigned // i, 
+      len;
     
     len = [orderList count];
     ma = [[NSMutableArray alloc] initWithCapacity:len];
-    for (i = 0; i < len; i++) {
-      EOSortOrdering *so;
+    // for (i = 0; i < len; i++) {
+    //   EOSortOrdering *so;
       
-      so = [EOSortOrdering sortOrderingWithKey:[orderList objectAtIndex:i]
-			   selector:EOCompareAscending];
-    }
+    //   so = [EOSortOrdering sortOrderingWithKey:[orderList objectAtIndex:i]
+    //     		   selector:EOCompareAscending];
+    // }
     lSortOrderings = [ma shallowCopy];
     [ma release];
     [orderList release]; orderList = nil;

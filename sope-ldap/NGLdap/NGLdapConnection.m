@@ -135,8 +135,7 @@ static void freeMods(LDAPMod **mods) {
       [self unbind];
     else {
       // call unbind to free resources
-      int err;
-      err = ldap_unbind(self->handle);
+      ldap_unbind(self->handle);
       self->handle = NULL;
     }
 
@@ -249,9 +248,7 @@ static void freeMods(LDAPMod **mods) {
 
 - (void)unbind {
   if (self->flags.isBound) {
-    int err;
-    
-    err = ldap_unbind(self->handle);
+    ldap_unbind(self->handle);
     self->flags.isBound = 0;
     self->handle = NULL;
   }

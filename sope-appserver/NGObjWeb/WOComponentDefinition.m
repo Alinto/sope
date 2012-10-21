@@ -81,15 +81,12 @@ static NSNumber *noNum      = nil;
   languages:(NSArray *)_languages
 {
   NSMutableDictionary *childComponents = nil;
-  WOResourceManager *_rm;
   WOTemplate *tmpl;
   NSEnumerator *keys;
   NSString     *key;
   
   if ((tmpl = _t) == nil)
     return nil;
-  
-  _rm = [[WOApplication application] resourceManager];
   
   if ([tmpl hasSubcomponentInfos] == 0)
     return nil;

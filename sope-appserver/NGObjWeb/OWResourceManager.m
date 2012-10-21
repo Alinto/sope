@@ -379,7 +379,6 @@ _pathExists(OWResourceManager *self, NSFileManager *fm, NSString *path)
   */
   NSFileManager *fm;
   NSString      *resource = nil;
-  unsigned      langCount;
   
   if (debugResourceLookup) {
     [self logWithFormat:@"lookup '%@' bundle=%@ languages=%@", 
@@ -387,7 +386,6 @@ _pathExists(OWResourceManager *self, NSFileManager *fm, NSString *path)
   }
   
   fm        = [self fileManager];
-  langCount = [_languages count];
 
   /* now check in webserver resources path */
   

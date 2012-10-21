@@ -193,7 +193,6 @@ static EONull *null          = nil;
 {
   NSArray        *componentRelationships = nil;
   EOSQLQualifier *qualifier              = nil;
-  NSArray        *sourceAttributes       = nil;
   id             tmpRelationship         = nil;
   EOAttribute    *sourceAttribute        = nil;
   EOAttribute    *destinationAttribute   = nil;
@@ -213,13 +212,6 @@ static EONull *null          = nil;
 
   if (componentRelationships) {
     tmpRelationship = [componentRelationships objectAtIndex:0];
-        
-    sourceAttributes =
-      [NSArray arrayWithObject:[tmpRelationship sourceAttribute]];
-  }
-  else {
-    sourceAttributes =
-      [NSArray arrayWithObject:[relationship sourceAttribute]];
   }
 
   sourceAttribute = [tmpRelationship sourceAttribute];

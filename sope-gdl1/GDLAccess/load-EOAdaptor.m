@@ -64,6 +64,8 @@ int main(int argc, char **argv, char **env) {
     exit(0);
   }
   
+  [pool release];
+
   fprintf(stderr, "ERROR: failed to load adaptor '%s'.\n", 
 	  [adaptorName cString]);
   

@@ -119,6 +119,8 @@ int main(int argc, char **argv, char **env) {
     printf("connection could be established.\n");
   
   [adch closeChannel];
+
+  [pool release];
   
   exit(0);
   return 0;
