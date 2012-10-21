@@ -104,7 +104,7 @@
     return [key isEqual:_key] ? value : nil;
 }
 
-- (unsigned int)count {
+- (NSUInteger)count {
     return 1;
 }
 - (BOOL)isNotEmpty {
