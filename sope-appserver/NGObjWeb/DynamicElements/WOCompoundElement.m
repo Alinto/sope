@@ -200,10 +200,10 @@ static int descriptiveIDs = -1;
 }
 
 - (void)appendToResponse:(WOResponse *)_response inContext:(WOContext *)_ctx {
-  static int depth = 0;
   void (*incId)(id, SEL);
   unsigned short i;
 #if DEBUG
+  static int depth = 0;
 #if USE_EXCEPTION_HANDLER
   static NSString *cName  = @"componentName";
   static NSString *elemId = @"elementID";
@@ -212,15 +212,13 @@ static int descriptiveIDs = -1;
   
   if (NSDateClass == Nil)
     NSDateClass = [NSDate class];
-#endif
 
   depth++;
-  
-#if defined(DEBUG) && USE_EXCEPTION_HANDLER
+
+#if USE_EXCEPTION_HANDLER
   NS_DURING {
 #endif
 
-#ifdef DEBUG
     if (profElements)
       st = [[NSDateClass date] timeIntervalSince1970];
 #endif
@@ -301,9 +299,8 @@ static int descriptiveIDs = -1;
              [[(WOComponent *)[_ctx component] name] cString],
              diff);
     }
-#endif
-    
-#if defined(DEBUG) && USE_EXCEPTION_HANDLER
+
+#if USE_EXCEPTION_HANDLER
   }
   NS_HANDLER {
     NSMutableDictionary *ui;
@@ -326,6 +323,7 @@ static int descriptiveIDs = -1;
 #endif
 
   depth--;
+#endif
 }
 
 /* description */
