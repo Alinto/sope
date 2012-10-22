@@ -69,6 +69,7 @@ ifneq ($(frameworks),yes)
 
 WOExtensions_BUNDLE_LIBS += \
 	-lNGObjWeb	\
+	-lWOExtensions -lWEExtensions \
 	-lNGMime	\
 	-lNGStreams -lNGExtensions -lEOControl \
 	-lDOM -lSaxObjC
