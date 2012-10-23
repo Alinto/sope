@@ -1,0 +1,579 @@
+2012-09-06  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Connection.m - reworked a bit the
+	code to have more cache hits. Also added a cache of enabled
+	extensions to avoid enabling them over and over using the
+	same IMAP connection.
+
+2012-08-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WOCoreApplication.m
+	(-shouldSetupSignalHandlers): new method that gives the
+	possibility for the applications not to setup the signal handlers
+	for SIGTERM/-INT/-ILL ...
+
+2012-05-09  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-core/NGStreams/NGCTextStream.m and:1
+	sope-mime/NGImap4/NGImap4Client.m - we now permit setting
+	the encoding instead of using the default one in NGCTextStream
+	as whenever we APPEND a message over IMAP, we use
+	NSISOLatin1StringEncoding while SOGo forces NSUTF8StringEncoding. This
+	create size mismatches and literal errors during the APPEND operation.
+
+2012-05-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMime/NSData+RFC822.m: new category module for rfc822
+	utility methods.
+
+2012-04-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/PGConnection.m
+	(-connectWithHostName:port:options:tty:database:login:password:)
+	(-connectWithInfo:): make sure that "standard_conforming_strings"
+	is set to 'on' for new connections.
+
+2012-03-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+    * Applied patch for bug http://www.sogo.nu/bugs/view.php?id=1670
+	* Applied patch for bug http://www.sogo.nu/bugs/view.php?id=1671
+	* Applied patch for bug http://www.sogo.nu/bugs/view.php?id=1672
+
+2012-03-22  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-appserver/NGObjWeb/UnixSignalHandler.{h,m} - entirely
+	dropped that class as it was utterly broken. Replaced the
+	callers with standard signal() calls.
+
+2012-02-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-login): when "useUTF8" is
+	set to YES, we need to specify the password length using the
+	NSUTF8StringEncoding.
+
+2012-02-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-login): when the password is
+	empty, use a simple pair of dquotes as password parameter, as
+	servers consider "{0}" as missing string instead of just an empty
+	one.
+
+2012-02-27  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m (-enable:): now takes an array
+	instead of a single string and populate the new
+	"enabledExtensions" ivar with the name of enabled extensions,
+	ensuring first that they are not listed more than once.
+	(-closeConnection): released and nilify the new
+	"enabledExtensions" ivar.
+	(-reconnect): when the enabledExtensions ivar is not empty,
+	reenable the extensions after relogin.
+
+	* sope-mime/NGImap4/NGImap4Connection.m (-enableExtensions:): now
+	takes an array instead of a single string.
+	(-init): removed the "enabledExtensions" ivar.
+
+2012-02-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/Oracle8/OracleValues.m
+	(-[NSStringstringValueForOracleType:attribute:]): return the
+	escaped value rather than "self", in order for the code to be
+	actually effective.
+	Accept additional types SQLT_VCS and SQLT_LVC.
+
+	* sope-gdl1/Oracle8/OracleAdaptor.m (-typeForName:): fixed mapping
+	for VARCHAR, added VARCHAR2 and LONG VARCHAR and a fallback to
+	SQLT_CHR if the type in question is not supported. Enhanced type
+	detection with hasPrefix, to enable count for fix values.
+
+2012-02-15  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/NSString+PGVal.m
+	(-stringValueForPostgreSQLType:attribute:): properly escape and
+	quote strings in a way that is supported by all know versions of
+	PostgreSQL, from 8.1 (or even before) up to 9.1.
+
+	* sope-gdl1/PostgreSQL/PGConnection.m (-_setupPrivateOptions):
+	removed method, made obsolete by the above.
+
+2012-02-14  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/Oracle8/OracleValues.m (-[NSString
+	stringValueForOracleType:attribute:]): propertly escape quote
+	("'") characters in strings and return the result between a new
+	pair of quotes.
+
+2012-02-13  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m: added parsing of
+	untagged response to the "ENABLE" command.
+
+2012-02-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+	(-davFlatQuery:inContext:): don't escape url components from here,
+	as they will be re-escaped in the webdav renderer.
+
+2012-02-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-ldap/NGLdap/NSString+DN.m (-escapedForLDAPDN): new helper
+	method to properly escape dn members following rfc.
+
+2012-01-31  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m (_parseBodyHeaderFields:)
+	We now correctly handle responses with no size parameters.
+
+2012-01-10  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMail/NGMailAddressParser.m: perform a check on the
+	char pointer to ensure the buffer is never read beyond its bounds.
+
+2011-12-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-ldap/NGLdap/NGLdapEntry.m (-initWithDN:attributes:): use
+	the original attributes array, in order to enable further
+	modifications thereof.
+
+	* sope-ldap/NGLdap/NGLdapAttribute.m (-allStringValues): do not
+	attempt to create an array when the resulting string is nil.
+	(-isEqual:): overridden comparator method in order to take the
+	attribute name and values into account.
+
+2011-12-30  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NSString+Imap4.m - dropped
+	the IMAP4 password escaping method - it was just plain braindead
+
+	* sope-mime/NGImap4/NGImap4Client.m - now use IMAP4
+	continuation when sending over the password
+
+2011-12-19  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m (-nextObject):
+	initialise rptr and ctrl to NULL in order to make sure they are
+	initialised even when the search did not succeed.
+
+2011-12-15  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGSieveClient.{h,m} - added TLS support
+	to the Sieve code.
+
+2011-12-06  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/PGConnection.m (-connectWithInfo:)
+	(-connectWithHostName:port:options:tty:database:login:password:):
+	set "standard_conforming_strings" pg options to "on" to avoid
+	warnings on < 9.x and useless interpretation of backslashes as
+	escaping sequences.
+
+2011-11-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WOMessage.m (-init): set version to
+	"HTTP/1.1" instead of "...1.0".
+
+	* sope-appserver/NGObjWeb/WOResponse.m (-init): set version to
+	"HTTP/1.1" instead of "...1.0".
+
+	* sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
+	(-stringForValue:ofProperty:prefixes:requireTagValue:): don't
+	append a space to singletons tags as html clients from the 90's
+	are no longer used for anything serious nowadays.
+
+2011-11-25  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+	(-deliverResponse:toRequest:onStream:): capitalize header names if
+	"WOHTTPAdaptorCapitalizeHeaders" is set.
+	(-_reasonForStatus:): improved certain "reasons" for picky clients.
+
+2011-11-10  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-gdl1/PostgreSQL/NSString+PGVal.m
+	(stringValueForPostgreSQLType:attribute:): we don't need to escape
+	"\" with postgres.
+
+2011-10-31  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Connection.m
+	(-fetchContentOfBodyPart:atURL:withPeek:): new method that enables
+	the use of either "BODY" or "BODY.PEEK" as body part prefixes.
+
+2011-10-28  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMime/NGMimeMultipartBody.m (-initWithPart:): removed
+	useless constraint on the _part parameter, since it's not even
+	used.
+
+2011-10-26  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMail/NGMimeMessage.m (-initWithHeader:): invoke
+	"retain" rather than copy on the header hashmap, in order to
+	enable further modifications in the client code.
+
+2011-09-21  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Connection.m: made
+	imap4FolderNameForURL: and imap4FolderNameForURL:removeFileName:
+	public.
+
+2011-09-04  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-core/NGStreams/NGActiveSocket.m
+	(-_unixWriteBytes:count:) - we tell send()
+	to not emit any signal such as SIGPIPE. This cause
+	havoc in OpenChange if the remote peer closes the
+	socket for inactivity.
+
+2011-07-29  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* Added patch from http://www.sogo.nu/bugs/view.php?id=1390
+	  to add GNU TLS support.
+
+2011-07-27  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* Dropped useless stuff in SOPE
+	* Made sure everything would compile and work
+	  on GCC's runtime (< 4.6 and >= 4.6) and the
+	  GNUstep runtime (libobjc2-1.5). This is an initial effort
+	  as things should still be cleaned up in SOPE.
+
+2011-07-18  Francis Lachapelle  <flachapelle@inverse.ca>
+
+	* NGUrlFormCoder.m (NGDecodeUrlFormParameters): applied a patch from
+	bug #1369 which fixes a buffer overflow.
+
+2011-07-06  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m
+	(-_parseSearchResponseIntoHashMap:) we make sure
+	that we've got a MSN before adding it to the 
+	array of MSNs. This can happen when servers
+	just return "* SEARCH" with no MSN.
+
+2011-07-05  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m
+	Applied a patch from bug #1358 which fixes
+	ACLs for names containing spaces.
+
+2011-06-29  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGSieveClient.{h,m}: Implemented
+	correctly the PLAIN authentication to support proxying
+
+2011-04-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-core/NGExtensions/FdExt.subproj/NSString+URLEscaping.m
+	(-containsURLInvalidCharacters): we wander the string as an array
+	of utf8 bytes, replacing the previous method that wrongfully
+	casted "unichar" into "char" data, leading to false negatives
+	for certain characters.
+	(-stringByEscapingURL): simplified and fixed method, that
+	wrongfully used the generic "-cStringXXX" methods. From now on,
+	the string is converted to an NSData, and the encoding is either
+	latin-1 or utf-8 based on doUseUTF8Encoding().
+
+2011-04-04  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Connection.m (-doesMailboxExistAtURL:):
+	if the mailbox is already counted as selected by the NGImap4Client
+	instance, we return YES directly to avoid a costly UIDVALIDITY
+	operation.
+
+	* sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
+	(+iniitialize): we no longer make use of "WOHttpAllowHost".
+	(-_accept): included remote address verification code from
+	_checkAccessOnConnection:
+	(-_checkAccessOnConnection:): removed obsolete method.
+
+2011-04-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-appserver/NGObjWeb/Defaults.plist: WOHttpAllowHost now set
+	to an empty array.
+
+	* sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+	(-_listeningAddress): don't warn about WOHttpAllowHost when its
+	value is an empty array.
+
+2011-03-29  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-core/NGStreams/configure: updated config.guess and
+	config.sub in order to support more modern architectures. Removed
+	useless creation of arch-dependent subdirs containing config.h.
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m (_parseSingleBody): be
+	even more tolerant with responses from dbmail.
+
+	* sope-appserver/NGObjWeb/DynamicElements/DynamicElements/WOString.m
+	(-[_WOSimpleStaticString initWithValue:escapeHTML:]): perform
+	string manipulations on an array of unichar instead of using the
+	"cString" methods, which return a wrong number of bytes in a non
+	8bit environments.
+
+	* sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+	(-[WOWatchDogChild readMessage]):
+	don't set the watchdog timeout if watchDogRequestTimeout is less
+	than 1.
+	(-[WOWatchDogChild _safetyBeltIteration:]): renamed from
+	"_killKill" and made a multi-iteration callback. Warns the user
+	each minute about request still hanging. Kills the child once
+	watchDogRequestTimeout has been reached for "killTimerIteration".
+	When occurring from a child, display a warning and invalidate the
+	faulty timer, although this should never occur.
+	(-[WOWatchDog _spawnChild:]): make all children release their kill
+	timer as they will otherwise be retained and their timer will be
+	triggered. This fixes a bug that was introduced in the last
+	change where children would attempt to kill one another.
+	(WOWatchDogApplicationMain): invoke "applicationWillStart" on the
+	WOApplication class when available, in order to let it perform
+	initialization tasks after the user defaults and the logging
+	channels have been setup propertly.
+
+2011-03-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMime/NGMimeType.m (classForType): accept
+	"text/vcard" type.
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m (_parseSingleBody): be
+	tolerant for mail servers that don't separate the response member
+	with a space character (like dbmail): don't use consumeIfMatch,
+	which raises an exception if the requested char is not found.
+
+2011-03-17  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m (_purifyQuotedString):
+	fixed to accept spaces between quoted and unquoted chunks (bug
+	#723).
+
+	* sope-core/NGExtensions/NGQuotedPrintableCoding.m
+	(NGDecodeQuotedPrintableX): be tolerant for certain mailers that
+	define the final line as a folded one...
+
+	* sope-mime/NGImap4/NGImap4Connection.m (-fetchContentOfBodyPart):
+	wander through the whole list of responses since the requested
+	body part might be returned after one or more untagged responses.
+
+	* sope-appserver/NGObjWEb/WOWatchDogApplicationMain.m
+	(-[WOWatchDogChild terminate]): no longer release the control
+	socket from here as the child's signal handle will try to notify
+	us that it is terminating. The control socket is released later in
+	-handleProcessStatus.
+	(-[WOWatchDog _cleanupSignalHandlers]): no longer release the control sockets
+	from here as the excessive children will be released fully when
+	releasing the children accounting arrays.
+	(-[WOWatchDog _spawnChild]): the children accounting arrays are
+	released and the current child is retained so that the excessive
+	control sockets, watchdog timers and memory are all removed from
+	memory.
+
+2011-02-24  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMail/NGImap4Connection.m (-selectFolder:): compare
+	folder names in their utf-7 form.
+
+2011-02-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+        * sope-mime/NGMail/NGSmtpClient.m
+	Removed the Bcc stripping code as it's now
+	done within SOGo.
+
+2011-01-05  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-core/NGExtensions/NGQuotedPrintableCoding.m
+	Applied a patch from Marcel Waldvogel
+	Marcel.Waldvogel@uni-konstanz.de which fixes
+	bug #1009.
+
+2010-12-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+	(-[EOKeyValueQualifier
+	imap4OperatorForDateKeyword:andComparisonSelector:]): consider
+	the EOQualifierOperatorGreaterThanOrEqualTo and
+	EOQualifierOperatorLessThanOrEqualTo operators.
+	(-[EOKeyValueQualifier appendToImap4SearchString:insertNot:]): Use
+	a minimalist english locale for generating date description to
+	avoid taking the active locale into account. The locale is
+	generated from the new function below.
+	Consider the EOQualifierOperatorCaseInsensitiveLike operator where
+	appropriate.
+	(initDateLocale): new function that generates a minimalist english
+	locale with the "NSShortMonthNameArray" key/value.
+
+2010-12-17  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
+	Fixed a braindead error where the data lenght was
+	verified after the strdup() call when it was equal
+	to 0 - generating a segfault in rare occasions.
+
+2010-11-10  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m
+	If we use Courier, we now avoid using UTF-8
+	SORT as it's a compile-time option not that common
+	This can be nonetheless forced using the
+	ImapSortEncoding.
+
+2010-11-02  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGMime/NGMimeHeaderFieldGeneratorSet.m
+	We no longer use NGMimeAddressHeaderFieldGenerator
+	for in-reply-to fields as they aren't "email addresses"
+	but rather "message ids".
+
+2010-11-01  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-json/SBJSon/: Inclusion of Stig Brautaset's SBJson library.
+
+2010-10-08  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m
+	We "assume" the server returns us UIDs sorted
+	by date when we only ask for this. This is the
+	case for GMail and Courier and makes initial mail
+	loading much faster
+	* sope-mime/NGImap4/NGImap4ResponseParser.m
+	Fixed a _consume(self, 1); in _parseEnvelopeAddressStructures
+	when _parseEnvelopeAddressStructure returns nil in order
+	to consume the space.
+
+2010-09-23  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4ResponseParser.m
+	We now try harder to get a string out of
+	an encoded string by trying the supplied encoding,
+	trying next UTF-8 and finally giving up with
+	ISO-8859-1.
+
+2010-08-30  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
+	(parseTimeZone): we must use signed types for time units to avoid
+	a sign-bit "overflow".
+
+	* sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m:
+	enhanced to support the "long long" fundamental type.
+
+	* sope-appserver/NGObjWeb/DynamicElements/_WOStaticHTMLElement.m,
+	sope-appserver/NGObjWeb/NGHttp+WO.m,
+	sope-appserver/NGObjWeb/SoObjects/SoObjectMethodDispatcher.m,
+	sope-appserver/NGObjWeb/SoObjects/SoProductLoader.m,
+	sope-appserver/NGObjWeb/Templates/WOWrapperTemplateBuilder.m,
+	sope-appserver/NGObjWeb/WOResponse.m,
+	sope-appserver/NGObjWeb/WOStatisticsStore.m,
+	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m,
+	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m,
+	sope-appserver/WEExtensions/WEPageView.m,
+	sope-appserver/WEExtensions/WETableMatrix.m,
+	sope-core/EOControl/EOKeyGlobalID.m,
+	sope-core/EOControl/EOQualifier.m,
+	sope-core/NGExtensions/FdExt.subproj/NSRunLoop+FileObjects.m,
+	sope-core/NGExtensions/NGBitSet.m,
+	sope-core/NGExtensions/NGBundleManager.m,
+	sope-core/NGExtensions/NGExtensions.m,
+	sope-core/NGExtensions/NGHashMap.m,
+	sope-core/NGExtensions/NGObjCRuntime.m,
+	sope-core/NGExtensions/NGStack.m,
+	sope-core/NGStreams/NGInternetSocketAddress.m,
+	sope-gdl1/GDLAccess/EOExpressionArray.m,
+	sope-gdl1/GDLAccess/EOFault.m,
+	sope-gdl1/GDLAccess/EOFaultHandler.m,
+	sope-gdl1/GDLAccess/EOObjectUniquer.m,
+	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m,
+	sope-gdl1/GDLAccess/EORecordDictionary.m,
+	sope-ldap/NGLdap/NGLdapConnection.m,
+	sope-mime/NGMime/NGMimeContentDispositionHeaderFieldGenerator.m,
+	sope-mime/NGMime/NGMimeFileData.m,
+	sope-mime/NGMime/NGMimeJoinedData.m,
+	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m,
+	sope-xml/DOM/DOMCharacterData.m, sope-xml/DOM/DOMElement.m,
+	sope-xml/DOM/DOMSaxHandler.m, sope-xml/DOM/DOMText.m,
+	sope-xml/SaxObjC/SaxAttributeList.m,
+	sope-xml/SaxObjC/SaxAttributes.m, sope-xml/SaxObjC/SaxLocator.m,
+	sope-xml/libxmlSAXDriver/TableCallbacks.m,
+	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m,
+	sope-appserver/NGObjWeb/DynamicElements/_WOStaticHTMLElement.m,
+	sope-appserver/NGObjWeb/NGHttp+WO.m,
+	sope-appserver/NGObjWeb/SoObjects/SoObjectMethodDispatcher.m,
+	sope-appserver/NGObjWeb/SoObjects/SoProductLoader.m,
+	sope-appserver/NGObjWeb/Templates/WOWrapperTemplateBuilder.m,
+	sope-appserver/NGObjWeb/WOResponse.m,
+	sope-appserver/NGObjWeb/WOStatisticsStore.m,
+	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m,
+	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m,
+	sope-appserver/WEExtensions/WEPageView.m,
+	sope-appserver/WEExtensions/WETableMatrix.m,
+	sope-core/EOControl/EOKeyGlobalID.m,
+	sope-core/EOControl/EOQualifier.m,
+	sope-core/NGExtensions/FdExt.subproj/NSRunLoop+FileObjects.m,
+	sope-core/NGExtensions/NGBitSet.m,
+	sope-core/NGExtensions/NGBundleManager.m,
+	sope-core/NGExtensions/NGExtensions.m,
+	sope-core/NGExtensions/NGHashMap.m,
+	sope-core/NGExtensions/NGObjCRuntime.m,
+	sope-core/NGExtensions/NGStack.m,
+	sope-core/NGStreams/NGInternetSocketAddress.m,
+	sope-gdl1/GDLAccess/EOExpressionArray.m,
+	sope-gdl1/GDLAccess/EOFault.m,
+	sope-gdl1/GDLAccess/EOFaultHandler.m,
+	sope-gdl1/GDLAccess/EOObjectUniquer.m,
+	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m,
+	sope-gdl1/GDLAccess/EORecordDictionary.m,
+	sope-ldap/NGLdap/NGLdapConnection.m,
+	sope-mime/NGMime/NGMimeContentDispositionHeaderFieldGenerator.m,
+	sope-mime/NGMime/NGMimeFileData.m,
+	sope-mime/NGMime/NGMimeJoinedData.m,
+	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m,
+	sope-xml/DOM/DOMCharacterData.m, sope-xml/DOM/DOMElement.m,
+	sope-xml/DOM/DOMSaxHandler.m, sope-xml/DOM/DOMText.m,
+	sope-xml/SaxObjC/SaxAttributeList.m,
+	sope-xml/SaxObjC/SaxAttributes.m, sope-xml/SaxObjC/SaxLocator.m,
+	sope-xml/libxmlSAXDriver/TableCallbacks.m,
+	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m: adapted classes to
+	use "NSInteger" and "NSUInteger" instead of "int" and "unsigned
+	int" for compatibility with versions of GNUstep base >= 1.20.
+
+	* NGExtensions/NSMethodSignature+misc.[hm]: dropped useless and
+	cumbersome category module.
+
+2010-08-26  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
+
+	* NGBundleManager.m (+load): removed method.
+	(+defaultBundleManager): removed the hack with the objective-c
+	class load hook since it uses memory and slows SOPE down for
+	nothing.
+	(_addMainBundlePathToPathArray:): we now ignore empty paths, since
+	we actually don't want to scan the CWD for bundles.
+
+	* sope-appserver/NGObjWeb/SNSConnection.m: removed obsolete class.
+
+	* sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m
+	(-generateDataForHeaderFieldNamed:value:): fixed a bug where the
+	buffer was treated as an unicode buffer (right) but where bytes
+	were extracted as an UTF-8 string (wrong). The "obj" variable is
+	now named "address" as a more explicit name.
+
+	* sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+	(NGEncodeQuotedPrintableMime): we encode ' ' as '_'.
+
+2010-08-24  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* sope-mime/NGImap4/NGImap4Client.m,
+	sope-core/NGStreams/NGActiveSSLSocket.m,
+	sope-core/NGStreams/NGSocket.m
+	Added TLS support for IMAP4 clients.
+
+2010-08-12  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+        * Dropped the sope-tools debian package and
+	all references to it
+
+2010-07-29  Ludovic Marcotte  <lmarcotte@inverse.ca>
+
+	* Initial import of the SOPE source based on
+	the r1664 revision.
+	* Added the sope-patchset and the sope-gsmake2 patches
+	* Added the sope-debian patch
+	* Dropped a bunch of useless stuff
