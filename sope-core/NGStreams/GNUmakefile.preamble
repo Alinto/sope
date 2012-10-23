@@ -43,14 +43,21 @@ else
 SYSTEM_LIB_DIR += -L/usr/local/lib -L/usr/lib
 endif
 
-
 # activating SSL support
-ifneq ($(ssl),no)
+ifeq ($(HAS_LIBRARY_gnutls),yes)
+libNGStreams_OBJC_FILES += NGActiveSSLSocket.m
+NGStreams_OBJC_FILES += NGActiveSSLSocket.m
+ADDITIONAL_CPPFLAGS += -DHAVE_GNUTLS=1
+libNGStreams_LIBRARIES_DEPEND_UPON += -lgnutls
+NGStreams_LIBRARIES_DEPEND_UPON += -lgnutls
+else
+ifeq ($(HAS_LIBRARY_ssl),yes)
 libNGStreams_OBJC_FILES += NGActiveSSLSocket.m
 NGStreams_OBJC_FILES += NGActiveSSLSocket.m
 ADDITIONAL_CPPFLAGS += -DHAVE_OPENSSL=1 -DOPENSSL_NO_KRB5
 libNGStreams_LIBRARIES_DEPEND_UPON += -lssl -lcrypto
 NGStreams_LIBRARIES_DEPEND_UPON += -lssl -lcrypto
+endif
 endif
 
 ADDITIONAL_CPPFLAGS += -Wall -Wno-protocol
