@@ -1,3 +1,12 @@
+commit 67812062daa25a8f52fff897b2c49b9c5554623c
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 23 17:25:00 2012 -0400
+
+    Replaced ChangeLog with the one generated from git
+
+M	ChangeLog
+A	ChangeLog.old
+
 commit 00f3a7573a1888f62f6d8a189dfa6ede470b2b3e
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 23 08:03:11 2012 -0400
@@ -24,13 +33,6 @@ Date:   Mon Oct 22 13:04:03 2012 -0400
     relink WOExtensions.wox against libWOExtensions and libWEExtensions
 
 M	sope-appserver/WOExtensions/GNUmakefile.preamble
-
-commit 52119a4db42cb7bdee1e527ef2ddc84bf1d98698
-Merge: e2d4127 b2fa3d8
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Sun Oct 21 00:26:03 2012 -0400
-
-    Merge branch 'master' of github.com:inverse-inc/sope
 
 commit e2d4127aa1f9eaaffc451185a262bd7895ee376a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
@@ -123,42 +125,6 @@ Date:   Sat Oct 20 21:05:28 2012 -0400
     make "count" return an "NSUInteger" rather than an "unsigned int" as in the original method signature (thanks to Sebastian Reitenbach)
 
 M	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m
-
-commit b2fa3d85bfea701362a9ab2fc1d78ffeb438658e
-Merge: 06d4718 c626689
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Sat Oct 20 12:31:50 2012 -0700
-
-    Merge pull request #5 from dekkers/fix-building-on-arm-and-alpha
-    
-    Fix building on arm and alpha (thanks to Jeroen Dekkers)
-
-commit 06d4718f9b29178dcd2f2fea0f934938cc643be0
-Merge: e5e2727 9876233
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Sat Oct 20 12:27:17 2012 -0700
-
-    Merge pull request #4 from dekkers/close-all-fds-on-daemon-start
-    
-    Close all file descriptors on daemon start (thanks to Jeroen Dekkers)
-
-commit e5e2727bbb1781a13e235c6cd69cd5da2d7515b0
-Merge: 5d959d2 c24dfc3
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Sat Oct 20 12:24:59 2012 -0700
-
-    Merge pull request #2 from dekkers/link-everything-correctly
-    
-    Specify all necessary libraries when linking (thanks to Jeroen Dekkers)
-
-commit 5d959d20b8a9693b260eed4f2daadb477994e2e8
-Merge: 28cfbd2 c8101a1
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Sat Oct 20 12:22:15 2012 -0700
-
-    Merge pull request #1 from dekkers/remove-disabling-of-optimization
-    
-    Remove disabling of optimization for exception handlers (thanks to Jeroen Dekkers)
 
 commit 28cfbd2a3940447322a91e11147e9f77a6fbe45f
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
@@ -623,13 +589,6 @@ Date:   Fri Oct 5 15:26:51 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit fceac47b19de9eb063c4d3200515b8f4bf7cfe7e
-Merge: 21e85bb 3a21618
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Tue Oct 2 15:59:46 2012 -0400
-
-    Merge branch 'master' of github.com:inverse-inc/sope
-
 commit 21e85bbc577eb287e06c687e2403c8e6b1bf1efc
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 2 15:59:41 2012 -0400
@@ -670,22 +629,6 @@ Date:   Mon Sep 10 17:09:42 2012 +0000
 
 M	sope-appserver/NGObjWeb/ChangeLog
 M	sope-appserver/NGObjWeb/NGHttp+WO.m
-
-commit 91d45a652ad2d7f7475503532b87e74c9bdff1b5
-Merge: 3244f2c c9fffea
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Thu Sep 6 08:48:55 2012 +0000
-
-    merge of '2242b23407828ca15b735ac862aadc4b3f143dd2'
-         and 'c766aa285f3a2511e4e728b4aa87faa112521be5'
-    
-    Monotone-Parent: 2242b23407828ca15b735ac862aadc4b3f143dd2
-    Monotone-Parent: c766aa285f3a2511e4e728b4aa87faa112521be5
-    Monotone-Revision: bb3fdad58223adb3b5db5802b078e46cc0dd076a
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2012-09-06T08:48:55
-    Monotone-Branch: ca.inverse.sope
 
 commit c9fffeaa0f47bfea166fe1871f9f377545493be8
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
@@ -766,22 +709,6 @@ Date:   Mon Aug 27 15:50:44 2012 +0000
 M	sope-mime/NGMail/ChangeLog
 M	sope-mime/NGMail/NGMailAddressParser.h
 M	sope-mime/NGMail/NGMailAddressParser.m
-
-commit 3c12cd1b368d5fd67727a7f7861e56dc6912b467
-Merge: a48f32e 4ac6ad4
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Wed Aug 8 17:19:08 2012 +0000
-
-    merge of '3240b1c8d9bdee4e51d428685d65be78bfb185bf'
-         and '8cb1826d1f3de08c525682d9ed4355e568ec3727'
-    
-    Monotone-Parent: 3240b1c8d9bdee4e51d428685d65be78bfb185bf
-    Monotone-Parent: 8cb1826d1f3de08c525682d9ed4355e568ec3727
-    Monotone-Revision: 57e49d338571c56854b554ebf9d7922693920b42
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2012-08-08T17:19:08
-    Monotone-Branch: ca.inverse.sope
 
 commit a48f32e1a239cd168ee97510f059441286500caa
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
@@ -1023,22 +950,6 @@ Date:   Tue May 29 18:48:00 2012 +0000
 
 M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
 
-commit 9de01c3fc09720ab76ae0332f0aeb13dfcad2127
-Merge: 1bc7557 72d7013
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Thu May 24 14:26:49 2012 +0000
-
-    merge of '251de628e771ed3930ca566995fad547dbce20df'
-         and 'b2721d7f18528c981a921065d3272cca1a9070e8'
-    
-    Monotone-Parent: 251de628e771ed3930ca566995fad547dbce20df
-    Monotone-Parent: b2721d7f18528c981a921065d3272cca1a9070e8
-    Monotone-Revision: 8d5039967f59c97fd8c653e702602f80dba08abf
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2012-05-24T14:26:49
-    Monotone-Branch: ca.inverse.sope
-
 commit 72d701377b372e799419dab1484c1ea40a1364cf
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu May 24 14:26:45 2012 +0000
@@ -1148,22 +1059,6 @@ Date:   Wed May 9 08:54:14 2012 +0000
 
 M	sope-xml/SaxObjC/SaxAttributes.m
 
-commit 928f3cf86f0cab3219ca0b2f99df903a762e35ad
-Merge: 9d51c0f 3611a5b
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Tue May 1 20:34:41 2012 +0000
-
-    merge of '3b3113f816e2ec37b42a5fd5982d60e172e2def7'
-         and '5944df4d57f6970a9272c13a25dae35011483fac'
-    
-    Monotone-Parent: 3b3113f816e2ec37b42a5fd5982d60e172e2def7
-    Monotone-Parent: 5944df4d57f6970a9272c13a25dae35011483fac
-    Monotone-Revision: 3726e7db829b5ee868cdc21f61798d973f1482d4
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2012-05-01T20:34:41
-    Monotone-Branch: ca.inverse.sope
-
 commit 9d51c0f6d61dc1407188ea412a070b3aebf031bc
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue May 1 20:34:36 2012 +0000
@@ -1180,22 +1075,6 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGMime/GNUmakefile
 A	sope-mime/NGMime/NSData+RFC822.h
 A	sope-mime/NGMime/NSData+RFC822.m
-
-commit 3611a5b7297905d2db416d16d0cd09dd78f9f152
-Merge: fb29509 91065b5
-Author: Francis Lachapelle <flachapelle@inverse.ca>
-Date:   Sat Apr 28 03:53:03 2012 +0000
-
-    merge of 'ac5a630f621998ce587f8395d1e6e7221b923eec'
-         and 'c7b7f5124aeab9453c93d95272e1bf91e7ac3172'
-    
-    Monotone-Parent: ac5a630f621998ce587f8395d1e6e7221b923eec
-    Monotone-Parent: c7b7f5124aeab9453c93d95272e1bf91e7ac3172
-    Monotone-Revision: 5944df4d57f6970a9272c13a25dae35011483fac
-    
-    Monotone-Author: flachapelle@inverse.ca
-    Monotone-Date: 2012-04-28T03:53:03
-    Monotone-Branch: ca.inverse.sope
 
 commit fb2950954e0a0db42ec487e2cf09fcad3b00f2fd
 Author: Jean Raby <jraby@inverse.ca>
@@ -1541,22 +1420,6 @@ Date:   Tue Feb 14 03:04:34 2012 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 109e6f894a19f1e7b3bd1f333a4b334a0b5d9cb1
-Merge: 856b6be 8d98bf5
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Mon Feb 6 15:23:13 2012 +0000
-
-    merge of '7c135ae304db6f9f5c070c6db456434525ee4ee9'
-         and '9f83d6a503f32e3c1f6fe8a0ddb9d6094660782e'
-    
-    Monotone-Parent: 7c135ae304db6f9f5c070c6db456434525ee4ee9
-    Monotone-Parent: 9f83d6a503f32e3c1f6fe8a0ddb9d6094660782e
-    Monotone-Revision: b168d3a8503d6652d6985fd328cfed12e5c8df6c
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2012-02-06T15:23:13
-    Monotone-Branch: ca.inverse.sope
-
 commit 856b6be3523026783a22046846ed1f42d462af74
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Feb 6 15:20:44 2012 +0000
@@ -1692,22 +1555,6 @@ Date:   Tue Jan 10 17:32:49 2012 +0000
 M	ChangeLog
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit 23b3cb23167fb02b91f4527f205d23b0ef8c8192
-Merge: 41f8287 704bff7
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Fri Dec 30 23:22:13 2011 +0000
-
-    merge of 'a2112c6513358c1ff28c2f936a00c3fe72723427'
-         and 'e619f846465044643ada44d0598cc9723923280c'
-    
-    Monotone-Parent: a2112c6513358c1ff28c2f936a00c3fe72723427
-    Monotone-Parent: e619f846465044643ada44d0598cc9723923280c
-    Monotone-Revision: 103e4fff058ad63f11219ee11f6805117d740246
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-12-30T23:22:13
-    Monotone-Branch: ca.inverse.sope
-
 commit 704bff7ea4d0b69269e312fd2f4d89ccd276a7c4
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Dec 30 23:21:37 2011 +0000
@@ -1756,22 +1603,6 @@ Date:   Fri Dec 30 14:08:43 2011 +0000
     Monotone-Branch: ca.inverse.sope
 
 M	sope-mime/NGMail/NGSendMail.m
-
-commit b731a1cd3818a7757e2e8591af3c4455f501c207
-Merge: ab768d4 33491e1
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Mon Dec 19 16:44:07 2011 +0000
-
-    merge of '8a88e3aacf55dc11b0afaf09bb87f917fe217816'
-         and 'b9939561d21749b9c1be9b4002f4fc926dddde8a'
-    
-    Monotone-Parent: 8a88e3aacf55dc11b0afaf09bb87f917fe217816
-    Monotone-Parent: b9939561d21749b9c1be9b4002f4fc926dddde8a
-    Monotone-Revision: 6d0d1c8725a3df86208f3b2c55f4f9bd6087a565
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-12-19T16:44:07
-    Monotone-Branch: ca.inverse.sope
 
 commit ab768d4f53f9c93c258a4862a4909c9e30812b21
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
@@ -1836,22 +1667,6 @@ Date:   Wed Dec 7 19:01:13 2011 +0000
 
 M	sope-appserver/NGObjWeb/DynamicElements/WORepetition.m
 
-commit a0ff2617f34b5b27b13508f77a5306cf177fa393
-Merge: be1cbce f025e39
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Tue Dec 6 20:28:39 2011 +0000
-
-    merge of '519a452ff4fa7dd1be752deffd406a5d640e7d55'
-         and '747d54047e7fe372edb0003f61bcce0af406b5fc'
-    
-    Monotone-Parent: 519a452ff4fa7dd1be752deffd406a5d640e7d55
-    Monotone-Parent: 747d54047e7fe372edb0003f61bcce0af406b5fc
-    Monotone-Revision: 7ebce8df2ddbe7d6cbc534f7c1e7d64ebbc73a72
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-12-06T20:28:39
-    Monotone-Branch: ca.inverse.sope
-
 commit f025e396a2cf30125af09a1e00e6fd9ddad77b69
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Dec 6 20:28:36 2011 +0000
@@ -1865,22 +1680,6 @@ Date:   Tue Dec 6 20:28:36 2011 +0000
 
 M	ChangeLog
 M	sope-gdl1/PostgreSQL/PGConnection.m
-
-commit 8b94570242f11aa964341c84be286111d263b69f
-Merge: bc211d6 e1d05c9
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Fri Dec 2 04:15:08 2011 +0000
-
-    merge of '20b836ff044516dbe78f1bf17d245894fd51db7f'
-         and '83b22fc0d4440f6251f95af50193800d7b85eb02'
-    
-    Monotone-Parent: 20b836ff044516dbe78f1bf17d245894fd51db7f
-    Monotone-Parent: 83b22fc0d4440f6251f95af50193800d7b85eb02
-    Monotone-Revision: 3df3e03bbcdc91d12dcaf95b5eaa7df343f47247
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-12-02T04:15:08
-    Monotone-Branch: ca.inverse.sope
 
 commit bc211d673e24d2ded166e17648e35db26e57d024
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
@@ -1953,22 +1752,6 @@ Date:   Tue Nov 29 19:22:40 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/WOMessage.m
 M	sope-appserver/NGObjWeb/WOResponse.m
-
-commit fb8d10b4a6c3c8408508cb792a792edf49a80edd
-Merge: af0edf0 ff68ef6
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Mon Nov 28 15:52:56 2011 +0000
-
-    merge of '381381042f096b28e466ae3abec7189eacb5fab4'
-         and '4a593664f738279a07d51c8d0d4bb4c56d6fb494'
-    
-    Monotone-Parent: 381381042f096b28e466ae3abec7189eacb5fab4
-    Monotone-Parent: 4a593664f738279a07d51c8d0d4bb4c56d6fb494
-    Monotone-Revision: 79874d054cbffd7190a1843fc605c697623d604e
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2011-11-28T15:52:56
-    Monotone-Branch: ca.inverse.sope
 
 commit ff68ef6493f8a7becb23fffe87b733e1bb4eb100
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
@@ -2160,22 +1943,6 @@ Date:   Mon Nov 14 20:01:21 2011 +0000
 M	sope-gdl1/Oracle8/ChangeLog
 M	sope-gdl1/Oracle8/OracleValues.m
 
-commit 9a61302aeada4cfdce296917502e6e4af7b04393
-Merge: 92f7864 c41a16e
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Thu Nov 10 22:24:53 2011 +0000
-
-    merge of '93ba88226d8461d87cf69e143446db6a92064de7'
-         and 'ea53e0f7ff4913544446eb78e0e93e6dff8b05c3'
-    
-    Monotone-Parent: 93ba88226d8461d87cf69e143446db6a92064de7
-    Monotone-Parent: ea53e0f7ff4913544446eb78e0e93e6dff8b05c3
-    Monotone-Revision: ee2063e40a66a64fcefe940a83ca7291aa1075d2
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-11-10T22:24:53
-    Monotone-Branch: ca.inverse.sope
-
 commit c41a16e2970150c0c14b10a65f8a16bb88926f54
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Nov 10 22:24:47 2011 +0000
@@ -2250,23 +2017,6 @@ Date:   Fri Oct 28 15:11:29 2011 +0000
 M	ChangeLog
 M	sope-mime/NGMime/NGMimeMultipartBody.m
 
-commit 27f29c76484576666e3212dc7cf6ce5565167589
-Merge: 2f9b648 a6fad36
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Wed Oct 26 19:06:36 2011 +0000
-
-    merge of '5e022ac12ab82d4c599ad00309b89f598637ada8'
-         and 'f546e89d450a6ab2501134f06f4318847f35ab19'
-    
-    Monotone-Parent: 5e022ac12ab82d4c599ad00309b89f598637ada8
-    Monotone-Parent: f546e89d450a6ab2501134f06f4318847f35ab19
-    Monotone-Revision: 4fa3570308238a3dfc1aaaecb57201c299a030ff
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-10-26T19:06:36
-    Monotone-Branch: ca.inverse.sope
-    Monotone-Tag: SOPE_v1.3.9
-
 commit a6fad367db9e2a53092ec957408313af379dc969
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 26 19:06:29 2011 +0000
@@ -2280,22 +2030,6 @@ Date:   Wed Oct 26 19:06:29 2011 +0000
 
 M	ChangeLog
 M	sope-mime/NGMail/NGMimeMessage.m
-
-commit 2f9b648314c4a6c46bcc54d601ee57d167e4b0ab
-Merge: 96d053f a8eb768
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Wed Oct 19 09:19:48 2011 +0000
-
-    merge of '5d63eebbb466666b63354840ace25d1befac9208'
-         and '68fd87de889636481862e5eb3091f34d1bbe24d8'
-    
-    Monotone-Parent: 5d63eebbb466666b63354840ace25d1befac9208
-    Monotone-Parent: 68fd87de889636481862e5eb3091f34d1bbe24d8
-    Monotone-Revision: 5e022ac12ab82d4c599ad00309b89f598637ada8
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2011-10-19T09:19:48
-    Monotone-Branch: ca.inverse.sope
 
 commit a8eb7681fb403bc145679dfac36bc380796a034a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
@@ -2542,22 +2276,6 @@ M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
 M	sope-ldap/NGLdap/GNUmakefile.preamble
 
-commit 6bb3247a488307115a267c5e6340d61f78a330bf
-Merge: 6494ebc cd071b6
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Fri Jul 29 13:30:22 2011 +0000
-
-    merge of '5d510eb100bf3a974c06666bd281ab0c0d58c839'
-         and 'b0a2eb792be5b9615a3f71755613a91984d9d965'
-    
-    Monotone-Parent: 5d510eb100bf3a974c06666bd281ab0c0d58c839
-    Monotone-Parent: b0a2eb792be5b9615a3f71755613a91984d9d965
-    Monotone-Revision: 2d3145b74b1ff457bedd55fa567dd40099d6a1a4
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-07-29T13:30:22
-    Monotone-Branch: ca.inverse.sope
-
 commit 6494ebc248482d06991935beb408965773ba3376
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 12:31:59 2011 +0000
@@ -2605,22 +2323,6 @@ Date:   Thu Jul 28 20:35:23 2011 +0000
 
 M	sope-appserver/NGObjWeb/SoObjects/SoObjCClass.m
 
-commit 117bb17eb7bd2c67f984b266b934bca874660b4a
-Merge: 66e3fb3 73a08c7
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Thu Jul 28 20:10:22 2011 +0000
-
-    merge of '68b7e7a0a76fc6f7178d0b38e814596820fda192'
-         and 'eaf1a8ddda3440cd179820db92c45bdeb54c8254'
-    
-    Monotone-Parent: 68b7e7a0a76fc6f7178d0b38e814596820fda192
-    Monotone-Parent: eaf1a8ddda3440cd179820db92c45bdeb54c8254
-    Monotone-Revision: ea25201c008b15a227db7f2a74ca849924736651
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2011-07-28T20:10:22
-    Monotone-Branch: ca.inverse.sope
-
 commit 66e3fb3257f13570f7f6a881c02c2ab681c1c97b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 20:10:14 2011 +0000
@@ -2635,22 +2337,6 @@ Date:   Thu Jul 28 20:10:14 2011 +0000
     Monotone-Branch: ca.inverse.sope
 
 M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
-
-commit 73a08c71e1335c07a58b953bb230aa23f54c78cf
-Merge: 503d426 6628807
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Thu Jul 28 20:02:51 2011 +0000
-
-    merge of 'e4a317e41a77a206510300675052d75281aea77a'
-         and 'ea7055a115673a92b88f8a6a30d580af1260bced'
-    
-    Monotone-Parent: e4a317e41a77a206510300675052d75281aea77a
-    Monotone-Parent: ea7055a115673a92b88f8a6a30d580af1260bced
-    Monotone-Revision: eaf1a8ddda3440cd179820db92c45bdeb54c8254
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2011-07-28T20:02:51
-    Monotone-Branch: ca.inverse.sope
 
 commit 503d426116648d3093d04f21d15673b9cc4a5960
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
@@ -2680,22 +2366,6 @@ Date:   Thu Jul 28 14:51:02 2011 +0000
 
 M	sope-mime/NGImap4/NGImap4Connection.h
 
-commit ac9aca87686ae9df44f1b7733307cc6d9dad97bf
-Merge: 169bf73 1666482
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Thu Jul 28 14:50:40 2011 +0000
-
-    merge of '4db270e71b371d36efb23b0f11ae53d939812cc8'
-         and 'b4a5c2dfcd2aa50df827923b2a62a1255e872a9c'
-    
-    Monotone-Parent: 4db270e71b371d36efb23b0f11ae53d939812cc8
-    Monotone-Parent: b4a5c2dfcd2aa50df827923b2a62a1255e872a9c
-    Monotone-Revision: 7c32ca09c9f85377e338da353b1eba1c2a194f5a
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-07-28T14:50:40
-    Monotone-Branch: ca.inverse.sope
-
 commit 169bf73f19d0f1569a422630d9ede4e8790dacc8
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 14:19:46 2011 +0000
@@ -2711,22 +2381,6 @@ Date:   Thu Jul 28 14:19:46 2011 +0000
 
 M	debian/libsope-appserver_SOPEVER_-dev.install
 M	debian/libsope-appserver_SOPEVER_.install
-
-commit 1666482c77f8ad66c9c53818b039dc080749f216
-Merge: 9688301 7145d42
-Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
-Date:   Thu Jul 28 00:56:47 2011 +0000
-
-    merge of '430ec2c2501a94576fabbee3fdf471188078af63'
-         and '70119bf7d87b438040fe83185770175d612d4aec'
-    
-    Monotone-Parent: 430ec2c2501a94576fabbee3fdf471188078af63
-    Monotone-Parent: 70119bf7d87b438040fe83185770175d612d4aec
-    Monotone-Revision: b4a5c2dfcd2aa50df827923b2a62a1255e872a9c
-    
-    Monotone-Author: wsourdeau@inverse.ca
-    Monotone-Date: 2011-07-28T00:56:47
-    Monotone-Branch: ca.inverse.sope
 
 commit 9688301b0d444ad4104015a4849894e49911b038
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
@@ -3181,22 +2835,6 @@ Date:   Mon May 9 20:24:23 2011 +0000
 M	sope-mime/NGMime/GNUmakefile.preamble
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
 
-commit 669bfbd7cc45b5486df83943bbd321bd2cffd620
-Merge: 0bc6fab 653a736
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Mon May 9 20:12:39 2011 +0000
-
-    merge of '14f63ed87619d66efaa6e55b50904ff1eb910d3d'
-         and 'c9723068f0534907bfebec9248331816410a6e25'
-    
-    Monotone-Parent: 14f63ed87619d66efaa6e55b50904ff1eb910d3d
-    Monotone-Parent: c9723068f0534907bfebec9248331816410a6e25
-    Monotone-Revision: c5a8d5d7bd08d2c13646aa67cda95ba544c90841
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2011-05-09T20:12:39
-    Monotone-Branch: ca.inverse.sope
-
 commit 0bc6fab8b6091d3eaa24dffbdb86098d89a32789
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon May 9 20:12:31 2011 +0000
@@ -3579,22 +3217,6 @@ M	ChangeLog
 D	sope-gdl1/COPYING.LIB
 D	sope-gdl1/README-OSX.txt
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
-
-commit 9e68fbcc9ba92861d27bb4b056908931dad4ce54
-Merge: 4050c48 68c6e33
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Tue Dec 7 18:20:18 2010 +0000
-
-    merge of 'aed2ceec003a06eb64daf071977780a99ca08427'
-         and 'bfd9b7b1adcb089d78763ecf4fc517d39c63be4c'
-    
-    Monotone-Parent: aed2ceec003a06eb64daf071977780a99ca08427
-    Monotone-Parent: bfd9b7b1adcb089d78763ecf4fc517d39c63be4c
-    Monotone-Revision: b43cf692b49827fd3bdb7aa4623f4fc3874501ae
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2010-12-07T18:20:18
-    Monotone-Branch: ca.inverse.sope
 
 commit 4050c48d3a71cdae5caf2d188ea910fea523d784
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
@@ -4062,22 +3684,6 @@ Date:   Wed Oct 6 13:43:55 2010 +0000
 M	sope-appserver/WEPrototype/ChangeLog
 M	sope-appserver/WEPrototype/WEPrototypeScript.jsm
 M	sope-appserver/WEPrototype/js2m.sh
-
-commit 5be79ebfaeee4ed5025bf229e820269d7f003b8d
-Merge: 5520a99 5e71664
-Author: Francis Lachapelle <flachapelle@inverse.ca>
-Date:   Fri Sep 24 20:26:12 2010 +0000
-
-    merge of '371157b0acf7f2b57302e0790502ad9c713b06f8'
-         and '8de1194a868d53b789ec161d51455b4f3422f842'
-    
-    Monotone-Parent: 371157b0acf7f2b57302e0790502ad9c713b06f8
-    Monotone-Parent: 8de1194a868d53b789ec161d51455b4f3422f842
-    Monotone-Revision: b7801a267e4f3c45af85e3377460ed0a1913af3c
-    
-    Monotone-Author: flachapelle@inverse.ca
-    Monotone-Date: 2010-09-24T20:26:12
-    Monotone-Branch: ca.inverse.sope
 
 commit 5e716648e0017021f9774a2c8e278db7db7b817e
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
@@ -4634,22 +4240,6 @@ Date:   Mon Aug 9 15:14:52 2010 +0000
 M	sope-mime/NGImap4/ChangeLog
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit aebea755de5e3c8f1a750d98f3977aeafc01b80f
-Merge: c6a0918 232a0fa
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Tue Aug 3 19:11:47 2010 +0000
-
-    merge of '37d9bd63a410572817861c3595f91d0017af98ee'
-         and 'd5e2b98ede18ae354506f45b9588837bb3f973b2'
-    
-    Monotone-Parent: 37d9bd63a410572817861c3595f91d0017af98ee
-    Monotone-Parent: d5e2b98ede18ae354506f45b9588837bb3f973b2
-    Monotone-Revision: 1bba55dfdf8fa1cb242b99fb0a3ba28456c223b8
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2010-08-03T19:11:47
-    Monotone-Branch: ca.inverse.sope
-
 commit c6a09187d8623e815e89c23f47dae3efd7f44e44
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 3 19:11:37 2010 +0000
@@ -4665,22 +4255,6 @@ Date:   Tue Aug 3 19:11:37 2010 +0000
 
 M	.mtn-ignore
 
-commit 232a0fac62d947738ba5fa636641e03428c5bb22
-Merge: f76eb3d 4636fe8
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Tue Aug 3 19:08:59 2010 +0000
-
-    merge of '3fa21774c82b6dbfbe5238f630a76a293c011da7'
-         and '5f7c8897d62e6017bcb8eaf4c0bfb6a78c439856'
-    
-    Monotone-Parent: 3fa21774c82b6dbfbe5238f630a76a293c011da7
-    Monotone-Parent: 5f7c8897d62e6017bcb8eaf4c0bfb6a78c439856
-    Monotone-Revision: d5e2b98ede18ae354506f45b9588837bb3f973b2
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2010-08-03T19:08:59
-    Monotone-Branch: ca.inverse.sope
-
 commit 4636fe807c81505ed061dfbb2d64132d385eaf37
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 3 19:08:33 2010 +0000
@@ -4695,22 +4269,6 @@ Date:   Tue Aug 3 19:08:33 2010 +0000
     Monotone-Branch: ca.inverse.sope
 
 A	.mtn-ignore
-
-commit f76eb3d627295247dc4c9abedf2cc5fba15216c9
-Merge: 095d969 9ec012b
-Author: Ludovic Marcotte <lmarcotte@inverse.ca>
-Date:   Mon Aug 2 14:25:13 2010 +0000
-
-    merge of '09af9941cdd02bc812882a357d02e20a334ea3ed'
-         and 'dcf8fb4dfcb4357ea70aa1937ff29fa8d45819b1'
-    
-    Monotone-Parent: 09af9941cdd02bc812882a357d02e20a334ea3ed
-    Monotone-Parent: dcf8fb4dfcb4357ea70aa1937ff29fa8d45819b1
-    Monotone-Revision: 3fa21774c82b6dbfbe5238f630a76a293c011da7
-    
-    Monotone-Author: ludovic@Sophos.ca
-    Monotone-Date: 2010-08-02T14:25:13
-    Monotone-Branch: ca.inverse.sope
 
 commit 095d9691e32dd8d5cf16d8756b938bc4cc134dc9
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
