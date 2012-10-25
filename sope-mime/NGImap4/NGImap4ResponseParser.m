@@ -345,16 +345,17 @@ static NSUInteger _removeCRLF(unsigned char *buffer, size_t len) {
   while (chr_ptr) {
     last_pos = new_pos + 1;
     new_pos = (chr_ptr - buffer);
-    if (last_pos) {
+    if (last_pos > 1) {
+      offset++;
       src_ptr = buffer + last_pos;
       memmove(src_ptr - offset, src_ptr, (new_pos - last_pos));
-      offset++;
     }
     chr_ptr = memchr(chr_ptr + 1, '\r', len - new_pos - 1);
   }
-  if (new_pos > 0) {
+  if (last_pos > 0) {
     last_pos = new_pos + 1;
     if (last_pos < len) {
+      offset++;
       src_ptr = buffer + last_pos;
       memmove(src_ptr - offset, src_ptr, len - last_pos);
     }
