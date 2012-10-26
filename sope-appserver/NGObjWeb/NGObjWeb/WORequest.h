@@ -44,6 +44,7 @@ NGObjWeb_EXPORT NSString *WONoSelectionString;
 @private
   NGHttpRequest *request;     // NGHttp Request
   id            formContent;  // FORM data (message content or URL paras)
+  NSMutableArray *browserLanguages; // cached list of browser languages
   
 @private
   NSString      *method;
