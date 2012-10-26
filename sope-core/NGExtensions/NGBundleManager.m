@@ -1875,7 +1875,7 @@ static BOOL debugLanguageLookup = NO;
     _languages = [[[NSSet setWithArray: _languages]
                     allObjects]
                    sortedArrayUsingSelector: @selector (compare:)];
-    langStr = [_languages componentsJoinedByString: @"/"];
+    langStr = [_languages componentsJoinedByString: @","];
   }
   else
     langStr = @"";
@@ -1893,7 +1893,7 @@ static BOOL debugLanguageLookup = NO;
   if (debugLanguageLookup) {
     NSLog(@"  BASE: %@", path);
     NSLog(@"LOOKUP(%s): %@ | %@ | %@ | %@", __PRETTY_FUNCTION__,
-	  _name, _ext, _directory, [_languages componentsJoinedByString:@","]);
+	  _name, _ext, _directory, langStr);
   }
 
   key = [NSString stringWithFormat: @"%@-%@-%@-%@",
