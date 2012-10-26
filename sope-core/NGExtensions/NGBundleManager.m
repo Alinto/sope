@@ -1872,8 +1872,7 @@ static BOOL debugLanguageLookup = NO;
   if (!_ext)
     _ext = @"";
   if ([_languages count] > 0) {
-    _languages = [[[NSSet setWithArray: _languages]
-                    allObjects]
+    _languages = [[[NSSet setWithArray: _languages] allObjects]
                    sortedArrayUsingSelector: @selector (compare:)];
     langStr = [_languages componentsJoinedByString: @","];
   }
