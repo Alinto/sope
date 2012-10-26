@@ -1858,8 +1858,8 @@ static BOOL debugLanguageLookup = NO;
   languages:(NSArray *)_languages
 {
   NSFileManager *fm;
-  NSString      *path = nil;
-  NSString *key;
+  NSString      *path;
+  NSString *key, *langStr, *cachedPath;
   int i, langCount;
   id (*objAtIdx)(id,SEL,int);
   static NSMutableDictionary *cache = nil;
@@ -1867,40 +1867,50 @@ static BOOL debugLanguageLookup = NO;
   if (!cache)
     cache = [NSMutableDictionary new];
 
-  key = [NSString stringWithFormat: @"%@-%@-%@-%@",
-                  _name, _ext, _directory,
-                  [_languages componentsJoinedByString: @"/"]];
-  path = [cache objectForKey: key];
-  if (path)
-    {
-      if ([path isKindOfClass: [NSString class]])
-        return path;
-      else
-        return nil;
-    }
+  if (!_name)
+    _name = @"";
+  if (!_ext)
+    _ext = @"";
+  if ([_languages count] > 0) {
+    _languages = [[[NSSet setWithArray: _languages]
+                    allObjects]
+                   sortedArrayUsingSelector: @selector (compare:)];
+    langStr = [_languages componentsJoinedByString: @"/"];
+  }
+  else
+    langStr = @"";
 
+  if (!_directory) {
+#if (NeXT_Foundation_LIBRARY || APPLE_Foundation_LIBRARY)
+    _directory = @"Contents/Resources";
+#else
+    _directory = @"Resources";
+#endif
+  }
+
+  path = [[self bundlePath] stringByAppendingPathComponent:_directory];
+  
   if (debugLanguageLookup) {
+    NSLog(@"  BASE: %@", path);
     NSLog(@"LOOKUP(%s): %@ | %@ | %@ | %@", __PRETTY_FUNCTION__,
 	  _name, _ext, _directory, [_languages componentsJoinedByString:@","]);
   }
-  
-  path = [self bundlePath];
-  if ([_directory isNotNull]) {
-    // TODO: should we change that?
-    path = [path stringByAppendingPathComponent:_directory];
+
+  key = [NSString stringWithFormat: @"%@-%@-%@-%@",
+                  _name, _ext, path, langStr];
+  cachedPath = [cache objectForKey: key];
+  if (cachedPath)  {
+    if ([cachedPath isKindOfClass: [NSString class]])
+      return cachedPath;
+    else
+      return nil;
   }
-  else {
-#if (NeXT_Foundation_LIBRARY || APPLE_Foundation_LIBRARY)
-    path = [path stringByAppendingPathComponent:@"Contents"];
-#endif
-    path = [path stringByAppendingPathComponent:@"Resources"];
-  }
-  
-  if (debugLanguageLookup) NSLog(@"  BASE: %@", path);
-  
+
   fm   = [NSFileManager defaultManager];
-  if (![fm fileExistsAtPath:path])
+  if (![fm fileExistsAtPath:path]) {
+    [cache setObject: [NSNull null] forKey: key];
     return nil;
+  }
   
   if (_ext != nil) _name = [_name stringByAppendingPathExtension:_ext];
   
