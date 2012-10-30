@@ -32,6 +32,7 @@
   use the SoProductResourceManager to locate their resources.
 */
 
+@class NSBundle;
 @class NSURL;
 @class WOElement;
 @class SoProductResourceManager;
@@ -39,6 +40,7 @@
 @interface SoComponent : WOComponent
 {
   SoProductResourceManager *soResourceManager; // __worm
+  NSBundle  *bundle;
   NSURL     *soBaseURL;  // __wobaseurl
   WOElement *soTemplate; // __wotemplate
 }
