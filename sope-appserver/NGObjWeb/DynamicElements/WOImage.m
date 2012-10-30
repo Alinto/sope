@@ -92,7 +92,7 @@
   if ([_ctx isRenderingDisabled] || [[_ctx request] isFromClientComponent])
     return;
 
-  WOResponse_AddCString(_response, "<img src=\"");
+  WOResponse_AddBytesLen(_response, "<img src=\"", 10);
   
 #if DEBUG && USE_EXCEPTION_HANDLER
   NS_DURING {
@@ -109,12 +109,12 @@
   [self _appendSrcToResponse:_response inContext:_ctx];
 #endif
   
-  WOResponse_AddChar(_response, '"');
+  WOResponse_AddBytesLen(_response, "\"", 1);
   
   [self appendExtraAttributesToResponse:_response inContext:_ctx];
     
   if (self->otherTagString) {
-    WOResponse_AddChar(_response, ' ');
+    WOResponse_AddBytesLen(_response, " ", 1);
     WOResponse_AddString(_response,
                          [self->otherTagString stringValueInComponent:
                               [_ctx component]]);
