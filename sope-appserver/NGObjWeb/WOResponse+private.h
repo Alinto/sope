@@ -27,29 +27,29 @@
 // fast inline functions (non-WO)
 
 #define WOResponse_AddChar(__R__,__C__) \
-  if (__R__) {__R__->addChar(__R__, @selector(appendContentCharacter:), \
+  {__R__->addChar(__R__, @selector(appendContentCharacter:), \
 			     __C__);}
 
 #define WOResponse_AddString(__R__,__C__) \
-  if (__R__) {__R__->addStr(__R__, @selector(appendContentString:), __C__);}
+  {__R__->addStr(__R__, @selector(appendContentString:), __C__);}
 #define WOResponse_AddCString(__R__,__C__) \
-  if (__R__) {__R__->addCStr(__R__, @selector(appendContentCString:), \
+  {__R__->addCStr(__R__, @selector(appendContentCString:), \
 			     (const unsigned char *)__C__);}
 
 #define WOResponse_AddHtmlString(__R__,__C__) \
-  if (__R__) {__R__->addHStr(__R__, @selector(appendContentHTMLString:), \
+  {__R__->addHStr(__R__, @selector(appendContentHTMLString:), \
 			     __C__);}
 
 #define WOResponse_AppendBeginTag(__R__,__C__) \
-if (__R__) { \
+{ \
   __R__->addChar(__R__, @selector(appendContentCharacter:), '<'); \
   __R__->addStr(__R__, @selector(appendContentString:), __C__); \
 }
 #define WOResponse_AppendBeginTagEnd(__R__) \
-if (__R__) {__R__->addChar(__R__, @selector(appendContentCharacter:), '>');}
+{__R__->addChar(__R__, @selector(appendContentCharacter:), '>');}
 
 #define WOResponse_AppendEndTag(__R__,__C__) \
-if (__R__) { \
+{ \
   __R__->addCStr(__R__, @selector(appendContentCString:), \
                  (const unsigned char *)"</"); \
   __R__->addStr(__R__, @selector(appendContentString:), __C__); \
@@ -57,7 +57,7 @@ if (__R__) { \
 }
 
 #define WOResponse_AppendAttribute(__R__,__K__,__V__) \
-if (__R__) { \
+{ \
   __R__->addChar(__R__, @selector(appendContentCharacter:), ' '); \
   __R__->addStr(__R__, @selector(appendContentString:), __K__); \
   __R__->addCStr(__R__, @selector(appendContentCString:), \
@@ -69,7 +69,7 @@ if (__R__) { \
 // TODO: performance ! - use static buffer and appendContentCString !
 
 #define WOResponse_AddUInt(__R__,__C__) \
-  if (__R__) {\
+  {\
     switch(__C__) {\
       case 0: __R__->addCStr(__R__, @selector(appendContentCString:),\
 			     (const unsigned char *)"0");break; \
@@ -89,7 +89,7 @@ if (__R__) { \
   }
 
 #define WOResponse_AddInt(__R__,__C__) \
-  if (__R__) {\
+  {\
     switch(__C__) {\
       case 0: __R__->addCStr(__R__, @selector(appendContentCString:),\
 			     (const unsigned char *)"0");break; \
