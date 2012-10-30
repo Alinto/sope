@@ -26,7 +26,7 @@
 #import <NGObjWeb/WOElement.h>
 #include <NGObjWeb/WOActionResults.h>
 
-@class NSString, NSDictionary, NSMutableDictionary, NSURL, NSException, NSURL;
+@class NSBundle, NSString, NSDictionary, NSMutableDictionary, NSURL, NSException, NSURL;
 @class WOElement, WOContext, WOSession, WOApplication, WOResourceManager;
 
 @interface WOComponent : WOElement < WOActionResults, NSCoding >
@@ -34,7 +34,9 @@
 @private
   NSDictionary        *wocBindings;     // bindings to parent component
   NSString            *wocName;         // name of component
-  
+
+  NSBundle            *bundle;
+   
   WOComponent         *parentComponent; // non-retained;
   NSDictionary        *subcomponents;   // subcomponents
   NSMutableDictionary *wocVariables;    // user variables
@@ -82,6 +84,7 @@
 
 /* resources */
 
+- (NSBundle *)componentBundle;
 - (NSString *)pathForResourceNamed:(NSString *)_name ofType:(NSString *)_ext;
 - (NSString *)frameworkName;
 

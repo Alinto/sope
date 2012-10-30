@@ -158,6 +158,7 @@ static BOOL  wakeupPageOnCreation              = NO;
   [self->wocVariables  release];
   [self->wocName       release];
   [self->wocBaseURL    release];
+  [self->bundle        release];
   [super dealloc];
 }
 
@@ -349,10 +350,21 @@ static inline id _getExtraVar(WOComponent *self, NSString *_key) {
 - (NSString *)name {
   return self->wocName;
 }
+
+- (NSBundle *)componentBundle {
+  if (!self->bundle)
+    {
+      self->bundle = [NSBundle bundleForClass:[self class]];
+      [self->bundle retain];
+    }
+
+  return self->bundle;
+}
+
 - (NSString *)frameworkName {
   NSBundle *cbundle;
   
-  cbundle = [NGBundle bundleForClass:[self class]];
+  cbundle = [self componentBundle];
   if (cbundle == [NSBundle mainBundle])
     return nil;
   
