@@ -19,6 +19,8 @@
   02111-1307, USA.
 */
 
+#include <netinet/tcp.h>
+
 #include "config.h"
 
 #if defined(HAVE_UNISTD_H) || defined(__APPLE__)
@@ -512,6 +514,15 @@
 
 - (int)socketType {
   return SOCK_STREAM;
+}
+
+- (void)disableNagle:(BOOL)_disable {
+  int on;
+
+  if ([self isConnected]) {
+    on = _disable ? 1 : 0;
+    setsockopt(self->fd, IPPROTO_TCP, TCP_NODELAY, &on, sizeof(on));
+  }
 }
 
 - (void)setSendTimeout:(NSTimeInterval)_timeout {
