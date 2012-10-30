@@ -336,7 +336,7 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
 
 static NSUInteger _removeCRLF(unsigned char *buffer, size_t len) {
   NSUInteger offset;
-  register size_t new_pos, last_pos;
+  register size_t new_pos, last_pos = 0;
   unsigned char *chr_ptr, *src_ptr;
 
   new_pos = 0;
