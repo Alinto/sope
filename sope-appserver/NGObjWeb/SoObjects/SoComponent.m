@@ -32,25 +32,34 @@
   [self->soResourceManager release];
   [self->soTemplate        release];
   [self->soBaseURL         release];
+  [self->bundle            release];
   [super dealloc];
 }
+ 
 
 /* resource manager */
 
 - (NSBundle *)componentBundle {
-  return [NSBundle bundleForClass:[self class]];
+  if (!self->bundle)
+    {
+      self->bundle = [NSBundle bundleForClass:[self class]];
+      [self->bundle retain];
+    }
+
+  return self->bundle;
 }
+
 - (SoProduct *)componentProduct {
   static SoProductRegistry *reg = nil;
   SoProduct *product;
-  NSBundle  *bundle;
   
   if (reg == nil)
     reg = [[SoProductRegistry sharedProductRegistry] retain];
   if (reg == nil)
     [self errorWithFormat:@"missing product registry!"];
-  
-  if ((bundle = [self componentBundle]) == nil)
+
+  [self componentBundle];
+  if (self->bundle == nil)
     [self warnWithFormat:@"did not find bundle of component !"];
   
   if ((product = [reg productForBundle:bundle]) == nil)
