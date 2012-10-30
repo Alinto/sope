@@ -58,6 +58,7 @@
   void (*addStr)(id, SEL, NSString *);
   void (*addHStr)(id, SEL, NSString *);
   void (*addCStr)(id, SEL, const unsigned char *);
+  void (*addBytesLen)(id, SEL, const unsigned char *, unsigned);
   void (*addBytes)(id, SEL, const void *, unsigned);
 }
 
