@@ -217,6 +217,20 @@ static size_t readAllFromSource(NGByteBuffer *self,
   }
 
   idx = self->headIdx + _la;
+
+  /* a safeguard against infinite loops in parsers */
+  if (self->lastLaIdx == idx) {
+    self->lastLaIdxCount++;
+    if (self->lastLaIdxCount > 53)
+      [NSException raise: NSInternalInconsistencyException
+                  format: @"invoked %s an unreasonable amount of times (%d)",
+                   __PRETTY_FUNCTION__, self->lastLaIdxCount];
+  }
+  else {
+    self->lastLaIdx = idx;
+    self->lastLaIdxCount = 0;
+  }
+
   if (idx < self->freeIdx) {
     result = self->la[idx & self->sizeLessOne];
   }

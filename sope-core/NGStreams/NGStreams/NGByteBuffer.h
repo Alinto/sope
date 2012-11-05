@@ -52,6 +52,9 @@ struct NGByteBufferLA;
   unsigned EOFIdx; /* max byte index ever + 1 */
   unsigned sizeLessOne;
 
+  unsigned lastLaIdx;
+  unsigned lastLaIdxCount;
+
   int (*laImpl)(id, SEL, unsigned);
   int (*sourceReadByte)(id, SEL);
   int (*sourceReadBytes)(id, SEL, void *, unsigned);
