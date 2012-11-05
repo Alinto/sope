@@ -64,6 +64,7 @@ typedef enum {
   NSMutableArray            *responseReceiver;  
 
   BOOL	   loggedIn;
+  BOOL     useAuthenticate;
 
   BOOL     isLogin;
   unsigned tagId;
@@ -72,6 +73,7 @@ typedef enum {
   NSString *selectedFolder;
   NSString *login;
   NSString *password;
+  NSString *authMechanism;
 
   NSMutableArray *enabledExtensions;
 
@@ -120,6 +122,8 @@ typedef enum {
 /* commands */
 
 - (NSDictionary *)login:(NSString *)_login password:(NSString *)_passwd;
+- (NSDictionary *)authenticate:(NSString *)_login password:(NSString *)_passwd
+                     mechanism:(NSString *)_mech;
 - (NSDictionary *)logout;
 - (NSDictionary *)noop;
   
