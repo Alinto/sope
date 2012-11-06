@@ -683,7 +683,7 @@ static NSMutableDictionary *namespaces;
       char *buffer;
       const char *utf8Username, *utf8Password;
       size_t buflen, lenUsername, lenPassword;
-      NSData *authString;
+      NSString *authString;
 
       utf8Username = [self->login UTF8String];
       utf8Password = [self->password UTF8String];
@@ -696,11 +696,12 @@ static NSMutableDictionary *namespaces;
       buffer = malloc (sizeof (char) * (buflen + 1));
       sprintf (buffer, "%s%c%s%c%s",
                utf8Username, 0, utf8Username, 0, utf8Password);
-      authString = [NSData dataWithBytesNoCopy: buffer
-                                        length: buflen
-                                  freeWhenDone: YES];
-      
-      map = [self processCommand:[authString stringByEncodingBase64]
+      authString = [[NSData dataWithBytesNoCopy: buffer
+                                         length: buflen
+                                   freeWhenDone: YES]
+                     stringByEncodingBase64];
+      map = [self processCommand:[authString stringByReplacingString: @"\n"
+                                                          withString: @""]
                          withTag:NO];
     }
   
