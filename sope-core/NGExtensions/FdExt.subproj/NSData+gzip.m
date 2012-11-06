@@ -160,6 +160,31 @@ static inline void putLong(uLong x, NSMutableData *data, IMP addBytes) {
   return data;
 }
 
+- (NSData *)compress
+{
+  return [self compressWithLevel: 3];
+}
+
+- (NSData *)compressWithLevel: (int) level
+{
+  NSData *result;
+  Bytef *destBuffer;
+  unsigned long destLen;
+  int rc;
+
+  destLen = [self length];
+  destBuffer = NSZoneMalloc (NULL, destLen);
+  rc = compress2 (destBuffer, &destLen, [self bytes], destLen, level);
+  if (rc == Z_OK)
+    result = [NSData dataWithBytesNoCopy: destBuffer
+                                  length: destLen
+                            freeWhenDone: YES];
+  else
+    result = nil;
+  
+  return result;
+}
+
 @end
 
 void __link_NSData_gzip(void) {
