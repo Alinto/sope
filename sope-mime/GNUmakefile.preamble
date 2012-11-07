@@ -19,7 +19,7 @@ libNGMime_INCLUDE_DIRS += \
 
 libNGMime_LIBRARIES_DEPEND_UPON += \
 	-lNGStreams -lNGExtensions -lEOControl	\
-	-lgnustep-base -lobjc
+	$(BASE_LIBS)
 
 NGMime_LIBRARIES_DEPEND_UPON += \
 	-framework NGStreams -framework NGExtensions -framework EOControl \

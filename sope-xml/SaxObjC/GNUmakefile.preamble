@@ -63,4 +63,4 @@ saxxml_LDFLAGS += -framework Foundation
 xmln_LDFLAGS   += -framework Foundation
 endif
 
-libSaxObjC_LIBRARIES_DEPEND_UPON += -lgnustep-base -lobjc
+libSaxObjC_LIBRARIES_DEPEND_UPON += $(BASE_LIBS)

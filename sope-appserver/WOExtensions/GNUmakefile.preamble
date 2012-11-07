@@ -21,7 +21,7 @@ libWOExtensions_VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
 
 libWOExtensions_LIBRARIES_DEPEND_UPON += \
 	-lNGObjWeb	\
-	-lgnustep-base -lobjc
+	$(BASE_LIBS)
 
 ifeq ($(frameworks),yes)
 WOExtensions_LIBRARIES_DEPEND_UPON += \
