@@ -57,16 +57,17 @@
 
 @implementation NGImap4ResponseParser
 
+#define __la(__SELF__, __PEEKPOS) \
+  ((__SELF__->la == NULL) \
+    ? [__SELF__->buffer la:__PEEKPOS]\
+    : __SELF__->la(__SELF__->buffer, @selector(la:), __PEEKPOS))
+
 static __inline__ int _la(NGImap4ResponseParser *self, unsigned _laCnt) {
-  register unsigned char c;
-  register unsigned pos = _laCnt;
-
-  while ((c = self->la(self->buffer, @selector(la:), pos)) == '\r')
-    pos++;
-
-  return c;
+  register unsigned char c = __la(self, _laCnt);
+  return (c == '\r')
+    ? _la(self, _laCnt + 1)
+    : c;
 }
-
 static __inline__ BOOL _matchesString(NGImap4ResponseParser *self, 
 				      const char *s)
 {
@@ -166,7 +167,7 @@ static NSNull           *null   = nil;
   
   if (Imap4MMDataBoundary < 10)
     /* Note: this should be larger than a usual header size! */
-    Imap4MMDataBoundary = 1 << 20;
+    Imap4MMDataBoundary = 2 * LaSize;
   
   StrClass  = [NSString class];
   NumClass  = [NSNumber class];
@@ -194,11 +195,13 @@ static NSNull           *null   = nil;
     id s;
     
     s = [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource:_stream];
-    self->buffer = [[NGByteBuffer alloc] initWithSource:s la:LaSize];
+    self->buffer = [NGByteBuffer alloc];
+    self->buffer = [self->buffer initWithSource:s la:LaSize];
     [s release];
     
-    self->la = (int(*)(id, SEL, unsigned))
-      [self->buffer methodForSelector:@selector(la:)];
+    if ([self->buffer respondsToSelector:@selector(methodForSelector:)])
+      self->la = (int(*)(id, SEL, unsigned))
+        [self->buffer methodForSelector:@selector(la:)];
     
     self->debug = debugOn;
   }
@@ -270,7 +273,6 @@ static NSNull           *null   = nil;
     l0 = _la(self, 0);
     
     if (l0 == '*') { /* those starting with '* ' */
-      _consume(self, 1);
       _parseUntaggedResponse(self, result);
       if ([result objectForKey:@"bye"]) {
         endOfCommand = YES;
@@ -334,44 +336,17 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
     return;
 }
 
-static NSUInteger _removeCRLF(unsigned char *buffer, size_t len) {
-  NSUInteger offset;
-  register size_t new_pos, last_pos;
-  unsigned char *chr_ptr, *src_ptr;
-
-  new_pos = 0;
-  offset = 0;
-  chr_ptr = memchr(buffer, '\r', len);
-  while (chr_ptr) {
-    last_pos = new_pos + 1;
-    new_pos = (chr_ptr - buffer);
-    if (last_pos) {
-      src_ptr = buffer + last_pos;
-      memmove(src_ptr - offset, src_ptr, (new_pos - last_pos));
-      offset++;
-    }
-    chr_ptr = memchr(chr_ptr + 1, '\r', len - new_pos - 1);
-  }
-  if (new_pos > 0) {
-    last_pos = new_pos + 1;
-    if (last_pos < len) {
-      src_ptr = buffer + last_pos;
-      memmove(src_ptr - offset, src_ptr, len - last_pos);
-    }
-  }
-
-  return offset;
-}
-
 - (NSData *)_parseDataToFile:(unsigned)_size {
   // TODO: move to own method
   // TODO: do not use NGFileStream but just fopen/fwrite
   static NSProcessInfo *Pi = nil;
   NGFileStream  *stream;
   NSData        *result;
-  unsigned char buf[LaSize + 1];
-  unsigned      remaining;
+  unsigned char buf[LaSize + 2];
+  unsigned char tmpBuf[LaSize + 2];
+  unsigned      wasRead = 0;
   NSString      *path;
+  signed char   lastChar; // must be signed
       
   if (debugDataOn) [self logWithFormat:@"  using memory mapped data  ..."];
       
@@ -390,19 +365,44 @@ static NSUInteger _removeCRLF(unsigned char *buffer, size_t len) {
     [self setLastException:[e autorelease]];
     return nil;
   }
+      
+  lastChar = -1;
+  while (wasRead < _size) {
+    unsigned readCnt, bufCnt, tmpSize, cnt, tmpBufCnt;
 
-  remaining = _size;
-  buf[LaSize] = '\0';
-  while (remaining > 0) {
-    unsigned readCnt;
-    NSUInteger offset;
+    bufCnt = 0;
+        
+    if (lastChar != -1) {
+      buf[bufCnt++] = lastChar;
+      lastChar = -1;
+    }
+        
+    [self->buffer la:(_size - wasRead <  LaSize) 
+	 ? (_size - wasRead)
+	 : LaSize];
+        
+    readCnt = [self->buffer readBytes:buf+bufCnt count:_size - wasRead];
+        
+    wasRead+=readCnt;
+    bufCnt +=readCnt;
 
-    readCnt = [self->buffer readBytes:buf count:(remaining < LaSize) ? remaining : LaSize];
-    offset = _removeCRLF(buf, readCnt);
-    remaining -= readCnt;
-    
-    [stream writeBytes:buf count:readCnt-offset];
+    tmpSize   = bufCnt - 1;
+    cnt       = 0;
+    tmpBufCnt = 0;
+        
+    while (cnt < tmpSize) {
+      if ((buf[cnt] == '\r') && (buf[cnt+1] == '\n')) {
+	cnt++;
+      }
+      tmpBuf[tmpBufCnt++] = buf[cnt++];
+    }
+    if (cnt < bufCnt) {
+      lastChar = buf[cnt];
+    }
+    [stream writeBytes:tmpBuf count:tmpBufCnt];
   }
+  if (lastChar != -1)
+    [stream writeBytes:&lastChar count:1];
   
   [stream close];
   [stream release]; stream = nil;
@@ -413,27 +413,43 @@ static NSUInteger _removeCRLF(unsigned char *buffer, size_t len) {
 }
 - (NSData *)_parseDataIntoRAM:(unsigned)_size {
   /* parses data into a RAM buffer (NSData) */
-  register unsigned char *buf;
-  // register unsigned char firstChar, nextChar;
-  NSUInteger wasRead, offset;
-  NSData *result;
-
-  buf = malloc((_size + 1) * sizeof(char));
-
-  wasRead = 0;
+  unsigned char *buf = NULL;
+  unsigned char *tmpBuf;
+  unsigned      wasRead   = 0;
+  unsigned      cnt, tmpBufCnt, tmpSize;
+  NSData        *result;
+          
+  buf = calloc(_size + 10, sizeof(char));
+    
   while (wasRead < _size) {
-    self->la(self->buffer, @selector (la:), (_size - wasRead <  LaSize) ? (_size - wasRead) : LaSize);
+    [self->buffer la:(_size - wasRead <  LaSize) ? (_size - wasRead) : LaSize];
+            
     wasRead += [self->buffer readBytes:(buf + wasRead) count:(_size-wasRead)];
   }
-  *(buf + _size) = '\0';
- 
+  
   /* normalize response  \r\n -> \n */
-
-  offset = _removeCRLF(buf, wasRead);
-  result = [DataClass dataWithBytesNoCopy:buf
-                      length:wasRead-offset
-                      freeWhenDone:YES];
-
+	
+  tmpBuf    = calloc(_size + 10, sizeof(char));
+  cnt       = 0;
+  tmpBufCnt = 0;
+  tmpSize   = _size == 0 ? 0 : _size - 1;
+  while (tmpBufCnt < tmpSize && cnt < _size) {
+    if ((buf[cnt] == '\r') && (buf[cnt + 1] == '\n'))
+      cnt++; /* skip \r */
+      
+    tmpBuf[tmpBufCnt] = buf[cnt];
+    tmpBufCnt++;
+    cnt++;
+  }
+  if (cnt < _size) {
+    tmpBuf[tmpBufCnt] = buf[cnt];
+    tmpBufCnt++;
+    cnt++;
+  }
+    
+  result = [DataClass dataWithBytesNoCopy:tmpBuf length:tmpBufCnt];
+    
+  if (buf != NULL) free(buf); buf = NULL;
   return result;
 }
 - (NSData *)_parseData {
@@ -583,13 +599,10 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
   // TODO: is it really required by IMAP4 that responses are uppercase?
   // TODO: apparently this code *breaks* with lowercase detection on!
   unsigned char l0, l1 = 0;
-
-  l0 = _la(self, 0);
-  if (l0 == ' ') {
-    _consume(self, 1);
-    l0 = _la(self, 0);
-  }
+  _consumeIfMatch(self, '*');
+  _consumeIfMatch(self, ' ');
   
+  l0 = _la(self, 0);
   switch (l0) {
   case 'A':
     if ([self _parseACLResponseIntoHashMap:result_])
@@ -2495,10 +2508,9 @@ static BOOL _parseNoUntaggedResponse(NGImap4ResponseParser *self,
 }
 
 static BOOL _parseOkUntaggedResponse(NGImap4ResponseParser *self,
-                                     NGMutableHashMap *result_)
+                                     NGMutableHashMap *result_) 
 {
-  /* we know the first element is 'O', since the caller has tested it */
-  if (!((_la(self, 1)=='K') && (_la(self, 2)==' ')))
+  if (!((_la(self, 0)=='O') && (_la(self, 1)=='K') && (_la(self, 2)==' ')))
     return NO;
   
   _consume(self, 3);
@@ -2675,11 +2687,9 @@ static __inline__ void _consume(NGImap4ResponseParser *self, unsigned _cnt) {
 
   if (_cnt == 0)
     return;
-
-  if (self->la(self->buffer, @selector(la:), _cnt - 1) == '\r') {
-    _cnt++;
-  }
-
+  
+  _cnt +=  (__la(self, _cnt - 1) == '\r') ? 1 : 0;
+  
   if (self->debug) {
     unsigned cnt;
     
