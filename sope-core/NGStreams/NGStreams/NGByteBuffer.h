@@ -43,28 +43,22 @@ struct NGByteBufferLA;
 @interface NGByteBuffer : NGFilterStream
 {
 @protected
-  unsigned char *la;
+  struct NGByteBufferLA *la;
 
   unsigned bufLen;
   BOOL     wasEOF;
   unsigned headIdx;
-  unsigned freeIdx; /* first byte index that has not been fetched */
-  unsigned EOFIdx; /* max byte index ever + 1 */
   unsigned sizeLessOne;
 
-  unsigned lastLaIdx;
-  unsigned lastLaIdxCount;
-
-  int (*laImpl)(id, SEL, unsigned);
-  int (*sourceReadByte)(id, SEL);
-  int (*sourceReadBytes)(id, SEL, void *, unsigned);
+  int (*readByte)(id, SEL);
+  int (*laFunction)(id, SEL, unsigned);
 }
 
 /*
   Initialize a byte buffer with a lookahead depth of _la bytes.
 */
 + (id)byteBufferWithSource:(id<NGStream>)_stream la:(unsigned)_la;
-- (id)initWithSource:(NSObject <NGStream> *)_stream la:(unsigned)_la;
+- (id)initWithSource:(id<NGStream>)_stream la:(unsigned)_la;
 
 // LA
 - (int)la:(unsigned)_lookaheadPosition;
