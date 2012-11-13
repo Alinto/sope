@@ -1858,58 +1858,32 @@ static BOOL debugLanguageLookup = NO;
   languages:(NSArray *)_languages
 {
   NSFileManager *fm;
-  NSString      *path;
-  NSString *key, *langStr, *cachedPath;
+  NSString      *path = nil;
   int i, langCount;
   id (*objAtIdx)(id,SEL,int);
-  static NSMutableDictionary *cache = nil;
-
-  if (!cache)
-    cache = [NSMutableDictionary new];
-
-  if (!_name)
-    _name = @"";
-  if (!_ext)
-    _ext = @"";
-  if ([_languages count] > 0) {
-    _languages = [[[NSSet setWithArray: _languages] allObjects]
-                   sortedArrayUsingSelector: @selector (compare:)];
-    langStr = [_languages componentsJoinedByString: @","];
-  }
-  else
-    langStr = @"";
-
-  if (!_directory) {
-#if (NeXT_Foundation_LIBRARY || APPLE_Foundation_LIBRARY)
-    _directory = @"Contents/Resources";
-#else
-    _directory = @"Resources";
-#endif
-  }
-
-  path = [[self bundlePath] stringByAppendingPathComponent:_directory];
   
   if (debugLanguageLookup) {
-    NSLog(@"  BASE: %@", path);
     NSLog(@"LOOKUP(%s): %@ | %@ | %@ | %@", __PRETTY_FUNCTION__,
-	  _name, _ext, _directory, langStr);
+	  _name, _ext, _directory, [_languages componentsJoinedByString:@","]);
   }
-
-  key = [NSString stringWithFormat: @"%@-%@-%@-%@",
-                  _name, _ext, path, langStr];
-  cachedPath = [cache objectForKey: key];
-  if (cachedPath)  {
-    if ([cachedPath isKindOfClass: [NSString class]])
-      return cachedPath;
-    else
-      return nil;
+  
+  path = [self bundlePath];
+  if ([_directory isNotNull]) {
+    // TODO: should we change that?
+    path = [path stringByAppendingPathComponent:_directory];
   }
-
+  else {
+#if (NeXT_Foundation_LIBRARY || APPLE_Foundation_LIBRARY)
+    path = [path stringByAppendingPathComponent:@"Contents"];
+#endif
+    path = [path stringByAppendingPathComponent:@"Resources"];
+  }
+  
+  if (debugLanguageLookup) NSLog(@"  BASE: %@", path);
+  
   fm   = [NSFileManager defaultManager];
-  if (![fm fileExistsAtPath:path]) {
-    [cache setObject: [NSNull null] forKey: key];
+  if (![fm fileExistsAtPath:path])
     return nil;
-  }
   
   if (_ext != nil) _name = [_name stringByAppendingPathExtension:_ext];
   
@@ -1930,23 +1904,16 @@ static BOOL debugLanguageLookup = NO;
     lpath = [path stringByAppendingPathComponent:language];
     lpath = [lpath stringByAppendingPathComponent:_name];
 
-    if ([fm fileExistsAtPath:lpath]) {
-        [cache setObject: lpath forKey: key];
-        return lpath;
-      }
+    if ([fm fileExistsAtPath:lpath])
+      return lpath;
   }
   
   if (debugLanguageLookup) 
     NSLog(@"  no language matched, check base: %@", path);
 
   /* now look into x.bundle/Resources/name.type */
-  if ([fm fileExistsAtPath:[path stringByAppendingPathComponent:_name]]) {
-    path = [path stringByAppendingPathComponent:_name];
-    [cache setObject: path forKey: key];
-    return path;
-  }
-
-  [cache setObject: [NSNull null] forKey: key];
+  if ([fm fileExistsAtPath:[path stringByAppendingPathComponent:_name]])
+    return [path stringByAppendingPathComponent:_name];
 
   return nil;
 }
