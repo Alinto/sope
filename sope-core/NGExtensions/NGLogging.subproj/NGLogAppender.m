@@ -40,7 +40,7 @@ static NSString *defaultAppenderClassName = nil;
   defaultAppenderClassName =
     [[ud stringForKey:@"NGLogDefaultAppenderClass"] retain];
   if (defaultAppenderClassName == nil)
-    defaultAppenderClassName = @"NGLogStdoutAppender";
+    defaultAppenderClassName = @"NGLogStderrAppender";
 }
 
 + (id)logAppenderFromConfig:(NSDictionary *)_config {

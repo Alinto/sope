@@ -33,7 +33,7 @@
   ----------------------------------------------------------------------------
   NGLogDefaultAppenderClass     The appender class to use if no class
                                 information was provided by the configuration.
-                                The fallback is "NGLogStdoutAppender".
+                                The fallback is "NGLogStderrAppender".
  
  
   The following keys in the configuration dictionary will be recognized:
