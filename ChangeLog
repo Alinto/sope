@@ -1,3 +1,31 @@
+commit cf743a6b81cbf6f0cdaf46545a692397546d46dd
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Nov 13 08:34:29 2012 -0500
+
+    Removed premature IMAP optmization, causing attachments corruption.
+    
+    This patch would "corrupt" some attachment when viewing them, or
+    saving them to the local filesystem. Files would be truncated, or
+    exceed in bytes, rendering them useless.
+    (cherry picked from commit a18bb288f890db5747911bf2c74382e59583fde4)
+    
+    Conflicts:
+    	sope-core/NGStreams/NGByteBuffer.m
+    	sope-core/NGStreams/NGStreams/NGByteBuffer.h
+    	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+M	sope-core/NGStreams/NGByteBuffer.m
+M	sope-core/NGStreams/NGStreams/NGByteBuffer.h
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit a0702f6b0dea3fcd9d70af41fc09d83386a5ae92
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Wed Oct 24 15:00:15 2012 -0400
+
+    style
+
+M	ChangeLog
+
 commit 67812062daa25a8f52fff897b2c49b9c5554623c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 23 17:25:00 2012 -0400
