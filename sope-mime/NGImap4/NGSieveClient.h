@@ -60,8 +60,11 @@ typedef enum {
 
   NSString *authname;
   NSString *login;
-  NSString *password;
+  NSString *password; 
 
+  NSString *serverType;
+  NSArray  *capabilities;
+  
   BOOL debug;
   BOOL useTLS;
 }
@@ -78,6 +81,7 @@ typedef enum {
 
 - (id<NGActiveSocket>)socket;
 - (id<NGSocketAddress>)address;
+
 
 /* exceptions */
 
@@ -107,6 +111,13 @@ typedef enum {
 /* equality */
 
 - (BOOL)isEqualToSieveClient:(NGSieveClient *)_obj;
+
+
+/* Misc */
+- (NSString *) serverType;
+- (NSArray *) capabilities;
+- (BOOL) hasCapability: (NSString *)_capabilityName;
+
 
 @end
 

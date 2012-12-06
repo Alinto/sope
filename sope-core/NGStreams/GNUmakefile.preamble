@@ -10,7 +10,7 @@ NGStreams_INCLUDE_DIRS += $(libNGStreams_INCLUDE_DIRS)
 # dependencies
 
 libNGStreams_LIBRARIES_DEPEND_UPON += \
-	-lz -lgnustep-base -lobjc
+	-lz $(BASE_LIBS)
 NGStreams_LIBRARIES_DEPEND_UPON += \
 	-framework NGExtensions -framework EOControl	\
 	-framework DOM -framework SaxObjC		\

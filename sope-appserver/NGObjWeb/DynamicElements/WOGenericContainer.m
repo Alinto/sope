@@ -100,7 +100,7 @@
       break;
   }
   
-  WOResponse_AddChar(_response, '<');
+  WOResponse_AddBytesLen(_response, "<", 1);
   if (tag) {
     WOResponse_AddString(_response, tag);
   }
@@ -111,23 +111,23 @@
   [self _appendAttributesToResponse:_response inContext:_ctx];
   
   if (self->otherTagString) {
-    WOResponse_AddChar(_response, ' ');
+    WOResponse_AddBytesLen(_response, " ", 1);
     WOResponse_AddString(_response,
                          [self->otherTagString stringValueInComponent:
                            sComponent]);
   }
-  WOResponse_AddChar(_response, '>');
+  WOResponse_AddBytesLen(_response, ">", 1);
   
   [self->template appendToResponse:_response inContext:_ctx];
   
-  WOResponse_AddCString(_response, "</");
+  WOResponse_AddBytesLen(_response, "</", 2);
   if (tag) {
     WOResponse_AddString(_response, tag);
   }
   else if (self->tagNameType == TagNameType_ASCII) {
     WOResponse_AddCString(_response, self->tagName);
   }
-  WOResponse_AddChar(_response, '>');
+  WOResponse_AddBytesLen(_response, ">", 1);
 }
 
 @end /* WOGenericContainer */

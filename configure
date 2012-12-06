@@ -474,6 +474,8 @@ checkLinking() {
 checkDependencies() {
   cfgwrite ""
   cfgwrite "# library dependencies"
+  cfgwrite "BASE_LIBS := `gnustep-config --base-libs`"
+  
   checkLinking "xml2"        optional;
   checkLinking "ldap"        optional;
 

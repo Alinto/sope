@@ -91,6 +91,7 @@
 - (void)sendResponseNotification:(NGHashMap *)map;
 
 - (NSDictionary *)login;
+- (NSDictionary *)authenticate;
 
 - (NSDictionary *) _sopeSORT: (id)_sortSpec  qualifier:(EOQualifier *)_qual  encoding:(NSString *)_encoding;
 
@@ -548,6 +549,31 @@ static NSMutableDictionary *namespaces;
   return [self login];
 }
 
+- (NSDictionary *)authenticate:(NSString *)_login password:(NSString *)_passwd
+                     mechanism:(NSString *)_mech {
+  /* login with plaintext password authenticating */
+
+  if ((_login == nil) || (_passwd == nil))
+    return nil;
+
+  if (_mech == nil)
+    _mech = @"PLAIN";
+
+  [self->login     release]; self->login    = nil;
+  [self->password  release]; self->password = nil;
+  [self->authMechanism  release]; self->authMechanism = nil;
+  [self->serverGID release]; self->serverGID = nil;
+  
+  self->login    = _login;
+  [_login retain];
+  self->password = _passwd;
+  [_passwd retain];
+  self->authMechanism = _mech;
+  [_mech retain];
+  
+  return [self authenticate];
+}
+
 - (void)reconnect {
   NSArray *extensions;
 
@@ -564,8 +590,11 @@ static NSMutableDictionary *namespaces;
   if ([self->context lastException] != nil)
     return;
   
-  [self login];
-
+  if (self->useAuthenticate)
+    [self authenticate];
+  else
+    [self login];
+  
   if (self->loggedIn && [extensions count] > 0) {
     [self enable: extensions];
   }
@@ -619,6 +648,72 @@ static NSMutableDictionary *namespaces;
   response = [self->normer normalizeResponse:map];
 
   self->loggedIn = [[response valueForKey:@"result"] boolValue];
+  self->useAuthenticate = NO;
+
+  return response;
+}
+
+- (NSDictionary *)authenticate {
+  /*
+    On failure returns a dictionary with those keys:
+      'result'      - a boolean => false
+      'reason'      - reason why authenticate failed
+      'RawResponse' - the raw IMAP4 response
+    On success:
+      'result'      - a boolean => true
+      'expunge'     - an array (containing what?)
+      'RawResponse' - the raw IMAP4 response
+  */
+  NSDictionary *response;
+  NGHashMap *map;
+  NSString  *s;
+
+  if (self->isLogin)
+    return nil;
+  
+  self->isLogin = YES;
+
+  s = [NSString stringWithFormat:@"authenticate %@", self->authMechanism];
+  map = [self processCommand: s
+                     withTag: YES
+            withNotification: NO];
+  
+  if ([[map objectForKey:@"ContinuationResponse"] boolValue])
+    {
+      char *buffer;
+      const char *utf8Username, *utf8Password;
+      size_t buflen, lenUsername, lenPassword;
+      NSString *authString;
+
+      utf8Username = [self->login UTF8String];
+      utf8Password = [self->password UTF8String];
+      if (!utf8Password)
+        utf8Password = 0;
+
+      lenUsername = strlen (utf8Username);
+      lenPassword = strlen (utf8Password);
+      buflen = lenUsername * 2 + lenPassword + 2;
+      buffer = malloc (sizeof (char) * (buflen + 1));
+      sprintf (buffer, "%s%c%s%c%s",
+               utf8Username, 0, utf8Username, 0, utf8Password);
+      authString = [[NSData dataWithBytesNoCopy: buffer
+                                         length: buflen
+                                   freeWhenDone: YES]
+                     stringByEncodingBase64];
+      map = [self processCommand:[authString stringByReplacingString: @"\n"
+                                                          withString: @""]
+                         withTag:NO];
+    }
+  
+  if (self->selectedFolder != nil)
+    [self select:self->selectedFolder];
+  
+  self->isLogin = NO;
+  
+  response = [self->normer normalizeResponse:map];
+
+  self->loggedIn = [[response valueForKey:@"result"] boolValue];
+  self->useAuthenticate = self->loggedIn;
 
   return response;
 }

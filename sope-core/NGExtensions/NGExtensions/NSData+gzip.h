@@ -32,6 +32,9 @@
 - (NSData *)gzipWithLevel:(int)_compressionLevel;
 - (NSData *)gzip;
 
+- (NSData *)compress;
+- (NSData *)compressWithLevel: (int) level;
+
 @end
 
 #endif /* __NGZlib_NSData_gzip_H__ */

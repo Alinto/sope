@@ -213,6 +213,7 @@ static BOOL debugOn = NO;
 }
 
 - (void)dealloc {
+  [self->browserLanguages   release];
   [self->startDate          release];
   [self->startStatistics    release];
   [self->method             release];
@@ -577,52 +578,54 @@ static BOOL debugOn = NO;
   static NSArray *defLangs = nil;
   NSString       *hheader;
   NSEnumerator   *e;
-  NSMutableArray *languages;
   NSString       *language;
   NSString       *tmp;
   
-  languages = [NSMutableArray arrayWithCapacity:8];
+  if (!browserLanguages)
+    {
+      browserLanguages = [NSMutableArray new];
   
-  e = [[self headersForKey:@"accept-language"] objectEnumerator];
-  while ((hheader = [e nextObject]) != nil) {
-    NSEnumerator *le;
+      e = [[self headersForKey:@"accept-language"] objectEnumerator];
+      while ((hheader = [e nextObject]) != nil) {
+        NSEnumerator *le;
     
-    le = [[hheader componentsSeparatedByString:@","] objectEnumerator];
-    while ((language = [le nextObject]) != nil) {
-      NSString *tmp;
-      NSRange  r;
+        le = [[hheader componentsSeparatedByString:@","] objectEnumerator];
+        while ((language = [le nextObject]) != nil) {
+          NSString *tmp;
+          NSRange  r;
       
-      /* split off the quality (eg 'en;0.96') */
-      r = [language rangeOfString:@";"];
-      if (r.length > 0)
-        language = [language substringToIndex:r.location];
-      language = [language stringByTrimmingSpaces];
+          /* split off the quality (eg 'en;0.96') */
+          r = [language rangeOfString:@";"];
+          if (r.length > 0)
+            language = [language substringToIndex:r.location];
+          language = [language stringByTrimmingSpaces];
 
-      if ([language length] == 0)
-        continue;
+          if ([language length] == 0)
+            continue;
       
-      /* check in map */
-      if ((tmp = [self languageForBrowserLanguageCode:language]))
-        language = tmp;
+          /* check in map */
+          if ((tmp = [self languageForBrowserLanguageCode:language]))
+            language = tmp;
       
-      if ([languages containsObject:language])
-        continue;
+          if ([browserLanguages containsObject:language])
+            continue;
       
-      [languages addObject:language];
+          [browserLanguages addObject:language];
+        }
+      }
+  
+      if ((tmp = [self _languageFromUserAgent]))
+        [browserLanguages addObject:tmp];
+  
+      if (defLangs == nil) {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        defLangs = [[ud arrayForKey:@"WODefaultLanguages"] copy];
+      }
+      [browserLanguages addObjectsFromArray:defLangs];
     }
-  }
-  
-  if ((tmp = [self _languageFromUserAgent]))
-    [languages addObject:tmp];
-  
-  if (defLangs == nil) {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    defLangs = [[ud arrayForKey:@"WODefaultLanguages"] copy];
-  }
-  [languages addObjectsFromArray:defLangs];
   
   //[self debugWithFormat:@"languages: %@", languages];
-  return [[languages copy] autorelease];
+  return browserLanguages;
 }
 
 /* cookies */

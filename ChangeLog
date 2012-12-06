@@ -1,3 +1,240 @@
+commit 180ee5442d3245265a993de4c565271bc6c5c142
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Dec 3 16:27:45 2012 -0500
+
+    Fix for bug #2126
+
+M	sope-mime/NGMail/NGSmtpClient.m
+M	sope-mime/NGMail/NGSmtpReplyCodes.h
+
+commit bc62cc45f0c4978f4454a8ccf0887b1f01f6e32c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Nov 30 10:07:34 2012 -0500
+
+    Added ways to obtain Sieve's server capabilities.
+    
+    This fixes bug #1391.
+
+M	sope-mime/NGImap4/NGSieveClient.h
+M	sope-mime/NGImap4/NGSieveClient.m
+
+commit a18bb288f890db5747911bf2c74382e59583fde4
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Nov 13 08:34:29 2012 -0500
+
+    Removed premature IMAP optmization, causing attachments corruption.
+    
+    This patch would "corrupt" some attachment when viewing them, or
+    saving them to the local filesystem. Files would be truncated, or
+    exceed in bytes, rendering them useless.
+
+M	sope-core/NGStreams/NGByteBuffer.m
+M	sope-core/NGStreams/NGStreams/NGByteBuffer.h
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 9de080f29a9f965ac46db911d15305654bf3602f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Nov 13 08:30:08 2012 -0500
+
+    Removed useless and buggy optimization.
+    
+    This optimization would break heavily localization support in SOGo.
+    This patch might be reviewed later, but for now, we remove it.
+
+M	sope-core/NGExtensions/NGBundleManager.m
+
+commit baef7f83a658ca22bc056cc2a5f1c816079f0768
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Wed Nov 7 10:14:03 2012 -0500
+
+    Use the output of "gnustep-config --base-libs" to determine which libs our libraries must be linked against
+
+M	configure
+M	sope-appserver/NGObjWeb/GNUmakefile.preamble
+M	sope-appserver/WEExtensions/GNUmakefile.preamble
+M	sope-appserver/WOExtensions/GNUmakefile.preamble
+M	sope-core/EOControl/GNUmakefile.preamble
+M	sope-core/NGExtensions/GNUmakefile.preamble
+M	sope-core/NGStreams/GNUmakefile.preamble
+M	sope-gdl1/GDLAccess/GNUmakefile.preamble
+M	sope-ldap/NGLdap/GNUmakefile.preamble
+M	sope-mime/GNUmakefile.preamble
+M	sope-xml/DOM/GNUmakefile.preamble
+M	sope-xml/SaxObjC/GNUmakefile.preamble
+M	sope-xml/XmlRpc/GNUmakefile.preamble
+
+commit 29800475e0cc61e2667d0a05f2438337e45be3e6
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Nov 6 13:49:23 2012 -0500
+
+    Remove carriage returns from base64 blob
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 0caecc6ff0cf3148881824dbd307e5bbb47079be
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Nov 6 13:48:54 2012 -0500
+
+    Added -compress and -compressWithLevel: to compress NSData as headerless zlib streams
+
+M	sope-core/NGExtensions/FdExt.subproj/NSData+gzip.m
+M	sope-core/NGExtensions/NGExtensions/NSData+gzip.h
+
+commit e1996a96a76025270596b11c782db33061e3cdd0
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Mon Nov 5 13:58:57 2012 -0500
+
+    Added a safeguard for infinite loops occuring when a parser instance request the same buffer position too many times (53 times max)
+
+M	sope-core/NGStreams/NGByteBuffer.m
+M	sope-core/NGStreams/NGStreams/NGByteBuffer.h
+
+commit 39fb8d8e4a49ed99909b0e6f7439c043cc428884
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Mon Nov 5 10:29:09 2012 -0500
+
+    added support for the IMAP AUTHENTICATE command
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4ConnectionManager.m
+
+commit 88657808dc1a08a4607d5702434fcb1cca451131
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 30 09:40:06 2012 -0400
+
+    moved -[SoComponent componentBundle] into "WOComponent" class
+
+M	sope-appserver/NGObjWeb/NGObjWeb/WOComponent.h
+M	sope-appserver/NGObjWeb/SoObjects/SoComponent.h
+M	sope-appserver/NGObjWeb/SoObjects/SoComponent.m
+M	sope-appserver/NGObjWeb/WOComponent.m
+
+commit c471578a7e7186ad3e2bef4d8dd5ef6b0fb140fe
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 30 08:52:50 2012 -0400
+
+    initialize last_pos to 0
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit cfcc1bd1886b216a26f6aaf56293f3b363bf1c98
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 30 08:47:53 2012 -0400
+
+    make use of WOResponse_AddBytesLen to avoid calls to strlen for known lengths
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOGenericContainer.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOImage.m
+
+commit 397fd115a02d53acc3d606a7267428a346fa694d
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 30 08:46:34 2012 -0400
+
+    allocated the "content" ivar during init, and expose the IMPL of appendContentBytes:length: via the addBytesLen function pointer
+
+M	sope-appserver/NGObjWeb/NGObjWeb/WOMessage.h
+M	sope-appserver/NGObjWeb/WOMessage.m
+M	sope-appserver/NGObjWeb/WOResponse+private.h
+
+commit c85c649b7f502bfac4d1b93ac59026c4060fb3ae
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 30 08:43:38 2012 -0400
+
+    cache the component bundle
+
+M	sope-appserver/NGObjWeb/SoObjects/SoComponent.h
+
+commit e8bea4c638e7dc7a23d82dc2e7364cbd5260fd74
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 30 08:43:00 2012 -0400
+
+    Removed useless pointer validity check, at it is already performed in the underlying methods
+
+M	sope-appserver/NGObjWeb/WOResponse+private.h
+
+commit 2a9f409eb7b35a383ff9af762147cb4fb626475d
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 30 08:40:34 2012 -0400
+
+    cache the component bundle
+
+M	sope-appserver/NGObjWeb/SoObjects/SoComponent.m
+
+commit 6471303994298c6a45efcdf80d5b72e280e80d90
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Tue Oct 30 08:38:47 2012 -0400
+
+    -[NGActiveSocket disableNagle:]: new method to disable the nagle algorithm
+
+M	sope-core/NGStreams/NGActiveSocket.m
+M	sope-core/NGStreams/NGStreams/NGActiveSocket.h
+
+commit c6124589e87a99300f5c1eb9fcdc951f7f8fe637
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Mon Oct 29 16:44:59 2012 -0400
+
+    .mtn-ignore
+
+D	.mtn-ignore
+
+commit 9d892351127e8a1a86bb014b313c61b1c30e28ae
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Fri Oct 26 17:34:36 2012 -0400
+
+    style
+
+M	sope-core/NGExtensions/NGBundleManager.m
+
+commit befdab9b605c148c7054245272d2aa1a8253e383
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Fri Oct 26 17:33:48 2012 -0400
+
+    use "," as separator for languages
+
+M	sope-core/NGExtensions/NGBundleManager.m
+
+commit 79cd48cd6d503b8880aab918e8fc65e289c984fb
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Fri Oct 26 17:28:51 2012 -0400
+
+    Fixed deduction of lookup dir when _directory is NULL
+
+M	sope-core/NGExtensions/NGBundleManager.m
+
+commit b72e9146e7644496703661313814f83e1ec9ec3c
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Fri Oct 26 16:20:23 2012 -0400
+
+    -pathForResource:ofType:inDirectory:languages: made faster by caching results
+
+M	sope-core/NGExtensions/NGBundleManager.m
+
+commit 000158cc9442eb4d3c168c9e6dc11c8d6465561e
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Thu Oct 25 22:18:09 2012 -0400
+
+    Accelerated basic page loading by caching the list of browser languages
+
+M	sope-appserver/NGObjWeb/NGObjWeb/WORequest.h
+M	sope-appserver/NGObjWeb/WORequest.m
+
+commit 441b5159d34361e9f614c6a5d9b6907afca75639
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Thu Oct 25 09:31:11 2012 -0400
+
+    "last_pos" should be > 1 in order to be taken into account and "new_pos" could be 0 when the first character of the buffer is "\r"
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit a0702f6b0dea3fcd9d70af41fc09d83386a5ae92
+Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Date:   Wed Oct 24 15:00:15 2012 -0400
+
+    style
+
+M	ChangeLog
+
 commit 67812062daa25a8f52fff897b2c49b9c5554623c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 23 17:25:00 2012 -0400

@@ -17,7 +17,7 @@ libEOControl_LIBRARIES_DEPEND_UPON += -lFoundation
 endif
 
 ifeq ($(FOUNDATION_LIB),gnu)
-libEOControl_LIBRARIES_DEPEND_UPON += -lgnustep-base -lobjc -lm
+libEOControl_LIBRARIES_DEPEND_UPON += $(BASE_LIBS)
 endif
 
 # Apple

@@ -68,7 +68,8 @@ libNGObjWeb_LIBRARIES_DEPEND_UPON += \
 	$(sope-mime-libs) \
 	$(sope-core-libs) \
 	$(sope-xml-libs) \
-	-lgnustep-base -lobjc
+	$(BASE_LIBS)
+
 NGObjWeb_LIBRARIES_DEPEND_UPON += \
 	$(sope-mime-libs) \
 	$(sope-core-libs)\

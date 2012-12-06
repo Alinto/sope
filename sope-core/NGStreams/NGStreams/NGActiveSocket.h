@@ -81,6 +81,8 @@
 - (BOOL)isConnected;
 - (BOOL)isOpen;
 
+- (void)disableNagle:(BOOL)_disable;
+
 - (void)setSendTimeout:(NSTimeInterval)_timeout;
 - (NSTimeInterval)sendTimeout;
 - (void)setReceiveTimeout:(NSTimeInterval)_timeout;

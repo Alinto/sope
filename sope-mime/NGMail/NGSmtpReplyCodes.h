@@ -109,6 +109,7 @@ typedef enum {
   NGSmtpUserNotLocalWillForward   = 251,
 
   // 300 codes, positive intermediate reply
+  NGSmtpServerChallenge           = 334,
   NGSmtpStartMailInput            = 354,
 
   // 400 codes, transient negative completion reply

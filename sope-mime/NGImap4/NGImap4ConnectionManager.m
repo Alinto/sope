@@ -30,13 +30,16 @@ static BOOL           debugOn    = NO;
 static BOOL           debugCache = NO;
 static BOOL           poolingOff = NO;
 static NSTimeInterval PoolScanInterval = 5 * 60 /* every five minutes */;
+static NSString       *AuthMechanism = nil;
 
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   
-  debugOn      = [ud boolForKey:@"NGImap4EnableIMAP4Debug"];
-  debugCache   = [ud boolForKey:@"NGImap4EnableIMAP4CacheDebug"];
-  poolingOff   = [ud boolForKey:@"NGImap4DisableIMAP4Pooling"];
+  debugOn       = [ud boolForKey:@"NGImap4EnableIMAP4Debug"];
+  debugCache    = [ud boolForKey:@"NGImap4EnableIMAP4CacheDebug"];
+  poolingOff    = [ud boolForKey:@"NGImap4DisableIMAP4Pooling"];
+  AuthMechanism = [ud stringForKey:@"NGImap4AuthMechanism"];
+  [AuthMechanism retain];
   
   if ([ud objectForKey:@"NGImap4PoolingCleanupInterval"])
     PoolScanInterval = [[ud objectForKey:@"NGImap4PoolingCleanupInterval"] doubleValue];
@@ -192,7 +195,11 @@ static NSTimeInterval PoolScanInterval = 5 * 60 /* every five minutes */;
   if ((client = [NGImap4Client clientWithURL:_url]) == nil)
     return nil;
   
-  result = [client login:[_url user] password:_pwd];
+  if (AuthMechanism)
+    result = [client authenticate:[_url user] password:_pwd
+                        mechanism:AuthMechanism];
+  else
+    result = [client login:[_url user] password:_pwd];
   if (![[result valueForKey:@"result"] boolValue]) {
     [self errorWithFormat:
             @"IMAP4 login failed:\n"

@@ -42,7 +42,7 @@ endif
 libWEExtensions_LIBRARIES_DEPEND_UPON += \
 	-lNGObjWeb	\
 	-lNGExtensions -lEOControl \
-	-lgnustep-base -lobjc -lm
+        $(BASE_LIBS)
 
 ifeq ($(frameworks),yes)
 WEExtensions_LIBRARIES_DEPEND_UPON += \
