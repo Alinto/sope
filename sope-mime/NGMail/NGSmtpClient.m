@@ -223,7 +223,7 @@
     char *buffer;
     const char *utf8Username, *utf8Password;
     size_t buflen, lenUsername, lenPassword;
-    NSData *authString;
+    NSString *authString;
     NGSmtpResponse *reply;
 
     utf8Username = [username UTF8String];
@@ -237,11 +237,17 @@
     buffer = malloc (sizeof (char) * (buflen + 1));
     sprintf (buffer, "%s%c%s%c%s",
              utf8Username, 0, utf8Username, 0, utf8Password);
-    authString = [NSData dataWithBytesNoCopy: buffer
-                                      length: buflen
-                                freeWhenDone: YES];
-    reply = [self sendCommand: @"AUTH PLAIN"
-                     argument: [authString stringByEncodingBase64]];
+    authString = [[NSData dataWithBytesNoCopy: buffer
+                                       length: buflen
+                                 freeWhenDone: YES]
+                   stringByEncodingBase64];
+    reply = [self sendCommand: @"AUTH PLAIN"];
+    
+    if ([reply code] == NGSmtpServerChallenge)
+      {
+        reply = [self sendCommand: authString];
+      }
+
     rc = ([reply code] == NGSmtpAuthenticationSuccess);
   }
   else {

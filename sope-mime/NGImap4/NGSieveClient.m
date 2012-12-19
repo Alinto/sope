@@ -119,7 +119,7 @@ static BOOL     debugImap4         = NO;
   
   if ((port = [[_url port] intValue]) == 0)
     port = defaultSievePort;
-  
+
   a = [NGInternetSocketAddress addressWithPort:port 
 			       onHost:[_url host]];
   if ((self = [self initWithAddress:a])) {
@@ -131,6 +131,10 @@ static BOOL     debugImap4         = NO;
       else
 	self->useTLS = NO;
   }
+  
+  serverType = nil;
+  capabilities = nil;
+
   return self;
 }
 - (id)initWithURL:(id)_url {
@@ -170,6 +174,8 @@ static BOOL     debugImap4         = NO;
   [self->authname release];
   [self->login    release];
   [self->password release];
+  [self->serverType release];
+  [self->capabilities release];
   [super dealloc];
 }
 
@@ -198,6 +204,24 @@ static BOOL     debugImap4         = NO;
 - (id<NGSocketAddress>)address {
   return self->address;
 }
+
+- (NSString * ) serverType {
+  return self->serverType;
+}
+
+- (NSArray *) capabilities {
+  return self->capabilities;
+}
+
+- (BOOL) hasCapability: (NSString *)_capabilityName {
+  if (self->capabilities)
+    {
+      return [self->capabilities containsObject: _capabilityName];
+    }
+
+  return NO;
+}
+
 
 /* exceptions */
 
@@ -259,6 +283,10 @@ static BOOL     debugImap4         = NO;
 
   res = [self normalizeOpenConnectionResponse:
 		[self->parser parseSieveResponse]];
+
+  ASSIGN(serverType, [res objectForKey: @"server"]);
+  ASSIGN(capabilities, [[res objectForKey:@"capabilities"] componentsSeparatedByString: @" "]);
+         
 
   // If we're using TLS, we start it here
   if (self->useTLS)
