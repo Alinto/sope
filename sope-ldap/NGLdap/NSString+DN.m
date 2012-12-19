@@ -22,6 +22,9 @@
 
 #import <Foundation/NSCharacterSet.h>
 
+#define LDAP_DEPRECATED 1
+#include <ldap.h>
+
 #include "NSString+DN.h"
 #include <NGExtensions/NSString+Ext.h>
 #include "common.h"
@@ -48,6 +51,43 @@ static NSArray *cleanDNComponents(NSArray *_components) {
   return _components;
 }
 
+static NSArray *explodeDN(const char *dn) {
+  char **exploded;
+  unsigned i;
+  NSMutableArray *array;
+  NSArray *ret;
+  id *cs;
+
+  if (dn == NULL)
+    return nil;
+
+  if (dn[0] == '\0') {
+    return [NSArray arrayWithObjects: @"", nil];
+  }
+
+  exploded = ldap_explode_dn(dn, 0);
+  if (exploded == NULL)
+    return nil;
+
+  /* Count number of RDNs */
+  for (i = 0; exploded[i] != NULL; i++);
+
+  cs = calloc(i, sizeof(id));
+
+  array = [[NSMutableArray alloc] initWithCapacity:i];
+  for (i = 0; exploded[i] != NULL; i++) {
+    [array addObject: [NSString stringWithCString:exploded[i]]];
+  }
+
+  ldap_value_free(exploded);
+
+  ret = [array copy];
+
+  if (cs != NULL) { free(cs); cs = NULL; }
+
+  return cleanDNComponents(ret);
+}
+
 @implementation NSString(DNSupport)
 
 + (NSString *)dnWithComponents:(NSArray *)_components {
@@ -55,7 +95,7 @@ static NSArray *cleanDNComponents(NSArray *_components) {
 }
 
 - (NSArray *)dnComponents {
-  return cleanDNComponents([self componentsSeparatedByString:dnSeparator]);
+  return explodeDN([self cString]);
 }
 
 - (NSString *)stringByAppendingDNComponent:(NSString *)_component {
