@@ -164,11 +164,11 @@ void _checkFetch(EOArrayProxy *self) {
 
 // NSArray operations
 
-- (id)objectAtIndex:(unsigned int)_index {
+- (id)objectAtIndex:(NSUInteger)_index {
   _checkFetch(self);
   return [self->content objectAtIndex:_index];
 }
-- (unsigned int)count {
+- (NSUInteger) count {
   _checkFetch(self);
   return [self->content count];
 }
@@ -176,7 +176,7 @@ void _checkFetch(EOArrayProxy *self) {
   _checkFetch(self);
   return [self->content count] > 0 ? YES : NO;
 }
-- (unsigned int)indexOfObjectIdenticalTo:(id)_object {
+- (NSUInteger)indexOfObjectIdenticalTo:(id)_object {
   _checkFetch(self);
   return [self->content indexOfObjectIdenticalTo:_object];
 }
