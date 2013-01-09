@@ -367,7 +367,9 @@
         self->extensions.hasPipelining = YES;
       else if ([line hasPrefix:@"HELP"])
         self->extensions.hasHelp = YES;
-      else if ([line hasPrefix:@"AUTH"]) {
+      // We skip "AUTH=PLAIN ..." here, as it's redundant with "AUTH PLAIN ..." and will
+      // break things on components splitting
+      else if ([line hasPrefix:@"AUTH "]) {
         NSArray *methods;
         methods = [line componentsSeparatedByString: @" "];
         self->extensions.hasAuthPlain = [methods containsObject: @"PLAIN"];
