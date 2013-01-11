@@ -52,10 +52,9 @@ static NSArray *cleanDNComponents(NSArray *_components) {
 }
 
 static NSArray *explodeDN(const char *dn) {
+  NSMutableArray *array;
   char **exploded;
   unsigned i;
-  NSMutableArray *array;
-  NSArray *ret;
   id *cs;
 
   if (dn == NULL)
@@ -74,18 +73,16 @@ static NSArray *explodeDN(const char *dn) {
 
   cs = calloc(i, sizeof(id));
 
-  array = [[NSMutableArray alloc] initWithCapacity:i];
+  array = [NSMutableArray arrayWithCapacity: i];
   for (i = 0; exploded[i] != NULL; i++) {
-    [array addObject: [NSString stringWithCString:exploded[i]]];
+    [array addObject: [NSString stringWithCString: exploded[i]]];
   }
 
   ldap_value_free(exploded);
 
-  ret = [array copy];
-
   if (cs != NULL) { free(cs); cs = NULL; }
 
-  return cleanDNComponents(ret);
+  return cleanDNComponents(array);
 }
 
 @implementation NSString(DNSupport)
