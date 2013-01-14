@@ -241,6 +241,7 @@
                                        length: buflen
                                  freeWhenDone: YES]
                    stringByEncodingBase64];
+    authString = [authString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     reply = [self sendCommand: @"AUTH PLAIN"];
     
     if ([reply code] == NGSmtpServerChallenge)
