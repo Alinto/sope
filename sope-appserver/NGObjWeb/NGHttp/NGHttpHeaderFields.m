@@ -563,16 +563,20 @@ static void _parseUserAgent(NGHttpUserAgent *self) {
       }
       self->user = 
         [[NSString alloc] initWithCString:start length:(str - start)];
-      // skip ':'
-      str++; len--;
       
-      if (len > 0) {
-        self->password = [[NSString alloc] initWithCString:str length:len];
+      if (self->user) {
+        // skip ':'
+        str++; len--;
+        
+        if (len > 0) {
+          self->password = [[NSString alloc] initWithCString:str length:len];
+        }
       }
 
       //NSLog(@"decoded user %@ password %@", self->user, self->password);
     }
-    else
+
+    if (!self->user)
       NSLog(@"ERROR: could not decode credentials (invalid base64 encoding)");
   }
   return self;
