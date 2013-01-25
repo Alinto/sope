@@ -1,3 +1,101 @@
+commit bf8a01faee50ac0209051fa1870ca338dc112904
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jan 23 09:39:30 2013 -0500
+
+    Fixed a crash when malformed base64 data was passed during DAV plain auth.
+
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFields.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit 9c3999fadcf3b5e2de9dfbf21756eaa4b7d41e54
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Jan 14 14:24:43 2013 -0500
+
+    Fix SMTP AUTH with long login
+    
+    Fixes #2126
+
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit 52d80264db6e5d4d8aedd50f3bb76d015b8394d6
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 11 11:50:11 2013 -0500
+
+    Fixed memleak in patch from #2152 + formatting changes.
+
+M	sope-ldap/NGLdap/NSString+DN.m
+
+commit 134db61df78edbd367c8b740513802c5fcb25571
+Author: Adam Tkac <vonsch@gmail.com>
+Date:   Wed Dec 19 21:08:05 2012 +0100
+
+    NSString+DN.m:dnComponents method failed to parse DNs which contain commas
+    
+    NSString+DN.m:dnComponents failed to parse for example following DN:
+    
+    dn: CN=Tkac\, Adam,OU=ITZ,DC=geodis,DC=cz
+    
+    The DN was splitted into
+    
+    "CN=Tkac\", "Adam", "OU=ITZ", "DC=geodis", "DC=cz"
+    
+    which is apparently wrong. Now the DN is splitted correctly into
+    
+    "CN=Tkac\, Adam", "OU=ITZ", "DC=geodis", "DC=cz"
+    
+    Signed-off-by: Adam Tkac <vonsch@gmail.com>
+    Signed-off-by: Ludovic Marcotte <lmarcotte@inverse.ca>
+
+M	sope-ldap/NGLdap/NSString+DN.m
+
+commit 888a2595a60f0e24a81b066651c26c5f14761fce
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jan 9 13:04:36 2013 -0500
+
+    Fix for bug #2161
+
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit b4062373339a2a675d86d8578c5c2dc2627bbcb0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jan 9 12:43:42 2013 -0500
+
+    Applied patch from bug #2154.
+
+M	sope-gdl1/GDLAccess/EOArrayProxy.m
+
+commit efccb03d148c64e10b51dbe2e40be5d08bf1b1c8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jan 9 11:29:48 2013 -0500
+
+    Added missing #include - bug #2141.
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 8c29d3b6d2c2d27a421c1109b6d582951fbff36d
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Thu Dec 20 10:39:52 2012 -0500
+
+    Add support for LDAP URLs and tweak exception code
+    
+    handle is now a LDAP*
+    _reinit: use ldap_initialize if provided with a ldap url
+    _exceptionForErrorCode: replace handrolled solution  with ldap_err2str
+    startTLS: raise an exception if ldap_start_tls_s fails
+    Callers should be updated to do something useful with this exception.
+
+M	sope-ldap/NGLdap/ChangeLog
+M	sope-ldap/NGLdap/NGLdapConnection.h
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit 557954949330fd63f03e418ac1e08d73407f836d
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Dec 6 10:55:34 2012 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 180ee5442d3245265a993de4c565271bc6c5c142
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Dec 3 16:27:45 2012 -0500
@@ -17,6 +115,17 @@ Date:   Fri Nov 30 10:07:34 2012 -0500
 
 M	sope-mime/NGImap4/NGSieveClient.h
 M	sope-mime/NGImap4/NGSieveClient.m
+
+commit fc4c41a74c7cdbcee1cfd7d797bd1b1aa9f29815
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Thu Nov 15 11:53:04 2012 -0500
+
+    defaultAppenderClassName: NGLogStderrAppender
+    
+    Change NGLogAppender fallback appender to NGLogStderrAppender
+
+M	sope-core/NGExtensions/NGExtensions/NGLogAppender.h
+M	sope-core/NGExtensions/NGLogging.subproj/NGLogAppender.m
 
 commit a18bb288f890db5747911bf2c74382e59583fde4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
