@@ -1,3 +1,10 @@
+2012-12-20  Jean Raby  <jraby@inverse.ca>
+	* NGLdapconnection.h handle is now a LDAP*
+	* NGLdapConnection.m (_reinit): ldap_initialize if provided with a ldap url
+	* NGLdapConnection.m (_exceptionForErrorCode): replace body with ldap_err2str
+	* NGLdapConnection.m (startTLS): raise an exception if ldap_start_tls_s fails
+	  Callers should be updated to do something useful with this exception.
+
 2010-03-08  Ludovic Marcotte  <lmarcotte@inverse.ca>
 
 	* Added password policy support when binding to the

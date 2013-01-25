@@ -92,9 +92,27 @@ static void freeMods(LDAPMod **mods) {
     self->handle = NULL;
   }
   
-  self->handle = ldap_init([self->hostName UTF8String], self->port);
-  if (self->handle == NULL)
-    return NO;
+  if (ldap_is_ldap_url([self->hostName UTF8String])) {
+    if (LDAPDebugEnabled)
+      [self logWithFormat:@"Using ldap_initialize for LDAP URL: %@",
+                          self->hostName];
+
+    rc = ldap_initialize(&self->handle, [self->hostName UTF8String]);
+    if (rc != LDAP_SUCCESS) {
+      [self logWithFormat:@"ERROR: ldap_initialize: %s",
+                               ldap_err2string(rc)];
+      return NO;
+    }
+  }
+  else {
+    /* Keep deprecated API around for old configurations */
+    if (LDAPDebugEnabled)
+      [self logWithFormat:@"Using ldap_init (deprecated) for LDAP host:port %@:%d",
+                          self->hostName, self->port];
+    self->handle = ldap_init([self->hostName UTF8String], self->port);
+    if (self->handle == NULL)
+      return NO;
+  }
   
   /* setup options (must be done before the bind) */
   rc = 
@@ -167,48 +185,14 @@ static void freeMods(LDAPMod **mods) {
   userInfo:(NSDictionary *)_ui
 {
   NSException *e;
-  NSString *name, *reason;
+  NSString *name, *reason, *ldapError;
 
   name = @"LDAPException";
-
-  switch (_err) {
-    case LDAP_SUCCESS:
-      return nil;
-
-    case LDAP_INAPPROPRIATE_AUTH:
-      reason = @"inappropriate authorization";
-      break;
-
-    case LDAP_INVALID_CREDENTIALS:
-      reason = @"invalid credentials";
-      break;
-      
-    case LDAP_INSUFFICIENT_ACCESS:
-      reason = @"insufficient access";
-      break;
-
-    case LDAP_SERVER_DOWN:
-      reason = @"the server is down";
-      break;
-
-    case LDAP_TIMEOUT:
-      reason = @"the operation timed out";
-      break;
-
-    case LDAP_AUTH_UNKNOWN:
-      reason = @"authorization unknown";
-      break;
-      
-    case LDAP_NOT_ALLOWED_ON_NONLEAF:
-      reason = @"operation not allowed on non-leaf record";
-      break;
-      
-    default:
-      reason = [NSString stringWithFormat:
-                           @"operation %@ failed with code 0x%X",
-                           _operation, _err];
-      break;
-  }
+  ldapError = [NSString stringWithCString: ldap_err2string(_err)
+                             encoding: NSUTF8StringEncoding];
+  reason = [NSString stringWithFormat:
+                           @"operation %@ failed: %@ (0x%X)",
+                           _operation, ldapError, _err];
 
   e = [NSException exceptionWithName:name
                    reason:reason
@@ -236,8 +220,22 @@ static void freeMods(LDAPMod **mods) {
 
 - (BOOL)startTLS
 {
-  return (self->handle != NULL
-	  && ldap_start_tls_s(self->handle, NULL, NULL) == LDAP_SUCCESS);
+  int rc;
+  if (!self->handle)
+    return NO;
+
+  rc = ldap_start_tls_s(self->handle, NULL, NULL);
+  /* manpage says it returns LDAP_LOCAL_ERROR if TLS is already installed */
+  /* but it actually returns LDAP_OPERATIONS_ERROR */
+  if (rc != LDAP_SUCCESS && rc != LDAP_LOCAL_ERROR &&
+      rc != LDAP_OPERATIONS_ERROR) {
+    [[self _exceptionForErrorCode: rc
+                        operation: @"startTLS"
+                         userInfo: nil] raise];
+    return NO;
+  }
+  else
+    return YES;
 }
 
 /* binding */

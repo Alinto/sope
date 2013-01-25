@@ -34,7 +34,7 @@
 
 @interface NGLdapConnection : NSObject
 {
-  void           *handle;
+  LDAP           *handle;
   NSString       *hostName;
   int            port;
   unsigned int   sizeLimit;

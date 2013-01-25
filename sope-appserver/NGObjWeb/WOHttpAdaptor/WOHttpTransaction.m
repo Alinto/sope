@@ -347,11 +347,14 @@ static int logCounter = 0;
         auth =
           [NGHttpCredentials credentialsWithString:[auth stringValue]];
       }
-            
-      [woRequest setHeader:[auth userName]
-                 forKey:@"x-webobjects-remote-user"];
-      [woRequest setHeader:[auth scheme]
-                 forKey:@"x-webobjects-auth-type"];
+       
+      if ([auth userName])
+        [woRequest setHeader:[auth userName]
+                      forKey:@"x-webobjects-remote-user"];
+      
+      if ([auth scheme])
+        [woRequest setHeader:[auth scheme]
+                      forKey:@"x-webobjects-auth-type"];
     }
   }
 }
