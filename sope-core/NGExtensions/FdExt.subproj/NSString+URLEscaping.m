@@ -263,6 +263,11 @@ NGUnescapeUrlBuffer(const unsigned char *_source, unsigned char *_dest)
   if (doUseUTF8Encoding()) {
     /* OK, the input is considered UTF-8 encoded in a string */
     s = [[NSString alloc] initWithUTF8String:buffer];
+
+    /* We fallback to ISO-8859-1 here, as this method totally ignores the charset */
+    if (!s)
+      s = [[NSString alloc] initWithCString:buffer  encoding: NSISOLatin1StringEncoding];
+
     if (buffer != NULL) free(buffer); buffer = NULL;
   }
   else {
