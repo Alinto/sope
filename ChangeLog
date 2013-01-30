@@ -1,3 +1,19 @@
+commit 16deb50d8d8d803163cb8088883ce5da2d66ede0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jan 28 13:40:42 2013 -0500
+
+    Fix for bug #2200.
+
+M	sope-core/NGExtensions/FdExt.subproj/NSString+URLEscaping.m
+
+commit 2166006e47416c736efedfc0a5d1b93b5dec8474
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Jan 24 19:16:07 2013 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit bf8a01faee50ac0209051fa1870ca338dc112904
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jan 23 09:39:30 2013 -0500
