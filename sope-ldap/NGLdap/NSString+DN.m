@@ -143,7 +143,7 @@ static NSArray *cleanDNComponents(NSArray *_components) {
   /* "Last DN component" is actually the first component :
    * For "cn=bob,ou=users,dc=example,dc=com", return "cn=bob"
    */
-  return [NSString stringWithString: [components objectAtIndex: 0]];
+  return [components objectAtIndex: 0];
 }
 
 - (const char *)ldapRepresentation {
