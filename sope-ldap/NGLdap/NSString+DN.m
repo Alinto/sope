@@ -21,8 +21,8 @@
 */
 
 #import <Foundation/NSCharacterSet.h>
+#import <Foundation/NSArray.h>
 
-#define LDAP_DEPRECATED 1
 #include <ldap.h>
 
 #include "NSString+DN.h"
@@ -57,8 +57,55 @@ static NSArray *cleanDNComponents(NSArray *_components) {
   return [cleanDNComponents(_components) componentsJoinedByString:dnSeparator];
 }
 
+/* returns each dn component in a NSArray 
+ * returns nil if there is a decoding error
+ */
 - (NSArray *)dnComponents {
-  return cleanDNComponents([self componentsSeparatedByString:dnSeparator]);
+  char *componentStr;
+  int i, err;
+
+  LDAPDN dn;
+
+  NSMutableArray *components;
+
+  if (![self length])
+    return nil;
+
+  dn = NULL;
+  components = [NSMutableArray arrayWithCapacity:0];
+
+  err = ldap_str2dn([self cStringUsingEncoding: NSUTF8StringEncoding],
+                    &dn, LDAP_DN_FORMAT_LDAPV3);
+  if(err) {
+    /* sorry for the noise but this has to be known */
+    NSLog(@"ldap_str2dn: %s\n", ldap_err2string(err));
+    ldap_dnfree(dn);
+    return nil;
+  }
+    
+  /* loop through the dn parts
+   * convert them back to properly quoted/escaped strings 
+   */
+  for (i=0; dn[i]; i++) {
+    componentStr = NULL;
+    err = ldap_rdn2str(dn[i], &componentStr,
+                       LDAP_DN_FORMAT_LDAPV3 | LDAP_DN_PRETTY);
+    if(err) {
+      NSLog(@"ldap_rdn2dn: %s\n", ldap_err2string(err));
+      ldap_dnfree(dn);
+      return nil;
+    }
+
+    if(componentStr) {
+      [components addObject:
+                    [NSString stringWithCString: componentStr
+                                       encoding: NSUTF8StringEncoding]];
+      free(componentStr);
+    }
+  }
+
+  ldap_dnfree(dn);
+  return [NSArray arrayWithArray: components];
 }
 
 - (NSString *)stringByAppendingDNComponent:(NSString *)_component {
