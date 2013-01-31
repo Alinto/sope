@@ -119,22 +119,31 @@ static NSArray *cleanDNComponents(NSArray *_components) {
 }
 
 - (NSString *)stringByDeletingLastDNComponent {
-  NSRange r;
-  
-  r = [self rangeOfString:dnSeparator];
-  if (r.length == 0) return nil;
-  
-  return [[self substringFromIndex:(r.location + r.length)]
-                stringByTrimmingWhiteSpaces];
+  NSMutableArray *components;
+
+  components = [NSMutableArray arrayWithArray: [self dnComponents]];
+  if (![components count])
+    return nil;
+
+  /* "Last DN component" is actually the first component :
+   * For "cn=bob,ou=users,dc=example,dc=com", remove "cn=bob"
+   */
+  [components removeObjectAtIndex: 0];
+
+  return [components componentsJoinedByString:dnSeparator];
 }
 
 - (NSString *)lastDNComponent {
-  NSRange r;
-  
-  r = [self rangeOfString:dnSeparator];
-  if (r.length == 0) return nil;
-  
-  return [[self substringToIndex:r.location] stringByTrimmingWhiteSpaces];
+  NSMutableArray *components;
+
+  components = [NSMutableArray arrayWithArray: [self dnComponents]];
+  if (![components count])
+    return nil;
+
+  /* "Last DN component" is actually the first component :
+   * For "cn=bob,ou=users,dc=example,dc=com", return "cn=bob"
+   */
+  return [NSString stringWithString: [components objectAtIndex: 0]];
 }
 
 - (const char *)ldapRepresentation {
