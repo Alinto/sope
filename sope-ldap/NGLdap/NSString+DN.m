@@ -51,40 +51,6 @@ static NSArray *cleanDNComponents(NSArray *_components) {
   return _components;
 }
 
-static NSArray *explodeDN(const char *dn) {
-  NSMutableArray *array;
-  char **exploded;
-  unsigned i;
-  id *cs;
-
-  if (dn == NULL)
-    return nil;
-
-  if (dn[0] == '\0') {
-    return [NSArray arrayWithObjects: @"", nil];
-  }
-
-  exploded = ldap_explode_dn(dn, 0);
-  if (exploded == NULL)
-    return nil;
-
-  /* Count number of RDNs */
-  for (i = 0; exploded[i] != NULL; i++);
-
-  cs = calloc(i, sizeof(id));
-
-  array = [NSMutableArray arrayWithCapacity: i];
-  for (i = 0; exploded[i] != NULL; i++) {
-    [array addObject: [NSString stringWithCString: exploded[i]]];
-  }
-
-  ldap_value_free(exploded);
-
-  if (cs != NULL) { free(cs); cs = NULL; }
-
-  return cleanDNComponents(array);
-}
-
 @implementation NSString(DNSupport)
 
 + (NSString *)dnWithComponents:(NSArray *)_components {
@@ -92,7 +58,7 @@ static NSArray *explodeDN(const char *dn) {
 }
 
 - (NSArray *)dnComponents {
-  return explodeDN([self cString]);
+  return cleanDNComponents([self componentsSeparatedByString:dnSeparator]);
 }
 
 - (NSString *)stringByAppendingDNComponent:(NSString *)_component {
