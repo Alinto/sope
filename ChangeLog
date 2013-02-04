@@ -1,3 +1,49 @@
+commit 2d2ed180fe154318a3f5dd64b01765ef4d174e48
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Thu Jan 31 13:27:51 2013 -0500
+
+    Remove useless [NSString stringWithString]
+
+M	sope-ldap/NGLdap/NSString+DN.m
+
+commit 82342978d28f6621d2d8a91053be8d56f96946e9
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Thu Jan 31 12:31:25 2013 -0500
+
+    Use dnComponents where appropriate
+    
+    Namely in lastDnComponent and stringByDeletingLastDNComponent
+
+M	sope-ldap/NGLdap/NSString+DN.m
+
+commit 7a8cb886103dc9b4569151ae185b9e3bc2e95b4e
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Thu Jan 31 12:10:09 2013 -0500
+
+    Rework dnComponents to use non deprecated ldap api
+    
+    Use ldap_{str2dn,rdn2str} to build properly encoded/escaped DN components
+
+M	sope-ldap/NGLdap/NSString+DN.m
+
+commit 9f494524f0686bb828bf541ff9a8e2b833861ece
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Wed Jan 30 22:21:22 2013 -0500
+
+    revert previous fix for #2152
+    
+    ldap_explode_dn breaks utf8 and AD complains pretty loudly...
+
+M	sope-ldap/NGLdap/NSString+DN.m
+
+commit 917e35950e1e7ffeb996d9317653640184527bac
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jan 30 08:56:46 2013 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 16deb50d8d8d803163cb8088883ce5da2d66ede0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jan 28 13:40:42 2013 -0500
