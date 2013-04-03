@@ -329,6 +329,20 @@ static BOOL     debugImap4         = NO;
 	      
 	      self->parser = [[NGImap4ResponseParser alloc] initWithStream: self->socket];
 	      [self logWithFormat:@"TLS started successfully."];
+
+              /* as per rfc5804 section 2.2:
+               * at this point, the server MUST re-issue the capability results
+               * followed by an OK response.
+               * The client MUST discard cached capability information
+               * and replace it with the new information.
+               */
+              res = [self normalizeOpenConnectionResponse:
+                [self->parser parseSieveResponse]];
+
+              ASSIGN(serverType, [res objectForKey: @"server"]);
+              ASSIGN(capabilities, [[res objectForKey:@"capabilities"]
+                componentsSeparatedByString: @" "]);
+
 	    }
 	  else
 	    [self logWithFormat:@"Could not start TLS."];
