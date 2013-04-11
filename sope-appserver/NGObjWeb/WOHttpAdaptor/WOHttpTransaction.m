@@ -323,15 +323,26 @@ static int logCounter = 0;
   if ([woRequest headerForKey:@"x-webobjects-remote-host"] == nil) {
     id<NGSocketAddress> remote = nil;
     NSString *remoteHost = nil;
+
+    /* Use de facto standard headers if remote-host is not set
+     * before falling back to the remote end of the socket 
+     */
+     if ([woRequest headerForKey:@"x-forward"]) {
+       remoteHost = [woRequest headerForKey:@"x-forward"];
+     }
+     else if ([woRequest headerForKey:@"x-forwarded-for"]) {
+       remoteHost = [woRequest headerForKey:@"x-forwarded-for"];
+     }
+     else {
+       remote = [self->socket remoteAddress];
     
-    remote = [self->socket remoteAddress];
-    
-    if ([remote isKindOfClass:[NGInternetSocketAddress class]])
-      remoteHost = [(NGInternetSocketAddress *)remote hostName];
+       if ([remote isKindOfClass:[NGInternetSocketAddress class]])
+         remoteHost = [(NGInternetSocketAddress *)remote hostName];
 #if !defined(__MINGW32__)
-    else if ([remote isKindOfClass:[NGLocalSocketAddress class]])
-      remoteHost = @"local";
+       else if ([remote isKindOfClass:[NGLocalSocketAddress class]])
+         remoteHost = @"local";
 #endif
+    }
 
     if ([remoteHost length] > 0)
       [woRequest setHeader:remoteHost forKey:@"x-webobjects-remote-host"];

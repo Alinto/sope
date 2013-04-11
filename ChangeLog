@@ -1,3 +1,34 @@
+commit 24588cf7e401c287878abbc2ca605d4ee3431415
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Apr 2 21:03:14 2013 -0400
+
+    handle sieve capabilities after starttls
+    
+    Fixes #2132
+
+M	sope-mime/NGImap4/NGSieveClient.m
+
+commit b45dbb52984cc5dd62c5a5e589f164dbbc26309f
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Feb 5 14:07:44 2013 -0500
+
+    Use standard proxy headers if remotehost isn't set
+    
+    The code will now use 'x-forward' or 'x-forwarded-for' header
+    if x-webobjects-remote-host is not set.
+    Allows for more useful logging (Fixes #2229)
+
+M	sope-appserver/NGObjWeb/ChangeLog
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit 995b534ca83b8a06c89e9d9cff620de1f949b522
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Feb 4 14:26:40 2013 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 2d2ed180fe154318a3f5dd64b01765ef4d174e48
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jan 31 13:27:51 2013 -0500
