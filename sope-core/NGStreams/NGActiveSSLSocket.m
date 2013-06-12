@@ -304,6 +304,7 @@ static BIO_METHOD streamBIO = {
 }
 
 - (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
+  int ret;
   if (self->ctx == NULL) {
     NSLog(@"ERROR(%s): ctx isn't setup yet !",
           __PRETTY_FUNCTION__);
@@ -334,9 +335,10 @@ static BIO_METHOD streamBIO = {
   NSAssert(self->sbio, @"missing SSL BIO ...");
   
   SSL_set_bio(self->ssl, self->sbio, self->sbio);
-  if (SSL_connect(self->ssl) <= 0) {
-    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket ...",
-          __PRETTY_FUNCTION__);
+  ret = SSL_connect(self->ssl);
+  if (ret <= 0) {
+    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)...",
+	  __PRETTY_FUNCTION__, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
     [self shutdown];
     return NO;
   }
