@@ -62,7 +62,6 @@
   WOHttpAllowHost                       = ();
   WOHttpTransactionUseSimpleParser      = NO;
   WOHttpTransactionLoggerConfig         = {
-    "LogLevel"  = "INFO";
     "Appenders" = (
         {
             "Class"     = "NGLogStdoutAppender";

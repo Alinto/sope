@@ -200,10 +200,8 @@ static NSString *defaultCompRqHandlerClassName = @"WOComponentRequestHandler";
     ud         = [NSUserDefaults standardUserDefaults];
 
     debugOn = [WOApplication isDebuggingEnabled];
-    if (!debugOn)
-      [[self logger] setLogLevel:NGLogLevelInfo];
-    else
-      [[self logger] logWithFormat:@"WOApplication debugging is enabled."];
+    if ([WOApplication isDebuggingEnabled])
+      [[self logger] debugWithFormat:@"WOApplication debugging is enabled."];
     
     if (classLock == nil) classLock = [[NSRecursiveLock alloc] init];
     

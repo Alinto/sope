@@ -38,7 +38,6 @@ static NGLogger *logger = nil;
   logger  = [lm loggerForDefaultKey:@"WORequestParserDebugEnabled"];
   if (!logger) {
     logger = [lm loggerForClass:self];
-    [logger setLogLevel:NGLogLevelInfo];
   }
 }
 

@@ -1,3 +1,12 @@
+2013-06-20  Jean Raby  <jraby@inverse.ca>
+
+	* Defaults.plist: don't hardcode the loglevel for
+	WOHttpTransactionLoggerConfig, use default
+
+	* Templates/WOxElemBuilder.m: don't setLogLevel on the defaultLogger
+	* WOApplication.m: don't setLogLevel on the defaultLogger
+	* WOHttpAdaptor/WORequestParser.m: don't setLogLevel on the defaultLogger
+
 2012-02-05  Jean Raby  <jraby@inverse.ca>
 
 	* WOHttpAdaptor/WOHttpTransaction.m (applyAdaptorHeadersWithHttpRequest):

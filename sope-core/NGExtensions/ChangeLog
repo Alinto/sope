@@ -1,3 +1,9 @@
+2013-06-20  Jean Raby  <jraby@inverse.ca>
+
+	* NSObject+Logs.m (debugWithFormat:arguments:): check current
+	logLevel value before calling [NGLogger logLevel:message:]
+	This squelches debug message at lower log levels
+
 2010-10-08  Wolfgang Sourdeau  <wsourdeau@inverse.ca>
 
 	* NGBase64Coding.m (-[NSString dataByDecodingBase64]): free "dest"
