@@ -80,6 +80,7 @@ static NGLogLevel defaultLogLevel = NGLogLevelInfo;
 
     levelString = [_config objectForKey:@"LogLevel"];
     level       = [NGLogger _logLevelForString:levelString];
+
     [self setLogLevel:level];
 
     appenderConfigs = [_config objectForKey:@"Appenders"];
@@ -225,7 +226,7 @@ static NGLogLevel defaultLogLevel = NGLogLevelInfo;
 /* Private */
 
 + (NGLogLevel)_logLevelForString:(NSString *)_level {
-  if (![_level isNotNull]) {
+  if ([_level length]) {
     _level = [_level uppercaseString];
     if ([_level isEqualToString:@"DEBUG"])
       return NGLogLevelDebug;
@@ -239,7 +240,7 @@ static NGLogLevel defaultLogLevel = NGLogLevelInfo;
       return NGLogLevelFatal;
     return NGLogLevelAll; /* better than nothing */
   }
-  return NGLogLevelInfo;
+  return defaultLogLevel;
 }
 
 /* description */

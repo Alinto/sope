@@ -1,3 +1,48 @@
+commit d30c986f9d2cefc764ae420cc3f2509adc0fea33
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Thu Jun 20 00:45:01 2013 -0400
+
+    Multiple fixes to logging subsystem
+    
+      * Defaults.plist: don't hardcode the loglevel for
+        WOHttpTransactionLoggerConfig, use default
+    
+      * Templates/WOxElemBuilder.m: don't setLogLevel on the defaultLogger
+      * WOApplication.m: don't setLogLevel on the defaultLogger
+      * WOHttpAdaptor/WORequestParser.m: don't setLogLevel on the defaultLogger
+    
+      * NSObject+Logs.m (debugWithFormat:arguments:): check current
+        logLevel value before calling [NGLogger logLevel:message:]
+        This squelches debug message at lower log levels
+      * NGLogger.m (_logLevelForString): fix the check and return
+        the defaultLogLevel instead of hardcoding INFO
+
+M	sope-appserver/NGObjWeb/ChangeLog
+M	sope-appserver/NGObjWeb/Defaults.plist
+M	sope-appserver/NGObjWeb/Templates/WOxElemBuilder.m
+M	sope-appserver/NGObjWeb/WOApplication.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WORequestParser.m
+M	sope-core/NGExtensions/ChangeLog
+M	sope-core/NGExtensions/FdExt.subproj/NSObject+Logs.m
+M	sope-core/NGExtensions/NGLogging.subproj/ChangeLog
+M	sope-core/NGExtensions/NGLogging.subproj/NGLogger.m
+
+commit d6331e074c376bddc20280b22c246b5032acff57
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Wed Jun 12 06:46:52 2013 -0400
+
+    log ssl error
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit f958f49542fb11a4fc82ebc71172e04d395bc811
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Apr 11 13:00:45 2013 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 24588cf7e401c287878abbc2ca605d4ee3431415
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Apr 2 21:03:14 2013 -0400

@@ -74,14 +74,22 @@ static inline Class NSStringClass(void) {
 
 - (void)debugWithFormat:(NSString *)_fmt arguments:(va_list)_va {
 #if DEBUG
+  NGLogger *logger;
   NSString *msg, *msg2;
   
-  if (![self isDebuggingEnabled]) return;
+  /* This does some fancy formatting and calls [NGLogger logLevel:message:]
+   * thereby bypassing the logLevel check normally done in the logger.
+   * So we must do it here
+   */
+
+  logger = [self debugLogger];
+  if ((![self isDebuggingEnabled]) || ([logger logLevel] < NGLogLevelDebug))
+    return;
   
   msg  = [[NSStringClass() alloc] initWithFormat:_fmt arguments:_va];
   msg2 = [[NSStringClass() alloc] initWithFormat:
 				    @"<%@>D %@", [self loggingPrefix], msg];
-  [[self debugLogger] logLevel:NGLogLevelDebug message:msg2];
+  [logger logLevel:NGLogLevelDebug message:msg2];
   [msg2 release];
   [msg  release];
 #else

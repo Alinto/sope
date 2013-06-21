@@ -121,8 +121,6 @@ static WOAssociation *yesAssoc = nil;
   lm = [NGLoggerManager defaultLoggerManager];
 
   logger = [lm loggerForClass:self];
-  [logger setLogLevel:[WOApplication isDebuggingEnabled] ? NGLogLevelDebug
-                                                         : NGLogLevelInfo];
 
   StrClass = NSClassFromString(@"_WOSimpleStaticString");
   if (StrClass == Nil)
