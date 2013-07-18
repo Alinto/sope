@@ -255,7 +255,7 @@ static char *activityDesc[8] = {
 {
     return [target isEqual:anotherHolder->target]
 	    && [argument isEqual:anotherHolder->argument]
-	    && SEL_EQ(action, anotherHolder->action);
+	    && sel_isEqual(action, anotherHolder->action);
 }
 
 - (void)execute

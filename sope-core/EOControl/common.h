@@ -34,15 +34,6 @@
 #  define objc_malloc(__size__) malloc(__size__)
 #  define objc_calloc(__cnt__, __size__) calloc(__cnt__, __size__)
 #  define objc_realloc(__ptr__, __size__) realloc(__ptr__, __size__)
-#  ifndef sel_eq
-#    define sel_eq(sela,selb) (sela==selb?YES:NO)
-#  endif
-#endif
-
-#if __GNU_LIBOBJC__ >= 20100911
-#  ifndef sel_eq
-#    define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
-#  endif
 #endif
 
 #ifndef ASSIGN
