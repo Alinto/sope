@@ -48,26 +48,8 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#if NeXT_RUNTIME || APPLE_RUNTIME
-#  define sel_eq(sela,selb) (sela==selb?YES:NO)
-#  ifndef SEL_EQ
-#    define SEL_EQ(__A__,__B__) (__A__==__B__?YES:NO)
-#  endif
-#endif
-
-#if __GNU_LIBOBJC__ >= 20100911
-#  define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
-#  ifndef SEL_EQ
-#    define SEL_EQ(__A__,__B__) sel_isEqual(__A__,__B__)
-#  endif
-#endif
-
-#if LIB_FOUNDATION_LIBRARY
-#  import <extensions/objc-runtime.h>
-#else
 #  include <NGExtensions/NGObjectMacros.h>
 #  include <NGExtensions/NSString+Ext.h>
-#endif
 
 
 // ******************** common functions ********************
@@ -189,15 +171,11 @@ static inline long Atol(const char *str)
 	_a < _b ? _a : _b; })
 #endif
 
-#if !LIB_FOUNDATION_LIBRARY
 
 #ifndef CREATE_AUTORELEASE_POOL
 #define CREATE_AUTORELEASE_POOL(pool) \
   id pool = [[NSAutoreleasePool alloc] init]
 #endif
-
-#endif /* ! LIB_FOUNDATION_LIBRARY */
-
 
 #if !LIB_FOUNDATION_LIBRARY
 
@@ -235,24 +213,9 @@ static inline char *Ltoa(long nr, char *str, int base)
 }
 #endif
 
-#if !LIB_FOUNDATION_LIBRARY
-
 @interface NSObject(FoundationExtGDLAccess)
 - (void)subclassResponsibility:(SEL)sel;
 - (void)notImplemented:(SEL)sel;
 @end
-
-#endif
-
-#if !GNU_RUNTIME
-#  ifndef SEL_EQ
-#    define SEL_EQ(__A__,__B__) (__A__==__B__ ? YES : NO)
-#  endif
-#else
-#  ifndef SEL_EQ
-#    include <objc/objc.h>
-#    define SEL_EQ(__A__,__B__) sel_eq(__A__,__B__)
-#  endif
-#endif
 
 #endif /* __common_h__ */

@@ -42,10 +42,6 @@
 
 #endif /* NeXT_Foundation_LIBRARY */
 
-#if GNUSTEP_BASE_LIBRARY
-extern BOOL __objc_responds_to(id, SEL);
-#endif
-
 @implementation NSObject(NGObjWebKVC)
 
 - (BOOL)kvcIsPreferredInKeyPath {
@@ -131,11 +127,7 @@ static inline SEL _getSetSel(register const unsigned char *_key,
                              register unsigned _len) {
   char buf[259];
   _getSetSelName((unsigned char *)buf, _key, _len);
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
   return sel_getUid(buf);
-#else
-  return sel_get_uid(buf);
-#endif
 }
 
 typedef union {
@@ -267,15 +259,11 @@ IMP WOGetKVCGetMethod(id object, NSString *_key) {
     keyLen = [_key cStringLength];
     buf = malloc(keyLen + 1);
     [_key getCString:buf]; buf[keyLen] = '\0';
-    getSel = sel_get_uid(buf);
+    getSel = sel_getUid(buf);
     free(buf);
 
     if (getSel == NULL) // no such selector
       return NULL;
-#if GNUSTEP_BASE_LIBRARY
-    if (!__objc_responds_to(object, getSel))
-      return NULL;
-#endif
 
     return [object methodForSelector:getSel];
   }
@@ -308,19 +296,11 @@ id WOGetKVCValueUsingMethod(id object, NSString *_key) {
     char *buf;
     buf = malloc(keyLen + 1);
     [_key getCString:buf];
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
     getSel = sel_getUid(buf);
-#else
-    getSel = sel_get_uid(buf);
-#endif
     if (getSel == NULL) // no such selector
       return nil;
     free(buf); buf = NULL;
   }
-#if GNUSTEP_BASE_LIBRARY
-  if (!__objc_responds_to(object, getSel))
-    return nil;
-#endif
   
   gm.method = [object methodForSelector:getSel];
   if (gm.method == NULL) // no such method

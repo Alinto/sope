@@ -66,7 +66,7 @@
 }
 
 - (unsigned)options {
-  return (SEL_EQ([self selector], EOQualifierOperatorCaseInsensitiveLike))
+  return (sel_isEqual([self selector], EOQualifierOperatorCaseInsensitiveLike))
     ? NSCaseInsensitivePredicateOption : 0;
 }
 

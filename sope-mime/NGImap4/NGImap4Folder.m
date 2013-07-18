@@ -702,8 +702,8 @@ static int FetchNewUnseenMessagesInSubFoldersOnDemand = -1;
       }
       muids = [[NSMutableArray alloc] initWithCapacity:255];
 
-      if (sel_eq([so selector], EOCompareAscending) ||
-          sel_eq([so selector], EOCompareCaseInsensitiveAscending)) {
+      if (sel_isEqual([so selector], EOCompareAscending) ||
+          sel_isEqual([so selector], EOCompareCaseInsensitiveAscending)) {
         qual1 = UnseenQual;
         if (_unseen)
           qual2 = nil;

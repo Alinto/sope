@@ -51,13 +51,6 @@
 #include <NGExtensions/NGLogging.h>
 #include <NGStreams/NGStreams.h>
 
-#if NeXT_RUNTIME || APPLE_RUNTIME || (__GNU_LIBOBJC__ >= 20100911)
-#  ifndef sel_get_name
-#    define sel_get_name(__XXX__)    sel_getName(__XXX__)
-#    define sel_get_any_uid(__XXX__) sel_getUid(__XXX__)
-#  endif
-#endif
-
 #define IS_DEPRECATED \
   [self warnWithFormat:@"used deprecated method: %s:%i.", \
           __PRETTY_FUNCTION__, __LINE__];
