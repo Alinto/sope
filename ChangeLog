@@ -1,3 +1,91 @@
+commit 8a214de88bcfaa838157b9c2a3c7246131e019f2
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jul 19 10:10:31 2013 -0400
+
+    Reverted patch
+
+M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOComponentContent.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOComponentReference.m
+M	sope-appserver/NGObjWeb/NSObject+WO.m
+M	sope-appserver/NGObjWeb/SoObjects/SoSelectorInvocation.m
+M	sope-appserver/NGObjWeb/WOChildComponentReference.m
+M	sope-appserver/NGObjWeb/WORunLoop.m
+M	sope-appserver/NGObjWeb/WOSession.m
+M	sope-appserver/NGObjWeb/common.h
+M	sope-core/EOControl/EOKeyComparisonQualifier.m
+M	sope-core/EOControl/EOKeyValueCoding.m
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EOSortOrdering.m
+M	sope-core/EOControl/EOValidation.m
+M	sope-core/EOControl/common.h
+M	sope-core/EOCoreData/EOKeyComparisonQualifier+CoreData.m
+M	sope-core/EOCoreData/EOKeyValueQualifier+CoreData.m
+M	sope-core/EOCoreData/EOQualifier+CoreData.m
+M	sope-core/EOCoreData/EOSortOrdering+CoreData.m
+M	sope-core/EOCoreData/common.h
+M	sope-core/NGExtensions/EOExt.subproj/EOQualifier+CtxEval.m
+M	sope-core/NGStreams/NGStreamCoder.m
+M	sope-gdl1/GDLAccess/EOAdaptorDataSource.m
+M	sope-gdl1/GDLAccess/EOKeyComparisonQualifier+SQL.m
+M	sope-gdl1/GDLAccess/EOKeyValueQualifier+SQL.m
+M	sope-gdl1/GDLAccess/EOSQLExpression.m
+M	sope-gdl1/GDLAccess/common.h
+M	sope-ldap/NGLdap/EOQualifier+LDAP.m
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+M	sope-mime/NGImap4/EOSortOrdering+IMAPAdditions.m
+M	sope-mime/NGImap4/NGImap4Folder.m
+M	sope-mime/NGImap4/imCommon.h
+M	sope-mime/NGMime/common.h
+
+commit d93b3d55d889219a5b0e0b8af9fcf2d2ba3d2967
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jul 18 11:02:06 2013 -0400
+
+    Applied patch from bug #2234
+
+M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOComponentContent.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOComponentReference.m
+M	sope-appserver/NGObjWeb/NSObject+WO.m
+M	sope-appserver/NGObjWeb/SoObjects/SoSelectorInvocation.m
+M	sope-appserver/NGObjWeb/WOChildComponentReference.m
+M	sope-appserver/NGObjWeb/WORunLoop.m
+M	sope-appserver/NGObjWeb/WOSession.m
+M	sope-appserver/NGObjWeb/common.h
+M	sope-core/EOControl/EOKeyComparisonQualifier.m
+M	sope-core/EOControl/EOKeyValueCoding.m
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EOSortOrdering.m
+M	sope-core/EOControl/EOValidation.m
+M	sope-core/EOControl/common.h
+M	sope-core/EOCoreData/EOKeyComparisonQualifier+CoreData.m
+M	sope-core/EOCoreData/EOKeyValueQualifier+CoreData.m
+M	sope-core/EOCoreData/EOQualifier+CoreData.m
+M	sope-core/EOCoreData/EOSortOrdering+CoreData.m
+M	sope-core/EOCoreData/common.h
+M	sope-core/NGExtensions/EOExt.subproj/EOQualifier+CtxEval.m
+M	sope-core/NGStreams/NGStreamCoder.m
+M	sope-gdl1/GDLAccess/EOAdaptorDataSource.m
+M	sope-gdl1/GDLAccess/EOKeyComparisonQualifier+SQL.m
+M	sope-gdl1/GDLAccess/EOKeyValueQualifier+SQL.m
+M	sope-gdl1/GDLAccess/EOSQLExpression.m
+M	sope-gdl1/GDLAccess/common.h
+M	sope-ldap/NGLdap/EOQualifier+LDAP.m
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+M	sope-mime/NGImap4/EOSortOrdering+IMAPAdditions.m
+M	sope-mime/NGImap4/NGImap4Folder.m
+M	sope-mime/NGImap4/imCommon.h
+M	sope-mime/NGMime/common.h
+
+commit ede754c45999a35304d4bcba6ec427b9b445983d
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jun 21 12:47:08 2013 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit d30c986f9d2cefc764ae420cc3f2509adc0fea33
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jun 20 00:45:01 2013 -0400
