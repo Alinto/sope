@@ -28,6 +28,14 @@
 #  include <objc/objc.h>
 #endif
 
+#ifndef SEL_EQ
+#  if GNU_RUNTIME
+#    define SEL_EQ(sel1,sel2) sel_eq(sel1,sel2)
+#  else
+#    define SEL_EQ(sel1,sel2) (sel1 == sel2)
+#  endif
+#endif
+
 @implementation EOSortOrdering
 /*"
   This class specifies a sort-ordering as used with
@@ -75,7 +83,7 @@
 /* equality */
 
 - (BOOL)isEqualToSortOrdering:(EOSortOrdering *)_sortOrdering {
-  if (!sel_isEqual([_sortOrdering selector], [self selector]))
+  if (!SEL_EQ([_sortOrdering selector], [self selector]))
     return NO;
   if (![[_sortOrdering key] isEqualToString:[self key]])
     return NO;

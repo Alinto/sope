@@ -52,26 +52,26 @@
 @implementation EOQualifier(CoreData)
 
 + (NSPredicateOperatorType)predicateOperatorTypeForEOSelector:(SEL)_sel {
-  if (sel_isEqual(_sel, EOQualifierOperatorEqual))
+  if (SEL_EQ(_sel, EOQualifierOperatorEqual))
     return NSEqualToPredicateOperatorType;
-  if (sel_isEqual(_sel, EOQualifierOperatorNotEqual))
+  if (SEL_EQ(_sel, EOQualifierOperatorNotEqual))
     return NSNotEqualToPredicateOperatorType;
   
-  if (sel_isEqual(_sel, EOQualifierOperatorLessThan))
+  if (SEL_EQ(_sel, EOQualifierOperatorLessThan))
     return NSLessThanPredicateOperatorType;
-  if (sel_isEqual(_sel, EOQualifierOperatorGreaterThan))
+  if (SEL_EQ(_sel, EOQualifierOperatorGreaterThan))
     return NSGreaterThanPredicateOperatorType;
   
-  if (sel_isEqual(_sel, EOQualifierOperatorLessThanOrEqualTo))
+  if (SEL_EQ(_sel, EOQualifierOperatorLessThanOrEqualTo))
     return NSLessThanOrEqualToPredicateOperatorType;
-  if (sel_isEqual(_sel, EOQualifierOperatorGreaterThanOrEqualTo))
+  if (SEL_EQ(_sel, EOQualifierOperatorGreaterThanOrEqualTo))
     return NSGreaterThanOrEqualToPredicateOperatorType;
   
-  if (sel_isEqual(_sel, EOQualifierOperatorContains))
+  if (SEL_EQ(_sel, EOQualifierOperatorContains))
     return NSInPredicateOperatorType;
   
-  if (sel_isEqual(_sel, EOQualifierOperatorLike) ||
-      sel_isEqual(_sel, EOQualifierOperatorCaseInsensitiveLike))
+  if (SEL_EQ(_sel, EOQualifierOperatorLike) ||
+      SEL_EQ(_sel, EOQualifierOperatorCaseInsensitiveLike))
     return NSLikePredicateOperatorType;
   
   return NSCustomSelectorPredicateOperatorType;
@@ -164,7 +164,7 @@
   pmod  = NSDirectPredicateModifier;
   popts = 0;
   
-  if (sel_isEqual(_selector, EOQualifierOperatorCaseInsensitiveLike))
+  if (SEL_EQ(_selector, EOQualifierOperatorCaseInsensitiveLike))
     popts = NSCaseInsensitivePredicateOption;
   
   return [NSComparisonPredicate predicateWithLeftExpression:_lhs

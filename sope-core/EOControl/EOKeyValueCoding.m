@@ -24,7 +24,15 @@
 #include "common.h"
 
 #if GNU_RUNTIME
+
+#if __GNU_LIBOBJC__ >= 20100911
+#  define sel_get_any_uid sel_getUid
 #  include <objc/runtime.h>
+#else
+#  include <objc/encoding.h>
+#  include <objc/objc-api.h>
+#endif
+
 #endif
 
 static EONull *null = nil;
@@ -144,7 +152,7 @@ static GetKeyValueBinding* newGetBinding(NSString* key, id instance)
     cbuf = malloc(clen + 1);
     [key getCString:cbuf]; cbuf[clen] = '\0';
     ckey = cbuf;
-    sel = sel_getUid(ckey);
+    sel = sel_get_any_uid(ckey);
     
     if (sel && (mth = class_get_instance_method(class, sel)) &&
         method_get_number_of_arguments(mth) == 2) {
@@ -318,7 +326,7 @@ static SetKeyValueBinding* newSetBinding(NSString* key, id instance)
     Strcat(sname, ckey);
     Strcat(sname, ":");
     sname[3] = islower((int)sname[3]) ? toupper((int)sname[3]) : sname[3];
-    sel = sel_getUid(sname);
+    sel = sel_get_any_uid(sname);
         
     if (sel && (mth = class_get_instance_method(class, sel)) &&
         method_get_number_of_arguments(mth) == 3 &&
@@ -958,7 +966,7 @@ static inline BOOL setValue(NSString* key, id instance, id value)
     strcpy(bufPtr, "ForKey:");
     if (kbuf) free(kbuf);
     
-    sel = sel_getUid(buf);
+    sel = sel_get_any_uid(buf);
     if (buf) free(buf);
     
     return sel != NULL ? [self performSelector:sel withObject:_key] : nil;
@@ -1523,7 +1531,11 @@ static void doubleIvarSetFunc(void* info1, void* info2, id self, id val) {
     strcpy(bufPtr, "ForKey:");
     if (kbuf) free(kbuf);
 
+#if NeXT_RUNTIME
     sel = sel_getUid(buf);
+#else    
+    sel = sel_get_any_uid(buf);
+#endif
     if (buf) free(buf);
     
     return sel != NULL ? [self performSelector:sel withObject:_key] : nil;

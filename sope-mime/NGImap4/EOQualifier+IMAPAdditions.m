@@ -267,10 +267,10 @@ static void _initImap4SearchCategory(void) {
 
   // TODO: add support for <> qualifier? (seen => unseen)
       
-  if (sel_isEqual(lselector, EOQualifierOperatorEqual)) {
+  if (sel_eq(lselector, EOQualifierOperatorEqual)) {
     lvalue = [NSArray arrayWithObject:lvalue];
   }
-  else if (!sel_isEqual(lselector, EOQualifierOperatorContains)) {
+  else if (!sel_eq(lselector, EOQualifierOperatorContains)) {
     return [self invalidImap4SearchQualifier:
 		   @"unexpected EOKeyValueQualifier selector"];
   }
@@ -299,13 +299,13 @@ static void _initImap4SearchCategory(void) {
 andComparisonSelector:(SEL)lselector {
   NSString *operatorPrefix, *dateOperator, *imap4Operator;
 
-  if (sel_isEqual(lselector, EOQualifierOperatorEqual))
+  if (sel_eq(lselector, EOQualifierOperatorEqual))
     dateOperator = @"ON";
-  else if (sel_isEqual(lselector, EOQualifierOperatorGreaterThan)
-	   || sel_isEqual(lselector, EOQualifierOperatorGreaterThanOrEqualTo))
+  else if (sel_eq(lselector, EOQualifierOperatorGreaterThan)
+	   || sel_eq(lselector, EOQualifierOperatorGreaterThanOrEqualTo))
     dateOperator = @"SINCE";
-  else if (sel_isEqual(lselector, EOQualifierOperatorLessThan)
-	   || sel_isEqual(lselector, EOQualifierOperatorLessThanOrEqualTo))
+  else if (sel_eq(lselector, EOQualifierOperatorLessThan)
+	   || sel_eq(lselector, EOQualifierOperatorLessThanOrEqualTo))
     dateOperator = @"BEFORE";
   else
     dateOperator = nil;
@@ -371,7 +371,7 @@ andComparisonSelector:(SEL)lselector {
   }
 
   if ([lkey isEqualToString:@"UID"]) {
-    if (!sel_isEqual(lselector, EOQualifierOperatorEqual)) {
+    if (!sel_eq(lselector, EOQualifierOperatorEqual)) {
       return [self invalidImap4SearchQualifier:@"unexpected qualifier 2"];
     }
     
@@ -381,7 +381,7 @@ andComparisonSelector:(SEL)lselector {
   }
 
   if ([lkey isEqualToString:@"MODSEQ"]) {
-    if (!sel_isEqual(lselector, EOQualifierOperatorGreaterThanOrEqualTo)) {
+    if (!sel_eq(lselector, EOQualifierOperatorGreaterThanOrEqualTo)) {
       return [self invalidImap4SearchQualifier:@"'MODSEQ' can only take 'EOQualifierOperatorGreaterThanOrEqualTo' as qualifier operator"];
     }
     
@@ -391,11 +391,11 @@ andComparisonSelector:(SEL)lselector {
   }
   
   if ([lkey isEqualToString:@"SIZE"]) {
-    if (sel_isEqual(lselector, EOQualifierOperatorGreaterThan)
-	|| sel_isEqual(lselector, EOQualifierOperatorGreaterThanOrEqualTo))
+    if (sel_eq(lselector, EOQualifierOperatorGreaterThan)
+	|| sel_eq(lselector, EOQualifierOperatorGreaterThanOrEqualTo))
       [search appendString:@"LARGER "];
-    else if (sel_isEqual(lselector, EOQualifierOperatorLessThan)
-	     || sel_isEqual(lselector, EOQualifierOperatorLessThanOrEqualTo))
+    else if (sel_eq(lselector, EOQualifierOperatorLessThan)
+	     || sel_eq(lselector, EOQualifierOperatorLessThanOrEqualTo))
       [search appendString:@"SMALLER "];
     else
       return [self invalidImap4SearchQualifier:@"unexpected qualifier 3"];
@@ -416,9 +416,9 @@ andComparisonSelector:(SEL)lselector {
 
        Would be: "a caseInsensitiveLike: '*ABC*'"
     */
-    if (!sel_isEqual(lselector, EOQualifierOperatorEqual) &&
-	!sel_isEqual(lselector, EOQualifierOperatorCaseInsensitiveLike) &&
-	!sel_isEqual(lselector, EOQualifierOperatorContains)) {
+    if (!sel_eq(lselector, EOQualifierOperatorEqual) &&
+	!sel_eq(lselector, EOQualifierOperatorCaseInsensitiveLike) &&
+	!sel_eq(lselector, EOQualifierOperatorContains)) {
       [self logWithFormat:@"IMAP4 generation: got: %@, allowed: %@", 
 	    NSStringFromSelector(lselector),
 	    NSStringFromSelector(EOQualifierOperatorEqual)];
@@ -435,8 +435,8 @@ andComparisonSelector:(SEL)lselector {
   }
   
   
-  if (!sel_isEqual(lselector, EOQualifierOperatorEqual) &&
-      !sel_isEqual(lselector, EOQualifierOperatorCaseInsensitiveLike))
+  if (!sel_eq(lselector, EOQualifierOperatorEqual) &&
+      !sel_eq(lselector, EOQualifierOperatorCaseInsensitiveLike))
     return [self invalidImap4SearchQualifier:@"unexpected qualifier 5"];
   
   [search appendString:@"HEADER "];

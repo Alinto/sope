@@ -33,6 +33,10 @@
 #include "common.h"
 #include <string.h>
 
+#if !defined(sel_get_name) && ((defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__))
+#  define sel_get_name sel_getName
+#endif
+
 #if APPLE_FOUNDATION_LIBRARY || NeXT_Foundation_LIBRARY
 @interface NSObject(Miss)
 - (id)notImplemented:(SEL)cmd;
@@ -413,7 +417,7 @@ static Class NSDateClass = Nil;
         
         diff = [[NSDateClass date] timeIntervalSince1970] - st;
         printf("prof[%s %s]: %0.3fs\n",
-               [[(WOComponent *)page name] cString], sel_getName(_cmd), diff);
+               [[(WOComponent *)page name] cString], sel_get_name(_cmd), diff);
       }
       
       WOContext_leaveComponent(_ctx, page);
@@ -455,7 +459,7 @@ static Class NSDateClass = Nil;
         
         diff = [[NSDateClass date] timeIntervalSince1970] - st;
         printf("prof[%s %s]: %0.3fs\n",
-               [[(WOComponent *)page name] cString], sel_getName(_cmd), diff);
+               [[(WOComponent *)page name] cString], sel_get_name(_cmd), diff);
       }
       
       WOContext_leaveComponent(_ctx, page);
@@ -502,8 +506,8 @@ static Class NSDateClass = Nil;
           
           diff = [[NSDateClass date] timeIntervalSince1970] - st;
           printf("prof[%s %s]: %0.3fs\n",
-                 [[page name] cString], sel_getName(_cmd), diff);
-                 //[page name], sel_getName(_cmd), diff);
+                 [[page name] cString], sel_get_name(_cmd), diff);
+                 //[page name], sel_get_name(_cmd), diff);
         }
       
         WOContext_leaveComponent(_ctx, page);
@@ -550,7 +554,7 @@ static Class NSDateClass = Nil;
         
         diff = [[NSDateClass date] timeIntervalSince1970] - st;
         printf("prof[%s %s]: %0.3fs\n",
-               [[page name] cString], sel_getName(_cmd), diff);
+               [[page name] cString], sel_get_name(_cmd), diff);
       }
       
       WOContext_leaveComponent(_ctx, page);
