@@ -22,6 +22,14 @@
 #include "EOQualifier+LDAP.h"
 #include "common.h"
 
+#if NeXT_RUNTIME
+#define sel_eq(sel1, sel2) ((sel1)) == ((sel2))
+#endif
+
+#if __GNU_LIBOBJC__ >= 20100911
+#  define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
+#endif
+
 @interface EOQualifier(LDAPPrivates)
 
 - (void)addToLDAPFilterString:(NSMutableString *)_s inContext:(id)_ctx;
@@ -115,29 +123,29 @@
 
   sel = [self selector];
 
-  if (sel_isEqual(sel,  EOQualifierOperatorNotEqual))
+  if (sel_eq(sel,  EOQualifierOperatorNotEqual))
     [_s appendString:@"(!"];
   
   [_s appendString:@"("];
   [_s appendString:[self key]];
 
-  if (sel_isEqual(sel,  EOQualifierOperatorEqual))
+  if (sel_eq(sel,  EOQualifierOperatorEqual))
     [_s appendString:@"="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorNotEqual))
+  else if (sel_eq(sel,  EOQualifierOperatorNotEqual))
     [_s appendString:@"="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorLessThan))
+  else if (sel_eq(sel,  EOQualifierOperatorLessThan))
     [_s appendString:@"<"];
-  else if (sel_isEqual(sel,  EOQualifierOperatorGreaterThan))
+  else if (sel_eq(sel,  EOQualifierOperatorGreaterThan))
     [_s appendString:@">"];
-  else if (sel_isEqual(sel,  EOQualifierOperatorLessThanOrEqualTo))
+  else if (sel_eq(sel,  EOQualifierOperatorLessThanOrEqualTo))
     [_s appendString:@"<="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorGreaterThanOrEqualTo))
+  else if (sel_eq(sel,  EOQualifierOperatorGreaterThanOrEqualTo))
     [_s appendString:@">="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorContains))
+  else if (sel_eq(sel,  EOQualifierOperatorContains))
     [_s appendString:@"=*"];
-  else if (sel_isEqual(sel,  EOQualifierOperatorLike))
+  else if (sel_eq(sel,  EOQualifierOperatorLike))
     [_s appendString:@"="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorCaseInsensitiveLike))
+  else if (sel_eq(sel,  EOQualifierOperatorCaseInsensitiveLike))
     [_s appendString:@"="];
   else {
     NSLog(@"UNKNOWN operator: %@", NSStringFromSelector([self selector]));
@@ -147,7 +155,7 @@
   [_s appendString:[[self value] description]];
   [_s appendString:@")"];
   
-  if (sel_isEqual(sel,  EOQualifierOperatorNotEqual))
+  if (sel_eq(sel,  EOQualifierOperatorNotEqual))
     [_s appendString:@")"];
 }
 
@@ -161,29 +169,29 @@
 
   sel = [self selector];
 
-  if (sel_isEqual(sel,  EOQualifierOperatorNotEqual))
+  if (sel_eq(sel,  EOQualifierOperatorNotEqual))
     [_s appendString:@"(!"];
   
   [_s appendString:@"("];
   [_s appendString:[self leftKey]];
 
-  if (sel_isEqual(sel,  EOQualifierOperatorEqual))
+  if (sel_eq(sel,  EOQualifierOperatorEqual))
     [_s appendString:@"="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorNotEqual))
+  else if (sel_eq(sel,  EOQualifierOperatorNotEqual))
     [_s appendString:@"="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorLessThan))
+  else if (sel_eq(sel,  EOQualifierOperatorLessThan))
     [_s appendString:@"<"];
-  else if (sel_isEqual(sel,  EOQualifierOperatorGreaterThan))
+  else if (sel_eq(sel,  EOQualifierOperatorGreaterThan))
     [_s appendString:@">"];
-  else if (sel_isEqual(sel,  EOQualifierOperatorLessThanOrEqualTo))
+  else if (sel_eq(sel,  EOQualifierOperatorLessThanOrEqualTo))
     [_s appendString:@"<="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorGreaterThanOrEqualTo))
+  else if (sel_eq(sel,  EOQualifierOperatorGreaterThanOrEqualTo))
     [_s appendString:@">="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorContains))
+  else if (sel_eq(sel,  EOQualifierOperatorContains))
     [_s appendString:@"=*"];
-  else if (sel_isEqual(sel,  EOQualifierOperatorLike))
+  else if (sel_eq(sel,  EOQualifierOperatorLike))
     [_s appendString:@"="];
-  else if (sel_isEqual(sel,  EOQualifierOperatorCaseInsensitiveLike))
+  else if (sel_eq(sel,  EOQualifierOperatorCaseInsensitiveLike))
     [_s appendString:@"="];
   else {
     NSLog(@"UNKNOWN operator: %@", NSStringFromSelector([self selector]));
@@ -193,7 +201,7 @@
   [_s appendString:[self rightKey]];
   [_s appendString:@")"];
   
-  if (sel_isEqual(sel,  EOQualifierOperatorNotEqual))
+  if (sel_eq(sel,  EOQualifierOperatorNotEqual))
     [_s appendString:@")"];
 }
 

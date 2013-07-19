@@ -1023,15 +1023,15 @@ static NSNotificationCenter *getNC(void ) {
         [orderByExpr appendString:@", "];
       
       if ((selector = [sortOrdering selector])) {
-        if (sel_isEqual(selector, EOCompareAscending))
+        if (SEL_EQ(selector, EOCompareAscending))
           order = 1;
-        else if (sel_isEqual(selector, EOCompareDescending))
+        else if (SEL_EQ(selector, EOCompareDescending))
           order = 2;
-        else if (sel_isEqual(selector, EOCompareCaseInsensitiveAscending)) {
+        else if (SEL_EQ(selector, EOCompareCaseInsensitiveAscending)) {
 	  order       = 1;
 	  inSensitive = YES;
 	}
-        else if (sel_isEqual(selector, EOCompareCaseInsensitiveDescending)) {
+        else if (SEL_EQ(selector, EOCompareCaseInsensitiveDescending)) {
 	  order       = 2;
 	  inSensitive = YES;
 	}
@@ -1359,38 +1359,38 @@ static NSNotificationCenter *getNC(void ) {
 
   sql = nil;
   
-  if (sel_isEqual(EOQualifierOperatorEqual, self->operator)) {
+  if (SEL_EQ(EOQualifierOperatorEqual, self->operator)) {
     if ([self->value isNotNull])
       sql = [NSString stringWithFormat:@"%@ = %@", sqlKey, sqlValue];
     else
       sql = [NSString stringWithFormat:@"%@ IS NULL", sqlKey];
   }
-  else if (sel_isEqual(EOQualifierOperatorNotEqual, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorNotEqual, self->operator)) {
     if ([self->value isNotNull])
       sql = [NSString stringWithFormat:@"NOT (%@ = %@)", sqlKey, sqlValue];
     else
       sql = [NSString stringWithFormat:@"%@ IS NOT NULL", sqlKey];
   }
-  else if (sel_isEqual(EOQualifierOperatorLessThan, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorLessThan, self->operator)) {
     sql = [NSString stringWithFormat:@"%@ < %@", sqlKey, sqlValue];
   }
-  else if (sel_isEqual(EOQualifierOperatorLessThanOrEqualTo, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorLessThanOrEqualTo, self->operator)) {
     sql = [NSString stringWithFormat:@"%@ <= %@", sqlKey, sqlValue];
   }
-  else if (sel_isEqual(EOQualifierOperatorGreaterThan, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorGreaterThan, self->operator)) {
     sql = [NSString stringWithFormat:@"%@ > %@", sqlKey, sqlValue];
   }
-  else if (sel_isEqual(EOQualifierOperatorGreaterThanOrEqualTo, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorGreaterThanOrEqualTo, self->operator)) {
     sql = [NSString stringWithFormat:@"%@ >= %@", sqlKey, sqlValue];
   }
-  else if (sel_isEqual(EOQualifierOperatorLike, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorLike, self->operator)) {
     sqlValue = [[self->value stringValue]
                              stringByReplacingString:@"*" withString:@"%"];
     sqlValue = [_adaptor formatValue:sqlValue forAttribute:attr];
     
     sql = [NSString stringWithFormat:@"%@ LIKE %@", sqlKey, sqlValue];
   }
-  else if (sel_isEqual(EOQualifierOperatorCaseInsensitiveLike, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorCaseInsensitiveLike, self->operator)) {
     sqlValue = [[self->value stringValue]
                              stringByReplacingString:@"*" withString:@"%"];
     sqlValue = [sqlValue lowercaseString];
@@ -1399,9 +1399,9 @@ static NSNotificationCenter *getNC(void ) {
     sql = [NSString stringWithFormat:@"LOWER(%@) LIKE %@", sqlKey, sqlValue];
   }
 #if 0
-  else if (sel_isEqual(EOQualifierOperatorLessThanOrEqualTo, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorLessThanOrEqualTo, self->operator)) {
   }
-  else if (sel_isEqual(EOQualifierOperatorGreaterThanOrEqualTo, self->operator)) {
+  else if (SEL_EQ(EOQualifierOperatorGreaterThanOrEqualTo, self->operator)) {
   }
 #endif
   else {
