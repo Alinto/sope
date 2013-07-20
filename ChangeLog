@@ -1,3 +1,19 @@
+commit 5030353177728764e3c417392dab085a61190483
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jul 19 16:19:40 2013 -0400
+
+    Avoid throwing log info for the ID untagged response
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 7311d726e005ae8fd2802d07a17761ba03984892
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Jul 19 13:51:30 2013 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 8a214de88bcfaa838157b9c2a3c7246131e019f2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 19 10:10:31 2013 -0400

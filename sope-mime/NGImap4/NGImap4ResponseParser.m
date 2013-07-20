@@ -632,6 +632,11 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
       return;
     break;
     
+  // ID untagged response
+  case 'I':
+    _parseUntil(self, '\n');
+    return;
+
   case 'L':
     if (_matchesString(self, "LISTRIGHTS")) {
       if ([self _parseListRightsResponseIntoHashMap:result_])
