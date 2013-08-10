@@ -640,9 +640,9 @@ static void freeMods(LDAPMod **mods) {
     attrs = NULL;
   
   if (LDAPDebugEnabled) {
-    NSLog(@"%s: search with at base %s filter %s for attrs %s\n",
+    NSLog(@"%s: search at base '%@' filter '%@' for attrs '%@'\n",
 	  __PRETTY_FUNCTION__, _base, filter,
-	  _attributes);
+	  [_attributes componentsJoinedByString: @","]);
   }
 
   /* apply limits */
