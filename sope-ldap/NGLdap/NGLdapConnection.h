@@ -130,8 +130,10 @@
 
 - (NGLdapEntry *)schemaEntry;
 - (NGLdapEntry *)rootDSE;
+- (NGLdapEntry *)rootDSEWithAttributes: (NSArray *) attributes;
 - (NGLdapEntry *)configEntry;
 - (NSArray *)namingContexts;
+- (BOOL) isADCompatible;
 
 @end
 

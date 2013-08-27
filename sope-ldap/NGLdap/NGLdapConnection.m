@@ -1069,13 +1069,17 @@ static void freeMods(LDAPMod **mods) {
   return nil;
 }
 
-- (NGLdapEntry *)rootDSE {
+- (NGLdapEntry *)rootDSEWithAttributes: (NSArray *) attributes {
   NGLdapEntry *e;
   
-  if ((e = [self entryAtDN:@"" attributes:nil]))
+  if ((e = [self entryAtDN:@"" attributes: attributes]))
     return e;
   
   return nil;
+}
+
+- (NGLdapEntry *)rootDSE {
+  return [self rootDSEWithAttributes: nil];
 }
 
 - (NGLdapEntry *)configEntry {
@@ -1118,6 +1122,41 @@ static void freeMods(LDAPMod **mods) {
     [ma addObject:value];
   }
   return ma;
+}
+
+- (NSArray*) _supportedCapabilities
+{
+  NGLdapEntry    *e;
+  NSArray *reqAttrs, *resAttrs;
+
+  resAttrs = nil;
+  reqAttrs = [NSArray arrayWithObject: @"supportedCapabilities"];
+  if ((e = [self rootDSEWithAttributes: reqAttrs])) {
+    resAttrs = [[e attributeWithName:@"supportedCapabilities"] allStringValues];
+  }
+
+  return resAttrs;
+}
+
+- (BOOL) isADCompatible
+{
+ /*
+  * Check that the LDAP server is Active Directory compatible (samba)
+  * by checking if it supports LDAP_CAP_ACTIVE_DIRECTORY_OID in its supportedCapabilities
+  *   http://msdn.microsoft.com/en-us/library/cc223360.aspx
+  */
+  BOOL rc;
+  NSArray *caps;
+
+  rc = NO;
+  caps = [self _supportedCapabilities];
+
+  // LDAP_CAP_ACTIVE_DIRECTORY_OID = 1.2.840.113556.1.4.800
+  // LDAP_CAP_ACTIVE_DIRECTORY_LDAP_INTEG_OID = 1.2.840.113556.1.4.1791
+  if ([caps containsObject: @"1.2.840.113556.1.4.800"])
+    rc = YES;
+
+  return rc;
 }
 
 /* description */
