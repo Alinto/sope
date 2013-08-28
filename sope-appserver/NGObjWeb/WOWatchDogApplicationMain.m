@@ -1033,7 +1033,7 @@ int WOWatchDogApplicationMain
         rc = [[WOWatchDog sharedWatchDog] run: appName argc: argc argv: argv];
     }
     else {
-      [ud errorWithFormat: @"unable to open pid file: %@", pidFile];
+      [ud errorWithFormat: @"unable to open pid file: %s", pidFile];
       rc = -1;
     }
   }
