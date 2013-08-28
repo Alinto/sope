@@ -418,9 +418,9 @@ typedef enum {
 }
 
 - (void) receivedEvent: (void*)data
-		  type: (RunLoopEventType)type
-		 extra: (void*)extra
-	       forMode: (NSString*)mode
+                  type: (RunLoopEventType)type
+                 extra: (void*)extra
+               forMode: (NSString*)mode
 {
   if ([controlSocket isAlive])
     [self readMessage];
@@ -511,9 +511,9 @@ typedef enum {
 }
 
 - (void) receivedEvent: (void*)data
-		  type: (RunLoopEventType)type
-		 extra: (void*)extra
-	       forMode: (NSString*)mode
+                  type: (RunLoopEventType)type
+                 extra: (void*)extra
+               forMode: (NSString*)mode
 {
   int nextId;
   WOWatchDogChild *child;
@@ -912,7 +912,7 @@ typedef enum {
       }
 
       if (shouldTerminate && pidFile)
-	unlink(pidFile);
+        unlink(pidFile);
 
       // [self logWithFormat: @"watchdog loop"];
       NS_DURING {
