@@ -82,6 +82,11 @@
 		       perr: (LDAPPasswordPolicyError *) _perr;
 #endif
 
+
+- (BOOL) changeADPasswordAtDn: (NSString *) _dn
+                oldPassword: (NSString *) _oldPassword
+                newPassword: (NSString *) _newPassword;
+
 /* query parameters */
 
 - (void)setQueryTimeLimit:(NSTimeInterval)_timeLimit;

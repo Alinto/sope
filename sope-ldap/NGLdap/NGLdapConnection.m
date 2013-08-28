@@ -592,9 +592,7 @@ static void freeMods(LDAPMod **mods) {
   return NO;
 }
 
-#endif
-
-/* running queries */
+#endif /* LDAP_CONTROL_PASSWORDPOLICYREQUEST */
 
 - (void)setQueryTimeLimit:(NSTimeInterval)_timeLimit {
   self->timeLimit = _timeLimit;
@@ -609,6 +607,54 @@ static void freeMods(LDAPMod **mods) {
 - (unsigned int)querySizeLimit {
   return self->sizeLimit;
 }
+
+/* password operations */
+- (BOOL) changeADPasswordAtDn: (NSString *) _dn
+                oldPassword: (NSString *) _oldPassword
+                newPassword: (NSString *) _newPassword
+{
+ /* Change a user password in Active Directory (or Samba4) following these
+  * guidelines: http://support.microsoft.com/kb/269190
+  *             http://msdn.microsoft.com/en-us/library/cc223248.aspx
+  */
+  BOOL didChange;
+  NSArray *mods;
+  NSData *dataOldPassword, *dataNewPassword;
+  NGLdapAttribute *attrOldPassword, *attrNewPassword;
+  NGLdapModification *modPasswordDelete, *modPasswordAdd;
+
+  /* Passwords must be quoted and UTF16 encoded */
+  dataOldPassword = [[NSString stringWithFormat: @"\"%@\"", _oldPassword]
+                       dataUsingEncoding: NSUTF16LittleEndianStringEncoding];
+  dataNewPassword = [[NSString stringWithFormat: @"\"%@\"", _newPassword]
+                       dataUsingEncoding: NSUTF16LittleEndianStringEncoding];
+
+  attrOldPassword = [[NGLdapAttribute alloc] initWithAttributeName: @"unicodePwd"
+                      values: [NSArray arrayWithObject: dataOldPassword]];
+  [attrOldPassword autorelease];
+
+  attrNewPassword = [[NGLdapAttribute alloc] initWithAttributeName: @"unicodePwd"
+                      values: [NSArray arrayWithObject: dataNewPassword]];
+  [attrNewPassword autorelease];
+
+  /* Password delete op must contain quoted old password */
+  modPasswordDelete = [NGLdapModification deleteModification: attrOldPassword];
+  modPasswordAdd = [NGLdapModification addModification: attrNewPassword];
+  mods = [NSArray arrayWithObjects: modPasswordDelete, modPasswordAdd, nil];
+  NS_DURING {
+    didChange = [self modifyEntryWithDN: _dn
+                                changes: mods];
+  }
+  NS_HANDLER {
+    [self errorWithFormat: @"Couldn't change password for %@", _dn];
+    [localException raise];
+  }
+  NS_ENDHANDLER;
+
+  return didChange;
+}
+
+/* running queries */
 
 - (NSEnumerator *)_searchAtBaseDN:(NSString *)_base
   qualifier:(EOQualifier *)_q
