@@ -554,7 +554,7 @@ static void _parseUserAgent(NGHttpUserAgent *self) {
 
     if (data) {
       char *str = (char *)[data bytes];
-      NSUInteger len = [data length];
+      NSInteger len = [data length];
       char *start = str;
 
       while ((*str != '\0') && (*str != ':') && (len > 0)) {
