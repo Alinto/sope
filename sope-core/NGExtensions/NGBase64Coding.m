@@ -114,17 +114,16 @@ static int NSStringMaxLineWidth = 1024;
       }
       else {
         result = [[StringClass alloc]
-                   initWithBytesNoCopy:dest
-                                length:destLength
-                              encoding:NSUTF8StringEncoding
-                          freeWhenDone:YES];
+                   initWithBytes:dest
+                          length:destLength
+                        encoding:NSUTF8StringEncoding];
         // we fallback on latin 1
         if (!result)
           result = [[StringClass alloc]
-                     initWithBytesNoCopy:dest
-                                  length:destLength
-                                encoding:NSISOLatin1StringEncoding
-                            freeWhenDone:YES];
+                     initWithBytes:dest
+                            length:destLength
+                          encoding:NSISOLatin1StringEncoding];
+        free(dest);
         [result autorelease];
       }
     }
