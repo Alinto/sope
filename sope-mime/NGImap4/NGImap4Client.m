@@ -948,8 +948,9 @@ static NSMutableDictionary *namespaces;
   if ((_fname = [self _folder2ImapFolder:_fname]) == nil)
     return nil;
 
-  // eg: 'delete "blah"'
-  command = [NSString stringWithFormat:@"%@ \"%@\"", _op, SaneFolderName(_fname)];
+  // eg: 'delete "blah"'. We correctly encode the foldername here
+  // as we don't do it anymore automagically everywhere in SOPE.
+  command = [NSString stringWithFormat:@"%@ \"%@\"", _op, SaneFolderName([_fname stringByEncodingImap4FolderName])];
 
   return [self->normer normalizeResponse:[self processCommand:command]];
 }
@@ -1822,8 +1823,8 @@ static inline NSArray *_flags2ImapFlags(NGImap4Client *self, NSArray *_flags) {
         array = [array subarrayWithRange:NSMakeRange(0, [array count] - 1)];
     }
   }
-  return [[array componentsJoinedByString:self->delimiter]
-           stringByEncodingImap4FolderName];
+  
+  return [array componentsJoinedByString:self->delimiter];
 }
 
 - (NSString *)_imapFolder2Folder:(NSString *)_folder {
@@ -1847,8 +1848,7 @@ static inline NSArray *_flags2ImapFlags(NGImap4Client *self, NSArray *_flags) {
   array = [array arrayByAddingObjectsFromArray:
                    [_folder componentsSeparatedByString:[self delimiter]]];
 
-  return [[array componentsJoinedByString: @"/"]
-           stringByDecodingImap4FolderName];
+  return [array componentsJoinedByString: @"/"];
 }
 
 - (void)setContext:(NGImap4Context *)_ctx {
