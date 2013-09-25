@@ -944,13 +944,19 @@ static NSMutableDictionary *namespaces;
 
 - (NSDictionary *)_performCommand:(NSString *)_op onFolder:(NSString *)_fname {
   NSString *command;
+  NSString *name;
 
   if ((_fname = [self _folder2ImapFolder:_fname]) == nil)
     return nil;
 
   // eg: 'delete "blah"'. We correctly encode the foldername here
   // as we don't do it anymore automagically everywhere in SOPE.
-  command = [NSString stringWithFormat:@"%@ \"%@\"", _op, SaneFolderName([_fname stringByEncodingImap4FolderName])];
+  if ([_fname is7bitSafe])
+    name = _fname;
+  else
+    name = [_fname stringByEncodingImap4FolderName];
+
+  command = [NSString stringWithFormat:@"%@ \"%@\"", _op, SaneFolderName(name)];
 
   return [self->normer normalizeResponse:[self processCommand:command]];
 }
