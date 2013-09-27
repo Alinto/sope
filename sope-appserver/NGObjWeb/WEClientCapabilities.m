@@ -77,6 +77,7 @@
 #define WEUA_Cook_XMLRPCdotNET 46
 #define WEUA_WDFS              47
 #define WEUA_ZideOne_Outlook   48
+#define WEUA_2DO               49
 
 #define WEOS_UNKNOWN   0
 #define WEOS_WINDOWS   1
@@ -404,6 +405,9 @@
   }
   else if (strstr(ua, "XML-RPC.NET")) {
     self->browser = WEUA_Cook_XMLRPCdotNET;
+  }
+  else if (strstr(ua, "2Do")) {
+    self->browser = WEUA_2DO;
   }
   else {
     /* unknown browser */
