@@ -1001,10 +1001,10 @@ static __inline__ const char *monthAbbr(int m) {
   [buf appendString:remoteHost];
   [buf appendString:@" - - ["];
   [buf appendFormat:@"%02i/%s/%04i:%02i:%02i:%02i",
-        [now dayOfMonth],
+        (int)[now dayOfMonth],
         monthAbbr([now monthOfYear]),
-        [now yearOfCommonEra],
-        [now hourOfDay], [now minuteOfHour], [now secondOfMinute]];
+        (int)[now yearOfCommonEra],
+        (int)[now hourOfDay], (int)[now minuteOfHour], (int)[now secondOfMinute]];
   [buf appendString:@" GMT] \""];
   [buf appendString:[_request method]];
   [buf appendString:@" "];
@@ -1014,9 +1014,9 @@ static __inline__ const char *monthAbbr(int m) {
   [buf appendString:@"\" "];
   [buf appendFormat:@"%i %i",  
          [_response status],
-         [[_response content] length]];
+         (int)[[_response content] length]];
   if (doExtLog)
-    [buf appendFormat:@"/%i", [[_request content] length]];
+    [buf appendFormat:@"/%i", (int)[[_request content] length]];
   
   /* append duration */
   if (lstartDate != nil)

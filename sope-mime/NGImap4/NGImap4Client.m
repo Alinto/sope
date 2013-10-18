@@ -629,7 +629,7 @@ static NSMutableDictionary *namespaces;
 
   if (plength > 0)
     s = [NSString stringWithFormat:@"login \"%@\" {%d}",
-		  self->login, plength];
+		  self->login, (int)plength];
   else
     s = [NSString stringWithFormat:@"login \"%@\" \"\"", self->login];
 
@@ -1084,7 +1084,7 @@ static NSMutableDictionary *namespaces;
   
   cmd  = [NSString stringWithFormat:
                      @"UID FETCH 1:* (UID) (CHANGEDSINCE %llu VANISHED)",
-                   _modseq];
+                   (unsigned long long)_modseq];
   fetchres = [self processCommand:cmd];
   result   = [[self->normer normalizeFetchResponse:fetchres] retain];
   [pool release];
@@ -1210,7 +1210,7 @@ static NSMutableDictionary *namespaces;
   
   icmd = [NSString stringWithFormat:@"append \"%@\" (%@) {%d}",
                    _folder, [flags componentsJoinedByString:@" "],
-                   [rfc822Data length]];
+                   (int)[rfc822Data length]];
   result = [self processCommand:icmd
                  withTag:YES withNotification:NO];
   

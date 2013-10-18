@@ -272,7 +272,7 @@ static BOOL  doDebug         = NO;
   
   if (doDebug) {
     NSLog(@"%s: begin (data: %i bytes, nesting: %i)", __PRETTY_FUNCTION__, 
-          [self->data length], self->nesting);
+          (int)[self->data length], self->nesting);
   }
   if ([self->data length] == 0) return nil;
   

@@ -646,11 +646,11 @@ static int FetchNewUnseenMessagesInSubFoldersOnDemand = -1;
       [m release];
     }
   }
-  m = [mes copy];
+  NSArray *a = [mes copy];
   [mes release]; mes = nil;
   [pool release];
   
-  return [m autorelease];;
+  return [a autorelease];;
 }
 
 - (NSArray *)_buildMessagesFromFetch:(NSDictionary *)_fetch {

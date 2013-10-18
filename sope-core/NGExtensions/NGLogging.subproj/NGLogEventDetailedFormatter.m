@@ -86,8 +86,8 @@ static __inline__ unsigned char *levelPrefixForEvent(NGLogEvent *_event) {
   date = [_event date];
   [fe appendFormat:@"%s %02i %02i:%02i:%02i %s [%d]: %s",
     monthNames[[date monthOfYear]],
-    [date dayOfMonth],
-    [date hourOfDay], [date minuteOfHour], [date secondOfMinute],
+    (int)[date dayOfMonth],
+    (int)[date hourOfDay], (int)[date minuteOfHour], (int)[date secondOfMinute],
     processName,
     /* Note: pid can change after a fork() */
 #if NeXT_Foundation_LIBRARY || COCOA_Foundation_LIBRARY

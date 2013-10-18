@@ -64,7 +64,7 @@ static __inline__ void eoRemove(EOGenericRecord *table, id key);
 
 static EONull *null = nil;
 
-+ (int)version {
++ (NSInteger)version {
   return 2;
 }
 

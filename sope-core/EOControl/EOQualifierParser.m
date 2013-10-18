@@ -375,7 +375,7 @@ static NSString *_parseOp(const char *_buf, unsigned _bufLen,
             @"string(class=%@,len=%i) '%@'",
             __PRETTY_FUNCTION__,
             [_qualifierFormat class],
-            [_qualifierFormat length], _qualifierFormat);
+            (int)[_qualifierFormat length], _qualifierFormat);
       NSLog(@"  buf-length: %i", bufLen);
       NSLog(@"  length:     %i", length);
       NSLog(@"  char[length]: '%c' (%i) '%s'", buf[length], buf[length],

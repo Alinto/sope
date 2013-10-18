@@ -19,6 +19,7 @@
   02111-1307, USA.
 */
 
+#define EXPOSE_NSException_IVARS 1
 #include "NSException+misc.h"
 #import <Foundation/NSNull.h>
 #include "common.h"
@@ -85,7 +86,7 @@
 
 - (id)copyWithZone:(NSZone *)_zone {
   // TODO: should make a real copy?
-  return [self retain];
+  return (id)[self retain];
 }
 
 @end /* NSException(NGMiscellaneous) */

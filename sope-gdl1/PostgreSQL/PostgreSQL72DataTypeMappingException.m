@@ -46,7 +46,7 @@
   typeName = _dt;
 
   if (typeName == nil)
-    typeName = [NSString stringWithFormat:@"Oid[%i]", _dt];
+    typeName = [NSString stringWithFormat:@"Oid[%i]", (int)_dt];
   
   // TODO: fix for Cocoa/gstep Foundation?
   [self setName:@"DataTypeMappingNotSupported"];

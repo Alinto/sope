@@ -75,7 +75,7 @@
     temporaryHyperlink = [_WOTemporaryHyperlink allocWithZone:zone];
   
   if (self == WOHyperlinkClass)
-    return temporaryHyperlink;
+    return (id)temporaryHyperlink;
   else {
 #if PROFILE_CLUSTERS
     static unsigned totalCount        = 0;
