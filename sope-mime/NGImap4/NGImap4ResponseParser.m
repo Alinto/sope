@@ -116,7 +116,6 @@ static BOOL _parseNoUntaggedResponse(NGImap4ResponseParser *self,
 static NSNumber *_parseUnsigned(NGImap4ResponseParser *self);
 static NSString *_parseUntil(NGImap4ResponseParser *self, char _c);
 static NSString *_parseUntil2(NGImap4ResponseParser *self, char _c1, char _c2);
-static BOOL _endsWithCQuote(NSString *_string);
 
 static __inline__ NSException *_consumeIfMatch
   (NGImap4ResponseParser *self, unsigned char _m);
@@ -830,24 +829,13 @@ _purifyQuotedString(NSMutableString *quotedString) {
 - (NSString *)_parseQuotedString {
   NSMutableString *quotedString;
   NSString *tmpString;
-  BOOL stop;
 
   /* parse a quoted string, eg '"' */
   if (_la(self, 0) == '"') {
     _consume(self, 1);
     quotedString = [NSMutableString string];
-    stop = NO;
-    while (!stop) {
-      tmpString = _parseUntil(self, '"');
-      [quotedString appendString: tmpString];
-      if(_endsWithCQuote(tmpString)) {
-	[quotedString deleteSuffix: @"\\"];
-	[quotedString appendString: @"\""];
-      }
-      else {
-	stop = YES;
-      }
-    }
+    tmpString = _parseUntil(self, '"');
+    [quotedString appendString: tmpString];
   }
   else {
     quotedString = nil;
@@ -1801,15 +1789,6 @@ _purifyQuotedString(NSMutableString *quotedString) {
       else
 	[self logWithFormat:@"ERROR: could not parse envelope!"];
     }
-//     else if ([key isEqualToString:@"bodystructure"]) {
-//       // TODO: implement!
-//       NSException *e;
-      
-//       e = [[NGImap4ParserException alloc] 
-// 	    initWithFormat:@"bodystructure fetch result not yet supported!"];
-//       [self setLastException:[e autorelease]];
-//       return NO;
-//     }
     else if ([key isEqualToString:@"internaldate"]) {
       // TODO: implement!
       NSException *e;
@@ -2638,21 +2617,6 @@ static NSString *_parseUntil2(NGImap4ResponseParser *self, char _c1, char _c2){
     [s release];
     return s2;
   }
-}
-
-static BOOL _endsWithCQuote(NSString *_string){
-  unsigned int quoteSlashes;
-  int pos;
-
-  quoteSlashes = 0;
-  pos = [_string length] - 1;
-  while (pos > -1
-	 && [_string characterAtIndex: pos] == '\\') {
-    quoteSlashes++;
-    pos--;
-  }
-
-  return ((quoteSlashes % 2) == 1);
 }
 
 - (NSException *)exceptionForFailedMatch:(unsigned char)_match
