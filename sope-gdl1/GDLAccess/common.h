@@ -60,27 +60,6 @@
 #  ifndef SEL_EQ
 #    define SEL_EQ(__A__,__B__) sel_isEqual(__A__,__B__)
 #  endif
-#else
-__attribute__((weak)) Class object_get_class(id cls);
-__attribute__((weak))
-Class object_getClass(id cls)
-{
-        return object_get_class(cls);
-}
-
-__attribute__((weak)) BOOL sel_eq(SEL s1, SEL s2);
-__attribute__((weak))
-BOOL sel_isEqual(SEL s1, SEL s2)
-{
-        return sel_eq(s1, s2);
-}
-
-__attribute__((weak)) Class object_setClass(id obj, Class cls)
-{
-        Class oldClass = ((NSObject*)obj)->isa;
-        ((NSObject*)obj)->isa = cls;
-        return oldClass;
-}
 #endif
 
 #if LIB_FOUNDATION_LIBRARY

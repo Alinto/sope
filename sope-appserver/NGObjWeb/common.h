@@ -56,20 +56,6 @@
 #    define sel_get_name(__XXX__)    sel_getName(__XXX__)
 #    define sel_get_any_uid(__XXX__) sel_getUid(__XXX__)
 #  endif
-#else
-__attribute__((weak)) Class object_get_class(id cls);
-__attribute__((weak))
-Class object_getClass(id cls)
-{
-        return object_get_class(cls);
-}
-
-__attribute__((weak)) BOOL sel_eq(SEL s1, SEL s2);
-__attribute__((weak))
-BOOL sel_isEqual(SEL s1, SEL s2)
-{
-        return sel_eq(s1, s2);
-}
 #endif
 
 #define IS_DEPRECATED \
