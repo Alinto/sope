@@ -124,7 +124,7 @@ static BOOL            debugAll        = NO;
 - (NSString *)description {
   return [NSString stringWithFormat:@"<%@[0x%p] debugAll=%@ #loggers=%d>",
                      NSStringFromClass([self class]), self,
-                     debugAll ? @"YES" : @"NO", (int)[self->loggerMap count]];
+                     debugAll ? @"YES" : @"NO", [self->loggerMap count]];
 }
 
 @end /* NGLoggerManager */

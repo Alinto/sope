@@ -291,7 +291,7 @@
       [ma release];
     }
     else
-      lHints = (id)[self->hints retain];
+      lHints = [self->hints retain];
   }
   else 
     lHints = nil;

@@ -201,7 +201,7 @@ static int openConnectionCount = 0;
   /* set client encoding */
 #if NG_SET_CLIENT_ENCODING
   if (![self->connection setClientEncoding:PGClientEncoding]) {
-    NSLog(@"WARNING: could not set client encoding to: '%@'", 
+    NSLog(@"WARNING: could not set client encoding to: '%s'", 
 	  PGClientEncoding);
   }
 #endif

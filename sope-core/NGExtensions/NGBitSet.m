@@ -222,7 +222,7 @@
 }
 
 - (NSUInteger)lastMember {
-  NSInteger element;
+  register unsigned int element;
 
   for (element = (self->universe - 1); element >= 0; element--) {
     if (NGTestBit(element))

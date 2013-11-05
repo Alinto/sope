@@ -39,7 +39,6 @@
 #include <EOControl/EOKeyValueCoding.h>
 #include <EOControl/EONull.h>
 #import "EOQualifierScanner.h"
-#import "NGExtensions/NSException+misc.h"
 
 #if LIB_FOUNDATION_LIBRARY
 #  include <extensions/DefaultScannerHandler.h>
@@ -469,7 +468,7 @@ handle_attribute(EOSQLQualifier *self, id object, id _relationshipPaths)
 - (id)copyWithZone:(NSZone*)zone {
   EOSQLQualifier* copy = nil;
 
-  copy                    = [[object_getClass(self) allocWithZone:zone] init];
+  copy                    = [[self->isa allocWithZone:zone] init];
   copy->entity            = RETAIN(self->entity);
   copy->content           = [self->content           mutableCopyWithZone:zone];
   copy->relationshipPaths = [self->relationshipPaths mutableCopyWithZone:zone];

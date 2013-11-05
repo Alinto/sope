@@ -218,7 +218,7 @@ static NGMimeType *defaultDataType = nil;
     if ([b length] < 512)
       [d appendFormat:@" body=%@", b];
     else
-      [d appendFormat:@" body[len=%i]", (int)[b length]];
+      [d appendFormat:@" body[len=%i]", [b length]];
   }
   else
     [d appendFormat:@" body=%@", b];

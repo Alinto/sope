@@ -222,7 +222,7 @@
   return [NSString stringWithFormat:
                      @"<%@[0x%p] capacity=%u SP=%u count=%u content=%s>",
                      NSStringFromClass([self class]), self,
-                     (int)[self capacity], (int)[self stackPointer], (int)[self count],
+                     [self capacity], [self stackPointer], [self count],
                      [[[self toArray] description] cString]];
 }
 
@@ -298,7 +298,7 @@
   [self addObject:_obj];
 }
 - (id)pop {
-  NSInteger lastIdx = ([self count] - 1);
+  unsigned lastIdx = ([self count] - 1);
 
   if (lastIdx >= 0) {
     id element = [self objectAtIndex:lastIdx];

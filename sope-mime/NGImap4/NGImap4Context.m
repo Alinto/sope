@@ -944,7 +944,8 @@ static int ImapLogEnabled                           = -1;
         [self serverName],
         [self serverKind],
         [self serverVersion],
-        [self serverSubVersion]];
+        [self serverSubVersion],
+        [self serverTag]];
   
   if (self->syncMode)
     [ms appendString:@" syncmode"];

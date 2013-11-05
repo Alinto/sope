@@ -172,7 +172,7 @@ static NSNull *null = nil;
 		      reason:_ns
 		      userInfo:nil];
 }
-- (NSException *)missingElementMapping:(NSString *)_ns :(NSString *)_tag {
+- (NSException *)missingElementMapping:(NSString *)_ns:(NSString *)_tag {
   return [NSException exceptionWithName:@"MissingElementMapping"
 		      reason:_tag
 		      userInfo:nil];
@@ -266,7 +266,7 @@ static NSNull *null = nil;
 
 /* CDATA */
 
-- (void)characters:(unichar *)_chars length:(NSUInteger)_len {
+- (void)characters:(unichar *)_chars length:(int)_len {
   _SaxObjTagInfo *info;
   
   if (_len == 0) return;

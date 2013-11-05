@@ -453,7 +453,7 @@ static NSException *_makeException(NSException *_exception,
           }
         */
         if (!atEof && (_idx > 0)) {
-            NSInteger pos;
+            register unsigned pos;
             const unsigned char *startPos, *endPos;
 
             for (pos = _idx; (pos >= 0) && (_buffer[pos] != '\n'); pos--)

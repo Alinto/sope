@@ -35,7 +35,7 @@
   
   count = [self count];
   array = [NSMutableArray arrayWithCapacity:count];
-  for (i = 0; i < count; i++) {
+  for (i = 0, count; i < count; i++) {
     id o;
     
     o = [self objectAtIndex:i];

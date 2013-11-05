@@ -346,15 +346,15 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   uniString = [NSString stringWithCharacters:(unichar *)[_data bytes]
 			length:([_data length] / sizeof(unichar))];
 
-  return [(id)self mailAddressParserWithString:uniString];
+  return [(NGMailAddressParser *)self mailAddressParserWithString:uniString];
 }
 
-+ (id)mailAddressParserWithCString:(const char *)_cString {
++ (id)mailAddressParserWithCString:(char *)_cString {
   NSString *nsCString;
 
   nsCString = [NSString stringWithCString:_cString];
 
-  return [(id)self mailAddressParserWithString:nsCString];
+  return [(NGMailAddressParser *)self mailAddressParserWithString:nsCString];
 }
 
 + (id)mailAddressParserWithString:(NSString *)_string {

@@ -255,7 +255,7 @@ static BOOL printErrors = NO;
   self->tagDepth--;
 }
 
-- (void)characters:(unichar *)_chars length:(NSUInteger)_len {
+- (void)characters:(unichar *)_chars length:(int)_len {
   id       charNode;
   NSString *data;
   

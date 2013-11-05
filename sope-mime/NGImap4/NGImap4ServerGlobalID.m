@@ -65,7 +65,7 @@
 
 /* comparison */
 
-- (NSUInteger)hash {
+- (unsigned)hash {
   return [self->login hash];
 }
 

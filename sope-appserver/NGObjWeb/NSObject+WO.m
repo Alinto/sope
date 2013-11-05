@@ -259,7 +259,7 @@ IMP WOGetKVCGetMethod(id object, NSString *_key) {
   if (object == nil) return NULL;
   if (_key   == nil) return NULL;
 
-#if GNU_RUNTIME && !(defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) && !defined(__GNUSTEP_RUNTIME__)
+#if GNU_RUNTIME && !(defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911))
   {
     unsigned keyLen;
     char     *buf;
@@ -317,9 +317,7 @@ id WOGetKVCValueUsingMethod(id object, NSString *_key) {
       return nil;
     free(buf); buf = NULL;
   }
-// This appears to be a work around for an old version of GNUstep-base not
-// correctly handling the case where there is no method.
-#if GNUSTEP_BASE_LIBRARY && !defined(__GNUSTEP_RUNTIME__)
+#if GNUSTEP_BASE_LIBRARY
   if (!__objc_responds_to(object, getSel))
     return nil;
 #endif

@@ -1525,9 +1525,9 @@ static inline void _applyState_(WETableView *self, WOComponent *cmp) {
         result = [self decreaseBatchSizeInContext:_ctx];
       else {
         if (self->identifier == nil) {
-          NSInteger idx;
+          unsigned idx;
       
-          idx   = [idxId integerValue];
+          idx   = [idxId unsignedIntValue];
           if (idx < [self->allObjects count] && idx >= 0) {
             _applyItems_(self, cmp, idx);
           }

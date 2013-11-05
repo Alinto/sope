@@ -82,7 +82,7 @@
 
 + (NSString *) stringWithUnsignedLongLong: (unsigned long long)value
 {
-  return [NSString stringWithFormat: @"0x%.16llx", value];
+  return [NSString stringWithFormat: @"0x%.16"PRIx64, value];
 }
 
 - (BOOL)boolValue {

@@ -30,7 +30,7 @@
 }
 
 + (id)decodeObjectWithXmlRpcCoder:(XmlRpcDecoder *)_coder {
-  self = (id)[NSNotification notificationWithName:
+  self = [NSNotification notificationWithName:
                            [_coder decodeStringForKey:@"name"]
                          object:[_coder decodeObjectForKey:@"object"]
                          userInfo:[_coder decodeStructForKey:@"userInfo"]];

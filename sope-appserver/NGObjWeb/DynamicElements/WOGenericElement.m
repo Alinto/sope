@@ -77,9 +77,10 @@ typedef struct {
   [children autorelease];
   
   /* construct self ... */
-  return (WOGenericElement*)[(WODynamicElement *)self initWithName:name 
+  self = [(WODynamicElement *)self initWithName:name 
                                    associations:assocs 
                                    contentElements:children];
+  return self;
 }
 
 - (BOOL)_isASCIIString:(NSString *)_s {

@@ -71,7 +71,7 @@
 }
 
 - (NSString *)stringByEscapingCharactersFromSet:(NSCharacterSet *)_escSet
-  usingStringEscaping:(id<NGStringEscaping>)_esc
+  usingStringEscaping:(<NGStringEscaping>)_esc
 {
   NSMutableString *safeString;
   unsigned length;

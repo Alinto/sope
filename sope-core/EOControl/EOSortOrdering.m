@@ -29,9 +29,7 @@
 #endif
 
 #ifndef SEL_EQ
-#  if defined(__GNUSTEP_RUNTIME__)
-#    define SEL_EQ(sel1,sel2) sel_isEqual(sel1, sel2)
-#  elif GNU_RUNTIME
+#  if GNU_RUNTIME
 #    define SEL_EQ(sel1,sel2) sel_eq(sel1,sel2)
 #  else
 #    define SEL_EQ(sel1,sel2) (sel1 == sel2)

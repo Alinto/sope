@@ -52,10 +52,10 @@ static inline Class NSStringClass(void) {
                                          200);
     lm = [NGLoggerManager defaultLoggerManager];
   }
-  logger = NSMapGet(loggerForClassMap, object_getClass(self));
+  logger = NSMapGet(loggerForClassMap, self->isa);
   if (!logger) {
-    logger = [lm loggerForClass: object_getClass(self)];
-    NSMapInsert(loggerForClassMap, object_getClass(self), logger);
+    logger = [lm loggerForClass:self->isa];
+    NSMapInsert(loggerForClassMap, self->isa, logger);
   }
 
   return logger;

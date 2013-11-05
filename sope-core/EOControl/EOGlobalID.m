@@ -95,7 +95,7 @@ static unsigned int   ip;
 }
 
 - (id)init {
-  [object_getClass(self) assignGloballyUniqueBytes:&(self->idbuffer[0])];
+  [self->isa assignGloballyUniqueBytes:&(self->idbuffer[0])];
   return self;
 }
 

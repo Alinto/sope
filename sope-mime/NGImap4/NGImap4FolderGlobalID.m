@@ -62,7 +62,7 @@
 
 /* comparison */
 
-- (NSUInteger)hash {
+- (unsigned)hash {
   return [self->absoluteName hash];
 }
 

@@ -19,7 +19,7 @@
   Free Software Foundation, 59 Temple Place - Suite 330, Boston, MA
   02111-1307, USA.
 */
-#define EXPOSE_NSBundle_IVARS 1
+
 #include "NGBundleManager.h"
 #include "common.h"
 #include <NGExtensions/NSObject+Logs.h>
@@ -902,7 +902,7 @@ static NSString *NGEnvVarPathSeparator = @":";
                 @"  loaded version:   %i\n"
                 @"  bundle:           %@",
                 className,
-                v, (int)[clazz version],
+                v, [clazz version],
                 [_bundle bundlePath]);
         }
       }
@@ -918,7 +918,7 @@ static NSString *NGEnvVarPathSeparator = @":";
                 @"  loaded version:         %i\n"
                 @"  bundle:                 %@",
                 className,
-                v, (int)[clazz version],
+                v, [clazz version],
                 [_bundle bundlePath]);
         }
       }
@@ -1140,7 +1140,7 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
 
   if (debugOn) {
     NSLog(@"BM LOOKUP pathes (%d bundles loaded): %@ / %@", 
-          (int)NSCountMapTable(self->loadedBundles), _resourceName, _type);
+          NSCountMapTable(self->loadedBundles), _resourceName, _type);
   }
   
   fm     = [NSFileManager defaultManager];
@@ -1316,7 +1316,7 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
   
   if (debugOn) {
     NSLog(@"BM LOOKUP path (%d bundles loaded): %@ / %@", 
-          (int)NSCountMapTable(self->loadedBundles), _resourceName, _type);
+          NSCountMapTable(self->loadedBundles), _resourceName, _type);
   }
   
   /* look in loaded bundles */

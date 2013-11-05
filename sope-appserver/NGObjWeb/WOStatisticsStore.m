@@ -35,7 +35,7 @@
   unsigned       zippedResponsesCount;
   unsigned       totalZippedSize;
   unsigned       largestResponseSize;
-  NSInteger      smallestResponseSize;
+  unsigned       smallestResponseSize;
   NSTimeInterval minimumDuration;
   NSTimeInterval maximumDuration;
   NSTimeInterval totalDuration;
@@ -420,7 +420,7 @@ static id mkdbl(double d) {
   /* response */
   
   [result appendFormat:@"%i %i",
-            [_response status], (int)[[_response content] length]];
+            [_response status], [[_response content] length]];
   
   if ((startDate = [request startDate]) != nil) {
     NSTimeInterval duration;

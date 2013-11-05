@@ -87,7 +87,7 @@ void WOComponent_syncFromParent(WOComponent *self, WOComponent *_parent) {
 #if NeXT_RUNTIME
   takeValue = (void *)[self methodForSelector:@selector(takeValue:forKey:)];
 #elif GNUSTEP_BASE_LIBRARY
-  takeValue = (void*)method_get_imp(class_get_instance_method(object_getClass(self),
+  takeValue = (void*)method_get_imp(class_get_instance_method(self->isa,
                 @selector(setValue:forKey:)));
 #else  
   takeValue = (void*)method_get_imp(class_get_instance_method(self->isa,
@@ -148,7 +148,7 @@ void WOComponent_syncToParent(WOComponent *self, WOComponent *_parent) {
 #if NeXT_RUNTIME
   getValue = (void *)[self methodForSelector:@selector(valueForKey:)];
 #else
-  getValue = (void*)method_get_imp(class_get_instance_method(object_getClass(self),
+  getValue = (void*)method_get_imp(class_get_instance_method(self->isa,
                 @selector(valueForKey:)));
 #endif
   

@@ -177,7 +177,7 @@
   }
   else {
     /* generate link to table file */
-    NSDictionary *qd;
+    NSMutableDictionary *qd;
     NSString *url;
     id product = nil;
     

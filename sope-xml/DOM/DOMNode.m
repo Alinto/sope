@@ -214,7 +214,7 @@ NSString *DOMNodeValue(id _node) {
                      [self nodeName],
                      [[self parentNode] nodeName],
                      [self nodeType],
-                     [self hasChildNodes] ? (int)[[self childNodes] length] : 0];
+                     [self hasChildNodes] ? [[self childNodes] length] : 0];
 }
 
 @end /* NGDOMNode */

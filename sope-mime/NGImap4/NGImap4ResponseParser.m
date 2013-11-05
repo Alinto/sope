@@ -2411,7 +2411,7 @@ static BOOL _parseBadUntaggedResponse(NGImap4ResponseParser *self,
 static BOOL _parseNoOrOkArguments(NGImap4ResponseParser *self,
                                   NGMutableHashMap *result_, NSString *_key) 
 {
-  id obj;
+  NSString *obj;
 
   obj = nil;
   

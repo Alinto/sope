@@ -48,7 +48,7 @@
   return self->qualifier;
 }
 
-- (NSUInteger)count {
+- (unsigned int)count {
   return self->qualifier ? 1 : 0;
 }
 - (NSArray *)subqualifiers {

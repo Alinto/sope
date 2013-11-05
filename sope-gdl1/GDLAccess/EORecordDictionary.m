@@ -55,7 +55,7 @@ static NSDictionary *emptyDict = nil;
 - (id)init  {
   RELEASE(self);
   if (emptyDict == nil) emptyDict = [[NSDictionary alloc] init];
-  return (id)[emptyDict retain];
+  return [emptyDict retain];
 }
 
 - (id)initWithObjects:(id *)_objects forKeys:(id *)_keys 
@@ -64,12 +64,12 @@ static NSDictionary *emptyDict = nil;
   if (_count == 0) {
         RELEASE(self);
 	if (emptyDict == nil) emptyDict = [[NSDictionary alloc] init];
-	return (id)[emptyDict retain];
+	return [emptyDict retain];
   }
   
   if (_count == 1) {
         RELEASE(self);
-        return (id)[[NSDictionary alloc]
+        return [[NSDictionary alloc]
                               initWithObjects:_objects forKeys:_keys
                               count:_count];
   }

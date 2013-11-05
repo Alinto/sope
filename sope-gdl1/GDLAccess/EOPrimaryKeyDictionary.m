@@ -130,7 +130,7 @@
 - (BOOL)isEqualToDictionary:(NSDictionary *)other {
     if (self == (EOSinglePrimaryKeyDictionary*)other)
         return YES;
-    if (object_getClass(self) == object_getClass(other)) {
+    if (self->isa == ((EOSinglePrimaryKeyDictionary*)other)->isa) {
         if (fastHash == ((EOSinglePrimaryKeyDictionary*)other)->fastHash &&
             [key isEqual:((EOSinglePrimaryKeyDictionary*)other)->key] &&
             [value isEqual:((EOSinglePrimaryKeyDictionary*)other)->value])
@@ -157,7 +157,7 @@
 - (BOOL)fastIsEqual:(id)other {
     if (self == other)
         return YES;
-    if (object_getClass(self) == object_getClass(other)) {
+    if (self->isa == ((EOSinglePrimaryKeyDictionary*)other)->isa) {
         if (fastHash == ((EOSinglePrimaryKeyDictionary*)other)->fastHash &&
             key == ((EOSinglePrimaryKeyDictionary*)other)->key &&
             [value isEqual:((EOSinglePrimaryKeyDictionary*)other)->value])
@@ -263,14 +263,14 @@
     return nil;
 }
 
-- (NSUInteger)count {
+- (unsigned int)count {
     return self->count;
 }
 - (BOOL)isNotEmpty {
   return self->count > 0 ? YES : NO;
 }
 
-- (NSUInteger)hash {
+- (unsigned int)hash {
     return self->count;
 }
 
@@ -316,7 +316,7 @@
 - (BOOL)fastIsEqual:(id)aDict {
     int i;
     
-    if (object_getClass(self) == object_getClass(aDict)) {
+    if (self->isa != ((EOMultiplePrimaryKeyDictionary*)aDict)->isa) {
       [NSException raise:NSInvalidArgumentException
 		   format:@"fastIsEqual: can compare only "
                            @"EOPrimaryKeyDictionary instances"];

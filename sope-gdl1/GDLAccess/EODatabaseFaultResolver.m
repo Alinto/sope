@@ -191,7 +191,7 @@
 
 - (NSString *)descriptionForObject:(id)_fault {
   return [NSString stringWithFormat:
-                   @"<Array fault %p (qualifier=%@, order=%@, channel=%@)>",
+                   @"<Array fault 0x%x (qualifier=%@, order=%@, channel=%@)>",
                    _fault, qualifier, fetchOrder, channel];
 }
 
@@ -302,7 +302,7 @@
 
 - (NSString *)descriptionForObject:(id)_fault {
   return [NSString stringWithFormat:
-                     @"<Object fault %p "
+                     @"<Object fault 0x%X "
                      @"(class=%@, entity=%@, key=%@, channel=%@)>",
                      _fault,
                      NSStringFromClass(targetClass), 

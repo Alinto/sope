@@ -410,7 +410,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
   if ((_index < list->count) == 0) {
     [NSException raise:NSRangeException
                  format:@"index %d out of range for key %@ of length %d",
-                   (int)_index, _key, list->count];
+                   _index, _key, list->count];
     return nil;
   }
 
@@ -723,7 +723,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
     if (_index > 0) {
       [NSException raise:NSRangeException
                    format:@"index %d out of range in map 0x%p", 
-                    (int)_index, self];
+                    _index, self];
       return;
     }
 
@@ -735,7 +735,7 @@ static inline unsigned __countObjectsForKey(NGHashMap *self, id _key) {
     if (!(_index < root->count)) {
       [NSException raise:NSRangeException
                    format:@"index %d out of range in map 0x%p length %d", 
-                    (int)_index, self, root->count];
+                    _index, self, root->count];
       return;
     }
     

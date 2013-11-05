@@ -66,7 +66,7 @@ static Class DataStreamClass = Nil;
   }
   if (*(Class *)_source == DataStreamClass) {
     [self release];
-    return (id)[_source retain];
+    return [_source retain];
   }
 
   if ((self = [super initWithSource:_source])) {
@@ -90,7 +90,7 @@ static Class DataStreamClass = Nil;
   }
   if (*(Class *)_source == DataStreamClass) {
     [self release];
-    return (id)[_source retain];
+    return [_source retain];
   }
 
   if ((self = [super initWithInputSource:_source])) {
@@ -109,7 +109,7 @@ static Class DataStreamClass = Nil;
   }
   if (*(Class *)_src == DataStreamClass) {
     [self release];
-    return (id)[_src retain];
+    return [_src retain];
   }
 
   if ((self = [super initWithOutputSource:_src])) {

@@ -180,8 +180,7 @@ WOMailDelivery *sharedInstance = nil;
       NSData *body;
       
       body = [(NSDictionary *)_email objectForKey:@"body"];
-      NSUInteger bytes = [body length];
-      if (fwrite([body bytes], bytes, 1, toMail) < bytes)
+      if (fwrite([body bytes], [body length], 1, toMail) < 0)
         goto failed;
     }
     fprintf(toMail, "\r\n");

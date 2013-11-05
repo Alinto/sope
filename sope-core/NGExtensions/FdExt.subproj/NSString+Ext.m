@@ -68,7 +68,7 @@
     
     if ((len = [self length]) > 0) {
         unichar  *buf;
-        NSInteger idx;
+        unsigned idx;
         
         buf = calloc(len + 1, sizeof(unichar));
         [self getCharacters:buf];

@@ -32,15 +32,15 @@
 @implementation EONull
 
 + (id)allocWithZone:(NSZone *)_zone {
-  return (EONull*)[NSNull allocWithZone:_zone];
+  return [NSNull allocWithZone:_zone];
 }
 
 + (NSNull *)null {
-  return (EONull*)[NSNull null];
+  return [NSNull null];
 }
 
 - (id)self {
-  return (EONull*)[NSNull null];
+  return [NSNull null];
 }
 
 @end

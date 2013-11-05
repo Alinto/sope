@@ -35,7 +35,6 @@
 #import "EODatabaseFaultResolver.h"
 #import "EOArrayProxy.h"
 #import "common.h"
-#import "NGExtensions/NSException+misc.h"
 
 #if NeXT_RUNTIME || APPLE_RUNTIME
 #  include <objc/objc-class.h>
@@ -79,15 +78,15 @@ typedef struct {
 		       @"to fault",
 		       NSStringFromClass([fault class]),
 #if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
-		       (int)class_getInstanceSize([self class])];
+		       class_getInstanceSize([self class])];
 #else
 			   ((Class)self)->instance_size];
 #endif
     }
     fault->faultResolver = [[EOObjectFault alloc] initWithPrimaryKey:key
         entity:entity databaseChannel:channel zone:zone 
-        targetClass:object_getClass(fault)];
-    object_setClass(fault, self);
+        targetClass:fault->isa];
+    fault->isa = self;
     
     return (EODatabaseFault *)AUTORELEASE(fault);
 }
@@ -131,7 +130,7 @@ typedef struct {
 {
   EODatabaseFault *fault;
     
-  fault = (EODatabaseFault*)[NSMutableArray allocWithZone:zone];
+  fault = [NSMutableArray allocWithZone:zone];
 
 #if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
   if (class_getInstanceSize([fault class]) < class_getInstanceSize([self class])) {
@@ -141,19 +140,19 @@ typedef struct {
         (void)[fault autorelease];
 	[NSException raise:NSInvalidArgumentException
 		     format:
-                    @"Instances from class %@ must be at least %d "
+                    @"Instances from class %s must be at least %d "
                     @"in size to fault",
                     NSStringFromClass([fault class]),
 #if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
-                    (int)class_getInstanceSize([self class])];
+                    class_getInstanceSize([self class])];
 #else
 					((Class)self)->instance_size];
 #endif
   }
   fault->faultResolver = [[EOArrayFault alloc] initWithQualifier:qualifier
         fetchOrder:fetchOrder databaseChannel:channel zone:zone 
-        targetClass:object_getClass(fault)];
-  object_setClass(fault, self);
+        targetClass:fault->isa];
+  fault->isa = self;
 
   return (NSArray *)AUTORELEASE(fault);
 }
@@ -162,7 +161,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (object_getClass(aFault) != self)
+  if (aFault->isa != self)
     return nil;
     
   return [(EODatabaseFaultResolver *)aFault->faultResolver primaryKey];
@@ -172,7 +171,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (object_getClass(aFault) != self)
+  if (aFault->isa != self)
     return nil;
 
   return [(EODatabaseFaultResolver *)aFault->faultResolver entity];
@@ -182,7 +181,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (object_getClass(aFault) != self)
+  if (aFault->isa != self)
     return nil;
     
   return [(EODatabaseFaultResolver *)aFault->faultResolver qualifier];
@@ -192,7 +191,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (object_getClass(aFault) != self)
+  if (aFault->isa != self)
     return nil;
     
   return [(EODatabaseFaultResolver *)aFault->faultResolver fetchOrder];
@@ -202,7 +201,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (object_getClass(aFault) != self)
+  if (aFault->isa != self)
     return nil;
     
   return [(EODatabaseFaultResolver *)aFault->faultResolver databaseChannel];

@@ -37,14 +37,13 @@
 #include <NGMime/NGMime.h>
 #include <NGMail/NGMail.h>
 
-// This is also wrong for the apple runtime, although it will usually work:
 #if NeXT_RUNTIME || APPLE_RUNTIME
 #  ifndef sel_eq
 #    define sel_eq(__A__,__B__) (__A__==__B__)
 #  endif
 #endif
 
-#if (__GNU_LIBOBJC__ >= 20100911) || defined(__GNUSTEP_RUNTIME__)
+#if __GNU_LIBOBJC__ >= 20100911
 #  ifndef sel_eq
 #    define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
 #  endif

@@ -9,9 +9,6 @@
 
 @class EOFaultHandler;
 
-#ifdef __clang__
-__attribute__((objc_root_class))
-#endif
 @interface EOFault
 {
   Class          isa;

@@ -44,7 +44,7 @@ static Class DataStreamClass = Nil;
   DataStreamClass   = NSClassFromString(@"NGDataStream");
 }
 
-+ (NSInteger)version {
++ (int)version {
   return [super version] + 1;
 }
 
@@ -61,7 +61,7 @@ static Class DataStreamClass = Nil;
   }
   if (*(Class *)_source == DataStreamClass) {
     [self release];
-    return (id)[_source retain];
+    return [_source retain];
   }
   if ((self = [super initWithSource:_source])) {
     unsigned size = 0;

@@ -54,7 +54,7 @@
 {
   self->fileManager = _fm
     ? [_fm retain]
-    : (id)[[NSFileManager defaultManager] retain];
+    : [[NSFileManager defaultManager] retain];
 
   self->pathStack = [[NSMutableArray alloc] init];
   self->enumStack = [[NSMutableArray alloc] init];

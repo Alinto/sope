@@ -243,8 +243,8 @@ static BOOL              ImapDebugEnabled  = NO;
 }
 
 - (void)markUnread {
-  if ([self isRead])
-    [self removeFlag:@"seen"];
+  if ([self isRead]);
+  [self removeFlag:@"seen"];
 }
 
 - (BOOL)isFlagged {
@@ -345,7 +345,7 @@ static BOOL              ImapDebugEnabled  = NO;
   return YES;
 }
 
-- (NSUInteger)hash {
+- (unsigned)hash {
   return self->uid;
 }
 

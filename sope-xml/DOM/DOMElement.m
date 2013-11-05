@@ -511,8 +511,8 @@ static NSNull *null = nil;
                      self, NSStringFromClass([self class]),
                      [self nodeName],
                      [[self parentNode] nodeName],
-                     (int)[self _numberOfAttributes],
-                     [self hasChildNodes] ? (int)[[self childNodes] length] : 0];
+                     [self _numberOfAttributes],
+                     [self hasChildNodes] ? [[self childNodes] length] : 0];
 }
 
 /* QPValues */

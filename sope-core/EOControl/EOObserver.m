@@ -21,10 +21,6 @@
 
 #include "EOObserver.h"
 #include "common.h"
-#ifdef __GNUSTEP_RUNTIME__
-#define objc_malloc(x) malloc(x)
-#define objc_free(x) free(x)
-#endif
 
 // THREAD, MT
 

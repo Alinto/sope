@@ -149,7 +149,7 @@
   The delegate can select which NGMimeBodyGenerator should de used
   for generate the given part.
 */  
-- (id<NGMimePartGenerator>)multipartBodyGenerator:(id<NGMimeBodyGenerator>)aGenerator
+- (id<NGMimePartGenerator>)multipartBodyGenerator:(id<NGMimeBodyGenerator>)
   generatorForPart:(id<NGMimePart>)_part;
 
 - (BOOL)useMimeData;
