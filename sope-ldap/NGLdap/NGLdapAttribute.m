@@ -193,7 +193,7 @@
       }
     else
       {
-        [self errorWithFormat: @"cound not convert value of %@ to string", [self attributeName]];
+        [self errorWithFormat: @"could not convert value of %@ to string", [self attributeName]];
         return nil;
       }
   }
