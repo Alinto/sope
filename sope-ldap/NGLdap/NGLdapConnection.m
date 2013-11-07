@@ -306,11 +306,11 @@ static void freeMods(LDAPMod **mods) {
 
 #ifdef LDAP_CONTROL_PASSWORDPOLICYREQUEST
 - (BOOL) bindWithMethod: (NSString *) _method
-		 binddn: (NSString *) _login
-	    credentials: (NSString *) _cred
-		   perr: (LDAPPasswordPolicyError *) _perr
-		 expire: (int *) _expire
-		  grace: (int *) _grace
+                 binddn: (NSString *) _login
+            credentials: (NSString *) _cred
+                   perr: (LDAPPasswordPolicyError *) _perr
+                 expire: (int *) _expire
+                  grace: (int *) _grace
 {
   LDAPControl **sctrlsp = NULL;
   LDAPControl *sctrls[2];
@@ -325,7 +325,7 @@ static void freeMods(LDAPMod **mods) {
   char *matched = NULL;
   char *info = NULL;
   char **refs = NULL;
-  struct berval	passwd = { 0, NULL };
+  struct berval passwd = { 0, NULL };
 
   l = [_login UTF8String];
   p = LDAPUseLatin1Creds
@@ -389,18 +389,18 @@ static void freeMods(LDAPMod **mods) {
     {
       ctrl = ldap_find_control(LDAP_CONTROL_PASSWORDPOLICYRESPONSE, ctrls);
       if (ctrl)
-	{
-	  rc = ldap_parse_passwordpolicy_control(self->handle, ctrl, _expire, _grace, _perr);
-	  
-	  if (rc == LDAP_SUCCESS)
-	    {
-	      [self logWithFormat: @"bind - policy values: %d %d %d - bound: %d", *_expire, *_grace, *_perr, self->flags.isBound];
-	    }
-	  else
-	    [self logWithFormat: @"bind - ldap_parse_passwordpolicy call failed"];
-	}
+        {
+          rc = ldap_parse_passwordpolicy_control(self->handle, ctrl, _expire, _grace, _perr);
+
+          if (rc == LDAP_SUCCESS)
+            {
+              [self logWithFormat: @"bind - policy values: %d %d %d - bound: %d", *_expire, *_grace, *_perr, self->flags.isBound];
+            }
+          else
+            [self logWithFormat: @"bind - ldap_parse_passwordpolicy call failed"];
+        }
       else
-	[self logWithFormat: @"bind - ldap_find_control call failed"];
+        [self logWithFormat: @"bind - ldap_find_control call failed"];
 
       ldap_controls_free(ctrls);
     }
@@ -418,9 +418,9 @@ static void freeMods(LDAPMod **mods) {
 // will fail.
 // 
 - (BOOL) changePasswordAtDn: (NSString *) _dn
-		oldPassword: (NSString *) _oldPassword
-		newPassword: (NSString *) _newPassword
-		       perr: (LDAPPasswordPolicyError *) _perr
+                oldPassword: (NSString *) _oldPassword
+                newPassword: (NSString *) _newPassword
+                       perr: (LDAPPasswordPolicyError *) _perr
   
 {
   char *p;
@@ -437,164 +437,162 @@ static void freeMods(LDAPMod **mods) {
       rc = ldap_simple_bind_s(self->handle, user, p);
 
       if (rc == LDAP_SUCCESS)
-	{
-	  struct berval newpw = { 0, NULL };
-	  struct berval oldpw = { 0, NULL };
-	  struct berval bv = {0, NULL};
-	  struct berval *retdata = NULL;
+        {
+          struct berval newpw = { 0, NULL };
+          struct berval oldpw = { 0, NULL };
+          struct berval bv = {0, NULL};
+          struct berval *retdata = NULL;
 
-	  LDAPControl *sctrls[2];
-	  LDAPControl **ctrls;
-	  LDAPControl sctrl[2];
-	  LDAPControl c, *ctrl;
-	  LDAPMessage *result;
+          LDAPControl *sctrls[2];
+          LDAPControl **ctrls;
+          LDAPControl sctrl[2];
+          LDAPControl c, *ctrl;
+          LDAPMessage *result;
 
-	  BerElement  *ber = NULL;
+          BerElement  *ber = NULL;
 
-	  char *matcheddn = NULL, *retoid = NULL, *text = NULL, **refs = NULL;
-	  int idd, grace, expire, code;
+          char *matcheddn = NULL, *retoid = NULL, *text = NULL, **refs = NULL;
+          int idd, grace, expire, code;
 
-	  self->flags.isBound = YES;
-	  code = LDAP_OTHER;
-	  
-	  newpw.bv_val = LDAPUseLatin1Creds ? (char *)[_newPassword  cString] : (char *)[_newPassword  UTF8String];
-	  newpw.bv_len = strlen(newpw.bv_val);
-	  
-	  oldpw.bv_val = p;
-	  oldpw.bv_len = strlen(p);
-	  
-	  ber = ber_alloc_t(LBER_USE_DER);
-	  
-	  if (ber == NULL)
-	    return NO;
-	  
-	  ber_printf(ber, "{" /*}*/ );	    
-	  ber_printf(ber, "ts", LDAP_TAG_EXOP_MODIFY_PASSWD_ID, user);
-	  ber_printf(ber, "tO", LDAP_TAG_EXOP_MODIFY_PASSWD_OLD, &oldpw);
-	  ber_printf(ber, "tO", LDAP_TAG_EXOP_MODIFY_PASSWD_NEW, &newpw);
-	  ber_printf(ber, /*{*/ "N}" );
-	  
-	  rc = ber_flatten2(ber, &bv, 0 );
-	  
-	  if (rc < 0)
-	    {
-	      [self logWithFormat: @"change password - ber_flatten2 call failed"];
-	      ber_free(ber, 1);
-	      return NO;
-	    }
-	  
-	  // Everything is alright...
-	  *_perr = -1;
+          self->flags.isBound = YES;
+          code = LDAP_OTHER;
 
-	  c.ldctl_oid = LDAP_CONTROL_PASSWORDPOLICYREQUEST;
-	  c.ldctl_value.bv_val = NULL;
-	  c.ldctl_value.bv_len = 0;
-	  c.ldctl_iscritical = 0;
-	  sctrl[0] = c;
-	  sctrls[0] = &sctrl[0];
-	  sctrls[1] = NULL;	  
-	  
-	  rc = ldap_set_option(self->handle, LDAP_OPT_SERVER_CONTROLS, sctrls);
+          newpw.bv_val = LDAPUseLatin1Creds ? (char *)[_newPassword  cString] : (char *)[_newPassword  UTF8String];
+          newpw.bv_len = strlen(newpw.bv_val);
 
-	  if (rc != LDAP_OPT_SUCCESS)
-	    {
-	      [self logWithFormat: @"change password - ldap_set_option call failed"];
-	      ber_free(ber, 1);
-	      return NO;
-	    }
+          oldpw.bv_val = p;
+          oldpw.bv_len = strlen(p);
 
-	  rc = ldap_extended_operation(self->handle,
-				       LDAP_EXOP_MODIFY_PASSWD, &bv,
-				       NULL, NULL, &idd);
-	  
-	  ber_free(ber, 1);
-	  
-	  if (rc != LDAP_SUCCESS )
-	    {
-	      [self logWithFormat: @"change password - ldap_extended_operation call failed"];
-	      return NO;
-	    }
-	  
-	  rc = ldap_result(self->handle, LDAP_RES_ANY, LDAP_MSG_ALL, NULL, &result);
+          ber = ber_alloc_t(LBER_USE_DER);
 
-	  if (rc < 0)
-	    {
-	      [self logWithFormat: @"change password - ldap_result call failed"];
-	      return NO;
-	    }
-	  
-	  rc = ldap_parse_result(self->handle, result, &code, &matcheddn, &text, &refs, &ctrls, 0 );
-	 
-	  if (rc != LDAP_SUCCESS)
-	    {
-	      [self logWithFormat: @"change password - ldap_parse_result call failed, rc = %d, code = %d, matcheddn = %s, text = %s", rc, code, matcheddn, text];
-	      ber_memfree(text);
-	      ber_memfree(matcheddn);
-	      ber_memvfree((void **) refs);
-	      free(ctrls);
-	      return NO;
-	    }
+          if (ber == NULL)
+            return NO;
 
-	  rc = ldap_parse_extended_result(self->handle, result, &retoid, &retdata, 1);
-	  if (rc != LDAP_SUCCESS)
-	    {
-	      [self logWithFormat: @"change password - ldap_parse_extended result call failed"];
-	      ber_memfree(text);
-	      ber_memfree(matcheddn);
-	      ber_memvfree((void **) refs);
-	      ber_memfree(retoid);
-	      ber_bvfree(retdata);
-	      free(ctrls);
-	      return NO;
-	    }
+          ber_printf(ber, "{" /*}*/ );	    
+          ber_printf(ber, "ts", LDAP_TAG_EXOP_MODIFY_PASSWD_ID, user);
+          ber_printf(ber, "tO", LDAP_TAG_EXOP_MODIFY_PASSWD_OLD, &oldpw);
+          ber_printf(ber, "tO", LDAP_TAG_EXOP_MODIFY_PASSWD_NEW, &newpw);
+          ber_printf(ber, /*{*/ "N}" );
 
-	  ctrl = ldap_find_control(LDAP_CONTROL_PASSWORDPOLICYRESPONSE, ctrls);
-	  
-	  if (ctrl)
-	    {
-	      rc = ldap_parse_passwordpolicy_control(self->handle, ctrl, &expire, &grace, _perr);
-	      
-	      if (rc == LDAP_SUCCESS && *_perr == PP_noError)
-		{
-		  [self logWithFormat: @"change password - policy values: %d %d %d", expire, grace, *_perr];
-		}
-	      else
-		{
-		  [self logWithFormat: @"change password - ldap_parse_passwordpolicy call failed or error during password change: %d", *_perr];
-		  ber_memfree(text);
-		  ber_memfree(matcheddn);
-		  ber_memvfree((void **) refs);
-		  ber_memfree(retoid);
-		  ber_bvfree(retdata);
-		  free(ctrls);
-		  return NO;
-		}
-	    }
-	  else
-	    {
-	      // Ending up here doesn't mean that things failed. It could simply be caused by the
-	      // fact that the password change was a success but no policy control object
-	      // could be found.
-	      [self logWithFormat: @"change password - ldap_find_control call failed"];
-	    }
-	  
-	  ber_memfree(text);
-	  ber_memfree(matcheddn);
-	  ber_memvfree((void **) refs);
-	  ber_memfree(retoid);
-	  ber_bvfree(retdata);
-	  free(ctrls);
+          rc = ber_flatten2(ber, &bv, 0 );
 
-	  return YES;
-	}
+          if (rc < 0)
+            {
+              [self logWithFormat: @"change password - ber_flatten2 call failed"];
+              ber_free(ber, 1);
+              return NO;
+            }
+
+          // Everything is alright...
+          *_perr = -1;
+
+          c.ldctl_oid = LDAP_CONTROL_PASSWORDPOLICYREQUEST;
+          c.ldctl_value.bv_val = NULL;
+          c.ldctl_value.bv_len = 0;
+          c.ldctl_iscritical = 0;
+          sctrl[0] = c;
+          sctrls[0] = &sctrl[0];
+          sctrls[1] = NULL;	  
+
+          rc = ldap_set_option(self->handle, LDAP_OPT_SERVER_CONTROLS, sctrls);
+
+          if (rc != LDAP_OPT_SUCCESS)
+            {
+              [self logWithFormat: @"change password - ldap_set_option call failed"];
+              ber_free(ber, 1);
+              return NO;
+            }
+
+          rc = ldap_extended_operation(self->handle,
+                                       LDAP_EXOP_MODIFY_PASSWD, &bv,
+                                       NULL, NULL, &idd);
+
+          ber_free(ber, 1);
+
+          if (rc != LDAP_SUCCESS )
+            {
+              [self logWithFormat: @"change password - ldap_extended_operation call failed"];
+              return NO;
+            }
+
+          rc = ldap_result(self->handle, LDAP_RES_ANY, LDAP_MSG_ALL, NULL, &result);
+
+          if (rc < 0)
+            {
+              [self logWithFormat: @"change password - ldap_result call failed"];
+              return NO;
+            }
+
+          rc = ldap_parse_result(self->handle, result, &code, &matcheddn, &text, &refs, &ctrls, 0 );
+
+          if (rc != LDAP_SUCCESS)
+            {
+              [self logWithFormat: @"change password - ldap_parse_result call failed, rc = %d, code = %d, matcheddn = %s, text = %s", rc, code, matcheddn, text];
+              ber_memfree(text);
+              ber_memfree(matcheddn);
+              ber_memvfree((void **) refs);
+              free(ctrls);
+              return NO;
+            }
+
+          rc = ldap_parse_extended_result(self->handle, result, &retoid, &retdata, 1);
+          if (rc != LDAP_SUCCESS)
+            {
+              [self logWithFormat: @"change password - ldap_parse_extended result call failed"];
+              ber_memfree(text);
+              ber_memfree(matcheddn);
+              ber_memvfree((void **) refs);
+              ber_memfree(retoid);
+              ber_bvfree(retdata);
+              free(ctrls);
+              return NO;
+            }
+
+          ctrl = ldap_find_control(LDAP_CONTROL_PASSWORDPOLICYRESPONSE, ctrls);
+
+          if (ctrl)
+            {
+              rc = ldap_parse_passwordpolicy_control(self->handle, ctrl, &expire, &grace, _perr);
+
+              if (rc == LDAP_SUCCESS && *_perr == PP_noError)
+                {
+                  [self logWithFormat: @"change password - policy values: %d %d %d", expire, grace, *_perr];
+                }
+              else
+                {
+                  [self logWithFormat: @"change password - ldap_parse_passwordpolicy call failed or error during password change: %d", *_perr];
+                  ber_memfree(text);
+                  ber_memfree(matcheddn);
+                  ber_memvfree((void **) refs);
+                  ber_memfree(retoid);
+                  ber_bvfree(retdata);
+                  free(ctrls);
+                  return NO;
+                }
+            }
+          else
+            {
+              // Ending up here doesn't mean that things failed. It could simply be caused by the
+              // fact that the password change was a success but no policy control object
+              // could be found.
+              [self logWithFormat: @"change password - ldap_find_control call failed"];
+            }
+
+          ber_memfree(text);
+          ber_memfree(matcheddn);
+          ber_memvfree((void **) refs);
+          ber_memfree(retoid);
+          ber_bvfree(retdata);
+          free(ctrls);
+
+          return YES;
+    }
     }
   
   return NO;
 }
 
-#endif
-
-/* running queries */
+#endif /* LDAP_CONTROL_PASSWORDPOLICYREQUEST */
 
 - (void)setQueryTimeLimit:(NSTimeInterval)_timeLimit {
   self->timeLimit = _timeLimit;
@@ -609,6 +607,54 @@ static void freeMods(LDAPMod **mods) {
 - (unsigned int)querySizeLimit {
   return self->sizeLimit;
 }
+
+/* password operations */
+- (BOOL) changeADPasswordAtDn: (NSString *) _dn
+                oldPassword: (NSString *) _oldPassword
+                newPassword: (NSString *) _newPassword
+{
+ /* Change a user password in Active Directory (or Samba4) following these
+  * guidelines: http://support.microsoft.com/kb/269190
+  *             http://msdn.microsoft.com/en-us/library/cc223248.aspx
+  */
+  BOOL didChange;
+  NSArray *mods;
+  NSData *dataOldPassword, *dataNewPassword;
+  NGLdapAttribute *attrOldPassword, *attrNewPassword;
+  NGLdapModification *modPasswordDelete, *modPasswordAdd;
+
+  /* Passwords must be quoted and UTF16 encoded */
+  dataOldPassword = [[NSString stringWithFormat: @"\"%@\"", _oldPassword]
+                       dataUsingEncoding: NSUTF16LittleEndianStringEncoding];
+  dataNewPassword = [[NSString stringWithFormat: @"\"%@\"", _newPassword]
+                       dataUsingEncoding: NSUTF16LittleEndianStringEncoding];
+
+  attrOldPassword = [[NGLdapAttribute alloc] initWithAttributeName: @"unicodePwd"
+                      values: [NSArray arrayWithObject: dataOldPassword]];
+  [attrOldPassword autorelease];
+
+  attrNewPassword = [[NGLdapAttribute alloc] initWithAttributeName: @"unicodePwd"
+                      values: [NSArray arrayWithObject: dataNewPassword]];
+  [attrNewPassword autorelease];
+
+  /* Password delete op must contain quoted old password */
+  modPasswordDelete = [NGLdapModification deleteModification: attrOldPassword];
+  modPasswordAdd = [NGLdapModification addModification: attrNewPassword];
+  mods = [NSArray arrayWithObjects: modPasswordDelete, modPasswordAdd, nil];
+  NS_DURING {
+    didChange = [self modifyEntryWithDN: _dn
+                                changes: mods];
+  }
+  NS_HANDLER {
+    [self errorWithFormat: @"Couldn't change password for %@", _dn];
+    [localException raise];
+  }
+  NS_ENDHANDLER;
+
+  return didChange;
+}
+
+/* running queries */
 
 - (NSEnumerator *)_searchAtBaseDN:(NSString *)_base
   qualifier:(EOQualifier *)_q
@@ -640,9 +686,9 @@ static void freeMods(LDAPMod **mods) {
     attrs = NULL;
   
   if (LDAPDebugEnabled) {
-    NSLog(@"%s: search with at base %s filter %s for attrs %s\n",
-	  __PRETTY_FUNCTION__, _base, filter,
-	  _attributes);
+    NSLog(@"%s: search at base '%@' filter '%@' for attrs '%@'\n",
+            __PRETTY_FUNCTION__, _base, filter,
+            [_attributes componentsJoinedByString: @","]);
   }
 
   /* apply limits */
@@ -738,7 +784,7 @@ static void freeMods(LDAPMod **mods) {
     if (self->isCacheEnabled) {
 #if LDAP_API_VERSION > 2000
       NSLog(@"WARNING(%s): setting cache-timeout unsupported on the client "
-	    @"library version!", __PRETTY_FUNCTION__);
+            @"library version!", __PRETTY_FUNCTION__);
 #else
       ldap_disable_cache(self->handle);
       ldap_enable_cache(self->handle, _to, [self cacheMaxMemoryUsage]);
@@ -757,7 +803,7 @@ static void freeMods(LDAPMod **mods) {
     if (self->isCacheEnabled) {
 #if LDAP_API_VERSION > 2000
       NSLog(@"WARNING(%s): setting maxmem usage unsupported on the client "
-	    @"library version!", __PRETTY_FUNCTION__);
+            @"library version!", __PRETTY_FUNCTION__);
 #else
       ldap_disable_cache(self->handle);
       ldap_enable_cache(self->handle, [self cacheTimeout], _maxMem);
@@ -773,7 +819,7 @@ static void freeMods(LDAPMod **mods) {
   if (_flag) {
 #if LDAP_API_VERSION > 2000
       NSLog(@"WARNING(%s): setting cache-usage unsupported on the client "
-	    @"library version!", __PRETTY_FUNCTION__);
+            @"library version!", __PRETTY_FUNCTION__);
 #else
     ldap_enable_cache(self->handle,
                       [self cacheTimeout], [self cacheMaxMemoryUsage]);
@@ -783,7 +829,7 @@ static void freeMods(LDAPMod **mods) {
   else {
 #if LDAP_API_VERSION > 2000
       NSLog(@"WARNING(%s): setting cache-usage unsupported on the client "
-	    @"library version!", __PRETTY_FUNCTION__);
+            @"library version!", __PRETTY_FUNCTION__);
 #else
     ldap_disable_cache(self->handle);
 #endif
@@ -889,7 +935,7 @@ static void freeMods(LDAPMod **mods) {
   
   if (msgid == -1) {
     [[self _exceptionForErrorCode:
-	     0 /* was in v1: ((LDAP *)self->handle)->ld_errno */
+           0 /* was in v1: ((LDAP *)self->handle)->ld_errno */
            operation:@"add"
            userInfo:[NSDictionary dictionaryWithObject:_entry forKey:@"entry"]]
            raise];
@@ -1049,7 +1095,7 @@ static void freeMods(LDAPMod **mods) {
   
   if (res != LDAP_SUCCESS) {
     [[self _exceptionForErrorCode:
-	     res /* was in v1: ((LDAP *)self->handle)->ld_errno */
+           res /* was in v1: ((LDAP *)self->handle)->ld_errno */
            operation:@"modify"
            userInfo:[NSDictionary dictionaryWithObject:_dn forKey:@"dn"]]
            raise];
@@ -1069,13 +1115,17 @@ static void freeMods(LDAPMod **mods) {
   return nil;
 }
 
-- (NGLdapEntry *)rootDSE {
+- (NGLdapEntry *)rootDSEWithAttributes: (NSArray *) attributes {
   NGLdapEntry *e;
   
-  if ((e = [self entryAtDN:@"" attributes:nil]))
+  if ((e = [self entryAtDN:@"" attributes: attributes]))
     return e;
   
   return nil;
+}
+
+- (NGLdapEntry *)rootDSE {
+  return [self rootDSEWithAttributes: nil];
 }
 
 - (NGLdapEntry *)configEntry {
@@ -1118,6 +1168,41 @@ static void freeMods(LDAPMod **mods) {
     [ma addObject:value];
   }
   return ma;
+}
+
+- (NSArray*) _supportedCapabilities
+{
+  NGLdapEntry    *e;
+  NSArray *reqAttrs, *resAttrs;
+
+  resAttrs = nil;
+  reqAttrs = [NSArray arrayWithObject: @"supportedCapabilities"];
+  if ((e = [self rootDSEWithAttributes: reqAttrs])) {
+    resAttrs = [[e attributeWithName:@"supportedCapabilities"] allStringValues];
+  }
+
+  return resAttrs;
+}
+
+- (BOOL) isADCompatible
+{
+ /*
+  * Check that the LDAP server is Active Directory compatible (samba)
+  * by checking if it supports LDAP_CAP_ACTIVE_DIRECTORY_OID in its supportedCapabilities
+  *   http://msdn.microsoft.com/en-us/library/cc223360.aspx
+  */
+  BOOL rc;
+  NSArray *caps;
+
+  rc = NO;
+  caps = [self _supportedCapabilities];
+
+  // LDAP_CAP_ACTIVE_DIRECTORY_OID = 1.2.840.113556.1.4.800
+  // LDAP_CAP_ACTIVE_DIRECTORY_LDAP_INTEG_OID = 1.2.840.113556.1.4.1791
+  if ([caps containsObject: @"1.2.840.113556.1.4.800"])
+    rc = YES;
+
+  return rc;
 }
 
 /* description */
@@ -1180,23 +1265,23 @@ static void freeMods(LDAPMod **mods) {
     
     NS_DURING {
       if (LDAPInitialBindSpecific) {
-	// TODO: can't we just check whether the DN is set?
-	if (LDAPDebugEnabled) {
-	  [self logWithFormat:
-		  @"  attempt to do a simple, authenticated bind "
-		  @"(dn=%@,pwd=%s) ..",
-		  LDAPInitialBindDN, 
-		  [LDAPInitialBindPW length] > 0 ? "yes":"no"];
-	}
-	
-        didBind = [self bindWithMethod:@"simple" binddn:LDAPInitialBindDN
-			credentials:LDAPInitialBindPW];
+          // TODO: can't we just check whether the DN is set?
+          if (LDAPDebugEnabled) {
+              [self logWithFormat:
+                @"  attempt to do a simple, authenticated bind "
+                @"(dn=%@,pwd=%s) ..",
+                LDAPInitialBindDN, 
+                [LDAPInitialBindPW length] > 0 ? "yes":"no"];
+          }
+
+          didBind = [self bindWithMethod:@"simple" binddn:LDAPInitialBindDN
+            credentials:LDAPInitialBindPW];
       }
       else {
-	if (LDAPDebugEnabled)
-	  [self logWithFormat:@"  attempt to do a simple, anonymous bind .."];
-	
-        didBind = [self bindWithMethod:@"simple" binddn:@"" credentials:@""];
+          if (LDAPDebugEnabled)
+            [self logWithFormat:@"  attempt to do a simple, anonymous bind .."];
+
+          didBind = [self bindWithMethod:@"simple" binddn:@"" credentials:@""];
       }
     }
     NS_HANDLER

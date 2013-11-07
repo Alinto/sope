@@ -554,22 +554,36 @@ static void _parseUserAgent(NGHttpUserAgent *self) {
 
     if (data) {
       char *str = (char *)[data bytes];
-      NSUInteger len = [data length];
+      NSInteger len = [data length];
       char *start = str;
 
       while ((*str != '\0') && (*str != ':') && (len > 0)) {
         str++;
         len--;
       }
-      self->user = 
-        [[NSString alloc] initWithCString:start length:(str - start)];
+      self->user = [[NSString alloc] initWithBytes: start
+                                            length: (str - start)
+                                          encoding: NSUTF8StringEncoding];
+      if (!self->user)
+        /* fallback to latin1 - matches what stringByDecodingBase64 does */
+        self->user = [[NSString alloc] initWithBytes: start
+                                              length: (str - start)
+                                            encoding: NSISOLatin1StringEncoding];
       
       if (self->user) {
         // skip ':'
         str++; len--;
         
         if (len > 0) {
-          self->password = [[NSString alloc] initWithCString:str length:len];
+          self->password =
+                   [[NSString alloc] initWithBytes: str
+                                            length: len
+                                          encoding: NSUTF8StringEncoding];
+          if (!self->password)
+            self->password =
+                     [[NSString alloc] initWithBytes: str
+                                              length: len
+                                            encoding: NSISOLatin1StringEncoding];
         }
       }
 

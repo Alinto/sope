@@ -120,10 +120,13 @@
 
 - (id)initWithSocket:(id<NGActiveSocket>)_socket { // designated initializer
   if ((self = [super init])) {
+    BOOL debug;
     self->socket = [_socket retain];
     NSAssert(self->socket, @"invalid socket parameter");
 
-    [self setDebuggingEnabled:YES];
+    debug = [[NSUserDefaults standardUserDefaults]
+                boolForKey:@"ImapDebugEnabled"];
+    [self setDebuggingEnabled: debug];
 
     self->connection = 
       [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource:_socket];

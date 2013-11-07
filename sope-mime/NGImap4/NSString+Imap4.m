@@ -246,4 +246,22 @@ static unsigned int _decodeOfModifiedUTF7(unsigned char *_source, unichar *resul
   return processedSrc;
 }
 
+- (BOOL) is7bitSafe
+{
+  int i, len;
+
+  // We search for a non-ASCII character.
+  len = [self length];
+
+  for (i = 0; i < len; i++)
+    {
+      if ([self characterAtIndex: i] > 0x007E)
+        {
+          return NO;
+        }
+    }
+
+  return YES;
+}
+
 @end /* NSString(Imap4) */

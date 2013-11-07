@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
+  Copyright (C) 2013 Inverse inc.
 
   This file is part of SOPE.
 
@@ -29,6 +30,7 @@
 /* WARNING: this should encode/decode to NSData !!! */
 - (NSString *)stringByEncodingImap4FolderName;
 - (NSString *)stringByDecodingImap4FolderName;
+- (BOOL) is7bitSafe; // From Pantomime
 
 @end
 

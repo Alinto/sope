@@ -77,6 +77,7 @@
 #define WEUA_Cook_XMLRPCdotNET 46
 #define WEUA_WDFS              47
 #define WEUA_ZideOne_Outlook   48
+#define WEUA_2DO               49
 
 #define WEOS_UNKNOWN   0
 #define WEOS_WINDOWS   1
@@ -331,9 +332,11 @@
   }
   else if (strstr(ua, "DAVAccess")
            || strstr(ua, "CardDAVPlugin")
+           || strstr(ua, "CalendarAgent")
            || strstr(ua, "CalendarStore")
            || strstr(ua, "CoreDAV/")
-           || ((strstr(ua, "AddressBook") || strstr(ua, "Calendar")) && strstr(ua, "Mac OS X"))) {
+           || ((strstr(ua, "AddressBook") || strstr(ua, "Calendar")) && strstr(ua, "Mac OS X"))
+	   ) {
     /* Apple MacOSX 10.2.1 / iCal 1.0 DAV Access Framework */
     self->browser = WEUA_AppleDAVAccess;
   }
@@ -404,6 +407,9 @@
   }
   else if (strstr(ua, "XML-RPC.NET")) {
     self->browser = WEUA_Cook_XMLRPCdotNET;
+  }
+  else if (strstr(ua, "2Do")) {
+    self->browser = WEUA_2DO;
   }
   else {
     /* unknown browser */

@@ -103,6 +103,8 @@ static BOOL debugOn = NO;
   BOOL         doEscape;
   NSString     *entityURL;
   BOOL         isBrief = YES; // do not encode "sub-errors", just omit the item
+  NSAutoreleasePool *pool;
+  int i;
   
   [self debugWithFormat:@"performing flat query: %@", _fs];
 
@@ -132,11 +134,19 @@ static BOOL debugOn = NO;
     
   queriedAttrNames = [_fs selectedWebDAVPropertyNames];
   
+  pool = [[NSAutoreleasePool alloc] init];
+  i=0;
   while ((childKey = [[childKeys nextObject] stringValue]) != nil) {
     NSDictionary *rec;
     NSException  *e;
     NSString     *childHref;
     id child = nil;
+
+    if (i % 10 == 0) {
+      RELEASE(pool);
+      pool = [[NSAutoreleasePool alloc] init];
+    }
+    i++;
       
     /* 
        TODO: question of the week, is it faster to filter on the record
@@ -239,6 +249,8 @@ static BOOL debugOn = NO;
     [ma addObject:rec];
     [rec release];
   }
+
+  RELEASE(pool);
   
   /* sort result (note: you must select anything you want to sort ...) */
   if ((orderings = [_fs sortOrderings]))

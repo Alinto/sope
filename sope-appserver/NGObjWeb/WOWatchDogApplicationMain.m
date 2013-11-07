@@ -74,6 +74,11 @@ int WOWatchDogApplicationMain
 #include <time.h>
 #include <string.h>
 
+#define OUT_OF_CHILD_SLEEPTIME 250 /* ~0.25ms */
+/* We sleep longer than that so the log interval is not very accurate.
+ * Should be good enough to avoid spamming the logs */
+#define OUT_OF_CHILD_LOG_INTERVAL (1000000 / OUT_OF_CHILD_SLEEPTIME) /* 1 sec */
+
 static NSTimeInterval respawnDelay; /* seconds */
 static const char *pidFile = NULL;
 NSInteger watchDogRequestTimeout;
@@ -147,6 +152,8 @@ typedef enum {
   NSMutableArray *children;
   NSMutableArray *readyChildren;
   NSMutableArray *downChildren;
+
+  long outOfChildSleepCount;
 }
 
 + (id) sharedWatchDog;
@@ -418,9 +425,9 @@ typedef enum {
 }
 
 - (void) receivedEvent: (void*)data
-		  type: (RunLoopEventType)type
-		 extra: (void*)extra
-	       forMode: (NSString*)mode
+                  type: (RunLoopEventType)type
+                 extra: (void*)extra
+               forMode: (NSString*)mode
 {
   if ([controlSocket isAlive])
     [self readMessage];
@@ -459,6 +466,7 @@ typedef enum {
       shouldTerminate = NO;
       pendingSIGHUP = 0;
 
+      outOfChildSleepCount = 0;
       numberOfChildren = 0;
       children = [[NSMutableArray alloc] initWithCapacity: 10];
       readyChildren = [[NSMutableArray alloc] initWithCapacity: 10];
@@ -511,9 +519,9 @@ typedef enum {
 }
 
 - (void) receivedEvent: (void*)data
-		  type: (RunLoopEventType)type
-		 extra: (void*)extra
-	       forMode: (NSString*)mode
+                  type: (RunLoopEventType)type
+                 extra: (void*)extra
+               forMode: (NSString*)mode
 {
   int nextId;
   WOWatchDogChild *child;
@@ -521,10 +529,19 @@ typedef enum {
 
   max = [readyChildren count];
   if (max > 0) {
+    outOfChildSleepCount = 0;
     nextId = max - 1;
     child = [readyChildren objectAtIndex: nextId];
     [readyChildren removeObjectAtIndex: nextId];
     [child notify];
+  }
+  else {
+    /* we're out of ready children, sleep a bit to avoid hogging the CPU */
+    usleep(OUT_OF_CHILD_SLEEPTIME);
+    if (outOfChildSleepCount % OUT_OF_CHILD_LOG_INTERVAL == 0) {
+      [self errorWithFormat: @"No child available to handle incoming request!"];
+    }
+    outOfChildSleepCount++;
   }
 }
 
@@ -912,7 +929,7 @@ typedef enum {
       }
 
       if (shouldTerminate && pidFile)
-	unlink(pidFile);
+        unlink(pidFile);
 
       // [self logWithFormat: @"watchdog loop"];
       NS_DURING {
@@ -1033,7 +1050,7 @@ int WOWatchDogApplicationMain
         rc = [[WOWatchDog sharedWatchDog] run: appName argc: argc argv: argv];
     }
     else {
-      [ud errorWithFormat: @"unable to open pid file: %@", pidFile];
+      [ud errorWithFormat: @"unable to open pid file: %s", pidFile];
       rc = -1;
     }
   }
