@@ -1,3 +1,557 @@
+commit 59e66e3a7ecdf06f849a5e581572b1c6bbc2710d
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Wed Nov 6 08:17:43 2013 -0500
+
+    Typo in error msg: cound -> could
+
+M	sope-ldap/NGLdap/NGLdapAttribute.m
+
+commit 87b9400affc61f48e3dfe24ff56500875eb9312b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Nov 5 15:08:59 2013 -0500
+
+    Reverted patch from David Chisnall to bring back Lucid to a working state.
+
+M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
+M	sope-appserver/NGObjWeb/Associations/WOScriptAssociation.m
+M	sope-appserver/NGObjWeb/Associations/WOValueAssociation.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOComponentReference.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOGenericElement.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOHyperlink.m
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFieldParser.m
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpResponse.h
+M	sope-appserver/NGObjWeb/NGHttp/NGUrlFormCoder.m
+M	sope-appserver/NGObjWeb/NSObject+WO.m
+M	sope-appserver/NGObjWeb/SoObjects/SoClassSecurityInfo.h
+M	sope-appserver/NGObjWeb/SoObjects/SoClassSecurityInfo.m
+M	sope-appserver/NGObjWeb/SoObjects/SoComponent.m
+M	sope-appserver/NGObjWeb/SoObjects/SoDefaultRenderer.m
+M	sope-appserver/NGObjWeb/Templates/WOComponentScriptPart.m
+M	sope-appserver/NGObjWeb/Templates/WODParser.m
+M	sope-appserver/NGObjWeb/Templates/WOHTMLParser.m
+M	sope-appserver/NGObjWeb/Templates/WOTemplate.m
+M	sope-appserver/NGObjWeb/Templates/WOxElemBuilder.m
+M	sope-appserver/NGObjWeb/WOComponent+Sync.m
+M	sope-appserver/NGObjWeb/WOComponent.m
+M	sope-appserver/NGObjWeb/WOHTTPConnection.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WORequest+Adaptor.m
+M	sope-appserver/NGObjWeb/WOMailDelivery.m
+M	sope-appserver/NGObjWeb/WOResponse.m
+M	sope-appserver/NGObjWeb/WOSessionStore.m
+M	sope-appserver/NGObjWeb/WOSimpleHTTPParser.m
+M	sope-appserver/NGObjWeb/WOStatisticsStore.m
+M	sope-appserver/NGObjWeb/WebDAV/SaxDAVHandler.m
+M	sope-appserver/NGObjWeb/WebDAV/SoDAVSQLParser.h
+M	sope-appserver/NGObjWeb/WebDAV/SoDAVSQLParser.m
+M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
+M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVValue.m
+M	sope-appserver/NGObjWeb/_WOStringTable.m
+M	sope-appserver/NGObjWeb/common.h
+M	sope-appserver/WEExtensions/JSStringTable.m
+M	sope-appserver/WEExtensions/WEMonthOverview.m
+M	sope-appserver/WEExtensions/WEResourceKey.m
+M	sope-appserver/WEExtensions/WEResourceManager.m
+M	sope-appserver/WEExtensions/WETableCalcMatrix.h
+M	sope-appserver/WEExtensions/WETableCalcMatrix.m
+M	sope-appserver/WEExtensions/WETableMatrix.m
+M	sope-appserver/WEExtensions/WETableView/WETableView.m
+M	sope-appserver/WOExtensions/WOTabPanel.m
+M	sope-core/EOControl/EOFetchSpecification.m
+M	sope-core/EOControl/EOGenericRecord.m
+M	sope-core/EOControl/EOGlobalID.m
+M	sope-core/EOControl/EOKeyComparisonQualifier.m
+M	sope-core/EOControl/EOKeyGlobalID.m
+M	sope-core/EOControl/EOKeyValueCoding.m
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EONotQualifier.m
+M	sope-core/EOControl/EONull.m
+M	sope-core/EOControl/EOObserver.m
+M	sope-core/EOControl/EOOrQualifier.m
+M	sope-core/EOControl/EOQualifierParser.m
+M	sope-core/EOControl/EOSQLParser.h
+M	sope-core/EOControl/EOSQLParser.m
+M	sope-core/EOControl/EOSortOrdering.m
+M	sope-core/EOControl/EOValidation.m
+M	sope-core/EOControl/NSArray+EOQualifier.m
+M	sope-core/NGExtensions/EOExt.subproj/EOFetchSpecification+plist.m
+M	sope-core/NGExtensions/EOExt.subproj/EOKeyMapDataSource.m
+M	sope-core/NGExtensions/EOExt.subproj/EOQualifier+CtxEval.m
+M	sope-core/NGExtensions/FdExt.subproj/NGPropertyListParser.m
+M	sope-core/NGExtensions/FdExt.subproj/NSException+misc.m
+M	sope-core/NGExtensions/FdExt.subproj/NSObject+Logs.m
+M	sope-core/NGExtensions/FdExt.subproj/NSObject+Values.m
+M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
+M	sope-core/NGExtensions/FdExt.subproj/NSSet+enumerator.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Escaping.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Ext.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+misc.m
+M	sope-core/NGExtensions/NGBitSet.m
+M	sope-core/NGExtensions/NGBundleManager.m
+M	sope-core/NGExtensions/NGCalendarDateRange.m
+M	sope-core/NGExtensions/NGDirectoryEnumerator.m
+M	sope-core/NGExtensions/NGHashMap.m
+M	sope-core/NGExtensions/NGLogging.subproj/NGLogEventDetailedFormatter.m
+M	sope-core/NGExtensions/NGLogging.subproj/NGLoggerManager.m
+M	sope-core/NGExtensions/NGResourceLocator.m
+M	sope-core/NGExtensions/NGStack.m
+M	sope-core/NGStreams/NGActiveSocket.m
+M	sope-core/NGStreams/NGBufferedStream.m
+M	sope-core/NGStreams/NGByteBuffer.m
+M	sope-core/NGStreams/NGByteCountStream.m
+M	sope-core/NGStreams/NGCTextStream.m
+M	sope-core/NGStreams/NGConcreteStreamFileHandle.m
+M	sope-core/NGStreams/NGLocalSocketAddress.m
+M	sope-gdl1/GDLAccess/EOAdaptor.m
+M	sope-gdl1/GDLAccess/EOAttribute.m
+M	sope-gdl1/GDLAccess/EODatabase.m
+M	sope-gdl1/GDLAccess/EODatabaseChannel.m
+M	sope-gdl1/GDLAccess/EODatabaseContext.m
+M	sope-gdl1/GDLAccess/EODatabaseFault.m
+M	sope-gdl1/GDLAccess/EODatabaseFaultResolver.m
+M	sope-gdl1/GDLAccess/EOEntity.m
+M	sope-gdl1/GDLAccess/EOFExceptions.m
+M	sope-gdl1/GDLAccess/EOFault.h
+M	sope-gdl1/GDLAccess/EOFault.m
+M	sope-gdl1/GDLAccess/EOModel.m
+M	sope-gdl1/GDLAccess/EOObjectUniquer.m
+M	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m
+M	sope-gdl1/GDLAccess/EORecordDictionary.m
+M	sope-gdl1/GDLAccess/EORelationship.m
+M	sope-gdl1/GDLAccess/EOSQLExpression.m
+M	sope-gdl1/GDLAccess/EOSQLQualifier.m
+M	sope-gdl1/GDLAccess/common.h
+M	sope-gdl1/PostgreSQL/NSData+PGVal.m
+M	sope-gdl1/PostgreSQL/NSString+PostgreSQL72.m
+M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
+M	sope-gdl1/PostgreSQL/PostgreSQL72DataTypeMappingException.m
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+M	sope-mime/NGImap4/NGImap4Context.m
+M	sope-mime/NGImap4/NGImap4FileManager.m
+M	sope-mime/NGImap4/NGImap4Folder.m
+M	sope-mime/NGImap4/NGImap4FolderGlobalID.m
+M	sope-mime/NGImap4/NGImap4Message.m
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+M	sope-mime/NGImap4/NGImap4ServerGlobalID.m
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGImap4/imCommon.h
+M	sope-mime/NGMail/NGMailAddress.m
+M	sope-mime/NGMail/NGMailAddressParser.m
+M	sope-mime/NGMail/NGMimeMessage.m
+M	sope-mime/NGMime/NGMimeBodyPart.m
+M	sope-mime/NGMime/NGMimeJoinedData.m
+M	sope-mime/NGMime/NGMimePartGenerator.h
+M	sope-mime/NGMime/NGMimePartGenerator.m
+M	sope-mime/NGMime/NGMimePartParser.m
+M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
+M	sope-xml/DOM/DOMElement.m
+M	sope-xml/DOM/DOMNode.m
+M	sope-xml/DOM/DOMQueryPathExpression.m
+M	sope-xml/DOM/DOMSaxHandler.m
+M	sope-xml/STXSaxDriver/ExtraSTX/StructuredText.m
+M	sope-xml/STXSaxDriver/Model/StructuredTextBodyElement.m
+M	sope-xml/STXSaxDriver/Model/StructuredTextHeader.m
+M	sope-xml/STXSaxDriver/STXSaxDriver.m
+M	sope-xml/SaxObjC/SaxAttributeList.m
+M	sope-xml/SaxObjC/SaxAttributes.m
+M	sope-xml/SaxObjC/SaxContentHandler.h
+M	sope-xml/SaxObjC/SaxDefaultHandler.m
+M	sope-xml/SaxObjC/SaxObjectDecoder.m
+M	sope-xml/SaxObjC/SaxXMLFilter.m
+M	sope-xml/SaxObjC/SaxXMLReaderFactory.m
+M	sope-xml/XmlRpc/NSNotification+XmlRpcCoding.m
+M	sope-xml/XmlRpc/XmlRpcDecoder.m
+M	sope-xml/XmlRpc/XmlRpcEncoder.m
+M	sope-xml/XmlRpc/XmlRpcMethodCall.m
+M	sope-xml/XmlRpc/XmlRpcSaxHandler.m
+
+commit 25b7c45834da4b50f1ac56b367e3eeb1ea4cd623
+Author: sogo <sogo@example.com>
+Date:   Tue Nov 5 14:42:59 2013 -0500
+
+    Reverted fix.
+
+M	sope-appserver/NGObjWeb/common.h
+M	sope-gdl1/GDLAccess/common.h
+
+commit 39eb541020f13dbb1710f6068c8bc5adbbe0ff2b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Nov 5 14:16:15 2013 -0500
+
+    Fix for Lucid
+
+M	sope-appserver/NGObjWeb/common.h
+M	sope-gdl1/GDLAccess/common.h
+
+commit f7d864030c3985ff40c622cd745cca33dbc4a5a9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Oct 28 15:28:50 2013 -0400
+
+    Removed uber-brain-damaged code.
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 03369a2963654b2e3f50facef394a0c44bd83f33
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Oct 24 20:58:56 2013 -0400
+
+    Potential fix for OS X 10.9
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit 663174ffee0f3680eda328a6510e48ee8a34d62d
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Oct 18 13:48:43 2013 -0400
+
+    Applied huge patch (slightly modified) from David Chisnall
+    
+    These fixes are for the FreeBSD/OpenBSD port.
+
+M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
+M	sope-appserver/NGObjWeb/Associations/WOScriptAssociation.m
+M	sope-appserver/NGObjWeb/Associations/WOValueAssociation.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOComponentReference.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOGenericElement.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOHyperlink.m
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFieldParser.m
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpResponse.h
+M	sope-appserver/NGObjWeb/NGHttp/NGUrlFormCoder.m
+M	sope-appserver/NGObjWeb/NSObject+WO.m
+M	sope-appserver/NGObjWeb/SoObjects/SoClassSecurityInfo.h
+M	sope-appserver/NGObjWeb/SoObjects/SoClassSecurityInfo.m
+M	sope-appserver/NGObjWeb/SoObjects/SoComponent.m
+M	sope-appserver/NGObjWeb/SoObjects/SoDefaultRenderer.m
+M	sope-appserver/NGObjWeb/Templates/WOComponentScriptPart.m
+M	sope-appserver/NGObjWeb/Templates/WODParser.m
+M	sope-appserver/NGObjWeb/Templates/WOHTMLParser.m
+M	sope-appserver/NGObjWeb/Templates/WOTemplate.m
+M	sope-appserver/NGObjWeb/Templates/WOxElemBuilder.m
+M	sope-appserver/NGObjWeb/WOComponent+Sync.m
+M	sope-appserver/NGObjWeb/WOComponent.m
+M	sope-appserver/NGObjWeb/WOHTTPConnection.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WORequest+Adaptor.m
+M	sope-appserver/NGObjWeb/WOMailDelivery.m
+M	sope-appserver/NGObjWeb/WOResponse.m
+M	sope-appserver/NGObjWeb/WOSessionStore.m
+M	sope-appserver/NGObjWeb/WOSimpleHTTPParser.m
+M	sope-appserver/NGObjWeb/WOStatisticsStore.m
+M	sope-appserver/NGObjWeb/WebDAV/SaxDAVHandler.m
+M	sope-appserver/NGObjWeb/WebDAV/SoDAVSQLParser.h
+M	sope-appserver/NGObjWeb/WebDAV/SoDAVSQLParser.m
+M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
+M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVValue.m
+M	sope-appserver/NGObjWeb/_WOStringTable.m
+M	sope-appserver/NGObjWeb/common.h
+M	sope-appserver/WEExtensions/JSStringTable.m
+M	sope-appserver/WEExtensions/WEMonthOverview.m
+M	sope-appserver/WEExtensions/WEResourceKey.m
+M	sope-appserver/WEExtensions/WEResourceManager.m
+M	sope-appserver/WEExtensions/WETableCalcMatrix.h
+M	sope-appserver/WEExtensions/WETableCalcMatrix.m
+M	sope-appserver/WEExtensions/WETableMatrix.m
+M	sope-appserver/WEExtensions/WETableView/WETableView.m
+M	sope-appserver/WOExtensions/WOTabPanel.m
+M	sope-core/EOControl/EOFetchSpecification.m
+M	sope-core/EOControl/EOGenericRecord.m
+M	sope-core/EOControl/EOGlobalID.m
+M	sope-core/EOControl/EOKeyComparisonQualifier.m
+M	sope-core/EOControl/EOKeyGlobalID.m
+M	sope-core/EOControl/EOKeyValueCoding.m
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EONotQualifier.m
+M	sope-core/EOControl/EONull.m
+M	sope-core/EOControl/EOObserver.m
+M	sope-core/EOControl/EOOrQualifier.m
+M	sope-core/EOControl/EOQualifierParser.m
+M	sope-core/EOControl/EOSQLParser.h
+M	sope-core/EOControl/EOSQLParser.m
+M	sope-core/EOControl/EOSortOrdering.m
+M	sope-core/EOControl/EOValidation.m
+M	sope-core/EOControl/NSArray+EOQualifier.m
+M	sope-core/NGExtensions/EOExt.subproj/EOFetchSpecification+plist.m
+M	sope-core/NGExtensions/EOExt.subproj/EOKeyMapDataSource.m
+M	sope-core/NGExtensions/EOExt.subproj/EOQualifier+CtxEval.m
+M	sope-core/NGExtensions/FdExt.subproj/NGPropertyListParser.m
+M	sope-core/NGExtensions/FdExt.subproj/NSException+misc.m
+M	sope-core/NGExtensions/FdExt.subproj/NSObject+Logs.m
+M	sope-core/NGExtensions/FdExt.subproj/NSObject+Values.m
+M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
+M	sope-core/NGExtensions/FdExt.subproj/NSSet+enumerator.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Escaping.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Ext.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+misc.m
+M	sope-core/NGExtensions/NGBitSet.m
+M	sope-core/NGExtensions/NGBundleManager.m
+M	sope-core/NGExtensions/NGCalendarDateRange.m
+M	sope-core/NGExtensions/NGDirectoryEnumerator.m
+M	sope-core/NGExtensions/NGHashMap.m
+M	sope-core/NGExtensions/NGLogging.subproj/NGLogEventDetailedFormatter.m
+M	sope-core/NGExtensions/NGLogging.subproj/NGLoggerManager.m
+M	sope-core/NGExtensions/NGResourceLocator.m
+M	sope-core/NGExtensions/NGStack.m
+M	sope-core/NGStreams/NGActiveSocket.m
+M	sope-core/NGStreams/NGBufferedStream.m
+M	sope-core/NGStreams/NGByteBuffer.m
+M	sope-core/NGStreams/NGByteCountStream.m
+M	sope-core/NGStreams/NGCTextStream.m
+M	sope-core/NGStreams/NGConcreteStreamFileHandle.m
+M	sope-core/NGStreams/NGLocalSocketAddress.m
+M	sope-gdl1/GDLAccess/EOAdaptor.m
+M	sope-gdl1/GDLAccess/EOAttribute.m
+M	sope-gdl1/GDLAccess/EODatabase.m
+M	sope-gdl1/GDLAccess/EODatabaseChannel.m
+M	sope-gdl1/GDLAccess/EODatabaseContext.m
+M	sope-gdl1/GDLAccess/EODatabaseFault.m
+M	sope-gdl1/GDLAccess/EODatabaseFaultResolver.m
+M	sope-gdl1/GDLAccess/EOEntity.m
+M	sope-gdl1/GDLAccess/EOFExceptions.m
+M	sope-gdl1/GDLAccess/EOFault.h
+M	sope-gdl1/GDLAccess/EOFault.m
+M	sope-gdl1/GDLAccess/EOModel.m
+M	sope-gdl1/GDLAccess/EOObjectUniquer.m
+M	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m
+M	sope-gdl1/GDLAccess/EORecordDictionary.m
+M	sope-gdl1/GDLAccess/EORelationship.m
+M	sope-gdl1/GDLAccess/EOSQLExpression.m
+M	sope-gdl1/GDLAccess/EOSQLQualifier.m
+M	sope-gdl1/GDLAccess/common.h
+M	sope-gdl1/PostgreSQL/NSData+PGVal.m
+M	sope-gdl1/PostgreSQL/NSString+PostgreSQL72.m
+M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
+M	sope-gdl1/PostgreSQL/PostgreSQL72DataTypeMappingException.m
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+M	sope-mime/NGImap4/NGImap4Context.m
+M	sope-mime/NGImap4/NGImap4FileManager.m
+M	sope-mime/NGImap4/NGImap4Folder.m
+M	sope-mime/NGImap4/NGImap4FolderGlobalID.m
+M	sope-mime/NGImap4/NGImap4Message.m
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+M	sope-mime/NGImap4/NGImap4ServerGlobalID.m
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGImap4/imCommon.h
+M	sope-mime/NGMail/NGMailAddress.m
+M	sope-mime/NGMail/NGMailAddressParser.m
+M	sope-mime/NGMail/NGMimeMessage.m
+M	sope-mime/NGMime/NGMimeBodyPart.m
+M	sope-mime/NGMime/NGMimeJoinedData.m
+M	sope-mime/NGMime/NGMimePartGenerator.h
+M	sope-mime/NGMime/NGMimePartGenerator.m
+M	sope-mime/NGMime/NGMimePartParser.m
+M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
+M	sope-xml/DOM/DOMElement.m
+M	sope-xml/DOM/DOMNode.m
+M	sope-xml/DOM/DOMQueryPathExpression.m
+M	sope-xml/DOM/DOMSaxHandler.m
+M	sope-xml/STXSaxDriver/ExtraSTX/StructuredText.m
+M	sope-xml/STXSaxDriver/Model/StructuredTextBodyElement.m
+M	sope-xml/STXSaxDriver/Model/StructuredTextHeader.m
+M	sope-xml/STXSaxDriver/STXSaxDriver.m
+M	sope-xml/SaxObjC/SaxAttributeList.m
+M	sope-xml/SaxObjC/SaxAttributes.m
+M	sope-xml/SaxObjC/SaxContentHandler.h
+M	sope-xml/SaxObjC/SaxDefaultHandler.m
+M	sope-xml/SaxObjC/SaxObjectDecoder.m
+M	sope-xml/SaxObjC/SaxXMLFilter.m
+M	sope-xml/SaxObjC/SaxXMLReaderFactory.m
+M	sope-xml/XmlRpc/NSNotification+XmlRpcCoding.m
+M	sope-xml/XmlRpc/XmlRpcDecoder.m
+M	sope-xml/XmlRpc/XmlRpcEncoder.m
+M	sope-xml/XmlRpc/XmlRpcMethodCall.m
+M	sope-xml/XmlRpc/XmlRpcSaxHandler.m
+
+commit e89bfaef8041f2e56b880432285d237d4d5e9ab9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 27 10:34:47 2013 -0400
+
+    Added 2Do client. See #2114 for more details.
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit 7bb4c77e937336a1e3409ff436aab176f048d036
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Sep 26 14:47:01 2013 -0400
+
+    Fix for bug #2412
+
+M	sope-appserver/NGObjWeb/Languages.plist
+
+commit 2c46765fcf11844fffa95a976b577554917ad35b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Sep 25 14:30:51 2013 -0400
+
+    Fix for bug #2319
+
+M	sope-gdl1/MySQL/MySQL4Channel.m
+
+commit dd21a117bb5dea064b58b949e6e88bdd4e9848ae
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Sep 25 10:05:46 2013 -0400
+
+    Avoid double-encoding 7bit-safe folders
+
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NSString+Imap4.h
+M	sope-mime/NGImap4/NSString+Imap4.m
+
+commit 223e0ae569b9ad4eae3d5ac5a43209feff99b3dd
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Sep 24 15:58:11 2013 -0400
+
+    Fix for bug #2318
+
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit aa26f89ded0672fda8f3a11f0492fd938bdbdd9b
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Thu Sep 12 09:30:24 2013 -0400
+
+    Add gitignore. No obj/ directory
+
+A	.gitignore
+
+commit 8540c3ae63923298ca29aa269a1bbdb9c996646e
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Sep 10 12:03:55 2013 -0400
+
+    use initWithBytes to handle credentials
+    
+    That behavior matches what stringByDecodingBase64 does, but this code should
+    probably be rewritten to use it instead on rolling its own version.
+
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFields.m
+
+commit 5ee6f6fdd9ac63a51e6619e880d625a6f6fa83e1
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Sep 10 11:58:35 2013 -0400
+
+    Use initWithBytes instead of initWithBytesNocopy
+    
+    For some strange reason, the dest pointer gets mangled by gnustep
+    when the init fails with encoding:NSUTF8StringEncoding.
+    Use initWithBytes and free the pointer manually instead.
+    
+    This avoids a double free crash when handling latin1 encoded creds
+
+M	sope-core/NGExtensions/NGBase64Coding.m
+
+commit de26af91c8df6b37f7db44ddb127174ce6e72840
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Sep 10 11:54:36 2013 -0400
+
+    len must be signed
+    
+    Avoids wrapping if data doesn't contain a ':'
+    This avoids an out of memory exception when receiving malformed auth data
+
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFields.m
+
+commit eac41b9cde81e8b4dfa0869b58e84a211d996e3d
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Fri Sep 6 13:41:29 2013 -0400
+
+    Avoid high CPU usage when all child procs are busy
+
+M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+
+commit 82f23a317665157c6ef36a6f9c191f4421caf36b
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Wed Aug 28 17:05:31 2013 -0400
+
+    Implement ldap password change for ActiveDirectory
+    
+    Also works against Samba4. Unfortunately, we don't get detailed error messages
+    from AD. On samba4, debug has to be turned quite high to see anything.
+    
+    The LDAP connection *must* use TLS/SSL, otherwise it won't work.
+    See these links for details:
+      http://support.microsoft.com/kb/269190
+      http://msdn.microsoft.com/en-us/library/cc223248.aspx
+
+M	sope-ldap/NGLdap/NGLdapConnection.h
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit 3dcc9b1459bd8a3ab626f918dea5576defb86eea
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Wed Aug 28 09:33:59 2013 -0400
+
+    Fix format. Avoid crash on pidfile creation error.
+    
+    reported by hannes_at_erven.at
+
+M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+
+commit dccbbf0ab71f2f8bbb8fbe7966f9b66da18f1c4c
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Wed Aug 28 09:24:15 2013 -0400
+
+    whitespace tabkill
+
+M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+
+commit 7ea253d7a468040adfc1b244dbc83c7546c1728b
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Aug 27 16:34:01 2013 -0400
+
+    implement isADCompatible
+    
+    add utility functions along the way
+
+M	sope-ldap/NGLdap/NGLdapConnection.h
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit ab997ddd2ea7c1525e80d65e4038582a1a60484d
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Aug 27 15:25:18 2013 -0400
+
+    whitespace tabkill
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit 724726e1e8a11ff9950d9b304a8d0aa83ee6edef
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Aug 27 13:49:28 2013 -0400
+
+    Enable debug only if ImapDebugEnabled is enabled
+    
+    It would probably be better to replace ImapDebugEnabled by something like
+    MailDebugEnabled. But this is certainly better than always having debug output
+
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit 13d7780e406e866ed56155c61b33c45e3c099424
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Thu Aug 15 08:49:26 2013 -0400
+
+    Local pool to avoid keeping many opened LDAP fd
+
+M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+
+commit fa31f618ff0c593b05f4fd91a4d149da4573e901
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Fri Aug 9 21:19:44 2013 -0400
+
+    fixup NGLdapConnection logging for searches
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit 9f98c590e397b642d8a4c69c3f4789de6f7027dd
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Sat Jul 20 15:02:26 2013 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 5030353177728764e3c417392dab085a61190483
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 19 16:19:40 2013 -0400
