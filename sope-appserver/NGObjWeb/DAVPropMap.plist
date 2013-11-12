@@ -200,4 +200,5 @@
   "{urn:inverse:params:xml:ns:inverse-dav}notify-on-external-modifications" = davNotifyOnExternalModifications;
   "{urn:inverse:params:xml:ns:inverse-dav}notify-user-on-personal-modifications" = davNotifyUserOnPersonalModifications;
   "{urn:inverse:params:xml:ns:inverse-dav}notified-user-on-personal-modifications" = davNotifiedUserOnPersonalModifications;
+  "{urn:inverse:params:xml:ns:inverse-dav}mails-labels" = davMailsLabels;
 }
