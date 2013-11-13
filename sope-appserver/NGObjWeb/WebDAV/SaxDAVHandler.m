@@ -506,7 +506,7 @@ static BOOL heavyLog = NO;
   [q release];
 }
 
-- (void)startPropValueElement:(NSString *)_localName namespace:(NSString *)_ns {
+- (void)startPropValueElement:(NSString *)_localName namespace:(NSString *)_ns attributes:(id<SaxAttributes>)_attributes {
   self->propValueNesting++;
   if (debugPropValue) {
     [self debugWithFormat:@"start[%i]: {%@}%@", self->propValueNesting,
@@ -531,6 +531,15 @@ static BOOL heavyLog = NO;
     [self->cdata appendString:@" xmlns:V=\""];
     [self->cdata appendString:_ns];
     [self->cdata appendString:@"\""];
+    
+    if ([_attributes count]) {
+      int i;
+      
+      for (i = 0; i < [_attributes count]; i++) {
+        [self->cdata appendFormat: @" %@=\"%@\"", [_attributes nameAtIndex: i], [_attributes valueAtIndex: 0]];
+      }
+    }
+    
     [self->cdata appendString:@">"];
   }
 }
@@ -589,11 +598,11 @@ static BOOL heavyLog = NO;
     /* TODO: should return ? */
   }
   if (self->in.PropertyUpdate && self->in.Set && self->in.Prop) {
-    [self startPropValueElement:_localName namespace:XMLNS_WEBDAV];
+    [self startPropValueElement:_localName namespace:XMLNS_WEBDAV attributes:nil];
     return;
   }
   if (self->in.Response && self->in.PropStat && self->in.Prop) {
-    [self startPropValueElement:_localName namespace:XMLNS_WEBDAV];
+    [self startPropValueElement:_localName namespace:XMLNS_WEBDAV attributes:nil];
     return;
   }
   
@@ -890,7 +899,7 @@ static BOOL heavyLog = NO;
   }
   else if (self->in.PropertyUpdate) {
     if (self->in.Set) {
-      [self startPropValueElement:_localName namespace:_ns];
+      [self startPropValueElement:_localName namespace:_ns attributes:_attributes];
     }
     else if (self->in.Remove) {
       NSString *fqn;
@@ -900,7 +909,7 @@ static BOOL heavyLog = NO;
     }
   }
   else if (self->in.Response && self->in.PropStat && self->in.Prop)
-    [self startPropValueElement:_localName namespace:_ns];
+    [self startPropValueElement:_localName namespace:_ns attributes:_attributes];
 }
 
 - (void)endElement:(NSString *)_localName
