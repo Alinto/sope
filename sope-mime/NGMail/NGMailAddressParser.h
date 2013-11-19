@@ -46,7 +46,7 @@
 + (id)mailAddressParserWithData:(NSData *)_data;
 + (id)mailAddressParserWithCString:(const char *)_cString;
 - (id)initWithString:(NSString *)_str;
-+ (id)sanitizeMailAddresses:(NSString *)_string;
++ (NSString *)sanitizeMailAddresses:(NSString *)originalAddress;
 
 /* parsing */
 

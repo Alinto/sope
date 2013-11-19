@@ -1,3 +1,46 @@
+commit 3c5fddcf5e54795aa206206cef92b82de8283552
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Mon Nov 18 21:40:39 2013 -0500
+
+    Rewrite sanitizeMailAddresses
+    
+    It should now be more robust and shouldn't crash when handling strange input.
+
+M	sope-mime/NGMail/NGMailAddressParser.h
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit 12fb93ead66cb672e8d8db4c7767b47ae069bac1
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Fri Nov 15 16:05:41 2013 -0500
+
+    Use is7bitSafe to avoid double encoding strings
+
+M	sope-mime/NGImap4/NSString+Imap4.m
+
+commit 2e03d606f60f1cb003bc9788f393aeca8b9007bb
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Nov 13 15:35:12 2013 -0500
+
+    Added attributes support
+
+M	sope-appserver/NGObjWeb/WebDAV/SaxDAVHandler.m
+
+commit ea6d6c304faf21dbb5ab816c5888831a4e4e3ea8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Nov 12 15:24:28 2013 -0500
+
+    Added new PROPFIND/PROPATCH for mails labels synchronization
+
+M	sope-appserver/NGObjWeb/DAVPropMap.plist
+
+commit f12836f47932138c09d9f641111b1030fbe09203
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Nov 7 14:40:03 2013 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 59e66e3a7ecdf06f849a5e581572b1c6bbc2710d
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Nov 6 08:17:43 2013 -0500

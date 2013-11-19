@@ -40,6 +40,10 @@ static unsigned int _decodeOfModifiedUTF7(unsigned char *_source, unichar *resul
   unsigned int  cntRes  = 0;
   NSString      *result = nil;
 
+  /* do real work only if we're not already 7bit safe */
+  if ([self is7bitSafe])
+    return [[self copy] autorelease];
+
   len = [self length];
   buf = NSZoneMalloc(NULL, (len + 1) * sizeof(unichar));
   [self getCharacters: buf];
