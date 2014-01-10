@@ -264,6 +264,10 @@ static int      LogImapEnabled = -1;
     if ([obj isKindOfClass:DictClass]) {
       if ((o = [obj  objectForKey:@"unseen"]))
         [result setObject:o forKey:@"unseen"];
+      else if ((o = [obj objectForKey:@"HIGHESTMODSEQ"]))
+        [result setObject:o forKey:@"highestmodseq"];
+      else if ((o = [obj objectForKey:@"UIDNEXT"]))
+        [result setObject:o forKey:@"uidnext"];
     }
     else
       [self warnWithFormat:@"unexpected OK object: %@", obj];
