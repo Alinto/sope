@@ -311,10 +311,10 @@ andComparisonSelector:(SEL)lselector {
     dateOperator = nil;
  
   if (dateOperator) {
-    if ([dkey isEqualToString: @"DATE"])
-      operatorPrefix = @"SENT";
-    else
-      operatorPrefix = @"";
+    //if ([dkey isEqualToString: @"DATE"])
+    //  operatorPrefix = @"SENT";
+    //else
+    operatorPrefix = @"";
     imap4Operator = [NSString stringWithFormat: @"%@%@ ",
                               operatorPrefix, dateOperator];
   }
