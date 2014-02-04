@@ -721,7 +721,7 @@ static inline BOOL isTokStopChar(unichar c) {
 	    NSStringFromClass([q class]));
     }
     else if ([[(EOAndQualifier *)q qualifiers] count] != 3) {
-      NSLog(@"  INVALID: expected 3 subqualifiers, got %i !",
+      NSLog(@"  INVALID: expected 3 subqualifiers, got %"PRIuPTR" !",
 	    [[(EOAndQualifier *)q qualifiers] count]);
     }
 
@@ -739,7 +739,7 @@ static inline BOOL isTokStopChar(unichar c) {
 	    NSStringFromClass([props class]));
     }
     else if ([props count] != 14) {
-      NSLog(@"  INVALID: invalid attribute count, expected 14, got %i.",
+      NSLog(@"  INVALID: invalid attribute count, expected 14, got %"PRIuPTR".",
 	    [props count]);
     }
   }

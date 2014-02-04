@@ -28,14 +28,14 @@
   NSAutoreleasePool *pool;
   NSMutableArray *array = nil;
   NSArray  *result;
-  unsigned i, count;
+  NSUInteger i, count;
 
   pool = [[NSAutoreleasePool alloc] init];
   result = nil;
   
   count = [self count];
   array = [NSMutableArray arrayWithCapacity:count];
-  for (i = 0, count; i < count; i++) {
+  for (i = 0; i < count; i++) {
     id o;
     
     o = [self objectAtIndex:i];
