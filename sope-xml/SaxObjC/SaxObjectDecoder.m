@@ -266,7 +266,7 @@ static NSNull *null = nil;
 
 /* CDATA */
 
-- (void)characters:(unichar *)_chars length:(int)_len {
+- (void)characters:(unichar *)_chars length:(NSUInteger)_len {
   _SaxObjTagInfo *info;
   
   if (_len == 0) return;
@@ -278,7 +278,7 @@ static NSNull *null = nil;
   return NO;
 }
 
-- (void)ignorableWhitespace:(unichar *)_chars length:(int)_len {
+- (void)ignorableWhitespace:(unichar *)_chars length:(NSUInteger)_len {
   if ([self processIgnorableWhitespace])
     [self characters:_chars length:_len];
 }

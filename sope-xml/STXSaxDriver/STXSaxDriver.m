@@ -353,11 +353,11 @@ static BOOL debugOn = NO;
   }
   
   if ((s = [_item textParsedWithDelegate:(id)self inContext:self->context])) {
-    if (debugOn) NSLog(@"          chars: %d", [s length]);
+    if (debugOn) NSLog(@"          chars: %"PRIuPTR, [s length]);
     [self _characters:s];
   }
   
-    if (debugOn) NSLog(@"          elems: %d", [[_item elements] count]);
+    if (debugOn) NSLog(@"          elems: %"PRIuPTR, [[_item elements] count]);
   [self produceSaxEventsForElements:[_item elements]];
   
   switch (typology) {
@@ -392,7 +392,7 @@ static BOOL debugOn = NO;
   unsigned int i, c;
   
   if (debugOn)
-    NSLog(@"  produce SAX events for elements: %d", [_elems count]);
+    NSLog(@"  produce SAX events for elements: %"PRIuPTR, [_elems count]);
   for (i = 0, c = [_elems count]; i < c; i++) {
     id currentObject;
     

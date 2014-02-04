@@ -426,7 +426,7 @@ static BOOL  doDebug         = NO;
 
   if ([self->params count] > 1) {
     if (doDebug) {
-      NSLog(@"%s:   has more than one params (%i)!", __PRETTY_FUNCTION__, 
+      NSLog(@"%s:   has more than one params (%"PRIuPTR")!", __PRETTY_FUNCTION__, 
       [self->params count]);
     }
     self->invalidCall = YES;

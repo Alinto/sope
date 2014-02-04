@@ -39,8 +39,8 @@
 
 /* CDATA */
 
-- (void)characters:(unichar *)_chars          length:(int)_len;
-- (void)ignorableWhitespace:(unichar *)_chars length:(int)_len;
+- (void)characters:(unichar *)_chars          length:(NSUInteger)_len;
+- (void)ignorableWhitespace:(unichar *)_chars length:(NSUInteger)_len;
 
 /* PIs */
 

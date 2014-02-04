@@ -364,9 +364,10 @@ static Class NSNumberClass = Nil;
 
   /* format in XML-RPC date format */
   
-  s = [[NSString alloc] initWithFormat:@"%04i%02i%02iT%02i:%02i:%02i",
-                 [date yearOfCommonEra], [date monthOfYear], [date dayOfMonth],
-                 [date hourOfDay], [date minuteOfHour], [date secondOfMinute]];
+  s = [[NSString alloc] initWithFormat:
+		@"%04"PRIiPTR"%02"PRIiPTR"%02"PRIiPTR"T%02"PRIiPTR":%02"PRIiPTR":%02"PRIiPTR,
+                [date yearOfCommonEra], [date monthOfYear], [date dayOfMonth],
+                [date hourOfDay], [date minuteOfHour], [date secondOfMinute]];
   
   [date release]; date = nil;
   

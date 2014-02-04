@@ -410,7 +410,7 @@ static BOOL debugOn = NO;
   unichar c;
   
   length = [_str length];
-  if (debugOn) NSLog(@"  find link block target: '%s'", _str);
+  if (debugOn) NSLog(@"  find link block target: '%@'", _str);
 
   c = [_str characterAtIndex:0];
   
@@ -460,7 +460,7 @@ static BOOL debugOn = NO;
     
     range.location = 0;
 
-    if (debugOn) NSLog(@"    range(0,%d)", range.length);
+    if (debugOn) NSLog(@"    range(0,%"PRIuPTR")", range.length);
     return range;
   }
   
@@ -965,7 +965,7 @@ static BOOL debugOn = NO;
   [ms appendFormat:@"<0x%p[%@]:", self, NSStringFromClass([self class])];
   
   if (self->_elements) 
-    [ms appendFormat:@" #elements=%d", [self->_elements count]];
+    [ms appendFormat:@" #elements=%"PRIuPTR, [self->_elements count]];
 
   if (self->_delegate) {
     [ms appendFormat:@" delegate=0x%p<%@>", 

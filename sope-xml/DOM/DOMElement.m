@@ -507,7 +507,7 @@ static NSNull *null = nil;
 
 - (NSString *)description {
   return [NSString stringWithFormat:
-                     @"<0x%p[%@]: name=%@ parent=%@ #attrs=%i #children=%i>",
+                     @"<0x%p[%@]: name=%@ parent=%@ #attrs=%"PRIuPTR" #children=%"PRIuPTR">",
                      self, NSStringFromClass([self class]),
                      [self nodeName],
                      [[self parentNode] nodeName],
