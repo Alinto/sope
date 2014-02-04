@@ -456,7 +456,7 @@ static NSException *_makeException(NSException *_exception,
             register unsigned pos;
             const unsigned char *startPos, *endPos;
 
-            for (pos = _idx; (pos >= 0) && (_buffer[pos] != '\n'); pos--)
+            for (pos = _idx; (pos > 0) && (_buffer[pos] != '\n'); pos--)
                 ;
             startPos = &(_buffer[pos + 1]);
 

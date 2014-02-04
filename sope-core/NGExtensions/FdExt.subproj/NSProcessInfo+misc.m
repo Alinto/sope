@@ -68,7 +68,7 @@
   NSString *s;
   cnt++;
   s = [NSString stringWithFormat:
-                  @"%04X%X%02X.tmp", getpid(), time(NULL),
+                  @"%04X%llX%02X.tmp", getpid(), (long long)time(NULL),
                   cnt];
   return [_prefix stringByAppendingString:s];
 }

@@ -23,12 +23,6 @@
 #include "NSString+misc.h"
 #include "common.h"
 
-@interface NSStringVariableBindingException : NSException
-@end
-
-@implementation NSStringVariableBindingException
-@end
-
 @implementation NSObject(StringBindings)
 
 - (NSString *)valueForStringBinding:(NSString *)_key {
@@ -56,9 +50,10 @@
     
     if (pos + 1 == len) { /* last entry */
       if (wbuf[pos] == '$') { /* found $ without end-char */
-        [[[NSStringVariableBindingException alloc]
-	   initWithFormat:@"did not find end of variable for string %@", self]
-	   raise];
+	[[NSException exceptionWithName: @"NSStringVariableBindingException"
+		reason:[NSString stringWithFormat:
+			@"did not find end of variable for string %@", self]
+		userInfo:nil] raise];
       }
       break;
     }
@@ -84,9 +79,10 @@
 	break;
     }
     if (pos == len) { /* end of string was reached */
-      [[[NSStringVariableBindingException alloc]
-	 initWithFormat:@"did not find end of variable for string %@", self]
-	 raise];
+	[[NSException exceptionWithName: @"NSStringVariableBindingException"
+		reason:[NSString stringWithFormat:
+			@"did not find end of variable for string %@", self]
+		userInfo:nil] raise];
     }
     else {
       NSString *key = nil;
@@ -119,9 +115,10 @@
   while (pos < len) {
     if (pos + 1 == len) { /* last entry */
       if (wbuf[pos] == '$') { /* found $ without end-char */
-        [[[NSStringVariableBindingException alloc]
-	   initWithFormat:@"did not find end of variable for string %@", self]
-	  raise];
+	[[NSException exceptionWithName: @"NSStringVariableBindingException"
+		reason:[NSString stringWithFormat:
+			@"did not find end of variable for string %@", self]
+		userInfo:nil] raise];
       }
       break;
     }
@@ -145,9 +142,10 @@
             break;
         }
         if (pos == len) { /* end of string was reached */
-          [[[NSStringVariableBindingException alloc]
-	     initWithFormat:@"did not find end of variable for string %@", 
-	     self] raise];
+	[[NSException exceptionWithName: @"NSStringVariableBindingException"
+		reason:[NSString stringWithFormat:
+			@"did not find end of variable for string %@", self]
+		userInfo:nil] raise];
 	}
         else {
           NSString *key;
@@ -159,10 +157,13 @@
 	  
           if ((value = [_bindings valueForStringBinding:key]) == nil) {
             if (_unknown == nil) {
-              [[[NSStringVariableBindingException alloc]
-                          initWithFormat:@"did not find binding for "
-                                         @"name %@ in binding-dictionary %@",
-                                         [key autorelease], _bindings] raise];
+		[[NSException exceptionWithName:
+			@"NSStringVariableBindingException"
+			reason:[NSString stringWithFormat:
+				@"did not find binding for "
+				@"name %@ in binding-dictionary %@",
+				[key autorelease], _bindings]
+			userInfo:nil] raise];
             }
             else
               value = _unknown;

@@ -64,16 +64,16 @@
 - (NSString *)stringByTrimmingTailWhiteSpaces
 {
     // should check 'whitespaceAndNewlineCharacterSet' ..
-    unsigned len;
+    NSUInteger len;
     
     if ((len = [self length]) > 0) {
         unichar  *buf;
-        unsigned idx;
+        NSUInteger idx;
         
         buf = calloc(len + 1, sizeof(unichar));
         [self getCharacters:buf];
 
-        for (idx = (len - 1); (idx >= 0) && (buf[idx] == 32); idx--)
+        for (idx = (len - 1); (idx > 0) && (buf[idx] == 32); idx--)
             ;
         
         self = [NSString stringWithCharacters:buf length:(idx + 1)];

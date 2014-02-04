@@ -197,7 +197,7 @@ static char *iconv_wrapper(id self, char *_src, unsigned _srcLen,
   inbuf      = NULL;
   outbuf     = NULL;
   
-  if ((type == (iconv_t)-1)) {
+  if (type == (iconv_t)-1) {
     [self logWithFormat:@"%s: Could not handle iconv encoding. FromEncoding:%@"
           @" to encoding:%@", __PRETTY_FUNCTION__, _fromEncode, _toEncode];
     goto CLEAR_AND_RETURN;
