@@ -171,7 +171,7 @@
 	  [self->endDate isEqual:[other endDate]]) ? YES : NO;
 }
 
-- (unsigned)hash {
+- (NSUInteger)hash {
   return [self->startDate hash] ^ [self->endDate hash];
 }
 
@@ -193,7 +193,7 @@
     
   description = [NSMutableString stringWithCapacity:64];
 
-  [description appendFormat:@"<%@[0x%x]: startDate:%@ endDate: ", 
+  [description appendFormat:@"<%@[0x%p]: startDate:%@ endDate: ", 
 	         NSStringFromClass(self->isa), self, self->startDate];
   
   if ([self->startDate isEqual:self->endDate])

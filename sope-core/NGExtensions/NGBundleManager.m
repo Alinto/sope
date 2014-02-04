@@ -891,15 +891,15 @@ static NSString *NGEnvVarPathSeparator = @":";
         continue;
       
       if ([i objectForKey:@"exact-version"]) {
-        int v;
+        NSInteger v;
 
-        v = [[i objectForKey:@"exact-version"] intValue];
+        v = [[i objectForKey:@"exact-version"] integerValue];
 	
         if (v != [clazz version]) {
           NSLog(@"ERROR: required exact class match failed:\n"
                 @"  class:            %@\n"
-                @"  required version: %i\n"
-                @"  loaded version:   %i\n"
+                @"  required version: %"PRIiPTR"\n"
+                @"  loaded version:   %"PRIiPTR"\n"
                 @"  bundle:           %@",
                 className,
                 v, [clazz version],
@@ -907,15 +907,15 @@ static NSString *NGEnvVarPathSeparator = @":";
         }
       }
       else if ([i objectForKey:@"version"]) {
-        int v;
+        NSInteger v;
         
         v = [[i objectForKey:@"version"] intValue];
         
         if (v > [clazz version]) {
           NSLog(@"ERROR: provided class does not match required version:\n"
                 @"  class:                  %@\n"
-                @"  least required version: %i\n"
-                @"  loaded version:         %i\n"
+                @"  least required version: %"PRIiPTR"\n"
+                @"  loaded version:         %"PRIiPTR"\n"
                 @"  bundle:                 %@",
                 className,
                 v, [clazz version],
@@ -1139,7 +1139,7 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
   NSString       *path;
 
   if (debugOn) {
-    NSLog(@"BM LOOKUP pathes (%d bundles loaded): %@ / %@", 
+    NSLog(@"BM LOOKUP pathes (%"PRIuPTR" bundles loaded): %@ / %@", 
           NSCountMapTable(self->loadedBundles), _resourceName, _type);
   }
   
@@ -1315,7 +1315,7 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
   NSArray       *rnKeys = nil;
   
   if (debugOn) {
-    NSLog(@"BM LOOKUP path (%d bundles loaded): %@ / %@", 
+    NSLog(@"BM LOOKUP path (%"PRIuPTR" bundles loaded): %@ / %@", 
           NSCountMapTable(self->loadedBundles), _resourceName, _type);
   }
   

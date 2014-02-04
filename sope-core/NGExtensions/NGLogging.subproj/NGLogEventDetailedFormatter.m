@@ -84,7 +84,7 @@ static __inline__ unsigned char *levelPrefixForEvent(NGLogEvent *_event) {
   fe = [NSMutableString stringWithCapacity:160];
   /* timestamp, process name, process id, level prefix */
   date = [_event date];
-  [fe appendFormat:@"%s %02i %02i:%02i:%02i %s [%d]: %s",
+  [fe appendFormat:@"%s %02"PRIiPTR" %02"PRIiPTR":%02"PRIiPTR":%02"PRIiPTR" %s [%d]: %s",
     monthNames[[date monthOfYear]],
     [date dayOfMonth],
     [date hourOfDay], [date minuteOfHour], [date secondOfMinute],
