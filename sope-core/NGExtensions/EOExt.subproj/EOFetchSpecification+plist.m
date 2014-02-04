@@ -20,6 +20,7 @@
 */
 
 #include <NGExtensions/EOFetchSpecification+plist.h>
+#include <NGExtensions/EOSortOrdering+plist.h>
 #import <EOControl/EOControl.h>
 #include "common.h"
 
