@@ -55,7 +55,7 @@ static inline BOOL doAbort(void) {
   return NO;
 }
 - (BOOL)isNull {
-#if DEBUG
+#if DEBUG && 0
   NSLog(@"WARNING(%s): called deprecated -isNull on NSNull (use -isNotNull) !",
         __PRETTY_FUNCTION__);
   if (doAbort()) abort();
@@ -83,7 +83,7 @@ static inline BOOL doAbort(void) {
 }
 
 - (unsigned int)length {
-#if DEBUG
+#if DEBUG && 0
   NSLog(@"WARNING(%s): "
         @"called NSNull -length (returns 0) !!!",
         __PRETTY_FUNCTION__);
@@ -92,7 +92,7 @@ static inline BOOL doAbort(void) {
   return 0;
 }
 - (unsigned int)count {
-#if DEBUG
+#if DEBUG && 0
   NSLog(@"WARNING(%s): "
         @"called NSNull -count (returns 0) !!!",
         __PRETTY_FUNCTION__);
@@ -115,7 +115,7 @@ static inline BOOL doAbort(void) {
 }
 
 - (unichar)characterAtIndex:(unsigned int)_idx {
-#if DEBUG
+#if DEBUG && 0
   NSLog(@"WARNING(%s): "
         @"called NSNull -characterAtIndex:%d - returning 0!",
         __PRETTY_FUNCTION__, _idx);
@@ -223,7 +223,7 @@ static inline BOOL doAbort(void) {
 }
 
 - (BOOL)isNull {
-#if DEBUG
+#if DEBUG && 0
   NSLog(@"%s: WARNING, called -isNull on NSObject (use -isNotNull) !",
         __PRETTY_FUNCTION__);
 #endif
