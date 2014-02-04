@@ -383,7 +383,7 @@ NSEnumerator *libraryPaths;
   defReader = 
     [[NSUserDefaults standardUserDefaults] stringForKey:@"XMLReader"];
 
-  if (debugOn) NSLog(@"%s:   default name ...",__PRETTY_FUNCTION__, defReader);
+  if (debugOn) NSLog(@"%s: '%@' default reader",__PRETTY_FUNCTION__, defReader);
   
   if (defReader) {
     if ((reader = [self createXMLReaderWithName:defReader]))

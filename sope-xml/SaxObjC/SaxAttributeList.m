@@ -160,7 +160,7 @@
   NSUInteger i, c;
   
   s = [[NSMutableString alloc] init];
-  [s appendFormat:@"<%08X[%@]:", self, NSStringFromClass([self class])];
+  [s appendFormat:@"<%p[%@]:", self, NSStringFromClass([self class])];
   
   for (i = 0, c = [self count]; i < c; i++) {
     NSString *type;
