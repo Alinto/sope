@@ -22,6 +22,7 @@
 #ifndef __XmlRpc_common_h__
 #define __XmlRpc_common_h__
 
+#include <inttypes.h>
 #import <Foundation/Foundation.h>
 
 #ifndef ASSIGN

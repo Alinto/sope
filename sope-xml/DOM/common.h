@@ -22,6 +22,8 @@
 #ifndef __DOM_common_H__
 #define __DOM_common_H__
 
+#include <inttypes.h>
+
 #import <Foundation/Foundation.h>
 
 #ifndef ASSIGN

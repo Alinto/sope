@@ -22,6 +22,8 @@
 #ifndef __NGExtensions_common_h__
 #define __NGExtensions_common_h__
 
+#include <inttypes.h>
+
 #import <Foundation/Foundation.h>
 #import <Foundation/NSMapTable.h>
 
