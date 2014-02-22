@@ -37,7 +37,7 @@
   // WODynamicElement: otherTagString
   
   unsigned short count;
-  id children[1];
+  id *children;
 }
 
 + (id)allocForCount:(int)_count zone:(NSZone *)_zone;

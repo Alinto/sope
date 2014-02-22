@@ -94,6 +94,7 @@ static int descriptiveIDs = -1;
             _children);
   
   self->count = [_children count];
+  self->children = malloc(sizeof(id) * self->count);
   for (i = (self->count - 1); i >= 0; i--) {
     register WOElement *child;
     
@@ -117,6 +118,7 @@ static int descriptiveIDs = -1;
     [self->children[i] release];
     self->children[i] = nil;
   }
+  free(self->children);
   [super dealloc];
 }
 
