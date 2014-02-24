@@ -209,7 +209,7 @@ NSString *DOMNodeValue(id _node) {
 
 - (NSString *)description {
   return [NSString stringWithFormat:
-                     @"<0x%p[%@]: name=%@ parent=%@ type=%i #children=%i>",
+                     @"<0x%p[%@]: name=%@ parent=%@ type=%i #children=%"PRIuPTR">",
                      self, NSStringFromClass([self class]),
                      [self nodeName],
                      [[self parentNode] nodeName],

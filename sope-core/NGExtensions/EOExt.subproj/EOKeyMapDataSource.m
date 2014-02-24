@@ -112,7 +112,7 @@
     if ([obj isModified]) {
       if (self->map) {
 	NSLog(@"%s: don't know how to back-map modified object: %@", 
-	      _object);
+	      __PRETTY_FUNCTION__, _object);
 #if NeXT_Foundation_LIBRARY
     [self doesNotRecognizeSelector:_cmd];
     return nil; // keep compiler happy
@@ -265,7 +265,7 @@
   NSAutoreleasePool *pool;
   NSArray *a;
   
-  pool = [[NSArray alloc] init];
+  pool = [[NSAutoreleasePool alloc] init];
   a = [[NSArray alloc] initWithObjectsFromEnumerator:[self fetchEnumerator]];
   [pool release];
   return [a autorelease];

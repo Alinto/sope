@@ -30,11 +30,10 @@
     text messages
 */
 
-NSData *
-_base64Encoding(NGMimeBodyGenerator *self,
-                NSData *_data_,
-                id<NGMimePart>_part,
-                NGMutableHashMap *_addHeaders)
+NSData * _base64Encoding(NGMimeBodyGenerator *self,
+                         NSData *_data_,
+                         id<NGMimePart>_part,
+                         NGMutableHashMap *_addHeaders)
 {
   NSString   *transEnc = nil;  
   const char *bytes    = NULL;
@@ -50,13 +49,18 @@ _base64Encoding(NGMimeBodyGenerator *self,
   bytes  = [_data_ bytes];
   length = [_data_ length];
 
-  while (length > 0) {
-    if ((unsigned char)*bytes > 127) {
-      break;
+  // Force encoding if the content is bigger than 72 bytes or if it contains
+  // non-ascii characters.
+  if (length < 72)
+    {
+      while (length > 0) {
+        if ((unsigned char)*bytes > 127) {
+          break;
+        }
+        bytes++;
+        length--;
+      }
     }
-    bytes++;
-    length--;
-  }
   if (length > 0) { // should be encoded
     NGMimeType *type;
 

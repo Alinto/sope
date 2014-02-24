@@ -255,7 +255,7 @@ static BOOL printErrors = NO;
   self->tagDepth--;
 }
 
-- (void)characters:(unichar *)_chars length:(int)_len {
+- (void)characters:(unichar *)_chars length:(NSUInteger)_len {
   id       charNode;
   NSString *data;
   
@@ -265,7 +265,7 @@ static BOOL printErrors = NO;
   
   [self->currentElement appendChild:charNode];
 }
-- (void)ignorableWhitespace:(unichar *)_chars length:(int)_len {
+- (void)ignorableWhitespace:(unichar *)_chars length:(NSUInteger)_len {
 }
 
 - (void)processingInstruction:(NSString *)_pi data:(NSString *)_data {

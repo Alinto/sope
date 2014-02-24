@@ -263,7 +263,7 @@
     [ms appendString:@":hits"];
   if (self->flags.cachePathMisses)
     [ms appendString:@":misses"];
-  [ms appendFormat:@":#%d", [self->nameToPathCache count]];
+  [ms appendFormat:@":#%"PRIuPTR, [self->nameToPathCache count]];
   
   [ms appendString:@">"];
   return ms;

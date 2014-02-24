@@ -136,7 +136,7 @@
   s = [NSMutableString stringWithFormat:@"<0x%p[%@]: ",
                          self, NSStringFromClass([self class])];
   [s appendFormat:@"method=%@", [self methodName]];
-  [s appendFormat:@" #paras=%d", [self->parameters count]];
+  [s appendFormat:@" #paras=%"PRIuPTR, [self->parameters count]];
   [s appendString:@">"];
   return s;
 }

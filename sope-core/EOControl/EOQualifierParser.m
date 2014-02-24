@@ -372,7 +372,7 @@ static NSString *_parseOp(const char *_buf, unsigned _bufLen,
     
     if (length < bufLen) {
       NSLog(@"WARNING(%s): unexpected chars at the end of the "
-            @"string(class=%@,len=%i) '%@'",
+            @"string(class=%@,len=%"PRIuPTR") '%@'",
             __PRETTY_FUNCTION__,
             [_qualifierFormat class],
             [_qualifierFormat length], _qualifierFormat);

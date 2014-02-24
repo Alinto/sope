@@ -513,7 +513,7 @@
   ms = [NSMutableString stringWithCapacity:128];
   [ms appendFormat:@"<0x%p[%@]:", self, NSStringFromClass([self class])];
   
-  if (self->_text) [ms appendFormat:@" text-len=%d", [self->_text length]];
+  if (self->_text) [ms appendFormat:@" text-len=%"PRIuPTR, [self->_text length]];
   if (self->_document)
     [ms appendFormat:@" document=%@", self->_document];
 

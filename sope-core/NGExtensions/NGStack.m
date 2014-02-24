@@ -220,7 +220,7 @@
 
 - (NSString *)description {
   return [NSString stringWithFormat:
-                     @"<%@[0x%p] capacity=%u SP=%u count=%u content=%s>",
+    @"<%@[0x%p] capacity=%"PRIuPTR" SP=%"PRIuPTR" count=%"PRIuPTR" content=%s>",
                      NSStringFromClass([self class]), self,
                      [self capacity], [self stackPointer], [self count],
                      [[[self toArray] description] cString]];
@@ -298,19 +298,11 @@
   [self addObject:_obj];
 }
 - (id)pop {
-  unsigned lastIdx = ([self count] - 1);
+  NSUInteger lastIdx = ([self count] - 1);
 
-  if (lastIdx >= 0) {
-    id element = [self objectAtIndex:lastIdx];
-    [self removeObjectAtIndex:lastIdx];
-    return element;
-  }
-  else {
-    [[[NGStackException alloc] initWithName:@"StackException"
-        reason:@"tried to pop an object from an empty stack !"
-        userInfo:nil] raise];
-    return nil;
-  }
+  id element = [self objectAtIndex:lastIdx];
+  [self removeObjectAtIndex:lastIdx];
+  return element;
 }
 
 - (void)clear {

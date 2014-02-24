@@ -122,7 +122,8 @@ static BOOL            debugAll        = NO;
 /* description */
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"<%@[0x%p] debugAll=%@ #loggers=%d>",
+  return [NSString stringWithFormat:
+		@"<%@[0x%p] debugAll=%@ #loggers=%"PRIuPTR">",
                      NSStringFromClass([self class]), self,
                      debugAll ? @"YES" : @"NO", [self->loggerMap count]];
 }

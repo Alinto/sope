@@ -66,13 +66,13 @@
 
   /* header specific */
 
-  if (self->_text) [ms appendFormat:@" text-len=%d", [self->_text length]];
+  if (self->_text) [ms appendFormat:@" text-len=%"PRIuPTR, [self->_text length]];
   if (self->level) [ms appendFormat:@" level=%i",    self->level];
   
   /* common stuff */
   
   if (self->_elements) 
-    [ms appendFormat:@" #elements=%d", [self->_elements count]];
+    [ms appendFormat:@" #elements=%"PRIuPTR, [self->_elements count]];
 
   if (self->_delegate) {
     [ms appendFormat:@" delegate=0x%p<%@>", 

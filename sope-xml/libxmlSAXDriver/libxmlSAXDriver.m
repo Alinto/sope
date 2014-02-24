@@ -223,9 +223,9 @@ _startElement(libxmlSAXDriver *self, const xmlChar *name, const xmlChar **atts);
 static void _endElement(libxmlSAXDriver *self, const xmlChar *name);
 static void _startDocument(libxmlSAXDriver *self);
 static void _endDocument(libxmlSAXDriver *self);
-static void _characters(libxmlSAXDriver *self, const xmlChar *chars, int len);
+static void _characters(libxmlSAXDriver *self, const xmlChar *chars, NSUInteger len);
 static void
-_ignorableWhiteSpace(libxmlSAXDriver *self, const xmlChar *chars, int len);
+_ignorableWhiteSpace(libxmlSAXDriver *self, const xmlChar *chars, NSUInteger len);
 static void __pi(libxmlSAXDriver *self, const xmlChar *target, const xmlChar *data);
 static void _comment(libxmlSAXDriver *self, const xmlChar *value);
 static xmlParserInputPtr
@@ -237,7 +237,7 @@ static void _warning(libxmlSAXDriver *self, const char *msg, ...);
 static void _error(libxmlSAXDriver *self, const char *msg, ...);
 static void _fatalError(libxmlSAXDriver *self, const char *msg, ...);
 static void _setLocator(void *udata, xmlSAXLocatorPtr _locator);
-static void _cdataBlock(libxmlSAXDriver *self, const xmlChar *value, int len);
+static void _cdataBlock(libxmlSAXDriver *self, const xmlChar *value, NSUInteger len);
 static void _entityDecl(libxmlSAXDriver *self, const xmlChar *name, int type,
                        const xmlChar *publicId, const xmlChar *systemId,
                        xmlChar *content)
@@ -1038,7 +1038,7 @@ static void _endDocument(libxmlSAXDriver *self) {
   }
 }
 
-static void _characters(libxmlSAXDriver *self, const xmlChar *chars, int len) {
+static void _characters(libxmlSAXDriver *self, const xmlChar *chars, NSUInteger len) {
   /* need to transform UTF8 to UTF16 */
   unichar *data, *ts;
   
@@ -1062,13 +1062,13 @@ static void _characters(libxmlSAXDriver *self, const xmlChar *chars, int len) {
           __PRETTY_FUNCTION__, __LINE__);
   }
   else {
-    [self->contentHandler characters:data length:((unsigned)(ts - data))];
+    [self->contentHandler characters:data length:((NSUInteger)(ts - data))];
     free(data);
   }
 }
 
 static void
-_ignorableWhiteSpace(libxmlSAXDriver *self, const xmlChar *chars, int len)
+_ignorableWhiteSpace(libxmlSAXDriver *self, const xmlChar *chars, NSUInteger len)
 {
   /* need to transform UTF8 to UTF16 */
   unichar *data, *ts;
@@ -1196,7 +1196,7 @@ static xmlEntityPtr _getEntity(libxmlSAXDriver *self, const xmlChar *name) {
   return p;
 }
 
-static void _cdataBlock(libxmlSAXDriver *self, const xmlChar *value, int len) {
+static void _cdataBlock(libxmlSAXDriver *self, const xmlChar *value, NSUInteger len) {
   [self->lexicalHandler startCDATA];
   _characters(self, value, len);
   [self->lexicalHandler endCDATA];

@@ -1,3 +1,173 @@
+commit 86e24f467277576f82b42985c1590b2d6e4b8945
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Feb 5 16:45:14 2014 -0500
+
+    Raise exception when not enough memory available
+
+M	sope-mime/NGMime/NGMimePartParser.m
+
+commit 328614a3aff41b903861720c276dab8e6037803f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Feb 5 09:14:47 2014 -0500
+
+    Fixed include for old gcc versions
+
+M	sope-core/EOControl/common.h
+M	sope-core/NGExtensions/common.h
+M	sope-xml/DOM/common.h
+M	sope-xml/STXSaxDriver/common.h
+M	sope-xml/XmlRpc/common.h
+
+commit f302b47209140493a6d42dbaf835c22132e84711
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 4 14:25:18 2014 -0500
+
+    Silented massively annoying log messages.
+
+M	sope-core/NGExtensions/FdExt.subproj/NSNull+misc.m
+
+commit d4be6c6a3b3c39df117b2ab96510db02739998da
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 4 08:59:43 2014 -0500
+
+    Fix for bug #2566
+
+M	sope-core/NGExtensions/NGBitSet.m
+M	sope-core/NGExtensions/NGBundleManager.m
+M	sope-core/NGExtensions/NGCalendarDateRange.m
+M	sope-core/NGExtensions/NGHashMap.m
+M	sope-core/NGExtensions/NGLogging.subproj/NGLogEventDetailedFormatter.m
+M	sope-core/NGExtensions/NGLogging.subproj/NGLoggerManager.m
+M	sope-core/NGExtensions/NGResourceLocator.m
+M	sope-core/NGExtensions/NGStack.m
+
+commit 427d4f9260dcb701e7ed5b94c2e6333fd726e9b9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 4 08:58:32 2014 -0500
+
+    Fix for bug #2554
+
+M	sope-core/NGExtensions/EOExt.subproj/EOFetchSpecification+plist.m
+M	sope-core/NGExtensions/EOExt.subproj/EOKeyMapDataSource.m
+
+commit 0261eafb19da1e46be7ed589ef9517007793b875
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 4 08:56:54 2014 -0500
+
+    Fix for bug #2553
+
+M	sope-core/NGExtensions/FdExt.subproj/NGPropertyListParser.m
+M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Escaping.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Ext.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+misc.m
+
+commit a8a123e9d7a8ade6a7214e8c994017cb3cc90067
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 4 08:55:42 2014 -0500
+
+    Fix for bug #2551
+
+M	sope-core/EOControl/EOGenericRecord.m
+M	sope-core/EOControl/EONotQualifier.m
+M	sope-core/EOControl/EOQualifierParser.m
+M	sope-core/EOControl/EOSQLParser.m
+M	sope-core/EOControl/NSArray+EOQualifier.m
+
+commit a98ec9011ef0d8864b3b83e3574144c828bb5e12
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 4 08:54:24 2014 -0500
+
+    Fix for bug #2550
+
+M	sope-xml/DOM/DOMElement.m
+M	sope-xml/DOM/DOMNode.m
+M	sope-xml/DOM/DOMSaxHandler.m
+M	sope-xml/STXSaxDriver/ExtraSTX/StructuredText.m
+M	sope-xml/STXSaxDriver/Model/StructuredTextBodyElement.m
+M	sope-xml/STXSaxDriver/Model/StructuredTextHeader.m
+M	sope-xml/STXSaxDriver/STXSaxDriver.m
+M	sope-xml/SaxObjC/SaxDefaultHandler.m
+M	sope-xml/SaxObjC/SaxDocumentHandler.h
+M	sope-xml/SaxObjC/SaxHandlerBase.m
+M	sope-xml/SaxObjC/SaxObjectDecoder.m
+M	sope-xml/SaxObjC/SaxXMLFilter.m
+M	sope-xml/XmlRpc/XmlRpcDecoder.m
+M	sope-xml/XmlRpc/XmlRpcEncoder.m
+M	sope-xml/XmlRpc/XmlRpcMethodCall.m
+M	sope-xml/XmlRpc/XmlRpcSaxHandler.m
+M	sope-xml/libxmlSAXDriver/libxmlSAXDriver.m
+
+commit 2a5b6b2cb1cd1db00b0237c0a3d95fc0de28ac46
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 4 08:51:05 2014 -0500
+
+    Fix for bug #2549
+
+M	sope-xml/SaxObjC/SaxAttributeList.m
+M	sope-xml/SaxObjC/SaxAttributes.m
+M	sope-xml/SaxObjC/SaxXMLReaderFactory.m
+
+commit 2ce6fb40226d6b3aad38e2399b6b3be89c87e8e9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 31 11:39:33 2014 -0500
+
+    Disabled encoding to broken entities.
+
+M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
+
+commit 7280b9cf26d0c487cd05336462db5a6dd037e42c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Jan 30 09:39:26 2014 -0500
+
+    Encode big parts in quoted-printable
+    
+    We now encode messages in quoted-printable when content is bigger than
+    72 bytes.
+
+M	sope-mime/NGMail/NGMailBase64Encoding.m
+
+commit 87e7a6591e8a75238fbedfc5822cfc20b7ef8481
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jan 20 10:08:11 2014 -0500
+
+    Disabled the addition of the "SENT" prefix - this broke IMAP filtering
+
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+
+commit f7c657190a1adf0147f0d09c82a239880d95b524
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jan 9 20:35:11 2014 -0500
+
+    Handle highestmodseq and uidnext untagged responses
+
+M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
+
+commit 91b1d7252822028df9a876ff71e6a69d1c593729
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jan 9 20:34:19 2014 -0500
+
+    Rework header capitalization code to not touch AS headers
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit df78a9868ee98eafbd4d1d1e04f4cb04d02c35db
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 25 15:34:24 2013 -0500
+
+    Added REPORT as an allowed DAV method.
+
+M	sope-appserver/NGObjWeb/Defaults.plist
+
+commit 5e8ad77b88067bb681441b1d6e4734f8cf0eef02
+Author: Jean Raby <jraby@inverse.ca>
+Date:   Tue Nov 19 14:05:06 2013 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 3c5fddcf5e54795aa206206cef92b82de8283552
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Mon Nov 18 21:40:39 2013 -0500

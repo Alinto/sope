@@ -94,11 +94,12 @@ static BOOL     WOHttpAdaptor_LogStream      = NO;
 static NSMutableDictionary *pendingTransactions = nil; // THREAD
 static BOOL useSimpleParser = YES;
 static int  doCore  = -1;
-static BOOL capitalizeHeaders;
+static BOOL capitalizeHeaders = YES;
 static NSString *adLogPath         = nil;
 static NGLogger *debugLogger       = nil;
 static NGLogger *perfLogger        = nil;
 static NGLogger *transActionLogger = nil;
+static NSDictionary *standardCapitalizedHeaders = nil;
 
 + (void)initialize {
   NSUserDefaults  *ud;
@@ -121,6 +122,9 @@ static NGLogger *transActionLogger = nil;
   
   adLogPath = [[ud stringForKey:@"WOAdaptorLogPath"] copy];
   if (adLogPath == nil) adLogPath = @"";
+
+  standardCapitalizedHeaders = [NSDictionary dictionaryWithObjectsAndKeys: @"MS-Server-ActiveSync", @"ms-server-activesync", @"MS-ASProtocolVersions", @"ms-asprotocolversions", @"MS-ASProtocolCommands", @"ms-asprotocolcommands", nil];
+  [standardCapitalizedHeaders retain];
 }
 
 - (BOOL)optionLogStream {
@@ -835,8 +839,16 @@ static int logCounter = 0;
 #if HEAVY_DEBUG
 	  NSLog(@"    VAL: %@", value);
 #endif
-          addStr(header, @selector(appendString:),
-                 capitalizeHeaders ? capitalizeHeaderName (fieldName) : fieldName);
+          if ([standardCapitalizedHeaders objectForKey: fieldName])
+            {
+              addStr(header, @selector(appendString:), [standardCapitalizedHeaders objectForKey: fieldName]);
+            }
+          else
+            {
+              addStr(header, @selector(appendString:),
+                     capitalizeHeaders ? capitalizeHeaderName (fieldName) : fieldName);
+            }
+          
           addStr(header, @selector(appendString:), @": ");
           addStr(header, @selector(appendString:), value);
           addStr(header, @selector(appendString:), @"\r\n");
