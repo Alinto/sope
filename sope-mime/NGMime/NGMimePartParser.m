@@ -942,7 +942,12 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
   readB   = 0;
     
   buf = calloc(_len, sizeof(char));
-    
+  if (!buf)
+    {
+      [NSException raise: @"MIMEPartReadException" format: @"Can't alloc memory"];
+      return nil;
+    }
+
   NS_DURING {
 
     NS_DURING {
