@@ -60,10 +60,12 @@
         buf[j] = '&'; j++; buf[j] = 'a'; j++; buf[j] = 'm'; j++;
         buf[j] = 'p'; j++; buf[j] = ';'; j++;
         break;
+#if 0
       case '"':
         buf[j] = '&'; j++; buf[j] = 'q'; j++; buf[j] = 'u'; j++;
         buf[j] = 'o'; j++; buf[j] = 't'; j++; buf[j] = ';'; j++;
         break;
+#endif
       case '<':
         buf[j] = '&'; j++; buf[j] = 'l'; j++; buf[j] = 't'; j++;
         buf[j] = ';'; j++;
