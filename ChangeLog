@@ -1,3 +1,28 @@
+commit db69cc0392cae4677ad8392b5318f046168f89f1
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 25 14:46:10 2014 -0500
+
+    Don't encode &quote;
+
+M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
+
+commit ab13ed37694d3dd18d4e8b69973b1d71ab00a5fd
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 25 14:41:57 2014 -0500
+
+    Fix for bug #2609
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit fac46cf1bcd097f0294d85e89a5ce0c113cc7215
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Feb 24 16:55:56 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 86e24f467277576f82b42985c1590b2d6e4b8945
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Feb 5 16:45:14 2014 -0500
