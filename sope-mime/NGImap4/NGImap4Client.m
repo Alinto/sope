@@ -1073,6 +1073,20 @@ static NSMutableDictionary *namespaces;
   return [result autorelease];
 }
 
+- (NSDictionary *) fetchModseqForUid: (unsigned)_uid
+{
+  NSString          *cmd;
+  NSDictionary      *result;
+  id fetchres;
+
+  cmd  = [NSString stringWithFormat:
+                     @"UID FETCH %llu:%llu (UID) (CHANGEDSINCE 1)",
+                   _uid, _uid];
+  fetchres = [self processCommand:cmd];
+  result   = [self->normer normalizeFetchResponse:fetchres];
+  return result;
+}
+
 - (NSDictionary *)fetchVanished:(uint64_t)_modseq
 {
   NSAutoreleasePool *pool;

@@ -147,6 +147,7 @@ typedef enum {
   encoding:(NSString *)_encoding;
 - (NSDictionary *)fetchUids:(NSArray *)_uids parts:(NSArray *)_parts;
 - (NSDictionary *)fetchUid:(unsigned)_uid    parts:(NSArray *)_parts;
+- (NSDictionary *) fetchModseqForUid: (unsigned)_uid;
 - (NSDictionary *)fetchVanished:(uint64_t)_modseq;
 - (NSDictionary *)fetchFrom:(unsigned)_from to:(unsigned)_to
   parts:(NSArray *)_parts;
