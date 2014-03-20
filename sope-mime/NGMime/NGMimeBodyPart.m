@@ -33,7 +33,14 @@
 
 - (id)initWithHeader:(NGHashMap *)_header {
   if ((self = [super init])) {
-    self->header = [_header retain];
+
+    if (_header)
+      self->header = [NGMutableHashMap hashMapWithHashMap: _header];
+    else
+      self->header = [NGMutableHashMap hashMap];
+
+    [self->header retain];
+
     self->body   = nil;
   }
   return self;
@@ -68,6 +75,11 @@
 
 - (NSString *)headerForKey:(NSString *)_key {
   return [[self->header objectEnumeratorForKey:_key] nextObject];
+}
+
+- (void) setHeader: (id) _header  forKey: (NSString *)_key
+{
+  [self->header setObject: _header  forKey: _key];
 }
 
 - (NSArray *)headersForKey:(NSString *)_key {
