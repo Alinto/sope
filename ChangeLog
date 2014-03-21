@@ -1,3 +1,20 @@
+commit d26c934e5f542c6f7813df76b049c97f826eda82
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Mar 20 15:27:22 2014 -0400
+
+    Added header modification capability
+
+M	sope-mime/NGMime/NGMimeBodyPart.h
+M	sope-mime/NGMime/NGMimeBodyPart.m
+
+commit a947a38eeaec9d29728609178ea78b52f3b2d7ca
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Mar 7 14:07:20 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit e08ae3570f7d3df74aaa62dc1a4e6a76fd106e9a
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Feb 25 16:06:12 2014 -0500

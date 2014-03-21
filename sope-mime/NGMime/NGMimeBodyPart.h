@@ -32,12 +32,12 @@
 */
 
 @class NSString, NSArray, NSDictionary, NSEnumerator;
-@class NGHashMap;
+@class NGMutableHashMap;
 
 @interface NGMimeBodyPart : NSObject < NGMimePart >
 {
 @protected
-  NGHashMap *header;
+  NGMutableHashMap *header;
   id        body;
 }
 
@@ -64,6 +64,8 @@
 /* convenience */
 
 - (NSString *)headerForKey:(NSString *)_key;
+- (void) setHeader: (id) _header  forKey: (NSString *)_key;
+
 - (NSArray *)headersForKey:(NSString *)_key;
 - (NSArray *)headerKeys;
 - (NSDictionary *)headers;
