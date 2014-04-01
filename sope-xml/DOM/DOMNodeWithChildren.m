@@ -110,7 +110,7 @@
     for (i = 0; i < count; i++)
       [cache addObject:[fragNodes objectAtIndex:i]];
     
-    /* append nodes (in reverse order [array implemention is assumed]) .. */
+    /* append nodes (in reverse order [array implementation is assumed]) .. */
     for (i = count = [cache count]; i > 0; i--)
       [self appendChild:[cache objectAtIndex:(i - 1)]];
   }

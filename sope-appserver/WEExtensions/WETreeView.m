@@ -22,7 +22,7 @@
 /*
   WETreeView
   
-  A WETreeView is very similiar to a WETableView (eg it can have arbitary
+  A WETreeView is very similar to a WETableView (eg it can have arbitary
   columns), but can also show/manage a tree of objects.
   
   TODO: we should support a cookie to store the tree hiearchy for stateless 

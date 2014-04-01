@@ -199,7 +199,7 @@ static NSNull *null = nil;
       i++;
     }
     else {
-      /* look ahead for similiar entries */
+      /* look ahead for similar entries */
       unsigned j;
       
       r.location = i;

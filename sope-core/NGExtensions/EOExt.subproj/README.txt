@@ -53,7 +53,7 @@ Finally this datasource has own sort-orderings and an own auxiliaryQualifier.
 EOFilterDataSource
 ******************
 
-This datasource is somewhat similiar to EOCompoundDataSource but intended for
+This datasource is somewhat similar to EOCompoundDataSource but intended for
 subclassing and has just one source datasources. It provides own
 sort-orderings, groupings and an own auxiliaryQualifier.
 It can be used as-is to add grouping capabilities to datasources.

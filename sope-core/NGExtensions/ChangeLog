@@ -273,7 +273,7 @@
 2005-07-18  Helge Hess  <helge.hess@opengroupware.org>
 
 	* FdExt.subproj/NSNull+misc.m: added -isNotEmpty to all objects. Its
-	  similiar to -isNotNull but also checks for strings composed of just
+	  similar to -isNotNull but also checks for strings composed of just
 	  spaces (v4.5.162)
 
 2005-07-11  Helge Hess  <helge.hess@opengroupware.org>

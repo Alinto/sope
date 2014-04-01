@@ -81,7 +81,7 @@
 /*
   Attention: NSArray's 'valueForKey:' is special in that it does not
   return properties of the array but an array of the properties of it's
-  elements. That is, it is similiar to a map function.
+  elements. That is, it is similar to a map function.
 */
 - (id)valueForKey:(NSString *)_key;
 

@@ -1305,7 +1305,7 @@ static NSTimeZone                *gmt      = nil;
     How are BPROPFINDs mapped ? BPROPFIND corresponds to SKYRiX 4.1
     "fetch-by-globalids" commands, that is, a search gets passed a list
     of primary keys to fetch.
-    BPROPFIND is implemented in a similiar way, the target URLs are converted
+    BPROPFIND is implemented in a similar way, the target URLs are converted
     to be relative to the URI object and are passed to the query datasource
     using the "bulkTargetKeys" fetch hint.
     

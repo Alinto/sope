@@ -312,7 +312,7 @@ static BOOL logPathOps = NO;
     i++;
     tmp = [destPath stringByAppendingFormat:@"%d", i];
     if (i > 40) {
-      NSLog(@"%s: too many files named similiar to '%@' in trash folder '%@'",
+      NSLog(@"%s: too many files named similar to '%@' in trash folder '%@'",
             __PRETTY_FUNCTION__, destPath, trash);
       return NO;
     }
