@@ -453,7 +453,7 @@ static int loadDebugOn = 0;
        info, eg it can be used to just define the protections
     */
     [self logWithFormat:
-	    @"Note: missing implemention info for method '%@' !", _name];
+	    @"Note: missing implementation info for method '%@' !", _name];
   }
   return nil;
 }

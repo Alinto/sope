@@ -119,7 +119,7 @@ The dispatcher supports various Exchange WebDAV enhancements, eg bulk queries
 like BPROPFIND.
 
 Further it supports so called "ZideStore range" queries which are treated
-similiar to BPROPFIND and catches URLs starting with _range.
+similar to BPROPFIND and catches URLs starting with _range.
 
 
 TODO

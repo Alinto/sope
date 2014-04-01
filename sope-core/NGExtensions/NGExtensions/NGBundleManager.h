@@ -33,7 +33,7 @@
 /*
   NGBundleManager
 
-  NGBundleManager is a class similiar to a Java class loader. It searches
+  NGBundleManager is a class similar to a Java class loader. It searches
   for dynamically loadable bundles in a specified path set.
 
   The default bundle search path is:

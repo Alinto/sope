@@ -13,7 +13,7 @@ Example:
 
 * item B
 ---snap---
-will be reported as SAX events similiar to such an HTML file:
+will be reported as SAX events similar to such an HTML file:
 ---snip---
 <ul>
   <li>item A</li>
