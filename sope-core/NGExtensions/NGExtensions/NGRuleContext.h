@@ -29,7 +29,7 @@
   
   This is a specialized rule evaluation object for key based (assignment)
   rules. It exports evaluated rule values using key-value coding, thereby
-  giving a very simple access somewhat similiar to CSS.
+  giving a very simple access somewhat similar to CSS.
 */
 
 @class NSString, NSArray, NSMutableDictionary;

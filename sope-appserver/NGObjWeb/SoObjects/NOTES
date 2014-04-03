@@ -74,7 +74,7 @@ Indeed this is how it works in SkyPublisher.
 Hm.
 
 All this gets even more tricky if you consider URL processing. Zope
-does not do any URL processing resulting in a similiar problem. When
+does not do any URL processing resulting in a similar problem. When
 you write to reusable component you are probably thinking in the
 context of that component, not in the context of the invocation. So
 it probably makes perfect sense to rewrite URLs.
@@ -96,7 +96,7 @@ We currently do not support sites without a template :-( This is because
 NGObjWeb currently always "finds" a component, even if it has neither a
 template nor a class (probably something todo with scripting or forms).
 
-Note: just remembered about Zope Page Templates ZPT which are similiar to
+Note: just remembered about Zope Page Templates ZPT which are similar to
       .xtmpl templates.
 How are ZPT templates activated ?
 
@@ -110,7 +110,7 @@ on a document (the "clientObject") to perform some tasks.
   Method:   /folder/index.html/manage
   Template: /folder/index.html?template=manage
 
-Apparently templates and methods are quite similiar. In practice they are not 
+Apparently templates and methods are quite similar. In practice they are not
 and can be used in conjunction. "Methods", like the name suggests, are intended
 to perform some operation, eg "adduser", while "templates" are for *rendering*
 objects (usually in HTML).
@@ -168,7 +168,7 @@ Something like
 
 Hm.
 
-Similiar problem exists with various lookups. Eg "gimme a template" - currently
+Similar problem exists with various lookups. Eg "gimme a template" - currently
 we can only lookup templates that end with ".xtmpl".
 
 

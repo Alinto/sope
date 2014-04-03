@@ -162,7 +162,7 @@ static BOOL parseDebugOn = YES;
              andPriorityString:&ps];
   if (!ok) return nil;
   
-  [self debugWithFormat:@"  splitted: q='%@', as='%@', pri=%@", qs, as, ps];
+  [self debugWithFormat:@"  split: q='%@', as='%@', pri=%@", qs, as, ps];
   
   /* parse separate strings */
   

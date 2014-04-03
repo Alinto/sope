@@ -24,7 +24,7 @@
 /*
   WEPageLink
   
-  This element is pretty similiar to WOHyperlink with the "pageName" binding,
+  This element is pretty similar to WOHyperlink with the "pageName" binding,
   but in addition allows for parameters being passed to the page.
 
   WEPageLink associations:

@@ -1,3 +1,37 @@
+commit d684236f4067ed9710dfe5b33520daced696abbe
+Author: Jeroen Dekkers <jeroen@dekkers.ch>
+Date:   Tue Apr 1 17:01:55 2014 +0200
+
+    Fix spelling errors found by lintian
+
+M	sope-appserver/NGObjWeb/SoObjects/NOTES
+M	sope-appserver/NGObjWeb/SoObjects/SoProductClassInfo.m
+M	sope-appserver/NGObjWeb/WebDAV/README
+M	sope-appserver/NGObjWeb/WebDAV/SoObjectWebDAVDispatcher.m
+M	sope-appserver/WEExtensions/WEPageLink.m
+M	sope-appserver/WEExtensions/WETableCalcMatrix.m
+M	sope-appserver/WEExtensions/WETreeView.m
+M	sope-core/EOControl/EOKeyValueCoding.h
+M	sope-core/NGExtensions/ChangeLog
+M	sope-core/NGExtensions/EOExt.subproj/README.txt
+M	sope-core/NGExtensions/NGExtensions/NGBundleManager.h
+M	sope-core/NGExtensions/NGExtensions/NGRuleContext.h
+M	sope-core/NGExtensions/NGFileManager.m
+M	sope-core/NGExtensions/NGRuleEngine.subproj/NGRuleParser.m
+M	sope-core/NGExtensions/NGRuleEngine.subproj/README
+M	sope-core/NGStreams/NGDescriptorFunctions.m
+M	sope-mime/NGMime/NGMimePartParser.m
+M	sope-xml/DOM/DOMNodeWithChildren.m
+M	sope-xml/STXSaxDriver/README
+
+commit a1176463a8b23a01835e2d12cac93d8d53fcacf2
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Mar 21 15:35:45 2014 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit d26c934e5f542c6f7813df76b049c97f826eda82
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Mar 20 15:27:22 2014 -0400
@@ -6,6 +40,14 @@ Date:   Thu Mar 20 15:27:22 2014 -0400
 
 M	sope-mime/NGMime/NGMimeBodyPart.h
 M	sope-mime/NGMime/NGMimeBodyPart.m
+
+commit fcd9c3abbf6fbdd36765c1d294e2d949cc7c5768
+Author: Alexandre Cloutier <acloutier@inverse.ca>
+Date:   Wed Mar 12 14:32:19 2014 -0400
+
+    Encode the comma in the header
+
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
 commit a947a38eeaec9d29728609178ea78b52f3b2d7ca
 Author: Francis Lachapelle <flachapelle@inverse.ca>

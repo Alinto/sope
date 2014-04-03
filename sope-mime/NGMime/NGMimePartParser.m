@@ -1130,7 +1130,7 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
 
   rawBody = [self readBody];
 
-  /* apply content-encoding, transfer-encoding and similiar */
+  /* apply content-encoding, transfer-encoding and similar */
   rawBody = [self decodeBody:rawBody ofPart:_part];
 
   if (self->delegateRespondsTo.parserParseRawBodyDataOfPart) {

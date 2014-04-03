@@ -69,7 +69,7 @@ in the qualifier - "context.soRequestType='WebDAV'". If this left hand side
 
 
 So lets get to the right hand side. It is the so called "Assignment" and is
-actually someone similiar to a WOAssociation. The actual operation is triggered
+actually someone similar to a WOAssociation. The actual operation is triggered
 by some subclass of NGRuleAssignment in the -fireInContext: method.
 
 In the above example the RHS is

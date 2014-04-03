@@ -21,7 +21,7 @@
 
 #if !defined(WIN32) || defined(__CYGWIN32__)
 
-// similiar functions for Windows can be found in NGSocket.[hm]
+// similar functions for Windows can be found in NGSocket.[hm]
 
 #include "NGDescriptorFunctions.h"
 #include "NGStreamExceptions.h"

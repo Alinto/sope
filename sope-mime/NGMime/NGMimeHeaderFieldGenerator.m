@@ -59,10 +59,7 @@ int NGEncodeQuotedPrintableMime
     /* RFC 2045, Sect. 6.7 allows chars 33 through 60 inclusive, and 62 through 126, inclusive
      * RFC 2047, Sect. 4.2 also requires chars 63 and 95 to be encoded
      * Space might be "_", but let's encode it, too... */
-    if (((c >= 33) && (c <= 60)) ||
-	(c == 62) ||
-        ((c >= 64) && (c <= 94)) ||
-	((c >= 96) && (c <= 126))) {
+    if (((c >= 33) && (c <= 43)) || ((c >= 45) && (c <= 60)) || (c == 62) || ((c >= 64) && (c <= 94)) || ((c >= 96) && (c <= 126))) {
       // no quoting
       _dest[destCnt] = c;
       destCnt++;
