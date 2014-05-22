@@ -821,7 +821,7 @@ static NSNumber *YesNumber;
   }
   
   doScript      = NO;  /* perform tab-clicks on browser (use javascript) */
-  tabViewCount  = [[_ctx valueForKey:@"WETabViewScriptDone"] intValue];
+  tabViewCount  = [[_ctx objectForKey:@"WETabViewScriptDone"] intValue];
   cmp           = [_ctx component];
   
   /* check for browser */

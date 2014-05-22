@@ -213,7 +213,7 @@ static BOOL debugTakeValues = NO;
   
   doDnD = [[[_ctx request] clientCapabilities] doesSupportDHTMLDragAndDrop];
   
-  if (![[_ctx valueForKey: @"WEDragContainerScriptDone"] boolValue] && doDnD) {
+  if (![[_ctx objectForKey: @"WEDragContainerScriptDone"] boolValue] && doDnD) {
     dragScript =
       @"<DIV ID=\"DragDIV\" STYLE=\"position: absolute; visibility: hidden; width: 150;\"></DIV>"
       @"<SCRIPT LANGUAGE=\"JScript\">\n"

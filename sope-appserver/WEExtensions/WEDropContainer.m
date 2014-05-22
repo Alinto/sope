@@ -458,7 +458,7 @@ static NSString *dropScript =
   
   doDnD = [[[_ctx request] clientCapabilities] doesSupportDHTMLDragAndDrop];
   
-  if (![[_ctx valueForKey:@"WEDropContainerScriptDone"] boolValue] && doDnD) {
+  if (![[_ctx objectForKey:@"WEDropContainerScriptDone"] boolValue] && doDnD) {
     [_response appendContentString:dropScript];
     
     [_ctx takeValue:[NSNumber numberWithBool:YES]
