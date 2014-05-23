@@ -91,10 +91,10 @@ typedef struct {
   NGCustomFMPath p;
   id (*op)(id,SEL,NSString *);
   
-  if (_sel == NULL) return NO;
+  if (_sel == NULL) return nil;
   p = [self _resolvePath:_path];
-  if ((_path = p.path) == nil) return NO;
-  if ((op = (void *)[p.fileManager methodForSelector:_sel]) == NULL) return NO;
+  if ((_path = p.path) == nil) return nil;
+  if ((op = (void *)[p.fileManager methodForSelector:_sel]) == NULL) return nil;
   
   return op(p.fileManager, _sel, _path);
 }
@@ -248,7 +248,7 @@ typedef struct {
 - (NSDictionary *)fileAttributesAtPath:(NSString *)_p traverseLink:(BOOL)_flag{
   NGCustomFMPath p;
   p = [self _resolvePath:_p];
-  if (p.path == nil) return NO;
+  if (p.path == nil) return nil;
   
   /* special link handling required ??? */
   return [p.fileManager fileAttributesAtPath:p.path traverseLink:_flag];
@@ -332,14 +332,14 @@ typedef struct {
 
 - (EOGlobalID *)globalIDForPath:(NSString *)_path {
   NGCustomFileManagerInfo *info;
-  if ((_path = [self makeAbsolutePath:_path])      == nil) return NO;
-  if ((info = [self fileManagerInfoForPath:_path]) == nil) return NO;
+  if ((_path = [self makeAbsolutePath:_path])      == nil) return nil;
+  if ((info = [self fileManagerInfoForPath:_path]) == nil) return nil;
 
   if (![info supportsGlobalIDs])
     return nil;
   
   if ((_path = [info rewriteAbsolutePath:_path]) == nil)
-    return NO;
+    return nil;
   
   return [[info fileManager] globalIDForPath:_path];
 }
@@ -354,7 +354,7 @@ typedef struct {
   return [self _boolDo:_cmd onPath:_path];
 }
 - (NSString *)trashFolderForPath:(NSString *)_path {
-  return NO;
+  return nil;
 }
 
 @end /* NGCustomFileManager */
@@ -395,7 +395,7 @@ typedef struct {
 - (NSData *)contentsAtPath:(NSString *)_path version:(NSString *)_version {
   NGCustomFMPath p;
   p = [self _resolvePath:_path];
-  if (p.path == nil) return NO;
+  if (p.path == nil) return nil;
   
   return [p.fileManager contentsAtPath:p.path version:_version];
 }
@@ -406,7 +406,7 @@ typedef struct {
 {
   NGCustomFMPath p;
   p = [self _resolvePath:_path];
-  if (p.path == nil) return NO;
+  if (p.path == nil) return nil;
   
   /* do something special to symlink ??? */
   
