@@ -118,7 +118,7 @@ static int          ProfileImapEnabled = -1;
 static int          LogImapEnabled     = -1;
 static int          PreventExceptions  = -1;
 static BOOL         fetchDebug         = NO;
-static BOOL         ImapDebugEnabled   = NO;
+static BOOL         ImapDebugEnabled   = YES;
 static NSArray      *Imap4SystemFlags  = nil;
 
 static NSMutableDictionary *capabilities;
@@ -908,6 +908,78 @@ static NSMutableDictionary *namespaces;
   return [self->normer normalizeResponse:[self processCommand:@"unselect"]];
 }
 
+/*
+ result dict looks like the following  
+{FolderList = {INBOX = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_d8"; }; }; "Other Users/sogo2" = {"/comment" = {"value.priv" = "sogo_c0c_192bd7dc_0"; }; }; Sent = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_da"; }; }; Trash = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_dc"; }; }; abczzll = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_d9"; }; }; "abczzll/mmabcmm" = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_de"; }; }; mf1renamedd = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_dd"; }; }; tfu1 = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_db"; }; }; zuk = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_df"; }; }; }; RawResponse = "{FolderList = ({INBOX = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_d8\"; }; }; }, {Sent = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_da\"; }; }; }, {Trash = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_dc\"; }; }; }, {abczzll = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_d9\"; }; }; }, {\"abczzll/mmabcmm\" = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_de\"; }; }; }, {mf1renamedd = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_dd\"; }; }; }, {tfu1 = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_db\"; }; }; }, {zuk = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_df\"; }; }; }, {\"Other Users/sogo2\" = {\"/comment\" = {\"value.priv\" = \"sogo_c0c_192bd7dc_0\"; }; }; }); ResponseResult = {description = Completed; result = ok; tagId = 13; }; }"; expunge = (); result = 1; }
+
+ getannotation:
+
+ result = [client annotation: folderName entryName: @"/comment" attributeName: @"value.priv"];
+ result = [client annotation: folderName entryName: @"/comment" attributeName: @"value"];
+ result = [client annotation: folderName entryName: @"/*" attributeName: @"value"];
+ result = [client annotation: @"" entryName: @"/*" attributeName: @"value"];
+
+*/
+- (NSDictionary *)annotation:(NSString *)_folder entryName:(NSString *)_entry attributeName:(NSString *)_attribute {
+  NSString *cmd;
+  NGHashMap *_map;
+  NSDictionary        *obj;
+  NSMutableDictionary *result, *folderList;
+  NSEnumerator        *enumerator;
+
+  if (_folder == nil)
+    return nil;
+  if ((_entry == nil))
+    return nil;
+  if ((_attribute == nil))
+    return nil;
+  if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
+    return nil;
+  
+  cmd     = [NSString stringWithFormat:@"getannotation \"%@\" \"%@\" \"%@\"",
+                      SaneFolderName(_folder), _entry, _attribute];
+  
+  result  = [NSMutableDictionary dictionaryWithCapacity:2];
+  _map = [self processCommand:cmd];
+
+  result = [self->normer normalizeResponse:_map];
+
+  enumerator = [_map objectEnumeratorForKey:@"FolderList"];
+  folderList  = [NSMutableDictionary dictionaryWithCapacity:5];
+  while ((obj = [enumerator nextObject]) != nil) {
+
+    [folderList addEntriesFromDictionary:[NSDictionary dictionaryWithDictionary:obj]];
+  }
+
+  [result setObject: folderList forKey: @"FolderList" ];
+
+  return result;
+}
+
+- (NSDictionary *)annotation:(NSString *)_folder entryName:(NSString *)_entry attributeName:(NSString *)_attribute attributeValue:(NSString *)_value {
+  NSString *cmd;
+  NSMutableDictionary *result;
+  
+  if (_folder == nil)
+    return nil;
+  if ((_entry == nil))
+    return nil;
+  if ((_attribute == nil))
+    return nil;
+  if ((_value == nil))
+    return nil;
+  if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
+    return nil;
+  
+  cmd     = [NSString stringWithFormat:@"setannotation \"%@\" \"%@\" (\"%@\" \"%@\")",
+                      SaneFolderName(_folder), _entry, _attribute, _value];
+  
+  result  = [NSMutableDictionary dictionaryWithCapacity:2];
+  result = [self->normer normalizeResponse:[self processCommand:cmd]];
+
+  return result;
+}
+
 - (NSDictionary *)status:(NSString *)_folder flags:(NSArray *)_flags {
   NSString *cmd;
   
@@ -918,7 +990,7 @@ static NSMutableDictionary *namespaces;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   
-  cmd     = [NSString stringWithFormat:@"status \"%@\" (%@)",
+  cmd = [NSString stringWithFormat:@"status \"%@\" (%@)",
                       SaneFolderName(_folder), [_flags componentsJoinedByString:@" "]];
   return [self->normer normalizeStatusResponse:[self processCommand:cmd]];
 }
@@ -987,6 +1059,7 @@ static NSMutableDictionary *namespaces;
 - (NSString *)_partsJoinedForFetchCmd:(NSArray *)_parts {
   return [_parts componentsJoinedByString:@" "];
 }
+
 
 - (NSDictionary *)fetchUids:(NSArray *)_uids parts:(NSArray *)_parts {
   /*

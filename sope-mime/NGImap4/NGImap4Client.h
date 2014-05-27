@@ -136,6 +136,8 @@ typedef enum {
 - (NSDictionary *)select:(NSString *)_folder;
 - (NSDictionary *)unselect;
 - (NSDictionary *)status:(NSString *)_folder flags:(NSArray *)_flags;
+- (NSDictionary *)annotation:(NSString *)_folder entryName:(NSString *)_entry attributeName:(NSString *)_attribute;
+- (NSDictionary *)annotation:(NSString *)_folder entryName:(NSString *)_entry attributeName:(NSString *)_attribute  attributeValue:(NSString *)_value;
 - (NSDictionary *)rename:(NSString *)_folder to:(NSString *)_newName;
 - (NSDictionary *)delete:(NSString *)_folder;
 - (NSDictionary *)create:(NSString *)_name;

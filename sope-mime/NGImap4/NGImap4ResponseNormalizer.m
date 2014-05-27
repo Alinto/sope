@@ -268,6 +268,8 @@ static int      LogImapEnabled = -1;
         [result setObject:o forKey:@"highestmodseq"];
       else if ((o = [obj objectForKey:@"UIDNEXT"]))
         [result setObject:o forKey:@"uidnext"];
+      else if ((o = [obj objectForKey:@"UIDVALIDITY"]))
+        [result setObject:o forKey:@"uidvalidity"];
     }
     else
       [self warnWithFormat:@"unexpected OK object: %@", obj];
@@ -292,6 +294,7 @@ static int      LogImapEnabled = -1;
   
   return result;
 }
+
 
 - (NSDictionary *)normalizeStatusResponse:(NGHashMap *)_map {
   /*
@@ -318,6 +321,10 @@ static int      LogImapEnabled = -1;
   }
   if ((o = [obj  objectForKey:@"unseen"]) != nil)
     [result setObject:o forKey:@"unseen"];
+
+  // support x-guid (dovecot)
+  if ((o = [obj  objectForKey:@"x-guid"]) != nil)
+    [result setObject:o forKey:@"x-guid"];
   
   return result;
 }
