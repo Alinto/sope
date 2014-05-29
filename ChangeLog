@@ -1,3 +1,101 @@
+commit 942e123307fd13c382bba00615f34daa5ee61542
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed May 28 09:50:03 2014 -0400
+
+    Don't strip "comments" by default in headers. This is uterly braindead.
+
+M	sope-mime/NGMime/NGMimeStringHeaderFieldParser.m
+
+commit 378d023f70f2134f2127a6f8fe72a88042af4c6d
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue May 27 12:01:24 2014 -0400
+
+    Added IMAP annotations support - patch from #2688
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit a435b7f2b6a7dc2603663d64e574bc2d1e715047
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri May 23 09:35:02 2014 -0400
+
+    Return nil where pointers are expected
+    
+    Fixes #2790
+
+M	sope-core/NGExtensions/NGCustomFileManager.m
+
+commit 40c20c124b15fcf68354dae0ca599bc62c14b399
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri May 23 07:46:30 2014 -0400
+
+    Make declarations in header match implemenations
+    
+    Fixes #2789
+
+M	sope-xml/SaxObjC/SaxContentHandler.h
+
+commit 34b70f45575e506c01b60b45ffaf0e6a459e7c0d
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 22 14:26:37 2014 -0400
+
+    Added patch from bug #2752
+
+M	sope-appserver/NGObjWeb/WOResponse+private.h
+
+commit 6bdd62c9b2a1083dad13454d36c9179c59562664
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 22 10:23:45 2014 -0400
+
+    Applied patch from bug #2756
+
+M	sope-appserver/WEExtensions/WETableMatrixLabel.m
+
+commit 040d30bd7e1329979333822dc7a84df1efa63d9f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 22 10:13:25 2014 -0400
+
+    Applied patch from bug #2737
+
+M	sope-appserver/WEExtensions/WEDragContainer.m
+M	sope-appserver/WEExtensions/WEDropContainer.m
+M	sope-appserver/WEExtensions/WETabView.m
+
+commit 05edc27b75d0c8d37303d940927881978c7835a8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri May 16 09:36:20 2014 -0400
+
+    Fixed buffer overflow
+
+M	sope-mime/NGMail/NGMimeMessageGenerator.m
+
+commit 36ee084ab9cdeb3a9a01ccd01e94fa583d6f9536
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri May 16 09:35:05 2014 -0400
+
+    Now encode everything in UTF-8 instead of Latin9 since that's what
+    is gonna be used afterwards.
+
+M	sope-mime/NGMime/NGMimeStringHeaderFieldGenerator.m
+
+commit 60caf252df2eed12115f05ff5025b54f01b42efb
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 15 11:34:51 2014 -0400
+
+    Fixed fd leak where files were unlinked w/o being closed first.
+
+M	sope-mime/NGMime/NGMimeFileData.m
+
+commit 91d2dce547942de6ea4cfb6f100aba51534a7fe2
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Apr 3 10:09:01 2014 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit d684236f4067ed9710dfe5b33520daced696abbe
 Author: Jeroen Dekkers <jeroen@dekkers.ch>
 Date:   Tue Apr 1 17:01:55 2014 +0200
