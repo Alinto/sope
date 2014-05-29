@@ -40,7 +40,7 @@ static BOOL StripLeadingSpaces = NO;
   return self;
 }
 - (id)init {
-  return [self initWithRemoveComments:YES];
+  return [self initWithRemoveComments:NO];
 }
 
 /* operation */

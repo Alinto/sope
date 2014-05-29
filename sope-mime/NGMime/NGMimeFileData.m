@@ -95,6 +95,9 @@ static unsigned      tmpmask  = 0600;
     [self release];
     return nil;
   }
+ 
+  close(fd);
+ 
   return [self initWithPath:filename removeFile:YES];
 }
 

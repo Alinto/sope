@@ -106,7 +106,7 @@ static NSString *retStrForInt(int i) {
   
   pos = [self->position stringValueInComponent:[_ctx component]];
   
-  if ((tmp = [_ctx valueForKey:@"WETableMatrix_Query"]) != nil) {
+  if ((tmp = [_ctx objectForKey:@"WETableMatrix_Query"]) != nil) {
     if (pos == nil)
       [self errorWithFormat:@"got no position: %@", self->position];
     else
@@ -114,7 +114,7 @@ static NSString *retStrForInt(int i) {
     return;
   }
 
-  if ((tmp = [_ctx valueForKey:@"WETableMatrix_Mode"]) == nil)
+  if ((tmp = [_ctx objectForKey:@"WETableMatrix_Mode"]) == nil)
     return;
 
   if (![tmp isEqualToString:pos])

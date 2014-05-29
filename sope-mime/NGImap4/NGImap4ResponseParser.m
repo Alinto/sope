@@ -11,7 +11,7 @@
   SOPE is distributed in the hope that it will be useful, but WITHOUT ANY
   WARRANTY; without even the implied warranty of MERCHANTABILITY or
   FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
-  License for more details.
+/bin/bash: 58: command not found
 
   You should have received a copy of the GNU Lesser General Public
   License along with SOPE; see the file COPYING.  If not, write to the
@@ -48,6 +48,7 @@
 - (BOOL)_parseVanishedResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseByeUntaggedResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseACLResponseIntoHashMap:(NGMutableHashMap *)result_;
+- (BOOL)_parseAnnotationResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseMyRightsResponseIntoHashMap:(NGMutableHashMap *)result_;
 - (BOOL)_parseListRightsResponseIntoHashMap:(NGMutableHashMap *)result_;
 
@@ -604,7 +605,10 @@ static void _parseUntaggedResponse(NGImap4ResponseParser *self,
   l0 = _la(self, 0);
   switch (l0) {
   case 'A':
-    if ([self _parseACLResponseIntoHashMap:result_])
+    l1 = _la(self, 1);
+    if (l1 == 'C' && [self _parseACLResponseIntoHashMap:result_])
+      return;
+    if (l1 == 'N' && [self _parseAnnotationResponseIntoHashMap:result_]) 
       return;
     break;
     
@@ -1407,7 +1411,7 @@ _purifyQuotedString(NSMutableString *quotedString) {
 - (BOOL)_parseStatusResponseIntoHashMap:(NGMutableHashMap *)result_ {
   NSString            *name  = nil;
   NSMutableDictionary *flags = nil;
-  NSDictionary *d;
+  NSDictionary *d, *f;
     
   if (!_matchesString(self, "STATUS "))
     return NO;
@@ -1437,8 +1441,12 @@ _purifyQuotedString(NSMutableString *quotedString) {
     if (_la(self, 0) == ' ')
       _consume(self, 1);
       
+    if ([[key lowercaseString] isEqualToString:@"x-guid"])
+    [flags setObject:value
+          forKey:[key lowercaseString]];
+    else
     [flags setObject:[NumClass numberWithInt:[value intValue]]
-	   forKey:[key lowercaseString]];
+          forKey:[key lowercaseString]];
   }
   _consumeIfMatch(self, ')');
   _parseUntil(self, '\n');
@@ -1450,6 +1458,71 @@ _purifyQuotedString(NSMutableString *quotedString) {
   [d release];
   return YES;
 }
+
+- (BOOL)_parseAnnotationResponseIntoHashMap:(NGMutableHashMap *)result_ {
+  NSString            *name  = nil;
+  NSString            *entry  = nil;
+  NSMutableDictionary *attributes = nil;
+  NSDictionary *d, *f;
+
+  if (!_matchesString(self, "ANNOTATION "))
+    return NO;
+
+  _consume(self, 11);
+
+  if (_la(self, 0) == '"') {
+    name = [self _parseQuotedString];
+    _consumeIfMatch(self, ' ');
+  }
+  else if (_la(self, 0) == '{') {
+    name = [self _parseQuotedStringOrNIL];
+    _consumeIfMatch(self, ' ');
+  }
+  else {
+    name = _parseUntil(self, ' ');
+  }
+
+  if (_la(self, 0) == '"') {
+    entry = [self _parseQuotedString];
+    _consumeIfMatch(self, ' ');
+  }
+  else if (_la(self, 0) == '{') {
+    entry = [self _parseQuotedStringOrNIL];
+    _consumeIfMatch(self, ' ');
+  }
+  else {
+    entry = _parseUntil(self, ' ');
+  }
+
+  _consumeIfMatch(self, '(');
+
+  attributes = [NSMutableDictionary dictionaryWithCapacity:2];
+  d = [NSMutableDictionary dictionaryWithCapacity:2];
+  f = [NSMutableDictionary dictionaryWithCapacity:2];
+
+  while (_la(self, 0) != ')') {
+    NSString *key   = [self _parseQuotedString];
+    _consumeIfMatch(self, ' ');
+    NSString *value = [self _parseQuotedString];
+
+    if (_la(self, 0) == ' ')
+      _consume(self, 1);
+
+    [attributes setObject:value
+           forKey:[key lowercaseString]];
+
+    [d setObject:[NSDictionary dictionaryWithDictionary:attributes]
+       forKey:entry];
+  }
+  _consumeIfMatch(self, ')');
+  _parseUntil(self, '\n');
+
+  [f setObject:d forKey:name];
+  [result_ addObject:f forKey:@"FolderList"];
+
+  return YES;
+}
+
 
 - (BOOL)_parseByeUntaggedResponseIntoHashMap:(NGMutableHashMap *)result_ {
   NSString *reason;

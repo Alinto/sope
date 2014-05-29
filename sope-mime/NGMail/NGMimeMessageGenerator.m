@@ -113,7 +113,7 @@ static BOOL debugOn = NO;
   /* encode quoted printable */
   {
     char        iso[]     = "=?utf-8?q?";
-    unsigned    isoLen    = 16;
+    unsigned    isoLen    = 10;
     char        isoEnd[]  = "?=";
     unsigned    isoEndLen = 2;
       

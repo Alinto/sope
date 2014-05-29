@@ -33,7 +33,7 @@
 #define WOResponse_AddString(__R__,__C__) \
   {__R__->addStr(__R__, @selector(appendContentString:), __C__);}
 #define WOResponse_AddCString(__R__,__C__) \
-  {__R__->addCStr(__R__, @selector(appendContentCString:), \
+  if (__R__) {__R__->addCStr(__R__, @selector(appendContentCString:), \
 			     (const unsigned char *)__C__);}
 #define WOResponse_AddBytesLen(__R__,__C__,__L__)                    \
   {__R__->addBytesLen(__R__, @selector(appendContentBytes:length:),   \

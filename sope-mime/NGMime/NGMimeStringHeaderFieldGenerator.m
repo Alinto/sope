@@ -37,11 +37,7 @@
   if (![_value isKindOfClass:[NSString class]])
     _value = [_value stringValue];
 
-#if APPLE_Foundation_LIBRARY || NeXT_Foundation_LIBRARY
-  return [_value dataUsingEncoding:NSISOLatin1StringEncoding];
-#else
-  return [_value dataUsingEncoding:NSISOLatin9StringEncoding];
-#endif
+  return [_value dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end /* NGMimeStringHeaderFieldGenerator */
