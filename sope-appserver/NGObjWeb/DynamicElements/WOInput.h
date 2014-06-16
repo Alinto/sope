@@ -36,6 +36,7 @@
   // WODynamicElement: otherTagString
 @protected
   WOAssociation *name;
+  WOAssociation *type;
   WOAssociation *value;
   WOAssociation *disabled;
 }

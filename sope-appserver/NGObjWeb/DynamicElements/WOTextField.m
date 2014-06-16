@@ -170,13 +170,14 @@ static inline NSFormatter *_getFormatter(WOTextField *self, WOContext *_ctx) {
 
 - (void)appendToResponse:(WOResponse *)_response inContext:(WOContext *)_ctx {
   NSFormatter *fmt;
-  id       obj;
+  id       obj, t;
   unsigned s;
 
   if ([_ctx isRenderingDisabled]) return;
 
-  obj = [self->value valueInComponent:[_ctx component]];
-  s   = [self->size  unsignedIntValueInComponent:[_ctx component]];
+  obj  = [self->value valueInComponent:[_ctx component]];
+  t    = [self->type  valueInComponent:[_ctx component]];
+  s    = [self->size  unsignedIntValueInComponent:[_ctx component]];
 
   if ((fmt = _getFormatter(self, _ctx)) != nil) {
     NSString *formattedObj;
@@ -192,7 +193,14 @@ static inline NSFormatter *_getFormatter(WOTextField *self, WOContext *_ctx) {
     obj = formattedObj;
   }
   
-  WOResponse_AddCString(_response, "<input type=\"text\" name=\"");
+  WOResponse_AddCString(_response, "<input type=\"");
+  if (t) {
+    [_response appendContentHTMLAttributeValue:[t stringValue]];
+  }
+  else {
+    WOResponse_AddCString(_response, "text");
+  }
+  WOResponse_AddCString(_response, "\" name=\"");
   [_response appendContentHTMLAttributeValue:OWFormElementName(self, _ctx)];
   WOResponse_AddCString(_response, "\" value=\"");
   [_response appendContentHTMLAttributeValue:[obj stringValue]];
