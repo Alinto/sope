@@ -24,6 +24,7 @@
 #include <SaxObjC/XMLNamespaces.h>
 #import <EOControl/EOQualifier.h>
 #include "common.h"
+#include <inttypes.h>
 
 /*
   TODO: support parsing of DASL
