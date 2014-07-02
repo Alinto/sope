@@ -2,6 +2,7 @@
 
 <wo class="WOTextField">
   <binding name="name"/>
+  <binding name="type" settable="YES" required="YES"/>
   <binding name="value" settable="YES" required="YES"/>
   <binding name="disabled" passthrough="NO" defaults="YES/NO"/>
 

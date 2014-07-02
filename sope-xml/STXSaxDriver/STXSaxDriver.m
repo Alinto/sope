@@ -156,7 +156,7 @@ static BOOL debugOn = NO;
 }
 - (void)_characters:(NSString *)_chars {
   unichar      *buf;
-  unsigned int len;
+  NSUInteger   len;
   
   if ((len = [_chars length]) == 0) // TODO: may or may not be correct
     return;

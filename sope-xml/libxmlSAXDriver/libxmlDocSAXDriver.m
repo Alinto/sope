@@ -424,7 +424,7 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
         return NO;
       }
       
-      [self->contentHandler characters:data length:(unsigned)(ts - data)];
+      [self->contentHandler characters:data length:(ts - data)];
       
       free(data);
     }

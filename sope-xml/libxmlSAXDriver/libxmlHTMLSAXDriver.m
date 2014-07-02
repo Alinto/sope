@@ -481,7 +481,7 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
 - (BOOL)processTextNode:(xmlNodePtr)_node {
   static unichar c = '\0';
   xmlChar  *chars;
-  unsigned len;
+  NSUInteger len;
   
   if (self->contentHandler == nil)
     return YES;

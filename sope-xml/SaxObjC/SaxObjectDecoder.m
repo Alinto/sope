@@ -55,7 +55,7 @@ static BOOL debugOn = NO;
 - (void)start;
 - (void)stop;
 
-- (void)characters:(unichar *)_chars length:(int)_len;
+- (void)characters:(unichar *)_chars length:(NSUInteger)_len;
 
 @end
 
@@ -467,7 +467,7 @@ static Class  StringClass        = Nil;
   }
 }
 
-- (void)characters:(unichar *)_chars length:(int)_len {
+- (void)characters:(unichar *)_chars length:(NSUInteger)_len {
   if (self->flags.isMutableString) {
     NSString *tmp;
     

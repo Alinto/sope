@@ -81,7 +81,7 @@ static BOOL doDebug = NO;
 
 - (void)parser:(id)_parser foundCharacters:(NSString *)_string {
   /* Note: expensive ..., decompose string into chars */
-  int     len;
+  NSUInteger     len;
   unichar *buf = NULL;
   
   if ((len = [_string length]) > 0) {
@@ -93,7 +93,7 @@ static BOOL doDebug = NO;
 }
 - (void)parser:(id)_parser foundIgnorableWhitespace:(NSString *)_ws {
   /* Note: expensive ..., decompose string into chars */
-  int     len;
+  NSUInteger     len;
   unichar *buf = NULL;
   
   if ((len = [_ws length]) > 0) {

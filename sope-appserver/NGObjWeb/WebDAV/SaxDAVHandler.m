@@ -24,6 +24,7 @@
 #include <SaxObjC/XMLNamespaces.h>
 #import <EOControl/EOQualifier.h>
 #include "common.h"
+#include <inttypes.h>
 
 /*
   TODO: support parsing of DASL
@@ -937,8 +938,8 @@ static BOOL heavyLog = NO;
 
 /* CDATA */
 
-- (void)characters:(unichar *)_chars length:(int)_len {
-  if (heavyLog) [self logWithFormat:@"got %i chars", _len];
+- (void)characters:(unichar *)_chars length:(NSUInteger)_len {
+  if (heavyLog) [self logWithFormat:@"got %"PRIuPTR" chars", _len];
   
   if (_len > 0 && (self->cdata != nil)) {
     NSString *s;

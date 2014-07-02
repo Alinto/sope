@@ -36,19 +36,17 @@ static BOOL takeValueDebugOn = YES;
 }
 
 - (id)initWithName:(NSString *)_name
-  associations:(NSDictionary *)_associations
-  template:(WOElement *)_rootChild
+      associations:(NSDictionary *)_associations
+          template:(WOElement *)_rootChild
 {
   self = [super initWithName:_name associations:_associations
-                template:_rootChild];
+                    template:_rootChild];
   if (self) {
     self->containsForm = YES;
     self->name     = OWGetProperty(_associations, @"name");
+    self->type     = OWGetProperty(_associations, @"type");
     self->value    = OWGetProperty(_associations, @"value");
     self->disabled = OWGetProperty(_associations, @"disabled");
-    
-    /* type is defined by the element itself ... */
-    [(NSMutableDictionary *)_associations removeObjectForKey:@"type"];
     
     if ([_associations objectForKey:@"NAME"]) {
       [self warnWithFormat:@"found 'NAME' association in element %@, "
@@ -60,6 +58,7 @@ static BOOL takeValueDebugOn = YES;
 
 - (void)dealloc {
   [self->name     release];
+  [self->type     release];
   [self->value    release];
   [self->disabled release];
   [super dealloc];
@@ -78,9 +77,9 @@ NSString *OWFormElementName(WOInput *self, WOContext *_ctx) {
   
   [[_ctx component]
          warnWithFormat:
-               @"in element %@, 'name' attribute configured (%@),"
-               @"but no name assigned (using elementID as name) !",
-               self, self->name];
+      @"in element %@, 'name' attribute configured (%@),"
+    @"but no name assigned (using elementID as name) !",
+    self, self->name];
   return [_ctx elementID];
 }
 
@@ -105,8 +104,8 @@ NSString *OWFormElementName(WOInput *self, WOContext *_ctx) {
   
   if (takeValueDebugOn) {
     [self logWithFormat:
-	    @"%s(%@): form=%@ ctx=%@ value=%@ ..", __PRETTY_FUNCTION__,
-	    [_ctx elementID], formName, [_ctx contextID], formValue];
+               @"%s(%@): form=%@ ctx=%@ value=%@ ..", __PRETTY_FUNCTION__,
+          [_ctx elementID], formName, [_ctx contextID], formValue];
   }
   
   if ([self->value isValueSettable]) {
@@ -115,8 +114,8 @@ NSString *OWFormElementName(WOInput *self, WOContext *_ctx) {
   }
   else if (self->value != nil) {
     [self logWithFormat:
-	    @"%s: form value is not settable: %@", __PRETTY_FUNCTION__,
-            self->value];
+                   @"%s: form value is not settable: %@", __PRETTY_FUNCTION__,
+          self->value];
   }
 }
 
@@ -128,6 +127,7 @@ NSString *OWFormElementName(WOInput *self, WOContext *_ctx) {
   str = [NSMutableString stringWithCapacity:128];
   if (self->value != nil) [str appendFormat:@" value=%@",    self->value];
   if (self->name  != nil) [str appendFormat:@" name=%@",     self->name];
+  if (self->type  != nil) [str appendFormat:@" type=%@",     self->value];
   
   if (self->disabled) [str appendFormat:@" disabled=%@", self->disabled];
   return str;

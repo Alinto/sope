@@ -110,6 +110,9 @@ static Class WOGenericElementClass   = Nil;
         if ([type isEqualToString:@"reset"])
           return NSClassFromString(@"WOResetButton");
       }
+      else if (c1 == 'e' && [type isEqualToString:@"email"]) {
+        return NSClassFromString(@"WOTextField");
+      }
       break;
       
     case 6:

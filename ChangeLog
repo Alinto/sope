@@ -1,3 +1,52 @@
+commit 5f94d915eff8bfc46a3f6cb9cb5a8577ee5dede4
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jun 25 15:31:03 2014 -0400
+
+    Applied patch for bug #2814
+
+M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
+
+commit 467bf1a276e580cb0e7a4e80cbb0e31873f17495
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jun 19 16:12:47 2014 -0400
+
+    Avoid compilation failures
+
+M	sope-appserver/NGObjWeb/WebDAV/SaxDAVHandler.m
+
+commit 67cb8a515451f781b0bf0fcdfebefad20e63c973
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 16 15:32:22 2014 -0400
+
+    Fix for bug #2736
+
+M	sope-appserver/NGObjWeb/WebDAV/SaxDAVHandler.m
+M	sope-xml/STXSaxDriver/STXSaxDriver.m
+M	sope-xml/SaxObjC/SaxDefaultHandler+NSXML.m
+M	sope-xml/SaxObjC/SaxObjectDecoder.m
+M	sope-xml/libxmlSAXDriver/libxmlDocSAXDriver.m
+M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
+
+commit 0de27fec6b74a4fa7d8eb1e68d6a22350dd6c324
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Jun 16 15:17:31 2014 -0400
+
+    Add support for the email input type of HTML5
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOInput.h
+M	sope-appserver/NGObjWeb/DynamicElements/WOInput.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOTextField.api
+M	sope-appserver/NGObjWeb/DynamicElements/WOTextField.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOxHTMLElemBuilder.m
+
+commit e1d2554820ce75b5b93757b5b4a7c5e49aaee4c2
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu May 29 11:19:59 2014 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 942e123307fd13c382bba00615f34daa5ee61542
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 28 09:50:03 2014 -0400
