@@ -609,8 +609,8 @@ static NSMutableDictionary *namespaces;
     should (?) be sent directly.
     */
     NSString *s = self->password;
-    int len = [s length];
-    for (int i = 0; i < len; i++) {
+    int i, len = [s length];
+    for (i = 0; i < len; i++) {
         unichar c = [s characterAtIndex:i];
         if (c < ' ' || c == '"' || c > '~')
             return NO;
@@ -639,7 +639,6 @@ static NSMutableDictionary *namespaces;
   
   self->isLogin = YES;
 
-  if ([self self->password])
   if (self->useUTF8)
     plength = [self->password lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
   else
