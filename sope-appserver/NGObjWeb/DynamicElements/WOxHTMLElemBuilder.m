@@ -90,6 +90,12 @@ static Class WOGenericElementClass   = Nil;
   switch (tl) {
     case 0:
 
+    case 3:
+      if (c1 == 'u' && [type isEqualToString:@"url"]) {
+        return NSClassFromString(@"WOTextField");
+      }
+      break;
+
     case 4:
       if (c1 == 't') {
         if ([type isEqualToString:@"text"])

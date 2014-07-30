@@ -601,6 +601,23 @@ static NSMutableDictionary *namespaces;
   [extensions autorelease];
 }
 
+- (BOOL)passwordIsSimple {
+    /*
+    Password is pure printable ASCII [ -~] without quote
+    and can thus be sent without continuation.
+    This obviously includes the empty password which
+    should (?) be sent directly.
+    */
+    NSString *s = self->password;
+    int i, len = [s length];
+    for (i = 0; i < len; i++) {
+        unichar c = [s characterAtIndex:i];
+        if (c < ' ' || c == '"' || c > '~')
+            return NO;
+    }
+    return YES;
+}
+
 - (NSDictionary *)login {
   /*
     On failure returns a dictionary with those keys:
@@ -627,11 +644,12 @@ static NSMutableDictionary *namespaces;
   else
     plength = [self->password length];
 
-  if (plength > 0)
+  if (![self passwordIsSimple])
     s = [NSString stringWithFormat:@"login \"%@\" {%d}",
 		  self->login, plength];
   else
-    s = [NSString stringWithFormat:@"login \"%@\" \"\"", self->login];
+    s = [NSString stringWithFormat:@"login \"%@\" \"%@\"",
+          self->login, self->password];
 
   map = [self processCommand: s
                      withTag: YES
