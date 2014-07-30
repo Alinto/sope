@@ -1,3 +1,45 @@
+commit a7291026a938c2e028d1f4c1e74815a760786fa5
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jul 22 16:09:48 2014 -0400
+
+    Silenced annoying warning.
+
+M	sope-ldap/NGLdap/NGLdapAttribute.m
+
+commit 4c60ceb5c918b05d254a7bc6f146cc35c6f1b4ae
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Jun 17 07:07:02 2014 -0400
+
+    Add support for the url input type of HTML5
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOxHTMLElemBuilder.m
+
+commit b081453f25b6431dd3e34eefed26da7089630104
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jul 15 07:09:42 2014 -0400
+
+    Fixed broken merged pull request.
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 25d3ef8629bbe997e39f4b81205859d9dd0034ba
+Author: Marcel Waldvogel <waldvogel@netfuture.ch>
+Date:   Fri Jul 4 23:11:54 2014 +0200
+
+    Sends "simple" passwords with command
+    
+    This is necessary for some old IMAP servers, e.g. SmarterMail
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit aec5f5a99131bf10b05fd5b284d9c9480a6a11f7
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jul 2 12:29:52 2014 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 5f94d915eff8bfc46a3f6cb9cb5a8577ee5dede4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 25 15:31:03 2014 -0400
