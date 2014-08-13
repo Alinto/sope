@@ -148,12 +148,6 @@
     }
 #endif
   }
-  else {
-    NSLog(@"%s: missing link-type specified for WOHyperlink (config=%@) !",
-          __PRETTY_FUNCTION__, _config);
-    RELEASE(self);
-    return nil;
-  }
   
   if (count > 0) {
     if ((self->string = OWGetProperty(_config, @"string"))) {

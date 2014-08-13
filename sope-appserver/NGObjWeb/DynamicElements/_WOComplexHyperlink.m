@@ -265,26 +265,26 @@ static Class NSURLClass = Nil;
     NSString *queryString = nil;
 
     targetView = [self->target stringValueInComponent:sComponent];
-    
-    WOResponse_AddCString(_response, "<a href=\"");
-      
+
+    WOResponse_AddCString(_response, "<a");
+
     if ([self _appendHrefToResponse:_response inContext:_ctx]) {
       queryString = [self queryStringForQueryDictionary:
           [self->queryDictionary valueInComponent:sComponent]
           andQueryParameters:self->queryParameters
           inContext:_ctx];
-    }
 
-    if (self->fragmentIdentifier) {
+      if (self->fragmentIdentifier) {
         [_response appendContentCharacter:'#'];
         WOResponse_AddString(_response,
-           [self->fragmentIdentifier stringValueInComponent:sComponent]);
+                             [self->fragmentIdentifier stringValueInComponent:sComponent]);
+      }
+      if (queryString) {
+        [_response appendContentCharacter:'?'];
+        WOResponse_AddString(_response, queryString);
+      }
+      [_response appendContentCharacter:'"'];
     }
-    if (queryString) {
-      [_response appendContentCharacter:'?'];
-      WOResponse_AddString(_response, queryString);
-    }
-    [_response appendContentCharacter:'"'];
       
     if (targetView) {
       WOResponse_AddCString(_response, " target=\"");
@@ -453,6 +453,7 @@ static BOOL debugStaticLinks = NO;
     [self logWithFormat:@"  string   %@", s];
   }
   
+  s = [NSString stringWithFormat: @" href=\"%@", s];
   WOResponse_AddString(_r, s);
   return YES;
 }
@@ -509,7 +510,9 @@ static BOOL debugStaticLinks = NO;
 - (BOOL)_appendHrefToResponse:(WOResponse *)_response
   inContext:(WOContext *)_ctx
 {
-  WOResponse_AddString(_response, [_ctx componentActionURL]);
+  NSString *s;
+  s = [NSString stringWithFormat: @" href=\"%@", [_ctx componentActionURL]];
+  WOResponse_AddString(_response, s);
   return YES;
 }
 
@@ -580,7 +583,9 @@ static BOOL debugStaticLinks = NO;
       13% NSString dataUsingEncoding(appendContentString!)
     TODO(prof): use addcstring
   */
-  WOResponse_AddString(_r, [_ctx componentActionURL]);
+  NSString *s;
+  s = [NSString stringWithFormat: @" href=\"%@", [_ctx componentActionURL]];
+  WOResponse_AddString(_r, s);
   return YES;
 }
 
@@ -634,11 +639,11 @@ static BOOL debugStaticLinks = NO;
 /* generate response */
 
 - (BOOL)_appendHrefToResponse:(WOResponse *)_r
-  inContext:(WOContext *)_ctx
+                    inContext:(WOContext *)_ctx
 {
   WOComponent         *sComponent;
   NSString            *daClass;
-  NSString            *daName;
+  NSString            *daName, *s;
   NSMutableDictionary *qd;
   NSDictionary        *tmp;
 
@@ -697,9 +702,14 @@ static BOOL debugStaticLinks = NO;
     }
   }
 
-  WOResponse_AddString(_r,
-                       [_ctx directActionURLForActionNamed:daName
-                             queryDictionary:qd]);
+  if (daName)
+    {
+      s = [NSString stringWithFormat: @" href=\"%@\"",
+                    [_ctx directActionURLForActionNamed:daName
+                                        queryDictionary:qd]];
+      WOResponse_AddString(_r, s);
+    }
+
   return NO;
 }
 
