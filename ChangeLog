@@ -1,3 +1,45 @@
+commit f0dcde71bfe5e175aeb32bb1de2fc67b40fce0a9
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Aug 15 09:09:31 2014 -0400
+
+    Allow link with no parameter
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOHyperlinkInfo.m
+
+commit 73024ce6dd193ceb6475819fff6235c700bef837
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Aug 13 15:26:25 2014 -0400
+
+    Remove requirement of a link href attribute
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOHyperlinkInfo.m
+M	sope-appserver/NGObjWeb/DynamicElements/_WOComplexHyperlink.m
+M	sope-appserver/NGObjWeb/DynamicElements/_WOTemporaryHyperlink.m
+
+commit 140d302b14ac396c3eaf5224e742cdac5e649e70
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Aug 7 15:29:54 2014 -0400
+
+    Fix support for templates themes
+
+M	sope-appserver/NGObjWeb/WOResourceManager.m
+
+commit 8d493b030c62f8c0e854d134344e8c2aeb0e2aaf
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Aug 7 15:29:12 2014 -0400
+
+    Remove requirement of a form action attribute
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOForm.m
+
+commit 30add55449cae848b95f42eeb9e02c4832d3220d
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jul 30 11:23:40 2014 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit a7291026a938c2e028d1f4c1e74815a760786fa5
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jul 22 16:09:48 2014 -0400
