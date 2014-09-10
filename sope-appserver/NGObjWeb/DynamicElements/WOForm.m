@@ -354,39 +354,45 @@ static int debugTakeValues = -1;
   else
     [_ctx setInForm:YES];
 
-  WOResponse_AddCString(_response, "<form action=\"");
+  WOResponse_AddCString(_response, "<form");
 
   /* add URL to response and return the query string */
-  
-  if (self->href != nil)
-    queryString = [self _addHrefToResponse:_response inContext:_ctx];
-  else if (self->directActionName != nil || self->actionClass != nil)
-    [self _addDirectActionToResponse:_response inContext:_ctx];
-  else
-    queryString = [self _addActionToResponse:_response inContext:_ctx];
+  if (self->href != nil || self->directActionName != nil || self->actionClass != nil)
+    {
+      WOResponse_AddCString(_response, " action=\"");
 
-  if (self->fragmentIdentifier != nil) {
-    NSString *f = [self->fragmentIdentifier stringValueInComponent:sComponent];
-    if ([f isNotEmpty]) {
-      [_response appendContentCharacter:'#'];
-      WOResponse_AddString(_response, f);
+      if (self->href != nil)
+        queryString = [self _addHrefToResponse:_response inContext:_ctx];
+      else if (self->directActionName != nil || self->actionClass != nil)
+        [self _addDirectActionToResponse:_response inContext:_ctx];
+      else
+        queryString = [self _addActionToResponse:_response inContext:_ctx];
+
+      if (self->fragmentIdentifier != nil) {
+        NSString *f = [self->fragmentIdentifier stringValueInComponent:sComponent];
+        if ([f isNotEmpty]) {
+          [_response appendContentCharacter:'#'];
+          WOResponse_AddString(_response, f);
+        }
+      }
+
+      /* append the query string */
+      if (queryString != nil) {
+        [_response appendContentCharacter:'?'];
+        WOResponse_AddString(_response, queryString);
+      }
+
+      WOResponse_AddCString(_response, "\"");
     }
-  }
 
-  /* append the query string */
-  
-  if (queryString != nil) {
-    [_response appendContentCharacter:'?'];
-    WOResponse_AddString(_response, queryString);
-  }
   if (self->method != nil) {
-    WOResponse_AddCString(_response, "\" method=\"");
+    WOResponse_AddCString(_response, " method=\"");
     WOResponse_AddString(_response, 
 			 [self->method stringValueInComponent:sComponent]);
     WOResponse_AddCString(_response, "\"");
   }
   else
-    WOResponse_AddCString(_response, "\" method=\"post\"");
+    WOResponse_AddCString(_response, " method=\"post\"");
       
   [self appendExtraAttributesToResponse:_response inContext:_ctx];
   

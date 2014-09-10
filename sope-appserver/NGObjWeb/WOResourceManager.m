@@ -932,7 +932,7 @@ _pathExists(WOResourceManager *self, NSFileManager *fm, NSString *path)
   
   // TODO: Explain why _framework and _languages are NOT passed!
   [self _getComponentURL:&componentURL andName:&_name 
-	forNameOrURL:_name inFramework:nil languages:nil];
+	forNameOrURL:_name inFramework:nil languages:_languages];
   
   if (debugComponentLookup) {
     [self logWithFormat:@"  component='%@' in framework='%@': url='%@'", 

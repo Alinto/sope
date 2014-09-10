@@ -29,12 +29,6 @@
 - (id)initWithConfig:(NSMutableDictionary *)_config {
   unsigned count;
 
-  if ((self->initialCount = count = [_config count]) == 0) {
-    NSLog(@"%s: missing associations for WOHyperlink !", __PRETTY_FUNCTION__);
-    RELEASE(self);
-    return nil;
-  }
-  
   self->sidInUrl = YES;
   
   //NSLog(@"CONFIG: %@", _config);
@@ -147,12 +141,6 @@
       }
     }
 #endif
-  }
-  else {
-    NSLog(@"%s: missing link-type specified for WOHyperlink (config=%@) !",
-          __PRETTY_FUNCTION__, _config);
-    RELEASE(self);
-    return nil;
   }
   
   if (count > 0) {

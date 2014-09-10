@@ -100,15 +100,10 @@ static Class _WODirectActionHyperlinkClass       = Nil;
         }
       }
     }
+  }
 
-    if (linkClass == Nil)
-      linkClass = [_WODirectActionHyperlinkClass class];
-  }
-  else {
-    NSLog(@"%s: found no setting for link named '%@', assocs %@",
-          __PRETTY_FUNCTION__, _name, _config);
-    return nil;
-  }
+  if (linkClass == Nil)
+    linkClass = [_WODirectActionHyperlinkClass class];
   
   self =
     [[linkClass alloc] initWithName:_name hyperlinkInfo:info template:_t];
