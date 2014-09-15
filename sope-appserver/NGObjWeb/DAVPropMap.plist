@@ -143,6 +143,9 @@
   "{DAV:}group-member-set"           = davGroupMemberSet;
   "{DAV:}group-membership"           = davGroupMembership;
 
+  /* WebDAV sync - RFC6578 */
+  "{DAV:}sync-token" = davCollectionTag;
+
   /* CalDAV */
   "{urn:ietf:params:xml:ns:caldav}calendar-data" = davCalendarData;
   "{urn:ietf:params:xml:ns:caldav}calendar-description" = davDescription;
