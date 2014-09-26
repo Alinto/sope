@@ -1,3 +1,19 @@
+commit 0ee64d0309ecc96a29d7c788e56246aec3606ad5
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Sep 15 15:46:45 2014 -0400
+
+    Handle sync-token during PROPFIND calls
+
+M	sope-appserver/NGObjWeb/DAVPropMap.plist
+
+commit c418c832df6b1097af525a1021b9fc7a2cd6b45b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Sep 10 14:25:36 2014 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit f0dcde71bfe5e175aeb32bb1de2fc67b40fce0a9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Aug 15 09:09:31 2014 -0400
