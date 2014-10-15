@@ -320,8 +320,10 @@ fi
 make CC="$CC" %{sope_makeflags}
 cd sope-gdl1/MySQL
 make CC="$CC" LDFLAGS="-L/usr/%{_lib}/mysql" %{sope_makeflags}
+%if %oracle_support
 cd ../Oracle8
 make CC="$CC" LDFLAGS="-L$ORACLELIB_PATH" %{sope_makeflags}
+%endif
 export PATH=$PATH:/usr/sbin
 #cd ../../sope-appserver/mod_ngobjweb/
 #if [ -x /usr/bin/apr-1-config ]
