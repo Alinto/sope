@@ -16,7 +16,7 @@ AutoReqProv:  off
 Source:       %{sope_source}
 Prefix:       /usr
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildPreReq:  gnustep-make gcc-objc postgresql-devel mysql-devel
+BuildPreReq:  gnustep-make gcc-objc postgresql-devel
 
 %{?el5:BuildRequires: mysql-devel}
 %{?el6:BuildRequires: mysql-devel}
