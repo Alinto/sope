@@ -16,6 +16,10 @@ Prefix:       /usr
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildPreReq:  gnustep-make gcc-objc postgresql-devel mysql-devel
 
+%{?el5:BuildRequires: mysql-devel}
+%{?el6:BuildRequires: mysql-devel}
+%{?el7:BuildRequires: mariadb-devel}
+
 %description
 sope
 
