@@ -5,16 +5,21 @@ Summary:      SOPE.
 Name:         sope%{sope_major_version}%{sope_minor_version}
 Version:      %{sope_version}
 Release:      %{sope_release}.%{dist_suffix}.%{sope_buildcount}
-Vendor:       http://www.opengroupware.org
-Packager:     Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Vendor:       http://www.inverse.ca
+Packager:     Inverse inc.
 License:      GPL
-URL:          http://www.opengroupware.org
+URL:          http://www.inverse.ca
 Group:        Development/Libraries/Objective C
 AutoReqProv:  off
 Source:       %{sope_source}
 Prefix:       /usr
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildPreReq:  gnustep-make gcc-objc postgresql-devel mysql-devel
+BuildPreReq:  gnustep-make gcc-objc postgresql-devel
+
+%{?el5:BuildRequires: mysql-devel}
+%{?el6:BuildRequires: mysql-devel}
+%{?el7:BuildRequires: mariadb-devel}
+
 
 %description
 sope
