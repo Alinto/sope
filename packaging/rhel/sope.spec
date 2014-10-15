@@ -1,5 +1,7 @@
 %define apache_modules_dir %{_usr}/lib/httpd/modules
 %define apache_conf_dir    %{_sysconfdir}/httpd/conf.d
+%define oracle_support     1
+%{?el7:%define oracle_support 0}
 
 Summary:      SOPE.
 Name:         sope%{sope_major_version}%{sope_minor_version}
@@ -221,6 +223,7 @@ GNUstep database libraries.
 SOPE is a framework for developing web applications and services. The
 name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
 
+%if %oracle_support
 %package gdl1-oracle
 Summary:      Oracle connector for SOPE's fork of the GNUstep database environment
 Group:        Development/Libraries/Objective C
@@ -231,6 +234,7 @@ AutoReqProv:  off
 %description gdl1-oracle
 This package contains the Oracle connector for SOPE's fork of the
 GNUstep database libraries.
+%endif
 
 %package gdl1-mysql
 Summary:      MySQL connector for SOPE's fork of the GNUstep database environment
@@ -460,9 +464,11 @@ rm -fr ${RPM_BUILD_ROOT}
 %defattr(-,root,root,-)
 %{_libdir}/GNUstep/GDLAdaptors-%{sope_version}/PostgreSQL.gdladaptor
 
+%if %oracle_support
 %files gdl1-oracle
 %defattr(-,root,root,-)
 %{_libdir}/GNUstep/GDLAdaptors-%{sope_version}/Oracle8.gdladaptor
+%endif
 
 %files gdl1-mysql
 %defattr(-,root,root,-)
