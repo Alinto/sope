@@ -320,7 +320,7 @@ static EONull *null          = nil;
           back to an array (the EOQualifierEnumScannerHandler does that).
           Works on ix86, but *NOT* on iSeries or zServer !!
   */
-#if defined(__s390__) || defined(__arm__) || defined(__alpha__)
+#if defined(__s390__) || defined(__arm__)  || defined(__aarch64__) || defined(__alpha__)
   qualifierString =
     [formatScanner performSelector:@selector(stringWithFormat:arguments:)
                    withObject:_qualifierFormat
