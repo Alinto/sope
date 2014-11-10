@@ -321,7 +321,7 @@ make CC="$CC" %{sope_makeflags}
 cd sope-gdl1/MySQL
 make CC="$CC" LDFLAGS="-L/usr/%{_lib}/mysql" %{sope_makeflags}
 majversion=$(lsb_release -rs | cut -f1 -d.)
-if [ $majversion -lt 7]
+if [ $majversion -lt "7" ]
 cd ../Oracle8
 make CC="$CC" LDFLAGS="-L$ORACLELIB_PATH" %{sope_makeflags}
 fi
