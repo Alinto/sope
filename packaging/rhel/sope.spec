@@ -447,7 +447,11 @@ rm -fr ${RPM_BUILD_ROOT}
 %{_libdir}/libNGObjWeb*.so
 %{_libdir}/libWEExtensions*.so
 %{_libdir}/libWOExtensions*.so
-#%{_datadir}/GNUstep/Makefiles
+%if %{el7}
+%{_libdir}/GNUstep/Makefiles
+%else
+%{_datadir}/GNUstep/Makefiles
+%endif
 
 %files ldap
 %defattr(-,root,root,-)
