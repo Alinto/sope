@@ -447,7 +447,7 @@ rm -fr ${RPM_BUILD_ROOT}
 %{_libdir}/libNGObjWeb*.so
 %{_libdir}/libWEExtensions*.so
 %{_libdir}/libWOExtensions*.so
-%{_datadir}/GNUstep/Makefiles
+#%{_datadir}/GNUstep/Makefiles
 
 %files ldap
 %defattr(-,root,root,-)
@@ -531,5 +531,5 @@ rm -fr ${RPM_BUILD_ROOT}
   the current version we build for
 * Sat Nov 06 2004 Helge Hess <helge.hess@opengroupware.org>
 - updated to 4.5 version
-* Wed Sep 09 2004 Frank Reppin <frank@opengroupware.org>
+* Thu Sep 09 2004 Frank Reppin <frank@opengroupware.org>
 - initial build
