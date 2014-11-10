@@ -1,6 +1,6 @@
 %define apache_modules_dir %{_usr}/lib/httpd/modules
 %define apache_conf_dir    %{_sysconfdir}/httpd/conf.d
-%define oracle_support     0
+%define oracle_support     1
 %{?el7:%define oracle_support 0}
 
 Summary:      SOPE
@@ -320,10 +320,11 @@ fi
 make CC="$CC" %{sope_makeflags}
 cd sope-gdl1/MySQL
 make CC="$CC" LDFLAGS="-L/usr/%{_lib}/mysql" %{sope_makeflags}
-%if %oracle_support
+majversion=$(lsb_release -rs | cut -f1 -d.)
+if [ $majversion -lt 7]
 cd ../Oracle8
 make CC="$CC" LDFLAGS="-L$ORACLELIB_PATH" %{sope_makeflags}
-%endif
+fi
 #export PATH=$PATH:/usr/sbin
 #cd ../../sope-appserver/mod_ngobjweb/
 #if [ -x /usr/bin/apr-1-config ]
