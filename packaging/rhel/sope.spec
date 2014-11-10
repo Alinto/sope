@@ -1,16 +1,16 @@
 %define apache_modules_dir %{_usr}/lib/httpd/modules
 %define apache_conf_dir    %{_sysconfdir}/httpd/conf.d
-%define oracle_support     1
+%define oracle_support     0
 %{?el7:%define oracle_support 0}
 
-Summary:      SOPE.
+Summary:      SOPE
 Name:         sope%{sope_major_version}%{sope_minor_version}
 Version:      %{sope_version}
 Release:      %{sope_release}.%{dist_suffix}.%{sope_buildcount}
 Vendor:       http://www.opengroupware.org
-Packager:     Wolfgang Sourdeau <wsourdeau@inverse.ca>
+Packager:     Inverse inc. <info@inverse.ca>
 License:      GPL
-URL:          http://www.opengroupware.org
+URL:          https://github.com/inverse-inc/sope
 Group:        Development/Libraries/Objective C
 AutoReqProv:  off
 Source:       %{sope_source}
@@ -324,7 +324,7 @@ make CC="$CC" LDFLAGS="-L/usr/%{_lib}/mysql" %{sope_makeflags}
 cd ../Oracle8
 make CC="$CC" LDFLAGS="-L$ORACLELIB_PATH" %{sope_makeflags}
 %endif
-export PATH=$PATH:/usr/sbin
+#export PATH=$PATH:/usr/sbin
 #cd ../../sope-appserver/mod_ngobjweb/
 #if [ -x /usr/bin/apr-1-config ]
 #then
