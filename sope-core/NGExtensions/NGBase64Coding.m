@@ -365,6 +365,8 @@ static inline int encode_base64(const char *_src, size_t _srcLen, char *_dest,
       c1 = _src[inPos] & 0xFF;
       out[outPos++] = base64tab[(c1 & 0xFC) >> 2];
       out[outPos++] = base64tab[((c1 & 0x03) << 4)];
+      out[outPos++] = '=';
+      out[outPos++] = '=';
       break;
     case 2:
       c1 = _src[inPos++] & 0xFF;
@@ -372,17 +374,6 @@ static inline int encode_base64(const char *_src, size_t _srcLen, char *_dest,
       out[outPos++] = base64tab[(c1 & 0xFC) >> 2];
       out[outPos++] = base64tab[((c1 & 0x03) << 4) | ((c2 & 0xF0) >> 4)];
       out[outPos++] = base64tab[((c2 & 0x0F) << 2)];
-      break;
-  }
-
-  // We pad so our output buffer's length is always a multiple of 3.
-  // This is very important to avoid attachments corruption in Outlook. 
-  switch (outPos % 3) {
-    case 1:
-      out[outPos++] = '=';
-      out[outPos++] = '=';
-      break;
-    case 2:
       out[outPos++] = '=';
       break;
   }
