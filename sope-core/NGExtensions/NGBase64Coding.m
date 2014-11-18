@@ -382,6 +382,19 @@ static inline int encode_base64(const char *_src, size_t _srcLen, char *_dest,
       //out[outPos++] = '\n';
       break;
   }
+
+  // We pad so our output buffer's length is always a multiple of 3.
+  // This is very important to avoid attachments corruption in Outlook. 
+  switch (outPos % 3) {
+    case 1:
+      out[outPos++] = '=';
+      out[outPos++] = '=';
+      break;
+    case 2:
+      out[outPos++] = '=';
+      break;
+  }
+
   out[outPos] = 0;
   *_destLen = outPos;
   return 0;
