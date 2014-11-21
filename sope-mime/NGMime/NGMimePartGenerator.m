@@ -366,11 +366,18 @@ static BOOL       debugOn = NO;
     //       data which in turn resulted in a superflous "\r\n" string
     if ([headerData length] > 0) {
       [self->result appendData:headerData];
+
+      // We pad so our output buffer's with an extra \n\r to avoid Outlook data corruption.
+      // See: http://answers.microsoft.com/en-us/office/forum/office_2010-outlook/outlook-2010-decodes-pdf-attachment-as-all-zero/51012fe5-9d5e-431d-9d9c-a37b0171264a?page=2
+      // for more details.
       [self->result appendBytes:"\r\n" length:2];
     }
     
     if (bodyData != nil)
-      [self->result appendData:bodyData];
+      {
+        [self->result appendData:bodyData];
+        [self->result appendBytes:"\r\n" length:2];
+      }
     else if (debugOn)
       [self debugWithFormat:@"  => did not generate any body data!"];
   }

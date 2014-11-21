@@ -39,7 +39,7 @@
     // shouldn't be done. Checking whether args is NULL breaks on arm
     // and alpha however, because a va_list isn't a pointer, so we
     // don't do the check on arm and alpha.
-#if !defined(__arm__) && !defined(__alpha__)
+#if !defined(__arm__) && !defined(__aarch64__) && !defined(__alpha__)
     if (!args)
       return format;
 #endif
