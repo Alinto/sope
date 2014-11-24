@@ -127,6 +127,7 @@ static unsigned int _decodeOfModifiedUTF7(unsigned char *_source, unichar *resul
 
   res[cntRes] = 0;
   result = [NSString stringWithCharacters: res length: cntRes];
+  if (res != NULL) NSZoneFree(NULL, res);
 
   return result;
 }
