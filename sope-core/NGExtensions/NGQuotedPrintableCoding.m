@@ -72,10 +72,17 @@
   resSize = 
     NGDecodeQuotedPrintableX([self bytes], [self length], dest, destSize, YES);
   
-  return ((int)resSize != -1)
-    ? [NSData dataWithBytesNoCopy:dest length:resSize]
-    : nil;
+  if ((int)resSize != -1)
+    {
+      return [NSData dataWithBytesNoCopy:dest length:resSize];
+    }
+  else
+    {
+      free(dest);
+      return nil;
+    }
 }
+
 - (NSData *)dataByDecodingQuotedPrintableTransferEncoding {
   char   *dest;
   size_t destSize;
@@ -87,9 +94,15 @@
   resSize = 
     NGDecodeQuotedPrintableX([self bytes], [self length], dest, destSize, NO);
   
-  return ((int)resSize != -1)
-    ? [NSData dataWithBytesNoCopy:dest length:resSize]
-    : nil;
+  if ((int)resSize != -1)
+    {
+      return [NSData dataWithBytesNoCopy:dest length:resSize];
+    }
+  else
+    {
+      free(dest);
+      return nil;
+    }
 }
 
 - (NSData *)dataByEncodingQuotedPrintable {
