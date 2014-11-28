@@ -160,17 +160,21 @@ int NGDecodeQuotedPrintableX(const char *_src, unsigned _srcLen,
       destCnt++;
     }
     else {
-      if ((_srcLen - cnt) > 2) {
+      if ((_srcLen - cnt) > 1) {
         signed char c1, c2;
 
 	cnt++;          // skip '='
         c1 = _src[cnt]; // first hex digit
 
         if (c1 == '\r' || c1 == '\n') {
-          if (_src[cnt + 1] == '\r' || _src[cnt + 1] == '\n' )
+          if (cnt < _srcLen && (_src[cnt + 1] == '\r' || _src[cnt + 1] == '\n' ))
             cnt++;
           continue;
         }
+
+        if (cnt == _srcLen)  /* We have reached the end of the _src */
+          break;
+
         c1 = __hexToChar(c1);
 
 	cnt++; // skip first hex digit
