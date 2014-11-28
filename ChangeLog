@@ -1,3 +1,191 @@
+commit bb70653d820450507097230add9fa1fa13b2453c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Nov 20 09:42:42 2014 -0500
+
+    Revert "Fix crash when decoding a = at end of the data"
+    
+    This reverts commit 1544d178c4cf56ee8358f06475c4b3e45dddc11c.
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit 67c58bfd91e859c9bf643cf20cc44ed2fe6e389f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Nov 18 10:52:22 2014 -0500
+
+    Improved last commit after more Outlook's brain damange findings
+
+M	sope-core/NGExtensions/NGBase64Coding.m
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit c959d950a64d45d679f8a59a82a3b499c05415f8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Nov 18 09:06:37 2014 -0500
+
+    Disable original and broken padding.
+
+M	sope-core/NGExtensions/NGBase64Coding.m
+
+commit 2c127ff4a7a448820c7b36b68918fce0c394c7d7
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 17 21:04:01 2014 -0500
+
+    Pad the output buffer to avoid Outlook corruption
+
+M	sope-core/NGExtensions/NGBase64Coding.m
+
+commit 1544d178c4cf56ee8358f06475c4b3e45dddc11c
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Fri Nov 14 11:37:04 2014 +0100
+
+    Fix crash when decoding a = at end of the data
+    
+    In decoding a quoted printable mail. There is a buffer overflow
+    as we are always parsing two bytes instead of one.
+    
+    See the full backtrace at:
+    
+    https://gist.github.com/sixstone-qq/cb8099b66c2911e8aaf2
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit ceae95aaa2400b339c1ed42650c5bc35b2170dff
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Nov 12 11:22:21 2014 -0500
+
+    Avoid failures on non-RHEL7 distros
+
+M	packaging/rhel/sope.spec
+
+commit 31de3aac952b97c10b3fecbde5068673ee1538df
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 10 16:07:55 2014 -0500
+
+    Adjust the GNUstep makefiles path on EL7
+
+M	packaging/rhel/sope.spec
+
+commit dd065c21ec420dbdbd486b9c57ccd33220eab123
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 10 15:38:24 2014 -0500
+
+    Cleaned up the file
+
+M	packaging/rhel/sope.spec
+
+commit 7305bc339f72ba9790813ec66a8da53acaef4382
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 10 15:31:54 2014 -0500
+
+    Fixed spec file for EL7
+
+M	packaging/rhel/sope.spec
+
+commit 19fbde18941a18037905086e46e20bb1f1c6206b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 10 14:10:35 2014 -0500
+
+    Verbose logging
+
+M	packaging/rhel/sope.spec
+
+commit 31aec7522fee85b7c164e0ffb49ab9cabe8303cd
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 10 14:02:05 2014 -0500
+
+    Fixed one more typo
+
+M	packaging/rhel/sope.spec
+
+commit 6398402d19490a8f2ebf9c443adb3baa0b1df421
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 10 13:57:11 2014 -0500
+
+    Fixed typo
+
+M	packaging/rhel/sope.spec
+
+commit 74a3367274565893a7d00753d38886b48ec3c096
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 10 13:51:33 2014 -0500
+
+    Improvements to spec file
+
+M	packaging/rhel/sope.spec
+
+commit 7062f085c58b89daecb2b7db3ff782ebc4e47901
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 10 13:40:08 2014 -0500
+
+    spec file improvements, disabled Oracle support for now
+
+M	packaging/rhel/sope.spec
+
+commit 75995d361fb0e5da74c9e84f753bc2dca03270c9
+Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
+Date:   Sat Feb 22 09:00:47 2014 -0500
+
+    WOCompountElement: the array of children was not properly allocated, leading to a buffer overflow
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOCompoundElement.h
+M	sope-appserver/NGObjWeb/DynamicElements/WOCompoundElement.m
+
+commit 9fe995c38d190f051acacdd5f2eeefc58b837f24
+Author: Jeroen Dekkers <jeroen@dekkers.ch>
+Date:   Mon Oct 13 11:49:54 2014 +0200
+
+    Add support for arm64
+
+M	sope-gdl1/GDLAccess/EOSQLQualifier.m
+M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
+
+commit fb65ea6df85a76caaae3c480178d182c0cabe93c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 15 16:21:51 2014 -0400
+
+    Small fix on RHEL7
+
+M	packaging/rhel/sope.spec
+
+commit e193644086d96e0f4ca7ce13c9ca4bc4ba0c7d08
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 15 16:12:31 2014 -0400
+
+    Fixed unused dependancy
+
+M	packaging/rhel/sope.spec
+
+commit bcffd9a6034ada60b20319e209cf4474b8f359f8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 15 16:03:52 2014 -0400
+
+    Disabled Oracle support on RHEL7
+
+M	packaging/rhel/sope.spec
+
+commit 00a3dc5c059d0efeb5003f768aca3c1ded0b3e66
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 15 15:50:29 2014 -0400
+
+    Initial work on RHEL 7
+
+M	packaging/rhel/sope.spec
+
+commit cb31698b1b23a4a82cfa79a2e4f7b6c733c067ab
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Oct 6 13:54:11 2014 -0400
+
+    Fix BrazilianPortuguese language mapping
+
+M	sope-appserver/NGObjWeb/Languages.plist
+
+commit 34893bd565e91c24dbed6c371ce57615345de6fd
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 26 14:34:25 2014 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 0ee64d0309ecc96a29d7c788e56246aec3606ad5
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Sep 15 15:46:45 2014 -0400
