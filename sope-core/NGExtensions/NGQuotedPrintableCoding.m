@@ -109,13 +109,13 @@
 
   // length/64*3 should be plenty for soft newlines
   desLen = (length + length/64) *3;
-  des = NGMallocAtomic(sizeof(char) * desLen);
+  des = malloc(sizeof(char) * desLen);
 
   desLen = NGEncodeQuotedPrintable(bytes, length, des, desLen);
 
   if ((int)desLen == -1)
     {
-      NGFree(des);
+      free(des);
       return nil;
     }
 
