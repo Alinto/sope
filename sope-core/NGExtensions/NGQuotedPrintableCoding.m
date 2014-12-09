@@ -72,10 +72,17 @@
   resSize = 
     NGDecodeQuotedPrintableX([self bytes], [self length], dest, destSize, YES);
   
-  return ((int)resSize != -1)
-    ? [NSData dataWithBytesNoCopy:dest length:resSize]
-    : nil;
+  if ((int)resSize != -1)
+    {
+      return [NSData dataWithBytesNoCopy:dest length:resSize];
+    }
+  else
+    {
+      free(dest);
+      return nil;
+    }
 }
+
 - (NSData *)dataByDecodingQuotedPrintableTransferEncoding {
   char   *dest;
   size_t destSize;
@@ -87,9 +94,15 @@
   resSize = 
     NGDecodeQuotedPrintableX([self bytes], [self length], dest, destSize, NO);
   
-  return ((int)resSize != -1)
-    ? [NSData dataWithBytesNoCopy:dest length:resSize]
-    : nil;
+  if ((int)resSize != -1)
+    {
+      return [NSData dataWithBytesNoCopy:dest length:resSize];
+    }
+  else
+    {
+      free(dest);
+      return nil;
+    }
 }
 
 - (NSData *)dataByEncodingQuotedPrintable {
@@ -154,10 +167,14 @@ int NGDecodeQuotedPrintableX(const char *_src, unsigned _srcLen,
         c1 = _src[cnt]; // first hex digit
 	
         if (c1 == '\r' || c1 == '\n') {
-          if (_src[cnt + 1] == '\r' || _src[cnt + 1] == '\n' )
+          if (cnt < _srcLen && (_src[cnt + 1] == '\r' || _src[cnt + 1] == '\n' ))
             cnt++;
           continue;
         }
+
+        if (cnt == _srcLen)  /* We have reached the end of the _src */
+          break;
+
         c1 = __hexToChar(c1);
 	
 	cnt++; // skip first hex digit
