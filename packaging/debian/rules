@@ -164,7 +164,7 @@ binary-arch: build install
 #	dh_python
 	dh_makeshlibs -V
 	dh_installdeb
-	dh_shlibdeps -L libsope-appserver$(SOPEVER) -L libsope-xml$(SOPEVER) -L libsope-mime$(SOPEVER) \
+	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info -L libsope-appserver$(SOPEVER) -L libsope-xml$(SOPEVER) -L libsope-mime$(SOPEVER) \
 		-L libsope-ldap$(SOPEVER) -L libsope-gdl1-$(SOPEVER) \
 		-l debian/tmp/usr/lib
 	dh_gencontrol
