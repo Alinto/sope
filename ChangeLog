@@ -1,3 +1,99 @@
+commit 75bd8a0105752cee05496efd53b2d4103390a4dc
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Thu Nov 27 17:21:03 2014 +0100
+
+    Fix memory leak when failing to parse a quoted printable
+    
+    Valgrind report:
+    
+       604 bytes in 1 blocks are definitely lost in loss record 8,010 of 10,179
+          at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+          by 0x2BF73131: _i_NSData_QuotedPrintableCoding_dataByDecodingQuotedPrintableTransferEncoding (in /usr/lib/libNGExtensions.so.4.9.203)
+          by 0x3375053E: _i_NSData_SOGoMailUtilities_bodyDataFromEncoding_ (in /usr/lib/GNUstep/SOGo/Mailer.SOGo/Mailer)
+          by 0x34D23B46: _i_MAPIStoreMailMessage__setBodyContentFromRawData_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34D1DD0A: _i_MAPIStoreMailFolder__lookupMessage_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34CF4312: _i_MAPIStoreFolder__lookupMessageByURL_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34CF497A: _i_MAPIStoreFolder__openMessage_withMID_forWriting_inMemCtx_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x2A5D5013: sogo_folder_open_message (in /usr/lib/x86_64-linux-gnu/mapistore_backends/libMAPIStoreSOGo.so.1.0.0)
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit bd194948067c876eafecd9723ae7c544099fb9e5
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Mon Nov 24 23:50:45 2014 +0100
+
+    Fix crash when decoding a = at end of the data
+    
+    In decoding a quoted printable mail. There is a buffer overflow
+    as we are always parsing two bytes instead of one.
+    
+    See the full backtrace at:
+    
+    https://gist.github.com/sixstone-qq/cb8099b66c2911e8aaf2
+    
+    This patch avoid regressions to manage = at the end of the source.
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit f26ccf1f1380b1a95b8b29e5a30e8edd775a151b
+Author: Samuel Cabrero <samuelcabrero@kernevil.me>
+Date:   Thu Nov 20 17:02:01 2014 +0100
+
+    Fix memory leak in file NSString+Imap4.m function stringByDecodingImap4FolderName
+    
+    Trace:
+    
+    ==26758== 114,980 bytes in 3,551 blocks are definitely lost in loss record 9,847 of 9,930
+    ==26758==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+    ==26758==    by 0x2D203DBD: ??? (in /usr/lib/libgnustep-base.so.1.24.0)
+    ==26758==    by 0x2BA20427: _i_NSString_Imap4_stringByDecodingImap4FolderName (in /usr/lib/libNGMime.so.4.9.3)
+    ==26758==    by 0x34D19F77: _i_MAPIStoreMailFolder___imapFolderNameRepresentation_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34D1A11C: _i_MAPIStoreMailFolder___cleanupSubfolderKeys_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34D1A326: _i_MAPIStoreMailFolder__folderKeysMatchingQualifier_andSortOrderings_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34CF76D2: _i_MAPIStoreFolder__folderKeys (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34CF3BFE: _i_MAPIStoreFolder__lookupFolder_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34CF3E27: _i_MAPIStoreFolder__lookupFolderByURL_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34CF43BF: _i_MAPIStoreFolder__openFolder_withFID_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x2A5D4773: sogo_folder_open_folder (in /usr/lib/x86_64-linux-gnu/mapistore_backends/libMAPIStoreSOGo.so.1.0.0)
+    ==26758==    by 0x2917D670: mapistore_backend_folder_open_folder (in /usr/lib/x86_64-linux-gnu/libmapistore.so.2.2)
+    ==26758==    by 0x291758C2: mapistore_folder_open_folder (in /usr/lib/x86_64-linux-gnu/libmapistore.so.2.2)
+    ==26758==    by 0x28C1204D: emsmdbp_object_open_folder (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C3191F: oxcfxics_fill_transfer_state_arrays (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C319AC: oxcfxics_fill_transfer_state_arrays (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C31D76: oxcfxics_ndr_push_transfer_state (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C3226B: EcDoRpc_RopSyncGetTransferState (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C0D87C: EcDoRpc_process_transaction (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C0F3C7: dcesrv_EcDoRpcExt2 (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C0F89A: dcesrv_exchange_emsmdb_dispatch (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x26BF8E23: mapiproxy_server_dispatch (in /usr/lib/x86_64-linux-gnu/libmapiproxy.so.2.2)
+    ==26758==    by 0x268D7213: mapiproxy_op_dispatch (in /usr/lib/x86_64-linux-gnu/samba/dcerpc_server/dcesrv_mapiproxy.so)
+    ==26758==    by 0x16267BAF: dcesrv_process_ncacn_packet (in /usr/lib/x86_64-linux-gnu/libdcerpc-server.so.0.0.1)
+    ==26758==    by 0x16268980: dcesrv_read_fragment_done (in /usr/lib/x86_64-linux-gnu/libdcerpc-server.so.0.0.1)
+    ==26758==    by 0x809ECB6: dcerpc_read_ncacn_packet_done (in /usr/lib/x86_64-linux-gnu/libdcerpc-binding.so.0.0.1)
+    ==26758==    by 0xB5137C8: tstream_readv_pdu_readv_done (in /usr/lib/x86_64-linux-gnu/samba/libsamba-sockets.so.0)
+    ==26758==    by 0xB5126A5: tstream_readv_done (in /usr/lib/x86_64-linux-gnu/samba/libsamba-sockets.so.0)
+    ==26758==    by 0x8B04E13: tevent_common_loop_immediate (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B09436: epoll_event_loop_once (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B07B26: std_event_loop_once (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B045EC: _tevent_loop_once (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B0478A: tevent_common_loop_wait (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B07AC6: std_event_loop_wait (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x11DF4685: standard_new_task (in /usr/lib/x86_64-linux-gnu/samba/process_model/standard.so)
+    ==26758==    by 0x5D10EF9: task_server_startup (in /usr/lib/x86_64-linux-gnu/samba/libservice.so.0)
+    ==26758==    by 0x5D0FBA2: server_service_startup (in /usr/lib/x86_64-linux-gnu/samba/libservice.so.0)
+    ==26758==    by 0x111A54: binary_smbd_main.constprop.1 (in /usr/sbin/samba)
+    ==26758==    by 0x8D2FEC4: (below main) (libc-start.c:287)
+
+M	sope-mime/NGImap4/NSString+Imap4.m
+
+commit 6e8ab27640345febc742397dedc3c68e472166e6
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Nov 21 09:22:00 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit bb70653d820450507097230add9fa1fa13b2453c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 20 09:42:42 2014 -0500
