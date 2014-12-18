@@ -44,6 +44,7 @@
 - (NSDictionary *)normalizeFetchResponse:(NGHashMap *)_map;
 - (NSDictionary *)normalizeOpenConnectionResponse:(NGHashMap *)_map;
 - (NSDictionary *)normalizeListResponse:(NGHashMap *)_map;
+- (NSDictionary *)normalizeListStatusResponse:(NGHashMap *)_map;
 - (NSDictionary *)normalizeSelectResponse:(NGHashMap *)_map;
 - (NSDictionary *)normalizeStatusResponse:(NGHashMap *)_map;
 - (NSDictionary *)normalizeSearchResponse:(NGHashMap *)_map;

@@ -29,13 +29,13 @@
 
 - (NSString *)stringByDecodingQuotedPrintable {
   NSData *data;
-  
+
   data = ([self length] > 0)
     ? [self dataUsingEncoding:NSASCIIStringEncoding]
     : [NSData data];
-  
+
   data = [data dataByDecodingQuotedPrintable];
-  
+
   // TODO: should we default to some specific charset instead? (either
   //       Latin1 or UTF-8
   //       or the charset of the receiver?
@@ -44,14 +44,14 @@
 
 - (NSString *)stringByEncodingQuotedPrintable {
   NSData *data;
-  
+
   // TBD: which encoding to use?
   data = ([self length] > 0)
     ? [self dataUsingEncoding:[NSString defaultCStringEncoding]]
     : [NSData data];
-  
+
   data = [data dataByEncodingQuotedPrintable];
-  
+
   return [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]
 	             autorelease];
 }
@@ -65,44 +65,40 @@
   char   *dest;
   size_t destSize;
   size_t resSize;
-  
+
   destSize = [self length];
   dest     = malloc(destSize * sizeof(char) + 2);
 
-  resSize = 
+  resSize =
     NGDecodeQuotedPrintableX([self bytes], [self length], dest, destSize, YES);
-  
-  if ((int)resSize != -1)
-    {
-      return [NSData dataWithBytesNoCopy:dest length:resSize];
-    }
-  else
+
+  if ((int)resSize == -1)
     {
       free(dest);
       return nil;
     }
+
+  return [NSData dataWithBytesNoCopy:dest length:resSize];
 }
 
 - (NSData *)dataByDecodingQuotedPrintableTransferEncoding {
   char   *dest;
   size_t destSize;
   size_t resSize;
-  
+
   destSize = [self length];
   dest     = malloc(destSize * sizeof(char) + 2);
 
-  resSize = 
+  resSize =
     NGDecodeQuotedPrintableX([self bytes], [self length], dest, destSize, NO);
-  
-  if ((int)resSize != -1)
-    {
-      return [NSData dataWithBytesNoCopy:dest length:resSize];
-    }
-  else
+
+  if ((int)resSize == -1)
     {
       free(dest);
       return nil;
     }
+
+  return [NSData dataWithBytesNoCopy:dest length:resSize];
 }
 
 - (NSData *)dataByEncodingQuotedPrintable {
@@ -113,13 +109,17 @@
 
   // length/64*3 should be plenty for soft newlines
   desLen = (length + length/64) *3;
-  des = NGMallocAtomic(sizeof(char) * desLen);
+  des = malloc(sizeof(char) * desLen);
 
   desLen = NGEncodeQuotedPrintable(bytes, length, des, desLen);
 
-  return (int)desLen != -1
-    ? [NSData dataWithBytesNoCopy:des length:desLen]
-    : nil;
+  if ((int)desLen == -1)
+    {
+      free(des);
+      return nil;
+    }
+
+  return [NSData dataWithBytesNoCopy:des length:desLen];
 }
 
 @end /* NSData(QuotedPrintableCoding) */
@@ -155,7 +155,7 @@ int NGDecodeQuotedPrintableX(const char *_src, unsigned _srcLen,
 
   for (cnt = 0; ((cnt < _srcLen) && (destCnt < _destLen)); cnt++) {
     if (_src[cnt] != '=') {
-      _dest[destCnt] = 
+      _dest[destCnt] =
 	(_replaceUnderline && _src[cnt] == '_') ? 0x20 : _src[cnt];
       destCnt++;
     }
@@ -165,7 +165,7 @@ int NGDecodeQuotedPrintableX(const char *_src, unsigned _srcLen,
 
 	cnt++;          // skip '='
         c1 = _src[cnt]; // first hex digit
-	
+
         if (c1 == '\r' || c1 == '\n') {
           if (cnt < _srcLen && (_src[cnt + 1] == '\r' || _src[cnt + 1] == '\n' ))
             cnt++;
@@ -176,10 +176,10 @@ int NGDecodeQuotedPrintableX(const char *_src, unsigned _srcLen,
           break;
 
         c1 = __hexToChar(c1);
-	
+
 	cnt++; // skip first hex digit
         c2 = __hexToChar(_src[cnt]);
-        
+
         if ((c1 == -1) || (c2 == -1)) {
           if ((_destLen - destCnt) > 1) {
             _dest[destCnt] = _src[cnt - 1]; destCnt++;
@@ -194,7 +194,7 @@ int NGDecodeQuotedPrintableX(const char *_src, unsigned _srcLen,
 	  destCnt++;
         }
       }
-      else 
+      else
         break;
     }
   }
@@ -217,7 +217,7 @@ int NGDecodeQuotedPrintable(const char *_src, unsigned _srcLen,
   ...
 
   In this encoding, octets are to be represented as determined by the
-  following rules: 
+  following rules:
 
 
     (1)   (General 8bit representation) Any octet, except a CR or
@@ -257,7 +257,7 @@ int NGDecodeQuotedPrintable(const char *_src, unsigned _srcLen,
           are known to remove "white space" characters from the end of a line.
           Therefore, when decoding a Quoted-Printable body, any trailing white
           space on a line must be deleted, as it will necessarily have been
-          added by intermediate transport agents. 
+          added by intermediate transport agents.
 
 
     (4)   (Line Breaks) A line break in a text body, represented
@@ -282,7 +282,7 @@ int NGDecodeQuotedPrintable(const char *_src, unsigned _srcLen,
           encoded line indicates such a non-significant ("soft")
           line break in the encoded text.
 
-*/          
+*/
 
 int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
                             char *_dest, unsigned _destLen) {

@@ -1,3 +1,72 @@
+commit d6b948e0e4e42246f24c48b12bd2be0a3fac626c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Dec 17 15:02:23 2014 -0500
+
+    Now possible to set message headers dynamically
+
+M	sope-mime/NGMail/NGMimeMessage.h
+M	sope-mime/NGMail/NGMimeMessage.m
+
+commit ed5c2c66171220955d36e1094a7aca36d63c2930
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Dec 15 19:35:26 2014 -0500
+
+    New lstatus method to quickly grab the X-GUID of folders
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4ResponseNormalizer.h
+M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
+
+commit e49a05fc5544e9775e7e61fca7b93c7c2eea7087
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Dec 9 12:59:41 2014 -0500
+
+    Added workaround for Precise packaging
+
+M	packaging/debian/rules
+
+commit 2dd9a7919c0f4223fb6764bb9658cdb3dcdbf78f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Dec 9 09:12:44 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 4ed68775f91b6ecb566164babda0d00f0b519d23
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Sat Nov 29 09:23:06 2014 +0100
+
+    Use malloc/free as NGAllocAtomic/NGFree are useless
+    
+    LIB_FOUNDATION_BOEHM_GC is never used and will never be
+    according to inverse-inc devs
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit b249d8f5c3d0ce5bd765f9ec4270c54d7a870d7d
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Thu Nov 27 17:21:03 2014 +0100
+
+    Fix memory leak when failing to parse a quoted printable
+    
+    Valgrind report:
+    
+       604 bytes in 1 blocks are definitely lost in loss record 8,010 of 10,179
+          at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+          by 0x2BF73131: _i_NSData_QuotedPrintableCoding_dataByDecodingQuotedPrintableTransferEncoding (in /usr/lib/libNGExtensions.so.4.9.203)
+          by 0x3375053E: _i_NSData_SOGoMailUtilities_bodyDataFromEncoding_ (in /usr/lib/GNUstep/SOGo/Mailer.SOGo/Mailer)
+          by 0x34D23B46: _i_MAPIStoreMailMessage__setBodyContentFromRawData_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34D1DD0A: _i_MAPIStoreMailFolder__lookupMessage_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34CF4312: _i_MAPIStoreFolder__lookupMessageByURL_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34CF497A: _i_MAPIStoreFolder__openMessage_withMID_forWriting_inMemCtx_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x2A5D5013: sogo_folder_open_message (in /usr/lib/x86_64-linux-gnu/mapistore_backends/libMAPIStoreSOGo.so.1.0.0)
+    
+    In decoding and encoding failing.
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
 commit 75bd8a0105752cee05496efd53b2d4103390a4dc
 Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Thu Nov 27 17:21:03 2014 +0100
