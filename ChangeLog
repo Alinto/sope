@@ -1,3 +1,28 @@
+commit 0a015d9791a5848f3b0b395a90a085d8a59694b0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Dec 22 15:46:29 2014 -0500
+
+    Fix annotation/lstatus to handle separators other than '/'
+
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
+
+commit 901137b5425579ef6dcf99f731bc9c528a871cd0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Sat Dec 20 15:32:08 2014 -0500
+
+    Added hack to avoid bug #3036 on badly encodied mails
+
+M	sope-mime/NGMime/NGMimeBodyGenerator.m
+
+commit e1216770ca7067bf03bc95db29da54ca6107504c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Dec 18 08:58:59 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit d6b948e0e4e42246f24c48b12bd2be0a3fac626c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Dec 17 15:02:23 2014 -0500
