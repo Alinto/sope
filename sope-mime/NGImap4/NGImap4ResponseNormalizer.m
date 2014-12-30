@@ -714,7 +714,7 @@ static int      LogImapEnabled = -1;
 
     while ((o = [enumerator nextObject])) {
       [folder setObject:_imapFlags2Flags(self, [o objectForKey:@"flags"])
-              forKey:[o objectForKey:@"folderName"]];
+              forKey:[[self->client _imapFolder2Folder:[o objectForKey:@"folderName"]] substringFromIndex:1]];
     }
 
     [result setObject:folder forKey:@"list"];
@@ -731,7 +731,7 @@ static int      LogImapEnabled = -1;
 
     while ((o = [enumerator nextObject])) {
       [folder setObject:[o objectForKey:@"flags"]
-              forKey:[o objectForKey:@"folderName"]];
+              forKey:[[self->client _imapFolder2Folder:[o objectForKey:@"folderName"]] substringFromIndex:1]];
     }
 
     [result setObject:folder forKey:@"status"];

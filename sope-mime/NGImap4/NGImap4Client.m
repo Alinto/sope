@@ -980,9 +980,8 @@ static NSMutableDictionary *namespaces;
   enumerator = [_map objectEnumeratorForKey:@"FolderList"];
   folderList  = [NSMutableDictionary dictionaryWithCapacity:5];
   while ((obj = [enumerator nextObject]) != nil) {
-
-    [folderList addEntriesFromDictionary:[NSDictionary dictionaryWithDictionary:obj]];
-  }
+      [folderList setObject: [obj objectForKey: [[obj allKeys] objectAtIndex:0]] forKey: [[self _imapFolder2Folder: [[obj allKeys] objectAtIndex:0]] substringFromIndex:1]];
+    }
 
   [result setObject: folderList forKey: @"FolderList" ];
 
