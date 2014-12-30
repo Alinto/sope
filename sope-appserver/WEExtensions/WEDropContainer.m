@@ -288,7 +288,7 @@
     if (doDnD) {
       /* gen unique container id */
       
-      if ((containerID = [_ctx valueForKey:@"WEDropContainerSequence"])) {
+      if ((containerID = [_ctx objectForKey:@"WEDropContainerSequence"])) {
         containerID = AUTORELEASE([containerID copy]);
         containerIDc = [containerID intValue];
       }
