@@ -123,7 +123,7 @@ static NSDictionary *standardCapitalizedHeaders = nil;
   adLogPath = [[ud stringForKey:@"WOAdaptorLogPath"] copy];
   if (adLogPath == nil) adLogPath = @"";
 
-  standardCapitalizedHeaders = [NSDictionary dictionaryWithObjectsAndKeys: @"MS-Server-ActiveSync", @"ms-server-activesync", @"MS-ASProtocolVersions", @"ms-asprotocolversions", @"MS-ASProtocolCommands", @"ms-asprotocolcommands", nil];
+  standardCapitalizedHeaders = [NSDictionary dictionaryWithObjectsAndKeys: @"ETag", @"etag", @"MS-Server-ActiveSync", @"ms-server-activesync", @"MS-ASProtocolVersions", @"ms-asprotocolversions", @"MS-ASProtocolCommands", @"ms-asprotocolcommands", nil];
   [standardCapitalizedHeaders retain];
 }
 
