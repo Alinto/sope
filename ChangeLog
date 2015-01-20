@@ -1,3 +1,35 @@
+commit 77927f2583ecb26e97256a5e180b96dffa8eacf3
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 16 12:53:44 2015 -0500
+
+    Slight improvements to ppolicy code
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit bcbe4afed90dbb00cb406e6d02fc590d0d1243a9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jan 13 15:40:43 2015 -0500
+
+    Fix for bug #2993
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit 0115a39168a7d483f540ba87a2ebe378fb602f76
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Dec 30 12:57:03 2014 -0500
+
+    Fix for bug #2967
+
+M	sope-appserver/WEExtensions/WEDropContainer.m
+
+commit 382cabbaf6c5a9a559c0b7c066dbb52ee9f730ad
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Dec 30 08:04:14 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 0a015d9791a5848f3b0b395a90a085d8a59694b0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Dec 22 15:46:29 2014 -0500
