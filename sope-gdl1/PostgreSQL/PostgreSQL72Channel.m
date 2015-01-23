@@ -38,6 +38,8 @@
 
 #include "pgconfig.h"
 
+#import <NGExtensions/NSObject+Logs.h>
+
 #ifndef MIN
 #  define MIN(x, y) ((x > y) ? y : x)
 #endif
@@ -117,7 +119,7 @@ static Class    MDictClass  = Nil;
 }
 
 - (void)receivedMessage:(NSString *)_message {
-  NSLog(@"%@: message: %@", self, _message);
+  [self logWithFormat: @"message: %@", _message];
 }
 
 static void _pgMessageProcessor(void *_channel, const char *_msg)
