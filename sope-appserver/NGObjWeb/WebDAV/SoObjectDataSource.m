@@ -201,7 +201,7 @@ static BOOL debugOn = NO;
       // TODO: child can be SoHTTPException ?
       rec = (queriedAttrNames == nil)
 	? child
-	: (id)[child valuesForKeys:queriedAttrNames];
+	: (id)[child dictionaryWithValuesForKeys:queriedAttrNames];
 #if 0
       [self logWithFormat:@"got values: %@ for keys: %@ from object: %@",
 	    rec, queriedAttrNames, child];
