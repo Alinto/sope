@@ -46,15 +46,15 @@ static void _initialize(void) {
 
   if (debugLookup == -1) {
     debugLookup = [ud boolForKey:@"SoDebugKeyLookup"] ? 1 : 0;
-    NSLog(@"Note(SoObject): SoDebugKeyLookup is enabled!");
+    //NSLog(@"Note(SoObject): SoDebugKeyLookup is enabled!");
   }
   if (debugBaseURL == -1) {
     debugBaseURL = [ud boolForKey:@"SoDebugBaseURL"] ? 1 : 0;
-    NSLog(@"Note(SoObject): SoDebugBaseURL is enabled!");
+    //NSLog(@"Note(SoObject): SoDebugBaseURL is enabled!");
   }
   if (useRelativeURLs == -1) {
     useRelativeURLs = [ud boolForKey:@"WOUseRelativeURLs"] ?1:0;
-    NSLog(@"Note(SoObject): relative base URLs are enabled.");
+    //NSLog(@"Note(SoObject): relative base URLs are enabled.");
   }
   if (redirectInitted == -1) {
     url = [ud stringForKey:@"WOApplicationRedirectURL"];

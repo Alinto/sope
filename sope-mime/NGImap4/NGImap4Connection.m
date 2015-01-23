@@ -43,16 +43,16 @@ static NSString *imap4Separator = nil;
   debugKeys    = [ud boolForKey:@"NGImap4ConnectionFolderDebugEnabled"];
   alwaysSelect = [ud boolForKey:@"NGImap4ConnectionAlwaysSelect"];
   
-  if (debugOn)    NSLog(@"Note: NGImap4ConnectionDebugEnabled is enabled!");
-  if (alwaysSelect)
-    NSLog(@"WARNING: 'NGImap4ConnectionAlwaysSelect' enabled (slow down)");
+  //if (debugOn)    NSLog(@"Note: NGImap4ConnectionDebugEnabled is enabled!");
+  //if (alwaysSelect)
+  //  NSLog(@"WARNING: 'NGImap4ConnectionAlwaysSelect' enabled (slow down)");
 
   imap4Separator = 
     [[ud stringForKey:@"NGImap4ConnectionStringSeparator"] copy];
   if (![imap4Separator isNotEmpty])
     imap4Separator = @"/";
-  NSLog(@"Note(NGImap4Connection): using '%@' as the IMAP4 folder separator.", 
-	imap4Separator);
+  //NSLog(@"Note(NGImap4Connection): using '%@' as the IMAP4 folder separator.", 
+  //	imap4Separator);
 }
 
 - (id)initWithClient:(NGImap4Client *)_client password:(NSString *)_pwd {

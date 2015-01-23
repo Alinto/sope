@@ -541,8 +541,7 @@ static NSString *NGEnvVarPathSeparator = @":";
   }
   
   if ((bundle = [(NGBundle *)[NGBundle alloc] initWithPath:path]) == nil) {
-    NSLog(@"ERROR(%s): could not create bundle for path: '%@'", 
-	  __PRETTY_FUNCTION__, path);
+    [self errorWithFormat: @"could not create bundle for path: '%@'", path];
     return nil;
   }
   

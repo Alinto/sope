@@ -52,13 +52,13 @@ static Class DictClass = Nil;
   useFlatArray = [ud boolForKey:@"ImapUseOldMailNotificationSystem"]?NO:YES;
   if (useFlatArray) {
     disableNC = YES;
-    NSLog(@"Note: using flat-array message notifications!");
+    //NSLog(@"Note: using flat-array message notifications!");
   }
   
   if (disableNC) {
     nc = nil;
-    if (!useFlatArray)
-      NSLog(@"WARNING: NGImap4Message notifications disabled!");
+    //if (!useFlatArray)
+    //  NSLog(@"WARNING: NGImap4Message notifications disabled!");
   }
   else {
     nc = useOwnNC
