@@ -105,7 +105,6 @@ FdExt_HEADER_FILES = \
 	NSRunLoop+FileObjects.h		\
 	NSSet+enumerator.h		\
 	NSString+Ext.h			\
-	NSString+German.h		\
 	NSString+Formatting.h		\
 	NSString+Encoding.h		\
 	NSString+Escaping.h		\
