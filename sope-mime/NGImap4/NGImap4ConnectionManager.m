@@ -44,8 +44,8 @@ static NSString       *AuthMechanism = nil;
   if ([ud objectForKey:@"NGImap4PoolingCleanupInterval"])
     PoolScanInterval = [[ud objectForKey:@"NGImap4PoolingCleanupInterval"] doubleValue];
 
-  if (debugOn)    NSLog(@"Note: NGImap4EnableIMAP4Debug is enabled!");
-  if (poolingOff) NSLog(@"WARNING: IMAP4 connection pooling is disabled!");
+  //if (debugOn)    NSLog(@"Note: NGImap4EnableIMAP4Debug is enabled!");
+  //if (poolingOff) NSLog(@"WARNING: IMAP4 connection pooling is disabled!");
 }
 
 + (id)defaultConnectionManager {

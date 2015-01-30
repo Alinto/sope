@@ -415,10 +415,12 @@
     /* unknown browser */
     self->browser = WEUA_UNKNOWN;
     
+#if 0
     if (self->userAgent) {
       NSLog(@"%s: Unknown WebClient: user-agent='%@'",
             __PRETTY_FUNCTION__, self->userAgent);
     }
+#endif
   }
   
   /* detect OS */

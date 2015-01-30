@@ -132,7 +132,7 @@
     break;
   }
   
-  NSLog(@"%s: could not derive NSStringEncoding from name: '%@'", _encoding);
+  //NSLog(@"%s: could not derive NSStringEncoding from name: '%@'", _encoding);
   return 0;
 }
 
@@ -157,7 +157,7 @@ static void checkDefaults(void) {
     ud = [NSUserDefaults standardUserDefaults];
     IconvLogEnabled = [ud boolForKey:@"IconvLogEnabled"]?1:0;
 
-    NSLog(@"Note: using '%@' on Linux.", unicharEncoding);
+    //NSLog(@"Note: using '%@' on Linux.", unicharEncoding);
   }
 }
 

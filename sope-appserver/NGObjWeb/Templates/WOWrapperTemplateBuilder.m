@@ -84,7 +84,7 @@ static NSDictionary *defaultAssocMap = nil;
   
   if ([ud boolForKey:@"WOParsersUseUTF8"]) {
     parserEncoding = NSUTF8StringEncoding;
-    NSLog(@"Note: using UTF-8 as wrapper template parser encoding.");
+    //NSLog(@"Note: using UTF-8 as wrapper template parser encoding.");
   }
   else
     parserEncoding = [NSString defaultCStringEncoding];

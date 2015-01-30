@@ -105,7 +105,7 @@ static int debugBulk = NO; // TODO: set to -1 and use defaults
   }
   
   // TODO: we should map out certain keys, like 'retain', 'release' etc!
-  if ((values = [self valuesForKeys:keys]) == nil)
+  if ((values = [self dictionaryWithValuesForKeys:keys]) == nil)
     return nil;
   
   return [NSArray arrayWithObject:values];

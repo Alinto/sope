@@ -1,3 +1,76 @@
+commit 6ce6a39e1af5a4161769b9b7d52c19b805b13815
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 30 11:11:51 2015 -0500
+
+    Silenced more stuff
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit 5ddf39f50561d989f418804a51e0f7e293b8b242
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 23 16:18:26 2015 -0500
+
+    More cleanups to avoid GNUstep warnings
+
+M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+
+commit e9a168ec7b6ef170dcb1b2d24853fc248c6368de
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 23 16:15:06 2015 -0500
+
+    More cleanups
+
+M	sope-appserver/NGObjWeb/WebDAV/SoObject+SoDAVQuery.m
+M	sope-core/NGExtensions/GNUmakefile
+
+commit 6c910bc7b5c2150b2315be6b2320a878f0014144
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 23 16:13:07 2015 -0500
+
+    More cleanups
+
+M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
+
+commit 531b118227e395d65947c9dadcb5df37398fe0c8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 23 16:02:22 2015 -0500
+
+    Major cleanups to crappy logging before
+
+M	sope-appserver/NGObjWeb/Defaults.plist
+M	sope-appserver/NGObjWeb/DynamicElements/WOBrowser.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOCompoundElement.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOString.m
+M	sope-appserver/NGObjWeb/SoObjects/SoObject.m
+M	sope-appserver/NGObjWeb/Templates/WOWrapperTemplateBuilder.m
+M	sope-appserver/NGObjWeb/Templates/WOxElemBuilder.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+URLEscaping.m
+M	sope-core/NGExtensions/NGBundleManager.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+M	sope-mime/NGImap4/NGImap4ConnectionManager.m
+M	sope-mime/NGImap4/NGImap4FolderMailRegistry.m
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit 91ae0a61312a1f1b40eff727258b06f15d9d0867
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jan 22 10:40:12 2015 -0500
+
+    Removed worthless files
+
+M	sope-core/NGExtensions/FdExt.subproj/GNUmakefile
+D	sope-core/NGExtensions/FdExt.subproj/NSString+German.m
+D	sope-core/NGExtensions/NGExtensions/NSString+German.h
+
+commit 64e164a20bfda861fdf1df715776b9657ad0feb5
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jan 20 08:37:58 2015 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 77927f2583ecb26e97256a5e180b96dffa8eacf3
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 16 12:53:44 2015 -0500
