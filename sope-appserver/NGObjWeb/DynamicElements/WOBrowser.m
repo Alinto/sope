@@ -208,11 +208,13 @@
     }
 
     if ([self->singleSelection boolValueInComponent:sComponent]) {
+#if 0
         if ([sel count] > 1) {
           NSLog(@"WARNING(%@): "
                 @"using singleSelection with multiple selected values",
                 self);
         }
+#endif
         [self->selection setValue:[sel lastObject] inComponent:sComponent];
     }
     else

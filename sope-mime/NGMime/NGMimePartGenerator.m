@@ -35,8 +35,8 @@ static BOOL       debugOn = NO;
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   
   debugOn = [ud boolForKey:@"NGMimeGeneratorDebugEnabled"];
-  if (debugOn)
-    NSLog(@"WARNING[%@]: NGMimeGeneratorDebugEnabled is enabled!", self);
+  //if (debugOn)
+  //   NSLog(@"WARNING[%@]: NGMimeGeneratorDebugEnabled is enabled!", self);
   
   if (Pi == nil)
     Pi = [[NSProcessInfo processInfo] retain];
@@ -421,8 +421,7 @@ static BOOL       debugOn = NO;
 
   if (![[self generateMimeFromPart:_part]
               writeToFile:filename atomically:YES]) {
-    NSLog(@"ERROR[%s] couldn`t write data to temorary file %@",
-          __PRETTY_FUNCTION__, filename);
+    [self errorWithFormat: @"couldn`t write data to temorary file %@", filename];
     return nil;
   }
   return filename;

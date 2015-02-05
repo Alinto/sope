@@ -335,8 +335,7 @@ static void freeMods(LDAPMod **mods) {
   *_perr = -1;
   passwd.bv_val = (char *) p;
   passwd.bv_len = strlen(p);
-
-
+  
   c.ldctl_oid = LDAP_CONTROL_PASSWORDPOLICYREQUEST;
   c.ldctl_value.bv_val = NULL;
   c.ldctl_value.bv_len = 0;
@@ -348,7 +347,7 @@ static void freeMods(LDAPMod **mods) {
   sctrlsp = sctrls;
   
   rc = ldap_sasl_bind(self->handle, l, LDAP_SASL_SIMPLE, &passwd, sctrlsp, NULL, &msgid);
-
+  
   if (msgid == -1 || rc != LDAP_SUCCESS)
     {
       [self logWithFormat: @"bind - ldap_sasl_bind call failed"];
@@ -365,7 +364,7 @@ static void freeMods(LDAPMod **mods) {
     }
   
   [self logWithFormat: @"bind - ldap_result call result: %d", rc];
-
+  
   rc = ldap_parse_result(self->handle, result, &err, &matched, &info, &refs, &ctrls, 1);
 
   if (rc != LDAP_SUCCESS)
@@ -406,7 +405,10 @@ static void freeMods(LDAPMod **mods) {
     }
   else
     {
+      // A NULL control object doesn't mean it failed. 389-ds retuns one only
+      // when it actually fails - upon success, it returns nothing.
       [self logWithFormat: @"bind - ldap_parse_result - ctrls is NULL"];
+      *_perr = 65535;
     }
 
   return self->flags.isBound;
@@ -430,7 +432,7 @@ static void freeMods(LDAPMod **mods) {
   *_perr = -1;
   
   user = [_dn UTF8String];
-  p = LDAPUseLatin1Creds ? (char *)[_oldPassword  cString] : (char *)[_oldPassword  UTF8String];
+  p = LDAPUseLatin1Creds ? (char *)[_oldPassword cString] : (char *)[_oldPassword UTF8String];
   
   if (!self->flags.isBound)
     {
@@ -457,7 +459,7 @@ static void freeMods(LDAPMod **mods) {
           self->flags.isBound = YES;
           code = LDAP_OTHER;
 
-          newpw.bv_val = LDAPUseLatin1Creds ? (char *)[_newPassword  cString] : (char *)[_newPassword  UTF8String];
+          newpw.bv_val = LDAPUseLatin1Creds ? (char *)[_newPassword cString] : (char *)[_newPassword UTF8String];
           newpw.bv_len = strlen(newpw.bv_val);
 
           oldpw.bv_val = p;
@@ -468,11 +470,11 @@ static void freeMods(LDAPMod **mods) {
           if (ber == NULL)
             return NO;
 
-          ber_printf(ber, "{" /*}*/ );	    
+          ber_printf(ber, "{");	    
           ber_printf(ber, "ts", LDAP_TAG_EXOP_MODIFY_PASSWD_ID, user);
           ber_printf(ber, "tO", LDAP_TAG_EXOP_MODIFY_PASSWD_OLD, &oldpw);
           ber_printf(ber, "tO", LDAP_TAG_EXOP_MODIFY_PASSWD_NEW, &newpw);
-          ber_printf(ber, /*{*/ "N}" );
+          ber_printf(ber, "N}");
 
           rc = ber_flatten2(ber, &bv, 0 );
 
@@ -485,7 +487,7 @@ static void freeMods(LDAPMod **mods) {
 
           // Everything is alright...
           *_perr = -1;
-
+          
           c.ldctl_oid = LDAP_CONTROL_PASSWORDPOLICYREQUEST;
           c.ldctl_value.bv_val = NULL;
           c.ldctl_value.bv_len = 0;
@@ -516,14 +518,14 @@ static void freeMods(LDAPMod **mods) {
             }
 
           rc = ldap_result(self->handle, LDAP_RES_ANY, LDAP_MSG_ALL, NULL, &result);
-
+          
           if (rc < 0)
             {
               [self logWithFormat: @"change password - ldap_result call failed"];
               return NO;
             }
 
-          rc = ldap_parse_result(self->handle, result, &code, &matcheddn, &text, &refs, &ctrls, 0 );
+          rc = ldap_parse_result(self->handle, result, &code, &matcheddn, &text, &refs, &ctrls, 0);
 
           if (rc != LDAP_SUCCESS)
             {
@@ -549,7 +551,7 @@ static void freeMods(LDAPMod **mods) {
             }
 
           ctrl = ldap_find_control(LDAP_CONTROL_PASSWORDPOLICYRESPONSE, ctrls);
-
+          
           if (ctrl)
             {
               rc = ldap_parse_passwordpolicy_control(self->handle, ctrl, &expire, &grace, _perr);
@@ -586,7 +588,7 @@ static void freeMods(LDAPMod **mods) {
           free(ctrls);
 
           return YES;
-    }
+        }
     }
   
   return NO;

@@ -926,6 +926,21 @@ static NSMutableDictionary *namespaces;
   return [self->normer normalizeResponse:[self processCommand:@"unselect"]];
 }
 
+- (NSDictionary *)lstatus:(NSString *)_folder flags:(NSArray *)_flags {
+  NSString *cmd;
+
+  if (_folder == nil)
+    return nil;
+  if ((_flags == nil) || ([_flags count] == 0))
+    return nil;
+  if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
+    return nil;
+
+  cmd     = [NSString stringWithFormat:@"list \"\" \"%@\" return (status (%@))",
+                      SaneFolderName(_folder), [_flags componentsJoinedByString:@" "]];
+  return [self->normer normalizeListStatusResponse:[self processCommand:cmd]];
+}
+
 /*
  result dict looks like the following  
 {FolderList = {INBOX = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_d8"; }; }; "Other Users/sogo2" = {"/comment" = {"value.priv" = "sogo_c0c_192bd7dc_0"; }; }; Sent = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_da"; }; }; Trash = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_dc"; }; }; abczzll = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_d9"; }; }; "abczzll/mmabcmm" = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_de"; }; }; mf1renamedd = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_dd"; }; }; tfu1 = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_db"; }; }; zuk = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_df"; }; }; }; RawResponse = "{FolderList = ({INBOX = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_d8\"; }; }; }, {Sent = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_da\"; }; }; }, {Trash = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_dc\"; }; }; }, {abczzll = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_d9\"; }; }; }, {\"abczzll/mmabcmm\" = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_de\"; }; }; }, {mf1renamedd = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_dd\"; }; }; }, {tfu1 = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_db\"; }; }; }, {zuk = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_df\"; }; }; }, {\"Other Users/sogo2\" = {\"/comment\" = {\"value.priv\" = \"sogo_c0c_192bd7dc_0\"; }; }; }); ResponseResult = {description = Completed; result = ok; tagId = 13; }; }"; expunge = (); result = 1; }
@@ -965,9 +980,8 @@ static NSMutableDictionary *namespaces;
   enumerator = [_map objectEnumeratorForKey:@"FolderList"];
   folderList  = [NSMutableDictionary dictionaryWithCapacity:5];
   while ((obj = [enumerator nextObject]) != nil) {
-
-    [folderList addEntriesFromDictionary:[NSDictionary dictionaryWithDictionary:obj]];
-  }
+      [folderList setObject: [obj objectForKey: [[obj allKeys] objectAtIndex:0]] forKey: [[self _imapFolder2Folder: [[obj allKeys] objectAtIndex:0]] substringFromIndex:1]];
+    }
 
   [result setObject: folderList forKey: @"FolderList" ];
 

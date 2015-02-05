@@ -307,10 +307,12 @@
             break;
             
           default:
+#if 0
             if ((*bufPtr = cbuf[i]) > 127) {
               NSLog(@"WARNING: string is not ASCII as required for "
                     @"SimpleStaticASCIIString !!! '%@'", v);
             }
+#endif
             bufPtr++;
             break;
         }

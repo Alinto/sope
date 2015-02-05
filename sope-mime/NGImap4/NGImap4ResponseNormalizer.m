@@ -695,6 +695,56 @@ static int      LogImapEnabled = -1;
   return [rr autorelease];
 }
 
+- (NSDictionary *)normalizeListStatusResponse:(NGHashMap *)_map {
+  NSMutableDictionary *result;
+  id                  obj;
+  NSAutoreleasePool   *pool;
+  NSDictionary        *rr;
+
+  pool   = [[NSAutoreleasePool alloc] init];
+  result = [self normalizeResponse:_map];
+
+  if ((obj = [_map objectsForKey:@"list"]) != nil) {
+    NSEnumerator        *enumerator;
+    NSDictionary        *o;
+    NSMutableDictionary *folder;
+
+    enumerator = [obj objectEnumerator];
+    folder     = [[NSMutableDictionary alloc] init];
+
+    while ((o = [enumerator nextObject])) {
+      [folder setObject:_imapFlags2Flags(self, [o objectForKey:@"flags"])
+              forKey:[[self->client _imapFolder2Folder:[o objectForKey:@"folderName"]] substringFromIndex:1]];
+    }
+
+    [result setObject:folder forKey:@"list"];
+    [folder release];
+  }
+
+  if ((obj = [_map objectsForKey:@"status"]) != nil) {
+    NSEnumerator        *enumerator;
+    NSDictionary        *o;
+    NSMutableDictionary *folder;
+
+    enumerator = [obj objectEnumerator];
+    folder     = [[NSMutableDictionary alloc] init];
+
+    while ((o = [enumerator nextObject])) {
+      [folder setObject:[o objectForKey:@"flags"]
+              forKey:[[self->client _imapFolder2Folder:[o objectForKey:@"folderName"]] substringFromIndex:1]];
+    }
+
+    [result setObject:folder forKey:@"status"];
+    [folder release];
+  }
+
+
+  rr = [result retain];
+  [pool release];
+
+  return [rr autorelease];
+}
+
 /* flags */
 
 static inline NSArray *

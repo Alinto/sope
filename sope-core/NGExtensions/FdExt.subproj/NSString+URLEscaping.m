@@ -37,8 +37,8 @@ static inline BOOL doUseUTF8Encoding(void) {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
     useUTF8Encoding = [ud boolForKey:@"NGUseUTF8AsURLEncoding"] ? 1 : 0;
-    if (useUTF8Encoding)
-      NSLog(@"Note: Using UTF-8 as URL encoding in NGExtensions.");
+    //if (useUTF8Encoding)
+    //  NSLog(@"Note: Using UTF-8 as URL encoding in NGExtensions.");
   }
   return useUTF8Encoding ? YES : NO;
 }

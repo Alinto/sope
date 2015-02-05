@@ -25,20 +25,21 @@
 #import <Foundation/NSObject.h>
 #include <NGMime/NGPart.h>
 
-@class NGHashMap;
+@class NGMutatbleHashMap;
 
 /*
   NGMimeMessage represents a RFC822 message with MIME extensions.
 */
 
 @class NSString, NSArray, NSDictionary, NSEnumerator;
+@class NGMutableHashMap;
 @class NGHashMap;
 @class NGMimeType;
 
 @interface NGMimeMessage : NSObject < NGMimePart >
 {
 @protected
-  NGHashMap  *header;
+  NGMutableHashMap  *header;
   id         body;
   NGMimeType *mimeType;
 }
@@ -70,6 +71,7 @@
 - (NSArray *)headerKeys;
 - (NSDictionary *)headers;
 - (NSString *)headersAsString;
+- (void) setHeader: (id) _header  forKey: (NSString *)_key;
 
 @end
 

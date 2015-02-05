@@ -34,7 +34,6 @@ FdExt_OBJC_FILES = \
 	NSString+HTMLEscaping.m		\
 	NSString+XMLEscaping.m		\
 	NSString+URLEscaping.m		\
-	NSString+German.m		\
 	NSURL+misc.m			\
 	NGPropertyListParser.m		\
 

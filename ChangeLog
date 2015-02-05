@@ -1,3 +1,298 @@
+commit 6ce6a39e1af5a4161769b9b7d52c19b805b13815
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 30 11:11:51 2015 -0500
+
+    Silenced more stuff
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit 5ddf39f50561d989f418804a51e0f7e293b8b242
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 23 16:18:26 2015 -0500
+
+    More cleanups to avoid GNUstep warnings
+
+M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+
+commit e9a168ec7b6ef170dcb1b2d24853fc248c6368de
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 23 16:15:06 2015 -0500
+
+    More cleanups
+
+M	sope-appserver/NGObjWeb/WebDAV/SoObject+SoDAVQuery.m
+M	sope-core/NGExtensions/GNUmakefile
+
+commit 6c910bc7b5c2150b2315be6b2320a878f0014144
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 23 16:13:07 2015 -0500
+
+    More cleanups
+
+M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
+
+commit 531b118227e395d65947c9dadcb5df37398fe0c8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 23 16:02:22 2015 -0500
+
+    Major cleanups to crappy logging before
+
+M	sope-appserver/NGObjWeb/Defaults.plist
+M	sope-appserver/NGObjWeb/DynamicElements/WOBrowser.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOCompoundElement.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOString.m
+M	sope-appserver/NGObjWeb/SoObjects/SoObject.m
+M	sope-appserver/NGObjWeb/Templates/WOWrapperTemplateBuilder.m
+M	sope-appserver/NGObjWeb/Templates/WOxElemBuilder.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+URLEscaping.m
+M	sope-core/NGExtensions/NGBundleManager.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+M	sope-mime/NGImap4/NGImap4ConnectionManager.m
+M	sope-mime/NGImap4/NGImap4FolderMailRegistry.m
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit 91ae0a61312a1f1b40eff727258b06f15d9d0867
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jan 22 10:40:12 2015 -0500
+
+    Removed worthless files
+
+M	sope-core/NGExtensions/FdExt.subproj/GNUmakefile
+D	sope-core/NGExtensions/FdExt.subproj/NSString+German.m
+D	sope-core/NGExtensions/NGExtensions/NSString+German.h
+
+commit 64e164a20bfda861fdf1df715776b9657ad0feb5
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jan 20 08:37:58 2015 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 77927f2583ecb26e97256a5e180b96dffa8eacf3
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 16 12:53:44 2015 -0500
+
+    Slight improvements to ppolicy code
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit bcbe4afed90dbb00cb406e6d02fc590d0d1243a9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jan 13 15:40:43 2015 -0500
+
+    Fix for bug #2993
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit 0115a39168a7d483f540ba87a2ebe378fb602f76
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Dec 30 12:57:03 2014 -0500
+
+    Fix for bug #2967
+
+M	sope-appserver/WEExtensions/WEDropContainer.m
+
+commit 382cabbaf6c5a9a559c0b7c066dbb52ee9f730ad
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Dec 30 08:04:14 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 0a015d9791a5848f3b0b395a90a085d8a59694b0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Dec 22 15:46:29 2014 -0500
+
+    Fix annotation/lstatus to handle separators other than '/'
+
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
+
+commit 901137b5425579ef6dcf99f731bc9c528a871cd0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Sat Dec 20 15:32:08 2014 -0500
+
+    Added hack to avoid bug #3036 on badly encodied mails
+
+M	sope-mime/NGMime/NGMimeBodyGenerator.m
+
+commit e1216770ca7067bf03bc95db29da54ca6107504c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Dec 18 08:58:59 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit d6b948e0e4e42246f24c48b12bd2be0a3fac626c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Dec 17 15:02:23 2014 -0500
+
+    Now possible to set message headers dynamically
+
+M	sope-mime/NGMail/NGMimeMessage.h
+M	sope-mime/NGMail/NGMimeMessage.m
+
+commit ed5c2c66171220955d36e1094a7aca36d63c2930
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Dec 15 19:35:26 2014 -0500
+
+    New lstatus method to quickly grab the X-GUID of folders
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4ResponseNormalizer.h
+M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
+
+commit e49a05fc5544e9775e7e61fca7b93c7c2eea7087
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Dec 9 12:59:41 2014 -0500
+
+    Added workaround for Precise packaging
+
+M	packaging/debian/rules
+
+commit 2dd9a7919c0f4223fb6764bb9658cdb3dcdbf78f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Dec 9 09:12:44 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 4ed68775f91b6ecb566164babda0d00f0b519d23
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Sat Nov 29 09:23:06 2014 +0100
+
+    Use malloc/free as NGAllocAtomic/NGFree are useless
+    
+    LIB_FOUNDATION_BOEHM_GC is never used and will never be
+    according to inverse-inc devs
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit b249d8f5c3d0ce5bd765f9ec4270c54d7a870d7d
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Thu Nov 27 17:21:03 2014 +0100
+
+    Fix memory leak when failing to parse a quoted printable
+    
+    Valgrind report:
+    
+       604 bytes in 1 blocks are definitely lost in loss record 8,010 of 10,179
+          at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+          by 0x2BF73131: _i_NSData_QuotedPrintableCoding_dataByDecodingQuotedPrintableTransferEncoding (in /usr/lib/libNGExtensions.so.4.9.203)
+          by 0x3375053E: _i_NSData_SOGoMailUtilities_bodyDataFromEncoding_ (in /usr/lib/GNUstep/SOGo/Mailer.SOGo/Mailer)
+          by 0x34D23B46: _i_MAPIStoreMailMessage__setBodyContentFromRawData_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34D1DD0A: _i_MAPIStoreMailFolder__lookupMessage_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34CF4312: _i_MAPIStoreFolder__lookupMessageByURL_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34CF497A: _i_MAPIStoreFolder__openMessage_withMID_forWriting_inMemCtx_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x2A5D5013: sogo_folder_open_message (in /usr/lib/x86_64-linux-gnu/mapistore_backends/libMAPIStoreSOGo.so.1.0.0)
+    
+    In decoding and encoding failing.
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit 75bd8a0105752cee05496efd53b2d4103390a4dc
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Thu Nov 27 17:21:03 2014 +0100
+
+    Fix memory leak when failing to parse a quoted printable
+    
+    Valgrind report:
+    
+       604 bytes in 1 blocks are definitely lost in loss record 8,010 of 10,179
+          at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+          by 0x2BF73131: _i_NSData_QuotedPrintableCoding_dataByDecodingQuotedPrintableTransferEncoding (in /usr/lib/libNGExtensions.so.4.9.203)
+          by 0x3375053E: _i_NSData_SOGoMailUtilities_bodyDataFromEncoding_ (in /usr/lib/GNUstep/SOGo/Mailer.SOGo/Mailer)
+          by 0x34D23B46: _i_MAPIStoreMailMessage__setBodyContentFromRawData_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34D1DD0A: _i_MAPIStoreMailFolder__lookupMessage_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34CF4312: _i_MAPIStoreFolder__lookupMessageByURL_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x34CF497A: _i_MAPIStoreFolder__openMessage_withMID_forWriting_inMemCtx_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+          by 0x2A5D5013: sogo_folder_open_message (in /usr/lib/x86_64-linux-gnu/mapistore_backends/libMAPIStoreSOGo.so.1.0.0)
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit bd194948067c876eafecd9723ae7c544099fb9e5
+Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
+Date:   Mon Nov 24 23:50:45 2014 +0100
+
+    Fix crash when decoding a = at end of the data
+    
+    In decoding a quoted printable mail. There is a buffer overflow
+    as we are always parsing two bytes instead of one.
+    
+    See the full backtrace at:
+    
+    https://gist.github.com/sixstone-qq/cb8099b66c2911e8aaf2
+    
+    This patch avoid regressions to manage = at the end of the source.
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit f26ccf1f1380b1a95b8b29e5a30e8edd775a151b
+Author: Samuel Cabrero <samuelcabrero@kernevil.me>
+Date:   Thu Nov 20 17:02:01 2014 +0100
+
+    Fix memory leak in file NSString+Imap4.m function stringByDecodingImap4FolderName
+    
+    Trace:
+    
+    ==26758== 114,980 bytes in 3,551 blocks are definitely lost in loss record 9,847 of 9,930
+    ==26758==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+    ==26758==    by 0x2D203DBD: ??? (in /usr/lib/libgnustep-base.so.1.24.0)
+    ==26758==    by 0x2BA20427: _i_NSString_Imap4_stringByDecodingImap4FolderName (in /usr/lib/libNGMime.so.4.9.3)
+    ==26758==    by 0x34D19F77: _i_MAPIStoreMailFolder___imapFolderNameRepresentation_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34D1A11C: _i_MAPIStoreMailFolder___cleanupSubfolderKeys_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34D1A326: _i_MAPIStoreMailFolder__folderKeysMatchingQualifier_andSortOrderings_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34CF76D2: _i_MAPIStoreFolder__folderKeys (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34CF3BFE: _i_MAPIStoreFolder__lookupFolder_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34CF3E27: _i_MAPIStoreFolder__lookupFolderByURL_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x34CF43BF: _i_MAPIStoreFolder__openFolder_withFID_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
+    ==26758==    by 0x2A5D4773: sogo_folder_open_folder (in /usr/lib/x86_64-linux-gnu/mapistore_backends/libMAPIStoreSOGo.so.1.0.0)
+    ==26758==    by 0x2917D670: mapistore_backend_folder_open_folder (in /usr/lib/x86_64-linux-gnu/libmapistore.so.2.2)
+    ==26758==    by 0x291758C2: mapistore_folder_open_folder (in /usr/lib/x86_64-linux-gnu/libmapistore.so.2.2)
+    ==26758==    by 0x28C1204D: emsmdbp_object_open_folder (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C3191F: oxcfxics_fill_transfer_state_arrays (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C319AC: oxcfxics_fill_transfer_state_arrays (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C31D76: oxcfxics_ndr_push_transfer_state (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C3226B: EcDoRpc_RopSyncGetTransferState (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C0D87C: EcDoRpc_process_transaction (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C0F3C7: dcesrv_EcDoRpcExt2 (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x28C0F89A: dcesrv_exchange_emsmdb_dispatch (in /usr/lib/x86_64-linux-gnu/openchange/dcerpc_mapiproxy_server/exchange_emsmdb.so)
+    ==26758==    by 0x26BF8E23: mapiproxy_server_dispatch (in /usr/lib/x86_64-linux-gnu/libmapiproxy.so.2.2)
+    ==26758==    by 0x268D7213: mapiproxy_op_dispatch (in /usr/lib/x86_64-linux-gnu/samba/dcerpc_server/dcesrv_mapiproxy.so)
+    ==26758==    by 0x16267BAF: dcesrv_process_ncacn_packet (in /usr/lib/x86_64-linux-gnu/libdcerpc-server.so.0.0.1)
+    ==26758==    by 0x16268980: dcesrv_read_fragment_done (in /usr/lib/x86_64-linux-gnu/libdcerpc-server.so.0.0.1)
+    ==26758==    by 0x809ECB6: dcerpc_read_ncacn_packet_done (in /usr/lib/x86_64-linux-gnu/libdcerpc-binding.so.0.0.1)
+    ==26758==    by 0xB5137C8: tstream_readv_pdu_readv_done (in /usr/lib/x86_64-linux-gnu/samba/libsamba-sockets.so.0)
+    ==26758==    by 0xB5126A5: tstream_readv_done (in /usr/lib/x86_64-linux-gnu/samba/libsamba-sockets.so.0)
+    ==26758==    by 0x8B04E13: tevent_common_loop_immediate (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B09436: epoll_event_loop_once (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B07B26: std_event_loop_once (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B045EC: _tevent_loop_once (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B0478A: tevent_common_loop_wait (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x8B07AC6: std_event_loop_wait (in /usr/lib/x86_64-linux-gnu/libtevent.so.0.9.19)
+    ==26758==    by 0x11DF4685: standard_new_task (in /usr/lib/x86_64-linux-gnu/samba/process_model/standard.so)
+    ==26758==    by 0x5D10EF9: task_server_startup (in /usr/lib/x86_64-linux-gnu/samba/libservice.so.0)
+    ==26758==    by 0x5D0FBA2: server_service_startup (in /usr/lib/x86_64-linux-gnu/samba/libservice.so.0)
+    ==26758==    by 0x111A54: binary_smbd_main.constprop.1 (in /usr/sbin/samba)
+    ==26758==    by 0x8D2FEC4: (below main) (libc-start.c:287)
+
+M	sope-mime/NGImap4/NSString+Imap4.m
+
+commit 6e8ab27640345febc742397dedc3c68e472166e6
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Nov 21 09:22:00 2014 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit bb70653d820450507097230add9fa1fa13b2453c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 20 09:42:42 2014 -0500

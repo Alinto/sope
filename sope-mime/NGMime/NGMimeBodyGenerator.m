@@ -45,6 +45,11 @@ static BOOL debugOn = NO;
   NSData *data, *input;
   
   input = [_part body];
+
+  // We make sure we're dealing with data here. SOPE is just too lame.
+  if ([input isKindOfClass: [NSString class]])
+   input = [(id)input dataUsingEncoding: NSUTF8StringEncoding];
+
   data  = [self encodeData:input
                 forPart:_part
                 additionalHeaders:_addHeaders];
