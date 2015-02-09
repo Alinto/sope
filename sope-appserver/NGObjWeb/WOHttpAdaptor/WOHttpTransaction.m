@@ -794,7 +794,8 @@ static int logCounter = 0;
     /* add content length header */
     
     if ((length = [body length]) == 0
-        && ![[_response headerForKey: @"content-type"] hasPrefix:@"text/plain"]) {
+        && ![[_response headerForKey: @"content-type"] hasPrefix:@"text/plain"]
+        && ![[_response headerForKey: @"content-type"] hasPrefix:@"application/vnd.ms-sync.wbxml"]) {
       [_response setHeader:@"text/plain" forKey:@"content-type"];
     }
     snprintf((char *)buf, sizeof(buf), "%d", length);
