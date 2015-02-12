@@ -1,3 +1,19 @@
+commit d38cce21a6ad2fc872d307a8b99e1bbce9dea729
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Feb 9 15:32:36 2015 -0500
+
+    Avoid overwriting the content-type for empty EAS responses (#3095)
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit 09dbf543661fdabb7485e2e7d8c8d02984e0f7d1
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 30 11:12:36 2015 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 6ce6a39e1af5a4161769b9b7d52c19b805b13815
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 30 11:11:51 2015 -0500
