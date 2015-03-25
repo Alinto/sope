@@ -403,7 +403,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     remainder = (NSMutableString *)[remainder stringByTrimmingCharactersInSet:
                             [NSCharacterSet characterSetWithCharactersInString: @","]];
     /* get address part */
-    r = [remainder rangeOfString: @"<"];
+    r = [remainder rangeOfString: @"<" options:NSBackwardsSearch];
     addrStart = r.location;
     if (addrStart == NSNotFound)
       /* Use rest of line as email if there's no '<' */

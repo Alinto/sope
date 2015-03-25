@@ -38,86 +38,86 @@
 
 @end /* NGMimeHeaderFieldGenerator */
 
-#if 1
-int NGEncodeQuotedPrintableMime
-(const unsigned char *_src, unsigned _srcLen,
- unsigned char *_dest, unsigned _destLen) 
+/*
+   text       :=  ALPHA / DIGIT / "!" / "#" / "$" / "%" / "&" / "'" /
+                  "*" / "+" / "-" / "/" / "^" /  "`" / "{" / "|" /
+                  "}" / "~"
+
+  tspecials   :=  "(" / ")" / "<" / ">" / "@" / "," / ";" /
+                  ":" / "\" / <"> / "/" / "[" / "]" / "?" /
+                  "=" / "_"
+
+  rfc822_text := 1*<any (US-ASCII) CHAR except SPACE, CTLs, or tspecials>
+*/
+static unsigned char rfc822_text[256] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* 0-15 */
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* 16-31 */
+    0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, /* 32-47 */
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, /* 48-63 */
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, /* 64-79 */
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, /* 80-95 */
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, /* 96-111 */
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, /* 112-127 */
+
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* >= 128 */
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+};
+
+bool NGEncodeQuotedPrintableMimeNeeded(const unsigned char *src, unsigned srcLen)
 {
-  /* decode also spaces*/
-  unsigned cnt      = 0;
-  unsigned destCnt  = 0;
-  unsigned char
-    hexT[16] = {'0','1','2','3','4','5','6','7','8',
-                '9','A','B','C','D','E','F'};
-  
-  if (_srcLen > _destLen)
-    return -1;
-  
-  for (cnt = 0; (cnt < _srcLen) && (destCnt < _destLen); cnt++) {
-    register unsigned char c = _src[cnt];
+  unsigned i = 0;
 
-    /* RFC 2045, Sect. 6.7 allows chars 33 through 60 inclusive, and 62 through 126, inclusive
-     * RFC 2047, Sect. 4.2 also requires chars 63 and 95 to be encoded
-     * Space might be "_", but let's encode it, too... */
-    if (((c >= 33) && (c <= 43)) || ((c >= 45) && (c <= 60)) || (c == 62) || ((c >= 64) && (c <= 94)) || ((c >= 96) && (c <= 126))) {
+  for (i = 0; i < srcLen; i++) {
+    if (src[i] != ' ' && !rfc822_text[src[i]]) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+int NGEncodeQuotedPrintableMime(const unsigned char *src, unsigned srcLen,
+                                unsigned char *dest, unsigned destLen)
+{
+  unsigned cnt = 0;
+  unsigned destCnt = 0;
+  unsigned char hexT[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
+                            '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
+  if (srcLen > destLen)
+    return -1;
+
+  for (cnt = 0; cnt < srcLen && destCnt < destLen; cnt++) {
+    register unsigned char c = src[cnt];
+
+    if (rfc822_text[c] == 1) {
       // no quoting
-      _dest[destCnt] = c;
+      dest[destCnt] = c;
       destCnt++;
-    }
-    else { // need to be quoted
-      if (_destLen - destCnt > 2) {
-        if (c == ' ') {
-          _dest[destCnt] = '_'; destCnt++;
-        }
-        else {
-          _dest[destCnt] = '='; destCnt++;
-          _dest[destCnt] = hexT[(c >> 4) & 15]; destCnt++;
-          _dest[destCnt] = hexT[c & 15]; destCnt++;
-        }
-      }
-      else 
+    } else {
+      // need to be quoted
+      if (destLen - destCnt <= 2)
         break;
+
+      if (c == ' ') {
+        // Special case ' ' => '_' (and '_' will be encoded)
+        dest[destCnt] = '_'; destCnt++;
+      } else {
+        dest[destCnt] = '='; destCnt++;
+        dest[destCnt] = hexT[(c >> 4) & 15]; destCnt++;
+        dest[destCnt] = hexT[c & 15]; destCnt++;
+      }
     }
   }
-  if (cnt < _srcLen)
+
+  if (cnt < srcLen)
     return -1;
+
   return destCnt;
 }
-
-#else /* TODO: this one was declared in NGMimeMessageGenerator, any diff? */
-
-static int NGEncodeQuotedPrintableMime(const char *_src, unsigned _srcLen,
-                                       char *_dest, unsigned _destLen) {
-  /* decode also spaces*/
-  unsigned cnt      = 0;
-  unsigned destCnt  = 0;
-  char     hexT[16] = {'0','1','2','3','4','5','6','7','8',
-                       '9','A','B','C','D','E','F'};
-  
-  if (_srcLen > _destLen)
-    return -1;
-  
-  for (cnt = 0; (cnt < _srcLen) && (destCnt < _destLen); cnt++) {
-    char c = _src[cnt];
-
-    if (((c > 47) && (c < 58)) ||
-        ((c > 64) && (c < 91)) ||
-        ((c > 96) && (c < 123))) { // no quoting
-      _dest[destCnt++] = c;
-    }
-    else { // need to be quoted
-      if (_destLen - destCnt > 2) {
-        _dest[destCnt++] = '=';
-        _dest[destCnt++] = hexT[(c >> 4) & 15];
-        _dest[destCnt++] = hexT[c & 15];
-      }
-      else 
-        break;
-    }
-  }
-  if (cnt < _srcLen)
-    return -1;
-  return destCnt;
-}
-
-#endif
