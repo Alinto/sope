@@ -1,3 +1,35 @@
+commit d0ac78bdab50ae3c5af4e946e6f5ef2e0f284d9b
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Mar 4 11:59:06 2015 -0500
+
+    Add support for date & search input types of HTML5
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOxHTMLElemBuilder.m
+
+commit 6452ca58fbd7ee4850ae06bd7228a4feeb21441b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Feb 12 11:09:30 2015 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit d38cce21a6ad2fc872d307a8b99e1bbce9dea729
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Feb 9 15:32:36 2015 -0500
+
+    Avoid overwriting the content-type for empty EAS responses (#3095)
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit 09dbf543661fdabb7485e2e7d8c8d02984e0f7d1
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 30 11:12:36 2015 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 6ce6a39e1af5a4161769b9b7d52c19b805b13815
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 30 11:11:51 2015 -0500

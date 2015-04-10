@@ -105,6 +105,10 @@ static Class WOGenericElementClass   = Nil;
         if ([type isEqualToString:@"file"])
           return NSClassFromString(@"WOFileUpload");
       }
+      else if (c1 == 'd') {
+        if ([type isEqualToString:@"date"])
+          return NSClassFromString(@"WOTextField");
+      }
       break;
       
     case 5:
@@ -122,8 +126,12 @@ static Class WOGenericElementClass   = Nil;
       break;
       
     case 6:
-      if (c1 == 's' && [type isEqualToString:@"submit"])
-        return NSClassFromString(@"WOSubmitButton");
+      if (c1 == 's') {
+        if ([type isEqualToString:@"submit"])
+          return NSClassFromString(@"WOSubmitButton");
+        else if ([type isEqualToString:@"search"])
+          return NSClassFromString(@"WOTextField");
+      }
       else if (c1 == 'h' && [type isEqualToString:@"hidden"])
         return NSClassFromString(@"WOHiddenField");
       else if (c1 == 'b' && [type isEqualToString:@"button"])
