@@ -718,7 +718,12 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 - (void) _mergeDict: (NSDictionary *) source
                into: (NSMutableDictionary *) target
 {
-  for (id key in [source keyEnumerator]) {
+  NSEnumerator *keyEnumerator;
+  id key;
+
+  keyEnumerator = [source keyEnumerator];
+  
+  while ((key = [keyEnumerator nextObject])) {
     id obj, current_obj;
 
     current_obj = [target objectForKey: key];
@@ -754,7 +759,12 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 - (void) _mergeNGHashMap: (NGMutableHashMap *) source
                     into: (NGMutableHashMap *) target
 {
-  for (id key in [source keyEnumerator]) {
+  NSEnumerator *keyEnumerator;
+  id key;
+
+  keyEnumerator = [source keyEnumerator];
+  
+  while ((key = [keyEnumerator nextObject])) {
     NSArray *obj, *current_obj;
 
     current_obj = [target objectsForKey: key];
