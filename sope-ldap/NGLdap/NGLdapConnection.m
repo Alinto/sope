@@ -186,6 +186,7 @@ static void freeMods(LDAPMod **mods) {
 {
   NSException *e;
   NSString *name, *reason, *ldapError;
+  NSMutableDictionary *userInfo;
 
   name = @"LDAPException";
   ldapError = [NSString stringWithCString: ldap_err2string(_err)
@@ -194,10 +195,12 @@ static void freeMods(LDAPMod **mods) {
                            @"operation %@ failed: %@ (0x%X)",
                            _operation, ldapError, _err];
 
+  userInfo = [[_ui mutableCopy] autorelease];
+  [userInfo setObject: [NSNumber numberWithInteger: _err] forKey: @"error_code"];
   e = [NSException exceptionWithName:name
                    reason:reason
-                   userInfo:_ui];
-  
+                   userInfo:userInfo];
+
   return e;
 }
 
