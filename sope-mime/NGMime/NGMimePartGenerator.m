@@ -148,7 +148,7 @@ static BOOL       debugOn = NO;
   /* returns whether data was generated */
   const unsigned char *fcname;
   id       value  = nil;
-  unsigned len;
+  unsigned len, line_len;
   BOOL     isMultiValue, isFirst;
   
   /* get field name and strip leading spaces */
@@ -172,9 +172,19 @@ static BOOL       debugOn = NO;
 	[_data appendBytes:fcname length:len];
 	[_data appendBytes:": " length:2];
 	isFirst = NO;
+        line_len = 0;
       }
-      else
-	[_data appendBytes:", " length:2];
+      else {
+        // Line MUST be no more than 998 characters. This is RFC-enforced.
+        if (line_len + [data length] + 2 <= 998) {
+          [_data appendBytes:", " length:2];
+          line_len += ([data length] + 2);
+        }
+        else {
+          [_data appendBytes:",\r\n " length:4];
+          line_len = 0;
+        }
+      }
       
       [_data appendData:data];
     }
