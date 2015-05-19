@@ -172,7 +172,7 @@ static BOOL       debugOn = NO;
 	[_data appendBytes:fcname length:len];
 	[_data appendBytes:": " length:2];
 	isFirst = NO;
-        line_len = 0;
+        line_len = len+2;
       }
       else {
         // Line MUST be no more than 998 characters. This is RFC-enforced.
@@ -182,7 +182,7 @@ static BOOL       debugOn = NO;
         }
         else {
           [_data appendBytes:",\r\n " length:4];
-          line_len = 0;
+          line_len = 1;
         }
       }
       
