@@ -92,7 +92,7 @@ static int UseLFSeperatedAddressEntries = -1;
     NSString   *tmp;
     char       *buffer;
     unsigned   bufLen;
-    bool       doEnc;
+    BOOL       doEnc;
 
     if ([result length] > 0) {
       if (UseLFSeperatedAddressEntries == 1)

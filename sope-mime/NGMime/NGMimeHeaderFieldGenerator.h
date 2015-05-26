@@ -83,7 +83,7 @@
 
 @end
 
-extern bool NGEncodeQuotedPrintableMimeNeeded(const unsigned char *src,
+extern BOOL NGEncodeQuotedPrintableMimeNeeded(const unsigned char *src,
                                               unsigned srcLen);
 
 extern int NGEncodeQuotedPrintableMime(const unsigned char *src, unsigned srcLen,
