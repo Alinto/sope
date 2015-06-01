@@ -83,8 +83,10 @@
 
 @end
 
-extern int NGEncodeQuotedPrintableMime
-(const unsigned char *_src, unsigned _srcLen,
- unsigned char *_dest, unsigned _destLen);
+extern BOOL NGEncodeQuotedPrintableMimeNeeded(const unsigned char *src,
+                                              unsigned srcLen);
+
+extern int NGEncodeQuotedPrintableMime(const unsigned char *src, unsigned srcLen,
+                                       unsigned char *dest, unsigned destLen);
 
 #endif // __NGMime_NGHeaderFieldGenerator_H__

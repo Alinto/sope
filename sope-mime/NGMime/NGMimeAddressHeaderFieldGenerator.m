@@ -84,50 +84,29 @@ static int UseLFSeperatedAddressEntries = -1;
     : [NSClassFromString(@"NGMailAddressParser")
 			mailAddressParserWithData:_value];
 #endif
-  
+
   enumerator = [[parser parseAddressList] objectEnumerator];
   result     = [[NSMutableString alloc] initWithCapacity:128];
 
   while ((address = [enumerator nextObject]) != nil) {
     NSString   *tmp;
-    unichar *uniBuffer;
     char       *buffer;
-    unsigned   bufLen, cnt;
+    unsigned   bufLen;
     BOOL       doEnc;
-    
+
     if ([result length] > 0) {
       if (UseLFSeperatedAddressEntries == 1)
         [result appendString:@",\n   "];
       else
         [result appendString:@", "];
     }
-    
-    tmp    = [address displayName];
-    bufLen = [tmp length];
-    
-    uniBuffer = calloc(bufLen, sizeof(unichar));
-    [tmp getCharacters: uniBuffer];
-    
-    cnt   = 0;
-    doEnc = NO;
-    
-    while (cnt < bufLen) {
-      /* must encode chars outside ASCII 33..60, 62..126 ranges [RFC 2045, Sect. 6.7]
-       * RFC 2047, Sect. 4.2 also requires chars 63 and 95 to be encoded
-       * For spaces, quotation is fine */
-      if (uniBuffer[cnt] < 32 ||
-	  uniBuffer[cnt] == 61 ||
-	  uniBuffer[cnt] == 63 ||
-          uniBuffer[cnt] == 95 ||
-	  uniBuffer[cnt] > 126) {
-        doEnc = YES;
-        break;
-      }
-      cnt++;
-    }
-    
+
+    tmp = [address displayName];
+
+    doEnc = NGEncodeQuotedPrintableMimeNeeded((unsigned char *)[tmp UTF8String],
+                                              [tmp length]);
     buffer = NULL;
-  
+
     if (doEnc) {
       /* FIXME - better use UTF8 encoding! */
 #if NeXT_Foundation_LIBRARY
