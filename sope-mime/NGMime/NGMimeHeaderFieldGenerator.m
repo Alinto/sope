@@ -69,17 +69,17 @@ static unsigned char rfc822_text[256] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-bool NGEncodeQuotedPrintableMimeNeeded(const unsigned char *src, unsigned srcLen)
+BOOL NGEncodeQuotedPrintableMimeNeeded(const unsigned char *src, unsigned srcLen)
 {
   unsigned i = 0;
 
   for (i = 0; i < srcLen; i++) {
     if (src[i] != ' ' && !rfc822_text[src[i]]) {
-      return true;
+      return YES;
     }
   }
 
-  return false;
+  return NO;
 }
 
 int NGEncodeQuotedPrintableMime(const unsigned char *src, unsigned srcLen,

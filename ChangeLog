@@ -1,3 +1,95 @@
+commit b6b71be58813684cfe8a2fbc0a18715c26a042fc
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue May 26 15:09:43 2015 -0400
+
+    (fix) let the code compile on older gcc versions
+
+M	sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.h
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
+commit e81575b85fe1a45bdad0ca5160a31fe45c5c9c49
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed May 20 08:26:14 2015 -0400
+
+    improvements over previous commits
+
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit f354d85c3e6968252f41fb91956aef0c1fb8a25d
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue May 19 14:58:03 2015 -0400
+
+    very slight enhancements over previous commit
+
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit 918ecf623f32b4318545e883b30038ac9a187a79
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue May 19 14:52:04 2015 -0400
+
+    (fix) enforce the 998 chars limit when generating header data (#3085)
+
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit 20acefdd4dab607b064e2f3d1ffebd3bae936a66
+Author: Javier Amor García <jamor@zentyal.com>
+Date:   Mon May 18 14:36:41 2015 +0200
+
+    NGLdap: Add LDAP error code to `LDAPException` object.
+    
+    The error code is stored in the userInfo dictioanry under the key error_code
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit ed1a58d4bd9241689b49bd83329961f77500cc94
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Apr 21 10:57:46 2015 -0400
+
+    Fixed code for C99 comptability
+
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit 984afb7fbc9a46f2df0a86a7114d24c5bce1b532
+Author: Jesús García Sáez <jgarcia@zentyal.com>
+Date:   Mon Apr 20 14:24:07 2015 +0200
+
+    NGImap4Connection:fetchUids retrieve uids in batches
+    
+    To prevent 'too long request' error
+
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit 99a5736d198a5300491d253b273bda437ef35f11
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Mar 24 11:10:52 2015 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 9afc84eb11fd5329bc342e3fadec81a3855b486c
+Author: Jesús García Sáez <jgarcia@zentyal.com>
+Date:   Mon Mar 23 17:04:59 2015 +0100
+
+    mime/mail: Parse emails with '<' in displayName
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit 67c9c4ff64099e07a239d44ca84cf58c9886dcf8
+Author: Jesús García Sáez <jgarcia@zentyal.com>
+Date:   Mon Mar 23 13:38:27 2015 +0100
+
+    mime: encode address headers properly
+    
+    More restrict QP encode based on rfc822, escape all special chars.
+    
+    This is the way dovecot parses these fields.
+
+M	sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.h
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
 commit d0ac78bdab50ae3c5af4e946e6f5ef2e0f284d9b
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Mar 4 11:59:06 2015 -0500

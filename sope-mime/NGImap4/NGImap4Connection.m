@@ -26,6 +26,16 @@
 #include "NSString+Imap4.h"
 #include "imCommon.h"
 
+@interface NGImap4Connection (private)
+
+- (void) _mergeDict: (NSDictionary *) source
+               into: (NSMutableDictionary *) target;
+
+- (void) _mergeNGHashMap: (NGMutableHashMap *) source
+                    into: (NGMutableHashMap *) target;
+
+@end
+
 @implementation NGImap4Connection
 
 static BOOL     debugOn         = NO;
@@ -629,21 +639,22 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
       [self warnWithFormat: @"No THREAD support for %@", _url];
       uids = [self fetchUIDsInURL: _url qualifier: _qualifier sortOrdering: _so];
     }
-  
+
   if (![uids isNotNull])
     {
       [self errorWithFormat: @"got no UIDs for URL: %@: %@", _url, result];
       return nil;
     }
-  
+
   // Update cache
-  
+
   [self cacheUIDs:uids forURL:_url qualifier:_qualifier sortOrdering:_so];
   return uids;
 }
 
-- (NSArray *)fetchUIDs:(NSArray *)_uids inURL:(NSURL *)_url
-  parts:(NSArray *)_parts
+- (NSArray *) fetchUIDs: (NSArray *) _uids
+                  inURL: (NSURL *) _url
+                  parts: (NSArray *) _parts
 {
   // currently returns a dict?!
   /*
@@ -660,34 +671,118 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
       RFC822.SIZE
       RFC822.TEXT
   */
-  NSDictionary *result;
-  
-  if (_uids == nil)
+  NSMutableDictionary *result = nil;
+  NSUInteger i, total, step = 1000;
+
+  if (_uids == nil || [_uids count] == 0)
     return nil;
-  if (![_uids isNotEmpty])
-    return nil; // TODO: might break empty folders?! return a dict!
-  
+
   /* select folder */
 
   if (![self selectFolder:_url])
     return nil;
-  
+
   /* fetch parts */
-  
-  // TODO: split uids into batches, otherwise Cyrus will complain
-  //       => not really important because we batch before (in the sort)
-  //       if the list is too long, we get a:
-  //       "* BYE Fatal error: word too long"
-  
-  result = [[self client] fetchUids:_uids parts:_parts];
-  if (![[result valueForKey:@"result"] boolValue]) {
-    [self errorWithFormat:@"could not fetch %d uids for url: %@",
-	    [_uids count],_url];
-    return nil;
+
+  total = [_uids count];
+  for (i = 0; i < total; i += step) {
+    NSRange range;
+    NSArray *partial_uids;
+    NSDictionary *partial_result;
+
+    range = NSMakeRange(i, (i + step) > total ? (total - i) : step);
+    partial_uids = [_uids subarrayWithRange: range];
+
+    /* We will only fetch "step" uids each time */
+    partial_result = [[self client] fetchUids:partial_uids parts:_parts];
+
+    if (![[partial_result valueForKey:@"result"] boolValue]) {
+      [self errorWithFormat: @"Error fetching %u uids for url: %@",
+                             total, _url];
+      return nil;
+    }
+
+    if (result == nil) {
+      /* First iteration, first result */
+      result = [[partial_result mutableCopy] autorelease];
+    } else {
+      /* Merge partial_result into previous result */
+      [self _mergeDict: partial_result into: result];
+    }
   }
-  
-  //[self logWithFormat:@"RESULT: %@", result];
+
   return (id)result;
+}
+
+
+- (void) _mergeDict: (NSDictionary *) source
+               into: (NSMutableDictionary *) target
+{
+  NSEnumerator *keyEnumerator;
+  id key;
+
+  keyEnumerator = [source keyEnumerator];
+  
+  while ((key = [keyEnumerator nextObject])) {
+    id obj, current_obj;
+
+    current_obj = [target objectForKey: key];
+    if (current_obj == nil) {
+      /* This should never happen but just in case... */
+      [self errorWithFormat: @"Error merging fetchUids results: "
+                             @"nonexistent key %@ on current target", key];
+      continue;
+    }
+
+    obj = [source objectForKey: key];
+    if ([obj isKindOfClass: [NSArray class]]) {
+      NSArray *data, *current_data, *new_data;
+      data = obj;
+      current_data = current_obj;
+      new_data = [current_data arrayByAddingObjectsFromArray: data];
+      [target setObject: new_data forKey: key];
+    } else if ([obj isKindOfClass: [NGMutableHashMap class]]) {
+      [self _mergeNGHashMap: obj into: current_obj];
+    } else if ([obj isKindOfClass: [NSNumber class]]) {
+      if (obj != current_obj) {
+        [self errorWithFormat: @"Error merging fetchUids results: "
+                               @"incorrect value for key %@: %@ != %@",
+                               key, obj, current_obj];
+      }
+    } else {
+      [self errorWithFormat: @"Error merging fetchUids results: "
+                             @"ignored %@ (%@) key", key, [key class]];
+    }
+  }
+}
+
+- (void) _mergeNGHashMap: (NGMutableHashMap *) source
+                    into: (NGMutableHashMap *) target
+{
+  NSEnumerator *keyEnumerator;
+  id key;
+
+  keyEnumerator = [source keyEnumerator];
+  
+  while ((key = [keyEnumerator nextObject])) {
+    NSArray *obj, *current_obj;
+
+    current_obj = [target objectsForKey: key];
+    if (current_obj == nil) {
+      /* This should never happen but just in case... */
+      [self errorWithFormat: @"Error merging fetchUids results: "
+                             @"nonexistent key %@ on current target", key];
+      continue;
+    }
+
+    if ([current_obj count] == 1) {
+      /* Merge only results, that means fields with more than 1 object */
+      continue;
+    }
+
+    obj = [source objectsForKey: key];
+    [target addObjects: obj forKey: key];
+  }
 }
 
 - (id)fetchURL:(NSURL *)_url parts:(NSArray *)_parts {
