@@ -136,6 +136,8 @@ static Class WOGenericElementClass   = Nil;
         return NSClassFromString(@"WOHiddenField");
       else if (c1 == 'b' && [type isEqualToString:@"button"])
         return NSClassFromString(@"WOGenericElement");
+      else if (c1 == 'n' && [type isEqualToString:@"number"])
+        return NSClassFromString(@"WOTextField");
       break;
 
     case 8:
