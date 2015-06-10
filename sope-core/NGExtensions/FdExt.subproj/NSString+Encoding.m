@@ -141,9 +141,9 @@
 
 #ifdef __linux__
 #if __BYTE_ORDER == __LITTLE_ENDIAN
-static NSString *unicharEncoding = @"UCS-2LE";
+static NSString *unicharEncoding = @"UTF-16LE";
 #else
-static NSString *unicharEncoding = @"UCS-2BE";
+static NSString *unicharEncoding = @"UTF-16BE";
 #endif /* __BYTE_ORDER */
 #else
 static NSString *unicharEncoding = @"UCS-2-INTERNAL";
