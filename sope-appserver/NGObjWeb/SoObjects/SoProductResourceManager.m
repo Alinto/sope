@@ -105,8 +105,8 @@ static BOOL debugOn = NO;
     bundle = [bm bundleWithName:[_fwName stringByDeletingPathExtension]
 		 type:[_fwName pathExtension]];
   }
-  if (bundle == nil)
-      [self warnWithFormat:@"missing bundle for framework: '%@'", _fwName];
+  //if (bundle == nil)
+  //    [self warnWithFormat:@"missing bundle for framework: '%@'", _fwName];
   
   return bundle;
 }

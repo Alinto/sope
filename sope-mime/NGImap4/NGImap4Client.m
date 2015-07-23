@@ -612,7 +612,7 @@ static NSMutableDictionary *namespaces;
     int i, len = [s length];
     for (i = 0; i < len; i++) {
         unichar c = [s characterAtIndex:i];
-        if (c < ' ' || c == '"' || c > '~')
+        if (c < ' ' || c == '"' || c > '~' || c == '\\')
             return NO;
     }
     return YES;
