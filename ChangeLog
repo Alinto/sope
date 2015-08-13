@@ -1,3 +1,51 @@
+commit 18d989c142aa6e8fb9e6487b65770033419febe3
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jul 3 09:46:37 2015 -0400
+
+    Silenced useless warning
+
+M	sope-appserver/NGObjWeb/SoObjects/SoProductResourceManager.m
+
+commit 1c1bafbf5b38c35650b1138d606fbe99bfe37137
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 15 11:28:26 2015 -0400
+
+    (fix) improvements to address parsing (#3243, #3254)
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit 986305940779b821df35e4f1219d4de7e0cc1dc3
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jun 10 14:58:23 2015 -0400
+
+    Add support for the number input type of HTML5
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOxHTMLElemBuilder.m
+
+commit 773f984b2e0ce8c0d22040301e5e63de685d6b8e
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jun 10 11:00:30 2015 -0400
+
+    (fix) added support for big characters encoding
+
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
+
+commit b738adc8abea04c8b6e733e1fd26779f9e2c0fb1
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jun 9 15:58:12 2015 -0400
+
+    (fix) force continuation if / is found in the password
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 383de8a96cccb78b16ab166bf5d06c2c49465408
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 1 08:38:44 2015 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit b6b71be58813684cfe8a2fbc0a18715c26a042fc
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 26 15:09:43 2015 -0400
