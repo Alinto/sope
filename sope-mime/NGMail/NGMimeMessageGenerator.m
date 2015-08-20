@@ -65,20 +65,69 @@ static BOOL debugOn = NO;
     if ((c0 == 'b' || c0 == 'B') && ((c1 == 'c' || c1 == 'C'))) {
       c0 = [_headerField characterAtIndex:2];
       if (c0 == 'c' || c0 == 'C')
-	return YES;
+        return YES;
     }
     break;
   }
   return [super isMultiValueCommaHeaderField:_headerField];
 }
 
-- (id)_escapeHeaderFieldValue:(NSData *)_data {
-  const char   *bytes  = NULL;
-  unsigned int length  = 0;
-  unsigned int desLen  = 0;
-  char         *des    = NULL;
-  unsigned int cnt;
-  BOOL         doEnc;
+int _encodeWord(const char *bytes, unsigned int length, NSMutableData *destination)
+{
+  const char *iso = "=?utf-8?q?";
+  unsigned int isoLen = 10;
+  const char *isoEnd = "?=";
+  unsigned int isoEndLen = 2;
+  char *des = NULL;
+  unsigned int desLen = 0;
+  int retval = -1;
+  
+  desLen = length*3 + isoLen + isoEndLen;
+  des = calloc(desLen + 2, sizeof(char));
+  if (!des) {
+    return -1;
+  }
+
+  memcpy(des, iso, isoLen);
+  desLen = NGEncodeQuotedPrintableMime((unsigned char *) bytes, 
+                                       length,
+                                       (unsigned char *)(des + isoLen),
+                                       desLen - isoLen - isoEndLen);
+  if ((int)desLen != -1) {
+    memcpy(des + isoLen + desLen, isoEnd, isoEndLen);
+    [destination appendBytes: des
+                      length: (isoLen + desLen + isoEndLen)];
+    retval = 0;
+  }
+
+  free(des);
+  return retval;
+}
+
+/*
+This function assumes the format of MIME header parameters.
+
+The no-MIME headers will continue to be correctly encoded, just it will be 
+several q-encoded words separated as if they were header MIME parameters.
+
+Also, it assumes that the header MIME parameters are correctly generated
+by the client, and does not try to enforce that parameter names should 
+not be encoded.
+*/
+- (id)_escapeFieldValue:(NSData *)_data 
+{
+  NSMutableData *encodedHeader = nil;
+  const char *bytes;
+  unsigned int valueLength  = 0;
+  unsigned int lastPosition;
+
+  unsigned int i;
+  BOOL doEnc = NO;
+  unsigned int encodingPos = 0;
+  unsigned int asciiPos = 0;
+  unsigned int parameterPos = 0;
+  BOOL quoted = NO;
+
 //   NSString     *str;
 
   // TODO: this s***s big time!
@@ -95,50 +144,162 @@ static BOOL debugOn = NO;
 //   bytes  = [str cString];
 //   length = [str cStringLength];
 
-  bytes = [_data bytes];
-  length = [_data length];
+  bytes = (char*) [_data bytes];
+  valueLength = [_data length];
+  lastPosition = valueLength - 1;
 
-  /* check whether we need to encode */
-  cnt = 0;
-  doEnc = NO;
-  while (!doEnc && cnt < length)
-    if ((unsigned char)bytes[cnt] > 127)
+  for (i=0; i < valueLength; i++) {
+    unsigned char chr = (unsigned char)bytes[i];
+    BOOL endWord = NO;
+
+    if (i == lastPosition) {
+      endWord = YES;
+      if (chr > 127)
+        doEnc = YES;
+    } else if (chr > 127)  {
       doEnc = YES;
-    else
-      cnt++;
+    } else if (chr == ';') {
+      if (encodingPos == i) {
+        // this is to skip contiguous ';'
+        encodingPos += 1;
+      } else {
+        endWord = YES;
+      }
+    } else if (chr == '=' && !doEnc && i > 0) {
+      if (((unsigned char)bytes[i-1] != '=') &&
+          ((unsigned char)bytes[i+1] != '=')) {
+        parameterPos = encodingPos;
+        encodingPos = i + 1;
 
-  if (!doEnc)
+        if ((unsigned char)bytes[i+1] == '"')
+          quoted = YES;
+      }
+    }
+
+    if (endWord) {
+      if (!doEnc) {
+        encodingPos = i +1;
+        if ((i == lastPosition) && encodedHeader) {
+          [encodedHeader appendBytes: "\n"
+                              length: 1];
+          [encodedHeader appendBytes: bytes + asciiPos
+                              length: valueLength - asciiPos];
+        }
+      } else {
+        unsigned int lenAscii;
+        unsigned int lenParameter;
+        unsigned int lenEncode;
+        unsigned int afterCrLfPos;
+        if (encodedHeader == nil)
+          encodedHeader = [NSMutableData data];
+
+        // calculate length of the sections
+        if (asciiPos == encodingPos) {
+          lenAscii = 0;
+          lenParameter = 0;
+        } else {
+          if (asciiPos > parameterPos) {
+            // no parameter in this case
+            lenAscii = encodingPos - asciiPos;
+            lenParameter = 0;
+          } else {
+            lenAscii = parameterPos - asciiPos;
+            lenParameter = encodingPos - parameterPos;
+          }
+        }
+        lenEncode = i + 1 - encodingPos;
+
+        if (lenAscii) {
+          // add no encoded bytes as they are
+          [encodedHeader appendBytes: bytes + asciiPos
+                              length: lenAscii];
+        }
+
+        if (lenAscii || asciiPos > 0) {
+          // we need a crlf+space to split the header value
+          afterCrLfPos = asciiPos + lenAscii;
+          if ((unsigned char)bytes[afterCrLfPos] == ' ') {
+            if ((afterCrLfPos+1 != lastPosition) &&
+                (unsigned char)bytes[afterCrLfPos+1] != ' ') {
+              if (lenParameter == 0) {
+                // assure the space is not encoded
+                [encodedHeader appendBytes: "\n "
+                                    length: 2];
+                encodingPos += 1;
+                lenEncode -= 1;
+              } else {
+                // the space after the mime delimiter will be recicled as continue-line
+                [encodedHeader appendBytes: "\n"
+                                    length: 1];
+              }
+            } else {
+              // 2 spaces at begin of line we must quote the second
+              [encodedHeader appendBytes: "\n \\ "
+                                  length: 4];
+              // we must adjust pointer to bypass the two altered spaces
+              if (lenParameter) {
+                parameterPos += 2;
+                lenParameter -= 2;
+              } else {
+                encodingPos += 2;
+                lenEncode -= 2;
+              }
+            }
+          } else {
+            [encodedHeader appendBytes: "\n "
+                                length: 2];
+          }
+        }
+
+        if (lenParameter) {
+          // add parameter lvalue as is it
+          [encodedHeader appendBytes: bytes + parameterPos
+                              length: lenParameter];
+        }
+
+        // dont encode ';' termination
+        // and check if it is fully quoted if needed
+        if (chr == ';') {
+          lenEncode -= 1;
+          if ((unsigned char)bytes[i-1] != '"')
+                quoted = NO;
+        } else if (quoted && (chr != '"')) {
+          quoted = NO;
+        }
+
+        if (quoted) {
+          encodingPos += 1;
+          lenEncode -= 2; // because we left two characters aside
+          [encodedHeader appendBytes: "\""
+                              length: 1];     
+        }
+
+        if (_encodeWord (bytes+encodingPos, lenEncode, encodedHeader) == 0) {
+          doEnc = NO;
+          asciiPos = i + 1;
+          encodingPos = i + 1;
+          if (quoted) {
+            [encodedHeader appendBytes: "\""
+                                length: 1];     
+            quoted = NO;
+          }
+          if (chr == ';') {
+            [encodedHeader appendBytes: ";"
+                                length: 1];
+          }
+        } else {
+          [self logWithFormat:
+                    @"WARNING: Error during quoted-printable encoding"];
+          return _data;
+        }
+      }
+    }
+  }  
+
+  if (encodedHeader == nil)
     return _data;
-  
-  /* encode quoted printable */
-  {
-    char        iso[]     = "=?utf-8?q?";
-    unsigned    isoLen    = 10;
-    char        isoEnd[]  = "?=";
-    unsigned    isoEndLen = 2;
-      
-    desLen = length * 3 + 20;
-      
-    des = calloc(desLen + 2, sizeof(char));
-      
-    // memcpy(des, bytes, cnt);
-    memcpy(des, iso, isoLen);
-    desLen = NGEncodeQuotedPrintableMime((unsigned char *)bytes, length,
-                                         (unsigned char *)(des + isoLen),
-					 desLen - isoLen);
-    if ((int)desLen != -1) {
-      memcpy(des + isoLen + desLen, isoEnd, isoEndLen);
-      
-      return [NSData dataWithBytesNoCopy:des
-                     length:(isoLen + desLen + isoEndLen)];
-    }
-    else {
-      [self logWithFormat:
-              @"WARNING: An error occour during quoted-printable decoding"];
-      if (des != NULL) free(des);
-      return _data;
-    }
-  }
+
+  return encodedHeader;
 }
 
 - (NSData *)generateDataForHeaderField:(NSString *)_hf value:(id)_value {
@@ -148,7 +309,7 @@ static BOOL debugOn = NO;
   //       prior passing the value up?
   
   data = [super generateDataForHeaderField:_hf value:_value];
-  return [self _escapeHeaderFieldValue:data];
+  return [self _escapeFieldValue: data];
 }
 
 
@@ -182,7 +343,7 @@ static BOOL debugOn = NO;
   
   if (contentType == nil) {
     [self logWithFormat:@"WARNING(%s): missing content-type in part 0x%p.",
-	    __PRETTY_FUNCTION__, _part];
+            __PRETTY_FUNCTION__, _part];
     return nil;
   }
   
@@ -200,14 +361,14 @@ static BOOL debugOn = NO;
 
   if (generatorClass == Nil) {
     [self debugWithFormat:
-	    @"found no body generator class for part with type: %@", 
-	    contentType];
+            @"found no body generator class for part with type: %@", 
+            contentType];
     return nil;
   }
   
   if (debugOn) {
     [self debugWithFormat:@"using body generator class %@ for part: %@",
-	    generatorClass, _part];
+            generatorClass, _part];
   }
   
   /* allocate generator */
