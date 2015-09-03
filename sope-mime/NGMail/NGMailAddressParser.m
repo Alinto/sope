@@ -378,7 +378,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
   NSMutableString* remainder;
   NSMutableArray* addressList;
   NSString *address, *displayName;
-  NSRange r, c;
+  NSRange r, a, c;
   NSCharacterSet *whitespace;
 
   NSUInteger addrStart, addrEnd, commaPos;
@@ -406,7 +406,8 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     r = [remainder rangeOfString: @"<"];
     addrStart = r.location;
 
-    c = [remainder rangeOfString: @","];
+    a = [remainder rangeOfString: @"@"];
+    c = [remainder rangeOfString: @"," options:0 range:NSMakeRange(a.location+1, [remainder length]-a.location-1)];
     commaPos = c.location;
 
     if ((addrStart == NSNotFound) || (commaPos < addrStart))
