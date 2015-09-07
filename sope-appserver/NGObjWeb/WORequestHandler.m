@@ -232,8 +232,8 @@ static NGLogger *perfLogger        = nil;
       }
       
       [session lock];
-
-      /*NS_DURING {*/
+      
+      NS_DURING {
         response = [self handleRequest:_request
                          inContext:context
                          session:session
@@ -259,12 +259,12 @@ static NGLogger *perfLogger        = nil;
         }
         else
           [self debugWithFormat:@"no session to store."];
-      /*}
+      }
       NS_HANDLER {
         response = [app handleException:localException inContext:context];
       }
-      NS_ENDHANDLER;*/
-
+      NS_ENDHANDLER;
+      
       [session unlock];
       
     responseDone:
