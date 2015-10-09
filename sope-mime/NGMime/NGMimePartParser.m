@@ -245,6 +245,13 @@ static inline BOOL _checkKey(NGMimePartParser *self, NGHashMap *_map,
     tmp = [[StringClass alloc]
 	    initWithData:_data
 	    encoding:[NGMimePartParser defaultHeaderFieldEncoding]];
+
+    // We try to fallback to ISO-8859-1 here. This fixes some brain
+    // damage due to broken mails. See http://sogo.nu/bugs/view.php?id=3309
+    // for details.
+    if (!tmp)
+      tmp = [[StringClass alloc] initWithData: _data
+                                     encoding: NSISOLatin1StringEncoding];
   }
   else
     tmp = [_data retain];

@@ -407,24 +407,34 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
     addrStart = r.location;
 
     a = [remainder rangeOfString: @"@"];
-    c = [remainder rangeOfString: @"," options:0 range:NSMakeRange(a.location+1, [remainder length]-a.location-1)];
+    if (a.location != NSNotFound)
+      c = [remainder rangeOfString: @","
+                           options: 0
+                             range: NSMakeRange(a.location+1, [remainder length]-a.location-1)];
+    else if (addrStart != NSNotFound)
+      c = [remainder rangeOfString: @","
+                           options: 0
+                             range: NSMakeRange(addrStart+1, [remainder length]-addrStart-1)];
+    else
+      c = [remainder rangeOfString: @","
+                           options: 0
+                             range: NSMakeRange(0, [remainder length])];
     commaPos = c.location;
 
-    if ((addrStart == NSNotFound) || (commaPos < addrStart))
+    if ((addrStart == NSNotFound) || (commaPos != NSNotFound && commaPos < addrStart))
       addrStart = 0;
     else
       addrStart++;   // consume the '<'
 
-
-      r = [remainder rangeOfString: @">"
-                           options: 0
-                             range: NSMakeRange(addrStart, [remainder length] - addrStart)];
-      addrEnd = r.location;
-      if (addrEnd == NSNotFound && commaPos == NSNotFound) {
-        /* use all remainder if there's no closing '>' */
-        addrEnd = [remainder length];
-      }
-      else if (!(commaPos == NSNotFound))
+    r = [remainder rangeOfString: @">"
+                         options: 0
+                           range: NSMakeRange(addrStart, [remainder length] - addrStart)];
+    addrEnd = r.location;
+    if (addrEnd == NSNotFound && commaPos == NSNotFound) {
+      /* use all remainder if there's no closing '>' */
+      addrEnd = [remainder length];
+    }
+    else if (!(commaPos == NSNotFound))
       {
         if (addrEnd == commaPos -1)
           addrEnd = commaPos-1; // ... <addr>, <addr>
@@ -432,13 +442,12 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
           addrEnd = commaPos;   // ... addr, addr
       }
 
-
-      /* get address only if there's actually something in between */
-      if (addrEnd - addrStart > 0) {
-        address = [remainder substringWithRange:
-                     NSMakeRange(addrStart, addrEnd-addrStart)];
-        address = [address stringByTrimmingCharactersInSet: whitespace];
-      }
+    /* get address only if there's actually something in between */
+    if (addrEnd - addrStart > 0) {
+      address = [remainder substringWithRange:
+                             NSMakeRange(addrStart, addrEnd-addrStart)];
+      address = [address stringByTrimmingCharactersInSet: whitespace];
+    }
 
     /* get displayName part */
     if (addrStart != NSNotFound && addrStart > 0) {
