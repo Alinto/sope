@@ -42,9 +42,9 @@
   if ([date respondsToSelector:@selector(descriptionWithCalendarFormat:)]) {
     // TODO: do not use -descriptionWithCalendarFormat: !
     //       - slow
-    //       - does not necessarily encode an English dayname!
-    dateString = [date descriptionWithCalendarFormat:
-                         @" %a, %d %b %Y %H:%M:%S %z"];
+    dateString = [date descriptionWithCalendarFormat: @" %a, %d %b %Y %H:%M:%S %z"
+                                            timeZone: [NSTimeZone timeZoneWithName: @"GMT"]
+                                              locale: [[[NSLocale alloc] initWithLocaleIdentifier: @"en_US"] autorelease]];
   }
   else
     dateString = [date stringValue];
