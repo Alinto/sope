@@ -42,9 +42,13 @@
   if ([date respondsToSelector:@selector(descriptionWithCalendarFormat:)]) {
     // TODO: do not use -descriptionWithCalendarFormat: !
     //       - slow
+#if GNUSTEP_BASE_MINOR_VERSION < 21
+    dateString = [date descriptionWithCalendarFormat: @" %a, %d %b %Y %H:%M:%S %z"];
+#else
     dateString = [date descriptionWithCalendarFormat: @" %a, %d %b %Y %H:%M:%S %z"
                                             timeZone: [NSTimeZone timeZoneWithName: @"GMT"]
                                               locale: [[[NSLocale alloc] initWithLocaleIdentifier: @"en_US"] autorelease]];
+#endif
   }
   else
     dateString = [date stringValue];
