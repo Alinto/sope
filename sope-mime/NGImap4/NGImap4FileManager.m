@@ -225,7 +225,7 @@ static BOOL debugOn = NO;
   if ((folder = [self _lookupFolderAtPathString:_path]) == nil)
     return NO;
 
-  ASSIGN(self->currentFolder, folder);
+  ASSIGN(self->currentFolder, (id)folder);
 
   return YES;
 }

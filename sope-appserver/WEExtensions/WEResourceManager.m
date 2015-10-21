@@ -620,7 +620,7 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
     }
     [ms appendString:_name];
     [ms appendFormat: @"?lm=%u",
-        (NSUInteger) [lastModified timeIntervalSince1970]];
+        (unsigned) [lastModified timeIntervalSince1970]];
       
     url = ms;
     if (debugOn) [self debugWithFormat:@"FOUND: '%@'", url];

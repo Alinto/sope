@@ -263,14 +263,14 @@
     return nil;
 }
 
-- (unsigned int)count {
+- (NSUInteger)count {
     return self->count;
 }
 - (BOOL)isNotEmpty {
   return self->count > 0 ? YES : NO;
 }
 
-- (unsigned int)hash {
+- (NSUInteger)hash {
     return self->count;
 }
 
