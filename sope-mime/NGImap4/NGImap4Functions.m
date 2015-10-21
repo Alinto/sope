@@ -129,7 +129,7 @@ NGImap4Folder *_subFolderWithName
       if (debugFolderLookup) {
 	NSLog(@"  FAILED: %@", [[_parent context] lastException]);
       }
-      return NO;
+      return nil;
     }
   }
   if (debugFolderLookup) NSLog(@"  NOT FOUND.");

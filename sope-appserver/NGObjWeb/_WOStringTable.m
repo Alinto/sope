@@ -162,7 +162,7 @@ static NSStringEncoding stringFilesEncoding = NSUTF8StringEncoding;
   [ms appendFormat:@"<0x%p[%@]: ", self, NSStringFromClass([self class])];
   
   if (self->path)     [ms appendFormat:@" path='%@'",   self->path];
-  if (self->data)     [ms appendFormat:@" strings=#%d", [self->data count]];
+  if (self->data)     [ms appendFormat:@" strings=#%d", (int)[self->data count]];
   if (self->lastRead) [ms appendFormat:@" loaddate=%@", self->lastRead];
   
   [ms appendString:@">"];

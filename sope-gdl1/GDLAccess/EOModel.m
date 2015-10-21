@@ -416,7 +416,7 @@ void EOModel_linkCategories(void) {
   if ((s = [self adaptorName]))      [ms appendFormat:@" adaptor=%@", s];
   if ((s = [self adaptorClassName])) [ms appendFormat:@" adaptor-class=%@", s];
   
-  [ms appendFormat:@" #entities=%d", [self->entities count]];
+  [ms appendFormat:@" #entities=%d", (int)[self->entities count]];
   
   [ms appendString:@">"];
   return ms;

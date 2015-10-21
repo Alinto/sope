@@ -66,7 +66,7 @@
   return NO;
 }
 
-- (unsigned)hash {
+- (NSUInteger)hash {
   return [self->address hash];
 }
 

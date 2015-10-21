@@ -1311,7 +1311,7 @@ static BOOL         useRelativeURLs = YES;
     [r appendContentString:@"204 No Content"];
   else {
     NSString *s;
-    s = [NSString stringWithFormat:@"%i code%i"];
+    s = [NSString stringWithFormat:@"%i code", _code];
     [r appendContentString:s];
   }
   [r appendContentString:@"</D:status>"];

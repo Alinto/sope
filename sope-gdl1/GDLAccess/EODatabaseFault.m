@@ -78,7 +78,7 @@ typedef struct {
 		       @"to fault",
 		       NSStringFromClass([fault class]),
 #if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
-		       class_getInstanceSize([self class])];
+		       (int)class_getInstanceSize([self class])];
 #else
 			   ((Class)self)->instance_size];
 #endif
@@ -130,7 +130,7 @@ typedef struct {
 {
   EODatabaseFault *fault;
     
-  fault = [NSMutableArray allocWithZone:zone];
+  fault = (EODatabaseFault*)[NSMutableArray allocWithZone:zone];
 
 #if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
   if (class_getInstanceSize([fault class]) < class_getInstanceSize([self class])) {
@@ -140,11 +140,11 @@ typedef struct {
         (void)[fault autorelease];
 	[NSException raise:NSInvalidArgumentException
 		     format:
-                    @"Instances from class %s must be at least %d "
+                    @"Instances from class %@ must be at least %d "
                     @"in size to fault",
                     NSStringFromClass([fault class]),
 #if defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) || (__GNU_LIBOBJC__ >= 20100911)
-                    class_getInstanceSize([self class])];
+                    (int)class_getInstanceSize([self class])];
 #else
 					((Class)self)->instance_size];
 #endif

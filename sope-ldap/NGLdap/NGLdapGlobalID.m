@@ -53,7 +53,7 @@
 
 /* equality */
 
-- (unsigned)hash {
+- (NSUInteger)hash {
   return [self->dn hash] + [self->host hash];
 }
 

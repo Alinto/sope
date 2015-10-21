@@ -749,7 +749,7 @@ static inline BOOL isTokStopChar(unichar c) {
     }
     else if ([[(EOAndQualifier *)q qualifiers] count] != 3) {
       NSLog(@"  INVALID: expected 3 subqualifiers, got %i !",
-	    [[(EOAndQualifier *)q qualifiers] count]);
+	    (int)[[(EOAndQualifier *)q qualifiers] count]);
     }
 
     /* check sortordering */
@@ -767,7 +767,7 @@ static inline BOOL isTokStopChar(unichar c) {
     }
     else if ([props count] != 14) {
       NSLog(@"  INVALID: invalid attribute count, expected 14, got %i.",
-	    [props count]);
+	    (int)[props count]);
     }
   }
   

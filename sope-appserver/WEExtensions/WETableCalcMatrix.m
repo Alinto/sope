@@ -89,8 +89,8 @@ static NSNull *null = nil;
                      @"<0x%p[%@]: object=0x%p start=%d len=%d>",
                      self, NSStringFromClass([self class]),
                      [self object],
-                     self->range.location,
-                     self->range.length];
+                     (int)self->range.location,
+                     (int)self->range.length];
 }
 
 @end /* WETableCalcMatrixSpan */

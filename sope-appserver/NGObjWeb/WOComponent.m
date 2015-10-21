@@ -1219,7 +1219,7 @@ static inline id _getExtraVar(WOComponent *self, NSString *_key) {
   if (self->parentComponent)
     [str appendFormat:@" parent=%@", [self->parentComponent name]];
   if (self->subcomponents)
-    [str appendFormat:@" #subs=%i", [self->subcomponents count]];
+    [str appendFormat:@" #subs=%i", (int)[self->subcomponents count]];
   
   if (self->componentFlags.isAwake)
     [str appendFormat:@" awake=0x%p", self->context];

@@ -593,7 +593,7 @@ NSString *EODatabaseChannelDidLockObjectName =
   }
   // Record object in database context
   if (![new_pkey isEqual:old_pkey]) {
-    NSLog(@"WARNING: (%@) primary key changed from %@ to %@",
+    NSLog(@"WARNING: (%s) primary key changed from %@ to %@",
           __PRETTY_FUNCTION__, old_pkey, new_pkey);
     [databaseContext forgetObject:anObj];
   }

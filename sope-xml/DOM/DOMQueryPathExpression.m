@@ -318,7 +318,7 @@
   qpexpr = [DOMQueryPathExpression queryPathWithString:_expr];
   //NSLog(@"Expr: %@", qpexpr);
   
-  pred =
+  pred = (_DOMQPPredicateExpression*)
     [[_DOMQPPredicateQPExpression alloc] initWithQueryPathExpression:qpexpr];
   
   return [pred autorelease];

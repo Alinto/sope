@@ -294,7 +294,7 @@ static inline void _resolveFault(EOFault *self) {
 }
 
 + (id)self {
-  _resolveFault(self);
+  _resolveFault((id)self);
   return self;
 }
 

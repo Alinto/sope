@@ -85,7 +85,7 @@
 
 - (id)copyWithZone:(NSZone *)_zone {
   // TODO: should make a real copy?
-  return [self retain];
+  return (id)[self retain];
 }
 
 @end /* NSException(NGMiscellaneous) */
