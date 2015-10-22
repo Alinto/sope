@@ -255,7 +255,7 @@ void EOModel_linkCategories(void) {
   NSMutableDictionary *model = [NSMutableDictionary dictionaryWithCapacity:64];
   int i, count;
     
-  [model setObject:[[NSNumber numberWithInt:[isa version]] stringValue]
+  [model setObject:[[NSNumber numberWithInt:[object_getClass(self) version]] stringValue]
 	 forKey:@"EOModelVersion"];
   if (name)
         [model setObject:name forKey:@"name"];
