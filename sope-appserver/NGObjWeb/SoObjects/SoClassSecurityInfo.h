@@ -101,7 +101,7 @@
 - (BOOL)hasDefaultAccessDeclaration;
 - (void)declarePublic:(NSString *)_firstName, ...;
 - (void)declarePrivate:(NSString *)_firstName, ...;
-- (void)declareProtected:(NSString *)_perm:(NSString *)_firstName, ...;
+- (void)declareProtected:(NSString *)_perm :(NSString *)_firstName, ...;
 
 /* object security */
 
