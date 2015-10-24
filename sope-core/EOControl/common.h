@@ -30,22 +30,6 @@
 #import <Foundation/Foundation.h>
 #import <Foundation/NSObjCRuntime.h>
 
-#if NeXT_RUNTIME || APPLE_RUNTIME
-#  define objc_free(__mem__)    free(__mem__)
-#  define objc_malloc(__size__) malloc(__size__)
-#  define objc_calloc(__cnt__, __size__) calloc(__cnt__, __size__)
-#  define objc_realloc(__ptr__, __size__) realloc(__ptr__, __size__)
-#  ifndef sel_eq
-#    define sel_eq(sela,selb) (sela==selb?YES:NO)
-#  endif
-#endif
-
-#if __GNU_LIBOBJC__ >= 20100911
-#  ifndef sel_eq
-#    define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
-#  endif
-#endif
-
 #ifndef ASSIGN
 #  define ASSIGN(object, value) \
        ({id __object = (id)object;    \

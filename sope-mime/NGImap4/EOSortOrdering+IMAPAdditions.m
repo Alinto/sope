@@ -68,8 +68,8 @@ static NSArray *AllowedSortKeys = nil;
   /* check selector */
   
   sel = [self selector];
-  if (sel_eq(sel, EOCompareDescending) ||
-      sel_eq(sel, EOCompareCaseInsensitiveDescending)) {
+  if (sel_isEqual(sel, EOCompareDescending) ||
+      sel_isEqual(sel, EOCompareCaseInsensitiveDescending)) {
     return [@"REVERSE " stringByAppendingString:lkey];
   }
   // TODO: check other selectors whether they make sense instead of silent acc.

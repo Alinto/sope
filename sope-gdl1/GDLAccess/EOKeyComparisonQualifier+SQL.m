@@ -36,19 +36,19 @@
   EOSQLQualifier *q;
   NSString *format;
 
-  if (SEL_EQ(self->operator, EOQualifierOperatorEqual))
+  if (sel_isEqual(self->operator, EOQualifierOperatorEqual))
       format = @"%A = %A";
-  else if (SEL_EQ(self->operator, EOQualifierOperatorNotEqual))
+  else if (sel_isEqual(self->operator, EOQualifierOperatorNotEqual))
       format = @"%A <> %A";
-  else if (SEL_EQ(self->operator, EOQualifierOperatorLessThan))
+  else if (sel_isEqual(self->operator, EOQualifierOperatorLessThan))
       format = @"%A < %A";
-  else if (SEL_EQ(self->operator, EOQualifierOperatorGreaterThan))
+  else if (sel_isEqual(self->operator, EOQualifierOperatorGreaterThan))
       format = @"%A > %A";
-  else if (SEL_EQ(self->operator, EOQualifierOperatorLessThanOrEqualTo))
+  else if (sel_isEqual(self->operator, EOQualifierOperatorLessThanOrEqualTo))
       format = @"%A <= %A";
-  else if (SEL_EQ(self->operator, EOQualifierOperatorGreaterThanOrEqualTo))
+  else if (sel_isEqual(self->operator, EOQualifierOperatorGreaterThanOrEqualTo))
       format = @"%A >= %A";
-  else if (SEL_EQ(self->operator, EOQualifierOperatorLike))
+  else if (sel_isEqual(self->operator, EOQualifierOperatorLike))
       format = @"%A LIKE %A";
   else {
       format = [NSString stringWithFormat:@"%%A %@ %%A",

@@ -30,7 +30,6 @@
 #define object_is_instance(XXX) (XXX != nil)
 #define class_get_class_method    class_getClassMethod
 #define class_get_instance_method class_getInstanceMethod
-#define sel_get_uid               sel_getUid
 #define method_get_imp			  method_getImplementation	
 typedef struct objc_method      *Method_t;
 
@@ -48,7 +47,6 @@ typedef struct objc_method      *Method_t;
 
 #define method_get_imp            method_getImplementation  
 #  define METHOD_NULL NULL
-#  define sel_get_uid               sel_getUid
 #  define class_get_class_method    class_getClassMethod
 #  define class_get_instance_method class_getInstanceMethod
 
@@ -430,14 +428,14 @@ static inline void _fillInfo(WOKeyPathAssociation *self, id object,
 		[[StringClass alloc] initWithCString:(char *)info->ckey];
             }
             else {
-              info->extra.sel.get = sel_get_uid((char *)info->ckey);
+              info->extra.sel.get = sel_registerName((char *)info->ckey);
               method = class_get_instance_method(clazz, info->extra.sel.get);
               if (method != METHOD_NULL)
                 info->type = WOKeyType_method;
             }
           }
           else {
-            info->extra.sel.get = sel_get_uid((char *)info->ckey);
+            info->extra.sel.get = sel_registerName((char *)info->ckey);
             method = class_get_instance_method(clazz, info->extra.sel.get);
             
             if (method != METHOD_NULL)
@@ -461,7 +459,7 @@ static inline void _fillInfo(WOKeyPathAssociation *self, id object,
 	      [[StringClass alloc] initWithCString:(char *)info->ckey];
           }
           else {
-            info->extra.sel.get = sel_get_uid((char *)info->ckey);
+            info->extra.sel.get = sel_registerName((char *)info->ckey);
             method =
               class_get_class_method(*(Class *)object, info->extra.sel.get);
             if (method != METHOD_NULL) {
@@ -807,7 +805,7 @@ static inline SEL _getSetSel(register const unsigned char *_key,
                              register unsigned _len) {
   unsigned char buf[259];
   _getSetSelName(buf, _key, _len);
-  return sel_get_uid((char *)buf);
+  return sel_registerName((char *)buf);
 }
 
 static BOOL _setValue(WOKeyPathAssociation *self, id _value, id root) {

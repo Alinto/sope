@@ -535,11 +535,7 @@ static inline void _addToPropList(NSMutableDictionary *propertyList,
     return @"";
 
   clen = [self cStringLength];
-#if GNU_RUNTIME
-  s = objc_atomic_malloc(clen + 4);
-#else
   s = malloc(clen + 4);
-#endif
 
   [self getCString:s maxLength:clen];
     
