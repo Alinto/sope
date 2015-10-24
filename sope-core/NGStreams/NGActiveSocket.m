@@ -19,6 +19,7 @@
   02111-1307, USA.
 */
 
+#include <sys/types.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 
