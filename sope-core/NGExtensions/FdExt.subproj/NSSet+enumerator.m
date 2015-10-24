@@ -21,6 +21,7 @@
 */
 
 #include "NSSet+enumerator.h"
+#include "NSArray+enumerator.h"
 #include "common.h"
 
 @implementation NSSet(enumerator)

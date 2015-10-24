@@ -77,12 +77,6 @@
 
 - (NSString *)_folder2ImapFolder:(NSString *)_folder;
 
-- (NGHashMap *)processCommand:(NSString *)_command;
-- (NGHashMap *)processCommand:(NSString *)_command withTag:(BOOL)_tag;
-- (NGHashMap *)processCommand:(NSString *)_command withTag:(BOOL)_tag
-  withNotification:(BOOL)_notification;
-- (NGHashMap *)processCommand:(NSString *)_command logText:(NSString *)_txt;
-
 - (void)sendCommand:(NSString *)_command;
 - (void)sendCommand:(NSString *)_command withTag:(BOOL)_tag;
 - (void)sendCommand:(NSString *)_command withTag:(BOOL)_tag

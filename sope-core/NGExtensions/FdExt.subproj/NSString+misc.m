@@ -21,6 +21,7 @@
 */
 
 #include "NSString+misc.h"
+#include "NSException+misc.h"
 #include "common.h"
 
 @implementation NSObject(StringBindings)

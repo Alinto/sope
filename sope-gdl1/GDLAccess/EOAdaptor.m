@@ -31,6 +31,7 @@
 #include "EOFExceptions.h"
 #include "EOModel.h"
 #include "EOSQLExpression.h"
+#include "NGExtensions/NSException+misc.h"
 #include "common.h"
 
 @implementation EOAdaptor
