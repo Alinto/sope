@@ -139,7 +139,7 @@ static NSNumber *numForUInt(unsigned int i) {
 
 - (BOOL)tableCalcMatrix:(WETableCalcMatrix *)_matrix
   shouldPlaceObject:(id)_object
-  atPosition:(unsigned)_x:(unsigned)_y
+  atPosition:(unsigned)_x :(unsigned)_y
 {
   id   _row, _col;
   BOOL doPlace;

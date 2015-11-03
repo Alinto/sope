@@ -81,7 +81,7 @@ NSString *EODatabaseChannelDidLockObjectName =
 - (Class)privateClassForEntity:(EOEntity *)anEntity;
 - (void)privateUpdateCurrentEntityInfo;
 - (void)privateClearCurrentEntityInfo;
-- (void)privateReportError:(SEL)method:(NSString *)format, ...;
+- (void)privateReportError:(SEL)method :(NSString *)format, ...;
 @end
 
 /*
