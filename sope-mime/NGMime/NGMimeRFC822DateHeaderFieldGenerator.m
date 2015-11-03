@@ -47,7 +47,7 @@
 #else
     dateString = [date descriptionWithCalendarFormat: @" %a, %d %b %Y %H:%M:%S %z"
                                             timeZone: [NSTimeZone timeZoneWithName: @"GMT"]
-                                              locale: [[[NSLocale alloc] initWithLocaleIdentifier: @"en_US"] autorelease]];
+                                              locale: (NSDictionary *)[[[NSLocale alloc] initWithLocaleIdentifier: @"en_US"] autorelease]];
 #endif
   }
   else
