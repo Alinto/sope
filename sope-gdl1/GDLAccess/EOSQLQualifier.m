@@ -39,6 +39,7 @@
 #include <EOControl/EOKeyValueCoding.h>
 #include <EOControl/EONull.h>
 #import "EOQualifierScanner.h"
+#import "NGExtensions/NSException+misc.h"
 
 #if LIB_FOUNDATION_LIBRARY
 #  include <extensions/DefaultScannerHandler.h>

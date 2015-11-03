@@ -35,6 +35,7 @@
 #import "EODatabaseFaultResolver.h"
 #import "EOArrayProxy.h"
 #import "common.h"
+#import "NGExtensions/NSException+misc.h"
 
 #if NeXT_RUNTIME || APPLE_RUNTIME
 #  include <objc/objc-class.h>
