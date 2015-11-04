@@ -110,7 +110,7 @@ static Class NSDateClass = Nil;
     for (i = [_ctx componentStackCount]; i >= 0; i--)
       printf("  ");
     printf("[%s %s]: %0.3fs\n",
-           [[child name] cString], sel_get_name(_cmd), diff);
+           [[child name] cString], sel_getName(_cmd), diff);
   }
 }
 
@@ -147,7 +147,7 @@ static Class NSDateClass = Nil;
     for (i = [_ctx componentStackCount]; i >= 0; i--)
       printf("  ");
     printf("[%s %s]: %0.3fs\n",
-           [[child name] cString], sel_get_name(_cmd), diff);
+           [[child name] cString], sel_getName(_cmd), diff);
   }
 
   return result;
@@ -188,7 +188,7 @@ static Class NSDateClass = Nil;
     for (i = [_ctx componentStackCount]; i >= 0; i--)
       printf("  ");
     printf("[%s %s]: %0.3fs\n",
-           [[child name] cString], sel_get_name(_cmd), diff);
+           [[child name] cString], sel_getName(_cmd), diff);
   }
 }
 

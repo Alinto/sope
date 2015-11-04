@@ -30,20 +30,18 @@
 #  import <extensions/objc-runtime.h>
 #elif GNUSTEP_BASE_LIBRARY
 #if __GNU_LIBOBJC__ >= 20100911
-#  define sel_get_name sel_getName
 #  import <objc/runtime.h>
 #else
 #  import <objc/objc-api.h>
 #endif
 #else
 #  import <objc/objc.h>
-#  define sel_get_name sel_getName
 #endif
 
 static inline int countSelArgs(SEL _sel) {
   register const char *selName;
 
-  if ((selName = sel_get_name(_sel))) {
+  if ((selName = sel_getName(_sel))) {
     register int count;
     
     for (count = 0; *selName; selName++) {

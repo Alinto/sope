@@ -36,12 +36,6 @@
 
 #include "NGMimeType.h"
 
-#if !GNU_RUNTIME
-#  ifndef sel_eq
-#    define sel_eq(__A__, __B__) (__A__==__B__)
-#  endif
-#endif
-
 @interface NSObject(OSXHacks)
 - (void)subclassResponsibility:(SEL)_acmd;
 - (void)notImplemented:(SEL)_acmd;

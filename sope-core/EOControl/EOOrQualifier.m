@@ -52,7 +52,7 @@ static BOOL debugTransform = NO;
   if (c == 0)
     return [self initWithQualifierArray:nil];
 
-  qs = objc_calloc(c, sizeof(id));
+  qs = calloc(c, sizeof(id));
   
   va_start(va, _qual1);
   for (c = 0, q = _qual1; q != nil; q = va_arg(va, id), c++) {
@@ -61,7 +61,7 @@ static BOOL debugTransform = NO;
   va_end(va);
 
   a = [NSArray arrayWithObjects:qs count:c];
-  objc_free(qs);
+  free(qs);
   
   return [self initWithQualifierArray:a];
 }

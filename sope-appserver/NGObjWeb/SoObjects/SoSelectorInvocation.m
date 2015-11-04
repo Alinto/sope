@@ -28,11 +28,6 @@
 #include <DOM/EDOM.h>
 #include "common.h"
 
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__)
-#  define sel_get_any_uid   sel_getUid
-#  define sel_register_name sel_registerName
-#endif
-
 @implementation SoSelectorInvocation
 
 static BOOL debugOn = NO;
@@ -109,8 +104,7 @@ static BOOL debugOn = NO;
     /* this can happen if the product bundle is not yet loaded ... */
 #if GNU_RUNTIME
     const char *sname = [_name cString];
-    if ((self->sel = sel_get_any_uid(sname)) == NULL)
-      self->sel = sel_register_name(sname);
+    self->sel = sel_registerName(sname);
 #else
     /* TODO: not tested against this ObjC runtime */
     [self warnWithFormat:@"(%s): not tested against this ObjC runtime, "

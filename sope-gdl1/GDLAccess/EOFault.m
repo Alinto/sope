@@ -381,7 +381,7 @@ static inline void _resolveFault(EOFault *self) {
 
     r = [NSString stringWithFormat:
 		    @"fault error: resolved fault does not responds to selector %s",
-		    sel_get_name(sel)];
+		    sel_getName(sel)];
     [NSException raise:@"NSInvalidArgumentException" reason:r userInfo:nil];
   }
   return objc_msg_sendv(self, sel, args);
