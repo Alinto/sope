@@ -86,8 +86,8 @@ typedef struct {
     }
     fault->faultResolver = [[EOObjectFault alloc] initWithPrimaryKey:key
         entity:entity databaseChannel:channel zone:zone 
-        targetClass:fault->isa];
-    fault->isa = self;
+        targetClass:object_getClass(fault)];
+    object_setClass(fault, self);
     
     return (EODatabaseFault *)AUTORELEASE(fault);
 }
@@ -152,8 +152,8 @@ typedef struct {
   }
   fault->faultResolver = [[EOArrayFault alloc] initWithQualifier:qualifier
         fetchOrder:fetchOrder databaseChannel:channel zone:zone 
-        targetClass:fault->isa];
-  fault->isa = self;
+        targetClass:object_getClass(fault)];
+  object_setClass(fault, self);
 
   return (NSArray *)AUTORELEASE(fault);
 }
@@ -162,7 +162,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (aFault->isa != self)
+  if (object_getClass(aFault) != self)
     return nil;
     
   return [(EODatabaseFaultResolver *)aFault->faultResolver primaryKey];
@@ -172,7 +172,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (aFault->isa != self)
+  if (object_getClass(aFault) != self)
     return nil;
 
   return [(EODatabaseFaultResolver *)aFault->faultResolver entity];
@@ -182,7 +182,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (aFault->isa != self)
+  if (object_getClass(aFault) != self)
     return nil;
     
   return [(EODatabaseFaultResolver *)aFault->faultResolver qualifier];
@@ -192,7 +192,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (aFault->isa != self)
+  if (object_getClass(aFault) != self)
     return nil;
     
   return [(EODatabaseFaultResolver *)aFault->faultResolver fetchOrder];
@@ -202,7 +202,7 @@ typedef struct {
   EODatabaseFault *aFault = (EODatabaseFault *)fault;
 
   // Check that argument is fault
-  if (aFault->isa != self)
+  if (object_getClass(aFault) != self)
     return nil;
     
   return [(EODatabaseFaultResolver *)aFault->faultResolver databaseChannel];
