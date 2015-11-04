@@ -1996,16 +1996,12 @@ static BOOL debugLanguageLookup = NO;
   
   sprintf (buffer,
 	   "<%s %p fullPath: %s infoDictionary: %p loaded=%s>",
-#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911)) || defined(APPLE_RUNTIME) || defined(__GNUSTEP_RUNTIME__) 
 	   (char*)class_getName([self class]),
-#else
-	   (char*)object_get_class_name(self),
-#endif
 	   self,
 	   [[self bundlePath] cString],
-	   [self infoDictionary], 
-	   self->_codeLoaded ? "yes" : "no");
-  
+	   [self infoDictionary],
+	   [self isLoaded] ? "yes" : "no");
+
   return [NSString stringWithCString:buffer];
 }
 #endif

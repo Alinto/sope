@@ -82,7 +82,6 @@
 #endif
 
 @interface NSException(setUserInfo)
-- (id)setReason:(NSString *)_reason;
 - (id)setUserInfo:(NSDictionary *)_userInfo;
 @end
 

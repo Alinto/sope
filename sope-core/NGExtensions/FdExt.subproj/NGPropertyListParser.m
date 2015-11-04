@@ -43,7 +43,6 @@
 
 @interface NSException(UsedPrivates) /* may break on Panther? */
 - (void)setUserInfo:(NSDictionary *)_ui;
-- (void)setReason:(NSString *)_reason;
 @end
 
 static NSString     *_parseString (NSZone *_zone, const unsigned char *_buffer,

@@ -255,7 +255,7 @@ IMP WOGetKVCGetMethod(id object, NSString *_key) {
   if (object == nil) return NULL;
   if (_key   == nil) return NULL;
 
-#if GNU_RUNTIME && !(defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ >= 20100911))
+#if (defined(__GNU_LIBOBJC__) && (__GNU_LIBOBJC__ < 20100911))
   {
     unsigned keyLen;
     char     *buf;
@@ -309,7 +309,7 @@ id WOGetKVCValueUsingMethod(id object, NSString *_key) {
       return nil;
     free(buf); buf = NULL;
   }
-#if GNUSTEP_BASE_LIBRARY
+#if GNUSTEP_BASE_LIBRARY && !defined(__GNUSTEP_RUNTIME__)
   if (!__objc_responds_to(object, getSel))
     return nil;
 #endif

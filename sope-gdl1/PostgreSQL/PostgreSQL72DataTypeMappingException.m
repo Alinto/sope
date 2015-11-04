@@ -29,12 +29,15 @@
 #if !LIB_FOUNDATION_LIBRARY
 @interface PostgreSQL72DataTypeMappingException(Privates)
 - (void)setName:(NSString *)_name;
-- (void)setReason:(NSString *)_reason;
 - (void)setUserInfo:(NSDictionary *)_ui;
 @end
 #endif
 
 @implementation PostgreSQL72DataTypeMappingException
+
+/*
+// Unused method: setReason method call is bad and has been removed
+// from NSException_misc.m because it uses IVARS. Exception reasons should be immutable.
 
 - (id)initWithObject:(id)_obj
   forAttribute:(EOAttribute *)_attr
@@ -64,6 +67,7 @@
                                     nil]];
   return self;
 }
+*/ // END unused method (initWithObject)
 
 @end /* PostgreSQL72DataTypeMappingException */
 
