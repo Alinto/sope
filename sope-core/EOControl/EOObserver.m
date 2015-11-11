@@ -109,11 +109,7 @@ static NSMapTable     *objectToObservers   = NULL;
     }
   }
 
-#if NeXT_RUNTIME
   nl = malloc(sizeof(EOObserverList));
-#else  
-  nl = objc_malloc(sizeof(EOObserverList));
-#endif
   nl->observer = [_observer retain];
   nl->notify   = (void*)
     [(id)_observer methodForSelector:@selector(objectWillChange:)];
@@ -149,11 +145,7 @@ static NSMapTable     *objectToObservers   = NULL;
         /* entry is not the first entry */
         ll->next = l->next;
         [l->observer release];
-#if NeXT_RUNTIME
         free(l);
-#else    
-        objc_free(l);
-#endif
         break;
       }
       else if (l->next) {
@@ -167,22 +159,14 @@ static NSMapTable     *objectToObservers   = NULL;
         l->observer = ll->observer;
         l->notify   = ll->notify;
         l->next     = ll->next;
-#if NeXT_RUNTIME
         free(ll);
-#else    
-        objc_free(ll);
-#endif
         break;
       }
       else {
         /* entry is the lone entry */
         NSMapRemove(objectToObservers, _object);
         [l->observer release];
-#if NeXT_RUNTIME
         free(l);
-#else    
-        objc_free(l);
-#endif
         break;
       }
     }
@@ -233,11 +217,7 @@ static NSMapTable     *objectToObservers   = NULL;
       return;
   }
 
-#if NeXT_RUNTIME
   l = malloc(sizeof(EOObserverList));
-#else  
-  l = objc_malloc(sizeof(EOObserverList));
-#endif
   l->next     = omniscientObservers;
   l->observer = [_observer retain];
   l->notify   = (void*)[(id)_observer methodForSelector:@selector(willChange:)];
@@ -258,7 +238,7 @@ static NSMapTable     *objectToObservers   = NULL;
         ll->next = l->next;
 
       [l->observer release];
-      objc_free(l);
+      free(l);
       return;
     }
 

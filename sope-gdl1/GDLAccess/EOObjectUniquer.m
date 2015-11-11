@@ -49,7 +49,7 @@ static BOOL uniquerCompare(NSMapTable *table, EOUniquerRecord *rec1,
 
 static NSString* uniqDescription(NSMapTable *t, EOUniquerRecord* rec) {
   return [NSString stringWithFormat:
-                     @"<<pkey:%08x entity:%08x object:%08x snapshot:%08x>>",
+                     @"<<pkey:%p entity:%p object:%p snapshot:%p>>",
                      rec->pkey, rec->entity, rec->object, rec->snapshot];
 }
 

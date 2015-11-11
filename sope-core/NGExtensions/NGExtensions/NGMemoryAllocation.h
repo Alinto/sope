@@ -28,16 +28,9 @@
 
 #include <stdlib.h>
 
-#if LIB_FOUNDATION_BOEHM_GC
-#  define NGMalloc       objc_malloc
-#  define NGMallocAtomic objc_atomic_malloc
-#  define NGFree         objc_free
-#  define NGRealloc      objc_realloc
-#else
-#  define NGMalloc       malloc
-#  define NGMallocAtomic malloc
-#  define NGFree         free
-#  define NGRealloc      realloc
-#endif
+#define NGMalloc       malloc
+#define NGMallocAtomic malloc
+#define NGFree         free
+#define NGRealloc      realloc
 
 #endif /* __NGExtensions_NGMemoryAllocation_H__ */

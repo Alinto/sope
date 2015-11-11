@@ -265,7 +265,7 @@ static void _flushAtExit(void) {
                  format:
                    @"called writeCharacter: with character code (0x%X)"
                    @" exceeding the maximum system character code (0x%X)",
-                   _character, ((sizeof(unsigned char) * 256) - 1)];
+                   _character, (int)((sizeof(unsigned char) * 256) - 1)];
   }
 
   c = _character;
@@ -290,22 +290,21 @@ static void _flushAtExit(void) {
   unsigned toGo;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= 1040 || (GNUSTEP && OS_API_VERSION(100400,GS_API_LATEST))
-  if ((toGo = [_string maximumLengthOfBytesUsingEncoding:self->encoding]) == 0)
+  if ((toGo = [_string lengthOfBytesUsingEncoding:self->encoding]) == 0)
     return YES;
-  
-  buf = str = calloc(toGo + 2, sizeof(unsigned char));
-  // Note: maxLength INCLUDES the 0-terminator. And -getCString: does
-  //       0-terminate the buffer
+
+  /* getCString NULL-terminates the string, while lengthOfBytesUsingEncoding
+     doesn't take that last character into account */
+  buf = str = calloc(toGo + 1, sizeof(unsigned char));
   if (![_string getCString:(char *)str maxLength:(toGo + 1)
-		encoding:self->encoding]) {
+                  encoding:self->encoding]) {
     NSLog(@"ERROR(%s): failed to extract cString in defaultCStringEncoding(%i)"
 	  @" from NSString: '%@'\n", __PRETTY_FUNCTION__,
 	  self->encoding, _string);
+    if (buf != NULL) { free(buf); buf = NULL; };
     return NO;
   }
-  
-  // we need to update the *real* (not the max) length
-  toGo = strlen((char *)str);
+
 #else
   if ((toGo = [_string cStringLength]) == 0)
     return YES;
@@ -314,18 +313,18 @@ static void _flushAtExit(void) {
   [_string getCString:(char *)str];
   str[toGo] = '\0';
 #endif
-  
+
   NS_DURING {
     while (toGo > 0) {
       unsigned writeCount;
-      
+
       writeCount = writeBytes
         ? writeBytes(source, @selector(writeBytes:count:), str, toGo)
         : [source writeBytes:str count:toGo];
-      
+
       if (writeCount == NGStreamError)
         [[self->source lastException] raise];
-      
+
       toGo -= writeCount;
       str  += writeCount;
     }
@@ -335,7 +334,7 @@ static void _flushAtExit(void) {
     [localException raise];
   }
   NS_ENDHANDLER;
-  
+
   if (buf) { free(buf); buf = NULL; }
   return YES;
 }

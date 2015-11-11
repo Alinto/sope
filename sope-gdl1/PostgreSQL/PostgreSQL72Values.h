@@ -38,11 +38,13 @@
 
 @interface PostgreSQL72DataTypeMappingException : PostgreSQL72Exception
 
+/*
 - (id)initWithObject:(id)_obj
   forAttribute:(EOAttribute *)_attr
   andPostgreSQLType:(NSString *)_dt
   inChannel:(PostgreSQL72Channel *)_channel;
 
+*/
 @end
 
 @protocol PostgreSQL72Values

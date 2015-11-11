@@ -449,7 +449,7 @@ static NSString *stringForHeaderName(char *p) { /* Note: arg is _not_ const */
   
   while ((e = [self readNextLine]) == nil) {
     unsigned char *p, *v;
-    unsigned int  idx;
+    int  idx;
     NSString *headerName;
     NSString *headerValue;
     

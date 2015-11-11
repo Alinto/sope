@@ -33,12 +33,12 @@
   }
   
   sel = [_descriptor selector];
-  if (SEL_EQ(sel, @selector(compare:))) {
+  if (sel_isEqual(sel, @selector(compare:))) {
     sel = [_descriptor ascending] 
       ? EOCompareAscending
       : EOCompareDescending;
   }
-  else if (SEL_EQ(sel, @selector(caseInsensitiveCompare:))) {
+  else if (sel_isEqual(sel, @selector(caseInsensitiveCompare:))) {
     sel = [_descriptor ascending] 
       ? EOCompareCaseInsensitiveAscending
       : EOCompareCaseInsensitiveDescending;
@@ -54,18 +54,18 @@
 }
 
 - (BOOL)isAscendingEOSortSelector:(SEL)_sel {
-  if (SEL_EQ(_sel, EOCompareDescending)) return NO;
-  if (SEL_EQ(_sel, EOCompareCaseInsensitiveAscending)) return NO;
+  if (sel_isEqual(_sel, EOCompareDescending)) return NO;
+  if (sel_isEqual(_sel, EOCompareCaseInsensitiveAscending)) return NO;
   return YES;
 }
 
 - (SEL)cdSortSelectorFromEOSortSelector:(SEL)_sel {
-  if (SEL_EQ(_sel, EOCompareAscending))  return @selector(compare:);
-  if (SEL_EQ(_sel, EOCompareDescending)) return @selector(compare:);
+  if (sel_isEqual(_sel, EOCompareAscending))  return @selector(compare:);
+  if (sel_isEqual(_sel, EOCompareDescending)) return @selector(compare:);
   
-  if (SEL_EQ(_sel, EOCompareCaseInsensitiveAscending))
+  if (sel_isEqual(_sel, EOCompareCaseInsensitiveAscending))
     return @selector(caseInsensitiveCompare:);
-  if (SEL_EQ(_sel, EOCompareCaseInsensitiveDescending))
+  if (sel_isEqual(_sel, EOCompareCaseInsensitiveDescending))
     return @selector(caseInsensitiveCompare:);
   
   return _sel;

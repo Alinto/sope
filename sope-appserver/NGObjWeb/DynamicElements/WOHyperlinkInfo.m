@@ -27,7 +27,7 @@
 @implementation WOHyperlinkInfo
 
 - (id)initWithConfig:(NSMutableDictionary *)_config {
-  unsigned count;
+  unsigned count = (unsigned)[_config count];
 
   self->sidInUrl = YES;
   

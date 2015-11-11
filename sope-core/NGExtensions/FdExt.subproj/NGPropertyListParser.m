@@ -43,7 +43,6 @@
 
 @interface NSException(UsedPrivates) /* may break on Panther? */
 - (void)setUserInfo:(NSDictionary *)_ui;
-- (void)setReason:(NSString *)_reason;
 @end
 
 static NSString     *_parseString (NSZone *_zone, const unsigned char *_buffer,
@@ -453,7 +452,7 @@ static NSException *_makeException(NSException *_exception,
           }
         */
         if (!atEof && (_idx > 0)) {
-            register unsigned pos;
+            NSInteger pos;
             const unsigned char *startPos, *endPos;
 
             for (pos = _idx; (pos > 0) && (_buffer[pos] != '\n'); pos--)

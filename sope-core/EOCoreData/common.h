@@ -56,12 +56,4 @@
 #  include <objc/objc.h>
 #endif
 
-#ifndef SEL_EQ
-#  if GNU_RUNTIME
-#    define SEL_EQ(sel1,sel2) sel_eq(sel1,sel2)
-#  else
-#    define SEL_EQ(sel1,sel2) (sel1 == sel2)
-#  endif
-#endif
-
 #endif /* __EOCoreData_COMMON_H__ */

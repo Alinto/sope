@@ -74,11 +74,16 @@ static int debugOn = -1;
 
 - (NSException *)makeExceptionForObject:(id)_obj reason:(NSString *)_r {
   NSException *e;
+  NSString *r;
   if (_obj == nil) return nil;
+  if ([_r length] <= 0)
+    r = nil;
+  else
+    r = _r;
   e = [SoAccessDeniedException securityExceptionOnObject:_obj
 			       withAuthenticator:nil
-			       andManager:self];
-  if ([_r length] > 0) [e setReason:_r];
+			       andManager:self
+			       reason:_r];
   return e;
 }
 
@@ -264,7 +269,8 @@ static int debugOn = -1;
 				    withAuthenticator:
 				      [self authenticatorInContext:_ctx 
 					    object:_object]
-				    andManager:self];
+				    andManager:self
+				    reason:nil];
   }
   
   [self debugWithFormat:@"  got user: %@)", user];
@@ -319,7 +325,8 @@ static int debugOn = -1;
                                       withAuthenticator:
                                         [self authenticatorInContext:_ctx
                                               object:_object]
-                                      andManager:self];
+                                      andManager:self
+                                      reason:nil];
     }
     else {
       /* 

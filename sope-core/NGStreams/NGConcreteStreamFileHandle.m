@@ -118,7 +118,7 @@
 
   *(&data) = [NSMutableData dataWithCapacity:2048];
   *(&bs) = [self->stream isKindOfClass:[NGBufferedStream class]]
-    ? [self->stream retain]
+    ? (id)[self->stream retain]
     : [(NGBufferedStream *)[NGBufferedStream alloc] 
           initWithSource:self->stream];
 

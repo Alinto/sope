@@ -85,32 +85,10 @@
 
 - (id)copyWithZone:(NSZone *)_zone {
   // TODO: should make a real copy?
-  return [self retain];
+  return (id)[self retain];
 }
 
 @end /* NSException(NGMiscellaneous) */
-
-#if COCOA_Foundation_LIBRARY || NeXT_Foundation_LIBRARY
-
-@implementation NSException (NGLibFoundationCompatibility)
-- (void)setReason:(NSString *)_reason {
-  [_reason retain];
-  [self->reason release];
-  self->reason = _reason;
-}
-@end
-
-#elif GNUSTEP_BASE_LIBRARY
-
-@implementation NSException (NGLibFoundationCompatibility)
-- (void)setReason:(NSString *)_reason {
-  [_reason retain];
-  [self->_e_reason release];
-  self->_e_reason = _reason;
-}
-@end
-
-#endif
 
 void __link_NGExtensions_NSExceptionMisc() {
   __link_NGExtensions_NSExceptionMisc();

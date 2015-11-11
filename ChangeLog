@@ -1,3 +1,403 @@
+commit 51ecf2ee16c260075a1ac7375007b765f00d262c
+Author: Javier Amor García <jamor@zentyal.com>
+Date:   Wed Nov 11 16:58:39 2015 +0100
+
+    [NGMIMEType stringEncodingForCharset:] added more ISO charsets
+
+M	sope-mime/NGMime/NGMimeType.m
+
+commit e219ef792df5c6a4a3f6fdf0e3ceabb4cb063ce8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 9 14:28:28 2015 -0500
+
+    (fix) additional fix for #3356
+
+M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldGenerator.m
+
+commit 36e3816a89fd03261d7a50163a4b36a1fa4baded
+Author: hasufell <hasufell@hasufell.de>
+Date:   Tue Nov 3 17:09:02 2015 +0100
+
+    configure: allow more explicit control over dependencies
+    
+    Previously the 'checkLinking <lib> optional' strings caused
+    trouble for distributions, because these checks are automagic, as in:
+    even if the user doesn't want ldap support, but ldap exists on the
+    system, it will still be used, possibly causing problems if
+    ldap is removed afterwards.
+    
+    Making these things explicit fixes those problems. Default is
+    still automagic, unless --enable-<feature> or --disable-<feature>
+    is passed.
+
+M	configure
+
+commit 162d03325c47868b2323676f4865b64acbcb205b
+Author: extrafu <lmarcotte@inverse.ca>
+Date:   Mon Nov 2 14:08:50 2015 -0500
+
+    Revert "Close all file descriptors on daemon start"
+
+M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+
+commit 39cd5ba93765452918ffb47f11f88103cc02e031
+Author: Euan Thoms <euan@potensol.com>
+Date:   Wed Oct 28 06:48:12 2015 +0800
+
+    Stage 9.1, further cleanup after removing EXPOSE_?_IVARS.
+
+M	sope-core/NGExtensions/NGBundleManager.m
+
+commit 15a9e33e2c02c31522149ff66bd2a1f7062a917b
+Author: Euan Thoms <euan@potensol.com>
+Date:   Wed Oct 28 05:06:53 2015 +0800
+
+    Stage 9 of clang compiler warning patches.
+
+M	sope-appserver/NGObjWeb/NSObject+WO.m
+M	sope-appserver/NGObjWeb/SoObjects/SoSecurityException.h
+M	sope-appserver/NGObjWeb/SoObjects/SoSecurityException.m
+M	sope-appserver/NGObjWeb/SoObjects/SoSecurityManager.m
+M	sope-appserver/NGObjWeb/SoObjects/common.h
+M	sope-appserver/NGObjWeb/Templates/WOHTMLParser.m
+M	sope-appserver/NGObjWeb/Templates/common.h
+M	sope-appserver/NGObjWeb/common.h
+M	sope-core/NGExtensions/FdExt.subproj/NGPropertyListParser.m
+M	sope-core/NGExtensions/FdExt.subproj/NSException+misc.m
+M	sope-core/NGExtensions/NGBundleManager.m
+M	sope-core/NGExtensions/NGExtensions/NSException+misc.h
+M	sope-gdl1/GDLAccess/EOFault.h
+M	sope-gdl1/PostgreSQL/PostgreSQL72DataTypeMappingException.m
+M	sope-gdl1/PostgreSQL/PostgreSQL72Values.h
+
+commit d06baebfe450a25746a506c9f215b6e676e39616
+Author: ethoms <euan@potensol.com>
+Date:   Mon Oct 26 18:50:44 2015 +0800
+
+    Update NGByteCountStream.m
+
+M	sope-core/NGStreams/NGByteCountStream.m
+
+commit 7e020ff67e1c49b8fa7a1187b9d1c3b880553aa2
+Author: Euan Thoms <euan@potensol.com>
+Date:   Sun Oct 25 01:34:22 2015 +0800
+
+    Stage 8 of clang compiler warning patches.
+
+M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOComponentContent.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOComponentReference.m
+M	sope-appserver/NGObjWeb/NSObject+WO.m
+M	sope-appserver/NGObjWeb/SoObjects/SoSelectorInvocation.m
+M	sope-appserver/NGObjWeb/WOChildComponentReference.m
+M	sope-appserver/NGObjWeb/WORunLoop.m
+M	sope-appserver/NGObjWeb/WOSession.m
+M	sope-appserver/NGObjWeb/common.h
+M	sope-core/EOControl/EOKeyComparisonQualifier.m
+M	sope-core/EOControl/EOKeyValueCoding.m
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EOObserver.m
+M	sope-core/EOControl/EOOrQualifier.m
+M	sope-core/EOControl/EOSortOrdering.m
+M	sope-core/EOControl/EOValidation.m
+M	sope-core/EOControl/common.h
+M	sope-core/EOCoreData/EOKeyComparisonQualifier+CoreData.m
+M	sope-core/EOCoreData/EOKeyValueQualifier+CoreData.m
+M	sope-core/EOCoreData/EOQualifier+CoreData.m
+M	sope-core/EOCoreData/EOSortOrdering+CoreData.m
+M	sope-core/EOCoreData/common.h
+M	sope-core/NGExtensions/EOExt.subproj/EOQualifier+CtxEval.m
+M	sope-core/NGExtensions/NGExtensions/NGMemoryAllocation.h
+M	sope-core/NGStreams/NGByteCountStream.m
+M	sope-core/NGStreams/NGStreamCoder.m
+M	sope-gdl1/GDLAccess/EOAdaptorDataSource.m
+M	sope-gdl1/GDLAccess/EOAttribute.m
+M	sope-gdl1/GDLAccess/EOEntity.m
+M	sope-gdl1/GDLAccess/EOFault.m
+M	sope-gdl1/GDLAccess/EOKeyComparisonQualifier+SQL.m
+M	sope-gdl1/GDLAccess/EOKeyValueQualifier+SQL.m
+M	sope-gdl1/GDLAccess/EOSQLExpression.m
+M	sope-gdl1/GDLAccess/common.h
+M	sope-ldap/NGLdap/EOQualifier+LDAP.m
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+M	sope-mime/NGImap4/EOSortOrdering+IMAPAdditions.m
+M	sope-mime/NGImap4/NGImap4Folder.m
+M	sope-mime/NGImap4/imCommon.h
+M	sope-mime/NGMime/common.h
+
+commit 89241c40becf566ebde00d097aeacb04babe7f8b
+Author: Euan Thoms <euan@potensol.com>
+Date:   Sat Oct 24 20:07:50 2015 +0800
+
+    Stage 7 of clang compiler warning patches.
+
+M	sope-core/NGStreams/NGActiveSocket.m
+M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldGenerator.m
+
+commit 73254707c39657d4eded1626f3a72c6bc717cb6b
+Author: Euan Thoms <euan@potensol.com>
+Date:   Thu Oct 22 18:28:39 2015 +0800
+
+    Stage 6 of clang compiler warning patches. Fix hidden method in NGImap4Client.m required by SOGo.
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 635a56d9d583d59ce43431005a1d9fa9a864a455
+Author: Euan Thoms <euan@potensol.com>
+Date:   Thu Oct 22 18:10:36 2015 +0800
+
+    Stage 5 of clang compiler warning patches. Missing header file imports.
+
+M	sope-core/NGExtensions/FdExt.subproj/NSSet+enumerator.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+misc.m
+M	sope-gdl1/GDLAccess/EOAdaptor.m
+M	sope-gdl1/GDLAccess/EODatabaseFault.m
+M	sope-gdl1/GDLAccess/EOSQLExpression.m
+M	sope-gdl1/GDLAccess/EOSQLQualifier.m
+
+commit a7141312d05b3ca807592ebc81726d4c7624ba44
+Author: Euan Thoms <euan@potensol.com>
+Date:   Thu Oct 22 16:55:11 2015 +0800
+
+    Stage 4 of clang compiler warning patches. Various code cleanup and fixes.
+
+M	sope-appserver/NGObjWeb/DynamicElements/WOHyperlinkInfo.m
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFieldParser.m
+M	sope-appserver/NGObjWeb/WOMailDelivery.m
+M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
+M	sope-core/NGStreams/NGActiveSocket.m
+M	sope-gdl1/PostgreSQL/NSString+PostgreSQL72.m
+M	sope-mime/NGImap4/NGImap4Context.m
+M	sope-mime/NGImap4/NGImap4Folder.m
+
+commit c2b41f5be002d0f67e315c6bc504147ba6abeec8
+Author: Euan Thoms <euan@potensol.com>
+Date:   Thu Oct 22 15:17:44 2015 +0800
+
+    Stage 3 of clang compiler warning patches. Replace deprecated 'isa' calls.
+
+M	sope-appserver/NGObjWeb/WOComponent+Sync.m
+M	sope-appserver/NGObjWeb/WOComponent.m
+M	sope-core/EOControl/EOGlobalID.m
+M	sope-core/EOControl/EOKeyGlobalID.m
+M	sope-core/NGExtensions/FdExt.subproj/NSObject+Logs.m
+M	sope-core/NGExtensions/NGCalendarDateRange.m
+M	sope-gdl1/GDLAccess/EODatabaseFault.m
+M	sope-gdl1/GDLAccess/EOFExceptions.m
+M	sope-gdl1/GDLAccess/EOFault.m
+M	sope-gdl1/GDLAccess/EOModel.m
+M	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m
+M	sope-gdl1/GDLAccess/EOSQLQualifier.m
+
+commit 1dad0ae546b5d28d1d7bb51a6c06016ac1b5d83d
+Author: Euan Thoms <euan@potensol.com>
+Date:   Thu Oct 22 13:51:42 2015 +0800
+
+    Stage 2 of clang compiler warning patches. Function declaration syntax fixes.
+
+M	sope-appserver/NGObjWeb/SoObjects/SoClassSecurityInfo.h
+M	sope-appserver/NGObjWeb/SoObjects/SoClassSecurityInfo.m
+M	sope-appserver/NGObjWeb/WebDAV/SoDAVSQLParser.h
+M	sope-appserver/NGObjWeb/WebDAV/SoDAVSQLParser.m
+M	sope-appserver/WEExtensions/WETableCalcMatrix.h
+M	sope-appserver/WEExtensions/WETableCalcMatrix.m
+M	sope-appserver/WEExtensions/WETableMatrix.m
+M	sope-core/EOControl/EOSQLParser.h
+M	sope-core/EOControl/EOSQLParser.m
+M	sope-gdl1/GDLAccess/EODatabaseChannel.m
+M	sope-mime/NGMime/NGMimePartGenerator.h
+M	sope-xml/SaxObjC/SaxObjectDecoder.m
+
+commit 37782867bc35981da0ed8593f9389e9761c3f83a
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 21 08:57:55 2015 -0400
+
+    (fix) c99 fixes
+
+M	sope-core/NGStreams/NGByteCountStream.m
+
+commit 3b820aea61003364dc9835a74668ae882da9b60d
+Author: Euan Thoms <euan@potensol.com>
+Date:   Wed Oct 21 11:15:28 2015 +0800
+
+    Stage 1 of clang complier warning patches. These are mostly fixes for data type and casting inconsistencies. Also some string formatting fixes.
+
+M	sope-appserver/NGObjWeb/Associations/WOScriptAssociation.m
+M	sope-appserver/NGObjWeb/Associations/WOValueAssociation.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOGenericElement.m
+M	sope-appserver/NGObjWeb/DynamicElements/WOHyperlink.m
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpResponse.h
+M	sope-appserver/NGObjWeb/NGHttp/NGUrlFormCoder.m
+M	sope-appserver/NGObjWeb/SoObjects/SoComponent.m
+M	sope-appserver/NGObjWeb/SoObjects/SoDefaultRenderer.m
+M	sope-appserver/NGObjWeb/Templates/WOComponentScriptPart.m
+M	sope-appserver/NGObjWeb/Templates/WODParser.m
+M	sope-appserver/NGObjWeb/Templates/WOHTMLParser.m
+M	sope-appserver/NGObjWeb/Templates/WOTemplate.m
+M	sope-appserver/NGObjWeb/Templates/WOxElemBuilder.m
+M	sope-appserver/NGObjWeb/WOComponent.m
+M	sope-appserver/NGObjWeb/WOHTTPConnection.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WORequest+Adaptor.m
+M	sope-appserver/NGObjWeb/WOResponse.m
+M	sope-appserver/NGObjWeb/WOSessionStore.m
+M	sope-appserver/NGObjWeb/WOSimpleHTTPParser.m
+M	sope-appserver/NGObjWeb/WOStatisticsStore.m
+M	sope-appserver/NGObjWeb/WebDAV/SoDAVSQLParser.m
+M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
+M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVValue.m
+M	sope-appserver/NGObjWeb/_WOStringTable.m
+M	sope-appserver/WEExtensions/JSStringTable.m
+M	sope-appserver/WEExtensions/WEMonthOverview.m
+M	sope-appserver/WEExtensions/WEResourceKey.m
+M	sope-appserver/WEExtensions/WEResourceManager.m
+M	sope-appserver/WEExtensions/WETableCalcMatrix.m
+M	sope-appserver/WEExtensions/WETableView/WETableView.m
+M	sope-appserver/WOExtensions/WOTabPanel.m
+M	sope-core/EOControl/EOFetchSpecification.m
+M	sope-core/EOControl/EONull.m
+M	sope-core/NGExtensions/FdExt.subproj/NGPropertyListParser.m
+M	sope-core/NGExtensions/FdExt.subproj/NSException+misc.m
+M	sope-core/NGExtensions/FdExt.subproj/NSObject+Values.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
+M	sope-core/NGExtensions/NGDirectoryEnumerator.m
+M	sope-core/NGStreams/NGBufferedStream.m
+M	sope-core/NGStreams/NGByteBuffer.m
+M	sope-core/NGStreams/NGByteCountStream.m
+M	sope-core/NGStreams/NGCTextStream.m
+M	sope-core/NGStreams/NGConcreteStreamFileHandle.m
+M	sope-core/NGStreams/NGLocalSocketAddress.m
+M	sope-gdl1/GDLAccess/EOAttribute.m
+M	sope-gdl1/GDLAccess/EODatabase.m
+M	sope-gdl1/GDLAccess/EODatabaseChannel.m
+M	sope-gdl1/GDLAccess/EODatabaseContext.m
+M	sope-gdl1/GDLAccess/EODatabaseFault.m
+M	sope-gdl1/GDLAccess/EODatabaseFaultResolver.m
+M	sope-gdl1/GDLAccess/EOEntity.m
+M	sope-gdl1/GDLAccess/EOFault.m
+M	sope-gdl1/GDLAccess/EOModel.m
+M	sope-gdl1/GDLAccess/EOObjectUniquer.m
+M	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m
+M	sope-gdl1/GDLAccess/EORecordDictionary.m
+M	sope-gdl1/GDLAccess/EORelationship.m
+M	sope-gdl1/PostgreSQL/NSData+PGVal.m
+M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
+M	sope-gdl1/PostgreSQL/PostgreSQL72DataTypeMappingException.m
+M	sope-ldap/NGLdap/NGLdapConnection.m
+M	sope-ldap/NGLdap/NGLdapFileManager.m
+M	sope-ldap/NGLdap/NGLdapGlobalID.m
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+M	sope-mime/NGImap4/NGImap4FileManager.m
+M	sope-mime/NGImap4/NGImap4FolderGlobalID.m
+M	sope-mime/NGImap4/NGImap4Functions.m
+M	sope-mime/NGImap4/NGImap4Message.m
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+M	sope-mime/NGImap4/NGImap4ServerGlobalID.m
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGMail/NGMailAddress.m
+M	sope-mime/NGMail/NGMailAddressParser.m
+M	sope-mime/NGMail/NGMimeMessage.m
+M	sope-mime/NGMime/NGMimeBodyPart.m
+M	sope-mime/NGMime/NGMimeJoinedData.m
+M	sope-mime/NGMime/NGMimePartGenerator.m
+M	sope-mime/NGMime/NGMimePartParser.m
+M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
+M	sope-xml/DOM/DOMQueryPathExpression.m
+M	sope-xml/XmlRpc/NSNotification+XmlRpcCoding.m
+
+commit ad7a88e35e027b1ed6c8fe5e6a275634ac077490
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Oct 15 15:55:48 2015 -0400
+
+    (fix) support old GNUstep versions
+
+M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldGenerator.m
+
+commit 4ac4809dae92a08e219677a5f67c6575baa8a98e
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 14 15:54:59 2015 -0400
+
+    (fix) make sure to use the English locale when generating Date headers
+
+M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldGenerator.m
+
+commit a2e2908f9dd0ec90bc6d48c48d4c2d467b29dae7
+Author: Juan Vallés <jvalles@zentyal.com>
+Date:   Wed Oct 7 16:36:35 2015 +0200
+
+    Compute the exact string length for IMAP commands
+    
+    By computing the maximum length and then using `strlen()` we were being
+    efficient, but if there was a `\0` in the command (e.g. when there is an
+    attachment in a message and its data has that byte), `strlen()` skipped
+    the rest of the string and returned a smaller length.
+    
+    Suggested `NEWS` line:
+    * `Avoid server freeze due to attached files`
+
+M	sope-core/NGStreams/NGCTextStream.m
+
+commit e870145b7ed381c1bdef5945075ed48948b86d5b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Sep 9 14:59:10 2015 -0400
+
+    (fix) bug fix for #3309
+
+M	sope-mime/NGMime/NGMimePartParser.m
+
+commit 2d1665fd94b5c320c631d5d9231421a0773f890b
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Sep 8 12:21:30 2015 -0400
+
+    Improve parsing of email address
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit 410739bc77e68143734bd2bcaf42bf86eb0719b0
+Author: Jesús García Sáez <blaxter@gmail.com>
+Date:   Mon Sep 7 16:22:30 2015 +0200
+
+    Revert "Remove handleException on requests"
+
+M	sope-appserver/NGObjWeb/WORequestHandler.m
+
+commit 7dcb6a244b5cdf5812541d5ddba9c63994ec7eb7
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Sep 3 14:12:49 2015 -0400
+
+    Fix parsing of email that contains a comma
+    
+    Fixes #3301 #3306
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit 7a4328c1034c3a161bd33082e620fec543ef4ade
+Author: Javier Amor García <jamor@zentyal.com>
+Date:   Thu Aug 20 14:53:18 2015 +0200
+
+    sope-mime: Fixed UTF-8 q-encoding in MIME headers
+    
+    The q-encoding was broke because it encoded the whole
+    header line; this made MIME parameters unrecognizable
+    by client.
+    This commit makes a more selective encoding.
+    
+    The error triggered a failure when sending attachments
+    with no-latin file names.
+
+M	sope-mime/NGMail/NGMimeMessageGenerator.m
+
+commit 750e5ec0858eb52fa8d0859028d0277d47f6c543
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jul 23 11:53:33 2015 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 18d989c142aa6e8fb9e6487b65770033419febe3
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 3 09:46:37 2015 -0400
@@ -5,6 +405,14 @@ Date:   Fri Jul 3 09:46:37 2015 -0400
     Silenced useless warning
 
 M	sope-appserver/NGObjWeb/SoObjects/SoProductResourceManager.m
+
+commit 6d65405dbb6dc9a9cf65970f5436011c1d6a1ae7
+Author: Jesús García Sáez <jgarcia@zentyal.com>
+Date:   Thu Jun 18 17:27:55 2015 +0200
+
+    Remove handleException on requests
+
+M	sope-appserver/NGObjWeb/WORequestHandler.m
 
 commit 1c1bafbf5b38c35650b1138d606fbe99bfe37137
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>

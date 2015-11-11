@@ -48,20 +48,6 @@
 
 #import <Foundation/NSObjCRuntime.h>
 
-#if NeXT_RUNTIME || APPLE_RUNTIME
-#  define sel_eq(sela,selb) (sela==selb?YES:NO)
-#  ifndef SEL_EQ
-#    define SEL_EQ(__A__,__B__) (__A__==__B__?YES:NO)
-#  endif
-#endif
-
-#if __GNU_LIBOBJC__ >= 20100911
-#  define sel_eq(__A__,__B__) sel_isEqual(__A__,__B__)
-#  ifndef SEL_EQ
-#    define SEL_EQ(__A__,__B__) sel_isEqual(__A__,__B__)
-#  endif
-#endif
-
 #if LIB_FOUNDATION_LIBRARY
 #  import <extensions/objc-runtime.h>
 #else
@@ -242,17 +228,6 @@ static inline char *Ltoa(long nr, char *str, int base)
 - (void)notImplemented:(SEL)sel;
 @end
 
-#endif
-
-#if !GNU_RUNTIME
-#  ifndef SEL_EQ
-#    define SEL_EQ(__A__,__B__) (__A__==__B__ ? YES : NO)
-#  endif
-#else
-#  ifndef SEL_EQ
-#    include <objc/objc.h>
-#    define SEL_EQ(__A__,__B__) sel_eq(__A__,__B__)
-#  endif
 #endif
 
 #endif /* __common_h__ */

@@ -427,7 +427,7 @@ static BOOL     debugOn                      = NO;
 }
 
 - (NGActiveSocket *)_accept {
-  NGActiveSocket *connection;
+  id<NGActiveSocket>  connection;
   id<NGSocketAddress> remote;
 
   NS_DURING {
@@ -450,7 +450,7 @@ static BOOL     debugOn                      = NO;
   }
   NS_ENDHANDLER;
 
-  return connection;
+  return (NGActiveSocket*)connection;
 }
 
 - (void)_handleConnection:(NGActiveSocket *)connection {

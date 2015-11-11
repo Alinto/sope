@@ -24,10 +24,6 @@
 #include "EONull.h"
 #include "common.h"
 
-#if __GNU_LIBOBJC__ >= 20100911
-#  define sel_get_any_uid sel_getUid
-#endif
-
 #if !LIB_FOUNDATION_LIBRARY
 
 @interface NSException(UsedSetUI) /* does Jaguar allow -setUserInfo: ? */
@@ -150,11 +146,7 @@
     strcat(buf, ":");
     buf[8] = toupper(buf[8]);
     
-#if NeXT_RUNTIME
-    sel = sel_getUid(buf);
-#else
-    sel = sel_get_any_uid(buf);
-#endif
+    sel = sel_registerName(buf);
     if (sel) {
       if ([self respondsToSelector:sel]) {
         if (buf) free(buf);

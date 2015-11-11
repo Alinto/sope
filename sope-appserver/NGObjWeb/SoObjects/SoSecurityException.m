@@ -28,17 +28,19 @@
 + (id)securityExceptionOnObject:(id)_o 
   withAuthenticator:(id)_a 
   andManager:(id)_m 
+  reason:(NSString *)_r
 {
   return [[[self alloc] 
-	    initWithObject:_o authenticator:_a manager:_m] autorelease];
+	    initWithObject:_o authenticator:_a manager:_m reason:_r] autorelease];
 }
-- (id)initWithObject:(id)_object authenticator:(id)_auth manager:(id)_manager {
+- (id)initWithObject:(id)_object authenticator:(id)_auth manager:(id)_manager reason:(NSString *)_reason {
   NSString *n, *r;
   
   if ((n = [self name]) == nil)
     n = NSStringFromClass([self class]);
-  if ((r = [self reason]) == nil)
-    r = @"generic security exception";
+  if ((r = _reason) == nil)
+    if ((r = [self reason]) == nil)
+      r = @"generic security exception";
   
   if ((self = [super initWithName:n reason:r userInfo:nil])) {
     self->object          = [_object  retain];

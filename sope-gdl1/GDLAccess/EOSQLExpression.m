@@ -39,6 +39,7 @@
 #include <EOControl/EONull.h>
 #include <EOControl/EOQualifier.h>
 #include <EOControl/EOSortOrdering.h>
+#import "NGExtensions/NSException+misc.h"
 
 #if LIB_FOUNDATION_LIBRARY
 #  include <extensions/DefaultScannerHandler.h>
@@ -480,20 +481,20 @@ NSString *EOBindVariableValueKey       = @"value";
       ordering  = [order selector];
       attribute = [self->entity attributeNamed:[order key]];
 
-      if (sel_eq(ordering, EOCompareCaseInsensitiveAscending) ||
-          sel_eq(ordering, EOCompareCaseInsensitiveDescending))
+      if (sel_isEqual(ordering, EOCompareCaseInsensitiveAscending) ||
+          sel_isEqual(ordering, EOCompareCaseInsensitiveDescending))
         fmt = @"LOWER(%@)";
       else
         fmt = @"%@";
       
       [orderBy appendFormat:fmt, [self expressionValueForAttribute:attribute]];
 
-      if (sel_eq(ordering, EOCompareCaseInsensitiveAscending) ||
-          sel_eq(ordering, EOCompareAscending)) {
+      if (sel_isEqual(ordering, EOCompareCaseInsensitiveAscending) ||
+          sel_isEqual(ordering, EOCompareAscending)) {
         [orderBy appendString:@" ASC"];
       }
-      else if (sel_eq(ordering, EOCompareCaseInsensitiveDescending) ||
-               sel_eq(ordering, EOCompareDescending)) {
+      else if (sel_isEqual(ordering, EOCompareCaseInsensitiveDescending) ||
+               sel_isEqual(ordering, EOCompareDescending)) {
         [orderBy appendString:@" DESC"];
       }
     }
@@ -1153,27 +1154,27 @@ NSString *EOBindVariableValueKey       = @"value";
 
 - (NSString *)sqlStringForSelector:(SEL)_selector value:(id)_value {
   if ((_value == null) || (_value == nil)) {
-    if (sel_eq(_selector, EOQualifierOperatorEqual))
+    if (sel_isEqual(_selector, EOQualifierOperatorEqual))
       return @"is";
-    else if (sel_eq(_selector, EOQualifierOperatorNotEqual))
+    else if (sel_isEqual(_selector, EOQualifierOperatorNotEqual))
       return @"is not";
   }
   else {
-    if (sel_eq(_selector, EOQualifierOperatorEqual))
+    if (sel_isEqual(_selector, EOQualifierOperatorEqual))
       return @"=";
-    else if (sel_eq(_selector, EOQualifierOperatorNotEqual))
+    else if (sel_isEqual(_selector, EOQualifierOperatorNotEqual))
       return @"<>";
   }
   
-  if (sel_eq(_selector, EOQualifierOperatorLessThan))
+  if (sel_isEqual(_selector, EOQualifierOperatorLessThan))
     return @"<";
-  else if (sel_eq(_selector, EOQualifierOperatorGreaterThan))
+  else if (sel_isEqual(_selector, EOQualifierOperatorGreaterThan))
     return @">";
-  else if (sel_eq(_selector, EOQualifierOperatorLessThanOrEqualTo))
+  else if (sel_isEqual(_selector, EOQualifierOperatorLessThanOrEqualTo))
     return @"<=";
-  else if (sel_eq(_selector, EOQualifierOperatorGreaterThanOrEqualTo))
+  else if (sel_isEqual(_selector, EOQualifierOperatorGreaterThanOrEqualTo))
     return @">=";
-  else if (sel_eq(_selector, EOQualifierOperatorLike))
+  else if (sel_isEqual(_selector, EOQualifierOperatorLike))
     return @"LIKE";
   else {
     return [NSString stringWithFormat:@"UNKNOWN<%@>",

@@ -191,7 +191,7 @@ static WOAssociation *yesAssoc = nil;
       }
     }
     else {
-      NSLog(@"%s: couldn't allocate builder (class=%@)", cn);
+      NSLog(@"couldn't allocate builder (class=%@)", cn);
       continue;
     }
   }
