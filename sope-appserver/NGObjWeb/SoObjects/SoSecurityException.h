@@ -35,8 +35,9 @@
 
 + (id)securityExceptionOnObject:(id)_object
   withAuthenticator:(id)_auth
-  andManager:(id)_manager;
-- (id)initWithObject:(id)_object authenticator:(id)_auth manager:(id)_manager;
+  andManager:(id)_manager
+  reason:(NSString *)_r;
+- (id)initWithObject:(id)_object authenticator:(id)_auth manager:(id)_manager reason:(NSString *)_reason;
 
 - (SoSecurityManager *)securityManager;
 - (id)authenticator;

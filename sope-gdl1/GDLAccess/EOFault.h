@@ -9,6 +9,13 @@
 
 @class EOFaultHandler;
 
+#ifndef __has_attribute
+#define __has_attribute(x) 0
+#endif
+
+#if __has_attribute(objc_root_class)
+__attribute__((objc_root_class))
+#endif
 @interface EOFault
 {
   Class          isa;

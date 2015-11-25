@@ -42,9 +42,21 @@
   if ([date respondsToSelector:@selector(descriptionWithCalendarFormat:)]) {
     // TODO: do not use -descriptionWithCalendarFormat: !
     //       - slow
-    //       - does not necessarily encode an English dayname!
-    dateString = [date descriptionWithCalendarFormat:
-                         @" %a, %d %b %Y %H:%M:%S %z"];
+#if GNUSTEP_BASE_MINOR_VERSION < 21
+    dateString = [date descriptionWithCalendarFormat: @" %a, %d %b %Y %H:%M:%S %z"];
+#else
+    dateString = [date descriptionWithCalendarFormat: @" %a, %d %b %Y %H:%M:%S %z"
+                                            timeZone: [NSTimeZone timeZoneWithName: @"GMT"]
+                                              locale: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [NSArray arrayWithObjects: @"Jan", @"Feb", @"Mar", @"Apr",
+                                                                                      @"May", @"Jun", @"Jul", @"Aug",
+                                                                                      @"Sep", @"Oct", @"Nov", @"Dec", nil],
+                                                           @"NSShortMonthNameArray",
+                                                           [NSArray arrayWithObjects: @"Sun", @"Mon", @"Tue", @"Wed", @"Thu",
+                                                                                      @"Fri", @"Sat", nil],
+                                                           @"NSShortWeekDayNameArray",
+                                                           nil]];
+#endif
   }
   else
     dateString = [date stringValue];

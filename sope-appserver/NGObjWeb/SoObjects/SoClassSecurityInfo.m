@@ -111,7 +111,7 @@
   va_end(va);
 }
 
-- (void)declareProtected:(NSString *)_perm:(NSString *)_firstName, ... {
+- (void)declareProtected:(NSString *)_perm :(NSString *)_firstName, ... {
   va_list  va;
   NSString *aname;
 

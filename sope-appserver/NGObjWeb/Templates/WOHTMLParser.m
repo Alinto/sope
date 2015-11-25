@@ -86,9 +86,9 @@ static BOOL  useUTF8 = NO;
 
 /* callbacks */
 
-- (NSException *)_makeSyntaxErrorException {
+- (NSException *)_makeSyntaxErrorException:(NSString *)_reason {
   return [NSException exceptionWithName:@"SyntaxError"
-                      reason:@"template syntax error"
+                      reason:_reason
                       userInfo:nil];
 }
 
@@ -221,7 +221,6 @@ static NSException *_makeHtmlException(NSException *_exception,
     // error resulted from a previous error (exception already set)
     return _exception;
   
-  exception = [self _makeSyntaxErrorException];
 
   if (atEof)
     _text = [@"Unexpected end: " stringByAppendingString:[_text stringValue]];
@@ -229,8 +228,8 @@ static NSException *_makeHtmlException(NSException *_exception,
     _text = [StrClass stringWithFormat:@"Syntax error in line %i: %@",
                       numLines, _text];
   }
-  
-  [exception setReason:_text];
+
+  exception = [self _makeSyntaxErrorException:_text];
 
   /* user info */
   {
@@ -246,7 +245,7 @@ static NSException *_makeHtmlException(NSException *_exception,
       [ui setObject:self forKey:@"handler"];
     
     if (!atEof && (_idx > 0)) {
-      register unsigned pos;
+      NSInteger pos;
       const unichar *startPos, *endPos;
 
       for (pos = _idx; (pos >= 0) && (_buffer[pos] != '\n'); pos--)

@@ -587,7 +587,7 @@ FINAL void _readObjC(NGStreamCoder *self, void *_value, const char *_type);
 
     case _C_SEL:
       _writeTag(self, _C_SEL);
-      _writeCString(self, (*(SEL *)_value) ? sel_get_name(*(SEL *)_value) : NULL);
+      _writeCString(self, (*(SEL *)_value) ? sel_getName(*(SEL *)_value) : NULL);
       break;
       
     case _C_PTR:
@@ -899,7 +899,7 @@ FINAL void _readObjC(NGStreamCoder *self, void *_value, const char *_type);
       
       NSAssert(*_type == tag, @"invalid type ..");
       _readObjC(self, &name, @encode(char *));
-      *(SEL *)_value = name ? sel_get_any_uid(name) : NULL;
+      *(SEL *)_value = name ? sel_registerName(name) : NULL;
       NGFree(name); name = NULL;
     }
 

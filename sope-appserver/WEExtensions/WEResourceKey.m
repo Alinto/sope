@@ -65,7 +65,7 @@
 
 /* equality */
 
-- (unsigned)hash {
+- (NSUInteger)hash {
   if (self->hashValue == 0) {
     /* don't know whether this is smart, Nat! needs to comment ;-) */
     self->hashValue = [self->name hash];

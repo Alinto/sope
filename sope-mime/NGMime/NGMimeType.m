@@ -144,6 +144,23 @@ static Class NSStringClass  = Nil;
   else if ([charset isEqualToString:@"iso-8859-2"]) {
     encoding = NSISOLatin2StringEncoding;
   }
+  else if ([charset isEqualToString:@"iso-8859-8-i"]) {
+    encoding = NSISOHebrewStringEncoding;
+  }
+  else if ([charset isEqualToString:@"iso-8859-7"]) {
+    encoding = NSISOGreekStringEncoding;
+  }
+  else if ([charset isEqualToString:@"iso-8859-6"]) {
+    encoding = NSISOArabicStringEncoding;
+  }
+  else if ([charset isEqualToString:@"iso-8859-4"]) {
+    // latin 4 is for baltic languages
+    encoding = NSISOLatin4StringEncoding;
+  }
+  else if ([charset isEqualToString:@"iso-8859-9"]) {
+    // latin 5 is for turkish languages
+    encoding = NSISOLatin5StringEncoding;
+  }
   else if ([charset isEqualToString:@"x-unknown"] ||
            [charset isEqualToString:@"unknown"]) {
     encoding = NSISOLatin1StringEncoding;

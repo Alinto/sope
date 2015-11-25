@@ -33,6 +33,5 @@
           __PRETTY_FUNCTION__, __LINE__];
 
 @interface NSException(NGObjWeb_Templates_setUserInfo)
-- (id)setReason:(NSString *)_reason;
 - (id)setUserInfo:(NSDictionary *)_userInfo;
 @end

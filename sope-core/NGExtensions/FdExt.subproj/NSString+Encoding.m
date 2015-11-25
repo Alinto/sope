@@ -209,7 +209,7 @@ static char *iconv_wrapper(id self, char *_src, unsigned _srcLen,
   tm           = outbuf;
   outbytesleft = outlen;
 
-  write = iconv(type, &inbuf, &inbytesleft, &tm, &outbytesleft);
+  write = iconv(type, (void*)&inbuf, &inbytesleft, &tm, &outbytesleft);
 
   if (write == (size_t)-1) {
     if (errno == EILSEQ) {

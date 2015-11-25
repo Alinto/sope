@@ -168,7 +168,7 @@
   ms = [NSMutableString stringWithCapacity:128];
   [ms appendFormat:@"<0x%p[%@]:", self, NSStringFromClass([self class])];
   [ms appendFormat:@" joinedDataObjects=%d>",
-        [self->joinedDataObjects count]];
+        (int)[self->joinedDataObjects count]];
   [ms appendString:@">"];
   return ms;
 }

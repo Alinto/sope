@@ -85,9 +85,10 @@
 
   totalReadCount += result;
   {
+    NSInteger len;
     register unsigned char *byteBuffer = _buf;
 
-    for (_len = result - 1; _len >= 0; _len--, byteBuffer++) {
+    for (len = result - 1; len >= 0; len--, byteBuffer++) {
       if (*byteBuffer == byteToCount)
         byteReadCount++;
     }
@@ -104,9 +105,10 @@
 
   totalWriteCount += result;
   {
+    NSInteger len;
     register unsigned char *byteBuffer = (unsigned char *)_buf;
 
-    for (_len = result - 1; _len >= 0; _len--, byteBuffer++) {
+    for (len = result - 1; len >= 0; len--, byteBuffer++) {
       if (*byteBuffer == byteToCount)
         byteWriteCount++;
     }

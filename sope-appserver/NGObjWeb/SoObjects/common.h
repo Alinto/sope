@@ -23,6 +23,5 @@
 #include <NGExtensions/NGExtensions.h>
 
 @interface NSException(SoObjects_setUserInfo)
-- (id)setReason:(NSString *)_reason;
 - (id)setUserInfo:(NSDictionary *)_userInfo;
 @end

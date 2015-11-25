@@ -55,13 +55,6 @@
 @end
 
 
-#if COCOA_Foundation_LIBRARY || GNUSTEP_BASE_LIBRARY
-@interface NSException (NGLibFoundationCompatibility)
-- (void)setReason:(NSString *)_reason;
-@end
-#endif
-
-
 /*
   The following macros are for use of locks together with exception handling.
   A synchronized block is properly 'unlocked' even if an exception occures.
