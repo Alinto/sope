@@ -1,3 +1,19 @@
+commit 947a44954249fc1ebd7fa8134e03cb55ff734830
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Dec 14 10:22:56 2015 -0500
+
+    (fix) don't consider MobileIron Email+ as DAV client
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit 7380c8869e9eddc5487b85dcab1928775e2e8a1d
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Nov 11 14:20:56 2015 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 51ecf2ee16c260075a1ac7375007b765f00d262c
 Author: Javier Amor García <jamor@zentyal.com>
 Date:   Wed Nov 11 16:58:39 2015 +0100
