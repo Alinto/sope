@@ -262,21 +262,18 @@ int NGEncodeQuotedPrintableMime(const unsigned char *src, unsigned srcLen,
 
     if (rfc822_text[c] == 1) {
       // no quoting
-      dest[destCnt] = c;
-      destCnt++;
+      dest[destCnt++] = c;
+    } else if (c == ' ') {
+      // Special case ' ' => '_'
+      dest[destCnt++] = '_';
     } else {
       // need to be quoted
       if (destLen - destCnt <= 2)
         break;
 
-      if (c == ' ') {
-        // Special case ' ' => '_' (and '_' will be encoded)
-        dest[destCnt] = '_'; destCnt++;
-      } else {
-        dest[destCnt] = '='; destCnt++;
-        dest[destCnt] = hexT[(c >> 4) & 15]; destCnt++;
-        dest[destCnt] = hexT[c & 15]; destCnt++;
-      }
+      dest[destCnt++] = '=';
+      dest[destCnt++] = hexT[(c >> 4) & 15];
+      dest[destCnt++] = hexT[c & 15];
     }
   }
 
