@@ -31,6 +31,10 @@
 
 + (id)headerFieldGenerator;
 
++ (NSString *)encodeQuotedPrintableWord: (NSString *)word;
+
++ (NSString *)encodeQuotedPrintableText: (NSString *)text;
+
 - (NSData *)generateDataForHeaderFieldNamed:(NSString *)_headerField
   value:(id)_value;
 
