@@ -290,21 +290,24 @@ static void _flushAtExit(void) {
   unsigned toGo;
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= 1040 || (GNUSTEP && OS_API_VERSION(100400,GS_API_LATEST))
+  NSData *d;
+
   if ((toGo = [_string lengthOfBytesUsingEncoding:self->encoding]) == 0)
     return YES;
 
-  /* getCString NULL-terminates the string, while lengthOfBytesUsingEncoding
-     doesn't take that last character into account */
-  buf = str = calloc(toGo + 1, sizeof(unsigned char));
-  if (![_string getCString:(char *)str maxLength:(toGo + 1)
-                  encoding:self->encoding]) {
-    NSLog(@"ERROR(%s): failed to extract cString in defaultCStringEncoding(%i)"
-	  @" from NSString: '%@'\n", __PRETTY_FUNCTION__,
-	  self->encoding, _string);
-    if (buf != NULL) { free(buf); buf = NULL; };
+  d = [_string dataUsingEncoding: self->encoding
+            allowLossyConversion: NO];
+
+  if (!d) {
+    NSLog(@"ERROR(%s): failed to extract data using encoding(%i)"
+          @" from NSString: '%@'\n", __PRETTY_FUNCTION__,
+          self->encoding, _string);
     return NO;
   }
 
+  buf = str = calloc(toGo + 1, sizeof(unsigned char));
+  [d getBytes: str  length: toGo];
+  str[toGo] = '\0';
 #else
   if ((toGo = [_string cStringLength]) == 0)
     return YES;
