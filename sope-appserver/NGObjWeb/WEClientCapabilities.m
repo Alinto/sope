@@ -344,7 +344,7 @@
     /* some iCal 1.x DAV Access Framework, report as Apple DAV access */
     self->browser = WEUA_AppleDAVAccess;
   }
-  else if (strstr(ua, "dataaccessd/") || strstr(ua, "iOS")) {
+  else if ((strstr(ua, "dataaccessd/") || strstr(ua, "iOS")) && !strstr(ua, "iOS-Email+") && !strstr(ua, "Outlook-iOS")) {
     /* iOS 5.x (iPhone/iPad) DAV Access Framework, report as Apple DAV access */
     self->browser = WEUA_AppleDAVAccess;
   }
