@@ -78,7 +78,7 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
     unichar       *buffer;
     unsigned int  bufLen, maxBufLen;
     NSString      *charset;
-    BOOL          appendLC;
+    BOOL          appendLC, encodedLastWord;
     int           cnt, tmp;
     unsigned char encoding;
 
@@ -90,7 +90,8 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
     
     encoding = 0;
     tmp      = -1;
-    appendLC = YES;      
+    appendLC = YES;
+    encodedLastWord = NO;
     charset  = nil;
     status   = NGMimeMessageParser_quoted_start;
 
@@ -106,19 +107,28 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
       if (status == NGMimeMessageParser_quoted_start) {
         if ((bytes[cnt] == '=') && (bytes[cnt + 1] == '?')) { // found begin
           cnt++;
+          if (encodedLastWord && tmp != -1) {
+            // We must remove the whitespace added since `tmp`
+            int i;
+            for (i = bufLen - 1; i >= tmp; i--)
+              buffer[i] = '\0';
+            bufLen = tmp;
+          }
+          tmp = -1;
           status = NGMimeMessageParser_quoted_charSet;
-        }
-        else { // other char
-          if (bytes[cnt + 1] != '=') {
-            buffer[bufLen++] = bytes[cnt];
-            buffer[bufLen++] = bytes[cnt+1];
-            cnt++;
-            if (cnt >= length - 1)
-              appendLC = NO;
-          }
-          else {
-            buffer[bufLen++] = bytes[cnt];
-          }
+        } else if (bytes[cnt] == ' ' || bytes[cnt] == '\r' ||
+                   bytes[cnt] == '\n' || bytes[cnt] == '\t') {
+          // We must ignore whitespace between qp encoded strings.
+          // Both are valid:
+          // (ab) -> (=?utf-8?q?a?=  =?utf-8?q?b?=)
+          // (ab) -> (=?utf-8?q?a?=
+          //             =?utf-8?q?b?=)
+          if (tmp == -1) // first whitespace found
+            tmp = bufLen;
+          buffer[bufLen++] = bytes[cnt];
+        } else {
+          encodedLastWord = NO;
+          buffer[bufLen++] = bytes[cnt];
         }
       }
       else if (status == NGMimeMessageParser_quoted_charSet) {
@@ -188,6 +198,7 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
           cnt++;
           appendLC = YES;
           status   = NGMimeMessageParser_quoted_start;
+          encodedLastWord = YES;
         }
       }
     }
