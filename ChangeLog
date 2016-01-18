@@ -1,3 +1,19 @@
+commit fe0d0c33452ace9aaba13c85c1e2e43d82a345af
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jan 18 10:14:30 2016 -0500
+
+    (fix) allow compilation on old gcc
+
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
+commit 1f261501a0671fb1cf2ccec5d08cc49f15d0a556
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Jan 18 09:57:56 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit fc6e0228804ee16b0128384c886475f77d314ce6
 Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Dec 21 17:42:01 2015 +0100
