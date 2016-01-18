@@ -166,9 +166,12 @@ static NSArray *splitWordIfQPEncodingTooBig(NSString *s)
   NSArray *words = [input componentsSeparatedByString: @" "];
   NSMutableString *text = [@"" mutableCopy], *line = [@"" mutableCopy];
   BOOL encodedLastWord = NO, needsEncode = NO;
+  NSString *word, *part;
   NSUInteger spaces = 0;
+  int i, j;
 
-  for (NSString *word in words) {
+  for (i = 0; i < [words count]; i++) {
+    word = [words objectAtIndex: i];
     // Count number of spaces from the previous encoded word
     if ([line length] > 0 || [word length] == 0) spaces++;
     // If word is empty means we had a space (which we've already counted it)
@@ -178,7 +181,8 @@ static NSArray *splitWordIfQPEncodingTooBig(NSString *s)
     needsEncode = NGEncodeQuotedPrintableMimeNeeded ([data bytes], [data length]);
 
     NSArray *parts = splitWordIfQPEncodingTooBig (word);
-    for (NSString *part in parts) {
+    for (j = 0; j < [parts count]; j++) {
+      part = [parts objectAtIndex: j];
       NSString *encoded = part;
       if (needsEncode) {
         NSMutableString *toEncode = [part mutableCopy];
