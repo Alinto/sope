@@ -107,8 +107,8 @@
   char         *des    = NULL;
   unsigned int desLen  = 0;
 
-  // length/64*3 should be plenty for soft newlines
-  desLen = (length + length/64) *3;
+  // length/64*4 should be plenty for soft newlines
+  desLen = (length + length/64) * 4;
   des = malloc(sizeof(char) * desLen);
 
   desLen = NGEncodeQuotedPrintable(bytes, length, des, desLen);
