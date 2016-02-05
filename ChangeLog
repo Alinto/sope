@@ -1,3 +1,11 @@
+commit dc3db91aac7b64dd059cb9854520f828efcbc593
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Jan 25 11:21:37 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 28d239d0c8589b4d4ce7f49aa7d77f580c7254b7
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 22 14:22:26 2016 -0500
