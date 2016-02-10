@@ -102,6 +102,8 @@
 - (NSArray *)subfoldersForURL:(NSURL *)_url
   onlySubscribedFolders: (BOOL) subscribedFoldersOnly;
 - (NSArray *)allFoldersForURL:(NSURL *)_url;
+- (NSDictionary *) allFoldersMetadataForURL:(NSURL *)_url
+                      onlySubscribedFolders:(BOOL)_subscribedFoldersOnly;
 - (NSArray *)allFoldersForURL:(NSURL *)_url
   onlySubscribedFolders: (BOOL) subscribedFoldersOnly;
 - (BOOL)selectFolder:(id)_url;
