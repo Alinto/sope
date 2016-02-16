@@ -51,11 +51,14 @@ static NGMimeType           *wwwFormUrlEncoded = nil;
 static NGMimeType           *multipartFormData = nil;
 static id<NGMimeBodyParser> wwwFormUrlParser   = nil;
 static id<NGMimeBodyParser> multipartFormDataParser = nil;
+static unsigned int         maxUploadSize = 0;
 
 + (void)initialize {
   static BOOL isInitialized = NO;
   if (!isInitialized) {
     isInitialized = YES;
+
+    maxUploadSize = [[NSUserDefaults standardUserDefaults] integerForKey: @"WOMaxUploadSize"] * 1024;
 
     wwwFormUrlEncoded = 
       [[NGMimeType mimeType:@"application/x-www-form-urlencoded"] retain];
@@ -575,19 +578,27 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
       case NGHttpMethod_POST:
       case NGHttpMethod_PUT:
       default:
-	if (doParse && ([rq contentLength] == 0)) {
-	  /*
-	    Two cases: 
-	      HTTP/1.0, HTTP/0.9 - read till EOF if no content-length is set
-	      HTTP/1.1 and above: if no content-length is set, body is empty
-	  */
-	  if ([rq majorVersion] < 1)
-	    doParse = YES;
-	  else if ([rq majorVersion] == 1 && [rq minorVersion] == 0)
-	    doParse = YES;
-	  else
-	    doParse = NO;
-	}
+	if (doParse) {
+          if ([rq contentLength] == 0) {
+            /*
+              Two cases:
+              HTTP/1.0, HTTP/0.9 - read till EOF if no content-length is set
+              HTTP/1.1 and above: if no content-length is set, body is empty
+            */
+            if ([rq majorVersion] < 1)
+              doParse = YES;
+            else if ([rq majorVersion] == 1 && [rq minorVersion] == 0)
+              doParse = YES;
+            else
+              doParse = NO;
+          }
+          else if (maxUploadSize && [rq contentLength] > maxUploadSize) {
+            [_part setBody: [NSException exceptionWithName:@"MaxUploadSizeException"
+                                                    reason:@"File size upload limit reached"
+                                                  userInfo:nil]];
+            return;
+          }
+        }
         break;
     }
     
