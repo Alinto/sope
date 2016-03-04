@@ -1,3 +1,30 @@
+commit 730dec9898b0d4ec04862dda26845c91995a4994
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 16 16:23:25 2016 -0500
+
+    (feat) new feature to limit the upload size using WOMaxUploadSize
+    
+    This limit is specified in kilobytes. 1024 == 1 MB.
+
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
+
+commit f4241bed9caf41d2a53a6adb0e97bf8149634f38
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Feb 10 09:57:51 2016 -0500
+
+    (feat) can now get IMAP folders metadata
+
+M	sope-mime/NGImap4/NGImap4Connection.h
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit 629aa13bd418085a36c24d5521dcc12204acad2c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Feb 5 12:18:12 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit dc3db91aac7b64dd059cb9854520f828efcbc593
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Jan 25 11:21:37 2016 -0500
