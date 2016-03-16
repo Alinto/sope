@@ -624,13 +624,13 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
         int laC1 = _la(self, 1);
 
         if (isRfc822_LWSP(laC1)) {               // CR LSWSP
-          _consume(self, 2);  // folding
+          _consume(self, 1);  // folding
         }
         else if (laC1 == '\n') {                 // CR LF
           int laC2 = _la(self, 2);
 
           if (isRfc822_LWSP(laC2)) {             // CR LF LWSP
-            _consume(self, 3); // folding
+            _consume(self, 2); // folding
           }
           else if (laC2 == '\r') {               // CR LF CR
             int laC3 = _la(self, 3);
@@ -663,7 +663,7 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
         int laC1 = _la(self, 1);
 
         if (isRfc822_LWSP(laC1)) {               // LF LWSP
-          _consume(self, 2); // folding
+          _consume(self, 1); // folding
         }
         else if (laC1 == '\n') {                 // LF LF
           _consume(self, 2);
@@ -674,7 +674,7 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
           int laC2 = _la(self, 2);
           
           if (isRfc822_LWSP(laC2)) {             // LF CR LWSP
-            _consume(self, 3); // folding
+            _consume(self, 2); // folding
           }
           else if (laC2 == '\n') {               // LF CR LF
             _consume(self, 3); //
