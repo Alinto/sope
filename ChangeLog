@@ -1,3 +1,38 @@
+commit fb4ab168beec05af879fa807f825b7de4ee87040
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Mar 16 08:52:56 2016 -0400
+
+    (fix) properly unfold long headers
+
+M	sope-mime/NGMime/NGMimePartParser.m
+
+commit c975a7cf3b136a06e65721ef602b8849dd879e84
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Mar 14 18:45:45 2016 -0400
+
+    (fix) correctly backtrack when finding the character (fixes #3580)
+
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
+commit caec2ca2c5e0269ae9a6540baf1bf8cf79c1bf7a
+Author: Bernard Cafarelli <bernard.cafarelli@gmail.com>
+Date:   Thu Mar 10 11:20:15 2016 +0100
+
+    Fix mysql_config calls
+    
+    Original patch by Russell Knighton <russell@annunaki2k2.co.uk>
+    Gentoo bug: https://bugs.gentoo.org/show_bug.cgi?id=566138
+
+M	sope-gdl1/MySQL/GNUmakefile.preamble
+
+commit 07b63038c6346165f6c645bee28e88d813064ed4
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Mar 4 12:12:04 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 730dec9898b0d4ec04862dda26845c91995a4994
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 16 16:23:25 2016 -0500
