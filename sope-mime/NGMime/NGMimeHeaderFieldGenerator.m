@@ -136,7 +136,7 @@ static NSArray *splitWordIfQPEncodingTooBig(NSString *s)
                                                   length: [subdata length]
                                                 encoding: NSUTF8StringEncoding];
         }
-        chunk_start = i-1-backtrack;
+        chunk_start = i-backtrack;
       }
       [chunk_string autorelease];
       [chunks addObject: chunk_string];
@@ -163,12 +163,19 @@ static NSArray *splitWordIfQPEncodingTooBig(NSString *s)
 */
 + (NSString *)encodeQuotedPrintableText:(NSString *)input
 {
-  NSArray *words = [input componentsSeparatedByString: @" "];
-  NSMutableString *text = [@"" mutableCopy], *line = [@"" mutableCopy];
-  BOOL encodedLastWord = NO, needsEncode = NO;
+  NSMutableString *line, *text;
   NSString *word, *part;
-  NSUInteger spaces = 0;
+  NSArray *words;
+
+  BOOL encodedLastWord, needsEncode;
+  NSUInteger spaces;
   int i, j;
+
+  words = [input componentsSeparatedByString: @" "];
+  text = [NSMutableString string];
+  line = [NSMutableString string];
+  encodedLastWord = needsEncode = NO;
+  spaces = 0;
 
   for (i = 0; i < [words count]; i++) {
     word = [words objectAtIndex: i];
@@ -180,7 +187,7 @@ static NSArray *splitWordIfQPEncodingTooBig(NSString *s)
     NSData *data = [word dataUsingEncoding: NSUTF8StringEncoding];
     needsEncode = NGEncodeQuotedPrintableMimeNeeded ([data bytes], [data length]);
 
-    NSArray *parts = splitWordIfQPEncodingTooBig (word);
+    NSArray *parts = splitWordIfQPEncodingTooBig(word);
     for (j = 0; j < [parts count]; j++) {
       part = [parts objectAtIndex: j];
       NSString *encoded = part;

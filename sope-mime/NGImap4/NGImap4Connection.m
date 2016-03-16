@@ -468,20 +468,34 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   return [self primaryFetchMailboxHierarchyForURL: _url onlySubscribedFolders: NO];
 }
 
-- (NSArray *)allFoldersForURL:(NSURL *)_url
+- (NSDictionary *) allFoldersMetadataForURL:(NSURL *)_url
 	onlySubscribedFolders:(BOOL)_subscribedFoldersOnly
 {
   NSDictionary *result;
 
   if ((result = [self primaryFetchMailboxHierarchyForURL:_url
-		      onlySubscribedFolders:_subscribedFoldersOnly]) == nil)
+                                   onlySubscribedFolders:_subscribedFoldersOnly]) == nil)
     return nil;
   if ([result isKindOfClass:[NSException class]]) {
     [self errorWithFormat:@"failed to retrieve hierarchy: %@", result];
     return nil;
   }
-  
-  return [self extractFoldersFromResultSet:result];
+
+  return result;
+}
+
+- (NSArray *)allFoldersForURL:(NSURL *)_url
+	onlySubscribedFolders:(BOOL)_subscribedFoldersOnly
+{
+  NSDictionary *result;
+
+  result = [self allFoldersMetadataForURL: _url
+                    onlySubscribedFolders: _subscribedFoldersOnly];
+
+  if (result)
+    return [self extractFoldersFromResultSet:result];
+
+  return nil;
 }
 
 - (NSArray *)allFoldersForURL:(NSURL *)_url
