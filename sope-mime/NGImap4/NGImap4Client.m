@@ -930,7 +930,7 @@ static NSMutableDictionary *namespaces;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
 
-  cmd     = [NSString stringWithFormat:@"list \"\" \"%@\" return (status (%@))",
+  cmd     = [NSString stringWithFormat:@"list \"\" \"%@\" return (status (%@) children)",
                       SaneFolderName(_folder), [_flags componentsJoinedByString:@" "]];
   return [self->normer normalizeListStatusResponse:[self processCommand:cmd]];
 }
