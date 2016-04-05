@@ -1,3 +1,19 @@
+commit 65e486502da2c440ee2a91c0993c23c7559031f0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Mar 28 11:12:17 2016 -0400
+
+    (fix) handle Dovecot's mail_shared_explicit_inbox = YES
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 3462d1ad59fe708e1e7ab0f94e9e6599949ebfb9
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Mar 16 11:02:19 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit fb4ab168beec05af879fa807f825b7de4ee87040
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Mar 16 08:52:56 2016 -0400
