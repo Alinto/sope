@@ -1411,7 +1411,7 @@ _purifyQuotedString(NSMutableString *quotedString) {
 - (BOOL)_parseStatusResponseIntoHashMap:(NGMutableHashMap *)result_ {
   NSString            *name  = nil;
   NSMutableDictionary *flags = nil;
-  NSDictionary *d, *f;
+  NSDictionary *d;
     
   if (!_matchesString(self, "STATUS "))
     return NO;
@@ -2158,21 +2158,30 @@ static NSDictionary *_parseContentDisposition(NGImap4ResponseParser *self)
 
 static NSArray *_parseAddressStructure(NGImap4ResponseParser *self) {
   NSString *personalName, *sourceRoute, *mailboxName, *hostName;
-  
-  _consumeIfMatch(self, '(');
-  personalName = _parseBodyString(self, YES);
-  _consumeIfMatch(self, ' ');
-  sourceRoute = _parseBodyString(self, YES);
-  _consumeIfMatch(self, ' ');
-  mailboxName = _parseBodyString(self, YES);
-  _consumeIfMatch(self, ' ');
-  hostName = _parseBodyString(self, YES);
-  _consumeIfMatch(self, ')');
-  return [NSDictionary dictionaryWithObjectsAndKeys:
-                       personalName, @"personalName",
-                       sourceRoute,  @"sourceRoute",
-                       mailboxName,  @"mailboxName",
-                       hostName,     @"hostName", nil];
+
+  // Handle broken address list - generally sent by Microsoft Exchange.
+  if (_la(self, 0) == '(') {
+    _consume(self, 1);
+
+    personalName = _parseBodyString(self, YES);
+    _consumeIfMatch(self, ' ');
+    sourceRoute = _parseBodyString(self, YES);
+    _consumeIfMatch(self, ' ');
+    mailboxName = _parseBodyString(self, YES);
+    _consumeIfMatch(self, ' ');
+    hostName = _parseBodyString(self, YES);
+    _consumeIfMatch(self, ')');
+
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+                           personalName, @"personalName",
+                         sourceRoute,  @"sourceRoute",
+                         mailboxName,  @"mailboxName",
+                         hostName,     @"hostName", nil];
+  }
+
+  _parseUntil(self, ')');
+
+  return [NSDictionary dictionary];
 }
 
 static NSArray *_parseParenthesizedAddressList(NGImap4ResponseParser *self) {
