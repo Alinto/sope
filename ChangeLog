@@ -1,3 +1,19 @@
+commit f3843334a2e58bdb7c54d0b336169bb56b3c7273
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Apr 6 13:18:56 2016 -0400
+
+    (fix) handle broken/empty address list
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 8f543729bf7f1e781d2d49740ad9163bc0c041fe
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Apr 5 12:34:20 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 65e486502da2c440ee2a91c0993c23c7559031f0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Mar 28 11:12:17 2016 -0400
