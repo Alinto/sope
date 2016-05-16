@@ -44,9 +44,15 @@
 @implementation MySQL4Channel
 
 static EONull *null = nil;
+static NSString *encoding = nil;
 
 + (void)initialize {
   if (null == NULL) null = [[EONull null] retain];
+  encoding = [[NSUserDefaults standardUserDefaults] stringForKey: @"MySQL4Encoding"];
+  if (!encoding) {
+    encoding = [NSString stringWithString: @"utf8"];
+  };
+  [encoding retain];
 }
 
 - (id)initWithAdaptorContext:(EOAdaptorContext*)_adaptorContext {
@@ -117,7 +123,7 @@ static int openConnectionCount = 0;
 - (BOOL)openChannel {
   const char *cDBName;
   MySQL4Adaptor *adaptor;
-  NSString *host, *socket;
+  NSString *host, *socket, *s;
   BOOL reconnect;
   void *rc;
   
@@ -173,8 +179,10 @@ static int openConnectionCount = 0;
     self->_connection = NULL;
     return NO;
   }
-  
-  if (mysql_query(self->_connection, "SET CHARACTER SET utf8") != 0) {
+
+  s = [NSString stringWithFormat: @"SET CHARACTER SET %@", encoding];
+
+  if (mysql_query(self->_connection, [s UTF8String]) != 0) {
     NSLog(@"WARNING(%s): could not put MySQL4 connection into UTF-8 mode: %s",
 	  __PRETTY_FUNCTION__, mysql_error(self->_connection));
 #if 0
