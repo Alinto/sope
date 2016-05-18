@@ -470,7 +470,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
           addrEnd = commaPos;
 
     /* setup for next run */
-    if (addrEnd != NSNotFound && addrEnd+1 < [remainder length]-1)
+    if (addrEnd != NSNotFound && [remainder length] > 0 && addrEnd+1 < [remainder length]-1)
       remainder =
         (NSMutableString *)[remainder substringFromIndex: addrEnd+1];
     else
