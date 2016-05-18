@@ -1,3 +1,29 @@
+commit d00cf04258bbd8cf9805759636c60d2c0cb532ae
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue May 17 11:17:59 2016 -0400
+
+    (fix) safe-guard against bogus string values in headers
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit 89aaa374f8710a4aedec1d023c225778dc62cecd
+Author: Patrice Levesque <github-wayne@ptaff.ca>
+Date:   Thu May 12 16:50:57 2016 -0400
+
+    Allow manual override of MySQL connection charset
+    
+    By default, SOGo connects to MySQL using the 'utf8' charset which maps to an incomplete Unicode implementation.  This change introduces the MySQL4Encoding configuration variable that can optionally be set to 'utf8mb4' to allow complete Unicode coverage; requires a properly configured MySQL >= 5.5 server.
+
+M	sope-gdl1/MySQL/MySQL4Channel.m
+
+commit acb965dec439cc09d0504daf71b3c102b818245b
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu May 12 13:54:20 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit f3843334a2e58bdb7c54d0b336169bb56b3c7273
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Apr 6 13:18:56 2016 -0400
