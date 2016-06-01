@@ -42,52 +42,52 @@ static inline BOOL isRfc822_SpecialByte(unsigned char _byte) {
 // single chars
 NSDictionary *parseParameters(id self, NSString *_str, unichar *cstr);
 
-static inline BOOL isRfc822_CR(unsigned char _byte) {
+static inline BOOL isRfc822_CR(unichar _byte) {
   return (_byte == 13);
 }
-static inline BOOL isRfc822_LF(unsigned char _byte) {
+static inline BOOL isRfc822_LF(unichar _byte) {
   return (_byte == 10);
 }
-static inline BOOL isRfc822_HTAB(unsigned char _byte) {
+static inline BOOL isRfc822_HTAB(unichar _byte) {
   return (_byte == 9);
 }
-static inline BOOL isRfc822_SPACE(unsigned char _byte) {
+static inline BOOL isRfc822_SPACE(unichar _byte) {
   return (_byte == 32);
 }
-static inline BOOL isRfc822_QUOTE(unsigned char _byte) {
+static inline BOOL isRfc822_QUOTE(unichar _byte) {
   return (_byte == 34);
 }
 
 // ranges
 
-static inline BOOL isRfc822_CHAR(unsigned char _byte) {
+static inline BOOL isRfc822_CHAR(unichar _byte) {
   return (_byte < 128);
 }
 
-static inline BOOL isRfc822_CTL(unsigned char _byte) {
+static inline BOOL isRfc822_CTL(unichar _byte) {
   return (_byte < 32) || (_byte == 127);
 }
 
-static inline BOOL isRfc822_ALPHA(unsigned char _byte) {
+static inline BOOL isRfc822_ALPHA(unichar _byte) {
   return (((_byte >= 65) && (_byte <= 90)) ||
           ((_byte >= 97) && (_byte <= 122)));
 }
 
-static inline BOOL isRfc822_DIGIT(unsigned char _byte) {
+static inline BOOL isRfc822_DIGIT(unichar _byte) {
   return (_byte >= 48) && (_byte <= 57);
 }
 
-static inline BOOL isRfc822_LWSP(unsigned char _byte) {
+static inline BOOL isRfc822_LWSP(unichar _byte) {
   return (isRfc822_SPACE(_byte) || isRfc822_HTAB(_byte));
 }
 
 
-static inline BOOL isRfc822_FieldNameChar(unsigned char _byte) {
+static inline BOOL isRfc822_FieldNameChar(unichar _byte) {
   return (isRfc822_CHAR(_byte) &&
           !(isRfc822_CTL(_byte) || isRfc822_SPACE(_byte) || (_byte == ':')));
 }
 
-static inline BOOL isRfc822_AtomChar(unsigned char _byte) {
+static inline BOOL isRfc822_AtomChar(unichar _byte) {
   return (isRfc822_CHAR(_byte) &&
           !(isRfc822_SpecialByte(_byte) || isRfc822_SPACE(_byte) ||
             isRfc822_CTL(_byte)));
@@ -95,7 +95,7 @@ static inline BOOL isRfc822_AtomChar(unsigned char _byte) {
 
 // ******************** MIME ***********************
 
-static inline BOOL isMime_SpecialByte(unsigned char _byte) {
+static inline BOOL isMime_SpecialByte(unichar _byte) {
   switch (_byte) {
   case '(': case ')': case '<': case '>': case '@':
   case ',': case ';': case ':': case '"': case '\\':
@@ -106,21 +106,21 @@ static inline BOOL isMime_SpecialByte(unsigned char _byte) {
   }
 }
 
-static inline BOOL isMime_TokenChar(unsigned char _byte) {
+static inline BOOL isMime_TokenChar(unichar _byte) {
   return (isRfc822_CHAR(_byte) &&
           !(isRfc822_CTL(_byte) || isRfc822_SPACE(_byte) ||
             isMime_SpecialByte(_byte)));
 }
 
-static inline BOOL isMime_SafeChar(unsigned char _byte) {
+static inline BOOL isMime_SafeChar(unichar _byte) {
   return ((_byte >= 33 && _byte <= 60) || (_byte >= 62 && _byte <= 126));
 }
 
-static inline BOOL isMime_ValidTypeXTokenChar(unsigned char _byte) {
+static inline BOOL isMime_ValidTypeXTokenChar(unichar _byte) {
   return !isRfc822_SPACE(_byte);
 }
 
-static inline BOOL isMime_ValidTypeAttributeChar(unsigned char _byte) {
+static inline BOOL isMime_ValidTypeAttributeChar(unichar _byte) {
   return isMime_TokenChar(_byte);
 }
 
