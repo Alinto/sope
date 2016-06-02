@@ -157,12 +157,14 @@ NSDictionary *parseParameters(id self, NSString *_str, unichar *cstr) {
         cstr++;
         tmp = cstr;
         len = 0;
-        while (!isRfc822_QUOTE(*cstr) && (*cstr != '\0')) {
+        while ( (!(isRfc822_QUOTE(*cstr) && *(cstr - 1) != '\\')) && (*cstr != '\0')) {
           cstr++;
           len++;
         }
         attrValue = [[[NSString alloc] initWithCharacters:tmp length:len]
                                 autorelease];
+        /* webkit hack: "urldecode" quotes only. @seealso: https://bugs.webkit.org/show_bug.cgi?id=62107 https://www.w3.org/Bugs/Public/show_bug.cgi?id=16909 */
+        attrValue = [attrValue stringByReplacingOccurrencesOfString:@"%22" withString:@"\\\""];
           
         if (*cstr == '\0') { // quote was not closed
           if (MimeLogEnabled)  

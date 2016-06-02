@@ -83,6 +83,9 @@
 	int    desLen;
 	char        *des;
 	
+	bytes = [[tmp stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""] cStringUsingEncoding: NSUTF8StringEncoding];
+	length = strlen(bytes);
+
 	desLen = length * 3 + 20;
 	
 	des = calloc(desLen + 2, sizeof(char));

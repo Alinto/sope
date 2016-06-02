@@ -1,3 +1,23 @@
+commit ca14e49da38456b56ef1e86ef60dc65b98b037e3
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jun 1 09:12:28 2016 -0400
+
+    Fix decoding of attachment filename
+    
+    Partially resolves #2272
+
+M	sope-mime/NGMime/NGMimeContentDispositionHeaderFieldGenerator.m
+M	sope-mime/NGMime/NGMimeUtilities.h
+M	sope-mime/NGMime/NGMimeUtilities.m
+
+commit f157871cf565f7fd7b1e01c122006e0c031808f7
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed May 18 16:12:46 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit d00cf04258bbd8cf9805759636c60d2c0cb532ae
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 17 11:17:59 2016 -0400
