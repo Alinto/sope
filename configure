@@ -426,6 +426,7 @@ genConfigMake() {
     cfgwrite "${MAKE_ASSI}";
   done
   cfgwrite "LIBRARY_COMBO=$LIBRARY_COMBO"
+  cfgwrite "include \${SOPE_ROOT}/general.make"
   cfgwrite ""
 }
 
