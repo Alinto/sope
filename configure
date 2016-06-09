@@ -136,7 +136,7 @@ _ACEOFWARN
 }
 
 setupInternalGSMake() {
-  if test -f ${INTERNAL_MAKEDIR}/Library/Makefiles/GNUstep.sh; then
+  if test -f "${INTERNAL_MAKEDIR}/Library/Makefiles/GNUstep.sh"; then
     ARG_GSMAKE="${INTERNAL_MAKEDIR}/Library/Makefiles/"
     ARG_IS_FHS=1
     DARG_IS_FHS=1
@@ -307,7 +307,7 @@ printGNUstepSetup() {
 }
 
 cfgwrite() {
-  echo "$1" >> $ARG_CFGMAKE
+  echo "$1" >> "${ARG_CFGMAKE}"
 }
 
 genConfigMake() {
@@ -321,10 +321,10 @@ genConfigMake() {
     echo "creating: $ARG_CFGMAKE"
   fi
   
-  echo "# GNUstep environment configuration" > $ARG_CFGMAKE
+  echo "# GNUstep environment configuration" > "${ARG_CFGMAKE}"
   cfgwrite "#   created by: '$CFG_ARGS'"
   cfgwrite ""
-  cfgwrite "SOPE_ROOT=`pwd`"
+  cfgwrite "SOPE_ROOT=`pwd | sed 's/ /\\\ /g'`"
   cfgwrite "include \${SOPE_ROOT}/Version"
   
   cfgwrite "# Note: you can override any option as a 'make' parameter, eg:"
@@ -432,7 +432,7 @@ genConfigMake() {
 
 checkLinking() {
   # library-name => $1, type => $2
-  local oldpwd=$PWD
+  local oldpwd="${PWD}"
   local tmpdir=".configure-test-$$"
   
   mkdir $tmpdir
@@ -476,7 +476,7 @@ checkLinking() {
     fi
   fi
   
-  cd $oldpwd
+  cd "${oldpwd}"
   rm -rf $tmpdir
 
   return $LINK_RESULT
@@ -547,13 +547,13 @@ runIt() {
     genConfigMake;
     checkDependencies;
     
-    if test -x $NGSTREAMS_DIR/configure; then
+    if test -x "${NGSTREAMS_DIR}/configure"; then
       if test $ARG_BEQUIET != 1; then
         echo -n "configuring NGStreams library .."
         old="$PWD"
-        cd $NGSTREAMS_DIR
-        ./configure >$old/config-NGStreams.log
-        cd $old
+        cd "${NGSTREAMS_DIR}"
+        ./configure >"${old}/config-NGStreams.log"
+        cd "${old}"
         echo ".. done (log in config-NGStreams.log)."
       fi
     fi
