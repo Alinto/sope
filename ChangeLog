@@ -1,3 +1,58 @@
+commit 092e1857e7fffe973c11134eccdc3cffeb19031d
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jun 15 13:09:37 2016 -0400
+
+    (fix) safely escape some characters sent by bogus UA (fixes #3670)
+
+M	sope-appserver/NGObjWeb/WORequest.m
+
+commit 11d3cbbd7d54803d57d829d25fbbf35190cc53cb
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 13 09:14:40 2016 -0400
+
+    (fix) only show debugging loading info when requested
+
+M	sope-appserver/NGObjWeb/SoObjects/SoProductClassInfo.m
+
+commit 0b5d04d3337062b8870d411c37d696b0734255f2
+Author: Patrice Levesque <github-wayne@ptaff.ca>
+Date:   Thu Jun 9 13:06:51 2016 -0400
+
+    Remove Makefile condition for test-uninitialized
+
+M	general.make
+
+commit 1b7cea55e481f0de703008eb56e401ac34a7bf7a
+Author: Patrice Levesque <github-wayne@ptaff.ca>
+Date:   Wed Jun 8 17:14:05 2016 -0400
+
+    Fix builds in directory names containing spaces
+    
+    Prevent ./configure failure when run from a directory
+    such as "/home/bob/my own sope directory/"
+
+M	configure
+
+commit 2efbd67b92b931d6313ec38546a18912b3779468
+Author: Patrice Levesque <github-wayne@ptaff.ca>
+Date:   Tue Jun 7 11:20:57 2016 -0400
+
+    Add -O2 compilation by default and -g debug info
+    
+    Also when possible, store GCC command-line switches
+    in the binaries for easier debugging.
+
+M	configure
+A	general.make
+
+commit e95ce1b48440ebd16ef2ebfbfaf84cb19250be38
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Jun 2 13:26:02 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit ca14e49da38456b56ef1e86ef60dc65b98b037e3
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jun 1 09:12:28 2016 -0400

@@ -101,8 +101,53 @@ static BOOL debugOn = NO;
             @"did not register browser language mappings: %@", apath];
 }
 
-/* parse URI */
+/* sanitize input to avoid XSS injection (see https://sogo.nu/bugs/view.php?id=3670) */
+- (NSString *) _sanitize: (NSString *) s
+{
+  unsigned int i_len, o_len, i;
+  const char *i_buf, *start;
+  char c, *o_buf;
 
+  i_buf = [s cStringUsingEncoding: NSASCIIStringEncoding];
+  i_len = [s length];
+
+  start = o_buf = calloc(i_len * 3, sizeof(char));
+  i = o_len = 0;
+
+  while (i < i_len)
+    {
+      c = *i_buf;
+
+      switch (c)
+	{
+	case '\'':
+	  *o_buf = '%'; o_buf++;
+	  *o_buf = '2'; o_buf++;
+	  *o_buf = '7'; o_buf++;
+	  break;
+	case '(':
+	  *o_buf = '%'; o_buf++;
+	  *o_buf = '2'; o_buf++;
+	  *o_buf = '8'; o_buf++;
+	  break;
+	case ')':
+	  *o_buf = '%'; o_buf++;
+	  *o_buf = '2'; o_buf++;
+	  *o_buf = '9'; o_buf++;
+	  break;
+	default:
+	  *o_buf = c; o_buf++;
+	  break;
+	}
+
+      i_buf++;
+      i++;
+    }
+
+  return [[NSString alloc] initWithCString:start length:(o_buf - start)];
+}
+
+/* parse URI */
 - (void)_parseURI {
   unsigned uriLen;
   char     *uriBuf;
@@ -199,7 +244,7 @@ static BOOL debugOn = NO;
   userInfo:(NSDictionary *)_userInfo
 {
   if ((self = [super init]) != nil) {
-    self->_uri   = [__uri   copy];
+    self->_uri   = [self _sanitize: __uri];
     self->method = [_method copy];
     [self _parseURI];
     

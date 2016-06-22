@@ -235,9 +235,10 @@ static int loadDebugOn = 0;
   }
   
   if ((soClass = [_registry soClassWithName:[self className]]) == nil) {
-    [self errorWithFormat:
-            @"did not find exported SoClass '%@' in product %@!", 
-            [self className], self->product];
+    if (loadDebugOn)
+      [self errorWithFormat:
+              @"did not find exported SoClass '%@' in product %@!", 
+              [self className], self->product];
     return;
   }
   
