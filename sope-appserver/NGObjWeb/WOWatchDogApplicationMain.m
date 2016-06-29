@@ -218,6 +218,11 @@ typedef enum {
   [super dealloc];
 }
 
+- (NSString *) description
+{
+  return [NSString stringWithFormat: @"WOWatchDogChild (pid: %d)", pid];
+}
+
 - (void) setWatchDog: (WOWatchDog *) newWatchDog
 {
   watchDog = newWatchDog;
@@ -600,7 +605,7 @@ typedef enum {
       [self logWithFormat: @"child spawned with pid %d", childPid];
       [child setPid: childPid];
       [child setStatus: WOChildStatusSpawning];
-      [pair[1] setReceiveTimeout: 1.0];
+      [pair[1] setReceiveTimeout: 5.0];
       [child setControlSocket: pair[1]];
       [child setLastSpawn: [NSCalendarDate date]];
     } else {
@@ -810,7 +815,8 @@ typedef enum {
 
 - (void) declareChildReady: (WOWatchDogChild *) readyChild
 {
-  [readyChildren addObject: readyChild];
+  if (![readyChildren containsObject: readyChild])
+    [readyChildren addObject: readyChild];
 }
 
 - (void) declareChildDown: (WOWatchDogChild *) downChild
