@@ -246,9 +246,15 @@ static BOOL     debugOn                      = NO;
               activities:NSPosixReadableActivity
               forMode:NSDefaultRunLoopMode];
     message = WOChildMessageReady;
-    [controlSocket safeWriteBytes: &message
-                            count: sizeof (WOChildMessage)];
-    // [self logWithFormat: @"notified the watchdog that we are ready"];
+    if (![controlSocket safeWriteBytes: &message
+				 count: sizeof (WOChildMessage)])
+      {
+	[self errorWithFormat: @"failure notifying watchdog we are ready during events registration: %@",
+              [controlSocket lastException]];
+	[[WOCoreApplication application] terminate];
+      }
+    else
+      [self logWithFormat: @"notified the watchdog that we are ready"];
   }
   else {
     backlog = [[WOCoreApplication listenQueueSize] intValue];
