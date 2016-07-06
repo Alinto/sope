@@ -1,3 +1,20 @@
+commit 452b547eb1c7a5576cc7acd9b254606e30b05752
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jun 29 15:33:51 2016 -0400
+
+    (fix) improve error-handling with parent/child communication
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
+M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+
+commit bff1093270e12da328ed05de95f922d6dc03606a
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jun 22 11:39:10 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 092e1857e7fffe973c11134eccdc3cffeb19031d
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 15 13:09:37 2016 -0400
