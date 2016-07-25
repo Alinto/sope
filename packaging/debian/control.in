@@ -253,11 +253,11 @@ Description: High performance Objective-C JSON library
  .
  url: http://code.google.com/p/json-framework/
 
-Package: libsbjson2.3-dev
+Package: libsbjson-dev
 Section: libdevel
 Architecture: any
 Depends: libsbjson2.3 (= ${binary:Version}), ${misc:Depends}
-Provides: libsbjson-dev
+Provides: libsbjson2.3-dev
 Description: High performance Objective-C JSON library
  The BSJson library is a very fast JSON library in Objective-C.
  .
