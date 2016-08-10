@@ -1,3 +1,27 @@
+commit eceb975f1444e796d3d96f61ca766b059f7de78c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Aug 8 16:23:53 2016 -0400
+
+    (fix) remove bitrotted code and fall back to ISO Latin 1 when decoding fails
+
+M	sope-mime/NGMail/NSData+MimeQP.m
+
+commit cf1865e407b55ed2149159340d01494f37efc508
+Author: ethoms <euan@potensol.com>
+Date:   Thu Jul 14 01:12:42 2016 +0800
+
+    Convert 'configure' shebang back to /bin/sh for platform compatability (#41)
+
+M	configure
+
+commit 1a96d03cc25224c4b9d134f0414275da6840bf2c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jul 6 07:26:29 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 452b547eb1c7a5576cc7acd9b254606e30b05752
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 29 15:33:51 2016 -0400
