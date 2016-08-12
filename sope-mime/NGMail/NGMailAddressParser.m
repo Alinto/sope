@@ -218,10 +218,9 @@ static inline id parseQText(NGMailAddressParser *self, BOOL _guessMode) {
       returnValue = yesNum;
     }
     else {
-      NSCAssert(length > 0, @"no qtext with length=0");
+      //NSCAssert(length > 0, @"no qtext with length=0");
       returnValue = [mkStrObj(text, length) autorelease];
-      NSCAssert([returnValue isKindOfClass:StrClass],
-               @"got no string ..");
+      //NSCAssert([returnValue isKindOfClass:StrClass], @"got no string ..");
     }
   }
   else {
