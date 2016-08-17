@@ -1,3 +1,27 @@
+commit 514fb76a7fbe0c32b22504c27bc8ba7e9152135b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Aug 16 08:42:59 2016 -0400
+
+    (fix) handle broken multipart mime (types) when they aren't in reality
+
+M	sope-mime/NGMime/NGMimeType.m
+
+commit 3245eb43835be013b4c706a27a198d5901b8b819
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Aug 12 11:57:33 2016 -0400
+
+    (fix) added workaround for bug #3791 while waiting to write that crappy code from SOPE
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit feb54b8402b234f460baa7af8e2bd524873400ac
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Aug 10 13:55:37 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit eceb975f1444e796d3d96f61ca766b059f7de78c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Aug 8 16:23:53 2016 -0400
