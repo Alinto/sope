@@ -538,7 +538,8 @@ static NSString *_stringForType(char *_type, int _len) {
     case 9:
       if (strncmp(_type, "multipart", 9) == 0)
         return MimeTypeConstants->multipart;
-      break;    case 11:
+      break;
+    case 11:
       if (strncmp(_type, "application", 11) == 0)
         return MimeTypeConstants->application;
       break;
@@ -632,6 +633,15 @@ static NSString *_stringForSubType(char *_type, int _len) {
   return [NSStringClass stringWithCString:_type length:_len];
 }
 
+static void _fixMimeType(NSString **type, NSString **subType)
+{
+  if ([*type isEqualToString: @"multipart"] && [*subType isEqualToString: @"x-zip"])
+    {
+      *type = MimeTypeConstants->application;
+      *subType = [NSString stringWithString: @"zip"];
+    }
+}
+
 static BOOL _parseMimeType(id self, NSString *_str, NSString **type,
                            NSString **subType, NSDictionary **parameters)
 {
@@ -699,6 +709,12 @@ static BOOL _parseMimeType(id self, NSString *_str, NSString **type,
   
   if (*cstr == ';') // skip ';' (parameter separator)
     cstr++;
+
+  // We fix what could be potentially broken MIME type
+  // For example, we can receive multipart/x-zip while
+  // in reality, it is only a application/zip archive.
+  // This will create a mayhem in the SOPE code.
+  _fixMimeType(type, subType);
 
   // skip spaces
   while (isRfc822_LWSP(*cstr) && (*cstr != '\0'))
