@@ -1,3 +1,11 @@
+commit 8d875425b28c93da47707d3aec646521b558ee7a
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Aug 17 08:22:39 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 514fb76a7fbe0c32b22504c27bc8ba7e9152135b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 16 08:42:59 2016 -0400
