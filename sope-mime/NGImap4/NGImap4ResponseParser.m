@@ -1508,11 +1508,14 @@ _purifyQuotedString(NSMutableString *quotedString) {
     if (_la(self, 0) == ' ')
       _consume(self, 1);
 
-    [attributes setObject:value
-           forKey:[key lowercaseString]];
+    if (value)
+      {
+	[attributes setObject:value
+		       forKey:[key lowercaseString]];
 
-    [d setObject:[NSMutableDictionary dictionaryWithDictionary:attributes]
-       forKey:entry];
+	[d setObject:[NSMutableDictionary dictionaryWithDictionary:attributes]
+	      forKey:entry];
+      }
   }
   _consumeIfMatch(self, ')');
   _parseUntil(self, '\n');
