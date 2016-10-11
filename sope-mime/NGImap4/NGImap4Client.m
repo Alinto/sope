@@ -963,8 +963,8 @@ static NSMutableDictionary *namespaces;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   
-  cmd     = [NSString stringWithFormat:@"getannotation \"%@\" \"%@\" \"%@\"",
-                      SaneFolderName(_folder), _entry, _attribute];
+  cmd = [NSString stringWithFormat:@"GETANNOTATION \"%@\" \"%@\" \"%@\"",
+		  SaneFolderName(_folder), _entry, _attribute];
   
   result  = [NSMutableDictionary dictionaryWithCapacity:2];
   _map = [self processCommand:cmd];
@@ -973,8 +973,10 @@ static NSMutableDictionary *namespaces;
 
   enumerator = [_map objectEnumeratorForKey:@"FolderList"];
   folderList  = [NSMutableDictionary dictionaryWithCapacity:5];
-  while ((obj = [enumerator nextObject]) != nil) {
-      [folderList setObject: [obj objectForKey: [[obj allKeys] objectAtIndex:0]] forKey: [[self _imapFolder2Folder: [[obj allKeys] objectAtIndex:0]] substringFromIndex:1]];
+  while ((obj = [enumerator nextObject]) != nil)
+    {
+      if ([obj objectForKey: [[obj allKeys] objectAtIndex:0]])
+	[folderList setObject: [obj objectForKey: [[obj allKeys] objectAtIndex:0]] forKey: [[self _imapFolder2Folder: [[obj allKeys] objectAtIndex:0]] substringFromIndex:1]];
     }
 
   [result setObject: folderList forKey: @"FolderList" ];
@@ -997,7 +999,7 @@ static NSMutableDictionary *namespaces;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   
-  cmd     = [NSString stringWithFormat:@"setannotation \"%@\" \"%@\" (\"%@\" \"%@\")",
+  cmd     = [NSString stringWithFormat:@"SETANNOTATION \"%@\" \"%@\" (\"%@\" \"%@\")",
                       SaneFolderName(_folder), _entry, _attribute, _value];
   
   result  = [NSMutableDictionary dictionaryWithCapacity:2];
