@@ -1502,8 +1502,8 @@ _purifyQuotedString(NSMutableString *quotedString) {
 
   while (_la(self, 0) != ')') {
     NSString *key   = [self _parseQuotedString];
-    _consumeIfMatch(self, ' ');
-    NSString *value = [self _parseQuotedString];
+    _consume(self, 1); // ' '
+    NSString *value = [self _parseQuotedStringOrNIL];
 
     if (_la(self, 0) == ' ')
       _consume(self, 1);
