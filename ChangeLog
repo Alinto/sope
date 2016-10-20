@@ -1,3 +1,35 @@
+commit f503532011f6cff22277688bdfa6b3381f8fcebc
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Oct 14 09:17:46 2016 -0400
+
+    (fix) attempt to make the annotation parser a bit more robust
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 928842388d95f82063ab2d97eccf7acd197df64c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Oct 11 11:18:51 2016 -0400
+
+    (fix) more safety checks around nil annotation values
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit d6a218e53727000c5c7dc843225ce9354449b401
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Oct 11 08:39:09 2016 -0400
+
+    (fix) make sure we have a non-nil annotation when trying to populate the hash
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 09c59f08c178ee9a0fd87701a3b3b55b7ee4461a
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Oct 3 11:59:24 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 4a2b7df9d0c67a915ea27cef924be7bdc4fe6f24
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Sep 14 09:32:21 2016 -0400
