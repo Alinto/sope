@@ -1,3 +1,22 @@
+commit d047870b37db97fc605a53b84b1e86eca5691aa5
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Nov 21 13:11:42 2016 -0500
+
+    Use %u instead of %d in NGImap4Client
+    
+    Fixes #3908
+
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit 801734f7ed6b616437b77a646e69a96fc409003f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Oct 20 10:50:30 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit f503532011f6cff22277688bdfa6b3381f8fcebc
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 14 09:17:46 2016 -0400
