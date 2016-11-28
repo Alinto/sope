@@ -639,8 +639,8 @@ static NSMutableDictionary *namespaces;
     plength = [self->password length];
 
   if (![self passwordIsSimple])
-    s = [NSString stringWithFormat:@"login \"%@\" {%d}",
-		  self->login, (int)plength];
+    s = [NSString stringWithFormat:@"login \"%@\" {%u}",
+		  self->login, (unsigned)plength];
   else
     s = [NSString stringWithFormat:@"login \"%@\" \"%@\"",
           self->login, self->password];
@@ -1120,7 +1120,7 @@ static NSMutableDictionary *namespaces;
   id fetchres;
   
   pool   = [[NSAutoreleasePool alloc] init];
-  cmd    = [NSString stringWithFormat:@"uid fetch %d (%@)", _uid,
+  cmd    = [NSString stringWithFormat:@"uid fetch %u (%@)", _uid,
                      [self _partsJoinedForFetchCmd:_parts]];
   fetchres = [self processCommand:cmd];
   result   = [[self->normer normalizeFetchResponse:fetchres] retain];
@@ -1150,7 +1150,7 @@ static NSMutableDictionary *namespaces;
     
     cmd = [NSMutableString stringWithCapacity:256];
     [cmd appendString:@"fetch "];
-    [cmd appendFormat:@"%d:%d (", _from, _to];
+    [cmd appendFormat:@"%u:%u (", _from, _to];
     for (i = 0, count = [_parts count]; i < count; i++) {
       if (i != 0) [cmd appendString:@" "];
       [cmd appendString:[_parts objectAtIndex:i]];
@@ -1213,7 +1213,7 @@ static NSMutableDictionary *namespaces;
   NSString *icmd, *iflags;
   
   iflags = [_flags2ImapFlags(self, _flags) componentsJoinedByString:@" "];
-  icmd   = [NSString stringWithFormat:@"uid store %d %cFLAGS (%@)",
+  icmd   = [NSString stringWithFormat:@"uid store %u %cFLAGS (%@)",
                      _uid, [_add boolValue] ? '+' : '-',
                      iflags];
   return [self->normer normalizeResponse:[self processCommand:icmd]];
@@ -1232,7 +1232,7 @@ static NSMutableDictionary *namespaces;
     _from = 1;
 
   flagstr = [_flags2ImapFlags(self, _flags) componentsJoinedByString:@" "];
-  cmd = [NSString stringWithFormat:@"store %d:%d %cFLAGS (%@)",
+  cmd = [NSString stringWithFormat:@"store %u:%u %cFLAGS (%@)",
 		    _from, _to, [_add boolValue] ? '+' : '-', flagstr];
   
   return [self->normer normalizeResponse:[self processCommand:cmd]];
@@ -1272,7 +1272,7 @@ static NSMutableDictionary *namespaces;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   
-  cmd = [NSString stringWithFormat:@"copy %d:%d \"%@\"", _from, _to, _folder];
+  cmd = [NSString stringWithFormat:@"copy %u:%u \"%@\"", _from, _to, _folder];
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
@@ -1282,7 +1282,7 @@ static NSMutableDictionary *namespaces;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   
-  cmd = [NSString stringWithFormat:@"uid copy %d \"%@\"", _uid, _folder];
+  cmd = [NSString stringWithFormat:@"uid copy %u \"%@\"", _uid, _folder];
   
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
@@ -1323,9 +1323,9 @@ static NSMutableDictionary *namespaces;
   /* Remove bare newlines */
   rfc822Data = [_message dataByEnsuringCRLFLineEndings];
   
-  icmd = [NSString stringWithFormat:@"append \"%@\" (%@) {%d}",
+  icmd = [NSString stringWithFormat:@"append \"%@\" (%@) {%u}",
                    _folder, [flags componentsJoinedByString:@" "],
-                   (int)[rfc822Data length]];
+                   (unsigned)[rfc822Data length]];
   result = [self processCommand:icmd
                  withTag:YES withNotification:NO];
   
@@ -1862,9 +1862,9 @@ static NSMutableDictionary *namespaces;
   if (_tag) {
     self->tagId++;
 
-    command = [NSString stringWithFormat:@"%d %@", self->tagId, _command];
+    command = [NSString stringWithFormat:@"%u %@", self->tagId, _command];
     if (self->debug) {
-      _txt = [NSString stringWithFormat:@"%d %@", self->tagId, _txt];
+      _txt = [NSString stringWithFormat:@"%u %@", self->tagId, _txt];
     }
   }
   else

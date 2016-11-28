@@ -895,7 +895,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   
   /* store flags */
   
-  result = [[self client] storeUid:[[[_url path] lastPathComponent] intValue]
+  result = [[self client] storeUid: [[[_url path] lastPathComponent] unsignedIntValue]
 			  add:[NSNumber numberWithBool:_flag]
 			  flags:_f];
   if (![[result valueForKey:@"result"] boolValue]) {

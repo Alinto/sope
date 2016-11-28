@@ -1,3 +1,46 @@
+commit 3c66ec5a8f59cea88fd1e3239c4ea946301e61cc
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Nov 25 11:01:13 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit ac70bd12c23135cf5a957c27b861f143e2c6b3e0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Nov 23 16:24:56 2016 -0500
+
+    (fix) handle non-string LDAP attributes, return NSData instances
+
+M	sope-ldap/NGLdap/NGLdapEntry.m
+
+commit 674139c077c037244bc709ab9f803c1316b58645
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Nov 23 11:36:32 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit d047870b37db97fc605a53b84b1e86eca5691aa5
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Nov 21 13:11:42 2016 -0500
+
+    Use %u instead of %d in NGImap4Client
+    
+    Fixes #3908
+
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit 801734f7ed6b616437b77a646e69a96fc409003f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Oct 20 10:50:30 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit f503532011f6cff22277688bdfa6b3381f8fcebc
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 14 09:17:46 2016 -0400
