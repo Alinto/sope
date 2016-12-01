@@ -24,6 +24,24 @@
 
 @implementation NGImap4EnvelopeAddress
 
+static inline NSString *
+DecodeParameter (NSString *param)
+{
+  NSData *data;
+  id dataDecoded;
+
+  data = [param dataUsingEncoding:NSUTF8StringEncoding];
+  dataDecoded = [data decodeQuotedPrintableValueOfMIMEHeaderField:@"field"];
+
+  if ([dataDecoded isKindOfClass: [NSString class]])
+    return [dataDecoded copy];
+
+  if ([dataDecoded isKindOfClass: [NSData class]])
+    data = dataDecoded;
+
+  return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
 - (id)initWithPersonalName:(NSString *)_pname sourceRoute:(NSString *)_route
   mailbox:(NSString *)_mbox host:(NSString *)_host
 {
@@ -32,12 +50,21 @@
     [self release];
     return nil;
   }
-  
+
   if ((self = [super init])) {
-    if ([_pname isNotNull]) self->personalName = [_pname copy];
-    if ([_route isNotNull]) self->sourceRoute  = [_route copy];
-    if ([_mbox  isNotNull]) self->mailbox      = [_mbox  copy];
-    if ([_host  isNotNull]) self->host         = [_host  copy];
+    if ([_pname isNotNull]) self->personalName = DecodeParameter (_pname);
+    if ([_route isNotNull]) self->sourceRoute = DecodeParameter (_route);
+
+    if ([_mbox isNotNull] && [_host isNotNull]) {
+      NSString *email = DecodeParameter ([NSString stringWithFormat:@"%@@%@", _mbox, _host]);
+      NSArray *parts = [email componentsSeparatedByString:@"@"];
+      [email release];
+      self->mailbox = [[parts objectAtIndex:0] retain];
+      self->host = [[parts objectAtIndex:1] retain];
+    } else {
+      if ([_mbox isNotNull]) self->mailbox = DecodeParameter (_mbox);
+      if ([_host isNotNull]) self->host = DecodeParameter (_host);
+    }
   }
   return self;
 }
