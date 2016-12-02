@@ -810,8 +810,11 @@ static void error(void *udata, const char *msg, ...) {
   va_start(args, msg);
   e = mkException(activeDriver, @"SAXError", msg, args);
   va_end(args);
-  
-  [activeDriver->errorHandler error:e];
+
+  if (activeDriver->errorHandler)
+    [activeDriver->errorHandler error:e];
+  else
+    [e raise];
 }
 
 static void fatalError(void *udata, const char *msg, ...) {
@@ -826,8 +829,11 @@ static void fatalError(void *udata, const char *msg, ...) {
   va_start(args, msg);
   e = mkException(activeDriver, @"SAXFatalError", msg, args);
   va_end(args);
-  
-  [activeDriver->errorHandler fatalError:e];
+
+  if (activeDriver->errorHandler)
+    [activeDriver->errorHandler fatalError:e];
+  else
+    [e raise];
 }
 
 static void setLocator(void *udata, xmlSAXLocatorPtr _locator) {
