@@ -287,7 +287,7 @@ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
 
 %prep
 rm -fr ${RPM_BUILD_ROOT}
-%setup -q -n sope-SOPE-3.2.3
+%setup -q -n sope-SOPE-%{sogo_version}
 
 # ****************************** build ********************************
 %build
