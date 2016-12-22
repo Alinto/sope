@@ -759,12 +759,14 @@ static void freeMods(LDAPMod **mods) {
                scope:LDAP_SCOPE_BASE];
 }
 
-- (NGLdapEntry *)entryAtDN:(NSString *)_dn attributes:(NSArray *)_attrs {
+- (NGLdapEntry *)entryAtDN:(NSString *)_dn
+  qualifier:(EOQualifier *)_q
+  attributes:(NSArray *)_attrs {
   NSEnumerator *e;
   NGLdapEntry  *entry;
   
   e = [self _searchAtBaseDN:_dn
-            qualifier:nil
+            qualifier:_q
             attributes:_attrs
             scope:LDAP_SCOPE_BASE];
   
@@ -778,6 +780,10 @@ static void freeMods(LDAPMod **mods) {
   }
   
   return entry;
+}
+
+- (NGLdapEntry *)entryAtDN:(NSString *)_dn attributes:(NSArray *)_attrs {
+  return [self entryAtDN:_dn qualifier:nil attributes:_attrs];
 }
 
 /* cache */
