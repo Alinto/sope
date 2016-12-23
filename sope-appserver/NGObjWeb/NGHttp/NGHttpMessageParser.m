@@ -585,11 +585,13 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
               HTTP/1.0, HTTP/0.9 - read till EOF if no content-length is set
               HTTP/1.1 and above: if no content-length is set, body is empty
             */
+#if 0
             if ([rq majorVersion] < 1)
               doParse = YES;
             else if ([rq majorVersion] == 1 && [rq minorVersion] == 0)
               doParse = YES;
             else
+#endif
               doParse = NO;
           }
           else if (maxUploadSize && [rq contentLength] > maxUploadSize) {
@@ -604,7 +606,7 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
     
     if (doParse)
       [super parseBodyOfPart:_part];
-  }
+  } // if (self->flags.parseRequest) {
   else {
 #if DEBUG
     NSAssert([_part isKindOfClass:[NGHttpResponse class]],
