@@ -523,13 +523,16 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
 
 - (void)parseBodyOfPart:(id<NGMimePart>)_part {
   BOOL doParse;
+#if 0
   id   clenValues;
-  
+#endif
+
   if (_part == nil) {
     [self warnWithFormat:@"%s:%i: got no part!", __PRETTY_FUNCTION__,__LINE__];
     return;
   }
-  
+
+#if 0
   /* parse only if content-length > 0 */
   clenValues = [_part valuesOfHeaderFieldWithName:@"content-length"];
   if ((clenValues = [clenValues nextObject])) {
@@ -542,14 +545,14 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
   }
   else {
     /* parse until EOF */
-#if 0
     [self warnWithFormat:@"%s: parsing until EOF, "
           @"missed content-length header in part %@..",
           __PRETTY_FUNCTION__, _part];
-#endif
     doParse = YES;
   }
-  
+#endif
+  doParse = YES;
+
   if (self->flags.parseRequest) {
     NGHttpRequest *rq;
     
@@ -592,6 +595,13 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
               doParse = YES;
             else
 #endif
+	      // We got an empty content because Content-Lenght was specified
+	      // We set the content to an empty body to avoid parsing it
+	      // with the NGMimePartParser's streaming parser. Not parsing
+	      // anything and not setting a content would lead to a 500 error code.
+	      if ([rq valueOfHeaderFieldWithName: @"content-length"])
+		[_part setBody: [NSData data]];
+
               doParse = NO;
           }
           else if (maxUploadSize && [rq contentLength] > maxUploadSize) {
