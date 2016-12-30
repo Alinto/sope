@@ -343,6 +343,42 @@
 
 @end /* NSString(MailQuoting) */
 
+@implementation NSString(HeaderCapitalization)
+
+- (NSString *) asCapitalizedHeader
+{
+  NSString *result;
+  NSUInteger count, max;
+  unichar *chars;
+  BOOL capitalize = YES;
+
+  max = [self length];
+  if (max == 3 && [[self lowercaseString] isEqualToString: @"dav"])
+    result = @"DAV";
+  else
+    {
+      chars = malloc (max * sizeof (unichar));
+      [self getCharacters: chars];
+      for (count = 0; count < max; count++)
+        {
+          if (capitalize)
+            {
+              if (chars[count] >= 97 && chars[count] <= 122)
+                chars[count] -= 32;
+              capitalize = NO;
+            }
+          else if (chars[count] == '-')
+            capitalize = YES;
+        }
+      result = [NSString stringWithCharacters: chars length: max];
+      free (chars);
+    }
+
+  return result;
+}
+
+@end
+
 // linking
 
 void __link_NSString_misc(void) {

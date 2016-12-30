@@ -135,4 +135,10 @@
 
 @end
 
+@interface NSString(HeaderCapitalization)
+
+- (NSString *) asCapitalizedHeader;
+
+@end
+
 #endif /* __NGExtensions_NSString_misc_H__ */
