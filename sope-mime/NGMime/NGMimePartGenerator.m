@@ -24,10 +24,12 @@
 #include "NGMimeBodyGenerator.h"
 #include "NGMimeJoinedData.h"
 #include <NGMime/NGMimeType.h>
+#include <NGExtensions/NSString+misc.h>
 #include "common.h"
 
 @implementation NGMimePartGenerator
 
+static NSDictionary *standardCapitalizedHeaders = nil;
 static NSProcessInfo *Pi = nil;
 static BOOL       debugOn = NO;
 
@@ -40,6 +42,26 @@ static BOOL       debugOn = NO;
   
   if (Pi == nil)
     Pi = [[NSProcessInfo processInfo] retain];
+
+  if (standardCapitalizedHeaders == nil)
+    {
+      // See https://tools.ietf.org/html/rfc4021 for a good list
+      standardCapitalizedHeaders = [NSDictionary dictionaryWithObjectsAndKeys:
+						   @"Content-ID", @"content-id",
+						 @"Content-MD5", @"content-md5",
+						 @"Discarded-X400-IPMS-Extensions", @"discarded-x400-ipms-extensions",
+						 @"Discarded-X400-MTS-Extensions", @"discarded-x400-mts-extensions",
+						 @"DL-Expansion-History", @"dl-expansion-history",
+						 @"List-ID", @"list-id",
+						 @"Message-ID", @"message-id",
+						 @"MIME-Version", @"mime-version",
+						 @"Original-Message-ID", @"original-message-id",
+						 @"PICS-Label", @"pics-label",
+						 @"Resent-Message-ID", @"resent-message-id",
+						 @"X400-MTS-Identifier", @"x400-mts-identifier",
+						 nil];
+      [standardCapitalizedHeaders retain];
+    }
 }
 
 + (id)mimePartGenerator {
@@ -152,6 +174,14 @@ static BOOL       debugOn = NO;
   BOOL     isMultiValue, isFirst;
   
   /* get field name and strip leading spaces */
+
+  // We capitalize headers to avoid spam filters from increasing
+  // their score level
+  if ([standardCapitalizedHeaders objectForKey: _field])
+    _field = [standardCapitalizedHeaders objectForKey: _field];
+  else
+    _field = [_field asCapitalizedHeader];
+
   fcname = (const unsigned char *)[_field cStringUsingEncoding:NSISOLatin1StringEncoding];
   for (len = [_field lengthOfBytesUsingEncoding:NSISOLatin1StringEncoding];
        len > 0; fcname++, len--) {
