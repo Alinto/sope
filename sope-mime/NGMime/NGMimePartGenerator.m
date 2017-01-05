@@ -196,7 +196,7 @@ static BOOL       debugOn = NO;
   while ((value = [_values nextObject]) != nil) {
     NSData *data;
     
-    if ((data = [self generateDataForHeaderField:_field value:value]) == nil)
+    if ((data = [self generateDataForHeaderField: [_field lowercaseString] value:value]) == nil)
       continue;
     
     if (isMultiValue) {
