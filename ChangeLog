@@ -1,3 +1,73 @@
+commit e083bd9858ad8d4eaa4e4a9a77912e2a4a289764
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jan 5 10:09:15 2017 -0500
+
+    (fix) pick the right generator (fixes #3977)
+
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit c96d96d56f546321e807b5baa85ed707336aeb44
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 30 13:55:40 2016 -0500
+
+    (fix) properly capitalize mail headers (fixes #1047)
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+misc.m
+M	sope-core/NGExtensions/NGExtensions/NSString+misc.h
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit 4deea9073f1e576b6c9e8dfff045af014f4a4caa
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Dec 29 09:54:40 2016 -0500
+
+    (fix) additional fix for streaming issues
+
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
+
+commit 7b20f29a618ea380de9404278b0fc7c6a13fe51b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 23 15:53:23 2016 -0500
+
+    (fix) force a content-lenght to be specified to avoid streaming (fixes #3249)
+
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
+
+commit 2f1d8b1323344c53512f930ed320cf43d8a3588e
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Dec 22 14:24:58 2016 -0500
+
+    (feat) allow DN lookup using qualifier
+
+M	sope-ldap/NGLdap/NGLdapConnection.h
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit ac4024cbc835dbe724252448cec8da7898875df1
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 2 16:29:07 2016 -0500
+
+    Revert "(fix) if no handler defined, raise the exception"
+    
+    This reverts commit fa536470e65ef075dea80c1a143af12aa7922f87.
+
+M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
+
+commit fa536470e65ef075dea80c1a143af12aa7922f87
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 2 15:50:54 2016 -0500
+
+    (fix) if no handler defined, raise the exception
+
+M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
+
+commit 956c7b908c10fcd692be31be5353a1ac95ad2850
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Dec 1 12:16:52 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 98c6ece78785357cf1c6b805774559df37f86773
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 28 14:39:33 2016 -0500
