@@ -1,3 +1,19 @@
+commit bc75598c5cc3c4db398ac1219dfd32633c202094
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 13 15:42:07 2017 -0500
+
+    (fix) expose the "method" method, you silly SOPE
+
+M	sope-mime/NGMime/NGConcreteMimeType.h
+
+commit 1e31be9bbc7f40cfc7975e890b6a51764b0db7d2
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Jan 6 20:59:02 2017 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit e083bd9858ad8d4eaa4e4a9a77912e2a4a289764
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jan 5 10:09:15 2017 -0500
