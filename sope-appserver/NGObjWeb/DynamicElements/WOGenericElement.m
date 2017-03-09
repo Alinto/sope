@@ -190,6 +190,10 @@ typedef struct {
   WOComponent *sComponent = [_ctx component];
   OWAttribute *map;
   unsigned cnt;
+  static Class WOBoolAssociationKlass = Nil;
+
+  if (!WOBoolAssociationKlass)
+    WOBoolAssociationKlass = NSClassFromString(@"WOBoolAssociation");
   
   for (cnt = 0, map = self->mappings; cnt < self->count; cnt++, map++) {
     register id value;
@@ -199,9 +203,13 @@ typedef struct {
 
     WOResponse_AddChar(_response, ' ');
     WOResponse_AddString(_response, map->key);
-    WOResponse_AddCString(_response, "=\"");
-    WOResponse_AddHtmlString(_response, [value stringValue]);
-    WOResponse_AddChar(_response, '"');
+
+    if (![map->value isKindOfClass: WOBoolAssociationKlass])
+      {
+        WOResponse_AddCString(_response, "=\"");
+        WOResponse_AddHtmlString(_response, [value stringValue]);
+        WOResponse_AddChar(_response, '"');
+      }
   }
 }
 

@@ -144,6 +144,7 @@
     "OGo:script"                          = WOScriptAssociation;
     "OGo:url"                             = WOResourceURLAssociation;
     "OGo:label"                           = WOLabelAssociation;
+    "OGo:bool"                            = WOBoolAssociation;
     "OGo:path"                            = SoLookupAssociation;
   };
   SoClassRegistryDebugEnabled          = NO;
