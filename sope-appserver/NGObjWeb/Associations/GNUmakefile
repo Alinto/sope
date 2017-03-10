@@ -15,6 +15,7 @@ Associations_OBJC_FILES = \
 	WOScriptAssociation.m		\
 	WOResourceURLAssociation.m	\
 	WOLabelAssociation.m		\
+	WOBoolAssociation.m             \
 	\
 	NSUserDefaults+KVC.m
 

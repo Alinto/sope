@@ -78,6 +78,8 @@
   float    quality;
 }
 
+- (NSString *)method;
+
 @end
 
 @interface NGConcreteTextVcardMimeType : NGConcreteTextMimeType
