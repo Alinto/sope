@@ -1,3 +1,11 @@
+commit a8511fde705b5a00e0d97727b75c9c7b702ae08d
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Mar 10 11:16:47 2017 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 152a289a4ec0fa9b402482c23e99947a8a437b42
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Mar 9 09:36:03 2017 -0500
