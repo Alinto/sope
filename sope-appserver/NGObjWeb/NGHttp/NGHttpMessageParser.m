@@ -523,13 +523,16 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
 
 - (void)parseBodyOfPart:(id<NGMimePart>)_part {
   BOOL doParse;
+#if 0
   id   clenValues;
-  
+#endif
+
   if (_part == nil) {
     [self warnWithFormat:@"%s:%i: got no part!", __PRETTY_FUNCTION__,__LINE__];
     return;
   }
-  
+
+#if 0
   /* parse only if content-length > 0 */
   clenValues = [_part valuesOfHeaderFieldWithName:@"content-length"];
   if ((clenValues = [clenValues nextObject])) {
@@ -542,14 +545,14 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
   }
   else {
     /* parse until EOF */
-#if 0
     [self warnWithFormat:@"%s: parsing until EOF, "
           @"missed content-length header in part %@..",
           __PRETTY_FUNCTION__, _part];
-#endif
     doParse = YES;
   }
-  
+#endif
+  doParse = YES;
+
   if (self->flags.parseRequest) {
     NGHttpRequest *rq;
     
@@ -585,11 +588,20 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
               HTTP/1.0, HTTP/0.9 - read till EOF if no content-length is set
               HTTP/1.1 and above: if no content-length is set, body is empty
             */
+#if 0
             if ([rq majorVersion] < 1)
               doParse = YES;
             else if ([rq majorVersion] == 1 && [rq minorVersion] == 0)
               doParse = YES;
             else
+#endif
+	      // We got an empty content because Content-Lenght was specified
+	      // We set the content to an empty body to avoid parsing it
+	      // with the NGMimePartParser's streaming parser. Not parsing
+	      // anything and not setting a content would lead to a 500 error code.
+	      if ([rq valueOfHeaderFieldWithName: @"content-length"])
+		[_part setBody: [NSData data]];
+
               doParse = NO;
           }
           else if (maxUploadSize && [rq contentLength] > maxUploadSize) {
@@ -604,7 +616,7 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
     
     if (doParse)
       [super parseBodyOfPart:_part];
-  }
+  } // if (self->flags.parseRequest) {
   else {
 #if DEBUG
     NSAssert([_part isKindOfClass:[NGHttpResponse class]],

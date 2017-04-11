@@ -1,3 +1,273 @@
+commit a8511fde705b5a00e0d97727b75c9c7b702ae08d
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Mar 10 11:16:47 2017 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 152a289a4ec0fa9b402482c23e99947a8a437b42
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Mar 9 09:36:03 2017 -0500
+
+    New association to define HTML5 boolean attribute
+
+M	sope-appserver/NGObjWeb/Associations/GNUmakefile
+A	sope-appserver/NGObjWeb/Associations/WOBoolAssociation.h
+A	sope-appserver/NGObjWeb/Associations/WOBoolAssociation.m
+M	sope-appserver/NGObjWeb/Defaults.plist
+M	sope-appserver/NGObjWeb/DynamicElements/WOGenericElement.m
+M	sope-appserver/NGObjWeb/WODynamicElement.m
+
+commit cdc1e99b6f27ff2673b67ca76449d95128e48a1d
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Feb 14 08:42:19 2017 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit e13714e2faf4f49d02e9e84661ad0466a0407c5a
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Jan 23 10:03:30 2017 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit bc75598c5cc3c4db398ac1219dfd32633c202094
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 13 15:42:07 2017 -0500
+
+    (fix) expose the "method" method, you silly SOPE
+
+M	sope-mime/NGMime/NGConcreteMimeType.h
+
+commit 1e31be9bbc7f40cfc7975e890b6a51764b0db7d2
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Jan 6 20:59:02 2017 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit e083bd9858ad8d4eaa4e4a9a77912e2a4a289764
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jan 5 10:09:15 2017 -0500
+
+    (fix) pick the right generator (fixes #3977)
+
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit c96d96d56f546321e807b5baa85ed707336aeb44
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 30 13:55:40 2016 -0500
+
+    (fix) properly capitalize mail headers (fixes #1047)
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-core/NGExtensions/FdExt.subproj/NSString+misc.m
+M	sope-core/NGExtensions/NGExtensions/NSString+misc.h
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit 4deea9073f1e576b6c9e8dfff045af014f4a4caa
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Dec 29 09:54:40 2016 -0500
+
+    (fix) additional fix for streaming issues
+
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
+
+commit 7b20f29a618ea380de9404278b0fc7c6a13fe51b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 23 15:53:23 2016 -0500
+
+    (fix) force a content-lenght to be specified to avoid streaming (fixes #3249)
+
+M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
+
+commit 2f1d8b1323344c53512f930ed320cf43d8a3588e
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Dec 22 14:24:58 2016 -0500
+
+    (feat) allow DN lookup using qualifier
+
+M	sope-ldap/NGLdap/NGLdapConnection.h
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit ac4024cbc835dbe724252448cec8da7898875df1
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 2 16:29:07 2016 -0500
+
+    Revert "(fix) if no handler defined, raise the exception"
+    
+    This reverts commit fa536470e65ef075dea80c1a143af12aa7922f87.
+
+M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
+
+commit fa536470e65ef075dea80c1a143af12aa7922f87
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 2 15:50:54 2016 -0500
+
+    (fix) if no handler defined, raise the exception
+
+M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
+
+commit 956c7b908c10fcd692be31be5353a1ac95ad2850
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Dec 1 12:16:52 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 98c6ece78785357cf1c6b805774559df37f86773
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Nov 28 14:39:33 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 3c66ec5a8f59cea88fd1e3239c4ea946301e61cc
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Nov 25 11:01:13 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit ac70bd12c23135cf5a957c27b861f143e2c6b3e0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Nov 23 16:24:56 2016 -0500
+
+    (fix) handle non-string LDAP attributes, return NSData instances
+
+M	sope-ldap/NGLdap/NGLdapEntry.m
+
+commit 674139c077c037244bc709ab9f803c1316b58645
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Nov 23 11:36:32 2016 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit d047870b37db97fc605a53b84b1e86eca5691aa5
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Nov 21 13:11:42 2016 -0500
+
+    Use %u instead of %d in NGImap4Client
+    
+    Fixes #3908
+
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit 801734f7ed6b616437b77a646e69a96fc409003f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Oct 20 10:50:30 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit f503532011f6cff22277688bdfa6b3381f8fcebc
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Oct 14 09:17:46 2016 -0400
+
+    (fix) attempt to make the annotation parser a bit more robust
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 928842388d95f82063ab2d97eccf7acd197df64c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Oct 11 11:18:51 2016 -0400
+
+    (fix) more safety checks around nil annotation values
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit d6a218e53727000c5c7dc843225ce9354449b401
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Oct 11 08:39:09 2016 -0400
+
+    (fix) make sure we have a non-nil annotation when trying to populate the hash
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 09c59f08c178ee9a0fd87701a3b3b55b7ee4461a
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Oct 3 11:59:24 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 4a2b7df9d0c67a915ea27cef924be7bdc4fe6f24
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Sep 14 09:32:21 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 8d875425b28c93da47707d3aec646521b558ee7a
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Aug 17 08:22:39 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 514fb76a7fbe0c32b22504c27bc8ba7e9152135b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Aug 16 08:42:59 2016 -0400
+
+    (fix) handle broken multipart mime (types) when they aren't in reality
+
+M	sope-mime/NGMime/NGMimeType.m
+
+commit 3245eb43835be013b4c706a27a198d5901b8b819
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Aug 12 11:57:33 2016 -0400
+
+    (fix) added workaround for bug #3791 while waiting to write that crappy code from SOPE
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit feb54b8402b234f460baa7af8e2bd524873400ac
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Aug 10 13:55:37 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit eceb975f1444e796d3d96f61ca766b059f7de78c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Aug 8 16:23:53 2016 -0400
+
+    (fix) remove bitrotted code and fall back to ISO Latin 1 when decoding fails
+
+M	sope-mime/NGMail/NSData+MimeQP.m
+
+commit cf1865e407b55ed2149159340d01494f37efc508
+Author: ethoms <euan@potensol.com>
+Date:   Thu Jul 14 01:12:42 2016 +0800
+
+    Convert 'configure' shebang back to /bin/sh for platform compatability (#41)
+
+M	configure
+
+commit 1a96d03cc25224c4b9d134f0414275da6840bf2c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jul 6 07:26:29 2016 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 452b547eb1c7a5576cc7acd9b254606e30b05752
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 29 15:33:51 2016 -0400

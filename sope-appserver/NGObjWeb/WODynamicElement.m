@@ -39,8 +39,9 @@ typedef struct _WOExtraAttrStruct  {
 
 @implementation WODynamicElement
 
-static Class FormClass        = Nil;
-static Class FormElementClass = Nil;
+static Class FormClass              = Nil;
+static Class FormElementClass       = Nil;
+static Class WOBoolAssociationClass = Nil;
 
 + (void)initialize {
   static BOOL isInitialized = NO;
@@ -48,8 +49,9 @@ static Class FormElementClass = Nil;
   if (!isInitialized) {
     isInitialized = YES;
 
-    FormClass        = NSClassFromString(@"WOForm");
-    FormElementClass = NSClassFromString(@"WOInput");
+    FormClass              = NSClassFromString(@"WOForm");
+    FormElementClass       = NSClassFromString(@"WOInput");
+    WOBoolAssociationClass = NSClassFromString(@"WOBoolAssociation");
   }
 }
 
@@ -188,7 +190,6 @@ static Class FormElementClass = Nil;
     else {
       /* dynamic value (calculated at runtime) */
       register WOExtraAttrItem *item;
-      
       item = &(ea->items[ea->count]);
       item->key   = [key copy];
       item->value = RETAIN(value);
@@ -234,7 +235,7 @@ static Class FormElementClass = Nil;
       /* has dynamic attributes */
       WOComponent *sComponent;
       register unsigned short i;
-      
+
       sComponent = [_ctx component];
       
       for (i = 0; i < ea->count; i++) {
@@ -251,12 +252,20 @@ static Class FormElementClass = Nil;
         else {
           value = [item->value stringValueInComponent:sComponent];
         }
-        
-        WOResponse_AddChar(_response, ' ');
-        WOResponse_AddString(_response, item->key);
-        WOResponse_AddCString(_response, "=\"");
-        [_response appendContentHTMLAttributeValue:value];
-        WOResponse_AddChar(_response, '"');
+
+        if (value ||
+            ([item->value isKindOfClass: WOBoolAssociationClass] &&
+             [item->value boolValueInComponent:sComponent]))
+          {
+            WOResponse_AddChar(_response, ' ');
+            WOResponse_AddString(_response, item->key);
+            if (![item->value isKindOfClass: WOBoolAssociationClass])
+              {
+                WOResponse_AddCString(_response, "=\"");
+                [_response appendContentHTMLAttributeValue:value];
+                WOResponse_AddChar(_response, '"');
+              }
+          }
       }
     }
     

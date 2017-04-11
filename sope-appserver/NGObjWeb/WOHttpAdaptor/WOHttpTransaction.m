@@ -31,6 +31,7 @@
 #include <NGObjWeb/WOResponse.h>
 #include <NGObjWeb/WOCookie.h>
 #include <NGExtensions/NSData+gzip.h>
+#include <NGExtensions/NSString+misc.h>
 #include <NGHttp/NGHttp.h>
 #include <NGMime/NGMimeType.h>
 #include "common.h"
@@ -38,38 +39,7 @@
 #include <string.h>
 #include <sys/time.h>
 
-static inline NSString *
-capitalizeHeaderName (NSString *headerName)
-{
-  NSString *result;
-  NSUInteger count, max;
-  unichar *chars;
-  BOOL capitalize = YES;
 
-  max = [headerName length];
-  if (max == 3 && [[headerName lowercaseString] isEqualToString: @"dav"])
-    result = @"DAV";
-  else
-    {
-      chars = malloc (max * sizeof (unichar));
-      [headerName getCharacters: chars];
-      for (count = 0; count < max; count++)
-        {
-          if (capitalize)
-            {
-              if (chars[count] >= 97 && chars[count] <= 122)
-                chars[count] -= 32;
-              capitalize = NO;
-            }
-          else if (chars[count] == '-')
-            capitalize = YES;
-        }
-      result = [NSString stringWithCharacters: chars length: max];
-      free (chars);
-    }
-
-  return result;
-}
 
 @interface WORequest(UsedPrivates)
 - (NSCalendarDate *)startDate;
@@ -847,7 +817,7 @@ static int logCounter = 0;
           else
             {
               addStr(header, @selector(appendString:),
-                     capitalizeHeaders ? capitalizeHeaderName (fieldName) : fieldName);
+                     capitalizeHeaders ? [fieldName asCapitalizedHeader] : fieldName);
             }
           
           addStr(header, @selector(appendString:), @": ");

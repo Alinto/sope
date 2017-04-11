@@ -107,6 +107,10 @@
   qualifier:(EOQualifier *)_q
   attributes:(NSArray *)_attributes;
 
+- (NGLdapEntry *)entryAtDN:(NSString *)_dn
+  qualifier:(EOQualifier *)_q
+  attributes:(NSArray *)_attrs;
+
 - (NGLdapEntry *)entryAtDN:(NSString *)_dn attributes:(NSArray *)_attrs;
 
 /* cache */

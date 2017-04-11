@@ -27,8 +27,6 @@
 static Class NSStringClass   = Nil;
 static Class NGMimeTypeClass = Nil;
 
-static int   UseFoundationStringEncodingForMimeHeader = -1;
-
 - (id)decodeQuotedPrintableValueOfMIMEHeaderField:(NSString *)_name {
   // check data for 8-bit headerfields (RFC 2047 (MIME PART III))
   /*
@@ -47,20 +45,11 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
   BOOL foundQP = NO;
 
   /* setup statics */
-
-  if (UseFoundationStringEncodingForMimeHeader == -1) {
-    UseFoundationStringEncodingForMimeHeader
-      = [[NSUserDefaults standardUserDefaults]
-	  boolForKey:@"UseFoundationStringEncodingForMimeHeader"]
-      ? 1 : 0;
-  }
-
   if (NSStringClass   == Nil) NSStringClass   = [NSString class];
   if (NGMimeTypeClass == Nil) NGMimeTypeClass = [NGMimeType class];
 
   
   /* begin */
-  
   length = [self length];
   
   /* check whether the string is long enough to be quoted etc */
@@ -171,18 +160,24 @@ static int   UseFoundationStringEncodingForMimeHeader = -1;
 	     create a temporary string for charset conversion ... 
 	     Note: the headerfield is currently held in ISO Latin 1
 	  */
-          tmpStr = nil;
-          
-          if (!UseFoundationStringEncodingForMimeHeader) {
-            tmpStr = [NSStringClass stringWithData:tmpData
-                                    usingEncodingNamed:charset];
-          }
+	  tmpStr = [NSStringClass stringWithData:tmpData
+			      usingEncodingNamed:charset];
+
           if (tmpStr == nil) {
             NSStringEncoding enc;
             
             enc    = [NGMimeTypeClass stringEncodingForCharset:charset];
             tmpStr = [[[NSStringClass alloc] initWithData:tmpData encoding:enc]
                                       autorelease];
+
+	    // Fall-back to ISO Latin 1 if the decoding using the specified charset
+	    // has failed. Note that we shouldn't be doing this here, we should let
+	    // the application decide what to do but SOPE is just too lame and does
+	    // not expose a failure vs. the initial value of the header
+	    if (!tmpStr)
+	      tmpStr = [[[NSStringClass alloc] initWithData:tmpData
+						   encoding:NSISOLatin1StringEncoding]
+			 autorelease];
           }
 	  tmpLen = [tmpStr length];
 

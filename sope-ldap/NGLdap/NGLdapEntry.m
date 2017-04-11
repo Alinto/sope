@@ -239,8 +239,12 @@
     {
       key = [keys objectAtIndex: count];
       value = [[ldapAttributes objectForKey: key] asArrayOrString];
+
+      if (!value)
+	value = [[[ldapAttributes objectForKey: key] allValues] lastObject];
+
       if (value)
-        [ldapRecord setObject: value forKey: [key lowercaseString]];
+	[ldapRecord setObject: value forKey: [key lowercaseString]];
     }
 
   return ldapRecord;
