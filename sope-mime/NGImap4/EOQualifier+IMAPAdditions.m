@@ -127,6 +127,7 @@ static void _initImap4SearchCategory(void) {
     return nil;
   }
   
+  [_search appendString: @"("];
   for (i = 0; i < lCount; i++) {
     EOQualifier *qualifier;
     NSException *error;
@@ -134,12 +135,13 @@ static void _initImap4SearchCategory(void) {
     qualifier = [quals objectAtIndex:i];
     if (debugOn)
       [self logWithFormat:@"  append subqualifier: %@", qualifier];
-    
-    [_search appendString:(i == 0) ? @"(" : @" ("];
+
+    if (i > 0)
+      [_search appendString: @" "];
     if ((error = [qualifier appendToImap4SearchString:_search]))
       return error;
-    [_search appendString:@")"];
   }
+  [_search appendString: @")"];
   
   return nil /* no error */;
 }
