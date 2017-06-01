@@ -1,3 +1,19 @@
+commit 1aeb286bc28e722dba821798f388a9111896ed15
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu May 25 15:46:14 2017 -0400
+
+    (IMAP) Remove parenthesis in AND qualifier
+
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+
+commit e5b4212ea2bd76dd3886a85fe795acc5cfe16b10
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue May 9 09:07:33 2017 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 4ef04c722776286ccc4a1ed16b97f2e84b1b873a
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Mar 24 09:48:05 2017 -0400
