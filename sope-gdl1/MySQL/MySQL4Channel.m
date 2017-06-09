@@ -568,8 +568,7 @@ static int openConnectionCount = 0;
 				  value:rawRow[cnt] length:lengths[cnt]];
       
       if (value == nil) {
-        NSLog(@"ERROR(%s): %@: got no value for column:\n"
-              @"  attribute=%@\n  valueClass=%@\n  type=%@",
+        NSLog(@"ERROR(%s): %@: got no value for column: attribute=%@\n  valueClass=%@\n  type=%@",
               __PRETTY_FUNCTION__, self,
               attrName, NSStringFromClass(valueClass), 
 	      [attribute externalType]);
