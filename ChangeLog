@@ -1,3 +1,28 @@
+commit bcaca802d6bfe73662e1072b5d4bab9c53dfcb32
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jun 27 10:24:41 2017 -0400
+
+    (fix) added Debian 9 compat
+
+M	packaging/debian/control.in
+
+commit 5f44dc09c67fff0493566ae9a6823393813a4b0a
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jun 9 15:31:11 2017 -0400
+
+    (fix) avoid breaking the NSLog call - gcc lameness?
+
+M	sope-gdl1/MySQL/MySQL4Channel.m
+M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
+
+commit 88a5c874ec182cd9c94950989ac59fc93d75e955
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Jun 1 09:56:01 2017 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 1aeb286bc28e722dba821798f388a9111896ed15
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu May 25 15:46:14 2017 -0400
