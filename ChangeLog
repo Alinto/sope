@@ -1,3 +1,76 @@
+commit 45db3976d3f4790337e3e8bfb149f053e88174f9
+Author: Ivan Zakharyaschev <imz@altlinux.org>
+Date:   Mon Oct 9 18:15:35 2017 +0300
+
+    _{encodeTo,decodeOf}ModifiedUTF7(): 64th digit of the base is "," (RFC3501)
+    
+    According to https://tools.ietf.org/html/rfc3501#section-5.1.3 ,
+    in comparison to Base64 encoding, "," should be used instead of "/"
+    as the greatest digit of the base.
+    
+    Of course, this meant that the encodings used by an IMAP server (e.g.,
+    dovecot) and SOGo did not match when they were communicating with each
+    other.
+    
+    For example, when SOGo attempts to create a folder whose encoding
+    includes the base64 "/" digit, it is not accepted as valid mUTF7 by
+    the IMAP server:
+    
+    C[0x5649de0d5d30]: 5 LIST "" ""
+    S[0x5649de0f3640]: * LIST (\Noselect) "/" ""
+    S[0x5649de0f3640]: 5 OK List completed (0.001 + 0.040 + 0.039 secs).
+    C[0x5649de0d5d30]: 6 create "INBOX/&BD8EMAQ/BDA-"
+    S[0x5649de0f3640]: 6 NO Mailbox name is not valid mUTF-7 (0.001 + 0.000 secs).
+    
+    In the other direction, when such a folder is listed by the IMAP
+    server, it appears with a ",", for example: "&BD8EMAQ/BDA-". And this
+    is not correctly decoded by SOGo due to the fact that "," is not known
+    to SOGo as a digit in this base and is mapped to -1 by the internal
+    table, which results in a wrong Unicode code.
+    
+    An example of a Unicode string which would trigger this bug is a
+    string with U+043F CYRILLIC SMALL LETTER PE as the third letter:
+    
+    $ printf '\x04\x3f\x04\x30\x04\x3f' | recode ucs-2..
+    $ printf '\x04\x3f\x04\x30\x04\x3f' | base64
+    BD8EMAQ/
+    
+    Three two-byte Unicode (Cyrillic) characters correspond to eight 6-bit
+    base64 digits, the last one being "/":
+    
+    U+043F                U+0430                 U+043F
+    0000 01|00 0011 1111  00|00 0100 0011 00|00  0000 0100 00|11 1111
+          B|      D|       8|      E|      M|       A|      Q|      /|
+    
+    This bug has been reported in:
+    
+    https://sogo.nu/bugs/view.php?id=4308
+    https://bugzilla.altlinux.org/show_bug.cgi?id=32426
+    https://bugzilla.altlinux.org/show_bug.cgi?id=33722
+    
+    and a part of the problem described in
+    https://sogo.nu/bugs/view.php?id=2318 must be caused by incorrect
+    mUTF7 encoding, too (and hence must have not been fixed completely
+    before):
+    
+    And I see next messages when I try to open Cyrillic folder:
+    C[0x7fb2e23a77a0]: 5 select "&BBQEPgRBBEIEQwT/BEs-"
+    S[0x7fb2e21fb690]: 5 NO Invalid mailbox name: &BBQEPgRBBEIEQwT/BEs-
+    
+    As can you see sogo sends wrong folder name:
+    received "&BBQEPgRBBEIEQwQ,BEs-"
+    sent "&BBQEPgRBBEIEQwT/BEs-"
+
+M	sope-mime/NGImap4/NSString+Imap4.m
+
+commit 8941256d13bb1440adfeec10171e400db1d84796
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jul 5 10:58:34 2017 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit bcaca802d6bfe73662e1072b5d4bab9c53dfcb32
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jun 27 10:24:41 2017 -0400
