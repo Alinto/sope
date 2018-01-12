@@ -90,12 +90,12 @@ NSData * _base64Encoding(NGMimeBodyGenerator *self,
       if (type == nil)
         [_addHeaders setObject:appOctet forKey:@"content-type"];
     }
+
+    [_addHeaders setObject:transEnc forKey:@"content-transfer-encoding"];
   }
-  else /* no encoding */
-    transEnc = @"7bit";
-  
-  [_addHeaders setObject:transEnc forKey:@"content-transfer-encoding"];
-  [_addHeaders setObject:[NSNumber numberWithInt:[_data_ length]]
-                      forKey:@"content-length"];
+
+  if ([_data_ length])
+    [_addHeaders setObject:[NSNumber numberWithInt:[_data_ length]]
+                    forKey:@"content-length"];
   return _data_;
 }

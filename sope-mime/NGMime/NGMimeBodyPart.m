@@ -218,4 +218,32 @@
   return d;
 }
 
+- (NSDictionary *) bodyInfo
+{
+  NSMutableDictionary *d;
+  id o;
+
+  d = [NSMutableDictionary dictionary];
+
+  if ((o = [[self contentType] type]))
+    [d setObject: o  forKey: @"type"];
+
+  if ((o = [[self contentType] subType]))
+    [d setObject: o  forKey: @"subtype"];
+
+  if ((o = [[self headerForKey: @"content-disposition"] filename]))
+    {
+      NSDictionary *disposition, *parameterList;
+
+      parameterList = [NSDictionary dictionaryWithObject: o  forKey: @"filename"];
+      disposition = [NSDictionary dictionaryWithObject: parameterList  forKey: @"parameterList"];
+      [d setObject: disposition  forKey: @"disposition"];
+    }
+
+  if ((o = [self headerForKey: @"content-length"]))
+    [d setObject: o  forKey: @"size"];
+
+  return d;
+}
+
 @end /* NGMimeBodyPart */
