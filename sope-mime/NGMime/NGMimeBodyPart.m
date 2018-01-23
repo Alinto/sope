@@ -231,6 +231,9 @@
   if ((o = [[self contentType] subType]))
     [d setObject: o  forKey: @"subtype"];
 
+  if ((o = [self contentId]))
+    [d setObject: o  forKey: @"bodyId"];
+
   if ((o = [[self headerForKey: @"content-disposition"] filename]))
     {
       NSDictionary *disposition, *parameterList;
