@@ -1222,7 +1222,15 @@ _purifyQuotedString(NSMutableString *quotedString) {
   }
     
   parse = [NSMutableDictionary dictionaryWithCapacity:3];
-  qRoot = _parseUntil2(self, ' ', '\n');
+  if (_la(self, 0) == '"') {
+    NSMutableString *str;
+    _consume(self, 1);
+    str = [NSMutableString stringWithFormat: @"\"%@\"", _parseUntil(self, '"')];
+    qRoot = str;
+  }
+  else {
+    qRoot = _parseUntil2(self, ' ', '\n');
+  }
 
   if (_la(self, 0) == ' ') {
       _consume(self, 1);
