@@ -1,3 +1,47 @@
+commit 0f5d66fabe9232ef0f03f15670103a69ffede35e
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Feb 6 15:31:45 2018 -0500
+
+    Fix parsing of quota root in IMAP server response
+    
+    Fixes #4382
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit d76498eb6581413cb4c6264dfbba1a92cfcab28e
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jan 24 16:01:05 2018 -0500
+
+    Allow comparison of arrays
+
+M	sope-core/EOControl/EOSortOrdering.m
+
+commit edc566a2d9df26b623c70d2848e82771ce4e7329
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jan 23 10:32:28 2018 -0500
+
+    (fix) also set the bodyId in fake bodyInfo
+
+M	sope-mime/NGMime/NGMimeBodyPart.m
+
+commit 6d0a70d6988bcbd6782f81d58df77fe444d74c67
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 12 15:37:38 2018 -0500
+
+    (fix) added missing commits for S/MIME support
+
+M	sope-mime/NGMail/NGMailBase64Encoding.m
+M	sope-mime/NGMime/NGMimeBodyPart.h
+M	sope-mime/NGMime/NGMimeBodyPart.m
+
+commit 43e4fe5115d28e1a2cdfc0100659ab378e40ec30
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Oct 18 11:14:48 2017 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 45db3976d3f4790337e3e8bfb149f053e88174f9
 Author: Ivan Zakharyaschev <imz@altlinux.org>
 Date:   Mon Oct 9 18:15:35 2017 +0300
