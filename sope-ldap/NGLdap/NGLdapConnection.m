@@ -722,7 +722,7 @@ static void freeMods(LDAPMod **mods) {
     /* trouble */
     int err;
     ldap_get_option(self->handle, LDAP_OPT_RESULT_CODE, &err);
-    NSLog(@"Fatal LDAP error: %s", ldap_err2string(err));
+    NSLog(@"Fatal LDAP error during ldap_search: %s", ldap_err2string(err));
     return nil;
   }
 

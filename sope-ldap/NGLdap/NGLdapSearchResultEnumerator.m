@@ -184,6 +184,15 @@
   }
   
   res = ldap_result(self->handle, self->msgid, 0, top, &msg);
+
+  if (res == -1)
+    {
+      int err;
+      ldap_get_option(self->handle, LDAP_OPT_RESULT_CODE, &err);
+      NSLog(@"Fatal LDAP error during ldap_result: %s", ldap_err2string(err));
+      return nil;
+    }
+
   if (msg == NULL)
     return nil;
   
