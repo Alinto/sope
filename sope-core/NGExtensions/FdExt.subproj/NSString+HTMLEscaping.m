@@ -21,21 +21,26 @@
 
 #include "NSString+misc.h"
 #include "common.h"
+#include <Foundation/NSData.h>
 
 @implementation NSString(HTMLEscaping)
 
 - (NSString *)stringByEscapingHTMLStringUsingCharacters {
+  NSData *data;
+
   register unsigned i, len, j;
-  register unichar  *chars, *buf;
+  const wchar_t *chars;
+  wchar_t *buf;
   unsigned escapeCount;
-  
+
   if ((len = [self length]) == 0) return @"";
-  
-  chars = malloc((len + 3) * sizeof(unichar));
-  [self getCharacters:chars];
+
+  data = [self dataUsingEncoding: NSUTF32LittleEndianStringEncoding];
+  chars = [data bytes];
+  len = [data length];
   
   /* check for characters to escape ... */
-  for (i = 0, escapeCount = 0; i < len; i++) {
+  for (i = 0, escapeCount = 0; i < len/4; i++) {
     switch (chars[i]) {
       case '&': case '"': case '<': case '>':
         escapeCount++;
@@ -46,26 +51,18 @@
         break;
     }
   }
-  if (escapeCount == 0 ) {
-    /* nothing to escape ... */
-    if (chars) free(chars);
+  if (escapeCount == 0 )
     return [[self copy] autorelease];
-  }
-  
-  buf = calloc((len + 5) + (escapeCount * 8), sizeof(unichar));
-  for (i = 0, j = 0; i < len; i++) {
+
+  buf = (wchar_t *)calloc(len, sizeof(wchar_t)*2);
+
+  for (i = 0, j = 0; i < len/4; i++) {
     switch (chars[i]) {
       /* escape special chars */
       case '&':
         buf[j] = '&'; j++; buf[j] = 'a'; j++; buf[j] = 'm'; j++;
         buf[j] = 'p'; j++; buf[j] = ';'; j++;
         break;
-#if 0
-      case '"':
-        buf[j] = '&'; j++; buf[j] = 'q'; j++; buf[j] = 'u'; j++;
-        buf[j] = 'o'; j++; buf[j] = 't'; j++; buf[j] = ';'; j++;
-        break;
-#endif
       case '<':
         buf[j] = '&'; j++; buf[j] = 'l'; j++; buf[j] = 't'; j++;
         buf[j] = ';'; j++;
@@ -74,38 +71,6 @@
         buf[j] = '&'; j++; buf[j] = 'g'; j++; buf[j] = 't'; j++;
         buf[j] = ';'; j++;
         break;
-#if 0
-      case 223: /* &szlig; */
-        buf[j] = '&'; j++; buf[j] = 's'; j++; buf[j] = 'z'; j++;
-        buf[j] = 'l'; j++; buf[j] = 'i'; j++; buf[j] = 'g'; j++;
-        buf[j] = ';'; j++;
-        break;
-        // TODO: this is missing a LOT?
-      case 252: /* &uuml; */
-        buf[j] = '&'; j++; buf[j] = 'u'; j++; buf[j] = 'u'; j++;
-        buf[j] = 'm'; j++; buf[j] = 'l'; j++; buf[j] = ';'; j++;
-        break;
-      case 220: /* &Uuml; */
-        buf[j] = '&'; j++; buf[j] = 'U'; j++; buf[j] = 'u'; j++;
-        buf[j] = 'm'; j++; buf[j] = 'l'; j++; buf[j] = ';'; j++;
-        break;
-      case 228: /* &auml; */
-        buf[j] = '&'; j++; buf[j] = 'a'; j++; buf[j] = 'u'; j++;
-        buf[j] = 'm'; j++; buf[j] = 'l'; j++; buf[j] = ';'; j++;
-        break;
-      case 196: /* &Auml; */
-        buf[j] = '&'; j++; buf[j] = 'A'; j++; buf[j] = 'u'; j++;
-        buf[j] = 'm'; j++; buf[j] = 'l'; j++; buf[j] = ';'; j++;
-        break;
-      case 246: /* &ouml; */
-        buf[j] = '&'; j++; buf[j] = 'o'; j++; buf[j] = 'u'; j++;
-        buf[j] = 'm'; j++; buf[j] = 'l'; j++; buf[j] = ';'; j++;
-        break;
-      case 214: /* &Ouml; */
-        buf[j] = '&'; j++; buf[j] = 'O'; j++; buf[j] = 'u'; j++;
-        buf[j] = 'm'; j++; buf[j] = 'l'; j++; buf[j] = ';'; j++;
-        break;
-#endif        
       default:
         /* escape big chars */
         if (chars[i] > 127) {
@@ -126,11 +91,9 @@
         break;
     }
   }
-  
-  self = [NSString stringWithCharacters:buf length:j];
-  
-  if (chars) free(chars);
-  if (buf)   free(buf);
+
+  self = [[[NSString alloc] initWithBytesNoCopy: buf  length: j*sizeof(wchar_t)  encoding: NSUTF32LittleEndianStringEncoding  freeWhenDone: YES] autorelease];
+
   return self;
 }
 
