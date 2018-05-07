@@ -230,7 +230,12 @@ static Class ArrayClass = Nil;
 
   if (_object == self) return NSOrderedSame;
   if ([_object isKindOfClass: ArrayClass])
-    result = [[self objectAtIndex: 0] compareCaseInsensitiveAscending: [_object objectAtIndex: 0]];
+    {
+      if ([_object count] && [_object objectAtIndex: 0])
+        result = [[self objectAtIndex: 0] compareCaseInsensitiveAscending: [_object objectAtIndex: 0]];
+      else
+        result = NSOrderedDescending;
+    }
   else
     result = [[self objectAtIndex: 0] compareCaseInsensitiveAscending: _object];
 
