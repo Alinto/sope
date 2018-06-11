@@ -252,11 +252,18 @@ static BIO_METHOD streamBIO = {
 /* basic IO, reading and writing bytes */
 
 - (unsigned)readBytes:(void *)_buf count:(unsigned)_len {
+  int ret;
+
   if (self->ssl == NULL)
     // should throw error
     return NGStreamError;
   
-  return SSL_read(self->ssl, _buf, _len);
+  ret = SSL_read(self->ssl, _buf, _len);
+
+  if (ret <= 0)
+    return NGStreamError;
+
+  return ret;
 }
 - (unsigned)writeBytes:(const void *)_buf count:(unsigned)_len {
   return SSL_write(self->ssl, _buf, _len);
