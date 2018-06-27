@@ -252,7 +252,7 @@ static Class DataStreamClass = Nil;
 
       // TODO: check whether malloc is used for sufficiently large blocks!
       tmpBuffer = malloc(desiredBytes + 2);
-
+      //NSLog(@"Reading %d %d %d bytes...", desiredBytes, _la, i);
       cntReadBytes = (self->readBytes == NULL)
         ? [self->source readBytes:tmpBuffer count:desiredBytes]
         : self->readBytes(self->source, @selector(readBytes:count:),
