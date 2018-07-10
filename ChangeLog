@@ -1,3 +1,70 @@
+commit a8523275c860bca39c5d37fe238ac5d35ecc7316
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jun 27 09:42:49 2018 -0400
+
+    Removed noise
+
+M	sope-core/NGStreams/NGByteBuffer.m
+
+commit 2f26952009f622f97a43921a6cfdafb79b8f46f6
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 11 10:55:16 2018 -0400
+
+    (fix) better error-handling on SSL sockets
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit 275a75b28e304568e0b9ff1582f149e8b8ca73b3
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon May 7 16:13:51 2018 -0400
+
+    Fix sorting of array of arrays
+    
+    We now handle empty arrays.
+
+M	sope-core/EOControl/EOSortOrdering.m
+
+commit 2d38fbe94b515ddf22aad3dca49f5e542188b749
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Mar 19 13:42:38 2018 -0400
+
+    (fix) improve LDAP logging
+
+M	sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m
+
+commit 72ed256b2b2fdee432c1b3e4a4aae1b54e9dd935
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Mar 14 11:47:58 2018 -0400
+
+    (fix) properly handle wide chars
+
+M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
+
+commit 4786b5faf535b2144fa552adc77fcfb64f9d3515
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Mar 14 09:17:55 2018 -0400
+
+    (fix) improve LDAP error logging
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+M	sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m
+
+commit 597265a11da87e9580586ea43c9e35a4342762f6
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Mar 13 18:59:08 2018 -0400
+
+    (fix) improve LDAP error output
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit 8f48ab7f5d96c615dfac910be0ef4e01e8629321
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Mar 7 11:21:58 2018 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 0f5d66fabe9232ef0f03f15670103a69ffede35e
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Feb 6 15:31:45 2018 -0500
