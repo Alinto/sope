@@ -16,7 +16,7 @@ AutoReqProv:  off
 Source:       %{sope_source}
 Prefix:       /usr
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: gnustep-make gcc-objc postgresql-devel openldap-devel gnustep-base-devel gnustep-base libxml2-devel gmp-devel avahi-devel gnutls-devel libgcrypt-devel libffi-devel libxslt-devel libicu-devel
+BuildRequires: gnustep-make gcc-objc postgresql-devel openldap-devel gnustep-base-devel gnustep-base libxml2-devel gmp-devel avahi-devel gnutls-devel libgcrypt-devel libffi-devel libxslt-devel libicu-devel python
 
 %{?el5:BuildRequires: mysql-devel}
 %{?el6:BuildRequires: mysql-devel}
