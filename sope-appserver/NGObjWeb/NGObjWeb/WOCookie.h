@@ -37,6 +37,7 @@
   NSString *path;        // the root-path where the cookie is valid
   NSString *domainName;  // the domain where the cookie is valid (def: hostname)
   BOOL     onlyIfSecure; // send only if communication-channel is secure (SSL)
+  BOOL     httpOnly;     // disable client-side access to cookie
 }
 
 + (id)cookieWithName:(NSString *)_name value:(NSString *)_value;
@@ -45,6 +46,12 @@
   path:(NSString *)_path domain:(NSString *)_domain
   expires:(NSDate *)_date
   isSecure:(BOOL)_secure;
+
++ (id)cookieWithName:(NSString *)_name value:(NSString *)_value
+  path:(NSString *)_path domain:(NSString *)_domain
+  expires:(NSDate *)_date
+  isSecure:(BOOL)_secure
+  httpOnly:(BOOL)_httpOnly;
 
 /* accessors */
 

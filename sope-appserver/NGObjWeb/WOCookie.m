@@ -27,7 +27,8 @@
 - (id)initWithName:(NSString *)_name value:(NSString *)_value
   path:(NSString *)_path domain:(NSString *)_domain
   expires:(NSDate *)_date
-  isSecure:(BOOL)_secure;
+  isSecure:(BOOL)_secure
+  httpOnly: (BOOL)_httpOnly;
 
 @end
 
@@ -48,7 +49,7 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
 + (id)cookieWithName:(NSString *)_name value:(NSString *)_value {
   return [[[self alloc] initWithName:_name value:_value
                         path:nil domain:nil
-                        expires:nil isSecure:NO]
+                        expires:nil isSecure:NO httpOnly:NO]
                         autorelease];
 }
 
@@ -59,7 +60,19 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
 {
   return [[[self alloc] initWithName:_name value:_value
                         path:_path domain:_domain
-                        expires:_date isSecure:_secure]
+                        expires:_date isSecure:_secure httpOnly:NO]
+                        autorelease];
+}
+
++ (id)cookieWithName:(NSString *)_name value:(NSString *)_value
+  path:(NSString *)_path domain:(NSString *)_domain
+  expires:(NSDate *)_date
+  isSecure:(BOOL)_secure
+  httpOnly: (BOOL)_httpOnly
+{
+  return [[[self alloc] initWithName:_name value:_value
+                        path:_path domain:_domain
+                        expires:_date isSecure:_secure httpOnly:_httpOnly]
                         autorelease];
 }
 
@@ -67,6 +80,7 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
   path:(NSString *)_path domain:(NSString *)_domain
   expires:(NSDate *)_date
   isSecure:(BOOL)_secure
+  httpOnly:(BOOL)_httpOnly
 {
   if ((self = [super init]) != nil) {
     NSZone *z = [self zone];
@@ -76,6 +90,7 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
     self->domainName   = [_domain copyWithZone:z];
     self->expireDate   = [_date   retain]; // TBD: should be copy?
     self->onlyIfSecure = _secure;
+    self->httpOnly     = _httpOnly;
   }
   return self;
 }
@@ -138,6 +153,13 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
   return self->onlyIfSecure;
 }
 
+- (void)setHttpOnly:(BOOL)_flag {
+  self->httpOnly = _flag ? YES : NO;
+}
+- (BOOL)isHttpOnly {
+  return self->httpOnly;
+}
+
 - (NSDate *)expireDate {
   // DEPRECATED
   return self->expireDate;
@@ -149,7 +171,8 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
   return [[WOCookie alloc] initWithName:self->name value:self->value 
 			   path:self->path domain:self->domainName
 			   expires:self->expireDate
-			   isSecure:self->onlyIfSecure];
+			   isSecure:self->onlyIfSecure
+                           httpOnly:self->httpOnly];
 }
 
 /* description */
@@ -205,6 +228,9 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
   }
   if (self->onlyIfSecure)
     [str appendString:@"; secure"];
+
+  if (self->httpOnly)
+    [str appendString:@"; HttpOnly"];
   
   return str;
 }
@@ -232,6 +258,9 @@ static NSString *cookieDateFormat =  @"%a, %d-%b-%Y %H:%M:%S %Z";
   }
   if (self->onlyIfSecure)
     [str appendString:@" secure"];
+
+  if (self->httpOnly)
+    [str appendString:@" HttpOnly"];
 
   [str appendString:@">"];
   
