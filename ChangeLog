@@ -1,3 +1,28 @@
+commit a6703c60f03af455e7e73a7f836eb3ed6be7f397
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Aug 21 12:38:58 2018 -0400
+
+    Add support for the HttpOnly flag on cookies
+
+M	sope-appserver/NGObjWeb/NGObjWeb/WOCookie.h
+M	sope-appserver/NGObjWeb/WOCookie.m
+
+commit 3c4d515e036fc387240b6d1757031937cfd666b9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Aug 13 08:14:12 2018 -0400
+
+    (fix) enable Oracle OCI support for RHELv7
+
+M	packaging/rhel/sope.spec
+
+commit 794ec4a87ec5d8b45eca73306d4d2bbcc0de93cb
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Jul 10 09:55:20 2018 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit a8523275c860bca39c5d37fe238ac5d35ecc7316
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 27 09:42:49 2018 -0400
