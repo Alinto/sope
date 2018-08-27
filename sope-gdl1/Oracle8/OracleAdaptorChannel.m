@@ -186,6 +186,9 @@ static void DBTerminate()
 {
   if ([self isOpen])
     {
+      if (debugOn)
+        [self logWithFormat: @"closing Oracle adaptor channel");
+
       [super closeChannel];
     
       // We logoff from the database.
@@ -275,13 +278,13 @@ static void DBTerminate()
   if (!theExpression || ![theExpression length])
     {
       [NSException raise: @"OracleInvalidExpressionException"
-		   format: @"Passed an invalid (nil or length == 0) SQL expression"];
+                  format: @"Passed an invalid (nil or length == 0) SQL expression"];
     }
 
   if (![self isOpen])
     {
       [NSException raise: @"OracleChannelNotOpenException"
-		   format: @"Called -evaluateExpression: prior to -openChannel"];
+                  format: @"Called -evaluateExpression: prior to -openChannel"];
     }
   
   sql = (text *)[theExpression UTF8String];
@@ -354,6 +357,8 @@ static void DBTerminate()
 		  NSLog(@"Connection re-established to Oracle - retrying to process the statement.");
 		  goto retry;
 		}
+              else
+                NSLog(@"Could not re-establish connection to Oracle - statement re-processing aborted.");
 	    }
 	}
       return NO;
@@ -476,6 +481,9 @@ static void DBTerminate()
   
   const char *username, *password, *database;
   sword status;
+
+  if (debugOn)
+    [self logWithFormat: @"opening Oracle adaptor channel"];
 
   if (![super openChannel] || [self isOpen])
     {
