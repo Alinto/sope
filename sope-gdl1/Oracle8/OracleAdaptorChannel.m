@@ -187,7 +187,7 @@ static void DBTerminate()
   if ([self isOpen])
     {
       if (debugOn)
-        [self logWithFormat: @"closing Oracle adaptor channel");
+        [self logWithFormat: @"closing Oracle adaptor channel"];
 
       [super closeChannel];
     
