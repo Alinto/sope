@@ -596,6 +596,7 @@ static void DBTerminate()
 		    if (status != OCI_INVALID_HANDLE && status != OCI_SUCCESS)
 		      {
 			checkerr(_oci_err, status);
+                        NSLog(@"Attempted to read a NULL CLOB");
 			o = [NSString string];
 		      }
 		    else
