@@ -588,7 +588,7 @@ static void DBTerminate()
 		  {
 		    ub4 len;
 		    
-		    status = OCILobGetLength(_oci_ctx, _oci_err, info->value, &len);
+		    status = OCILobGetLength2(_oci_ctx, _oci_err, info->value, &len);
 		    
 		    // We might get a OCI_INVALID_HANDLE if we try to read a NULL CLOB.
 		    // This would be avoided if folks using CLOB would use Oracle's empty_clob()
