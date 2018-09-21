@@ -586,9 +586,10 @@ static void DBTerminate()
 
 		case SQLT_CLOB:
 		  {
-		    ub4 len;
-		    
-		    status = OCILobGetLength2(_oci_ctx, _oci_err, info->value, &len);
+                    ub4 len;
+
+                    len = 0;
+                    status = OCILobGetLength(_oci_ctx, _oci_err, info->value, &len);
 		    
 		    // We might get a OCI_INVALID_HANDLE if we try to read a NULL CLOB.
 		    // This would be avoided if folks using CLOB would use Oracle's empty_clob()
@@ -603,8 +604,8 @@ static void DBTerminate()
 		      {
 			// We alloc twice the size of the LOB length. OCILobGetLength() returns us the LOB length in UTF-16 characters.
 			o = calloc(len*2, 1);
-			OCILobRead(_oci_ctx, _oci_err, info->value, &len, 1, o, len*2, (dvoid *)0, (sb4 (*)(dvoid *, CONST dvoid *, ub4, ub1))0, (ub2)0, (ub1)SQLCS_IMPLICIT);
-			o = AUTORELEASE([[NSString alloc] initWithBytesNoCopy: o  length: len  encoding: NSUTF8StringEncoding  freeWhenDone: YES]);
+			OCILobRead(_oci_ctx, _oci_err, info->value, &len, 1, o, len*2, (dvoid *)0, (sb4 (*)(dvoid *, CONST dvoid *, ub4, ub1))0, (ub2)OCI_UTF16ID, (ub1)SQLCS_IMPLICIT);
+			o = AUTORELEASE([[NSString alloc] initWithBytesNoCopy: o  length: len*2  encoding: NSUTF16StringEncoding  freeWhenDone: YES]);
 		      }
 		  }
 		  break;
