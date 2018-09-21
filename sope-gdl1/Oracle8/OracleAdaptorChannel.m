@@ -336,6 +336,7 @@ static void DBTerminate()
       checkerr(_oci_err, status);
       NSLog(@"Statement execute failed (OCI_ERROR): %@", theExpression);
 
+#if 0
       // We check to see if we lost connection and need to reconnect.
       serverStatus = 0;
       OCIAttrGet((dvoid *)_oci_env, OCI_HTYPE_SERVER, (dvoid *)&serverStatus, (ub4 *)0, OCI_ATTR_SERVER_STATUS, _oci_err);
@@ -361,6 +362,7 @@ static void DBTerminate()
                 NSLog(@"Could not re-establish connection to Oracle - statement re-processing aborted.");
 	    }
 	}
+#endif
       return NO;
     }
 
