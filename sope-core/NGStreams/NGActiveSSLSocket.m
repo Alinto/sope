@@ -216,13 +216,15 @@ static BIO_METHOD streamBIO = {
   if ((self = [super initWithDomain:_domain])) {
     //BIO *bio_err;
     static BOOL didGlobalInit = NO;
-    
+
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
     if (!didGlobalInit) {
       /* Global system initialization*/
       SSL_library_init();
       SSL_load_error_strings();
       didGlobalInit = YES;
     }
+#endif /* OPENSSL_VERSION_NUMBER */
 
     /* An error write context */
     //bio_err = BIO_new_fp(stderr, BIO_NOCLOSE);
