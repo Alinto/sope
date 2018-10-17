@@ -1,3 +1,86 @@
+commit 0aa1ddb95534bf85dba8c733835418d2ce2039ad
+Author: DJ Lucas <dj@lucasit.com>
+Date:   Sat Oct 13 23:47:18 2018 -0500
+
+    Don't use SSL_library_init() and friends for OpenSSL 1.1.0.
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit 7440b66c054e67049969767084f7feb244b83224
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Sat Sep 22 10:27:26 2018 -0400
+
+    Revert "(fix) remove un-needed library link"
+    
+    This reverts commit 834f8c735dab3ab4008170ae7c72f61e7c30548e.
+
+M	sope-gdl1/Oracle8/GNUmakefile
+
+commit 31762856c94aa40bbbc7c759528cbf085c4516db
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 21 12:45:40 2018 -0400
+
+    (fix) avoid trying to reconnect, the check for OCI_ATTR_SERVER_STATUS is always bogus
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit a08001b0379f9d1d4be8afb46fd7e0c2f339201b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 21 11:18:17 2018 -0400
+
+    (fix) force reading data in UTF-16
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit 834f8c735dab3ab4008170ae7c72f61e7c30548e
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 21 10:24:25 2018 -0400
+
+    (fix) remove un-needed library link
+
+M	sope-gdl1/Oracle8/GNUmakefile
+
+commit 23c7f81c125a82c3a2f56da686d171f971527c16
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Sep 20 09:15:22 2018 -0400
+
+    Use the non-deprecated function
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit 471bfae774b32a266a1bf5f144426007c07c3f3f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Sep 4 15:04:36 2018 -0400
+
+    (fix) added more logging
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+M	sope-gdl1/Oracle8/OracleAdaptorChannelController.m
+
+commit 654ba58f2fedd1d1fb233b35b3a7dea4d1733d1c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Aug 28 06:50:29 2018 -0400
+
+    Fixed typo
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit e4bc04663ca0abf6e0a99d88ffacaf2b3b166949
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Aug 27 08:40:41 2018 -0400
+
+    (fix) improved debugging
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit c5d07009b71660490d41349da539bb62f9e6156d
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Aug 24 09:03:11 2018 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit a6703c60f03af455e7e73a7f836eb3ed6be7f397
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Aug 21 12:38:58 2018 -0400
