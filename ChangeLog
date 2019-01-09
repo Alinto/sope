@@ -1,3 +1,19 @@
+commit 39a84e811cfdd1aa246386a6f38b4f2e2ff68c2e
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 14 11:15:26 2018 -0500
+
+    (fix) added EAS fix for MobileIron MDM
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit ed132260a6f33da61b905507685e645453737563
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Oct 17 11:20:42 2018 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 0aa1ddb95534bf85dba8c733835418d2ce2039ad
 Author: DJ Lucas <dj@lucasit.com>
 Date:   Sat Oct 13 23:47:18 2018 -0500
