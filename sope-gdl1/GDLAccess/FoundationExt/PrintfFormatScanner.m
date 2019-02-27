@@ -36,10 +36,10 @@
     // possible to be NULL at all, but we're called with an array as
     // argument instead of a va_list in EOSQLQualifier and are thus
     // calling __va_copy on an array, which is something that really
-    // shouldn't be done. Checking whether args is NULL breaks on arm
-    // and alpha however, because a va_list isn't a pointer, so we
-    // don't do the check on arm and alpha.
-#if !defined(__arm__) && !defined(__aarch64__) && !defined(__alpha__)
+    // shouldn't be done. Checking whether args is NULL breaks on arm,
+    // alpha and sh4 however, because a va_list isn't a pointer, so we
+    // don't do the check on arm, alpha and sh4.
+#if !defined(__arm__) && !defined(__aarch64__) && !defined(__alpha__) && !defined(__sh__)
     if (!args)
       return format;
 #endif
