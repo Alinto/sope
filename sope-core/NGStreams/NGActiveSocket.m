@@ -629,8 +629,6 @@
       switch (errno) {
         case EINTR:
           continue;
-        case EBADF:
-          goto notAlive;
         default:
           NSLog(@"socket select() failed: %s", strerror(errno));
           goto notAlive;
