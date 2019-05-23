@@ -363,6 +363,7 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
     e = [[NGImap4ParserException alloc]
 	  initWithFormat:@"Could not open temporary file %@", path];
     [self setLastException:[e autorelease]];
+    [self logWithFormat: [e reason]];
     return nil;
   }
       
