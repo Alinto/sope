@@ -610,10 +610,25 @@
 }
 
 - (BOOL)isAlive {
-  if (self->fd == NGInvalidSocketDescriptor)
+  if (self->fd == NGInvalidSocketDescriptor ||
+      !self->remoteAddress)
     return NO;
   
   /* poll socket for input */
+#if 1
+  {
+    struct pollfd pfd;
+    int ret,  timeout = 5;
+    pfd.fd = self->fd;
+    pfd.events = POLLIN|POLLOUT;
+
+    while (YES) {
+      ret = poll(&pfd, 1, timeout);
+      if (ret > 0) return YES;
+      if (ret < 0) goto notAlive;
+    }
+  }
+#else
   {
     struct timeval to;
     fd_set readMask;
@@ -639,6 +654,7 @@
     if (!FD_ISSET(self->fd, &readMask)) 
       return YES;
   }
+#endif
 
   /*
     input is pending: If select() indicates pending input, but ioctl()
@@ -665,7 +681,7 @@
   close(self->fd);
 #endif
   self->fd = NGInvalidSocketDescriptor;
-  RELEASE(self->remoteAddress); self->remoteAddress = nil;
+  DESTROY(self->remoteAddress);
   return NO;
 }
  
