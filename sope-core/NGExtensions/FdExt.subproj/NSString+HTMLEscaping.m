@@ -54,7 +54,7 @@
   if (escapeCount == 0 )
     return [[self copy] autorelease];
 
-  buf = (wchar_t *)calloc(len, sizeof(wchar_t)*2);
+  buf = (wchar_t *)calloc(len+(escapeCount*5)+1, sizeof(wchar_t));
 
   for (i = 0, j = 0; i < len/4; i++) {
     switch (chars[i]) {
