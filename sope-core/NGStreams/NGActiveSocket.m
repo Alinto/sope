@@ -631,7 +631,7 @@
       case EINTR:
         continue;
       default:
-        NSLog(@"socket select() failed: %s", strerror(errno));
+        NSLog(@"socket poll() failed: %s", strerror(errno));
         goto notAlive;
       }
     }
