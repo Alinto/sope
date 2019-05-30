@@ -618,14 +618,22 @@
 #if 1
   {
     struct pollfd pfd;
-    int ret,  timeout = 5;
+    int ret, timeout = 5;
     pfd.fd = self->fd;
     pfd.events = POLLIN|POLLOUT;
 
     while (YES) {
       ret = poll(&pfd, 1, timeout);
-      if (ret > 0) return YES;
-      if (ret < 0) goto notAlive;
+      if (ret >= 0)
+        break;
+
+      switch (errno) {
+      case EINTR:
+        continue;
+      default:
+        NSLog(@"socket select() failed: %s", strerror(errno));
+        goto notAlive;
+      }
     }
   }
 #else
