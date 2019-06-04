@@ -615,7 +615,7 @@
     return NO;
   
   /* poll socket for input */
-#if 0
+#if 1
   {
     struct pollfd pfd;
     int ret, timeout = 5;

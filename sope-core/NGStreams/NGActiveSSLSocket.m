@@ -375,4 +375,9 @@ static BIO_METHOD streamBIO = {
 
 #endif
 
+- (BOOL)isAlive {
+  return (SSL_get_shutdown(self->ssl) == 0);
+}
+
+
 @end /* NGActiveSSLSocket */
