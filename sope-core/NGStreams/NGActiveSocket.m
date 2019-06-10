@@ -620,7 +620,7 @@
     struct pollfd pfd;
     int ret, timeout = 5;
     pfd.fd = self->fd;
-    pfd.events = POLLIN|POLLOUT;
+    pfd.events = POLLIN;
 
     while (YES) {
       ret = poll(&pfd, 1, timeout);
@@ -634,6 +634,11 @@
         NSLog(@"socket poll() failed: %s", strerror(errno));
         goto notAlive;
       }
+    }
+
+    /* no input is pending, connection is alive */
+    if (!(pfd.revents & POLLIN)) {
+      return YES;
     }
   }
 #else
