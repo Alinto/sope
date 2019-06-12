@@ -74,7 +74,7 @@ Build flags:
   --with-gnustep          install in GNUstep tree
   --enable-debug          turn on debugging and compile time warnings
   --enable-strip          turn on stripping of debug symbols
-  --with-ssl=SSL          specify ssl library (none, libssl, gnutls, auto) [auto]
+  --with-ssl=SSL          specify ssl library (none, ssl, gnutls, auto) [auto]
   --enable-xml            Enable xml support (auto if unspecified)
   --enable-mysql          Enable mysql support (auto if unspecified)
   --enable-postgresql     Enable postgresql support (auto if unspecified)
