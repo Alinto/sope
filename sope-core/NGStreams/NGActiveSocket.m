@@ -610,8 +610,7 @@
 }
 
 - (BOOL)isAlive {
-  if (self->fd == NGInvalidSocketDescriptor ||
-      !self->remoteAddress)
+  if (self->fd == NGInvalidSocketDescriptor)
     return NO;
   
   /* poll socket for input */
