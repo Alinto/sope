@@ -1,3 +1,101 @@
+commit 44539feee74e3f7f76ca7061c31ae3fac4f00c78
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jul 8 10:39:49 2019 -0400
+
+    (fix) be more permissive about broken state
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit d7d5679d23f8f833aba226cb536495f2e6233eea
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 10 13:37:11 2019 -0400
+
+    (fix) check if fd has any pending read
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit d5043f35c2101cdee793fa4631e0304221b02a57
+Author: Janne Heß <janne@hess.ooo>
+Date:   Mon Jun 10 00:56:06 2019 +0200
+
+    configure: Harmonize help and implementation
+
+M	configure
+
+commit b8a712d0558b28f1d52340a554cf0e0997f50412
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jun 4 11:44:31 2019 -0400
+
+    (fix) re-enabled poll() and added isAlive for SSL sockets
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 2c53f8800bd62b7fc824405b7e7bec0e3007e49b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 3 16:05:50 2019 -0400
+
+    Reverted the old select code for now
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 0d2ea932359ce016c2481358a37f9a082263a5b9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 30 13:38:26 2019 -0400
+
+    (fix) proper error message
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 65ae507ac33a47943bd419ee099931b24fe420d4
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 30 13:34:38 2019 -0400
+
+    (fix) improve polling code
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 1b754c106c47bd171a1dcd7f87d0193d9cf80150
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 23 12:48:51 2019 -0400
+
+    (fix) use poll instead of select to avoid stack smashing with over 538 processes
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 5ea4be632df98679f6f254867c078cca2d2a29b4
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 23 10:57:30 2019 -0400
+
+    (fix) improving buffer sizing to avoid overruns
+
+M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
+
+commit bf0441560db807ee2216e66cd0d06c8b785fb570
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 23 10:56:25 2019 -0400
+
+    (fix) improve logging
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 8cf45c4d6fa114bc5d7ffa9bb8776de6389472d7
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon May 13 14:35:54 2019 -0400
+
+    (fix) improved debugging
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit f9d2aa0d838a7d209bc18f0a51977416ff556312
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Feb 21 09:47:54 2019 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 2ca5842d863fd9f25593c6b608f5a1954f79d345
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Feb 14 14:15:22 2019 -0500
@@ -43,7 +141,7 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Sat Sep 22 10:27:26 2018 -0400
 
     Revert "(fix) remove un-needed library link"
-
+    
     This reverts commit 834f8c735dab3ab4008170ae7c72f61e7c30548e.
 
 M	sope-gdl1/Oracle8/GNUmakefile
@@ -159,7 +257,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon May 7 16:13:51 2018 -0400
 
     Fix sorting of array of arrays
-
+    
     We now handle empty arrays.
 
 M	sope-core/EOControl/EOSortOrdering.m
@@ -210,7 +308,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Feb 6 15:31:45 2018 -0500
 
     Fix parsing of quota root in IMAP server response
-
+    
     Fixes #4382
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
@@ -254,60 +352,60 @@ Author: Ivan Zakharyaschev <imz@altlinux.org>
 Date:   Mon Oct 9 18:15:35 2017 +0300
 
     _{encodeTo,decodeOf}ModifiedUTF7(): 64th digit of the base is "," (RFC3501)
-
+    
     According to https://tools.ietf.org/html/rfc3501#section-5.1.3 ,
     in comparison to Base64 encoding, "," should be used instead of "/"
     as the greatest digit of the base.
-
+    
     Of course, this meant that the encodings used by an IMAP server (e.g.,
     dovecot) and SOGo did not match when they were communicating with each
     other.
-
+    
     For example, when SOGo attempts to create a folder whose encoding
     includes the base64 "/" digit, it is not accepted as valid mUTF7 by
     the IMAP server:
-
+    
     C[0x5649de0d5d30]: 5 LIST "" ""
     S[0x5649de0f3640]: * LIST (\Noselect) "/" ""
     S[0x5649de0f3640]: 5 OK List completed (0.001 + 0.040 + 0.039 secs).
     C[0x5649de0d5d30]: 6 create "INBOX/&BD8EMAQ/BDA-"
     S[0x5649de0f3640]: 6 NO Mailbox name is not valid mUTF-7 (0.001 + 0.000 secs).
-
+    
     In the other direction, when such a folder is listed by the IMAP
     server, it appears with a ",", for example: "&BD8EMAQ/BDA-". And this
     is not correctly decoded by SOGo due to the fact that "," is not known
     to SOGo as a digit in this base and is mapped to -1 by the internal
     table, which results in a wrong Unicode code.
-
+    
     An example of a Unicode string which would trigger this bug is a
     string with U+043F CYRILLIC SMALL LETTER PE as the third letter:
-
+    
     $ printf '\x04\x3f\x04\x30\x04\x3f' | recode ucs-2..
     $ printf '\x04\x3f\x04\x30\x04\x3f' | base64
     BD8EMAQ/
-
+    
     Three two-byte Unicode (Cyrillic) characters correspond to eight 6-bit
     base64 digits, the last one being "/":
-
+    
     U+043F                U+0430                 U+043F
     0000 01|00 0011 1111  00|00 0100 0011 00|00  0000 0100 00|11 1111
           B|      D|       8|      E|      M|       A|      Q|      /|
-
+    
     This bug has been reported in:
-
+    
     https://sogo.nu/bugs/view.php?id=4308
     https://bugzilla.altlinux.org/show_bug.cgi?id=32426
     https://bugzilla.altlinux.org/show_bug.cgi?id=33722
-
+    
     and a part of the problem described in
     https://sogo.nu/bugs/view.php?id=2318 must be caused by incorrect
     mUTF7 encoding, too (and hence must have not been fixed completely
     before):
-
+    
     And I see next messages when I try to open Cyrillic folder:
     C[0x7fb2e23a77a0]: 5 select "&BBQEPgRBBEIEQwT/BEs-"
     S[0x7fb2e21fb690]: 5 NO Invalid mailbox name: &BBQEPgRBBEIEQwT/BEs-
-
+    
     As can you see sogo sends wrong folder name:
     received "&BBQEPgRBBEIEQwQ,BEs-"
     sent "&BBQEPgRBBEIEQwT/BEs-"
@@ -473,7 +571,7 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 2 16:29:07 2016 -0500
 
     Revert "(fix) if no handler defined, raise the exception"
-
+    
     This reverts commit fa536470e65ef075dea80c1a143af12aa7922f87.
 
 M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
@@ -531,7 +629,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 21 13:11:42 2016 -0500
 
     Use %u instead of %d in NGImap4Client
-
+    
     Fixes #3908
 
 M	sope-mime/NGImap4/NGImap4Client.m
@@ -687,7 +785,7 @@ Author: Patrice Levesque <github-wayne@ptaff.ca>
 Date:   Wed Jun 8 17:14:05 2016 -0400
 
     Fix builds in directory names containing spaces
-
+    
     Prevent ./configure failure when run from a directory
     such as "/home/bob/my own sope directory/"
 
@@ -698,7 +796,7 @@ Author: Patrice Levesque <github-wayne@ptaff.ca>
 Date:   Tue Jun 7 11:20:57 2016 -0400
 
     Add -O2 compilation by default and -g debug info
-
+    
     Also when possible, store GCC command-line switches
     in the binaries for easier debugging.
 
@@ -718,7 +816,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jun 1 09:12:28 2016 -0400
 
     Fix decoding of attachment filename
-
+    
     Partially resolves #2272
 
 M	sope-mime/NGMime/NGMimeContentDispositionHeaderFieldGenerator.m
@@ -746,7 +844,7 @@ Author: Patrice Levesque <github-wayne@ptaff.ca>
 Date:   Thu May 12 16:50:57 2016 -0400
 
     Allow manual override of MySQL connection charset
-
+    
     By default, SOGo connects to MySQL using the 'utf8' charset which maps to an incomplete Unicode implementation.  This change introduces the MySQL4Encoding configuration variable that can optionally be set to 'utf8mb4' to allow complete Unicode coverage; requires a properly configured MySQL >= 5.5 server.
 
 M	sope-gdl1/MySQL/MySQL4Channel.m
@@ -812,7 +910,7 @@ Author: Bernard Cafarelli <bernard.cafarelli@gmail.com>
 Date:   Thu Mar 10 11:20:15 2016 +0100
 
     Fix mysql_config calls
-
+    
     Original patch by Russell Knighton <russell@annunaki2k2.co.uk>
     Gentoo bug: https://bugs.gentoo.org/show_bug.cgi?id=566138
 
@@ -831,7 +929,7 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 16 16:23:25 2016 -0500
 
     (feat) new feature to limit the upload size using WOMaxUploadSize
-
+    
     This limit is specified in kilobytes. 1024 == 1 MB.
 
 M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
@@ -987,13 +1085,13 @@ Author: hasufell <hasufell@hasufell.de>
 Date:   Tue Nov 3 17:09:02 2015 +0100
 
     configure: allow more explicit control over dependencies
-
+    
     Previously the 'checkLinking <lib> optional' strings caused
     trouble for distributions, because these checks are automagic, as in:
     even if the user doesn't want ldap support, but ldap exists on the
     system, it will still be used, possibly causing problems if
     ldap is removed afterwards.
-
+    
     Making these things explicit fixes those problems. Default is
     still automagic, unless --enable-<feature> or --disable-<feature>
     is passed.
@@ -1297,12 +1395,12 @@ Author: Juan Vallés <jvalles@zentyal.com>
 Date:   Wed Oct 7 16:36:35 2015 +0200
 
     Compute the exact string length for IMAP commands
-
+    
     By computing the maximum length and then using `strlen()` we were being
     efficient, but if there was a `\0` in the command (e.g. when there is an
     attachment in a message and its data has that byte), `strlen()` skipped
     the rest of the string and returned a smaller length.
-
+    
     Suggested `NEWS` line:
     * `Avoid server freeze due to attached files`
 
@@ -1337,7 +1435,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Sep 3 14:12:49 2015 -0400
 
     Fix parsing of email that contains a comma
-
+    
     Fixes #3301 #3306
 
 M	sope-mime/NGMail/NGMailAddressParser.m
@@ -1347,12 +1445,12 @@ Author: Javier Amor García <jamor@zentyal.com>
 Date:   Thu Aug 20 14:53:18 2015 +0200
 
     sope-mime: Fixed UTF-8 q-encoding in MIME headers
-
+    
     The q-encoding was broke because it encoded the whole
     header line; this made MIME parameters unrecognizable
     by client.
     This commit makes a more selective encoding.
-
+    
     The error triggered a failure when sending attachments
     with no-latin file names.
 
@@ -1461,7 +1559,7 @@ Author: Javier Amor García <jamor@zentyal.com>
 Date:   Mon May 18 14:36:41 2015 +0200
 
     NGLdap: Add LDAP error code to `LDAPException` object.
-
+    
     The error code is stored in the userInfo dictioanry under the key error_code
 
 M	sope-ldap/NGLdap/NGLdapConnection.m
@@ -1479,7 +1577,7 @@ Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Apr 20 14:24:07 2015 +0200
 
     NGImap4Connection:fetchUids retrieve uids in batches
-
+    
     To prevent 'too long request' error
 
 M	sope-mime/NGImap4/NGImap4Connection.m
@@ -1505,9 +1603,9 @@ Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Mar 23 13:38:27 2015 +0100
 
     mime: encode address headers properly
-
+    
     More restrict QP encode based on rfc822, escape all special chars.
-
+    
     This is the way dovecot parses these fields.
 
 M	sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m
@@ -1717,7 +1815,7 @@ Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Sat Nov 29 09:23:06 2014 +0100
 
     Use malloc/free as NGAllocAtomic/NGFree are useless
-
+    
     LIB_FOUNDATION_BOEHM_GC is never used and will never be
     according to inverse-inc devs
 
@@ -1728,9 +1826,9 @@ Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Thu Nov 27 17:21:03 2014 +0100
 
     Fix memory leak when failing to parse a quoted printable
-
+    
     Valgrind report:
-
+    
        604 bytes in 1 blocks are definitely lost in loss record 8,010 of 10,179
           at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
           by 0x2BF73131: _i_NSData_QuotedPrintableCoding_dataByDecodingQuotedPrintableTransferEncoding (in /usr/lib/libNGExtensions.so.4.9.203)
@@ -1740,7 +1838,7 @@ Date:   Thu Nov 27 17:21:03 2014 +0100
           by 0x34CF4312: _i_MAPIStoreFolder__lookupMessageByURL_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
           by 0x34CF497A: _i_MAPIStoreFolder__openMessage_withMID_forWriting_inMemCtx_ (in /usr/lib/GNUstep/SOGo/SOGoBackend.MAPIStore/SOGoBackend)
           by 0x2A5D5013: sogo_folder_open_message (in /usr/lib/x86_64-linux-gnu/mapistore_backends/libMAPIStoreSOGo.so.1.0.0)
-
+    
     In decoding and encoding failing.
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
@@ -1750,9 +1848,9 @@ Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Thu Nov 27 17:21:03 2014 +0100
 
     Fix memory leak when failing to parse a quoted printable
-
+    
     Valgrind report:
-
+    
        604 bytes in 1 blocks are definitely lost in loss record 8,010 of 10,179
           at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
           by 0x2BF73131: _i_NSData_QuotedPrintableCoding_dataByDecodingQuotedPrintableTransferEncoding (in /usr/lib/libNGExtensions.so.4.9.203)
@@ -1770,14 +1868,14 @@ Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Mon Nov 24 23:50:45 2014 +0100
 
     Fix crash when decoding a = at end of the data
-
+    
     In decoding a quoted printable mail. There is a buffer overflow
     as we are always parsing two bytes instead of one.
-
+    
     See the full backtrace at:
-
+    
     https://gist.github.com/sixstone-qq/cb8099b66c2911e8aaf2
-
+    
     This patch avoid regressions to manage = at the end of the source.
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
@@ -1787,9 +1885,9 @@ Author: Samuel Cabrero <samuelcabrero@kernevil.me>
 Date:   Thu Nov 20 17:02:01 2014 +0100
 
     Fix memory leak in file NSString+Imap4.m function stringByDecodingImap4FolderName
-
+    
     Trace:
-
+    
     ==26758== 114,980 bytes in 3,551 blocks are definitely lost in loss record 9,847 of 9,930
     ==26758==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
     ==26758==    by 0x2D203DBD: ??? (in /usr/lib/libgnustep-base.so.1.24.0)
@@ -1846,7 +1944,7 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 20 09:42:42 2014 -0500
 
     Revert "Fix crash when decoding a = at end of the data"
-
+    
     This reverts commit 1544d178c4cf56ee8358f06475c4b3e45dddc11c.
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
@@ -1881,12 +1979,12 @@ Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Fri Nov 14 11:37:04 2014 +0100
 
     Fix crash when decoding a = at end of the data
-
+    
     In decoding a quoted printable mail. There is a buffer overflow
     as we are always parsing two bytes instead of one.
-
+    
     See the full backtrace at:
-
+    
     https://gist.github.com/sixstone-qq/cb8099b66c2911e8aaf2
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
@@ -2116,7 +2214,7 @@ Author: Marcel Waldvogel <waldvogel@netfuture.ch>
 Date:   Fri Jul 4 23:11:54 2014 +0200
 
     Sends "simple" passwords with command
-
+    
     This is necessary for some old IMAP servers, e.g. SmarterMail
 
 M	sope-mime/NGImap4/NGImap4Client.m
@@ -2202,7 +2300,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri May 23 09:35:02 2014 -0400
 
     Return nil where pointers are expected
-
+    
     Fixes #2790
 
 M	sope-core/NGExtensions/NGCustomFileManager.m
@@ -2212,7 +2310,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri May 23 07:46:30 2014 -0400
 
     Make declarations in header match implemenations
-
+    
     Fixes #2789
 
 M	sope-xml/SaxObjC/SaxContentHandler.h
@@ -2492,7 +2590,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jan 30 09:39:26 2014 -0500
 
     Encode big parts in quoted-printable
-
+    
     We now encode messages in quoted-printable when content is bigger than
     72 bytes.
 
@@ -2543,7 +2641,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Mon Nov 18 21:40:39 2013 -0500
 
     Rewrite sanitizeMailAddresses
-
+    
     It should now be more robust and shouldn't crash when handling strange input.
 
 M	sope-mime/NGMail/NGMailAddressParser.h
@@ -2791,7 +2889,7 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 18 13:48:43 2013 -0400
 
     Applied huge patch (slightly modified) from David Chisnall
-
+    
     These fixes are for the FreeBSD/OpenBSD port.
 
 M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
@@ -3007,7 +3105,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Sep 10 12:03:55 2013 -0400
 
     use initWithBytes to handle credentials
-
+    
     That behavior matches what stringByDecodingBase64 does, but this code should
     probably be rewritten to use it instead on rolling its own version.
 
@@ -3018,11 +3116,11 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Sep 10 11:58:35 2013 -0400
 
     Use initWithBytes instead of initWithBytesNocopy
-
+    
     For some strange reason, the dest pointer gets mangled by gnustep
     when the init fails with encoding:NSUTF8StringEncoding.
     Use initWithBytes and free the pointer manually instead.
-
+    
     This avoids a double free crash when handling latin1 encoded creds
 
 M	sope-core/NGExtensions/NGBase64Coding.m
@@ -3032,7 +3130,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Sep 10 11:54:36 2013 -0400
 
     len must be signed
-
+    
     Avoids wrapping if data doesn't contain a ':'
     This avoids an out of memory exception when receiving malformed auth data
 
@@ -3051,10 +3149,10 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Aug 28 17:05:31 2013 -0400
 
     Implement ldap password change for ActiveDirectory
-
+    
     Also works against Samba4. Unfortunately, we don't get detailed error messages
     from AD. On samba4, debug has to be turned quite high to see anything.
-
+    
     The LDAP connection *must* use TLS/SSL, otherwise it won't work.
     See these links for details:
       http://support.microsoft.com/kb/269190
@@ -3068,7 +3166,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Aug 28 09:33:59 2013 -0400
 
     Fix format. Avoid crash on pidfile creation error.
-
+    
     reported by hannes_at_erven.at
 
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
@@ -3086,7 +3184,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Aug 27 16:34:01 2013 -0400
 
     implement isADCompatible
-
+    
     add utility functions along the way
 
 M	sope-ldap/NGLdap/NGLdapConnection.h
@@ -3105,7 +3203,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Aug 27 13:49:28 2013 -0400
 
     Enable debug only if ImapDebugEnabled is enabled
-
+    
     It would probably be better to replace ImapDebugEnabled by something like
     MailDebugEnabled. But this is certainly better than always having debug output
 
@@ -3244,14 +3342,14 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jun 20 00:45:01 2013 -0400
 
     Multiple fixes to logging subsystem
-
+    
       * Defaults.plist: don't hardcode the loglevel for
         WOHttpTransactionLoggerConfig, use default
-
+    
       * Templates/WOxElemBuilder.m: don't setLogLevel on the defaultLogger
       * WOApplication.m: don't setLogLevel on the defaultLogger
       * WOHttpAdaptor/WORequestParser.m: don't setLogLevel on the defaultLogger
-
+    
       * NSObject+Logs.m (debugWithFormat:arguments:): check current
         logLevel value before calling [NGLogger logLevel:message:]
         This squelches debug message at lower log levels
@@ -3289,7 +3387,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Apr 2 21:03:14 2013 -0400
 
     handle sieve capabilities after starttls
-
+    
     Fixes #2132
 
 M	sope-mime/NGImap4/NGSieveClient.m
@@ -3299,7 +3397,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Feb 5 14:07:44 2013 -0500
 
     Use standard proxy headers if remotehost isn't set
-
+    
     The code will now use 'x-forward' or 'x-forwarded-for' header
     if x-webobjects-remote-host is not set.
     Allows for more useful logging (Fixes #2229)
@@ -3328,7 +3426,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jan 31 12:31:25 2013 -0500
 
     Use dnComponents where appropriate
-
+    
     Namely in lastDnComponent and stringByDeletingLastDNComponent
 
 M	sope-ldap/NGLdap/NSString+DN.m
@@ -3338,7 +3436,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jan 31 12:10:09 2013 -0500
 
     Rework dnComponents to use non deprecated ldap api
-
+    
     Use ldap_{str2dn,rdn2str} to build properly encoded/escaped DN components
 
 M	sope-ldap/NGLdap/NSString+DN.m
@@ -3348,7 +3446,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Jan 30 22:21:22 2013 -0500
 
     revert previous fix for #2152
-
+    
     ldap_explode_dn breaks utf8 and AD complains pretty loudly...
 
 M	sope-ldap/NGLdap/NSString+DN.m
@@ -3391,7 +3489,7 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Jan 14 14:24:43 2013 -0500
 
     Fix SMTP AUTH with long login
-
+    
     Fixes #2126
 
 M	sope-mime/NGMail/NGSmtpClient.m
@@ -3409,19 +3507,19 @@ Author: Adam Tkac <vonsch@gmail.com>
 Date:   Wed Dec 19 21:08:05 2012 +0100
 
     NSString+DN.m:dnComponents method failed to parse DNs which contain commas
-
+    
     NSString+DN.m:dnComponents failed to parse for example following DN:
-
+    
     dn: CN=Tkac\, Adam,OU=ITZ,DC=geodis,DC=cz
-
+    
     The DN was splitted into
-
+    
     "CN=Tkac\", "Adam", "OU=ITZ", "DC=geodis", "DC=cz"
-
+    
     which is apparently wrong. Now the DN is splitted correctly into
-
+    
     "CN=Tkac\, Adam", "OU=ITZ", "DC=geodis", "DC=cz"
-
+    
     Signed-off-by: Adam Tkac <vonsch@gmail.com>
     Signed-off-by: Ludovic Marcotte <lmarcotte@inverse.ca>
 
@@ -3456,7 +3554,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Dec 20 10:39:52 2012 -0500
 
     Add support for LDAP URLs and tweak exception code
-
+    
     handle is now a LDAP*
     _reinit: use ldap_initialize if provided with a ldap url
     _exceptionForErrorCode: replace handrolled solution  with ldap_err2str
@@ -3489,7 +3587,7 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Nov 30 10:07:34 2012 -0500
 
     Added ways to obtain Sieve's server capabilities.
-
+    
     This fixes bug #1391.
 
 M	sope-mime/NGImap4/NGSieveClient.h
@@ -3500,7 +3598,7 @@ Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Nov 15 11:53:04 2012 -0500
 
     defaultAppenderClassName: NGLogStderrAppender
-
+    
     Change NGLogAppender fallback appender to NGLogStderrAppender
 
 M	sope-core/NGExtensions/NGExtensions/NGLogAppender.h
@@ -3511,7 +3609,7 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 13 08:34:29 2012 -0500
 
     Removed premature IMAP optmization, causing attachments corruption.
-
+    
     This patch would "corrupt" some attachment when viewing them, or
     saving them to the local filesystem. Files would be truncated, or
     exceed in bytes, rendering them useless.
@@ -3525,7 +3623,7 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 13 08:30:08 2012 -0500
 
     Removed useless and buggy optimization.
-
+    
     This optimization would break heavily localization support in SOGo.
     This patch might be reviewed later, but for now, we remove it.
 
@@ -4344,10 +4442,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Sep 10 17:09:42 2012 +0000
 
     See sope-appserver/NGObjWeb/ChangeLog
-
+    
     Monotone-Parent: bb3fdad58223adb3b5db5802b078e46cc0dd076a
     Monotone-Revision: cc3d4a024fbe9c9c2602de7f061655ffb2d3c786
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2012-09-10T17:09:42
     Monotone-Branch: ca.inverse.sope
@@ -4360,10 +4458,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 6 08:48:49 2012 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 2f23e55e9d7b67297faba428abc1e017f8ec6072
     Monotone-Revision: c766aa285f3a2511e4e728b4aa87faa112521be5
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-09-06T08:48:49
     Monotone-Branch: ca.inverse.sope
@@ -4377,10 +4475,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Sep 4 17:04:58 2012 +0000
 
     See sope-appserver/NGObjWeb/ChangeLog
-
+    
     Monotone-Parent: 2f23e55e9d7b67297faba428abc1e017f8ec6072
     Monotone-Revision: 2242b23407828ca15b735ac862aadc4b3f143dd2
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2012-09-04T17:04:58
     Monotone-Branch: ca.inverse.sope
@@ -4393,10 +4491,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Sep 4 10:25:11 2012 +0000
 
     Fix for bug #1966
-
+    
     Monotone-Parent: a548133128c8f057cf55481568691064bdebd5f8
     Monotone-Revision: 2f23e55e9d7b67297faba428abc1e017f8ec6072
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-09-04T10:25:11
     Monotone-Branch: ca.inverse.sope
@@ -4408,10 +4506,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 28 08:26:28 2012 +0000
 
     Fix for bug #1927
-
+    
     Monotone-Parent: 511791fc5bfb5cf1f56266a5c55753aa26f958b8
     Monotone-Revision: a548133128c8f057cf55481568691064bdebd5f8
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-08-28T08:26:28
     Monotone-Branch: ca.inverse.sope
@@ -4423,10 +4521,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Aug 27 15:50:44 2012 +0000
 
     See sope-mime/NGMail/ChangeLog
-
+    
     Monotone-Parent: 57e49d338571c56854b554ebf9d7922693920b42
     Monotone-Revision: 511791fc5bfb5cf1f56266a5c55753aa26f958b8
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2012-08-27T15:50:44
     Monotone-Branch: ca.inverse.sope
@@ -4441,7 +4539,7 @@ Date:   Wed Aug 8 17:19:00 2012 +0000
 
     Monotone-Parent: cbd094f7768d84e8bef25c09fa754d85717b26fa
     Monotone-Revision: 3240b1c8d9bdee4e51d428685d65be78bfb185bf
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-08-08T17:19:00
     Monotone-Branch: ca.inverse.sope
@@ -4456,10 +4554,10 @@ Date:   Thu Aug 2 18:45:21 2012 +0000
 
     Mode packaging stuff to its own directory
     Add the rhel spec file
-
+    
     Monotone-Parent: 9fcf97eb10d5be9ee65cc8ce8bf5651e02b25534
     Monotone-Revision: 8cb1826d1f3de08c525682d9ed4355e568ec3727
-
+    
     Monotone-Author: jraby@inverse.ca
     Monotone-Date: 2012-08-02T18:45:21
     Monotone-Branch: ca.inverse.sope
@@ -4543,10 +4641,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jul 23 13:34:24 2012 +0000
 
     Added fix for bug #1593
-
+    
     Monotone-Parent: cbd094f7768d84e8bef25c09fa754d85717b26fa
     Monotone-Revision: 9fcf97eb10d5be9ee65cc8ce8bf5651e02b25534
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-07-23T13:34:24
     Monotone-Branch: ca.inverse.sope
@@ -4559,7 +4657,7 @@ Date:   Tue Jul 10 15:58:47 2012 +0000
 
     Monotone-Parent: bac2c81bb9b48922cfe4173bcbb8c041ec4631ef
     Monotone-Revision: cbd094f7768d84e8bef25c09fa754d85717b26fa
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-07-10T15:58:47
     Monotone-Branch: ca.inverse.sope
@@ -4572,10 +4670,10 @@ Date:   Thu May 31 15:35:55 2012 +0000
 
     include inttypes.h for PRIuPTR macro.
     Causes a warning on lucid 64bit only but the data should be fine.
-
+    
     Monotone-Parent: 2ae372cb89130a900713d9526275ebb1b1d31223
     Monotone-Revision: bac2c81bb9b48922cfe4173bcbb8c041ec4631ef
-
+    
     Monotone-Author: jraby@inverse.ca
     Monotone-Date: 2012-05-31T15:35:55
     Monotone-Branch: ca.inverse.sope
@@ -4588,10 +4686,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 31 12:33:27 2012 +0000
 
     Moved code from SOGo to SOPE regarding lowercasing attribute names
-
+    
     Monotone-Parent: 0971b8d4c54bb6e36c9ddbc585d5ba9ddd05df9a
     Monotone-Revision: 2ae372cb89130a900713d9526275ebb1b1d31223
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-31T12:33:27
     Monotone-Branch: ca.inverse.sope
@@ -4606,10 +4704,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 29 19:01:32 2012 +0000
 
     Patch applied from bug #1594
-
+    
     Monotone-Parent: a53e8be2320aec0d1cd6ec52e82fba427afc9735
     Monotone-Revision: 0971b8d4c54bb6e36c9ddbc585d5ba9ddd05df9a
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-29T19:01:32
     Monotone-Branch: ca.inverse.sope
@@ -4621,10 +4719,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 29 18:56:25 2012 +0000
 
     Patch applied from bug #1664
-
+    
     Monotone-Parent: 494c1e08ea03a172bc351c9989850a6f746fd2d6
     Monotone-Revision: a53e8be2320aec0d1cd6ec52e82fba427afc9735
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-29T18:56:25
     Monotone-Branch: ca.inverse.sope
@@ -4650,10 +4748,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 29 18:50:07 2012 +0000
 
     Applied patch from bug #1817
-
+    
     Monotone-Parent: 8ebc4980bb476d82acbad15b70df3600932b35f2
     Monotone-Revision: 494c1e08ea03a172bc351c9989850a6f746fd2d6
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-29T18:50:07
     Monotone-Branch: ca.inverse.sope
@@ -4665,10 +4763,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 29 18:48:00 2012 +0000
 
     Applied patch from bug #1820
-
+    
     Monotone-Parent: 8d5039967f59c97fd8c653e702602f80dba08abf
     Monotone-Revision: 8ebc4980bb476d82acbad15b70df3600932b35f2
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-29T18:48:00
     Monotone-Branch: ca.inverse.sope
@@ -4681,7 +4779,7 @@ Date:   Thu May 24 14:26:45 2012 +0000
 
     Monotone-Parent: 6f6c97530e1ca62307245ec25b6fab1b9399f99d
     Monotone-Revision: b2721d7f18528c981a921065d3272cca1a9070e8
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-05-24T14:26:45
     Monotone-Branch: ca.inverse.sope
@@ -4694,10 +4792,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 10 17:50:26 2012 +0000
 
     Applied patch for bug #1800 and #1801
-
+    
     Monotone-Parent: 0681181778150eed5fe08a39588d7884861cdbf2
     Monotone-Revision: 251de628e771ed3930ca566995fad547dbce20df
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-10T17:50:26
     Monotone-Branch: ca.inverse.sope
@@ -4713,10 +4811,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 9 11:53:35 2012 +0000
 
     Added patch from bug #1763
-
+    
     Monotone-Parent: 6f6c97530e1ca62307245ec25b6fab1b9399f99d
     Monotone-Revision: 0681181778150eed5fe08a39588d7884861cdbf2
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-09T11:53:35
     Monotone-Branch: ca.inverse.sope
@@ -4756,10 +4854,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 9 10:51:29 2012 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 87432dfeaa5feaee87a4ed6d05a7bb339c095278
     Monotone-Revision: 6f6c97530e1ca62307245ec25b6fab1b9399f99d
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-09T10:51:29
     Monotone-Branch: ca.inverse.sope
@@ -4774,10 +4872,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 9 08:54:14 2012 +0000
 
     Applied fix for bug #1794
-
+    
     Monotone-Parent: 3726e7db829b5ee868cdc21f61798d973f1482d4
     Monotone-Revision: 87432dfeaa5feaee87a4ed6d05a7bb339c095278
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-05-09T08:54:14
     Monotone-Branch: ca.inverse.sope
@@ -4790,7 +4888,7 @@ Date:   Tue May 1 20:34:36 2012 +0000
 
     Monotone-Parent: c7b7f5124aeab9453c93d95272e1bf91e7ac3172
     Monotone-Revision: 3b3113f816e2ec37b42a5fd5982d60e172e2def7
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-05-01T20:34:36
     Monotone-Branch: ca.inverse.sope
@@ -4808,10 +4906,10 @@ Date:   Fri Apr 27 19:56:49 2012 +0000
     sope_SOPEVER_-gdl1-mysql now 'Suggests' mysql-server instead of
     'Recommends'.
     There is usually no need to pull in mysql when doing a sogo install.
-
+    
     Monotone-Parent: 3df3e03bbcdc91d12dcaf95b5eaa7df343f47247
     Monotone-Revision: ac5a630f621998ce587f8395d1e6e7221b923eec
-
+    
     Monotone-Author: jraby@inverse.ca
     Monotone-Date: 2012-04-27T19:56:49
     Monotone-Branch: ca.inverse.sope
@@ -4824,7 +4922,7 @@ Date:   Thu Apr 19 14:22:22 2012 +0000
 
     Monotone-Parent: 835c4a5fbbe9bb44019a84dd66c1469483739afc
     Monotone-Revision: c7b7f5124aeab9453c93d95272e1bf91e7ac3172
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-04-19T14:22:22
     Monotone-Branch: ca.inverse.sope
@@ -4838,7 +4936,7 @@ Date:   Fri Apr 13 15:15:43 2012 +0000
 
     Monotone-Parent: 000e03baf62d699266017ea7e9681fbbfe262382
     Monotone-Revision: 835c4a5fbbe9bb44019a84dd66c1469483739afc
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-04-13T15:15:43
     Monotone-Branch: ca.inverse.sope
@@ -4850,10 +4948,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Apr 2 18:24:18 2012 +0000
 
     Fixed licensing
-
+    
     Monotone-Parent: 91277a54bc09d99eb7c022687bc24ac4529c81d3
     Monotone-Revision: 000e03baf62d699266017ea7e9681fbbfe262382
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-04-02T18:24:18
     Monotone-Branch: ca.inverse.sope
@@ -4867,7 +4965,7 @@ Date:   Tue Mar 27 15:01:51 2012 +0000
 
     Monotone-Parent: 2adb5ade334600e109b08ab00325c5c87d89b847
     Monotone-Revision: 91277a54bc09d99eb7c022687bc24ac4529c81d3
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-03-27T15:01:51
     Monotone-Branch: ca.inverse.sope
@@ -4879,10 +4977,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Mar 23 18:44:43 2012 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 37e6e15919108b7a757e4fecda053baaadd2093b
     Monotone-Revision: 2adb5ade334600e109b08ab00325c5c87d89b847
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-03-23T18:44:43
     Monotone-Branch: ca.inverse.sope
@@ -4895,10 +4993,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Mar 23 18:39:20 2012 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: c60cd0952994b1cdcab7aebd637a1fa8e01da711
     Monotone-Revision: 37e6e15919108b7a757e4fecda053baaadd2093b
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-03-23T18:39:20
     Monotone-Branch: ca.inverse.sope
@@ -4911,10 +5009,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Mar 23 18:36:28 2012 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: df0ef67a4bf2065b385d60810d28973f0fb0c981
     Monotone-Revision: c60cd0952994b1cdcab7aebd637a1fa8e01da711
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-03-23T18:36:28
     Monotone-Branch: ca.inverse.sope
@@ -4927,10 +5025,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Mar 23 13:38:55 2012 +0000
 
     Updated languages codes mapping.
-
+    
     Monotone-Parent: b96d6417b4c71dc3e69b12860fd024d3ad7d9489
     Monotone-Revision: df0ef67a4bf2065b385d60810d28973f0fb0c981
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2012-03-23T13:38:55
     Monotone-Branch: ca.inverse.sope
@@ -4942,10 +5040,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Mar 22 16:40:27 2012 +0000
 
     picky change
-
+    
     Monotone-Parent: 005db4256b2ff313f82c36ae9eb52a4d8c4ab67e
     Monotone-Revision: b96d6417b4c71dc3e69b12860fd024d3ad7d9489
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-03-22T16:40:27
     Monotone-Branch: ca.inverse.sope
@@ -4957,10 +5055,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Mar 22 16:21:46 2012 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 3d7d6d0fe580b2bd77cafeb5765f6fcacac9f273
     Monotone-Revision: 005db4256b2ff313f82c36ae9eb52a4d8c4ab67e
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-03-22T16:21:46
     Monotone-Branch: ca.inverse.sope
@@ -4980,7 +5078,7 @@ Date:   Mon Mar 19 20:55:30 2012 +0000
 
     Monotone-Parent: b86f910c6075f5e82e49d37bc6e4611271e89968
     Monotone-Revision: 3d7d6d0fe580b2bd77cafeb5765f6fcacac9f273
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-03-19T20:55:30
     Monotone-Branch: ca.inverse.sope
@@ -4993,7 +5091,7 @@ Date:   Wed Feb 29 15:51:27 2012 +0000
 
     Monotone-Parent: e9206f8459a263ff918e0b8facd433aa6c1b0b4e
     Monotone-Revision: b86f910c6075f5e82e49d37bc6e4611271e89968
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-29T15:51:27
     Monotone-Branch: ca.inverse.sope
@@ -5007,7 +5105,7 @@ Date:   Tue Feb 28 18:47:28 2012 +0000
 
     Monotone-Parent: 0d4659c4c17f20f0b96d853bed2a6a1fb66557f7
     Monotone-Revision: e9206f8459a263ff918e0b8facd433aa6c1b0b4e
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-28T18:47:28
     Monotone-Branch: ca.inverse.sope
@@ -5021,7 +5119,7 @@ Date:   Mon Feb 27 18:42:48 2012 +0000
 
     Monotone-Parent: b093683a4868512e114edae88b9e95957764b4c6
     Monotone-Revision: 0d4659c4c17f20f0b96d853bed2a6a1fb66557f7
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-27T18:42:48
     Monotone-Branch: ca.inverse.sope
@@ -5038,7 +5136,7 @@ Date:   Wed Feb 22 14:51:37 2012 +0000
 
     Monotone-Parent: 743613f1ea4d6d8c2e4c011a7664c652df8ef33e
     Monotone-Revision: b093683a4868512e114edae88b9e95957764b4c6
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-22T14:51:37
     Monotone-Branch: ca.inverse.sope
@@ -5051,7 +5149,7 @@ Date:   Thu Feb 16 20:35:05 2012 +0000
 
     Monotone-Parent: d45d39a4d591839ed7a4c50453f1d262f8360359
     Monotone-Revision: 743613f1ea4d6d8c2e4c011a7664c652df8ef33e
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-16T20:35:05
     Monotone-Branch: ca.inverse.sope
@@ -5064,7 +5162,7 @@ Date:   Thu Feb 16 20:28:32 2012 +0000
 
     Monotone-Parent: 1b121c0c9891fb09844f64de7ec01bd95dcd0893
     Monotone-Revision: d45d39a4d591839ed7a4c50453f1d262f8360359
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-16T20:28:32
     Monotone-Branch: ca.inverse.sope
@@ -5079,7 +5177,7 @@ Date:   Thu Feb 16 19:46:14 2012 +0000
 
     Monotone-Parent: 8c2e4c4dc578c74711ed9d90287f0dfd342f4361
     Monotone-Revision: 1b121c0c9891fb09844f64de7ec01bd95dcd0893
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-16T19:46:14
     Monotone-Branch: ca.inverse.sope
@@ -5093,7 +5191,7 @@ Date:   Thu Feb 16 03:28:52 2012 +0000
 
     Monotone-Parent: 1499106c726073d801b4d554b1d51eea158e6b18
     Monotone-Revision: 8c2e4c4dc578c74711ed9d90287f0dfd342f4361
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-16T03:28:52
     Monotone-Branch: ca.inverse.sope
@@ -5107,10 +5205,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Feb 16 01:23:55 2012 +0000
 
     Improved error handling regarding nil values
-
+    
     Monotone-Parent: 737bf4b51a51e3e9813a77e8dda9d8306b668994
     Monotone-Revision: 1499106c726073d801b4d554b1d51eea158e6b18
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-02-16T01:23:55
     Monotone-Branch: ca.inverse.sope
@@ -5123,7 +5221,7 @@ Date:   Tue Feb 14 16:34:19 2012 +0000
 
     Monotone-Parent: 0451f94f3496a81d0149daf53e3987a6d42cb925
     Monotone-Revision: 737bf4b51a51e3e9813a77e8dda9d8306b668994
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-14T16:34:19
     Monotone-Branch: ca.inverse.sope
@@ -5137,7 +5235,7 @@ Date:   Tue Feb 14 03:04:34 2012 +0000
 
     Monotone-Parent: b168d3a8503d6652d6985fd328cfed12e5c8df6c
     Monotone-Revision: 0451f94f3496a81d0149daf53e3987a6d42cb925
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-14T03:04:34
     Monotone-Branch: ca.inverse.sope
@@ -5151,7 +5249,7 @@ Date:   Mon Feb 6 15:20:44 2012 +0000
 
     Monotone-Parent: 8b8a037e689b9c65a616a4a148591f98cfe5572c
     Monotone-Revision: 7c135ae304db6f9f5c070c6db456434525ee4ee9
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-06T15:20:44
     Monotone-Branch: ca.inverse.sope
@@ -5165,7 +5263,7 @@ Date:   Mon Feb 6 13:54:00 2012 +0000
 
     Monotone-Parent: 37cf8f46768823a23cf158ff7c9a57589c964ed7
     Monotone-Revision: 8b8a037e689b9c65a616a4a148591f98cfe5572c
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-02-06T13:54:00
     Monotone-Branch: ca.inverse.sope
@@ -5179,10 +5277,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Feb 3 19:10:23 2012 +0000
 
     Patch from ticket #1592.
-
+    
     Monotone-Parent: 37cf8f46768823a23cf158ff7c9a57589c964ed7
     Monotone-Revision: 9f83d6a503f32e3c1f6fe8a0ddb9d6094660782e
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2012-02-03T19:10:23
     Monotone-Branch: ca.inverse.sope
@@ -5196,7 +5294,7 @@ Date:   Tue Jan 31 21:23:55 2012 +0000
 
     Monotone-Parent: 02c927b3e08f384d6aba9f08952af4c2b3b60aa0
     Monotone-Revision: 37cf8f46768823a23cf158ff7c9a57589c964ed7
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2012-01-31T21:23:55
     Monotone-Branch: ca.inverse.sope
@@ -5208,10 +5306,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jan 31 21:20:57 2012 +0000
 
     See sope-appserver/NGObjWeb/ChangeLog.
-
+    
     Monotone-Parent: d20a1575636e50a8c6671ffb3c1efe2b463225e7
     Monotone-Revision: 02c927b3e08f384d6aba9f08952af4c2b3b60aa0
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2012-01-31T21:20:57
     Monotone-Branch: ca.inverse.sope
@@ -5225,10 +5323,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jan 31 16:02:38 2012 +0000
 
     Fixed typo
-
+    
     Monotone-Parent: 05cd5cf046d6d8cb0c454c34d1693fb8fe70d850
     Monotone-Revision: d20a1575636e50a8c6671ffb3c1efe2b463225e7
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-01-31T16:02:38
     Monotone-Branch: ca.inverse.sope
@@ -5240,10 +5338,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jan 31 15:58:50 2012 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 27a98e0cc01cdb0350ef1b49fe1bf8380a5b0741
     Monotone-Revision: 05cd5cf046d6d8cb0c454c34d1693fb8fe70d850
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-01-31T15:58:50
     Monotone-Branch: ca.inverse.sope
@@ -5256,10 +5354,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jan 12 20:00:56 2012 +0000
 
     Added "iOS" for iPhone/iPad client strings
-
+    
     Monotone-Parent: 3ff7813d47cda2243c4744d290ca09054df18fac
     Monotone-Revision: 27a98e0cc01cdb0350ef1b49fe1bf8380a5b0741
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2012-01-12T20:00:56
     Monotone-Branch: ca.inverse.sope
@@ -5272,7 +5370,7 @@ Date:   Tue Jan 10 17:32:49 2012 +0000
 
     Monotone-Parent: 103e4fff058ad63f11219ee11f6805117d740246
     Monotone-Revision: 3ff7813d47cda2243c4744d290ca09054df18fac
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2012-01-10T17:32:49
     Monotone-Branch: ca.inverse.sope
@@ -5286,7 +5384,7 @@ Date:   Fri Dec 30 23:21:37 2011 +0000
 
     Monotone-Parent: 6d0d1c8725a3df86208f3b2c55f4f9bd6087a565
     Monotone-Revision: e619f846465044643ada44d0598cc9723923280c
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-12-30T23:21:37
     Monotone-Branch: ca.inverse.sope
@@ -5301,10 +5399,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 30 17:22:26 2011 +0000
 
     Fix for bug #1382
-
+    
     Monotone-Parent: 00e41d1f78647ab913b68bad93535f9554a94aaf
     Monotone-Revision: a2112c6513358c1ff28c2f936a00c3fe72723427
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-12-30T17:22:26
     Monotone-Branch: ca.inverse.sope
@@ -5319,10 +5417,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 30 14:08:43 2011 +0000
 
     Fix for bug #1423
-
+    
     Monotone-Parent: 6d0d1c8725a3df86208f3b2c55f4f9bd6087a565
     Monotone-Revision: 00e41d1f78647ab913b68bad93535f9554a94aaf
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-12-30T14:08:43
     Monotone-Branch: ca.inverse.sope
@@ -5335,7 +5433,7 @@ Date:   Mon Dec 19 16:39:36 2011 +0000
 
     Monotone-Parent: 6f04c3ff404864219b0b380125d03a078468b946
     Monotone-Revision: 8a88e3aacf55dc11b0afaf09bb87f917fe217816
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-12-19T16:39:36
     Monotone-Branch: ca.inverse.sope
@@ -5348,10 +5446,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Dec 15 19:38:04 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 6f04c3ff404864219b0b380125d03a078468b946
     Monotone-Revision: b9939561d21749b9c1be9b4002f4fc926dddde8a
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-12-15T19:38:04
     Monotone-Branch: ca.inverse.sope
@@ -5366,10 +5464,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Dec 8 18:41:35 2011 +0000
 
     Fixed typo in language name for "nb" (NorwegianBokmaal => NorwegianBokmal).
-
+    
     Monotone-Parent: 1f44a0d5895a6e34af5e973ae98a48b118eb7cd8
     Monotone-Revision: 6f04c3ff404864219b0b380125d03a078468b946
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-12-08T18:41:35
     Monotone-Branch: ca.inverse.sope
@@ -5382,10 +5480,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Dec 7 19:01:13 2011 +0000
 
     Applied fix for bug #1404
-
+    
     Monotone-Parent: 7ebce8df2ddbe7d6cbc534f7c1e7d64ebbc73a72
     Monotone-Revision: 1f44a0d5895a6e34af5e973ae98a48b118eb7cd8
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-12-07T19:01:13
     Monotone-Branch: ca.inverse.sope
@@ -5398,7 +5496,7 @@ Date:   Tue Dec 6 20:28:36 2011 +0000
 
     Monotone-Parent: 3df3e03bbcdc91d12dcaf95b5eaa7df343f47247
     Monotone-Revision: 747d54047e7fe372edb0003f61bcce0af406b5fc
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-12-06T20:28:36
     Monotone-Branch: ca.inverse.sope
@@ -5412,7 +5510,7 @@ Date:   Fri Dec 2 04:15:02 2011 +0000
 
     Monotone-Parent: 07249ff8fa4fe3c361d567ae5d0a3fd19dd903e2
     Monotone-Revision: 20b836ff044516dbe78f1bf17d245894fd51db7f
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-12-02T04:15:02
     Monotone-Branch: ca.inverse.sope
@@ -5424,10 +5522,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Dec 2 03:41:12 2011 +0000
 
     Updated sope-gdl1/Oracle8 for Instant Client v11.
-
+    
     Monotone-Parent: 3df3e03bbcdc91d12dcaf95b5eaa7df343f47247
     Monotone-Revision: 519a452ff4fa7dd1be752deffd406a5d640e7d55
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-12-02T03:41:12
     Monotone-Branch: ca.inverse.sope
@@ -5439,10 +5537,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Dec 1 12:31:55 2011 +0000
 
     Reverted small change from #1459
-
+    
     Monotone-Parent: 07249ff8fa4fe3c361d567ae5d0a3fd19dd903e2
     Monotone-Revision: 83b22fc0d4440f6251f95af50193800d7b85eb02
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-12-01T12:31:55
     Monotone-Branch: ca.inverse.sope
@@ -5455,7 +5553,7 @@ Date:   Tue Nov 29 19:25:59 2011 +0000
 
     Monotone-Parent: 68b5fa4a9ba7533267ab3a5001df82cb7ed3acae
     Monotone-Revision: 07249ff8fa4fe3c361d567ae5d0a3fd19dd903e2
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-29T19:25:59
     Monotone-Branch: ca.inverse.sope
@@ -5469,7 +5567,7 @@ Date:   Tue Nov 29 19:22:40 2011 +0000
 
     Monotone-Parent: 79874d054cbffd7190a1843fc605c697623d604e
     Monotone-Revision: 68b5fa4a9ba7533267ab3a5001df82cb7ed3acae
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-29T19:22:40
     Monotone-Branch: ca.inverse.sope
@@ -5484,7 +5582,7 @@ Date:   Fri Nov 25 18:41:45 2011 +0000
 
     Monotone-Parent: 402c3e3428f597cf9f2eb5de354304ec49553d22
     Monotone-Revision: 4a593664f738279a07d51c8d0d4bb4c56d6fb494
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-25T18:41:45
     Monotone-Branch: ca.inverse.sope
@@ -5497,7 +5595,7 @@ Date:   Fri Nov 25 18:41:14 2011 +0000
 
     Monotone-Parent: 700636fe0e3238b6c058593cbd9699c7a6f75574
     Monotone-Revision: 402c3e3428f597cf9f2eb5de354304ec49553d22
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-25T18:41:14
     Monotone-Branch: ca.inverse.sope
@@ -5510,7 +5608,7 @@ Date:   Fri Nov 25 18:40:56 2011 +0000
 
     Monotone-Parent: 03aa7b4131b9f2025a93f90aa4f5450a648fe953
     Monotone-Revision: 700636fe0e3238b6c058593cbd9699c7a6f75574
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-25T18:40:56
     Monotone-Branch: ca.inverse.sope
@@ -5523,7 +5621,7 @@ Date:   Fri Nov 25 18:38:52 2011 +0000
 
     Monotone-Parent: 30bc7bb2ebafa0449d0fe2c650c67ab2a0b3ef51
     Monotone-Revision: 03aa7b4131b9f2025a93f90aa4f5450a648fe953
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-25T18:38:52
     Monotone-Branch: ca.inverse.sope
@@ -5537,7 +5635,7 @@ Date:   Fri Nov 25 18:35:59 2011 +0000
 
     Monotone-Parent: c3f26456a00a1ece8e3112ff71a237bd0d629d89
     Monotone-Revision: 30bc7bb2ebafa0449d0fe2c650c67ab2a0b3ef51
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-25T18:35:59
     Monotone-Branch: ca.inverse.sope
@@ -5550,10 +5648,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 24 20:12:43 2011 +0000
 
     Added patch from #1459
-
+    
     Monotone-Parent: c3f26456a00a1ece8e3112ff71a237bd0d629d89
     Monotone-Revision: 381381042f096b28e466ae3abec7189eacb5fab4
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-11-24T20:12:43
     Monotone-Branch: ca.inverse.sope
@@ -5566,10 +5664,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 21 14:07:16 2011 +0000
 
     Added more recognized Apple DAV clients
-
+    
     Monotone-Parent: 4cad0c80b603eddecb4f5bf70097952c3edc9527
     Monotone-Revision: c3f26456a00a1ece8e3112ff71a237bd0d629d89
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-11-21T14:07:16
     Monotone-Branch: ca.inverse.sope
@@ -5581,10 +5679,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 17 12:43:35 2011 +0000
 
     Fix for bug #1483
-
+    
     Monotone-Parent: d48f86f9609dac535dc37b591151381ac34b8227
     Monotone-Revision: 4cad0c80b603eddecb4f5bf70097952c3edc9527
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-11-17T12:43:35
     Monotone-Branch: ca.inverse.sope
@@ -5596,10 +5694,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 16 17:50:29 2011 +0000
 
     removed useless variable
-
+    
     Monotone-Parent: 132e678e4871e3ade7f5e2fcb1449258ea986762
     Monotone-Revision: d48f86f9609dac535dc37b591151381ac34b8227
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-11-16T17:50:29
     Monotone-Branch: ca.inverse.sope
@@ -5611,10 +5709,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 16 17:38:23 2011 +0000
 
     Fix for bug #1412
-
+    
     Monotone-Parent: 77fbf2ff8bd28e88111c38f0575e8bc609e7b80f
     Monotone-Revision: 132e678e4871e3ade7f5e2fcb1449258ea986762
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-11-16T17:38:23
     Monotone-Branch: ca.inverse.sope
@@ -5627,7 +5725,7 @@ Date:   Tue Nov 15 16:30:13 2011 +0000
 
     Monotone-Parent: f7eb0b1330fb1f2572ac355c8b56284f424ae649
     Monotone-Revision: 77fbf2ff8bd28e88111c38f0575e8bc609e7b80f
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-15T16:30:13
     Monotone-Branch: ca.inverse.sope
@@ -5639,10 +5737,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Nov 15 04:42:38 2011 +0000
 
     Defined static variables.
-
+    
     Monotone-Parent: 7f0b1a3ccff6cd51736b9d355a48d5d8bcd4222e
     Monotone-Revision: f7eb0b1330fb1f2572ac355c8b56284f424ae649
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-11-15T04:42:38
     Monotone-Branch: ca.inverse.sope
@@ -5657,10 +5755,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 14 20:01:21 2011 +0000
 
     See sope-gdl1/Oracle8/ChangeLog
-
+    
     Monotone-Parent: ee2063e40a66a64fcefe940a83ca7291aa1075d2
     Monotone-Revision: 7f0b1a3ccff6cd51736b9d355a48d5d8bcd4222e
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-11-14T20:01:21
     Monotone-Branch: ca.inverse.sope
@@ -5674,7 +5772,7 @@ Date:   Thu Nov 10 22:24:47 2011 +0000
 
     Monotone-Parent: 251b4565fb618249a9be38b2f6e86da9f39d8945
     Monotone-Revision: ea53e0f7ff4913544446eb78e0e93e6dff8b05c3
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-11-10T22:24:47
     Monotone-Branch: ca.inverse.sope
@@ -5687,10 +5785,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 9 17:28:54 2011 +0000
 
     Improved debugging output for OCILogon() failed calls
-
+    
     Monotone-Parent: 251b4565fb618249a9be38b2f6e86da9f39d8945
     Monotone-Revision: 93ba88226d8461d87cf69e143446db6a92064de7
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-11-09T17:28:54
     Monotone-Branch: ca.inverse.sope
@@ -5702,10 +5800,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Nov 2 18:46:40 2011 +0000
 
     See sope-gdl1/MySQL/ChangeLog.
-
+    
     Monotone-Parent: 6eaf4a45ce4e94507a541be4594b94f2adc500a6
     Monotone-Revision: 251b4565fb618249a9be38b2f6e86da9f39d8945
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-11-02T18:46:40
     Monotone-Branch: ca.inverse.sope
@@ -5719,7 +5817,7 @@ Date:   Mon Oct 31 19:24:03 2011 +0000
 
     Monotone-Parent: 7f482a94282fc309c473e2046177a55354b1ce29
     Monotone-Revision: 6eaf4a45ce4e94507a541be4594b94f2adc500a6
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-10-31T19:24:03
     Monotone-Branch: ca.inverse.sope
@@ -5734,7 +5832,7 @@ Date:   Fri Oct 28 15:11:29 2011 +0000
 
     Monotone-Parent: 4fa3570308238a3dfc1aaaecb57201c299a030ff
     Monotone-Revision: 7f482a94282fc309c473e2046177a55354b1ce29
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-10-28T15:11:29
     Monotone-Branch: ca.inverse.sope
@@ -5748,7 +5846,7 @@ Date:   Wed Oct 26 19:06:29 2011 +0000
 
     Monotone-Parent: 5d63eebbb466666b63354840ace25d1befac9208
     Monotone-Revision: f546e89d450a6ab2501134f06f4318847f35ab19
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-10-26T19:06:29
     Monotone-Branch: ca.inverse.sope
@@ -5761,10 +5859,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 19 09:19:22 2011 +0000
 
     Disabled port comparision which could lead to issues based on certain URLs and it's very unlikely to cause any problems
-
+    
     Monotone-Parent: 9dfff4b07c62ccec2c894fa0bb07d26001c7e7c0
     Monotone-Revision: 68fd87de889636481862e5eb3091f34d1bbe24d8
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-10-19T09:19:22
     Monotone-Branch: ca.inverse.sope
@@ -5777,7 +5875,7 @@ Date:   Tue Oct 18 20:09:19 2011 +0000
 
     Monotone-Parent: 06b0931e9f15b5f1c7da6d46a77161fa1355430b
     Monotone-Revision: 5d63eebbb466666b63354840ace25d1befac9208
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-10-18T20:09:19
     Monotone-Branch: ca.inverse.sope
@@ -5790,7 +5888,7 @@ Date:   Tue Oct 18 19:58:47 2011 +0000
 
     Monotone-Parent: 5ca9f40c9dd55f23cb91650a8c1e7643a82109ba
     Monotone-Revision: 06b0931e9f15b5f1c7da6d46a77161fa1355430b
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-10-18T19:58:47
     Monotone-Branch: ca.inverse.sope
@@ -5802,10 +5900,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Oct 18 12:31:03 2011 +0000
 
     Fix for bug #1096
-
+    
     Monotone-Parent: af90264fc2b3a40aaf122d30a9d5f8c2eb889f0a
     Monotone-Revision: 9dfff4b07c62ccec2c894fa0bb07d26001c7e7c0
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-10-18T12:31:03
     Monotone-Branch: ca.inverse.sope
@@ -5818,7 +5916,7 @@ Date:   Mon Oct 17 21:42:06 2011 +0000
 
     Monotone-Parent: 9dfff4b07c62ccec2c894fa0bb07d26001c7e7c0
     Monotone-Revision: 5ca9f40c9dd55f23cb91650a8c1e7643a82109ba
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-10-17T21:42:06
     Monotone-Branch: ca.inverse.sope
@@ -5830,10 +5928,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Oct 17 21:01:04 2011 +0000
 
     See sope-mime/NGImap4/ChangeLog.
-
+    
     Monotone-Parent: 56660a68caec60b50ae46fce95372af35713a183
     Monotone-Revision: af90264fc2b3a40aaf122d30a9d5f8c2eb889f0a
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-10-17T21:01:04
     Monotone-Branch: ca.inverse.sope
@@ -5846,10 +5944,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Oct 17 19:47:04 2011 +0000
 
     See Changelog.
-
+    
     Monotone-Parent: db3e36b4a57015b6741490de2d7a027515484d89
     Monotone-Revision: 56660a68caec60b50ae46fce95372af35713a183
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-10-17T19:47:04
     Monotone-Branch: ca.inverse.sope
@@ -5862,10 +5960,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Oct 17 17:14:20 2011 +0000
 
     Fix for bug #1457
-
+    
     Monotone-Parent: b0432fdb98b2862ae32a89856985a7f182a91efc
     Monotone-Revision: db3e36b4a57015b6741490de2d7a027515484d89
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-10-17T17:14:20
     Monotone-Branch: ca.inverse.sope
@@ -5877,10 +5975,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 5 12:36:40 2011 +0000
 
     Added fix for bug #1400
-
+    
     Monotone-Parent: 1ae4b707df5b49bc1f28f570464f1da33b5590e0
     Monotone-Revision: b0432fdb98b2862ae32a89856985a7f182a91efc
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-10-05T12:36:40
     Monotone-Branch: ca.inverse.sope
@@ -5894,10 +5992,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 5 12:31:58 2011 +0000
 
     Integrated fix for bug #1405
-
+    
     Monotone-Parent: 60ea81ded2b82c6979e398398fba9a7e84fa9af9
     Monotone-Revision: 1ae4b707df5b49bc1f28f570464f1da33b5590e0
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-10-05T12:31:58
     Monotone-Branch: ca.inverse.sope
@@ -5910,7 +6008,7 @@ Date:   Wed Sep 21 19:22:39 2011 +0000
 
     Monotone-Parent: 7dcdbaf73eb188a1796364219f04d5bd4a6bfc09
     Monotone-Revision: 60ea81ded2b82c6979e398398fba9a7e84fa9af9
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-09-21T19:22:39
     Monotone-Branch: ca.inverse.sope
@@ -5923,10 +6021,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Sun Sep 4 19:45:45 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 24b6d297354ecd5c33b18536da6e0c90803f2d66
     Monotone-Revision: 7dcdbaf73eb188a1796364219f04d5bd4a6bfc09
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-09-04T19:45:45
     Monotone-Branch: ca.inverse.sope
@@ -5940,7 +6038,7 @@ Date:   Mon Aug 8 20:10:58 2011 +0000
 
     Monotone-Parent: fec7b1b9d6da6f601fadc8edd7838a747aa8cbe0
     Monotone-Revision: 24b6d297354ecd5c33b18536da6e0c90803f2d66
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-08-08T20:10:58
     Monotone-Branch: ca.inverse.sope
@@ -5952,10 +6050,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 18:44:40 2011 +0000
 
     Reversed TLS patch
-
+    
     Monotone-Parent: eaf02799a023c3816b1d9a413261687c66eff53a
     Monotone-Revision: fec7b1b9d6da6f601fadc8edd7838a747aa8cbe0
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-29T18:44:40
     Monotone-Branch: ca.inverse.sope
@@ -5971,10 +6069,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 14:00:15 2011 +0000
 
     Small fix to the Debian build files
-
+    
     Monotone-Parent: 1267797e46d28285c9251ef695a8f7d832529994
     Monotone-Revision: eaf02799a023c3816b1d9a413261687c66eff53a
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-29T14:00:15
     Monotone-Branch: ca.inverse.sope
@@ -5986,10 +6084,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 13:50:53 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 2d3145b74b1ff457bedd55fa567dd40099d6a1a4
     Monotone-Revision: 1267797e46d28285c9251ef695a8f7d832529994
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-29T13:50:53
     Monotone-Branch: ca.inverse.sope
@@ -6006,10 +6104,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 12:31:59 2011 +0000
 
     small fix for gcc < 4.6 runtimes
-
+    
     Monotone-Parent: b6554a998b960d3439f7045272e63f6d40d61709
     Monotone-Revision: 5d510eb100bf3a974c06666bd281ab0c0d58c839
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-29T12:31:59
     Monotone-Branch: ca.inverse.sope
@@ -6022,7 +6120,7 @@ Date:   Fri Jul 29 02:14:52 2011 +0000
 
     Monotone-Parent: ea7055a115673a92b88f8a6a30d580af1260bced
     Monotone-Revision: b0a2eb792be5b9615a3f71755613a91984d9d965
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-07-29T02:14:52
     Monotone-Branch: ca.inverse.sope
@@ -6038,10 +6136,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 20:35:23 2011 +0000
 
     small fix for gcc < 4.6 runtimes
-
+    
     Monotone-Parent: ea25201c008b15a227db7f2a74ca849924736651
     Monotone-Revision: b6554a998b960d3439f7045272e63f6d40d61709
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-28T20:35:23
     Monotone-Branch: ca.inverse.sope
@@ -6053,10 +6151,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 20:10:14 2011 +0000
 
     small fix for gcc < 4.6 runtimes
-
+    
     Monotone-Parent: e4a317e41a77a206510300675052d75281aea77a
     Monotone-Revision: 68b7e7a0a76fc6f7178d0b38e814596820fda192
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-28T20:10:14
     Monotone-Branch: ca.inverse.sope
@@ -6068,10 +6166,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 14:52:45 2011 +0000
 
     added missing semi-colon
-
+    
     Monotone-Parent: 4db270e71b371d36efb23b0f11ae53d939812cc8
     Monotone-Revision: e4a317e41a77a206510300675052d75281aea77a
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-28T14:52:45
     Monotone-Branch: ca.inverse.sope
@@ -6084,7 +6182,7 @@ Date:   Thu Jul 28 14:51:02 2011 +0000
 
     Monotone-Parent: 7c32ca09c9f85377e338da353b1eba1c2a194f5a
     Monotone-Revision: ea7055a115673a92b88f8a6a30d580af1260bced
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-07-28T14:51:02
     Monotone-Branch: ca.inverse.sope
@@ -6096,10 +6194,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 14:19:46 2011 +0000
 
     Updated Debian packaging
-
+    
     Monotone-Parent: 70119bf7d87b438040fe83185770175d612d4aec
     Monotone-Revision: 4db270e71b371d36efb23b0f11ae53d939812cc8
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-28T14:19:46
     Monotone-Branch: ca.inverse.sope
@@ -6113,7 +6211,7 @@ Date:   Thu Jul 28 00:56:42 2011 +0000
 
     Monotone-Parent: b55c3d5a2d3c3107e576e9f623b23f17454a9a63
     Monotone-Revision: 430ec2c2501a94576fabbee3fdf471188078af63
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-07-28T00:56:42
     Monotone-Branch: ca.inverse.sope
@@ -6126,10 +6224,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jul 27 14:38:34 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: b55c3d5a2d3c3107e576e9f623b23f17454a9a63
     Monotone-Revision: 70119bf7d87b438040fe83185770175d612d4aec
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-27T14:38:34
     Monotone-Branch: ca.inverse.sope
@@ -6327,7 +6425,7 @@ Date:   Tue Jul 26 02:51:46 2011 +0000
 
     Monotone-Parent: 2c7398a3fedf8786bfbd6a9d65d4cbf771d599b2
     Monotone-Revision: b55c3d5a2d3c3107e576e9f623b23f17454a9a63
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-07-26T02:51:46
     Monotone-Branch: ca.inverse.sope
@@ -6343,7 +6441,7 @@ Date:   Tue Jul 26 02:49:56 2011 +0000
 
     Monotone-Parent: ea412d4d84178decdc9510ea1712b48fd8ce0a93
     Monotone-Revision: 2c7398a3fedf8786bfbd6a9d65d4cbf771d599b2
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-07-26T02:49:56
     Monotone-Branch: ca.inverse.sope
@@ -6356,7 +6454,7 @@ Date:   Tue Jul 26 02:49:38 2011 +0000
 
     Monotone-Parent: 00512840a3566cfba839d23a0c5f59a7bc8662b9
     Monotone-Revision: ea412d4d84178decdc9510ea1712b48fd8ce0a93
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-07-26T02:49:38
     Monotone-Branch: ca.inverse.sope
@@ -6372,7 +6470,7 @@ Date:   Mon Jul 25 14:50:53 2011 +0000
 
     Monotone-Parent: e83ede65860f4b5861aecfd393b724488b35f524
     Monotone-Revision: 00512840a3566cfba839d23a0c5f59a7bc8662b9
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-07-25T14:50:53
     Monotone-Branch: ca.inverse.sope
@@ -6386,10 +6484,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Jul 15 18:01:38 2011 +0000
 
     See ChangeLog.
-
+    
     Monotone-Parent: bb2b434f5b8424fa1b0cb475825a0114ca97c65a
     Monotone-Revision: e83ede65860f4b5861aecfd393b724488b35f524
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-07-15T18:01:38
     Monotone-Branch: ca.inverse.sope
@@ -6404,10 +6502,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jul 6 19:37:37 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 1709d5be2faef98c81803044c45b8869d94b5083
     Monotone-Revision: bb2b434f5b8424fa1b0cb475825a0114ca97c65a
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-06T19:37:37
     Monotone-Branch: ca.inverse.sope
@@ -6421,10 +6519,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jul 5 16:43:26 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: d7a9be812fd5948a1a2ffc3ca8fae9e68db604b4
     Monotone-Revision: 1709d5be2faef98c81803044c45b8869d94b5083
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-07-05T16:43:26
     Monotone-Branch: ca.inverse.sope
@@ -6437,10 +6535,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 29 17:40:32 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 555863e57ce13da9beb5913a24acef71207b4ced
     Monotone-Revision: d7a9be812fd5948a1a2ffc3ca8fae9e68db604b4
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-06-29T17:40:32
     Monotone-Branch: ca.inverse.sope
@@ -6454,10 +6552,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jun 17 12:16:06 2011 +0000
 
     Fix for bug #921
-
+    
     Monotone-Parent: 6a31d2853009c2655df905811252120fe1564f8e
     Monotone-Revision: 555863e57ce13da9beb5913a24acef71207b4ced
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-06-17T12:16:06
     Monotone-Branch: ca.inverse.sope
@@ -6469,10 +6567,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jun 16 15:40:18 2011 +0000
 
     Fix for bug #1262
-
+    
     Monotone-Parent: c209a0a647b14e436b77bc38e0b7b04cc2213d0d
     Monotone-Revision: 6a31d2853009c2655df905811252120fe1564f8e
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-06-16T15:40:18
     Monotone-Branch: ca.inverse.sope
@@ -6484,10 +6582,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jun 16 15:31:59 2011 +0000
 
     Fix for bug #1023
-
+    
     Monotone-Parent: 856965845eee02997e104f46f22a199238f9ed24
     Monotone-Revision: c209a0a647b14e436b77bc38e0b7b04cc2213d0d
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-06-16T15:31:59
     Monotone-Branch: ca.inverse.sope
@@ -6499,10 +6597,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jun 16 15:29:17 2011 +0000
 
     Fix for bug #1166
-
+    
     Monotone-Parent: b904302ec7f7663496c7a17492fc8767c1a1b674
     Monotone-Revision: 856965845eee02997e104f46f22a199238f9ed24
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-06-16T15:29:17
     Monotone-Branch: ca.inverse.sope
@@ -6514,10 +6612,10 @@ Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jun 1 17:45:25 2011 +0000
 
     See ChangeLog.
-
+    
     Monotone-Parent: 343b294ae6b349f6c17c2820edfb834d701eee22
     Monotone-Revision: b904302ec7f7663496c7a17492fc8767c1a1b674
-
+    
     Monotone-Author: flachapelle@inverse.ca
     Monotone-Date: 2011-06-01T17:45:25
     Monotone-Branch: ca.inverse.sope
@@ -6534,10 +6632,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 10 19:25:18 2011 +0000
 
     Update for bug #1022
-
+    
     Monotone-Parent: 66f477f73a8ce773bdb62cd6184905f4336f420e
     Monotone-Revision: 343b294ae6b349f6c17c2820edfb834d701eee22
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-05-10T19:25:18
     Monotone-Branch: ca.inverse.sope
@@ -6549,10 +6647,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon May 9 20:24:23 2011 +0000
 
     Fix for bug #1288
-
+    
     Monotone-Parent: c5a8d5d7bd08d2c13646aa67cda95ba544c90841
     Monotone-Revision: 66f477f73a8ce773bdb62cd6184905f4336f420e
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-05-09T20:24:23
     Monotone-Branch: ca.inverse.sope
@@ -6565,10 +6663,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon May 9 20:12:31 2011 +0000
 
     Fix for bug #1022
-
+    
     Monotone-Parent: de0e01465948db32e2abafb9422ea9eab4948235
     Monotone-Revision: 14f63ed87619d66efaa6e55b50904ff1eb910d3d
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-05-09T20:12:31
     Monotone-Branch: ca.inverse.sope
@@ -6581,7 +6679,7 @@ Date:   Fri Apr 8 15:35:07 2011 +0000
 
     Monotone-Parent: de0e01465948db32e2abafb9422ea9eab4948235
     Monotone-Revision: c9723068f0534907bfebec9248331816410a6e25
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-04-08T15:35:07
     Monotone-Branch: ca.inverse.sope
@@ -6597,7 +6695,7 @@ Date:   Tue Apr 5 16:56:25 2011 +0000
 
     Monotone-Parent: f0054fdcd971986140d813255d32d9d7baf552ca
     Monotone-Revision: de0e01465948db32e2abafb9422ea9eab4948235
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-04-05T16:56:25
     Monotone-Branch: ca.inverse.sope
@@ -6611,7 +6709,7 @@ Date:   Mon Apr 4 15:56:11 2011 +0000
 
     Monotone-Parent: 79068e9caaeaad9627b644cf8fa45afd52ee03e5
     Monotone-Revision: f0054fdcd971986140d813255d32d9d7baf552ca
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-04-04T15:56:11
     Monotone-Branch: ca.inverse.sope
@@ -6625,7 +6723,7 @@ Date:   Fri Apr 1 12:48:33 2011 +0000
 
     Monotone-Parent: 73abf806067a4542d59d36756891867840b5ecab
     Monotone-Revision: 79068e9caaeaad9627b644cf8fa45afd52ee03e5
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-04-01T12:48:33
     Monotone-Branch: ca.inverse.sope
@@ -6640,7 +6738,7 @@ Date:   Wed Mar 30 19:57:28 2011 +0000
 
     Monotone-Parent: a3d4e55651cc3665bc700bca6ff9fe90cfdd5a85
     Monotone-Revision: 73abf806067a4542d59d36756891867840b5ecab
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-30T19:57:28
     Monotone-Branch: ca.inverse.sope
@@ -6655,7 +6753,7 @@ Date:   Wed Mar 30 19:46:56 2011 +0000
 
     Monotone-Parent: 559ec44990593b5f87e22dac3a519a11311555ad
     Monotone-Revision: a3d4e55651cc3665bc700bca6ff9fe90cfdd5a85
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-30T19:46:56
     Monotone-Branch: ca.inverse.sope
@@ -6668,7 +6766,7 @@ Date:   Wed Mar 30 18:24:20 2011 +0000
 
     Monotone-Parent: 01aca3f61dbe0541db88ea9497a114cb2e10f039
     Monotone-Revision: 559ec44990593b5f87e22dac3a519a11311555ad
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-30T18:24:20
     Monotone-Branch: ca.inverse.sope
@@ -6681,7 +6779,7 @@ Date:   Wed Mar 30 18:22:24 2011 +0000
 
     Monotone-Parent: a7ef4a2a412b093da5f4be5031b48b0fea104491
     Monotone-Revision: 01aca3f61dbe0541db88ea9497a114cb2e10f039
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-30T18:22:24
     Monotone-Branch: ca.inverse.sope
@@ -6695,7 +6793,7 @@ Date:   Wed Mar 30 18:17:31 2011 +0000
 
     Monotone-Parent: 437f725698fa559d8db1633148ccfca185ff0f67
     Monotone-Revision: a7ef4a2a412b093da5f4be5031b48b0fea104491
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-30T18:17:31
     Monotone-Branch: ca.inverse.sope
@@ -6715,7 +6813,7 @@ Date:   Wed Mar 30 16:08:43 2011 +0000
 
     Monotone-Parent: b1d6b4263ac7881f719f51573baa184fb221568d
     Monotone-Revision: 437f725698fa559d8db1633148ccfca185ff0f67
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-30T16:08:43
     Monotone-Branch: ca.inverse.sope
@@ -6729,7 +6827,7 @@ Date:   Wed Mar 30 01:03:54 2011 +0000
 
     Monotone-Parent: 20015d753662591857d581e96ca36f36e2d82f3b
     Monotone-Revision: b1d6b4263ac7881f719f51573baa184fb221568d
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-30T01:03:54
     Monotone-Branch: ca.inverse.sope
@@ -6743,7 +6841,7 @@ Date:   Tue Mar 29 18:12:25 2011 +0000
 
     Monotone-Parent: b3f9e634153544d13a2e5a5d59482d88c332f1fd
     Monotone-Revision: 20015d753662591857d581e96ca36f36e2d82f3b
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-29T18:12:25
     Monotone-Branch: ca.inverse.sope
@@ -6758,7 +6856,7 @@ Date:   Tue Mar 29 15:17:10 2011 +0000
 
     Monotone-Parent: 88f115c9599e7844a2240f799cf327c853502ecd
     Monotone-Revision: b3f9e634153544d13a2e5a5d59482d88c332f1fd
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-29T15:17:10
     Monotone-Branch: ca.inverse.sope
@@ -6772,7 +6870,7 @@ Date:   Thu Mar 24 12:40:49 2011 +0000
 
     Monotone-Parent: 4736ea07b321358abcd258e898336df8431e007e
     Monotone-Revision: 88f115c9599e7844a2240f799cf327c853502ecd
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-24T12:40:49
     Monotone-Branch: ca.inverse.sope
@@ -6786,7 +6884,7 @@ Date:   Thu Mar 24 12:37:57 2011 +0000
 
     Monotone-Parent: ca2389fe3a5aa07e0ca7ba4a1ba3fa40f71cd2a4
     Monotone-Revision: 4736ea07b321358abcd258e898336df8431e007e
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-24T12:37:57
     Monotone-Branch: ca.inverse.sope
@@ -6799,7 +6897,7 @@ Date:   Thu Mar 24 12:33:27 2011 +0000
 
     Monotone-Parent: fd32da338e2fa757740eefbb0b8ae78ab559340b
     Monotone-Revision: ca2389fe3a5aa07e0ca7ba4a1ba3fa40f71cd2a4
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-24T12:33:27
     Monotone-Branch: ca.inverse.sope
@@ -6813,7 +6911,7 @@ Date:   Thu Mar 17 20:55:52 2011 +0000
 
     Monotone-Parent: 25bd2f1c11c2ef6913a3c40e82f336887e03c87d
     Monotone-Revision: fd32da338e2fa757740eefbb0b8ae78ab559340b
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-17T20:55:52
     Monotone-Branch: ca.inverse.sope
@@ -6827,7 +6925,7 @@ Date:   Thu Mar 17 16:30:21 2011 +0000
 
     Monotone-Parent: 85d5149fb219351986ce5e95b7693c73716ed059
     Monotone-Revision: 25bd2f1c11c2ef6913a3c40e82f336887e03c87d
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-17T16:30:21
     Monotone-Branch: ca.inverse.sope
@@ -6841,7 +6939,7 @@ Date:   Thu Mar 17 15:54:42 2011 +0000
 
     Monotone-Parent: 5ab60248b61360626ad013bbb715f62fd3e2d040
     Monotone-Revision: 85d5149fb219351986ce5e95b7693c73716ed059
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-17T15:54:42
     Monotone-Branch: ca.inverse.sope
@@ -6855,7 +6953,7 @@ Date:   Thu Mar 17 15:52:02 2011 +0000
 
     Monotone-Parent: 8001919a0b262e34b1e7bd97508ca3df1cca9bba
     Monotone-Revision: 5ab60248b61360626ad013bbb715f62fd3e2d040
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-03-17T15:52:02
     Monotone-Branch: ca.inverse.sope
@@ -6869,7 +6967,7 @@ Date:   Thu Feb 24 20:12:39 2011 +0000
 
     Monotone-Parent: be9dc5b7e13dac03faa057a060653af6008d1906
     Monotone-Revision: 8001919a0b262e34b1e7bd97508ca3df1cca9bba
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2011-02-24T20:12:39
     Monotone-Branch: ca.inverse.sope
@@ -6882,10 +6980,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Feb 23 23:02:01 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: b605553eb6d92d6d091473a50c3148ef02fc28f7
     Monotone-Revision: be9dc5b7e13dac03faa057a060653af6008d1906
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-02-23T23:02:01
     Monotone-Branch: ca.inverse.sope
@@ -6899,10 +6997,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jan 5 22:51:20 2011 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: cea3fd5edf797a3a5aa3b5fcb0ec00b98278842e
     Monotone-Revision: b605553eb6d92d6d091473a50c3148ef02fc28f7
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2011-01-05T22:51:20
     Monotone-Branch: ca.inverse.sope
@@ -6917,7 +7015,7 @@ Date:   Thu Dec 30 13:44:19 2010 +0000
 
     Monotone-Parent: 5f2dcb8f53919cb1fd811816afb8b818465a3dd6
     Monotone-Revision: cea3fd5edf797a3a5aa3b5fcb0ec00b98278842e
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-12-30T13:44:19
     Monotone-Branch: ca.inverse.sope
@@ -6930,10 +7028,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 17 20:53:50 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: b43cf692b49827fd3bdb7aa4623f4fc3874501ae
     Monotone-Revision: 5f2dcb8f53919cb1fd811816afb8b818465a3dd6
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-12-17T20:53:50
     Monotone-Branch: ca.inverse.sope
@@ -6948,10 +7046,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Dec 7 18:20:13 2010 +0000
 
     dropped useless files
-
+    
     Monotone-Parent: bb7c51374ca0618bbfd3191a3294b1493037591f
     Monotone-Revision: aed2ceec003a06eb64daf071977780a99ca08427
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-12-07T18:20:13
     Monotone-Branch: ca.inverse.sope
@@ -6965,7 +7063,7 @@ Date:   Tue Nov 23 14:53:15 2010 +0000
 
     Monotone-Parent: bb7c51374ca0618bbfd3191a3294b1493037591f
     Monotone-Revision: bfd9b7b1adcb089d78763ecf4fc517d39c63be4c
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-11-23T14:53:15
     Monotone-Branch: ca.inverse.sope
@@ -6980,10 +7078,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 10 19:58:51 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: a84d89083c5074c42f4091869e33b834834865dc
     Monotone-Revision: bb7c51374ca0618bbfd3191a3294b1493037591f
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-11-10T19:58:51
     Monotone-Branch: ca.inverse.sope
@@ -6997,10 +7095,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 2 17:47:04 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 334ce1ea6611e00728006a3a82bb74de2055da15
     Monotone-Revision: a84d89083c5074c42f4091869e33b834834865dc
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-11-02T17:47:04
     Monotone-Branch: ca.inverse.sope
@@ -7014,7 +7112,7 @@ Date:   Tue Nov 2 16:32:52 2010 +0000
 
     Monotone-Parent: 2f703e3271e286df3c00152e0464fcc084fea315
     Monotone-Revision: 334ce1ea6611e00728006a3a82bb74de2055da15
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-11-02T16:32:52
     Monotone-Branch: ca.inverse.sope
@@ -7027,7 +7125,7 @@ Date:   Tue Nov 2 16:21:38 2010 +0000
 
     Monotone-Parent: bcdbce4a172e6393f7c9dd505a7c830ebe7d5569
     Monotone-Revision: 2f703e3271e286df3c00152e0464fcc084fea315
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-11-02T16:21:38
     Monotone-Branch: ca.inverse.sope
@@ -7043,7 +7141,7 @@ Date:   Tue Nov 2 12:53:34 2010 +0000
 
     Monotone-Parent: 937d1a127047e0aa38e45f657f460515dc66d5c4
     Monotone-Revision: bcdbce4a172e6393f7c9dd505a7c830ebe7d5569
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-11-02T12:53:34
     Monotone-Branch: ca.inverse.sope
@@ -7056,7 +7154,7 @@ Date:   Mon Nov 1 17:57:27 2010 +0000
 
     Monotone-Parent: 8d6bd0910d4139547fff02487e39a40d0dc07698
     Monotone-Revision: 937d1a127047e0aa38e45f657f460515dc66d5c4
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-11-01T17:57:27
     Monotone-Branch: ca.inverse.sope
@@ -7069,7 +7167,7 @@ Date:   Mon Nov 1 12:39:37 2010 +0000
 
     Monotone-Parent: aeb7aa8954f5273458e8c551c8c4fd15817976ac
     Monotone-Revision: 8d6bd0910d4139547fff02487e39a40d0dc07698
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-11-01T12:39:37
     Monotone-Branch: ca.inverse.sope
@@ -7212,7 +7310,7 @@ Date:   Wed Oct 27 14:18:29 2010 +0000
 
     Monotone-Parent: 91eabdd47423fe94cc55b7326c9ae63c58d32702
     Monotone-Revision: aeb7aa8954f5273458e8c551c8c4fd15817976ac
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-27T14:18:29
     Monotone-Branch: ca.inverse.sope
@@ -7225,7 +7323,7 @@ Date:   Tue Oct 26 20:26:21 2010 +0000
 
     Monotone-Parent: 86da7ae8ad59e676427e5a4304365260cc29ce6f
     Monotone-Revision: 91eabdd47423fe94cc55b7326c9ae63c58d32702
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-26T20:26:21
     Monotone-Branch: ca.inverse.sope
@@ -7238,7 +7336,7 @@ Date:   Mon Oct 25 18:54:50 2010 +0000
 
     Monotone-Parent: 6bc74c53f02feea223e751b09d8e4cdd2a11956f
     Monotone-Revision: 86da7ae8ad59e676427e5a4304365260cc29ce6f
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-25T18:54:50
     Monotone-Branch: ca.inverse.sope
@@ -7250,10 +7348,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Sat Oct 16 18:30:21 2010 +0000
 
     Fix for http://sogo.nu/bugs/view.php?id=909
-
+    
     Monotone-Parent: a6d2805974fa3520dc43149ae8dbd7dc72f4c575
     Monotone-Revision: 6bc74c53f02feea223e751b09d8e4cdd2a11956f
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-10-16T18:30:21
     Monotone-Branch: ca.inverse.sope
@@ -7265,10 +7363,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 8 21:10:37 2010 +0000
 
     Removed NSLog call
-
+    
     Monotone-Parent: c97680ec76b8116f6a89a6fbfdd96aafe8765a7f
     Monotone-Revision: a6d2805974fa3520dc43149ae8dbd7dc72f4c575
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-10-08T21:10:37
     Monotone-Branch: ca.inverse.sope
@@ -7280,10 +7378,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 8 21:05:23 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 294283259afe17fbd3d6a8fcecdd0e385910a860
     Monotone-Revision: c97680ec76b8116f6a89a6fbfdd96aafe8765a7f
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-10-08T21:05:23
     Monotone-Branch: ca.inverse.sope
@@ -7298,7 +7396,7 @@ Date:   Fri Oct 8 18:55:32 2010 +0000
 
     Monotone-Parent: a9f6a3eeb31f56abac8a740944b6e599fadbe07a
     Monotone-Revision: 294283259afe17fbd3d6a8fcecdd0e385910a860
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-08T18:55:32
     Monotone-Branch: ca.inverse.sope
@@ -7312,7 +7410,7 @@ Date:   Fri Oct 8 18:53:12 2010 +0000
 
     Monotone-Parent: 792a3018d7226385d38a75e26074c3791e366d06
     Monotone-Revision: a9f6a3eeb31f56abac8a740944b6e599fadbe07a
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-08T18:53:12
     Monotone-Branch: ca.inverse.sope
@@ -7325,7 +7423,7 @@ Date:   Fri Oct 8 18:53:10 2010 +0000
 
     Monotone-Parent: cfeef63d98e65ee048144929e2932e4e6687d1f6
     Monotone-Revision: 792a3018d7226385d38a75e26074c3791e366d06
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-08T18:53:10
     Monotone-Branch: ca.inverse.sope
@@ -7338,7 +7436,7 @@ Date:   Fri Oct 8 15:47:48 2010 +0000
 
     Monotone-Parent: 8aacbd3a97490b69f50cef2fdce059e1d0013158
     Monotone-Revision: cfeef63d98e65ee048144929e2932e4e6687d1f6
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-08T15:47:48
     Monotone-Branch: ca.inverse.sope
@@ -7352,7 +7450,7 @@ Date:   Fri Oct 8 15:27:43 2010 +0000
 
     Monotone-Parent: c07a069b354f3262396ed734c9aabcd59296b2ec
     Monotone-Revision: 8aacbd3a97490b69f50cef2fdce059e1d0013158
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-08T15:27:43
     Monotone-Branch: ca.inverse.sope
@@ -7366,7 +7464,7 @@ Date:   Thu Oct 7 21:38:31 2010 +0000
 
     Monotone-Parent: ecdc440e8896df29068dbbc60a0e0d38a89a791f
     Monotone-Revision: c07a069b354f3262396ed734c9aabcd59296b2ec
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-07T21:38:31
     Monotone-Branch: ca.inverse.sope
@@ -7387,7 +7485,7 @@ Date:   Thu Oct 7 14:56:48 2010 +0000
 
     Monotone-Parent: 26c1f473aed204ed7db16619362066097b7890c1
     Monotone-Revision: ecdc440e8896df29068dbbc60a0e0d38a89a791f
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-07T14:56:48
     Monotone-Branch: ca.inverse.sope
@@ -7401,7 +7499,7 @@ Date:   Wed Oct 6 13:43:55 2010 +0000
 
     Monotone-Parent: b7801a267e4f3c45af85e3377460ed0a1913af3c
     Monotone-Revision: 26c1f473aed204ed7db16619362066097b7890c1
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-10-06T13:43:55
     Monotone-Branch: ca.inverse.sope
@@ -7415,10 +7513,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 23 19:04:39 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 6ee5af6a8c9a5173c9ea7d067f18d3ff0ec7f517
     Monotone-Revision: 8de1194a868d53b789ec161d51455b4f3422f842
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-09-23T19:04:39
     Monotone-Branch: ca.inverse.sope
@@ -7433,7 +7531,7 @@ Date:   Thu Sep 9 18:54:22 2010 +0000
 
     Monotone-Parent: bd09cb71bd5ec0ee149eebb943ee370f60e92077
     Monotone-Revision: 371157b0acf7f2b57302e0790502ad9c713b06f8
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T18:54:22
     Monotone-Branch: ca.inverse.sope
@@ -7446,7 +7544,7 @@ Date:   Thu Sep 9 18:18:41 2010 +0000
 
     Monotone-Parent: bbe6eb5c262eb73c0019badb62306cf755562cf7
     Monotone-Revision: bd09cb71bd5ec0ee149eebb943ee370f60e92077
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T18:18:41
     Monotone-Branch: ca.inverse.sope
@@ -7459,7 +7557,7 @@ Date:   Thu Sep 9 18:10:06 2010 +0000
 
     Monotone-Parent: aeed4c1c468a84535626e699b64b7b8ab061d9d4
     Monotone-Revision: bbe6eb5c262eb73c0019badb62306cf755562cf7
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T18:10:06
     Monotone-Branch: ca.inverse.sope
@@ -7472,7 +7570,7 @@ Date:   Thu Sep 9 18:08:00 2010 +0000
 
     Monotone-Parent: 3f72264cf3d5ab2a73a520e5e00990a04f78a887
     Monotone-Revision: aeed4c1c468a84535626e699b64b7b8ab061d9d4
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T18:08:00
     Monotone-Branch: ca.inverse.sope
@@ -7485,7 +7583,7 @@ Date:   Thu Sep 9 17:58:43 2010 +0000
 
     Monotone-Parent: cba99de33a61403dfeaad1225e9f99d6cc0c741a
     Monotone-Revision: 3f72264cf3d5ab2a73a520e5e00990a04f78a887
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T17:58:43
     Monotone-Branch: ca.inverse.sope
@@ -7498,7 +7596,7 @@ Date:   Thu Sep 9 17:50:36 2010 +0000
 
     Monotone-Parent: 19ba34cf34d05a18a7b7385b55a3a08a8bcec86d
     Monotone-Revision: cba99de33a61403dfeaad1225e9f99d6cc0c741a
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T17:50:36
     Monotone-Branch: ca.inverse.sope
@@ -7511,7 +7609,7 @@ Date:   Thu Sep 9 16:38:36 2010 +0000
 
     Monotone-Parent: 00782817e3dc9451815dbcddf447d3c7b7233ff4
     Monotone-Revision: 19ba34cf34d05a18a7b7385b55a3a08a8bcec86d
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T16:38:36
     Monotone-Branch: ca.inverse.sope
@@ -7524,7 +7622,7 @@ Date:   Thu Sep 9 16:32:47 2010 +0000
 
     Monotone-Parent: df78dc203bea03c959967aa6f06ce9d89220f7db
     Monotone-Revision: 00782817e3dc9451815dbcddf447d3c7b7233ff4
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T16:32:47
     Monotone-Branch: ca.inverse.sope
@@ -7538,7 +7636,7 @@ Date:   Thu Sep 9 16:20:24 2010 +0000
 
     Monotone-Parent: b849ed6fb2c4ce408354f53689bbbfaab425865e
     Monotone-Revision: df78dc203bea03c959967aa6f06ce9d89220f7db
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T16:20:24
     Monotone-Branch: ca.inverse.sope
@@ -7551,7 +7649,7 @@ Date:   Thu Sep 9 16:17:58 2010 +0000
 
     Monotone-Parent: 6ee5af6a8c9a5173c9ea7d067f18d3ff0ec7f517
     Monotone-Revision: b849ed6fb2c4ce408354f53689bbbfaab425865e
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-09-09T16:17:58
     Monotone-Branch: ca.inverse.sope
@@ -7564,10 +7662,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 2 16:46:39 2010 +0000
 
     Fixed the handling of TLS/SSL sockets
-
+    
     Monotone-Parent: 4cdfac2b03944c4ddb408b6d5e6618620cdf334f
     Monotone-Revision: 6ee5af6a8c9a5173c9ea7d067f18d3ff0ec7f517
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-09-02T16:46:39
     Monotone-Branch: ca.inverse.sope
@@ -7580,7 +7678,7 @@ Date:   Mon Aug 30 21:42:26 2010 +0000
 
     Monotone-Parent: da1af898a9c7e2aa99b063087444d269a67e52c5
     Monotone-Revision: 4cdfac2b03944c4ddb408b6d5e6618620cdf334f
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-30T21:42:26
     Monotone-Branch: ca.inverse.sope
@@ -7594,7 +7692,7 @@ Date:   Mon Aug 30 21:33:12 2010 +0000
 
     Monotone-Parent: 28432890c8b58fb691446255ed8333c70d9135c1
     Monotone-Revision: da1af898a9c7e2aa99b063087444d269a67e52c5
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-30T21:33:12
     Monotone-Branch: ca.inverse.sope
@@ -7607,10 +7705,10 @@ Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 30 19:42:29 2010 +0000
 
     compatibility with gsmake 2.2
-
+    
     Monotone-Parent: 68da0e360669d9370d0d64e6216124fa814549a9
     Monotone-Revision: 28432890c8b58fb691446255ed8333c70d9135c1
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-30T19:42:29
     Monotone-Branch: ca.inverse.sope
@@ -7623,7 +7721,7 @@ Date:   Mon Aug 30 19:42:03 2010 +0000
 
     Monotone-Parent: f051bedf15bee8178f44e8de5fa444e19f546ceb
     Monotone-Revision: 68da0e360669d9370d0d64e6216124fa814549a9
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-30T19:42:03
     Monotone-Branch: ca.inverse.sope
@@ -7695,7 +7793,7 @@ Date:   Mon Aug 30 19:40:45 2010 +0000
 
     Monotone-Parent: 54ff7ccf3d23faf6055a1fbbc7875a6dc05c520c
     Monotone-Revision: f051bedf15bee8178f44e8de5fa444e19f546ceb
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-30T19:40:45
     Monotone-Branch: ca.inverse.sope
@@ -7710,7 +7808,7 @@ Date:   Thu Aug 26 18:10:11 2010 +0000
 
     Monotone-Parent: e5f1c55e889e2363fcf85a8fbf7aab58432582b6
     Monotone-Revision: 54ff7ccf3d23faf6055a1fbbc7875a6dc05c520c
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-26T18:10:11
     Monotone-Branch: ca.inverse.sope
@@ -7724,7 +7822,7 @@ Date:   Thu Aug 26 17:31:10 2010 +0000
 
     Monotone-Parent: 6ee86ff736cb2d6ef7ce2f48b0d7fcf19209b9cd
     Monotone-Revision: e5f1c55e889e2363fcf85a8fbf7aab58432582b6
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-26T17:31:10
     Monotone-Branch: ca.inverse.sope
@@ -7743,7 +7841,7 @@ Date:   Thu Aug 26 15:14:14 2010 +0000
 
     Monotone-Parent: 6d465c81fc81595eebe12fc578e477d8a61fb238
     Monotone-Revision: 6ee86ff736cb2d6ef7ce2f48b0d7fcf19209b9cd
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-26T15:14:14
     Monotone-Branch: ca.inverse.sope
@@ -7757,10 +7855,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 24 13:25:30 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 9b94c673fd500fdd0104adf5a1b1b08b38d3e02d
     Monotone-Revision: 6d465c81fc81595eebe12fc578e477d8a61fb238
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-24T13:25:30
     Monotone-Branch: ca.inverse.sope
@@ -7779,7 +7877,7 @@ Date:   Mon Aug 23 20:43:27 2010 +0000
 
     Monotone-Parent: d1f82032dbb2a2aaab3d0f3e534b46c621fa36b5
     Monotone-Revision: 9b94c673fd500fdd0104adf5a1b1b08b38d3e02d
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-23T20:43:27
     Monotone-Branch: ca.inverse.sope
@@ -7793,7 +7891,7 @@ Date:   Fri Aug 20 16:04:54 2010 +0000
 
     Monotone-Parent: afc17800c31351dd9ce5882bb243bda5d4e64faa
     Monotone-Revision: d1f82032dbb2a2aaab3d0f3e534b46c621fa36b5
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-20T16:04:54
     Monotone-Branch: ca.inverse.sope
@@ -7806,7 +7904,7 @@ Date:   Fri Aug 20 16:02:10 2010 +0000
 
     Monotone-Parent: 709a5756f7d013d76c65c087e66733b8c38ad998
     Monotone-Revision: afc17800c31351dd9ce5882bb243bda5d4e64faa
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-20T16:02:10
     Monotone-Branch: ca.inverse.sope
@@ -7819,7 +7917,7 @@ Date:   Thu Aug 19 14:03:28 2010 +0000
 
     Monotone-Parent: c5baca432370687a033d269e639ab01b8a5e96ac
     Monotone-Revision: 709a5756f7d013d76c65c087e66733b8c38ad998
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-19T14:03:28
     Monotone-Branch: ca.inverse.sope
@@ -7832,7 +7930,7 @@ Date:   Thu Aug 19 14:02:04 2010 +0000
 
     Monotone-Parent: 8abcd902bb2f04604d400242a447793aa6efaeb4
     Monotone-Revision: c5baca432370687a033d269e639ab01b8a5e96ac
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-19T14:02:04
     Monotone-Branch: ca.inverse.sope
@@ -7844,10 +7942,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Aug 13 01:45:10 2010 +0000
 
     Small fix to not trim the last character
-
+    
     Monotone-Parent: d972f733e89b1d906db6f7e5840444e4d98e4197
     Monotone-Revision: 8abcd902bb2f04604d400242a447793aa6efaeb4
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-13T01:45:10
     Monotone-Branch: ca.inverse.sope
@@ -7859,10 +7957,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Aug 12 14:10:37 2010 +0000
 
     Dropped the versitsaxdriver debian package
-
+    
     Monotone-Parent: d9f32b7cb590d58e883d4e60a9713ef35d290f5d
     Monotone-Revision: d972f733e89b1d906db6f7e5840444e4d98e4197
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-12T14:10:37
     Monotone-Branch: ca.inverse.sope
@@ -7875,10 +7973,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Aug 12 14:04:11 2010 +0000
 
     Dropped the libsope-ical stuff.
-
+    
     Monotone-Parent: 80b3287a25725a1ca76cccc57e4826bd2b95e15c
     Monotone-Revision: d9f32b7cb590d58e883d4e60a9713ef35d290f5d
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-12T14:04:11
     Monotone-Branch: ca.inverse.sope
@@ -7893,10 +7991,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Aug 12 12:51:59 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 348e50b9d8d1562398b61e02f9e2764c6e11ab0c
     Monotone-Revision: 80b3287a25725a1ca76cccc57e4826bd2b95e15c
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-12T12:51:59
     Monotone-Branch: ca.inverse.sope
@@ -7912,10 +8010,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Aug 11 19:48:09 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 533a8567bdff250c185e8f60cb31bfe5da83612a
     Monotone-Revision: 348e50b9d8d1562398b61e02f9e2764c6e11ab0c
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-11T19:48:09
     Monotone-Branch: ca.inverse.sope
@@ -7930,7 +8028,7 @@ Date:   Wed Aug 11 19:12:52 2010 +0000
 
     Monotone-Parent: 2af34caac3920829ba0ce43c7af902d546cde1aa
     Monotone-Revision: 533a8567bdff250c185e8f60cb31bfe5da83612a
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-11T19:12:52
     Monotone-Branch: ca.inverse.sope
@@ -7944,7 +8042,7 @@ Date:   Wed Aug 11 19:11:55 2010 +0000
 
     Monotone-Parent: e325a2033a38fcea56e5f431fc77a79acc1c735e
     Monotone-Revision: 2af34caac3920829ba0ce43c7af902d546cde1aa
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-11T19:11:55
     Monotone-Branch: ca.inverse.sope
@@ -7957,7 +8055,7 @@ Date:   Mon Aug 9 15:14:52 2010 +0000
 
     Monotone-Parent: 1bba55dfdf8fa1cb242b99fb0a3ba28456c223b8
     Monotone-Revision: e325a2033a38fcea56e5f431fc77a79acc1c735e
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-08-09T15:14:52
     Monotone-Branch: ca.inverse.sope
@@ -7970,10 +8068,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 3 19:11:37 2010 +0000
 
     Updated .mtn-ignore
-
+    
     Monotone-Parent: 5f7c8897d62e6017bcb8eaf4c0bfb6a78c439856
     Monotone-Revision: 37d9bd63a410572817861c3595f91d0017af98ee
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-03T19:11:37
     Monotone-Branch: ca.inverse.sope
@@ -7985,10 +8083,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 3 19:08:33 2010 +0000
 
     Added .mtn-ignore
-
+    
     Monotone-Parent: 09af9941cdd02bc812882a357d02e20a334ea3ed
     Monotone-Revision: 5f7c8897d62e6017bcb8eaf4c0bfb6a78c439856
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-03T19:08:33
     Monotone-Branch: ca.inverse.sope
@@ -8000,10 +8098,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Aug 2 14:18:24 2010 +0000
 
     Dropped the FrontBase2 GDL adaptor.
-
+    
     Monotone-Parent: 7ae648e99b2ae1a437b3b23933c9fd60c6f92b77
     Monotone-Revision: 09af9941cdd02bc812882a357d02e20a334ea3ed
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-08-02T14:18:24
     Monotone-Branch: ca.inverse.sope
@@ -8051,7 +8149,7 @@ Date:   Fri Jul 30 17:40:54 2010 +0000
 
     Monotone-Parent: 7c7e2db643b28b0d79a640fd738d7913ba3f686d
     Monotone-Revision: dcf8fb4dfcb4357ea70aa1937ff29fa8d45819b1
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-07-30T17:40:54
     Monotone-Branch: ca.inverse.sope
@@ -8067,7 +8165,7 @@ Date:   Fri Jul 30 17:24:50 2010 +0000
 
     Monotone-Parent: 7ae648e99b2ae1a437b3b23933c9fd60c6f92b77
     Monotone-Revision: 7c7e2db643b28b0d79a640fd738d7913ba3f686d
-
+    
     Monotone-Author: wsourdeau@inverse.ca
     Monotone-Date: 2010-07-30T17:24:50
     Monotone-Branch: ca.inverse.sope
@@ -8080,10 +8178,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:58:48 2010 +0000
 
     Cleaned more stuff.
-
+    
     Monotone-Parent: 5a11c3789ee188a9f196ebf8d7a3998dae7996b5
     Monotone-Revision: 7ae648e99b2ae1a437b3b23933c9fd60c6f92b77
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-07-29T18:58:48
     Monotone-Branch: ca.inverse.sope
@@ -9340,10 +9438,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:50:10 2010 +0000
 
     Dropped samples target from makefiles
-
+    
     Monotone-Parent: 843d1025bab5d142155d7ded15c9de17d3b599e6
     Monotone-Revision: 5a11c3789ee188a9f196ebf8d7a3998dae7996b5
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-07-29T18:50:10
     Monotone-Branch: ca.inverse.sope
@@ -9356,10 +9454,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:40:21 2010 +0000
 
     Cleaned up more stuff.
-
+    
     Monotone-Parent: 592f1af929791fbdc8780afe81d8021d7c6fdd73
     Monotone-Revision: 843d1025bab5d142155d7ded15c9de17d3b599e6
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-07-29T18:40:21
     Monotone-Branch: ca.inverse.sope
@@ -9845,10 +9943,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:31:02 2010 +0000
 
     Dropped even more crap
-
+    
     Monotone-Parent: 9bcb2bf0639d76277b95a768b2586a6eda1a87ec
     Monotone-Revision: 592f1af929791fbdc8780afe81d8021d7c6fdd73
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-07-29T18:31:02
     Monotone-Branch: ca.inverse.sope
@@ -10380,10 +10478,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:27:44 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: 4408649e520f6bcf86ac267f33864c565cc9e03d
     Monotone-Revision: 9bcb2bf0639d76277b95a768b2586a6eda1a87ec
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-07-29T18:27:44
     Monotone-Branch: ca.inverse.sope
@@ -11548,10 +11646,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 17:59:06 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: a3ff652a2fbe233cded539aeefdee2668df58c75
     Monotone-Revision: 4408649e520f6bcf86ac267f33864c565cc9e03d
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-07-29T17:59:06
     Monotone-Branch: ca.inverse.sope
@@ -11583,10 +11681,10 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 17:45:00 2010 +0000
 
     See ChangeLog
-
+    
     Monotone-Parent: c98854ace8d5141925016369142b44606e4a148f
     Monotone-Revision: a3ff652a2fbe233cded539aeefdee2668df58c75
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-07-29T17:45:00
     Monotone-Branch: ca.inverse.sope
@@ -11813,9 +11911,9 @@ Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 17:27:45 2010 +0000
 
     Added SOPE (r1664) to Inverse's monotone repo.
-
+    
     Monotone-Revision: c98854ace8d5141925016369142b44606e4a148f
-
+    
     Monotone-Author: ludovic@Sophos.ca
     Monotone-Date: 2010-07-29T17:27:45
     Monotone-Branch: ca.inverse.sope
