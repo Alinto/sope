@@ -43,7 +43,6 @@ static BOOL     debugCache      = NO;
 static BOOL     debugKeys       = NO;
 static BOOL     alwaysSelect    = NO;
 static BOOL     onlyFetchInbox  = NO;
-static NSString *imap4Separator = nil;
 
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -56,11 +55,6 @@ static NSString *imap4Separator = nil;
   //if (debugOn)    NSLog(@"Note: NGImap4ConnectionDebugEnabled is enabled!");
   //if (alwaysSelect)
   //  NSLog(@"WARNING: 'NGImap4ConnectionAlwaysSelect' enabled (slow down)");
-
-  imap4Separator = 
-    [[ud stringForKey:@"NGImap4ConnectionStringSeparator"] copy];
-  if (![imap4Separator isNotEmpty])
-    imap4Separator = @"/";
   //NSLog(@"Note(NGImap4Connection): using '%@' as the IMAP4 folder separator.", 
   //	imap4Separator);
 }
@@ -74,11 +68,9 @@ static NSString *imap4Separator = nil;
   if ((self = [super init])) {
     self->client   = [_client retain];
     self->password = [_pwd    copy];
-
     self->creationTime = [[NSDate alloc] init];
     
     // TODO: retrieve from IMAP4 instead of using a default
-    self->separator = [imap4Separator copy];
     self->subfolders = [NSMutableDictionary new];
     self->enabledExtensions = [NSMutableDictionary new];
   }
@@ -89,7 +81,6 @@ static NSString *imap4Separator = nil;
 }
 
 - (void)dealloc {
-  [self->separator       release];
   [self->urlToRights     release];
   [self->cachedUIDs      release];
   [self->uidFolderURL    release];
@@ -352,10 +343,6 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   return names;
 }
 
-- (NSString *)imap4Separator {
-  return self->separator;
-}
-
 - (NSString *)imap4FolderNameForURL:(NSURL *)_url removeFileName:(BOOL)_delfn {
   /* a bit hackish, but should be OK */
   NSString *folderName;
@@ -374,11 +361,11 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   
   if (_delfn) folderName = [folderName stringByDeletingLastPathComponent];
   
-  if ([[self imap4Separator] isEqualToString:@"/"])
+  if ([[[self client] delimiter] isEqualToString:@"/"])
     return folderName;
   
   names = [folderName componentsSeparatedByString: @"/"];
-  return [names componentsJoinedByString:[self imap4Separator]];
+  return [names componentsJoinedByString: [[self client] delimiter]];
 }
 - (NSString *)imap4FolderNameForURL:(NSURL *)_url {
   return [self imap4FolderNameForURL:_url removeFileName:NO];
@@ -1075,7 +1062,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   
   newPath = [self imap4FolderNameForURL:_url];
   if ([newPath length])
-    newPath = [newPath stringByAppendingString:[self imap4Separator]];
+    newPath = [newPath stringByAppendingString: [[self client] delimiter]];
   newPath = [newPath stringByAppendingString:_mailbox];
   
   /* create */

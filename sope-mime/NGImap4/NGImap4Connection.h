@@ -49,7 +49,6 @@
   NGImap4Client *client;
   NSString      *password;
   NSDate        *creationTime;
-  NSString      *separator;
 
   /* hierarchy cache */
   NSMutableDictionary  *subfolders;
