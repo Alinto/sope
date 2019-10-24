@@ -1,3 +1,28 @@
+commit f567f984bf1c9f2cad86a3f66667f5ad8b796760
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 13 10:42:13 2019 -0400
+
+    (fix) don't trim illegal characters (fixes #4806)
+
+M	sope-mime/NGMail/NSData+MimeQP.m
+
+commit 4c02b000d1bfaf1b706ceaf5b22492794a0c3a78
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Sep 4 13:42:10 2019 -0400
+
+    (fix) cleaned the IMAP separator mess
+
+M	sope-mime/NGImap4/NGImap4Connection.h
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit ffd38bc3b56d0eaa0135881a2acc34b8bf9d5b0a
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Jul 19 13:35:15 2019 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 44539feee74e3f7f76ca7061c31ae3fac4f00c78
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jul 8 10:39:49 2019 -0400
