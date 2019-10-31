@@ -1,3 +1,19 @@
+commit dd8c873b0dafc2f3011b718e0e88a5b3b9853eec
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 30 13:35:16 2019 -0400
+
+    (fix) ensure the From header is always the first one
+
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit 921d4e07819b467e160d7c388ca6cb8a8ea1f7fb
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Oct 24 10:48:48 2019 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit f567f984bf1c9f2cad86a3f66667f5ad8b796760
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Sep 13 10:42:13 2019 -0400
