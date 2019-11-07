@@ -624,7 +624,7 @@ static BOOL     debugImap4         = NO;
       s = [s substringToIndex:r.location];
       isActive = [line rangeOfString:@"ACTIVE"].length == 0 ? NO : YES;
       
-      [md setObject:isActive ? @"ACTIVE" : @"" forKey:s];
+      [md setObject:[NSNumber numberWithBool: isActive] forKey:s];
     }
     else {
       [self logWithFormat:@"unexpected list response line (%d): '%@'", 
