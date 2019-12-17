@@ -1,3 +1,27 @@
+commit c9712eb71a743b5b8a15dfb4023de20e053518ac
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Dec 17 15:06:30 2019 -0500
+
+    fix(sieve): parse code from Sieve response
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 2e63326871c41fd63b60a26eaa3f4d4bcd2a5684
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Nov 7 13:28:40 2019 -0500
+
+    chore(core): use a bool instead of stupid string
+
+M	sope-mime/NGImap4/NGSieveClient.m
+
+commit 460cf44aebdd6c70194ab615b53da212a6103633
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Oct 31 13:27:47 2019 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit dd8c873b0dafc2f3011b718e0e88a5b3b9853eec
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 30 13:35:16 2019 -0400
@@ -4603,78 +4627,42 @@ Date:   Thu Aug 2 18:45:21 2012 +0000
     Monotone-Date: 2012-08-02T18:45:21
     Monotone-Branch: ca.inverse.sope
 
-D	debian/500mod_ngobjweb.info
-D	debian/changelog
-D	debian/compat
-D	debian/control.in
-D	debian/copyright
-D	debian/libapache-mod-ngobjweb.dirs
-D	debian/libapache-mod-ngobjweb.install
-D	debian/libapache-mod-ngobjweb.postinst
-D	debian/libapache-mod-ngobjweb.postrm
-D	debian/libapache-mod-ngobjweb.prerm
-D	debian/libapache2-mod-ngobjweb.dirs
-D	debian/libapache2-mod-ngobjweb.install
-D	debian/libapache2-mod-ngobjweb.postinst
-D	debian/libapache2-mod-ngobjweb.prerm
-D	debian/libsbjson2.3-dev.install
-D	debian/libsbjson2.3.install
-D	debian/libsope-appserver_SOPEVER_-dev.install
-D	debian/libsope-appserver_SOPEVER_.install
-D	debian/libsope-core_SOPEVER_-dev.install
-D	debian/libsope-core_SOPEVER_.install
-D	debian/libsope-gdl1-_SOPEVER_-dev.install
-D	debian/libsope-gdl1-_SOPEVER_.install
-D	debian/libsope-ldap_SOPEVER_-dev.install
-D	debian/libsope-ldap_SOPEVER_.install
-D	debian/libsope-mime_SOPEVER_-dev.install
-D	debian/libsope-mime_SOPEVER_.install
-D	debian/libsope-xml_SOPEVER_-dev.install
-D	debian/libsope-xml_SOPEVER_.install
-D	debian/ngobjweb.load
-D	debian/rules
-D	debian/sope_SOPEVER_-appserver.install
-D	debian/sope_SOPEVER_-appserver.links
-D	debian/sope_SOPEVER_-gdl1-mysql.install
-D	debian/sope_SOPEVER_-gdl1-postgresql.install
-D	debian/sope_SOPEVER_-libxmlsaxdriver.install
-D	debian/sope_SOPEVER_-stxsaxdriver.install
-A	packaging/debian/500mod_ngobjweb.info
-A	packaging/debian/changelog
-A	packaging/debian/compat
-A	packaging/debian/control.in
-A	packaging/debian/copyright
-A	packaging/debian/libapache-mod-ngobjweb.dirs
-A	packaging/debian/libapache-mod-ngobjweb.install
-A	packaging/debian/libapache-mod-ngobjweb.postinst
-A	packaging/debian/libapache-mod-ngobjweb.postrm
-A	packaging/debian/libapache-mod-ngobjweb.prerm
-A	packaging/debian/libapache2-mod-ngobjweb.dirs
-A	packaging/debian/libapache2-mod-ngobjweb.install
-A	packaging/debian/libapache2-mod-ngobjweb.postinst
-A	packaging/debian/libapache2-mod-ngobjweb.prerm
-A	packaging/debian/libsbjson2.3-dev.install
-A	packaging/debian/libsbjson2.3.install
-A	packaging/debian/libsope-appserver_SOPEVER_-dev.install
-A	packaging/debian/libsope-appserver_SOPEVER_.install
-A	packaging/debian/libsope-core_SOPEVER_-dev.install
-A	packaging/debian/libsope-core_SOPEVER_.install
-A	packaging/debian/libsope-gdl1-_SOPEVER_-dev.install
-A	packaging/debian/libsope-gdl1-_SOPEVER_.install
-A	packaging/debian/libsope-ldap_SOPEVER_-dev.install
-A	packaging/debian/libsope-ldap_SOPEVER_.install
-A	packaging/debian/libsope-mime_SOPEVER_-dev.install
-A	packaging/debian/libsope-mime_SOPEVER_.install
-A	packaging/debian/libsope-xml_SOPEVER_-dev.install
-A	packaging/debian/libsope-xml_SOPEVER_.install
-A	packaging/debian/ngobjweb.load
-A	packaging/debian/rules
-A	packaging/debian/sope_SOPEVER_-appserver.install
-A	packaging/debian/sope_SOPEVER_-appserver.links
-A	packaging/debian/sope_SOPEVER_-gdl1-mysql.install
-A	packaging/debian/sope_SOPEVER_-gdl1-postgresql.install
-A	packaging/debian/sope_SOPEVER_-libxmlsaxdriver.install
-A	packaging/debian/sope_SOPEVER_-stxsaxdriver.install
+R100	debian/500mod_ngobjweb.info	packaging/debian/500mod_ngobjweb.info
+R100	debian/changelog	packaging/debian/changelog
+R100	debian/compat	packaging/debian/compat
+R100	debian/control.in	packaging/debian/control.in
+R100	debian/copyright	packaging/debian/copyright
+R100	debian/libapache-mod-ngobjweb.dirs	packaging/debian/libapache-mod-ngobjweb.dirs
+R100	debian/libapache-mod-ngobjweb.install	packaging/debian/libapache-mod-ngobjweb.install
+R100	debian/libapache-mod-ngobjweb.postinst	packaging/debian/libapache-mod-ngobjweb.postinst
+R100	debian/libapache-mod-ngobjweb.postrm	packaging/debian/libapache-mod-ngobjweb.postrm
+R100	debian/libapache-mod-ngobjweb.prerm	packaging/debian/libapache-mod-ngobjweb.prerm
+R100	debian/libapache2-mod-ngobjweb.dirs	packaging/debian/libapache2-mod-ngobjweb.dirs
+R100	debian/libapache2-mod-ngobjweb.install	packaging/debian/libapache2-mod-ngobjweb.install
+R100	debian/libapache2-mod-ngobjweb.postinst	packaging/debian/libapache2-mod-ngobjweb.postinst
+R100	debian/libapache2-mod-ngobjweb.prerm	packaging/debian/libapache2-mod-ngobjweb.prerm
+R100	debian/libsbjson2.3-dev.install	packaging/debian/libsbjson2.3-dev.install
+R100	debian/libsbjson2.3.install	packaging/debian/libsbjson2.3.install
+R100	debian/libsope-appserver_SOPEVER_-dev.install	packaging/debian/libsope-appserver_SOPEVER_-dev.install
+R100	debian/libsope-appserver_SOPEVER_.install	packaging/debian/libsope-appserver_SOPEVER_.install
+R100	debian/libsope-core_SOPEVER_-dev.install	packaging/debian/libsope-core_SOPEVER_-dev.install
+R100	debian/libsope-core_SOPEVER_.install	packaging/debian/libsope-core_SOPEVER_.install
+R100	debian/libsope-gdl1-_SOPEVER_-dev.install	packaging/debian/libsope-gdl1-_SOPEVER_-dev.install
+R100	debian/libsope-gdl1-_SOPEVER_.install	packaging/debian/libsope-gdl1-_SOPEVER_.install
+R100	debian/libsope-ldap_SOPEVER_-dev.install	packaging/debian/libsope-ldap_SOPEVER_-dev.install
+R100	debian/libsope-ldap_SOPEVER_.install	packaging/debian/libsope-ldap_SOPEVER_.install
+R100	debian/libsope-mime_SOPEVER_-dev.install	packaging/debian/libsope-mime_SOPEVER_-dev.install
+R100	debian/libsope-mime_SOPEVER_.install	packaging/debian/libsope-mime_SOPEVER_.install
+R100	debian/libsope-xml_SOPEVER_-dev.install	packaging/debian/libsope-xml_SOPEVER_-dev.install
+R100	debian/libsope-xml_SOPEVER_.install	packaging/debian/libsope-xml_SOPEVER_.install
+R100	debian/ngobjweb.load	packaging/debian/ngobjweb.load
+R100	debian/rules	packaging/debian/rules
+R100	debian/sope_SOPEVER_-appserver.install	packaging/debian/sope_SOPEVER_-appserver.install
+R100	debian/sope_SOPEVER_-appserver.links	packaging/debian/sope_SOPEVER_-appserver.links
+R100	debian/sope_SOPEVER_-gdl1-mysql.install	packaging/debian/sope_SOPEVER_-gdl1-mysql.install
+R100	debian/sope_SOPEVER_-gdl1-postgresql.install	packaging/debian/sope_SOPEVER_-gdl1-postgresql.install
+R100	debian/sope_SOPEVER_-libxmlsaxdriver.install	packaging/debian/sope_SOPEVER_-libxmlsaxdriver.install
+R100	debian/sope_SOPEVER_-stxsaxdriver.install	packaging/debian/sope_SOPEVER_-stxsaxdriver.install
 A	packaging/rhel/sope.spec
 
 commit 15c5f44267d15f04ed7547b30d468732a61b9d94
