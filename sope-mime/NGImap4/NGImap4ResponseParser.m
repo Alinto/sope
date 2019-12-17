@@ -1979,12 +1979,20 @@ static BOOL _parseOkSieveResponse(NGImap4ResponseParser *self,
 static BOOL _parseNoSieveResponse(NGImap4ResponseParser *self,
                                   NGMutableHashMap *result_) 
 {
-  NSString *data;
-  
+  NSString *code, *data;
+
   if (!((_la(self, 0)=='N') && (_la(self, 1)=='O') && (_la(self, 2)==' ')))
     return NO;
 
   _consume(self, 3);
+
+  if (_la(self, 0) == '(')
+    {
+      _consume(self, 1);
+      code = _parseUntil(self, ')');
+      if (_la(self, 0) == ' ') _consume(self, 1);
+      if (code) [result_ addObject:code forKey:@"code"];
+    }
 
   data = _parseContentSieveResponse(self);
 
