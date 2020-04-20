@@ -170,7 +170,7 @@ static NSNumber *_uint(unsigned int i) {
     fh = fopen(pp, "r");\
     if (fh == NULL)\
       res = -1;\
-    else\
+    else {\
       res = fscanf(fh,\
                  "%d %255s %c %d %d %d %d %d "\
                  "%u %u %u %u %u "\
@@ -191,7 +191,8 @@ static NSNumber *_uint(unsigned int i) {
                  &signal, &blocked, &sigignore, &sigcatch,\
                  &wchan\
                  );\
-    fclose(fh); fh = NULL;
+      fclose(fh); fh = NULL;\
+    }
 
 - (unsigned int)virtualMemorySize {
 #ifdef __linux__
