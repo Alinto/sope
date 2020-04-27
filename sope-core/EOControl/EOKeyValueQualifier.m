@@ -77,6 +77,12 @@ static EONull *null = nil;
   return self->value;
 }
 
+- (void) setValue: (id) _value
+{
+  [self->value release];
+  self->value = [_value retain];
+}
+
 /* bindings */
 
 - (EOQualifier *)qualifierWithBindings:(NSDictionary *)_bindings

@@ -164,6 +164,7 @@ extern SEL EOQualifierOperatorCaseInsensitiveLike;
 - (NSString *)key;
 - (SEL)selector;
 - (id)value;
+- (void) setValue: (id) _value;
 
 @end
 
