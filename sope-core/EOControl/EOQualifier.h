@@ -155,6 +155,7 @@ extern SEL EOQualifierOperatorCaseInsensitiveLike;
   NSString *key;
   id       value;
   SEL      operator;
+  BOOL     formatted;
 }
 
 - (id)initWithKey:(NSString *)_key
@@ -165,6 +166,8 @@ extern SEL EOQualifierOperatorCaseInsensitiveLike;
 - (SEL)selector;
 - (id)value;
 - (void) setValue: (id) _value;
+- (BOOL) formatted;
+- (void) setFormatted: (BOOL) _formatted;
 
 @end
 
