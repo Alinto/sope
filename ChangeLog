@@ -1,3 +1,41 @@
+commit 0a5bb5e3ea69ebeae41ee89dd8cd91205ee96fa8
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Apr 29 12:48:22 2020 -0400
+
+    fix(core): escape quotes before sending SQL queries
+    
+    Add accessors for new "formatted" variable
+
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EOQualifier.h
+
+commit 567bd0bdb3b2856dc74f58be35fa504b26b9617c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Apr 27 17:15:54 2020 -0400
+
+    fix(core): escape quotes before sending SQL queries
+    
+    Fixes #5010
+
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EOQualifier.h
+
+commit 7aa37c3fdea1a9937c3002c26071eecfbe063c1e
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Apr 20 10:06:45 2020 -0400
+
+    fix(core): don't try to close a null file descriptor
+
+M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
+
+commit e42d8ea87119ab74dd2d92ff428209ba1b36fd7c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Dec 17 15:09:55 2019 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit c9712eb71a743b5b8a15dfb4023de20e053518ac
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Dec 17 15:06:30 2019 -0500
