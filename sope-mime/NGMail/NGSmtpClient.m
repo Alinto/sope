@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2007 SKYRIX Software AG
+  Copyright (C) 2020      Nicolas Höft
 
   This file is part of SOPE.
 
@@ -32,8 +33,8 @@
 
 - (NSRange) rangeOfCString: (const char *) theCString;
 - (NSRange) rangeOfCString: (const char *) theCString
-		  options: (unsigned int) theOptions
-		    range: (NSRange) theRange;
+                  options: (unsigned int) theOptions
+                    range: (NSRange) theRange;
 @end
 
 @implementation NSMutableData (DataCleanupExtension)
@@ -46,23 +47,23 @@
 }
 
 -(NSRange) rangeOfCString: (const char *) theCString
-		  options: (unsigned int) theOptions
-		    range: (NSRange) theRange
+                  options: (unsigned int) theOptions
+                    range: (NSRange) theRange
 {
   const char *b, *bytes;
   int i, len, slen;
-  
+
   if (!theCString)
     {
       return NSMakeRange(NSNotFound,0);
     }
-  
+
   bytes = [self bytes];
   len = [self length];
   slen = strlen(theCString);
-  
+
   b = bytes;
-  
+
   if (len > theRange.location + theRange.length)
     {
       len = theRange.location + theRange.length;
@@ -72,29 +73,29 @@
     {
       i = theRange.location;
       b += i;
-      
+
       for (; i <= len-slen; i++, b++)
-	{
-	  if (!strncasecmp(theCString,b,slen))
-	    {
-	      return NSMakeRange(i,slen);
-	    }
-	}
+        {
+          if (!strncasecmp(theCString,b,slen))
+            {
+              return NSMakeRange(i,slen);
+            }
+        }
     }
   else
     {
       i = theRange.location;
       b += i;
-      
+
       for (; i <= len-slen; i++, b++)
-	{
-	  if (!memcmp(theCString,b,slen))
-	    {
-	      return NSMakeRange(i,slen);
-	    }
-	}
+        {
+          if (!memcmp(theCString,b,slen))
+            {
+              return NSMakeRange(i,slen);
+            }
+        }
     }
-  
+
   return NSMakeRange(NSNotFound,0);
 }
 
@@ -102,14 +103,22 @@
 
 @interface NGSmtpClient(PrivateMethods)
 - (void)_fetchExtensionInfo;
+- (id)_openSocket;
 @end
 
 @implementation NGSmtpClient
 
-+ (id)smtpClient {
-  NGActiveSocket *s;
-  s = [NGActiveSocket socketInDomain:[NGInternetSocketDomain domain]];
-  return [[[self alloc] initWithSocket:s] autorelease];
+- (BOOL)useSSL {
+  return self->useSSL;
+}
+
+- (BOOL)useStartTLS {
+  return self->useStartTLS;
+}
+
+
++ (id) clientWithURL: (NSURL *)_url; {
+  return [[(NGSmtpClient *)[self alloc] initWithURL:_url] autorelease];
 }
 
 - (id)init {
@@ -128,9 +137,9 @@
                 boolForKey:@"ImapDebugEnabled"];
     [self setDebuggingEnabled: debug];
 
-    self->connection = 
+    self->connection =
       [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource:_socket];
-    self->text = 
+    self->text =
       [(NGCTextStream *)[NGCTextStream alloc] initWithSource:self->connection];
 
     self->state = [self->socket isConnected]
@@ -140,10 +149,56 @@
   return self;
 }
 
+- (id)initWithURL:(NSURL *)_url {
+  NGInternetSocketAddress *a;
+  int port;
+
+  self->useSSL = [[_url scheme] isEqualToString:@"smtps"];
+  if (self->useSSL && NSClassFromString(@"NGActiveSSLSocket") == nil) {
+    [self logWithFormat:
+            @"no SSL support available, cannot connect: %@", _url];
+    [self release];
+    return nil;
+  }
+
+  if ([[_url query] isEqualToString:@"tls=YES"])
+    self->useStartTLS = YES;
+  else
+    self->useStartTLS = NO;
+
+  if ((port = [[_url port] intValue]) == 0) {
+    if (self->useSSL && !self->useStartTLS)
+      port = 465;
+    else
+      port = 25;
+  }
+
+  a = [NGInternetSocketAddress addressWithPort:port
+                                onHost:[_url host]];
+  self = [self initWithAddress:a];
+
+  return self;
+}
+
+- (id)initWithAddress:(id<NGSocketAddress>)_address { /* designated init */
+  if ((self = [super init])) {
+    BOOL debug;
+    [self gotoState:NGSmtpState_unconnected];
+
+    self->address = [_address retain];
+
+    debug = [[NSUserDefaults standardUserDefaults]
+                boolForKey:@"ImapDebugEnabled"];
+    [self setDebuggingEnabled: debug];
+  }
+  return self;
+}
+
 - (void)dealloc {
   [self->text       release];
   [self->connection release];
   [self->socket     release];
+  [self->previous_socket release];
   [super dealloc];
 }
 
@@ -166,21 +221,46 @@
 
 // connection
 
-- (BOOL)connectToHost:(id)_host {
-  return [self connectToAddress:
-                 [NGInternetSocketAddress addressWithService:@"smtp"
-                                          onHost:_host protocol:@"tcp"]];
+- (id)_openSocket {
+  Class socketClass = Nil;
+  id sock;
+
+  socketClass = [NGActiveSocket class];
+
+  if ([self useSSL] && ![self useStartTLS])
+    socketClass = NSClassFromString(@"NGActiveSSLSocket");
+
+  NS_DURING {
+      sock = [socketClass socketConnectedToAddress:self->address];
+  }
+  NS_HANDLER {
+    sock = nil;
+  }
+  NS_ENDHANDLER;
+
+  return sock;
 }
 
-- (BOOL)connectToAddress:(id<NGSocketAddress>)_address {
+
+- (BOOL)connect {
   NGSmtpResponse *greeting = nil;
 
   [self requireState:NGSmtpState_unconnected];
-  
+
   if (self->isDebuggingEnabled)
-    [NGTextErr writeFormat:@"C: connect to %@\n", _address];
-  
-  [self->socket connectToAddress:_address];
+    [NGTextErr writeFormat:@"C: connect to %@\n", self->address];
+
+  if ((self->socket = [[self _openSocket] retain]) == nil)
+    return NO;
+
+  self->connection =
+      [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource:self->socket];
+  self->text =
+      [(NGCTextStream *)[NGCTextStream alloc] initWithSource:self->connection];
+
+  self->state = [self->socket isConnected]
+      ? NGSmtpState_connected
+      : NGSmtpState_unconnected;
 
   // receive greetings from server
   greeting = [self receiveReply];
@@ -202,6 +282,8 @@
         [NGTextErr writeFormat:@"S: expand extension supported.\n"];
       if (self->extensions.hasAuthPlain)
         [NGTextErr writeFormat:@"S: plain auth extension supported.\n"];
+      if (self->extensions.hasStartTls)
+        [NGTextErr writeFormat:@"S: starttls extension supported.\n"];
     }
     return YES;
   }
@@ -246,7 +328,7 @@
                    stringByEncodingBase64];
     authString = [authString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     reply = [self sendCommand: @"AUTH PLAIN"];
-    
+
     if ([reply code] == NGSmtpServerChallenge)
       {
         reply = [self sendCommand: authString];
@@ -326,7 +408,7 @@
     [NGTextOut writeFormat:@"C: %@\n", _command];
     [NGTextOut flush];
   }
-  
+
   [text writeString:_command];
   [text writeString:@"\r\n"];
   [text flush];
@@ -337,7 +419,7 @@
     [NGTextOut writeFormat:@"C: %@ %@\n", _command, _argument];
     [NGTextOut flush];
   }
-  
+
   [text writeString:_command];
   [text writeString:@" "];
   [text writeString:_argument];
@@ -351,7 +433,7 @@
 - (void)_fetchExtensionInfo {
   NGSmtpResponse *reply = nil;
   NSString       *hostName = nil;
-  
+
   hostName = [(NGInternetSocketAddress *)[self->socket localAddress] hostName];
 
   reply = [self sendCommand:@"EHLO" argument:hostName];
@@ -371,6 +453,8 @@
         self->extensions.hasPipelining = YES;
       else if ([line hasPrefix:@"HELP"])
         self->extensions.hasHelp = YES;
+      else if (([line hasPrefix:@"STARTTLS"]))
+        self->extensions.hasStartTls = YES;
       // We skip "AUTH=PLAIN ..." here, as it's redundant with "AUTH PLAIN ..." and will
       // break things on components splitting
       else if ([line hasPrefix:@"AUTH "]) {
@@ -409,12 +493,12 @@
   NGSmtpResponse *reply = nil;
 
   [self denyState:NGSmtpState_unconnected];
-  
+
   reply = [self sendCommand:@"QUIT"];
   if (self->isDebuggingEnabled) [NGTextErr writeFormat:@"S: %@\n", reply];
   if ([reply isPositive]) {
     unsigned int waitBytes = 0;
-    
+
     if ([reply code] == NGSmtpServiceClosingChannel) {
       // wait for connection close ..
       while ([self->connection readByte] != -1)
@@ -431,7 +515,7 @@
   NGSmtpResponse *reply = nil;
 
   [self denyState:NGSmtpState_unconnected];
-  
+
   reply = [self sendCommand:@"HELO" argument:_host];
   if (self->isDebuggingEnabled) [NGTextErr writeFormat:@"S: %@\n", reply];
   if ([reply isPositive]) {
@@ -467,7 +551,7 @@
   NGSmtpResponse *reply = nil;
 
   [self denyState:NGSmtpState_unconnected];
-  
+
   reply = [self sendCommand:@"HELP"];
   if (self->isDebuggingEnabled) [NGTextErr writeFormat:@"S: %@\n", reply];
   if ([reply isPositive]) {
@@ -482,7 +566,7 @@
 - (NSString *)helpForTopic:(NSString *)_topic {
   NGSmtpResponse *reply = nil;
   [self denyState:NGSmtpState_unconnected];
-  
+
   reply = [self sendCommand:@"HELP" argument:_topic];
   if (self->isDebuggingEnabled) [NGTextErr writeFormat:@"S: %@\n", reply];
   if ([reply isPositive]) {
@@ -519,14 +603,14 @@
 
 // transaction commands
 
-- (NSString *) _sanitizeAddress: (NSString *) address
+- (NSString *) _sanitizeAddress: (NSString *) _address
 {
   NSString *saneAddress;
 
-  if ([address hasPrefix: @"<"])
-    saneAddress = address;
+  if ([_address hasPrefix: @"<"])
+    saneAddress = _address;
   else
-    saneAddress = [NSString stringWithFormat: @"<%@>", address];
+    saneAddress = [NSString stringWithFormat: @"<%@>", _address];
 
   return saneAddress;
 }
@@ -554,7 +638,7 @@
 - (BOOL)recipientTo:(id)_receiver {
   NGSmtpResponse *reply = nil;
   NSString       *rcpt  = nil;
-  
+
   [self requireState:NGSmtpState_TRANSACTION];
 
   rcpt  = [self _sanitizeAddress: [_receiver stringValue]];
@@ -574,7 +658,7 @@
   NGSmtpResponse *reply = nil;
   NSMutableData *cleaned_data;
   NSRange r1;
-  
+
   const char *bytes;
   char *mbytes;
   int len, mlen;
@@ -613,7 +697,7 @@
 	    mbytes++;
 	    mlen++;
 	  }
-  
+
 	  *mbytes = *bytes;
 	  mbytes++; bytes++;
 	  len--;
@@ -628,19 +712,19 @@
     // to avoid data transparency.
     //
     r1 = [cleaned_data rangeOfCString: "\r\n."];
-    
+
     while (r1.location != NSNotFound)
       {
 	[cleaned_data replaceBytesInRange: r1  withBytes: "\r\n.."  length: 4];
-	
+
 	r1 = [cleaned_data rangeOfCString: "\r\n."
-			   options: 0 
+			   options: 0
 			   range: NSMakeRange(NSMaxRange(r1)+1, [cleaned_data length]-NSMaxRange(r1)-1)];
       }
-    
+
     if (self->isDebuggingEnabled)
       [NGTextErr writeFormat:@"C: data(%i bytes) ..\n", [cleaned_data length]];
-    
+
     [self->connection safeWriteBytes:[cleaned_data bytes] count:[cleaned_data length]];
     [self->connection safeWriteBytes:"\r\n.\r\n" count:5];
     [self->connection flush];
