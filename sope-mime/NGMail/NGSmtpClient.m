@@ -19,6 +19,7 @@
   Free Software Foundation, 59 Temple Place - Suite 330, Boston, MA
   02111-1307, USA.
 */
+#include <fcntl.h>
 
 #include "NGSmtpClient.h"
 #include "NGSmtpSupport.h"
@@ -102,8 +103,9 @@
 @end
 
 @interface NGSmtpClient(PrivateMethods)
-- (void)_fetchExtensionInfo;
-- (id)_openSocket;
+- (void) _fetchExtensionInfo;
+- (id) _openSocket;
+- (BOOL) _startTLS;
 @end
 
 @implementation NGSmtpClient
@@ -285,6 +287,24 @@
       if (self->extensions.hasStartTls)
         [NGTextErr writeFormat:@"S: starttls extension supported.\n"];
     }
+
+    if ([self useStartTLS]) {
+      if (!self->extensions.hasStartTls) {
+        [NSException raise:@"SMTPException"
+                 format:@"Server does not support STARTTLS"];
+        return NO;
+      }
+      if ([self _startTLS]) {
+        // after performing STARTTLS, we have to fetch the supported
+        // extensions again, supported AUTH mechanism may now
+        // have changed
+        [self _fetchExtensionInfo];
+        return YES;
+      }
+      [self disconnect];
+      return NO;
+    }
+
     return YES;
   }
   else {
@@ -293,8 +313,58 @@
   }
 }
 
+- (BOOL) _startTLS {
+  Class socketClass;
+  NGSmtpResponse *reply;
+  id tlsSocket;
+  int oldopts;
+
+  if (!self->extensions.hasStartTls) {
+    NSLog(@"SMTP: TLS not supported by client");
+    return NO;
+  }
+
+  socketClass = NSClassFromString(@"NGActiveSSLSocket");
+  if (!socketClass) {
+    NSLog(@"SMTP: TLS not supported by client");
+    return NO;
+  }
+
+  reply = [self sendCommand: @"STARTTLS"];
+  if ([reply code] != NGSmtpServiceReady) {
+    NSLog(@"SMTP: unexpected response from STARTTLS command (%d)", [reply code]);
+    return NO;
+  }
+
+  tlsSocket = [[socketClass alloc] initWithDomain: [self->address domain]];
+  [tlsSocket setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
+  // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
+  // SOPE will break on SSL-sockets.
+  oldopts = fcntl([(NGSocket*)self->socket fileDescriptor], F_GETFL, 0);
+  fcntl([(NGSocket*)self->socket fileDescriptor], F_SETFL, oldopts & !O_NONBLOCK);
+
+  if (![tlsSocket startTLS]) {
+    NSLog(@"SMTP: unable to perform STARTTLS on socket");
+    return NO;
+  }
+
+  // the TLS socket is on top of the connection we
+  // opened before, so we have to keep it
+  self->previous_socket = self->socket;
+  self->socket = tlsSocket;
+  // redirect the connection and text objects
+  // to the new socket
+  [self->text release];
+  [self->connection release];
+  self->connection = [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource: self->socket];
+  self->text = [(NGCTextStream *)[NGCTextStream alloc] initWithSource: self->connection];
+  NSLog(@"SMTP: STARTTLS successfully performed");
+  return YES;
+}
+
 - (void)disconnect {
   [text   flush];
+  [previous_socket close];
   [socket close];
   [self gotoState:NGSmtpState_unconnected];
 }
@@ -433,8 +503,15 @@
 - (void)_fetchExtensionInfo {
   NGSmtpResponse *reply = nil;
   NSString       *hostName = nil;
+  NGActiveSocket* sock;
 
-  hostName = [(NGInternetSocketAddress *)[self->socket localAddress] hostName];
+  if (previous_socket) {
+    sock = self->previous_socket;
+  } else {
+    sock = self->socket;
+  }
+
+  hostName = [(NGInternetSocketAddress *)[sock localAddress] hostName];
 
   reply = [self sendCommand:@"EHLO" argument:hostName];
   if ([reply code] == NGSmtpActionCompleted) {
