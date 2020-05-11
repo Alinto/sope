@@ -125,6 +125,8 @@
 {
   int ret;
 
+  [self disableNagle: YES];
+
   ret = gnutls_init((gnutls_session_t *) &self->session, GNUTLS_CLIENT);
   if (ret) {
     // should set exception !
@@ -236,9 +238,9 @@ static BIO_METHOD streamBIO = {
 
     /* An error write context */
     //bio_err = BIO_new_fp(stderr, BIO_NOCLOSE);
-    
+
     /* Create our context*/
-    
+
     if ((self->ctx = SSL_CTX_new(SSLv23_method())) == NULL) {
       NSLog(@"ERROR(%s): couldn't create SSL context for v23 method !",
             __PRETTY_FUNCTION__);
@@ -267,7 +269,7 @@ static BIO_METHOD streamBIO = {
   if (self->ssl == NULL)
     // should throw error
     return NGStreamError;
-  
+
   ret = SSL_read(self->ssl, _buf, _len);
 
   if (ret <= 0)
@@ -308,7 +310,7 @@ static BIO_METHOD streamBIO = {
           __PRETTY_FUNCTION__);
     return NO;
   }
- 
+
   ret = SSL_connect(self->ssl);
   if (ret <= 0) {
     NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)...",
@@ -316,7 +318,7 @@ static BIO_METHOD streamBIO = {
     [self shutdown];
     return NO;
   }
-  
+
   return YES;
 }
 
@@ -334,11 +336,11 @@ static BIO_METHOD streamBIO = {
           __PRETTY_FUNCTION__);
     return NO;
   }
-  
+
   if (![super primaryConnectToAddress:_address])
     /* could not connect to Unix socket ... */
     return NO;
-  
+
   /* probably we should create a BIO for streams !!! */
   if ((self->sbio = BIO_new_socket(self->fd, BIO_NOCLOSE)) == NULL) {
     NSLog(@"ERROR(%s): couldn't create SSL socket IO structure ...",
@@ -346,11 +348,11 @@ static BIO_METHOD streamBIO = {
     [self shutdown];
     return NO;
   }
-  
+
   NSAssert(self->ctx,  @"missing SSL context ...");
   NSAssert(self->ssl,  @"missing SSL socket ...");
   NSAssert(self->sbio, @"missing SSL BIO ...");
-  
+
   SSL_set_bio(self->ssl, self->sbio, self->sbio);
   ret = SSL_connect(self->ssl);
   if (ret <= 0) {
@@ -359,7 +361,7 @@ static BIO_METHOD streamBIO = {
     [self shutdown];
     return NO;
   }
-  
+
   return YES;
 }
 - (BOOL)shutdown {
