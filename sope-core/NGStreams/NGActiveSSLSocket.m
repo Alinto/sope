@@ -71,7 +71,10 @@
 }
 
 #if HAVE_GNUTLS
-- (id)initWithDomain:(id<NGSocketDomain>)_domain {
+- (id)initWithDomain:(id<NGSocketDomain>)_domain
+      onHostName: (NSString *)_hostName
+{
+  hostName = [_hostName copy];
   if ((self = [super initWithDomain:_domain])) {
     //BIO *bio_err;
     static BOOL didGlobalInit = NO;
@@ -80,20 +83,29 @@
     if (!didGlobalInit) {
       /* Global system initialization*/
       if (gnutls_global_init()) {
-	[self release];
-	return nil;
+        [self release];
+        return nil;
       }
 
       didGlobalInit = YES;
     }
 
-    ret = gnutls_certificate_allocate_credentials ((gnutls_certificate_credentials_t *) &self->cred);
-    if ( ret)
+    ret = gnutls_certificate_allocate_credentials((gnutls_certificate_credentials_t *) &self->cred);
+    if (ret)
       {
-	NSLog(@"ERROR(%s): couldn't create GnuTLS credentials (%s)",
-	      __PRETTY_FUNCTION__, gnutls_strerror(ret));
-	[self release];
-	return nil;
+        NSLog(@"ERROR(%s): couldn't create GnuTLS credentials (%s)",
+              __PRETTY_FUNCTION__, gnutls_strerror(ret));
+        [self release];
+        return nil;
+      }
+
+    ret = gnutls_certificate_set_x509_system_trust(self->cred);
+    if (ret)
+      {
+        NSLog(@"ERROR(%s): could not set GnuTLS system trust (%s)",
+              __PRETTY_FUNCTION__, gnutls_strerror(ret));
+        [self release];
+        return nil;
       }
 
     self->session = NULL;
@@ -110,6 +122,7 @@
     gnutls_certificate_free_credentials((gnutls_certificate_credentials_t) self->cred);
     self->cred = NULL;
   }
+  [hostName release];
   [super dealloc];
 }
 
@@ -129,6 +142,7 @@
   else
     return ret;
 }
+
 - (unsigned)writeBytes:(const void *)_buf count:(unsigned)_len {
   ssize_t ret;
 
@@ -152,6 +166,7 @@
 - (BOOL) startTLS
 {
   int ret;
+  gnutls_session_t sess;
 
   [self disableNagle: YES];
 
@@ -162,10 +177,11 @@
           __PRETTY_FUNCTION__, gnutls_strerror(ret));
     return NO;
   }
+  sess = (gnutls_session_t) self->session;
 
-  gnutls_priority_set_direct (session, "NORMAL", NULL);
+  gnutls_set_default_priority(sess);
 
-  ret = gnutls_credentials_set((gnutls_session_t) self->session, GNUTLS_CRD_CERTIFICATE, (gnutls_certificate_credentials_t) self->cred);
+  ret = gnutls_credentials_set(sess, GNUTLS_CRD_CERTIFICATE, (gnutls_certificate_credentials_t) self->cred);
   if (ret) {
     // should set exception !
     NSLog(@"ERROR(%s): couldn't set GnuTLS credentials (%s)",
@@ -173,18 +189,33 @@
     return NO;
   }
 
+  // set SNI
+  ret = gnutls_server_name_set(sess, GNUTLS_NAME_DNS, [hostName UTF8String], [hostName length]);
+  if (ret) {
+    // should set exception !
+    NSLog(@"ERROR(%s): couldn't set GnuTLS SNI (%s)",
+          __PRETTY_FUNCTION__, gnutls_strerror(ret));
+    return NO;
+  }
+
+  gnutls_session_set_verify_cert(sess, [hostName UTF8String], 0);
+
 #if GNUTLS_VERSION_NUMBER < 0x030109
-  gnutls_transport_set_ptr((gnutls_session_t) self->session, (gnutls_transport_ptr_t)(long)self->fd);
+  gnutls_transport_set_ptr(sess, (gnutls_transport_ptr_t)(long)self->fd);
 #else
-  gnutls_transport_set_int((gnutls_session_t) self->session, self->fd);
+  gnutls_transport_set_int(sess, self->fd);
 #endif /* GNUTLS_VERSION_NUMBER < 0x030109 */
 
-  ret = gnutls_handshake((gnutls_session_t) self->session);
-  if (ret) {
-    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)",
-	  __PRETTY_FUNCTION__, gnutls_strerror(ret));
+  gnutls_handshake_set_timeout(sess, GNUTLS_DEFAULT_HANDSHAKE_TIMEOUT);
+  do {
+    ret = gnutls_handshake(sess);
+  } while (ret < 0 && gnutls_error_is_fatal(ret) == 0);
+
+  if (ret < 0) {
+    NSLog(@"ERROR(%s):GnutTLS handshake failed on socket (%s)",
+      __PRETTY_FUNCTION__, gnutls_strerror(ret));
     if (ret == GNUTLS_E_FATAL_ALERT_RECEIVED) {
-      NSLog(@"Alert: %s", gnutls_alert_get_name(gnutls_alert_get(self->session)));
+      NSLog(@"Alert: %s", gnutls_alert_get_name(gnutls_alert_get(sess)));
     }
     [self shutdown];
     return NO;
@@ -194,7 +225,10 @@
 }
 
 - (BOOL)shutdown {
+
   if (self->session) {
+    int ret;
+    LOOP_CHECK(ret, gnutls_bye((gnutls_session_t)self->session, GNUTLS_SHUT_RDWR));
     gnutls_deinit((gnutls_session_t) self->session);
     self->session = NULL;
   }
@@ -299,6 +333,7 @@ static BIO_METHOD streamBIO = {
 
 - (void)dealloc {
   [self shutdown];
+  [hostName release];
   [super dealloc];
 }
 
@@ -318,6 +353,7 @@ static BIO_METHOD streamBIO = {
 
   return ret;
 }
+
 - (unsigned)writeBytes:(const void *)_buf count:(unsigned)_len {
   return SSL_write(self->ssl, _buf, _len);
 }

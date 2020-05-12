@@ -300,7 +300,6 @@ static NSMutableDictionary *namespaces;
   id sock;
   BOOL sslSocket = [self useSSL] && ![self useTLS];
 
-
   NS_DURING {
       if (sslSocket) {
         sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
