@@ -1,6 +1,7 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
   Copyright (C) 2011 Jeroen Dekkers <jeroen@dekkers.ch>
+  Copyright (C) 2020 Nicolas Höft
 
   This file is part of SOPE.
 
@@ -33,6 +34,7 @@
 #  define id openssl_id
 #  include <openssl/ssl.h>
 #  include <openssl/err.h>
+#  include <openssl/x509v3.h>
 #  undef id
 #endif
 
@@ -41,6 +43,32 @@
 @end
 
 @implementation NGActiveSSLSocket
+
+- (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
+
+  if (![super primaryConnectToAddress:_address])
+    /* could not connect to Unix socket ... */
+    return NO;
+
+  return [self startTLS];
+}
+
++ (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
+                  onHostName: (NSString *) _hostName
+{
+  id sock = [[self alloc] initWithDomain:[_address domain]
+                      onHostName: _hostName];
+  if (![sock connectToAddress:_address]) {
+    NSException *e;
+    e = [[sock lastException] retain];
+    [self release];
+    e = [e autorelease];
+    [e raise];
+    return nil;
+  }
+  sock = [sock autorelease];
+  return sock;
+}
 
 #if HAVE_GNUTLS
 - (id)initWithDomain:(id<NGSocketDomain>)_domain {
@@ -165,14 +193,6 @@
   return YES;
 }
 
-- (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
-  if (![super primaryConnectToAddress:_address])
-    /* could not connect to Unix socket ... */
-    return NO;
-
-  return [self startTLS];
-}
-
 - (BOOL)shutdown {
   if (self->session) {
     gnutls_deinit((gnutls_session_t) self->session);
@@ -222,12 +242,16 @@ static BIO_METHOD streamBIO = {
 
 #endif /* STREAM_BIO */
 
-- (id)initWithDomain:(id<NGSocketDomain>)_domain {
+- (id)initWithDomain:(id<NGSocketDomain>)_domain
+          onHostName: (NSString *)_hostName
+{
+
+  hostName = [_hostName copy];
   if ((self = [super initWithDomain:_domain])) {
     //BIO *bio_err;
-    static BOOL didGlobalInit = NO;
 
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
+    static BOOL didGlobalInit = NO;
     if (!didGlobalInit) {
       /* Global system initialization*/
       SSL_library_init();
@@ -236,28 +260,45 @@ static BIO_METHOD streamBIO = {
     }
 #endif /* OPENSSL_VERSION_NUMBER */
 
-    /* An error write context */
-    //bio_err = BIO_new_fp(stderr, BIO_NOCLOSE);
 
     /* Create our context*/
-
     if ((self->ctx = SSL_CTX_new(SSLv23_method())) == NULL) {
       NSLog(@"ERROR(%s): couldn't create SSL context for v23 method !",
             __PRETTY_FUNCTION__);
       [self release];
       return nil;
     }
+    // use system default trust store
+    SSL_CTX_set_default_verify_paths(self->ctx);
 
-    SSL_CTX_set_verify(self->ctx, SSL_VERIFY_NONE, NULL);
+    if ((self->ssl = SSL_new(self->ctx)) == NULL) {
+      // should set exception !
+      NSLog(@"ERROR(%s): couldn't create SSL socket structure ...",
+            __PRETTY_FUNCTION__);
+      return nil;
+    }
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
+    X509_VERIFY_PARAM *param = NULL;
+    param = SSL_get0_param(self->ssl);
+    X509_VERIFY_PARAM_set_hostflags(param, X509_CHECK_FLAG_NO_PARTIAL_WILDCARDS);
+    if (!X509_VERIFY_PARAM_set1_host(param, [hostName UTF8String], 0)) {
+      return nil;
+    }
+#else
+    SSL_set1_host(self->ssl, [hostName UTF8String]);
+#endif /* OPENSSL_VERSION_NUMBER < 0x10100000L */
+
+    // send SNI
+    SSL_set_tlsext_host_name(self->ssl, [hostName UTF8String]);
+    // verify the peer
+    SSL_set_verify(self->ssl, SSL_VERIFY_PEER, NULL);
+
   }
   return self;
 }
 
 - (void)dealloc {
-  if (self->ctx) {
-    SSL_CTX_free(self->ctx);
-    self->ctx = NULL;
-  }
+  [self shutdown];
   [super dealloc];
 }
 
@@ -291,15 +332,10 @@ static BIO_METHOD streamBIO = {
 {
   int ret;
 
-  if (self->ctx == NULL) {
-    NSLog(@"ERROR(%s): ctx isn't setup yet !",
-          __PRETTY_FUNCTION__);
-    return NO;
-  }
+  [self disableNagle: YES];
 
-  if ((self->ssl = SSL_new(self->ctx)) == NULL) {
-    // should set exception !
-    NSLog(@"ERROR(%s): couldn't create SSL socket structure ...",
+  if (self->ssl == NULL) {
+    NSLog(@"ERROR(%s): SSL structure is not set up!",
           __PRETTY_FUNCTION__);
     return NO;
   }
@@ -313,8 +349,8 @@ static BIO_METHOD streamBIO = {
 
   ret = SSL_connect(self->ssl);
   if (ret <= 0) {
-    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)...",
-	  __PRETTY_FUNCTION__, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
+    NSLog(@"ERROR(%s): couldn't setup SSL connection on host %@ (%s)...",
+      __PRETTY_FUNCTION__, hostName, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
     [self shutdown];
     return NO;
   }
@@ -322,49 +358,15 @@ static BIO_METHOD streamBIO = {
   return YES;
 }
 
-- (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
-  int ret;
-  if (self->ctx == NULL) {
-    NSLog(@"ERROR(%s): ctx isn't setup yet !",
-          __PRETTY_FUNCTION__);
-    return NO;
-  }
-
-  if ((self->ssl = SSL_new(self->ctx)) == NULL) {
-    // should set exception !
-    NSLog(@"ERROR(%s): couldn't create SSL socket structure ...",
-          __PRETTY_FUNCTION__);
-    return NO;
-  }
-
-  if (![super primaryConnectToAddress:_address])
-    /* could not connect to Unix socket ... */
-    return NO;
-
-  /* probably we should create a BIO for streams !!! */
-  if ((self->sbio = BIO_new_socket(self->fd, BIO_NOCLOSE)) == NULL) {
-    NSLog(@"ERROR(%s): couldn't create SSL socket IO structure ...",
-          __PRETTY_FUNCTION__);
-    [self shutdown];
-    return NO;
-  }
-
-  NSAssert(self->ctx,  @"missing SSL context ...");
-  NSAssert(self->ssl,  @"missing SSL socket ...");
-  NSAssert(self->sbio, @"missing SSL BIO ...");
-
-  SSL_set_bio(self->ssl, self->sbio, self->sbio);
-  ret = SSL_connect(self->ssl);
-  if (ret <= 0) {
-    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)...",
-	  __PRETTY_FUNCTION__, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
-    [self shutdown];
-    return NO;
-  }
-
-  return YES;
-}
 - (BOOL)shutdown {
+  if (self->ssl) {
+    int ret = SSL_shutdown(self->ssl);
+    // call shutdown a second time
+    if (ret == 0)
+      SSL_shutdown(self->ssl);
+    SSL_free(self->ssl);
+    self->ssl = NULL;
+  }
   if (self->ctx) {
     SSL_CTX_free(self->ctx);
     self->ctx = NULL;
