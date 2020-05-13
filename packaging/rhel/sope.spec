@@ -2,6 +2,7 @@
 %define apache_conf_dir    %{_sysconfdir}/httpd/conf.d
 %define oracle_support     1
 %{?el7:%define oracle_support 1}
+%{?el8:%define oracle_support 0}
 
 Summary:      SOPE
 Name:         sope%{sope_major_version}%{sope_minor_version}
