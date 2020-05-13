@@ -448,7 +448,7 @@ rm -fr ${RPM_BUILD_ROOT}
 %{_libdir}/libNGObjWeb*.so
 %{_libdir}/libWEExtensions*.so
 %{_libdir}/libWOExtensions*.so
-%if 0%{?el7}
+%if 0%{?rhel} >= 7
 %{_libdir}/GNUstep/Makefiles
 %else
 %{_datadir}/GNUstep/Makefiles
