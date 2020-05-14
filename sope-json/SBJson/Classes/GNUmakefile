@@ -25,6 +25,8 @@ SBJson_OBJC_FILES = \
 	SBJsonParser.m \
 	SBJsonWriter.m
 
+SBJson_LIBRARIES_DEPEND_UPON += $(BASE_LIBS)
+
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/library.make
 -include GNUmakefile.postamble
