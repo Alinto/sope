@@ -25,6 +25,10 @@
 
 #if HAVE_GNUTLS
 #  include <gnutls/gnutls.h>
+#define LOOP_CHECK(rval, cmd) \
+  do { \
+    rval = cmd; \
+  } while(rval == GNUTLS_E_AGAIN || rval == GNUTLS_E_INTERRUPTED);
 #elif HAVE_OPENSSL
 #  define id openssl_id
 #  include <openssl/ssl.h>
@@ -91,8 +95,8 @@
     return NGStreamError;
 
 
-  ret = gnutls_record_recv((gnutls_session_t) self->session, _buf, _len);
-  if (ret < 0)
+  LOOP_CHECK(ret, gnutls_record_recv((gnutls_session_t) self->session, _buf, _len));
+  if (ret <= 0)
     return NGStreamError;
   else
     return ret;
@@ -104,8 +108,8 @@
     // should throw error
     return NGStreamError;
 
-  ret = gnutls_record_send((gnutls_session_t) self->session, _buf, _len);
-  if (ret < 0)
+  LOOP_CHECK(ret, gnutls_record_send((gnutls_session_t) self->session, _buf, _len));
+  if (ret <= 0)
     return NGStreamError;
   else
     return ret;
@@ -139,7 +143,11 @@
     return NO;
   }
 
-  gnutls_transport_set_ptr((gnutls_session_t) self->session, (gnutls_transport_ptr_t) self->fd);
+#if GNUTLS_VERSION_NUMBER < 0x030109
+  gnutls_transport_set_ptr((gnutls_session_t) self->session, (gnutls_transport_ptr_t)(long)self->fd);
+#else
+  gnutls_transport_set_int((gnutls_session_t) self->session, self->fd);
+#endif /* GNUTLS_VERSION_NUMBER < 0x030109 */
 
   ret = gnutls_handshake((gnutls_session_t) self->session);
   if (ret) {
