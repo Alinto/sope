@@ -781,12 +781,12 @@ static void error(void *udata, const char *msg, ...) {
   SaxParseException *e;
   
   if (!reportInvalidTags && msg != NULL) {
-    if (toupper(msg[0]) == 'T') {
+    if (toupper((unsigned char) msg[0]) == 'T') {
       if (strncasecmp(tagInvalidMsg, msg, strlen(tagInvalidMsg)) == 0)
         return;
     }
 #if 0
-    else if (toupper(msg[0]) == 'U') {
+    else if (toupper((unsigned char) msg[0]) == 'U') {
       if (strncasecmp(unexpectedNobrCloseMsg, msg, 
                       strlen(unexpectedNobrCloseMsg)) == 0)
         return;
@@ -794,7 +794,7 @@ static void error(void *udata, const char *msg, ...) {
     }
 #endif
   }
-  if (!reportUnclosedEntities && msg != NULL && toupper(msg[0]) == 'H') {
+  if (!reportUnclosedEntities && msg != NULL && toupper((unsigned char) msg[0]) == 'H') {
     if (strncasecmp(unclosedEntityInvalidMsg, msg, 
                     strlen(unclosedEntityInvalidMsg)) == 0)
       return;
