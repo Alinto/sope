@@ -38,7 +38,7 @@
 
 #include <string.h>
 #include <sys/time.h>
-
+#include <unistd.h>
 
 
 @interface WORequest(UsedPrivates)
@@ -730,6 +730,7 @@ static int logCounter = 0;
     BOOL doZip;
     BOOL isok = YES;
     int length;
+    NSFileHandle *contentFile;
     
     doZip = [_response shouldZipResponseToRequest:_request];
     
@@ -755,19 +756,26 @@ static int logCounter = 0;
         isok = [out writeFormat:@"%@ %i %s\r\n", t, s, r];
     }
     if (isok) isok = [out flush];
+
+    contentFile = [_response contentFile];
+    if (contentFile != nil) {
+      length = [contentFile seekToEndOfFile];
+      doZip = NO;
+    } else {
+      /* zip */
+      body = (doZip) 
+        ? [_response zipResponse]
+        : [_response content];
     
-    /* zip */
-    body = (doZip) 
-      ? [_response zipResponse]
-      : [_response content];
+      /* add content length header */
     
-    /* add content length header */
-    
-    if ((length = [body length]) == 0
-        && ![[_response headerForKey: @"content-type"] hasPrefix:@"text/plain"]
-        && ![[_response headerForKey: @"content-type"] hasPrefix:@"application/vnd.ms-sync.wbxml"]) {
-      [_response setHeader:@"text/plain" forKey:@"content-type"];
+      if ((length = [body length]) == 0
+          && ![[_response headerForKey: @"content-type"] hasPrefix:@"text/plain"]
+          && ![[_response headerForKey: @"content-type"] hasPrefix:@"application/vnd.ms-sync.wbxml"]) {
+        [_response setHeader:@"text/plain" forKey:@"content-type"];
+      }
     }
+
     snprintf((char *)buf, sizeof(buf), "%d", length);
     t1 = [[NSString alloc] initWithCString:(char *)buf];
     [_response setHeader:t1 forKey:@"content-length"];
@@ -879,7 +887,18 @@ static int logCounter = 0;
     /* write body */
     
     if (![[_request method] isEqualToString:@"HEAD"] && isok) {
-      if ((body != nil) && isok) {
+      if (contentFile != nil && isok) {
+        char buffer[8192];
+        int count;
+        int fd = [contentFile fileDescriptor];
+
+        lseek(fd, 0, SEEK_SET);
+        while (isok && (count = read(fd, buffer, 8192)) > 0) {
+          isok = [_out safeWriteBytes: buffer count: count];
+        }
+        isok = isok && (count == 0) && [_out flush];
+        [contentFile closeFile];
+     } else if ((body != nil) && isok) {
         if (![body isKindOfClass:[NSData class]]) {
           if (![body isKindOfClass:[NSString class]])
             body = [body description];
