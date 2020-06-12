@@ -108,6 +108,8 @@ static WOMessageProfileInfo profiletot = { 0, 0, 0, 0, 0 };
   [self->content  release];
   [self->header   release];
   [self->userInfo release];
+  if (self->contentFileHandle != nil)
+     [self->contentFileHandle release];
   [super dealloc];
 }
 
@@ -354,6 +356,17 @@ static WOMessageProfileInfo profiletot = { 0, 0, 0, 0, 0 };
 }  
 - (NSStringEncoding)contentEncoding {
   return self->contentEncoding;
+}
+
+- (void)setContentFile:(NSFileHandle *) handle {
+  if (self->contentFileHandle)
+     [self->contentFileHandle release];
+  self->contentFileHandle = handle;
+  [handle retain];
+}
+
+- (NSFileHandle *)contentFile {
+  return self->contentFileHandle;
 }
 
 /* structured content */
