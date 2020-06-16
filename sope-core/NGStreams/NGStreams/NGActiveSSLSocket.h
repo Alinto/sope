@@ -1,7 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
   Copyright (C) 2011 Jeroen Dekkers <jeroen@dekkers.ch>
-  Copyright (C) 2020 Nicolas Höft
 
   This file is part of SOPE.
 
@@ -23,13 +22,11 @@
 #ifndef __NGNet_NGActiveSSLSocket_H__
 #define __NGNet_NGActiveSSLSocket_H__
 
-#import <NGStreams/NGSocketProtocols.h>
 #include <NGStreams/NGActiveSocket.h>
 #include "../config.h"
 
 @interface NGActiveSSLSocket : NGActiveSocket
 {
-@protected
 #ifdef HAVE_GNUTLS
   void *cred; /* real type: gnutls_certificate_credentials_t */
   void *session; /* real type: gnutls_session_t */
@@ -38,15 +35,10 @@
   void *ssl;   /* real type: SSL */
   void *sbio;  /* real type: BIO (basic input/output) */
 #endif
-  NSString *hostName;
 }
-+ (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
-                  onHostName: (NSString *) hostName;
-
-- (id)initWithDomain:(id<NGSocketDomain>)_domain
-      onHostName: (NSString *)_hostName;
 
 - (BOOL) startTLS;
+
 @end
 
 #endif /* __NGNet_NGActiveSSLSocket_H__ */

@@ -93,8 +93,8 @@
 
 /*
   An implementation of an Imap4 client
-
-  A folder name always looks like an absolute filename (/inbox/doof)
+  
+  A folder name always looks like an absolute filename (/inbox/doof) 
 */
 
 @implementation NGImap4Client
@@ -131,15 +131,15 @@ static NSMutableDictionary *namespaces;
   static BOOL didInit = NO;
   if (didInit) return;
   didInit = YES;
-
+  
   PreventExceptions  = [ud boolForKey:@"ImapPreventConnectionExceptions"]?1:0;
   LogImapEnabled     = [ud boolForKey:@"ImapLogEnabled"]?1:0;
   ProfileImapEnabled = [ud boolForKey:@"ProfileImapEnabled"]?1:0;
   ImapDebugEnabled   = [ud boolForKey:@"ImapDebugEnabled"];
-
+  
   YesNumber = [[NSNumber numberWithBool:YES] retain];
   NoNumber  = [[NSNumber numberWithBool:NO]  retain];
-
+  
   if (MaxImapClients < 1) {
     MaxImapClients = [ud integerForKey:@"NGImapMaxConnectionCount"];
     if (MaxImapClients < 1) MaxImapClients = 50;
@@ -170,7 +170,7 @@ static NSMutableDictionary *namespaces;
 
 - (id)initWithHost:(id)_host {
   NGInternetSocketAddress *a;
-
+  
   a = [NGInternetSocketAddress addressWithPort:143 onHost:_host];
   return [self initWithAddress:a];
 }
@@ -178,7 +178,7 @@ static NSMutableDictionary *namespaces;
   NGInternetSocketAddress *a;
   int port;
   id  tmp;
-
+  
   if ((self->useSSL = [[_url scheme] isEqualToString:@"imaps"])) {
     if (NSClassFromString(@"NGActiveSSLSocket") == nil) {
       [self logWithFormat:
@@ -200,10 +200,10 @@ static NSMutableDictionary *namespaces;
     if ([tmp intValue] <= 0)
       port = 143;
   }
-
+  
   self->login    = [[_url user]     copy];
   self->password = [[_url password] copy];
-
+  
   a = [NGInternetSocketAddress addressWithPort:port onHost:[_url host]];
   return [self initWithAddress:a];
 }
@@ -237,7 +237,7 @@ static NSMutableDictionary *namespaces;
   [self->selectedFolder   release];
   [self->delimiter        release];
   [self->serverGID        release];
-
+  
   self->context = nil; /* not retained */
   [super dealloc];
 }
@@ -247,17 +247,17 @@ static NSMutableDictionary *namespaces;
 - (BOOL)isEqual:(id)_obj {
   if (_obj == self)
     return YES;
-
+  
   if ([_obj isKindOfClass:[NGImap4Client class]])
     return [self isEqualToClient:_obj];
-
+  
   return NO;
 }
 
 - (BOOL)isEqualToClient:(NGImap4Client *)_obj {
   if (_obj == self) return YES;
   if (_obj == nil)  return NO;
-
+  
   return [[_obj address] isEqual:self->address];
 }
 
@@ -277,12 +277,12 @@ static NSMutableDictionary *namespaces;
 
 - (EOGlobalID *)serverGlobalID {
   NGInternetSocketAddress *is;
-
+  
   if (self->serverGID)
     return self->serverGID;
-
+  
   is = (id)[self address];
-
+  
   self->serverGID = [[NGImap4ServerGlobalID alloc]
 		      initWithHostname:[is hostName]
 		      port:[is port]
@@ -297,33 +297,33 @@ static NSMutableDictionary *namespaces;
 /* connection */
 
 - (id)_openSocket {
+  Class socketClass = Nil;
   id sock;
-  BOOL sslSocket = [self useSSL] && ![self useTLS];
 
+  socketClass = [NGActiveSocket class];
+  
+  if ([self useSSL] && ![self useTLS])
+    socketClass = NSClassFromString(@"NGActiveSSLSocket");
+  
   NS_DURING {
-      if (sslSocket) {
-        sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
-          onHostName: [(NGInternetSocketAddress *)self->address hostName]];
-      } else {
-        sock = [NGActiveSocket socketConnectedToAddress:self->address];
-      }
+      sock = [socketClass socketConnectedToAddress:self->address];
   }
   NS_HANDLER {
     [self->context setLastException:localException];
     sock = nil;
   }
   NS_ENDHANDLER;
-
+  
   return sock;
 }
 
 - (NSDictionary *)_receiveServerGreetingWithoutTagId {
   NSDictionary *res = nil;
-
+  
   NS_DURING {
     NSException *e;
     NGHashMap *hm;
-
+    
     hm = [self->parser parseResponseForTagId:-1 exception:&e];
     [e raise];
     res = [self->normer normalizeOpenConnectionResponse:hm];
@@ -331,33 +331,34 @@ static NSMutableDictionary *namespaces;
     // If using Courier, we disable UTF-8
     if ([[res objectForKey:@"serverKind"] isEqual: @"courier"])
       self->useUTF8 = NO;
-
+    
     // If we're using TLS, we start it here
     if ([self useTLS])
       {
+	Class socketClass;
 	NSDictionary *d;
 
 
 	d = [self->normer normalizeResponse:[self processCommand: @"STARTTLS"]];
+	socketClass = NSClassFromString(@"NGActiveSSLSocket");
 
-	if ([[d valueForKey:@"result"] boolValue])
+	if ([[d valueForKey:@"result"] boolValue] && socketClass)
 	  {
 	    int oldopts;
 	    id o;
 
-	    o = [[NGActiveSSLSocket alloc] initWithDomain: [self->address domain]
-          onHostName: [(NGInternetSocketAddress *)self->address hostName]];
+	    o = [[socketClass alloc] initWithDomain: [self->address domain]];
 	    [o setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
-
+	    
 	    // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
 	    // SOPE will break on SSL-sockets.
 	    oldopts = fcntl([(NGSocket*)self->socket fileDescriptor], F_GETFL, 0);
 	    fcntl([(NGSocket*)self->socket fileDescriptor], F_SETFL, oldopts & !O_NONBLOCK);
-
+	    
 	    if ([o startTLS])
 	      {
 		NGBufferedStream *buffer;
-
+		
 		// We keep a reference to our previous instance of NGActiveSocket as
 		// it's still being used. NGActiveSSLSocket's read/write methods are
 		// being used but the rest is coming of directly from NGActiveSocket
@@ -365,12 +366,12 @@ static NSMutableDictionary *namespaces;
 		self->socket = o;
 		[self->text release];
 		[self->parser release];
-
+		
 		buffer = [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource: self->socket];
 		self->text = [(NGCTextStream *)[NGCTextStream alloc] initWithSource: buffer];
 		[buffer release];
 		buffer = nil;
-
+		
 		self->parser = [[NGImap4ResponseParser alloc] initWithStream: self->socket];
 		[self logWithFormat:@"TLS started successfully."];
 	      }
@@ -384,7 +385,7 @@ static NSMutableDictionary *namespaces;
   NS_HANDLER
     [self->context setLastException:localException];
   NS_ENDHANDLER;
-
+  
   if (!_checkResult(self->context, res, __PRETTY_FUNCTION__))
     return nil;
 
@@ -396,7 +397,7 @@ static NSMutableDictionary *namespaces;
   NGBufferedStream *buffer;
   struct timeval tv;
   double         ti = 0.0;
-
+  
   if (ProfileImapEnabled == 1) {
     gettimeofday(&tv, NULL);
     ti =  (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0);
@@ -405,34 +406,34 @@ static NSMutableDictionary *namespaces;
   [self->previous_socket release]; self->previous_socket = nil;
   [self->parser release]; self->parser = nil;
   [self->text   release]; self->text   = nil;
-
+  
   [self->context resetLastException];
 
   if ((self->socket = [[self _openSocket] retain]) == nil)
     return nil;
   if ([self->context lastException])
     return nil;
-
-  buffer     =
+  
+  buffer     = 
     [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource:self->socket];
   self->text = [(NGCTextStream *)[NGCTextStream alloc] initWithSource:buffer];
   [buffer release]; buffer = nil;
-
+  
   self->parser = [[NGImap4ResponseParser alloc] initWithStream:self->socket];
   self->tagId  = 0;
-
+  
   if (ProfileImapEnabled == 1) {
     gettimeofday(&tv, NULL);
     ti = (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0) - ti;
     fprintf(stderr, "[%s] <openConnection> : time needed: %4.4fs\n",
-           __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);
+           __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);    
   }
 
   self->enabledExtensions = [[NSMutableArray alloc] init];
 
   [self registerConnection];
   [self->context resetLastException];
-
+  
   return [self _receiveServerGreetingWithoutTagId];
 }
 
@@ -442,12 +443,12 @@ static NSMutableDictionary *namespaces;
 
 - (NSNumber *)isConnected {
   // TODO: why is that an NSNummber?
-  /*
-     Check whether stream is already open (could be closed because
-     server-timeout)
+  /* 
+     Check whether stream is already open (could be closed because 
+     server-timeout) 
   */
   return (self->socket == nil)
-    ? NoNumber
+    ? NoNumber 
     : ([(NGActiveSocket *)self->socket isAlive] ? YesNumber : NoNumber);
 }
 
@@ -465,23 +466,23 @@ static NSMutableDictionary *namespaces;
 }
 - (void)closeConnection {
   /* close a connection */
-
+  
   // TODO: this is a bit weird, probably because of the flush
   //       maybe just call -close on the text stream?
   NS_DURING
-    [self->text release];
+    [self->text release]; 
   NS_HANDLER
     [[self _handleTextReleaseException:localException] raise];
   NS_ENDHANDLER;
   self->text = nil;
-
+  
   NS_DURING
     [self->socket close];
     [self->previous_socket close];
   NS_HANDLER
     [[self _handleSocketCloseException:localException] raise];
   NS_ENDHANDLER;
-
+  
   NS_DURING
     [self->socket release];
     [self->previous_socket release];
@@ -489,8 +490,8 @@ static NSMutableDictionary *namespaces;
     [[self _handleSocketReleaseException:localException] raise];
   NS_ENDHANDLER;
   self->socket = nil;
-  self->previous_socket = nil;
-
+  self->previous_socket = nil;   
+  
   [self->parser    release]; self->parser    = nil;
   [self->delimiter release]; self->delimiter = nil;
   [self->enabledExtensions release]; self->enabledExtensions = nil;
@@ -535,10 +536,10 @@ static NSMutableDictionary *namespaces;
   [self->login     release]; self->login    = nil;
   [self->password  release]; self->password = nil;
   [self->serverGID release]; self->serverGID = nil;
-
+  
   self->login    = [_login copy];
   self->password = [_passwd copy];
-
+  
   return [self login];
 }
 
@@ -556,14 +557,14 @@ static NSMutableDictionary *namespaces;
   [self->password  release]; self->password = nil;
   [self->authMechanism  release]; self->authMechanism = nil;
   [self->serverGID release]; self->serverGID = nil;
-
+  
   self->login    = _login;
   [_login retain];
   self->password = _passwd;
   [_passwd retain];
   self->authMechanism = _mech;
   [_mech retain];
-
+  
   return [self authenticate];
 }
 
@@ -582,12 +583,12 @@ static NSMutableDictionary *namespaces;
 
   if ([self->context lastException] != nil)
     return;
-
+  
   if (self->useAuthenticate)
     [self authenticate];
   else
     [self login];
-
+  
   if (self->loggedIn && [extensions count] > 0) {
     [self enable: extensions];
   }
@@ -629,7 +630,7 @@ static NSMutableDictionary *namespaces;
 
   if (self->isLogin)
     return nil;
-
+  
   self->isLogin = YES;
 
   if (self->useUTF8)
@@ -647,15 +648,15 @@ static NSMutableDictionary *namespaces;
   map = [self processCommand: s
                      withTag: YES
             withNotification: NO];
-
+  
   if (plength > 0 && [[map objectForKey:@"ContinuationResponse"] boolValue])
     map = [self processCommand:self->password withTag:NO];
-
+  
   if (self->selectedFolder != nil)
     [self select:self->selectedFolder];
-
+  
   self->isLogin = NO;
-
+  
   response = [self->normer normalizeResponse:map];
 
   self->loggedIn = [[response valueForKey:@"result"] boolValue];
@@ -681,14 +682,14 @@ static NSMutableDictionary *namespaces;
 
   if (self->isLogin)
     return nil;
-
+  
   self->isLogin = YES;
 
   s = [NSString stringWithFormat:@"authenticate %@", self->authMechanism];
   map = [self processCommand: s
                      withTag: YES
             withNotification: NO];
-
+  
   if ([[map objectForKey:@"ContinuationResponse"] boolValue])
     {
       char *buffer;
@@ -715,12 +716,12 @@ static NSMutableDictionary *namespaces;
                                                           withString: @""]
                          withTag:NO];
     }
-
+  
   if (self->selectedFolder != nil)
     [self select:self->selectedFolder];
-
+  
   self->isLogin = NO;
-
+  
   response = [self->normer normalizeResponse:map];
 
   self->loggedIn = [[response valueForKey:@"result"] boolValue];
@@ -737,7 +738,7 @@ static NSMutableDictionary *namespaces;
   [self closeConnection];
   [self->selectedFolder release]; self->selectedFolder = nil;
   self->loggedIn = NO;
-
+  
   return [self->normer normalizeResponse:map];
 }
 
@@ -760,22 +761,22 @@ static NSMutableDictionary *namespaces;
   NGHashMap         *map;
   NSDictionary      *result;
   NSString *s, *prefix;
-
+  
   pool = [[NSAutoreleasePool alloc] init];
-
+  
   if (_folder  == nil) _folder  = @"";
   if (_pattern == nil) _pattern = @"";
-
+  
   if ([_folder isNotEmpty]) {
     if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
       return nil;
   }
-
+  
 
   if ([_pattern isNotEmpty])
     if (!(_pattern = [self _folder2ImapFolder:_pattern]))
       return nil;
-
+  
   if ([_folder length] > 0)
     prefix = [NSString stringWithFormat: @"%@%@",
                        SaneFolderName(_folder), self->delimiter];
@@ -783,14 +784,14 @@ static NSMutableDictionary *namespaces;
     prefix = @"";
   s = [NSString stringWithFormat:@"LIST \"\" \"%@%@\"", prefix, _pattern];
   map = [self processCommand:s];
-
+  
   if (self->delimiter == nil) {
     NSDictionary *rdel;
-
+    
     rdel = [[map objectEnumeratorForKey:@"list"] nextObject];
     self->delimiter = [[rdel objectForKey:@"delimiter"] copy];
   }
-
+  
   result = [[self->normer normalizeListResponse:map] copy];
   [pool release];
   return [result autorelease];
@@ -799,14 +800,14 @@ static NSMutableDictionary *namespaces;
 - (NSDictionary *)capability {
   NSDictionary *result;
   id capres;
-
+  
   result = [capabilities objectForKey: [self->address description]];
 
   if (!result)
     {
       capres = [self processCommand:@"capability"];
       result = [self->normer normalizeCapabilityResponse:capres];
-
+  
       if (result)
 	[capabilities setObject:  result  forKey: [self->address description]];
     }
@@ -823,7 +824,7 @@ static NSMutableDictionary *namespaces;
     [enabledExtensions removeObjectsInArray: _extensions];
     [enabledExtensions addObjectsFromArray: _extensions];
   }
-
+  
   return result;
 }
 
@@ -869,7 +870,7 @@ static NSMutableDictionary *namespaces;
     if ((_pattern = [self _folder2ImapFolder:_pattern]) == nil)
       return nil;
   }
-
+  
   if ([_folder length] > 0)
     prefix = [NSString stringWithFormat: @"%@%@", SaneFolderName(_folder), self->delimiter];
   else
@@ -879,7 +880,7 @@ static NSMutableDictionary *namespaces;
 
   if (self->delimiter == nil) {
     NSDictionary *rdel;
-
+    
     rdel = [[map objectEnumeratorForKey:@"LIST"] nextObject];
     self->delimiter = [[rdel objectForKey:@"delimiter"] copy];
   }
@@ -890,7 +891,7 @@ static NSMutableDictionary *namespaces;
   /*
     Select a folder (required for a lot of methods).
     eg: 'SELECT "INBOX"'
-
+    
     The result dict contains the following keys:
       'result'      - a boolean
       'access'      - string           (eg "READ-WRITE")
@@ -935,7 +936,7 @@ static NSMutableDictionary *namespaces;
 }
 
 /*
- result dict looks like the following
+ result dict looks like the following  
 {FolderList = {INBOX = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_d8"; }; }; "Other Users/sogo2" = {"/comment" = {"value.priv" = "sogo_c0c_192bd7dc_0"; }; }; Sent = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_da"; }; }; Trash = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_dc"; }; }; abczzll = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_d9"; }; }; "abczzll/mmabcmm" = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_de"; }; }; mf1renamedd = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_dd"; }; }; tfu1 = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_db"; }; }; zuk = {"/comment" = {"value.priv" = "sogo_73c_192bd57b_df"; }; }; }; RawResponse = "{FolderList = ({INBOX = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_d8\"; }; }; }, {Sent = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_da\"; }; }; }, {Trash = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_dc\"; }; }; }, {abczzll = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_d9\"; }; }; }, {\"abczzll/mmabcmm\" = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_de\"; }; }; }, {mf1renamedd = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_dd\"; }; }; }, {tfu1 = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_db\"; }; }; }, {zuk = {\"/comment\" = {\"value.priv\" = \"sogo_73c_192bd57b_df\"; }; }; }, {\"Other Users/sogo2\" = {\"/comment\" = {\"value.priv\" = \"sogo_c0c_192bd7dc_0\"; }; }; }); ResponseResult = {description = Completed; result = ok; tagId = 13; }; }"; expunge = (); result = 1; }
 
  getannotation:
@@ -961,10 +962,10 @@ static NSMutableDictionary *namespaces;
     return nil;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"GETANNOTATION \"%@\" \"%@\" \"%@\"",
 		  SaneFolderName(_folder), _entry, _attribute];
-
+  
   result  = [NSMutableDictionary dictionaryWithCapacity:2];
   _map = [self processCommand:cmd];
 
@@ -986,7 +987,7 @@ static NSMutableDictionary *namespaces;
 - (NSDictionary *)annotation:(NSString *)_folder entryName:(NSString *)_entry attributeName:(NSString *)_attribute attributeValue:(NSString *)_value {
   NSString *cmd;
   NSMutableDictionary *result;
-
+  
   if (_folder == nil)
     return nil;
   if (_entry == nil)
@@ -997,10 +998,10 @@ static NSMutableDictionary *namespaces;
     return nil;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd     = [NSString stringWithFormat:@"SETANNOTATION \"%@\" \"%@\" (\"%@\" \"%@\")",
                       SaneFolderName(_folder), _entry, _attribute, _value];
-
+  
   result  = [NSMutableDictionary dictionaryWithCapacity:2];
   result = [self->normer normalizeResponse:[self processCommand:cmd]];
 
@@ -1009,14 +1010,14 @@ static NSMutableDictionary *namespaces;
 
 - (NSDictionary *)status:(NSString *)_folder flags:(NSArray *)_flags {
   NSString *cmd;
-
+  
   if (_folder == nil)
     return nil;
   if ((_flags == nil) || ([_flags count] == 0))
     return nil;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"status \"%@\" (%@)",
                       SaneFolderName(_folder), [_flags componentsJoinedByString:@" "]];
   return [self->normer normalizeStatusResponse:[self processCommand:cmd]];
@@ -1029,15 +1030,15 @@ static NSMutableDictionary *namespaces;
 
 - (NSDictionary *)rename:(NSString *)_folder to:(NSString *)_newName {
   NSString *cmd;
-
+  
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
   if ((_newName = [self _folder2ImapFolder:_newName]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"rename \"%@\" \"%@\"",
                   SaneFolderName(_folder), SaneFolderName(_newName)];
-
+  
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
@@ -1097,17 +1098,17 @@ static NSMutableDictionary *namespaces;
   NSDictionary      *result;
   NSString          *uidsStr, *partsStr;
   id fetchres;
-
+  
   pool = [[NSAutoreleasePool alloc] init];
-
+  
   uidsStr  = [self _uidsJoinedForFetchCmd:_uids];
   partsStr = [self _partsJoinedForFetchCmd:_parts];
   cmd  = [NSString stringWithFormat:@"uid fetch %@ (%@)", uidsStr, partsStr];
-
+  
   fetchres = [self processCommand:cmd];
   result   = [[self->normer normalizeFetchResponse:fetchres] retain];
   [pool release];
-
+  
   return [result autorelease];
 }
 
@@ -1117,13 +1118,13 @@ static NSMutableDictionary *namespaces;
   NSString          *cmd;
   NSDictionary      *result;
   id fetchres;
-
+  
   pool   = [[NSAutoreleasePool alloc] init];
   cmd    = [NSString stringWithFormat:@"uid fetch %u (%@)", _uid,
                      [self _partsJoinedForFetchCmd:_parts]];
   fetchres = [self processCommand:cmd];
   result   = [[self->normer normalizeFetchResponse:fetchres] retain];
-
+  
   [pool release];
   return [result autorelease];
 }
@@ -1134,19 +1135,19 @@ static NSMutableDictionary *namespaces;
   // TODO: optimize
   NSAutoreleasePool *pool;
   NSMutableString   *cmd;
-  NSDictionary      *result;
+  NSDictionary      *result; 
   NGHashMap         *rawResult;
-
+ 
   if (_to == 0)
     return [self noop];
-
+  
   if (_from == 0)
     _from = 1;
 
   pool = [[NSAutoreleasePool alloc] init];
   {
     unsigned i, count;
-
+    
     cmd = [NSMutableString stringWithCapacity:256];
     [cmd appendString:@"fetch "];
     [cmd appendFormat:@"%u:%u (", _from, _to];
@@ -1155,7 +1156,7 @@ static NSMutableDictionary *namespaces;
       [cmd appendString:[_parts objectAtIndex:i]];
     }
     [cmd appendString:@")"];
-
+    
     if (fetchDebug) NSLog(@"%s: process: %@", __PRETTY_FUNCTION__, cmd);
     rawResult = [self processCommand:cmd];
     /*
@@ -1163,7 +1164,7 @@ static NSMutableDictionary *namespaces;
         ResponseResult: dict    eg: {descripted=Completed;result=ok;tagId=8;}
 	fetch:          array of record dicts (eg "rfc822.header" key)
     */
-
+    
     if (fetchDebug) NSLog(@"%s: normalize: %@", __PRETTY_FUNCTION__,rawResult);
     result = [[self->normer normalizeFetchResponse:rawResult] retain];
     if (fetchDebug) NSLog(@"%s: normalized: %@", __PRETTY_FUNCTION__, result);
@@ -1193,16 +1194,16 @@ static NSMutableDictionary *namespaces;
   NSString          *cmd;
   NSDictionary      *result;
   id fetchres;
-
+  
   pool = [[NSAutoreleasePool alloc] init];
-
+  
   cmd  = [NSString stringWithFormat:
                      @"UID FETCH 1:* (UID) (CHANGEDSINCE %llu VANISHED)",
                    (unsigned long long)_modseq];
   fetchres = [self processCommand:cmd];
   result   = [[self->normer normalizeFetchResponse:fetchres] retain];
   [pool release];
-
+  
   return [result autorelease];
 }
 
@@ -1210,7 +1211,7 @@ static NSMutableDictionary *namespaces;
   flags:(NSArray *)_flags
 {
   NSString *icmd, *iflags;
-
+  
   iflags = [_flags2ImapFlags(self, _flags) componentsJoinedByString:@" "];
   icmd   = [NSString stringWithFormat:@"uid store %u %cFLAGS (%@)",
                      _uid, [_add boolValue] ? '+' : '-',
@@ -1233,7 +1234,7 @@ static NSMutableDictionary *namespaces;
   flagstr = [_flags2ImapFlags(self, _flags) componentsJoinedByString:@" "];
   cmd = [NSString stringWithFormat:@"store %u:%u %cFLAGS (%@)",
 		    _from, _to, [_add boolValue] ? '+' : '-', flagstr];
-
+  
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
@@ -1243,7 +1244,7 @@ static NSMutableDictionary *namespaces;
   NSString *cmd;
   NSString *flagstr;
   NSString *seqstr;
-
+  
   if ([_uids isKindOfClass:[NSArray class]]) {
     // TODO: improve by using ranges, eg 1:5 instead of 1,2,3,4,5
     _uids  = [_uids valueForKey:@"stringValue"];
@@ -1251,11 +1252,11 @@ static NSMutableDictionary *namespaces;
   }
   else
     seqstr = [_uids stringValue];
-
+  
   flagstr = [_flags2ImapFlags(self, _flags) componentsJoinedByString:@" "];
   cmd = [NSString stringWithFormat:@"UID STORE %@ %cFLAGS (%@)",
 		    seqstr, _flag ? '+' : '-', flagstr];
-
+  
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
@@ -1270,30 +1271,30 @@ static NSMutableDictionary *namespaces;
     _from = 1;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"copy %u:%u \"%@\"", _from, _to, _folder];
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
 - (NSDictionary *)copyUid:(unsigned)_uid toFolder:(NSString *)_folder {
   NSString *cmd;
-
+  
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"uid copy %u \"%@\"", _uid, _folder];
-
+  
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 - (NSDictionary *)copyUids:(NSArray *)_uids toFolder:(NSString *)_folder {
   NSString *cmd;
-
+  
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
-  cmd = [NSString stringWithFormat:@"uid copy %@ \"%@\"",
+  
+  cmd = [NSString stringWithFormat:@"uid copy %@ \"%@\"", 
 		  [_uids componentsJoinedByString:@","], _folder];
-
+  
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
@@ -1302,7 +1303,7 @@ static NSMutableDictionary *namespaces;
 
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"getquotaroot \"%@\"", _folder];
   return [self->normer normalizeQuotaResponse:[self processCommand:cmd]];
 }
@@ -1321,13 +1322,13 @@ static NSMutableDictionary *namespaces;
 
   /* Remove bare newlines */
   rfc822Data = [_message dataByEnsuringCRLFLineEndings];
-
+  
   icmd = [NSString stringWithFormat:@"append \"%@\" (%@) {%u}",
                    _folder, [flags componentsJoinedByString:@" "],
                    (unsigned)[rfc822Data length]];
   result = [self processCommand:icmd
                  withTag:YES withNotification:NO];
-
+  
   // TODO: explain that
   if ([[result objectForKey:@"ContinuationResponse"] boolValue])
     {
@@ -1336,7 +1337,7 @@ static NSMutableDictionary *namespaces;
                                       encoding: NSISOLatin1StringEncoding];
       [[self textStream] setEncoding: NSISOLatin1StringEncoding];
       result = [self processCommand:message withTag:NO];
-
+      
       [message release]; message = nil;
     }
 
@@ -1345,17 +1346,17 @@ static NSMutableDictionary *namespaces;
 
 - (void)_handleSearchExprIssue:(NSString *)reason qualifier:(EOQualifier *)_q {
   NSString     *descr;
-  NSException  *exception = nil;
+  NSException  *exception = nil;                                             
   NSDictionary *ui;
-
+  
   if (PreventExceptions != 0)
     return;
-
-  if (_q == nil) _q = (id)[NSNull null];
-
-  descr = @"Could not process qualifier for imap search ";
-  descr = [descr stringByAppendingString:reason];
-
+  
+  if (_q == nil) _q = (id)[NSNull null];                
+  
+  descr = @"Could not process qualifier for imap search "; 
+  descr = [descr stringByAppendingString:reason];           
+  
   ui = [NSDictionary dictionaryWithObject:_q forKey:@"qualifier"];
   exception
     = [NGImap4SearchException exceptionWithName: @"NGImap4SearchException"
@@ -1372,10 +1373,10 @@ static NSMutableDictionary *namespaces;
       ' TEXT "why SOPE rocks"'
   */
   id result;
-
+  
   if (_qualifier == nil)
     return @" ALL";
-
+  
   result = [_qualifier imap4SearchString];
   if ([result isKindOfClass:[NSException class]]) {
     [self _handleSearchExprIssue:[(NSException *)result reason]
@@ -1397,16 +1398,16 @@ static NSMutableDictionary *namespaces;
     Parameters:
       _bySubject - if yes, use "REFERENCES" else "ORDEREDSUBJECT"
       _charSet   - default: "UTF-8"
-
+    
     Generates:
       UID THREAD REFERENCES|ORDEREDSUBJECT UTF-8 ALL
   */
   NSString *threadStr;
   NSString *threadAlg;
   NSArray *capa;
-
+  
   threadAlg = (_bySubject) ? @"ORDEREDSUBJECT" : @"REFERENCES";
-
+  
   if (![_charSet isNotEmpty])
     _charSet = @"UTF-8";
 
@@ -1415,18 +1416,18 @@ static NSMutableDictionary *namespaces;
   if ([capa indexOfObject: [NSString stringWithFormat: @"thread=%@", [threadAlg lowercaseString]]] == NSNotFound)
     {
       [self logWithFormat: @"WARNING: No support for THREAD %@ for %@", threadAlg, [self->address description]];
-      threadAlg = (_bySubject) ? @"REFERENCES" : @"ORDEREDSUBJECT";
+      threadAlg = (_bySubject) ? @"REFERENCES" : @"ORDEREDSUBJECT";        
       if ([capa indexOfObject: [NSString stringWithFormat: @"thread=%@", [threadAlg lowercaseString]]] == NSNotFound)
         {
           [self errorWithFormat: @"No support for THREAD %@ for %@", threadAlg, [self->address description]];
           return nil;
         }
     }
-
+  
   threadStr = [NSString stringWithFormat:@"UID THREAD %@ %@ (%@)",
                         threadAlg, _charSet,
                [[self _searchExprForQual: _qual] substringFromIndex: 1]];
-
+  
   return [self->normer normalizeThreadResponse:
                           [self processCommand: threadStr]];
 }
@@ -1443,15 +1444,15 @@ static NSMutableDictionary *namespaces;
   qualifierString:(NSString *)_qualString
   encoding:(NSString *)_encoding
 {
-  /*
+  /* 
      http://www.ietf.org/internet-drafts/draft-ietf-imapext-sort-17.txt
-
+     
      The result dict contains the following keys:
       'result'      - a boolean
       'expunge'     - array            (of what?)
       'sort'        - array of uids in sort order
       'RawResponse' - the raw IMAP4 response
-
+     
      Eg: UID SORT ( DATE REVERSE SUBJECT ) UTF-8 TODO
   */
   NSMutableString *sortStr;
@@ -1459,7 +1460,7 @@ static NSMutableDictionary *namespaces;
 
   if (![_encoding   isNotNull]) _encoding   = @"UTF-8";
   if (![_qualString isNotNull]) _qualString = @" ALL";
-
+  
   // Prior sending the SORT command, we make sure it really supports
   // SORT UTF-8. We could have received that no matter what is supported
   if (!self->useUTF8)
@@ -1471,45 +1472,45 @@ static NSMutableDictionary *namespaces;
     _encoding = [ud stringForKey:@"ImapSortEncoding"];
 
   sortStr = [NSMutableString stringWithCapacity:128];
-
+  
   [sortStr appendString:@"UID SORT ("];
   if (_sort != nil) [sortStr appendString:_sort];
   [sortStr appendString:@") "];
-
+  
   [sortStr appendString:_encoding];   /* eg 'UTF-8' or '' */
-
+  
   /* Note: this is _space sensitive_! to many spaces lead to error! */
   [sortStr appendString:_qualString]; /* eg ' ALL' or ' TEXT "abc"' */
-
+  
   return [self->normer normalizeSortResponse:[self processCommand:sortStr]];
 }
 
 - (NSDictionary *)sort:(id)_sortSpec qualifier:(EOQualifier *)_qual
   encoding:(NSString *)_encoding
 {
-  /*
+  /* 
      http://www.ietf.org/internet-drafts/draft-ietf-imapext-sort-17.txt
 
      The _sortSpec can be:
      - a simple 'raw' IMAP4 sort string
      - an EOSortOrdering
      - an array of EOSortOrderings
-
+     
      The result dict contains the following keys:
       'result'      - a boolean
       'expunge'     - array            (of what?)
       'sort'        - array of uids in sort order
       'RawResponse' - the raw IMAP4 response
-
+    
      If no sortable key was found, the sort will run against 'DATE'.
      => TODO: this is inconsistent. If none are passed in, false will be
               returned
-
+     
      Eg: UID SORT ( DATE REVERSE SUBJECT ) UTF-8 TODO
   */
   NSString *tmp;
   NSArray *capa;
-
+  
   // We first check to see if our server supports IMAP SORT. If not
   // we'll sort ourself the results.
   capa = [[self capability] objectForKey: @"capability"];
@@ -1519,21 +1520,21 @@ static NSMutableDictionary *namespaces;
       return [self _sopeSORT: _sortSpec  qualifier: _qual  encoding: _encoding];
     }
 
-
+  
   if ([_sortSpec isKindOfClass:[NSArray class]])
     tmp = [self _generateIMAP4SortOrderings:_sortSpec];
   else if ([_sortSpec isKindOfClass:[EOSortOrdering class]])
     tmp = [self _generateIMAP4SortOrdering:_sortSpec];
   else
     tmp = [_sortSpec stringValue];
-
+  
   if (![tmp isNotEmpty]) { /* found no valid key use date sorting */
     [self logWithFormat:@"Note: no key found for sorting, using 'DATE': %@",
 	    _sortSpec];
     tmp = @"DATE";
   }
-
-  return [self primarySort: tmp
+  
+  return [self primarySort: tmp 
 	       qualifierString: [self _searchExprForQual:_qual]
 	       encoding: _encoding];
 }
@@ -1547,7 +1548,7 @@ static NSMutableDictionary *namespaces;
 
 - (NSDictionary *)searchWithQualifier:(EOQualifier *)_qualifier {
   NSString *s;
-
+  
   s = [self _searchExprForQual:_qualifier];
   if (![s isNotEmpty]) {
     // TODO: should set last-exception?
@@ -1555,7 +1556,7 @@ static NSMutableDictionary *namespaces;
           __PRETTY_FUNCTION__, _qualifier];
     return nil;
   }
-
+  
   s = [@"UID SEARCH" stringByAppendingString:s];
   return [self->normer normalizeSearchResponse:[self processCommand:s]];
 }
@@ -1567,7 +1568,7 @@ static NSMutableDictionary *namespaces;
 
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"getacl \"%@\"", SaneFolderName(_folder)];
   return [self->normer normalizeGetACLResponse:[self processCommand:cmd]];
 }
@@ -1576,10 +1577,10 @@ static NSMutableDictionary *namespaces;
   uid:(NSString *)_uid
 {
   NSString *cmd;
-
+  
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"setacl \"%@\" \"%@\" \"%@\"",
 		  SaneFolderName(_folder), _uid, _r];
   return [self->normer normalizeResponse:[self processCommand:cmd]];
@@ -1590,7 +1591,7 @@ static NSMutableDictionary *namespaces;
 
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"deleteacl \"%@\" \"%@\"",
 		  SaneFolderName(_folder), _uid];
   return [self->normer normalizeResponse:[self processCommand:cmd]];
@@ -1601,7 +1602,7 @@ static NSMutableDictionary *namespaces;
 
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"listrights \"%@\" \"%@\"",
 		  SaneFolderName(_folder), _uid];
   return [self->normer normalizeListRightsResponse:[self processCommand:cmd]];
@@ -1612,7 +1613,7 @@ static NSMutableDictionary *namespaces;
 
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
-
+  
   cmd = [NSString stringWithFormat:@"myrights \"%@\"", SaneFolderName(_folder)];
   return [self->normer normalizeMyRightsResponse:[self processCommand:cmd]];
 }
@@ -1629,7 +1630,7 @@ static NSMutableDictionary *namespaces;
 
   // _sortSpec: [REVERSE] {DATE,FROM,SUBJECT}
   d = [self searchWithQualifier: _qual];
-
+ 
   if ((d = [d objectForKey: @"RawResponse"])) {
     NSMutableDictionary *dict;
     NSArray *a, *s_a;
@@ -1641,32 +1642,32 @@ static NSMutableDictionary *namespaces;
 
       // If we are sorting by DATE or REVERSE DATE, we do NOT fetch all the body envelope
       // and we assume the server returns us the fetched UIDs in the right order.
-      if ([_sortSpec caseInsensitiveCompare: @"DATE"] == NSOrderedSame ||
+      if ([_sortSpec caseInsensitiveCompare: @"DATE"] == NSOrderedSame || 
 	  [_sortSpec caseInsensitiveCompare: @"REVERSE DATE"]  == NSOrderedSame) {
-	s_a = a;
+	s_a = a; 
       }
       else {
 	d = [self fetchUids: a
 		  parts: [NSArray arrayWithObjects: @"ENVELOPE",
 				  @"RFC822.SIZE", nil]];
 	a = [d objectForKey: @"fetch"];
-
+	
 	dict = [NSMutableDictionary dictionary];
 	b = YES;
-
+	
 	for (i = 0; i < [a count]; i++) {
 	  NGImap4Envelope *env;
 	  id o, uid, s;
-
+	  
 	  o = [a objectAtIndex: i];
 	  env = [o objectForKey: @"envelope"];
 	  uid = [o objectForKey: @"uid"];
-
+	  
 	  if ([_sortSpec rangeOfString: @"SUBJECT"].length) {
 	    s = [env subject];
 	    if ([s isKindOfClass: [NSData class]])
 	      s = [[[NSString alloc] initWithData: s  encoding: NSUTF8StringEncoding] autorelease];
-
+	    
 	    [dict setObject: (s != nil ? s : (id)@"")  forKey: uid];
 	  }
 	  else if ([_sortSpec rangeOfString: @"FROM"].length) {
@@ -1687,7 +1688,7 @@ static NSMutableDictionary *namespaces;
           b = NO;
 	  }
 	}
-
+	
 	if (b)
 	  s_a = [dict keysSortedByValueUsingSelector: @selector(caseInsensitiveCompare:)];
 	else
@@ -1697,7 +1698,7 @@ static NSMutableDictionary *namespaces;
       if ([_sortSpec rangeOfString: @"REVERSE"].length)	{
         s_a = [[s_a reverseObjectEnumerator] allObjects];
       }
-
+      
     }
     else {
       s_a = [NSArray array];
@@ -1766,7 +1767,7 @@ static NSMutableDictionary *namespaces;
     [self->context resetLastException];
     NS_DURING {
       NSException *e = nil; // TODO: try to remove exception handler
-
+      
       [self sendCommand:_command withTag:_tag logText:_txt];
       map = [self->parser parseResponseForTagId:self->tagId exception:&e];
       [e raise];
@@ -1822,7 +1823,7 @@ static NSMutableDictionary *namespaces;
     gettimeofday(&tv, NULL);
     ti = (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0) - ti;
     fprintf(stderr, "}[%s] <Send Command [%s]> : time needed: %4.4fs\n",
-           __PRETTY_FUNCTION__, [_command cString], ti < 0.0 ? -1.0 : ti);
+           __PRETTY_FUNCTION__, [_command cString], ti < 0.0 ? -1.0 : ti);    
   }
   return map;
 }
@@ -1872,7 +1873,7 @@ static NSMutableDictionary *namespaces;
   if (self->debug) {
       fprintf(stderr, "C[%p]: %s\n", self, [_txt cString]);
   }
-
+  
   if (![txtStream writeString:command])
     [self->context setLastException:[txtStream lastException]];
   else if (![txtStream writeString:@"\r\n"])
@@ -1880,7 +1881,7 @@ static NSMutableDictionary *namespaces;
   else if (![txtStream flush])
     [self->context setLastException:[txtStream lastException]];
 }
-
+  
 - (void)sendCommand:(NSString *)_command withTag:(BOOL)_tag {
   [self sendCommand:_command withTag:_tag logText:_command];
 }
@@ -1896,7 +1897,7 @@ static NSMutableDictionary *namespaces;
   id           obj;
   id           *objs;
   unsigned     cnt;
-
+  
   objs = calloc([_flags count] + 2, sizeof(id));
   cnt  = 0;
   enumerator = [_flags objectEnumerator];
@@ -1917,7 +1918,7 @@ static inline NSArray *_flags2ImapFlags(NGImap4Client *self, NSArray *_flags) {
 
 - (NSString *)_folder2ImapFolder:(NSString *)_folder {
   NSArray *array;
-
+  
   if (self->delimiter == nil) {
     NSDictionary *res;
 
@@ -1943,23 +1944,23 @@ static inline NSArray *_flags2ImapFlags(NGImap4Client *self, NSArray *_flags) {
         array = [array subarrayWithRange:NSMakeRange(0, [array count] - 1)];
     }
   }
-
+  
   return [array componentsJoinedByString:self->delimiter];
 }
 
 - (NSString *)_imapFolder2Folder:(NSString *)_folder {
   NSArray *array;
-
+  
   array = [NSArray arrayWithObject:@""];
 
   if ([self delimiter] == nil) {
     NSDictionary *res;
-
+    
     res = [self list:@"" pattern:@""]; // fill the delimiter ivar?
     if (!_checkResult(self->context, res, __PRETTY_FUNCTION__))
       return nil;
   }
-
+  
   if ([_folder hasPrefix: self->delimiter])
     _folder = [_folder substringFromIndex: 1];
   if ([_folder hasSuffix: self->delimiter])
@@ -1982,7 +1983,7 @@ static inline NSArray *_flags2ImapFlags(NGImap4Client *self, NSArray *_flags) {
 
 - (void)removeFromConnectionRegister {
   unsigned cnt;
-
+  
   for (cnt = 0; cnt < MaxImapClients; cnt++) {
     if (ImapClients[cnt] == self)
       ImapClients[cnt] = nil;
@@ -2017,15 +2018,15 @@ static inline NSArray *_flags2ImapFlags(NGImap4Client *self, NSArray *_flags) {
 
   ms = [NSMutableString stringWithCapacity:128];
   [ms appendFormat:@"<0x%p[%@]:", self, NSStringFromClass([self class])];
-
+  
   if (self->login != nil)
     [ms appendFormat:@" login=%@%s", self->login, self->password?"(pwd)":""];
-
+  
   if ((tmp = [self socket]) != nil)
     [ms appendFormat:@" socket=%@", tmp];
   else if (self->address)
     [ms appendFormat:@" address=%@", self->address];
-
+  
   [ms appendString:@">"];
   return ms;
 }
