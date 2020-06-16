@@ -1,7 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
   Copyright (C) 2011 Jeroen Dekkers <jeroen@dekkers.ch>
-  Copyright (C) 2020 Nicolas Höft
 
   This file is part of SOPE.
 
@@ -34,7 +33,6 @@
 #  define id openssl_id
 #  include <openssl/ssl.h>
 #  include <openssl/err.h>
-#  include <openssl/x509v3.h>
 #  undef id
 #endif
 
@@ -44,37 +42,8 @@
 
 @implementation NGActiveSSLSocket
 
-- (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
-
-  if (![super primaryConnectToAddress:_address])
-    /* could not connect to Unix socket ... */
-    return NO;
-
-  return [self startTLS];
-}
-
-+ (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
-                  onHostName: (NSString *) _hostName
-{
-  id sock = [[self alloc] initWithDomain:[_address domain]
-                      onHostName: _hostName];
-  if (![sock connectToAddress:_address]) {
-    NSException *e;
-    e = [[sock lastException] retain];
-    [self release];
-    e = [e autorelease];
-    [e raise];
-    return nil;
-  }
-  sock = [sock autorelease];
-  return sock;
-}
-
 #if HAVE_GNUTLS
-- (id)initWithDomain:(id<NGSocketDomain>)_domain
-      onHostName: (NSString *)_hostName
-{
-  hostName = [_hostName copy];
+- (id)initWithDomain:(id<NGSocketDomain>)_domain {
   if ((self = [super initWithDomain:_domain])) {
     //BIO *bio_err;
     static BOOL didGlobalInit = NO;
@@ -83,29 +52,20 @@
     if (!didGlobalInit) {
       /* Global system initialization*/
       if (gnutls_global_init()) {
-        [self release];
-        return nil;
+	[self release];
+	return nil;
       }
 
       didGlobalInit = YES;
     }
 
-    ret = gnutls_certificate_allocate_credentials((gnutls_certificate_credentials_t *) &self->cred);
-    if (ret)
+    ret = gnutls_certificate_allocate_credentials ((gnutls_certificate_credentials_t *) &self->cred);
+    if ( ret)
       {
-        NSLog(@"ERROR(%s): couldn't create GnuTLS credentials (%s)",
-              __PRETTY_FUNCTION__, gnutls_strerror(ret));
-        [self release];
-        return nil;
-      }
-
-    ret = gnutls_certificate_set_x509_system_trust(self->cred);
-    if (ret)
-      {
-        NSLog(@"ERROR(%s): could not set GnuTLS system trust (%s)",
-              __PRETTY_FUNCTION__, gnutls_strerror(ret));
-        [self release];
-        return nil;
+	NSLog(@"ERROR(%s): couldn't create GnuTLS credentials (%s)",
+	      __PRETTY_FUNCTION__, gnutls_strerror(ret));
+	[self release];
+	return nil;
       }
 
     self->session = NULL;
@@ -122,7 +82,6 @@
     gnutls_certificate_free_credentials((gnutls_certificate_credentials_t) self->cred);
     self->cred = NULL;
   }
-  [hostName release];
   [super dealloc];
 }
 
@@ -142,7 +101,6 @@
   else
     return ret;
 }
-
 - (unsigned)writeBytes:(const void *)_buf count:(unsigned)_len {
   ssize_t ret;
 
@@ -166,9 +124,6 @@
 - (BOOL) startTLS
 {
   int ret;
-  gnutls_session_t sess;
-
-  [self disableNagle: YES];
 
   ret = gnutls_init((gnutls_session_t *) &self->session, GNUTLS_CLIENT);
   if (ret) {
@@ -177,11 +132,10 @@
           __PRETTY_FUNCTION__, gnutls_strerror(ret));
     return NO;
   }
-  sess = (gnutls_session_t) self->session;
 
-  gnutls_set_default_priority(sess);
+  gnutls_priority_set_direct (session, "NORMAL", NULL);
 
-  ret = gnutls_credentials_set(sess, GNUTLS_CRD_CERTIFICATE, (gnutls_certificate_credentials_t) self->cred);
+  ret = gnutls_credentials_set((gnutls_session_t) self->session, GNUTLS_CRD_CERTIFICATE, (gnutls_certificate_credentials_t) self->cred);
   if (ret) {
     // should set exception !
     NSLog(@"ERROR(%s): couldn't set GnuTLS credentials (%s)",
@@ -189,33 +143,18 @@
     return NO;
   }
 
-  // set SNI
-  ret = gnutls_server_name_set(sess, GNUTLS_NAME_DNS, [hostName UTF8String], [hostName length]);
-  if (ret) {
-    // should set exception !
-    NSLog(@"ERROR(%s): couldn't set GnuTLS SNI (%s)",
-          __PRETTY_FUNCTION__, gnutls_strerror(ret));
-    return NO;
-  }
-
-  gnutls_session_set_verify_cert(sess, [hostName UTF8String], 0);
-
 #if GNUTLS_VERSION_NUMBER < 0x030109
-  gnutls_transport_set_ptr(sess, (gnutls_transport_ptr_t)(long)self->fd);
+  gnutls_transport_set_ptr((gnutls_session_t) self->session, (gnutls_transport_ptr_t)(long)self->fd);
 #else
-  gnutls_transport_set_int(sess, self->fd);
+  gnutls_transport_set_int((gnutls_session_t) self->session, self->fd);
 #endif /* GNUTLS_VERSION_NUMBER < 0x030109 */
 
-  gnutls_handshake_set_timeout(sess, GNUTLS_DEFAULT_HANDSHAKE_TIMEOUT);
-  do {
-    ret = gnutls_handshake(sess);
-  } while (ret < 0 && gnutls_error_is_fatal(ret) == 0);
-
-  if (ret < 0) {
-    NSLog(@"ERROR(%s):GnutTLS handshake failed on socket (%s)",
-      __PRETTY_FUNCTION__, gnutls_strerror(ret));
+  ret = gnutls_handshake((gnutls_session_t) self->session);
+  if (ret) {
+    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)",
+	  __PRETTY_FUNCTION__, gnutls_strerror(ret));
     if (ret == GNUTLS_E_FATAL_ALERT_RECEIVED) {
-      NSLog(@"Alert: %s", gnutls_alert_get_name(gnutls_alert_get(sess)));
+      NSLog(@"Alert: %s", gnutls_alert_get_name(gnutls_alert_get(self->session)));
     }
     [self shutdown];
     return NO;
@@ -224,11 +163,16 @@
   return YES;
 }
 
-- (BOOL)shutdown {
+- (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
+  if (![super primaryConnectToAddress:_address])
+    /* could not connect to Unix socket ... */
+    return NO;
 
+  return [self startTLS];
+}
+
+- (BOOL)shutdown {
   if (self->session) {
-    int ret;
-    LOOP_CHECK(ret, gnutls_bye((gnutls_session_t)self->session, GNUTLS_SHUT_RDWR));
     gnutls_deinit((gnutls_session_t) self->session);
     self->session = NULL;
   }
@@ -276,16 +220,12 @@ static BIO_METHOD streamBIO = {
 
 #endif /* STREAM_BIO */
 
-- (id)initWithDomain:(id<NGSocketDomain>)_domain
-          onHostName: (NSString *)_hostName
-{
-
-  hostName = [_hostName copy];
+- (id)initWithDomain:(id<NGSocketDomain>)_domain {
   if ((self = [super initWithDomain:_domain])) {
     //BIO *bio_err;
+    static BOOL didGlobalInit = NO;
 
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
-    static BOOL didGlobalInit = NO;
     if (!didGlobalInit) {
       /* Global system initialization*/
       SSL_library_init();
@@ -294,46 +234,28 @@ static BIO_METHOD streamBIO = {
     }
 #endif /* OPENSSL_VERSION_NUMBER */
 
-
+    /* An error write context */
+    //bio_err = BIO_new_fp(stderr, BIO_NOCLOSE);
+    
     /* Create our context*/
+    
     if ((self->ctx = SSL_CTX_new(SSLv23_method())) == NULL) {
       NSLog(@"ERROR(%s): couldn't create SSL context for v23 method !",
             __PRETTY_FUNCTION__);
       [self release];
       return nil;
     }
-    // use system default trust store
-    SSL_CTX_set_default_verify_paths(self->ctx);
 
-    if ((self->ssl = SSL_new(self->ctx)) == NULL) {
-      // should set exception !
-      NSLog(@"ERROR(%s): couldn't create SSL socket structure ...",
-            __PRETTY_FUNCTION__);
-      return nil;
-    }
-#if OPENSSL_VERSION_NUMBER < 0x10100000L
-    X509_VERIFY_PARAM *param = NULL;
-    param = SSL_get0_param(self->ssl);
-    X509_VERIFY_PARAM_set_hostflags(param, X509_CHECK_FLAG_NO_PARTIAL_WILDCARDS);
-    if (!X509_VERIFY_PARAM_set1_host(param, [hostName UTF8String], 0)) {
-      return nil;
-    }
-#else
-    SSL_set1_host(self->ssl, [hostName UTF8String]);
-#endif /* OPENSSL_VERSION_NUMBER < 0x10100000L */
-
-    // send SNI
-    SSL_set_tlsext_host_name(self->ssl, [hostName UTF8String]);
-    // verify the peer
-    SSL_set_verify(self->ssl, SSL_VERIFY_PEER, NULL);
-
+    SSL_CTX_set_verify(self->ctx, SSL_VERIFY_NONE, NULL);
   }
   return self;
 }
 
 - (void)dealloc {
-  [self shutdown];
-  [hostName release];
+  if (self->ctx) {
+    SSL_CTX_free(self->ctx);
+    self->ctx = NULL;
+  }
   [super dealloc];
 }
 
@@ -345,7 +267,7 @@ static BIO_METHOD streamBIO = {
   if (self->ssl == NULL)
     // should throw error
     return NGStreamError;
-
+  
   ret = SSL_read(self->ssl, _buf, _len);
 
   if (ret <= 0)
@@ -353,7 +275,6 @@ static BIO_METHOD streamBIO = {
 
   return ret;
 }
-
 - (unsigned)writeBytes:(const void *)_buf count:(unsigned)_len {
   return SSL_write(self->ssl, _buf, _len);
 }
@@ -368,10 +289,15 @@ static BIO_METHOD streamBIO = {
 {
   int ret;
 
-  [self disableNagle: YES];
+  if (self->ctx == NULL) {
+    NSLog(@"ERROR(%s): ctx isn't setup yet !",
+          __PRETTY_FUNCTION__);
+    return NO;
+  }
 
-  if (self->ssl == NULL) {
-    NSLog(@"ERROR(%s): SSL structure is not set up!",
+  if ((self->ssl = SSL_new(self->ctx)) == NULL) {
+    // should set exception !
+    NSLog(@"ERROR(%s): couldn't create SSL socket structure ...",
           __PRETTY_FUNCTION__);
     return NO;
   }
@@ -382,27 +308,61 @@ static BIO_METHOD streamBIO = {
           __PRETTY_FUNCTION__);
     return NO;
   }
-
+ 
   ret = SSL_connect(self->ssl);
   if (ret <= 0) {
-    NSLog(@"ERROR(%s): couldn't setup SSL connection on host %@ (%s)...",
-      __PRETTY_FUNCTION__, hostName, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
+    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)...",
+	  __PRETTY_FUNCTION__, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
     [self shutdown];
     return NO;
   }
-
+  
   return YES;
 }
 
-- (BOOL)shutdown {
-  if (self->ssl) {
-    int ret = SSL_shutdown(self->ssl);
-    // call shutdown a second time
-    if (ret == 0)
-      SSL_shutdown(self->ssl);
-    SSL_free(self->ssl);
-    self->ssl = NULL;
+- (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
+  int ret;
+  if (self->ctx == NULL) {
+    NSLog(@"ERROR(%s): ctx isn't setup yet !",
+          __PRETTY_FUNCTION__);
+    return NO;
   }
+
+  if ((self->ssl = SSL_new(self->ctx)) == NULL) {
+    // should set exception !
+    NSLog(@"ERROR(%s): couldn't create SSL socket structure ...",
+          __PRETTY_FUNCTION__);
+    return NO;
+  }
+  
+  if (![super primaryConnectToAddress:_address])
+    /* could not connect to Unix socket ... */
+    return NO;
+  
+  /* probably we should create a BIO for streams !!! */
+  if ((self->sbio = BIO_new_socket(self->fd, BIO_NOCLOSE)) == NULL) {
+    NSLog(@"ERROR(%s): couldn't create SSL socket IO structure ...",
+          __PRETTY_FUNCTION__);
+    [self shutdown];
+    return NO;
+  }
+  
+  NSAssert(self->ctx,  @"missing SSL context ...");
+  NSAssert(self->ssl,  @"missing SSL socket ...");
+  NSAssert(self->sbio, @"missing SSL BIO ...");
+  
+  SSL_set_bio(self->ssl, self->sbio, self->sbio);
+  ret = SSL_connect(self->ssl);
+  if (ret <= 0) {
+    NSLog(@"ERROR(%s): couldn't setup SSL connection on socket (%s)...",
+	  __PRETTY_FUNCTION__, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
+    [self shutdown];
+    return NO;
+  }
+  
+  return YES;
+}
+- (BOOL)shutdown {
   if (self->ctx) {
     SSL_CTX_free(self->ctx);
     self->ctx = NULL;

@@ -218,11 +218,10 @@ static BOOL logStream = NO;
     [self debugWithFormat:@"got no address for connect .."];
     return NO;
   }
-
+  
   NS_DURING {
     self->socket = self->useSSL
-      ? [SSLSocketClass socketConnectedToAddress:address
-                                      onHostName: [self->url host]]
+      ? [SSLSocketClass socketConnectedToAddress:address]
       : [NGActiveSocket socketConnectedToAddress:address];
   }
   NS_HANDLER {
