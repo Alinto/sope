@@ -36,7 +36,6 @@
 #else
   void *ctx;   /* real type: SSL_CTX */
   void *ssl;   /* real type: SSL */
-  void *sbio;  /* real type: BIO (basic input/output) */
 #endif
   NSString *hostName;
 }
