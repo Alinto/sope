@@ -291,18 +291,17 @@ static BOOL     debugImap4         = NO;
   // If we're using TLS, we start it here
   if (self->useTLS)
     {
-      Class socketClass;
       NSDictionary *d;
       
       d = [self normalizeResponse:[self processCommand: @"STARTTLS"]];
-      socketClass = NSClassFromString(@"NGActiveSSLSocket");
-      
-      if ([[d valueForKey:@"result"] boolValue] && socketClass)
+
+      if ([[d valueForKey:@"result"] boolValue])
 	{
 	  int oldopts;
 	  id o;
-	  
-	  o = [[socketClass alloc] initWithDomain: [self->address domain]];
+
+	  o = [[NGActiveSSLSocket alloc] initWithDomain: [self->address domain]
+	                                     onHostName: [(NGInternetSocketAddress *)self->address hostName]];
 	  [o setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
 	  
 	  // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
