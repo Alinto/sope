@@ -57,6 +57,7 @@ DEALINGS IN THE SOFTWARE.
 
 #if HAVE_GNUTLS
 #  include <gnutls/gnutls.h>
+#  include <gnutls/x509.h>
 #define LOOP_CHECK(rval, cmd) \
   do { \
     rval = cmd; \
@@ -106,6 +107,90 @@ DEALINGS IN THE SOFTWARE.
 }
 
 #if HAVE_GNUTLS
+
+/* This function will verify the peer's certificate, and check
+ * if the hostname matches, as well as the activation, expiration dates.
+ */
+static int
+_verify_certificate_callback (gnutls_session_t session)
+{
+  unsigned int status;
+  const gnutls_datum_t *cert_list;
+  unsigned int cert_list_size;
+  int ret;
+  gnutls_x509_crt_t cert;
+  const char *hostname;
+
+  /* read hostname */
+  hostname = gnutls_session_get_ptr (session);
+
+  /* This verification function uses the trusted CAs in the credentials
+   * structure. So you must have installed one or more CA certificates.
+   */
+  ret = gnutls_certificate_verify_peers2 (session, &status);
+  if (ret < 0)
+    {
+      NSLog(@"ERROR: verify_peer2 failed");
+      return GNUTLS_E_CERTIFICATE_ERROR;
+    }
+
+  if (status & GNUTLS_CERT_SIGNER_NOT_FOUND)
+    NSLog(@"ERROR: The certificate hasn't got a known issuer.");
+
+  if (status & GNUTLS_CERT_REVOKED)
+    NSLog(@"ERROR: The certificate has been revoked.");
+
+  if (status & GNUTLS_CERT_EXPIRED)
+    NSLog(@"ERROR: The certificate has expired");
+
+  if (status & GNUTLS_CERT_NOT_ACTIVATED)
+    NSLog(@"ERROR: The certificate is not yet activated");
+
+  if (status & GNUTLS_CERT_INVALID)
+    {
+      NSLog(@"ERROR: The certificate is not trusted.");
+      return GNUTLS_E_CERTIFICATE_ERROR;
+    }
+
+  /* Up to here the process is the same for X.509 certificates and
+   * OpenPGP keys. From now on X.509 certificates are assumed. This can
+   * be easily extended to work with openpgp keys as well.
+   */
+  if (gnutls_certificate_type_get (session) != GNUTLS_CRT_X509)
+    return GNUTLS_E_CERTIFICATE_ERROR;
+
+  if (gnutls_x509_crt_init (&cert) < 0)
+    {
+      NSLog(@"WARNING: could not initialize gnutls certificate");
+      return GNUTLS_E_CERTIFICATE_ERROR;
+    }
+
+  cert_list = gnutls_certificate_get_peers (session, &cert_list_size);
+  if (cert_list == NULL)
+    {
+      NSLog(@"WARNING: GnuTLS certificate not found");
+      return GNUTLS_E_CERTIFICATE_ERROR;
+    }
+
+  if (gnutls_x509_crt_import (cert, &cert_list[0], GNUTLS_X509_FMT_DER) < 0)
+    {
+      NSLog(@"WARNING: Unable to parse certificate");
+      return GNUTLS_E_CERTIFICATE_ERROR;
+    }
+
+
+  if (!gnutls_x509_crt_check_hostname (cert, hostname))
+    {
+      NSLog(@"ERROR: Certificate does not match hostname '%s'", hostname);
+      return GNUTLS_E_CERTIFICATE_ERROR;
+    }
+
+  gnutls_x509_crt_deinit (cert);
+
+  /* notify gnutls to continue handshake normally */
+  return 0;
+}
+
 - (id)initWithDomain:(id<NGSocketDomain>)_domain
       onHostName: (NSString *)_hostName
 {
@@ -132,8 +217,13 @@ DEALINGS IN THE SOFTWARE.
         [self release];
         return nil;
       }
-
+#ifdef CA_BUNDLE
+    ret = gnutls_certificate_set_x509_trust_file(self->cred, CA_BUNDLE, GNUTLS_X509_FMT_PEM);
+#elif GNUTLS_VERSION_NUMBER >= 0x030020
     ret = gnutls_certificate_set_x509_system_trust(self->cred);
+#else
+#error "Cant use default system trust, CA_BUNDLE needs to be passed"
+#endif
     if (ret < 0)
       {
         NSLog(@"ERROR(%s): could not set GnuTLS system trust (%s)",
@@ -141,6 +231,10 @@ DEALINGS IN THE SOFTWARE.
         [self release];
         return nil;
       }
+
+#if GNUTLS_VERSION_NUMBER < 0x030406
+    gnutls_certificate_set_verify_function(self->cred, _verify_certificate_callback);
+#endif /*  GNUTLS_VERSION_NUMBER >= 0x030406*/
 
     self->session = NULL;
   }
@@ -232,7 +326,11 @@ DEALINGS IN THE SOFTWARE.
     return NO;
   }
 
+#if GNUTLS_VERSION_NUMBER >= 0x030406
   gnutls_session_set_verify_cert(sess, [hostName UTF8String], 0);
+#else
+  gnutls_session_set_ptr(session, (void *) [hostName UTF8String]);
+#endif /*  GNUTLS_VERSION_NUMBER >= 0x030406*/
 
 #if GNUTLS_VERSION_NUMBER < 0x030109
   gnutls_transport_set_ptr(sess, (gnutls_transport_ptr_t)(long)self->fd);
@@ -240,7 +338,9 @@ DEALINGS IN THE SOFTWARE.
   gnutls_transport_set_int(sess, self->fd);
 #endif /* GNUTLS_VERSION_NUMBER < 0x030109 */
 
+#if GNUTLS_VERSION_NUMBER >= 0x030100
   gnutls_handshake_set_timeout(sess, GNUTLS_DEFAULT_HANDSHAKE_TIMEOUT);
+#endif
   do {
     ret = gnutls_handshake(sess);
   } while (ret < 0 && gnutls_error_is_fatal(ret) == 0);
@@ -404,7 +504,12 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
       return nil;
     }
     // use system default trust store
+
+#ifdef CA_BUNDLE
+    SSL_CTX_load_verify_locations(self->ctx, CA_BUNDLE, NULL);
+#else
     SSL_CTX_set_default_verify_paths(self->ctx);
+#endif // CA_BUNDLE
 
     if ((self->ssl = SSL_new(self->ctx)) == NULL) {
       // should set exception !

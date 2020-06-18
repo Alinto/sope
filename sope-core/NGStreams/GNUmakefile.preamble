@@ -60,6 +60,11 @@ NGStreams_LIBRARIES_DEPEND_UPON += -lssl -lcrypto
 endif
 endif
 
+# pass CA bundle
+ifdef CA_BUNDLE
+ADDITIONAL_CPPFLAGS += -DCA_BUNDLE="\"$(CA_BUNDLE)\""
+endif
+
 ADDITIONAL_CPPFLAGS += -Wall -Wno-protocol
 
 # reentrant

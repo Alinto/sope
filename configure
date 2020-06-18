@@ -18,6 +18,7 @@ ARG_FRAMEWORK_DIR=""
 ARG_GSMAKE=`gnustep-config --variable=GNUSTEP_MAKEFILES`
 ARG_CFGMAKE="$PWD/config.make"
 ARG_CFGSSL="auto"
+ARG_CABUNDLE="none"
 ARG_FHSMAKE="$PWD/fhs-postinstall.make"
 ARG_WITH_GNUSTEP=0
 ARG_WITH_DEBUG=1
@@ -75,6 +76,7 @@ Build flags:
   --enable-debug          turn on debugging and compile time warnings
   --enable-strip          turn on stripping of debug symbols
   --with-ssl=SSL          specify ssl library (none, ssl, gnutls, auto) [auto]
+  --ca-bundle=CA_BUNDLE   specify path to ca bundle (none, path, auto) [none]
   --enable-xml            Enable xml support (auto if unspecified)
   --enable-mysql          Enable mysql support (auto if unspecified)
   --enable-postgresql     Enable postgresql support (auto if unspecified)
@@ -92,24 +94,24 @@ printParas() {
   if test $ARG_BEQUIET  = 1; then echo "  will be quite.";  fi
   if test $ARG_NOCREATE = 1; then echo "  won't create files"; fi
   if test "x$ARG_FRAMEWORK_DIR" != "x"; then
-    echo "  FHS:    install in frameworks directory"; 
+    echo "  FHS:    install in frameworks directory";
   elif test $DARG_IS_FHS = 1;  then
-    echo "  FHS:    install in FHS root"; 
+    echo "  FHS:    install in FHS root";
   else
-    echo "  FHS:    install in GNUstep tree"; 
+    echo "  FHS:    install in GNUstep tree";
   fi
 
-  if test $ARG_WITH_DEBUG = 1; then 
+  if test $ARG_WITH_DEBUG = 1; then
     echo "  debug:  yes";
   else
     echo "  debug:  no";
   fi
-  if test $ARG_WITH_STRIP = 1; then 
+  if test $ARG_WITH_STRIP = 1; then
     echo "  strip:  yes";
   else
     echo "  strip:  no";
   fi
-  
+
   echo "  prefix:     $ARG_PREFIX"
   echo "  frameworks: $ARG_FRAMEWORK_DIR"
   echo "  gstep:      $ARG_GSMAKE"
@@ -155,9 +157,9 @@ setupInternalGSMake() {
       ENABLE_PCH_OPT="--enable-pch"
     fi
     pregsmdir="$PWD"
-    
+
     echo -n "configuring builtin gnustep-make environment (${SETUP_LOGNAME}) .."
-    
+
     cd "$GSTEPMAKE_SRCDIR"
     ./configure >${pregsmdir}/${SETUP_LOGNAME} \
       ${ENABLE_PCH_OPT} \
@@ -171,7 +173,7 @@ setupInternalGSMake() {
 
     echo -n ".. install .."
     $MAKE install >>${pregsmdir}/${SETUP_LOGNAME}
-    
+
     ARG_GSMAKE="${INTERNAL_MAKEDIR}/Library/Makefiles/"
     ARG_IS_FHS=1
     DARG_IS_FHS=1
@@ -180,7 +182,7 @@ setupInternalGSMake() {
     if test "x$ARG_PREFIX" = "x"; then
       ARG_PREFIX="/usr/local/"
     fi
-    
+
     cd "$pregsmdir"
     if test -f $ARG_GSMAKE/GNUstep.sh; then
       echo ".. done (log in ${SETUP_LOGNAME})."
@@ -229,7 +231,7 @@ setupAppleArgs() {
   if test "x${USES_INTERNAL_MAKE}" = "no"; then
     ARG_WITH_GNUSTEP=1
   fi
-  
+
   # no reason to print a warning?
   #if test "x${xLIBRARY_COMBO}" != "xapple-apple-nil"; then
   #  if test "x${LIBRARY_COMBO}" != "xapple-apple-apple"; then
@@ -285,7 +287,7 @@ validateArgs() {
         fi
 	;;
   esac
-  
+
   if test $ARG_WITH_GNUSTEP = 1; then
     if test $DARG_IS_FHS = 1; then
       echo "error: configured for FHS root _and_ GNUstep tree. Choose one!"
@@ -316,17 +318,17 @@ genConfigMake() {
   #   DYLD_LIBRARY_PATH
   #   GUILE_LOAD_PATH
   #   CLASSPATH
-  
+
   if test $ARG_BEQUIET != 1; then
     echo "creating: $ARG_CFGMAKE"
   fi
-  
+
   echo "# GNUstep environment configuration" > "${ARG_CFGMAKE}"
   cfgwrite "#   created by: '$CFG_ARGS'"
   cfgwrite ""
   cfgwrite "SOPE_ROOT=`pwd | sed 's/ /\\\ /g'`"
   cfgwrite "include \${SOPE_ROOT}/Version"
-  
+
   cfgwrite "# Note: you can override any option as a 'make' parameter, eg:"
   cfgwrite "#         make debug=yes"
   cfgwrite ""
@@ -336,7 +338,7 @@ genConfigMake() {
   #cfgwrite "all :: "
   #cfgwrite "	@echo Local GNUstep config.make is active"
   #cfgwrite ""
-  
+
   # Note: GNUSTEP_TARGET_CPU is not yet available (set by common.make), so we
   #       only have environment variables
   # Note: we can't set SYSTEM_LIB_DIR in this location, it gets overridden by
@@ -358,8 +360,8 @@ genConfigMake() {
   cfgwrite "endif"
   cfgwrite "GNUSTEP_INSTALLATION_DOMAIN:=LOCAL"
   cfgwrite "CONFIGURE_SYSTEM_LIB_DIR += -L/usr/\$(CGS_LIBDIR_NAME)/"
-  
-  
+
+
   if test "x$ARG_FRAMEWORK_DIR" != "x"; then
     cfgwrite "# configured to install in Frameworks directory"
     cfgwrite "FRAMEWORK_INSTALL_DIR:=${ARG_FRAMEWORK_DIR}"
@@ -396,7 +398,7 @@ genConfigMake() {
     cfgwrite "SOPE_TOOLS=\${GNUSTEP_TOOLS}"
     cfgwrite "SOPE_ADMIN_TOOLS=\${GNUSTEP_ADMIN_TOOLS}"
   fi
-  
+
   if test $ARG_WITH_DEBUG = 1; then
     cfgwrite "# configured to produce debugging code";
     cfgwrite "debug:=yes"
@@ -406,7 +408,7 @@ genConfigMake() {
     cfgwrite "debug:=no"
   fi
   cfgwrite ""
-  
+
   if test $ARG_WITH_STRIP = 1; then
     cfgwrite "# configured to produce stripped code";
     cfgwrite "strip:=yes"
@@ -419,7 +421,7 @@ genConfigMake() {
   cfgwrite "# enforce shared libraries";
   cfgwrite "shared:=yes"
   cfgwrite ""
-  
+
   cfgwrite "# GNUstep environment variables:";
   for i in `env | grep GNUSTEP_ | sort`; do
     MAKE_ASSI="`echo $i | sed s/=/:=/`"
@@ -434,7 +436,7 @@ checkLinking() {
   # library-name => $1, type => $2
   local oldpwd="${PWD}"
   local tmpdir=".configure-test-$$"
-  
+
   mkdir $tmpdir
   cd $tmpdir
   cp ../maintenance/dummytool.c .
@@ -443,7 +445,7 @@ checkLinking() {
   for LIB in $1;do
     LIBS="$LIBS -l${LIB}"
   done
-  
+
   tmpmake="GNUmakefile"
   echo  >$tmpmake "-include ../config.make"
   echo >>$tmpmake "include \$(GNUSTEP_MAKEFILES)/common.make"
@@ -457,10 +459,10 @@ checkLinking() {
   echo >>$tmpmake "SYSTEM_LIB_DIR += \$(CONFIGURE_SYSTEM_LIB_DIR)"
   echo >>$tmpmake "SYSTEM_LIB_DIR      += ${LINK_SYSLIBDIRS}"
   echo >>$tmpmake "include \$(GNUSTEP_MAKEFILES)/ctool.make"
-  
+
   $MAKE -s messages=yes -f $tmpmake linktest >out.log 2>err.log
   LINK_RESULT=$?
-  
+
   if test $LINK_RESULT = 0; then
     echo "$2 library found: $1"
     cfgwrite "HAS_LIBRARY_$1=yes"
@@ -475,7 +477,7 @@ checkLinking() {
       LIBS=$OLDLIBS
     fi
   fi
-  
+
   cd "${oldpwd}"
   rm -rf $tmpdir
 
@@ -514,6 +516,32 @@ checkDependencies() {
       checkLinking "gnutls"  required;
   fi
 
+  if test "x$ARG_CABUNDLE" = "xauto"; then
+    while read f; do
+        if test -f $f; then
+            echo "found $f"
+            ARG_CABUNDLE="$f"
+            break
+        fi
+    # we need this odd syntax in order not to spawn a sub
+    # shell
+    done << EOF
+    /etc/ssl/certs/ca-certificates.crt
+    /etc/pki/tls/certs/ca-bundle.crt
+    /usr/share/ssl/certs/ca-bundle.crt
+    /usr/local/share/certs/ca-root-nss.crt
+    /etc/ssl/cert.pem
+EOF
+
+    if test "x$ARG_CABUNDLE" = "xauto"; then
+        echo "failed to find CA root store"
+        exit 1
+    fi
+  fi
+  if test "x$ARG_CABUNDLE" != "xnone"; then
+      cfgwrite "CA_BUNDLE=$ARG_CABUNDLE"
+      echo "Using CA Bundle: $ARG_CABUNDLE"
+  fi
   if test "x$ARG_WITH_POSTGRESQL" = "xauto" ; then
     checkLinking "pq"          optional;
   elif test $ARG_WITH_POSTGRESQL = 1 ; then
@@ -538,15 +566,15 @@ runIt() {
   if test $ARG_BEQUIET != 1; then
     printParas;
   fi
-  
-  if test $ARG_NOCREATE = 1; then 
+
+  if test $ARG_NOCREATE = 1; then
     if test $ARG_BEQUIET != 1; then
       echo "not creating the config file ...";
     fi
   else
     genConfigMake;
     checkDependencies;
-    
+
     if test -x "${NGSTREAMS_DIR}/configure"; then
       if test $ARG_BEQUIET != 1; then
         echo -n "configuring NGStreams library .."
@@ -613,6 +641,10 @@ processOption() {
         extractFuncValue $1;
         ARG_CFGSSL="$VALUE"
 	;;
+    x--ca-bundle=*)
+        extractFuncValue $1;
+        ARG_CABUNDLE="$VALUE"
+    ;;
     "x--enable-mysql")
         ARG_WITH_MYSQL=1
 	;;
