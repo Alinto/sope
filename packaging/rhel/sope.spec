@@ -22,6 +22,7 @@ BuildPreReq:  gnustep-make gcc-objc postgresql-devel
 %{?el5:BuildRequires: mysql-devel}
 %{?el6:BuildRequires: mysql-devel}
 %{?el7:BuildRequires: mariadb-devel}
+%{?el8:BuildRequires: mariadb-devel}
 
 %description
 sope
