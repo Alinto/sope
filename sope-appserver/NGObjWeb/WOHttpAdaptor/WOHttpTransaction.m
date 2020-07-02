@@ -1067,6 +1067,8 @@ static __inline__ const char *monthAbbr(int m) {
         [buf appendFormat:@" %iM", diff / 1024];
       else
         [buf appendFormat:@" %iK", diff];
+
+      [buf appendFormat:@" - %i", [pi fileDescriptorCount]];
     }
     else
       [buf appendString:@" ?"];

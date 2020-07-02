@@ -23,6 +23,11 @@
 #include "common.h"
 #include <time.h>
 
+#ifdef __linux__
+#include <sys/types.h>
+#include <dirent.h>
+#endif
+
 #if !LIB_FOUNDATION_LIBRARY && !GNUSTEP_BASE_LIBRARY
 #  import <NGExtensions/NSString+Ext.h>
 #endif
@@ -218,6 +223,29 @@ static NSNumber *_uint(unsigned int i) {
   return 0;
 #endif
 }
+
+- (unsigned int)fileDescriptorCount
+{
+#ifdef __linux__
+  int fd_count;
+  char buf[64];
+  struct dirent *dp;
+  DIR *dir;
+
+  snprintf(buf, 64, "/proc/%i/fd/", getpid());
+
+  fd_count = 0;
+  dir = opendir(buf);
+  while ((dp = readdir(dir)) != NULL) {
+    fd_count++;
+  }
+  closedir(dir);
+  return fd_count;
+#else
+  return 0;
+#endif
+}
+
 
 - (NSDictionary *)procStatDictionary {
 #ifdef __linux__
