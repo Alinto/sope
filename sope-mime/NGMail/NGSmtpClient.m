@@ -21,6 +21,8 @@
 */
 #include <fcntl.h>
 
+#include <NGStreams/NGActiveSSLSocket.h>
+
 #include "NGSmtpClient.h"
 #include "NGSmtpSupport.h"
 #include "NGSmtpReplyCodes.h"
@@ -224,16 +226,16 @@
 // connection
 
 - (id)_openSocket {
-  Class socketClass = Nil;
   id sock;
-
-  socketClass = [NGActiveSocket class];
-
-  if ([self useSSL] && ![self useStartTLS])
-    socketClass = NSClassFromString(@"NGActiveSSLSocket");
+  BOOL sslSocket = [self useSSL] && ![self useStartTLS];
 
   NS_DURING {
-      sock = [socketClass socketConnectedToAddress:self->address];
+    if (sslSocket) {
+      sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
+          onHostName: [(NGInternetSocketAddress *)self->address hostName]];
+    } else {
+      sock = [NGActiveSocket socketConnectedToAddress:self->address];
+    }
   }
   NS_HANDLER {
     sock = nil;
@@ -336,7 +338,8 @@
     return NO;
   }
 
-  tlsSocket = [[socketClass alloc] initWithDomain: [self->address domain]];
+  tlsSocket = [[NGActiveSSLSocket alloc] initWithDomain: [self->address domain]
+          onHostName: [(NGInternetSocketAddress *)self->address hostName]];
   [tlsSocket setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
   // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
   // SOPE will break on SSL-sockets.
