@@ -39,6 +39,7 @@
 
 - (NGHashMap *)processCommand:(id)_command;
 - (NGHashMap *)processCommand:(id)_command logText:(id)_txt;
+- (NGHashMap *)processCommand:(id)_command logText:(id)_txt reconnect:(BOOL)_reconnect;
 
 - (NSException *)sendCommand:(id)_command;
 - (NSException *)sendCommand:(id)_command logText:(id)_txt;
@@ -444,7 +445,9 @@ static BOOL     debugImap4         = NO;
     
     s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" {%d+}\r\n%s",
                   (int)[auth length], [auth bytes]];
-    map = [self processCommand:s];
+    map = [self processCommand:s
+                       logText:s
+                     reconnect:NO];
   }
   else {
     NSString *s;
@@ -452,7 +455,8 @@ static BOOL     debugImap4         = NO;
     s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" {%d+}\r\n%s",
                   (int)[auth length], [auth bytes]];
     map = [self processCommand:s
-                logText:@"AUTHENTICATE \"PLAIN\" {%d+}\r\nLOGIN:PASSWORD\r\n"];
+                       logText:@"AUTHENTICATE \"PLAIN\" {%d+}\r\nLOGIN:PASSWORD\r\n"
+                     reconnect:NO];
   }
 
   if (map == nil) {
@@ -705,14 +709,25 @@ static BOOL     debugImap4         = NO;
 - (void)waitPriorReconnectWithRepetitionCount:(int)_cnt {
   unsigned timeout;
   
-  timeout = _cnt * 4;
+  timeout = _cnt * 2;
   [self logWithFormat:@"reconnect to %@, sleeping %d seconds ...",
           self->address, timeout];
   sleep(timeout);
   [self logWithFormat:@"reconnect ..."];
 }
 
-- (NGHashMap *)processCommand:(id)_command logText:(id)_txt {
+- (NGHashMap *) processCommand: (id)_command
+                       logText: (id)_txt
+{
+  return [self processCommand: _command
+                      logText: _txt
+                    reconnect: YES];
+}
+
+- (NGHashMap *) processCommand: (id)_command
+                       logText: (id)_txt
+                     reconnect: (BOOL)_reconnect
+{
   NGHashMap *map          = nil;
   BOOL      repeatCommand = NO;
   int       repeatCnt     = 0;
@@ -730,7 +745,8 @@ static BOOL     debugImap4         = NO;
         [self waitPriorReconnectWithRepetitionCount:repeatCnt];
       
       repeatCnt++;
-      [self reconnect];
+      if (_reconnect)
+        [self reconnect];
       repeatCommand = NO;
     }
     

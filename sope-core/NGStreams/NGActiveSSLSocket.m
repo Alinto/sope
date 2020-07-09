@@ -471,7 +471,7 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
     if (validation_result == YES) {
         return 1;
     } else {
-        NSLog(@"SSL(%@): Certificate validation failed",
+        NSLog(@"SSL(%s): Certificate validation failed",
             __PRETTY_FUNCTION__);
         return 0;
     }
