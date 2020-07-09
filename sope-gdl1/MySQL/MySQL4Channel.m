@@ -193,12 +193,12 @@ static int openConnectionCount = 0;
   }
   
   if (isDebuggingEnabled)
-    NSLog(@"MySQL4 connection established 0x%p", self->_connection);
-
-#if 0
-  NSLog(@"---------- %s: %@ opens channel count[%d]", __PRETTY_FUNCTION__,
+    {
+      NSLog(@"MySQL4 connection established 0x%p", self->_connection);
+      NSLog(@"---------- %s: %@ opens channel count[%d]", __PRETTY_FUNCTION__,
         self, openConnectionCount);
-#endif
+    }
+
   openConnectionCount++;
   
 #if LIB_FOUNDATION_BOEHM_GC
@@ -220,10 +220,11 @@ static int openConnectionCount = 0;
   
   if (self->_connection != NULL) {
     mysql_close(self->_connection);
-#if 0
-    NSLog(@"---------- %s: %@ close channel count[%d]", __PRETTY_FUNCTION__,
-          self, openConnectionCount);
-#endif
+
+    if (isDebuggingEnabled)
+      NSLog(@"---------- %s: %@ close channel count[%d]", __PRETTY_FUNCTION__,
+      self, openConnectionCount);
+
     openConnectionCount--;
     
     if (isDebuggingEnabled) {
