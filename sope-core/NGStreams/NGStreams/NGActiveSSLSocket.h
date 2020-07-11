@@ -38,12 +38,19 @@
   void *ssl;   /* real type: SSL */
 #endif
   NSString *hostName;
+  BOOL validatePeer;
 }
 + (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
                   onHostName: (NSString *) hostName;
 
 - (id)initWithDomain:(id<NGSocketDomain>)_domain
       onHostName: (NSString *)_hostName;
+
+/**
+ * enable/disable peer certificate validation. must be called before
+ * the handshake is performed. Default is enabled.
+ */
+- (void) validatePeerCertificate:(BOOL)_validate;
 
 - (BOOL) startTLS;
 @end
