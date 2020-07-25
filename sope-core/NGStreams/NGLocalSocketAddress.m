@@ -67,15 +67,15 @@ static NSString *socketDirectoryPath = @"/tmp";
 - (id)initWithPath:(NSString *)_path {
   if ((self = [super init])) {
     self->address = calloc(1, sizeof(struct sockaddr_un));
-    
+
     memset(self->address, 0, sizeof(struct sockaddr_un));
-    
+
 #if defined(__WIN32__) && !defined(__CYGWIN32__)
     self->path = [_path copyWithZone:[self zone]];
 #else
     if ([_path cStringLength] >=
         sizeof(((struct sockaddr_un *)self->address)->sun_path)) {
-      
+
       NSLog(@"LocalDomain name too long: maxlen=%i, len=%i, path=%@",
             (int)sizeof(((struct sockaddr_un *)self->address)->sun_path),
             (int)[_path cStringLength],
@@ -85,7 +85,7 @@ static NSString *socketDirectoryPath = @"/tmp";
       [self release];
       return nil;
     }
-    
+
     ((struct sockaddr_un *)self->address)->sun_family =
       [[self domain] socketDomain];
 
@@ -99,7 +99,7 @@ static NSString *socketDirectoryPath = @"/tmp";
 - (id)init {
   int      addressCounter = 0;
   NSString *newPath;
-  
+
   newPath = [NSString stringWithFormat:@"_ngsocket_%d_%p_%03d",
                         (int)getpid(), [NSThread currentThread], addressCounter];
   newPath = [socketDirectoryPath stringByAppendingPathComponent:newPath];
@@ -118,7 +118,7 @@ static NSString *socketDirectoryPath = @"/tmp";
   path = (_length < 3)
     ? (id)@""
     : [[NSString alloc] initWithCString:nun->sun_path];
-  
+
   self = [self initWithPath:path];
   [path release]; path = nil;
   return self;
@@ -137,7 +137,7 @@ static NSString *socketDirectoryPath = @"/tmp";
   sp = ((struct sockaddr_un *)self->address)->sun_path;
   if (strlen(sp) == 0)
     return @"";
-  
+
   return [NSString stringWithCString:sp];
 }
 
@@ -145,11 +145,11 @@ static NSString *socketDirectoryPath = @"/tmp";
 
 - (void)deletePath {
   const char *sp;
-  
+
   sp = ((struct sockaddr_un *)self->address)->sun_path;
   if (strlen(sp) == 0)
     return;
-  
+
   unlink(sp);
 }
 
@@ -163,6 +163,14 @@ static NSString *socketDirectoryPath = @"/tmp";
 }
 - (id)domain {
   return [NGLocalSocketDomain domain];
+}
+
+- (BOOL) isLocalhost {
+  return YES;
+}
+
+- (NSString *) hostName {
+  return @"localhost";
 }
 
 /* test for accessibility */
@@ -226,7 +234,7 @@ static NSString *socketDirectoryPath = @"/tmp";
 
 - (NSString *)description {
   NSString *p = [self path];
-  
+
   if ([p length] == 0)
     p = @"[no path]";
 
