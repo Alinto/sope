@@ -1271,7 +1271,7 @@ static NSMutableDictionary *namespaces;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
 
-  cmd = [NSString stringWithFormat:@"copy %u:%u \"%@\"", _from, _to, _folder];
+  cmd = [NSString stringWithFormat:@"copy %u:%u \"%@\"", _from, _to, SaneFolderName(_folder)];
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
@@ -1281,7 +1281,7 @@ static NSMutableDictionary *namespaces;
   if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
     return nil;
 
-  cmd = [NSString stringWithFormat:@"uid copy %u \"%@\"", _uid, _folder];
+  cmd = [NSString stringWithFormat:@"uid copy %u \"%@\"", _uid, SaneFolderName(_folder)];
 
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
@@ -1292,7 +1292,7 @@ static NSMutableDictionary *namespaces;
     return nil;
 
   cmd = [NSString stringWithFormat:@"uid copy %@ \"%@\"",
-		  [_uids componentsJoinedByString:@","], _folder];
+		  [_uids componentsJoinedByString:@","], SaneFolderName(_folder)];
 
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
@@ -1323,7 +1323,7 @@ static NSMutableDictionary *namespaces;
   rfc822Data = [_message dataByEnsuringCRLFLineEndings];
 
   icmd = [NSString stringWithFormat:@"append \"%@\" (%@) {%u}",
-                   _folder, [flags componentsJoinedByString:@" "],
+                   SaneFolderName(_folder), [flags componentsJoinedByString:@" "],
                    (unsigned)[rfc822Data length]];
   result = [self processCommand:icmd
                  withTag:YES withNotification:NO];
