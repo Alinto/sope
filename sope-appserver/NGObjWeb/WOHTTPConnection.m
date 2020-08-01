@@ -25,6 +25,7 @@
 #include <NGObjWeb/WOResponse.h>
 #include <NGObjWeb/WOCookie.h>
 #include <NGObjWeb/WORunLoop.h>
+#include <NGStreams/NGActiveSSLSocket.h>
 #include <NGStreams/NGStreams.h>
 #include <NGStreams/NGCTextStream.h>
 #include <NGStreams/NGBufferedStream.h>
@@ -71,7 +72,7 @@ static BOOL logStream = NO;
   static BOOL didInit = NO;
   if (didInit) return;
   didInit = YES;
-    
+
   useSimpleParser = [ud boolForKey:@"WOHTTPConnectionUseSimpleParser"];
   proxyServer     = [ud stringForKey:@"WOProxyServer"];
   noProxy         = [ud arrayForKey:@"WONoProxySuffixes"];
@@ -88,7 +89,7 @@ static BOOL logStream = NO;
   ps = [self proxyServer];
   if ([ps length] == 0)
     return nil;
-  
+
   return [NSURL URLWithString:ps];
 }
 + (NSArray *)noProxySuffixes {
@@ -100,7 +101,7 @@ static BOOL logStream = NO;
     self->url      = [_url retain];
     self->useSSL   = [[_url scheme] isEqualToString:@"https"];
     self->useProxy = [_url shouldUseWOProxyServer];
-    
+
     if (self->useSSL) {
       static BOOL didCheck = NO;
       if (!didCheck) {
@@ -114,7 +115,7 @@ static BOOL logStream = NO;
 
 - (id)initWithURL:(id)_url {
   NSURL *lurl;
-  
+
   /* create an NSURL object if necessary */
   lurl = [_url isKindOfClass:[NSURL class]]
     ? _url
@@ -130,13 +131,13 @@ static BOOL logStream = NO;
   return [self initWithNSURL:lurl];
 }
 
-- (id)initWithHost:(NSString *)_hostName onPort:(unsigned int)_port 
+- (id)initWithHost:(NSString *)_hostName onPort:(unsigned int)_port
   secure:(BOOL)_flag
 {
   NSString *s;
-  
+
   s = [NSString stringWithFormat:@"http%s://%@:%i/",
-		  _flag ? "s" : "", _hostName, 
+		  _flag ? "s" : "", _hostName,
 		  _port == 0 ? (_flag?443:80) : _port];
   return [self initWithURL:s];
 }
@@ -168,7 +169,7 @@ static BOOL logStream = NO;
 - (NSString *)loggingPrefix {
   /* improve perf ... */
   if (self->url) {
-    return [NSString stringWithFormat:@"WOHTTP[0x%p]<%@>", 
+    return [NSString stringWithFormat:@"WOHTTP[0x%p]<%@>",
 		       self, [self->url absoluteString]];
   }
   else
@@ -185,14 +186,14 @@ static BOOL logStream = NO;
 
 - (BOOL)_connect {
   id<NGSocketAddress> address;
-  
+
   [self _disconnect];
-  
+
 #if DEBUG
   NSAssert(self->socket == nil, @"socket still available after disconnect");
   NSAssert(self->io == nil,     @"IO stream still available after disconnect");
 #endif
-  
+
   if (self->useSSL) {
     if (SSLSocketClass == Nil) {
       /* no SSL support is available */
@@ -204,10 +205,10 @@ static BOOL logStream = NO;
       return NO;
     }
   }
-  
+
   if (self->useProxy) {
     NSURL *purl;
-    
+
     purl = [[self class] proxyServerURL];
     address = [purl socketAddressForURL];
   }
@@ -222,7 +223,7 @@ static BOOL logStream = NO;
   NS_DURING {
     self->socket = self->useSSL
       ? [SSLSocketClass socketConnectedToAddress:address
-                                      onHostName: [self->url host]]
+                                  withVerifyMode: TLSVerifyDefault]
       : [NGActiveSocket socketConnectedToAddress:address];
   }
   NS_HANDLER {
@@ -234,26 +235,26 @@ static BOOL logStream = NO;
     self->socket = nil;
   }
   NS_ENDHANDLER;
-  
+
   if (self->socket == nil) {
     [self debugWithFormat:@"socket is not setup: %@", [self lastException]];
     return NO;
   }
-  
+
   if (![self->socket isConnected]) {
     self->socket = nil;
     [self debugWithFormat:@"socket is not connected .."];
     return NO;
   }
-  
+
   self->socket = [self->socket retain];
-  
+
   [(NGActiveSocket *)self->socket setSendTimeout:[self sendTimeout]];
   [(NGActiveSocket *)self->socket setReceiveTimeout:[self receiveTimeout]];
-  
+
   if (self->socket != nil) {
     NGBufferedStream *bStr;
-    
+
     bStr = [NGBufferedStream alloc]; // keep gcc happy
     bStr = [bStr initWithSource:self->socket];
     if (logStream) {
@@ -262,24 +263,24 @@ static BOOL logStream = NO;
     }
     else
       self->log = nil;
-    
+
     self->io = [NGCTextStream alloc]; // keep gcc happy
     self->io = [self->io initWithSource:
 		      (id)(self->log != nil ? self->log : (id)bStr)];
     [bStr release]; bStr = nil;
   }
-  
+
   return YES;
 }
 - (void)_disconnect {
   [self->log release]; self->log = nil;
   [self->io  release]; self->io  = nil;
-  
+
   NS_DURING
     (void)[self->socket shutdown];
   NS_HANDLER {}
   NS_ENDHANDLER;
-  
+
   [self->socket release]; self->socket = nil;
 }
 
@@ -287,7 +288,7 @@ static BOOL logStream = NO;
 
 - (void)logRequest:(WORequest *)_response data:(NSData *)_data {
   if (_data == nil) return;
-  
+
 #if 1
   NSLog(@"request is\n");
   fflush(stderr);
@@ -299,7 +300,7 @@ static BOOL logStream = NO;
 }
 - (void)logResponse:(WOResponse *)_response data:(NSData *)_data {
   if (_data == nil) return;
-  
+
 #if 1
   NSLog(@"response is\n");
   fflush(stderr);
@@ -315,10 +316,10 @@ static BOOL logStream = NO;
 - (BOOL)sendRequest:(WORequest *)_request {
   NSData *content;
   BOOL isok = YES;
-  
+
   if (doDebug)
     [self debugWithFormat:@"send request: %@", _request];
-  
+
   if (![self->socket isConnected]) {
     if (![self _connect]) {
       /* could not connect */
@@ -328,16 +329,16 @@ static BOOL logStream = NO;
     }
     /* now connected */
   }
-  
+
   content = [_request content];
-  
+
   /* write request line (eg 'GET / HTTP/1.0') */
   if (doDebug)
     [self debugWithFormat:@"  method: %@", [_request method]];
-  
+
   if (isok) isok = [self->io writeString:[_request method]];
   if (isok) isok = [self->io writeString:@" "];
-  
+
   if (self->useProxy) {
     if (isok)
       // TODO: check whether this produces a '//' (may need to strip uri)
@@ -345,13 +346,13 @@ static BOOL logStream = NO;
     [self debugWithFormat:@"  wrote proxy start ..."];
   }
   if (isok) isok = [self->io writeString:[_request uri]];
-  
+
   if (isok) isok = [self->io writeString:@" "];
   if (isok) isok = [self->io writeString:[_request httpVersion]];
   if (isok) isok = [self->io writeString:@"\r\n"];
 
   /* set content-length header */
-  
+
   if ([content length] > 0) {
     [_request setHeader:[NSString stringWithFormat:@"%d", (int)[content length]]
               forKey:@"content-length"];
@@ -359,20 +360,20 @@ static BOOL logStream = NO;
 
   if ([[self->url scheme] hasPrefix:@"http"]) {
     /* host header */
-    
+
     if (isok) isok = [self->io writeString:@"Host: "];
     if (isok) isok = [self->io writeString:[self hostName]];
     if (isok) isok = [self->io writeString:@"\r\n"];
     [self debugWithFormat:@"  wrote host header: %@", [self hostName]];
   }
-  
+
   /* write request headers */
 
   if (isok) {
     NSEnumerator *fields;
     NSString *fieldName;
     int cnt;
-    
+
     fields = [[_request headerKeys] objectEnumerator];
     cnt = 0;
     while (isok && (fieldName = [fields nextObject])) {
@@ -387,9 +388,9 @@ static BOOL logStream = NO;
 	  /* did already write host ... */
 	  continue;
       }
-      
+
       values = [[_request headersForKey:fieldName] objectEnumerator];
-        
+
       while ((value = [values nextObject]) && isok) {
         if (isok) isok = [self->io writeString:fieldName];
         if (isok) isok = [self->io writeString:@": "];
@@ -400,9 +401,9 @@ static BOOL logStream = NO;
     }
     [self debugWithFormat:@"  wrote %i request headers ...", cnt];
   }
-  
+
   /* write some required headers */
-  
+
   if ([_request headerForKey:@"accept"] == nil) {
     if (isok) isok = [self->io writeString:@"Accept: */*\r\n"];
     [self debugWithFormat:@"  wrote accept header ..."];
@@ -412,22 +413,22 @@ static BOOL logStream = NO;
       static NSString *s = nil;
       if (s == nil) {
 	s = [[NSString alloc] initWithFormat:@"User-Agent: SOPE/%i.%i.%i\r\n",
-			      SOPE_MAJOR_VERSION, SOPE_MINOR_VERSION, 
+			      SOPE_MAJOR_VERSION, SOPE_MINOR_VERSION,
 			      SOPE_SUBMINOR_VERSION];
       }
       isok = [self->io writeString:s];
     }
     [self debugWithFormat:@"  wrote user-agent header ..."];
   }
-  
+
   /* write cookie headers */
-  
+
   if ([[_request cookies] count] > 0 && isok) {
     NSEnumerator *cookies;
     WOCookie     *cookie;
     BOOL         isFirst;
     int cnt;
-    
+
     [self->io writeString:@"set-cookie: "];
     cnt = 0;
     cookies = [[_request cookies] objectEnumerator];
@@ -435,26 +436,26 @@ static BOOL logStream = NO;
     while (isok && (cookie = [cookies nextObject])) {
       if (isFirst) isFirst = NO;
       else if (isok) isok = [self->io writeString:@"; "];
-      
+
       if (isok) isok = [self->io writeString:[cookie stringValue]];
       cnt ++;
     }
     if (isok) isok = [self->io writeString:@"\r\n"];
     [self debugWithFormat:@"  wrote %i cookies ...", cnt];
   }
-  
+
   /* flush request header on socket */
-  
+
   if (isok) isok = [self->io writeString:@"\r\n"];
   if (isok) isok = [self->io flush];
   [self debugWithFormat:@"  flushed HTTP header."];
-  
+
   /* write content */
 
   if ([content length] > 0) {
-    [self debugWithFormat:@"  writing HTTP entity (length=%i).", 
+    [self debugWithFormat:@"  writing HTTP entity (length=%i).",
             [content length]];
-    
+
     if ([content isKindOfClass:[NSString class]]) {
       if (isok) isok = [self->io writeString:(NSString *)content];
     }
@@ -471,22 +472,22 @@ static BOOL logStream = NO;
   else if (doDebug) {
     [self debugWithFormat:@"  no HTTP entity to write ..."];
   }
-  
+
   if (logStream)
     [self logRequest:_request data:[self->log writeLog]];
   [self->log resetWriteLog];
-  
-  [self debugWithFormat:@"=> finished:\n  url:  %@\n  sock: %@", 
+
+  [self debugWithFormat:@"=> finished:\n  url:  %@\n  sock: %@",
           self->url, self->socket];
   if (!isok) {
     ASSIGN(self->lastException, [self->socket lastException]);
     [self->socket shutdown];
     return NO;
   }
-  
+
   if (![self->socket isConnected])
     return NO;
-  
+
   return YES;
 }
 
@@ -500,26 +501,26 @@ static BOOL logStream = NO;
 - (WOResponse *)readResponse {
   /* TODO: split up method */
   WOResponse *response;
-  
+
   *(&response) = nil;
-  
+
   if (self->socket == nil) {
     [self debugWithFormat:@"no socket available for reading response ..."];
     return nil;
   }
-  
+
   [self debugWithFormat:@"parsing response from socket: %@", self->socket];
-  
+
   if (useSimpleParser) {
     WOSimpleHTTPParser *parser;
-    
+
     [self debugWithFormat:@"  using simple HTTP parser ..."];
-    
+
     parser = [[WOSimpleHTTPParser alloc] initWithStream:[self->io source]];
     if (parser == nil)
       return nil;
     parser = [parser autorelease];
-    
+
     if ((response = [parser parseResponse]) == nil) {
       if (doDebug)
         [self debugWithFormat:@"parsing failed: %@", [parser lastException]];
@@ -530,14 +531,14 @@ static BOOL logStream = NO;
     NGHttpResponse *mresponse;
     NGMimeType     *ctype;
     id body;
-    
+
     *(&mresponse) = nil;
-    
+
     if ((parser = [[[NGHttpMessageParser alloc] init] autorelease]) == nil)
       return nil;
-    
+
     [self debugWithFormat:@"  using MIME HTTP parser (complex parser) ..."];
-    
+
     NS_DURING {
       [parser setDelegate:self];
       mresponse = [parser parseResponseFromStream:self->socket];
@@ -545,14 +546,14 @@ static BOOL logStream = NO;
     NS_HANDLER
       [[self handleResponseParsingError:localException] raise];
     NS_ENDHANDLER;
-    
+
     [self debugWithFormat:@"finished parsing response: %@", mresponse];
-    
+
     /* transform parsed MIME response to WOResponse */
-    
+
     body = [mresponse body];
     if (body == nil) body = [NSData data];
-    
+
     response = [[[WOResponse alloc] init] autorelease];
     [response setHTTPVersion:[mresponse httpVersion]];
     [response setStatus:[mresponse statusCode]];
@@ -561,21 +562,21 @@ static BOOL logStream = NO;
                                           mresponse, @"NGMimeResponse",
                                           body,      @"NGMimeBody",
                                           nil]];
-  
+
     { /* check content-type */
       id value;
-      
-      value = [[mresponse valuesOfHeaderFieldWithName:@"content-type"] 
+
+      value = [[mresponse valuesOfHeaderFieldWithName:@"content-type"]
   	                nextObject];
       if (value) {
         NSString *charset;
-        
+
         ctype = [NGMimeType mimeType:[value stringValue]];
         charset = [[ctype valueOfParameter:@"charset"] lowercaseString];
-        
+
         if ([charset length] == 0) {
           /* autodetect charset ... */
-          
+
           if ([[ctype type] isEqualToString:@"text"]) {
             if ([[ctype subType] isEqualToString:@"xml"]) {
               /* default XML encoding is UTF-8 */
@@ -585,27 +586,27 @@ static BOOL logStream = NO;
         }
         else {
           NSStringEncoding enc;
-          
+
           enc = [NGMimeType stringEncodingForCharset:charset];
           [response setContentEncoding:enc];
         }
-        
+
         [response setHeader:[ctype stringValue] forKey:@"content-type"];
-        
+
       }
       else {
         ctype = [NGMimeType mimeType:@"application/octet-stream"];
       }
     }
-  
+
     /* check content */
-    
+
     if ([body isKindOfClass:[NSData class]]) {
       [response setContent:body];
     }
     else if ([body isKindOfClass:[NSString class]]) {
       NSData *data;
-      
+
       data = [body dataUsingEncoding:[response contentEncoding]];
       if (data)
         [response setContent:data];
@@ -614,28 +615,28 @@ static BOOL logStream = NO;
       /* generate data from structured body .. */
       NGMimeBodyGenerator *gen;
       NSData *data;
-      
+
       gen = [[[NGMimeBodyGenerator alloc] init] autorelease];
       data = [gen generateBodyOfPart:body
                   additionalHeaders:nil
                   delegate:self];
       [response setContent:data];
     }
-    
+
     { /* transfer headers */
       NSEnumerator *names;
       NSString     *name;
-      
+
       names = [mresponse headerFieldNames];
       while ((name = [names nextObject])) {
         NSEnumerator *values;
         id           value;
-        
+
         if ([name isEqualToString:@"content-type"])
           continue;
         if ([name isEqualToString:@"set-cookie"])
           continue;
-        
+
         values = [mresponse valuesOfHeaderFieldWithName:name];
         while ((value = [values nextObject])) {
           value = [value stringValue];
@@ -643,16 +644,16 @@ static BOOL logStream = NO;
         }
       }
     }
-    
+
     { /* transfer cookies */
       NSEnumerator *cookies;
       NGHttpCookie *mcookie;
-  
+
       cookies = [mresponse valuesOfHeaderFieldWithName:@"set-cookie"];
-      
+
       while ((mcookie = [cookies nextObject])) {
         WOCookie *woCookie;
-        
+
         if (![mcookie isKindOfClass:[NGHttpCookie class]]) {
           /* parse cookie */
           woCookie = [WOCookie cookieWithString:[mcookie stringValue]];
@@ -672,28 +673,28 @@ static BOOL logStream = NO;
           // could not create cookie
           continue;
         }
-        
+
         [self debugWithFormat:@"adding cookie: %@", woCookie];
-        
+
         [response addCookie:woCookie];
       }
     }
   }
-  
+
   if (logStream)
     [self logResponse:response data:[self->log readLog]];
   [self->log resetReadLog];
-  
+
   if (doDebug)
     [self debugWithFormat:@"processed response: %@", response];
-  
+
   /* check keep-alive */
   {
     NSString *conn;
-    
+
     conn = [response headerForKey:@"connection"];
     conn = [conn lowercaseString];
-    
+
     if ([conn isEqualToString:@"close"]) {
       [self setKeepAliveEnabled:NO];
       [self _disconnect];
@@ -706,7 +707,7 @@ static BOOL logStream = NO;
       [self _disconnect];
     }
   }
-  
+
   return response;
 }
 
@@ -744,16 +745,16 @@ static BOOL logStream = NO;
 
 - (NSString *)description {
   NSMutableString *str;
-  
+
   str = [NSMutableString stringWithCapacity:128];
   [str appendFormat:@"<%@[0x%p]:", NSStringFromClass([self class]), self];
-  
+
   if (self->url)      [str appendFormat:@" url=%@", self->url];
   if (self->useProxy) [str appendString:@" proxy"];
   if (self->useSSL)   [str appendString:@" SSL"];
 
   if (self->socket) [str appendFormat:@" socket=%@", self->socket];
-  
+
   [str appendString:@">"];
   return str;
 }
@@ -764,25 +765,25 @@ static BOOL logStream = NO;
 
 - (id)socketAddressForURL {
   NSString *s;
-  
+
   s = [self scheme];
-  
+
   if ([s isEqualToString:@"http"]) {
     int p;
-    
+
     s = [self host];
     if ([s length] == 0) s = @"localhost";
     p = [[self port] intValue];
-    
+
     return [NGInternetSocketAddress addressWithPort:p == 0 ? 80 : p onHost:s];
   }
   else if ([s isEqualToString:@"https"]) {
     int p;
-    
+
     s = [self host];
     if ([s length] == 0) s = @"localhost";
     p = [[self port] intValue];
-    
+
     return [NGInternetSocketAddress addressWithPort:p == 0 ? 443 : p onHost:s];
   }
   else if ([s isEqualToString:@"unix"] || [s isEqualToString:@"file"]) {
@@ -794,20 +795,20 @@ static BOOL logStream = NO;
 - (BOOL)shouldUseWOProxyServer {
   if ([[self scheme] hasPrefix:@"http"]) {
     NSString *h;
-    
+
     if ((h = [self host]) == nil)
       return NO;
-    
+
     if ([h isEqualToString:@"127.0.0.1"])
       return NO;
     if ([h isEqualToString:@"localhost"])
       return NO;
-    
+
     if ([[WOHTTPConnection proxyServer] length] > 0) {
       NSEnumerator *e;
       NSString *suffix;
       BOOL     useProxy;
-      
+
       useProxy = YES;
       e = [[WOHTTPConnection noProxySuffixes] objectEnumerator];
       while ((suffix = [e nextObject])) {

@@ -21,7 +21,6 @@
 */
 
 #include <unistd.h>
-#include <fcntl.h>
 
 #include "NGImap4Client.h"
 #include "NGImap4Context.h"
@@ -303,7 +302,7 @@ static NSMutableDictionary *namespaces;
   NS_DURING {
       if (sslSocket) {
         sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
-          onHostName: [(NGInternetSocketAddress *)self->address hostName]];
+                                            withVerifyMode: TLSVerifyDefault];
       } else {
         sock = [NGActiveSocket socketConnectedToAddress:self->address];
       }
@@ -342,17 +341,10 @@ static NSMutableDictionary *namespaces;
 
 	if ([[d valueForKey:@"result"] boolValue])
 	  {
-	    int oldopts;
 	    id o;
 
-	    o = [[NGActiveSSLSocket alloc] initWithDomain: [self->address domain]
-          onHostName: [(NGInternetSocketAddress *)self->address hostName]];
-	    [o setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
-
-	    // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
-	    // SOPE will break on SSL-sockets.
-	    oldopts = fcntl([(NGSocket*)self->socket fileDescriptor], F_GETFL, 0);
-	    fcntl([(NGSocket*)self->socket fileDescriptor], F_SETFL, oldopts & !O_NONBLOCK);
+	    o = [[NGActiveSSLSocket alloc] initWithConnectedActiveSocket: (NGActiveSocket *)self->socket
+            withVerifyMode: TLSVerifyDefault];
 
 	    if ([o startTLS])
 	      {

@@ -69,9 +69,11 @@ DEALINGS IN THE SOFTWARE.
 #  include <openssl/x509v3.h>
 #  undef id
 #endif
+#include <fcntl.h>
 
 
 @interface NGActiveSocket(UsedPrivates)
+- (id)initWithDomain:(id<NGSocketDomain>)_domain onHostName: (NSString *)_hostName;
 - (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address;
 #if HAVE_OPENSSL
 - (BOOL) _validateHostname: (X509 *) server_cert;
@@ -85,6 +87,7 @@ DEALINGS IN THE SOFTWARE.
   validatePeer = _validate;
 }
 
+
 - (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
 
   if (![super primaryConnectToAddress:_address])
@@ -94,11 +97,19 @@ DEALINGS IN THE SOFTWARE.
   return [self startTLS];
 }
 
+
 + (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
-                  onHostName: (NSString *) _hostName
+                  withVerifyMode: (int) mode
 {
-  id sock = [[self alloc] initWithDomain:[_address domain]
-                      onHostName: _hostName];
+  NGActiveSSLSocket *sock = [[self alloc] initWithDomain:[_address domain]
+                      onHostName: [_address hostName]];
+  if (mode == TLSVerifyNone ||
+    ([_address isLocalhost] && mode == TLSVerifyAllowInsecureLocalhost)) {
+    [sock validatePeerCertificate: NO];
+  }
+  else {
+    [sock validatePeerCertificate: YES];
+  }
   if (![sock connectToAddress:_address]) {
     NSException *e;
     e = [[sock lastException] retain];
@@ -109,6 +120,39 @@ DEALINGS IN THE SOFTWARE.
   }
   sock = [sock autorelease];
   return sock;
+}
+
+- (id)initWithConnectedActiveSocket: (NGActiveSocket *) _socket
+                     withVerifyMode: (int) mode
+{
+  id<NGSocketAddress> remoteAddr;
+  int oldopts;
+  int sock_fd;
+
+  if (![_socket isConnected]) {
+    NSLog(@"ERROR(%s): Socket needs to be connected to remote", __PRETTY_FUNCTION__);
+    [self release];
+    return nil;
+  }
+  remoteAddr = [_socket remoteAddress];
+  [self initWithDomain: [remoteAddr domain]
+            onHostName: [remoteAddr hostName]];
+
+  if (mode == TLSVerifyNone ||
+    ([remoteAddr isLocalhost] && mode == TLSVerifyAllowInsecureLocalhost)) {
+    [self validatePeerCertificate: NO];
+  }
+  else {
+    [self validatePeerCertificate: YES];
+  }
+
+  sock_fd = [_socket fileDescriptor];
+  [self setFileDescriptor: sock_fd];
+  // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
+  // SOPE will break on SSL-sockets.
+  oldopts = fcntl(sock_fd, F_GETFL, 0);
+  fcntl(sock_fd, F_SETFL, oldopts & !O_NONBLOCK);
+  return self;
 }
 
 #if HAVE_GNUTLS
@@ -203,7 +247,6 @@ _verify_certificate_callback (gnutls_session_t session)
       onHostName: (NSString *)_hostName
 {
   hostName = [_hostName copy];
-  validatePeer = YES;
   if ((self = [super initWithDomain:_domain])) {
     static BOOL didGlobalInit = NO;
     int ret;
@@ -490,7 +533,6 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
 {
 
   hostName = [_hostName copy];
-  validatePeer = YES;
   if ((self = [super initWithDomain:_domain])) {
 
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
@@ -633,7 +675,7 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
   NSLog(@"WARNING: The NGActiveSSLSocket class was accessed, "
         @"but OpenSSL support is turned off.");
 }
-- (id)initWithDomain:(id<NGSocketDomain>)_domain onHostName: (NSString *)_hostName {
+- (id)initWithDomain:(id<NGSocketDomain>)_domain onHostName: (NSString *)_hostName withVerifyMode: (int) mode {
   [self release];
   return nil;
 }

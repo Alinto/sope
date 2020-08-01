@@ -19,8 +19,6 @@
   Free Software Foundation, 59 Temple Place - Suite 330, Boston, MA
   02111-1307, USA.
 */
-#include <fcntl.h>
-
 #include <NGStreams/NGActiveSSLSocket.h>
 
 #include "NGSmtpClient.h"
@@ -232,7 +230,7 @@
   NS_DURING {
     if (sslSocket) {
       sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
-          onHostName: [(NGInternetSocketAddress *)self->address hostName]];
+                                          withVerifyMode: TLSVerifyDefault];
     } else {
       sock = [NGActiveSocket socketConnectedToAddress:self->address];
     }
@@ -319,7 +317,6 @@
   Class socketClass;
   NGSmtpResponse *reply;
   id tlsSocket;
-  int oldopts;
 
   if (!self->extensions.hasStartTls) {
     NSLog(@"SMTP: TLS not supported by client");
@@ -338,13 +335,8 @@
     return NO;
   }
 
-  tlsSocket = [[NGActiveSSLSocket alloc] initWithDomain: [self->address domain]
-          onHostName: [(NGInternetSocketAddress *)self->address hostName]];
-  [tlsSocket setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
-  // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
-  // SOPE will break on SSL-sockets.
-  oldopts = fcntl([(NGSocket*)self->socket fileDescriptor], F_GETFL, 0);
-  fcntl([(NGSocket*)self->socket fileDescriptor], F_SETFL, oldopts & !O_NONBLOCK);
+  tlsSocket = [[NGActiveSSLSocket alloc] initWithConnectedActiveSocket: (NGActiveSocket *)self->socket
+          withVerifyMode: TLSVerifyDefault];
 
   if (![tlsSocket startTLS]) {
     NSLog(@"SMTP: unable to perform STARTTLS on socket");
