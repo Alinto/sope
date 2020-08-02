@@ -121,15 +121,28 @@ static BOOL     debugImap4         = NO;
     port = defaultSievePort;
 
   a = [NGInternetSocketAddress addressWithPort:port
-			       onHost:[_url host]];
+                               onHost:[_url host]];
   if ((self = [self initWithAddress:a])) {
+    NSDictionary *queryComponents = [_url queryComponents];
+    NSString *value;
     self->login    = [[_url user]     copy];
     self->password = [[_url password] copy];
 
-      if ([[_url query] isEqualToString:@"tls=YES"])
-	self->useTLS = YES;
-      else
-	self->useTLS = NO;
+    value = [queryComponents valueForKey: @"tls"];
+    if (value && [value isEqualToString: @"YES"])
+      self->useTLS = YES;
+    else
+      self->useTLS = NO;
+
+    tlsVerifyMode = TLSVerifyDefault;
+    value = [queryComponents valueForKey: @"tlsVerifyMode"];
+    if (value) {
+      if ([value isEqualToString: @"allowInsecureLocalhost"]) {
+        tlsVerifyMode = TLSVerifyAllowInsecureLocalhost;
+      } else if ([value isEqualToString: @"none"]) {
+       tlsVerifyMode = TLSVerifyNone;
+      }
+    }
   }
 
   serverType = nil;
@@ -300,7 +313,7 @@ static BOOL     debugImap4         = NO;
 	  id o;
 
 	  o = [[NGActiveSSLSocket alloc] initWithConnectedActiveSocket: (NGActiveSocket *)self->socket
-	                                     withVerifyMode: TLSVerifyDefault];
+	                                     withVerifyMode: tlsVerifyMode];
 
 	  if ([o startTLS])
 	    {

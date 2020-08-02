@@ -177,6 +177,8 @@ static NSMutableDictionary *namespaces;
   NGInternetSocketAddress *a;
   int port;
   id  tmp;
+  NSDictionary *queryComponents = [_url queryComponents];
+  NSString *value;
 
   if ((self->useSSL = [[_url scheme] isEqualToString:@"imaps"])) {
     if (NSClassFromString(@"NGActiveSSLSocket") == nil) {
@@ -193,11 +195,21 @@ static NSMutableDictionary *namespaces;
   else
     port = self->useSSL ? 993 : 143;
 
-  if ([[_url query] isEqualToString:@"tls=YES"]) {
+  value = [queryComponents valueForKey: @"tls"];
+  if (value && [value isEqualToString: @"YES"]) {
     self->useTLS = YES;
 
     if ([tmp intValue] <= 0)
       port = 143;
+  }
+  tlsVerifyMode = TLSVerifyDefault;
+  value = [queryComponents valueForKey: @"tlsVerifyMode"];
+  if (value) {
+    if ([value isEqualToString: @"allowInsecureLocalhost"]) {
+      tlsVerifyMode = TLSVerifyAllowInsecureLocalhost;
+    } else if ([value isEqualToString: @"none"]) {
+      tlsVerifyMode = TLSVerifyNone;
+    }
   }
 
   self->login    = [[_url user]     copy];
@@ -302,7 +314,7 @@ static NSMutableDictionary *namespaces;
   NS_DURING {
       if (sslSocket) {
         sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
-                                            withVerifyMode: TLSVerifyDefault];
+                                            withVerifyMode: tlsVerifyMode];
       } else {
         sock = [NGActiveSocket socketConnectedToAddress:self->address];
       }
@@ -344,7 +356,7 @@ static NSMutableDictionary *namespaces;
 	    id o;
 
 	    o = [[NGActiveSSLSocket alloc] initWithConnectedActiveSocket: (NGActiveSocket *)self->socket
-            withVerifyMode: TLSVerifyDefault];
+            withVerifyMode: tlsVerifyMode];
 
 	    if ([o startTLS])
 	      {

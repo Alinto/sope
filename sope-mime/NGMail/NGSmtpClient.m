@@ -154,6 +154,8 @@
 - (id)initWithURL:(NSURL *)_url {
   NGInternetSocketAddress *a;
   int port;
+  NSDictionary *queryComponents = [_url queryComponents];
+  NSString *value;
 
   self->useSSL = [[_url scheme] isEqualToString:@"smtps"];
   if (self->useSSL && NSClassFromString(@"NGActiveSSLSocket") == nil) {
@@ -163,7 +165,8 @@
     return nil;
   }
 
-  if ([[_url query] isEqualToString:@"tls=YES"])
+  value = [queryComponents valueForKey: @"tls"];
+  if (value && [value isEqualToString: @"YES"])
     self->useStartTLS = YES;
   else
     self->useStartTLS = NO;
@@ -173,6 +176,15 @@
       port = 465;
     else
       port = 25;
+  }
+  tlsVerifyMode = TLSVerifyDefault;
+  value = [queryComponents valueForKey: @"tlsVerifyMode"];
+  if (value) {
+    if ([value isEqualToString: @"allowInsecureLocalhost"]) {
+      tlsVerifyMode = TLSVerifyAllowInsecureLocalhost;
+    } else if ([value isEqualToString: @"none"]) {
+      tlsVerifyMode = TLSVerifyNone;
+    }
   }
 
   a = [NGInternetSocketAddress addressWithPort:port
@@ -230,7 +242,7 @@
   NS_DURING {
     if (sslSocket) {
       sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
-                                          withVerifyMode: TLSVerifyDefault];
+                                          withVerifyMode: tlsVerifyMode];
     } else {
       sock = [NGActiveSocket socketConnectedToAddress:self->address];
     }
@@ -336,7 +348,7 @@
   }
 
   tlsSocket = [[NGActiveSSLSocket alloc] initWithConnectedActiveSocket: (NGActiveSocket *)self->socket
-          withVerifyMode: TLSVerifyDefault];
+          withVerifyMode: tlsVerifyMode];
 
   if (![tlsSocket startTLS]) {
     NSLog(@"SMTP: unable to perform STARTTLS on socket");
