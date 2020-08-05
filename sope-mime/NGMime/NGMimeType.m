@@ -59,7 +59,7 @@ classForType(NSString *_type, NSString *_subType, NSDictionary *_parameters)
         || [_subType isEqualToString:@"vcard"])
       return [NGConcreteTextVcardMimeType class];
   }
-  
+
   c = [typeToClass objectForKey:_type];
   return c ? c : [NGConcreteGenericMimeType class];
 }
@@ -71,13 +71,13 @@ static Class NSStringClass  = Nil;
     isInitialized = YES;
 
     typeToClass = [[NSMutableDictionary alloc] initWithCapacity:10];
-    [typeToClass setObject:[NGConcreteTextMimeType  class] 
+    [typeToClass setObject:[NGConcreteTextMimeType  class]
 		 forKey:NGMimeTypeText];
-    [typeToClass setObject:[NGConcreteVideoMimeType class] 
+    [typeToClass setObject:[NGConcreteVideoMimeType class]
 		 forKey:NGMimeTypeVideo];
-    [typeToClass setObject:[NGConcreteAudioMimeType class] 
+    [typeToClass setObject:[NGConcreteAudioMimeType class]
 		 forKey:NGMimeTypeAudio];
-    [typeToClass setObject:[NGConcreteImageMimeType class] 
+    [typeToClass setObject:[NGConcreteImageMimeType class]
 		 forKey:NGMimeTypeImage];
     [typeToClass setObject:[NGConcreteApplicationMimeType class]
                  forKey:NGMimeTypeApplication];
@@ -93,13 +93,17 @@ static Class NSStringClass  = Nil;
   NSStringEncoding encoding;
 
   charset          = [_s lowercaseString];
-  
+
   if ([charset length] == 0)
     encoding = [NSString defaultCStringEncoding];
-  
+
   /* UTF-, ASCII */
   else if ([charset isEqualToString:@"us-ascii"])
     encoding = NSASCIIStringEncoding;
+  else if ([charset isEqualToString:@"ascii"])
+    encoding = NSASCIIStringEncoding;
+  else if ([charset isEqualToString:@"utf8"])
+    encoding = NSUTF8StringEncoding;
   else if ([charset isEqualToString:@"utf-8"])
     encoding = NSUTF8StringEncoding;
   else if ([charset isEqualToString:@"utf-16"])
@@ -112,7 +116,7 @@ static Class NSStringClass  = Nil;
     encoding = NSISOLatin1StringEncoding;
   else if ([charset isEqualToString:@"8859-1"])
     encoding = NSISOLatin1StringEncoding;
-  
+
   /* some unsupported, but known encoding */
   else if ([charset isEqualToString:@"ks_c_5601-1987"]) {
     encoding = NSISOLatin1StringEncoding;
@@ -161,6 +165,9 @@ static Class NSStringClass  = Nil;
     // latin 5 is for turkish languages
     encoding = NSISOLatin5StringEncoding;
   }
+  else if ([charset isEqualToString:@"iso-8859-5"]) {
+    encoding = NSISOCyrillicStringEncoding;
+  }
   else if ([charset isEqualToString:@"x-unknown"] ||
            [charset isEqualToString:@"unknown"]) {
     encoding = NSISOLatin1StringEncoding;
@@ -191,7 +198,7 @@ static Class NSStringClass  = Nil;
 
   c = classForType(_type, _subType, _parameters);
   [self release];
-  
+
   return [[c alloc] initWithType:_type subType:_subType
                     parameters:_parameters];
 }
@@ -200,7 +207,7 @@ static Class NSStringClass  = Nil;
   Class c;
 
   c = classForType(_type, _subType, nil);
-  
+
   NSAssert(c, @"did not find class for mimetype ..");
 
   return [[[c alloc] initWithType:_type subType:_subType
@@ -214,7 +221,7 @@ static Class NSStringClass  = Nil;
 
   c = classForType(_type, _subType, _parameters);
   NSAssert(c, @"did not find class for mimetype ..");
-  
+
   return [[[c alloc] initWithType:_type subType:_subType
                      parameters:_parameters] autorelease];
 }
@@ -331,7 +338,7 @@ static Class NSStringClass  = Nil;
     ost = @"*";
   }
   if (![st isEqualToString:ost]) return NO;
-  
+
   return YES;
 }
 
@@ -373,17 +380,17 @@ static Class NSStringClass  = Nil;
 
   if ((names = [self parameterNames]) == nil)
     return nil;
-  
+
   result = [NSMutableString stringWithCapacity:64];
   while ((name = [names nextObject])) {
     NSString *value;
 
     value = [[self valueOfParameter:name] stringValue];
-    
+
     [result appendString:@"; "];
     [result appendString:name];
     [result appendString:@"="];
-    
+
     if ([self valueNeedsQuotes:value]) {
       [result appendString:@"\""];
       [result appendString:value];
@@ -514,20 +521,20 @@ static NSString *_stringForType(char *_type, int _len) {
         return MimeTypeConstants->star;
       break;
     case 4:
-      if (strncmp(_type, "text", 4) == 0) 
+      if (strncmp(_type, "text", 4) == 0)
         return MimeTypeConstants->text;
       break;
     case 5:
       if (_type[0] == 'i') {
-        if (strncmp(_type, "image", 5) == 0) 
+        if (strncmp(_type, "image", 5) == 0)
           return MimeTypeConstants->image;
       }
       else if (_type[0] == 'v') {
-        if (strncmp(_type, "video", 5) == 0) 
+        if (strncmp(_type, "video", 5) == 0)
           return MimeTypeConstants->video;
       }
       else if (_type[0] == 'a') {
-        if (strncmp(_type, "audio", 5) == 0) 
+        if (strncmp(_type, "audio", 5) == 0)
           return MimeTypeConstants->audio;
       }
       break;
@@ -577,56 +584,56 @@ static NSString *_stringForSubType(char *_type, int _len) {
       break;
     case 3:
       if (_type[0] == 'p') {
-        if (strncmp(_type, "png", 3) == 0) 
+        if (strncmp(_type, "png", 3) == 0)
           return MimeSubTypeConstants->png;
       }
       else if (_type[0] == 'g') {
-        if (strncmp(_type, "gif", 3) == 0) 
+        if (strncmp(_type, "gif", 3) == 0)
           return MimeSubTypeConstants->gif;
       }
       else if (_type[0] == 'c') {
-        if (strncmp(_type, "css", 3) == 0) 
+        if (strncmp(_type, "css", 3) == 0)
           return MimeSubTypeConstants->css;
       }
       else if (_type[0] == 'x') {
-        if (strncmp(_type, "xml", 3) == 0) 
+        if (strncmp(_type, "xml", 3) == 0)
           return MimeSubTypeConstants->xml;
       }
       break;
     case 4:
       if (_type[0] == 'h') {
-        if (strncmp(_type, "html", 4) == 0) 
+        if (strncmp(_type, "html", 4) == 0)
           return MimeSubTypeConstants->html;
       }
       else if (_type[0] == 'j') {
-        if (strncmp(_type, "jpeg", 4) == 0) 
+        if (strncmp(_type, "jpeg", 4) == 0)
           return MimeSubTypeConstants->jpeg;
       }
       break;
     case 5:
       if (_type[0] == 'p') {
-        if (strncmp(_type, "plain", 5) == 0) 
+        if (strncmp(_type, "plain", 5) == 0)
           return MimeSubTypeConstants->plain;
       }
       else if (_type[0] == 'm') {
-        if (strncmp(_type, "mixed", 5) == 0) 
+        if (strncmp(_type, "mixed", 5) == 0)
           return MimeSubTypeConstants->mixed;
       }
       else if (_type[0] == 'x') {
-        if (strncmp(_type, "x-mng", 5) == 0) 
+        if (strncmp(_type, "x-mng", 5) == 0)
           return MimeSubTypeConstants->xMng;
       }
       break;
     case 6:
-      if (strncmp(_type, "rfc822", 6) == 0) 
+      if (strncmp(_type, "rfc822", 6) == 0)
           return MimeSubTypeConstants->rfc822;
       break;
     case 9:
-      if (strncmp(_type, "xhtml+xml", 9) == 0) 
+      if (strncmp(_type, "xhtml+xml", 9) == 0)
           return MimeSubTypeConstants->xhtmlXml;
       break;
     case 12:
-      if (strncmp(_type, "octet-stream", 12) == 0) 
+      if (strncmp(_type, "octet-stream", 12) == 0)
           return MimeSubTypeConstants->octetStream;
       break;
   }
@@ -671,7 +678,7 @@ static BOOL _parseMimeType(id self, NSString *_str, NSString **type,
   {
     unsigned char     buf[len + 3];
     register unsigned i;
-    
+
     buf[len] = '\0';
     for (i = 0; i < len; i++) buf[i] = tolower(tmp[i]);
     *type = _stringForType((char *)buf, len);
@@ -688,12 +695,12 @@ static BOOL _parseMimeType(id self, NSString *_str, NSString **type,
     }
     if (len <= 0) {
       *subType = @"*";
-      return YES; // no subtype was read      
+      return YES; // no subtype was read
     }
     else {
       unsigned char     buf[len + 1];
       register unsigned i;
-      
+
       buf[len] = '\0';
       for (i = 0; i < len; i++) buf[i] = tolower(tmp[i]);
       *subType = _stringForSubType((char *)buf, len);
@@ -706,7 +713,7 @@ static BOOL _parseMimeType(id self, NSString *_str, NSString **type,
   // skip spaces
   while (isRfc822_LWSP(*cstr) && (*cstr != '\0'))
     cstr++;
-  
+
   if (*cstr == ';') // skip ';' (parameter separator)
     cstr++;
 
@@ -728,6 +735,6 @@ static BOOL _parseMimeType(id self, NSString *_str, NSString **type,
   *parameters = parseParameters(self, _str, cstr);
   if (![*parameters isNotEmpty])
     *parameters = nil;
-  
+
   return YES;
 }

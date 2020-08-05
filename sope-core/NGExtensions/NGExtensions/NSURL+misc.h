@@ -26,6 +26,8 @@
 #import <Foundation/NSURL.h>
 #import <Foundation/NSString.h>
 
+@class NSDictionary;
+
 @interface NSURL(misc)
 
 /*
@@ -54,7 +56,7 @@
 /*
   eg:                "/a/b/c.html"
   should resolve to: "c.html"
-    
+
   Directories are a bit more difficult, eg:
     "/a/b/c/"
   is resolved to
@@ -70,6 +72,12 @@
   never return an absolute path (it only does in error conditions).
 */
 - (NSString *)urlPathRelativeToPath:(NSString *)_base;
+
+@end
+
+@interface NSURL (QueryComponents)
+
+- (NSDictionary *) queryComponents;
 
 @end
 

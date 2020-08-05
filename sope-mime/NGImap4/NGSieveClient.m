@@ -23,7 +23,6 @@
 */
 
 #include <unistd.h>
-#include <fcntl.h>
 
 #include "NGSieveClient.h"
 #include "NGImap4Support.h"
@@ -58,11 +57,11 @@
 
 /*
   An implementation of an Imap4 client
-  
+
   A folder name always looks like an absolute filename (/inbox/blah)
-  
+
   NOTE: Sieve is just the filtering language ...
-  
+
   This should be ACAP?
     http://asg.web.cmu.edu/rfc/rfc2244.html
 
@@ -89,12 +88,12 @@ static BOOL     debugImap4         = NO;
   NSUserDefaults *ud;
   if (didInit) return;
   didInit = YES;
-  
+
   ud = [NSUserDefaults standardUserDefaults];
   LOG_PASSWORD       = [ud boolForKey:@"SieveLogPassword"];
   ProfileImapEnabled = [ud boolForKey:@"ProfileImapEnabled"];
   debugImap4         = [ud boolForKey:@"ImapDebugEnabled"];
-  
+
   YesNumber = [[NSNumber numberWithBool:YES] retain];
   NoNumber  = [[NSNumber numberWithBool:NO] retain];
 }
@@ -105,7 +104,7 @@ static BOOL     debugImap4         = NO;
 
 + (id)clientWithAddress:(id<NGSocketAddress>)_address {
   NGSieveClient *client;
-  
+
   client = [self alloc];
   return [[client initWithAddress:_address] autorelease];
 }
@@ -117,22 +116,35 @@ static BOOL     debugImap4         = NO;
 - (id)initWithNSURL:(NSURL *)_url {
   NGInternetSocketAddress *a;
   int port;
-  
+
   if ((port = [[_url port] intValue]) == 0)
     port = defaultSievePort;
 
-  a = [NGInternetSocketAddress addressWithPort:port 
-			       onHost:[_url host]];
+  a = [NGInternetSocketAddress addressWithPort:port
+                               onHost:[_url host]];
   if ((self = [self initWithAddress:a])) {
+    NSDictionary *queryComponents = [_url queryComponents];
+    NSString *value;
     self->login    = [[_url user]     copy];
     self->password = [[_url password] copy];
 
-      if ([[_url query] isEqualToString:@"tls=YES"])
-	self->useTLS = YES;
-      else
-	self->useTLS = NO;
+    value = [queryComponents valueForKey: @"tls"];
+    if (value && [value isEqualToString: @"YES"])
+      self->useTLS = YES;
+    else
+      self->useTLS = NO;
+
+    tlsVerifyMode = TLSVerifyDefault;
+    value = [queryComponents valueForKey: @"tlsVerifyMode"];
+    if (value) {
+      if ([value isEqualToString: @"allowInsecureLocalhost"]) {
+        tlsVerifyMode = TLSVerifyAllowInsecureLocalhost;
+      } else if ([value isEqualToString: @"none"]) {
+       tlsVerifyMode = TLSVerifyNone;
+      }
+    }
   }
-  
+
   serverType = nil;
   capabilities = nil;
 
@@ -143,16 +155,16 @@ static BOOL     debugImap4         = NO;
     [self release];
     return nil;
   }
-  
+
   if (![_url isKindOfClass:[NSURL class]])
     _url = [NSURL URLWithString:[_url stringValue]];
-  
+
   return [self initWithNSURL:_url];
 }
 
 - (id)initWithHost:(id)_host {
   NGInternetSocketAddress *a;
-  
+
   a = [NGInternetSocketAddress addressWithPort:defaultSievePort onHost:_host];
   return [self initWithAddress:a];
 }
@@ -257,9 +269,9 @@ static BOOL     debugImap4         = NO;
     gettimeofday(&tv, NULL);
     ti =  (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0);
   }
-  
+
   [self resetStreams];
-  
+
   [self->previous_socket release];
   self->previous_socket = nil;
   self->socket =
@@ -279,7 +291,7 @@ static BOOL     debugImap4         = NO;
     gettimeofday(&tv, NULL);
     ti = (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0) - ti;
     fprintf(stderr, "[%s] <openConnection> : time needed: %4.4fs\n",
-           __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);    
+           __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);
   }
 
   res = [self normalizeOpenConnectionResponse:
@@ -287,33 +299,26 @@ static BOOL     debugImap4         = NO;
 
   ASSIGN(serverType, [res objectForKey: @"server"]);
   ASSIGN(capabilities, [[res objectForKey:@"capabilities"] componentsSeparatedByString: @" "]);
-         
+
 
   // If we're using TLS, we start it here
   if (self->useTLS)
     {
       NSDictionary *d;
-      
+
       d = [self normalizeResponse:[self processCommand: @"STARTTLS"]];
 
       if ([[d valueForKey:@"result"] boolValue])
 	{
-	  int oldopts;
 	  id o;
 
-	  o = [[NGActiveSSLSocket alloc] initWithDomain: [self->address domain]
-	                                     onHostName: [(NGInternetSocketAddress *)self->address hostName]];
-	  [o setFileDescriptor: [(NGSocket*)self->socket fileDescriptor]];
-	  
-	  // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
-	  // SOPE will break on SSL-sockets.
-	  oldopts = fcntl([(NGSocket*)self->socket fileDescriptor], F_GETFL, 0);
-	  fcntl([(NGSocket*)self->socket fileDescriptor], F_SETFL, oldopts & !O_NONBLOCK);
-	    
+	  o = [[NGActiveSSLSocket alloc] initWithConnectedActiveSocket: (NGActiveSocket *)self->socket
+	                                     withVerifyMode: tlsVerifyMode];
+
 	  if ([o startTLS])
 	    {
 	      //NGBufferedStream *buffer;
-	      
+
 	      // We keep a reference to our previous instance of NGActiveSocket as
 	      // it's still being used. NGActiveSSLSocket's read/write methods are
 	      // being used but the rest is coming of directly from NGActiveSocket
@@ -321,12 +326,12 @@ static BOOL     debugImap4         = NO;
 	      self->socket = o;
 	      //[self->text release];
 	      [self->parser release];
-	      
+
 	      self->io = [(NGBufferedStream *)[NGBufferedStream alloc] initWithSource: self->socket];
 	      //self->text = [(NGCTextStream *)[NGCTextStream alloc] initWithSource: buffer];
 	      //[buffer release];
 	      //buffer = nil;
-	      
+
 	      self->parser = [[NGImap4ResponseParser alloc] initWithStream: self->socket];
 	      [self logWithFormat:@"TLS started successfully."];
 
@@ -362,17 +367,17 @@ static BOOL     debugImap4         = NO;
   // TODO: why does that return an object?
   if (self->socket == nil)
     return [NSNumber numberWithBool:NO];
-  
+
   return [NSNumber numberWithBool:[(NGActiveSocket *)self->socket isAlive]];
 }
 
 - (void)closeConnection {
   [self->socket close];
   [self->socket release]; self->socket = nil;
-  
+
   [self->previous_socket close];
   [self->previous_socket release]; self->previous_socket = nil;
-   
+
   [self->parser release]; self->parser = nil;
 }
 
@@ -382,14 +387,14 @@ static BOOL     debugImap4         = NO;
 
 - (NSDictionary *)login:(NSString *)_login authname:(NSString *)_authname password:(NSString *)_passwd {
   /* login with plaintext password authenticating */
-  
+
   if ((_login == nil) || (_passwd == nil))
     return nil;
-  
+
   [self->authname release]; self->authname = nil;
   [self->login    release]; self->login    = nil;
   [self->password release]; self->password = nil;
-  
+
   self->authname = [_authname copy];
   self->login    = [_login  copy];
   self->password = [_passwd copy];
@@ -397,7 +402,7 @@ static BOOL     debugImap4         = NO;
 }
 
 - (void)reconnect {
-  [self closeConnection];  
+  [self closeConnection];
   [self openConnection];
   [self login];
 }
@@ -407,42 +412,42 @@ static BOOL     debugImap4         = NO;
   NSData    *auth;
   char      *buf;
   int       bufLen, logLen, authLen;
-  
+
   if (![self->socket isConnected]) {
     NSDictionary *con;
-    
+
     if ((con = [self openConnection]) == nil)
       return nil;
     if (![[con objectForKey:@"result"] boolValue])
       return con;
   }
-  
+
   authLen = [self->authname lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
   logLen = [self->login lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
   bufLen = (logLen+authLen) + [self->password lengthOfBytesUsingEncoding: NSUTF8StringEncoding] +2;
-  
+
   buf = calloc(bufLen + 2, sizeof(char));
-  
+
   /*
     Format:
       authenticate-id
       authorize-id
       password
   */
-  sprintf(buf, "%s %s %s", 
+  sprintf(buf, "%s %s %s",
           [self->login cStringUsingEncoding:NSUTF8StringEncoding],
           [self->authname cStringUsingEncoding:NSUTF8StringEncoding],
           [self->password cStringUsingEncoding:NSUTF8StringEncoding]);
-  
+
   buf[logLen] = '\0';
   buf[logLen+authLen + 1] = '\0';
-  
+
   auth = [NSData dataWithBytesNoCopy:buf length:bufLen];
   auth = [auth dataByEncodingBase64WithLineLength:4096 /* 'unlimited' */];
-  
+
   if (LOG_PASSWORD) {
     NSString *s;
-    
+
     s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" {%d+}\r\n%s",
                   (int)[auth length], [auth bytes]];
     map = [self processCommand:s
@@ -451,7 +456,7 @@ static BOOL     debugImap4         = NO;
   }
   else {
     NSString *s;
-    
+
     s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" {%d+}\r\n%s",
                   (int)[auth length], [auth bytes]];
     map = [self processCommand:s
@@ -463,7 +468,7 @@ static BOOL     debugImap4         = NO;
     [self logWithFormat:@"ERROR: got no result from command."];
     return nil;
   }
-  
+
   return [self normalizeResponse:map];
 }
 
@@ -480,7 +485,7 @@ static BOOL     debugImap4         = NO;
 - (NSString *)getScript:(NSString *)_scriptName {
   NSException *ex;
   NSString *script, *s;
-  
+
   s = [@"GETSCRIPT \"" stringByAppendingString:_scriptName];
   s = [s stringByAppendingString:@"\""];
   ex = [self sendCommand:s logText:s attempts:3];
@@ -489,24 +494,24 @@ static BOOL     debugImap4         = NO;
     [self setLastException:ex];
     return nil;
   }
-  
+
   /* read script string */
-  
+
   if ((script = [[self readString] autorelease]) == nil)
     return nil;
-  
+
   if ([script hasPrefix:@"O "] || [script hasPrefix:@"NO "]) {
     // TODO: not exactly correct, script could begin with this signature
     // Note: readString read 'NO ...', but the first char is consumed
-    
+
     [self logWithFormat:@"ERROR: status line reports: '%@'", script];
     return nil;
   }
-  
+
   NSLog(@"str: %@", script);
-  
+
   /* read response code */
-  
+
   if ((s = [self readStringToCRLF]) == nil) {
     [self logWithFormat:@"ERROR: could not parse status line."];
     return nil;
@@ -518,14 +523,14 @@ static BOOL     debugImap4         = NO;
       return nil;
     }
   }
-  
+
   if (![s hasPrefix:@"OK"]) {
     [self logWithFormat:@"ERROR: status line reports: '%@'", s];
     [s release];
     return nil;
   }
   [s release];
-  
+
   return script;
 }
 
@@ -537,7 +542,7 @@ static BOOL     debugImap4         = NO;
   // TODO: script should be send in UTF-8!
   NGHashMap *map;
   NSString  *s;
-  
+
   if (![self isValidScriptName:_name]) {
     [self logWithFormat:@"%s: missing script-name", __PRETTY_FUNCTION__];
     return nil;
@@ -546,7 +551,7 @@ static BOOL     debugImap4         = NO;
     [self logWithFormat:@"%s: missing script", __PRETTY_FUNCTION__];
     return nil;
   }
-  
+
   s = @"PUTSCRIPT \"";
   s = [s stringByAppendingString:_name];
   s = [s stringByAppendingString:@"\" "];
@@ -559,7 +564,7 @@ static BOOL     debugImap4         = NO;
 
 - (NSDictionary *)setActiveScript:(NSString *)_name {
   NGHashMap *map;
-  
+
   if (!_name) {
     NSLog(@"%s: missing script-name", __PRETTY_FUNCTION__);
     return nil;
@@ -577,7 +582,7 @@ static BOOL     debugImap4         = NO;
     NSLog(@"%s: missing script-name", __PRETTY_FUNCTION__);
     return nil;
   }
-  
+
   s = [NSString stringWithFormat:@"DELETESCRIPT \"%@\"", _name];
   map = [self processCommand:s];
   return [self normalizeResponse:map];
@@ -587,26 +592,26 @@ static BOOL     debugImap4         = NO;
   NSMutableDictionary *md;
   NSException *ex;
   NSString *line;
-  
+
   ex = [self sendCommand:@"LISTSCRIPTS" logText:@"LISTSCRIPTS" attempts:3];
   if (ex != nil) {
     [self logWithFormat:@"ERROR: could not list scripts: %@", ex];
     [self setLastException:ex];
     return nil;
   }
-  
+
   /* read response */
-  
+
   md = [NSMutableDictionary dictionaryWithCapacity:16];
   while ((line = [self readStringToCRLF]) != nil) {
     if ([line hasPrefix:@"OK"])
       break;
-    
+
     if ([line hasPrefix:@"NO"]) {
       md = nil;
       break;
     }
-    
+
     if ([line hasPrefix:@"{"]) {
       [self logWithFormat:@"unsupported list response line: '%@'", line];
     }
@@ -614,31 +619,31 @@ static BOOL     debugImap4         = NO;
       NSString *s;
       NSRange  r;
       BOOL     isActive;
-      
+
       s = [line substringFromIndex:1];
       r = [s rangeOfString:@"\""];
-      
+
       if (r.length == 0) {
 	[self logWithFormat:@"missing closing quote in line: '%@'", line];
 	[line release]; line = nil;
 	continue;
       }
-      
+
       s = [s substringToIndex:r.location];
       isActive = [line rangeOfString:@"ACTIVE"].length == 0 ? NO : YES;
-      
+
       [md setObject:[NSNumber numberWithBool: isActive] forKey:s];
     }
     else {
-      [self logWithFormat:@"unexpected list response line (%d): '%@'", 
+      [self logWithFormat:@"unexpected list response line (%d): '%@'",
 	    [line length], line];
     }
-    
+
     [line release]; line = nil;
   }
-  
+
   [line release]; line = nil;
-  
+
   return md;
 }
 
@@ -654,7 +659,7 @@ static BOOL     debugImap4         = NO;
   */
   id keys[3], values[3];
   NSParameterAssert(_map != nil);
-  
+
   keys[0] = @"RawResponse"; values[0] = _map;
   keys[1] = @"result";
   values[1] = [[_map objectForKey:@"ok"] boolValue] ? YesNumber : NoNumber;
@@ -666,9 +671,9 @@ static BOOL     debugImap4         = NO;
   /* filter for open connection */
   NSMutableDictionary *result;
   NSString *tmp;
-  
+
   result = [self normalizeResponse:_map];
-  
+
   if (![[[_map objectEnumeratorForKey:@"ok"] nextObject] boolValue])
     return result;
 
@@ -688,10 +693,10 @@ static BOOL     debugImap4         = NO;
     [_exception raise];
     return NO;
   }
-  
+
   if ([_exception isKindOfClass:[NGIOException class]]) {
     [self logWithFormat:
-            @"WARNING: got exception try to restore connection: %@", 
+            @"WARNING: got exception try to restore connection: %@",
             _exception];
     return YES;
   }
@@ -701,14 +706,14 @@ static BOOL     debugImap4         = NO;
             _exception];
     return YES;
   }
-  
+
   [_exception raise];
   return NO;
 }
 
 - (void)waitPriorReconnectWithRepetitionCount:(int)_cnt {
   unsigned timeout;
-  
+
   timeout = _cnt * 2;
   [self logWithFormat:@"reconnect to %@, sleeping %d seconds ...",
           self->address, timeout];
@@ -733,7 +738,7 @@ static BOOL     debugImap4         = NO;
   int       repeatCnt     = 0;
   struct timeval tv;
   double         ti = 0.0;
-  
+
   if (ProfileImapEnabled) {
     gettimeofday(&tv, NULL);
     ti =  (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0);
@@ -743,18 +748,18 @@ static BOOL     debugImap4         = NO;
     if (repeatCommand) {
       if (repeatCnt > 1)
         [self waitPriorReconnectWithRepetitionCount:repeatCnt];
-      
+
       repeatCnt++;
       if (_reconnect)
         [self reconnect];
       repeatCommand = NO;
     }
-    
+
     NS_DURING {
       NSException *ex;
-      
+
       if ((ex = [self sendCommand:_command logText:_txt]) != nil) {
-	repeatCommand = [self handleProcessException:ex 
+	repeatCommand = [self handleProcessException:ex
 			      repetitionCount:repeatCnt];
       }
       else
@@ -764,17 +769,17 @@ static BOOL     debugImap4         = NO;
       repeatCommand = [self handleProcessException:localException
                             repetitionCount:repeatCnt];
     }
-    NS_ENDHANDLER;    
+    NS_ENDHANDLER;
   }
   while (repeatCommand);
-  
+
   if (ProfileImapEnabled) {
     gettimeofday(&tv, NULL);
     ti = (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0) - ti;
     fprintf(stderr, "}[%s] <Send Command> : time needed: %4.4fs\n",
-           __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);    
+           __PRETTY_FUNCTION__, ti < 0.0 ? -1.0 : ti);
   }
-  
+
   return map;
 }
 
@@ -784,10 +789,10 @@ static BOOL     debugImap4         = NO;
 
 - (NSException *)sendCommand:(id)_command logText:(id)_txt {
   NSString *command = nil;
-  
+
   if ((command = _command) == nil) /* missing command */
     return nil; // TODO: return exception?
-  
+
   /* log */
 
   if (self->debug) {
@@ -801,17 +806,17 @@ static BOOL     debugImap4         = NO;
   }
 
   /* write */
-  
+
   if (![_command isKindOfClass:[NSData class]])
     _command = [command dataUsingEncoding:NSUTF8StringEncoding];
-  
+
   if (![self->io safeWriteData:_command])
     return [self->io lastException];
   if (![self->io writeBytes:"\r\n" count:2])
     return [self->io lastException];
   if (![self->io flush])
     return [self->io lastException];
-  
+
   return nil;
 }
 
@@ -823,7 +828,7 @@ static BOOL     debugImap4         = NO;
   NSException *ex;
   BOOL tryAgain;
   int  repeatCnt;
-  
+
   for (tryAgain = YES, repeatCnt = 0, ex = nil; tryAgain; repeatCnt++) {
     if (repeatCnt > 0) {
       if (repeatCnt > 1) /* one repeat goes without delay */
@@ -831,23 +836,23 @@ static BOOL     debugImap4         = NO;
       [self reconnect];
       tryAgain = NO;
     }
-    
+
     NS_DURING
       ex = [self sendCommand:_command logText:_txt];
     NS_HANDLER
       ex = [localException retain];
     NS_ENDHANDLER;
-    
+
     if (ex == nil) /* everything is fine */
       break;
-    
+
     if (repeatCnt > _c) /* reached max attempts */
       break;
-    
+
     /* try again for certain exceptions */
     tryAgain = [self handleProcessException:ex repetitionCount:repeatCnt];
   }
-  
+
   return ex;
 }
 
@@ -855,7 +860,7 @@ static BOOL     debugImap4         = NO;
 
 - (int)readByte {
   unsigned char c;
-  
+
   if (![self->io readBytes:&c count:1]) {
     [self setLastException:[self->io lastException]];
     return -1;
@@ -864,33 +869,33 @@ static BOOL     debugImap4         = NO;
 }
 
 - (NSString *)readLiteral {
-  /* 
+  /*
      Assumes 1st char is consumed, returns a retained string.
-     
+
      Parses: "{" number [ "+" ] "}" CRLF *OCTET
   */
   unsigned char countBuf[16];
   int      i;
   unsigned byteCount;
   unsigned char *octets;
-  
+
   /* read count */
-  
+
   for (i = 0; i < 14; i++) {
     int c;
-    
+
     if ((c = [self readByte]) == -1)
       return nil;
     if (c == '}')
       break;
-    
+
     countBuf[i] = c;
   }
   countBuf[i] = '\0';
   byteCount = i > 0 ? atoi((char *)countBuf) : 0;
-  
+
   /* read CRLF */
-  
+
   i = [self readByte];
   if (i != '\n') {
     if (i == '\r' && i != -1)
@@ -898,31 +903,31 @@ static BOOL     debugImap4         = NO;
     if (i == -1)
       return nil;
   }
-  
+
   /* read octet */
-  
+
   if (byteCount == 0)
     return @"";
-  
+
   octets = malloc(byteCount + 4);
   if (![self->io safeReadBytes:octets count:byteCount]) {
     [self setLastException:[self->io lastException]];
     return nil;
   }
   octets[byteCount] = '\0';
-  
+
   return [[NSString alloc] initWithUTF8String:(char *)octets];
 }
 
 - (NSString *)readQuoted {
-  /* 
+  /*
      assumes 1st char is consumed, returns a retained string
 
      Note: quoted strings are limited to 1KB!
   */
   unsigned char buf[1032];
   int i, c;
-  
+
   i = 0;
   do {
     c      = [self readByte];
@@ -931,32 +936,32 @@ static BOOL     debugImap4         = NO;
   }
   while ((c != -1) && (c != '"'));
   buf[i] = '\0';
-  
+
   if (c == -1)
     return nil;
-  
+
   return [[NSString alloc] initWithUTF8String:(char *)buf];
 }
 
 - (NSString *)readStringToCRLF {
   unsigned char buf[1032];
   int i, c;
-  
+
   i = 0;
   do {
     c = [self readByte];
     if (c == '\n' || c == '\r')
       break;
-    
+
     buf[i] = c;
     i++;
   }
   while ((c != -1) && (c != '\r') && (c != '\n') && (i < 1024));
   buf[i] = '\0';
-  
+
   if (c == -1)
     return nil;
-  
+
   /* consume CRLF */
   if (c == '\r') {
     if ((c = [self readByte]) != '\n') {
@@ -967,17 +972,17 @@ static BOOL     debugImap4         = NO;
       return nil;
     }
   }
-  
+
   return [[NSString alloc] initWithUTF8String:(char *)buf];
 }
 
 - (NSString *)readString {
   /* Note: returns a retained string */
   int c1;
-  
+
   if ((c1 = [self readByte]) == -1)
     return nil;
-  
+
   if (c1 == '"')
     return [self readQuoted];
   if (c1 == '{')
@@ -998,7 +1003,7 @@ static BOOL     debugImap4         = NO;
 
   ms = [NSMutableString stringWithCapacity:128];
   [ms appendFormat:@"<0x%p[%@]:", self, NSStringFromClass([self class])];
-  
+
   if (self->socket != nil)
     [ms appendFormat:@" socket=%@", [self socket]];
   else

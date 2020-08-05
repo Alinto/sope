@@ -24,8 +24,15 @@
 #define __NGNet_NGActiveSSLSocket_H__
 
 #import <NGStreams/NGSocketProtocols.h>
+#import <NGStreams/NGInternetSocketAddress.h>
 #include <NGStreams/NGActiveSocket.h>
 #include "../config.h"
+
+enum {
+  TLSVerifyDefault = 0,
+  TLSVerifyNone = 1,
+  TLSVerifyAllowInsecureLocalhost = 2
+};
 
 @interface NGActiveSSLSocket : NGActiveSocket
 {
@@ -38,12 +45,19 @@
   void *ssl;   /* real type: SSL */
 #endif
   NSString *hostName;
+  BOOL validatePeer;
 }
-+ (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
-                  onHostName: (NSString *) hostName;
 
-- (id)initWithDomain:(id<NGSocketDomain>)_domain
-      onHostName: (NSString *)_hostName;
++ (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
+                 withVerifyMode: (int) mode;
+
+- (id)initWithConnectedActiveSocket: (NGActiveSocket *) _socket
+                     withVerifyMode: (int) mode;
+/**
+ * enable/disable peer certificate validation. must be called before
+ * the handshake is performed. Default is enabled.
+ */
+- (void) validatePeerCertificate: (BOOL) validate;
 
 - (BOOL) startTLS;
 @end

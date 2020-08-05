@@ -64,6 +64,7 @@ typedef enum {
 
   BOOL useStartTLS;
   BOOL useSSL;
+  int tlsVerifyMode;
 }
 
 + (id)clientWithURL:(NSURL *)_url;

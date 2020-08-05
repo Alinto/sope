@@ -30,7 +30,7 @@
 
 /*
   NGSieveClient
-  
+
   This implements a client for server stored Sieve scripts as supported by
   the Cyrus IMAP server.
 */
@@ -60,13 +60,14 @@ typedef enum {
 
   NSString *authname;
   NSString *login;
-  NSString *password; 
+  NSString *password;
 
   NSString *serverType;
   NSArray  *capabilities;
-  
+
   BOOL debug;
   BOOL useTLS;
+  int tlsVerifyMode;
 }
 
 + (id)clientWithURL:(id)_url;
