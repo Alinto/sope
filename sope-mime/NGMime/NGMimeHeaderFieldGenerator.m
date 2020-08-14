@@ -24,8 +24,8 @@
 #include "common.h"
 
 static BOOL isPrintable(char ch) {
-  // match printable ASCII-characters except =, ? and _ according to https://tools.ietf.org/html/rfc2047#section-4.2
-  return ch >= 32 && ch < 127 && ch != '=' && ch != '?' && ch != '_';
+  // match printable ASCII-characters according to https://tools.ietf.org/html/rfc2047#section-4.2
+  return ch >= 32 && ch < 127 && ch != '=' && ch != '?' && ch != '_' && ch != ',' && ch != ';' && ch != ':';
 }
 
 @implementation NGMimeHeaderFieldGenerator
