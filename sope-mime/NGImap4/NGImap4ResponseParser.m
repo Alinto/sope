@@ -1592,9 +1592,9 @@ _purifyQuotedString(NSMutableString *quotedString) {
      eg: 
        ("Helge Hess" NIL "helge.hess" "opengroupware.org")
   */
-  NGImap4EnvelopeAddress *address;
+  NGImap4EnvelopeAddress *address = nil;
   NSString *pname, *route, *mailbox, *host;
-  
+
   if (_la(self, 0) != '(') {
     if (_matchesString(self, "NIL")) {
       _consume(self, 3);
@@ -1623,10 +1623,12 @@ _purifyQuotedString(NSMutableString *quotedString) {
   }
   else
     _consume(self, 1);
-  
-  address = [[NGImap4EnvelopeAddress alloc] initWithPersonalName:pname
-					    sourceRoute:route mailbox:mailbox
-					    host:host];
+
+  if ([pname isNotNull] || [route isNotNull] || [mailbox isNotNull] || [host isNotNull])
+    address = [[NGImap4EnvelopeAddress alloc] initWithPersonalName:pname
+                                                       sourceRoute:route
+                                                           mailbox:mailbox
+                                                              host:host];
 
   return address;
 }
