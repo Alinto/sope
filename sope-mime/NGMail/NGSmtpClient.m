@@ -136,7 +136,7 @@
     NSAssert(self->socket, @"invalid socket parameter");
 
     debug = [[NSUserDefaults standardUserDefaults]
-                boolForKey:@"ImapDebugEnabled"];
+                boolForKey:@"SMTPDebugEnabled"];
     [self setDebuggingEnabled: debug];
 
     self->connection =
@@ -202,7 +202,7 @@
     self->address = [_address retain];
 
     debug = [[NSUserDefaults standardUserDefaults]
-                boolForKey:@"ImapDebugEnabled"];
+                boolForKey:@"SMTPDebugEnabled"];
     [self setDebuggingEnabled: debug];
   }
   return self;

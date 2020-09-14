@@ -44,7 +44,7 @@
     ud = [NSUserDefaults standardUserDefaults];
     
     self->isLoggingEnabled = 
-      [ud boolForKey:@"ImapDebugEnabled"];
+      [ud boolForKey:@"SMTPDebugEnabled"];
     self->shouldOnlyUseMailboxName =
       [ud boolForKey:@"UseOnlyMailboxNameForSendmail"];
     
