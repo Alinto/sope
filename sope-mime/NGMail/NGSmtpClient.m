@@ -716,6 +716,12 @@
     [self gotoState:NGSmtpState_TRANSACTION];
     return YES;
   }
+  else if ([[reply text] length])
+    {
+      NSLog(@"SMTP(MAIL FROM) error: %@", [reply text]);
+      [NSException raise: @"SMTPException"
+                  format: [reply text]];
+    }
   return NO;
 }
 
@@ -735,6 +741,12 @@
     }
     return YES;
   }
+  else if ([[reply text] length])
+    {
+      NSLog(@"SMTP(RCPT TO) error: %@", [reply text]);
+      [NSException raise: @"SMTPException"
+                  format: [reply text]];
+    }
   return NO;
 }
 
@@ -823,6 +835,12 @@
       NSLog(@"SMTP(DATA): mail input failed, got code %i ..", [reply code]);
     }
   }
+  if ([[reply text] length])
+    {
+      NSLog(@"SMTP(DATA) error: %@", [reply text]);
+      [NSException raise: @"SMTPException"
+                  format: [reply text]];
+    }
   return NO;
 }
 
