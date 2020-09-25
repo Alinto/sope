@@ -144,7 +144,7 @@ static BOOL debugOn = NO;
       i++;
     }
 
-  return [[NSString alloc] initWithCString:start length:(o_buf - start)];
+  return [[NSString alloc] initWithCStringNoCopy:start length:(o_buf - start) freeWhenDone:YES];
 }
 
 /* parse URI */
