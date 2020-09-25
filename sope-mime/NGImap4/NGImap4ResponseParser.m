@@ -1655,7 +1655,7 @@ _purifyQuotedString(NSMutableString *quotedString) {
     NGImap4EnvelopeAddress *address;
     
     if ((address = [self _parseEnvelopeAddressStructure]) == nil) {
-      _consume(self, 1);
+      [self _consumeOptionalSpace];
       continue; // TODO: should we stop parsing?
     }
     if (![address isNotNull])
