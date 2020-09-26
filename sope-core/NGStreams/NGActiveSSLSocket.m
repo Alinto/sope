@@ -147,7 +147,8 @@ DEALINGS IN THE SOFTWARE.
   }
 
   sock_fd = [_socket fileDescriptor];
-  [self setFileDescriptor: sock_fd];
+  // the fd is still owned by the other socket
+  [self setFileDescriptor: sock_fd closeWhenDone: NO];
   // We remove the NON-BLOCKING I/O flag on the file descriptor, otherwise
   // SOPE will break on SSL-sockets.
   oldopts = fcntl(sock_fd, F_GETFL, 0);
