@@ -577,7 +577,7 @@ static EOQualifier *_parseKeyCompQualifier(id _ctx, const char *_buf,
 {
   NSString     *key       = nil;
   NSString     *op        = nil;
-  NSString     *value     = nil;
+  id            value     = nil;
   EOQualifier  *qual      = nil;
   NSDictionary *dict      = nil;
   SEL          sel        = NULL;
