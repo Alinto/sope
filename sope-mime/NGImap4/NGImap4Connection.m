@@ -28,6 +28,8 @@
 
 @interface NGImap4Connection (private)
 
+- (NSArray *) _flattenedArray: (NSArray *) _array;
+
 - (void) _mergeDict: (NSDictionary *) source
                into: (NSMutableDictionary *) target;
 
@@ -579,12 +581,12 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
                        sortOrdering:(id)_so
 {
   NSDictionary *result;
-  NSArray *uids;
-  NSMutableArray *sortedThreads;
+  NSArray *uids, *threadUids;
+  NSMutableArray *sortedThreads, *sortedThread;
   NSMutableDictionary *threads;
   NSEnumerator *threadsEnum, *threadEnum;
   id rootThread, thread;
-  unsigned int i;
+  unsigned int i, j;
 
   // Check cache
   
@@ -621,7 +623,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
           [threads setObject: rootThread forKey: thread];
         }
 
-      // 2. Sort the threads based on an IMAP SORT
+      // 2. Flatten and sort the threads based on an IMAP SORT
 
       uids = [self fetchUIDsInURL: _url qualifier: _qualifier sortOrdering: _so];
       sortedThreads = [NSMutableArray arrayWithCapacity: [threads count]];
@@ -629,7 +631,24 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
         {
           thread = [threads objectForKey: [uids objectAtIndex: i]];
           if (thread)
-            [sortedThreads addObject: thread];
+            {
+              if ([thread count] > 1)
+                {
+                  threadUids = [self _flattenedArray: thread];
+                  sortedThread = [NSMutableArray arrayWithCapacity: [threadUids count]];
+                  for (j = 0; j < [uids count]; j++)
+                    {
+                      if ([threadUids containsObject: [uids objectAtIndex: j]])
+                        [sortedThread addObject: [uids objectAtIndex: j]];
+                    }
+                  [sortedThreads addObject: sortedThread];
+                }
+              else
+                {
+                  // No sorting required
+                  [sortedThreads addObject: thread];
+                }
+            }
         }
 
       uids = sortedThreads;
@@ -651,6 +670,23 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 
   [self cacheUIDs:uids forURL:_url qualifier:_qualifier sortOrdering:_so];
   return uids;
+}
+
+- (NSArray *) _flattenedArray: (NSArray *) _array
+{
+  NSMutableArray *flattenedArray;
+  NSEnumerator *objects;
+  id currentObject;
+
+  flattenedArray = [NSMutableArray array];
+  objects = [_array objectEnumerator];
+  while ((currentObject = [objects nextObject]))
+    if ([currentObject isKindOfClass: [NSArray class]])
+      [flattenedArray addObjectsFromArray: [self _flattenedArray: (NSArray *)currentObject]];
+    else
+      [flattenedArray addObject: currentObject];
+
+  return flattenedArray;
 }
 
 - (NSArray *) fetchUIDs: (NSArray *) _uids
