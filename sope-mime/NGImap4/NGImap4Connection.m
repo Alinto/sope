@@ -636,7 +636,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
                 {
                   threadUids = [self _flattenedArray: thread];
                   sortedThread = [NSMutableArray arrayWithCapacity: [threadUids count]];
-                  for (j = 0; j < [uids count]; j++)
+                  for (j = 0; j < [uids count] && [sortedThread count] < [threadUids count]; j++)
                     {
                       if ([threadUids containsObject: [uids objectAtIndex: j]])
                         [sortedThread addObject: [uids objectAtIndex: j]];
