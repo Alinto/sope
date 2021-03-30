@@ -1,3 +1,79 @@
+commit 60d393d65955da6b1e41cdfd48df944ce46c3e54
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Mar 1 20:41:50 2021 -0500
+
+    fix(imap): flatten and sort inner threads
+    
+    Fixes #3100
+    Fixes #4796
+
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit b0a271aea01796d41c3086a9f296b34fe855cbd9
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Mar 1 17:18:27 2021 -0500
+
+    fix(imap): flatten and sort inner threads
+    
+    Fixes #3100
+    Fixes #4796
+
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit fdb22733fe9898e5edab39c5c28704f5dc4e86af
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Feb 26 14:18:44 2021 -0500
+
+    fix(gdl): don't cast NSNull values as strings
+
+M	sope-core/EOControl/EOQualifierParser.m
+
+commit ffdbc20a026d126a22924ccf97a95e48ad1d8676
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Dec 1 15:52:06 2020 -0500
+
+    fix(addressbook(dav)): add support for macOS 11 (Big Sur)
+    
+    Fixes #5203
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit 5a55b43c7dcbf19b73a21bb10d6c122e26c93440
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Nov 2 11:00:44 2020 -0500
+
+    chore(core): update sope-core/NGStreams/config.guess
+    
+    Resolves compilation on Debian ARM platform.
+    
+    Fixes #5202
+
+M	sope-core/NGStreams/config.guess
+
+commit ed0a0784543d22bdbd5890e9e3455dcc36e286b5
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Oct 15 09:32:00 2020 -0400
+
+    fix(core): consider @ as a printable character
+
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
+commit df94cafba604d17fe44d5160d2421c06cd448fec
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Oct 13 09:59:30 2020 -0400
+
+    fix(core): MIME generation resulting in broken S/MIME (fixes #4634)
+
+M	sope-mime/NGMime/NGMimeMultipartBodyGenerator.m
+
+commit 84b7fecf83a622c75403fc8d1c9ecaf72e80a4e7
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Oct 7 10:47:02 2020 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit cb56694116f8e7cb2e5fcb1326fad6e6254bafdd
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 7 08:00:02 2020 -0400
