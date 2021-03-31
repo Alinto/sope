@@ -23,38 +23,10 @@
 #include "NGMimeHeaderFields.h"
 #include "common.h"
 
-
-/*
-   text       :=  ALPHA / DIGIT / "!" / "#" / "$" / "%" / "&" / "'" /
-                  "*" / "+" / "-" / "/" / "^" /  "`" / "{" / "|" /
-                  "}" / "~"
-
-  tspecials   :=  "(" / ")" / "<" / ">" / "@" / "," / ";" /
-                  ":" / "\" / <"> / "/" / "[" / "]" / "?" /
-                  "=" / "_"
-
-  rfc822_text := 1*<any (US-ASCII) CHAR except SPACE, CTLs, or tspecials>
-*/
-static unsigned char rfc822_text[256] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* 0-15 */
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* 16-31 */
-    0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, /* 32-47 */
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, /* 48-63 */
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, /* 64-79 */
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, /* 80-95 */
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, /* 96-111 */
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, /* 112-127 */
-
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* >= 128 */
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-};
-
+static BOOL isPrintable(char ch) {
+  // match printable ASCII-characters according to https://tools.ietf.org/html/rfc2047#section-4.2
+  return ch >= 32 && ch < 127 && ch != '=' && ch != '?' && ch != '_' && ch != ',' && ch != ';' && ch != ':' && ch != '@';
+}
 
 @implementation NGMimeHeaderFieldGenerator
 
@@ -112,7 +84,7 @@ static NSArray *splitWordIfQPEncodingTooBig(NSString *s)
   NSMutableArray *chunks = [NSMutableArray array];
   NSUInteger i, chunk_size = 0, chunk_start = 0;
   for (i = 0; i < size; i++) {
-    if (!rfc822_text[bytes[i]])
+    if (!isPrintable(bytes[i]))
       chunk_size += 3;
     else
       chunk_size++;
@@ -249,7 +221,7 @@ BOOL NGEncodeQuotedPrintableMimeNeeded(const unsigned char *src, unsigned srcLen
   unsigned i = 0;
 
   for (i = 0; i < srcLen; i++) {
-    if (src[i] != ' ' && !rfc822_text[src[i]]) {
+    if (!isPrintable(src[i])) {
       return YES;
     }
   }
@@ -271,12 +243,9 @@ int NGEncodeQuotedPrintableMime(const unsigned char *src, unsigned srcLen,
   for (cnt = 0; cnt < srcLen && destCnt < destLen; cnt++) {
     register unsigned char c = src[cnt];
 
-    if (rfc822_text[c] == 1) {
+    if (isPrintable(c)) {
       // no quoting
-      dest[destCnt++] = c;
-    } else if (c == ' ') {
-      // Special case ' ' => '_'
-      dest[destCnt++] = '_';
+      dest[destCnt++] = (c == ' ') ? '_' : c;
     } else {
       // need to be quoted
       if (destLen - destCnt <= 2)

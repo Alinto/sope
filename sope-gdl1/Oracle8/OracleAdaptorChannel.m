@@ -186,6 +186,9 @@ static void DBTerminate()
 {
   if ([self isOpen])
     {
+      if (debugOn)
+        [self logWithFormat: @"closing Oracle adaptor channel"];
+
       [super closeChannel];
     
       // We logoff from the database.
@@ -275,13 +278,13 @@ static void DBTerminate()
   if (!theExpression || ![theExpression length])
     {
       [NSException raise: @"OracleInvalidExpressionException"
-		   format: @"Passed an invalid (nil or length == 0) SQL expression"];
+                  format: @"Passed an invalid (nil or length == 0) SQL expression"];
     }
 
   if (![self isOpen])
     {
       [NSException raise: @"OracleChannelNotOpenException"
-		   format: @"Called -evaluateExpression: prior to -openChannel"];
+                  format: @"Called -evaluateExpression: prior to -openChannel"];
     }
   
   sql = (text *)[theExpression UTF8String];
@@ -333,6 +336,7 @@ static void DBTerminate()
       checkerr(_oci_err, status);
       NSLog(@"Statement execute failed (OCI_ERROR): %@", theExpression);
 
+#if 0
       // We check to see if we lost connection and need to reconnect.
       serverStatus = 0;
       OCIAttrGet((dvoid *)_oci_env, OCI_HTYPE_SERVER, (dvoid *)&serverStatus, (ub4 *)0, OCI_ATTR_SERVER_STATUS, _oci_err);
@@ -354,8 +358,11 @@ static void DBTerminate()
 		  NSLog(@"Connection re-established to Oracle - retrying to process the statement.");
 		  goto retry;
 		}
+              else
+                NSLog(@"Could not re-establish connection to Oracle - statement re-processing aborted.");
 	    }
 	}
+#endif
       return NO;
     }
 
@@ -477,6 +484,9 @@ static void DBTerminate()
   const char *username, *password, *database;
   sword status;
 
+  if (debugOn)
+    [self logWithFormat: @"opening Oracle adaptor channel"];
+
   if (![super openChannel] || [self isOpen])
     {
       return NO;
@@ -578,9 +588,10 @@ static void DBTerminate()
 
 		case SQLT_CLOB:
 		  {
-		    ub4 len;
-		    
-		    status = OCILobGetLength(_oci_ctx, _oci_err, info->value, &len);
+                    ub4 len;
+
+                    len = 0;
+                    status = OCILobGetLength(_oci_ctx, _oci_err, info->value, &len);
 		    
 		    // We might get a OCI_INVALID_HANDLE if we try to read a NULL CLOB.
 		    // This would be avoided if folks using CLOB would use Oracle's empty_clob()
@@ -588,14 +599,15 @@ static void DBTerminate()
 		    if (status != OCI_INVALID_HANDLE && status != OCI_SUCCESS)
 		      {
 			checkerr(_oci_err, status);
+                        NSLog(@"Attempted to read a NULL CLOB");
 			o = [NSString string];
 		      }
 		    else
 		      {
 			// We alloc twice the size of the LOB length. OCILobGetLength() returns us the LOB length in UTF-16 characters.
 			o = calloc(len*2, 1);
-			OCILobRead(_oci_ctx, _oci_err, info->value, &len, 1, o, len*2, (dvoid *)0, (sb4 (*)(dvoid *, CONST dvoid *, ub4, ub1))0, (ub2)0, (ub1)SQLCS_IMPLICIT);
-			o = AUTORELEASE([[NSString alloc] initWithBytesNoCopy: o  length: len  encoding: NSUTF8StringEncoding  freeWhenDone: YES]);
+			OCILobRead(_oci_ctx, _oci_err, info->value, &len, 1, o, len*2, (dvoid *)0, (sb4 (*)(dvoid *, CONST dvoid *, ub4, ub1))0, (ub2)OCI_UTF16ID, (ub1)SQLCS_IMPLICIT);
+			o = AUTORELEASE([[NSString alloc] initWithBytesNoCopy: o  length: len*2  encoding: NSUTF16StringEncoding  freeWhenDone: YES]);
 		      }
 		  }
 		  break;

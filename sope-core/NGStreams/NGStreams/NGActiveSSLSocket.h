@@ -1,6 +1,7 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
   Copyright (C) 2011 Jeroen Dekkers <jeroen@dekkers.ch>
+  Copyright (C) 2020 Nicolas Höft
 
   This file is part of SOPE.
 
@@ -22,23 +23,43 @@
 #ifndef __NGNet_NGActiveSSLSocket_H__
 #define __NGNet_NGActiveSSLSocket_H__
 
+#import <NGStreams/NGSocketProtocols.h>
+#import <NGStreams/NGInternetSocketAddress.h>
 #include <NGStreams/NGActiveSocket.h>
 #include "../config.h"
 
+enum {
+  TLSVerifyDefault = 0,
+  TLSVerifyNone = 1,
+  TLSVerifyAllowInsecureLocalhost = 2
+};
+
 @interface NGActiveSSLSocket : NGActiveSocket
 {
+@protected
 #ifdef HAVE_GNUTLS
   void *cred; /* real type: gnutls_certificate_credentials_t */
   void *session; /* real type: gnutls_session_t */
 #else
   void *ctx;   /* real type: SSL_CTX */
   void *ssl;   /* real type: SSL */
-  void *sbio;  /* real type: BIO (basic input/output) */
 #endif
+  NSString *hostName;
+  BOOL validatePeer;
 }
 
-- (BOOL) startTLS;
++ (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
+                 withVerifyMode: (int) mode;
 
+- (id)initWithConnectedActiveSocket: (NGActiveSocket *) _socket
+                     withVerifyMode: (int) mode;
+/**
+ * enable/disable peer certificate validation. must be called before
+ * the handshake is performed. Default is enabled.
+ */
+- (void) validatePeerCertificate: (BOOL) validate;
+
+- (BOOL) startTLS;
 @end
 
 #endif /* __NGNet_NGActiveSSLSocket_H__ */

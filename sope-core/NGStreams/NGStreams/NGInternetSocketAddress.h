@@ -27,7 +27,7 @@
 
 /*
   Represents an Internet socket address (AF_INET).
-  
+
   Socket addresses are immutable. -copy therefore returns a retained self.
 
   The host arguments are id because they are allowed to be either NSString
@@ -66,7 +66,6 @@
 
 /* accessors */
 
-- (NSString *)hostName;
 - (NSString *)address;
 - (int)port;
 

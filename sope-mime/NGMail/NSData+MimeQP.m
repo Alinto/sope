@@ -212,15 +212,8 @@ static Class NGMimeTypeClass = Nil;
       data = nil;
       
       if (buffer && foundQP) {
-        static NSCharacterSet *illegalCS = nil;
-
-        if (illegalCS == nil) {
-          illegalCS = [NSCharacterSet illegalCharacterSet];
-          [illegalCS retain];
-        }
         data = [[[NSStringClass alloc] initWithCharacters:buffer length:bufLen]
                                 autorelease];
-        data = [data stringByTrimmingCharactersInSet: illegalCS];
         if (data == nil) {
           [self warnWithFormat:
 		  @"%s: got no string for buffer '%s', length '%i' !", 

@@ -1,3 +1,1060 @@
+commit 60d393d65955da6b1e41cdfd48df944ce46c3e54
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Mar 1 20:41:50 2021 -0500
+
+    fix(imap): flatten and sort inner threads
+    
+    Fixes #3100
+    Fixes #4796
+
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit b0a271aea01796d41c3086a9f296b34fe855cbd9
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Mar 1 17:18:27 2021 -0500
+
+    fix(imap): flatten and sort inner threads
+    
+    Fixes #3100
+    Fixes #4796
+
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit fdb22733fe9898e5edab39c5c28704f5dc4e86af
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Feb 26 14:18:44 2021 -0500
+
+    fix(gdl): don't cast NSNull values as strings
+
+M	sope-core/EOControl/EOQualifierParser.m
+
+commit ffdbc20a026d126a22924ccf97a95e48ad1d8676
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Dec 1 15:52:06 2020 -0500
+
+    fix(addressbook(dav)): add support for macOS 11 (Big Sur)
+    
+    Fixes #5203
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit 5a55b43c7dcbf19b73a21bb10d6c122e26c93440
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Nov 2 11:00:44 2020 -0500
+
+    chore(core): update sope-core/NGStreams/config.guess
+    
+    Resolves compilation on Debian ARM platform.
+    
+    Fixes #5202
+
+M	sope-core/NGStreams/config.guess
+
+commit ed0a0784543d22bdbd5890e9e3455dcc36e286b5
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Oct 15 09:32:00 2020 -0400
+
+    fix(core): consider @ as a printable character
+
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
+commit df94cafba604d17fe44d5160d2421c06cd448fec
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Oct 13 09:59:30 2020 -0400
+
+    fix(core): MIME generation resulting in broken S/MIME (fixes #4634)
+
+M	sope-mime/NGMime/NGMimeMultipartBodyGenerator.m
+
+commit 84b7fecf83a622c75403fc8d1c9ecaf72e80a4e7
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Oct 7 10:47:02 2020 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit cb56694116f8e7cb2e5fcb1326fad6e6254bafdd
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 7 08:00:02 2020 -0400
+
+    fix(core): handle bogus CardDAV clients
+
+M	sope-appserver/NGObjWeb/DAVPropMap.plist
+
+commit 218ca14fc2d322f384c89cdd8509d5db82d8ba5f
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sat Sep 26 20:06:49 2020 +0200
+
+    fix(appserver): Fix warning
+    
+    Convert const char* to char* as the ownership is transferred to NSString
+
+M	sope-appserver/NGObjWeb/WORequest.m
+
+commit 2ad8d880d6be62596b8642ad546c178e182c5c44
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sat Sep 26 19:57:36 2020 +0200
+
+    fix(core): Dont leak fd when using STARTTLS
+    
+    When STARTTLS is used, we re-use the connection and put a
+    new socket "on top" of the old one and reuse the file
+    descriptor of the previous socket.
+    
+    This lead to two issues: First, now both sockets tried to close
+    the underlying file descriptor: Once from the non-starttls connection,
+    once by the starttls connection. This wasnt so harmful, as closing would
+    fail with EBADF. Fix this by using the flag `closeOnFree` for such
+    fd assignments, in this way the ownership is clearer.
+    
+    The second issue is more severe: when passing the fd to the TLS socket,
+    the TLS socket could already have an fd assigned, but that would never
+    be freed. To fix the fd leak simply call `close` on the old fd
+    when `setFileDescriptor` is called.
+    
+    Fixes: #5175
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGActiveSocket.m
+M	sope-core/NGStreams/NGSocket.m
+M	sope-core/NGStreams/NGStreams/NGSocket.h
+
+commit c5c23fd757b5b2c9c61cf7229924a8ffbd120fc1
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Sep 25 13:52:35 2020 -0400
+
+    fix(mime): parse empty address in envelope
+    
+    Fixes #5173
+    Fixes #5174
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 30815c3876ed29dee41e64c932a5e682edd5c60b
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Fri Sep 25 11:01:41 2020 +0200
+
+    fix(appserver): Fix memory leak
+    
+    Free the memory allocated by calloc() again by passing `freeWhenDone: YES`
+
+M	sope-appserver/NGObjWeb/WORequest.m
+
+commit 1ac9e39e8f1a2a14bad8282b2e01a5dd70f61bda
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Sep 14 14:32:01 2020 -0400
+
+    fix(smtp): raise exception when server returns an error
+
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit 50441eb222fbf6e9e1bff8ce6b7d80b39eeff43f
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Sep 14 14:23:43 2020 -0400
+
+    fix(smtp): add defaults SMTPDebugEnabled
+    
+    Instead of depending on ImapDebugEnabled, NGSmtpClient and NGSendMail
+    will log debugging information only if SMTPDebugEnabled is set.
+    
+    Fixes #5129
+
+M	sope-mime/NGMail/NGSendMail.m
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit 579f73e6dec22f05f9e2a2e96f9d87e22b788419
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Sep 9 14:59:44 2020 -0400
+
+    fix(imap): ignore empty envelope addresses
+    
+    Fixes #5142
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 4527e6a5c37fb26157ca04ae33591710cbbac68b
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Aug 14 09:45:06 2020 -0400
+
+    fix(mime): encode , / ; / : characters in headers
+    
+    Fixes #5119
+
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
+commit 5a4f363628a549ad5b93da7dd8e258acc63fa864
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sun Aug 2 12:01:00 2020 +0200
+
+    fix(core): NGMimeType: Fix unit tests
+    
+    Add missing charsets in NGMimeType that are tested in the SOGo unit tests.
+
+M	sope-mime/NGMime/NGMimeType.m
+
+commit 4f280bf2388070d7984602858a59b1a574c2fa70
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sun Aug 2 14:33:40 2020 +0200
+
+    feat(core): Allow setting TLS verify mode for IMAP, SMTP, Sieve
+    
+    Given the query parameter `tlsVerifyMode` one can specify the TLS
+    validation mode for IMAP, SMTP, and sieve protocols when the TLS
+    wrapper is enabled.
+    
+    Possible options are:
+      * tlsVerifyMode=allowInsecureLocalhost: This will disable peer verification
+        if the remote host is on the local machine (localhost and similar)
+      * tlsVerifyMode=none: Disable all TLS checks. This should be used for
+        debugging only
+    
+    Refs #5078
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGSieveClient.h
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGMail/NGSmtpClient.h
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit 417ef16a1ac1d7e3810a8576da71810a207b757f
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sun Aug 2 11:58:42 2020 +0200
+
+    feat(core): Extend NSURL with queryComponents
+    
+    This queryComponents method will return a NSDictionary with the key/values
+    for the query, to allow for easy access if the given query components.
+
+M	sope-core/NGExtensions/FdExt.subproj/NSURL+misc.m
+M	sope-core/NGExtensions/NGExtensions/NSURL+misc.h
+
+commit 4fb17374daba03c68064039678c1e56e5af2fd81
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sat Aug 1 19:40:29 2020 +0200
+
+    feat(core): NGActiveSSLSocket: Allow setting peer verification for STARTTLS
+    
+    Add a new initializer for NGActiveSSLSocket, `initWithConnectedActiveSocket`
+    with the purpose to be initialized on top of a connected socket. Moving
+    the function of grabbing the socket fd and options from outside into the
+    SSL socket implementation itself.
+    
+    Also by passing the socket, we dont have to pass the host name explicitly
+    anymore, as we can get it from the socket itself.
+    
+    The verifyMode selector can enable the full TLS checks (default), disable
+    them for localhost addresses, or disable peer verification completely.
+    
+    Refs #5078
+
+M	sope-appserver/NGObjWeb/WOHTTPConnection.m
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit ca0c82834dd51196cee5610f31cce49f69b397e7
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sat Jul 25 15:23:50 2020 +0200
+
+    feat(core): SocketAddress: isLocalhost hostName to protocol
+    
+    The function isLocalhost will return true if the given address is on the
+    same machine. For this it checks for "localhost[6]" domain names or if
+    the IP is in 127.0.0.1/8.
+    
+    Add the hostName getter to return the hostname, for LocalSocketAddress it will
+    always return YES.
+
+M	sope-core/NGStreams/NGInternetSocketAddress.m
+M	sope-core/NGStreams/NGLocalSocketAddress.m
+M	sope-core/NGStreams/NGStreams/NGInternetSocketAddress.h
+M	sope-core/NGStreams/NGStreams/NGSocketProtocols.h
+
+commit 2c9d49197ad910f8ec5411b666688dfa87bd0988
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sat Jul 11 23:20:33 2020 +0200
+
+    feat(core): NGActiveSSLSocket: Add option to disable peer verification
+    
+    In certain scenarios it may be helpful to disable peer verification,
+    even though it undermines the concept in TLS.
+    The default is to verify the peer, but it can be disabled if validation
+    is disabled before the handshake is performed.
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
+
+commit 34dc27941e5f685ddd4362a29968a8ac7221db0d
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Jul 30 11:28:25 2020 -0400
+
+    fix(imap): sanitize destination mailbox name in copy operations
+    
+    Fixes #5095
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 8b1b1a0d830a33dbbebccc07ef1872f84af810de
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Jul 9 15:40:39 2020 -0400
+
+    fix(sieve): improve connection error remediation
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-mime/NGImap4/NGSieveClient.m
+
+commit 9c5483b96c27430ab289e99698974853ae82abf8
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jul 9 12:09:46 2020 -0400
+
+    fix(core): added MySQL debugging when opening/closing connections
+
+M	sope-gdl1/MySQL/MySQL4Channel.m
+
+commit 9460140be5394c86f68c48f6f22ddb156c5e88ed
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jul 8 07:56:03 2020 -0400
+
+    fix(core): added method in header to avoid warning
+
+M	sope-core/NGExtensions/NGExtensions/NSProcessInfo+misc.h
+
+commit d9fd0098df691c7fdc6da1a3b7fbdcd9c206f3d2
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Jul 2 14:18:57 2020 -0400
+
+    feat(core): show the current fd count at end of each request
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
+
+commit dbe2dc04ee4315f00b24b48dcac3cc4ca1737d70
+Author: Johannes Kanefendt <johannes.kanefendt@krzn.de>
+Date:   Thu Jul 2 14:23:39 2020 +0200
+
+    Fixed set of printable characters in quoted printable according to RFC2047
+
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
+commit 059a4075d9048a8af6cefb3f5bfe887600b65525
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Thu Jun 18 22:40:53 2020 +0200
+
+    feat(core): Support older GnuTLS versions
+    
+    Add version checking to GnuTLS and use manual host name verification
+    in case GnuTLS does not support this natively.
+    
+    Because older GnuTLS versions do not support using the system trust,
+    add a new configuration option to pass the system CA bundle. This option
+    can also search for the default locations. If none is given, but the
+    the GnuTLS version does not support loading the default system trust,
+    compilation will fail.
+
+M	configure
+M	sope-core/NGStreams/GNUmakefile.preamble
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit d79191fe918590d7846bdb1b0ee10e77d5a3033b
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Wed Jun 17 14:48:19 2020 +0200
+
+    feat(core): Support hostname validation for openssl<1.0.2
+    
+    Older versions of OpenSSL need hostname validation injected via
+    SSL_CTX_set_cert_verify_callback(). match_pattern() function and
+    _validateHostname() are based on boost asio code.
+    
+    Remove unused BIO functions.
+    
+    Fixes #5019
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
+
+commit 280bc8dfffc0b0176729e2982d5bb6141dbbedfd
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jun 23 12:40:06 2020 -0400
+
+    fix(packaging): add proper build dep
+
+M	packaging/rhel/sope.spec
+
+commit ff8d877064351e7490655a09c5de18261c3fdead
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jun 19 10:43:20 2020 -0400
+
+    fix(core): remove unuseful control char
+
+M	sope-core/NGStreams/NGPassiveSocket.m
+
+commit a948deb76767521651f6d1fba79669360debacf0
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Wed Jun 17 15:02:45 2020 +0200
+
+    Revert "Merge pull request #55 from inverse-inc/revert-52-bugfix/5019-tls-hostname"
+    
+    This reverts commit e249ac8d417614bc237673afe46cee2ac224aba3, reversing
+    changes made to 03316166cbbe48abcfc07a6db5158134748ce5ed.
+
+M	sope-appserver/NGObjWeb/WOHTTPConnection.m
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit dbd28bdac646f05ea55a23ddb64dc04621cfed81
+Author: Extra Fu <lmarcotte@inverse.ca>
+Date:   Tue Jun 16 13:22:04 2020 -0400
+
+    Revert "feat(core): Peer verification on TLS connections"
+
+M	sope-appserver/NGObjWeb/WOHTTPConnection.m
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit bc766e2463fba726a7a17000e168a4f0efbd60f7
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Tue May 12 10:20:07 2020 +0200
+
+    feat(core): NGActiveSSLSocket: Check host name for GnuTLS
+    
+    Implement peer verification for TLS connections also
+    for GnuTLS. It will load the default system CA root store,
+    and also send the Server Name Indication (SNI).
+    
+    Fixes #5019
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 0370e1bba4e9f5437049661dbcc19dfd4b25525e
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Tue May 12 10:03:08 2020 +0200
+
+    feat(core): NGActiveSSLSocket: Implement peer verification for OpenSSL
+    
+    Load system default CA trust store and verify the hostname of the
+    endpoint.
+    Simplify the SSL setup by reducing duplicate initialization code.
+    
+    Require a host name argument now to be able to compare the host names
+    with.
+    
+    Fixes #5019
+
+M	sope-appserver/NGObjWeb/WOHTTPConnection.m
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit 994caa9df00f47571baa5a1ffe532804e9c0c01b
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Mon May 11 18:48:12 2020 +0200
+
+    fix(core): Disable Nagle for TLS connections
+    
+    To improve TLS handshake performance, disable Nagle
+    algorithm on the underlying socket.
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit 7be6ef55cee4d6f59d75f6fba2150f47a7b07bb4
+Author: Johannes Kanefendt <johannes.kanefendt@krzn.de>
+Date:   Tue Jun 9 14:14:15 2020 +0200
+
+    Allow writing files directly (in small blocks) to HTTP response
+
+M	sope-appserver/NGObjWeb/NGObjWeb/WOMessage.h
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+M	sope-appserver/NGObjWeb/WOMessage.m
+
+commit f65084a8c5fedf00dc391d0b376213d006bb6222
+Author: Roland Illig <roland.illig@gmx.de>
+Date:   Sun May 31 16:31:29 2020 +0200
+
+    Fix usage of <ctype.h> functions
+    
+    These functions must not be called with negative integers, except for EOF.
+    
+    libxmlHTMLSAXDriver.m:784:9: error: array subscript is of type 'char' [-Werror,-Wchar-subscripts]
+    libxmlHTMLSAXDriver.m:797:49: error: array subscript is of type 'char' [-Werror,-Wchar-subscripts]
+
+M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
+
+commit 5ee8894b17cdebed1716e9d67cbbb2026226e46a
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed May 13 14:53:27 2020 -0400
+
+    fix(packaging): fix for rhelv8
+
+M	packaging/rhel/sope.spec
+
+commit 9fddad2ccbf327edb0eab018e86712c08e5ef3c0
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed May 13 14:25:52 2020 -0400
+
+    fix(packaging): disable oracle on RHELv8
+
+M	packaging/rhel/sope.spec
+
+commit 9cb89a04697e08784e8221f0f272459f9e32efd9
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Tue May 12 10:04:09 2020 +0200
+
+    fix(core): ActiveSSLSocket: Fix GnuTLS issues
+    
+    The read/write functions from GnuTLS may return GNUTLS_E_AGAIN or
+    GNUTLS_E_INTERRUPTED. In such a case, we just have to retry. This
+    fixes apparent sudden reconnects observed in Debian Buster:
+    
+        [NGImap4Client]> ERROR(-[NGImap4Client _processUnknownCommandParserException:]): catched non-IMAP4 parsing exception UnexpectedEndOfStream: the parsed stream ended unexpectedly
+    
+    Further, when compiling SOPE with GnuTLS, a warning would be issued:
+    
+      warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+      gnutls_transport_set_ptr((gnutls_session_t) self->session, (gnutls_transport_ptr_t) self->fd);
+    
+    On 64bit systems this can be quite dangerous, as an invalid file
+    descriptor would be passed to GnuTLS, rendering the transport unusable.
+    Fix this by using the new function `gnutls_transport_set_int()` if available
+    (GnuTLS >= 3.1.9). Otherwise, cast the fd to long to ensure the higher bits
+    are zero, too.
+    
+    Also make sure to return an error if sending or receiving data fails,
+    otherwise the socket may hang indefinitely.
+    
+    Fixes #4783
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit 40bb586cf04bf6969e17cf6fc7e2cd8ce6987d31
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sun May 10 21:16:40 2020 +0200
+
+    feat(smtp): Support STARTTLS
+    
+    Following the implementations on IMAP and Sieve, implement STARTTLS
+    also for SMTP: A new TLS socket is built on the already open socket
+    which performs all TLS related actions. The SMTP client then
+    only has to talk on the TLS socket.
+    
+    Note that after issuing STARTTLS command, we have to re-request the
+    supported server capabilities (i.e. send EHLO again and parse the
+    server response), because the announced AUTH mechanism may change.
+    
+    Fixes #31
+
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit ec32774cc5555f4b6f9005ade081fc02d9a88764
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sat May 9 19:32:28 2020 +0200
+
+    feat(smtp): Support smtps
+    
+    Implement support for SMTPS. Remove some unused initialization
+    functions and add one expecting NSURL. From this url we can extract
+    the scheme: smtp:// or smtps://, whereas the former is unencrypted SMTP
+    and the latter refers to smtp in SSL/TLS wrapper mode (usually port 465).
+    
+    As with IMAPS and STARTTLS for sieve, openssl or GnuTLS need to be present
+    for this to work.
+    
+    Fixes #31
+
+M	sope-mime/NGMail/NGSmtpClient.h
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit ec7ecb52d4b2c432320703a6892b04382824a45f
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri May 1 14:52:43 2020 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 0a5bb5e3ea69ebeae41ee89dd8cd91205ee96fa8
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Apr 29 12:48:22 2020 -0400
+
+    fix(core): escape quotes before sending SQL queries
+    
+    Add accessors for new "formatted" variable
+
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EOQualifier.h
+
+commit 567bd0bdb3b2856dc74f58be35fa504b26b9617c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Apr 27 17:15:54 2020 -0400
+
+    fix(core): escape quotes before sending SQL queries
+    
+    Fixes #5010
+
+M	sope-core/EOControl/EOKeyValueQualifier.m
+M	sope-core/EOControl/EOQualifier.h
+
+commit 7aa37c3fdea1a9937c3002c26071eecfbe063c1e
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Apr 20 10:06:45 2020 -0400
+
+    fix(core): don't try to close a null file descriptor
+
+M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
+
+commit e42d8ea87119ab74dd2d92ff428209ba1b36fd7c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Dec 17 15:09:55 2019 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit c9712eb71a743b5b8a15dfb4023de20e053518ac
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Dec 17 15:06:30 2019 -0500
+
+    fix(sieve): parse code from Sieve response
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 2e63326871c41fd63b60a26eaa3f4d4bcd2a5684
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Nov 7 13:28:40 2019 -0500
+
+    chore(core): use a bool instead of stupid string
+
+M	sope-mime/NGImap4/NGSieveClient.m
+
+commit 460cf44aebdd6c70194ab615b53da212a6103633
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Oct 31 13:27:47 2019 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit dd8c873b0dafc2f3011b718e0e88a5b3b9853eec
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Oct 30 13:35:16 2019 -0400
+
+    (fix) ensure the From header is always the first one
+
+M	sope-mime/NGMime/NGMimePartGenerator.m
+
+commit 921d4e07819b467e160d7c388ca6cb8a8ea1f7fb
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Oct 24 10:48:48 2019 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit f567f984bf1c9f2cad86a3f66667f5ad8b796760
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 13 10:42:13 2019 -0400
+
+    (fix) don't trim illegal characters (fixes #4806)
+
+M	sope-mime/NGMail/NSData+MimeQP.m
+
+commit 4c02b000d1bfaf1b706ceaf5b22492794a0c3a78
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Sep 4 13:42:10 2019 -0400
+
+    (fix) cleaned the IMAP separator mess
+
+M	sope-mime/NGImap4/NGImap4Connection.h
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit ffd38bc3b56d0eaa0135881a2acc34b8bf9d5b0a
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Jul 19 13:35:15 2019 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 44539feee74e3f7f76ca7061c31ae3fac4f00c78
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jul 8 10:39:49 2019 -0400
+
+    (fix) be more permissive about broken state
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit d7d5679d23f8f833aba226cb536495f2e6233eea
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 10 13:37:11 2019 -0400
+
+    (fix) check if fd has any pending read
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit d5043f35c2101cdee793fa4631e0304221b02a57
+Author: Janne Heß <janne@hess.ooo>
+Date:   Mon Jun 10 00:56:06 2019 +0200
+
+    configure: Harmonize help and implementation
+
+M	configure
+
+commit b8a712d0558b28f1d52340a554cf0e0997f50412
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jun 4 11:44:31 2019 -0400
+
+    (fix) re-enabled poll() and added isAlive for SSL sockets
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 2c53f8800bd62b7fc824405b7e7bec0e3007e49b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 3 16:05:50 2019 -0400
+
+    Reverted the old select code for now
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 0d2ea932359ce016c2481358a37f9a082263a5b9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 30 13:38:26 2019 -0400
+
+    (fix) proper error message
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 65ae507ac33a47943bd419ee099931b24fe420d4
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 30 13:34:38 2019 -0400
+
+    (fix) improve polling code
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 1b754c106c47bd171a1dcd7f87d0193d9cf80150
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 23 12:48:51 2019 -0400
+
+    (fix) use poll instead of select to avoid stack smashing with over 538 processes
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 5ea4be632df98679f6f254867c078cca2d2a29b4
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 23 10:57:30 2019 -0400
+
+    (fix) improving buffer sizing to avoid overruns
+
+M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
+
+commit bf0441560db807ee2216e66cd0d06c8b785fb570
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu May 23 10:56:25 2019 -0400
+
+    (fix) improve logging
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 8cf45c4d6fa114bc5d7ffa9bb8776de6389472d7
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon May 13 14:35:54 2019 -0400
+
+    (fix) improved debugging
+
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit cbb62fb10bf298f082937008575027c9207a59c2
+Author: Cycylno <3764524+Cycylno@users.noreply.github.com>
+Date:   Sat Mar 30 09:54:32 2019 +0800
+
+    Add zh-cn and zh-tw to language list.
+    
+    Fixes the error in SOGo, sogod : [ERROR] [we-rm] did not find locale for language: Chinese.
+
+M	sope-appserver/NGObjWeb/Languages.plist
+
+commit 0b8813c3d13d5bf99e3fa719eaf4af97599b4307
+Author: Yavor Doganov <yavor@gnu.org>
+Date:   Wed Feb 27 15:00:24 2019 +0100
+
+    Treat va_list as a struct for sh4, like on alpha and arm*
+
+M	sope-gdl1/GDLAccess/EOSQLQualifier.m
+M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
+
+commit f9d2aa0d838a7d209bc18f0a51977416ff556312
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Feb 21 09:47:54 2019 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 2ca5842d863fd9f25593c6b608f5a1954f79d345
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Feb 14 14:15:22 2019 -0500
+
+    (fix) safety check to avoid exception
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit f5487e92a33bbae961c7bce15c4204904af26225
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jan 9 09:29:34 2019 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 39a84e811cfdd1aa246386a6f38b4f2e2ff68c2e
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Dec 14 11:15:26 2018 -0500
+
+    (fix) added EAS fix for MobileIron MDM
+
+M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit ed132260a6f33da61b905507685e645453737563
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Oct 17 11:20:42 2018 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 0aa1ddb95534bf85dba8c733835418d2ce2039ad
+Author: DJ Lucas <dj@lucasit.com>
+Date:   Sat Oct 13 23:47:18 2018 -0500
+
+    Don't use SSL_library_init() and friends for OpenSSL 1.1.0.
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit 7440b66c054e67049969767084f7feb244b83224
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Sat Sep 22 10:27:26 2018 -0400
+
+    Revert "(fix) remove un-needed library link"
+    
+    This reverts commit 834f8c735dab3ab4008170ae7c72f61e7c30548e.
+
+M	sope-gdl1/Oracle8/GNUmakefile
+
+commit 31762856c94aa40bbbc7c759528cbf085c4516db
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 21 12:45:40 2018 -0400
+
+    (fix) avoid trying to reconnect, the check for OCI_ATTR_SERVER_STATUS is always bogus
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit a08001b0379f9d1d4be8afb46fd7e0c2f339201b
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 21 11:18:17 2018 -0400
+
+    (fix) force reading data in UTF-16
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit 834f8c735dab3ab4008170ae7c72f61e7c30548e
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Sep 21 10:24:25 2018 -0400
+
+    (fix) remove un-needed library link
+
+M	sope-gdl1/Oracle8/GNUmakefile
+
+commit 23c7f81c125a82c3a2f56da686d171f971527c16
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Thu Sep 20 09:15:22 2018 -0400
+
+    Use the non-deprecated function
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit 471bfae774b32a266a1bf5f144426007c07c3f3f
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Sep 4 15:04:36 2018 -0400
+
+    (fix) added more logging
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+M	sope-gdl1/Oracle8/OracleAdaptorChannelController.m
+
+commit 654ba58f2fedd1d1fb233b35b3a7dea4d1733d1c
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Aug 28 06:50:29 2018 -0400
+
+    Fixed typo
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit e4bc04663ca0abf6e0a99d88ffacaf2b3b166949
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Aug 27 08:40:41 2018 -0400
+
+    (fix) improved debugging
+
+M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
+
+commit c5d07009b71660490d41349da539bb62f9e6156d
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Aug 24 09:03:11 2018 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit a6703c60f03af455e7e73a7f836eb3ed6be7f397
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Aug 21 12:38:58 2018 -0400
+
+    Add support for the HttpOnly flag on cookies
+
+M	sope-appserver/NGObjWeb/NGObjWeb/WOCookie.h
+M	sope-appserver/NGObjWeb/WOCookie.m
+
+commit 3c4d515e036fc387240b6d1757031937cfd666b9
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Aug 13 08:14:12 2018 -0400
+
+    (fix) enable Oracle OCI support for RHELv7
+
+M	packaging/rhel/sope.spec
+
+commit 794ec4a87ec5d8b45eca73306d4d2bbcc0de93cb
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Jul 10 09:55:20 2018 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit a8523275c860bca39c5d37fe238ac5d35ecc7316
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Jun 27 09:42:49 2018 -0400
+
+    Removed noise
+
+M	sope-core/NGStreams/NGByteBuffer.m
+
+commit 2f26952009f622f97a43921a6cfdafb79b8f46f6
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Jun 11 10:55:16 2018 -0400
+
+    (fix) better error-handling on SSL sockets
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit 275a75b28e304568e0b9ff1582f149e8b8ca73b3
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon May 7 16:13:51 2018 -0400
+
+    Fix sorting of array of arrays
+    
+    We now handle empty arrays.
+
+M	sope-core/EOControl/EOSortOrdering.m
+
+commit 2d38fbe94b515ddf22aad3dca49f5e542188b749
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Mon Mar 19 13:42:38 2018 -0400
+
+    (fix) improve LDAP logging
+
+M	sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m
+
+commit 72ed256b2b2fdee432c1b3e4a4aae1b54e9dd935
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Mar 14 11:47:58 2018 -0400
+
+    (fix) properly handle wide chars
+
+M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
+
+commit 4786b5faf535b2144fa552adc77fcfb64f9d3515
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Mar 14 09:17:55 2018 -0400
+
+    (fix) improve LDAP error logging
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+M	sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m
+
+commit 597265a11da87e9580586ea43c9e35a4342762f6
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Mar 13 18:59:08 2018 -0400
+
+    (fix) improve LDAP error output
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit 8f48ab7f5d96c615dfac910be0ef4e01e8629321
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Wed Mar 7 11:21:58 2018 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit 0f5d66fabe9232ef0f03f15670103a69ffede35e
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Feb 6 15:31:45 2018 -0500
+
+    Fix parsing of quota root in IMAP server response
+    
+    Fixes #4382
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit d76498eb6581413cb4c6264dfbba1a92cfcab28e
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jan 24 16:01:05 2018 -0500
+
+    Allow comparison of arrays
+
+M	sope-core/EOControl/EOSortOrdering.m
+
+commit edc566a2d9df26b623c70d2848e82771ce4e7329
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Tue Jan 23 10:32:28 2018 -0500
+
+    (fix) also set the bodyId in fake bodyInfo
+
+M	sope-mime/NGMime/NGMimeBodyPart.m
+
+commit 6d0a70d6988bcbd6782f81d58df77fe444d74c67
+Author: Ludovic Marcotte <lmarcotte@inverse.ca>
+Date:   Fri Jan 12 15:37:38 2018 -0500
+
+    (fix) added missing commits for S/MIME support
+
+M	sope-mime/NGMail/NGMailBase64Encoding.m
+M	sope-mime/NGMime/NGMimeBodyPart.h
+M	sope-mime/NGMime/NGMimeBodyPart.m
+
+commit 43e4fe5115d28e1a2cdfc0100659ab378e40ec30
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Oct 18 11:14:48 2017 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 45db3976d3f4790337e3e8bfb149f053e88174f9
 Author: Ivan Zakharyaschev <imz@altlinux.org>
 Date:   Mon Oct 9 18:15:35 2017 +0300
@@ -706,6 +1763,43 @@ Date:   Mon Dec 14 10:22:56 2015 -0500
     (fix) don't consider MobileIron Email+ as DAV client
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
+
+commit 54840e7cc3581bbf6aff747a3daf677eacbc469c
+Author: Andrey Cherepanov <cas@altlinux.org>
+Date:   Thu Nov 19 18:45:55 2015 +0300
+
+    Link libSBJson with BASE_LIBS to prevent undefined symbols
+    
+    Because there is no GNUmakefile.preamble for sope-json/SBJson/Classes
+    libSBJson is not linked with BASE_LIBS (libgnustep-base an so on).
+    Our build system checks for undefined symbols in libraries and found
+    in libSBJson.so.2.3.1:
+    
+    Verifying ELF objects in /usr/src/tmp/sope-buildroot (arch=normal,fhs=normal,lfs=relaxed,lint=relaxed,rpath=normal,stack=normal,textrel=normal,unresolved=normal)
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSMutableArray
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSDictionary
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSError
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSObject
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSAssertionHandler
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSString
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSArray
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSNull
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSNumber
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSMutableDictionary
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSMutableString
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSDecimalNumber
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_class_name_NSMutableCharacterSet
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: NSLocalizedDescriptionKey
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: NSUnderlyingErrorKey
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: objc_slot_lookup_super
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: __objc_exec_class
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: NSLog
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: objc_lookup_class
+    verify-elf: ERROR: ./usr/lib64/libSBJson.so.2.3.1: undefined symbol: objc_msgSend
+    
+    This patch allows libSBJson with BASE_LIBS.
+
+M	sope-json/SBJson/Classes/GNUmakefile
 
 commit 7380c8869e9eddc5487b85dcab1928775e2e8a1d
 Author: Francis Lachapelle <flachapelle@inverse.ca>
@@ -4213,78 +5307,42 @@ Date:   Thu Aug 2 18:45:21 2012 +0000
     Monotone-Date: 2012-08-02T18:45:21
     Monotone-Branch: ca.inverse.sope
 
-D	debian/500mod_ngobjweb.info
-D	debian/changelog
-D	debian/compat
-D	debian/control.in
-D	debian/copyright
-D	debian/libapache-mod-ngobjweb.dirs
-D	debian/libapache-mod-ngobjweb.install
-D	debian/libapache-mod-ngobjweb.postinst
-D	debian/libapache-mod-ngobjweb.postrm
-D	debian/libapache-mod-ngobjweb.prerm
-D	debian/libapache2-mod-ngobjweb.dirs
-D	debian/libapache2-mod-ngobjweb.install
-D	debian/libapache2-mod-ngobjweb.postinst
-D	debian/libapache2-mod-ngobjweb.prerm
-D	debian/libsbjson2.3-dev.install
-D	debian/libsbjson2.3.install
-D	debian/libsope-appserver_SOPEVER_-dev.install
-D	debian/libsope-appserver_SOPEVER_.install
-D	debian/libsope-core_SOPEVER_-dev.install
-D	debian/libsope-core_SOPEVER_.install
-D	debian/libsope-gdl1-_SOPEVER_-dev.install
-D	debian/libsope-gdl1-_SOPEVER_.install
-D	debian/libsope-ldap_SOPEVER_-dev.install
-D	debian/libsope-ldap_SOPEVER_.install
-D	debian/libsope-mime_SOPEVER_-dev.install
-D	debian/libsope-mime_SOPEVER_.install
-D	debian/libsope-xml_SOPEVER_-dev.install
-D	debian/libsope-xml_SOPEVER_.install
-D	debian/ngobjweb.load
-D	debian/rules
-D	debian/sope_SOPEVER_-appserver.install
-D	debian/sope_SOPEVER_-appserver.links
-D	debian/sope_SOPEVER_-gdl1-mysql.install
-D	debian/sope_SOPEVER_-gdl1-postgresql.install
-D	debian/sope_SOPEVER_-libxmlsaxdriver.install
-D	debian/sope_SOPEVER_-stxsaxdriver.install
-A	packaging/debian/500mod_ngobjweb.info
-A	packaging/debian/changelog
-A	packaging/debian/compat
-A	packaging/debian/control.in
-A	packaging/debian/copyright
-A	packaging/debian/libapache-mod-ngobjweb.dirs
-A	packaging/debian/libapache-mod-ngobjweb.install
-A	packaging/debian/libapache-mod-ngobjweb.postinst
-A	packaging/debian/libapache-mod-ngobjweb.postrm
-A	packaging/debian/libapache-mod-ngobjweb.prerm
-A	packaging/debian/libapache2-mod-ngobjweb.dirs
-A	packaging/debian/libapache2-mod-ngobjweb.install
-A	packaging/debian/libapache2-mod-ngobjweb.postinst
-A	packaging/debian/libapache2-mod-ngobjweb.prerm
-A	packaging/debian/libsbjson2.3-dev.install
-A	packaging/debian/libsbjson2.3.install
-A	packaging/debian/libsope-appserver_SOPEVER_-dev.install
-A	packaging/debian/libsope-appserver_SOPEVER_.install
-A	packaging/debian/libsope-core_SOPEVER_-dev.install
-A	packaging/debian/libsope-core_SOPEVER_.install
-A	packaging/debian/libsope-gdl1-_SOPEVER_-dev.install
-A	packaging/debian/libsope-gdl1-_SOPEVER_.install
-A	packaging/debian/libsope-ldap_SOPEVER_-dev.install
-A	packaging/debian/libsope-ldap_SOPEVER_.install
-A	packaging/debian/libsope-mime_SOPEVER_-dev.install
-A	packaging/debian/libsope-mime_SOPEVER_.install
-A	packaging/debian/libsope-xml_SOPEVER_-dev.install
-A	packaging/debian/libsope-xml_SOPEVER_.install
-A	packaging/debian/ngobjweb.load
-A	packaging/debian/rules
-A	packaging/debian/sope_SOPEVER_-appserver.install
-A	packaging/debian/sope_SOPEVER_-appserver.links
-A	packaging/debian/sope_SOPEVER_-gdl1-mysql.install
-A	packaging/debian/sope_SOPEVER_-gdl1-postgresql.install
-A	packaging/debian/sope_SOPEVER_-libxmlsaxdriver.install
-A	packaging/debian/sope_SOPEVER_-stxsaxdriver.install
+R100	debian/500mod_ngobjweb.info	packaging/debian/500mod_ngobjweb.info
+R100	debian/changelog	packaging/debian/changelog
+R100	debian/compat	packaging/debian/compat
+R100	debian/control.in	packaging/debian/control.in
+R100	debian/copyright	packaging/debian/copyright
+R100	debian/libapache-mod-ngobjweb.dirs	packaging/debian/libapache-mod-ngobjweb.dirs
+R100	debian/libapache-mod-ngobjweb.install	packaging/debian/libapache-mod-ngobjweb.install
+R100	debian/libapache-mod-ngobjweb.postinst	packaging/debian/libapache-mod-ngobjweb.postinst
+R100	debian/libapache-mod-ngobjweb.postrm	packaging/debian/libapache-mod-ngobjweb.postrm
+R100	debian/libapache-mod-ngobjweb.prerm	packaging/debian/libapache-mod-ngobjweb.prerm
+R100	debian/libapache2-mod-ngobjweb.dirs	packaging/debian/libapache2-mod-ngobjweb.dirs
+R100	debian/libapache2-mod-ngobjweb.install	packaging/debian/libapache2-mod-ngobjweb.install
+R100	debian/libapache2-mod-ngobjweb.postinst	packaging/debian/libapache2-mod-ngobjweb.postinst
+R100	debian/libapache2-mod-ngobjweb.prerm	packaging/debian/libapache2-mod-ngobjweb.prerm
+R100	debian/libsbjson2.3-dev.install	packaging/debian/libsbjson2.3-dev.install
+R100	debian/libsbjson2.3.install	packaging/debian/libsbjson2.3.install
+R100	debian/libsope-appserver_SOPEVER_-dev.install	packaging/debian/libsope-appserver_SOPEVER_-dev.install
+R100	debian/libsope-appserver_SOPEVER_.install	packaging/debian/libsope-appserver_SOPEVER_.install
+R100	debian/libsope-core_SOPEVER_-dev.install	packaging/debian/libsope-core_SOPEVER_-dev.install
+R100	debian/libsope-core_SOPEVER_.install	packaging/debian/libsope-core_SOPEVER_.install
+R100	debian/libsope-gdl1-_SOPEVER_-dev.install	packaging/debian/libsope-gdl1-_SOPEVER_-dev.install
+R100	debian/libsope-gdl1-_SOPEVER_.install	packaging/debian/libsope-gdl1-_SOPEVER_.install
+R100	debian/libsope-ldap_SOPEVER_-dev.install	packaging/debian/libsope-ldap_SOPEVER_-dev.install
+R100	debian/libsope-ldap_SOPEVER_.install	packaging/debian/libsope-ldap_SOPEVER_.install
+R100	debian/libsope-mime_SOPEVER_-dev.install	packaging/debian/libsope-mime_SOPEVER_-dev.install
+R100	debian/libsope-mime_SOPEVER_.install	packaging/debian/libsope-mime_SOPEVER_.install
+R100	debian/libsope-xml_SOPEVER_-dev.install	packaging/debian/libsope-xml_SOPEVER_-dev.install
+R100	debian/libsope-xml_SOPEVER_.install	packaging/debian/libsope-xml_SOPEVER_.install
+R100	debian/ngobjweb.load	packaging/debian/ngobjweb.load
+R100	debian/rules	packaging/debian/rules
+R100	debian/sope_SOPEVER_-appserver.install	packaging/debian/sope_SOPEVER_-appserver.install
+R100	debian/sope_SOPEVER_-appserver.links	packaging/debian/sope_SOPEVER_-appserver.links
+R100	debian/sope_SOPEVER_-gdl1-mysql.install	packaging/debian/sope_SOPEVER_-gdl1-mysql.install
+R100	debian/sope_SOPEVER_-gdl1-postgresql.install	packaging/debian/sope_SOPEVER_-gdl1-postgresql.install
+R100	debian/sope_SOPEVER_-libxmlsaxdriver.install	packaging/debian/sope_SOPEVER_-libxmlsaxdriver.install
+R100	debian/sope_SOPEVER_-stxsaxdriver.install	packaging/debian/sope_SOPEVER_-stxsaxdriver.install
 A	packaging/rhel/sope.spec
 
 commit 15c5f44267d15f04ed7547b30d468732a61b9d94

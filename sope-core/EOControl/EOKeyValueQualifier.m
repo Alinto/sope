@@ -43,9 +43,10 @@ static EONull *null = nil;
   operatorSelector:(SEL)_selector
   value:(id)_value
 {
-  self->key      = [_key   copyWithZone:NULL];
-  self->value    = [_value retain];
-  self->operator = _selector;
+  self->key       = [_key   copyWithZone:NULL];
+  self->value     = [_value retain];
+  self->operator  = _selector;
+  self->formatted = NO;
   
   if (_selector == NULL) {
     NSLog(@"WARNING(%s): got no selector for kv qualifier (key=%@)", 
@@ -75,6 +76,22 @@ static EONull *null = nil;
 }
 - (id)value {
   return self->value;
+}
+
+- (void) setValue: (id) _value
+{
+  [self->value release];
+  self->value = [_value retain];
+}
+
+- (BOOL) formatted
+{
+  return self->formatted;
+}
+
+- (void) setFormatted: (BOOL) _formatted
+{
+  self->formatted = _formatted;
 }
 
 /* bindings */

@@ -102,7 +102,7 @@
     NGActiveSocket *s1 = nil;
     NGActiveSocket *s2 = nil;
     NGLocalSocketAddress *address;
-    
+
     s1 = [[self alloc] _initWithDomain:domain descriptor:fds[0]];
     s2 = [[self alloc] _initWithDomain:domain descriptor:fds[1]];
     s1 = [s1 autorelease];
@@ -173,7 +173,7 @@
 
 + (id)socketConnectedToAddress:(id<NGSocketAddress>)_address {
   volatile id sock = [[self alloc] initWithDomain:[_address domain]];
-  
+
   if (sock != nil) {
     if (![sock connectToAddress:_address]) {
       NSException *e;
@@ -208,13 +208,13 @@
 
 - (id)_initWithDescriptor:(int)_fd
   localAddress:(id<NGSocketAddress>)_local
-  remoteAddress:(id<NGSocketAddress>)_remote 
+  remoteAddress:(id<NGSocketAddress>)_remote
 {
   if ((self = [self _initWithDomain:[_local domain] descriptor:_fd])) {
     ASSIGN(self->localAddress,  _local);
     ASSIGN(self->remoteAddress, _remote);
     self->mode = NGStreamMode_readWrite;
-    
+
 #if !defined(WIN32) || defined(__CYGWIN32__)
     NGAddDescriptorFlag(self->fd, O_NONBLOCK);
 #endif
@@ -236,10 +236,10 @@
 - (void)raise:(NSString *)_name reason:(NSString *)_reason {
   Class clazz;
   NSException *e;
-  
+
   clazz = NSClassFromString(_name);
   NSAssert1(clazz, @"did not find exception class %@", _name);
-  
+
   e = [clazz alloc];
   if (_reason) {
     if ([clazz instancesRespondToSelector:@selector(initWithReason:socket:)])
@@ -283,14 +283,14 @@
   //   NGCouldNotConnectException  if the the connect() call fails
 
   [self resetLastException];
-  
+
   if (connect(fd,
               (struct sockaddr *)[_address internalAddressRepresentation],
               [_address addressRepresentationSize]) != 0) {
     NSString *reason   = nil;
     int      errorCode = errno;
     NSException *e;
-    
+
     switch (errorCode) {
       case EACCES:
         reason = @"search permission denied for element in path";
@@ -373,7 +373,7 @@
         NSLog(@"WARNING(%s): connect() call failed, but errno=0",
               __PRETTY_FUNCTION__);
 #endif
-        
+
       default:
         reason = [NSString stringWithCString:strerror(errorCode)];
         break;
@@ -381,14 +381,14 @@
 
     reason = [NSString stringWithFormat:@"Could not connect to address %@: %@",
                          _address, reason];
-    
+
     e = [[NGCouldNotConnectException alloc]
               initWithReason:reason socket:self address:_address];
     [self setLastException:e];
     [e release];
     return NO;
   }
-  
+
   /* connect was successful */
 
   ASSIGN(self->remoteAddress, _address);
@@ -407,7 +407,7 @@
   //   NGSocketAlreadyConnectedException  if the socket is already connected
   //   NGInvalidSocketDomainException     if the remote domain != local domain
   //   NGCouldNotCreateSocketException    if the socket creation failed
-  
+
   if ([self isConnected]) {
     [[[NGSocketAlreadyConnectedException alloc]
               initWithReason:@"Could not connected: socket is already connected"
@@ -424,7 +424,7 @@
       return NO;
     }
   }
-  
+
   // connect, remote-address is non-nil if this returns
   if (![self primaryConnectToAddress:_address])
     return NO;
@@ -445,20 +445,24 @@
       if (shutdown(self->fd, SHUT_RDWR) == 0)
         self->mode = NGStreamMode_undefined;
     }
-    
+
+    if (self->flags.closeOnFree) {
 #if defined(WIN32) && !defined(__CYGWIN32__)
-    if (closesocket(self->fd) == 0) {
+      if (closesocket(self->fd) == 0) {
 #else
-    if (close(self->fd) == 0) {
+      if (close(self->fd) == 0) {
 #endif
+        self->fd = NGInvalidSocketDescriptor;
+      }
+      else {
+        NSLog(@"ERROR(%s): close of socket %@ (fd=%i) alive=%s failed: %s",
+              __PRETTY_FUNCTION__,
+              self, self->fd, [self isAlive] ? "YES" : "NO", strerror(errno));
+      }
+    } else {
       self->fd = NGInvalidSocketDescriptor;
     }
-    else {
-      NSLog(@"ERROR(%s): close of socket %@ (fd=%i) alive=%s failed: %s",
-            __PRETTY_FUNCTION__,
-            self, self->fd, [self isAlive] ? "YES" : "NO", strerror(errno));
-    }
-    
+
     ASSIGN(self->remoteAddress, (id)nil);
   }
   return YES;
@@ -467,16 +471,18 @@
 - (BOOL)shutdownSendChannel {
   if (NGCanWriteInStreamMode(self->mode)) {
     shutdown(self->fd, SHUT_WR);
-    
+
     if (self->mode == NGStreamMode_readWrite)
       self->mode = NGStreamMode_readOnly;
     else {
       self->mode = NGStreamMode_undefined;
+      if (self->flags.closeOnFree) {
 #if defined(WIN32) && !defined(__CYGWIN32__)
-      closesocket(self->fd);
+        closesocket(self->fd);
 #else
-      close(self->fd);
+        close(self->fd);
 #endif
+      }
       self->fd = NGInvalidSocketDescriptor;
     }
   }
@@ -485,16 +491,18 @@
 - (BOOL)shutdownReceiveChannel {
   if (NGCanReadInStreamMode(self->mode)) {
     shutdown(self->fd, SHUT_RD);
-    
+
     if (self->mode == NGStreamMode_readWrite)
       self->mode = NGStreamMode_writeOnly;
     else {
       self->mode = NGStreamMode_undefined;
+      if (self->flags.closeOnFree) {
 #if defined(WIN32) && !defined(__CYGWIN32__)
-      closesocket(self->fd);
+        closesocket(self->fd);
 #else
-      close(self->fd);
+        close(self->fd);
 #endif
+      }
       self->fd = NGInvalidSocketDescriptor;
     }
   }
@@ -588,16 +596,16 @@
           reason:@"socket is not connected"];
     return NGStreamError;
   }
-  
+
   if (!NGCanReadInStreamMode(self->mode)) {
     [self raise:@"NGWriteOnlyStreamException"];
     return NGStreamError;
   }
-  
+
 #if !defined(WIN32) && !defined(__CYGWIN32__)
   while (ioctl(self->fd, FIONREAD, &len) == -1) {
     if (errno == EINTR) continue;
-    
+
     [self raise:@"NGSocketException"
           reason:@"could not get number of available bytes"];
     return NGStreamError;
@@ -612,8 +620,35 @@
 - (BOOL)isAlive {
   if (self->fd == NGInvalidSocketDescriptor)
     return NO;
-  
+
   /* poll socket for input */
+#if 1
+  {
+    struct pollfd pfd;
+    int ret, timeout = 5;
+    pfd.fd = self->fd;
+    pfd.events = POLLIN;
+
+    while (YES) {
+      ret = poll(&pfd, 1, timeout);
+      if (ret >= 0)
+        break;
+
+      switch (errno) {
+      case EINTR:
+        continue;
+      default:
+        NSLog(@"socket poll() failed: %s", strerror(errno));
+        goto notAlive;
+      }
+    }
+
+    /* no input is pending, connection is alive */
+    if (!(pfd.revents & POLLIN)) {
+      return YES;
+    }
+  }
+#else
   {
     struct timeval to;
     fd_set readMask;
@@ -622,15 +657,13 @@
       FD_ZERO(&readMask);
       FD_SET(self->fd, &readMask);
       to.tv_sec = to.tv_usec = 0;
-      
+
       if (select(self->fd + 1, &readMask, NULL, NULL, &to) >= 0)
         break;
 
       switch (errno) {
         case EINTR:
           continue;
-        case EBADF:
-          goto notAlive;
         default:
           NSLog(@"socket select() failed: %s", strerror(errno));
           goto notAlive;
@@ -638,9 +671,10 @@
     }
 
     /* no input is pending, connection is alive */
-    if (!FD_ISSET(self->fd, &readMask)) 
+    if (!FD_ISSET(self->fd, &readMask))
       return YES;
   }
+#endif
 
   /*
     input is pending: If select() indicates pending input, but ioctl()
@@ -658,7 +692,7 @@
     }
     if (len > 0) return YES;
   }
-  
+
  notAlive:
   /* valid descriptor, but not alive .. so we close the socket */
 #if defined(WIN32) && !defined(__CYGWIN32__)
@@ -667,10 +701,10 @@
   close(self->fd);
 #endif
   self->fd = NGInvalidSocketDescriptor;
-  RELEASE(self->remoteAddress); self->remoteAddress = nil;
+  DESTROY(self->remoteAddress);
   return NO;
 }
- 
+
 // ******************** NGStream ********************
 
 - (unsigned)readBytes:(void *)_buf count:(unsigned)_len {
@@ -680,24 +714,24 @@
   //   NGEndOfStreamException        when the end of the stream is reached
   //   NGWriteOnlyStreamException    when the receive channel was shutdown
   NSException *e = nil;
-  
+
   if (self->fd == NGInvalidSocketDescriptor) {
     [self raise:@"NGSocketException" reason:@"NGActiveSocket is not open"];
     return NGStreamError;
   }
-  
+
   // need to check whether socket is connected
   if (self->remoteAddress == nil) {
     [self raise:@"NGSocketNotConnectedException"
           reason:@"socket is not connected"];
     return NGStreamError;
   }
-  
+
   if (!NGCanReadInStreamMode(self->mode)) {
     [self raise:@"NGWriteOnlyStreamException"];
     return NGStreamError;
   }
-  
+
   if (_len == 0) return 0;
 
   {
@@ -712,7 +746,7 @@
     }
     else if (readResult < 0) {
       int errorCode = WSAGetLastError();
-      
+
       switch (errorCode) {
         case WSAECONNRESET:
           e = [[NGSocketConnectionResetException alloc] initWithStream:self];
@@ -723,7 +757,7 @@
 
         case WSAEWOULDBLOCK:
           NSLog(@"WARNING: descriptor would block ..");
-          
+
         default:
           e = [[NGStreamReadErrorException alloc]
                     initWithStream:self errorCode:errorCode];
@@ -740,7 +774,7 @@
 
     NSAssert(_buf,     @"invalid buffer");
     NSAssert1(_len > 0, @"invalid length: %i", _len);
-   retry: 
+   retry:
     readResult = NGDescriptorRecv(self->fd, _buf, _len, 0,
                                   (self->receiveTimeout == 0.0)
                                   ? -1 // block until data
@@ -752,7 +786,7 @@
             self->fd, _buf, _len, 0);
     }
 #endif
-    
+
     if (readResult == 0) {
       [self _shutdownDuringOperation];
       [self raise:@"NGSocketShutdownDuringReadException"];
@@ -775,7 +809,7 @@
 #endif
           goto retry;
           break;
-          
+
         case ECONNRESET:
           e = [[NGSocketConnectionResetException alloc] initWithStream:self];
           break;
@@ -785,7 +819,7 @@
 
         case EWOULDBLOCK:
           NSLog(@"WARNING: descriptor would block ..");
-          
+
         default:
           e = [[NGStreamReadErrorException alloc]
                     initWithStream:self errorCode:errorCode];
@@ -810,7 +844,7 @@
     int writeResult;
 
     writeResult = send(self->fd, _buf, _len, 0);
-    
+
     if (writeResult == 0) {
       [self _shutdownDuringOperation];
       [self raise:@"NGSocketShutdownDuringWriteException"];
@@ -818,7 +852,7 @@
     }
     else if (writeResult < 0) {
       int errorCode = WSAGetLastError();
-      
+
       switch (errorCode) {
         case WSAECONNRESET:
           e = [[NGSocketConnectionResetException alloc] initWithStream:self];
@@ -844,7 +878,7 @@
     return writeResult;
 }
 
-#else 
+#else
 
 - (unsigned)_unixWriteBytes:(const void *)_buf count:(unsigned)_len {
    int writeResult;
@@ -855,10 +889,10 @@
    timeOut = (self->sendTimeout == 0.0)
      ? -1 // block until data
      : (int)(self->sendTimeout * 1000.0);
-   
- wretry: 
+
+ wretry:
    writeResult = NGDescriptorSend(self->fd, _buf, _len, MSG_NOSIGNAL, timeOut);
-   
+
    if (writeResult == 0) {
      [self _shutdownDuringOperation];
      [self raise:@"NGSocketShutdownDuringWriteException"];
@@ -870,7 +904,7 @@
    }
    else if (writeResult < 0) {
      int errorCode = errno;
-     
+
      switch (errorCode) {
        case 0:
 #if DEBUG
@@ -891,22 +925,22 @@
          sleep(retryCount);
          goto wretry;
          break;
-         
+
        case ECONNRESET:
          [self raise:@"NGSocketConnectionResetException"];
          return NGStreamError;
        case ETIMEDOUT:
          [self raise:@"NGSocketTimedOutException"];
          return NGStreamError;
-         
+
        case EPIPE:
          [self _shutdownDuringOperation];
          [self raise:@"NGSocketShutdownDuringWriteException"];
          return NGStreamError;
-         
+
        case EWOULDBLOCK:
          NSLog(@"WARNING: descriptor would block ..");
-         
+
        default: {
          NSException *e;
          e = [[NGStreamWriteErrorException alloc]
@@ -920,14 +954,14 @@
    return writeResult;
 }
 
-#endif 
- 
+#endif
+
 - (unsigned)writeBytes:(const void *)_buf count:(unsigned)_len {
   // throws
   //   NGStreamWriteErrorException   when the write call failed
   //   NGSocketNotConnectedException when the socket is not connected
   //   NGReadOnlyStreamException     when the send channel was shutdown
-  
+
   if (_len == NGStreamError) {
     NSLog(@"ERROR(%s): got NGStreamError passed in as length ...",
           __PRETTY_FUNCTION__);
@@ -939,26 +973,26 @@
           __PRETTY_FUNCTION__, (_len / 1024 / 1024), _len, NGStreamError);
   }
 #endif
-  
+
   if (self->fd == NGInvalidSocketDescriptor) {
     [self raise:@"NGSocketException" reason:@"NGActiveSocket is not open"];
     return NGStreamError;
   }
-  
+
   // need to check whether socket is connected
   if (self->remoteAddress == nil) {
     [self raise:@"NGSocketNotConnectedException"
           reason:@"socket is not connected"];
     return NGStreamError;
   }
-  
+
   if (!NGCanWriteInStreamMode(self->mode)) {
     [self raise:@"NGReadOnlyStreamException"];
     return NGStreamError;
   }
-  
+
   //NSLog(@"writeBytes: count:%u", _len);
-  
+
 #if defined(WIN32) && !defined(__CYGWIN32__)
   return [self _winWriteBytes:_buf count:_len];
 #else
@@ -969,11 +1003,11 @@
 - (BOOL)flush {
   return YES;
 }
-#if 0 
+#if 0
 - (BOOL)close {
   return [self shutdown];
 }
-#endif 
+#endif
 
 - (NGStreamMode)mode {
   return self->mode;
@@ -991,17 +1025,17 @@
   *(&toBeRead)   = _len;
   *(&readResult) = 0;
   *(&pos)        = _buf;
-  
+
   while (YES) {
     *(&readResult) =
       readBytes(self, @selector(readBytes:count:), pos, toBeRead);
-    
+
     if (readResult == NGStreamError) {
       NSException *localException;
       NSData *data;
-      
+
       data = [NSData dataWithBytes:_buf length:(_len - toBeRead)];
-      
+
       localException = [[NGEndOfStreamException alloc]
                           initWithStream:self
                           readCount:(_len - toBeRead)
@@ -1010,14 +1044,14 @@
       [self setLastException:localException];
       RELEASE(localException);
     }
-    
+
     NSAssert(readResult != 0, @"ERROR: readBytes may not return '0' ..");
 
     if (readResult == toBeRead) {
       // all bytes were read successfully, return
       break;
     }
-    
+
     if (readResult < 1) {
       [NSException raise:NSInternalInconsistencyException
                    format:@"readBytes:count: returned a value < 1"];
@@ -1026,7 +1060,7 @@
     toBeRead -= readResult;
     pos      += readResult;
   }
-  
+
   return YES;
 }
 
@@ -1048,11 +1082,11 @@
     lastClass = *(Class *)self;
     writeBytes = (void *)[self methodForSelector:@selector(writeBytes:count:)];
   }
-  
+
   while (YES) {
     writeResult =
       (int)writeBytes(self, @selector(writeBytes:count:), pos, toBeWritten);
-    
+
     if (writeResult == NGStreamError) {
       /* remember number of written bytes ??? */
       return NO;
@@ -1068,7 +1102,7 @@
                      self];
       return NO;
     }
-    
+
     toBeWritten -= writeResult;
     pos         += writeResult;
   }
@@ -1091,18 +1125,18 @@
 - (int)readByte { // java semantics (-1 returned on EOF)
   int result;
   unsigned char c;
-  
+
   result = [self readBytes:&c count:sizeof(unsigned char)];
-  
+
   if (result != 1) {
     static Class EOFExcClass = Nil;
 
     if (EOFExcClass == Nil)
       EOFExcClass = [NGEndOfStreamException class];
-    
+
     if ([[self lastException] isKindOfClass:EOFExcClass])
       [self resetLastException];
-    
+
     return -1;
   }
   return (int)c;
@@ -1112,7 +1146,7 @@
 
 - (NSString *)modeDescription {
   NSString *result = @"<unknown>";
-  
+
   switch ([self mode]) {
     case NGStreamMode_undefined: result = @"<closed>"; break;
     case NGStreamMode_readOnly:  result = @"r";        break;
@@ -1135,9 +1169,9 @@
   if ([self isConnected])
     [d appendFormat:@" connectedTo=%@", [self remoteAddress]];
 
-  if ([self sendTimeout] != 0.0) 
+  if ([self sendTimeout] != 0.0)
     [d appendFormat:@" send-timeout=%4.3fs", [self sendTimeout]];
-  if ([self receiveTimeout] != 0.0) 
+  if ([self receiveTimeout] != 0.0)
     [d appendFormat:@" receive-timeout=%4.3fs", [self receiveTimeout]];
 
   [d appendString:@">"];

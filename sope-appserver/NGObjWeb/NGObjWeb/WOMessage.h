@@ -25,6 +25,7 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSString.h>
 #include <NGStreams/NGStreamProtocols.h>
+#import <Foundation/NSFileHandle.h>
 
 /*
   WOMessage
@@ -41,6 +42,7 @@
 @private
   NSString         *version;
   NSMutableData    *content;
+  NSFileHandle     *contentFileHandle;
   NGMutableHashMap *header;
   NSDictionary     *userInfo;
   NSMutableArray   *cookies;
@@ -101,6 +103,11 @@
 - (NSStringEncoding)contentEncoding;
 + (void)setDefaultEncoding:(NSStringEncoding)_encoding;
 + (NSStringEncoding)defaultEncoding;
+
+/* file content */
+
+- (void)setContentFile:(NSFileHandle *) handle;
+- (NSFileHandle *)contentFile;
 
 /* structured content */
 

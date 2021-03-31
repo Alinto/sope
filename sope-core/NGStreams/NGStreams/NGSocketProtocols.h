@@ -34,6 +34,8 @@
 - (void *)internalAddressRepresentation;
 - (int)addressRepresentationSize;
 - (id)domain; // (a NGSocketDomain)
+- (BOOL) isLocalhost;
+- (NSString *)hostName;
 
 // needed by socket address factory:
 - (id)initWithDomain:(id)_domain

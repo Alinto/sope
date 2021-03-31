@@ -336,6 +336,7 @@
            || strstr(ua, "CalendarStore")
            || strstr(ua, "CoreDAV/")
            || ((strstr(ua, "AddressBook") || strstr(ua, "Calendar")) && strstr(ua, "Mac OS X"))
+           || (strstr(ua, "AddressBookCore") && strstr(ua, "macOS"))
 	   ) {
     /* Apple MacOSX 10.2.1 / iCal 1.0 DAV Access Framework */
     self->browser = WEUA_AppleDAVAccess;
@@ -344,7 +345,7 @@
     /* some iCal 1.x DAV Access Framework, report as Apple DAV access */
     self->browser = WEUA_AppleDAVAccess;
   }
-  else if ((strstr(ua, "dataaccessd/") || strstr(ua, "iOS")) && !strstr(ua, "iOS-Email+") && !strstr(ua, "Outlook-iOS")) {
+  else if ((strstr(ua, "dataaccessd/") || strstr(ua, "iOS")) && !strstr(ua, "iOS-Email+") && !strstr(ua, "Outlook-iOS") && !strstr(ua, "SecuredMIiOSEmail")) {
     /* iOS 5.x (iPhone/iPad) DAV Access Framework, report as Apple DAV access */
     self->browser = WEUA_AppleDAVAccess;
   }

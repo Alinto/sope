@@ -363,6 +363,7 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
     e = [[NGImap4ParserException alloc]
 	  initWithFormat:@"Could not open temporary file %@", path];
     [self setLastException:[e autorelease]];
+    [self logWithFormat: [e reason]];
     return nil;
   }
       
@@ -1222,7 +1223,15 @@ _purifyQuotedString(NSMutableString *quotedString) {
   }
     
   parse = [NSMutableDictionary dictionaryWithCapacity:3];
-  qRoot = _parseUntil2(self, ' ', '\n');
+  if (_la(self, 0) == '"') {
+    NSMutableString *str;
+    _consume(self, 1);
+    str = [NSMutableString stringWithFormat: @"\"%@\"", _parseUntil(self, '"')];
+    qRoot = str;
+  }
+  else {
+    qRoot = _parseUntil2(self, ' ', '\n');
+  }
 
   if (_la(self, 0) == ' ') {
       _consume(self, 1);
@@ -1583,9 +1592,9 @@ _purifyQuotedString(NSMutableString *quotedString) {
      eg: 
        ("Helge Hess" NIL "helge.hess" "opengroupware.org")
   */
-  NGImap4EnvelopeAddress *address;
+  NGImap4EnvelopeAddress *address = nil;
   NSString *pname, *route, *mailbox, *host;
-  
+
   if (_la(self, 0) != '(') {
     if (_matchesString(self, "NIL")) {
       _consume(self, 3);
@@ -1614,10 +1623,12 @@ _purifyQuotedString(NSMutableString *quotedString) {
   }
   else
     _consume(self, 1);
-  
-  address = [[NGImap4EnvelopeAddress alloc] initWithPersonalName:pname
-					    sourceRoute:route mailbox:mailbox
-					    host:host];
+
+  if ([pname isNotNull] || [route isNotNull] || [mailbox isNotNull] || [host isNotNull])
+    address = [[NGImap4EnvelopeAddress alloc] initWithPersonalName:pname
+                                                       sourceRoute:route
+                                                           mailbox:mailbox
+                                                              host:host];
 
   return address;
 }
@@ -1644,7 +1655,7 @@ _purifyQuotedString(NSMutableString *quotedString) {
     NGImap4EnvelopeAddress *address;
     
     if ((address = [self _parseEnvelopeAddressStructure]) == nil) {
-      _consume(self, 1);
+      [self _consumeOptionalSpace];
       continue; // TODO: should we stop parsing?
     }
     if (![address isNotNull])
@@ -1970,12 +1981,20 @@ static BOOL _parseOkSieveResponse(NGImap4ResponseParser *self,
 static BOOL _parseNoSieveResponse(NGImap4ResponseParser *self,
                                   NGMutableHashMap *result_) 
 {
-  NSString *data;
-  
+  NSString *code, *data;
+
   if (!((_la(self, 0)=='N') && (_la(self, 1)=='O') && (_la(self, 2)==' ')))
     return NO;
 
   _consume(self, 3);
+
+  if (_la(self, 0) == '(')
+    {
+      _consume(self, 1);
+      code = _parseUntil(self, ')');
+      if (_la(self, 0) == ' ') _consume(self, 1);
+      if (code) [result_ addObject:code forKey:@"code"];
+    }
 
   data = _parseContentSieveResponse(self);
 

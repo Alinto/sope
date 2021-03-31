@@ -8,8 +8,8 @@
 
    map ISO codes to OpenStep names.
 */";
-  "aa"          = "Afar";
-  "ab"          = "Abkhazian";
+  "aa"    = "Afar";
+  "ab"    = "Abkhazian";
   "af"    = "Afrikaans";
   "am"    = "Amharic";
   "ar"    = "Arabic";
@@ -173,5 +173,7 @@
   "yo"    = "Yoruba";
   "za"    = "Zhuang";
   "zh"    = "Chinese";
+  "zh-cn" = "ChineseChina";
+  "zh-tw" = "ChineseTaiwan";
   "zu"    = "Zulu";
 }

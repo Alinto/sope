@@ -28,6 +28,8 @@
 
 @interface NGImap4Connection (private)
 
+- (NSArray *) _flattenedArray: (NSArray *) _array;
+
 - (void) _mergeDict: (NSDictionary *) source
                into: (NSMutableDictionary *) target;
 
@@ -43,7 +45,6 @@ static BOOL     debugCache      = NO;
 static BOOL     debugKeys       = NO;
 static BOOL     alwaysSelect    = NO;
 static BOOL     onlyFetchInbox  = NO;
-static NSString *imap4Separator = nil;
 
 + (void)initialize {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -56,11 +57,6 @@ static NSString *imap4Separator = nil;
   //if (debugOn)    NSLog(@"Note: NGImap4ConnectionDebugEnabled is enabled!");
   //if (alwaysSelect)
   //  NSLog(@"WARNING: 'NGImap4ConnectionAlwaysSelect' enabled (slow down)");
-
-  imap4Separator = 
-    [[ud stringForKey:@"NGImap4ConnectionStringSeparator"] copy];
-  if (![imap4Separator isNotEmpty])
-    imap4Separator = @"/";
   //NSLog(@"Note(NGImap4Connection): using '%@' as the IMAP4 folder separator.", 
   //	imap4Separator);
 }
@@ -74,11 +70,9 @@ static NSString *imap4Separator = nil;
   if ((self = [super init])) {
     self->client   = [_client retain];
     self->password = [_pwd    copy];
-
     self->creationTime = [[NSDate alloc] init];
     
     // TODO: retrieve from IMAP4 instead of using a default
-    self->separator = [imap4Separator copy];
     self->subfolders = [NSMutableDictionary new];
     self->enabledExtensions = [NSMutableDictionary new];
   }
@@ -89,7 +83,6 @@ static NSString *imap4Separator = nil;
 }
 
 - (void)dealloc {
-  [self->separator       release];
   [self->urlToRights     release];
   [self->cachedUIDs      release];
   [self->uidFolderURL    release];
@@ -352,10 +345,6 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   return names;
 }
 
-- (NSString *)imap4Separator {
-  return self->separator;
-}
-
 - (NSString *)imap4FolderNameForURL:(NSURL *)_url removeFileName:(BOOL)_delfn {
   /* a bit hackish, but should be OK */
   NSString *folderName;
@@ -374,11 +363,11 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   
   if (_delfn) folderName = [folderName stringByDeletingLastPathComponent];
   
-  if ([[self imap4Separator] isEqualToString:@"/"])
+  if ([[[self client] delimiter] isEqualToString:@"/"])
     return folderName;
   
   names = [folderName componentsSeparatedByString: @"/"];
-  return [names componentsJoinedByString:[self imap4Separator]];
+  return [names componentsJoinedByString: [[self client] delimiter]];
 }
 - (NSString *)imap4FolderNameForURL:(NSURL *)_url {
   return [self imap4FolderNameForURL:_url removeFileName:NO];
@@ -592,12 +581,12 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
                        sortOrdering:(id)_so
 {
   NSDictionary *result;
-  NSArray *uids;
-  NSMutableArray *sortedThreads;
+  NSArray *uids, *threadUids;
+  NSMutableArray *sortedThreads, *sortedThread;
   NSMutableDictionary *threads;
   NSEnumerator *threadsEnum, *threadEnum;
   id rootThread, thread;
-  unsigned int i;
+  unsigned int i, j;
 
   // Check cache
   
@@ -634,7 +623,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
           [threads setObject: rootThread forKey: thread];
         }
 
-      // 2. Sort the threads based on an IMAP SORT
+      // 2. Flatten and sort the threads based on an IMAP SORT
 
       uids = [self fetchUIDsInURL: _url qualifier: _qualifier sortOrdering: _so];
       sortedThreads = [NSMutableArray arrayWithCapacity: [threads count]];
@@ -642,7 +631,24 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
         {
           thread = [threads objectForKey: [uids objectAtIndex: i]];
           if (thread)
-            [sortedThreads addObject: thread];
+            {
+              if ([thread count] > 1)
+                {
+                  threadUids = [self _flattenedArray: thread];
+                  sortedThread = [NSMutableArray arrayWithCapacity: [threadUids count]];
+                  for (j = 0; j < [uids count] && [sortedThread count] < [threadUids count]; j++)
+                    {
+                      if ([threadUids containsObject: [uids objectAtIndex: j]])
+                        [sortedThread addObject: [uids objectAtIndex: j]];
+                    }
+                  [sortedThreads addObject: sortedThread];
+                }
+              else
+                {
+                  // No sorting required
+                  [sortedThreads addObject: thread];
+                }
+            }
         }
 
       uids = sortedThreads;
@@ -664,6 +670,23 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 
   [self cacheUIDs:uids forURL:_url qualifier:_qualifier sortOrdering:_so];
   return uids;
+}
+
+- (NSArray *) _flattenedArray: (NSArray *) _array
+{
+  NSMutableArray *flattenedArray;
+  NSEnumerator *objects;
+  id currentObject;
+
+  flattenedArray = [NSMutableArray array];
+  objects = [_array objectEnumerator];
+  while ((currentObject = [objects nextObject]))
+    if ([currentObject isKindOfClass: [NSArray class]])
+      [flattenedArray addObjectsFromArray: [self _flattenedArray: (NSArray *)currentObject]];
+    else
+      [flattenedArray addObject: currentObject];
+
+  return flattenedArray;
 }
 
 - (NSArray *) fetchUIDs: (NSArray *) _uids
@@ -1075,7 +1098,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   
   newPath = [self imap4FolderNameForURL:_url];
   if ([newPath length])
-    newPath = [newPath stringByAppendingString:[self imap4Separator]];
+    newPath = [newPath stringByAppendingString: [[self client] delimiter]];
   newPath = [newPath stringByAppendingString:_mailbox];
   
   /* create */

@@ -116,10 +116,7 @@ static void _killWinSock(void) {
 }
 
 - (void)gcFinalize {
-  if (self->flags.closeOnFree)
-    [self close];
-  else
-    NSLog(@"WARNING: socket was not 'closeOnFree' !");
+  [self close];
 }
 
 - (void)dealloc {
@@ -137,14 +134,14 @@ static void _killWinSock(void) {
 - (BOOL)primaryCreateSocket {
   // throws
   //   NGCouldNotCreateSocketException  if the socket creation failed
-  
+
   fd = socket([domain socketDomain], [self socketType], [domain protocol]);
 
 #if defined(WIN32) && !defined(__CYGWIN32__)
   if (fd == SOCKET_ERROR) { // error
     int e = WSAGetLastError();
     NSString *reason = nil;
-    
+
     switch (e) {
       case WSAEACCES:
         reason = @"Not allowed to create socket of this type";
@@ -165,7 +162,7 @@ static void _killWinSock(void) {
   if (fd == -1) { // error
     int      e       = errno;
     NSString *reason = nil;
-    
+
     switch (e) {
       case EACCES:
         reason = @"Not allowed to create socket of this type";
@@ -195,7 +192,7 @@ static void _killWinSock(void) {
 }
 
 - (BOOL)close {
-  if (self->fd != NGInvalidSocketDescriptor) {
+  if (self->fd != NGInvalidSocketDescriptor && self->flags.closeOnFree) {
 #if DEBUG && 0
     NSLog(@"%@: closing socket fd %i", self, self->fd);
 #endif
@@ -214,6 +211,7 @@ static void _killWinSock(void) {
     else
       self->flags.isBound = NO;
   }
+  self->fd = NGInvalidSocketDescriptor;
   return YES;
 }
 
@@ -232,7 +230,7 @@ static void _killWinSock(void) {
   // THREAD
   ASSIGN(self->lastException,(id)nil);
 }
- 
+
 - (BOOL)primaryBindToAddress:(id<NGSocketAddress>)_address {
   // throws
   //   NGCouldNotBindSocketException    if the bind failed
@@ -246,7 +244,7 @@ static void _killWinSock(void) {
     NSString *reason = nil;
 #if defined(WIN32) && !defined(__CYGWIN32__)
     int errorCode = WSAGetLastError();
-#else    
+#else
     int errorCode = errno;
 #endif
 
@@ -258,14 +256,14 @@ static void _killWinSock(void) {
 
     reason = [NSString stringWithFormat:@"Could not bind to address %@: %@",
                          _address, reason];
-    
+
     [[[NGCouldNotBindSocketException alloc]
               initWithReason:reason socket:self address:_address] raise];
     return NO;
   }
 
   /* bind was successful */
-  
+
   ASSIGN(self->localAddress, _address);
   self->flags.isBound = YES;
   return YES;
@@ -287,21 +285,21 @@ static void _killWinSock(void) {
     /* let kernel bind address */
     return [self kernelBoundAddress];
   }
-  
+
   // perform bind
   if (![self primaryBindToAddress:_address])
     return NO;
-  
+
   /* check for wildcard port */
-  
+
   if ([_address respondsToSelector:@selector(isWildcardAddress)]) {
     if ([(id)_address isWildcardAddress]) {
       SockAddrLenType len = [[_address domain] addressRepresentationSize];
       char data[len]; // struct sockaddr
-      
+
       if (getsockname(fd, (void *)&data, &len) == 0) { // function is MT-safe
         id<NGSocketAddress> boundAddr;
-        
+
         boundAddr = [[_address domain]
                                addressWithRepresentation:&(data[0])
                                size:len];
@@ -311,7 +309,7 @@ static void _killWinSock(void) {
               inet_ntoa( (((struct sockaddr_in *)(&data[0]))->sin_addr)),
               ntohs(((struct sockaddr_in *)(&data[0]))->sin_port),
               boundAddr);
-#endif   
+#endif
         ASSIGN(self->localAddress, boundAddr);
       }
       else {
@@ -326,19 +324,19 @@ static void _killWinSock(void) {
 - (BOOL)kernelBoundAddress {
   SockAddrLenType len = [[self domain] addressRepresentationSize];
   char   data[len];
-  
+
   // check whether socket is already bound (either manually or by the kernel)
   if (flags.isBound) {
     [[[NGSocketAlreadyBoundException alloc]
               initWithReason:@"socket is already bound." socket:self] raise];
     return NO;
   }
-  
+
 #if 0
   NSLog(@"socket: kernel bound address of %i in domain %@",
         self->fd, [self domain]);
 #endif
-  
+
   if (getsockname(self->fd, (void *)&data, &len) != 0) { // function is MT-safe
     // could not get local socket name, THROW
     [[[NGSocketException alloc]
@@ -378,15 +376,17 @@ static void _killWinSock(void) {
 
 #if defined(WIN32) && !defined(__CYGWIN32__)
 - (SOCKET)fileDescriptor {
-#else 
+#else
 - (int)fileDescriptor {
 #endif
   return self->fd;
 }
 
-- (void)setFileDescriptor: (int) theFd
+- (void)setFileDescriptor: (int) theFd closeWhenDone: (BOOL) closeFd
 {
+  [self close];
   self->fd = theFd;
+  self->flags.closeOnFree = closeFd;
 }
 
 - (void)resetFileHandle { // called by the NSFileHandle on dealloc
@@ -432,7 +432,7 @@ static void _killWinSock(void) {
    }
 #else
     int e = errno;
-    
+
     switch (e) {
       case EBADF:
         reason = @"Could not set socket option, invalid file descriptor";
@@ -467,14 +467,14 @@ static void _killWinSock(void) {
 {
   int rc;
   socklen_t tlen;
-  
+
   rc = getsockopt(fd, _level, _option, _value, &tlen);
   if (_len) *_len = tlen;
   if (rc != 0) {
     NSString *reason = nil;
 #if defined(WIN32) && !defined(__CYGWIN32__)
     int e = WSAGetLastError();
-    
+
     switch (e) {
       case WSAEBADF:
         reason = @"Could not get socket option, invalid file descriptor";
@@ -500,7 +500,7 @@ static void _killWinSock(void) {
     }
 #else
     int e = errno;
-    
+
     switch (e) {
       case EBADF:
         reason = @"Could not get socket option, invalid file descriptor";
@@ -667,7 +667,7 @@ int NGPollDescriptor(SOCKET _fd, short _events, int _timeout) {
 
 // ******************** Flags ********************
 
-#if 0 
+#if 0
 int NGGetDescriptorFlags(int _fd) {
   int val;
 
@@ -685,7 +685,7 @@ void NGAddDescriptorFlag (int _fd, int _flag) {
   int val = NGGetDescriptorFlags(_fd);
   NGSetDescriptorFlags(_fd, val | _flag);
 }
-#endif 
+#endif
 
 // ******************** NonBlocking IO ************
 
@@ -710,7 +710,7 @@ int NGDescriptorRecv(SOCKET _fd, char *_buf, int _len, int _flags, int _timeout)
         errorCode = errno;
 
         // retry if interrupted
-        if ((errorCode != EINTR) && (errorCode != EAGAIN)) 
+        if ((errorCode != EINTR) && (errorCode != EAGAIN))
           break;
       }
     }

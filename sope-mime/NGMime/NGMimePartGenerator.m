@@ -237,12 +237,21 @@ static BOOL       debugOn = NO;
   NSString         *headerFieldName  = nil;
   NGMutableHashMap *addHeaders       = nil;
   NSMutableData    *data;
-  
+  NSMutableArray *allHeaderFieldNames;
+  NSUInteger index;
+
   data = (self->useMimeData)
     ? [[[NGMimeJoinedData alloc] init] autorelease]
     : [NSMutableData dataWithCapacity:2048];
+
+  // We make sure the From header is always the first one.
+  // That can cause issues otherwise in Outlook's Sent items
+  allHeaderFieldNames = [NSMutableArray arrayWithArray: [[self->part headerFieldNames] allObjects]];
+  index = [allHeaderFieldNames indexOfObject: @"from"];
+  if (index != NSNotFound)
+    [allHeaderFieldNames exchangeObjectAtIndex: 0 withObjectAtIndex: index];
   
-  headerFieldNames = [self->part headerFieldNames];
+  headerFieldNames = [allHeaderFieldNames objectEnumerator];
   addHeaders       = [_additionalHeaders mutableCopy];
   
   while ((headerFieldName = [headerFieldNames nextObject]) != nil) {

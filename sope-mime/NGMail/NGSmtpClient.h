@@ -45,8 +45,10 @@ typedef enum {
 {
 @protected
   id<NGActiveSocket>       socket;
+  id<NGActiveSocket>       previous_socket;
   NGBufferedStream         *connection;
   id<NGExtendedTextStream> text;
+  id<NGSocketAddress>      address;
 
   NGSmtpState state;
   BOOL isDebuggingEnabled;
@@ -57,11 +59,18 @@ typedef enum {
     BOOL hasHelp:1;
     BOOL hasPipelining;
     BOOL hasAuthPlain;
+    BOOL hasStartTls;
   } extensions;
+
+  BOOL useStartTLS;
+  BOOL useSSL;
+  int tlsVerifyMode;
 }
 
-+ (id)smtpClient;
-- (id)initWithSocket:(id<NGActiveSocket>)_socket; // designated initializer
++ (id)clientWithURL:(NSURL *)_url;
+
+- (id)initWithURL:(NSURL *)_url;
+- (id)initWithAddress:(id<NGSocketAddress>)_address;
 
 // accessors
 
@@ -72,10 +81,10 @@ typedef enum {
 - (BOOL)isDebuggingEnabled;
 
 // connection
-
-- (BOOL)connectToHost:(id)_host;
-- (BOOL)connectToAddress:(id<NGSocketAddress>)_address;
+- (BOOL)connect;
 - (void)disconnect;
+- (BOOL)useSSL;
+- (BOOL)useStartTLS;
 
 // authentication
 - (BOOL) plainAuthenticateUser: (NSString *) username

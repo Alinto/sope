@@ -51,6 +51,7 @@
 - (unsigned int)virtualMemorySize;
 - (unsigned int)residentSetSize;
 - (unsigned int)residentSetSizeLimit;
+- (unsigned int)fileDescriptorCount;
 
 @end
 

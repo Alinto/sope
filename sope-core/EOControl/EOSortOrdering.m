@@ -219,6 +219,34 @@ static int keyOrderComparator(id o1, id o2, EOSortOrderingContext *context) {
   [self sortUsingFunction:(void *)keyOrderComparator context:&ctx];
 }
 
+/*"
+  Limit the comparison the first object of the compared arrays
+"*/
+static Class ArrayClass = Nil;
+
+- (int)compareCaseInsensitiveDescending:(id)_object {
+  int result;
+  if (ArrayClass == Nil) ArrayClass = [NSArray class];
+
+  if (_object == self) return NSOrderedSame;
+  if ([_object isKindOfClass: ArrayClass])
+    {
+      if ([_object count] && [_object objectAtIndex: 0])
+        result = [[self objectAtIndex: 0] compareCaseInsensitiveAscending: [_object objectAtIndex: 0]];
+      else
+        result = NSOrderedDescending;
+    }
+  else
+    result = [[self objectAtIndex: 0] compareCaseInsensitiveAscending: _object];
+
+  if (result == NSOrderedAscending)
+    return NSOrderedDescending;
+  else if (result == NSOrderedDescending)
+    return NSOrderedAscending;
+  else
+    return NSOrderedSame;
+}
+
 @end /* NSMutableArray(EOSortOrdering) */
 
 @implementation EONull(EOSortOrdering)

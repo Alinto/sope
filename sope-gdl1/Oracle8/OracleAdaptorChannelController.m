@@ -244,6 +244,7 @@ static BOOL debugOn = NO;
 	      	{
 		  [self _cleanup: columns  statement: current_stm  channel: theChannel];
 		  checkerr([theChannel errorHandle], status);
+                  NSLog(@"OracleAdaptorChannelController - Unable to alloc descriptor");
 		  return NO;
 		}
 	      
@@ -270,6 +271,7 @@ static BOOL debugOn = NO;
 	{
 	  [self _cleanup: columns  statement: current_stm  channel: theChannel];
 	  checkerr([theChannel errorHandle], status);
+          NSLog(@"OracleAdaptorChannelController - Unable to bind variable");
 	  return NO;
 	}
     }

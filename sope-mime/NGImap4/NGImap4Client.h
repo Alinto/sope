@@ -29,14 +29,14 @@
 
 /*
   NGImap4Client
-  
+
   An IMAP4 client object. This object is a thin wrapper around the TCP/IP
   socket (id<NGActiveSocket> object) connecting to the IMAP4 server.
-  
+
   While it is pretty near to the IMAP4 raw protocol, it already does some
   normalization of responses. We might want to have something which is even
   lower level in the future.
-  
+
   Responses are send to all registered response receivers.
   TODO: explain notification system.
 */
@@ -61,7 +61,7 @@ typedef enum {
   id<NGSocketAddress>       address;
   NGImap4ResponseParser     *parser;
   NGImap4ResponseNormalizer *normer;
-  NSMutableArray            *responseReceiver;  
+  NSMutableArray            *responseReceiver;
 
   BOOL	   loggedIn;
   BOOL     useAuthenticate;
@@ -81,6 +81,7 @@ typedef enum {
   BOOL useSSL;
   BOOL useTLS;
   BOOL useUTF8;
+  int tlsVerifyMode;
 
   NGImap4Context *context; /* not retained, used to store exceptions */
   EOGlobalID *serverGID;
@@ -126,7 +127,7 @@ typedef enum {
                      mechanism:(NSString *)_mech;
 - (NSDictionary *)logout;
 - (NSDictionary *)noop;
-  
+
 - (NSDictionary *)capability;
 - (NSDictionary *)enable:(NSArray *)_extensions;
 
@@ -145,7 +146,7 @@ typedef enum {
 - (NSDictionary *)subscribe:(NSString *)_name;
 - (NSDictionary *)unsubscribe:(NSString *)_name;
 - (NSDictionary *)expunge;
-  
+
 - (NSDictionary *)sort:(id)_sortOrderings qualifier:(EOQualifier *)_qual
   encoding:(NSString *)_encoding;
 - (NSDictionary *)fetchUids:(NSArray *)_uids parts:(NSArray *)_parts;

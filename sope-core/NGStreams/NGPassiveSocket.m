@@ -126,7 +126,7 @@
     case WSAEOPNOTSUPP:
       return @"socket does not support listen";
     case WSAEINTR:
-      return @"interrupted by signal";
+      return @"interrupted by signal";
     case WSAEMFILE:
       return @"descriptor table is full";
 

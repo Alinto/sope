@@ -81,7 +81,7 @@
     int closeOnFree:1; // close socket on collect/dealloc ?
     int isBound:1;     // was a bind issued (either by the kernel or explicitly)
   } flags;
-  
+
   NSException *lastException;
 }
 
@@ -120,7 +120,7 @@
 - (SOCKET)fileDescriptor;
 #else
 - (int)fileDescriptor;
-- (void)setFileDescriptor: (int) theFd;
+- (void)setFileDescriptor: (int) theFd closeWhenDone: (BOOL) closeFd;
 #endif
 
 // ************************* options *************************

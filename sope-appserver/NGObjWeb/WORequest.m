@@ -63,11 +63,11 @@ static BOOL debugOn = NO;
 
   if (isInitialized) return;
   isInitialized = YES;
-  
+
   debugOn = [WOApplication isDebuggingEnabled];
-    
+
   /* apply defaults on some globals ... */
-    
+
   apath = [ud stringForKey:@"WORequestValueSessionID"];
   if ([apath isNotEmpty])
     WORequestValueSessionID = [apath copy];
@@ -77,9 +77,9 @@ static BOOL debugOn = NO;
   apath = [ud stringForKey:@"WONoSelectionString"];
   if ([apath isNotEmpty])
     WONoSelectionString = [apath copy];
-  
+
   /* load language mappings */
-    
+
   apath = [WOApplication findNGObjWebResource:@"Languages" ofType:@"plist"];
   if (apath == nil) {
     [self errorWithFormat:@"cannot find Languages.plist resource "
@@ -88,10 +88,10 @@ static BOOL debugOn = NO;
   }
   else
     langMap = [NSDictionary dictionaryWithContentsOfFile:apath];
-  
+
   if (langMap != nil) {
     NSDictionary *defs;
-    
+
     defs = [NSDictionary dictionaryWithObject:langMap
 			 forKey:@"WOBrowserLanguageMappings"];
     [ud registerDefaults:defs];
@@ -105,7 +105,8 @@ static BOOL debugOn = NO;
 - (NSString *) _sanitize: (NSString *) s
 {
   unsigned int i_len, o_len, i;
-  const char *i_buf, *start;
+  char *start;
+  const char *i_buf;
   char c, *o_buf;
 
   i_buf = [s cStringUsingEncoding: NSASCIIStringEncoding];
@@ -144,7 +145,7 @@ static BOOL debugOn = NO;
       i++;
     }
 
-  return [[NSString alloc] initWithCString:start length:(o_buf - start)];
+  return [[NSString alloc] initWithCStringNoCopy:start length:(o_buf - start) freeWhenDone:YES];
 }
 
 /* parse URI */
@@ -156,30 +157,30 @@ static BOOL debugOn = NO;
 
   // TBD: do not use cString ...
   uriLen = [self->_uri cStringLength];
-  
+
   uriBuf = uri = malloc(uriLen + 4 /* some extra safety ;-) */);
   [self->_uri getCString:uriBuf]; uriBuf[uriLen] = '\0';
-  
+
   /* determine adaptor prefix */
 
   if ((serverUrl = [self headerForKey:@"x-webobjects-adaptor-prefix"]) != nil)
     self->adaptorPrefix = [serverUrl copyWithZone:NULL];
-  
+
   if (self->adaptorPrefix == nil)
     self->adaptorPrefix = @"";
-  
+
   /* new parse */
-  
+
   if (uri != NULL) {
     const char *start = NULL;
-      
+
     /* skip adaptor prefix */
     if (self->adaptorPrefix)
       uri += [self->adaptorPrefix cStringLength];
     if (*uri == '\0') goto done;
 
     /* parse application name */
-      
+
     uri++; // skip '/'
     start = uri;
     while ((*uri != '\0') && (*uri != '/') && (*uri != '.'))
@@ -209,9 +210,9 @@ static BOOL debugOn = NO;
       goto done; // invalid state !
 
     if (*uri == '\0') goto done;
-    
+
     /* parse request handler key */
-    
+
     start = uri;
     while ((*uri != '\0') && (*uri != '/') && (*uri != '?'))
       uri++;
@@ -221,14 +222,14 @@ static BOOL debugOn = NO;
     if(*uri == '/'){
       uri++; // skip '/'
       /* parse request handler path */
-      
+
       start = uri;
       while (*uri != '\0' && (*uri != '?'))
         uri++;
       self->requestHandlerPath =
         [[NSString alloc] initWithCString:start length:(uri - start)];
     }
-    
+
     /* parsing done (found '\0') */
   done:
     ; // required for MacOSX-S
@@ -247,7 +248,7 @@ static BOOL debugOn = NO;
     self->_uri   = [self _sanitize: __uri];
     self->method = [_method copy];
     [self _parseURI];
-    
+
     /* WOMessage */
     [self setHTTPVersion:_version];
     [self setContent:_body];
@@ -309,21 +310,21 @@ static BOOL debugOn = NO;
   unsigned       clen;
   char           *cstrBuf;
   register char  *cstr;
-  
+
   clen   = [self->requestHandlerPath cStringLength];
   if (clen == 0)
     return nil;
-  
+
   cstrBuf = cstr = malloc(clen + 1);
   [self->requestHandlerPath getCString:cstrBuf]; cstrBuf[clen] = '\0';
-  
+
   do {
     NSString *component = nil;
     register char *tmp = cstr;
 
     while ((*tmp != '\0') && (*tmp != '?') && (*tmp != '/'))
       tmp++;
-    
+
     component = ((tmp - cstr) == 0)
       ? (id)@""
       : [[NSString alloc] initWithCString:cstr length:(tmp - cstr)];
@@ -421,12 +422,12 @@ static BOOL debugOn = NO;
 - (void)_parseQueryParameters:(NSString *)_s intoMap:(NGMutableHashMap *)_map {
   NSEnumerator *e;
   NSString *part;
-  
+
   e = [[_s componentsSeparatedByString:@"&"] objectEnumerator];
   while ((part = [e nextObject])) {
     NSRange  r;
     NSString *key, *value;
-	  
+
     r = [part rangeOfString:@"="];
     if (r.length == 0) {
       /* missing value of query parameter */
@@ -435,30 +436,30 @@ static BOOL debugOn = NO;
     }
     else {
       key   = [[part substringToIndex:r.location] stringByUnescapingURL];
-      value = [[part substringFromIndex:(r.location + r.length)] 
+      value = [[part substringFromIndex:(r.location + r.length)]
 		     stringByUnescapingURL];
     }
-    
+
     [self->formContent addObject:value forKey:key];
   }
 }
 
 - (NGHashMap *)_getFormParameters {
-  if (self->formContent != nil) 
+  if (self->formContent != nil)
     return self->formContent;
-  
+
   if (self->request != nil) {
     self->formContent = [[self->request formParameters] retain];
     return self->formContent;
   }
-  
+
   {
     /*
       TODO: add parsing of form values
-      
+
       contained in URL:
         a/blah?name=login&pwd=j
-      
+
       contained in body:
         Content-Type: application/x-www-form-urlencoded
         browserconfig=%7BisJavaScriptEnabled%3DYES%3B%7D&login=r&button=login
@@ -467,28 +468,28 @@ static BOOL debugOn = NO;
     NSString *query;
     NSString *ctype;
     BOOL     isMultiPartContent = NO, isFormContent = NO;
-    
+
     r = [self->_uri rangeOfString:@"?"];
     query = (r.length > 0)
       ? [self->_uri substringFromIndex:(r.location + r.length)]
       : (NSString *)nil;
-    
+
     if ((ctype = [self headerForKey:@"content-type"]) != nil) {
       isFormContent = [ctype hasPrefix:@"application/x-www-form-urlencoded"];
       if (!isFormContent)
         isMultiPartContent = [ctype hasPrefix:@"multipart/form-data"];
     }
-    
+
     if (query != nil || isFormContent || isMultiPartContent) {
       NSAutoreleasePool *pool;
-      
+
       pool = [[NSAutoreleasePool alloc] init];
       self->formContent = [[NGMutableHashMap alloc] init];
-      
+
       /* parse query string */
       if (query)
         [self _parseQueryParameters:query intoMap:self->formContent];
-      
+
       /* parse content (if form content) */
       if (isFormContent) {
         [self _parseQueryParameters:[self contentAsString]
@@ -497,7 +498,7 @@ static BOOL debugOn = NO;
       else if (isMultiPartContent) {
         [self errorWithFormat:@"missing NGHttpRequest, cannot parse multipart"];
       }
-      
+
       [pool release];
     }
     else
@@ -508,22 +509,22 @@ static BOOL debugOn = NO;
 
 - (NSArray *)formValueKeys {
   id paras = [self _getFormParameters];
-  
+
   if ([paras respondsToSelector:@selector(allKeys)])
     return [paras allKeys];
-  
+
   return nil;
 }
 
 - (NSString *)formValueForKey:(NSString *)_key {
   NSString *value;
   id paras;
-  
+
   value = nil;
   paras = [self _getFormParameters];
   if ([paras respondsToSelector:@selector(objectForKey:)])
     value = [(NSDictionary *)paras objectForKey:_key];
-  
+
   return value;
 }
 - (NSArray *)formValuesForKey:(NSString *)_key {
@@ -535,17 +536,17 @@ static BOOL debugOn = NO;
 
 - (NSDictionary *)formValues {
   id paras;
-  
+
   if ((paras = [self _getFormParameters]) == nil)
     return nil;
-  
+
   /* check class, could change with different HTTP adaptor */
-  
+
   if ([paras isKindOfClass:[NGHashMap class]])
     return [paras asDictionaryWithArraysForValues];
   if ([paras isKindOfClass:[NSDictionary class]])
     return paras;
-  
+
   [self errorWithFormat:@"(%s): don't know how to deal with form object: %@",
           paras];
   return nil;
@@ -556,26 +557,26 @@ static BOOL debugOn = NO;
 - (NSString *)languageForBrowserLanguageCode:(NSString *)_e {
   static NSDictionary *langMap = nil;
   NSString *le, *lang;
-  
+
   if (_e == nil) return nil;
-  
+
   if (langMap == nil) {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
+
     langMap = [[ud dictionaryForKey:@"WOBrowserLanguageMappings"] copy];
     if (langMap == nil) {
       [self warnWithFormat:@"did not find browser language mappings!"];
     }
   }
-  
+
   le = [_e lowercaseString];
-  
+
   lang = [langMap objectForKey:le];
   if (lang == nil && [le length] > 2) {
     /* process constructs like 'de-ch' */
     if ([le characterAtIndex:2] == '-') {
       NSString *ek;
-      
+
       ek = [le substringToIndex:2];
       lang = [langMap objectForKey:ek];
     }
@@ -589,7 +590,7 @@ static BOOL debugOn = NO;
     }
   }
   if (lang == nil && ![_e isEqualToString:@"*"]) {
-    [self debugWithFormat:@"did not find '%@' in map: %@", 
+    [self debugWithFormat:@"did not find '%@' in map: %@",
 	    _e, [[langMap allKeys] componentsJoinedByString:@", "]];
   }
   return lang;
@@ -603,14 +604,14 @@ static BOOL debugOn = NO;
   NSString *ua;
   NSRange  rng;
   NSString *tmp;
-  
+
   if ((ua = [self headerForKey:@"user-agent"]) == nil)
     return nil;
 
   rng = [ua rangeOfString:@"["];
   if (rng.length == 0)
     return nil;
-      
+
   tmp = [ua substringFromIndex:(rng.location + rng.length)];
   rng = [tmp rangeOfString:@"]"];
   if (rng.length > 0)
@@ -625,20 +626,20 @@ static BOOL debugOn = NO;
   NSEnumerator   *e;
   NSString       *language;
   NSString       *tmp;
-  
+
   if (!browserLanguages)
     {
       browserLanguages = [NSMutableArray new];
-  
+
       e = [[self headersForKey:@"accept-language"] objectEnumerator];
       while ((hheader = [e nextObject]) != nil) {
         NSEnumerator *le;
-    
+
         le = [[hheader componentsSeparatedByString:@","] objectEnumerator];
         while ((language = [le nextObject]) != nil) {
           NSString *tmp;
           NSRange  r;
-      
+
           /* split off the quality (eg 'en;0.96') */
           r = [language rangeOfString:@";"];
           if (r.length > 0)
@@ -647,28 +648,28 @@ static BOOL debugOn = NO;
 
           if ([language length] == 0)
             continue;
-      
+
           /* check in map */
           if ((tmp = [self languageForBrowserLanguageCode:language]))
             language = tmp;
-      
+
           if ([browserLanguages containsObject:language])
             continue;
-      
+
           [browserLanguages addObject:language];
         }
       }
-  
+
       if ((tmp = [self _languageFromUserAgent]))
         [browserLanguages addObject:tmp];
-  
+
       if (defLangs == nil) {
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         defLangs = [[ud arrayForKey:@"WODefaultLanguages"] copy];
       }
       [browserLanguages addObjectsFromArray:defLangs];
     }
-  
+
   //[self debugWithFormat:@"languages: %@", languages];
   return browserLanguages;
 }
@@ -679,22 +680,22 @@ static BOOL debugOn = NO;
   NSEnumerator   *ecookies;
   NSMutableArray *values;
   WOCookie       *cookie;
-  
+
   values  = [NSMutableArray arrayWithCapacity:8];
-  
+
   ecookies = [[self cookies] objectEnumerator];
   while ((cookie = [ecookies nextObject])) {
     if ([_key isEqualToString:[cookie name]])
       [values addObject:[cookie value]];
   }
-  
+
   return values;
 }
 
 - (NSString *)cookieValueForKey:(NSString *)_key {
   NSEnumerator *ecookies;
   WOCookie     *cookie;
-  
+
   ecookies = [[self cookies] objectEnumerator];
   while ((cookie = [ecookies nextObject])) {
     if ([_key isEqualToString:[cookie name]])
@@ -707,26 +708,26 @@ static BOOL debugOn = NO;
   NSEnumerator        *ecookies;
   NSMutableDictionary *values;
   WOCookie            *cookie;
-  
+
   values  = [NSMutableDictionary dictionaryWithCapacity:8];
-  
+
   ecookies = [[self cookies] objectEnumerator];
   while ((cookie = [ecookies nextObject])) {
     NSString       *name;
     NSMutableArray *vArray;
-    
+
     name   = [cookie name];
     vArray = [values objectForKey:name];
-    
+
     if (vArray == nil) {
       vArray = [[NSMutableArray alloc] initWithCapacity:8];
       [values setObject:vArray forKey:name];
       [vArray release];
     }
-    
+
     [vArray addObject:[cookie value]];
   }
-  
+
   return values;
 }
 
@@ -734,7 +735,7 @@ static BOOL debugOn = NO;
 
 - (NSString *)fragmentID {
   NSString *v;
-  
+
   v = [self formValueForKey:WORequestValueFragmentID];
   if (v == nil) return nil;
   v = [v stringByTrimmingWhiteSpaces];
@@ -751,7 +752,7 @@ static BOOL debugOn = NO;
   return debugOn;
 }
 - (NSString *)loggingPrefix {
-  return [NSString stringWithFormat:@"|Rq:%@ 0x%p|", 
+  return [NSString stringWithFormat:@"|Rq:%@ 0x%p|",
                      [self method], self];
 }
 

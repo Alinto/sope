@@ -382,6 +382,9 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 
   NSUInteger addrStart, addrEnd, commaPos;
 
+  if (!originalAddress)
+    return nil;
+
   whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
   addressList = [NSMutableArray arrayWithCapacity: 1];
   remainder = [NSMutableString stringWithString: originalAddress];

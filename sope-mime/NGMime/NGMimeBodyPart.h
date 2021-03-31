@@ -71,6 +71,8 @@
 - (NSDictionary *)headers;
 - (NSString *)headersAsString;
 
+- (NSDictionary *) bodyInfo;
+
 @end
 
 #endif /* __NGMime_NGMimeBodyPart_H__ */

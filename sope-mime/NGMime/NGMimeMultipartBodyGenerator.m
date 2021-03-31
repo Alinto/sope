@@ -206,7 +206,7 @@ static inline BOOL _isBoundaryInArray(NGMimeMultipartBodyGenerator *self,
   }
   [data appendBytes:"--" length:2];
   [data appendBytes:[_boundary cString] length:[_boundary length]];
-  [data appendBytes:"--\r\n" length:4];
+  [data appendBytes:"--" length:2];
   return data;
 }
 
