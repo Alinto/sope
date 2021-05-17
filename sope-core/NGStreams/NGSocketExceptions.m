@@ -38,14 +38,9 @@
                 reason:_reason
                 userInfo:nil];
   if (self) {
-    self->socket = [_socket retain];
+    self->socket = _socket;
   }
   return self;
-}
-
-- (void)dealloc {
-  [self->socket release];
-  [super dealloc];
 }
 
 - (id<NGSocket>)socket {
