@@ -1130,6 +1130,23 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   return nil;
 }
 
+- (NSException *) deleteMailbox: (NSString *)_path
+{
+  id result;
+
+  /* delete */
+
+  result = [[self client] delete: _path];
+  if (![[result valueForKey:@"result"] boolValue])
+    return [self errorForResult:result text:@"Failed to delete folder"];
+
+  [self flushFolderHierarchyCache];
+#if 0
+  [self debugWithFormat:@"delete mailbox %@: %@", _path, result];
+#endif
+  return nil;
+}
+
 - (NSException *)moveMailboxAtURL:(NSURL *)_srcurl toURL:(NSURL *)_desturl {
   NSString *srcname, *destname;
   id result;
@@ -1147,6 +1164,24 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 #if 0
   [self debugWithFormat:@"renamed mailbox %@: %@", _srcurl, result];
 #endif
+  return nil;
+}
+
+- (NSException *) moveMailbox: (NSString *)_srcname to:(NSString *)_destname
+{
+  id result;
+
+  /* rename */
+
+  result = [[self client] rename: _srcname to: _destname];
+  if (![[result valueForKey: @"result"] boolValue])
+    return [self errorForResult: result text:@"Failed to move folder"];
+
+  [self flushFolderHierarchyCache];
+#if 0
+  [self debugWithFormat:@"renamed mailbox %@: %@", _srcname, result];
+#endif
+
   return nil;
 }
 
