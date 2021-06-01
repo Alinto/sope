@@ -234,12 +234,16 @@
   if ((o = [self contentId]))
     [d setObject: o  forKey: @"bodyId"];
 
-  if ((o = [[self headerForKey: @"content-disposition"] filename]))
+  o = [self headerForKey: @"content-disposition"];
+  if ([o filename])
     {
-      NSDictionary *disposition, *parameterList;
+      NSDictionary *parameterList;
+      NSMutableDictionary *disposition;
 
-      parameterList = [NSDictionary dictionaryWithObject: o  forKey: @"filename"];
-      disposition = [NSDictionary dictionaryWithObject: parameterList  forKey: @"parameterList"];
+      parameterList = [NSDictionary dictionaryWithObject: [o filename] forKey: @"filename"];
+      disposition = [NSMutableDictionary dictionaryWithObject: parameterList  forKey: @"parameterList"];
+      if ([o type])
+        [disposition setObject: [o type] forKey: @"type"];
       [d setObject: disposition  forKey: @"disposition"];
     }
 

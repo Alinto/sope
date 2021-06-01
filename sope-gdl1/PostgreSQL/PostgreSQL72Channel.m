@@ -650,9 +650,7 @@ static int openConnectionCount = 0;
   
   self->resultSet = [[self->connection execute:_expression] retain];
   if (self->resultSet == nil) {
-    return [PostgreSQL72Exception exceptionWithName:@"ExecutionFailed"
-				  reason:@"the PQexec() failed"
-				  userInfo:nil];
+    return [self _handleFatalEvaluationError];
   }
 
   /* process results */

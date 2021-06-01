@@ -171,7 +171,7 @@ static int keyOrderComparator(id o1, id o2, EOSortOrderingContext *context) {
     SEL      sel;
     id       v1, v2;
     int      (*ccmp)(id, SEL, id);
-    int      result;
+    NSComparisonResult result;
 
     key = [context->orderings[i] key];
     sel = [context->orderings[i] selector];
@@ -190,7 +190,7 @@ static int keyOrderComparator(id o1, id o2, EOSortOrderingContext *context) {
     else if ((ccmp = (void *)[v1 methodForSelector:sel]))
       result = ccmp(v1, sel, v2);
     else
-      result = (unsigned long)[v1 performSelector:sel withObject:v2];
+      result = (NSComparisonResult)[v1 performSelector:sel withObject:v2];
 
     if (result != NSOrderedSame)
       return result;

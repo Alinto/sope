@@ -177,15 +177,12 @@
   if (sock != nil) {
     if (![sock connectToAddress:_address]) {
       NSException *e;
-#if 0
-      NSLog(@"WARNING(%s): Couldn't connect to address %@: %@",
-            __PRETTY_FUNCTION__, _address, [sock lastException]);
-#endif
       /*
         this method needs to raise the exception, since no object is returned
         in which we could check the -lastException ...
       */
       e = [[sock lastException] retain];
+      [sock autorelease];
       [self release];
       e = [e autorelease];
       [e raise];
@@ -462,7 +459,6 @@
     } else {
       self->fd = NGInvalidSocketDescriptor;
     }
-
     ASSIGN(self->remoteAddress, (id)nil);
   }
   return YES;

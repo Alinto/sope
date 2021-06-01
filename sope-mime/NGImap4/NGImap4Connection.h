@@ -148,7 +148,9 @@
 - (id)infoForMailboxAtURL:(NSURL *)_url;
 - (NSException *)createMailbox:(NSString *)_mailbox atURL:(NSURL *)_url;
 - (NSException *)deleteMailboxAtURL:(NSURL *)_url;
+- (NSException *) deleteMailbox: (NSString *)_path;
 - (NSException *)moveMailboxAtURL:(NSURL *)_srcurl toURL:(NSURL *)_desturl;
+- (NSException *) moveMailbox: (NSString *)_srcname to: (NSString *)_destname;
 
 /* ACLs */
 
