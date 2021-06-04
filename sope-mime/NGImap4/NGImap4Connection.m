@@ -586,7 +586,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   NSMutableDictionary *threads;
   NSEnumerator *threadsEnum;
   id rootThread;
-  unsigned int i, j;
+  unsigned int i, j, count;
 
   // Check cache
   
@@ -611,7 +611,6 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
       uids = [result valueForKey: @"thread"];
       threads = [NSMutableDictionary dictionaryWithCapacity: [uids count]];
       threadsEnum = [uids objectEnumerator];
-      i = 0;
       while ((rootThread = [threadsEnum nextObject]))
         {
           threadUids = [self _flattenedArray: rootThread];
@@ -621,27 +620,31 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
 
       // 2. Flatten and sort the threads based on an IMAP SORT
 
-      uids = [self fetchUIDsInURL: _url qualifier: _qualifier sortOrdering: _so];
-      sortedThreads = [NSMutableArray arrayWithCapacity: [threads count]];
-      for (i = 0; i < [uids count]; i++)
+      count = [threads count];
+      sortedThreads = [NSMutableArray arrayWithCapacity: count];
+      if (count > 0)
         {
-          threadUids = [threads objectForKey: [uids objectAtIndex: i]];
-          if (threadUids)
+          uids = [self fetchUIDsInURL: _url qualifier: _qualifier sortOrdering: _so];
+          for (i = 0; i < [uids count]; i++)
             {
-              if ([threadUids count] > 1)
+              threadUids = [threads objectForKey: [uids objectAtIndex: i]];
+              if (threadUids)
                 {
-                  sortedThread = [NSMutableArray arrayWithCapacity: [threadUids count]];
-                  for (j = 0; j < [uids count] && [sortedThread count] < [threadUids count]; j++)
+                  if ([threadUids count] > 1)
                     {
-                      if ([threadUids containsObject: [uids objectAtIndex: j]])
-                        [sortedThread addObject: [uids objectAtIndex: j]];
+                      sortedThread = [NSMutableArray arrayWithCapacity: [threadUids count]];
+                      for (j = 0; j < [uids count] && [sortedThread count] < [threadUids count]; j++)
+                        {
+                          if ([threadUids containsObject: [uids objectAtIndex: j]])
+                            [sortedThread addObject: [uids objectAtIndex: j]];
+                        }
+                      [sortedThreads addObject: sortedThread];
                     }
-                  [sortedThreads addObject: sortedThread];
-                }
-              else
-                {
-                  // No sorting required
-                  [sortedThreads addObject: threadUids];
+                  else
+                    {
+                      // No sorting required
+                      [sortedThreads addObject: threadUids];
+                    }
                 }
             }
         }
