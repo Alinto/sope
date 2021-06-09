@@ -584,8 +584,8 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   NSArray *uids, *threadUids;
   NSMutableArray *sortedThreads, *sortedThread;
   NSMutableDictionary *threads;
-  NSEnumerator *threadsEnum, *threadEnum;
-  id rootThread, thread;
+  NSEnumerator *threadsEnum;
+  id rootThread;
   unsigned int i, j;
 
   // Check cache
@@ -614,13 +614,9 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
       i = 0;
       while ((rootThread = [threadsEnum nextObject]))
         {
-          thread = rootThread;
-          while ([thread respondsToSelector: @selector(objectEnumerator)])
-            {
-              threadEnum = [thread objectEnumerator];
-              thread = [threadEnum nextObject];
-            }
-          [threads setObject: rootThread forKey: thread];
+          threadUids = [self _flattenedArray: rootThread];
+          threadUids = [threadUids sortedArrayUsingSelector: @selector (compare:)];
+          [threads setObject: threadUids forKey: [threadUids lastObject]];
         }
 
       // 2. Flatten and sort the threads based on an IMAP SORT
@@ -629,12 +625,11 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
       sortedThreads = [NSMutableArray arrayWithCapacity: [threads count]];
       for (i = 0; i < [uids count]; i++)
         {
-          thread = [threads objectForKey: [uids objectAtIndex: i]];
-          if (thread)
+          threadUids = [threads objectForKey: [uids objectAtIndex: i]];
+          if (threadUids)
             {
-              if ([thread count] > 1)
+              if ([threadUids count] > 1)
                 {
-                  threadUids = [self _flattenedArray: thread];
                   sortedThread = [NSMutableArray arrayWithCapacity: [threadUids count]];
                   for (j = 0; j < [uids count] && [sortedThread count] < [threadUids count]; j++)
                     {
@@ -646,7 +641,7 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
               else
                 {
                   // No sorting required
-                  [sortedThreads addObject: thread];
+                  [sortedThreads addObject: threadUids];
                 }
             }
         }
