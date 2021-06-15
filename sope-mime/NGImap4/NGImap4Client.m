@@ -919,8 +919,12 @@ static NSMutableDictionary *namespaces;
 }
 
 - (NSDictionary *)unselect {
-  [self->selectedFolder release]; self->selectedFolder = nil;
-  return [self->normer normalizeResponse:[self processCommand:@"unselect"]];
+  if (self->selectedFolder != nil)
+    {
+      [self->selectedFolder release]; self->selectedFolder = nil;
+      return [self->normer normalizeResponse:[self processCommand:@"unselect"]];
+    }
+  return nil;
 }
 
 - (NSDictionary *)lstatus:(NSString *)_folder flags:(NSArray *)_flags {
