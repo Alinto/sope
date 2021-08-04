@@ -1255,6 +1255,15 @@ _purifyQuotedString(NSMutableString *quotedString) {
             [parse setObject:used forKey:@"usedSpace"];
             [parse setObject:max  forKey:@"maxQuota"];
           }
+          else if ([key isEqualToString:@"message"]) {
+            NSString *used, *max;
+
+            used = _parseUntil(self, ' ');
+            max  = _parseUntil(self, ')');
+
+            [parse setObject:used forKey:@"messagesCount"];
+            [parse setObject:max  forKey:@"maxMessages"];
+          }
           else {
             NSString *v;
 
