@@ -1,3 +1,52 @@
+commit b7d49f5f242361688c137bc0437a3db91d2dbdb0
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Aug 4 09:58:47 2021 -0400
+
+    fix(imap): parse messages quota
+    
+    Fixes #5365
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit c808b54c6f927b6baa54080715dadc4a952f8171
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Jun 15 16:33:37 2021 -0400
+
+    fix(imap): don't unselect mailbox if none is selected
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 7040f004d432eb6903170909052c13483769f284
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jun 9 14:26:42 2021 -0400
+
+    fix(imap): flatten and sort inner threads
+    
+    Fixes #3100
+    Fixes #4796
+
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit 0a56b9b0c3ef196db2a2c31562c054baef6c81f7
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Jun 8 16:25:04 2021 -0400
+
+    fix(appserver): add timestamp to all web resources
+    
+    This will force a reload of the file each time it is modified.
+    
+    Fixes #5335
+
+M	sope-appserver/WEExtensions/WEResourceManager.m
+
+commit b0509cad8e8ae3248cf743bfbfc97fb7c2a8a481
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon May 31 21:22:29 2021 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 78362e95e57a5b97ae920a339705b81bab40665d
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri May 21 14:17:11 2021 -0400
