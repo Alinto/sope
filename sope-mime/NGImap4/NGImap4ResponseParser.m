@@ -1733,6 +1733,8 @@ _purifyQuotedString(NSMutableString *quotedString) {
     env->subject = [tmp isNotNull] 
       ? [[self _decodeQP:tmp headerField:@"subject"] copy]
       : nil;
+    if (![env->subject isKindOfClass: [NSString class]])
+      env->subject = [[NSString alloc] initWithData: env->subject encoding: NSUTF8StringEncoding];
     [self _consumeOptionalSpace];
   }
   else {
