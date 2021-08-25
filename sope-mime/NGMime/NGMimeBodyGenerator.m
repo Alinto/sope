@@ -22,6 +22,8 @@
 
 #include "NGMimeBodyGenerator.h"
 #include "NGMimePartGenerator.h"
+#include "NGMail/NGMimeMessageGenerator.h"
+
 #include "common.h"
 
 @implementation NGMimeBodyGenerator
@@ -68,7 +70,7 @@ static BOOL debugOn = NO;
   forPart:(id<NGMimePart>)_part
   additionalHeaders:(NGMutableHashMap *)_addHeaders
 {
-  return _data;
+  return _base64Encoding(self, _data, _part, _addHeaders);
 }
 
 /* manage data storage */
