@@ -1305,6 +1305,25 @@ static NSMutableDictionary *namespaces;
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }
 
+- (NSDictionary *) moveUids: (NSArray *)_uids
+                   toFolder: (NSString *)_folder
+{
+  NSArray *capa;
+  NSString *cmd;
+
+  if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
+    return nil;
+
+  capa = [[self capability] objectForKey: @"capability"];
+  if (![capa containsObject: @"move"])
+    return nil;
+
+  cmd = [NSString stringWithFormat:@"uid move %@ \"%@\"",
+                  [_uids componentsJoinedByString:@","], SaneFolderName(_folder)];
+
+  return [self->normer normalizeResponse:[self processCommand:cmd]];
+}
+
 - (NSDictionary *)getQuotaRoot:(NSString *)_folder {
   NSString *cmd;
 
