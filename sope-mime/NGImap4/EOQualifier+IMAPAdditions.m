@@ -310,10 +310,10 @@ andComparisonSelector:(SEL)lselector {
     dateOperator = nil;
  
   if (dateOperator) {
-    //if ([dkey isEqualToString: @"DATE"])
-    //  operatorPrefix = @"SENT";
-    //else
-    operatorPrefix = @"";
+    if ([dkey isEqualToString: @"SENT-DATE"])
+      operatorPrefix = @"SENT";
+    else
+      operatorPrefix = @"";
     imap4Operator = [NSString stringWithFormat: @"%@%@ ",
                               operatorPrefix, dateOperator];
   }
@@ -346,7 +346,7 @@ andComparisonSelector:(SEL)lselector {
   if (insertNot) 
     [search appendString:@"NOT "];
   
-  if ([lkey isEqualToString:@"DATE"] || [lkey isEqualToString:@"RECEIVE-DATE"]) {
+  if ([lkey isEqualToString:@"DATE"] || [lkey isEqualToString:@"RECEIVE-DATE"] || [lkey isEqualToString:@"SENT-DATE"]) {
     NSString *s;
     
     if (![lvalue isKindOfClass:[NSCalendarDate class]]) {
