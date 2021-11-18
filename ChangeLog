@@ -1,3 +1,81 @@
+commit 74155c9ec531ece59ced534e770c8109b799baf9
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Nov 1 16:47:59 2021 -0400
+
+    fix(mime): restore SENT-DATE support in EOQualifier
+
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+
+commit e1dbce7bf93556503fa6aa235122034b42b04e99
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Oct 26 15:32:55 2021 -0400
+
+    fix(imap): parse message/global structure like message/rfc822
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 85f64d5d39fa9955e4a99c16e4c0d6c649133ccc
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Oct 21 17:14:07 2021 -0400
+
+    feat(imap): allow search by keyword
+
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+
+commit f21a334ce2d7bceee0f7afa7c16b2e5f4afdf8c0
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Sep 30 14:50:25 2021 -0400
+
+    fix(core): don't eat successive LF when decoding quoted printable
+    
+    Fixes #5231
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit 282803991b7da20fd223cd8fb3b99197790f3ada
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Sep 22 13:35:31 2021 -0400
+
+    core: accept range with no duration in date intersection
+
+M	sope-core/NGExtensions/NGCalendarDateRange.m
+
+commit 4c814c9b9f5bdcc9ee34a949c7cce41e1624fc21
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Sep 10 14:03:45 2021 -0400
+
+    feat(imap): add support for UID MOVE operation
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 0eb64db6e1e3ba8fc5e03831ac31873f88a75859
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Aug 25 14:57:37 2021 -0400
+
+    fix(mime): encode text parts individually
+    
+    Fixes #5376
+
+M	sope-mime/NGMail/NGMimeMessageBodyGenerator.m
+M	sope-mime/NGMime/NGMimeBodyGenerator.m
+
+commit 6a7d407bb5a86e16ace3b5a38d2b80c2b261b5ae
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Aug 24 15:14:10 2021 -0400
+
+    fix(imap): force envelope subject to return a string
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit b0137fca131c37da10f1c454e1135276fae569af
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Aug 18 17:18:57 2021 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit b7d49f5f242361688c137bc0437a3db91d2dbdb0
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Aug 4 09:58:47 2021 -0400
