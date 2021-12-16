@@ -1,3 +1,19 @@
+commit 39aade4bf8668f6591baa81ceca12c885723804c
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Nov 22 14:49:05 2021 -0500
+
+    fix(pgsql): add open connection count in debugging output
+
+M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
+
+commit cf3aa193edf5271d2d2c72312ad23721488b2902
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Nov 18 15:43:55 2021 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 74155c9ec531ece59ced534e770c8109b799baf9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 1 16:47:59 2021 -0400
