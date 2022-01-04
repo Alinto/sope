@@ -2276,7 +2276,7 @@ static NSDictionary *_parseSingleBody(NGImap4ResponseParser *self,
     [dict setObject:_parseBodyString(self, YES) forKey:@"lines"];
   }
   else if ([type isEqualToString:@"message"]
-	   && ([subtype isEqualToString:@"rfc822"] || [subtype isEqualToString:@"global"])) {
+	   && [subtype isEqualToString:@"rfc822"]) {
     if (_la(self, 0) != ')') {
       _consumeIfMatch(self, ' ');
       _consumeIfMatch(self, '(');
