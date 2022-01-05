@@ -645,8 +645,8 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
 
   ret = SSL_connect(self->ssl);
   if (ret <= 0) {
-    NSLog(@"ERROR(%s): couldn't setup SSL connection on host %@ (%s)...",
-      __PRETTY_FUNCTION__, hostName, ERR_error_string(SSL_get_error(self->ssl, ret), NULL));
+    NSLog(@"ERROR(%s): couldn't setup SSL connection on host %@ (%s)",
+          __PRETTY_FUNCTION__, hostName, ERR_reason_error_string(ERR_get_error()));
     [self shutdown];
     return NO;
   }
