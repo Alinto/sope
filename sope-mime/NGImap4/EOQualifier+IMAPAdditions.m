@@ -161,7 +161,12 @@ static void _initImap4SearchCategory(void) {
   if ((lCount = [[self qualifiers] count]) == 0) /* no subqualifiers */
     return nil;
   if (lCount == 1)
-    return [[[self qualifiers] objectAtIndex:0] imap4SearchString];
+    {
+      NSString *uniqueSearch = [[[self qualifiers] objectAtIndex:0] imap4SearchString];
+      if (debugOn)
+        [self logWithFormat:@"  generated: '%@'", uniqueSearch];
+      return uniqueSearch;
+    }
   
   search = [NSMutableString stringWithCapacity:lCount * 3];
   
