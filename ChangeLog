@@ -1,3 +1,39 @@
+commit aa06002fc5ca9ff90d8fe6fee2c55893c3dd3073
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Jan 13 16:49:52 2022 -0500
+
+    fix(imap): improve debugging of EOQualifier
+
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+
+commit 29e8986630865f9e61399b6b3710f1d8e7f073ce
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Jan 5 16:21:40 2022 -0500
+
+    fix(core): improve SSL error log
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit 37aac3fdc42cf9a90bc43e8eb87a4fe472d261cd
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Jan 4 14:39:08 2022 -0500
+
+    Revert "fix(imap): parse message/global structure like message/rfc822"
+    
+    This reverts commit e1dbce7bf93556503fa6aa235122034b42b04e99.
+    
+    Fixes #5453
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 7e74ebcb36760cd8a3f8de2d29b86c862b99d661
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Dec 16 11:59:22 2021 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 39aade4bf8668f6591baa81ceca12c885723804c
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 22 14:49:05 2021 -0500
