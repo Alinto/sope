@@ -27,8 +27,10 @@
 @interface NSException(HTTP)
 
 + (id)exceptionWithHTTPStatus:(unsigned short)_status;
-+ (id)exceptionWithHTTPStatus:(unsigned short)_status reason:(NSString *)_r;
-- (id)initWithHTTPStatus:(unsigned short)_status reason:(NSString *)_r;
++ (id)exceptionWithHTTPStatus:(unsigned short)_status
+                       reason:(NSString *)_r;
+- (id)initWithHTTPStatus:(unsigned short)_status
+                  reason:(NSString *)_r;
 
 + (NSString *)exceptionNameForHTTPStatus:(unsigned short)_status;
 + (NSString *)exceptionReasonForHTTPStatus:(unsigned short)_status;
@@ -38,6 +40,28 @@
 @end
 
 @interface SoHTTPException : NSException
+{
+  unsigned short status;
+}
+
+@end
+
+@interface NSException(DAV)
+
++ (id)exceptionWithDAVStatus:(unsigned short)_status;
++ (id)exceptionWithDAVStatus:(unsigned short)_status
+                       reason:(NSString *)_r;
+- (id)initWithDAVStatus:(unsigned short)_status
+                  reason:(NSString *)_r;
+
++ (NSString *)exceptionNameForDAVStatus:(unsigned short)_status;
++ (NSString *)exceptionReasonForDAVStatus:(unsigned short)_status;
+
+- (unsigned short)httpStatus;
+
+@end
+
+@interface SoDAVException : NSException
 {
   unsigned short status;
 }
