@@ -1,3 +1,21 @@
+commit 7fc5dceed5a398b6bd9be18acb957438f432e96e
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Jan 27 13:01:42 2022 -0500
+
+    fix(appserver): render DAV exceptions as XML
+
+M	sope-appserver/NGObjWeb/SoObjects/NSException+HTTP.h
+M	sope-appserver/NGObjWeb/SoObjects/NSException+HTTP.m
+M	sope-appserver/NGObjWeb/SoObjects/SoDefaultRenderer.m
+
+commit 7c72fddddc01761dfa8a87a85bea55ae10d77b27
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Jan 18 11:13:02 2022 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit aa06002fc5ca9ff90d8fe6fee2c55893c3dd3073
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jan 13 16:49:52 2022 -0500
