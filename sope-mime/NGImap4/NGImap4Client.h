@@ -71,6 +71,7 @@ typedef enum {
 
   NSString *delimiter;
   NSString *selectedFolder;
+  NSString *authname;
   NSString *login;
   NSString *password;
   NSString *authMechanism;
@@ -123,6 +124,7 @@ typedef enum {
 /* commands */
 
 - (NSDictionary *)login:(NSString *)_login password:(NSString *)_passwd;
+- (NSDictionary *)authenticate:(NSString *)_login authname:(NSString *)_authname password:(NSString *)_passwd;
 - (NSDictionary *)authenticate:(NSString *)_login password:(NSString *)_passwd
                      mechanism:(NSString *)_mech;
 - (NSDictionary *)logout;

@@ -212,6 +212,7 @@ static NSMutableDictionary *namespaces;
     }
   }
 
+  self->authname = nil;
   self->login    = [[_url user]     copy];
   self->password = [[_url password] copy];
 
@@ -243,6 +244,7 @@ static NSMutableDictionary *namespaces;
   [self->previous_socket  release];
   [self->parser           release];
   [self->responseReceiver release];
+  [self->authname         release];
   [self->login            release];
   [self->password         release];
   [self->selectedFolder   release];
@@ -546,6 +548,19 @@ static NSMutableDictionary *namespaces;
   return [self login];
 }
 
+- (NSDictionary *) authenticate: (NSString *) _login
+                       authname: (NSString *) _authname
+                       password: (NSString *) _passwd
+{
+  [self->authname release];
+  self->authname = nil;
+  self->authname = [_authname copy];
+
+  return [self authenticate: _login
+                   password: _passwd
+                  mechanism: nil];
+}
+
 - (NSDictionary *)authenticate:(NSString *)_login password:(NSString *)_passwd
                      mechanism:(NSString *)_mech {
   /* login with plaintext password authenticating */
@@ -696,21 +711,26 @@ static NSMutableDictionary *namespaces;
   if ([[map objectForKey:@"ContinuationResponse"] boolValue])
     {
       char *buffer;
-      const char *utf8Username, *utf8Password;
-      size_t buflen, lenUsername, lenPassword;
+      const char *utf8Username, *utf8Authname, *utf8Password;
+      size_t buflen, lenUsername, lenAuthname, lenPassword;
       NSString *authString;
 
       utf8Username = [self->login UTF8String];
+      if (self->authname)
+        utf8Authname = [self->authname UTF8String];
+      else
+        utf8Authname = [self->login UTF8String];
       utf8Password = [self->password UTF8String];
       if (!utf8Password)
         utf8Password = 0;
 
       lenUsername = strlen (utf8Username);
+      lenAuthname = strlen (utf8Authname);
       lenPassword = strlen (utf8Password);
-      buflen = lenUsername * 2 + lenPassword + 2;
+      buflen = lenUsername + lenAuthname + lenPassword + 2;
       buffer = malloc (sizeof (char) * (buflen + 1));
       sprintf (buffer, "%s%c%s%c%s",
-               utf8Username, 0, utf8Username, 0, utf8Password);
+               utf8Username, 0, utf8Authname, 0, utf8Password);
       authString = [[NSData dataWithBytesNoCopy: buffer
                                          length: buflen
                                    freeWhenDone: YES]
