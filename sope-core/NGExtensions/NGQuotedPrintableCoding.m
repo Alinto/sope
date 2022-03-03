@@ -296,7 +296,9 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
     return -1;
 
   for (cnt = 0; (cnt < _srcLen) && (destCnt < _destLen); cnt++) {
-    if (destCnt - lineStart > 70) { // Possibly going to exceed 76 chars this line
+    char c = _src[cnt];
+    if (destCnt - lineStart > 70 && // Possibly going to exceed 76 chars this line
+        c != 13 && c != 10) {       // Not CR/LF
       if (_destLen - destCnt > 2) {
         _dest[destCnt++] = '=';
         _dest[destCnt++] = '\r';
@@ -306,7 +308,6 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
       else
         break;
     }
-    char c = _src[cnt];
     if (c == 95) {  // we encode the _, otherwise we'll always decode it as a space!
       if (_destLen - destCnt > 2) {
         _dest[destCnt++] = '=';
@@ -316,13 +317,13 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
       else
         break;
     }
-    else if ((c == 9)  ||
-        (c == 13) ||
-        ((c > 31) && (c < 61)) ||
-        ((c > 61) && (c < 127))) { // no quoting
-      _dest[destCnt++] = c;
+    else if ((c == 9)  ||               // tab
+             (c == 13) ||               // carriage return
+             ((c > 31) && (c < 61)) ||  // alphanumeric without the equal sign
+             ((c > 61) && (c < 127))) { // remaining alphanumeric
+      _dest[destCnt++] = c;             // no quoting
     }
-    else if (c == 10) { // Reset line length counter
+    else if (c == 10) {                 // line feed; reset line length counter
       _dest[destCnt++] = c;
       lineStart = destCnt;
     }
