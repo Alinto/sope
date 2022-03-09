@@ -1109,23 +1109,26 @@ NSString *EOBindVariableValueKey       = @"value";
     for (i = 0; *cstr; cstr++) {
       switch (*cstr) {
         case '*':
-          buf[i] = '%'; i++; didSomething = YES;
+          buf[i] = '%';
+          i++;
+          didSomething = YES;
           break;
+
         case '?':
-          buf[i] = '_'; i++; didSomething = YES;
+          buf[i] = '_';
+          i++;
+          didSomething = YES;
           break;
           
         case '%':
-          buf[i] = '['; i++;
+          buf[i] = '\\'; i++;
           buf[i] = '%'; i++;
-          buf[i] = ']'; i++;
           didSomething = YES;
           break;
           
         case '_':
-          buf[i] = '['; i++;
+          buf[i] = '\\'; i++;
           buf[i] = '_'; i++;
-          buf[i] = ']'; i++;
           didSomething = YES;
           break;
           
