@@ -304,11 +304,15 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
         (_src[cnt+1] == 13 ||
          _src[cnt+1] == 10))
       {
-        // Encode trailing white space (32) or tab (9)
-        _dest[destCnt++] = '=';
-        _dest[destCnt++] = hexT[(c >> 4) & 15];
-        _dest[destCnt++] = hexT[c & 15];
-        continue;
+        if (_destLen - destCnt > 2) {
+          // Encode trailing white space (32) or tab (9)
+          _dest[destCnt++] = '=';
+          _dest[destCnt++] = hexT[(c >> 4) & 15];
+          _dest[destCnt++] = hexT[c & 15];
+          continue;
+        }
+        else
+          break;
       }
     if (destCnt - lineStart > 70 &&     // Possibly going to exceed 76 chars this line
         c != 13 && c != 10) {           // Not CR/LF
