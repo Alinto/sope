@@ -1,3 +1,70 @@
+commit 79f272e31554a167be4fcd46f895376be3a8ffc1
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Jun 4 16:39:20 2021 -0400
+
+    fix(imap): avoid sort when mailbox is empty (threaded mode)
+
+M	sope-mime/NGImap4/NGImap4Connection.m
+
+commit b765dc5f2f6917171f153e7ab5d242c107f0e044
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Mar 24 07:23:30 2022 -0400
+
+    fix(core): encode trailing space or tab in quoted-printable
+    
+    Avoid buffer overflow.
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit 3409ed2668c00a331756d41f8f8db9cdeb7f132f
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Mar 10 16:43:17 2022 -0500
+
+    fix(core): encode trailing space or tab in quoted-printable
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit 26a9334e4971aa34d2b932938f852db5d2aeb815
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed Mar 9 11:23:18 2022 -0500
+
+    fix(gdl): escape SQL wildcards when converting from shell pattern
+
+M	sope-gdl1/GDLAccess/EOSQLExpression.m
+
+commit 213facc369ac4ae7baef10a4398cdbe848767c55
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Mar 3 10:31:46 2022 -0500
+
+    fix(core): don't split line right before CR/LF when encoding QP
+
+M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
+
+commit 3c64d156d04d700abc6b733bb61cc0feb4008a85
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Feb 17 10:04:44 2022 -0500
+
+    feat(imap): proxy authentication
+
+M	sope-mime/NGImap4/NGImap4Client.h
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 29fd0ca63c6989308891385716d01ff762d421e1
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Mon Feb 14 13:06:24 2022 -0500
+
+    fix(sieve): priorise the quoted format in AUTHENTICATE command
+
+M	sope-mime/NGImap4/NGSieveClient.m
+
+commit 2931f296f7fc9eda25be30a0904a86457009d99a
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Fri Feb 4 10:25:13 2022 -0500
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 7fc5dceed5a398b6bd9be18acb957438f432e96e
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jan 27 13:01:42 2022 -0500
