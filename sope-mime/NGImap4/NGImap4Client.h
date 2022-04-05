@@ -71,6 +71,7 @@ typedef enum {
 
   NSString *delimiter;
   NSString *selectedFolder;
+  NSString *authname;
   NSString *login;
   NSString *password;
   NSString *authMechanism;
@@ -123,6 +124,7 @@ typedef enum {
 /* commands */
 
 - (NSDictionary *)login:(NSString *)_login password:(NSString *)_passwd;
+- (NSDictionary *)authenticate:(NSString *)_login authname:(NSString *)_authname password:(NSString *)_passwd;
 - (NSDictionary *)authenticate:(NSString *)_login password:(NSString *)_passwd
                      mechanism:(NSString *)_mech;
 - (NSDictionary *)logout;
@@ -164,11 +166,12 @@ typedef enum {
 
 - (NSDictionary *)copyUid:(unsigned)_uid    toFolder:(NSString *)_folder;
 - (NSDictionary *)copyUids:(NSArray *)_uids toFolder:(NSString *)_folder;
-- (NSDictionary *)copyFrom:(unsigned)_from to:(unsigned)_to
-  toFolder:(NSString *)_folder;
+- (NSDictionary *)copyFrom:(unsigned)_from  to:(unsigned)_to
+                  toFolder:(NSString *)_folder;
+- (NSDictionary *)moveUids:(NSArray *)_uids toFolder:(NSString *)_folder;
 
-- (NSDictionary *)append:(NSData *)_message toFolder:(NSString *)_folder
-  withFlags:(NSArray *)_flags;
+- (NSDictionary *)append:(NSData *)_message  toFolder:(NSString *)_folder
+               withFlags:(NSArray *)_flags;
 - (NSDictionary *)threadBySubject:(BOOL)_bySubject
                           charset:(NSString *)_charSet
                         qualifier:(EOQualifier *)_qual;

@@ -445,20 +445,23 @@ static BOOL     debugImap4         = NO;
   auth = [NSData dataWithBytesNoCopy:buf length:bufLen];
   auth = [auth dataByEncodingBase64WithLineLength:4096 /* 'unlimited' */];
 
-  if (LOG_PASSWORD) {
-    NSString *s;
+  NSString *s;
 
+  if ([auth length] < 1024)
+    // Use the quoted format
+    s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" \"%s\"", [auth bytes]];
+  else
+    // Use the literal format
     s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" {%d+}\r\n%s",
                   (int)[auth length], [auth bytes]];
+
+
+  if (LOG_PASSWORD) {
     map = [self processCommand:s
                        logText:s
                      reconnect:NO];
   }
   else {
-    NSString *s;
-
-    s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" {%d+}\r\n%s",
-                  (int)[auth length], [auth bytes]];
     map = [self processCommand:s
                        logText:@"AUTHENTICATE \"PLAIN\" {%d+}\r\nLOGIN:PASSWORD\r\n"
                      reconnect:NO];

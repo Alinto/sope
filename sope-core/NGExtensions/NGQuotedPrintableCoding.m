@@ -167,7 +167,7 @@ int NGDecodeQuotedPrintableX(const char *_src, unsigned _srcLen,
         c1 = _src[cnt]; // first hex digit
 
         if (c1 == '\r' || c1 == '\n') {
-          if (cnt < _srcLen && (_src[cnt + 1] == '\r' || _src[cnt + 1] == '\n' ))
+          if (c1 == '\r' && cnt < _srcLen && _src[cnt + 1] == '\n') // CRLF
             cnt++;
           continue;
         }
@@ -296,7 +296,26 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
     return -1;
 
   for (cnt = 0; (cnt < _srcLen) && (destCnt < _destLen); cnt++) {
-    if (destCnt - lineStart > 70) { // Possibly going to exceed 76 chars this line
+    char c = _src[cnt];
+
+    if ((c ==  9 ||                     // tab (HT)
+         c == 32) &&                    // space
+        _srcLen - cnt > 0 &&
+        (_src[cnt+1] == 13 ||
+         _src[cnt+1] == 10))
+      {
+        if (_destLen - destCnt > 2) {
+          // Encode trailing white space (32) or tab (9)
+          _dest[destCnt++] = '=';
+          _dest[destCnt++] = hexT[(c >> 4) & 15];
+          _dest[destCnt++] = hexT[c & 15];
+          continue;
+        }
+        else
+          break;
+      }
+    if (destCnt - lineStart > 70 &&     // Possibly going to exceed 76 chars this line
+        c != 13 && c != 10) {           // Not CR/LF
       if (_destLen - destCnt > 2) {
         _dest[destCnt++] = '=';
         _dest[destCnt++] = '\r';
@@ -306,8 +325,8 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
       else
         break;
     }
-    char c = _src[cnt];
-    if (c == 95) {  // we encode the _, otherwise we'll always decode it as a space!
+
+    if (c == 95) {                      // we encode the _, otherwise we'll always decode it as a space!
       if (_destLen - destCnt > 2) {
         _dest[destCnt++] = '=';
         _dest[destCnt++] = '5';
@@ -316,17 +335,18 @@ int NGEncodeQuotedPrintable(const char *_src, unsigned _srcLen,
       else
         break;
     }
-    else if ((c == 9)  ||
-        (c == 13) ||
-        ((c > 31) && (c < 61)) ||
-        ((c > 61) && (c < 127))) { // no quoting
-      _dest[destCnt++] = c;
+
+    else if ((c ==  9) ||
+             (c == 13) ||               // carriage return
+             ((c > 31) && (c < 61)) ||  // alphanumeric without the equal sign
+             ((c > 61) && (c < 127))) { // remaining alphanumeric
+      _dest[destCnt++] = c;             // no quoting
     }
-    else if (c == 10) { // Reset line length counter
+    else if (c == 10) {                 // line feed; reset line length counter
       _dest[destCnt++] = c;
       lineStart = destCnt;
     }
-    else { // need to be quoted
+    else {                              // need to be quoted
       if (_destLen - destCnt > 2) {
         _dest[destCnt++] = '=';
         _dest[destCnt++] = hexT[(c >> 4) & 15];

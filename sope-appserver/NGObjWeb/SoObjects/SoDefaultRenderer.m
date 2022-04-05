@@ -28,6 +28,7 @@
 #include "SoSecurityException.h"
 #include "SoObject.h"
 #include "NSException+HTTP.h"
+#include <NGExtensions/NSString+Ext.h>
 #include <NGObjWeb/WOApplication.h>
 #include <NGObjWeb/WORequest.h>
 #include <NGObjWeb/WOResponse.h>
@@ -59,7 +60,7 @@ static int debugOn = 0;
 /* rendering */
 
 - (NSException *)renderException:(NSException *)_ex 
-  inContext:(WOContext *)_ctx 
+                       inContext:(WOContext *)_ctx
 {
   WOResponse *r = [_ctx response];
   int stat;
@@ -106,18 +107,30 @@ static int debugOn = 0;
   }
   else
     [r setStatus:500];
-  
-  [r setHeader:@"text/html; charset=\"iso-8859-1\"" forKey:@"content-type"];
-  [r appendContentString:
-       @"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n"
-       @"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
-       @"<body>"
-       @"<h3>An error occurred during object publishing</h3>"];
-  [r appendContentString:@"<p>"];
-  [r appendContentString:[_ex reason]];
-  [r appendContentString:@"</p>"];
-  [r appendContentString:@"</body>\n"];
-  [r appendContentString:@"</html>\n"];
+
+  if ([_ex isKindOfClass:[SoHTTPException class]])
+    {
+      [r setHeader:@"text/html; charset=\"iso-8859-1\"" forKey:@"content-type"];
+      [r appendContentString:
+           @"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n"
+        @"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+         @"<body>"
+         @"<h3>An error occurred during object publishing</h3>"];
+      [r appendContentString:@"<p>"];
+      [r appendContentString:[_ex reason]];
+      [r appendContentString:@"</p>"];
+      [r appendContentString:@"</body>\n"];
+      [r appendContentString:@"</html>\n"];
+    }
+  else if ([_ex isKindOfClass:[SoDAVException class]])
+    {
+      [r setHeader:@"application/xml; charset=\"utf-8\"" forKey:@"content-type"];
+      [r appendContentString: @"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+                        @"<D:error xmlns:D=\"DAV\">"];
+      [r appendContentString: [[_ex reason] stringByEscapingXMLString]];
+      [r appendContentString: @"</D:error>"];
+    }
+
   return nil;
 }
 

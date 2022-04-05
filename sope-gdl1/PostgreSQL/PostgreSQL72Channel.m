@@ -221,8 +221,8 @@ static int openConnectionCount = 0;
   openConnectionCount++;
 
   if (isDebuggingEnabled) {
-    NSLog(@"PostgreSQL72 channel 0x%p opened (connection=%@)",
-          self, self->connection);
+    NSLog(@"PostgreSQL72 channel 0x%p opened (connection=%@, count=%d)",
+          self, self->connection, openConnectionCount);
   }
   return YES;
 }
@@ -251,9 +251,8 @@ static int openConnectionCount = 0;
     openConnectionCount--;
     
     if (isDebuggingEnabled) {
-      fprintf(stderr, 
-	      "PostgreSQL72 connection dropped 0x%p (channel=0x%p)\n",
-              self->connection, self);
+      NSLog(@"PostgreSQL72 connection dropped 0x%p (channel=0x%p, count=%d)",
+            self->connection, self, openConnectionCount);
     }
     [self->connection release];
     self->connection = nil;

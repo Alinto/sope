@@ -46,7 +46,7 @@
 }
 
 + (id)exceptionWithHTTPStatus:(unsigned short)_status reason:(NSString *)_r {
-  return [[[SoHTTPException alloc] 
+  return [[[SoHTTPException alloc]
 	    initWithHTTPStatus:_status reason:_r] autorelease];
 }
 - (id)initWithHTTPStatus:(unsigned short)_status reason:(NSString *)_r {
@@ -55,11 +55,11 @@
   NSString *lReason;
 
   ui = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:_status]
-		     forKey:@"http-status"];
-  
+                                   forKey:@"http-status"];
+
   errorName = [[self class] exceptionNameForHTTPStatus:_status];
   lReason   = _r ? _r : [[self class] exceptionReasonForHTTPStatus:_status];
-  
+
   return [self initWithName:errorName reason:lReason userInfo:ui];
 }
 
@@ -85,10 +85,10 @@
 - (id)initWithHTTPStatus:(unsigned short)_status reason:(NSString *)_r {
   NSString *errorName;
   NSString *lReason;
-  
+
   errorName = [[self class] exceptionNameForHTTPStatus:_status];
   lReason   = _r ? _r : [[self class] exceptionReasonForHTTPStatus:_status];
-  
+
   if (([self initWithName:errorName reason:lReason userInfo:nil])) {
     self->status = _status;
   }
@@ -100,3 +100,84 @@
 }
 
 @end /* SoHTTPException */
+
+@implementation NSException(DAV)
+
++ (id) exceptionWithDAVStatus: (unsigned short) _status
+{
+  return [self exceptionWithDAVStatus: _status
+                               reason: nil];
+}
+
++ (NSString *)exceptionNameForDAVStatus:(unsigned short)_status {
+  switch (_status) {
+    case 401: return @"AuthRequired";
+    case 403: return @"Forbidden";
+    case 404: return @"NotFound";
+    default:  return [NSString stringWithFormat:@"DAV %i", _status];
+  }
+}
++ (NSString *)exceptionReasonForDAVStatus:(unsigned short)_status {
+  switch (_status) {
+    case 401: return @"authentication is required for access to the object!";
+    case 403: return @"you are not allowed to access the object!";
+    case 404: return @"the requested object could not be found!";
+    default:  return @"reason for DAV error unknown";
+  }
+}
+
++ (id)exceptionWithDAVStatus:(unsigned short)_status reason:(NSString *)_r {
+  return [[[SoDAVException alloc]
+	    initWithDAVStatus:_status reason:_r] autorelease];
+}
+- (id)initWithDAVStatus:(unsigned short)_status reason:(NSString *)_r {
+  NSDictionary *ui;
+  NSString *errorName;
+  NSString *lReason;
+
+  ui = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:_status]
+                                   forKey:@"http-status"];
+
+  errorName = [[self class] exceptionNameForDAVStatus:_status];
+  lReason   = _r ? _r : [[self class] exceptionReasonForDAVStatus:_status];
+
+  return [self initWithName:errorName reason:lReason userInfo:ui];
+}
+
+- (unsigned short)httpStatus {
+  return [[[self userInfo] objectForKey:@"http-status"] intValue];
+}
+
+- (void)detachFromContainer {
+  /* to be usable in OFS */
+}
+
+/* KVC */
+
+- (id)handleQueryWithUnboundKey:(NSString *)_key {
+  // TODO: is this considered a hack ?
+  return nil;
+}
+
+@end /* NSException(DAV) */
+
+@implementation SoDAVException
+
+- (id)initWithDAVStatus:(unsigned short)_status reason:(NSString *)_r {
+  NSString *errorName;
+  NSString *lReason;
+
+  errorName = [[self class] exceptionNameForDAVStatus:_status];
+  lReason   = _r ? _r : [[self class] exceptionReasonForDAVStatus:_status];
+
+  if (([self initWithName:errorName reason:lReason userInfo:nil])) {
+    self->status = _status;
+  }
+  return self;
+}
+
+- (unsigned short)httpStatus {
+  return self->status;
+}
+
+@end /* SoDAVException */

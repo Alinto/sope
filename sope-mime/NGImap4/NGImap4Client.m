@@ -212,6 +212,7 @@ static NSMutableDictionary *namespaces;
     }
   }
 
+  self->authname = nil;
   self->login    = [[_url user]     copy];
   self->password = [[_url password] copy];
 
@@ -243,6 +244,7 @@ static NSMutableDictionary *namespaces;
   [self->previous_socket  release];
   [self->parser           release];
   [self->responseReceiver release];
+  [self->authname         release];
   [self->login            release];
   [self->password         release];
   [self->selectedFolder   release];
@@ -546,6 +548,19 @@ static NSMutableDictionary *namespaces;
   return [self login];
 }
 
+- (NSDictionary *) authenticate: (NSString *) _login
+                       authname: (NSString *) _authname
+                       password: (NSString *) _passwd
+{
+  [self->authname release];
+  self->authname = nil;
+  self->authname = [_authname copy];
+
+  return [self authenticate: _login
+                   password: _passwd
+                  mechanism: nil];
+}
+
 - (NSDictionary *)authenticate:(NSString *)_login password:(NSString *)_passwd
                      mechanism:(NSString *)_mech {
   /* login with plaintext password authenticating */
@@ -696,21 +711,26 @@ static NSMutableDictionary *namespaces;
   if ([[map objectForKey:@"ContinuationResponse"] boolValue])
     {
       char *buffer;
-      const char *utf8Username, *utf8Password;
-      size_t buflen, lenUsername, lenPassword;
+      const char *utf8Username, *utf8Authname, *utf8Password;
+      size_t buflen, lenUsername, lenAuthname, lenPassword;
       NSString *authString;
 
       utf8Username = [self->login UTF8String];
+      if (self->authname)
+        utf8Authname = [self->authname UTF8String];
+      else
+        utf8Authname = [self->login UTF8String];
       utf8Password = [self->password UTF8String];
       if (!utf8Password)
         utf8Password = 0;
 
       lenUsername = strlen (utf8Username);
+      lenAuthname = strlen (utf8Authname);
       lenPassword = strlen (utf8Password);
-      buflen = lenUsername * 2 + lenPassword + 2;
+      buflen = lenUsername + lenAuthname + lenPassword + 2;
       buffer = malloc (sizeof (char) * (buflen + 1));
       sprintf (buffer, "%s%c%s%c%s",
-               utf8Username, 0, utf8Username, 0, utf8Password);
+               utf8Username, 0, utf8Authname, 0, utf8Password);
       authString = [[NSData dataWithBytesNoCopy: buffer
                                          length: buflen
                                    freeWhenDone: YES]
@@ -919,8 +939,12 @@ static NSMutableDictionary *namespaces;
 }
 
 - (NSDictionary *)unselect {
-  [self->selectedFolder release]; self->selectedFolder = nil;
-  return [self->normer normalizeResponse:[self processCommand:@"unselect"]];
+  if (self->selectedFolder != nil)
+    {
+      [self->selectedFolder release]; self->selectedFolder = nil;
+      return [self->normer normalizeResponse:[self processCommand:@"unselect"]];
+    }
+  return nil;
 }
 
 - (NSDictionary *)lstatus:(NSString *)_folder flags:(NSArray *)_flags {
@@ -1297,6 +1321,25 @@ static NSMutableDictionary *namespaces;
 
   cmd = [NSString stringWithFormat:@"uid copy %@ \"%@\"",
 		  [_uids componentsJoinedByString:@","], SaneFolderName(_folder)];
+
+  return [self->normer normalizeResponse:[self processCommand:cmd]];
+}
+
+- (NSDictionary *) moveUids: (NSArray *)_uids
+                   toFolder: (NSString *)_folder
+{
+  NSArray *capa;
+  NSString *cmd;
+
+  if ((_folder = [self _folder2ImapFolder:_folder]) == nil)
+    return nil;
+
+  capa = [[self capability] objectForKey: @"capability"];
+  if (![capa containsObject: @"move"])
+    return nil;
+
+  cmd = [NSString stringWithFormat:@"uid move %@ \"%@\"",
+                  [_uids componentsJoinedByString:@","], SaneFolderName(_folder)];
 
   return [self->normer normalizeResponse:[self processCommand:cmd]];
 }

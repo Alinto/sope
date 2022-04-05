@@ -31,7 +31,7 @@
   forPart:(id<NGMimePart>)_part
   additionalHeaders:(NGMutableHashMap *)_addHeaders
 {
-  return _base64Encoding(self, _data, _part, _addHeaders);
+  return _data;
 }
 
 @end /* NGMimeMessageBodyGenerator */

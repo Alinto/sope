@@ -97,8 +97,8 @@
     else
       return [NGCalendarDateRange calendarDateRangeWithStartDate:c endDate:b];
   }
-  if([c compare:d] == NSOrderedSame)
-    return nil; // no real range, thus return nil!
+  // if([c compare:d] == NSOrderedSame)
+  //   return nil; // no real range, thus return nil!
   // b !> d -> [c;d[
   return [NGCalendarDateRange calendarDateRangeWithStartDate:c endDate:d];
 }
