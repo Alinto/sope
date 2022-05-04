@@ -1,3 +1,11 @@
+commit dd08920b293732bba83550c7fdec3c8703319b96
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Apr 5 10:56:43 2022 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 79f272e31554a167be4fcd46f895376be3a8ffc1
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Jun 4 16:39:20 2021 -0400
