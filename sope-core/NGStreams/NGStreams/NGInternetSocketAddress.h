@@ -41,25 +41,40 @@
 @interface NGInternetSocketAddress : NSObject < NSCopying, NSCoding, NGSocketAddress >
 {
 @private
-  void     *address; /* ptr to struct sockaddr_in */
+  void     *address; /* ptr to struct sockaddr */
+  NSString *ipAddress;
   NSString *hostName;
+  int      port;
   BOOL     isAddressFilled;
   BOOL     isHostFilled;
   BOOL     isWildcardHost;
+  BOOL     isIp6;
 }
 
-+ (id)addressWithPort:(int)_port onHost:(id)_host;
++ (id)addressWithPort:(int)_port
+               onHost:(id)_host;
+
 + (id)addressWithPort:(int)_port; // localhost
-- (id)initWithPort:(int)_port onHost:(id)_host; // designated init
+
+- (id)initWithPort:(int)_port
+            onHost:(id)_host; // designated init
+
 - (id)initWithPort:(int)_port;    // localhost
 
 // these throw NGDidNotFindServiceException if the service is not found
 + (id)addressWithService:(NSString *)_serviceName
-  onHost:(id)_host protocol:(NSString *)_protocol;
-+ (id)addressWithService:(NSString *)_serviceName protocol:(NSString *)_proto;
-- (id)initWithService:(NSString *)_serviceName onHost:(id)_host
-  protocol:(NSString *)_protocol;
-- (id)initWithService:(NSString *)_serviceName protocol:(NSString *)_protocol;
+                  onHost:(id)_host
+                protocol:(NSString *)_protocol;
+
++ (id)addressWithService:(NSString *)_serviceName
+                protocol:(NSString *)_proto;
+
+- (id)initWithService:(NSString *)_serviceName
+               onHost:(id)_host
+             protocol:(NSString *)_protocol;
+
+- (id)initWithService:(NSString *)_serviceName
+             protocol:(NSString *)_protocol;
 
 + (id)wildcardAddress;
 + (id)wildcardAddressWithPort:(int)_port;
@@ -70,6 +85,9 @@
 - (int)port;
 
 - (BOOL)isWildcardAddress;
+
+- (BOOL)isIPv6;
+- (BOOL)isIPv4;
 
 /* testing for equality */
 

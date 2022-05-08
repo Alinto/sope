@@ -46,6 +46,29 @@
 
 @end
 
+
+/*
+  Represents the AF_INET6 socket domain.
+
+  NGInternetSocketDomain6 is a singleton, therefore on copy it returns itself
+  and on unarchiving it replaces the unarchived instance with the singleton.
+*/
+
+@interface NGInternetSocketDomain6 : NSObject < NSCoding, NSCopying, NGSocketDomain >
+
++ (id)domain;
+
+// NGSocketDomain
+
+- (id<NGSocketAddress>)addressWithRepresentation:(void *)_data
+  size:(unsigned int)_size;
+
+- (int)socketDomain;
+- (int)protocol;
+
+@end
+
 #define NGDefaultInternetSocketDomain [NGInternetSocketDomain domain]
+#define NGDefaultInternetSocketDomain6 [NGInternetSocketDomain6 domain]
 
 #endif /* __NGNet_NGInternetSocketDomain_H__ */

@@ -56,9 +56,9 @@ static NSArray  *fileInfoAttrs    = nil;
     [self release];
     return nil;
   }
-  
+
   [[self class] _initCache];
-  
+
   if ((self = [super init])) {
     self->connection = [_con retain];
   }
@@ -70,25 +70,25 @@ static NSArray  *fileInfoAttrs    = nil;
   rootDN:(NSString *)_rootDN
 {
   NGLdapConnection *ldap;
-  
+
   ldap = [[NGLdapConnection alloc] initWithHostName:_host port:_port?_port:389];
   if (ldap == nil) {
     [self release];
     return nil;
   }
   ldap = [ldap autorelease];
-  
+
   if (![ldap bindWithMethod:@"simple" binddn:_login credentials:_pwd]) {
     NSLog(@"couldn't bind as DN '%@' with %@", _login, ldap);
     [self release];
     return nil;
   }
-  
+
   if ((self = [self initWithLdapConnection:ldap])) {
     if (_rootDN == nil) {
       /* check cn=config as available in OpenLDAP */
       NSArray *nctxs;
-      
+
       if ((nctxs = [self->connection namingContexts])) {
         if ([nctxs count] > 1)
           NSLog(@"WARNING: more than one naming context handled by server !");
@@ -96,7 +96,7 @@ static NSArray  *fileInfoAttrs    = nil;
           _rootDN = [[nctxs objectAtIndex:0] lowercaseString];
       }
     }
-    
+
     if (_rootDN) {
       ASSIGNCOPY(self->rootDN,    _rootDN);
       ASSIGNCOPY(self->currentDN, _rootDN);
@@ -114,7 +114,7 @@ static NSArray  *fileInfoAttrs    = nil;
     [self release];
     return nil;
   }
-  
+
   return [self initWithHostName:[url hostName] port:[url port]
                bindDN:nil credentials:nil
                rootDN:[url baseDN]];
@@ -146,10 +146,10 @@ static NSArray  *fileInfoAttrs    = nil;
   NSEnumerator *dnComponents;
   NSString     *path;
   NSString     *rdn;
-  
+
   if (_dn == nil) return nil;
   _dn = [_dn lowercaseString];
-  
+
   if (![_dn hasSuffix:self->rootDN]) {
     /* DN is not rooted in this hierachy */
     return nil;
@@ -157,14 +157,14 @@ static NSArray  *fileInfoAttrs    = nil;
 
   /* cut of root */
   _dn = [_dn substringToIndex:([_dn length] - [self->rootDN length])];
-  
+
   path = @"/";
   dnComponents = [[_dn dnComponents] reverseObjectEnumerator];
   while ((rdn = [dnComponents nextObject])) {
     NSString *pathComponent;
-    
+
     pathComponent = [self _pathComponentForRDN:rdn];
-    
+
     path = [path stringByAppendingPathComponent:pathComponent];
   }
   return path;
@@ -180,18 +180,18 @@ static NSArray  *fileInfoAttrs    = nil;
 
   if (![_path isAbsolutePath])
     _path = [[self currentDirectoryPath] stringByAppendingPathComponent:_path];
-  
+
   if (![_path isNotEmpty]) return nil;
-  
+
   NSAssert1([_path isAbsolutePath],
 	    @"path %@ is not an absolute path (after append to cwd) !", _path);
   NSAssert(self->rootDN, @"missing root DN !");
-  
+
   pathComponents = [_path pathComponents];
   for (i = 0, count = [pathComponents count]; i < count; i++) {
     NSString *pathComponent;
     NSString *rdn;
-    
+
     pathComponent = [pathComponents objectAtIndex:i];
 
     if ([pathComponent isEqualToString:@"."])
@@ -203,16 +203,16 @@ static NSArray  *fileInfoAttrs    = nil;
       dn = self->rootDN;
       continue;
     }
-    
+
     if ([pathComponent isEqualToString:@".."]) {
       dn = [dn stringByDeletingLastDNComponent];
       continue;
     }
-    
+
     rdn = [self _rdnForPathComponent:pathComponent];
     dn  = [dn stringByAppendingDNComponent:rdn];
   }
-  
+
   return [dn lowercaseString];
 }
 
@@ -224,13 +224,13 @@ static NSArray  *fileInfoAttrs    = nil;
 
   if (![_path isNotEmpty])
     return NO;
-  
+
   if ((dn = [self dnForPath:_path]) == nil)
     return NO;
-  
+
   if ((path = [self pathForDN:dn]) == nil)
     return NO;
-  
+
   ASSIGNCOPY(self->currentDN,   dn);
   ASSIGNCOPY(self->currentPath, path);
   return YES;
@@ -246,10 +246,10 @@ static NSArray  *fileInfoAttrs    = nil;
   NSEnumerator   *e;
   NSMutableArray *rdns;
   NGLdapEntry    *entry;
-  
+
   if ((dn = [self dnForPath:_path]) == nil)
     return nil;
-  
+
   e = [self->connection flatSearchAtBaseDN:dn
                         qualifier:nil
                         attributes:objectClassAttrs];
@@ -260,7 +260,7 @@ static NSArray  *fileInfoAttrs    = nil;
   while ((entry = [e nextObject])) {
     if (rdns == nil)
       rdns = [NSMutableArray arrayWithCapacity:128];
-    
+
     [rdns addObject:[entry rdn]];
   }
 
@@ -272,25 +272,25 @@ static NSArray  *fileInfoAttrs    = nil;
   NSEnumerator   *e;
   NSMutableArray *paths;
   NGLdapEntry    *entry;
-  
+
   if ((dn = [self dnForPath:_path]) == nil)
     return nil;
-  
+
   _path = [self pathForDN:dn];
-  
+
   e = [self->connection deepSearchAtBaseDN:dn
                         qualifier:nil
                         attributes:objectClassAttrs];
   if (e == nil)
     return nil;
-  
+
   paths = nil;
   while ((entry = [e nextObject])) {
     NSString *path;
     NSString *sdn;
-    
+
     sdn = [entry dn];
-    
+
     if ((path = [self pathForDN:sdn]) == nil) {
       NSLog(@"got no path for dn '%@' ..", sdn);
       continue;
@@ -301,10 +301,10 @@ static NSArray  *fileInfoAttrs    = nil;
 
     if (paths == nil)
       paths = [NSMutableArray arrayWithCapacity:128];
-    
+
     [paths addObject:path];
   }
-  
+
   return [[paths copy] autorelease];
 }
 
@@ -315,14 +315,14 @@ static NSArray  *fileInfoAttrs    = nil;
   id    keys[10];
   id    vals[10];
   short count;
-  
+
   if ((dn = [self dnForPath:_path]) == nil)
     return nil;
-  
+
   entry = [self->connection entryAtDN:dn attributes:fileInfoAttrs];
   if (entry == nil)
     return nil;
-  
+
   count = 0;
   if ((attr = [entry attributeWithName:@"modifytimestamp"])) {
     keys[count] = NSFileModificationDate;
@@ -353,15 +353,15 @@ static NSArray  *fileInfoAttrs    = nil;
   keys[count] = @"NSFileIdentifier";
   if ((vals[count] = [entry dn]))
     count++;
-  
+
   keys[count] = NSFilePath;
   if ((vals[count] = _path))
     count++;
-  
+
   keys[count] = NSFileName;
   if ((vals[count] = [self _pathComponentForRDN:[dn lastDNComponent]]))
     count++;
-  
+
   return [NSDictionary dictionaryWithObjects:vals forKeys:keys count:count];
 }
 
@@ -373,10 +373,10 @@ static NSArray  *fileInfoAttrs    = nil;
 - (BOOL)fileExistsAtPath:(NSString *)_path isDirectory:(BOOL *)_isDir {
   NSString    *dn;
   NGLdapEntry *entry;
-  
+
   if ((dn = [self dnForPath:_path]) == nil)
     return NO;
-  
+
   entry = [self->connection entryAtDN:dn attributes:objectClassAttrs];
   if (entry == nil)
     return NO;
@@ -416,28 +416,28 @@ static NSArray  *fileInfoAttrs    = nil;
     return NO;
   if ((dn2 = [self dnForPath:_path2]) == nil)
     return NO;
-  
+
   if ([dn1 isEqualToString:dn2])
     /* same DN */
     return YES;
 
   e1 = [self->connection entryAtDN:dn1 attributes:nil];
   e2 = [self->connection entryAtDN:dn2 attributes:nil];
-  
+
   return [e1 isEqual:e2];
 }
 - (NSData *)contentsAtPath:(NSString *)_path {
   /* generate LDIF for record */
   NSString        *dn;
   NGLdapEntry     *entry;
-  
+
   if ((dn = [self dnForPath:_path]) == nil)
     return nil;
-  
+
   entry = [self->connection entryAtDN:dn attributes:nil];
   if (entry == nil)
     return nil;
-  
+
   return [[entry ldif] dataUsingEncoding:NSUTF8StringEncoding];
 }
 
@@ -451,7 +451,7 @@ static NSArray  *fileInfoAttrs    = nil;
   short count;
 
   count = 0;
-  
+
   if (_path) {
     keys[count]   = @"Path";
     values[count] = _path;
@@ -475,45 +475,45 @@ static NSArray  *fileInfoAttrs    = nil;
     values[count] = self->connection;
     count++;
   }
-  
+
   return [NSDictionary dictionaryWithObjects:values forKeys:keys count:count];
 }
 
 - (BOOL)removeFileAtPath:(NSString *)_path handler:(id)_fhandler {
   NSString *dn;
-  
+
   [_fhandler fileManager:(id)self willProcessPath:_path];
-  
+
   if ((dn = [self dnForPath:_path]) == nil) {
     if (_fhandler) {
       NSDictionary *errDict;
-      
+
       errDict = [self _errDictForPath:_path toPath:nil dn:nil
                       reason:@"couldn't map path to LDAP dn"];
-      
+
       if ([_fhandler fileManager:(id)self shouldProceedAfterError:errDict])
         return YES;
     }
     return NO;
   }
-  
+
   /* should delete sub-entries first ... */
-  
+
   /* delete entry */
-  
+
   if (![self->connection removeEntryWithDN:dn]) {
     if (_fhandler) {
       NSDictionary *errDict;
-      
+
       errDict = [self _errDictForPath:_path toPath:nil dn:dn
                       reason:@"couldn't remove LDAP entry"];
-      
+
       if ([_fhandler fileManager:(id)self shouldProceedAfterError:errDict])
         return YES;
     }
     return NO;
   }
-  
+
   return YES;
 }
 
@@ -522,16 +522,16 @@ static NSArray  *fileInfoAttrs    = nil;
 {
   NGLdapEntry *e;
   NSString    *fromDN, *toDN, *toRDN;
-  
+
   [_fhandler fileManager:(id)self willProcessPath:_path];
-  
+
   if ((fromDN = [self dnForPath:_path]) == nil) {
     if (_fhandler) {
       NSDictionary *errDict;
-      
+
       errDict = [self _errDictForPath:_path toPath:_destination dn:nil
                       reason:@"couldn't map source path to LDAP dn"];
-      
+
       if ([_fhandler fileManager:(id)self shouldProceedAfterError:errDict])
         return YES;
     }
@@ -545,14 +545,14 @@ static NSArray  *fileInfoAttrs    = nil;
   toDN  = [self dnForPath:_destination];
   toRDN = [toDN lastDNComponent];
   toDN  = [toDN stringByDeletingLastDNComponent];
-  
+
   if ((toDN == nil) || (toRDN == nil)) {
     if (_fhandler) {
       NSDictionary *errDict;
-      
+
       errDict = [self _errDictForPath:_path toPath:_destination dn:fromDN
                       reason:@"couldn't map destination path to LDAP dn"];
-      
+
       if ([_fhandler fileManager:(id)self shouldProceedAfterError:errDict])
         return YES;
     }
@@ -560,14 +560,14 @@ static NSArray  *fileInfoAttrs    = nil;
   }
 
   /* process record */
-  
+
   if ((e = [self->connection entryAtDN:fromDN attributes:nil]) == nil) {
     if (_fhandler) {
       NSDictionary *errDict;
-      
+
       errDict = [self _errDictForPath:_path toPath:_destination dn:fromDN
                       reason:@"couldn't load source LDAP record"];
-      
+
       if ([_fhandler fileManager:(id)self shouldProceedAfterError:errDict])
         return YES;
     }
@@ -577,48 +577,48 @@ static NSArray  *fileInfoAttrs    = nil;
     /* create new record with the attributes of the old one */
     NGLdapEntry *newe;
     NSArray     *attrs;
-    
+
     attrs = [[e attributes] allValues];
     newe  = [[NGLdapEntry alloc] initWithDN:toDN attributes:attrs];
     newe  = [newe autorelease];
-    
+
     /* insert record in target space */
     if (![self->connection addEntry:newe]) {
       /* insert failed */
 
       if (_fhandler) {
         NSDictionary *errDict;
-        
+
         errDict = [self _errDictForPath:_path toPath:_destination dn:toDN
                         reason:@"couldn't insert LDAP record in target dn"];
-        
+
         if ([_fhandler fileManager:(id)self shouldProceedAfterError:errDict])
           return YES;
       }
       return NO;
     }
   }
-  
+
   /* should process children ? */
-  
+
   return YES;
 }
 
-- (BOOL)movePath:(NSString *)_path toPath:(NSString *)_destination 
+- (BOOL)movePath:(NSString *)_path toPath:(NSString *)_destination
   handler:(id)_fhandler
 {
   /* needs to invoke a modrdn operation */
   [_fhandler fileManager:(id)self willProcessPath:_path];
-  
+
   return NO;
 }
 
-- (BOOL)linkPath:(NSString *)_path toPath:(NSString *)_destination 
+- (BOOL)linkPath:(NSString *)_path toPath:(NSString *)_destination
   handler:(id)_fhandler
 {
   /* LDAP doesn't support links .. */
   [_fhandler fileManager:(id)self willProcessPath:_path];
-  
+
   return NO;
 }
 
@@ -636,15 +636,15 @@ static NSArray  *fileInfoAttrs    = nil;
 
   ms = [NSMutableString stringWithCapacity:64];
   [ms appendFormat:@"<0x%p[%@]:", self, NSStringFromClass([self class])];
-  
+
   if (self->rootDN)
     [ms appendFormat:@" root=%@", self->rootDN];
   if (self->currentDN && ![self->currentDN isEqualToString:self->rootDN])
     [ms appendFormat:@" cwd=%@", self->currentDN];
-  
+
   if (self->connection)
     [ms appendFormat:@" ldap=%@", self->connection];
-  
+
   [ms appendString:@">"];
   return ms;
 }
@@ -680,11 +680,11 @@ static NSArray  *fileInfoAttrs    = nil;
 - (EODataSource *)dataSourceAtPath:(NSString *)_path {
   NGLdapDataSource *ds;
   NSString *dn;
-  
+
   if ((dn = [self dnForPath:_path]) == nil)
     /* couldn't get DN for specified path .. */
     return nil;
-  
+
   ds = [[NGLdapDataSource alloc]
                           initWithLdapConnection:self->connection
                           searchBase:dn];
@@ -699,10 +699,10 @@ static NSArray  *fileInfoAttrs    = nil;
 - (EOGlobalID *)globalIDForPath:(NSString *)_path {
   NSString       *dn;
   NGLdapGlobalID *gid;
-  
+
   if ((dn = [self dnForPath:_path]) == nil)
     return nil;
-  
+
   gid = [[NGLdapGlobalID alloc]
                          initWithHost:[self->connection hostName]
                          port:[self->connection port]
@@ -712,18 +712,18 @@ static NSArray  *fileInfoAttrs    = nil;
 
 - (NSString *)pathForGlobalID:(EOGlobalID *)_gid {
   NGLdapGlobalID *gid;
-  
+
   if (![_gid isKindOfClass:[NGLdapGlobalID class]])
     return nil;
 
   gid = (NGLdapGlobalID *)_gid;
-  
+
   /* check whether host&port is correct */
   if (![[self->connection hostName] isEqualToString:[gid host]])
     return nil;
-  if (![self->connection port] == [gid port])
+  if (!([self->connection port] == [gid port]))
     return nil;
-  
+
   return [self pathForDN:[gid dn]];
 }
 

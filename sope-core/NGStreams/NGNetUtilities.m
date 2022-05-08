@@ -31,7 +31,7 @@ id<NGSocketAddress> NGSocketAddressFromString(NSString *_string) {
 
   {
     const unsigned char *tmp = (unsigned char *)index((char *)cstr, ':');
-    
+
     if (tmp) { // INET socket
       NSString *hostName = nil;
 
@@ -39,7 +39,7 @@ id<NGSocketAddress> NGSocketAddressFromString(NSString *_string) {
         hostName = nil; // wildcard host
       else {
         hostName = [NSString stringWithCString:(char *)cstr
-			     length:(tmp - cstr)];
+                             length:(tmp - cstr)];
       }
 
       // check what comes after colon
@@ -53,22 +53,22 @@ id<NGSocketAddress> NGSocketAddressFromString(NSString *_string) {
         const unsigned char *tmp2;
         NSString *protocol = @"tcp";
         NSString *service;
-	
-	tmp2 = (unsigned char *)index((char *)(tmp + 1), '/');
+
+        tmp2 = (unsigned char *)index((char *)(tmp + 1), '/');
         tmp++;
 
         if (tmp2 == NULL)
           service  = [NSString stringWithCString:(char *)tmp];
         else {
           service  = [NSString stringWithCString:(char *)tmp
-			       length:(tmp2 - tmp)];
+                               length:(tmp2 - tmp)];
           protocol = [NSString stringWithCString:(char *)(tmp2 + 1)];
         }
 
         if ([service isEqualToString:@"auto"])
           return [NGInternetSocketAddress addressWithPort:0
                                           onHost:hostName];
-        
+
         return [NGInternetSocketAddress addressWithService:service
                                         onHost:hostName
                                         protocol:protocol];
