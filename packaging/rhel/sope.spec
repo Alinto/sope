@@ -17,7 +17,7 @@ AutoReqProv:  off
 Source:       %{sope_source}
 Prefix:       /usr
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildPreReq:  gnustep-make gcc-objc postgresql-devel
+BuildRequires: gnustep-make gcc-objc postgresql-devel openldap-devel gnustep-base-devel gnustep-base libxml2-devel gmp-devel avahi-devel gnutls-devel libgcrypt-devel libffi-devel libxslt-devel libicu-devel
 
 %{?el5:BuildRequires: mysql-devel}
 %{?el6:BuildRequires: mysql-devel}
@@ -289,7 +289,7 @@ name "SOPE" (SKYRiX Object Publishing Environment) is inspired by ZOPE.
 
 %prep
 rm -fr ${RPM_BUILD_ROOT}
-%setup -q -n SOPE
+%setup -q -n sope-SOPE-%{sogo_version}
 
 # ****************************** build ********************************
 %build
