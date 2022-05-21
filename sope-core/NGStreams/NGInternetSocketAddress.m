@@ -227,8 +227,8 @@ static inline NSString *_nameOfLocalhost(void) {
       memcpy(&addr->sin_addr, &((struct sockaddr_in *) res->ai_addr)->sin_addr, sizeof(struct in_addr));
       self->address = addr;
       self->isIp6 = NO;
+      self->isWildcardHost = (addr->sin_addr.s_addr == INADDR_ANY);
       addr_ptr = &addr->sin_addr;
-
     }
     else if (res->ai_family == AF_INET6) {
       struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)malloc(sizeof(struct sockaddr_in6));
@@ -236,6 +236,7 @@ static inline NSString *_nameOfLocalhost(void) {
       addr6->sin6_port = htons(self->port);
       memcpy(&addr6->sin6_addr, &((struct sockaddr_in6 *) res->ai_addr)->sin6_addr, sizeof(struct in6_addr));
       self->address = addr6;
+      self->isWildcardHost = IN6_IS_ADDR_UNSPECIFIED(&addr6->sin6_addr);
       self->isIp6 = YES;
       addr_ptr = &addr6->sin6_addr;
     }
