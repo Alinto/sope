@@ -25,50 +25,76 @@
 #include "common.h"
 
 id<NGSocketAddress> NGSocketAddressFromString(NSString *_string) {
-  const unsigned char *cstr = (unsigned char *)[_string cString];
+  const char *cstr = [_string cString];
   if (cstr == NULL)         return nil;
   if ([_string length] < 1) return nil;
 
   {
-    const unsigned char *tmp = (unsigned char *)index((char *)cstr, ':');
-    
-    if (tmp) { // INET socket
+    const char *colon = index(cstr, ':');
+
+    if (colon) { // INET socket
       NSString *hostName = nil;
 
-      if (((tmp - cstr) == 1) && (*cstr == '*'))
-        hostName = nil; // wildcard host
-      else {
+      if (*cstr == '[') {
+        // ipv6
+        cstr++;
+        char *pos = index(cstr, ']');
+        if (pos == 0) {
+          [NSException raise:NSInvalidArgumentException
+            format: @"Illegal Ipv6 address: %@", _string];
+        }
+        while (*pos != ']') {
+            if (*pos != ':' && *pos != '.' && !isxdigit(*pos)) {
+              [NSException raise:NSInvalidArgumentException
+              format: @"Illegal Ipv6 address: %@", _string];
+            }
+            pos++;
+        }
+        colon = pos +1;
+        if (*colon != ':') {
+            [NSException raise:NSInvalidArgumentException
+              format: @"Missing port on Ipv6 address: %@", _string];
+        }
         hostName = [NSString stringWithCString:(char *)cstr
-			     length:(tmp - cstr)];
+                             length:(pos - cstr)];
+      }
+      else {
+        // ipv4
+        if (((colon - cstr) == 1) && (*cstr == '*'))
+          hostName = nil; // wildcard host
+        else {
+          hostName = [NSString stringWithCString:(char *)cstr
+                              length:(colon - cstr)];
+        }
       }
 
       // check what comes after colon
-      if (isdigit(tmp[1])) {
+      if (isdigit(colon[1])) {
         // a port
-        int port = atoi((char *)tmp + 1);
+        int port = atoi((char *)colon + 1);
         return [NGInternetSocketAddress addressWithPort:port onHost:hostName];
       }
       else {
         // a service or 'auto' for auto-assigned ports
-        const unsigned char *tmp2;
+        const char *slash;
         NSString *protocol = @"tcp";
         NSString *service;
-	
-	tmp2 = (unsigned char *)index((char *)(tmp + 1), '/');
-        tmp++;
 
-        if (tmp2 == NULL)
-          service  = [NSString stringWithCString:(char *)tmp];
+        slash = index((colon + 1), '/');
+        colon++;
+
+        if (slash == NULL)
+          service  = [NSString stringWithCString:colon];
         else {
-          service  = [NSString stringWithCString:(char *)tmp
-			       length:(tmp2 - tmp)];
-          protocol = [NSString stringWithCString:(char *)(tmp2 + 1)];
+          service  = [NSString stringWithCString:colon
+                               length:(slash - colon)];
+          protocol = [NSString stringWithCString:(slash + 1)];
         }
 
         if ([service isEqualToString:@"auto"])
           return [NGInternetSocketAddress addressWithPort:0
                                           onHost:hostName];
-        
+
         return [NGInternetSocketAddress addressWithService:service
                                         onHost:hostName
                                         protocol:protocol];

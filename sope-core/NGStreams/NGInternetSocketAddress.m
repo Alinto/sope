@@ -1,5 +1,6 @@
 /*
   Copyright (C) 2000-2005 SKYRIX Software AG
+  Copyright (C) 2022 Nicolas Höft
 
   This file is part of SOPE.
 
@@ -30,27 +31,15 @@
 #if HAVE_UNISTD_H || defined(__APPLE__)
 #  include <unistd.h>
 #endif
-#if defined(__APPLE__)
+#ifdef HAVE_NETDB_H
 #  include <netdb.h>
 #endif
 
-#if !defined(__CYGWIN32__)
-#  if HAVE_WINDOWS_H
-#    include <windows.h>
-#  endif
-#  if HAVE_WINSOCK_H
-#    include <winsock.h>
-#  endif
-#endif
 
 #include "NGSocketExceptions.h"
 #include "NGInternetSocketAddress.h"
 #include "NGInternetSocketDomain.h"
 #include "common.h"
-
-#if defined(HAVE_GETHOSTBYNAME_R) && !defined(linux) && !defined(__FreeBSD__) && !defined(__GLIBC__)
-#define USE_GETHOSTBYNAME_R 1
-#endif
 
 @implementation NGInternetSocketAddress
 
@@ -105,77 +94,37 @@ static inline NSString *_nameOfLocalhost(void) {
 - (void)_fillHost {
   /*
     Fill up the host and port ivars based on the INET address.
-
-    TODO: cache some information, takes quite some time (11% of execution
-    time on MacOSX proftest) to get the hostname of an address.
   */
-  struct hostent *hostEntity = NULL; // only valid during lock
   NSString       *newHost  = nil;
   int            errorCode = 0;
-  struct sockaddr_in *sockAddr = self->address;
 
   if (self->isHostFilled)
     /* host is already filled .. */
     return;
 
 #if DEBUG
-  NSAssert(self->isAddressFilled, @"either host or address must be filled ...");
+  NSAssert(self->address != nil, @"either host or address must be filled ...");
 #endif
 
-  if (sockAddr->sin_addr.s_addr != 0) { // not a wildcard address
-#if !defined(HAVE_GETHOSTBYADDR_R)
-    [systemLock lock];
-    newHost = NSMapGet(nameCache,
-		       (void *)(unsigned long)sockAddr->sin_addr.s_addr);
-#else
-    [systemLock lock];
-    newHost = NSMapGet(nameCache,
-		       (void *)(unsigned long)sockAddr->sin_addr.s_addr);
-    [systemLock unlock];
-#endif
+  if (!self->isWildcardHost) {
     if (newHost == nil) {
       BOOL done = NO;
 
       while (!done) {
-#if USE_GETHOSTBYNAME_R
-        struct hostent hostEntityBuffer;
-        char buffer[8200];
+        char hostNameBuffer[256];
 
-        hostEntity = gethostbyaddr_r((char *)&(sockAddr->sin_addr.s_addr),
-                                     4,
-                                     [[self domain] socketDomain],
-                                     &hostEntityBuffer,
-                                     buffer, 8200,
-                                     &errorCode);
-#else
-# ifdef __MINGW32__
-#   warning "doesn't resolve host name on mingw32 !"
-	hostEntity = NULL;
-	errorCode  = -1;
-# else
-        hostEntity = gethostbyaddr((char *)&(sockAddr->sin_addr.s_addr),
-                                   4,
-                                   [[self domain] socketDomain]);
-#  if defined(WIN32) && !defined(__CYGWIN32__)
-        errorCode = WSAGetLastError();
-#  else
-        errorCode = h_errno;
-#  endif
-# endif
-#endif
-        if (hostEntity == NULL) {
+        errorCode = getnameinfo((struct sockaddr *)self->address, [self addressRepresentationSize],
+                                hostNameBuffer, 255, NULL, 0, 0);
+
+        if (errorCode != 0) {
           done = YES;
 
           switch (errorCode) {
-#ifdef __MINGW32__
-	    case -1:
-	      break;
-#endif
-            case HOST_NOT_FOUND:
+            case EAI_NONAME:
               NSLog(@"%s: host not found ..", __PRETTY_FUNCTION__);
               break;
 
-            case TRY_AGAIN:
+            case EAI_AGAIN:
 #ifndef __linux
               NSLog(@"%s:\n  couldn't lookup host, retry ..",
                     __PRETTY_FUNCTION__);
@@ -185,47 +134,31 @@ static inline NSString *_nameOfLocalhost(void) {
 #endif
               break;
 
-            case NO_RECOVERY:
-              NSLog(@"%s: no recovery", __PRETTY_FUNCTION__);
-              break;
-
-            case NO_DATA:
-              NSLog(@"%s: no data", __PRETTY_FUNCTION__);
+            case EAI_FAIL:
+              NSLog(@"%s: A nonrecoverable error occurred.", __PRETTY_FUNCTION__);
               break;
 
             default:
               NSLog(@"%s: unknown error: h_errno=%i errno=%s",
                     __PRETTY_FUNCTION__,
-                    errorCode, strerror(errno));
+                    errorCode, gai_strerror(errorCode));
               break;
           }
 
-          newHost = [NSString stringWithCString:inet_ntoa(sockAddr->sin_addr)];
+          newHost = self->ipAddress;
         }
         else {
-          newHost = [NSString stringWithCString:hostEntity->h_name];
+          newHost = [NSString stringWithCString:hostNameBuffer];
           done = YES;
         }
       }
 
-      if (hostEntity == NULL) {
+      if (errorCode != 0) {
         // throw could not get address ..
-        NSLog(@"could not get DNS name of address %@ in domain %@: %i",
-              newHost, [self domain], errorCode);
+        NSLog(@"could not get DNS name of address %@ in domain %@: %s",
+               self->ipAddress, [self domain], gai_strerror(errorCode));
       }
-      else if (newHost) {
-        /* add to cache */
-        NSMapInsert(nameCache,
-		    (void *)(unsigned long)sockAddr->sin_addr.s_addr, newHost);
-      }
-      /* TODO: should also cache unknown IPs ! */
     }
-
-    //else printf("%s: CACHE HIT !\n", __PRETTY_FUNCTION__);
-
-#if !defined(HAVE_GETHOSTBYADDR_R)
-    [systemLock unlock];
-#endif
   }
   else {
     /* wildcard address */
@@ -243,13 +176,7 @@ static inline NSString *_nameOfLocalhost(void) {
   // throws
   //   NGCouldNotResolveHostNameException  when a DNS lookup fails
 
-#if defined(WIN32) && !defined(__CYGWIN32__)
-  u_long *ia = &(((struct sockaddr_in *)self->address)->sin_addr.s_addr);
-#else
-  unsigned int *ia = &(((struct sockaddr_in *)self->address)->sin_addr.s_addr);
-#endif
-
-  if (self->isAddressFilled)
+  if (self->address != nil)
     /* address is already filled .. */
     return nil;
 
@@ -258,93 +185,65 @@ static inline NSString *_nameOfLocalhost(void) {
 #endif
 
   if (self->hostName == nil) {
-    //  if ([self isWildcardAddress])
-    *ia = htonl(INADDR_ANY); // wildcard (0)
-    self->isAddressFilled = YES;
+    if (self->isIp6) {
+      struct sockaddr_in6 *addr6 = malloc(sizeof(struct sockaddr_in6));
+      addr6->sin6_addr = in6addr_any;
+      addr6->sin6_port = htons(self->port);
+      self->address = addr6;
+    }
+    else
+    {
+      struct sockaddr_in *addr = malloc(sizeof(struct sockaddr_in));
+      addr->sin_addr.s_addr = htonl(INADDR_ANY);
+      addr->sin_port = htons(self->port);
+      self->address = addr;
+    }
+    self->ipAddress = @"*";
   }
   else {
-    const unsigned char *chost;
+    const char *chost;
+    struct addrinfo hint;
+    struct addrinfo* res = NULL;
+    void* addr_ptr;
+    char ipAddr[64];
+    memset(&hint, 0, sizeof(hint));
+    int ret;
 
-    chost = (unsigned char *)[[self hostName] cString];
-
-    // try to interpret hostname as INET dotted address (eg 122.133.44.87)
-    *ia = inet_addr((char *)chost);
-
-    if ((int)*ia != -1) { // succeeded
-      self->isAddressFilled = YES;
+    // try to interpret hostname as INET/INET6 dotted address (eg 122.133.44.87)
+    chost = [[self hostName] cString];
+    hint.ai_family = PF_UNSPEC;
+    hint.ai_flags |= AI_CANONNAME;
+    ret = getaddrinfo(chost, NULL, &hint, &res);
+    if (ret != 0)
+    {
+      NSString* reason = [NSString stringWithFormat:@"error code %s", gai_strerror(ret)];
+      return [[[NGCouldNotResolveHostNameException alloc]
+                  initWithHostName:[self hostName] reason:reason] autorelease];
     }
-    else { // failed, try to interpret hostname as DNS hostname
-      BOOL didFail   = NO;
-      int  errorCode = 0;
-      int  addrType  = AF_INET;
-#if defined(USE_GETHOSTBYNAME_R)
-      char buffer[4096];
-      struct hostent hostEntity;
-#else
-      struct hostent *hostEntity; // only valid during lock
-#endif
-
-#if defined(USE_GETHOSTBYNAME_R)
-      if (gethostbyname_r(chost, &hostEntity,
-                          buffer, sizeof(buffer), &errorCode) == NULL) {
-        didFail = YES;
-      }
-      else {
-        addrType = hostEntity.h_addrtype;
-
-        if (addrType == AF_INET)
-          *ia = ((struct in_addr *)(hostEntity.h_addr_list[0]))->s_addr;
-        else
-          didFail = YES; // invalid domain (eg AF_INET6)
-      }
-#else
-      [systemLock lock];
-      {
-        if ((hostEntity = gethostbyname((char *)chost)) == NULL) {
-          didFail = YES;
-#if defined(WIN32) && !defined(__CYGWIN32__)
-          errorCode = WSAGetLastError();
-#else
-          errorCode = h_errno;
-#endif
-        }
-        else {
-          addrType = hostEntity->h_addrtype;
-
-          if (addrType == AF_INET)
-            *ia = ((struct in_addr *)(hostEntity->h_addr_list[0]))->s_addr;
-          else
-            didFail = YES; // invalid domain (eg AF_INET6)
-        }
-      }
-      [systemLock unlock];
-#endif
-
-      if (didFail) { // could not resolve hostname
-        // did not find host
-        NSString *reason = nil;
-
-        if (addrType != AF_INET) {
-          // invalid domain (eg AF_INET6)
-          reason = @"resolved address is in invalid domain";
-        }
-        else {
-          switch (errorCode) {
-            case HOST_NOT_FOUND: reason = @"host not found"; break;
-            case TRY_AGAIN:      reason = @"try again";      break;
-            case NO_RECOVERY:    reason = @"no recovery";    break;
-            case NO_DATA:        reason = @"no address available"; break;
-            default:
-              reason = [NSString stringWithFormat:@"error code %i", errorCode];
-              break;
-          }
-        }
-        return [[[NGCouldNotResolveHostNameException alloc]
-		  initWithHostName:[self hostName] reason:reason] autorelease];
-      }
-
-      self->isAddressFilled = YES;
+    if (res->ai_family == AF_INET) {
+      struct sockaddr_in *addr = (struct sockaddr_in *)malloc(sizeof(struct sockaddr_in));
+      addr->sin_family = AF_INET;
+      addr->sin_port = htons(self->port);
+      memcpy(&addr->sin_addr, &((struct sockaddr_in *) res->ai_addr)->sin_addr, sizeof(struct in_addr));
+      self->address = addr;
+      self->isIp6 = NO;
+      self->isWildcardHost = (addr->sin_addr.s_addr == INADDR_ANY);
+      addr_ptr = &addr->sin_addr;
     }
+    else if (res->ai_family == AF_INET6) {
+      struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)malloc(sizeof(struct sockaddr_in6));
+      addr6->sin6_family = AF_INET6;
+      addr6->sin6_port = htons(self->port);
+      memcpy(&addr6->sin6_addr, &((struct sockaddr_in6 *) res->ai_addr)->sin6_addr, sizeof(struct in6_addr));
+      self->address = addr6;
+      self->isWildcardHost = IN6_IS_ADDR_UNSPECIFIED(&addr6->sin6_addr);
+      self->isIp6 = YES;
+      addr_ptr = &addr6->sin6_addr;
+    }
+    inet_ntop(res->ai_family, addr_ptr, ipAddr, 64);
+    freeaddrinfo(res);
+    self->ipAddress = [NSString stringWithUTF8String: ipAddr];
+    self->isAddressFilled = YES;
   }
   return nil;
 }
@@ -379,7 +278,7 @@ static inline NSString *_nameOfLocalhost(void) {
 
 - (id)init {
   if ((self = [super init])) {
-    self->address = malloc(sizeof(struct sockaddr_in));
+    self->address = NULL;
   }
   return self;
 }
@@ -388,6 +287,7 @@ static inline NSString *_nameOfLocalhost(void) {
   if ((self = [self init])) {
     self->isAddressFilled = NO;
     self->isHostFilled    = YES;
+    self->port = _port;
 
     if (_host != nil) {
       if ([_host isKindOfClass:[NSHost class]])
@@ -395,21 +295,18 @@ static inline NSString *_nameOfLocalhost(void) {
 
       if ([_host isEqualToString:@"*"]) {
         self->hostName = nil; /* wildcard host */
+        self->isWildcardHost = YES;
       }
       else {
         self->hostName = [_host copy];
         self->isWildcardHost = NO;
+        [self _fillAddress];
       }
     }
     else {
       /* wildcard host */
       self->isWildcardHost = YES;
     }
-
-    ((struct sockaddr_in *)self->address)->sin_family =
-      [[self domain] socketDomain];
-    ((struct sockaddr_in *)self->address)->sin_port =
-      htons((short)(_port & 0xffff));
   }
   return self;
 }
@@ -419,41 +316,35 @@ static inline NSString *_nameOfLocalhost(void) {
 {
   /* careful: the port in servent is in network byteorder! */
   NSException *exc = nil;
-  int port = -1;
-#if defined(HAVE_GETSERVBYNAME_R)
-  char   buffer[2048];
-  struct servent entry;
-#else
-  struct servent *entry;
-#endif
+  struct addrinfo* res = NULL;
+  struct addrinfo hint = {0};
+  hint.ai_family = AF_UNSPEC;
+  hint.ai_flags = AI_PASSIVE;
+  if ([_protocol isEqualToString: @"tcp"])
+    hint.ai_socktype = SOCK_STREAM;
+  else if ([_protocol isEqualToString: @"udp"])
+    hint.ai_socktype = SOCK_DGRAM;
+  int _port = -1;
+  int ret;
 
-#if defined(HAVE_GETSERVBYNAME_R)
-  if (getservbyname_r((char *)[_serviceName cString], [_protocol cString],
-                      &entry, buffer, sizeof(buffer)) == NULL) {
+  ret = getaddrinfo(NULL, [_serviceName cString], &hint, &res);
+  if (ret != 0) {
     exc = [[NGDidNotFindServiceException alloc] initWithServiceName:_serviceName];
   }
-  else
-    port = entry.s_port;
-#else
-  [systemLock lock];
-  {
-    entry = getservbyname((char *)[_serviceName cString], [_protocol cString]);
-    if (entry == NULL) {
-      exc = [[NGDidNotFindServiceException alloc]
-	      initWithServiceName:_serviceName];
-    }
-    else
-      port = entry->s_port;
+  else {
+    if (res->ai_family == AF_INET)
+      _port = ((struct sockaddr_in *) res->ai_addr)->sin_port;
+    else if (res->ai_family == AF_INET6)
+      _port = ((struct sockaddr_in6 *) res->ai_addr)->sin6_port;
   }
-  [systemLock unlock];
-#endif
+  freeaddrinfo(res);
 
   if (exc != nil) {
     self = [self autorelease];
     [exc raise];
     return nil;
   }
-  return [self initWithPort:ntohs(port) onHost:_host];
+  return [self initWithPort:ntohs(_port) onHost:_host];
 }
 
 - (id)initWithPort:(int)_port {
@@ -470,12 +361,14 @@ static inline NSString *_nameOfLocalhost(void) {
   internalRepresentation:(void *)_representation
   size:(int)_length
 {
-  struct sockaddr_in *sockAddr = _representation;
+  struct sockaddr *sockAddr = _representation;
+  char ipAddr[64];
+  void* addr_ptr;
 #if DEBUG
-  NSAssert(_length == sizeof(struct sockaddr_in),
+  NSAssert(_length == [_domain addressRepresentationSize],
            @"invalid socket address length");
 #else
-  if (_length != sizeof(struct sockaddr_in)) {
+  if (_length != [_domain addressRepresentationSize]) {
     NSLog(@"%s: got invalid sockaddr_in size ...", __PRETTY_FUNCTION__);
     [self release];
     return nil;
@@ -488,19 +381,36 @@ static inline NSString *_nameOfLocalhost(void) {
   self->isHostFilled = NO; /* need to lookup DNS */
 
   /* fill address */
+  if (sockAddr->sa_family == AF_INET) {
+    self->address = malloc(sizeof(struct sockaddr_in));
+    struct sockaddr_in *addr4 = (struct sockaddr_in *)sockAddr;
+    addr_ptr = &addr4->sin_addr;
+    self->isIp6 = NO;
+    self->isWildcardHost = (addr4->sin_addr.s_addr == INADDR_ANY);
+    self->port = ntohs(addr4->sin_port);
+  }
+  else if (sockAddr->sa_family == AF_INET6) {
+    self->address = malloc(sizeof(struct sockaddr_in6));
+    struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)sockAddr;
+    addr_ptr = &addr6->sin6_addr;
+    self->isIp6 = YES;
+    self->isWildcardHost = IN6_IS_ADDR_UNSPECIFIED(&addr6->sin6_addr);
+    self->port = ntohs(addr6->sin6_port);
+  }
 
+  memcpy(self->address, _representation, [_domain addressRepresentationSize]);
   self->isAddressFilled = YES;
-  memcpy(self->address, _representation, sizeof(struct sockaddr_in));
 
-  if (sockAddr->sin_addr.s_addr != 0) {
+  if (!self->isWildcardHost) {
     /* not a wildcard address */
-    self->isWildcardHost = NO;
+    inet_ntop(sockAddr->sa_family, addr_ptr, ipAddr, 64);
+    self->ipAddress = [NSString stringWithUTF8String: ipAddr];
   }
   else {
     /* wildcard address */
     self->hostName       = nil;
-    self->isWildcardHost = YES;
     self->isHostFilled   = YES; /* wildcard host, no DNS lookup ... */
+    self->ipAddress = @"*";
   }
 
   return self;
@@ -520,52 +430,26 @@ static inline NSString *_nameOfLocalhost(void) {
 }
 
 - (BOOL) _isLoopback {
-  if (!self->isAddressFilled)
+  if (self->address == nil)
     [[self _fillAddress] raise];
-#if defined(WIN32) && !defined(__CYGWIN32__)
-  u_long *ia = &(((struct sockaddr_in *)self->address)->sin_addr.s_addr);
-#else
+  if (self->isIp6) {
+      return IN6_IS_ADDR_LOOPBACK(&((struct sockaddr_in6 *)self->address)->sin6_addr);
+  }
   unsigned int *ia = &(((struct sockaddr_in *)self->address)->sin_addr.s_addr);
-#endif
   return ((((long int) (ntohl(*ia))) & 0xff000000) == 0x7f000000);
 }
 
 - (NSString *)address {
-#if defined(WIN32) && !defined(__CYGWIN32__)
-  u_long *ia;
-  ia = (u_long *)&(((struct sockaddr_in *)self->address)->sin_addr.s_addr);
-#else
-  unsigned long ia;
-  ia = (unsigned long)
-    &(((struct sockaddr_in *)self->address)->sin_addr.s_addr);
-#endif
-
   if (self->hostName == nil) /* wildcard */
     return nil;
 
-  if (!self->isAddressFilled)
+  if (self->address == nil)
     [[self _fillAddress] raise];
-
-  {
-    char     *ptr = NULL;
-    NSString *str = nil;
-
-    [systemLock lock];
-    {
-      ptr = inet_ntoa(*((struct in_addr *)ia));
-      str = [NSString stringWithCString:ptr];
-    }
-    [systemLock unlock];
-
-    return str;
-  }
+  return self->ipAddress;
 }
 
 - (int)port {
-  /* how to do ? */
-  if (!self->isAddressFilled)
-    [[self _fillAddress] raise];
-  return ntohs(((struct sockaddr_in *)self->address)->sin_port);
+  return self->port;
 }
 
 - (BOOL)isWildcardAddress {
@@ -579,18 +463,23 @@ static inline NSString *_nameOfLocalhost(void) {
   // throws
   //   NGCouldNotResolveHostNameException  when a DNS lookup fails
 
-  if (!self->isAddressFilled)
+  if (self->address == nil)
     [[self _fillAddress] raise];
-
   return self->address;
 }
 
 - (int)addressRepresentationSize {
   return [[self domain] addressRepresentationSize];
 }
+
+
 - (id)domain {
   static id domain = nil;
+  static id domain6 = nil;
   if (domain == nil) domain = [[NGInternetSocketDomain domain] retain];
+  if (domain6 == nil) domain6 = [[NGInternetSocketDomain6 domain] retain];
+  if (self->isIp6)
+    return domain6;
   return domain;
 }
 
@@ -609,16 +498,20 @@ static inline NSString *_nameOfLocalhost(void) {
     normalized_hostname = [normalized_hostname substringToIndex: [normalized_hostname length] - 1];
   }
 
-  if ([normalized_hostname isEqualToString: @"localhost6"] ||
-      [normalized_hostname isEqualToString: @"localhost6.localdomain6"]) {
-    return YES;
-  }
   if ([normalized_hostname isEqualToString: @"localhost"] ||
       [normalized_hostname isEqualToString: @"localhost.localdomain"] ||
       [normalized_hostname hasSuffix: @".localhost"]) {
     return YES;
   }
   return NO;
+}
+
+- (BOOL) isIPv4 {
+  return !self->isIp6;
+}
+
+- (BOOL) isIPv6 {
+  return self->isIp6;
 }
 
 /* comparing */
@@ -695,6 +588,9 @@ static inline NSString *_nameOfLocalhost(void) {
     [ms appendString:@" not-filled"];
   else
     [ms appendFormat:@" port=%d", [self port]];
+
+  //if (self->ipAddress != nil)
+    //[ms appendFormat:@" ip=%@", self->ipAddress];
 
   [ms appendString:@">"];
   return ms;

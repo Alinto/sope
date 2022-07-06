@@ -44,12 +44,12 @@ static NGInternetSocketDomain *domain = nil;
   size:(unsigned int)_size
 {
   NGInternetSocketAddress *address = nil;
-  
+
   if ((unsigned int)[self addressRepresentationSize] != _size) {
     NSLog(@"%@: invalid address size %i ..", NSStringFromSelector(_cmd), _size);
     return nil;
   }
-  
+
   address = [[NGInternetSocketAddress allocWithZone:[self zone]]
                                       initWithDomain:self
                                       internalRepresentation:_data
@@ -111,6 +111,96 @@ static NGInternetSocketDomain *domain = nil;
 
 - (NSString *)description {
   return [NSString stringWithFormat:@"<InternetDomain[0x%p]>", self];
+}
+
+@end /* NGInternetSocketDomain */
+
+
+
+@implementation NGInternetSocketDomain6
+
+static NGInternetSocketDomain6 *domain6 = nil;
+
++ (void)initialize {
+  if (domain6 == nil) domain6 = [[NGInternetSocketDomain6 alloc] init];
+}
++ (id)domain {
+  return domain6;
+}
+
+/* NGSocketDomain */
+
+- (id<NGSocketAddress>)addressWithRepresentation:(void *)_data
+  size:(unsigned int)_size
+{
+  NGInternetSocketAddress *address = nil;
+
+  if ((unsigned int)[self addressRepresentationSize] != _size) {
+    NSLog(@"%@: invalid address size %i ..", NSStringFromSelector(_cmd), _size);
+    return nil;
+  }
+
+  address = [[NGInternetSocketAddress allocWithZone:[self zone]]
+                                      initWithDomain:self
+                                      internalRepresentation:_data
+                                      size:_size];
+  return [address autorelease];
+}
+
+- (BOOL)prepareAddress:(id<NGSocketAddress>)_address
+  forBindWithSocket:(id<NGSocket>)_socket
+{
+  // nothing to prepare
+  return YES;
+}
+- (BOOL)cleanupAddress:(id<NGSocketAddress>)_address
+  afterCloseOfSocket:(id<NGSocket>)_socket
+{
+  // nothing to cleanup
+  return YES;
+}
+
+- (int)socketDomain {
+  return AF_INET6;
+}
+
+- (int)addressRepresentationSize {
+  return sizeof(struct sockaddr_in6);
+}
+
+- (int)protocol {
+  return 0;
+}
+
+/* NSCopying */
+
+- (id)copyWithZone:(NSZone *)_zone {
+  /* domain objects are immutable, just retain on copy */
+  return [self retain];
+}
+
+/* NSCoding */
+
+- (void)encodeWithCoder:(NSCoder *)_encoder {
+}
+- (id)initWithCoder:(NSCoder *)_decoder {
+  [self release]; self = nil;
+  return [domain6 retain];
+}
+
+- (id)awakeAfterUsingCoder:(NSCoder *)_decoder {
+  if (self != domain6) {
+    [self release]; self = nil;
+    return [domain6 retain];
+  }
+  else
+    return self;
+}
+
+/* description */
+
+- (NSString *)description {
+  return [NSString stringWithFormat:@"<InternetDomain6[0x%p]>", self];
 }
 
 @end /* NGInternetSocketDomain */
