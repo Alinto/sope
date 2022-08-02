@@ -1784,7 +1784,7 @@ static NSMutableDictionary *namespaces;
 }
 
 - (BOOL)_isLoginCommand:(NSString *)_command {
-  return [_command hasPrefix:@"login"];
+  return [_command hasPrefix:@"login"] || [_command hasPrefix:@"authenticate"];
 }
 
 - (NGHashMap *)processCommand:(NSString *)_command withTag:(BOOL)_tag
