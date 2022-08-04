@@ -361,7 +361,7 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 
 + (id)mailAddressParserWithString:(NSString *)_string {
 
-  return [[(NGMailAddressParser *)[self alloc] initWithString: [NGMailAddressParser sanitizeMailAddresses:_string]] 
+  return [[(NGMailAddressParser *)[self alloc] initWithString: _string] 
 	   autorelease];
 }
 
