@@ -1,4 +1,60 @@
-commit dd08920b293732bba83550c7fdec3c8703319b96
+commit 09ddeec
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Aug 4 16:23:19 2022 -0400
+
+    fix(mime): encode . character in headers
+
+M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
+
+commit 4927632
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Thu Aug 4 16:20:20 2022 -0400
+
+    fix(mail): avoid sanitizing address twice
+
+M	sope-mime/NGMail/NGMailAddressParser.m
+
+commit 8a2ed26
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Tue Aug 2 09:58:25 2022 -0400
+
+    fix(imap): don't reconnect after a failed authenticate
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit d6d7b01
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sat May 21 13:01:51 2022 +0200
+
+    NGNetUtilities: Support parsing ipv6 address
+    
+    In this way, we can also bind from ipv6 strings.
+
+M	sope-core/NGStreams/NGInternetSocketAddress.m
+M	sope-core/NGStreams/NGNetUtilities.m
+
+commit df31dee
+Author: Nicolas Höft <nicolas@hoeft.de>
+Date:   Sun May 8 14:28:50 2022 +0200
+
+    feat(core): NGInternetSocketAddress: Support IPv6
+
+M	sope-core/NGStreams/NGInternetSocketAddress.m
+M	sope-core/NGStreams/NGInternetSocketDomain.m
+M	sope-core/NGStreams/NGNetUtilities.m
+M	sope-core/NGStreams/NGStreams/NGInternetSocketAddress.h
+M	sope-core/NGStreams/NGStreams/NGInternetSocketDomain.h
+M	sope-ldap/NGLdap/NGLdapFileManager.m
+
+commit 63220dd
+Author: Francis Lachapelle <flachapelle@inverse.ca>
+Date:   Wed May 4 09:26:44 2022 -0400
+
+    Update ChangeLog
+
+M	ChangeLog
+
+commit dd08920
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Apr 5 10:56:43 2022 -0400
 
@@ -6,7 +62,7 @@ Date:   Tue Apr 5 10:56:43 2022 -0400
 
 M	ChangeLog
 
-commit 79f272e31554a167be4fcd46f895376be3a8ffc1
+commit 79f272e
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Jun 4 16:39:20 2021 -0400
 
@@ -14,7 +70,7 @@ Date:   Fri Jun 4 16:39:20 2021 -0400
 
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit b765dc5f2f6917171f153e7ab5d242c107f0e044
+commit b765dc5
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Mar 24 07:23:30 2022 -0400
 
@@ -24,7 +80,7 @@ Date:   Thu Mar 24 07:23:30 2022 -0400
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit 3409ed2668c00a331756d41f8f8db9cdeb7f132f
+commit 3409ed2
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Mar 10 16:43:17 2022 -0500
 
@@ -32,7 +88,7 @@ Date:   Thu Mar 10 16:43:17 2022 -0500
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit 26a9334e4971aa34d2b932938f852db5d2aeb815
+commit 26a9334
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Mar 9 11:23:18 2022 -0500
 
@@ -40,7 +96,7 @@ Date:   Wed Mar 9 11:23:18 2022 -0500
 
 M	sope-gdl1/GDLAccess/EOSQLExpression.m
 
-commit 213facc369ac4ae7baef10a4398cdbe848767c55
+commit 213facc
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Mar 3 10:31:46 2022 -0500
 
@@ -48,7 +104,7 @@ Date:   Thu Mar 3 10:31:46 2022 -0500
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit 3c64d156d04d700abc6b733bb61cc0feb4008a85
+commit 3c64d15
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Feb 17 10:04:44 2022 -0500
 
@@ -57,7 +113,7 @@ Date:   Thu Feb 17 10:04:44 2022 -0500
 M	sope-mime/NGImap4/NGImap4Client.h
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 29fd0ca63c6989308891385716d01ff762d421e1
+commit 29fd0ca
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Feb 14 13:06:24 2022 -0500
 
@@ -65,7 +121,7 @@ Date:   Mon Feb 14 13:06:24 2022 -0500
 
 M	sope-mime/NGImap4/NGSieveClient.m
 
-commit 2931f296f7fc9eda25be30a0904a86457009d99a
+commit 2931f29
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Feb 4 10:25:13 2022 -0500
 
@@ -73,7 +129,7 @@ Date:   Fri Feb 4 10:25:13 2022 -0500
 
 M	ChangeLog
 
-commit 7fc5dceed5a398b6bd9be18acb957438f432e96e
+commit 7fc5dce
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jan 27 13:01:42 2022 -0500
 
@@ -83,7 +139,7 @@ M	sope-appserver/NGObjWeb/SoObjects/NSException+HTTP.h
 M	sope-appserver/NGObjWeb/SoObjects/NSException+HTTP.m
 M	sope-appserver/NGObjWeb/SoObjects/SoDefaultRenderer.m
 
-commit 7c72fddddc01761dfa8a87a85bea55ae10d77b27
+commit 7c72fdd
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jan 18 11:13:02 2022 -0500
 
@@ -91,7 +147,7 @@ Date:   Tue Jan 18 11:13:02 2022 -0500
 
 M	ChangeLog
 
-commit aa06002fc5ca9ff90d8fe6fee2c55893c3dd3073
+commit aa06002
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jan 13 16:49:52 2022 -0500
 
@@ -99,7 +155,7 @@ Date:   Thu Jan 13 16:49:52 2022 -0500
 
 M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
 
-commit 29e8986630865f9e61399b6b3710f1d8e7f073ce
+commit 29e8986
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jan 5 16:21:40 2022 -0500
 
@@ -107,7 +163,7 @@ Date:   Wed Jan 5 16:21:40 2022 -0500
 
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 
-commit 37aac3fdc42cf9a90bc43e8eb87a4fe472d261cd
+commit 37aac3f
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jan 4 14:39:08 2022 -0500
 
@@ -119,7 +175,7 @@ Date:   Tue Jan 4 14:39:08 2022 -0500
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 7e74ebcb36760cd8a3f8de2d29b86c862b99d661
+commit 7e74ebc
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Dec 16 11:59:22 2021 -0500
 
@@ -127,7 +183,7 @@ Date:   Thu Dec 16 11:59:22 2021 -0500
 
 M	ChangeLog
 
-commit 39aade4bf8668f6591baa81ceca12c885723804c
+commit 39aade4
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 22 14:49:05 2021 -0500
 
@@ -135,7 +191,7 @@ Date:   Mon Nov 22 14:49:05 2021 -0500
 
 M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
 
-commit cf3aa193edf5271d2d2c72312ad23721488b2902
+commit cf3aa19
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Nov 18 15:43:55 2021 -0500
 
@@ -143,7 +199,7 @@ Date:   Thu Nov 18 15:43:55 2021 -0500
 
 M	ChangeLog
 
-commit 74155c9ec531ece59ced534e770c8109b799baf9
+commit 74155c9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 1 16:47:59 2021 -0400
 
@@ -151,7 +207,7 @@ Date:   Mon Nov 1 16:47:59 2021 -0400
 
 M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
 
-commit e1dbce7bf93556503fa6aa235122034b42b04e99
+commit e1dbce7
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Oct 26 15:32:55 2021 -0400
 
@@ -159,7 +215,7 @@ Date:   Tue Oct 26 15:32:55 2021 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 85f64d5d39fa9955e4a99c16e4c0d6c649133ccc
+commit 85f64d5
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Oct 21 17:14:07 2021 -0400
 
@@ -167,7 +223,7 @@ Date:   Thu Oct 21 17:14:07 2021 -0400
 
 M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
 
-commit f21a334ce2d7bceee0f7afa7c16b2e5f4afdf8c0
+commit f21a334
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Sep 30 14:50:25 2021 -0400
 
@@ -177,7 +233,7 @@ Date:   Thu Sep 30 14:50:25 2021 -0400
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit 282803991b7da20fd223cd8fb3b99197790f3ada
+commit 2828039
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Sep 22 13:35:31 2021 -0400
 
@@ -185,7 +241,7 @@ Date:   Wed Sep 22 13:35:31 2021 -0400
 
 M	sope-core/NGExtensions/NGCalendarDateRange.m
 
-commit 4c814c9b9f5bdcc9ee34a949c7cce41e1624fc21
+commit 4c814c9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Sep 10 14:03:45 2021 -0400
 
@@ -194,7 +250,7 @@ Date:   Fri Sep 10 14:03:45 2021 -0400
 M	sope-mime/NGImap4/NGImap4Client.h
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 0eb64db6e1e3ba8fc5e03831ac31873f88a75859
+commit 0eb64db
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Aug 25 14:57:37 2021 -0400
 
@@ -205,7 +261,7 @@ Date:   Wed Aug 25 14:57:37 2021 -0400
 M	sope-mime/NGMail/NGMimeMessageBodyGenerator.m
 M	sope-mime/NGMime/NGMimeBodyGenerator.m
 
-commit 6a7d407bb5a86e16ace3b5a38d2b80c2b261b5ae
+commit 6a7d407
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Aug 24 15:14:10 2021 -0400
 
@@ -213,7 +269,7 @@ Date:   Tue Aug 24 15:14:10 2021 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit b0137fca131c37da10f1c454e1135276fae569af
+commit b0137fc
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Aug 18 17:18:57 2021 -0400
 
@@ -221,7 +277,7 @@ Date:   Wed Aug 18 17:18:57 2021 -0400
 
 M	ChangeLog
 
-commit b7d49f5f242361688c137bc0437a3db91d2dbdb0
+commit b7d49f5
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Aug 4 09:58:47 2021 -0400
 
@@ -231,7 +287,7 @@ Date:   Wed Aug 4 09:58:47 2021 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit c808b54c6f927b6baa54080715dadc4a952f8171
+commit c808b54
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jun 15 16:33:37 2021 -0400
 
@@ -239,7 +295,7 @@ Date:   Tue Jun 15 16:33:37 2021 -0400
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 7040f004d432eb6903170909052c13483769f284
+commit 7040f00
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jun 9 14:26:42 2021 -0400
 
@@ -250,7 +306,7 @@ Date:   Wed Jun 9 14:26:42 2021 -0400
 
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit 0a56b9b0c3ef196db2a2c31562c054baef6c81f7
+commit 0a56b9b
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jun 8 16:25:04 2021 -0400
 
@@ -262,7 +318,7 @@ Date:   Tue Jun 8 16:25:04 2021 -0400
 
 M	sope-appserver/WEExtensions/WEResourceManager.m
 
-commit b0509cad8e8ae3248cf743bfbfc97fb7c2a8a481
+commit b0509ca
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon May 31 21:22:29 2021 -0400
 
@@ -270,7 +326,7 @@ Date:   Mon May 31 21:22:29 2021 -0400
 
 M	ChangeLog
 
-commit 78362e95e57a5b97ae920a339705b81bab40665d
+commit 78362e9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri May 21 14:17:11 2021 -0400
 
@@ -278,7 +334,7 @@ Date:   Fri May 21 14:17:11 2021 -0400
 
 M	sope-core/EOControl/EOSortOrdering.m
 
-commit 220e6fe3b714d2d4e9e15b9525db426469a0eab2
+commit 220e6fe
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon May 17 16:58:14 2021 -0400
 
@@ -287,7 +343,7 @@ Date:   Mon May 17 16:58:14 2021 -0400
 M	sope-mime/NGImap4/NGImap4Connection.h
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit 0bb0a9cd46a1228280d490d29841868c603d11a9
+commit 0bb0a9c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon May 17 15:13:42 2021 -0400
 
@@ -296,7 +352,7 @@ Date:   Mon May 17 15:13:42 2021 -0400
 M	sope-core/NGStreams/NGActiveSocket.m
 M	sope-core/NGStreams/NGSocketExceptions.m
 
-commit 1fd9dba3f08889511a7cca0467194c6afe7c39f9
+commit 1fd9dba
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu May 6 16:38:41 2021 -0400
 
@@ -304,7 +360,7 @@ Date:   Thu May 6 16:38:41 2021 -0400
 
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit 7c2c490005cf88bf2e8845a79ac9f69570a3f5e9
+commit 7c2c490
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu May 6 14:12:59 2021 -0400
 
@@ -312,7 +368,7 @@ Date:   Thu May 6 14:12:59 2021 -0400
 
 M	sope-mime/NGMime/NGMimeBodyPart.m
 
-commit bad15255544cafba1fad4f61de8a2fbbf01427c2
+commit bad1525
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Apr 27 13:16:12 2021 -0400
 
@@ -320,7 +376,7 @@ Date:   Tue Apr 27 13:16:12 2021 -0400
 
 M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
 
-commit 45e3255c9b8b5ce465c1dfec2ab641c5b96e4e93
+commit 45e3255
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Mar 30 17:08:40 2021 -0400
 
@@ -328,7 +384,7 @@ Date:   Tue Mar 30 17:08:40 2021 -0400
 
 M	ChangeLog
 
-commit 60d393d65955da6b1e41cdfd48df944ce46c3e54
+commit 60d393d
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Mar 1 20:41:50 2021 -0500
 
@@ -339,7 +395,7 @@ Date:   Mon Mar 1 20:41:50 2021 -0500
 
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit b0a271aea01796d41c3086a9f296b34fe855cbd9
+commit b0a271a
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Mar 1 17:18:27 2021 -0500
 
@@ -350,7 +406,7 @@ Date:   Mon Mar 1 17:18:27 2021 -0500
 
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit fdb22733fe9898e5edab39c5c28704f5dc4e86af
+commit fdb2273
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Feb 26 14:18:44 2021 -0500
 
@@ -358,7 +414,7 @@ Date:   Fri Feb 26 14:18:44 2021 -0500
 
 M	sope-core/EOControl/EOQualifierParser.m
 
-commit ffdbc20a026d126a22924ccf97a95e48ad1d8676
+commit ffdbc20
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Dec 1 15:52:06 2020 -0500
 
@@ -368,7 +424,7 @@ Date:   Tue Dec 1 15:52:06 2020 -0500
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit 5a55b43c7dcbf19b73a21bb10d6c122e26c93440
+commit 5a55b43
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 2 11:00:44 2020 -0500
 
@@ -380,7 +436,7 @@ Date:   Mon Nov 2 11:00:44 2020 -0500
 
 M	sope-core/NGStreams/config.guess
 
-commit ed0a0784543d22bdbd5890e9e3455dcc36e286b5
+commit ed0a078
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Oct 15 09:32:00 2020 -0400
 
@@ -388,7 +444,7 @@ Date:   Thu Oct 15 09:32:00 2020 -0400
 
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit df94cafba604d17fe44d5160d2421c06cd448fec
+commit df94caf
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Oct 13 09:59:30 2020 -0400
 
@@ -396,7 +452,7 @@ Date:   Tue Oct 13 09:59:30 2020 -0400
 
 M	sope-mime/NGMime/NGMimeMultipartBodyGenerator.m
 
-commit 84b7fecf83a622c75403fc8d1c9ecaf72e80a4e7
+commit 84b7fec
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Oct 7 10:47:02 2020 -0400
 
@@ -404,7 +460,7 @@ Date:   Wed Oct 7 10:47:02 2020 -0400
 
 M	ChangeLog
 
-commit cb56694116f8e7cb2e5fcb1326fad6e6254bafdd
+commit cb56694
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 7 08:00:02 2020 -0400
 
@@ -412,7 +468,7 @@ Date:   Wed Oct 7 08:00:02 2020 -0400
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 218ca14fc2d322f384c89cdd8509d5db82d8ba5f
+commit 218ca14
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sat Sep 26 20:06:49 2020 +0200
 
@@ -422,7 +478,7 @@ Date:   Sat Sep 26 20:06:49 2020 +0200
 
 M	sope-appserver/NGObjWeb/WORequest.m
 
-commit 2ad8d880d6be62596b8642ad546c178e182c5c44
+commit 2ad8d88
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sat Sep 26 19:57:36 2020 +0200
 
@@ -450,7 +506,7 @@ M	sope-core/NGStreams/NGActiveSocket.m
 M	sope-core/NGStreams/NGSocket.m
 M	sope-core/NGStreams/NGStreams/NGSocket.h
 
-commit c5c23fd757b5b2c9c61cf7229924a8ffbd120fc1
+commit c5c23fd
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Sep 25 13:52:35 2020 -0400
 
@@ -461,7 +517,7 @@ Date:   Fri Sep 25 13:52:35 2020 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 30815c3876ed29dee41e64c932a5e682edd5c60b
+commit 30815c3
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Fri Sep 25 11:01:41 2020 +0200
 
@@ -471,7 +527,7 @@ Date:   Fri Sep 25 11:01:41 2020 +0200
 
 M	sope-appserver/NGObjWeb/WORequest.m
 
-commit 1ac9e39e8f1a2a14bad8282b2e01a5dd70f61bda
+commit 1ac9e39
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Sep 14 14:32:01 2020 -0400
 
@@ -479,7 +535,7 @@ Date:   Mon Sep 14 14:32:01 2020 -0400
 
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 50441eb222fbf6e9e1bff8ce6b7d80b39eeff43f
+commit 50441eb
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Sep 14 14:23:43 2020 -0400
 
@@ -493,7 +549,7 @@ Date:   Mon Sep 14 14:23:43 2020 -0400
 M	sope-mime/NGMail/NGSendMail.m
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 579f73e6dec22f05f9e2a2e96f9d87e22b788419
+commit 579f73e
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Sep 9 14:59:44 2020 -0400
 
@@ -503,7 +559,7 @@ Date:   Wed Sep 9 14:59:44 2020 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 4527e6a5c37fb26157ca04ae33591710cbbac68b
+commit 4527e6a
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Aug 14 09:45:06 2020 -0400
 
@@ -513,7 +569,7 @@ Date:   Fri Aug 14 09:45:06 2020 -0400
 
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit 5a4f363628a549ad5b93da7dd8e258acc63fa864
+commit 5a4f363
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sun Aug 2 12:01:00 2020 +0200
 
@@ -523,7 +579,7 @@ Date:   Sun Aug 2 12:01:00 2020 +0200
 
 M	sope-mime/NGMime/NGMimeType.m
 
-commit 4f280bf2388070d7984602858a59b1a574c2fa70
+commit 4f280bf
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sun Aug 2 14:33:40 2020 +0200
 
@@ -548,7 +604,7 @@ M	sope-mime/NGImap4/NGSieveClient.m
 M	sope-mime/NGMail/NGSmtpClient.h
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 417ef16a1ac1d7e3810a8576da71810a207b757f
+commit 417ef16
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sun Aug 2 11:58:42 2020 +0200
 
@@ -560,7 +616,7 @@ Date:   Sun Aug 2 11:58:42 2020 +0200
 M	sope-core/NGExtensions/FdExt.subproj/NSURL+misc.m
 M	sope-core/NGExtensions/NGExtensions/NSURL+misc.h
 
-commit 4fb17374daba03c68064039678c1e56e5af2fd81
+commit 4fb1737
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sat Aug 1 19:40:29 2020 +0200
 
@@ -586,7 +642,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGSieveClient.m
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit ca0c82834dd51196cee5610f31cce49f69b397e7
+commit ca0c828
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sat Jul 25 15:23:50 2020 +0200
 
@@ -604,7 +660,7 @@ M	sope-core/NGStreams/NGLocalSocketAddress.m
 M	sope-core/NGStreams/NGStreams/NGInternetSocketAddress.h
 M	sope-core/NGStreams/NGStreams/NGSocketProtocols.h
 
-commit 2c9d49197ad910f8ec5411b666688dfa87bd0988
+commit 2c9d491
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sat Jul 11 23:20:33 2020 +0200
 
@@ -618,7 +674,7 @@ Date:   Sat Jul 11 23:20:33 2020 +0200
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
 
-commit 34dc27941e5f685ddd4362a29968a8ac7221db0d
+commit 34dc279
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jul 30 11:28:25 2020 -0400
 
@@ -628,7 +684,7 @@ Date:   Thu Jul 30 11:28:25 2020 -0400
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 8b1b1a0d830a33dbbebccc07ef1872f84af810de
+commit 8b1b1a0
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jul 9 15:40:39 2020 -0400
 
@@ -637,7 +693,7 @@ Date:   Thu Jul 9 15:40:39 2020 -0400
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-mime/NGImap4/NGSieveClient.m
 
-commit 9c5483b96c27430ab289e99698974853ae82abf8
+commit 9c5483b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 9 12:09:46 2020 -0400
 
@@ -645,7 +701,7 @@ Date:   Thu Jul 9 12:09:46 2020 -0400
 
 M	sope-gdl1/MySQL/MySQL4Channel.m
 
-commit 9460140be5394c86f68c48f6f22ddb156c5e88ed
+commit 9460140
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jul 8 07:56:03 2020 -0400
 
@@ -653,7 +709,7 @@ Date:   Wed Jul 8 07:56:03 2020 -0400
 
 M	sope-core/NGExtensions/NGExtensions/NSProcessInfo+misc.h
 
-commit d9fd0098df691c7fdc6da1a3b7fbdcd9c206f3d2
+commit d9fd009
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 2 14:18:57 2020 -0400
 
@@ -662,7 +718,7 @@ Date:   Thu Jul 2 14:18:57 2020 -0400
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
 
-commit dbe2dc04ee4315f00b24b48dcac3cc4ca1737d70
+commit dbe2dc0
 Author: Johannes Kanefendt <johannes.kanefendt@krzn.de>
 Date:   Thu Jul 2 14:23:39 2020 +0200
 
@@ -670,7 +726,7 @@ Date:   Thu Jul 2 14:23:39 2020 +0200
 
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit 059a4075d9048a8af6cefb3f5bfe887600b65525
+commit 059a407
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Thu Jun 18 22:40:53 2020 +0200
 
@@ -689,7 +745,7 @@ M	configure
 M	sope-core/NGStreams/GNUmakefile.preamble
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 
-commit d79191fe918590d7846bdb1b0ee10e77d5a3033b
+commit d79191f
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Wed Jun 17 14:48:19 2020 +0200
 
@@ -706,7 +762,7 @@ Date:   Wed Jun 17 14:48:19 2020 +0200
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
 
-commit 280bc8dfffc0b0176729e2982d5bb6141dbbedfd
+commit 280bc8d
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jun 23 12:40:06 2020 -0400
 
@@ -714,7 +770,7 @@ Date:   Tue Jun 23 12:40:06 2020 -0400
 
 M	packaging/rhel/sope.spec
 
-commit ff8d877064351e7490655a09c5de18261c3fdead
+commit ff8d877
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jun 19 10:43:20 2020 -0400
 
@@ -722,7 +778,7 @@ Date:   Fri Jun 19 10:43:20 2020 -0400
 
 M	sope-core/NGStreams/NGPassiveSocket.m
 
-commit a948deb76767521651f6d1fba79669360debacf0
+commit a948deb
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Wed Jun 17 15:02:45 2020 +0200
 
@@ -738,7 +794,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGSieveClient.m
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit dbd28bdac646f05ea55a23ddb64dc04621cfed81
+commit dbd28bd
 Author: Extra Fu <lmarcotte@inverse.ca>
 Date:   Tue Jun 16 13:22:04 2020 -0400
 
@@ -751,7 +807,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGSieveClient.m
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit bc766e2463fba726a7a17000e168a4f0efbd60f7
+commit bc766e2
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Tue May 12 10:20:07 2020 +0200
 
@@ -766,7 +822,7 @@ Date:   Tue May 12 10:20:07 2020 +0200
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 0370e1bba4e9f5437049661dbcc19dfd4b25525e
+commit 0370e1b
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Tue May 12 10:03:08 2020 +0200
 
@@ -788,7 +844,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGSieveClient.m
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 994caa9df00f47571baa5a1ffe532804e9c0c01b
+commit 994caa9
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Mon May 11 18:48:12 2020 +0200
 
@@ -799,7 +855,7 @@ Date:   Mon May 11 18:48:12 2020 +0200
 
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 
-commit 7be6ef55cee4d6f59d75f6fba2150f47a7b07bb4
+commit 7be6ef5
 Author: Johannes Kanefendt <johannes.kanefendt@krzn.de>
 Date:   Tue Jun 9 14:14:15 2020 +0200
 
@@ -809,7 +865,7 @@ M	sope-appserver/NGObjWeb/NGObjWeb/WOMessage.h
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 M	sope-appserver/NGObjWeb/WOMessage.m
 
-commit f65084a8c5fedf00dc391d0b376213d006bb6222
+commit f65084a
 Author: Roland Illig <roland.illig@gmx.de>
 Date:   Sun May 31 16:31:29 2020 +0200
 
@@ -822,7 +878,7 @@ Date:   Sun May 31 16:31:29 2020 +0200
 
 M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
 
-commit 5ee8894b17cdebed1716e9d67cbbb2026226e46a
+commit 5ee8894
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 13 14:53:27 2020 -0400
 
@@ -830,7 +886,7 @@ Date:   Wed May 13 14:53:27 2020 -0400
 
 M	packaging/rhel/sope.spec
 
-commit 9fddad2ccbf327edb0eab018e86712c08e5ef3c0
+commit 9fddad2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 13 14:25:52 2020 -0400
 
@@ -838,7 +894,7 @@ Date:   Wed May 13 14:25:52 2020 -0400
 
 M	packaging/rhel/sope.spec
 
-commit 9cb89a04697e08784e8221f0f272459f9e32efd9
+commit 9cb89a0
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Tue May 12 10:04:09 2020 +0200
 
@@ -868,7 +924,7 @@ Date:   Tue May 12 10:04:09 2020 +0200
 
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 
-commit 40bb586cf04bf6969e17cf6fc7e2cd8ce6987d31
+commit 40bb586
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sun May 10 21:16:40 2020 +0200
 
@@ -887,7 +943,7 @@ Date:   Sun May 10 21:16:40 2020 +0200
 
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit ec32774cc5555f4b6f9005ade081fc02d9a88764
+commit ec32774
 Author: Nicolas Höft <nicolas@hoeft.de>
 Date:   Sat May 9 19:32:28 2020 +0200
 
@@ -906,7 +962,7 @@ Date:   Sat May 9 19:32:28 2020 +0200
 M	sope-mime/NGMail/NGSmtpClient.h
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit ec7ecb52d4b2c432320703a6892b04382824a45f
+commit ec7ecb5
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri May 1 14:52:43 2020 -0400
 
@@ -914,7 +970,7 @@ Date:   Fri May 1 14:52:43 2020 -0400
 
 M	ChangeLog
 
-commit 0a5bb5e3ea69ebeae41ee89dd8cd91205ee96fa8
+commit 0a5bb5e
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Apr 29 12:48:22 2020 -0400
 
@@ -925,7 +981,7 @@ Date:   Wed Apr 29 12:48:22 2020 -0400
 M	sope-core/EOControl/EOKeyValueQualifier.m
 M	sope-core/EOControl/EOQualifier.h
 
-commit 567bd0bdb3b2856dc74f58be35fa504b26b9617c
+commit 567bd0b
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Apr 27 17:15:54 2020 -0400
 
@@ -936,7 +992,7 @@ Date:   Mon Apr 27 17:15:54 2020 -0400
 M	sope-core/EOControl/EOKeyValueQualifier.m
 M	sope-core/EOControl/EOQualifier.h
 
-commit 7aa37c3fdea1a9937c3002c26071eecfbe063c1e
+commit 7aa37c3
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Apr 20 10:06:45 2020 -0400
 
@@ -944,7 +1000,7 @@ Date:   Mon Apr 20 10:06:45 2020 -0400
 
 M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
 
-commit e42d8ea87119ab74dd2d92ff428209ba1b36fd7c
+commit e42d8ea
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Dec 17 15:09:55 2019 -0500
 
@@ -952,7 +1008,7 @@ Date:   Tue Dec 17 15:09:55 2019 -0500
 
 M	ChangeLog
 
-commit c9712eb71a743b5b8a15dfb4023de20e053518ac
+commit c9712eb
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Dec 17 15:06:30 2019 -0500
 
@@ -960,7 +1016,7 @@ Date:   Tue Dec 17 15:06:30 2019 -0500
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 2e63326871c41fd63b60a26eaa3f4d4bcd2a5684
+commit 2e63326
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 7 13:28:40 2019 -0500
 
@@ -968,7 +1024,7 @@ Date:   Thu Nov 7 13:28:40 2019 -0500
 
 M	sope-mime/NGImap4/NGSieveClient.m
 
-commit 460cf44aebdd6c70194ab615b53da212a6103633
+commit 460cf44
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Oct 31 13:27:47 2019 -0400
 
@@ -976,7 +1032,7 @@ Date:   Thu Oct 31 13:27:47 2019 -0400
 
 M	ChangeLog
 
-commit dd8c873b0dafc2f3011b718e0e88a5b3b9853eec
+commit dd8c873
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 30 13:35:16 2019 -0400
 
@@ -984,7 +1040,7 @@ Date:   Wed Oct 30 13:35:16 2019 -0400
 
 M	sope-mime/NGMime/NGMimePartGenerator.m
 
-commit 921d4e07819b467e160d7c388ca6cb8a8ea1f7fb
+commit 921d4e0
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Oct 24 10:48:48 2019 -0400
 
@@ -992,7 +1048,7 @@ Date:   Thu Oct 24 10:48:48 2019 -0400
 
 M	ChangeLog
 
-commit f567f984bf1c9f2cad86a3f66667f5ad8b796760
+commit f567f98
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Sep 13 10:42:13 2019 -0400
 
@@ -1000,7 +1056,7 @@ Date:   Fri Sep 13 10:42:13 2019 -0400
 
 M	sope-mime/NGMail/NSData+MimeQP.m
 
-commit 4c02b000d1bfaf1b706ceaf5b22492794a0c3a78
+commit 4c02b00
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Sep 4 13:42:10 2019 -0400
 
@@ -1009,7 +1065,7 @@ Date:   Wed Sep 4 13:42:10 2019 -0400
 M	sope-mime/NGImap4/NGImap4Connection.h
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit ffd38bc3b56d0eaa0135881a2acc34b8bf9d5b0a
+commit ffd38bc
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Jul 19 13:35:15 2019 -0400
 
@@ -1017,7 +1073,7 @@ Date:   Fri Jul 19 13:35:15 2019 -0400
 
 M	ChangeLog
 
-commit 44539feee74e3f7f76ca7061c31ae3fac4f00c78
+commit 44539fe
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jul 8 10:39:49 2019 -0400
 
@@ -1025,7 +1081,7 @@ Date:   Mon Jul 8 10:39:49 2019 -0400
 
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit d7d5679d23f8f833aba226cb536495f2e6233eea
+commit d7d5679
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jun 10 13:37:11 2019 -0400
 
@@ -1034,7 +1090,7 @@ Date:   Mon Jun 10 13:37:11 2019 -0400
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit d5043f35c2101cdee793fa4631e0304221b02a57
+commit d5043f3
 Author: Janne Heß <janne@hess.ooo>
 Date:   Mon Jun 10 00:56:06 2019 +0200
 
@@ -1042,7 +1098,7 @@ Date:   Mon Jun 10 00:56:06 2019 +0200
 
 M	configure
 
-commit b8a712d0558b28f1d52340a554cf0e0997f50412
+commit b8a712d
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jun 4 11:44:31 2019 -0400
 
@@ -1051,7 +1107,7 @@ Date:   Tue Jun 4 11:44:31 2019 -0400
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit 2c53f8800bd62b7fc824405b7e7bec0e3007e49b
+commit 2c53f88
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jun 3 16:05:50 2019 -0400
 
@@ -1059,7 +1115,7 @@ Date:   Mon Jun 3 16:05:50 2019 -0400
 
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit 0d2ea932359ce016c2481358a37f9a082263a5b9
+commit 0d2ea93
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 30 13:38:26 2019 -0400
 
@@ -1067,7 +1123,7 @@ Date:   Thu May 30 13:38:26 2019 -0400
 
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit 65ae507ac33a47943bd419ee099931b24fe420d4
+commit 65ae507
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 30 13:34:38 2019 -0400
 
@@ -1075,7 +1131,7 @@ Date:   Thu May 30 13:34:38 2019 -0400
 
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit 1b754c106c47bd171a1dcd7f87d0193d9cf80150
+commit 1b754c1
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 23 12:48:51 2019 -0400
 
@@ -1083,7 +1139,7 @@ Date:   Thu May 23 12:48:51 2019 -0400
 
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit 5ea4be632df98679f6f254867c078cca2d2a29b4
+commit 5ea4be6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 23 10:57:30 2019 -0400
 
@@ -1091,7 +1147,7 @@ Date:   Thu May 23 10:57:30 2019 -0400
 
 M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
 
-commit bf0441560db807ee2216e66cd0d06c8b785fb570
+commit bf04415
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 23 10:56:25 2019 -0400
 
@@ -1099,7 +1155,7 @@ Date:   Thu May 23 10:56:25 2019 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 8cf45c4d6fa114bc5d7ffa9bb8776de6389472d7
+commit 8cf45c4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon May 13 14:35:54 2019 -0400
 
@@ -1107,7 +1163,7 @@ Date:   Mon May 13 14:35:54 2019 -0400
 
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit cbb62fb10bf298f082937008575027c9207a59c2
+commit cbb62fb
 Author: Cycylno <3764524+Cycylno@users.noreply.github.com>
 Date:   Sat Mar 30 09:54:32 2019 +0800
 
@@ -1117,7 +1173,7 @@ Date:   Sat Mar 30 09:54:32 2019 +0800
 
 M	sope-appserver/NGObjWeb/Languages.plist
 
-commit 0b8813c3d13d5bf99e3fa719eaf4af97599b4307
+commit 0b8813c
 Author: Yavor Doganov <yavor@gnu.org>
 Date:   Wed Feb 27 15:00:24 2019 +0100
 
@@ -1126,7 +1182,7 @@ Date:   Wed Feb 27 15:00:24 2019 +0100
 M	sope-gdl1/GDLAccess/EOSQLQualifier.m
 M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
 
-commit f9d2aa0d838a7d209bc18f0a51977416ff556312
+commit f9d2aa0
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Feb 21 09:47:54 2019 -0500
 
@@ -1134,7 +1190,7 @@ Date:   Thu Feb 21 09:47:54 2019 -0500
 
 M	ChangeLog
 
-commit 2ca5842d863fd9f25593c6b608f5a1954f79d345
+commit 2ca5842
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Feb 14 14:15:22 2019 -0500
 
@@ -1142,7 +1198,7 @@ Date:   Thu Feb 14 14:15:22 2019 -0500
 
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit f5487e92a33bbae961c7bce15c4204904af26225
+commit f5487e9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jan 9 09:29:34 2019 -0500
 
@@ -1150,7 +1206,7 @@ Date:   Wed Jan 9 09:29:34 2019 -0500
 
 M	ChangeLog
 
-commit 39a84e811cfdd1aa246386a6f38b4f2e2ff68c2e
+commit 39a84e8
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 14 11:15:26 2018 -0500
 
@@ -1158,7 +1214,7 @@ Date:   Fri Dec 14 11:15:26 2018 -0500
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit ed132260a6f33da61b905507685e645453737563
+commit ed13226
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Oct 17 11:20:42 2018 -0400
 
@@ -1166,7 +1222,7 @@ Date:   Wed Oct 17 11:20:42 2018 -0400
 
 M	ChangeLog
 
-commit 0aa1ddb95534bf85dba8c733835418d2ce2039ad
+commit 0aa1ddb
 Author: DJ Lucas <dj@lucasit.com>
 Date:   Sat Oct 13 23:47:18 2018 -0500
 
@@ -1174,7 +1230,7 @@ Date:   Sat Oct 13 23:47:18 2018 -0500
 
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 
-commit 7440b66c054e67049969767084f7feb244b83224
+commit 7440b66
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Sat Sep 22 10:27:26 2018 -0400
 
@@ -1184,7 +1240,7 @@ Date:   Sat Sep 22 10:27:26 2018 -0400
 
 M	sope-gdl1/Oracle8/GNUmakefile
 
-commit 31762856c94aa40bbbc7c759528cbf085c4516db
+commit 3176285
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Sep 21 12:45:40 2018 -0400
 
@@ -1192,7 +1248,7 @@ Date:   Fri Sep 21 12:45:40 2018 -0400
 
 M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
 
-commit a08001b0379f9d1d4be8afb46fd7e0c2f339201b
+commit a08001b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Sep 21 11:18:17 2018 -0400
 
@@ -1200,7 +1256,7 @@ Date:   Fri Sep 21 11:18:17 2018 -0400
 
 M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
 
-commit 834f8c735dab3ab4008170ae7c72f61e7c30548e
+commit 834f8c7
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Sep 21 10:24:25 2018 -0400
 
@@ -1208,7 +1264,7 @@ Date:   Fri Sep 21 10:24:25 2018 -0400
 
 M	sope-gdl1/Oracle8/GNUmakefile
 
-commit 23c7f81c125a82c3a2f56da686d171f971527c16
+commit 23c7f81
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 20 09:15:22 2018 -0400
 
@@ -1216,7 +1272,7 @@ Date:   Thu Sep 20 09:15:22 2018 -0400
 
 M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
 
-commit 471bfae774b32a266a1bf5f144426007c07c3f3f
+commit 471bfae
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Sep 4 15:04:36 2018 -0400
 
@@ -1225,7 +1281,7 @@ Date:   Tue Sep 4 15:04:36 2018 -0400
 M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
 M	sope-gdl1/Oracle8/OracleAdaptorChannelController.m
 
-commit 654ba58f2fedd1d1fb233b35b3a7dea4d1733d1c
+commit 654ba58
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 28 06:50:29 2018 -0400
 
@@ -1233,7 +1289,7 @@ Date:   Tue Aug 28 06:50:29 2018 -0400
 
 M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
 
-commit e4bc04663ca0abf6e0a99d88ffacaf2b3b166949
+commit e4bc046
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Aug 27 08:40:41 2018 -0400
 
@@ -1241,7 +1297,7 @@ Date:   Mon Aug 27 08:40:41 2018 -0400
 
 M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
 
-commit c5d07009b71660490d41349da539bb62f9e6156d
+commit c5d0700
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Aug 24 09:03:11 2018 -0400
 
@@ -1249,7 +1305,7 @@ Date:   Fri Aug 24 09:03:11 2018 -0400
 
 M	ChangeLog
 
-commit a6703c60f03af455e7e73a7f836eb3ed6be7f397
+commit a6703c6
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Aug 21 12:38:58 2018 -0400
 
@@ -1258,7 +1314,7 @@ Date:   Tue Aug 21 12:38:58 2018 -0400
 M	sope-appserver/NGObjWeb/NGObjWeb/WOCookie.h
 M	sope-appserver/NGObjWeb/WOCookie.m
 
-commit 3c4d515e036fc387240b6d1757031937cfd666b9
+commit 3c4d515
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Aug 13 08:14:12 2018 -0400
 
@@ -1266,7 +1322,7 @@ Date:   Mon Aug 13 08:14:12 2018 -0400
 
 M	packaging/rhel/sope.spec
 
-commit 794ec4a87ec5d8b45eca73306d4d2bbcc0de93cb
+commit 794ec4a
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jul 10 09:55:20 2018 -0400
 
@@ -1274,7 +1330,7 @@ Date:   Tue Jul 10 09:55:20 2018 -0400
 
 M	ChangeLog
 
-commit a8523275c860bca39c5d37fe238ac5d35ecc7316
+commit a852327
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 27 09:42:49 2018 -0400
 
@@ -1282,7 +1338,7 @@ Date:   Wed Jun 27 09:42:49 2018 -0400
 
 M	sope-core/NGStreams/NGByteBuffer.m
 
-commit 2f26952009f622f97a43921a6cfdafb79b8f46f6
+commit 2f26952
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jun 11 10:55:16 2018 -0400
 
@@ -1290,7 +1346,7 @@ Date:   Mon Jun 11 10:55:16 2018 -0400
 
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 
-commit 275a75b28e304568e0b9ff1582f149e8b8ca73b3
+commit 275a75b
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon May 7 16:13:51 2018 -0400
 
@@ -1300,7 +1356,7 @@ Date:   Mon May 7 16:13:51 2018 -0400
 
 M	sope-core/EOControl/EOSortOrdering.m
 
-commit 2d38fbe94b515ddf22aad3dca49f5e542188b749
+commit 2d38fbe
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Mar 19 13:42:38 2018 -0400
 
@@ -1308,7 +1364,7 @@ Date:   Mon Mar 19 13:42:38 2018 -0400
 
 M	sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m
 
-commit 72ed256b2b2fdee432c1b3e4a4aae1b54e9dd935
+commit 72ed256
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Mar 14 11:47:58 2018 -0400
 
@@ -1316,7 +1372,7 @@ Date:   Wed Mar 14 11:47:58 2018 -0400
 
 M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
 
-commit 4786b5faf535b2144fa552adc77fcfb64f9d3515
+commit 4786b5f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Mar 14 09:17:55 2018 -0400
 
@@ -1325,7 +1381,7 @@ Date:   Wed Mar 14 09:17:55 2018 -0400
 M	sope-ldap/NGLdap/NGLdapConnection.m
 M	sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m
 
-commit 597265a11da87e9580586ea43c9e35a4342762f6
+commit 597265a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Mar 13 18:59:08 2018 -0400
 
@@ -1333,7 +1389,7 @@ Date:   Tue Mar 13 18:59:08 2018 -0400
 
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit 8f48ab7f5d96c615dfac910be0ef4e01e8629321
+commit 8f48ab7
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Mar 7 11:21:58 2018 -0500
 
@@ -1341,7 +1397,7 @@ Date:   Wed Mar 7 11:21:58 2018 -0500
 
 M	ChangeLog
 
-commit 0f5d66fabe9232ef0f03f15670103a69ffede35e
+commit 0f5d66f
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Feb 6 15:31:45 2018 -0500
 
@@ -1351,7 +1407,7 @@ Date:   Tue Feb 6 15:31:45 2018 -0500
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit d76498eb6581413cb4c6264dfbba1a92cfcab28e
+commit d76498e
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jan 24 16:01:05 2018 -0500
 
@@ -1359,7 +1415,7 @@ Date:   Wed Jan 24 16:01:05 2018 -0500
 
 M	sope-core/EOControl/EOSortOrdering.m
 
-commit edc566a2d9df26b623c70d2848e82771ce4e7329
+commit edc566a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jan 23 10:32:28 2018 -0500
 
@@ -1367,7 +1423,7 @@ Date:   Tue Jan 23 10:32:28 2018 -0500
 
 M	sope-mime/NGMime/NGMimeBodyPart.m
 
-commit 6d0a70d6988bcbd6782f81d58df77fe444d74c67
+commit 6d0a70d
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 12 15:37:38 2018 -0500
 
@@ -1377,7 +1433,7 @@ M	sope-mime/NGMail/NGMailBase64Encoding.m
 M	sope-mime/NGMime/NGMimeBodyPart.h
 M	sope-mime/NGMime/NGMimeBodyPart.m
 
-commit 43e4fe5115d28e1a2cdfc0100659ab378e40ec30
+commit 43e4fe5
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Oct 18 11:14:48 2017 -0400
 
@@ -1385,7 +1441,7 @@ Date:   Wed Oct 18 11:14:48 2017 -0400
 
 M	ChangeLog
 
-commit 45db3976d3f4790337e3e8bfb149f053e88174f9
+commit 45db397
 Author: Ivan Zakharyaschev <imz@altlinux.org>
 Date:   Mon Oct 9 18:15:35 2017 +0300
 
@@ -1450,7 +1506,7 @@ Date:   Mon Oct 9 18:15:35 2017 +0300
 
 M	sope-mime/NGImap4/NSString+Imap4.m
 
-commit 8941256d13bb1440adfeec10171e400db1d84796
+commit 8941256
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jul 5 10:58:34 2017 -0400
 
@@ -1458,7 +1514,7 @@ Date:   Wed Jul 5 10:58:34 2017 -0400
 
 M	ChangeLog
 
-commit bcaca802d6bfe73662e1072b5d4bab9c53dfcb32
+commit bcaca80
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jun 27 10:24:41 2017 -0400
 
@@ -1466,7 +1522,7 @@ Date:   Tue Jun 27 10:24:41 2017 -0400
 
 M	packaging/debian/control.in
 
-commit 5f44dc09c67fff0493566ae9a6823393813a4b0a
+commit 5f44dc0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jun 9 15:31:11 2017 -0400
 
@@ -1475,7 +1531,7 @@ Date:   Fri Jun 9 15:31:11 2017 -0400
 M	sope-gdl1/MySQL/MySQL4Channel.m
 M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
 
-commit 88a5c874ec182cd9c94950989ac59fc93d75e955
+commit 88a5c87
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jun 1 09:56:01 2017 -0400
 
@@ -1483,7 +1539,7 @@ Date:   Thu Jun 1 09:56:01 2017 -0400
 
 M	ChangeLog
 
-commit 1aeb286bc28e722dba821798f388a9111896ed15
+commit 1aeb286
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu May 25 15:46:14 2017 -0400
 
@@ -1491,7 +1547,7 @@ Date:   Thu May 25 15:46:14 2017 -0400
 
 M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
 
-commit e5b4212ea2bd76dd3886a85fe795acc5cfe16b10
+commit e5b4212
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue May 9 09:07:33 2017 -0400
 
@@ -1499,7 +1555,7 @@ Date:   Tue May 9 09:07:33 2017 -0400
 
 M	ChangeLog
 
-commit 4ef04c722776286ccc4a1ed16b97f2e84b1b873a
+commit 4ef04c7
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Mar 24 09:48:05 2017 -0400
 
@@ -1507,7 +1563,7 @@ Date:   Fri Mar 24 09:48:05 2017 -0400
 
 M	ChangeLog
 
-commit a8511fde705b5a00e0d97727b75c9c7b702ae08d
+commit a8511fd
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Mar 10 11:16:47 2017 -0500
 
@@ -1515,7 +1571,7 @@ Date:   Fri Mar 10 11:16:47 2017 -0500
 
 M	ChangeLog
 
-commit 152a289a4ec0fa9b402482c23e99947a8a437b42
+commit 152a289
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Mar 9 09:36:03 2017 -0500
 
@@ -1528,7 +1584,7 @@ M	sope-appserver/NGObjWeb/Defaults.plist
 M	sope-appserver/NGObjWeb/DynamicElements/WOGenericElement.m
 M	sope-appserver/NGObjWeb/WODynamicElement.m
 
-commit cdc1e99b6f27ff2673b67ca76449d95128e48a1d
+commit cdc1e99
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 14 08:42:19 2017 -0500
 
@@ -1536,7 +1592,7 @@ Date:   Tue Feb 14 08:42:19 2017 -0500
 
 M	ChangeLog
 
-commit e13714e2faf4f49d02e9e84661ad0466a0407c5a
+commit e13714e
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Jan 23 10:03:30 2017 -0500
 
@@ -1544,7 +1600,7 @@ Date:   Mon Jan 23 10:03:30 2017 -0500
 
 M	ChangeLog
 
-commit bc75598c5cc3c4db398ac1219dfd32633c202094
+commit bc75598
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 13 15:42:07 2017 -0500
 
@@ -1552,7 +1608,7 @@ Date:   Fri Jan 13 15:42:07 2017 -0500
 
 M	sope-mime/NGMime/NGConcreteMimeType.h
 
-commit 1e31be9bbc7f40cfc7975e890b6a51764b0db7d2
+commit 1e31be9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Jan 6 20:59:02 2017 -0500
 
@@ -1560,7 +1616,7 @@ Date:   Fri Jan 6 20:59:02 2017 -0500
 
 M	ChangeLog
 
-commit e083bd9858ad8d4eaa4e4a9a77912e2a4a289764
+commit e083bd9
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jan 5 10:09:15 2017 -0500
 
@@ -1568,7 +1624,7 @@ Date:   Thu Jan 5 10:09:15 2017 -0500
 
 M	sope-mime/NGMime/NGMimePartGenerator.m
 
-commit c96d96d56f546321e807b5baa85ed707336aeb44
+commit c96d96d
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 30 13:55:40 2016 -0500
 
@@ -1579,7 +1635,7 @@ M	sope-core/NGExtensions/FdExt.subproj/NSString+misc.m
 M	sope-core/NGExtensions/NGExtensions/NSString+misc.h
 M	sope-mime/NGMime/NGMimePartGenerator.m
 
-commit 4deea9073f1e576b6c9e8dfff045af014f4a4caa
+commit 4deea90
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Dec 29 09:54:40 2016 -0500
 
@@ -1587,7 +1643,7 @@ Date:   Thu Dec 29 09:54:40 2016 -0500
 
 M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
 
-commit 7b20f29a618ea380de9404278b0fc7c6a13fe51b
+commit 7b20f29
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 23 15:53:23 2016 -0500
 
@@ -1595,7 +1651,7 @@ Date:   Fri Dec 23 15:53:23 2016 -0500
 
 M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
 
-commit 2f1d8b1323344c53512f930ed320cf43d8a3588e
+commit 2f1d8b1
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Dec 22 14:24:58 2016 -0500
 
@@ -1604,7 +1660,7 @@ Date:   Thu Dec 22 14:24:58 2016 -0500
 M	sope-ldap/NGLdap/NGLdapConnection.h
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit ac4024cbc835dbe724252448cec8da7898875df1
+commit ac4024c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 2 16:29:07 2016 -0500
 
@@ -1614,7 +1670,7 @@ Date:   Fri Dec 2 16:29:07 2016 -0500
 
 M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
 
-commit fa536470e65ef075dea80c1a143af12aa7922f87
+commit fa53647
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 2 15:50:54 2016 -0500
 
@@ -1622,7 +1678,7 @@ Date:   Fri Dec 2 15:50:54 2016 -0500
 
 M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
 
-commit 956c7b908c10fcd692be31be5353a1ac95ad2850
+commit 956c7b9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Dec 1 12:16:52 2016 -0500
 
@@ -1630,7 +1686,7 @@ Date:   Thu Dec 1 12:16:52 2016 -0500
 
 M	ChangeLog
 
-commit 98c6ece78785357cf1c6b805774559df37f86773
+commit 98c6ece
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 28 14:39:33 2016 -0500
 
@@ -1638,7 +1694,7 @@ Date:   Mon Nov 28 14:39:33 2016 -0500
 
 M	ChangeLog
 
-commit 3c66ec5a8f59cea88fd1e3239c4ea946301e61cc
+commit 3c66ec5
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Nov 25 11:01:13 2016 -0500
 
@@ -1646,7 +1702,7 @@ Date:   Fri Nov 25 11:01:13 2016 -0500
 
 M	ChangeLog
 
-commit ac70bd12c23135cf5a957c27b861f143e2c6b3e0
+commit ac70bd1
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 23 16:24:56 2016 -0500
 
@@ -1654,7 +1710,7 @@ Date:   Wed Nov 23 16:24:56 2016 -0500
 
 M	sope-ldap/NGLdap/NGLdapEntry.m
 
-commit 674139c077c037244bc709ab9f803c1316b58645
+commit 674139c
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Nov 23 11:36:32 2016 -0500
 
@@ -1662,7 +1718,7 @@ Date:   Wed Nov 23 11:36:32 2016 -0500
 
 M	ChangeLog
 
-commit d047870b37db97fc605a53b84b1e86eca5691aa5
+commit d047870
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 21 13:11:42 2016 -0500
 
@@ -1673,7 +1729,7 @@ Date:   Mon Nov 21 13:11:42 2016 -0500
 M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit 801734f7ed6b616437b77a646e69a96fc409003f
+commit 801734f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Oct 20 10:50:30 2016 -0400
 
@@ -1681,7 +1737,7 @@ Date:   Thu Oct 20 10:50:30 2016 -0400
 
 M	ChangeLog
 
-commit f503532011f6cff22277688bdfa6b3381f8fcebc
+commit f503532
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 14 09:17:46 2016 -0400
 
@@ -1689,7 +1745,7 @@ Date:   Fri Oct 14 09:17:46 2016 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 928842388d95f82063ab2d97eccf7acd197df64c
+commit 9288423
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Oct 11 11:18:51 2016 -0400
 
@@ -1697,7 +1753,7 @@ Date:   Tue Oct 11 11:18:51 2016 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit d6a218e53727000c5c7dc843225ce9354449b401
+commit d6a218e
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Oct 11 08:39:09 2016 -0400
 
@@ -1705,7 +1761,7 @@ Date:   Tue Oct 11 08:39:09 2016 -0400
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 09c59f08c178ee9a0fd87701a3b3b55b7ee4461a
+commit 09c59f0
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Oct 3 11:59:24 2016 -0400
 
@@ -1713,7 +1769,7 @@ Date:   Mon Oct 3 11:59:24 2016 -0400
 
 M	ChangeLog
 
-commit 4a2b7df9d0c67a915ea27cef924be7bdc4fe6f24
+commit 4a2b7df
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Sep 14 09:32:21 2016 -0400
 
@@ -1721,7 +1777,7 @@ Date:   Wed Sep 14 09:32:21 2016 -0400
 
 M	ChangeLog
 
-commit 8d875425b28c93da47707d3aec646521b558ee7a
+commit 8d87542
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Aug 17 08:22:39 2016 -0400
 
@@ -1729,7 +1785,7 @@ Date:   Wed Aug 17 08:22:39 2016 -0400
 
 M	ChangeLog
 
-commit 514fb76a7fbe0c32b22504c27bc8ba7e9152135b
+commit 514fb76
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 16 08:42:59 2016 -0400
 
@@ -1737,7 +1793,7 @@ Date:   Tue Aug 16 08:42:59 2016 -0400
 
 M	sope-mime/NGMime/NGMimeType.m
 
-commit 3245eb43835be013b4c706a27a198d5901b8b819
+commit 3245eb4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Aug 12 11:57:33 2016 -0400
 
@@ -1745,7 +1801,7 @@ Date:   Fri Aug 12 11:57:33 2016 -0400
 
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit feb54b8402b234f460baa7af8e2bd524873400ac
+commit feb54b8
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Aug 10 13:55:37 2016 -0400
 
@@ -1753,7 +1809,7 @@ Date:   Wed Aug 10 13:55:37 2016 -0400
 
 M	ChangeLog
 
-commit eceb975f1444e796d3d96f61ca766b059f7de78c
+commit eceb975
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Aug 8 16:23:53 2016 -0400
 
@@ -1761,7 +1817,7 @@ Date:   Mon Aug 8 16:23:53 2016 -0400
 
 M	sope-mime/NGMail/NSData+MimeQP.m
 
-commit cf1865e407b55ed2149159340d01494f37efc508
+commit cf1865e
 Author: ethoms <euan@potensol.com>
 Date:   Thu Jul 14 01:12:42 2016 +0800
 
@@ -1769,7 +1825,7 @@ Date:   Thu Jul 14 01:12:42 2016 +0800
 
 M	configure
 
-commit 1a96d03cc25224c4b9d134f0414275da6840bf2c
+commit 1a96d03
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jul 6 07:26:29 2016 -0400
 
@@ -1777,7 +1833,7 @@ Date:   Wed Jul 6 07:26:29 2016 -0400
 
 M	ChangeLog
 
-commit 452b547eb1c7a5576cc7acd9b254606e30b05752
+commit 452b547
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 29 15:33:51 2016 -0400
 
@@ -1786,7 +1842,7 @@ Date:   Wed Jun 29 15:33:51 2016 -0400
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit bff1093270e12da328ed05de95f922d6dc03606a
+commit bff1093
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jun 22 11:39:10 2016 -0400
 
@@ -1794,7 +1850,7 @@ Date:   Wed Jun 22 11:39:10 2016 -0400
 
 M	ChangeLog
 
-commit 092e1857e7fffe973c11134eccdc3cffeb19031d
+commit 092e185
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 15 13:09:37 2016 -0400
 
@@ -1802,7 +1858,7 @@ Date:   Wed Jun 15 13:09:37 2016 -0400
 
 M	sope-appserver/NGObjWeb/WORequest.m
 
-commit 11d3cbbd7d54803d57d829d25fbbf35190cc53cb
+commit 11d3cbb
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jun 13 09:14:40 2016 -0400
 
@@ -1810,7 +1866,7 @@ Date:   Mon Jun 13 09:14:40 2016 -0400
 
 M	sope-appserver/NGObjWeb/SoObjects/SoProductClassInfo.m
 
-commit 0b5d04d3337062b8870d411c37d696b0734255f2
+commit 0b5d04d
 Author: Patrice Levesque <github-wayne@ptaff.ca>
 Date:   Thu Jun 9 13:06:51 2016 -0400
 
@@ -1818,7 +1874,7 @@ Date:   Thu Jun 9 13:06:51 2016 -0400
 
 M	general.make
 
-commit 1b7cea55e481f0de703008eb56e401ac34a7bf7a
+commit 1b7cea5
 Author: Patrice Levesque <github-wayne@ptaff.ca>
 Date:   Wed Jun 8 17:14:05 2016 -0400
 
@@ -1829,7 +1885,7 @@ Date:   Wed Jun 8 17:14:05 2016 -0400
 
 M	configure
 
-commit 2efbd67b92b931d6313ec38546a18912b3779468
+commit 2efbd67
 Author: Patrice Levesque <github-wayne@ptaff.ca>
 Date:   Tue Jun 7 11:20:57 2016 -0400
 
@@ -1841,7 +1897,7 @@ Date:   Tue Jun 7 11:20:57 2016 -0400
 M	configure
 A	general.make
 
-commit e95ce1b48440ebd16ef2ebfbfaf84cb19250be38
+commit e95ce1b
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jun 2 13:26:02 2016 -0400
 
@@ -1849,7 +1905,7 @@ Date:   Thu Jun 2 13:26:02 2016 -0400
 
 M	ChangeLog
 
-commit ca14e49da38456b56ef1e86ef60dc65b98b037e3
+commit ca14e49
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jun 1 09:12:28 2016 -0400
 
@@ -1861,7 +1917,7 @@ M	sope-mime/NGMime/NGMimeContentDispositionHeaderFieldGenerator.m
 M	sope-mime/NGMime/NGMimeUtilities.h
 M	sope-mime/NGMime/NGMimeUtilities.m
 
-commit f157871cf565f7fd7b1e01c122006e0c031808f7
+commit f157871
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed May 18 16:12:46 2016 -0400
 
@@ -1869,7 +1925,7 @@ Date:   Wed May 18 16:12:46 2016 -0400
 
 M	ChangeLog
 
-commit d00cf04258bbd8cf9805759636c60d2c0cb532ae
+commit d00cf04
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 17 11:17:59 2016 -0400
 
@@ -1877,7 +1933,7 @@ Date:   Tue May 17 11:17:59 2016 -0400
 
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit 89aaa374f8710a4aedec1d023c225778dc62cecd
+commit 89aaa37
 Author: Patrice Levesque <github-wayne@ptaff.ca>
 Date:   Thu May 12 16:50:57 2016 -0400
 
@@ -1887,7 +1943,7 @@ Date:   Thu May 12 16:50:57 2016 -0400
 
 M	sope-gdl1/MySQL/MySQL4Channel.m
 
-commit acb965dec439cc09d0504daf71b3c102b818245b
+commit acb965d
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu May 12 13:54:20 2016 -0400
 
@@ -1895,7 +1951,7 @@ Date:   Thu May 12 13:54:20 2016 -0400
 
 M	ChangeLog
 
-commit f3843334a2e58bdb7c54d0b336169bb56b3c7273
+commit f384333
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Apr 6 13:18:56 2016 -0400
 
@@ -1903,7 +1959,7 @@ Date:   Wed Apr 6 13:18:56 2016 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 8f543729bf7f1e781d2d49740ad9163bc0c041fe
+commit 8f54372
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Apr 5 12:34:20 2016 -0400
 
@@ -1911,7 +1967,7 @@ Date:   Tue Apr 5 12:34:20 2016 -0400
 
 M	ChangeLog
 
-commit 65e486502da2c440ee2a91c0993c23c7559031f0
+commit 65e4865
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Mar 28 11:12:17 2016 -0400
 
@@ -1919,7 +1975,7 @@ Date:   Mon Mar 28 11:12:17 2016 -0400
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 3462d1ad59fe708e1e7ab0f94e9e6599949ebfb9
+commit 3462d1a
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Mar 16 11:02:19 2016 -0400
 
@@ -1927,7 +1983,7 @@ Date:   Wed Mar 16 11:02:19 2016 -0400
 
 M	ChangeLog
 
-commit fb4ab168beec05af879fa807f825b7de4ee87040
+commit fb4ab16
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Mar 16 08:52:56 2016 -0400
 
@@ -1935,7 +1991,7 @@ Date:   Wed Mar 16 08:52:56 2016 -0400
 
 M	sope-mime/NGMime/NGMimePartParser.m
 
-commit c975a7cf3b136a06e65721ef602b8849dd879e84
+commit c975a7c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Mar 14 18:45:45 2016 -0400
 
@@ -1943,7 +1999,7 @@ Date:   Mon Mar 14 18:45:45 2016 -0400
 
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit caec2ca2c5e0269ae9a6540baf1bf8cf79c1bf7a
+commit caec2ca
 Author: Bernard Cafarelli <bernard.cafarelli@gmail.com>
 Date:   Thu Mar 10 11:20:15 2016 +0100
 
@@ -1954,7 +2010,7 @@ Date:   Thu Mar 10 11:20:15 2016 +0100
 
 M	sope-gdl1/MySQL/GNUmakefile.preamble
 
-commit 07b63038c6346165f6c645bee28e88d813064ed4
+commit 07b6303
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Mar 4 12:12:04 2016 -0500
 
@@ -1962,7 +2018,7 @@ Date:   Fri Mar 4 12:12:04 2016 -0500
 
 M	ChangeLog
 
-commit 730dec9898b0d4ec04862dda26845c91995a4994
+commit 730dec9
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 16 16:23:25 2016 -0500
 
@@ -1972,7 +2028,7 @@ Date:   Tue Feb 16 16:23:25 2016 -0500
 
 M	sope-appserver/NGObjWeb/NGHttp/NGHttpMessageParser.m
 
-commit f4241bed9caf41d2a53a6adb0e97bf8149634f38
+commit f4241be
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Feb 10 09:57:51 2016 -0500
 
@@ -1981,7 +2037,7 @@ Date:   Wed Feb 10 09:57:51 2016 -0500
 M	sope-mime/NGImap4/NGImap4Connection.h
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit 629aa13bd418085a36c24d5521dcc12204acad2c
+commit 629aa13
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Feb 5 12:18:12 2016 -0500
 
@@ -1989,7 +2045,7 @@ Date:   Fri Feb 5 12:18:12 2016 -0500
 
 M	ChangeLog
 
-commit dc3db91aac7b64dd059cb9854520f828efcbc593
+commit dc3db91
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Jan 25 11:21:37 2016 -0500
 
@@ -1997,7 +2053,7 @@ Date:   Mon Jan 25 11:21:37 2016 -0500
 
 M	ChangeLog
 
-commit 28d239d0c8589b4d4ce7f49aa7d77f580c7254b7
+commit 28d239d
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 22 14:22:26 2016 -0500
 
@@ -2005,7 +2061,7 @@ Date:   Fri Jan 22 14:22:26 2016 -0500
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit b76c3bb5eef6f976d0d21378fe9074a7d05c8dbf
+commit b76c3bb
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Jan 18 11:25:04 2016 -0500
 
@@ -2013,7 +2069,7 @@ Date:   Mon Jan 18 11:25:04 2016 -0500
 
 M	ChangeLog
 
-commit fe0d0c33452ace9aaba13c85c1e2e43d82a345af
+commit fe0d0c3
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jan 18 10:14:30 2016 -0500
 
@@ -2021,7 +2077,7 @@ Date:   Mon Jan 18 10:14:30 2016 -0500
 
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit 1f261501a0671fb1cf2ccec5d08cc49f15d0a556
+commit 1f26150
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Jan 18 09:57:56 2016 -0500
 
@@ -2029,7 +2085,7 @@ Date:   Mon Jan 18 09:57:56 2016 -0500
 
 M	ChangeLog
 
-commit fc6e0228804ee16b0128384c886475f77d314ce6
+commit fc6e022
 Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Dec 21 17:42:01 2015 +0100
 
@@ -2037,7 +2093,7 @@ Date:   Mon Dec 21 17:42:01 2015 +0100
 
 M	sope-mime/NGMail/NSData+MimeQP.m
 
-commit 905fda34954e378022b1a055d380c67efc04db61
+commit 905fda3
 Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Dec 21 13:16:46 2015 +0100
 
@@ -2045,7 +2101,7 @@ Date:   Mon Dec 21 13:16:46 2015 +0100
 
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit 1071c335b76fa3dcdc32b62534d3d1e113b25135
+commit 1071c33
 Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Dec 21 13:16:01 2015 +0100
 
@@ -2054,7 +2110,7 @@ Date:   Mon Dec 21 13:16:01 2015 +0100
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.h
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit f062773c49193bb09e8c4b08964f8cfeea2ab8cd
+commit f062773
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jan 7 09:52:54 2016 -0500
 
@@ -2062,7 +2118,7 @@ Date:   Thu Jan 7 09:52:54 2016 -0500
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit 91dec51286dcfe01701e459f5ed64f6c3e5070d3
+commit 91dec51
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jan 5 14:35:59 2016 -0500
 
@@ -2070,7 +2126,7 @@ Date:   Tue Jan 5 14:35:59 2016 -0500
 
 M	ChangeLog
 
-commit 1343491b3d67760c1cd89881b715a24ac633452f
+commit 1343491
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jan 5 13:43:35 2016 -0500
 
@@ -2078,7 +2134,7 @@ Date:   Tue Jan 5 13:43:35 2016 -0500
 
 M	sope-core/NGStreams/NGCTextStream.m
 
-commit d762688e9aa839f626e9bdb663fdf1a0cb724620
+commit d762688
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Dec 15 14:27:04 2015 -0500
 
@@ -2086,7 +2142,7 @@ Date:   Tue Dec 15 14:27:04 2015 -0500
 
 M	ChangeLog
 
-commit 947a44954249fc1ebd7fa8134e03cb55ff734830
+commit 947a449
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Dec 14 10:22:56 2015 -0500
 
@@ -2094,7 +2150,7 @@ Date:   Mon Dec 14 10:22:56 2015 -0500
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit 54840e7cc3581bbf6aff747a3daf677eacbc469c
+commit 54840e7
 Author: Andrey Cherepanov <cas@altlinux.org>
 Date:   Thu Nov 19 18:45:55 2015 +0300
 
@@ -2131,7 +2187,7 @@ Date:   Thu Nov 19 18:45:55 2015 +0300
 
 M	sope-json/SBJson/Classes/GNUmakefile
 
-commit 7380c8869e9eddc5487b85dcab1928775e2e8a1d
+commit 7380c88
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Nov 11 14:20:56 2015 -0500
 
@@ -2139,7 +2195,7 @@ Date:   Wed Nov 11 14:20:56 2015 -0500
 
 M	ChangeLog
 
-commit 51ecf2ee16c260075a1ac7375007b765f00d262c
+commit 51ecf2e
 Author: Javier Amor García <jamor@zentyal.com>
 Date:   Wed Nov 11 16:58:39 2015 +0100
 
@@ -2147,7 +2203,7 @@ Date:   Wed Nov 11 16:58:39 2015 +0100
 
 M	sope-mime/NGMime/NGMimeType.m
 
-commit e219ef792df5c6a4a3f6fdf0e3ceabb4cb063ce8
+commit e219ef7
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 9 14:28:28 2015 -0500
 
@@ -2155,7 +2211,7 @@ Date:   Mon Nov 9 14:28:28 2015 -0500
 
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldGenerator.m
 
-commit 36e3816a89fd03261d7a50163a4b36a1fa4baded
+commit 36e3816
 Author: hasufell <hasufell@hasufell.de>
 Date:   Tue Nov 3 17:09:02 2015 +0100
 
@@ -2173,7 +2229,7 @@ Date:   Tue Nov 3 17:09:02 2015 +0100
 
 M	configure
 
-commit 162d03325c47868b2323676f4865b64acbcb205b
+commit 162d033
 Author: extrafu <lmarcotte@inverse.ca>
 Date:   Mon Nov 2 14:08:50 2015 -0500
 
@@ -2181,7 +2237,7 @@ Date:   Mon Nov 2 14:08:50 2015 -0500
 
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 39cd5ba93765452918ffb47f11f88103cc02e031
+commit 39cd5ba
 Author: Euan Thoms <euan@potensol.com>
 Date:   Wed Oct 28 06:48:12 2015 +0800
 
@@ -2189,7 +2245,7 @@ Date:   Wed Oct 28 06:48:12 2015 +0800
 
 M	sope-core/NGExtensions/NGBundleManager.m
 
-commit 15a9e33e2c02c31522149ff66bd2a1f7062a917b
+commit 15a9e33
 Author: Euan Thoms <euan@potensol.com>
 Date:   Wed Oct 28 05:06:53 2015 +0800
 
@@ -2211,7 +2267,7 @@ M	sope-gdl1/GDLAccess/EOFault.h
 M	sope-gdl1/PostgreSQL/PostgreSQL72DataTypeMappingException.m
 M	sope-gdl1/PostgreSQL/PostgreSQL72Values.h
 
-commit d06baebfe450a25746a506c9f215b6e676e39616
+commit d06baeb
 Author: ethoms <euan@potensol.com>
 Date:   Mon Oct 26 18:50:44 2015 +0800
 
@@ -2219,7 +2275,7 @@ Date:   Mon Oct 26 18:50:44 2015 +0800
 
 M	sope-core/NGStreams/NGByteCountStream.m
 
-commit 7e020ff67e1c49b8fa7a1187b9d1c3b880553aa2
+commit 7e020ff
 Author: Euan Thoms <euan@potensol.com>
 Date:   Sun Oct 25 01:34:22 2015 +0800
 
@@ -2266,7 +2322,7 @@ M	sope-mime/NGImap4/NGImap4Folder.m
 M	sope-mime/NGImap4/imCommon.h
 M	sope-mime/NGMime/common.h
 
-commit 89241c40becf566ebde00d097aeacb04babe7f8b
+commit 89241c4
 Author: Euan Thoms <euan@potensol.com>
 Date:   Sat Oct 24 20:07:50 2015 +0800
 
@@ -2275,7 +2331,7 @@ Date:   Sat Oct 24 20:07:50 2015 +0800
 M	sope-core/NGStreams/NGActiveSocket.m
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldGenerator.m
 
-commit 73254707c39657d4eded1626f3a72c6bc717cb6b
+commit 7325470
 Author: Euan Thoms <euan@potensol.com>
 Date:   Thu Oct 22 18:28:39 2015 +0800
 
@@ -2284,7 +2340,7 @@ Date:   Thu Oct 22 18:28:39 2015 +0800
 M	sope-mime/NGImap4/NGImap4Client.h
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 635a56d9d583d59ce43431005a1d9fa9a864a455
+commit 635a56d
 Author: Euan Thoms <euan@potensol.com>
 Date:   Thu Oct 22 18:10:36 2015 +0800
 
@@ -2297,7 +2353,7 @@ M	sope-gdl1/GDLAccess/EODatabaseFault.m
 M	sope-gdl1/GDLAccess/EOSQLExpression.m
 M	sope-gdl1/GDLAccess/EOSQLQualifier.m
 
-commit a7141312d05b3ca807592ebc81726d4c7624ba44
+commit a714131
 Author: Euan Thoms <euan@potensol.com>
 Date:   Thu Oct 22 16:55:11 2015 +0800
 
@@ -2312,7 +2368,7 @@ M	sope-gdl1/PostgreSQL/NSString+PostgreSQL72.m
 M	sope-mime/NGImap4/NGImap4Context.m
 M	sope-mime/NGImap4/NGImap4Folder.m
 
-commit c2b41f5be002d0f67e315c6bc504147ba6abeec8
+commit c2b41f5
 Author: Euan Thoms <euan@potensol.com>
 Date:   Thu Oct 22 15:17:44 2015 +0800
 
@@ -2331,7 +2387,7 @@ M	sope-gdl1/GDLAccess/EOModel.m
 M	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m
 M	sope-gdl1/GDLAccess/EOSQLQualifier.m
 
-commit 1dad0ae546b5d28d1d7bb51a6c06016ac1b5d83d
+commit 1dad0ae
 Author: Euan Thoms <euan@potensol.com>
 Date:   Thu Oct 22 13:51:42 2015 +0800
 
@@ -2350,7 +2406,7 @@ M	sope-gdl1/GDLAccess/EODatabaseChannel.m
 M	sope-mime/NGMime/NGMimePartGenerator.h
 M	sope-xml/SaxObjC/SaxObjectDecoder.m
 
-commit 37782867bc35981da0ed8593f9389e9761c3f83a
+commit 3778286
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 21 08:57:55 2015 -0400
 
@@ -2358,7 +2414,7 @@ Date:   Wed Oct 21 08:57:55 2015 -0400
 
 M	sope-core/NGStreams/NGByteCountStream.m
 
-commit 3b820aea61003364dc9835a74668ae882da9b60d
+commit 3b820ae
 Author: Euan Thoms <euan@potensol.com>
 Date:   Wed Oct 21 11:15:28 2015 +0800
 
@@ -2449,7 +2505,7 @@ M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
 M	sope-xml/DOM/DOMQueryPathExpression.m
 M	sope-xml/XmlRpc/NSNotification+XmlRpcCoding.m
 
-commit ad7a88e35e027b1ed6c8fe5e6a275634ac077490
+commit ad7a88e
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Oct 15 15:55:48 2015 -0400
 
@@ -2457,7 +2513,7 @@ Date:   Thu Oct 15 15:55:48 2015 -0400
 
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldGenerator.m
 
-commit 4ac4809dae92a08e219677a5f67c6575baa8a98e
+commit 4ac4809
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 14 15:54:59 2015 -0400
 
@@ -2465,7 +2521,7 @@ Date:   Wed Oct 14 15:54:59 2015 -0400
 
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldGenerator.m
 
-commit a2e2908f9dd0ec90bc6d48c48d4c2d467b29dae7
+commit a2e2908
 Author: Juan Vallés <jvalles@zentyal.com>
 Date:   Wed Oct 7 16:36:35 2015 +0200
 
@@ -2481,7 +2537,7 @@ Date:   Wed Oct 7 16:36:35 2015 +0200
 
 M	sope-core/NGStreams/NGCTextStream.m
 
-commit e870145b7ed381c1bdef5945075ed48948b86d5b
+commit e870145
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Sep 9 14:59:10 2015 -0400
 
@@ -2489,7 +2545,7 @@ Date:   Wed Sep 9 14:59:10 2015 -0400
 
 M	sope-mime/NGMime/NGMimePartParser.m
 
-commit 2d1665fd94b5c320c631d5d9231421a0773f890b
+commit 2d1665f
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Sep 8 12:21:30 2015 -0400
 
@@ -2497,7 +2553,7 @@ Date:   Tue Sep 8 12:21:30 2015 -0400
 
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit 410739bc77e68143734bd2bcaf42bf86eb0719b0
+commit 410739b
 Author: Jesús García Sáez <blaxter@gmail.com>
 Date:   Mon Sep 7 16:22:30 2015 +0200
 
@@ -2505,7 +2561,7 @@ Date:   Mon Sep 7 16:22:30 2015 +0200
 
 M	sope-appserver/NGObjWeb/WORequestHandler.m
 
-commit 7dcb6a244b5cdf5812541d5ddba9c63994ec7eb7
+commit 7dcb6a2
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Sep 3 14:12:49 2015 -0400
 
@@ -2515,7 +2571,7 @@ Date:   Thu Sep 3 14:12:49 2015 -0400
 
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit 7a4328c1034c3a161bd33082e620fec543ef4ade
+commit 7a4328c
 Author: Javier Amor García <jamor@zentyal.com>
 Date:   Thu Aug 20 14:53:18 2015 +0200
 
@@ -2531,7 +2587,7 @@ Date:   Thu Aug 20 14:53:18 2015 +0200
 
 M	sope-mime/NGMail/NGMimeMessageGenerator.m
 
-commit 750e5ec0858eb52fa8d0859028d0277d47f6c543
+commit 750e5ec
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 23 11:53:33 2015 -0400
 
@@ -2539,7 +2595,7 @@ Date:   Thu Jul 23 11:53:33 2015 -0400
 
 M	ChangeLog
 
-commit 18d989c142aa6e8fb9e6487b65770033419febe3
+commit 18d989c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 3 09:46:37 2015 -0400
 
@@ -2547,7 +2603,7 @@ Date:   Fri Jul 3 09:46:37 2015 -0400
 
 M	sope-appserver/NGObjWeb/SoObjects/SoProductResourceManager.m
 
-commit 6d65405dbb6dc9a9cf65970f5436011c1d6a1ae7
+commit 6d65405
 Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Thu Jun 18 17:27:55 2015 +0200
 
@@ -2555,7 +2611,7 @@ Date:   Thu Jun 18 17:27:55 2015 +0200
 
 M	sope-appserver/NGObjWeb/WORequestHandler.m
 
-commit 1c1bafbf5b38c35650b1138d606fbe99bfe37137
+commit 1c1bafb
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jun 15 11:28:26 2015 -0400
 
@@ -2563,7 +2619,7 @@ Date:   Mon Jun 15 11:28:26 2015 -0400
 
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit 986305940779b821df35e4f1219d4de7e0cc1dc3
+commit 9863059
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jun 10 14:58:23 2015 -0400
 
@@ -2571,7 +2627,7 @@ Date:   Wed Jun 10 14:58:23 2015 -0400
 
 M	sope-appserver/NGObjWeb/DynamicElements/WOxHTMLElemBuilder.m
 
-commit 773f984b2e0ce8c0d22040301e5e63de685d6b8e
+commit 773f984
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 10 11:00:30 2015 -0400
 
@@ -2579,7 +2635,7 @@ Date:   Wed Jun 10 11:00:30 2015 -0400
 
 M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
 
-commit b738adc8abea04c8b6e733e1fd26779f9e2c0fb1
+commit b738adc
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jun 9 15:58:12 2015 -0400
 
@@ -2587,7 +2643,7 @@ Date:   Tue Jun 9 15:58:12 2015 -0400
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 383de8a96cccb78b16ab166bf5d06c2c49465408
+commit 383de8a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jun 1 08:38:44 2015 -0400
 
@@ -2595,7 +2651,7 @@ Date:   Mon Jun 1 08:38:44 2015 -0400
 
 M	ChangeLog
 
-commit b6b71be58813684cfe8a2fbc0a18715c26a042fc
+commit b6b71be
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 26 15:09:43 2015 -0400
 
@@ -2605,7 +2661,7 @@ M	sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.h
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit e81575b85fe1a45bdad0ca5160a31fe45c5c9c49
+commit e81575b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 20 08:26:14 2015 -0400
 
@@ -2613,7 +2669,7 @@ Date:   Wed May 20 08:26:14 2015 -0400
 
 M	sope-mime/NGMime/NGMimePartGenerator.m
 
-commit f354d85c3e6968252f41fb91956aef0c1fb8a25d
+commit f354d85
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 19 14:58:03 2015 -0400
 
@@ -2621,7 +2677,7 @@ Date:   Tue May 19 14:58:03 2015 -0400
 
 M	sope-mime/NGMime/NGMimePartGenerator.m
 
-commit 918ecf623f32b4318545e883b30038ac9a187a79
+commit 918ecf6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 19 14:52:04 2015 -0400
 
@@ -2629,7 +2685,7 @@ Date:   Tue May 19 14:52:04 2015 -0400
 
 M	sope-mime/NGMime/NGMimePartGenerator.m
 
-commit 20acefdd4dab607b064e2f3d1ffebd3bae936a66
+commit 20acefd
 Author: Javier Amor García <jamor@zentyal.com>
 Date:   Mon May 18 14:36:41 2015 +0200
 
@@ -2639,7 +2695,7 @@ Date:   Mon May 18 14:36:41 2015 +0200
 
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit ed1a58d4bd9241689b49bd83329961f77500cc94
+commit ed1a58d
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Apr 21 10:57:46 2015 -0400
 
@@ -2647,7 +2703,7 @@ Date:   Tue Apr 21 10:57:46 2015 -0400
 
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit 984afb7fbc9a46f2df0a86a7114d24c5bce1b532
+commit 984afb7
 Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Apr 20 14:24:07 2015 +0200
 
@@ -2657,7 +2713,7 @@ Date:   Mon Apr 20 14:24:07 2015 +0200
 
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit 99a5736d198a5300491d253b273bda437ef35f11
+commit 99a5736
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Mar 24 11:10:52 2015 -0400
 
@@ -2665,7 +2721,7 @@ Date:   Tue Mar 24 11:10:52 2015 -0400
 
 M	ChangeLog
 
-commit 9afc84eb11fd5329bc342e3fadec81a3855b486c
+commit 9afc84e
 Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Mar 23 17:04:59 2015 +0100
 
@@ -2673,7 +2729,7 @@ Date:   Mon Mar 23 17:04:59 2015 +0100
 
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit 67c9c4ff64099e07a239d44ca84cf58c9886dcf8
+commit 67c9c4f
 Author: Jesús García Sáez <jgarcia@zentyal.com>
 Date:   Mon Mar 23 13:38:27 2015 +0100
 
@@ -2687,7 +2743,7 @@ M	sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.h
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit d0ac78bdab50ae3c5af4e946e6f5ef2e0f284d9b
+commit d0ac78b
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Mar 4 11:59:06 2015 -0500
 
@@ -2695,7 +2751,7 @@ Date:   Wed Mar 4 11:59:06 2015 -0500
 
 M	sope-appserver/NGObjWeb/DynamicElements/WOxHTMLElemBuilder.m
 
-commit 6452ca58fbd7ee4850ae06bd7228a4feeb21441b
+commit 6452ca5
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Feb 12 11:09:30 2015 -0500
 
@@ -2703,7 +2759,7 @@ Date:   Thu Feb 12 11:09:30 2015 -0500
 
 M	ChangeLog
 
-commit d38cce21a6ad2fc872d307a8b99e1bbce9dea729
+commit d38cce2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Feb 9 15:32:36 2015 -0500
 
@@ -2711,7 +2767,7 @@ Date:   Mon Feb 9 15:32:36 2015 -0500
 
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 
-commit 09dbf543661fdabb7485e2e7d8c8d02984e0f7d1
+commit 09dbf54
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 30 11:12:36 2015 -0500
 
@@ -2719,7 +2775,7 @@ Date:   Fri Jan 30 11:12:36 2015 -0500
 
 M	ChangeLog
 
-commit 6ce6a39e1af5a4161769b9b7d52c19b805b13815
+commit 6ce6a39
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 30 11:11:51 2015 -0500
 
@@ -2727,7 +2783,7 @@ Date:   Fri Jan 30 11:11:51 2015 -0500
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit 5ddf39f50561d989f418804a51e0f7e293b8b242
+commit 5ddf39f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 23 16:18:26 2015 -0500
 
@@ -2735,7 +2791,7 @@ Date:   Fri Jan 23 16:18:26 2015 -0500
 
 M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
 
-commit e9a168ec7b6ef170dcb1b2d24853fc248c6368de
+commit e9a168e
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 23 16:15:06 2015 -0500
 
@@ -2744,7 +2800,7 @@ Date:   Fri Jan 23 16:15:06 2015 -0500
 M	sope-appserver/NGObjWeb/WebDAV/SoObject+SoDAVQuery.m
 M	sope-core/NGExtensions/GNUmakefile
 
-commit 6c910bc7b5c2150b2315be6b2320a878f0014144
+commit 6c910bc
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 23 16:13:07 2015 -0500
 
@@ -2752,7 +2808,7 @@ Date:   Fri Jan 23 16:13:07 2015 -0500
 
 M	sope-gdl1/PostgreSQL/PostgreSQL72Channel.m
 
-commit 531b118227e395d65947c9dadcb5df37398fe0c8
+commit 531b118
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 23 16:02:22 2015 -0500
 
@@ -2774,7 +2830,7 @@ M	sope-mime/NGImap4/NGImap4ConnectionManager.m
 M	sope-mime/NGImap4/NGImap4FolderMailRegistry.m
 M	sope-mime/NGMime/NGMimePartGenerator.m
 
-commit 91ae0a61312a1f1b40eff727258b06f15d9d0867
+commit 91ae0a6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jan 22 10:40:12 2015 -0500
 
@@ -2784,7 +2840,7 @@ M	sope-core/NGExtensions/FdExt.subproj/GNUmakefile
 D	sope-core/NGExtensions/FdExt.subproj/NSString+German.m
 D	sope-core/NGExtensions/NGExtensions/NSString+German.h
 
-commit 64e164a20bfda861fdf1df715776b9657ad0feb5
+commit 64e164a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jan 20 08:37:58 2015 -0500
 
@@ -2792,7 +2848,7 @@ Date:   Tue Jan 20 08:37:58 2015 -0500
 
 M	ChangeLog
 
-commit 77927f2583ecb26e97256a5e180b96dffa8eacf3
+commit 77927f2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 16 12:53:44 2015 -0500
 
@@ -2800,7 +2856,7 @@ Date:   Fri Jan 16 12:53:44 2015 -0500
 
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit bcbe4afed90dbb00cb406e6d02fc590d0d1243a9
+commit bcbe4af
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jan 13 15:40:43 2015 -0500
 
@@ -2808,7 +2864,7 @@ Date:   Tue Jan 13 15:40:43 2015 -0500
 
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 
-commit 0115a39168a7d483f540ba87a2ebe378fb602f76
+commit 0115a39
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Dec 30 12:57:03 2014 -0500
 
@@ -2816,7 +2872,7 @@ Date:   Tue Dec 30 12:57:03 2014 -0500
 
 M	sope-appserver/WEExtensions/WEDropContainer.m
 
-commit 382cabbaf6c5a9a559c0b7c066dbb52ee9f730ad
+commit 382cabb
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Dec 30 08:04:14 2014 -0500
 
@@ -2824,7 +2880,7 @@ Date:   Tue Dec 30 08:04:14 2014 -0500
 
 M	ChangeLog
 
-commit 0a015d9791a5848f3b0b395a90a085d8a59694b0
+commit 0a015d9
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Dec 22 15:46:29 2014 -0500
 
@@ -2833,7 +2889,7 @@ Date:   Mon Dec 22 15:46:29 2014 -0500
 M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
 
-commit 901137b5425579ef6dcf99f731bc9c528a871cd0
+commit 901137b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Sat Dec 20 15:32:08 2014 -0500
 
@@ -2841,7 +2897,7 @@ Date:   Sat Dec 20 15:32:08 2014 -0500
 
 M	sope-mime/NGMime/NGMimeBodyGenerator.m
 
-commit e1216770ca7067bf03bc95db29da54ca6107504c
+commit e121677
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Dec 18 08:58:59 2014 -0500
 
@@ -2849,7 +2905,7 @@ Date:   Thu Dec 18 08:58:59 2014 -0500
 
 M	ChangeLog
 
-commit d6b948e0e4e42246f24c48b12bd2be0a3fac626c
+commit d6b948e
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Dec 17 15:02:23 2014 -0500
 
@@ -2858,7 +2914,7 @@ Date:   Wed Dec 17 15:02:23 2014 -0500
 M	sope-mime/NGMail/NGMimeMessage.h
 M	sope-mime/NGMail/NGMimeMessage.m
 
-commit ed5c2c66171220955d36e1094a7aca36d63c2930
+commit ed5c2c6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Dec 15 19:35:26 2014 -0500
 
@@ -2869,7 +2925,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.h
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
 
-commit e49a05fc5544e9775e7e61fca7b93c7c2eea7087
+commit e49a05f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Dec 9 12:59:41 2014 -0500
 
@@ -2877,7 +2933,7 @@ Date:   Tue Dec 9 12:59:41 2014 -0500
 
 M	packaging/debian/rules
 
-commit 2dd9a7919c0f4223fb6764bb9658cdb3dcdbf78f
+commit 2dd9a79
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Dec 9 09:12:44 2014 -0500
 
@@ -2885,7 +2941,7 @@ Date:   Tue Dec 9 09:12:44 2014 -0500
 
 M	ChangeLog
 
-commit 4ed68775f91b6ecb566164babda0d00f0b519d23
+commit 4ed6877
 Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Sat Nov 29 09:23:06 2014 +0100
 
@@ -2896,7 +2952,7 @@ Date:   Sat Nov 29 09:23:06 2014 +0100
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit b249d8f5c3d0ce5bd765f9ec4270c54d7a870d7d
+commit b249d8f
 Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Thu Nov 27 17:21:03 2014 +0100
 
@@ -2918,7 +2974,7 @@ Date:   Thu Nov 27 17:21:03 2014 +0100
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit 75bd8a0105752cee05496efd53b2d4103390a4dc
+commit 75bd8a0
 Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Thu Nov 27 17:21:03 2014 +0100
 
@@ -2938,7 +2994,7 @@ Date:   Thu Nov 27 17:21:03 2014 +0100
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit bd194948067c876eafecd9723ae7c544099fb9e5
+commit bd19494
 Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Mon Nov 24 23:50:45 2014 +0100
 
@@ -2955,7 +3011,7 @@ Date:   Mon Nov 24 23:50:45 2014 +0100
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit f26ccf1f1380b1a95b8b29e5a30e8edd775a151b
+commit f26ccf1
 Author: Samuel Cabrero <samuelcabrero@kernevil.me>
 Date:   Thu Nov 20 17:02:01 2014 +0100
 
@@ -3006,7 +3062,7 @@ Date:   Thu Nov 20 17:02:01 2014 +0100
 
 M	sope-mime/NGImap4/NSString+Imap4.m
 
-commit 6e8ab27640345febc742397dedc3c68e472166e6
+commit 6e8ab27
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Nov 21 09:22:00 2014 -0500
 
@@ -3014,7 +3070,7 @@ Date:   Fri Nov 21 09:22:00 2014 -0500
 
 M	ChangeLog
 
-commit bb70653d820450507097230add9fa1fa13b2453c
+commit bb70653
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 20 09:42:42 2014 -0500
 
@@ -3024,7 +3080,7 @@ Date:   Thu Nov 20 09:42:42 2014 -0500
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit 67c58bfd91e859c9bf643cf20cc44ed2fe6e389f
+commit 67c58bf
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 18 10:52:22 2014 -0500
 
@@ -3033,7 +3089,7 @@ Date:   Tue Nov 18 10:52:22 2014 -0500
 M	sope-core/NGExtensions/NGBase64Coding.m
 M	sope-mime/NGMime/NGMimePartGenerator.m
 
-commit c959d950a64d45d679f8a59a82a3b499c05415f8
+commit c959d95
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 18 09:06:37 2014 -0500
 
@@ -3041,7 +3097,7 @@ Date:   Tue Nov 18 09:06:37 2014 -0500
 
 M	sope-core/NGExtensions/NGBase64Coding.m
 
-commit 2c127ff4a7a448820c7b36b68918fce0c394c7d7
+commit 2c127ff
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 17 21:04:01 2014 -0500
 
@@ -3049,7 +3105,7 @@ Date:   Mon Nov 17 21:04:01 2014 -0500
 
 M	sope-core/NGExtensions/NGBase64Coding.m
 
-commit 1544d178c4cf56ee8358f06475c4b3e45dddc11c
+commit 1544d17
 Author: Enrique J. Hernández Blasco <ejhernandez@zentyal.com>
 Date:   Fri Nov 14 11:37:04 2014 +0100
 
@@ -3064,7 +3120,7 @@ Date:   Fri Nov 14 11:37:04 2014 +0100
 
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit ceae95aaa2400b339c1ed42650c5bc35b2170dff
+commit ceae95a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 12 11:22:21 2014 -0500
 
@@ -3072,7 +3128,7 @@ Date:   Wed Nov 12 11:22:21 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit 31de3aac952b97c10b3fecbde5068673ee1538df
+commit 31de3aa
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 10 16:07:55 2014 -0500
 
@@ -3080,7 +3136,7 @@ Date:   Mon Nov 10 16:07:55 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit dd065c21ec420dbdbd486b9c57ccd33220eab123
+commit dd065c2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 10 15:38:24 2014 -0500
 
@@ -3088,7 +3144,7 @@ Date:   Mon Nov 10 15:38:24 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit 7305bc339f72ba9790813ec66a8da53acaef4382
+commit 7305bc3
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 10 15:31:54 2014 -0500
 
@@ -3096,7 +3152,7 @@ Date:   Mon Nov 10 15:31:54 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit 19fbde18941a18037905086e46e20bb1f1c6206b
+commit 19fbde1
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 10 14:10:35 2014 -0500
 
@@ -3104,7 +3160,7 @@ Date:   Mon Nov 10 14:10:35 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit 31aec7522fee85b7c164e0ffb49ab9cabe8303cd
+commit 31aec75
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 10 14:02:05 2014 -0500
 
@@ -3112,7 +3168,7 @@ Date:   Mon Nov 10 14:02:05 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit 6398402d19490a8f2ebf9c443adb3baa0b1df421
+commit 6398402
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 10 13:57:11 2014 -0500
 
@@ -3120,7 +3176,7 @@ Date:   Mon Nov 10 13:57:11 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit 74a3367274565893a7d00753d38886b48ec3c096
+commit 74a3367
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 10 13:51:33 2014 -0500
 
@@ -3128,7 +3184,7 @@ Date:   Mon Nov 10 13:51:33 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit 7062f085c58b89daecb2b7db3ff782ebc4e47901
+commit 7062f08
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 10 13:40:08 2014 -0500
 
@@ -3136,7 +3192,7 @@ Date:   Mon Nov 10 13:40:08 2014 -0500
 
 M	packaging/rhel/sope.spec
 
-commit 75995d361fb0e5da74c9e84f753bc2dca03270c9
+commit 75995d3
 Author: Wolfgang Sourdeau <Wolfgang@Contre.COM>
 Date:   Sat Feb 22 09:00:47 2014 -0500
 
@@ -3145,7 +3201,7 @@ Date:   Sat Feb 22 09:00:47 2014 -0500
 M	sope-appserver/NGObjWeb/DynamicElements/WOCompoundElement.h
 M	sope-appserver/NGObjWeb/DynamicElements/WOCompoundElement.m
 
-commit 9fe995c38d190f051acacdd5f2eeefc58b837f24
+commit 9fe995c
 Author: Jeroen Dekkers <jeroen@dekkers.ch>
 Date:   Mon Oct 13 11:49:54 2014 +0200
 
@@ -3154,7 +3210,7 @@ Date:   Mon Oct 13 11:49:54 2014 +0200
 M	sope-gdl1/GDLAccess/EOSQLQualifier.m
 M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
 
-commit fb65ea6df85a76caaae3c480178d182c0cabe93c
+commit fb65ea6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 15 16:21:51 2014 -0400
 
@@ -3162,7 +3218,7 @@ Date:   Wed Oct 15 16:21:51 2014 -0400
 
 M	packaging/rhel/sope.spec
 
-commit e193644086d96e0f4ca7ce13c9ca4bc4ba0c7d08
+commit e193644
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 15 16:12:31 2014 -0400
 
@@ -3170,7 +3226,7 @@ Date:   Wed Oct 15 16:12:31 2014 -0400
 
 M	packaging/rhel/sope.spec
 
-commit bcffd9a6034ada60b20319e209cf4474b8f359f8
+commit bcffd9a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 15 16:03:52 2014 -0400
 
@@ -3178,7 +3234,7 @@ Date:   Wed Oct 15 16:03:52 2014 -0400
 
 M	packaging/rhel/sope.spec
 
-commit 00a3dc5c059d0efeb5003f768aca3c1ded0b3e66
+commit 00a3dc5
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 15 15:50:29 2014 -0400
 
@@ -3186,7 +3242,7 @@ Date:   Wed Oct 15 15:50:29 2014 -0400
 
 M	packaging/rhel/sope.spec
 
-commit cb31698b1b23a4a82cfa79a2e4f7b6c733c067ab
+commit cb31698
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Oct 6 13:54:11 2014 -0400
 
@@ -3194,7 +3250,7 @@ Date:   Mon Oct 6 13:54:11 2014 -0400
 
 M	sope-appserver/NGObjWeb/Languages.plist
 
-commit 34893bd565e91c24dbed6c371ce57615345de6fd
+commit 34893bd
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Sep 26 14:34:25 2014 -0400
 
@@ -3202,7 +3258,7 @@ Date:   Fri Sep 26 14:34:25 2014 -0400
 
 M	ChangeLog
 
-commit 0ee64d0309ecc96a29d7c788e56246aec3606ad5
+commit 0ee64d0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Sep 15 15:46:45 2014 -0400
 
@@ -3210,7 +3266,7 @@ Date:   Mon Sep 15 15:46:45 2014 -0400
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit c418c832df6b1097af525a1021b9fc7a2cd6b45b
+commit c418c83
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Sep 10 14:25:36 2014 -0400
 
@@ -3218,7 +3274,7 @@ Date:   Wed Sep 10 14:25:36 2014 -0400
 
 M	ChangeLog
 
-commit f0dcde71bfe5e175aeb32bb1de2fc67b40fce0a9
+commit f0dcde7
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Aug 15 09:09:31 2014 -0400
 
@@ -3226,7 +3282,7 @@ Date:   Fri Aug 15 09:09:31 2014 -0400
 
 M	sope-appserver/NGObjWeb/DynamicElements/WOHyperlinkInfo.m
 
-commit 73024ce6dd193ceb6475819fff6235c700bef837
+commit 73024ce
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Aug 13 15:26:25 2014 -0400
 
@@ -3236,7 +3292,7 @@ M	sope-appserver/NGObjWeb/DynamicElements/WOHyperlinkInfo.m
 M	sope-appserver/NGObjWeb/DynamicElements/_WOComplexHyperlink.m
 M	sope-appserver/NGObjWeb/DynamicElements/_WOTemporaryHyperlink.m
 
-commit 140d302b14ac396c3eaf5224e742cdac5e649e70
+commit 140d302
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Aug 7 15:29:54 2014 -0400
 
@@ -3244,7 +3300,7 @@ Date:   Thu Aug 7 15:29:54 2014 -0400
 
 M	sope-appserver/NGObjWeb/WOResourceManager.m
 
-commit 8d493b030c62f8c0e854d134344e8c2aeb0e2aaf
+commit 8d493b0
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Aug 7 15:29:12 2014 -0400
 
@@ -3252,7 +3308,7 @@ Date:   Thu Aug 7 15:29:12 2014 -0400
 
 M	sope-appserver/NGObjWeb/DynamicElements/WOForm.m
 
-commit 30add55449cae848b95f42eeb9e02c4832d3220d
+commit 30add55
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jul 30 11:23:40 2014 -0400
 
@@ -3260,7 +3316,7 @@ Date:   Wed Jul 30 11:23:40 2014 -0400
 
 M	ChangeLog
 
-commit a7291026a938c2e028d1f4c1e74815a760786fa5
+commit a729102
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jul 22 16:09:48 2014 -0400
 
@@ -3268,7 +3324,7 @@ Date:   Tue Jul 22 16:09:48 2014 -0400
 
 M	sope-ldap/NGLdap/NGLdapAttribute.m
 
-commit 4c60ceb5c918b05d254a7bc6f146cc35c6f1b4ae
+commit 4c60ceb
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jun 17 07:07:02 2014 -0400
 
@@ -3276,7 +3332,7 @@ Date:   Tue Jun 17 07:07:02 2014 -0400
 
 M	sope-appserver/NGObjWeb/DynamicElements/WOxHTMLElemBuilder.m
 
-commit b081453f25b6431dd3e34eefed26da7089630104
+commit b081453
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jul 15 07:09:42 2014 -0400
 
@@ -3284,7 +3340,7 @@ Date:   Tue Jul 15 07:09:42 2014 -0400
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 25d3ef8629bbe997e39f4b81205859d9dd0034ba
+commit 25d3ef8
 Author: Marcel Waldvogel <waldvogel@netfuture.ch>
 Date:   Fri Jul 4 23:11:54 2014 +0200
 
@@ -3294,7 +3350,7 @@ Date:   Fri Jul 4 23:11:54 2014 +0200
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit aec5f5a99131bf10b05fd5b284d9c9480a6a11f7
+commit aec5f5a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jul 2 12:29:52 2014 -0400
 
@@ -3302,7 +3358,7 @@ Date:   Wed Jul 2 12:29:52 2014 -0400
 
 M	ChangeLog
 
-commit 5f94d915eff8bfc46a3f6cb9cb5a8577ee5dede4
+commit 5f94d91
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 25 15:31:03 2014 -0400
 
@@ -3310,7 +3366,7 @@ Date:   Wed Jun 25 15:31:03 2014 -0400
 
 M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
 
-commit 467bf1a276e580cb0e7a4e80cbb0e31873f17495
+commit 467bf1a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jun 19 16:12:47 2014 -0400
 
@@ -3318,7 +3374,7 @@ Date:   Thu Jun 19 16:12:47 2014 -0400
 
 M	sope-appserver/NGObjWeb/WebDAV/SaxDAVHandler.m
 
-commit 67cb8a515451f781b0bf0fcdfebefad20e63c973
+commit 67cb8a5
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jun 16 15:32:22 2014 -0400
 
@@ -3331,7 +3387,7 @@ M	sope-xml/SaxObjC/SaxObjectDecoder.m
 M	sope-xml/libxmlSAXDriver/libxmlDocSAXDriver.m
 M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
 
-commit 0de27fec6b74a4fa7d8eb1e68d6a22350dd6c324
+commit 0de27fe
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Jun 16 15:17:31 2014 -0400
 
@@ -3343,7 +3399,7 @@ M	sope-appserver/NGObjWeb/DynamicElements/WOTextField.api
 M	sope-appserver/NGObjWeb/DynamicElements/WOTextField.m
 M	sope-appserver/NGObjWeb/DynamicElements/WOxHTMLElemBuilder.m
 
-commit e1d2554820ce75b5b93757b5b4a7c5e49aaee4c2
+commit e1d2554
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu May 29 11:19:59 2014 -0400
 
@@ -3351,7 +3407,7 @@ Date:   Thu May 29 11:19:59 2014 -0400
 
 M	ChangeLog
 
-commit 942e123307fd13c382bba00615f34daa5ee61542
+commit 942e123
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 28 09:50:03 2014 -0400
 
@@ -3359,7 +3415,7 @@ Date:   Wed May 28 09:50:03 2014 -0400
 
 M	sope-mime/NGMime/NGMimeStringHeaderFieldParser.m
 
-commit 378d023f70f2134f2127a6f8fe72a88042af4c6d
+commit 378d023
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 27 12:01:24 2014 -0400
 
@@ -3370,7 +3426,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit a435b7f2b6a7dc2603663d64e574bc2d1e715047
+commit a435b7f
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri May 23 09:35:02 2014 -0400
 
@@ -3380,7 +3436,7 @@ Date:   Fri May 23 09:35:02 2014 -0400
 
 M	sope-core/NGExtensions/NGCustomFileManager.m
 
-commit 40c20c124b15fcf68354dae0ca599bc62c14b399
+commit 40c20c1
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri May 23 07:46:30 2014 -0400
 
@@ -3390,7 +3446,7 @@ Date:   Fri May 23 07:46:30 2014 -0400
 
 M	sope-xml/SaxObjC/SaxContentHandler.h
 
-commit 34b70f45575e506c01b60b45ffaf0e6a459e7c0d
+commit 34b70f4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 22 14:26:37 2014 -0400
 
@@ -3398,7 +3454,7 @@ Date:   Thu May 22 14:26:37 2014 -0400
 
 M	sope-appserver/NGObjWeb/WOResponse+private.h
 
-commit 6bdd62c9b2a1083dad13454d36c9179c59562664
+commit 6bdd62c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 22 10:23:45 2014 -0400
 
@@ -3406,7 +3462,7 @@ Date:   Thu May 22 10:23:45 2014 -0400
 
 M	sope-appserver/WEExtensions/WETableMatrixLabel.m
 
-commit 040d30bd7e1329979333822dc7a84df1efa63d9f
+commit 040d30b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 22 10:13:25 2014 -0400
 
@@ -3416,7 +3472,7 @@ M	sope-appserver/WEExtensions/WEDragContainer.m
 M	sope-appserver/WEExtensions/WEDropContainer.m
 M	sope-appserver/WEExtensions/WETabView.m
 
-commit 05edc27b75d0c8d37303d940927881978c7835a8
+commit 05edc27
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri May 16 09:36:20 2014 -0400
 
@@ -3424,7 +3480,7 @@ Date:   Fri May 16 09:36:20 2014 -0400
 
 M	sope-mime/NGMail/NGMimeMessageGenerator.m
 
-commit 36ee084ab9cdeb3a9a01ccd01e94fa583d6f9536
+commit 36ee084
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri May 16 09:35:05 2014 -0400
 
@@ -3433,7 +3489,7 @@ Date:   Fri May 16 09:35:05 2014 -0400
 
 M	sope-mime/NGMime/NGMimeStringHeaderFieldGenerator.m
 
-commit 60caf252df2eed12115f05ff5025b54f01b42efb
+commit 60caf25
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 15 11:34:51 2014 -0400
 
@@ -3441,7 +3497,7 @@ Date:   Thu May 15 11:34:51 2014 -0400
 
 M	sope-mime/NGMime/NGMimeFileData.m
 
-commit 91d2dce547942de6ea4cfb6f100aba51534a7fe2
+commit 91d2dce
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Apr 3 10:09:01 2014 -0400
 
@@ -3449,7 +3505,7 @@ Date:   Thu Apr 3 10:09:01 2014 -0400
 
 M	ChangeLog
 
-commit d684236f4067ed9710dfe5b33520daced696abbe
+commit d684236
 Author: Jeroen Dekkers <jeroen@dekkers.ch>
 Date:   Tue Apr 1 17:01:55 2014 +0200
 
@@ -3475,7 +3531,7 @@ M	sope-mime/NGMime/NGMimePartParser.m
 M	sope-xml/DOM/DOMNodeWithChildren.m
 M	sope-xml/STXSaxDriver/README
 
-commit a1176463a8b23a01835e2d12cac93d8d53fcacf2
+commit a117646
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Mar 21 15:35:45 2014 -0400
 
@@ -3483,7 +3539,7 @@ Date:   Fri Mar 21 15:35:45 2014 -0400
 
 M	ChangeLog
 
-commit d26c934e5f542c6f7813df76b049c97f826eda82
+commit d26c934
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Mar 20 15:27:22 2014 -0400
 
@@ -3492,7 +3548,7 @@ Date:   Thu Mar 20 15:27:22 2014 -0400
 M	sope-mime/NGMime/NGMimeBodyPart.h
 M	sope-mime/NGMime/NGMimeBodyPart.m
 
-commit fcd9c3abbf6fbdd36765c1d294e2d949cc7c5768
+commit fcd9c3a
 Author: Alexandre Cloutier <acloutier@inverse.ca>
 Date:   Wed Mar 12 14:32:19 2014 -0400
 
@@ -3500,7 +3556,7 @@ Date:   Wed Mar 12 14:32:19 2014 -0400
 
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit a947a38eeaec9d29728609178ea78b52f3b2d7ca
+commit a947a38
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Mar 7 14:07:20 2014 -0500
 
@@ -3508,7 +3564,7 @@ Date:   Fri Mar 7 14:07:20 2014 -0500
 
 M	ChangeLog
 
-commit e08ae3570f7d3df74aaa62dc1a4e6a76fd106e9a
+commit e08ae35
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Feb 25 16:06:12 2014 -0500
 
@@ -3516,7 +3572,7 @@ Date:   Tue Feb 25 16:06:12 2014 -0500
 
 M	ChangeLog
 
-commit db69cc0392cae4677ad8392b5318f046168f89f1
+commit db69cc0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 25 14:46:10 2014 -0500
 
@@ -3524,7 +3580,7 @@ Date:   Tue Feb 25 14:46:10 2014 -0500
 
 M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
 
-commit ab13ed37694d3dd18d4e8b69973b1d71ab00a5fd
+commit ab13ed3
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 25 14:41:57 2014 -0500
 
@@ -3533,7 +3589,7 @@ Date:   Tue Feb 25 14:41:57 2014 -0500
 M	sope-mime/NGImap4/NGImap4Client.h
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit fac46cf1bcd097f0294d85e89a5ce0c113cc7215
+commit fac46cf
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Feb 24 16:55:56 2014 -0500
 
@@ -3541,7 +3597,7 @@ Date:   Mon Feb 24 16:55:56 2014 -0500
 
 M	ChangeLog
 
-commit 86e24f467277576f82b42985c1590b2d6e4b8945
+commit 86e24f4
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Feb 5 16:45:14 2014 -0500
 
@@ -3549,7 +3605,7 @@ Date:   Wed Feb 5 16:45:14 2014 -0500
 
 M	sope-mime/NGMime/NGMimePartParser.m
 
-commit 328614a3aff41b903861720c276dab8e6037803f
+commit 328614a
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Feb 5 09:14:47 2014 -0500
 
@@ -3561,7 +3617,7 @@ M	sope-xml/DOM/common.h
 M	sope-xml/STXSaxDriver/common.h
 M	sope-xml/XmlRpc/common.h
 
-commit f302b47209140493a6d42dbaf835c22132e84711
+commit f302b47
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 4 14:25:18 2014 -0500
 
@@ -3569,7 +3625,7 @@ Date:   Tue Feb 4 14:25:18 2014 -0500
 
 M	sope-core/NGExtensions/FdExt.subproj/NSNull+misc.m
 
-commit d4be6c6a3b3c39df117b2ab96510db02739998da
+commit d4be6c6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 4 08:59:43 2014 -0500
 
@@ -3584,7 +3640,7 @@ M	sope-core/NGExtensions/NGLogging.subproj/NGLoggerManager.m
 M	sope-core/NGExtensions/NGResourceLocator.m
 M	sope-core/NGExtensions/NGStack.m
 
-commit 427d4f9260dcb701e7ed5b94c2e6333fd726e9b9
+commit 427d4f9
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 4 08:58:32 2014 -0500
 
@@ -3593,7 +3649,7 @@ Date:   Tue Feb 4 08:58:32 2014 -0500
 M	sope-core/NGExtensions/EOExt.subproj/EOFetchSpecification+plist.m
 M	sope-core/NGExtensions/EOExt.subproj/EOKeyMapDataSource.m
 
-commit 0261eafb19da1e46be7ed589ef9517007793b875
+commit 0261eaf
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 4 08:56:54 2014 -0500
 
@@ -3606,7 +3662,7 @@ M	sope-core/NGExtensions/FdExt.subproj/NSString+Escaping.m
 M	sope-core/NGExtensions/FdExt.subproj/NSString+Ext.m
 M	sope-core/NGExtensions/FdExt.subproj/NSString+misc.m
 
-commit a8a123e9d7a8ade6a7214e8c994017cb3cc90067
+commit a8a123e
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 4 08:55:42 2014 -0500
 
@@ -3618,7 +3674,7 @@ M	sope-core/EOControl/EOQualifierParser.m
 M	sope-core/EOControl/EOSQLParser.m
 M	sope-core/EOControl/NSArray+EOQualifier.m
 
-commit a98ec9011ef0d8864b3b83e3574144c828bb5e12
+commit a98ec90
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 4 08:54:24 2014 -0500
 
@@ -3642,7 +3698,7 @@ M	sope-xml/XmlRpc/XmlRpcMethodCall.m
 M	sope-xml/XmlRpc/XmlRpcSaxHandler.m
 M	sope-xml/libxmlSAXDriver/libxmlSAXDriver.m
 
-commit 2a5b6b2cb1cd1db00b0237c0a3d95fc0de28ac46
+commit 2a5b6b2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Feb 4 08:51:05 2014 -0500
 
@@ -3652,7 +3708,7 @@ M	sope-xml/SaxObjC/SaxAttributeList.m
 M	sope-xml/SaxObjC/SaxAttributes.m
 M	sope-xml/SaxObjC/SaxXMLReaderFactory.m
 
-commit 2ce6fb40226d6b3aad38e2399b6b3be89c87e8e9
+commit 2ce6fb4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 31 11:39:33 2014 -0500
 
@@ -3660,7 +3716,7 @@ Date:   Fri Jan 31 11:39:33 2014 -0500
 
 M	sope-core/NGExtensions/FdExt.subproj/NSString+HTMLEscaping.m
 
-commit 7280b9cf26d0c487cd05336462db5a6dd037e42c
+commit 7280b9c
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jan 30 09:39:26 2014 -0500
 
@@ -3671,7 +3727,7 @@ Date:   Thu Jan 30 09:39:26 2014 -0500
 
 M	sope-mime/NGMail/NGMailBase64Encoding.m
 
-commit 87e7a6591e8a75238fbedfc5822cfc20b7ef8481
+commit 87e7a65
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jan 20 10:08:11 2014 -0500
 
@@ -3679,7 +3735,7 @@ Date:   Mon Jan 20 10:08:11 2014 -0500
 
 M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
 
-commit f7c657190a1adf0147f0d09c82a239880d95b524
+commit f7c6571
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jan 9 20:35:11 2014 -0500
 
@@ -3687,7 +3743,7 @@ Date:   Thu Jan 9 20:35:11 2014 -0500
 
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
 
-commit 91b1d7252822028df9a876ff71e6a69d1c593729
+commit 91b1d72
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jan 9 20:34:19 2014 -0500
 
@@ -3695,7 +3751,7 @@ Date:   Thu Jan 9 20:34:19 2014 -0500
 
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 
-commit df78a9868ee98eafbd4d1d1e04f4cb04d02c35db
+commit df78a98
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 25 15:34:24 2013 -0500
 
@@ -3703,7 +3759,7 @@ Date:   Mon Nov 25 15:34:24 2013 -0500
 
 M	sope-appserver/NGObjWeb/Defaults.plist
 
-commit 5e8ad77b88067bb681441b1d6e4734f8cf0eef02
+commit 5e8ad77
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Nov 19 14:05:06 2013 -0500
 
@@ -3711,7 +3767,7 @@ Date:   Tue Nov 19 14:05:06 2013 -0500
 
 M	ChangeLog
 
-commit 3c5fddcf5e54795aa206206cef92b82de8283552
+commit 3c5fddc
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Mon Nov 18 21:40:39 2013 -0500
 
@@ -3722,7 +3778,7 @@ Date:   Mon Nov 18 21:40:39 2013 -0500
 M	sope-mime/NGMail/NGMailAddressParser.h
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit 12fb93ead66cb672e8d8db4c7767b47ae069bac1
+commit 12fb93e
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Fri Nov 15 16:05:41 2013 -0500
 
@@ -3730,7 +3786,7 @@ Date:   Fri Nov 15 16:05:41 2013 -0500
 
 M	sope-mime/NGImap4/NSString+Imap4.m
 
-commit 2e03d606f60f1cb003bc9788f393aeca8b9007bb
+commit 2e03d60
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 13 15:35:12 2013 -0500
 
@@ -3738,7 +3794,7 @@ Date:   Wed Nov 13 15:35:12 2013 -0500
 
 M	sope-appserver/NGObjWeb/WebDAV/SaxDAVHandler.m
 
-commit ea6d6c304faf21dbb5ab816c5888831a4e4e3ea8
+commit ea6d6c3
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 12 15:24:28 2013 -0500
 
@@ -3746,7 +3802,7 @@ Date:   Tue Nov 12 15:24:28 2013 -0500
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit f12836f47932138c09d9f641111b1030fbe09203
+commit f12836f
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Nov 7 14:40:03 2013 -0500
 
@@ -3754,7 +3810,7 @@ Date:   Thu Nov 7 14:40:03 2013 -0500
 
 M	ChangeLog
 
-commit 59e66e3a7ecdf06f849a5e581572b1c6bbc2710d
+commit 59e66e3
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Nov 6 08:17:43 2013 -0500
 
@@ -3762,7 +3818,7 @@ Date:   Wed Nov 6 08:17:43 2013 -0500
 
 M	sope-ldap/NGLdap/NGLdapAttribute.m
 
-commit 87b9400affc61f48e3dfe24ff56500875eb9312b
+commit 87b9400
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 5 15:08:59 2013 -0500
 
@@ -3925,7 +3981,7 @@ M	sope-xml/XmlRpc/XmlRpcEncoder.m
 M	sope-xml/XmlRpc/XmlRpcMethodCall.m
 M	sope-xml/XmlRpc/XmlRpcSaxHandler.m
 
-commit 25b7c45834da4b50f1ac56b367e3eeb1ea4cd623
+commit 25b7c45
 Author: sogo <sogo@example.com>
 Date:   Tue Nov 5 14:42:59 2013 -0500
 
@@ -3934,7 +3990,7 @@ Date:   Tue Nov 5 14:42:59 2013 -0500
 M	sope-appserver/NGObjWeb/common.h
 M	sope-gdl1/GDLAccess/common.h
 
-commit 39eb541020f13dbb1710f6068c8bc5adbbe0ff2b
+commit 39eb541
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 5 14:16:15 2013 -0500
 
@@ -3943,7 +3999,7 @@ Date:   Tue Nov 5 14:16:15 2013 -0500
 M	sope-appserver/NGObjWeb/common.h
 M	sope-gdl1/GDLAccess/common.h
 
-commit f7d864030c3985ff40c622cd745cca33dbc4a5a9
+commit f7d8640
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Oct 28 15:28:50 2013 -0400
 
@@ -3951,7 +4007,7 @@ Date:   Mon Oct 28 15:28:50 2013 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 03369a2963654b2e3f50facef394a0c44bd83f33
+commit 03369a2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Oct 24 20:58:56 2013 -0400
 
@@ -3959,7 +4015,7 @@ Date:   Thu Oct 24 20:58:56 2013 -0400
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit 663174ffee0f3680eda328a6510e48ee8a34d62d
+commit 663174f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 18 13:48:43 2013 -0400
 
@@ -4124,7 +4180,7 @@ M	sope-xml/XmlRpc/XmlRpcEncoder.m
 M	sope-xml/XmlRpc/XmlRpcMethodCall.m
 M	sope-xml/XmlRpc/XmlRpcSaxHandler.m
 
-commit e89bfaef8041f2e56b880432285d237d4d5e9ab9
+commit e89bfae
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Sep 27 10:34:47 2013 -0400
 
@@ -4132,7 +4188,7 @@ Date:   Fri Sep 27 10:34:47 2013 -0400
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit 7bb4c77e937336a1e3409ff436aab176f048d036
+commit 7bb4c77
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 26 14:47:01 2013 -0400
 
@@ -4140,7 +4196,7 @@ Date:   Thu Sep 26 14:47:01 2013 -0400
 
 M	sope-appserver/NGObjWeb/Languages.plist
 
-commit 2c46765fcf11844fffa95a976b577554917ad35b
+commit 2c46765
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Sep 25 14:30:51 2013 -0400
 
@@ -4148,7 +4204,7 @@ Date:   Wed Sep 25 14:30:51 2013 -0400
 
 M	sope-gdl1/MySQL/MySQL4Channel.m
 
-commit dd21a117bb5dea064b58b949e6e88bdd4e9848ae
+commit dd21a11
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Sep 25 10:05:46 2013 -0400
 
@@ -4158,7 +4214,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NSString+Imap4.h
 M	sope-mime/NGImap4/NSString+Imap4.m
 
-commit 223e0ae569b9ad4eae3d5ac5a43209feff99b3dd
+commit 223e0ae
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Sep 24 15:58:11 2013 -0400
 
@@ -4167,7 +4223,7 @@ Date:   Tue Sep 24 15:58:11 2013 -0400
 M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit aa26f89ded0672fda8f3a11f0492fd938bdbdd9b
+commit aa26f89
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Sep 12 09:30:24 2013 -0400
 
@@ -4175,7 +4231,7 @@ Date:   Thu Sep 12 09:30:24 2013 -0400
 
 A	.gitignore
 
-commit 8540c3ae63923298ca29aa269a1bbdb9c996646e
+commit 8540c3a
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Sep 10 12:03:55 2013 -0400
 
@@ -4186,7 +4242,7 @@ Date:   Tue Sep 10 12:03:55 2013 -0400
 
 M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFields.m
 
-commit 5ee6f6fdd9ac63a51e6619e880d625a6f6fa83e1
+commit 5ee6f6f
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Sep 10 11:58:35 2013 -0400
 
@@ -4200,7 +4256,7 @@ Date:   Tue Sep 10 11:58:35 2013 -0400
 
 M	sope-core/NGExtensions/NGBase64Coding.m
 
-commit de26af91c8df6b37f7db44ddb127174ce6e72840
+commit de26af9
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Sep 10 11:54:36 2013 -0400
 
@@ -4211,7 +4267,7 @@ Date:   Tue Sep 10 11:54:36 2013 -0400
 
 M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFields.m
 
-commit eac41b9cde81e8b4dfa0869b58e84a211d996e3d
+commit eac41b9
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Fri Sep 6 13:41:29 2013 -0400
 
@@ -4219,7 +4275,7 @@ Date:   Fri Sep 6 13:41:29 2013 -0400
 
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 82f23a317665157c6ef36a6f9c191f4421caf36b
+commit 82f23a3
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Aug 28 17:05:31 2013 -0400
 
@@ -4236,7 +4292,7 @@ Date:   Wed Aug 28 17:05:31 2013 -0400
 M	sope-ldap/NGLdap/NGLdapConnection.h
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit 3dcc9b1459bd8a3ab626f918dea5576defb86eea
+commit 3dcc9b1
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Aug 28 09:33:59 2013 -0400
 
@@ -4246,7 +4302,7 @@ Date:   Wed Aug 28 09:33:59 2013 -0400
 
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit dccbbf0ab71f2f8bbb8fbe7966f9b66da18f1c4c
+commit dccbbf0
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Aug 28 09:24:15 2013 -0400
 
@@ -4254,7 +4310,7 @@ Date:   Wed Aug 28 09:24:15 2013 -0400
 
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 7ea253d7a468040adfc1b244dbc83c7546c1728b
+commit 7ea253d
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Aug 27 16:34:01 2013 -0400
 
@@ -4265,7 +4321,7 @@ Date:   Tue Aug 27 16:34:01 2013 -0400
 M	sope-ldap/NGLdap/NGLdapConnection.h
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit ab997ddd2ea7c1525e80d65e4038582a1a60484d
+commit ab997dd
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Aug 27 15:25:18 2013 -0400
 
@@ -4273,7 +4329,7 @@ Date:   Tue Aug 27 15:25:18 2013 -0400
 
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit 724726e1e8a11ff9950d9b304a8d0aa83ee6edef
+commit 724726e
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Aug 27 13:49:28 2013 -0400
 
@@ -4284,7 +4340,7 @@ Date:   Tue Aug 27 13:49:28 2013 -0400
 
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 13d7780e406e866ed56155c61b33c45e3c099424
+commit 13d7780
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Aug 15 08:49:26 2013 -0400
 
@@ -4292,7 +4348,7 @@ Date:   Thu Aug 15 08:49:26 2013 -0400
 
 M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
 
-commit fa31f618ff0c593b05f4fd91a4d149da4573e901
+commit fa31f61
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Fri Aug 9 21:19:44 2013 -0400
 
@@ -4300,7 +4356,7 @@ Date:   Fri Aug 9 21:19:44 2013 -0400
 
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit 9f98c590e397b642d8a4c69c3f4789de6f7027dd
+commit 9f98c59
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Sat Jul 20 15:02:26 2013 -0400
 
@@ -4308,7 +4364,7 @@ Date:   Sat Jul 20 15:02:26 2013 -0400
 
 M	ChangeLog
 
-commit 5030353177728764e3c417392dab085a61190483
+commit 5030353
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 19 16:19:40 2013 -0400
 
@@ -4316,7 +4372,7 @@ Date:   Fri Jul 19 16:19:40 2013 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 7311d726e005ae8fd2802d07a17761ba03984892
+commit 7311d72
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Jul 19 13:51:30 2013 -0400
 
@@ -4324,7 +4380,7 @@ Date:   Fri Jul 19 13:51:30 2013 -0400
 
 M	ChangeLog
 
-commit 8a214de88bcfaa838157b9c2a3c7246131e019f2
+commit 8a214de
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 19 10:10:31 2013 -0400
 
@@ -4364,7 +4420,7 @@ M	sope-mime/NGImap4/NGImap4Folder.m
 M	sope-mime/NGImap4/imCommon.h
 M	sope-mime/NGMime/common.h
 
-commit d93b3d55d889219a5b0e0b8af9fcf2d2ba3d2967
+commit d93b3d5
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 18 11:02:06 2013 -0400
 
@@ -4404,7 +4460,7 @@ M	sope-mime/NGImap4/NGImap4Folder.m
 M	sope-mime/NGImap4/imCommon.h
 M	sope-mime/NGMime/common.h
 
-commit ede754c45999a35304d4bcba6ec427b9b445983d
+commit ede754c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jun 21 12:47:08 2013 -0400
 
@@ -4412,7 +4468,7 @@ Date:   Fri Jun 21 12:47:08 2013 -0400
 
 M	ChangeLog
 
-commit d30c986f9d2cefc764ae420cc3f2509adc0fea33
+commit d30c986
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jun 20 00:45:01 2013 -0400
 
@@ -4441,7 +4497,7 @@ M	sope-core/NGExtensions/FdExt.subproj/NSObject+Logs.m
 M	sope-core/NGExtensions/NGLogging.subproj/ChangeLog
 M	sope-core/NGExtensions/NGLogging.subproj/NGLogger.m
 
-commit d6331e074c376bddc20280b22c246b5032acff57
+commit d6331e0
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Jun 12 06:46:52 2013 -0400
 
@@ -4449,7 +4505,7 @@ Date:   Wed Jun 12 06:46:52 2013 -0400
 
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 
-commit f958f49542fb11a4fc82ebc71172e04d395bc811
+commit f958f49
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Apr 11 13:00:45 2013 -0400
 
@@ -4457,7 +4513,7 @@ Date:   Thu Apr 11 13:00:45 2013 -0400
 
 M	ChangeLog
 
-commit 24588cf7e401c287878abbc2ca605d4ee3431415
+commit 24588cf
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Apr 2 21:03:14 2013 -0400
 
@@ -4467,7 +4523,7 @@ Date:   Tue Apr 2 21:03:14 2013 -0400
 
 M	sope-mime/NGImap4/NGSieveClient.m
 
-commit b45dbb52984cc5dd62c5a5e589f164dbbc26309f
+commit b45dbb5
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Tue Feb 5 14:07:44 2013 -0500
 
@@ -4480,7 +4536,7 @@ Date:   Tue Feb 5 14:07:44 2013 -0500
 M	sope-appserver/NGObjWeb/ChangeLog
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 
-commit 995b534ca83b8a06c89e9d9cff620de1f949b522
+commit 995b534
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Feb 4 14:26:40 2013 -0500
 
@@ -4488,7 +4544,7 @@ Date:   Mon Feb 4 14:26:40 2013 -0500
 
 M	ChangeLog
 
-commit 2d2ed180fe154318a3f5dd64b01765ef4d174e48
+commit 2d2ed18
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jan 31 13:27:51 2013 -0500
 
@@ -4496,7 +4552,7 @@ Date:   Thu Jan 31 13:27:51 2013 -0500
 
 M	sope-ldap/NGLdap/NSString+DN.m
 
-commit 82342978d28f6621d2d8a91053be8d56f96946e9
+commit 8234297
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jan 31 12:31:25 2013 -0500
 
@@ -4506,7 +4562,7 @@ Date:   Thu Jan 31 12:31:25 2013 -0500
 
 M	sope-ldap/NGLdap/NSString+DN.m
 
-commit 7a8cb886103dc9b4569151ae185b9e3bc2e95b4e
+commit 7a8cb88
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Jan 31 12:10:09 2013 -0500
 
@@ -4516,7 +4572,7 @@ Date:   Thu Jan 31 12:10:09 2013 -0500
 
 M	sope-ldap/NGLdap/NSString+DN.m
 
-commit 9f494524f0686bb828bf541ff9a8e2b833861ece
+commit 9f49452
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Wed Jan 30 22:21:22 2013 -0500
 
@@ -4526,7 +4582,7 @@ Date:   Wed Jan 30 22:21:22 2013 -0500
 
 M	sope-ldap/NGLdap/NSString+DN.m
 
-commit 917e35950e1e7ffeb996d9317653640184527bac
+commit 917e359
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jan 30 08:56:46 2013 -0500
 
@@ -4534,7 +4590,7 @@ Date:   Wed Jan 30 08:56:46 2013 -0500
 
 M	ChangeLog
 
-commit 16deb50d8d8d803163cb8088883ce5da2d66ede0
+commit 16deb50
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jan 28 13:40:42 2013 -0500
 
@@ -4542,7 +4598,7 @@ Date:   Mon Jan 28 13:40:42 2013 -0500
 
 M	sope-core/NGExtensions/FdExt.subproj/NSString+URLEscaping.m
 
-commit 2166006e47416c736efedfc0a5d1b93b5dec8474
+commit 2166006
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Jan 24 19:16:07 2013 -0500
 
@@ -4550,7 +4606,7 @@ Date:   Thu Jan 24 19:16:07 2013 -0500
 
 M	ChangeLog
 
-commit bf8a01faee50ac0209051fa1870ca338dc112904
+commit bf8a01f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jan 23 09:39:30 2013 -0500
 
@@ -4559,7 +4615,7 @@ Date:   Wed Jan 23 09:39:30 2013 -0500
 M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFields.m
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 
-commit 9c3999fadcf3b5e2de9dfbf21756eaa4b7d41e54
+commit 9c3999f
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Jan 14 14:24:43 2013 -0500
 
@@ -4569,7 +4625,7 @@ Date:   Mon Jan 14 14:24:43 2013 -0500
 
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 52d80264db6e5d4d8aedd50f3bb76d015b8394d6
+commit 52d8026
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jan 11 11:50:11 2013 -0500
 
@@ -4577,7 +4633,7 @@ Date:   Fri Jan 11 11:50:11 2013 -0500
 
 M	sope-ldap/NGLdap/NSString+DN.m
 
-commit 134db61df78edbd367c8b740513802c5fcb25571
+commit 134db61
 Author: Adam Tkac <vonsch@gmail.com>
 Date:   Wed Dec 19 21:08:05 2012 +0100
 
@@ -4600,7 +4656,7 @@ Date:   Wed Dec 19 21:08:05 2012 +0100
 
 M	sope-ldap/NGLdap/NSString+DN.m
 
-commit 888a2595a60f0e24a81b066651c26c5f14761fce
+commit 888a259
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jan 9 13:04:36 2013 -0500
 
@@ -4608,7 +4664,7 @@ Date:   Wed Jan 9 13:04:36 2013 -0500
 
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit b4062373339a2a675d86d8578c5c2dc2627bbcb0
+commit b406237
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jan 9 12:43:42 2013 -0500
 
@@ -4616,7 +4672,7 @@ Date:   Wed Jan 9 12:43:42 2013 -0500
 
 M	sope-gdl1/GDLAccess/EOArrayProxy.m
 
-commit efccb03d148c64e10b51dbe2e40be5d08bf1b1c8
+commit efccb03
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jan 9 11:29:48 2013 -0500
 
@@ -4624,7 +4680,7 @@ Date:   Wed Jan 9 11:29:48 2013 -0500
 
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit 8c29d3b6d2c2d27a421c1109b6d582951fbff36d
+commit 8c29d3b
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Dec 20 10:39:52 2012 -0500
 
@@ -4640,7 +4696,7 @@ M	sope-ldap/NGLdap/ChangeLog
 M	sope-ldap/NGLdap/NGLdapConnection.h
 M	sope-ldap/NGLdap/NGLdapConnection.m
 
-commit 557954949330fd63f03e418ac1e08d73407f836d
+commit 5579549
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Dec 6 10:55:34 2012 -0500
 
@@ -4648,7 +4704,7 @@ Date:   Thu Dec 6 10:55:34 2012 -0500
 
 M	ChangeLog
 
-commit 180ee5442d3245265a993de4c565271bc6c5c142
+commit 180ee54
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Dec 3 16:27:45 2012 -0500
 
@@ -4657,7 +4713,7 @@ Date:   Mon Dec 3 16:27:45 2012 -0500
 M	sope-mime/NGMail/NGSmtpClient.m
 M	sope-mime/NGMail/NGSmtpReplyCodes.h
 
-commit bc62cc45f0c4978f4454a8ccf0887b1f01f6e32c
+commit bc62cc4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Nov 30 10:07:34 2012 -0500
 
@@ -4668,7 +4724,7 @@ Date:   Fri Nov 30 10:07:34 2012 -0500
 M	sope-mime/NGImap4/NGSieveClient.h
 M	sope-mime/NGImap4/NGSieveClient.m
 
-commit fc4c41a74c7cdbcee1cfd7d797bd1b1aa9f29815
+commit fc4c41a
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Nov 15 11:53:04 2012 -0500
 
@@ -4679,7 +4735,7 @@ Date:   Thu Nov 15 11:53:04 2012 -0500
 M	sope-core/NGExtensions/NGExtensions/NGLogAppender.h
 M	sope-core/NGExtensions/NGLogging.subproj/NGLogAppender.m
 
-commit a18bb288f890db5747911bf2c74382e59583fde4
+commit a18bb28
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 13 08:34:29 2012 -0500
 
@@ -4693,7 +4749,7 @@ M	sope-core/NGStreams/NGByteBuffer.m
 M	sope-core/NGStreams/NGStreams/NGByteBuffer.h
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 9de080f29a9f965ac46db911d15305654bf3602f
+commit 9de080f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 13 08:30:08 2012 -0500
 
@@ -4704,7 +4760,7 @@ Date:   Tue Nov 13 08:30:08 2012 -0500
 
 M	sope-core/NGExtensions/NGBundleManager.m
 
-commit baef7f83a658ca22bc056cc2a5f1c816079f0768
+commit baef7f8
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Nov 7 10:14:03 2012 -0500
 
@@ -4724,7 +4780,7 @@ M	sope-xml/DOM/GNUmakefile.preamble
 M	sope-xml/SaxObjC/GNUmakefile.preamble
 M	sope-xml/XmlRpc/GNUmakefile.preamble
 
-commit 29800475e0cc61e2667d0a05f2438337e45be3e6
+commit 2980047
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 6 13:49:23 2012 -0500
 
@@ -4732,7 +4788,7 @@ Date:   Tue Nov 6 13:49:23 2012 -0500
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 0caecc6ff0cf3148881824dbd307e5bbb47079be
+commit 0caecc6
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 6 13:48:54 2012 -0500
 
@@ -4741,7 +4797,7 @@ Date:   Tue Nov 6 13:48:54 2012 -0500
 M	sope-core/NGExtensions/FdExt.subproj/NSData+gzip.m
 M	sope-core/NGExtensions/NGExtensions/NSData+gzip.h
 
-commit e1996a96a76025270596b11c782db33061e3cdd0
+commit e1996a9
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Nov 5 13:58:57 2012 -0500
 
@@ -4750,7 +4806,7 @@ Date:   Mon Nov 5 13:58:57 2012 -0500
 M	sope-core/NGStreams/NGByteBuffer.m
 M	sope-core/NGStreams/NGStreams/NGByteBuffer.h
 
-commit 39fb8d8e4a49ed99909b0e6f7439c043cc428884
+commit 39fb8d8
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Nov 5 10:29:09 2012 -0500
 
@@ -4760,7 +4816,7 @@ M	sope-mime/NGImap4/NGImap4Client.h
 M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4ConnectionManager.m
 
-commit 88657808dc1a08a4607d5702434fcb1cca451131
+commit 8865780
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 30 09:40:06 2012 -0400
 
@@ -4771,7 +4827,7 @@ M	sope-appserver/NGObjWeb/SoObjects/SoComponent.h
 M	sope-appserver/NGObjWeb/SoObjects/SoComponent.m
 M	sope-appserver/NGObjWeb/WOComponent.m
 
-commit c471578a7e7186ad3e2bef4d8dd5ef6b0fb140fe
+commit c471578
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 30 08:52:50 2012 -0400
 
@@ -4779,7 +4835,7 @@ Date:   Tue Oct 30 08:52:50 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit cfcc1bd1886b216a26f6aaf56293f3b363bf1c98
+commit cfcc1bd
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 30 08:47:53 2012 -0400
 
@@ -4788,7 +4844,7 @@ Date:   Tue Oct 30 08:47:53 2012 -0400
 M	sope-appserver/NGObjWeb/DynamicElements/WOGenericContainer.m
 M	sope-appserver/NGObjWeb/DynamicElements/WOImage.m
 
-commit 397fd115a02d53acc3d606a7267428a346fa694d
+commit 397fd11
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 30 08:46:34 2012 -0400
 
@@ -4798,7 +4854,7 @@ M	sope-appserver/NGObjWeb/NGObjWeb/WOMessage.h
 M	sope-appserver/NGObjWeb/WOMessage.m
 M	sope-appserver/NGObjWeb/WOResponse+private.h
 
-commit c85c649b7f502bfac4d1b93ac59026c4060fb3ae
+commit c85c649
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 30 08:43:38 2012 -0400
 
@@ -4806,7 +4862,7 @@ Date:   Tue Oct 30 08:43:38 2012 -0400
 
 M	sope-appserver/NGObjWeb/SoObjects/SoComponent.h
 
-commit e8bea4c638e7dc7a23d82dc2e7364cbd5260fd74
+commit e8bea4c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 30 08:43:00 2012 -0400
 
@@ -4814,7 +4870,7 @@ Date:   Tue Oct 30 08:43:00 2012 -0400
 
 M	sope-appserver/NGObjWeb/WOResponse+private.h
 
-commit 2a9f409eb7b35a383ff9af762147cb4fb626475d
+commit 2a9f409
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 30 08:40:34 2012 -0400
 
@@ -4822,7 +4878,7 @@ Date:   Tue Oct 30 08:40:34 2012 -0400
 
 M	sope-appserver/NGObjWeb/SoObjects/SoComponent.m
 
-commit 6471303994298c6a45efcdf80d5b72e280e80d90
+commit 6471303
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 30 08:38:47 2012 -0400
 
@@ -4831,7 +4887,7 @@ Date:   Tue Oct 30 08:38:47 2012 -0400
 M	sope-core/NGStreams/NGActiveSocket.m
 M	sope-core/NGStreams/NGStreams/NGActiveSocket.h
 
-commit c6124589e87a99300f5c1eb9fcdc951f7f8fe637
+commit c612458
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 29 16:44:59 2012 -0400
 
@@ -4839,7 +4895,7 @@ Date:   Mon Oct 29 16:44:59 2012 -0400
 
 D	.mtn-ignore
 
-commit 9d892351127e8a1a86bb014b313c61b1c30e28ae
+commit 9d89235
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 26 17:34:36 2012 -0400
 
@@ -4847,7 +4903,7 @@ Date:   Fri Oct 26 17:34:36 2012 -0400
 
 M	sope-core/NGExtensions/NGBundleManager.m
 
-commit befdab9b605c148c7054245272d2aa1a8253e383
+commit befdab9
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 26 17:33:48 2012 -0400
 
@@ -4855,7 +4911,7 @@ Date:   Fri Oct 26 17:33:48 2012 -0400
 
 M	sope-core/NGExtensions/NGBundleManager.m
 
-commit 79cd48cd6d503b8880aab918e8fc65e289c984fb
+commit 79cd48c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 26 17:28:51 2012 -0400
 
@@ -4863,7 +4919,7 @@ Date:   Fri Oct 26 17:28:51 2012 -0400
 
 M	sope-core/NGExtensions/NGBundleManager.m
 
-commit b72e9146e7644496703661313814f83e1ec9ec3c
+commit b72e914
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 26 16:20:23 2012 -0400
 
@@ -4871,7 +4927,7 @@ Date:   Fri Oct 26 16:20:23 2012 -0400
 
 M	sope-core/NGExtensions/NGBundleManager.m
 
-commit 000158cc9442eb4d3c168c9e6dc11c8d6465561e
+commit 000158c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Oct 25 22:18:09 2012 -0400
 
@@ -4880,7 +4936,7 @@ Date:   Thu Oct 25 22:18:09 2012 -0400
 M	sope-appserver/NGObjWeb/NGObjWeb/WORequest.h
 M	sope-appserver/NGObjWeb/WORequest.m
 
-commit 441b5159d34361e9f614c6a5d9b6907afca75639
+commit 441b515
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Oct 25 09:31:11 2012 -0400
 
@@ -4888,7 +4944,7 @@ Date:   Thu Oct 25 09:31:11 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit a0702f6b0dea3fcd9d70af41fc09d83386a5ae92
+commit a0702f6
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 24 15:00:15 2012 -0400
 
@@ -4896,7 +4952,7 @@ Date:   Wed Oct 24 15:00:15 2012 -0400
 
 M	ChangeLog
 
-commit 67812062daa25a8f52fff897b2c49b9c5554623c
+commit 6781206
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 23 17:25:00 2012 -0400
 
@@ -4905,7 +4961,7 @@ Date:   Tue Oct 23 17:25:00 2012 -0400
 M	ChangeLog
 A	ChangeLog.old
 
-commit 00f3a7573a1888f62f6d8a189dfa6ede470b2b3e
+commit 00f3a75
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 23 08:03:11 2012 -0400
 
@@ -4916,7 +4972,7 @@ M	sope-core/NGStreams/GNUmakefile.preamble
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
 
-commit b362d140300b9a52cb9b892637fdc1312a29b940
+commit b362d14
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 23 08:02:18 2012 -0400
 
@@ -4924,7 +4980,7 @@ Date:   Tue Oct 23 08:02:18 2012 -0400
 
 M	sope-ldap/NGLdap/GNUmakefile.preamble
 
-commit ec2bb6802f1d5c2a5ac032bd89c3fa3488b613d2
+commit ec2bb68
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 22 13:04:03 2012 -0400
 
@@ -4932,7 +4988,7 @@ Date:   Mon Oct 22 13:04:03 2012 -0400
 
 M	sope-appserver/WOExtensions/GNUmakefile.preamble
 
-commit e2d4127aa1f9eaaffc451185a262bd7895ee376a
+commit e2d4127
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Sun Oct 21 00:25:24 2012 -0400
 
@@ -5000,7 +5056,7 @@ M	sope-xml/SaxObjC/SaxObjectModel.m
 M	sope-xml/XmlRpc/NSMutableString+XmlRpcDecoder.m
 M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
 
-commit a1534205525a16b6c482e99ac46a4801d0573e28
+commit a153420
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Sat Oct 20 21:09:04 2012 -0400
 
@@ -5008,7 +5064,7 @@ Date:   Sat Oct 20 21:09:04 2012 -0400
 
 M	sope-appserver/NGObjWeb/DynamicElements/WOBody.m
 
-commit 8b711dbb879bbe5909be3d578c5e259dbec49cd0
+commit 8b711db
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Sat Oct 20 21:07:02 2012 -0400
 
@@ -5016,7 +5072,7 @@ Date:   Sat Oct 20 21:07:02 2012 -0400
 
 M	sope-appserver/NGObjWeb/DynamicElements/WOCompoundElement.m
 
-commit c31b6334a18b756dbe3e2fb4a52eb8a9a2f68e00
+commit c31b633
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Sat Oct 20 21:05:28 2012 -0400
 
@@ -5024,7 +5080,7 @@ Date:   Sat Oct 20 21:05:28 2012 -0400
 
 M	sope-gdl1/GDLAccess/EOPrimaryKeyDictionary.m
 
-commit 28cfbd2a3940447322a91e11147e9f77a6fbe45f
+commit 28cfbd2
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 19 17:29:09 2012 -0400
 
@@ -5032,7 +5088,7 @@ Date:   Fri Oct 19 17:29:09 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit c8101a145047739d32096804f1e315a0825f4a37
+commit c8101a1
 Author: Jeroen Dekkers <jeroen@dekkers.ch>
 Date:   Thu Oct 18 20:27:01 2012 +0200
 
@@ -5044,7 +5100,7 @@ M	sope-xml/DOM/GNUmakefile.preamble
 M	sope-xml/SaxObjC/GNUmakefile.preamble
 M	sope-xml/XmlRpc/GNUmakefile.preamble
 
-commit c24dfc32880eedc3fde90f1f3f4f5b7e6d90e3b5
+commit c24dfc3
 Author: Jeroen Dekkers <jeroen@dekkers.ch>
 Date:   Thu Oct 18 20:26:47 2012 +0200
 
@@ -5064,7 +5120,7 @@ M	sope-xml/DOM/GNUmakefile.preamble
 M	sope-xml/SaxObjC/GNUmakefile.preamble
 M	sope-xml/XmlRpc/GNUmakefile.preamble
 
-commit c6266891e2c4338957ef5134e450ce9a986f97e2
+commit c626689
 Author: Jeroen Dekkers <jeroen@dekkers.ch>
 Date:   Thu Oct 18 20:26:29 2012 +0200
 
@@ -5073,7 +5129,7 @@ Date:   Thu Oct 18 20:26:29 2012 +0200
 M	sope-gdl1/GDLAccess/EOSQLQualifier.m
 M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
 
-commit 9876233a34fa023fd31730855009004b0898edc2
+commit 9876233
 Author: Jeroen Dekkers <jeroen@dekkers.ch>
 Date:   Thu Oct 18 20:26:19 2012 +0200
 
@@ -5081,7 +5137,7 @@ Date:   Thu Oct 18 20:26:19 2012 +0200
 
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 0a9ab5200fa541a506626185e5478381d613f0e3
+commit 0a9ab52
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Oct 18 10:36:29 2012 -0400
 
@@ -5238,7 +5294,7 @@ M	sope-mime/NGMime/NGMimeStringHeaderFieldParser.m
 M	sope-mime/NGMime/NGMimeTextBodyGenerator.m
 M	sope-mime/NGMime/NGMimeType.m
 
-commit adf53e59381e79a19f3bf17f949042e996785783
+commit adf53e5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Oct 18 01:16:11 2012 -0400
 
@@ -5246,7 +5302,7 @@ Date:   Thu Oct 18 01:16:11 2012 -0400
 
 M	sope-mime/NGMime/NGMimeFileData.m
 
-commit 9d54e0af27bcc2a3aa9e81eea082e2f035a64af0
+commit 9d54e0a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Oct 18 01:14:15 2012 -0400
 
@@ -5263,7 +5319,7 @@ M	sope-xml/SaxObjC/GNUmakefile.preamble
 M	sope-xml/libxmlSAXDriver/GNUmakefile.preamble
 M	sope-xml/pyxSAXDriver/GNUmakefile.preamble
 
-commit f102c6f03ea7079c090d3e56324773229e5cc3e2
+commit f102c6f
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Oct 18 01:08:24 2012 -0400
 
@@ -5271,7 +5327,7 @@ Date:   Thu Oct 18 01:08:24 2012 -0400
 
 M	sope-core/NGExtensions/GNUmakefile.preamble
 
-commit cef70e79dbe144a5aa92a65bc899e98b549931ec
+commit cef70e7
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 17 16:16:16 2012 -0400
 
@@ -5279,7 +5335,7 @@ Date:   Wed Oct 17 16:16:16 2012 -0400
 
 M	sope-core/NGStreams/NGByteBuffer.m
 
-commit 7849bd84936bd6d5cd27b8c67a612c821266b2c1
+commit 7849bd8
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 17 16:08:46 2012 -0400
 
@@ -5287,7 +5343,7 @@ Date:   Wed Oct 17 16:08:46 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 9a52d98eac736a0135867e6ecdc8d5186fd9cdf9
+commit 9a52d98
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 17 16:07:36 2012 -0400
 
@@ -5296,7 +5352,7 @@ Date:   Wed Oct 17 16:07:36 2012 -0400
 M	sope-core/NGStreams/NGByteBuffer.m
 M	sope-core/NGStreams/NGStreams/NGByteBuffer.h
 
-commit b26b6cc1a532bec1a9352912c7a60f10019bb8d8
+commit b26b6cc
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 16 16:55:51 2012 -0400
 
@@ -5306,7 +5362,7 @@ M	sope-mime/NGMail/NGSmtpClient.h
 M	sope-mime/NGMail/NGSmtpClient.m
 M	sope-mime/NGMail/NGSmtpReplyCodes.h
 
-commit b13300034e733d7a8ce9aae15a786232b16c1e06
+commit b133000
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 16 13:44:29 2012 -0400
 
@@ -5314,7 +5370,7 @@ Date:   Tue Oct 16 13:44:29 2012 -0400
 
 M	sope-core/NGStreams/NGByteBuffer.m
 
-commit 5251d09e60da80406c9b2d3eed7bf4cce12c44ca
+commit 5251d09
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 23:15:02 2012 -0400
 
@@ -5322,7 +5378,7 @@ Date:   Mon Oct 15 23:15:02 2012 -0400
 
 M	sope-core/NGStreams/NGByteBuffer.m
 
-commit 345b50cf4e98d43b2b06ad77d76e640b475c0ec7
+commit 345b50c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 23:10:51 2012 -0400
 
@@ -5331,7 +5387,7 @@ Date:   Mon Oct 15 23:10:51 2012 -0400
 M	sope-core/NGStreams/NGByteBuffer.m
 M	sope-core/NGStreams/NGStreams/NGByteBuffer.h
 
-commit 1b72be5e25cae788713952620a57033dbf99a384
+commit 1b72be5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 11:06:24 2012 -0400
 
@@ -5339,7 +5395,7 @@ Date:   Mon Oct 15 11:06:24 2012 -0400
 
 M	sope-core/NGExtensions/NGHashMap.m
 
-commit dfceefcb141c1b31b26eea19ca07d3916d663315
+commit dfceefc
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 11:00:25 2012 -0400
 
@@ -5347,7 +5403,7 @@ Date:   Mon Oct 15 11:00:25 2012 -0400
 
 M	sope-core/NGExtensions/NGHashMap.m
 
-commit f708c211edb6ef0e30e8d30506dd514b423bc7c4
+commit f708c21
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 09:47:59 2012 -0400
 
@@ -5355,7 +5411,7 @@ Date:   Mon Oct 15 09:47:59 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 720d188cdbc5139cc44f2cbc72e9c8d7066aa632
+commit 720d188
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 09:45:11 2012 -0400
 
@@ -5363,7 +5419,7 @@ Date:   Mon Oct 15 09:45:11 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 060292b2e9d322e63c9b5a36f7d7c322fc62c917
+commit 060292b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 08:21:15 2012 -0400
 
@@ -5371,7 +5427,7 @@ Date:   Mon Oct 15 08:21:15 2012 -0400
 
 M	sope-core/NGStreams/NGByteBuffer.m
 
-commit 7a5c79db87a9548859c6f29e1a39ed084457fcd5
+commit 7a5c79d
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 08:17:53 2012 -0400
 
@@ -5379,7 +5435,7 @@ Date:   Mon Oct 15 08:17:53 2012 -0400
 
 M	sope-core/NGStreams/NGByteBuffer.m
 
-commit c1c4d20afbdcd78fd540b8d66edbdae015ad159a
+commit c1c4d20
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 08:17:31 2012 -0400
 
@@ -5388,7 +5444,7 @@ Date:   Mon Oct 15 08:17:31 2012 -0400
 M	sope-core/NGStreams/NGByteBuffer.m
 M	sope-core/NGStreams/NGStreams/NGByteBuffer.h
 
-commit f97d700ea869feb04b57413cb62adf791ee1520b
+commit f97d700
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 15 08:10:31 2012 -0400
 
@@ -5396,7 +5452,7 @@ Date:   Mon Oct 15 08:10:31 2012 -0400
 
 M	sope-core/NGStreams/NGByteBuffer.m
 
-commit 0e2b14a21b84fa0c7cff5ef850478d2b8e151c3b
+commit 0e2b14a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 12 12:39:11 2012 -0400
 
@@ -5404,7 +5460,7 @@ Date:   Fri Oct 12 12:39:11 2012 -0400
 
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 
-commit 627fba59ece590d11359480e820110f558a159bd
+commit 627fba5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 12 12:29:46 2012 -0400
 
@@ -5412,7 +5468,7 @@ Date:   Fri Oct 12 12:29:46 2012 -0400
 
 M	sope-mime/NGMail/NGMimeMessageParser.m
 
-commit 4b1e35374269c31fc6c2e9aa8b0b67f077abc77d
+commit 4b1e353
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 12 12:29:16 2012 -0400
 
@@ -5420,7 +5476,7 @@ Date:   Fri Oct 12 12:29:16 2012 -0400
 
 M	sope-mime/NGMime/NGMimePartParser.m
 
-commit 4b6e29680af2541f16a74ce9d9561b6fc801accc
+commit 4b6e296
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 12 12:18:01 2012 -0400
 
@@ -5428,7 +5484,7 @@ Date:   Fri Oct 12 12:18:01 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 53cc0bac72849c2c09937da45388f1406110c98b
+commit 53cc0ba
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 12 12:16:43 2012 -0400
 
@@ -5436,7 +5492,7 @@ Date:   Fri Oct 12 12:16:43 2012 -0400
 
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
 
-commit 9fc05456c222a7fb8a5d1b01662de7519c83f0fd
+commit 9fc0545
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 10 09:16:31 2012 -0400
 
@@ -5444,7 +5500,7 @@ Date:   Wed Oct 10 09:16:31 2012 -0400
 
 M	sope-core/NGExtensions/FdExt.subproj/NSObject+Values.m
 
-commit 50de54323a0b7ad45b617a8dd36dc270c7e66d81
+commit 50de543
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 9 14:13:20 2012 -0400
 
@@ -5453,7 +5509,7 @@ Date:   Tue Oct 9 14:13:20 2012 -0400
 M	sope-core/NGExtensions/FdExt.subproj/NSObject+Values.m
 M	sope-core/NGExtensions/NGExtensions/NSObject+Values.h
 
-commit 84ff74b1d757bb8cf0a0d217dbeb15fb54829ff1
+commit 84ff74b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Sun Oct 7 00:18:28 2012 -0400
 
@@ -5461,7 +5517,7 @@ Date:   Sun Oct 7 00:18:28 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
 
-commit 45339ab1da6d8c87f17c113392fbc455cead6dee
+commit 45339ab
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Sat Oct 6 14:20:30 2012 -0400
 
@@ -5469,7 +5525,7 @@ Date:   Sat Oct 6 14:20:30 2012 -0400
 
 M	sope-json/SBJson/Classes/SBJsonParser.m
 
-commit 435f8e0daf1412d30d785dce87446c7347716205
+commit 435f8e0
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 5 18:51:32 2012 -0400
 
@@ -5479,7 +5535,7 @@ M	sope-mime/NGImap4/NGImap4Connection.m
 M	sope-mime/NGImap4/NGImap4Folder.m
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
 
-commit a852d7c636e3ea463e492ddf73d1ea61124909c1
+commit a852d7c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 5 15:26:51 2012 -0400
 
@@ -5487,7 +5543,7 @@ Date:   Fri Oct 5 15:26:51 2012 -0400
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 21e85bbc577eb287e06c687e2403c8e6b1bf1efc
+commit 21e85bb
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 2 15:59:41 2012 -0400
 
@@ -5495,7 +5551,7 @@ Date:   Tue Oct 2 15:59:41 2012 -0400
 
 M	sope-core/NGExtensions/FdExt.subproj/NSObject+Values.m
 
-commit 13d256bae2eeca5673b4f23dfcfbc387eb66eade
+commit 13d256b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 2 15:59:07 2012 -0400
 
@@ -5503,7 +5559,7 @@ Date:   Tue Oct 2 15:59:07 2012 -0400
 
 M	sope-core/NGExtensions/FdExt.subproj/NSObject+Values.m
 
-commit 3a21618d2f4a995688c03344fc70d5b528259a4d
+commit 3a21618
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 20 10:30:16 2012 -0400
 
@@ -5512,7 +5568,7 @@ Date:   Thu Sep 20 10:30:16 2012 -0400
 M	sope-appserver/NGObjWeb/SoObjects/SoDefaultRenderer.m
 M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
 
-commit 84bf8c22034163ad0608cb3af347bb6f00120c21
+commit 84bf8c2
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Sep 10 17:09:42 2012 +0000
 
@@ -5528,7 +5584,7 @@ Date:   Mon Sep 10 17:09:42 2012 +0000
 M	sope-appserver/NGObjWeb/ChangeLog
 M	sope-appserver/NGObjWeb/NGHttp+WO.m
 
-commit c9fffeaa0f47bfea166fe1871f9f377545493be8
+commit c9fffea
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 6 08:48:49 2012 +0000
 
@@ -5545,7 +5601,7 @@ M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Connection.h
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit 3244f2cb9ffc8dae4ab6b6315beab75840044d29
+commit 3244f2c
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Sep 4 17:04:58 2012 +0000
 
@@ -5561,7 +5617,7 @@ Date:   Tue Sep 4 17:04:58 2012 +0000
 M	sope-appserver/NGObjWeb/ChangeLog
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit 5788d59d8f9789a7cf1e158bed2f73e481c5dd4a
+commit 5788d59
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Sep 4 10:25:11 2012 +0000
 
@@ -5576,7 +5632,7 @@ Date:   Tue Sep 4 10:25:11 2012 +0000
 
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit b56cb0f3537da4b5cc9dba5bbd484907f6c41797
+commit b56cb0f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 28 08:26:28 2012 +0000
 
@@ -5591,7 +5647,7 @@ Date:   Tue Aug 28 08:26:28 2012 +0000
 
 M	sope-gdl1/GDLAccess/EOExpressionArray.m
 
-commit e1db3457a04e4aaba3350b334a9f6480fefbbd9f
+commit e1db345
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Aug 27 15:50:44 2012 +0000
 
@@ -5608,7 +5664,7 @@ M	sope-mime/NGMail/ChangeLog
 M	sope-mime/NGMail/NGMailAddressParser.h
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit a48f32e1a239cd168ee97510f059441286500caa
+commit a48f32e
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Aug 8 17:19:00 2012 +0000
 
@@ -5623,7 +5679,7 @@ M	ChangeLog
 M	sope-appserver/NGObjWeb/NGObjWeb/WOCoreApplication.h
 M	sope-appserver/NGObjWeb/WOCoreApplication.m
 
-commit 4ac6ad4aa9667f423bf71f5971ac7d1a3b829381
+commit 4ac6ad4
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu Aug 2 18:45:21 2012 +0000
 
@@ -5675,7 +5731,7 @@ R100	debian/sope_SOPEVER_-libxmlsaxdriver.install	packaging/debian/sope_SOPEVER_
 R100	debian/sope_SOPEVER_-stxsaxdriver.install	packaging/debian/sope_SOPEVER_-stxsaxdriver.install
 A	packaging/rhel/sope.spec
 
-commit 15c5f44267d15f04ed7547b30d468732a61b9d94
+commit 15c5f44
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Jul 23 13:34:24 2012 +0000
 
@@ -5690,7 +5746,7 @@ Date:   Mon Jul 23 13:34:24 2012 +0000
 
 M	sope-xml/DOM/DOMElement.m
 
-commit 79b17e06904812fde2de74addfc0251479b96532
+commit 79b17e0
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Jul 10 15:58:47 2012 +0000
 
@@ -5703,7 +5759,7 @@ Date:   Tue Jul 10 15:58:47 2012 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 0336dc79b837c929204e6c48b989573de86f6547
+commit 0336dc7
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Thu May 31 15:35:55 2012 +0000
 
@@ -5720,7 +5776,7 @@ Date:   Thu May 31 15:35:55 2012 +0000
 
 M	sope-appserver/NGObjWeb/NGHttp/common.h
 
-commit 3dfb4d2652c48356ff1ac41f67280428f32eb128
+commit 3dfb4d2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 31 12:33:27 2012 +0000
 
@@ -5738,7 +5794,7 @@ M	sope-ldap/NGLdap/NGLdapAttribute.m
 M	sope-ldap/NGLdap/NGLdapEntry.h
 M	sope-ldap/NGLdap/NGLdapEntry.m
 
-commit 09bc5746a9aaae977b3fd48943693d0350a8472d
+commit 09bc574
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 29 19:01:32 2012 +0000
 
@@ -5753,7 +5809,7 @@ Date:   Tue May 29 19:01:32 2012 +0000
 
 M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
 
-commit cbeeaa0d0e8cbe6ebe632bb114298d7be35d27dd
+commit cbeeaa0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 29 18:56:25 2012 +0000
 
@@ -5782,7 +5838,7 @@ M	sope-xml/XmlRpc/NSObject+XmlRpc.m
 M	sope-xml/XmlRpc/XmlRpcDecoder.m
 M	sope-xml/XmlRpc/XmlRpcSaxHandler.m
 
-commit 3ee99c0c66d032e0bc336d8879920aec958f0cc5
+commit 3ee99c0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 29 18:50:07 2012 +0000
 
@@ -5797,7 +5853,7 @@ Date:   Tue May 29 18:50:07 2012 +0000
 
 M	sope-core/NGStreams/NGInternetSocketAddress.m
 
-commit 9d612ce4ad96bfc19e1d7a3356fc6e875cf8f319
+commit 9d612ce
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 29 18:48:00 2012 +0000
 
@@ -5812,7 +5868,7 @@ Date:   Tue May 29 18:48:00 2012 +0000
 
 M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
 
-commit 72d701377b372e799419dab1484c1ea40a1364cf
+commit 72d7013
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu May 24 14:26:45 2012 +0000
 
@@ -5826,7 +5882,7 @@ Date:   Thu May 24 14:26:45 2012 +0000
 M	sope-appserver/WEExtensions/ChangeLog
 M	sope-appserver/WEExtensions/WEResourceManager.m
 
-commit 1bc7557ec270d532039dc8ee6fb3fce8a06ea684
+commit 1bc7557
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu May 10 17:50:26 2012 +0000
 
@@ -5845,7 +5901,7 @@ M	sope-appserver/NGObjWeb/WODisplayGroup.m
 M	sope-gdl1/GDLAccess/EOExpressionArray.h
 M	sope-gdl1/GDLAccess/EOExpressionArray.m
 
-commit b38271f048543669e67c8dbaf3169f760be71a1c
+commit b38271f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 9 11:53:35 2012 +0000
 
@@ -5888,7 +5944,7 @@ M	sope-gdl1/GDLAccess/common.h
 M	sope-ldap/NGLdap/EOQualifier+LDAP.m
 M	sope-mime/NGImap4/imCommon.h
 
-commit 70ac7ef7648066dbf2a00d0747770893c06e8b2e
+commit 70ac7ef
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 9 10:51:29 2012 +0000
 
@@ -5906,7 +5962,7 @@ M	sope-core/NGStreams/NGCTextStream.m
 M	sope-core/NGStreams/NGStreams/NGCTextStream.h
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 98cfa0f39afa27cb789b0553986f68e0edf5f242
+commit 98cfa0f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed May 9 08:54:14 2012 +0000
 
@@ -5921,7 +5977,7 @@ Date:   Wed May 9 08:54:14 2012 +0000
 
 M	sope-xml/SaxObjC/SaxAttributes.m
 
-commit 9d51c0f6d61dc1407188ea412a070b3aebf031bc
+commit 9d51c0f
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue May 1 20:34:36 2012 +0000
 
@@ -5938,7 +5994,7 @@ M	sope-mime/NGMime/GNUmakefile
 A	sope-mime/NGMime/NSData+RFC822.h
 A	sope-mime/NGMime/NSData+RFC822.m
 
-commit fb2950954e0a0db42ec487e2cf09fcad3b00f2fd
+commit fb29509
 Author: Jean Raby <jraby@inverse.ca>
 Date:   Fri Apr 27 19:56:49 2012 +0000
 
@@ -5955,7 +6011,7 @@ Date:   Fri Apr 27 19:56:49 2012 +0000
 
 M	debian/control.in
 
-commit 91065b5b520e34b32561c8edbb184d91e6022024
+commit 91065b5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Apr 19 14:22:22 2012 +0000
 
@@ -5969,7 +6025,7 @@ Date:   Thu Apr 19 14:22:22 2012 +0000
 M	ChangeLog
 M	sope-gdl1/PostgreSQL/PGConnection.m
 
-commit 783348da068ccbadfb3673f371259751c29f4741
+commit 783348d
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Apr 13 15:15:43 2012 +0000
 
@@ -5982,7 +6038,7 @@ Date:   Fri Apr 13 15:15:43 2012 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit ff65b06d8a84722598125422744f40839cf37068
+commit ff65b06
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Apr 2 18:24:18 2012 +0000
 
@@ -5998,7 +6054,7 @@ Date:   Mon Apr 2 18:24:18 2012 +0000
 M	sope-gdl1/Oracle8/err.h
 M	sope-gdl1/Oracle8/err.m
 
-commit 49028ebd0ecf9b2ad5a36d9086f9e0c8ca47b3a8
+commit 49028eb
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Mar 27 15:01:51 2012 +0000
 
@@ -6011,7 +6067,7 @@ Date:   Tue Mar 27 15:01:51 2012 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 99208fa5fb368de9b5138c893f34e727a2ffea13
+commit 99208fa
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Mar 23 18:44:43 2012 +0000
 
@@ -6027,7 +6083,7 @@ Date:   Fri Mar 23 18:44:43 2012 +0000
 M	ChangeLog
 M	sope-gdl1/GDLAccess/FoundationExt/PrintfFormatScanner.m
 
-commit efe7c7cae4ce1daf4c5d98205baf81353075cb11
+commit efe7c7c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Mar 23 18:39:20 2012 +0000
 
@@ -6043,7 +6099,7 @@ Date:   Fri Mar 23 18:39:20 2012 +0000
 M	ChangeLog
 M	configure
 
-commit f3f8dcd9a1022089d9f12f64be13cc74d11b65c7
+commit f3f8dcd
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Mar 23 18:36:28 2012 +0000
 
@@ -6059,7 +6115,7 @@ Date:   Fri Mar 23 18:36:28 2012 +0000
 M	ChangeLog
 M	sope-core/NGExtensions/NGLogging.subproj/NGLogSyslogAppender.m
 
-commit e9d93bc54b0b3c95bcc2162752c15510ac07101c
+commit e9d93bc
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Mar 23 13:38:55 2012 +0000
 
@@ -6074,7 +6130,7 @@ Date:   Fri Mar 23 13:38:55 2012 +0000
 
 M	sope-appserver/NGObjWeb/Languages.plist
 
-commit d1a2c2b5c0bd454a61f40a672b5d820d2a5726c7
+commit d1a2c2b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Mar 22 16:40:27 2012 +0000
 
@@ -6089,7 +6145,7 @@ Date:   Thu Mar 22 16:40:27 2012 +0000
 
 M	sope-appserver/NGObjWeb/WOCoreApplication.m
 
-commit 9727b4b8096f8d8dbeb9f8897653dfe3e9a0a739
+commit 9727b4b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Mar 22 16:21:46 2012 +0000
 
@@ -6111,7 +6167,7 @@ M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 M	sope-appserver/NGObjWeb/common.h
 
-commit 808de0feccfd53f9d0d94a384c4987b26a8ff981
+commit 808de0f
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Mar 19 20:55:30 2012 +0000
 
@@ -6124,7 +6180,7 @@ Date:   Mon Mar 19 20:55:30 2012 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit e96752ad03dd6a93eccc0394bfd9d98f2a1c3e48
+commit e96752a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Feb 29 15:51:27 2012 +0000
 
@@ -6138,7 +6194,7 @@ Date:   Wed Feb 29 15:51:27 2012 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit a318192fa5342bfc9cbd630bfd5544d83dc40afc
+commit a318192
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Feb 28 18:47:28 2012 +0000
 
@@ -6152,7 +6208,7 @@ Date:   Tue Feb 28 18:47:28 2012 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 73be1ec0bb98a509a78af3ca04bc01a7ff9a0bef
+commit 73be1ec
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Feb 27 18:42:48 2012 +0000
 
@@ -6169,7 +6225,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4Connection.h
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit e9d1d02f053d11022b00e0bc75db7f412aeb0f6f
+commit e9d1d02
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Feb 22 14:51:37 2012 +0000
 
@@ -6182,7 +6238,7 @@ Date:   Wed Feb 22 14:51:37 2012 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 7f0e8fd88c94e276c55612d632ce00fd5ed6abde
+commit 7f0e8fd
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Feb 16 20:35:05 2012 +0000
 
@@ -6195,7 +6251,7 @@ Date:   Thu Feb 16 20:35:05 2012 +0000
 
 M	sope-gdl1/Oracle8/OracleAdaptor.m
 
-commit 9a14ec90970f361304a404614fb6ee98939309cd
+commit 9a14ec9
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Feb 16 20:28:32 2012 +0000
 
@@ -6210,7 +6266,7 @@ M	ChangeLog
 M	sope-gdl1/Oracle8/OracleAdaptor.m
 M	sope-gdl1/Oracle8/OracleValues.m
 
-commit 12bee6a954dbefb1a79b545f31c593c2f3448109
+commit 12bee6a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Feb 16 19:46:14 2012 +0000
 
@@ -6224,7 +6280,7 @@ Date:   Thu Feb 16 19:46:14 2012 +0000
 M	ChangeLog
 M	sope-gdl1/Oracle8/OracleValues.m
 
-commit 193ff8b511c361c98c69138fb0f283766dfe3c55
+commit 193ff8b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Feb 16 03:28:52 2012 +0000
 
@@ -6239,7 +6295,7 @@ M	ChangeLog
 M	sope-gdl1/PostgreSQL/NSString+PGVal.m
 M	sope-gdl1/PostgreSQL/PGConnection.m
 
-commit 88343e5fd4ad36d3904e6c32e4511c689f1a1e72
+commit 88343e5
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Feb 16 01:23:55 2012 +0000
 
@@ -6254,7 +6310,7 @@ Date:   Thu Feb 16 01:23:55 2012 +0000
 
 M	sope-ldap/NGLdap/NGLdapAttribute.m
 
-commit 58192cfa93917d3eae576479221eb7ffe0173276
+commit 58192cf
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Feb 14 16:34:19 2012 +0000
 
@@ -6268,7 +6324,7 @@ Date:   Tue Feb 14 16:34:19 2012 +0000
 M	ChangeLog
 M	sope-gdl1/Oracle8/OracleValues.m
 
-commit 7c676d134ba168bf43587acb823dda54780dc640
+commit 7c676d1
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Feb 14 03:04:34 2012 +0000
 
@@ -6282,7 +6338,7 @@ Date:   Tue Feb 14 03:04:34 2012 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 856b6be3523026783a22046846ed1f42d462af74
+commit 856b6be
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Feb 6 15:20:44 2012 +0000
 
@@ -6296,7 +6352,7 @@ Date:   Mon Feb 6 15:20:44 2012 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/WebDAV/SoObjectDataSource.m
 
-commit 1e6523651d59df1d52a68a5d20ae048e894dbac9
+commit 1e65236
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Feb 6 13:54:00 2012 +0000
 
@@ -6311,7 +6367,7 @@ M	ChangeLog
 M	sope-ldap/NGLdap/NSString+DN.h
 M	sope-ldap/NGLdap/NSString+DN.m
 
-commit 8d98bf54c634d18017b843c34269047af438bfd4
+commit 8d98bf5
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Feb 3 19:10:23 2012 +0000
 
@@ -6327,7 +6383,7 @@ Date:   Fri Feb 3 19:10:23 2012 +0000
 M	sope-mime/NGImap4/NGImap4ServerRoot.h
 M	sope-mime/NGImap4/NGImap4ServerRoot.m
 
-commit 457256daec2e859121ee06c4bc16578f832b05bf
+commit 457256d
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jan 31 21:23:55 2012 +0000
 
@@ -6340,7 +6396,7 @@ Date:   Tue Jan 31 21:23:55 2012 +0000
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 1f537e05787845631aeb6032118bc5a63125233b
+commit 1f537e0
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Jan 31 21:20:57 2012 +0000
 
@@ -6357,7 +6413,7 @@ M	sope-appserver/NGObjWeb/ChangeLog
 M	sope-appserver/NGObjWeb/Languages.plist
 M	sope-appserver/NGObjWeb/WORequest.m
 
-commit d2cb4987049aacda4c4276ec6387aba371e7fb1b
+commit d2cb498
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jan 31 16:02:38 2012 +0000
 
@@ -6372,7 +6428,7 @@ Date:   Tue Jan 31 16:02:38 2012 +0000
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 79e177355873656f3bbe668b1dd3f4208b04ace7
+commit 79e1773
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jan 31 15:58:50 2012 +0000
 
@@ -6388,7 +6444,7 @@ Date:   Tue Jan 31 15:58:50 2012 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 7e3f4a6f0a0d61aae85521757000ac1a627aaa16
+commit 7e3f4a6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jan 12 20:00:56 2012 +0000
 
@@ -6403,7 +6459,7 @@ Date:   Thu Jan 12 20:00:56 2012 +0000
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit ffd9886b2ec9078350fab8eec8a93f749bde2947
+commit ffd9886
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Jan 10 17:32:49 2012 +0000
 
@@ -6417,7 +6473,7 @@ Date:   Tue Jan 10 17:32:49 2012 +0000
 M	ChangeLog
 M	sope-mime/NGMail/NGMailAddressParser.m
 
-commit 704bff7ea4d0b69269e312fd2f4d89ccd276a7c4
+commit 704bff7
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Dec 30 23:21:37 2011 +0000
 
@@ -6433,7 +6489,7 @@ M	sope-ldap/NGLdap/NGLdapAttribute.m
 M	sope-ldap/NGLdap/NGLdapConnection.m
 M	sope-ldap/NGLdap/NGLdapEntry.m
 
-commit 41f828798e5a757a3788ee8aa50f65dfa964ead2
+commit 41f8287
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 30 17:22:26 2011 +0000
 
@@ -6451,7 +6507,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NSString+Imap4.h
 M	sope-mime/NGImap4/NSString+Imap4.m
 
-commit fe7d311673d7fdd6e24829bdb08969bc8e73b18e
+commit fe7d311
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 30 14:08:43 2011 +0000
 
@@ -6466,7 +6522,7 @@ Date:   Fri Dec 30 14:08:43 2011 +0000
 
 M	sope-mime/NGMail/NGSendMail.m
 
-commit ab768d4f53f9c93c258a4862a4909c9e30812b21
+commit ab768d4
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Dec 19 16:39:36 2011 +0000
 
@@ -6480,7 +6536,7 @@ Date:   Mon Dec 19 16:39:36 2011 +0000
 M	ChangeLog
 M	sope-ldap/NGLdap/NGLdapSearchResultEnumerator.m
 
-commit 33491e1046e79e8986b05577d31243227ddada89
+commit 33491e1
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Dec 15 19:38:04 2011 +0000
 
@@ -6498,7 +6554,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGSieveClient.h
 M	sope-mime/NGImap4/NGSieveClient.m
 
-commit d0dc6777fccec98687acfd07f17000c9a19ead06
+commit d0dc677
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Thu Dec 8 18:41:35 2011 +0000
 
@@ -6514,7 +6570,7 @@ Date:   Thu Dec 8 18:41:35 2011 +0000
 
 M	sope-appserver/NGObjWeb/Languages.plist
 
-commit 7806ad12eece5cb579e8275d007f7cb830e2ac08
+commit 7806ad1
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Dec 7 19:01:13 2011 +0000
 
@@ -6529,7 +6585,7 @@ Date:   Wed Dec 7 19:01:13 2011 +0000
 
 M	sope-appserver/NGObjWeb/DynamicElements/WORepetition.m
 
-commit f025e396a2cf30125af09a1e00e6fd9ddad77b69
+commit f025e39
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Dec 6 20:28:36 2011 +0000
 
@@ -6543,7 +6599,7 @@ Date:   Tue Dec 6 20:28:36 2011 +0000
 M	ChangeLog
 M	sope-gdl1/PostgreSQL/PGConnection.m
 
-commit bc211d673e24d2ded166e17648e35db26e57d024
+commit bc211d6
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Dec 2 04:15:02 2011 +0000
 
@@ -6556,7 +6612,7 @@ Date:   Fri Dec 2 04:15:02 2011 +0000
 
 M	sope-appserver/NGObjWeb/WebDAV/SoObjectWebDAVDispatcher.m
 
-commit be1cbce1aa65cec2ba70b5771414fc706136f0f8
+commit be1cbce
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Dec 2 03:41:12 2011 +0000
 
@@ -6571,7 +6627,7 @@ Date:   Fri Dec 2 03:41:12 2011 +0000
 
 M	sope-gdl1/Oracle8/GNUmakefile
 
-commit e1d05c9e63236964ba9c2d805de3dbbc9d32ccf1
+commit e1d05c9
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Dec 1 12:31:55 2011 +0000
 
@@ -6586,7 +6642,7 @@ Date:   Thu Dec 1 12:31:55 2011 +0000
 
 M	sope-core/EOControl/EOSortOrdering.m
 
-commit 42c4f075756c0b0047f772d9fbf608564876bb58
+commit 42c4f07
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 29 19:25:59 2011 +0000
 
@@ -6600,7 +6656,7 @@ Date:   Tue Nov 29 19:25:59 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
 
-commit 6fb71b306377a8ec56d3441374b589c2baf9eddf
+commit 6fb71b3
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 29 19:22:40 2011 +0000
 
@@ -6615,7 +6671,7 @@ M	ChangeLog
 M	sope-appserver/NGObjWeb/WOMessage.m
 M	sope-appserver/NGObjWeb/WOResponse.m
 
-commit ff68ef6493f8a7becb23fffe87b733e1bb4eb100
+commit ff68ef6
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Nov 25 18:41:45 2011 +0000
 
@@ -6628,7 +6684,7 @@ Date:   Fri Nov 25 18:41:45 2011 +0000
 
 M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
 
-commit 8dfb0c5c1392ed18902302152f3018479d0714c7
+commit 8dfb0c5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Nov 25 18:41:14 2011 +0000
 
@@ -6641,7 +6697,7 @@ Date:   Fri Nov 25 18:41:14 2011 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 65ac8833a2f7696b0ead0b961be0d821d3f3866f
+commit 65ac883
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Nov 25 18:40:56 2011 +0000
 
@@ -6654,7 +6710,7 @@ Date:   Fri Nov 25 18:40:56 2011 +0000
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit b48079b917445f271cfb882ac9054efdc97219dc
+commit b48079b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Nov 25 18:38:52 2011 +0000
 
@@ -6668,7 +6724,7 @@ Date:   Fri Nov 25 18:38:52 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 
-commit e0fe39a9b26338eb86d77d81b395d4bc9d4d0e15
+commit e0fe39a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Nov 25 18:35:59 2011 +0000
 
@@ -6682,7 +6738,7 @@ Date:   Fri Nov 25 18:35:59 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
 
-commit af0edf01f6c0a45b9ed6e51a53ecb4547bfdf71d
+commit af0edf0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 24 20:12:43 2011 +0000
 
@@ -6698,7 +6754,7 @@ Date:   Thu Nov 24 20:12:43 2011 +0000
 M	sope-core/EOControl/EOSortOrdering.h
 M	sope-core/EOControl/EOSortOrdering.m
 
-commit deb0e1f77ffd4e67a792c138035ca91f28033dd5
+commit deb0e1f
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Nov 21 14:07:16 2011 +0000
 
@@ -6713,7 +6769,7 @@ Date:   Mon Nov 21 14:07:16 2011 +0000
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit a2c7154d753e7f3b585d303dabb87aa284c23d89
+commit a2c7154
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Nov 17 12:43:35 2011 +0000
 
@@ -6728,7 +6784,7 @@ Date:   Thu Nov 17 12:43:35 2011 +0000
 
 M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
 
-commit 7399bb2a54cbd58b12b7e1f8f2635c96c16c3418
+commit 7399bb2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 16 17:50:29 2011 +0000
 
@@ -6743,7 +6799,7 @@ Date:   Wed Nov 16 17:50:29 2011 +0000
 
 M	sope-core/EOControl/EOQualifierParser.m
 
-commit 71cf67c16f5201e8b3db462621752df6f970bafe
+commit 71cf67c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 16 17:38:23 2011 +0000
 
@@ -6758,7 +6814,7 @@ Date:   Wed Nov 16 17:38:23 2011 +0000
 
 M	sope-core/EOControl/EOQualifierParser.m
 
-commit e3a63fbaf1acab93a9742aa8a164a8857e1d745d
+commit e3a63fb
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 15 16:30:13 2011 +0000
 
@@ -6771,7 +6827,7 @@ Date:   Tue Nov 15 16:30:13 2011 +0000
 
 M	sope-gdl1/Oracle8/OracleValues.m
 
-commit 668fd348c132f1d094c2c870fcc6f5023f2475f7
+commit 668fd34
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Tue Nov 15 04:42:38 2011 +0000
 
@@ -6789,7 +6845,7 @@ M	sope-gdl1/Oracle8/OracleValues.m
 M	sope-gdl1/PostgreSQL/NSNumber+ExprValue.m
 M	sope-gdl1/PostgreSQL/NSNumber+PGVal.m
 
-commit 435bfc909bc7c8e0e99abb1c6694afbf7fb081c1
+commit 435bfc9
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Nov 14 20:01:21 2011 +0000
 
@@ -6805,7 +6861,7 @@ Date:   Mon Nov 14 20:01:21 2011 +0000
 M	sope-gdl1/Oracle8/ChangeLog
 M	sope-gdl1/Oracle8/OracleValues.m
 
-commit c41a16e2970150c0c14b10a65f8a16bb88926f54
+commit c41a16e
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Nov 10 22:24:47 2011 +0000
 
@@ -6819,7 +6875,7 @@ Date:   Thu Nov 10 22:24:47 2011 +0000
 M	ChangeLog
 M	sope-gdl1/PostgreSQL/NSString+PGVal.m
 
-commit 92f786448a6f994733c2632d2f5c255d98ef495c
+commit 92f7864
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 9 17:28:54 2011 +0000
 
@@ -6834,7 +6890,7 @@ Date:   Wed Nov 9 17:28:54 2011 +0000
 
 M	sope-gdl1/Oracle8/OracleAdaptorChannel.m
 
-commit 56a3ce62a824867829cc485b48dfe6b9b03d84b1
+commit 56a3ce6
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Nov 2 18:46:40 2011 +0000
 
@@ -6850,7 +6906,7 @@ Date:   Wed Nov 2 18:46:40 2011 +0000
 M	sope-gdl1/MySQL/ChangeLog
 M	sope-gdl1/MySQL/NSNumber+MySQL4Val.m
 
-commit 7c9ad217687ca2580af160812986c2e3daefc309
+commit 7c9ad21
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 31 19:24:03 2011 +0000
 
@@ -6865,7 +6921,7 @@ M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Connection.h
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit eefd3bfdde1f7bac21f3498f28299ee187383d94
+commit eefd3bf
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 28 15:11:29 2011 +0000
 
@@ -6879,7 +6935,7 @@ Date:   Fri Oct 28 15:11:29 2011 +0000
 M	ChangeLog
 M	sope-mime/NGMime/NGMimeMultipartBody.m
 
-commit a6fad367db9e2a53092ec957408313af379dc969
+commit a6fad36
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 26 19:06:29 2011 +0000
 
@@ -6893,7 +6949,7 @@ Date:   Wed Oct 26 19:06:29 2011 +0000
 M	ChangeLog
 M	sope-mime/NGMail/NGMimeMessage.m
 
-commit a8eb7681fb403bc145679dfac36bc380796a034a
+commit a8eb768
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 19 09:19:22 2011 +0000
 
@@ -6908,7 +6964,7 @@ Date:   Wed Oct 19 09:19:22 2011 +0000
 
 M	sope-appserver/NGObjWeb/WebDAV/SoObjectWebDAVDispatcher.m
 
-commit 96d053f6360023788f87616f25bd23bcfd746e6e
+commit 96d053f
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 18 20:09:19 2011 +0000
 
@@ -6921,7 +6977,7 @@ Date:   Tue Oct 18 20:09:19 2011 +0000
 
 M	sope-gdl1/Oracle8/GNUmakefile
 
-commit 9dbe83834205cfdb8457630db8ef1794c1b68cd1
+commit 9dbe838
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 18 19:58:47 2011 +0000
 
@@ -6934,7 +6990,7 @@ Date:   Tue Oct 18 19:58:47 2011 +0000
 
 M	sope-gdl1/Oracle8/GNUmakefile
 
-commit 48b37d233fe76780628782682a60130c9b70b5b3
+commit 48b37d2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Oct 18 12:31:03 2011 +0000
 
@@ -6949,7 +7005,7 @@ Date:   Tue Oct 18 12:31:03 2011 +0000
 
 M	sope-appserver/NGObjWeb/WebDAV/SoObjectWebDAVDispatcher.m
 
-commit 676ca070237a5b80d71518897835ad6ff90aba0c
+commit 676ca07
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 17 21:42:06 2011 +0000
 
@@ -6962,7 +7018,7 @@ Date:   Mon Oct 17 21:42:06 2011 +0000
 
 M	sope-gdl1/Oracle8/GNUmakefile
 
-commit c2ce349c539ba1f564a90ca3f0829c2c5c447f43
+commit c2ce349
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Oct 17 21:01:04 2011 +0000
 
@@ -6978,7 +7034,7 @@ Date:   Mon Oct 17 21:01:04 2011 +0000
 M	sope-mime/NGImap4/ChangeLog
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit ba8ef7b3eedd3bbe64b92a89bed0317197dff961
+commit ba8ef7b
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Mon Oct 17 19:47:04 2011 +0000
 
@@ -6994,7 +7050,7 @@ Date:   Mon Oct 17 19:47:04 2011 +0000
 M	sope-appserver/NGObjWeb/ChangeLog
 M	sope-appserver/NGObjWeb/WebDAV/SoObjectWebDAVDispatcher.m
 
-commit 829e1aea60c0e7456814fee9fb926f2bc15a2815
+commit 829e1ae
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Oct 17 17:14:20 2011 +0000
 
@@ -7009,7 +7065,7 @@ Date:   Mon Oct 17 17:14:20 2011 +0000
 
 M	sope-appserver/NGObjWeb/WEClientCapabilities.m
 
-commit f9e2487c7f4716bf8ec5495c054e2f8152c25f4e
+commit f9e2487
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 5 12:36:40 2011 +0000
 
@@ -7026,7 +7082,7 @@ M	sope-core/NGExtensions/FdExt.subproj/GNUmakefile
 A	sope-core/NGExtensions/FdExt.subproj/NSDictionary+KVC.m
 A	sope-core/NGExtensions/NGExtensions/NSDictionary+KVC.h
 
-commit 5f7e56b152d0367643087f4b10352fbe77427870
+commit 5f7e56b
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Oct 5 12:31:58 2011 +0000
 
@@ -7041,7 +7097,7 @@ Date:   Wed Oct 5 12:31:58 2011 +0000
 
 M	sope-appserver/NGObjWeb/NGHttp/NGHttpHeaderFieldParser.m
 
-commit ab700558c984d5eaa758c73571c62a04e1d5b2f5
+commit ab70055
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Sep 21 19:22:39 2011 +0000
 
@@ -7055,7 +7111,7 @@ Date:   Wed Sep 21 19:22:39 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Connection.h
 
-commit e5ffa57eeb05bcf53a9462ee3ad99271f54d5fc5
+commit e5ffa57
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Sun Sep 4 19:45:45 2011 +0000
 
@@ -7071,7 +7127,7 @@ Date:   Sun Sep 4 19:45:45 2011 +0000
 M	ChangeLog
 M	sope-core/NGStreams/NGActiveSocket.m
 
-commit 3a83cf8f6da07a27fb9b3041d2d41386c2a00e0f
+commit 3a83cf8
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 8 20:10:58 2011 +0000
 
@@ -7084,7 +7140,7 @@ Date:   Mon Aug 8 20:10:58 2011 +0000
 
 M	sope-appserver/NGObjWeb/Defaults.plist
 
-commit 7e1fb36a9d4aabc7ffaf2dd190e053dd25fb7075
+commit 7e1fb36
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 18:44:40 2011 +0000
 
@@ -7103,7 +7159,7 @@ M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
 M	sope-ldap/NGLdap/GNUmakefile.preamble
 
-commit bf5b91c957104db1247a28bd87fd9a0dba70bf86
+commit bf5b91c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 14:00:15 2011 +0000
 
@@ -7118,7 +7174,7 @@ Date:   Fri Jul 29 14:00:15 2011 +0000
 
 M	debian/sope_SOPEVER_-appserver.install
 
-commit 56fae50fc44c76c22218a28dd210b8b969f564e5
+commit 56fae50
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 13:50:53 2011 +0000
 
@@ -7138,7 +7194,7 @@ M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGStreams/NGActiveSSLSocket.h
 M	sope-ldap/NGLdap/GNUmakefile.preamble
 
-commit 6494ebc248482d06991935beb408965773ba3376
+commit 6494ebc
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jul 29 12:31:59 2011 +0000
 
@@ -7153,7 +7209,7 @@ Date:   Fri Jul 29 12:31:59 2011 +0000
 
 M	sope-appserver/NGObjWeb/WODirectActionRequestHandler.m
 
-commit cd071b6f561bf25c67f06d3cade128e416976985
+commit cd071b6
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Jul 29 02:14:52 2011 +0000
 
@@ -7170,7 +7226,7 @@ M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit a41d5c2c9c114e67f7ffb083d233fcb3eb74d13b
+commit a41d5c2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 20:35:23 2011 +0000
 
@@ -7185,7 +7241,7 @@ Date:   Thu Jul 28 20:35:23 2011 +0000
 
 M	sope-appserver/NGObjWeb/SoObjects/SoObjCClass.m
 
-commit 66e3fb3257f13570f7f6a881c02c2ab681c1c97b
+commit 66e3fb3
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 20:10:14 2011 +0000
 
@@ -7200,7 +7256,7 @@ Date:   Thu Jul 28 20:10:14 2011 +0000
 
 M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
 
-commit 503d426116648d3093d04f21d15673b9cc4a5960
+commit 503d426
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 14:52:45 2011 +0000
 
@@ -7215,7 +7271,7 @@ Date:   Thu Jul 28 14:52:45 2011 +0000
 
 M	sope-appserver/NGObjWeb/SoObjects/SoObjCClass.m
 
-commit 662880730d5a326a353a6fc2de6f3ee562936d23
+commit 6628807
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Jul 28 14:51:02 2011 +0000
 
@@ -7228,7 +7284,7 @@ Date:   Thu Jul 28 14:51:02 2011 +0000
 
 M	sope-mime/NGImap4/NGImap4Connection.h
 
-commit 169bf73f19d0f1569a422630d9ede4e8790dacc8
+commit 169bf73
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 28 14:19:46 2011 +0000
 
@@ -7244,7 +7300,7 @@ Date:   Thu Jul 28 14:19:46 2011 +0000
 M	debian/libsope-appserver_SOPEVER_-dev.install
 M	debian/libsope-appserver_SOPEVER_.install
 
-commit 9688301b0d444ad4104015a4849894e49911b038
+commit 9688301
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Jul 28 00:56:42 2011 +0000
 
@@ -7258,7 +7314,7 @@ Date:   Thu Jul 28 00:56:42 2011 +0000
 M	sope-mime/NGImap4/ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 7145d424b581895a8b7ec26236d42fa5d12567cc
+commit 7145d42
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jul 27 14:38:34 2011 +0000
 
@@ -7458,7 +7514,7 @@ M	sope-gdl1/PostgreSQL/NSString+PostgreSQL72.m
 M	sope-gdl1/PostgreSQL/common.h
 D	sope-xml/PROJECTLEAD
 
-commit 1a502e262a05bce50538f99ee626c179e707031a
+commit 1a502e2
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Jul 26 02:51:46 2011 +0000
 
@@ -7474,7 +7530,7 @@ M	sope-mime/NGImap4/ChangeLog
 M	sope-mime/NGImap4/NGImap4Connection.h
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit a0484e3c3456776c7f45f9bcc669f2856f353a7c
+commit a0484e3
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Jul 26 02:49:56 2011 +0000
 
@@ -7487,7 +7543,7 @@ Date:   Tue Jul 26 02:49:56 2011 +0000
 
 M	sope-mime/NGImap4/ChangeLog
 
-commit a2094dca2fbaee51d85473cb3caa9908224ce495
+commit a2094dc
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Jul 26 02:49:38 2011 +0000
 
@@ -7503,7 +7559,7 @@ M	sope-mime/NGImap4/EOSortOrdering+IMAPAdditions.m
 M	sope-mime/NGImap4/NGImap4ResponseNormalizer.m
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 384642a03dbf6e89a029ea4f5fed43dd3870a116
+commit 384642a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Jul 25 14:50:53 2011 +0000
 
@@ -7518,7 +7574,7 @@ M	sope-mime/NGImap4/ChangeLog
 M	sope-mime/NGImap4/NGImap4Client.h
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 26abca4f783bca1d04f685024ed4d3687ade508f
+commit 26abca4
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Fri Jul 15 18:01:38 2011 +0000
 
@@ -7536,7 +7592,7 @@ Date:   Fri Jul 15 18:01:38 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/NGHttp/NGUrlFormCoder.m
 
-commit 8ba1434c2a7fba441446e2a946a72852fd132f5d
+commit 8ba1434
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jul 6 19:37:37 2011 +0000
 
@@ -7553,7 +7609,7 @@ Date:   Wed Jul 6 19:37:37 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit f63e4fe149804d08e91678474e008fc2c502a9bf
+commit f63e4fe
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Jul 5 16:43:26 2011 +0000
 
@@ -7569,7 +7625,7 @@ Date:   Tue Jul 5 16:43:26 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 684ad7698d385d6aceac41d821168de9a987c569
+commit 684ad76
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jun 29 17:40:32 2011 +0000
 
@@ -7586,7 +7642,7 @@ M	ChangeLog
 M	sope-mime/NGImap4/NGSieveClient.h
 M	sope-mime/NGImap4/NGSieveClient.m
 
-commit b2d4aa2b7e2222c9cc6ace6d67de2a07fd3dbea4
+commit b2d4aa2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Jun 17 12:16:06 2011 +0000
 
@@ -7601,7 +7657,7 @@ Date:   Fri Jun 17 12:16:06 2011 +0000
 
 M	sope-gdl1/GDLAccess/EOSQLQualifier.m
 
-commit 3884148b9e2e0c22c65aa30e1c02a88b97b684b3
+commit 3884148
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jun 16 15:40:18 2011 +0000
 
@@ -7616,7 +7672,7 @@ Date:   Thu Jun 16 15:40:18 2011 +0000
 
 M	sope-appserver/NGObjWeb/UnixSignalHandler.h
 
-commit bba48aff7608928d88f7e786f326772cd115b4dd
+commit bba48af
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jun 16 15:31:59 2011 +0000
 
@@ -7631,7 +7687,7 @@ Date:   Thu Jun 16 15:31:59 2011 +0000
 
 M	sope-core/NGExtensions/FdExt.subproj/NSString+Encoding.m
 
-commit 02f21a2758ae968cffd2bbf074c1e1b9de4db29b
+commit 02f21a2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jun 16 15:29:17 2011 +0000
 
@@ -7646,7 +7702,7 @@ Date:   Thu Jun 16 15:29:17 2011 +0000
 
 M	sope-appserver/NGObjWeb/WOHTTPURLHandle.m
 
-commit bb8bdef230156855f38d0e4a7b260c01754bd299
+commit bb8bdef
 Author: Francis Lachapelle <flachapelle@inverse.ca>
 Date:   Wed Jun 1 17:45:25 2011 +0000
 
@@ -7666,7 +7722,7 @@ M	sope-mime/NGImap4/NGImap4Connection.h
 M	sope-mime/NGImap4/NGImap4Connection.m
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit c7833207aca18cdf2d83f781018c058fd03583c2
+commit c783320
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue May 10 19:25:18 2011 +0000
 
@@ -7681,7 +7737,7 @@ Date:   Tue May 10 19:25:18 2011 +0000
 
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
 
-commit 714aa4241fd10cbd60ea7e21eb869c9db5127cf1
+commit 714aa42
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon May 9 20:24:23 2011 +0000
 
@@ -7697,7 +7753,7 @@ Date:   Mon May 9 20:24:23 2011 +0000
 M	sope-mime/NGMime/GNUmakefile.preamble
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
 
-commit 0bc6fab8b6091d3eaa24dffbdb86098d89a32789
+commit 0bc6fab
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon May 9 20:12:31 2011 +0000
 
@@ -7712,7 +7768,7 @@ Date:   Mon May 9 20:12:31 2011 +0000
 
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
 
-commit 653a736035694bbccf4fb9855cfd3a287af0af1b
+commit 653a736
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Apr 8 15:35:07 2011 +0000
 
@@ -7728,7 +7784,7 @@ Date:   Fri Apr 8 15:35:07 2011 +0000
 M	ChangeLog
 M	sope-core/NGExtensions/FdExt.subproj/NSString+URLEscaping.m
 
-commit 41f0b1b613d0e901fdb8722692d5f1742848a357
+commit 41f0b1b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Apr 5 16:56:25 2011 +0000
 
@@ -7742,7 +7798,7 @@ Date:   Tue Apr 5 16:56:25 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit 16117a421714adf4439a3b3a87bec19428161df3
+commit 16117a4
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Apr 4 15:56:11 2011 +0000
 
@@ -7756,7 +7812,7 @@ Date:   Mon Apr 4 15:56:11 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
 
-commit 553e6a335f9656e026a263af5432c1a35dd90c7c
+commit 553e6a3
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Apr 1 12:48:33 2011 +0000
 
@@ -7771,7 +7827,7 @@ M	ChangeLog
 M	sope-appserver/NGObjWeb/Defaults.plist
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 9ae83b3cdbe8cb13738296b1c0570c3b750a42e8
+commit 9ae83b3
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Mar 30 19:57:28 2011 +0000
 
@@ -7786,7 +7842,7 @@ M	ChangeLog
 M	sope-appserver/NGObjWeb/NGObjWeb/WOCoreApplication.h
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 8288d939edfc80037f4cf6c9ab8950dd8db20468
+commit 8288d93
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Mar 30 19:46:56 2011 +0000
 
@@ -7799,7 +7855,7 @@ Date:   Wed Mar 30 19:46:56 2011 +0000
 
 M	configure
 
-commit 0e412e2d1c0c2870e96afeaba4377c83aea03458
+commit 0e412e2
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Mar 30 18:24:20 2011 +0000
 
@@ -7812,7 +7868,7 @@ Date:   Wed Mar 30 18:24:20 2011 +0000
 
 M	configure
 
-commit c2a23f75290e7527a4121090a45c5dde08c873d1
+commit c2a23f7
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Mar 30 18:22:24 2011 +0000
 
@@ -7826,7 +7882,7 @@ Date:   Wed Mar 30 18:22:24 2011 +0000
 M	sope-core/NGExtensions/common.h
 M	sope-core/NGStreams/common.h
 
-commit f738a592e5640c253ed7ab5300eb435fcd8d9edb
+commit f738a59
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Mar 30 18:17:31 2011 +0000
 
@@ -7846,7 +7902,7 @@ M	sope-core/NGStreams/configure
 M	sope-core/NGStreams/configure.in
 D	sope-core/NGStreams/macosx/config.h
 
-commit 93b15d5541acb769ab756ad2526011f7e2ea45c8
+commit 93b15d5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Mar 30 16:08:43 2011 +0000
 
@@ -7860,7 +7916,7 @@ Date:   Wed Mar 30 16:08:43 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit d6d73721890361a845c9ce5025f1a06b372813a8
+commit d6d7372
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Mar 30 01:03:54 2011 +0000
 
@@ -7874,7 +7930,7 @@ Date:   Wed Mar 30 01:03:54 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 6b56d8c6b8acdea748771b16dfca0a44e2823bb0
+commit 6b56d8c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Mar 29 18:12:25 2011 +0000
 
@@ -7889,7 +7945,7 @@ M	ChangeLog
 M	sope-appserver/NGObjWeb/Defaults.plist
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit d42a6e94a0ff67d3f91f4d3a2d877e10d838eaa0
+commit d42a6e9
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Mar 29 15:17:10 2011 +0000
 
@@ -7903,7 +7959,7 @@ Date:   Tue Mar 29 15:17:10 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/DynamicElements/WOString.m
 
-commit 647f6b9ae624b88dab35ef5a4c2341b631dff665
+commit 647f6b9
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Mar 24 12:40:49 2011 +0000
 
@@ -7917,7 +7973,7 @@ Date:   Thu Mar 24 12:40:49 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit b978c9d407376cee90ba5f471178df09afcd3781
+commit b978c9d
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Mar 24 12:37:57 2011 +0000
 
@@ -7930,7 +7986,7 @@ Date:   Thu Mar 24 12:37:57 2011 +0000
 
 M	ChangeLog
 
-commit 146f78b136e1b0328d3bac77e757037790f08477
+commit 146f78b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Mar 24 12:33:27 2011 +0000
 
@@ -7944,7 +8000,7 @@ Date:   Thu Mar 24 12:33:27 2011 +0000
 M	ChangeLog
 M	sope-mime/NGMime/NGMimeType.m
 
-commit fd09a090395eeda807ba755bc3627af4e78fa41c
+commit fd09a09
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Mar 17 20:55:52 2011 +0000
 
@@ -7958,7 +8014,7 @@ Date:   Thu Mar 17 20:55:52 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit bdf879b73396a7ac75433bdc16e5e523bf022981
+commit bdf879b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Mar 17 16:30:21 2011 +0000
 
@@ -7972,7 +8028,7 @@ Date:   Thu Mar 17 16:30:21 2011 +0000
 M	ChangeLog
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit 6fa3714683b45a38574416862743f25736891a55
+commit 6fa3714
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Mar 17 15:54:42 2011 +0000
 
@@ -7986,7 +8042,7 @@ Date:   Thu Mar 17 15:54:42 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit feda6bb1171217892df408d62ce7f0694817ddc0
+commit feda6bb
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Mar 17 15:52:02 2011 +0000
 
@@ -8000,7 +8056,7 @@ Date:   Thu Mar 17 15:52:02 2011 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit a3b17b5286e846bac63344ae23f76e526d7c14be
+commit a3b17b5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Feb 24 20:12:39 2011 +0000
 
@@ -8014,7 +8070,7 @@ Date:   Thu Feb 24 20:12:39 2011 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Connection.m
 
-commit df4854ca7772275e82b385be9e5e2da0af55cbe0
+commit df4854c
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Feb 23 23:02:01 2011 +0000
 
@@ -8031,7 +8087,7 @@ M	ChangeLog
 M	sope-mime/NGMail/NGSendMail.m
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 50ca9d24b414f76fd228827f46721bd4aef25e87
+commit 50ca9d2
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Jan 5 22:51:20 2011 +0000
 
@@ -8048,7 +8104,7 @@ Date:   Wed Jan 5 22:51:20 2011 +0000
 M	ChangeLog
 M	sope-core/NGExtensions/NGQuotedPrintableCoding.m
 
-commit 37d13f107c141c606b7b8456b9509ebf3dd64b9f
+commit 37d13f1
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Dec 30 13:44:19 2010 +0000
 
@@ -8062,7 +8118,7 @@ Date:   Thu Dec 30 13:44:19 2010 +0000
 M	ChangeLog
 M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
 
-commit eab9adf9b41f9e60c086cf566d41e84548dbd819
+commit eab9adf
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Dec 17 20:53:50 2010 +0000
 
@@ -8080,7 +8136,7 @@ D	sope-gdl1/COPYING.LIB
 D	sope-gdl1/README-OSX.txt
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
 
-commit 4050c48d3a71cdae5caf2d188ea910fea523d784
+commit 4050c48
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Dec 7 18:20:13 2010 +0000
 
@@ -8096,7 +8152,7 @@ Date:   Tue Dec 7 18:20:13 2010 +0000
 D	sope-xml/SaxObjC/shared_debug_obj/libSaxObjC.so.4.7
 D	sope-xml/SaxObjC/shared_debug_obj/libSaxObjC.so.4.7.66
 
-commit 68c6e337a6279a8c29990cd782431932532f9e0d
+commit 68c6e33
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 23 14:53:15 2010 +0000
 
@@ -8112,7 +8168,7 @@ M	sope-appserver/mod_ngobjweb/GNUmakefile
 M	sope-appserver/mod_ngobjweb/handler.c
 M	sope-appserver/mod_ngobjweb/scanhttp.c
 
-commit 770ef37d852347cd13aa09e9c4f9010e08991b67
+commit 770ef37
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Nov 10 19:58:51 2010 +0000
 
@@ -8129,7 +8185,7 @@ M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Client.h
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 1eba452ac6a2271ff4656eac3ae343b697b26c0a
+commit 1eba452
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Nov 2 17:47:04 2010 +0000
 
@@ -8145,7 +8201,7 @@ Date:   Tue Nov 2 17:47:04 2010 +0000
 M	ChangeLog
 M	sope-mime/NGMime/NGMimeHeaderFieldGeneratorSet.m
 
-commit a1f0836d5dba42ae46400e49e136798636798514
+commit a1f0836
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 2 16:32:52 2010 +0000
 
@@ -8158,7 +8214,7 @@ Date:   Tue Nov 2 16:32:52 2010 +0000
 
 M	debian/control.in
 
-commit 698bd036d24c37a52d9956e28d6d0e08d1dc5389
+commit 698bd03
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 2 16:21:38 2010 +0000
 
@@ -8174,7 +8230,7 @@ M	debian/control.in
 A	debian/libsbjson2.3-dev.install
 A	debian/libsbjson2.3.install
 
-commit a03c50d4e992196ddde97ecd8cca90f5849bbed0
+commit a03c50d
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Nov 2 12:53:34 2010 +0000
 
@@ -8187,7 +8243,7 @@ Date:   Tue Nov 2 12:53:34 2010 +0000
 
 M	GNUmakefile
 
-commit a3513b5dd46480b1463eb46baf9f530c75c6ec00
+commit a3513b5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Nov 1 17:57:27 2010 +0000
 
@@ -8200,7 +8256,7 @@ Date:   Mon Nov 1 17:57:27 2010 +0000
 
 M	sope-json/SBJson/Classes/GNUmakefile
 
-commit 83c3961e6bbb28ba71715b0c0c2804934f1101f1
+commit 83c3961
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Nov 1 12:39:37 2010 +0000
 
@@ -8343,7 +8399,7 @@ A	sope-json/SBJson/Tests/WriterTest.h
 A	sope-json/SBJson/Tests/WriterTest.m
 A	sope-json/SBJson/libjsontests-Info.plist
 
-commit e4e0c5c97aaa22bc1901084118695932dcb7efce
+commit e4e0c5c
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 27 14:18:29 2010 +0000
 
@@ -8356,7 +8412,7 @@ Date:   Wed Oct 27 14:18:29 2010 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 82e6126f38ce022b58c218d31a5257242f278109
+commit 82e6126
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Tue Oct 26 20:26:21 2010 +0000
 
@@ -8369,7 +8425,7 @@ Date:   Tue Oct 26 20:26:21 2010 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 5fd20e24dff94747a2c94ae0ce86db9dcb1deca7
+commit 5fd20e2
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Oct 25 18:54:50 2010 +0000
 
@@ -8382,7 +8438,7 @@ Date:   Mon Oct 25 18:54:50 2010 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 6ae23f0e2610e0c9b838adae9970a876ec464829
+commit 6ae23f0
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Sat Oct 16 18:30:21 2010 +0000
 
@@ -8397,7 +8453,7 @@ Date:   Sat Oct 16 18:30:21 2010 +0000
 
 M	sope-appserver/NGObjWeb/WebDAV/SoWebDAVRenderer.m
 
-commit 477b732face154405a46295d6a2ba253449dea90
+commit 477b732
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 8 21:10:37 2010 +0000
 
@@ -8412,7 +8468,7 @@ Date:   Fri Oct 8 21:10:37 2010 +0000
 
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 531de96712b26ae0c3e969a8b71372384a4a13e4
+commit 531de96
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Oct 8 21:05:23 2010 +0000
 
@@ -8429,7 +8485,7 @@ M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 27960ac2ca829a01cf9a96d648dc5d222cb3c437
+commit 27960ac
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 8 18:55:32 2010 +0000
 
@@ -8443,7 +8499,7 @@ Date:   Fri Oct 8 18:55:32 2010 +0000
 M	sope-core/NGExtensions/ChangeLog
 M	sope-core/NGExtensions/NGBase64Coding.m
 
-commit 61900d88aa9f090293131c4f5729772d57565c99
+commit 61900d8
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 8 18:53:12 2010 +0000
 
@@ -8456,7 +8512,7 @@ Date:   Fri Oct 8 18:53:12 2010 +0000
 
 M	sope-appserver/NGObjWeb/ChangeLog
 
-commit 150784587a0c38d9770f563070dd45320f9d14f7
+commit 1507845
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 8 18:53:10 2010 +0000
 
@@ -8469,7 +8525,7 @@ Date:   Fri Oct 8 18:53:10 2010 +0000
 
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
 
-commit 387be873412cdc1d23c050d0bb4a7759a5d92f33
+commit 387be87
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 8 15:47:48 2010 +0000
 
@@ -8483,7 +8539,7 @@ Date:   Fri Oct 8 15:47:48 2010 +0000
 M	sope-appserver/NGObjWeb/ChangeLog
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 8b5f7ab191645daa1e7dd46d441db9e5c15b9ec8
+commit 8b5f7ab
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Oct 8 15:27:43 2010 +0000
 
@@ -8497,7 +8553,7 @@ Date:   Fri Oct 8 15:27:43 2010 +0000
 M	sope-appserver/NGObjWeb/ChangeLog
 M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 
-commit 09f3b4ae246179543ea74afac2056e7b8b549718
+commit 09f3b4a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Oct 7 21:38:31 2010 +0000
 
@@ -8518,7 +8574,7 @@ M	sope-gdl1/MySQL/NSData+MySQL4Val.m
 M	sope-gdl1/MySQL/NSNumber+MySQL4Val.m
 M	sope-gdl1/MySQL/NSString+MySQL4Val.m
 
-commit c47383fd7043054b30ad38a9c8d85eb7e3ae0cd6
+commit c47383f
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Oct 7 14:56:48 2010 +0000
 
@@ -8532,7 +8588,7 @@ Date:   Thu Oct 7 14:56:48 2010 +0000
 M	sope-core/NGExtensions/ChangeLog
 M	sope-core/NGExtensions/NGBase64Coding.m
 
-commit 26a53212af980592d92737b1ebc37d4b37baa41e
+commit 26a5321
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Oct 6 13:43:55 2010 +0000
 
@@ -8547,7 +8603,7 @@ M	sope-appserver/WEPrototype/ChangeLog
 M	sope-appserver/WEPrototype/WEPrototypeScript.jsm
 M	sope-appserver/WEPrototype/js2m.sh
 
-commit 5e716648e0017021f9774a2c8e278db7db7b817e
+commit 5e71664
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 23 19:04:39 2010 +0000
 
@@ -8564,7 +8620,7 @@ M	ChangeLog
 M	sope-mime/NGImap4/NGImap4Client.m
 M	sope-mime/NGImap4/NGImap4ResponseParser.m
 
-commit 5520a998fa682be127bd9b018d97c2a104d82d87
+commit 5520a99
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 18:54:22 2010 +0000
 
@@ -8577,7 +8633,7 @@ Date:   Thu Sep 9 18:54:22 2010 +0000
 
 M	debian/control.in
 
-commit a25221e59224aa24ee09254c8322715e162466b0
+commit a25221e
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 18:18:41 2010 +0000
 
@@ -8590,7 +8646,7 @@ Date:   Thu Sep 9 18:18:41 2010 +0000
 
 M	debian/control.in
 
-commit 9bb9edab12e1d0d8af9adccfde6d10bbcfa00a5c
+commit 9bb9eda
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 18:10:06 2010 +0000
 
@@ -8603,7 +8659,7 @@ Date:   Thu Sep 9 18:10:06 2010 +0000
 
 M	debian/control.in
 
-commit 09582d841d0f9e1be962426827bef51a1120f19a
+commit 09582d8
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 18:08:00 2010 +0000
 
@@ -8616,7 +8672,7 @@ Date:   Thu Sep 9 18:08:00 2010 +0000
 
 M	debian/control.in
 
-commit cca239a692ad591e9907cd053feb0b7ad71f6c7e
+commit cca239a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 17:58:43 2010 +0000
 
@@ -8629,7 +8685,7 @@ Date:   Thu Sep 9 17:58:43 2010 +0000
 
 M	debian/control.in
 
-commit b63b51a3a461bf4ff4cb7f3dd51e76faab5ee0fd
+commit b63b51a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 17:50:36 2010 +0000
 
@@ -8642,7 +8698,7 @@ Date:   Thu Sep 9 17:50:36 2010 +0000
 
 M	debian/rules
 
-commit 96589a4008eb53eb0735b47bd98a735a27a9658b
+commit 96589a4
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 16:38:36 2010 +0000
 
@@ -8655,7 +8711,7 @@ Date:   Thu Sep 9 16:38:36 2010 +0000
 
 M	debian/rules
 
-commit ad617928b883e3a9d9821add55f31640855ba628
+commit ad61792
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 16:32:47 2010 +0000
 
@@ -8669,7 +8725,7 @@ Date:   Thu Sep 9 16:32:47 2010 +0000
 M	debian/control.in
 M	debian/rules
 
-commit 48f5560fab0aa44a9ac5c02fd5b7f6c161ffac2e
+commit 48f5560
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 16:20:24 2010 +0000
 
@@ -8682,7 +8738,7 @@ Date:   Thu Sep 9 16:20:24 2010 +0000
 
 M	sope-core/NGExtensions/NGExtensions/NGExtensions.h
 
-commit f0b2bcf836ba644d5dee4db9e540ffbfbc370ea7
+commit f0b2bcf
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Sep 9 16:17:58 2010 +0000
 
@@ -8696,7 +8752,7 @@ Date:   Thu Sep 9 16:17:58 2010 +0000
 M	debian/control.in
 M	debian/rules
 
-commit 2f2bad6b8a9fd39ba933595f6b096ff7b61f8db8
+commit 2f2bad6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Sep 2 16:46:39 2010 +0000
 
@@ -8711,7 +8767,7 @@ Date:   Thu Sep 2 16:46:39 2010 +0000
 
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit 0da62fc784d07c4cc8bd55b60abf0a70199c0df6
+commit 0da62fc
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 30 21:42:26 2010 +0000
 
@@ -8725,7 +8781,7 @@ Date:   Mon Aug 30 21:42:26 2010 +0000
 M	ChangeLog
 M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
 
-commit 59ebab56a7ee87aede7f73cef5f79b6716212c06
+commit 59ebab5
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 30 21:33:12 2010 +0000
 
@@ -8739,7 +8795,7 @@ Date:   Mon Aug 30 21:33:12 2010 +0000
 M	ChangeLog
 M	sope-appserver/NGObjWeb/Associations/WOKeyPathAssociation.m
 
-commit 4786fdd365e628c9985b244634f0a83ebb313c15
+commit 4786fdd
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 30 19:42:29 2010 +0000
 
@@ -8754,7 +8810,7 @@ Date:   Mon Aug 30 19:42:29 2010 +0000
 
 M	sope-appserver/NGObjWeb/wobundle-gs.make
 
-commit 29b45bc6c107d346b5adde2dcc16a5fcbf1ef273
+commit 29b45bc
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 30 19:42:03 2010 +0000
 
@@ -8826,7 +8882,7 @@ M	sope-xml/SaxObjC/SaxLocator.m
 M	sope-xml/libxmlSAXDriver/TableCallbacks.m
 M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
 
-commit 32dcb5adc794744b8e06b78488a7dd69a8f787ba
+commit 32dcb5a
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 30 19:40:45 2010 +0000
 
@@ -8841,7 +8897,7 @@ M	ChangeLog
 D	sope-core/NGExtensions/FdExt.subproj/NSMethodSignature+misc.m
 D	sope-core/NGExtensions/NGExtensions/NSMethodSignature+misc.h
 
-commit 8daed75a440e82e38b5f333a525d944a9f66e297
+commit 8daed75
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Aug 26 18:10:11 2010 +0000
 
@@ -8855,7 +8911,7 @@ Date:   Thu Aug 26 18:10:11 2010 +0000
 M	ChangeLog
 M	sope-core/NGExtensions/NGBundleManager.m
 
-commit 095321dc62218741a16e8fe5039de4145e9c875e
+commit 095321d
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Aug 26 17:31:10 2010 +0000
 
@@ -8874,7 +8930,7 @@ D	sope-appserver/NGObjWeb/SNSConnection.m
 M	sope-appserver/NGObjWeb/WOApplication.m
 M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpAdaptor.m
 
-commit 93a23b323fb04aac42cc4443a4581db00d8abb7b
+commit 93a23b3
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Aug 26 15:14:14 2010 +0000
 
@@ -8889,7 +8945,7 @@ M	ChangeLog
 M	sope-mime/NGMime/NGMimeAddressHeaderFieldGenerator.m
 M	sope-mime/NGMime/NGMimeHeaderFieldGenerator.m
 
-commit 7890bbf776aead18ccefe77e72570d56f03ce067
+commit 7890bbf
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 24 13:25:30 2010 +0000
 
@@ -8910,7 +8966,7 @@ M	sope-core/NGStreams/NGStreams/NGSocket.h
 M	sope-mime/NGImap4/NGImap4Client.h
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit a7626d434273c8f4f840e305aea79b85d08ab21f
+commit a7626d4
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 23 20:43:27 2010 +0000
 
@@ -8924,7 +8980,7 @@ Date:   Mon Aug 23 20:43:27 2010 +0000
 M	sope-mime/NGMail/ChangeLog
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 0debe5f406830933d075fc3530f692997881814d
+commit 0debe5f
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Aug 20 16:04:54 2010 +0000
 
@@ -8937,7 +8993,7 @@ Date:   Fri Aug 20 16:04:54 2010 +0000
 
 M	debian/rules
 
-commit ba5c62e43a84dc8106a4a68c31a6167f5e4b8a53
+commit ba5c62e
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Aug 20 16:02:10 2010 +0000
 
@@ -8950,7 +9006,7 @@ Date:   Fri Aug 20 16:02:10 2010 +0000
 
 M	debian/rules
 
-commit c710782c5d8eea05794e445b11fecc3b4304ef20
+commit c710782
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Aug 19 14:03:28 2010 +0000
 
@@ -8963,7 +9019,7 @@ Date:   Thu Aug 19 14:03:28 2010 +0000
 
 M	configure
 
-commit cbb04c6718cd29930085a30aea36ee4a305ab8e7
+commit cbb04c6
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Thu Aug 19 14:02:04 2010 +0000
 
@@ -8976,7 +9032,7 @@ Date:   Thu Aug 19 14:02:04 2010 +0000
 
 A	debian/sope_SOPEVER_-gdl1-mysql.install
 
-commit 6fd5639b483a3e9c36a26c61dc73e8cb2390c959
+commit 6fd5639
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Fri Aug 13 01:45:10 2010 +0000
 
@@ -8991,7 +9047,7 @@ Date:   Fri Aug 13 01:45:10 2010 +0000
 
 M	sope-mime/NGMail/NGSendMail.m
 
-commit 30859f6821e43a0fa161f649401dba9c50ec5ff2
+commit 30859f6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Aug 12 14:10:37 2010 +0000
 
@@ -9007,7 +9063,7 @@ Date:   Thu Aug 12 14:10:37 2010 +0000
 M	debian/control.in
 D	debian/sope_SOPEVER_-versitsaxdriver.install
 
-commit 9fb4120d8926f2b54dc16a5a0728d9009085bcde
+commit 9fb4120
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Aug 12 14:04:11 2010 +0000
 
@@ -9025,7 +9081,7 @@ D	debian/libsope-ical_SOPEVER_-dev.install
 D	debian/libsope-ical_SOPEVER_.install
 M	debian/rules
 
-commit 05f55cd6d564c2bb063d7356b70be202a7de3895
+commit 05f55cd
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Aug 12 12:51:59 2010 +0000
 
@@ -9044,7 +9100,7 @@ M	debian/control.in
 D	debian/sope-tools.install
 D	debian/sope-tools.links
 
-commit 22b03ede0136928aec1f6b37a042a692ca371afb
+commit 22b03ed
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Wed Aug 11 19:48:09 2010 +0000
 
@@ -9061,7 +9117,7 @@ M	sope-mime/NGMail/ChangeLog
 M	sope-mime/NGMail/NGSendMail.m
 M	sope-mime/NGMail/NGSmtpClient.m
 
-commit 7186931d9d28aff1bc52f456d0dd4ce4cdfca262
+commit 7186931
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Aug 11 19:12:52 2010 +0000
 
@@ -9075,7 +9131,7 @@ Date:   Wed Aug 11 19:12:52 2010 +0000
 M	sope-core/NGExtensions/ChangeLog
 M	sope-core/NGExtensions/NGBase64Coding.m
 
-commit 4ba1e40c43be3b6bae002ec03f022a41cd8cff36
+commit 4ba1e40
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Wed Aug 11 19:11:55 2010 +0000
 
@@ -9088,7 +9144,7 @@ Date:   Wed Aug 11 19:11:55 2010 +0000
 
 M	sope-appserver/NGObjWeb/DAVPropMap.plist
 
-commit 55b44e715da32cb0d77d9f40e3f2995053b29a24
+commit 55b44e7
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Mon Aug 9 15:14:52 2010 +0000
 
@@ -9102,7 +9158,7 @@ Date:   Mon Aug 9 15:14:52 2010 +0000
 M	sope-mime/NGImap4/ChangeLog
 M	sope-mime/NGImap4/NGImap4Client.m
 
-commit c6a09187d8623e815e89c23f47dae3efd7f44e44
+commit c6a0918
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 3 19:11:37 2010 +0000
 
@@ -9117,7 +9173,7 @@ Date:   Tue Aug 3 19:11:37 2010 +0000
 
 M	.mtn-ignore
 
-commit 4636fe807c81505ed061dfbb2d64132d385eaf37
+commit 4636fe8
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Tue Aug 3 19:08:33 2010 +0000
 
@@ -9132,7 +9188,7 @@ Date:   Tue Aug 3 19:08:33 2010 +0000
 
 A	.mtn-ignore
 
-commit 095d9691e32dd8d5cf16d8756b938bc4cc134dc9
+commit 095d969
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Mon Aug 2 14:18:24 2010 +0000
 
@@ -9182,7 +9238,7 @@ D	sope-gdl1/FrontBase2/fbtest.m
 D	sope-gdl1/FrontBase2/fbtest.py
 D	sope-gdl1/FrontBase2/test.eomodel
 
-commit 9ec012bbcd42f5773888708776db87fd21143125
+commit 9ec012b
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Jul 30 17:40:54 2010 +0000
 
@@ -9198,7 +9254,7 @@ D	debian/patches/sope-gsmake2.diff
 D	debian/patches/sope-patchset-r1660.diff
 M	debian/rules
 
-commit 67ff5272596e5befa0c1ec42719ff18528a1463c
+commit 67ff527
 Author: Wolfgang Sourdeau <wsourdeau@inverse.ca>
 Date:   Fri Jul 30 17:24:50 2010 +0000
 
@@ -9212,7 +9268,7 @@ Date:   Fri Jul 30 17:24:50 2010 +0000
 D	sope-core/NGStreams/powerpc/linux-gnu/config.h
 D	sope-core/NGStreams/ppc/linux-gnu/config.h
 
-commit 92de5888a66e79fbf537d8617a9c5f586843d41a
+commit 92de588
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:58:48 2010 +0000
 
@@ -10472,7 +10528,7 @@ D	sope-appserver/mod_ngobjweb-apache2/sns.c
 D	sope-core/NGStreams/config.guess.upstream
 D	sope-core/NGStreams/config.sub.upstream
 
-commit c782cc44f42f6e22c323c2184a77002320ed3ac9
+commit c782cc4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:50:10 2010 +0000
 
@@ -10488,7 +10544,7 @@ Date:   Thu Jul 29 18:50:10 2010 +0000
 M	sope-ldap/GNUmakefile
 M	sope-xml/GNUmakefile
 
-commit 97280a38bd1583e282a90c5513a15c88add3dcca
+commit 97280a3
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:40:21 2010 +0000
 
@@ -10977,7 +11033,7 @@ D	sope-xml/samples/saxxml.m
 D	sope-xml/samples/testqp.m
 D	sope-xml/samples/xmln.m
 
-commit d251060523a9d95e55f6b1263f64acdbe9f4feff
+commit d251060
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:31:02 2010 +0000
 
@@ -11512,7 +11568,7 @@ D	xcconfig/Common.xcconfig
 D	xcconfig/Development.xcconfig
 D	xcconfig/Wrapper.xcconfig
 
-commit 038b1c607481b8b6ab1e4a125eaf1bf68d403e6b
+commit 038b1c6
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 18:27:44 2010 +0000
 
@@ -12680,7 +12736,7 @@ D	xmlrpc_call/xmlrpc_call.m
 D	xmlrpc_call/xmlrpc_call.xcodeproj/project.pbxproj
 D	xmlrpc_call/xmlrpc_call.xcodeproj/znek.perspective
 
-commit 9e7c4005160a21778c9a15a5cb6dfe379cf587a5
+commit 9e7c400
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 17:59:06 2010 +0000
 
@@ -12715,7 +12771,7 @@ M	debian/sope_SOPEVER_-libxmlsaxdriver.install
 M	debian/sope_SOPEVER_-stxsaxdriver.install
 M	debian/sope_SOPEVER_-versitsaxdriver.install
 
-commit 9cc70b45be9235e77b7744abcf631f8ff5193c00
+commit 9cc70b4
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 17:45:00 2010 +0000
 
@@ -12945,7 +13001,7 @@ M	sope-xml/samples/PlistSaxDriver/GNUmakefile
 M	xmlrpc_call/GNUmakefile
 M	xmlrpc_call/GNUmakefile.preamble
 
-commit f94d0381bb1f67b067a2c2767a0e39e68be5c37d
+commit f94d038
 Author: Ludovic Marcotte <lmarcotte@inverse.ca>
 Date:   Thu Jul 29 17:27:45 2010 +0000
 
