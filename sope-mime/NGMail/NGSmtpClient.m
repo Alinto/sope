@@ -511,6 +511,7 @@
   NGSmtpResponse *reply = nil;
   NSString       *hostName = nil;
   NGActiveSocket* sock;
+  NGInternetSocketAddress* sockAddr;
 
   if (previous_socket) {
     sock = self->previous_socket;
@@ -518,7 +519,13 @@
     sock = self->socket;
   }
 
-  hostName = [(NGInternetSocketAddress *)[sock localAddress] hostName];
+  sockAddr = (NGInternetSocketAddress *)[sock localAddress];
+  if ([sockAddr isIPv6] && [[sockAddr hostName] isEqualToString: [sockAddr address]]) {
+    hostName = [NSString stringWithFormat:@"[IPv6:%@]", [sockAddr address]];
+  }
+  else {
+    hostName = [sockAddr hostName];
+  }
 
   reply = [self sendCommand:@"EHLO" argument:hostName];
   if ([reply code] == NGSmtpActionCompleted) {
