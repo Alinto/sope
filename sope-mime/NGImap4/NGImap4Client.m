@@ -378,7 +378,7 @@ static NSMutableDictionary *namespaces;
 		buffer = nil;
 
 		self->parser = [[NGImap4ResponseParser alloc] initWithStream: self->socket];
-		[self logWithFormat:@"TLS started successfully."];
+		[self debugWithFormat:@"TLS started successfully."];
 	      }
 	    else
 	      [self logWithFormat:@"Could not start TLS."];
