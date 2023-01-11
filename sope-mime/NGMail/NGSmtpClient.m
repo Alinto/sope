@@ -727,7 +727,8 @@
     {
       NSLog(@"SMTP(MAIL FROM) error: %@", [reply text]);
       [NSException raise: @"SMTPException"
-                  format: [reply text]];
+                  format: @"%@",
+                  [reply text]];
     }
   return NO;
 }
@@ -752,7 +753,8 @@
     {
       NSLog(@"SMTP(RCPT TO) error: %@", [reply text]);
       [NSException raise: @"SMTPException"
-                  format: [reply text]];
+                  format: @"%@",
+                  [reply text]];
     }
   return NO;
 }
@@ -846,7 +848,8 @@
     {
       NSLog(@"SMTP(DATA) error: %@", [reply text]);
       [NSException raise: @"SMTPException"
-                  format: [reply text]];
+                  format: @"%@",
+                  [reply text]];
     }
   return NO;
 }
