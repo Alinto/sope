@@ -1250,7 +1250,7 @@ _purifyQuotedString(NSMutableString *quotedString) {
             NSString *used, *max;
 
             used = _parseUntil(self, ' ');
-            max  = _parseUntil(self, ')');
+            max  = _parseUntil2(self, ' ', ')');
 
             [parse setObject:used forKey:@"usedSpace"];
             [parse setObject:max  forKey:@"maxQuota"];
@@ -1259,7 +1259,7 @@ _purifyQuotedString(NSMutableString *quotedString) {
             NSString *used, *max;
 
             used = _parseUntil(self, ' ');
-            max  = _parseUntil(self, ')');
+            max  = _parseUntil2(self, ' ', ')');
 
             [parse setObject:used forKey:@"messagesCount"];
             [parse setObject:max  forKey:@"maxMessages"];
