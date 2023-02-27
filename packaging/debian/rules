@@ -169,7 +169,7 @@ binary-arch: build install
 		-l debian/tmp/usr/lib
 	dh_gencontrol
 	dh_md5sums
-	dh_builddeb
+	dh_builddeb -- -Zgzip
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install configure
