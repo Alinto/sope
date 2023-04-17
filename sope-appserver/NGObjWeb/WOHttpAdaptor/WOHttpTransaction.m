@@ -738,7 +738,7 @@ static int logCounter = 0;
     if (isok) {
       unsigned int slen, rlen;
       const unsigned char *r;
-      int s;
+      int s, size;
 
       s  = [_response status];
       t1 = [_response httpVersion];
@@ -747,9 +747,10 @@ static int logCounter = 0;
       // TBD: replace -cStringLength/-getCString:
       slen = [t1 cStringLength];
       rlen = strlen((const char *)r);
-      if ((slen + rlen + 8) < 1000) {
+      size = 8 + rlen; // Size of status (e.g. : 200 OK \r\n) - 1 space, 3 digits for status code, 1 space, X for status, 2 end of line, 1 for zero-byte
+      if ((slen + size) < sizeof(buf)) {
         [t1 getCString:(char *)buf]; // HTTP status
-        snprintf((char *)&(buf[slen]), sizeof(buf), " %i %s\r\n", s, r);
+        snprintf((char *)&(buf[slen]), size, " %i %s\r\n", s, r);
         isok = [_out safeWriteBytes:buf count:strlen((char *)buf)];
       }
       else
