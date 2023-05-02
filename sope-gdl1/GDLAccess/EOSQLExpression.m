@@ -1121,7 +1121,6 @@ NSString *EOBindVariableValueKey       = @"value";
           break;
           
         case '%':
-          buf[i] = '\\'; i++;
           buf[i] = '%'; i++;
           didSomething = YES;
           break;
