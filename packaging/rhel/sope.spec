@@ -3,6 +3,7 @@
 %define oracle_support     1
 %{?el7:%define oracle_support 1}
 %{?el8:%define oracle_support 0}
+%{?el9:%define oracle_support 0}
 
 Summary:      SOPE
 Name:         sope%{sope_major_version}%{sope_minor_version}
@@ -23,6 +24,7 @@ BuildPreReq:  gnustep-make gcc-objc postgresql-devel
 %{?el6:BuildRequires: mysql-devel}
 %{?el7:BuildRequires: mariadb-devel}
 %{?el8:BuildRequires: mariadb-devel}
+%{?el9:BuildRequires: mariadb-devel}
 
 %description
 sope
