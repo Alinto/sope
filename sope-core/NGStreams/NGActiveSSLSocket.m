@@ -413,12 +413,16 @@ _verify_certificate_callback (gnutls_session_t session)
 
   if (self->session) {
     int ret;
-    LOOP_CHECK(ret, gnutls_bye((gnutls_session_t)self->session, GNUTLS_SHUT_RDWR));
+    if (NGInvalidSocketDescriptor != self->fd) {
+      LOOP_CHECK(ret, gnutls_bye((gnutls_session_t)self->session, GNUTLS_SHUT_RDWR));
+    }
     gnutls_deinit((gnutls_session_t) self->session);
     self->session = NULL;
   }
   if (self->cred) {
-    gnutls_certificate_free_credentials((gnutls_certificate_credentials_t) self->cred);
+    if (NGInvalidSocketDescriptor != self->fd) {
+      gnutls_certificate_free_credentials((gnutls_certificate_credentials_t) self->cred);
+    }
     self->cred = NULL;
   }
   return [super shutdown];
@@ -656,11 +660,13 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
 
 - (BOOL)shutdown {
   if (self->ssl) {
-    int ret = SSL_shutdown(self->ssl);
-    // call shutdown a second time
-    if (ret == 0)
-      SSL_shutdown(self->ssl);
-    SSL_free(self->ssl);
+    if (NGInvalidSocketDescriptor != self->fd) {
+      int ret = SSL_shutdown(self->ssl);
+      // call shutdown a second time
+      if (ret == 0)
+        SSL_shutdown(self->ssl);
+      SSL_free(self->ssl);
+    }
     self->ssl = NULL;
   }
   if (self->ctx) {

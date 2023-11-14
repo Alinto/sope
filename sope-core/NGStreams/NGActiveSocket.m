@@ -690,14 +690,6 @@
   }
 
  notAlive:
-  /* valid descriptor, but not alive .. so we close the socket */
-#if defined(WIN32) && !defined(__CYGWIN32__)
-  closesocket(self->fd);
-#else
-  close(self->fd);
-#endif
-  self->fd = NGInvalidSocketDescriptor;
-  DESTROY(self->remoteAddress);
   return NO;
 }
 

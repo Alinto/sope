@@ -482,7 +482,9 @@ static NSMutableDictionary *namespaces;
   self->text = nil;
 
   NS_DURING
+    [self->socket shutdown];
     [self->socket close];
+    [self->previous_socket shutdown];
     [self->previous_socket close];
   NS_HANDLER
     [[self _handleSocketCloseException:localException] raise];
