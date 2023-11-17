@@ -618,79 +618,33 @@
     return NO;
 
   /* poll socket for input */
-#if 1
-  {
-    struct pollfd pfd;
-    int ret, timeout = 5;
-    pfd.fd = self->fd;
-    pfd.events = POLLIN;
+  struct pollfd pfd;
+  int ret;
+  pfd.fd = self->fd;
+  pfd.events = POLLIN;
 
-    while (YES) {
-      ret = poll(&pfd, 1, timeout);
-      if (ret >= 0)
-        break;
+  while (YES) {
+    ret = poll(&pfd, 1, 0);
+    if (ret >= 0)
+      break;
 
-      switch (errno) {
-      case EINTR:
-        continue;
-      default:
-        NSLog(@"socket poll() failed: %s", strerror(errno));
-        goto notAlive;
-      }
-    }
-
-    /* no input is pending, connection is alive */
-    if (!(pfd.revents & POLLIN)) {
-      return YES;
+    switch (errno) {
+    case EINTR:
+      continue;
+    default:
+      NSLog(@"ERROR(%s) poll(%d) failed: %s",
+            __PRETTY_FUNCTION__, pfd.fd, strerror(errno));
+      return NO;
     }
   }
-#else
-  {
-    struct timeval to;
-    fd_set readMask;
-
-    while (YES) {
-      FD_ZERO(&readMask);
-      FD_SET(self->fd, &readMask);
-      to.tv_sec = to.tv_usec = 0;
-
-      if (select(self->fd + 1, &readMask, NULL, NULL, &to) >= 0)
-        break;
-
-      switch (errno) {
-        case EINTR:
-          continue;
-        default:
-          NSLog(@"socket select() failed: %s", strerror(errno));
-          goto notAlive;
-      }
-    }
-
-    /* no input is pending, connection is alive */
-    if (!FD_ISSET(self->fd, &readMask))
-      return YES;
-  }
-#endif
-
-  /*
-    input is pending: If select() indicates pending input, but ioctl()
-    indicates zero bytes of pending input, the connection is broken
-  */
-  {
-#if defined(WIN32) && !defined(__CYGWIN32__)
-    u_long len;
-#else
-    int len;
-#endif
-    while (ioctl(self->fd, FIONREAD, &len) == -1) {
-      if (errno == EINTR) continue;
-      goto notAlive;
-    }
-    if (len > 0) return YES;
-  }
-
- notAlive:
-  return NO;
+  /* Invalid file descriptor, Error or Hangup */
+  if (pfd.revents & (POLLNVAL|POLLERR|POLLHUP)) {
+    NSLog(@"INFO(%s) poll(): fd=%d revents=0x%04x)",
+          __PRETTY_FUNCTION__,
+          pfd.fd, pfd.revents);
+    return NO;
+  } 
+  return YES;
 }
 
 // ******************** NGStream ********************

@@ -415,14 +415,14 @@ _verify_certificate_callback (gnutls_session_t session)
     int ret;
     if (NGInvalidSocketDescriptor != self->fd) {
       LOOP_CHECK(ret, gnutls_bye((gnutls_session_t)self->session, GNUTLS_SHUT_RDWR));
+    } else {
+      NSLog(@"WARNING(%s): Cannot gnutls_bye() NGInvalidSocketDescriptor", __PRETTY_FUNCTION__);
     }
     gnutls_deinit((gnutls_session_t) self->session);
     self->session = NULL;
   }
   if (self->cred) {
-    if (NGInvalidSocketDescriptor != self->fd) {
-      gnutls_certificate_free_credentials((gnutls_certificate_credentials_t) self->cred);
-    }
+    gnutls_certificate_free_credentials((gnutls_certificate_credentials_t) self->cred);
     self->cred = NULL;
   }
   return [super shutdown];
@@ -593,7 +593,14 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
 }
 
 - (void)dealloc {
-  [self shutdown];
+  if (self->ssl) {
+    SSL_free(self->ssl);
+    self->ssl = NULL;
+  }
+  if (self->ctx) {
+    SSL_CTX_free(self->ctx);
+    self->ctx = NULL;
+  }
   [hostName release];
   [super dealloc];
 }
@@ -665,13 +672,10 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
       // call shutdown a second time
       if (ret == 0)
         SSL_shutdown(self->ssl);
-      SSL_free(self->ssl);
+    } else {
+      NSLog(@"WARNING(%s): Cannot SSL_shutdown() NGInvalidSocketDescriptor",
+            __PRETTY_FUNCTION__);
     }
-    self->ssl = NULL;
-  }
-  if (self->ctx) {
-    SSL_CTX_free(self->ctx);
-    self->ctx = NULL;
   }
   return [super shutdown];
 }
