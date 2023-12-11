@@ -657,6 +657,120 @@ static void freeMods(LDAPMod **mods) {
   qualifier:(EOQualifier *)_q
   attributes:(NSArray *)_attributes
   scope:(int)_scope
+  sortAttribute:(NSString *)_sortAttribute
+  sortReverse:(BOOL)_sortReverse
+{
+  NSString *filter;
+  int      msgid;
+  char     **attrs;
+  NGLdapSearchResultEnumerator *e;
+
+  if (self->handle == NULL)
+    [self _reinit];
+
+  if ((filter = [_q ldapFilterString]) == nil)
+    filter = @"(objectclass=*)";
+
+  if (_attributes != nil) {
+    unsigned i, acount;
+
+    acount = [_attributes count];
+    attrs = calloc(acount + 3, sizeof(char *));
+
+    for (i = 0; i < acount; i++)
+      attrs[i] = (char *)[[_attributes objectAtIndex:i] UTF8String];
+    attrs[i] = NULL;
+  }
+  else
+    attrs = NULL;
+
+  if (LDAPDebugEnabled) {
+    NSLog(@"%s: search at base '%@' filter '%@' for attrs '%@'\n",
+            __PRETTY_FUNCTION__, _base, filter,
+            [_attributes componentsJoinedByString: @","]);
+  }
+
+  /* trigger search */
+  
+  
+  int rc;
+  LDAPSortKey **keys = NULL;
+  LDAPControl cc;
+  struct berval control_value = { 0L, NULL };
+  LDAPControl** ctrls = NULL;
+  NSString *rcStr;
+  
+
+  keys = malloc(2 * sizeof(LDAPSortKey));
+  keys[0] = malloc(sizeof(LDAPSortKey));
+  keys[0]->attributeType = (char *)[_sortAttribute UTF8String];
+  keys[0]->orderingRule = "2.5.13.3";
+  keys[0]->reverseOrder = _sortReverse ? 1 : 0;
+
+  rc = ldap_create_sort_control_value(self->handle, keys, &control_value);
+  if (LDAP_SUCCESS == rc) {
+    ctrls = malloc(2 * sizeof(LDAPControl));
+    rc = ldap_control_create(LDAP_CONTROL_SORTREQUEST, LDAP_OPT_ON, &control_value, 1, ctrls);
+    if (LDAP_SUCCESS == rc) {
+      ctrls[1] = NULL;
+      struct timeval tv_timelimit, *tv_timelimitp = NULL;
+      if (self->timeLimit > 0.0) {
+        tv_timelimit.tv_sec = self->timeLimit;
+      } else {
+        tv_timelimit.tv_sec = 10.0;
+      }
+      tv_timelimit.tv_usec = 0;
+      tv_timelimitp = &tv_timelimit;
+      rc = ldap_search_ext (
+            self->handle,
+            (char *)[_base UTF8String],
+            _scope,
+            (char *)[filter UTF8String],
+            attrs,
+            0,
+            ctrls,
+            NULL,
+            tv_timelimitp,
+            self->sizeLimit > 0 ? self->sizeLimit : 1000,
+            &msgid);
+      if (LDAP_SUCCESS != rc) {
+        msgid = -1;
+        [self errorWithFormat: @"[sssvlv 3] %@", [NSString stringWithUTF8String: ldap_err2string(rc)]];
+      }
+    } else {
+      msgid = -1;
+      [self errorWithFormat: @"[sssvlv 2] %@", [NSString stringWithUTF8String: ldap_err2string(rc)]];
+    }
+    free(ctrls);
+  } else {
+    msgid = -1;
+    [self errorWithFormat: @"[sssvlv 1] %@", [NSString stringWithUTF8String: ldap_err2string(rc)]];
+  }
+  
+  free(keys[0]);
+  free(keys);
+
+  /* free attributes */
+  if (attrs != NULL) free(attrs); attrs = NULL;
+
+  if (msgid == -1) {
+    /* trouble */
+    int err;
+    ldap_get_option(self->handle, LDAP_OPT_RESULT_CODE, &err);
+    NSLog(@"Fatal LDAP error during ldap_search: %s", ldap_err2string(err));
+    return nil;
+  }
+
+  e = [[NGLdapSearchResultEnumerator alloc]
+                                     initWithConnection:self messageID:msgid];
+
+  return [e autorelease];
+}
+
+- (NSEnumerator *)_searchAtBaseDN:(NSString *)_base
+  qualifier:(EOQualifier *)_q
+  attributes:(NSArray *)_attributes
+  scope:(int)_scope
 {
   NSString *filter;
   int      msgid;
@@ -724,6 +838,20 @@ static void freeMods(LDAPMod **mods) {
   return [e autorelease];
 }
 
+- (NSEnumerator *)flatSearchAtBaseDN: (NSString *)_base
+                           qualifier: (EOQualifier *)_q
+                          attributes: (NSArray *)_attributes
+                       sortAttribute: (NSString *)_sortAttribute
+                         sortReverse: (BOOL)_sortReverse
+{
+  return [self _searchAtBaseDN:_base
+               qualifier:_q
+               attributes:_attributes
+               scope:LDAP_SCOPE_ONELEVEL
+       sortAttribute: _sortAttribute
+         sortReverse: _sortReverse];
+}
+
 - (NSEnumerator *)flatSearchAtBaseDN:(NSString *)_base
   qualifier:(EOQualifier *)_q
   attributes:(NSArray *)_attributes
@@ -735,6 +863,20 @@ static void freeMods(LDAPMod **mods) {
 }
 
 - (NSEnumerator *)deepSearchAtBaseDN:(NSString *)_base
+    qualifier:(EOQualifier *)_q
+   attributes:(NSArray *)_attributes
+sortAttribute:(NSString *)_sortAttribute
+  sortReverse:(BOOL)_sortReverse
+{
+  return [self _searchAtBaseDN:_base
+               qualifier:_q
+               attributes:_attributes
+               scope:LDAP_SCOPE_SUBTREE
+               sortAttribute: _sortAttribute
+                 sortReverse: _sortReverse];
+}
+
+- (NSEnumerator *)deepSearchAtBaseDN:(NSString *)_base
   qualifier:(EOQualifier *)_q
   attributes:(NSArray *)_attributes
 {
@@ -742,6 +884,20 @@ static void freeMods(LDAPMod **mods) {
                qualifier:_q
                attributes:_attributes
                scope:LDAP_SCOPE_SUBTREE];
+}
+
+- (NSEnumerator *)baseSearchAtBaseDN:(NSString *)_base
+                           qualifier:(EOQualifier *)_q
+                          attributes:(NSArray *)_attributes
+                       sortAttribute:(NSString *)_sortAttribute
+                         sortReverse:(BOOL)_sortReverse
+{
+  return [self _searchAtBaseDN:_base
+                     qualifier:_q
+                    attributes:_attributes
+                         scope:LDAP_SCOPE_BASE
+                 sortAttribute: _sortAttribute
+                   sortReverse: _sortReverse];
 }
 
 - (NSEnumerator *)baseSearchAtBaseDN:(NSString *)_base
