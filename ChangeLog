@@ -1,3 +1,31 @@
+commit a507a6fbb58a26dc7ac3b875be82294b31f7eada
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Fri Nov 17 12:40:41 2023 +0100
+
+    fix(core): Fix issue on file descriptors where TLS packet is sent on invalid file descriptor when reusing fd. Improve NGSocket, remove ssl free on shutdown and shutdown from dealloc
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGActiveSocket.m
+
+commit 8ac29ca19ef24a75a4abaa83e119687c44fbaa19
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Tue Nov 14 19:59:54 2023 +0100
+
+    fix(core): Fix issue on file descriptors where TLS packet is sent on invalid file descriptor when reusing fd
+
+M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+M	sope-core/NGStreams/NGActiveSocket.m
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 4cf26f5cb8cc025f19196760b57c01a198e6f692
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Sep 27 10:35:19 2023 +0200
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 8fb574b0b95498c011a7256779d76898dd457e6f
 Author: smizrahi <seb.mizrahi@gmail.com>
 Date:   Tue Jul 4 10:59:24 2023 +0200
