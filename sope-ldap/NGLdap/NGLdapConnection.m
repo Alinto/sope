@@ -661,9 +661,12 @@ static void freeMods(LDAPMod **mods) {
   sortReverse:(BOOL)_sortReverse
 {
   NSString *filter;
-  int      msgid;
+  int      msgid, rc;
   char     **attrs;
   NGLdapSearchResultEnumerator *e;
+  LDAPSortKey **keys;
+  struct berval control_value = { 0L, NULL };
+  LDAPControl** ctrls;
 
   if (self->handle == NULL)
     [self _reinit];
@@ -690,17 +693,8 @@ static void freeMods(LDAPMod **mods) {
             [_attributes componentsJoinedByString: @","]);
   }
 
-  /* trigger search */
+  /* trigger search with sorting */
   
-  
-  int rc;
-  LDAPSortKey **keys = NULL;
-  LDAPControl cc;
-  struct berval control_value = { 0L, NULL };
-  LDAPControl** ctrls = NULL;
-  NSString *rcStr;
-  
-
   keys = malloc(2 * sizeof(LDAPSortKey));
   keys[0] = malloc(sizeof(LDAPSortKey));
   keys[0]->attributeType = (char *)[_sortAttribute UTF8String];
