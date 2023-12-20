@@ -285,6 +285,10 @@ static NSMutableDictionary *namespaces;
 }
 
 - (NSString *)delimiter {
+  if (self->delimiter == nil) {
+    [self list:@"" pattern:@""];
+  }
+  
   return self->delimiter;
 }
 

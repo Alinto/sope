@@ -364,10 +364,17 @@ NSArray *SOGoMailGetDirectChildren(NSArray *_array, NSString *_fn) {
   if (_delfn) folderName = [folderName stringByDeletingLastPathComponent];
   
   if ([[[self client] delimiter] isEqualToString:@"/"])
+    if (debugKeys) {
+      [self logWithFormat: @"imap4FolderNameForURL: %@ became %@", _url, folderName];
+    }
     return folderName;
   
   names = [folderName componentsSeparatedByString: @"/"];
-  return [names componentsJoinedByString: [[self client] delimiter]];
+  folderName = [names componentsJoinedByString: [[self client] delimiter]];
+  if (debugKeys) {
+      [self logWithFormat: @"imap4FolderNameForURL: %@ became %@", _url, folderName];
+  }
+  return folderName;
 }
 - (NSString *)imap4FolderNameForURL:(NSURL *)_url {
   return [self imap4FolderNameForURL:_url removeFileName:NO];

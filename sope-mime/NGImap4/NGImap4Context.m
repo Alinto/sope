@@ -589,10 +589,8 @@ static int ImapLogEnabled                           = -1;
 }
 
 - (void)initializeSentFolder {
-  if ((self->sentFolder = [self _getFolderWithName:
-                                [self sentFolderName]]) == nil)
-    self->sentFolder = [self _getFolderWithName:
-                             [self sentFolderName]];
+  if ((self->sentFolder = [self _getFolderWithName: [self sentFolderName]]) == nil)
+    self->sentFolder = [self _getFolderWithName: [self sentFolderName]];
   if (self->sentFolder == nil)
     NSLog(@"WARNING[%s]: Couldn't find/create sentFolder", __PRETTY_FUNCTION__);
 }
