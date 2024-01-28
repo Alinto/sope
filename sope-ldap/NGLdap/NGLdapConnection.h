@@ -98,14 +98,29 @@
 /* running queries */
 
 - (NSEnumerator *)flatSearchAtBaseDN:(NSString *)_base
+                           qualifier:(EOQualifier *)_q
+                          attributes:(NSArray *)_attributes
+                       sortAttribute:(NSString *)_sortAttribute
+                         sortReverse:(BOOL)_sortReverse;
+- (NSEnumerator *)flatSearchAtBaseDN:(NSString *)_base
   qualifier:(EOQualifier *)_q
   attributes:(NSArray *)_attributes;
+- (NSEnumerator *)deepSearchAtBaseDN:(NSString *)_base
+                           qualifier:(EOQualifier *)_q
+                          attributes:(NSArray *)_attributes
+                       sortAttribute:(NSString *)_sortAttribute
+                         sortReverse:(BOOL)_sortReverse;
 - (NSEnumerator *)deepSearchAtBaseDN:(NSString *)_base
   qualifier:(EOQualifier *)_q
   attributes:(NSArray *)_attributes;
 - (NSEnumerator *)baseSearchAtBaseDN:(NSString *)_base
   qualifier:(EOQualifier *)_q
   attributes:(NSArray *)_attributes;
+- (NSEnumerator *)baseSearchAtBaseDN:(NSString *)_base
+                           qualifier:(EOQualifier *)_q
+                          attributes:(NSArray *)_attributes
+                       sortAttribute:(NSString *)_sortAttribute
+                         sortReverse:(BOOL)_sortReverse;
 
 - (NGLdapEntry *)entryAtDN:(NSString *)_dn
   qualifier:(EOQualifier *)_q

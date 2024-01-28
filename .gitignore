@@ -1,1 +1,13 @@
 obj/
+sope-appserver/NGObjWeb/SoCore.sxp
+sope-appserver/WEExtensions/WEExtensions.wox
+sope-appserver/WOExtensions/WOExtensions.wox
+config-NGStreams.log
+config.make
+sope-core/NGStreams/config.h
+sope-core/NGStreams/config.log
+sope-core/NGStreams/config.status
+sope-gdl1/MySQL/MySQL.gdladaptor/
+sope-gdl1/PostgreSQL/PostgreSQL.gdladaptor/
+sope-xml/STXSaxDriver/STXSaxDriver.sax/
+sope-xml/libxmlSAXDriver/libxmlSAXDriver.sax/

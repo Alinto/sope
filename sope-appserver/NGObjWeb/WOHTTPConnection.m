@@ -179,7 +179,12 @@ static BOOL logStream = NO;
 /* accessors */
 
 - (NSString *)hostName {
-  return [self->url host];
+  NSString* ret;
+
+  ret = [self->url host];
+  if([self->url port])
+    ret = [ret stringByAppendingFormat: @":%@", [self->url port]];
+  return ret;
 }
 
 /* IO */

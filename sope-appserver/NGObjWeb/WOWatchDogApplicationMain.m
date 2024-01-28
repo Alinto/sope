@@ -443,6 +443,8 @@ typedef enum {
                                        type: ET_RDESC
                                     forMode: NSDefaultRunLoopMode
                                         all: YES];
+    /* valid descriptor, but not alive .. so we close the socket */
+    [controlSocket shutdown];
     [self setControlSocket: nil];
   }
 }

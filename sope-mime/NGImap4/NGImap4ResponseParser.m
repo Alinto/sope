@@ -1832,17 +1832,17 @@ _purifyQuotedString(NSMutableString *quotedString) {
       NSData *content;
         
       if ((content = [self _parseBodyHeaderFields]) != nil)
-	[fetch setObject:content forKey:key];
+	      [fetch setObject:content forKey:key];
       else
-	[self logWithFormat:@"ERROR: got no body content for key: '%@'",key];
+	      [self logWithFormat:@"ERROR: got no body content for key: '%@'",key];
     } 
     else if ([key hasPrefix:@"body["]) {
       NSDictionary *content;
         
       if ((content = [self _parseBodyContent]) != nil)
-	[fetch setObject:content forKey:key];
+	      [fetch setObject:content forKey:key];
       else
-	[self logWithFormat:@"ERROR: got no body content for key: '%@'",key];
+	      [self logWithFormat:@"ERROR: got no body content for key: '%@'",key];
     }
     else if ([key isEqualToString:@"body"]) {
       [fetch setObject:_parseBody(self, NO) forKey:key];
@@ -1868,14 +1868,14 @@ _purifyQuotedString(NSMutableString *quotedString) {
       NSData *data;
       
       if (_la(self, 0) == '"') {
-	NSString *str;
-	_consume(self,1);
+	      NSString *str;
+	      _consume(self,1);
 
-	str = _parseUntil(self, '"');
-	data = [str dataUsingEncoding:defCStringEncoding];
+	      str = _parseUntil(self, '"');
+	      data = [str dataUsingEncoding:defCStringEncoding];
       }
       else 
-	data = [self _parseData];
+	      data = [self _parseData];
 
       if (data != nil) [fetch setObject:data forKey:key];
     }
@@ -1883,9 +1883,9 @@ _purifyQuotedString(NSMutableString *quotedString) {
       id envelope;
 
       if ((envelope = [self _parseEnvelope]) != nil)
-	[fetch setObject:envelope forKey:key];
+	      [fetch setObject:envelope forKey:key];
       else
-	[self logWithFormat:@"ERROR: could not parse envelope!"];
+	      [self logWithFormat:@"ERROR: could not parse envelope!"];
     }
     else if ([key isEqualToString:@"internaldate"]) {
       // TODO: implement!

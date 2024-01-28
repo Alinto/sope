@@ -124,7 +124,6 @@ static int openConnectionCount = 0;
   const char *cDBName;
   MySQL4Adaptor *adaptor;
   NSString *host, *socket, *s;
-  BOOL reconnect;
   void *rc;
   
   if (self->_connection != NULL) {
@@ -160,9 +159,6 @@ static int openConnectionCount = 0;
   }
   else
     socket = nil;
-  
-  reconnect = YES;
-  mysql_options(self->_connection, MYSQL_OPT_RECONNECT, &reconnect);
 
   rc = mysql_real_connect(self->_connection, 
 			  [host UTF8String],

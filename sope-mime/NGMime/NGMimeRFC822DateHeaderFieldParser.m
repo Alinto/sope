@@ -161,7 +161,8 @@ static NSTimeZone *parseTimeZone(const char *s, size_t len) {
     hours += 10 * (*(s + pos) - 48) + *(s + pos + 1) - 48;
     break;
   default:
-    NSLog (@"parseTimeZone: cannot parse time notation '%.*s'", (int)len, s);
+    if(!(len == 3 && *s == 'G' && *(s+1) == 'M' && *(s+2) == 'T'))
+      NSLog (@"parseTimeZone: cannot parse time notation '%.*s'", (int)len, s);
   }
 
   seconds += sign * (3600 * hours + 60 * minutes);
