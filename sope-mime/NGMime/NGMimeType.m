@@ -125,13 +125,22 @@ static Class NSStringClass  = Nil;
     encoding = NSKoreanEUCStringEncoding;
   }
   else if ([charset isEqualToString:@"big5"]) {
+#define C_GNUSTEP_VERSION (GNUSTEP_BASE_MAJOR_VERSION * 1000000) + (GNUSTEP_BASE_MINOR_VERSION * 1000) + GNUSTEP_BASE_SUBMINOR_VERSION
+#if C_GNUSTEP_VERSION >= 1029000
+    encoding = NSBig5StringEncoding;
+#else
     encoding = NSBIG5StringEncoding;
+#endif
   }
   else if ([charset isEqualToString:@"iso-2022-jp"]) {
     encoding = NSISO2022JPStringEncoding;
   }
   else if ([charset isEqualToString:@"gb2312"]) {
+#if C_GNUSTEP_VERSION >= 1029000
+    encoding = NSHZ_GB_2312StringEncoding;
+#else
     encoding = NSGB2312StringEncoding;
+#endif
   }
   else if ([charset isEqualToString:@"koi8-r"]) {
     encoding = NSKOI8RStringEncoding;
