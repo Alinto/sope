@@ -266,15 +266,20 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
 
 /* IO */
 
-- (void)pushBytes:(const char *)_bytes count:(unsigned)_len {
-  if (_len == 0) return;
+- (int)pushBytes:(const char *)_bytes count:(unsigned)_len {
+  int r;
+  r = 0;
+  if (_len == 0) return r;
   NSAssert(self->ctxt, @"missing HTML parser context");
-  htmlParseChunk(self->ctxt, _bytes, _len, 0);
+  r = htmlParseChunk(self->ctxt, _bytes, _len, 0);
+  return r;
 }
-- (void)pushEOF {
+- (int)pushEOF {
   char dummyByte;
-  htmlParseChunk(self->ctxt, &dummyByte, 0, 1 /* terminate */);
+  int r;
+  r = htmlParseChunk(self->ctxt, &dummyByte, 0, 1 /* terminate */);
   self->doc = ((xmlParserCtxtPtr)ctxt)->myDoc;
+  return r;
 }
 
 /* parsing */
@@ -305,6 +310,8 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
 
 - (void)_parseFromData:(NSData *)_data systemId:(NSString *)_sysId {
   NSAutoreleasePool *pool;
+  SaxParseException *e;
+  int errCode;
 
   if ([_data length] == 0) {
     [self _handleEmptyDataInSystemId:_sysId];
@@ -315,7 +322,16 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
 
   /* parse into structure */
   [self setupParserWithDocumentPath:_sysId];
-  [self pushBytes:[_data bytes] count:[_data length]];
+  errCode = [self pushBytes:[_data bytes] count:[_data length]];
+
+  if (XML_ERR_INTERNAL_ERROR == errCode) {
+    e = (id)[SaxParseException exceptionWithName:@"SaxIOException"
+                                          reason:[NSString stringWithFormat: @"Error XML parsing : %i", errCode]
+                                        userInfo:[NSDictionary dictionaryWithObject: [NSNumber numberWithInt: errCode] forKey:@"code"]];
+    
+    [self->errorHandler fatalError:e];
+  }
+  
   [self pushEOF];
   
   if (self->doc == NULL) {
