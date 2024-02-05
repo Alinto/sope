@@ -329,7 +329,8 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
                                           reason:[NSString stringWithFormat: @"Error XML parsing : %i", errCode]
                                         userInfo:[NSDictionary dictionaryWithObject: [NSNumber numberWithInt: errCode] forKey:@"code"]];
     
-    [self->errorHandler fatalError:e];
+    if (self->errorHandler)
+      [self->errorHandler fatalError: e];
   }
   
   [self pushEOF];
