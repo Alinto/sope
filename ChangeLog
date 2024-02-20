@@ -1,3 +1,91 @@
+commit ff9a7f9ab93f20b9106327babfce971b8b06672e
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Mon Feb 5 10:44:54 2024 +0100
+
+    fix(core): Add error handler on sax parsing (pushBytes)
+
+M	sope-xml/libxmlSAXDriver/libxmlHTMLSAXDriver.m
+
+commit 393f20cce158b45f780346d5604d740ac7f295a6
+Author: binary-jam <150174776+binary-jam@users.noreply.github.com>
+Date:   Sun Jan 28 19:50:54 2024 +0100
+
+    gnustep base >= 1.29.0
+    
+    fixed the preprocessor directives for version check
+
+M	sope-mime/NGMime/NGMimeType.m
+
+commit 1160846ac35a51d0ae85e73f5c1e0ec2ab3f0216
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Dec 20 16:52:39 2023 +0100
+
+    fix(imap): sometimes the folder name does not have the delimiter
+
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4Connection.m
+M	sope-mime/NGImap4/NGImap4Context.m
+
+commit cf999996b9c5f3fe81e5a0ace67d92e94a6147ca
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Mon Dec 18 16:41:20 2023 +0100
+
+    chore(logs): add logs for imap folder
+
+M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 7393682a904356c6ae92a46cf92929298de70d41
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Mon Dec 11 17:26:24 2023 +0100
+
+    feature(contact): Show 100 first results for global address book. Clean code.
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit a91491f1e5c6b8722015c18f6972bd27c5c98769
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Mon Dec 11 17:10:18 2023 +0100
+
+    feature(contact): Show 100 first results for global address book
+
+M	sope-ldap/NGLdap/NGLdapConnection.h
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit 3d4613c89f6537fa0bcaefe6105c517513bd84c1
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Dec 13 15:22:05 2023 +0100
+
+    fix(sql): remove deprecated param
+
+M	sope-gdl1/MySQL/MySQL4Channel.m
+
+commit 604c8ef291b2755dc5c821a9fcea7aafdef5eb7b
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Nov 22 08:36:47 2023 +0100
+
+    fix(dateHeader): allow GMT timezone
+
+M	sope-mime/NGMime/NGMimeRFC822DateHeaderFieldParser.m
+
+commit 4b9366d60c49729b5024b5d814ec643f8b3c3fa0
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Fri Oct 6 14:11:36 2023 +0200
+
+    fix(http): header host was not correct for local url
+
+M	.gitignore
+M	sope-appserver/NGObjWeb/WOHTTPConnection.m
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 9bda6f970c46785cc47e1fba00608bedfa588f5c
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Mon Dec 11 16:06:09 2023 +0100
+
+    Update Changelog
+
+M	.gitignore
+M	ChangeLog
+
 commit a507a6fbb58a26dc7ac3b875be82294b31f7eada
 Author: smizrahi <seb.mizrahi@gmail.com>
 Date:   Fri Nov 17 12:40:41 2023 +0100
@@ -17,6 +105,16 @@ M	sope-appserver/NGObjWeb/WOWatchDogApplicationMain.m
 M	sope-core/NGStreams/NGActiveSSLSocket.m
 M	sope-core/NGStreams/NGActiveSocket.m
 M	sope-mime/NGImap4/NGImap4Client.m
+
+commit 9ec2744cc851b11886c3ebb723138e4d672bd5c7
+Author: binary-jam <150174776+binary-jam@users.noreply.github.com>
+Date:   Tue Nov 7 19:22:10 2023 +0100
+
+    gnustep base >= 1.29.0
+    
+    add support for gnustep base libs 1.29.0 and higher, by using new enum names.
+
+M	sope-mime/NGMime/NGMimeType.m
 
 commit 4cf26f5cb8cc025f19196760b57c01a198e6f692
 Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
