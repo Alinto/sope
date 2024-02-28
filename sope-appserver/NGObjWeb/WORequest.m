@@ -183,10 +183,15 @@ static BOOL debugOn = NO;
 
     uri++; // skip '/'
     start = uri;
-    while ((*uri != '\0') && (*uri != '/') && (*uri != '.'))
+    while ((*uri != '\0') && (*uri != '/') && (*uri != '.') && (*uri != '?'))
       uri++;
 
     if (*uri == '\0') {
+      self->appName =
+        [[NSString alloc] initWithCString:start length:(uri - start)];
+      goto done;
+    }
+    else if (*uri == '?') {
       self->appName =
         [[NSString alloc] initWithCString:start length:(uri - start)];
       goto done;
