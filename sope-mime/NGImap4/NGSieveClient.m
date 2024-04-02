@@ -333,7 +333,7 @@ static BOOL     debugImap4         = NO;
 	      //buffer = nil;
 
 	      self->parser = [[NGImap4ResponseParser alloc] initWithStream: self->socket];
-	      [self logWithFormat:@"TLS started successfully."];
+	      [self debugWithFormat:@"TLS started successfully."];
 
               /* as per rfc5804 section 2.2:
                * at this point, the server MUST re-issue the capability results
