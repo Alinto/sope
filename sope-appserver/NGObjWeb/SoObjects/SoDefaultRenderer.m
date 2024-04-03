@@ -126,7 +126,7 @@ static int debugOn = 0;
     {
       [r setHeader:@"application/xml; charset=\"utf-8\"" forKey:@"content-type"];
       [r appendContentString: @"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-                        @"<D:error xmlns:D=\"DAV\">"];
+                        @"<D:error xmlns:D=\"DAV:\">"];
       [r appendContentString: [[_ex reason] stringByEscapingXMLString]];
       [r appendContentString: @"</D:error>"];
     }
