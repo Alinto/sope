@@ -1071,6 +1071,13 @@ static id _parseValue(id _ctx, const char *_buf, unsigned _bufLen,
     }
     if (class) {
       obj = [[[class alloc] initWithString:[orig description]] autorelease];
+    
+    if (obj == nil && [NSCalendarDate class] == class && 10 == [[orig description] length]) {
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+      NSDate *date = [dateFormatter dateFromString: [orig description]];
+      obj = [NSCalendarDate dateWithTimeIntervalSinceReferenceDate:[date timeIntervalSinceReferenceDate]];
+    }
       
       if (obj == nil) {
 	NSLog(@"%s: could not init object '%@' of cast class %@(%@) !",
