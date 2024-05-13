@@ -148,7 +148,7 @@ static BOOL _isDebugOn(void) {
       [self debugWithFormat:@"  acquisition disabled."];
   }
   
-  /* did not find object ... */
+  /* did not find object, can happend for api request */
   if (_isDebugOn())
     [self debugWithFormat:@"  lookup of key '%@' failed.", _name];
   return nil;

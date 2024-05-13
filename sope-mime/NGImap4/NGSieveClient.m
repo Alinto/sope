@@ -82,6 +82,7 @@ static NSNumber *NoNumber          = nil;
 static BOOL     ProfileImapEnabled = NO;
 static BOOL     LOG_PASSWORD       = NO;
 static BOOL     debugImap4         = NO;
+static NSString *AuthMechanism     = nil;
 
 + (void)initialize {
   static BOOL didInit = NO;
@@ -93,6 +94,8 @@ static BOOL     debugImap4         = NO;
   LOG_PASSWORD       = [ud boolForKey:@"SieveLogPassword"];
   ProfileImapEnabled = [ud boolForKey:@"ProfileImapEnabled"];
   debugImap4         = [ud boolForKey:@"ImapDebugEnabled"];
+  AuthMechanism      = [ud stringForKey:@"NGImap4AuthMechanism"];
+  [AuthMechanism retain];
 
   YesNumber = [[NSNumber numberWithBool:YES] retain];
   NoNumber  = [[NSNumber numberWithBool:NO] retain];
