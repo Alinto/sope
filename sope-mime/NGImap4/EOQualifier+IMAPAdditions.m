@@ -74,7 +74,7 @@ static void _initImap4SearchCategory(void) {
                             @"UNFLAGGED", @"UNSEEN", nil];
   OtherKeyWords = [[NSArray alloc] initWithObjects: @"ALL", @"BCC", @"BODY",
                                    @"CC", @"FROM", @"SUBJECT", @"TEXT", @"TO",
-                                   @"KEYWORD", @"UID", @"UNKEYWORD", nil];
+                                   @"KEYWORD", @"UID", @"UNKEYWORD", @"SIZE", @"DATE", nil];
   
   debugOn = [ud boolForKey:@"ImapDebugQualifierGeneration"];
 }
