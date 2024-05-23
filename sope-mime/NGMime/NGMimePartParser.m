@@ -1049,10 +1049,10 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
   
   pool = [[NSAutoreleasePool alloc] init];
 
-  if ((self->contentLength == -1) || (self->contentLength == 0)) {
+  if (self->contentLength == -1) {
     rbody = [self readBodyUnknownLength];
   }
-  else {
+  else if(self->contentLength > 0){
     /* note: this is called only, if self->useContentLength is set ! */
     rbody = [self readBodyWithKnownLength:self->contentLength];
   }
