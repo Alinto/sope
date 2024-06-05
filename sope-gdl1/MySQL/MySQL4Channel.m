@@ -121,9 +121,12 @@ static int openConnectionCount = 0;
 }
 
 - (BOOL)openChannel {
-  const char *cDBName;
+  const char *cDBName, *sslKey, *sslCert, *sslCa;
   MySQL4Adaptor *adaptor;
-  NSString *host, *socket, *s;
+  NSString *host, *socket, *s, *sslKeyPath, *sslCertPath, *sslCaPath;
+  BOOL isSSL;
+  int options;
+  
   void *rc;
   
   if (self->_connection != NULL) {
@@ -160,6 +163,27 @@ static int openConnectionCount = 0;
   else
     socket = nil;
 
+  isSSL =  [[NSUserDefaults standardUserDefaults]
+                     boolForKey:@"MySQL4SSLEnabled"];
+  options = 0;
+  if (isSSL) {
+    sslKey = NULL;
+    sslCert = NULL;
+    sslCa = NULL;
+    sslKeyPath = [[NSUserDefaults standardUserDefaults] stringForKey:@"MySQL4SSLKeyPath"];
+    if (sslKeyPath && [sslKeyPath length] > 0)
+      sslKey = [sslKeyPath UTF8String];
+    sslCertPath = [[NSUserDefaults standardUserDefaults] stringForKey:@"MySQL4SSLCertPath"];
+    if (sslCertPath && [sslCertPath length] > 0)
+      sslCert = [sslCertPath UTF8String];
+    sslCaPath   = [[NSUserDefaults standardUserDefaults] stringForKey:@"MySQL4SSLCaPath"];
+    if (sslCaPath && [sslCaPath length] > 0)
+      sslCa = [sslCaPath UTF8String];
+    mysql_ssl_set(self->_connection, sslKey, sslCert, sslCa, NULL, NULL);
+    options |= CLIENT_SSL;
+  }
+
+  
   rc = mysql_real_connect(self->_connection, 
 			  [host UTF8String],
 			  [[adaptor loginName]     UTF8String],
@@ -167,7 +191,8 @@ static int openConnectionCount = 0;
 			  cDBName,
 			  [[adaptor port] intValue],
 			  [socket cString],
-			  0);
+			  options);
+        
   if (rc == NULL) {
     NSLog(@"ERROR: could not open MySQL4 connection to database '%@': %s",
           [adaptor databaseName], mysql_error(self->_connection));
