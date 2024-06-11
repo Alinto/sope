@@ -48,8 +48,8 @@
 - (NSDictionary *)procStatDictionary;
 
 /* wrappers */
-- (unsigned int)virtualMemorySize;
-- (unsigned int)residentSetSize;
+- (unsigned long long)virtualMemorySize;
+- (unsigned long long)residentSetSize;
 - (unsigned int)residentSetSizeLimit;
 - (unsigned int)fileDescriptorCount;
 

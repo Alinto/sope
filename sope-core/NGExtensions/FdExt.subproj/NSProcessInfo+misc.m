@@ -165,7 +165,8 @@ static NSNumber *_uint(unsigned int i) {
     unsigned char comm[256];\
     char          state = 0;\
     int           priority, starttime;\
-    unsigned int  timeout, itrealvalue, vsize, rss, rlim, startcode, endcode;\
+    unsigned int  timeout, itrealvalue, rlim, startcode, endcode;\
+    unsigned long long rss, vsize;\
     unsigned int  startstack, kstkesp, kstkeip;\
     int           signal, blocked, sigignore, sigcatch;\
     unsigned int  wchan;\
@@ -181,7 +182,7 @@ static NSNumber *_uint(unsigned int i) {
                  "%u %u %u %u %u "\
                  "%d %d %d %d %d "\
                  "%d %u %u %d "\
-                 "%u %u %u %u %u"\
+                 "%llu %llu %u %u %u"\
                  "%u %u %u "\
                  "%d %d %d %d "\
                  "%u"\
@@ -199,7 +200,7 @@ static NSNumber *_uint(unsigned int i) {
       fclose(fh); fh = NULL;\
     }
 
-- (unsigned int)virtualMemorySize {
+- (unsigned long long)virtualMemorySize {
 #ifdef __linux__
   NG_GET_PROC_INFO;
   return vsize;
@@ -207,7 +208,7 @@ static NSNumber *_uint(unsigned int i) {
   return 0;
 #endif
 }
-- (unsigned int)residentSetSize {
+- (unsigned long long)residentSetSize {
 #ifdef __linux__
   NG_GET_PROC_INFO;
   return rss;
