@@ -547,6 +547,21 @@ static BOOL debugOn = NO;
 
   /* check class, could change with different HTTP adaptor */
 
+  if ([paras isKindOfClass:[NSData class]])
+  {
+    //I don't know how it can still be NSdata here...
+    NSError* error;
+    paras = [NSJSONSerialization JSONObjectWithData:paras
+                                                 options:NSJSONReadingAllowFragments 
+                                                   error:&error];
+
+    if(error)
+    {
+      [self errorWithFormat:@"(%s): don't know how to deal with data form object: %@", error];
+      return nil;
+    }
+    return paras;
+  }
   if ([paras isKindOfClass:[NGHashMap class]])
     return [paras asDictionaryWithArraysForValues];
   if ([paras isKindOfClass:[NSDictionary class]])
