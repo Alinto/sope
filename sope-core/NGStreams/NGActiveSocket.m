@@ -989,8 +989,8 @@
 
     NSAssert(readResult != 0, @"ERROR: readBytes may not return '0' ..");
 
-    if (readResult == toBeRead) {
-      // all bytes were read successfully, return
+    if (readResult == toBeRead || ![self isOpen]) {
+      // all bytes were read successfully or socket, return
       break;
     }
 

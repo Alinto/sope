@@ -206,45 +206,59 @@
     socklen_t len;
     char *data;
     int  newFd = NGInvalidSocketDescriptor;
+    fd_set read_fds;
+    int activity = 0;
 
     len   = [[self domain] addressRepresentationSize];
     data = calloc(1, len + 1);
     
-    if ((newFd = accept(fd, (void *)data, &len)) == -1) {
-      // call failed
-      NSString *reason = nil;
-      reason = [self reasonForLastError];
-      reason = [@"Could not accept: " stringByAppendingString:reason];
+    struct timeval timeout;
+    timeout.tv_sec = 1;
+    timeout.tv_usec = 0;
+
+    FD_ZERO(&read_fds);
+    FD_SET(fd, &read_fds);
+
+    activity = select(fd + 1, &read_fds, NULL, NULL, &timeout);
+
+    if (activity > 0) {
+        if ((newFd = accept(fd, (void *)data, &len)) == -1) {
+        // call failed
+        NSString *reason = nil;
+        reason = [self reasonForLastError];
+        reason = [@"Could not accept: " stringByAppendingString:reason];
+        
+        [[[NGCouldNotAcceptException alloc]
+                  initWithReason:reason socket:self] raise];
+      }
+
+      /* produce remote socket address object */
+      remote = [[self domain] addressWithRepresentation:(void *)data
+                              size:len];
       
-      [[[NGCouldNotAcceptException alloc]
-                initWithReason:reason socket:self] raise];
-    }
+      // getsockname if wildcard-IP-bind to get local IP address assigned
+      // to the connection
+      len = [[self domain] addressRepresentationSize];
+      if (getsockname(newFd, (void *)data, &len) != 0) { // function is MT-safe
+        [[[NGSocketException alloc]
+                  initWithReason:@"could not get local socket name" socket:self]
+                  raise];
+      }
+      local = [[self domain] addressWithRepresentation:(void *)data size:len];
 
-    /* produce remote socket address object */
-    remote = [[self domain] addressWithRepresentation:(void *)data
-                            size:len];
-    
-    // getsockname if wildcard-IP-bind to get local IP address assigned
-    // to the connection
-    len = [[self domain] addressRepresentationSize];
-    if (getsockname(newFd, (void *)data, &len) != 0) { // function is MT-safe
-      [[[NGSocketException alloc]
-                initWithReason:@"could not get local socket name" socket:self]
-                raise];
+      if (data) {
+        free(data);
+        data = NULL;
+      }
+      
+      socket = [[NGActiveSocket alloc]
+                                _initWithDescriptor:newFd
+                                localAddress:local
+                                remoteAddress:remote];
+      socket = [socket autorelease];
     }
-    local = [[self domain] addressWithRepresentation:(void *)data size:len];
-
-    if (data) {
-      free(data);
-      data = NULL;
-    }
-    
-    socket = [[NGActiveSocket alloc]
-                              _initWithDescriptor:newFd
-                              localAddress:local
-                              remoteAddress:remote];
-    socket = [socket autorelease];
   }
+    
   END_SYNCHRONIZED;
   return socket;
 }

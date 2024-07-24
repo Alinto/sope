@@ -52,10 +52,12 @@ NSString *NSFileObjectBecameActiveNotificationName =
   extra:(void *)_extra
   forMode:(NSString *)_mode
 {
-  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  if ([self isOpen]) {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
-  [nc postNotificationName:NSFileObjectBecameActiveNotificationName
-      object:self];
+    [nc postNotificationName:NSFileObjectBecameActiveNotificationName
+        object:self];
+  }
 }
 
 @end /* NSObject(FileObjectWatcher) */
