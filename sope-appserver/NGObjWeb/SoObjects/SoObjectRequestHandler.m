@@ -680,13 +680,18 @@ static NSString *redirectURISafetySuffix = nil;
   //Check if the authenticator need to add cookies
   if(authenticator)
   {
+    NSArray *listCookies;
     NSEnumerator *cookies;
     WOCookie *cookie;
 
-    cookies = [[authenticator getCookiesIfNeeded: _ctx] objectEnumerator];
-    while(cookie = [cookies nextObject])
+    listCookies = [authenticator getCookiesIfNeeded: _ctx];
+    if(listCookies && [listCookies isKindOfClass:[NSArray class]])
     {
-      [r addCookie: cookie];
+      cookies = [listCookies objectEnumerator];
+      while(cookie = [cookies nextObject])
+      {
+        [r addCookie: cookie];
+      }
     }
   }
   
