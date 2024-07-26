@@ -46,6 +46,9 @@
 
 - (BOOL)checkLogin:(NSString *)_login password:(NSString *)_pwd;
 
+/* To set additionnal cookies (override in subclasses !)*/
+- (NSArray *)getCookiesIfNeeded: (WOContext *)_ctx;
+
 /* HTTP basic authentication */
 
 - (NSString *)authRealmInContext:(WOContext *)_ctx;
