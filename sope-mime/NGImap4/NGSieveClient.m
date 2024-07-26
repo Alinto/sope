@@ -459,10 +459,11 @@ static NSString *AuthMechanism     = nil;
   }
   else
   {
+    AuthMechanism = @"PLAIN";
     buflen = lenUsername + lenAuthname + lenPassword + 2;
     buffer = malloc (sizeof (char) * (buflen + 1));
-    sprintf (buffer, "%s %s %s",
-            utf8Username, utf8Authname, utf8Password);
+    sprintf (buffer, "%s%c%s%c%s",
+            utf8Username, 0, utf8Authname, 0, utf8Password);
   };
 
   auth = [NSData dataWithBytesNoCopy:buffer length:buflen];
@@ -477,7 +478,6 @@ static NSString *AuthMechanism     = nil;
     // Use the literal format
     s = [NSString stringWithFormat:@"AUTHENTICATE \"%@\" {%d+}\r\n%s",
                   AuthMechanism, (int)[auth length], [auth bytes]];
-
 
   if (LOG_PASSWORD) {
     map = [self processCommand:s
