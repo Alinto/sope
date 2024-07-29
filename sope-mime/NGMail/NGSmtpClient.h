@@ -87,8 +87,9 @@ typedef enum {
 - (BOOL)useStartTLS;
 
 // authentication
-- (BOOL) plainAuthenticateUser: (NSString *) username
-                  withPassword: (NSString *) password;
+- (BOOL) authenticateUser: (NSString *) username
+                  withPassword: (NSString *) password
+                    withMethod: (NSString *) method;
 
 // state
 
