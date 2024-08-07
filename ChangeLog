@@ -1,3 +1,71 @@
+commit 4524ecafe27c8cfa9eef6977c6d4337d17ab99dd
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Wed Jul 24 17:41:51 2024 +0200
+
+    fix(core): Fix SIGSEGV when stopping sogod process. Fixes #5653.
+
+M	sope-core/NGExtensions/FdExt.subproj/NSRunLoop+FileObjects.m
+M	sope-core/NGStreams/NGActiveSocket.m
+M	sope-core/NGStreams/NGPassiveSocket.m
+
+commit 5c2c51aa988a51ffd81d7f08e3cfd9c24c37a45d
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Tue Jun 11 15:29:43 2024 +0200
+
+    fix(core): Fix int overflow on vms and rss computation
+
+M	sope-core/NGExtensions/FdExt.subproj/NSProcessInfo+misc.m
+M	sope-core/NGExtensions/NGExtensions/NSProcessInfo+misc.h
+
+commit 45d409cde618bf11e6f73e96bb3f3d9cee788486
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Wed Jun 5 11:24:40 2024 +0200
+
+    feat(core): Add MySQL/MariaDB SSL connection support
+
+M	sope-gdl1/MySQL/MySQL4Channel.m
+
+commit be086813c89cd7b0ecd50ec29e69a6b143d9b04f
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Thu May 23 15:09:54 2024 +0200
+
+    fix(http): don't wait for content if header content-length is 0
+
+M	sope-mime/NGMime/NGMimePartParser.m
+
+commit 76516bd63222c7285928d3041c1a78466f6f4adc
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Tue May 21 09:28:15 2024 +0200
+
+    feat(mail): Improve mail search (advanced search)
+
+M	sope-core/EOControl/EOQualifierParser.m
+M	sope-mime/NGImap4/EOQualifier+IMAPAdditions.m
+
+commit e77d447306d247bee18dccf757326e5fa59c8d10
+Author: Robo Burned <robo.burned@gmail.com>
+Date:   Wed Apr 3 19:37:56 2024 +0400
+
+    Fix XML namespace for DAV error element.
+
+M	sope-appserver/NGObjWeb/SoObjects/SoDefaultRenderer.m
+
+commit b8aa1d9fc0bbbb73bec2a138f5a0f0242fcce098
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Wed Feb 28 16:33:32 2024 +0100
+
+    fix(core): Add '?' char as end detection of appName in URI. Fixes #5793.
+
+M	sope-appserver/NGObjWeb/WORequest.m
+
+commit 081fdd1a32d7c0b1e0693181c347ccead9e8310c
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Tue Feb 20 14:02:02 2024 +0100
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit ff9a7f9ab93f20b9106327babfce971b8b06672e
 Author: smizrahi <seb.mizrahi@gmail.com>
 Date:   Mon Feb 5 10:44:54 2024 +0100
