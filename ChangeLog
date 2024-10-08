@@ -1,3 +1,19 @@
+commit f08dfce90d626f30b1f80165bb537feb880ec207
+Author: smizrahi <seb.mizrahi@gmail.com>
+Date:   Tue Aug 13 19:31:20 2024 +0200
+
+    fix(packaging): Add config.make as dependency of build-stamp
+
+M	packaging/debian/rules
+
+commit 64776d9ee5eeb681a45303fac559aa1f36d16ed7
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Aug 7 11:13:50 2024 +0200
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 4524ecafe27c8cfa9eef6977c6d4337d17ab99dd
 Author: smizrahi <seb.mizrahi@gmail.com>
 Date:   Wed Jul 24 17:41:51 2024 +0200
