@@ -750,11 +750,16 @@
     return YES;
   }
   else if ([[reply text] length])
-    {
-      NSLog(@"SMTP(RCPT TO) error: %@", [reply text]);
+    { 
+      NSString* smtpError = [reply text];
+      NSLog(@"SMTP(RCPT TO) error: %@", smtpError);
+      if(![smtpError containsString:rcpt])
+      {
+        smtpError = [NSString stringWithFormat: @"%@ - %@", smtpError, rcpt];
+      }
       [NSException raise: @"SMTPException"
                   format: @"%@",
-                  [reply text]];
+                  smtpError];
     }
   return NO;
 }
