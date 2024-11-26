@@ -572,6 +572,8 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
             __PRETTY_FUNCTION__);
       return nil;
     }
+    //SSL_CTX_set_options(self->ctx, SSL_OP_IGNORE_UNEXPECTED_EOF);
+     
 #if OPENSSL_VERSION_NUMBER < 0x10020000L
     SSL_CTX_set_cert_verify_callback(self->ctx, cert_verify_callback, (void *)self);
 #elif OPENSSL_VERSION_NUMBER < 0x10100000L
@@ -667,14 +669,25 @@ static int cert_verify_callback(X509_STORE_CTX *x509_ctx, void *arg)
 
 - (BOOL)shutdown {
   if (self->ssl) {
-    if (NGInvalidSocketDescriptor != self->fd) {
+    if (NGInvalidSocketDescriptor != self->fd)
+    {
       int ret = SSL_shutdown(self->ssl);
-      // call shutdown a second time
-      if (ret == 0)
-        SSL_shutdown(self->ssl);
-    } else {
-      NSLog(@"WARNING(%s): Cannot SSL_shutdown() NGInvalidSocketDescriptor",
-            __PRETTY_FUNCTION__);
+      int err = SSL_get_error(self->ssl, ret);
+      if (ret == 0 && NGInvalidSocketDescriptor != self->fd)
+      {
+        //From SSL_shutdown description here -> https://github.com/openssl/openssl/blob/master/doc/man3/SSL_shutdown.pod
+        //SL_shutdown() should not be called if a previous fatal error has occurred on a connection;
+        //i.e., if SSL_get_error(3) has returned SSL_ERROR_SYSCALL or SSL_ERROR_SSL.
+        if(err != SSL_ERROR_SYSCALL && err != SSL_ERROR_SSL)
+        {
+        // call shutdown a second time
+          SSL_shutdown(self->ssl);
+        }
+      }
+    }
+    else
+    {
+      NSLog(@"WARNING(%s): Cannot SSL_shutdown() NGInvalidSocketDescriptor", __PRETTY_FUNCTION__);
     }
   }
   return [super shutdown];
