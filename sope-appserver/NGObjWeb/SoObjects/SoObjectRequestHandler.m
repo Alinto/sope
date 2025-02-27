@@ -28,6 +28,7 @@
 #include "WORequest+So.h"
 #include <NGObjWeb/WOApplication.h>
 #include <NGObjWeb/WORequest.h>
+#include <NGObjWeb/WOCookie.h>
 #include <NGObjWeb/WOResponse.h>
 #include <NGObjWeb/WOElement.h>
 #include <NGObjWeb/WOTemplate.h>
@@ -675,6 +676,24 @@ static NSString *redirectURISafetySuffix = nil;
   }
   
   [self->dispatcherRules reset];
+
+  //Check if the authenticator need to add cookies
+  if(authenticator)
+  {
+    NSArray *listCookies;
+    NSEnumerator *cookies;
+    WOCookie *cookie;
+
+    listCookies = [authenticator getCookiesIfNeeded: _ctx];
+    if(listCookies && [listCookies isKindOfClass:[NSArray class]])
+    {
+      cookies = [listCookies objectEnumerator];
+      while((cookie = [cookies nextObject]))
+      {
+        [r addCookie: cookie];
+      }
+    }
+  }
   
   return r;
 }

@@ -51,6 +51,17 @@
   return self->login;
 }
 
+- (NSString *)loginDomain {
+    NSRange r;
+    NSString *domain = nil;
+    r = [self->login rangeOfString: @"@"];
+    if (r.location != NSNotFound)
+    {
+        domain = [self->login substringFromIndex: r.location+1];
+    }
+    return domain;
+}
+
 /* roles */
 
 - (NSArray *)rolesInContext:(id)_ctx {

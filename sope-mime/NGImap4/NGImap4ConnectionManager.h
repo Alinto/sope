@@ -39,7 +39,7 @@
   NSTimer *gcTimer;
 }
 
-+ (id)defaultConnectionManager;
++ (id)defaultConnectionManager:(NSString *) imapAuthMech;
 
 /* client object */
 

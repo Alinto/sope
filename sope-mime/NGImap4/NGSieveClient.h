@@ -70,11 +70,11 @@ typedef enum {
   int tlsVerifyMode;
 }
 
-+ (id)clientWithURL:(id)_url;
++ (id)clientWithURL:(id)_url andAuthMech:(NSString *) imapAuthMech;
 + (id)clientWithAddress:(id<NGSocketAddress>)_address;
 + (id)clientWithHost:(id)_host;
 
-- (id)initWithURL:(id)_url;
+- (id)initWithURL:(id)_url andAuthMech:(NSString *) imapAuthMech;
 - (id)initWithHost:(id)_host;
 - (id)initWithAddress:(id<NGSocketAddress>)_address;
 

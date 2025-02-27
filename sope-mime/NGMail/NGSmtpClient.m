@@ -377,8 +377,10 @@
 }
 
 // authentication
-- (BOOL) plainAuthenticateUser: (NSString *) username
-                  withPassword: (NSString *) password {
+- (BOOL) authenticateUser: (NSString *) username
+                  withPassword: (NSString *) password
+                    withMethod: (NSString *) method
+{
   BOOL rc;
 
   if (self->extensions.hasAuthPlain && [username length] > 0) {
@@ -388,28 +390,50 @@
     NSString *authString;
     NGSmtpResponse *reply;
 
-    utf8Username = [username UTF8String];
-    utf8Password = [password UTF8String];
-    if (!utf8Password)
-      utf8Password = 0;
+    if(!method)
+      method = @"PLAIN";
+    
+    if([method isEqualToString: @"xoauth2"])
+    {
+      NSString *oauth2Password, *oauth2Username;
+      oauth2Username = [NSString stringWithFormat: @"user=%@", username];
+      oauth2Password = [NSString stringWithFormat: @"auth=Bearer %@", password];
+      utf8Username = [oauth2Username UTF8String];
+      utf8Password = [oauth2Password UTF8String];
 
-    lenUsername = strlen (utf8Username);
-    lenPassword = strlen (utf8Password);
-    buflen = lenUsername * 2 + lenPassword + 2;
-    buffer = malloc (sizeof (char) * (buflen + 1));
-    sprintf (buffer, "%s%c%s%c%s",
-             utf8Username, 0, utf8Username, 0, utf8Password);
-    authString = [[NSData dataWithBytesNoCopy: buffer
-                                       length: buflen
-                                 freeWhenDone: YES]
-                   stringByEncodingBase64];
+      lenUsername = strlen(utf8Username);
+      lenPassword = strlen(utf8Password);
+      buflen = lenUsername + lenPassword + 3;
+      buffer = malloc (sizeof (char) * (buflen + 1));
+      sprintf (buffer, "%s%c%s%c%c", utf8Username, 1, utf8Password, 1, 1);
+      authString = [[NSData dataWithBytesNoCopy: buffer
+                                         length: buflen
+                                   freeWhenDone: YES] stringByEncodingBase64];
+    }
+    else
+    {
+      utf8Username = [username UTF8String];
+      utf8Password = [password UTF8String];
+      if (!utf8Password)
+        utf8Password = 0;
+
+      lenUsername = strlen (utf8Username);
+      lenPassword = strlen (utf8Password);
+      buflen = lenUsername * 2 + lenPassword + 2;
+      buffer = malloc (sizeof (char) * (buflen + 1));
+      sprintf (buffer, "%s%c%s%c%s", utf8Username, 0, utf8Username, 0, utf8Password);
+      authString = [[NSData dataWithBytesNoCopy: buffer
+                                         length: buflen
+                                   freeWhenDone: YES] stringByEncodingBase64];
+    }
+
     authString = [authString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    reply = [self sendCommand: @"AUTH PLAIN"];
+    reply = [self sendCommand: [NSString stringWithFormat:@"AUTH %@", method]];
 
     if ([reply code] == NGSmtpServerChallenge)
-      {
-        reply = [self sendCommand: authString];
-      }
+    {
+      reply = [self sendCommand: authString];
+    }
 
     rc = ([reply code] == NGSmtpAuthenticationSuccess);
   }

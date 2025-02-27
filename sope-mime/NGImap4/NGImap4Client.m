@@ -721,22 +721,46 @@ static NSMutableDictionary *namespaces;
       size_t buflen, lenUsername, lenAuthname, lenPassword;
       NSString *authString;
 
-      utf8Username = [self->login UTF8String];
+      
+      if([self->authMechanism isEqualToString: @"xoauth2"])
+      {
+        NSString *oauth2Password, *oauth2Username;
+        oauth2Username = [NSString stringWithFormat: @"user=%@", self->login];
+        oauth2Password = [NSString stringWithFormat: @"auth=Bearer %@", self->password];
+        utf8Username = [oauth2Username UTF8String];
+        utf8Password = [oauth2Password UTF8String];
+      }
+      else
+      {
+        utf8Username = [self->login UTF8String];
+        utf8Password = [self->password UTF8String];
+        if (!utf8Password)
+          utf8Password = 0;
+      }
+
       if (self->authname)
         utf8Authname = [self->authname UTF8String];
       else
         utf8Authname = [self->login UTF8String];
-      utf8Password = [self->password UTF8String];
-      if (!utf8Password)
-        utf8Password = 0;
-
+      
       lenUsername = strlen (utf8Username);
       lenAuthname = strlen (utf8Authname);
       lenPassword = strlen (utf8Password);
-      buflen = lenUsername + lenAuthname + lenPassword + 2;
-      buffer = malloc (sizeof (char) * (buflen + 1));
-      sprintf (buffer, "%s%c%s%c%s",
+      if([self->authMechanism isEqualToString: @"xoauth2"])
+      {
+        buflen = lenUsername + lenPassword + 3;
+        buffer = malloc (sizeof (char) * (buflen + 1));
+        sprintf (buffer, "%s%c%s%c%c",
+               utf8Username, 1, utf8Password, 1, 1);
+      }
+      else
+      {
+        buflen = lenUsername + lenAuthname + lenPassword + 2;
+        buffer = malloc (sizeof (char) * (buflen + 1));
+        sprintf (buffer, "%s%c%s%c%s",
                utf8Username, 0, utf8Authname, 0, utf8Password);
+      }
+        
       authString = [[NSData dataWithBytesNoCopy: buffer
                                          length: buflen
                                    freeWhenDone: YES]

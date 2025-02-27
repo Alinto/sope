@@ -40,6 +40,7 @@
 @protocol SoUser
 
 - (NSString *)login;
+- (NSString *)loginDomain;
 
 /* returns the names of the roles assigned to the user */
 - (NSArray *)rolesInContext:(id)_ctx;

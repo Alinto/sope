@@ -82,6 +82,7 @@ static NSNumber *NoNumber          = nil;
 static BOOL     ProfileImapEnabled = NO;
 static BOOL     LOG_PASSWORD       = NO;
 static BOOL     debugImap4         = NO;
+static NSString *AuthMechanism     = nil;
 
 + (void)initialize {
   static BOOL didInit = NO;
@@ -93,13 +94,15 @@ static BOOL     debugImap4         = NO;
   LOG_PASSWORD       = [ud boolForKey:@"SieveLogPassword"];
   ProfileImapEnabled = [ud boolForKey:@"ProfileImapEnabled"];
   debugImap4         = [ud boolForKey:@"ImapDebugEnabled"];
+  AuthMechanism      = [ud stringForKey:@"NGImap4AuthMechanism"];
+  [AuthMechanism retain];
 
   YesNumber = [[NSNumber numberWithBool:YES] retain];
   NoNumber  = [[NSNumber numberWithBool:NO] retain];
 }
 
-+ (id)clientWithURL:(id)_url {
-  return [[(NGSieveClient *)[self alloc] initWithURL:_url] autorelease];
++ (id)clientWithURL:(id)_url andAuthMech:(NSString *) imapAuthMech{
+  return [[(NGSieveClient *)[self alloc] initWithURL:_url andAuthMech: imapAuthMech] autorelease];
 }
 
 + (id)clientWithAddress:(id<NGSocketAddress>)_address {
@@ -113,7 +116,7 @@ static BOOL     debugImap4         = NO;
   return [[[self alloc] initWithHost:_host] autorelease];
 }
 
-- (id)initWithNSURL:(NSURL *)_url {
+- (id)initWithNSURL:(NSURL *)_url andAuthMech:(NSString *) imapAuthMech{
   NGInternetSocketAddress *a;
   int port;
 
@@ -147,10 +150,12 @@ static BOOL     debugImap4         = NO;
 
   serverType = nil;
   capabilities = nil;
+  if(imapAuthMech && [imapAuthMech length] > 0)
+    AuthMechanism = imapAuthMech;
 
   return self;
 }
-- (id)initWithURL:(id)_url {
+- (id)initWithURL:(id)_url andAuthMech:(NSString *) imapAuthMech {
   if (_url == nil) {
     [self release];
     return nil;
@@ -159,7 +164,7 @@ static BOOL     debugImap4         = NO;
   if (![_url isKindOfClass:[NSURL class]])
     _url = [NSURL URLWithString:[_url stringValue]];
 
-  return [self initWithNSURL:_url];
+  return [self initWithNSURL:_url andAuthMech: imapAuthMech];
 }
 
 - (id)initWithHost:(id)_host {
@@ -410,8 +415,9 @@ static BOOL     debugImap4         = NO;
 - (NSDictionary *)login {
   NGHashMap *map  = nil;
   NSData    *auth;
-  char      *buf;
-  int       bufLen, logLen, authLen;
+  char *buffer;
+  const char *utf8Username, *utf8Authname, *utf8Password;
+  size_t buflen, lenUsername, lenAuthname, lenPassword;
 
   if (![self->socket isConnected]) {
     NSDictionary *con;
@@ -422,39 +428,58 @@ static BOOL     debugImap4         = NO;
       return con;
   }
 
-  authLen = [self->authname lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
-  logLen = [self->login lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
-  bufLen = (logLen+authLen) + [self->password lengthOfBytesUsingEncoding: NSUTF8StringEncoding] +2;
+  if([AuthMechanism isEqualToString: @"xoauth2"])
+  {
+    NSString *oauth2Password, *oauth2Username;
+    oauth2Username = [NSString stringWithFormat: @"user=%@", self->login];
+    oauth2Password = [NSString stringWithFormat: @"auth=Bearer %@", self->password];
+    utf8Username = [oauth2Username UTF8String];
+    utf8Password = [oauth2Password UTF8String];
+  }
+  else
+  {
+    utf8Username = [self->login UTF8String];
+    utf8Password = [self->password UTF8String];
+    if (!utf8Password)
+      utf8Password = 0;
+  }
 
-  buf = calloc(bufLen + 2, sizeof(char));
+  if (self->authname)
+    utf8Authname = [self->authname UTF8String];
+  else
+    utf8Authname = [self->login UTF8String];
+  
+  lenUsername = strlen (utf8Username);
+  lenAuthname = strlen (utf8Authname);
+  lenPassword = strlen (utf8Password);
+  if([AuthMechanism isEqualToString: @"xoauth2"])
+  {
+    buflen = lenUsername + lenPassword + 3;
+    buffer = malloc (sizeof (char) * (buflen + 1));
+    sprintf (buffer, "%s%c%s%c%c",
+            utf8Username, 1, utf8Password, 1, 1);
+  }
+  else
+  {
+    AuthMechanism = @"PLAIN";
+    buflen = lenUsername + lenAuthname + lenPassword + 2;
+    buffer = malloc (sizeof (char) * (buflen + 1));
+    sprintf (buffer, "%s%c%s%c%s",
+            utf8Username, 0, utf8Authname, 0, utf8Password);
+  };
 
-  /*
-    Format:
-      authenticate-id
-      authorize-id
-      password
-  */
-  sprintf(buf, "%s %s %s",
-          [self->login cStringUsingEncoding:NSUTF8StringEncoding],
-          [self->authname cStringUsingEncoding:NSUTF8StringEncoding],
-          [self->password cStringUsingEncoding:NSUTF8StringEncoding]);
-
-  buf[logLen] = '\0';
-  buf[logLen+authLen + 1] = '\0';
-
-  auth = [NSData dataWithBytesNoCopy:buf length:bufLen];
+  auth = [NSData dataWithBytesNoCopy:buffer length:buflen];
   auth = [auth dataByEncodingBase64WithLineLength:4096 /* 'unlimited' */];
 
   NSString *s;
 
   if ([auth length] < 1024)
     // Use the quoted format
-    s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" \"%s\"", [auth bytes]];
+    s = [NSString stringWithFormat:@"AUTHENTICATE \"%@\" \"%s\"", AuthMechanism, [auth bytes]];
   else
     // Use the literal format
-    s = [NSString stringWithFormat:@"AUTHENTICATE \"PLAIN\" {%d+}\r\n%s",
-                  (int)[auth length], [auth bytes]];
-
+    s = [NSString stringWithFormat:@"AUTHENTICATE \"%@\" {%d+}\r\n%s",
+                  AuthMechanism, (int)[auth length], [auth bytes]];
 
   if (LOG_PASSWORD) {
     map = [self processCommand:s
@@ -462,8 +487,10 @@ static BOOL     debugImap4         = NO;
                      reconnect:NO];
   }
   else {
+    NSString *logText;
+    logText = [NSString stringWithFormat: @"AUTHENTICATE \"%@\" HIDDEN", AuthMechanism];
     map = [self processCommand:s
-                       logText:@"AUTHENTICATE \"PLAIN\" {%d+}\r\nLOGIN:PASSWORD\r\n"
+                       logText:logText
                      reconnect:NO];
   }
 

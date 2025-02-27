@@ -26,7 +26,7 @@
 #include <NGObjWeb/WOMessage.h>
 #include <NGObjWeb/NGObjWebDecls.h>
 
-@class NSString, NSArray, NSData, NSDictionary, NSCalendarDate;
+@class NSString, NSArray, NSData, NSDictionary, NSCalendarDate, NSJSONSerialization;
 @class NGHashMap;
 @class NGHttpRequest;
 

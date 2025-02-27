@@ -48,10 +48,30 @@ static NSString       *AuthMechanism = nil;
   //if (poolingOff) NSLog(@"WARNING: IMAP4 connection pooling is disabled!");
 }
 
-+ (id)defaultConnectionManager {
++ (id)defaultConnectionManager:(NSString *) imapAuthMech {
   static NGImap4ConnectionManager *manager = nil; // THREAD
-  if (manager == nil) 
+  static NGImap4ConnectionManager *managerXoauth = nil; // THREAD
+  
+  //In case of diffrent auth type for domains, instantiate the proper imap object.
+  if(imapAuthMech && [imapAuthMech length] > 0) {
+    if([imapAuthMech isEqualToString: @"xoauth2"]) {
+      if(managerXoauth == nil) {
+        managerXoauth = [[self alloc] init];
+        AuthMechanism = imapAuthMech;
+      }
+      return managerXoauth;
+    }
+    if([imapAuthMech isEqualToString: @"plain"]) {
+      if(manager == nil) {
+        manager = [[self alloc] init];
+        AuthMechanism = imapAuthMech;
+      }
+      return manager;
+    }
+  }
+  else if (manager == nil) 
     manager = [[self alloc] init];
+  
   return manager;
 }
 
