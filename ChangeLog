@@ -1,3 +1,53 @@
+commit 61aef7a85966c8f7af00150e45d5c7d63da278d3
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Thu Feb 27 09:39:07 2025 +0100
+
+    feat(login): add xoauth2 and openid auth
+
+M	sope-appserver/NGObjWeb/NGObjWeb/WORequest.h
+M	sope-appserver/NGObjWeb/SoObjects/SoCookieAuthenticator.h
+M	sope-appserver/NGObjWeb/SoObjects/SoCookieAuthenticator.m
+M	sope-appserver/NGObjWeb/SoObjects/SoHTTPAuthenticator.h
+M	sope-appserver/NGObjWeb/SoObjects/SoHTTPAuthenticator.m
+M	sope-appserver/NGObjWeb/SoObjects/SoObject+Traversal.m
+M	sope-appserver/NGObjWeb/SoObjects/SoObjectRequestHandler.m
+M	sope-appserver/NGObjWeb/SoObjects/SoUser.h
+M	sope-appserver/NGObjWeb/SoObjects/SoUser.m
+M	sope-appserver/NGObjWeb/WORequest.m
+M	sope-mime/NGImap4/NGImap4Client.m
+M	sope-mime/NGImap4/NGImap4ConnectionManager.h
+M	sope-mime/NGImap4/NGImap4ConnectionManager.m
+M	sope-mime/NGImap4/NGSieveClient.h
+M	sope-mime/NGImap4/NGSieveClient.m
+M	sope-mime/NGMail/NGSmtpClient.h
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit 75ded41e3dbdaa890ae5b15a844eea7dd9525597
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Tue Nov 26 10:30:25 2024 +0100
+
+    fix(https): don't shutdown the socket twice if error the first time
+    
+    In some cases the second shutdown was hanging
+
+M	sope-core/NGStreams/NGActiveSSLSocket.m
+
+commit 82ff9ceb6538052d26340bc1a5a7cf265e1de544
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Mon Nov 18 14:27:31 2024 +0100
+
+    chore(smtp): add the recipient in smtp error message if it is not already the case
+
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit f77f86a78dfa9d676e836ce92827494b34df2f44
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Tue Oct 8 12:24:43 2024 +0200
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit f08dfce90d626f30b1f80165bb537feb880ec207
 Author: smizrahi <seb.mizrahi@gmail.com>
 Date:   Tue Aug 13 19:31:20 2024 +0200
