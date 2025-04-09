@@ -307,6 +307,22 @@ static NSNull           *null   = nil;
       endOfCommand = YES;
       result = nil;
     }
+    else {
+      if (ex_) {
+        *ex_ = [self->buffer lastException];
+        if (!*ex_) {
+          NSString *reason = [NSString stringWithFormat: @"The char %u received is not expected", l0];
+          *ex_ = [NSException exceptionWithName:@"UnexpectedCharFromImapSever"
+                                      reason:reason
+                                    userInfo:nil];
+        }
+          
+      } else {
+        [self setLastException: [self->buffer lastException]];
+      }
+      endOfCommand = YES;
+      result = nil;
+    }
   }
   return result;
 }
