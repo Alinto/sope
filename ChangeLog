@@ -1,3 +1,19 @@
+commit 5342b3e7a5e622830ec0a85a0873bd5cf325a99e
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Apr 9 15:34:40 2025 +0200
+
+    fix(imap): properly quit the response parser in case of unexpected char
+
+M	sope-mime/NGImap4/NGImap4ResponseParser.m
+
+commit 6a9af0c96eac78de771a7d11c505d9e9149c07b7
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Mon Mar 24 10:37:51 2025 +0100
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 61aef7a85966c8f7af00150e45d5c7d63da278d3
 Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
 Date:   Thu Feb 27 09:39:07 2025 +0100
