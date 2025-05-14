@@ -473,33 +473,40 @@
 // replies
 
 - (NGSmtpResponse *)receiveReply {
-  NSMutableString *desc = nil;
-  NSString        *line = nil;
-  NGSmtpReplyCode code  = -1;
+    NSMutableString *desc = nil;
+    NSString        *line = nil;
+    NGSmtpReplyCode code  = -1;
 
-  line = [self->text readLineAsString];
-  if ([line length] < 4) {
-    NSLog(@"SMTP: reply has invalid format (%@)", line);
-    return nil;
-  }
-  code = [[line substringToIndex:3] intValue];
-  //if (self->isDebuggingEnabled)
-  //  [NGTextErr writeFormat:@"S: reply with code %i follows ..\n", code];
-
-  desc = [NSMutableString stringWithCapacity:[line length]];
-  while ([line characterAtIndex:3] == '-') {
-    if ([line length] < 4) {
-      NSLog(@"SMTP: reply has invalid format (text=%@, line=%@)", desc, line);
-      break;
-    }
-    [desc appendString:[line substringFromIndex:4]];
-    [desc appendString:@"\n"];
     line = [self->text readLineAsString];
-  }
-  if ([line length] >= 4)
-    [desc appendString:[line substringFromIndex:4]];
+    if ([line length] < 3) {
+        NSLog(@"SMTP: reply has invalid format (%@)", line);
+        return nil;
+    }
 
-  return [NGSmtpResponse responseWithCode:code text:desc];
+    // Check if the first three characters are digits
+    NSCharacterSet *digitSet = [NSCharacterSet decimalDigitCharacterSet];
+    NSString *codeString = [line substringToIndex:3];
+    
+    if ([codeString rangeOfCharacterFromSet:[digitSet invertedSet]].location != NSNotFound) {
+        NSLog(@"SMTP: reply code is not valid (%@)", line);
+        return nil;
+    }
+
+    code = [codeString intValue];
+
+    desc = [NSMutableString stringWithCapacity:[line length]];
+    while ([line length] > 3 && [line characterAtIndex:3] == '-') {
+        [desc appendString:[line substringFromIndex:4]];
+        [desc appendString:@"\n"];
+        line = [self->text readLineAsString];
+    }
+    
+    // If the line is valid and has more than 3 characters, append the last part
+    if ([line length] >= 4) {
+        [desc appendString:[line substringFromIndex:4]];
+    }
+
+    return [NGSmtpResponse responseWithCode:code text:desc];
 }
 
 // commands
