@@ -56,6 +56,7 @@
 
   case FIELD_TYPE_FLOAT:  return [self initWithFloat:atof(_v)];
   case FIELD_TYPE_DOUBLE: return [self initWithDouble:atof(_v)];
+  case FIELD_TYPE_DECIMAL: return [self initWithFloat:atof(_v)];
     
   default:
     NSLog(@"ERROR(%s): unsupported MySQL type: %i (len=%d)", 
