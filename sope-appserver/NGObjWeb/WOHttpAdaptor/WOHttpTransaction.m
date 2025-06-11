@@ -327,7 +327,7 @@ static int logCounter = 0;
           
     auth = [[request valuesOfHeaderFieldWithName:@"authorization"]
                      nextObject];
-    if (auth) {
+    if (auth && ![[auth lowercaseString] hasPrefix: @"bearer"]) {
       if (![auth isKindOfClass:[NGHttpCredentials class]]) {
         auth =
           [NGHttpCredentials credentialsWithString:[auth stringValue]];
