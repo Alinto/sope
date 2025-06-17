@@ -478,6 +478,19 @@
   NGSmtpReplyCode code  = -1;
 
   line = [self->text readLineAsString];
+  if([line length] == 3) {
+    //Invalid but can happen with some smtp server that does not follow correctly the smtp specs
+    //and only send the code number instead of the code + a space.
+    code = [[line substringToIndex:3] intValue];
+    if(code == 0)
+    {
+      NSLog(@"SMTP: reply has invalid format and is not a code of 3 chars (%@)", line);
+      return nil;
+    }
+    desc = [NSMutableString stringWithCapacity:[line length]];
+    return [NGSmtpResponse responseWithCode:code text:desc];
+  }
+
   if ([line length] < 4) {
     NSLog(@"SMTP: reply has invalid format (%@)", line);
     return nil;
