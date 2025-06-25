@@ -1,3 +1,35 @@
+commit 927aaeadcff6a55416e1ef29faa7bbe90d63daea
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Tue Jun 17 15:28:53 2025 +0200
+
+    fix(smtp): allow smtp replies with only 3 chars (being the number code) instead of 4 (code + space)
+
+M	sope-mime/NGMail/NGSmtpClient.m
+
+commit 2bec3d956c766b9cfbb37bef1f1868cea1293974
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Jun 11 12:53:22 2025 +0200
+
+    fix(proxy): don't check bearer token auth
+
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit 88611b402b9a393c031ebed1383e1f6a36fb8bd1
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Tue May 27 09:54:48 2025 +0200
+
+    fix(mysl): add decinmal type to nsnumber type
+
+M	sope-gdl1/MySQL/NSNumber+MySQL4Val.m
+
+commit 29fba59e01259fc461fc6c60000ce395d1bbdde2
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Apr 30 11:02:32 2025 +0200
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 5342b3e7a5e622830ec0a85a0873bd5cf325a99e
 Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
 Date:   Wed Apr 9 15:34:40 2025 +0200
