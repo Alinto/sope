@@ -356,8 +356,22 @@ static NSTimeZone                *gmt      = nil;
   return [NSNumber numberWithBool:YES];
 }
 
-- (NSString *)scopeForDepth:(NSString *)_depth inContext:(WOContext *)_ctx {
+- (NSString *)scopeForDepth:(NSString *)_depth withPrefer:(NSString *)_prefer inContext:(WOContext *)_ctx {
   NSString *scope;
+  NSArray *preferArray;
+  NSString *noroot;
+  int     pos, count;
+
+  //Parse Prefer header for draft-murchison-webdav-prefer-05
+  preferArray = [_prefer componentsSeparatedByString:@","];
+  count = [preferArray count];
+  for (pos = 0; pos < count; pos++) {
+    NSString *headElement = [[preferArray objectAtIndex:pos] stringByTrimmingSpaces];
+    if ([headElement isEqualToString:@"depth-noroot"]) {
+      noroot = headElement;
+      break;
+    }
+  }
   
   if ([_depth hasPrefix:@"0"])
     scope = @"self";
@@ -366,7 +380,11 @@ static NSTimeZone                *gmt      = nil;
   else if ([_depth hasPrefix:@"1"]) {
     NSString *ua;
     
-    scope = @"flat+self";
+    if ( noroot ) {
+      scope = @"flat";
+    } else {
+      scope = @"flat+self";
+    }
     
     /* some special handling for IE ... */
     if ((ua = [[[_ctx request] clientCapabilities] userAgentType])) {
@@ -376,6 +394,7 @@ static NSTimeZone                *gmt      = nil;
 	scope = @"flat";
     }
   }
+  /* TODO: deep can also be +self or with noroot */
   else if ([_depth hasPrefix:@"infinity"])
     scope = @"deep";
   else
@@ -411,6 +430,7 @@ static NSTimeZone                *gmt      = nil;
   WORequest *rq;
   NSString  *uri;
   NSString  *depth; /* 0, 1, 1,noroot or infinity */
+  NSString  *prefer;
   NSArray   *propNames, *rtargets;
   BOOL      findAll;
   BOOL      findNames;
@@ -435,6 +455,7 @@ static NSTimeZone                *gmt      = nil;
   
   rq    = [_ctx request];
   depth = [rq headerForKey:@"depth"];
+  prefer= [rq headerForKey:@"prefer"];
   uri   = [rq uri];
   
   if (![depth isNotEmpty]) depth = @"infinity";
@@ -516,7 +537,7 @@ static NSTimeZone                *gmt      = nil;
   {
     NSMutableDictionary *hints;
     
-    hints = [self hintsWithScope:[self scopeForDepth:depth inContext:_ctx]
+    hints = [self hintsWithScope:[self scopeForDepth:depth withPrefer:prefer inContext:_ctx]
 		  propNames:propNames findAll:findAll namesOnly:findNames];
     if (rtargets != nil) /* range-query keys */
       [hints setObject:rtargets forKey:@"bulkTargetKeys"];
@@ -1321,6 +1342,7 @@ static NSTimeZone                *gmt      = nil;
   EOFetchSpecification *fs;
   WORequest *rq;
   NSString  *depth; /* 0, 1, 1,noroot or infinity */
+  NSString  *prefer;
   NSArray   *propNames;
   NSArray   *targets, *rtargets;
   BOOL      findAll;
@@ -1345,6 +1367,7 @@ static NSTimeZone                *gmt      = nil;
   
   rq = [_ctx request];
   depth = [rq headerForKey:@"depth"];
+  prefer= [rq headerForKey:@"prefer"];
   if (![depth isNotEmpty]) depth = @"infinity";
   
   [self lockParser:davsax];
@@ -1378,7 +1401,7 @@ static NSTimeZone                *gmt      = nil;
   {
     NSMutableDictionary *hints;
     
-    hints = [self hintsWithScope:[self scopeForDepth:depth inContext:_ctx]
+    hints = [self hintsWithScope:[self scopeForDepth:depth withPrefer:prefer inContext:_ctx]
 		  propNames:propNames findAll:findAll namesOnly:findNames];
     [hints setObject:rtargets forKey:@"bulkTargetKeys"];
     
