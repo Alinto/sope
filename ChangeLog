@@ -1,3 +1,39 @@
+commit db84a9213cdba79b28a7210e04b52c523c1a06ad
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Thu Aug 7 19:28:10 2025 +0200
+
+    fix(ActiveSync): ActiveSync dispatcher was not called if the 'Cmd' query was first
+    
+    This won the award of "the most unrelated thing to cause a problem"
+
+M	sope-appserver/NGObjWeb/SoObjects/SoObjectRequestHandler.m
+
+commit 280104e45c20519ac4849ebf8bca114d91383543
+Author: Stefan Bühler <source@stbuehler.de>
+Date:   Sun Jun 29 10:21:32 2025 +0200
+
+    NGHashMap: keep root->last consistent to fix segfault adding duplicate key after copy
+    
+    segfault because root->last is NULL:
+        #0 -[NGMutableHashMap addObjects:count:forKey:]
+        #1 -[NGMutableHashMap addObject:forKey:]
+        #2 -[NGHttpRequest(WOSupport) _decodeFormContentURLParameters:]
+        #3 -[NGHttpRequest(WOSupport) formParameters]
+    
+    when POST and GET set the same parameter; trigger like this:
+    
+        curl -d 'x=' 'https://.../SOGo/?x='
+
+M	sope-core/NGExtensions/NGHashMap.m
+
+commit 3146fbdb6ff3314e37e5c3682deeeef7d0f32064
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Jun 25 09:36:14 2025 +0200
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit 927aaeadcff6a55416e1ef29faa7bbe90d63daea
 Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
 Date:   Tue Jun 17 15:28:53 2025 +0200
