@@ -206,6 +206,7 @@
   return r;
 }
 
+
 - (WOResponse *)preprocessCredentialsInContext:(WOContext *)_ctx {
   NSString *auth;
   NSString *k;
@@ -214,6 +215,15 @@
 
   if ((auth = [[_ctx request] headerForKey:@"authorization"]) == nil) {
     /* no authentication provided */
+    //if activesync, respond with a www-authenticate to force outlook to use basic auth
+    WORequest *rq;
+    rq = [_ctx request];
+    if([[rq requestHandlerKey] isEqualToString:@"Microsoft-Server-ActiveSync"])
+    {
+      NSLog(@"This is AES and there is no header authorization");
+      return [self unauthorized:@"ActiveSync SOGo server requires Basic Auth" inContext:_ctx];
+    }
+
     static NSArray *anon = nil;
     if (anon == nil)
       anon = [[NSArray alloc] initWithObjects:SoRole_Anonymous, nil];
@@ -280,7 +290,7 @@
   /* authenticate valid credentials */
   
   if (![self checkLogin:user password:pwd]) {
-    [self logWithFormat:@"tried wrong password for user '%@'!", user];
+    [self logWithFormat:@"tried wrong password for user '%@' and password: %@!", user, pwd];
     return [self unauthorized:nil inContext:_ctx];
   }
   
