@@ -130,9 +130,6 @@
   if (![(creds = [self parseCredentials:_creds]) isNotEmpty])
     return nil;
   
-  NSLog(@"checkCredentials login %@", [creds objectAtIndex: 0]);
-  NSLog(@"checkCredentials pwd %@", [creds objectAtIndex: 1]);
-  
   login = [creds objectAtIndex:0];
   if ([login isEqualToString:@"anonymous"])
     return @"anonymous";
@@ -149,7 +146,6 @@
   NSString  *auth;
   
   rq = [_ctx request];
-  NSLog(@"checkCredentialsInContext %@", [rq headers]);
   if ((auth = [rq headerForKey:@"authorization"]) == nil) {
     /* no auth supplied */
     return @"anonymous";
@@ -290,7 +286,7 @@
   /* authenticate valid credentials */
   
   if (![self checkLogin:user password:pwd]) {
-    [self logWithFormat:@"tried wrong password for user '%@' and password: %@!", user, pwd];
+    [self logWithFormat:@"tried wrong password for user '%@'", user];
     return [self unauthorized:nil inContext:_ctx];
   }
   
