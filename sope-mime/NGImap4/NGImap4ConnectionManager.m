@@ -223,10 +223,10 @@ static NSString       *AuthMechanism = nil;
   if (![[result valueForKey:@"result"] boolValue]) {
     [self errorWithFormat:
             @"IMAP4 login failed:\n"
-	    @"  host=%@, user=%@, pwd=%s\n"
+	    @"  host=%@, user=%@, pwd=%s, mech=%s\n"
 	    @"  url=%@\n  base=%@\n  base-class=%@)\n"
 	    @"  = %@", 
-            [_url host], [_url user], [_pwd length] > 0 ? "yes" : "no", 
+            [_url host], [_url user], [_pwd length] > 0 ? "yes" : "no", AuthMechanism ? AuthMechanism : @"login",
 	    [_url absoluteString],
 	    [_url baseURL],
             NSStringFromClass([[_url baseURL] class]),
