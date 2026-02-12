@@ -1,6 +1,6 @@
-usr/lib/libNGObjWeb.so.*
-usr/lib/libWOExtensions.so.*
-usr/lib/libWEExtensions.so.*
-usr/lib/GNUstep/Libraries/Resources/NGObjWeb/*
-usr/lib/GNUstep/SoProducts-*/*
-usr/lib/GNUstep/WOxElemBuilders-*/*
+usr/lib/x86_64-linux-gnu/libNGObjWeb.so.*
+usr/lib/x86_64-linux-gnu/libWOExtensions.so.*
+usr/lib/x86_64-linux-gnu/libWEExtensions.so.*
+usr/lib/x86_64-linux-gnu/GNUstep/Libraries/Resources/NGObjWeb/*
+usr/lib/x86_64-linux-gnu/GNUstep/SoProducts-*/*
+usr/lib/x86_64-linux-gnu/GNUstep/WOxElemBuilders-*/*
