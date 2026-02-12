@@ -1,6 +1,6 @@
 /usr/include/x86_64-linux-gnu/GNUstep/DOM
 /usr/include/x86_64-linux-gnu/GNUstep/SaxObjC
 /usr/include/x86_64-linux-gnu/GNUstep/XmlRpc
-usr/lib/libDOM.so
-usr/lib/libSaxObjC.so
-usr/lib/libXmlRpc.so
+usr/lib/x86_64-linux-gnu/libDOM.so
+usr/lib/x86_64-linux-gnu/libSaxObjC.so
+usr/lib/x86_64-linux-gnu/libXmlRpc.so
