@@ -2,7 +2,7 @@
 /usr/include/x86_64-linux-gnu/GNUstep/NGObjWeb
 /usr/include/x86_64-linux-gnu/GNUstep/WOExtensions
 /usr/include/x86_64-linux-gnu/GNUstep/WEExtensions
-usr/lib/libNGObjWeb.so
-usr/lib/libWOExtensions.so
-usr/lib/libWEExtensions.so
+usr/lib/x86_64-linux-gnu/libNGObjWeb.so
+usr/lib/x86_64-linux-gnu/libWOExtensions.so
+usr/lib/x86_64-linux-gnu/libWEExtensions.so
 usr/share/GNUstep/Makefiles/*

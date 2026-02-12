@@ -1,4 +1,4 @@
 /usr/include/x86_64-linux-gnu/GNUstep/NGMime
 /usr/include/x86_64-linux-gnu/GNUstep/NGImap4
 /usr/include/x86_64-linux-gnu/GNUstep/NGMail
-usr/lib/libNGMime.so
+usr/lib/x86_64-linux-gnu/libNGMime.so
