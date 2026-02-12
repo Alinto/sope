@@ -1,6 +1,6 @@
 /usr/include/x86_64-linux-gnu/GNUstep/NGExtensions
 /usr/include/x86_64-linux-gnu/GNUstep/EOControl
 /usr/include/x86_64-linux-gnu/GNUstep/NGStreams
-usr/lib/libNGExtensions.so
-usr/lib/libEOControl.so
-usr/lib/libNGStreams.so
+usr/lib/x86_64-linux-gnu/libNGExtensions.so
+usr/lib/x86_64-linux-gnu/libEOControl.so
+usr/lib/x86_64-linux-gnu/libNGStreams.so
