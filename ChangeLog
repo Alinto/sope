@@ -1,3 +1,19 @@
+commit c9d80d2dc59485654803239e2d612470de315c3b
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Feb 4 14:17:08 2026 +0100
+
+    fix(Contact): reseach with two dots now works
+
+M	sope-gdl1/GDLAccess/EOSQLExpression.m
+
+commit caf376c233dd0aeb965fd806ec427c5062056b31
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Mon Oct 6 09:53:48 2025 +0200
+
+    Update ChangeLog
+
+M	ChangeLog
+
 commit db84a9213cdba79b28a7210e04b52c523c1a06ad
 Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
 Date:   Thu Aug 7 19:28:10 2025 +0200
