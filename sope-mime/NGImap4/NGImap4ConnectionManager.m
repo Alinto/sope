@@ -24,6 +24,10 @@
 #include "NGImap4Client.h"
 #include "imCommon.h"
 
+#import <Foundation/NSAutoreleasePool.h>
+#import <Foundation/NSLock.h>
+#import <Foundation/NSThread.h>
+
 @implementation NGImap4ConnectionManager
 
 static BOOL           debugOn    = NO;
@@ -79,6 +83,7 @@ static NSString       *AuthMechanism = nil;
   if ((self = [super init])) {
     if (!poolingOff) {
       self->urlToEntry = [[NSMutableDictionary alloc] initWithCapacity:256];
+      self->entryLock = [[NSLock alloc] init];
       self->gcTimer = [[NSTimer scheduledTimerWithTimeInterval:
 				  PoolScanInterval
 				target:self selector:@selector(_garbageCollect:)
@@ -91,6 +96,7 @@ static NSString       *AuthMechanism = nil;
 - (void)dealloc {
   [self->gcTimer invalidate];
   [self->urlToEntry release];
+  [self->entryLock  release];
   [self->gcTimer    release];
   [super dealloc];
 }
@@ -104,39 +110,99 @@ static NSString       *AuthMechanism = nil;
 }
 
 - (NGImap4Connection *)entryForURL:(NSURL *)_url {
+  NGImap4Connection *entry;
+
   if (_url == nil)
     return nil;
-  
-  return [self->urlToEntry objectForKey:[self cacheKeyForURL:_url]];
+
+  [self->entryLock lock];
+  entry = [[self->urlToEntry objectForKey:[self cacheKeyForURL:_url]] retain];
+  [self->entryLock unlock];
+
+  return [entry autorelease];
 }
 - (void)cacheEntry:(NGImap4Connection *)_entry forURL:(NSURL *)_url {
   if (_entry == nil) _entry = (id)[NSNull null];
+  [self->entryLock lock];
   [self->urlToEntry setObject:_entry forKey:[self cacheKeyForURL:_url]];
+  [self->entryLock unlock];
+}
+
+- (unsigned int)poolEntryCount {
+  unsigned int count;
+
+  [self->entryLock lock];
+  count = [self->urlToEntry count];
+  [self->entryLock unlock];
+
+  return count;
+}
+
+- (void)_logoutClients:(NSArray *)_clients {
+  NSAutoreleasePool *pool;
+  NGImap4Client *client;
+  unsigned int i, count;
+
+  pool = [[NSAutoreleasePool alloc] init];
+  count = [_clients count];
+
+  for (i = 0; i < count; i++)
+    {
+      client = [_clients objectAtIndex:i];
+
+      NS_DURING
+        [client logout];
+      NS_HANDLER
+        [self logWithFormat:@"could not logout expired IMAP4 connection: %@",
+              localException];
+      NS_ENDHANDLER;
+    }
+
+  [_clients release];
+  [pool release];
 }
 
 - (void)_garbageCollect:(NSTimer *)_timer {
   // TODO: scan for old IMAP4 channels
   NGImap4Connection *entry;
+  NSMutableArray *clientsToLogout;
   NSDate *now;
   NSArray *a;
-  int i;
+  NSString *key;
+  NSArray *clients;
+  unsigned int i, count;
 
-  a = [self->urlToEntry allKeys];
+  clientsToLogout = [NSMutableArray arrayWithCapacity:16];
   now = [NSDate date];
 
-  for (i = 0; i < [a count]; i++)
-    {
-      entry = [self->urlToEntry objectForKey: [a objectAtIndex: i]];
+  [self->entryLock lock];
+  a = [self->urlToEntry allKeys];
+  count = [a count];
 
-      if ([now timeIntervalSinceDate: [entry creationTime]] > PoolScanInterval)
+  for (i = 0; i < count; i++)
+    {
+      key = [a objectAtIndex: i];
+      entry = [self->urlToEntry objectForKey: key];
+
+      if ([entry isKindOfClass:[NGImap4Connection class]]
+          && [now timeIntervalSinceDate: [entry creationTime]] > PoolScanInterval)
 	{
-	  [[entry client] logout];
-	  [self->urlToEntry removeObjectForKey: [a objectAtIndex: i]];
+	  [clientsToLogout addObject: [entry client]];
+	  [self->urlToEntry removeObjectForKey: key];
 	}
+    }
+  [self->entryLock unlock];
+
+  if ([clientsToLogout count] > 0)
+    {
+      clients = [clientsToLogout copy];
+      [NSThread detachNewThreadSelector:@selector(_logoutClients:)
+                toTarget:self
+                withObject:clients];
     }
 
   [self debugWithFormat:@"should collect IMAP4 channels (%d active)",
-	  [self->urlToEntry count]];
+	  [self poolEntryCount]];
 }
 
 - (NGImap4Connection *)connectionForURL:(NSURL *)_url password:(NSString *)_p {
