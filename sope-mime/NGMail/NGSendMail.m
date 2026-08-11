@@ -19,6 +19,8 @@
   02111-1307, USA.
 */
 
+#import <Foundation/NSFileHandle.h>
+
 #include "NGSendMail.h"
 #include "NGMimeMessageGenerator.h"
 #include "NGMailAddressParser.h"
@@ -231,29 +233,64 @@
   return pclose(_mail);
 }
 
-- (NSMutableString *)buildSendMailCommandLineWithSender:(NSString *)_sender {
-  NSMutableString *sendmail;
+- (NSFileHandle *)fileHandleForTask:(NSTask *)task {
+    return [[task standardInput] fileHandleForWriting];
+}
+
+- (NSTask *)openTaskToSendMailWithArguments:(NSArray *)arguments {
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:[self executablePath]];
+    [task setArguments:arguments];
+
+    // Create a pipe for writing to the task's stdin
+    NSPipe *pipe = [NSPipe pipe];
+    [task setStandardInput:pipe];
+
+    // Launch the task
+    [task launch];
+
+    return task;
+}
+
+// - (NSMutableString *)buildSendMailCommandLineWithSender:(NSString *)_sender {
+//   NSMutableString *sendmail;
   
-  if (![[self executablePath] isNotEmpty])
-    return nil;
+//   if (![[self executablePath] isNotEmpty])
+//     return nil;
   
-  sendmail = [NSMutableString stringWithCapacity:256];
-  [sendmail setString:[self executablePath]];
+//   sendmail = [NSMutableString stringWithCapacity:256];
+//   [sendmail setString:[self executablePath]];
   
-  /* don't treat a line with just "." as EOF */
-  [sendmail appendString:@" -i "];
+//   /* don't treat a line with just "." as EOF */
+//   [sendmail appendString:@" -i "];
   
-  /* add sender when available */
-  if (_sender != nil) {
-    NSString *f;
+//   /* add sender when available */
+//   if (_sender != nil) {
+//     NSString *f;
     
-    f = [[_sender componentsSeparatedByString:@","]
-	          componentsJoinedByString:@" "];
-    [sendmail appendString:@"-f "];
-    [sendmail appendString:f];
-    [sendmail appendString:@" "];
-  }
-  return sendmail;
+//     f = [[_sender componentsSeparatedByString:@","]
+// 	          componentsJoinedByString:@" "];
+//     [sendmail appendString:@"-f "];
+//     [sendmail appendString:f];
+//     [sendmail appendString:@" "];
+//   }
+//   return sendmail;
+// }
+
+- (NSArray *)buildSendMailArgumentsWithSender:(NSString *)_sender {
+    NSMutableArray *arguments = [NSMutableArray array];
+
+    // Add -i flag to ignore lines with just "."
+    [arguments addObject:@"-i"];
+
+    // Add sender if available
+    if (_sender != nil) {
+        NSString *f = [[_sender componentsSeparatedByString:@","] componentsJoinedByString:@" "];
+        [arguments addObject:@"-f"];
+        [arguments addObject:f];
+    }
+
+    return arguments;
 }
 
 - (NSException *)_handleAppendMessageException:(NSException *)_exception {
@@ -351,131 +388,278 @@
   return NO;
 }
 
-- (void)addRecipients:(NSArray *)_recipients 
-  toCmdLine:(NSMutableString *)_cmdline
-{
-  NSEnumerator *enumerator;
-  NSString     *str;
+// - (void)addRecipients:(NSArray *)_recipients 
+//   toCmdLine:(NSMutableString *)_cmdline
+// {
+//   NSEnumerator *enumerator;
+//   NSString     *str;
   
-  enumerator = [_recipients objectEnumerator];
-  while ((str = [enumerator nextObject]) != nil) {
-    NSEnumerator *e;
-    NSString     *s;
+//   enumerator = [_recipients objectEnumerator];
+//   while ((str = [enumerator nextObject]) != nil) {
+//     NSEnumerator *e;
+//     NSString     *s;
     
-    if ([str rangeOfString:@","].length == 0) {
-      [_cmdline appendFormat:@"'%@' ", [self mailAddrForStr:str]];
-      continue;
-    }
+//     if ([str rangeOfString:@","].length == 0) {
+//       [_cmdline appendFormat:@"'%@' ", [self mailAddrForStr:str]];
+//       continue;
+//     }
     
-    e = [[str componentsSeparatedByString:@","] objectEnumerator];
-    while ((s = [e nextObject])) {
-      s = [[s componentsSeparatedByString:@"'"] componentsJoinedByString:@""];
-      s = [[s componentsSeparatedByString:@","] componentsJoinedByString:@""];
+//     e = [[str componentsSeparatedByString:@","] objectEnumerator];
+//     while ((s = [e nextObject])) {
+//       s = [[s componentsSeparatedByString:@"'"] componentsJoinedByString:@""];
+//       s = [[s componentsSeparatedByString:@","] componentsJoinedByString:@""];
       
-      [_cmdline appendFormat:@"'%@'", [self mailAddrForStr:s]];
+//       [_cmdline appendFormat:@"'%@'", [self mailAddrForStr:s]];
+//     }
+//     [_cmdline appendString:@" "];
+//   }
+// }
+
+- (void)addRecipients:(NSArray *)_recipients toArguments:(NSMutableArray *)arguments {
+    for (NSString *str in _recipients) {
+        if ([str rangeOfString:@","].length == 0) {
+            [arguments addObject:[self mailAddrForStr:str]];
+            continue;
+        }
+
+        for (NSString *s in [str componentsSeparatedByString:@","]) {
+            s = [[s componentsSeparatedByString:@"'"] componentsJoinedByString:@""];
+            s = [[s componentsSeparatedByString:@","] componentsJoinedByString:@""];
+            [arguments addObject:[self mailAddrForStr:s]];
+        }
     }
-    [_cmdline appendString:@" "];
-  }
 }
 
 /* main entry methods */
 
-- (NSException *)sendMailAtPath:(NSString *)_path toRecipients:(NSArray *)_to
-  sender:(NSString *)_sender
-{
-  NSMutableString *sendmail;
-  FILE            *toMail       = NULL;
-  NSException     *error;
-  int  errorCode;
-  BOOL ok;
+// - (NSException *)sendMailAtPath:(NSString *)_path toRecipients:(NSArray *)_to
+//   sender:(NSString *)_sender
+// {
+//   NSMutableString *sendmail;
+//   FILE            *toMail       = NULL;
+//   NSException     *error;
+//   int  errorCode;
+//   BOOL ok;
   
-  if (_path == nil)
-    return [self missingMailToSendError];
+//   if (_path == nil)
+//     return [self missingMailToSendError];
   
-  sendmail = [self buildSendMailCommandLineWithSender:_sender];
-  [self addRecipients:_to toCmdLine:sendmail];
+//   sendmail = [self buildSendMailCommandLineWithSender:_sender];
+//   [self addRecipients:_to toCmdLine:sendmail];
   
-  if ((toMail = [self openStreamToSendMail:sendmail]) == NULL)
-    return [self failedToStartSendMailError:errno];
+//   if ((toMail = [self openStreamToSendMail:sendmail]) == NULL)
+//     return [self failedToStartSendMailError:errno];
   
-  if ([self isSendLoggingEnabled]) [self _logMailSend:sendmail ofPath:_path];
+//   if ([self isSendLoggingEnabled]) [self _logMailSend:sendmail ofPath:_path];
   
-  ok = [self _appendMessageFile:_path to:toMail];
+//   ok = [self _appendMessageFile:_path to:toMail];
   
-  error = nil;
-  if ((errorCode = [self closeStreamToSendMail:toMail]) != 0) {
-    if (ok) {
-      error = [self _handleSendMailErrorCode:errorCode sendmail:sendmail];
+//   error = nil;
+//   if ((errorCode = [self closeStreamToSendMail:toMail]) != 0) {
+//     if (ok) {
+//       error = [self _handleSendMailErrorCode:errorCode sendmail:sendmail];
+//     }
+//   }
+//   if (!ok) error = [self failedToSendFileToSendMail:_path];
+//   return error; /* nil means 'everything is awesome' */
+// }
+
+- (BOOL)_appendMessageFile:(NSString *)_p toFileHandle:(NSFileHandle *)_fileHandle {
+    NSData *fileData = [NSData dataWithContentsOfFile:_p];
+    if (!fileData) {
+        NSLog(@"ERROR: Could not read file at path %@", _p);
+        return NO;
     }
-  }
-  if (!ok) error = [self failedToSendFileToSendMail:_path];
-  return error; /* nil means 'everything is awesome' */
+
+    [_fileHandle writeData:fileData];
+    return YES;
 }
 
-- (NSException *)sendMailData:(NSData *)_data toRecipients:(NSArray *)_to
-  sender:(NSString *)_sender
-{
-  NSMutableData *cleaned_data;
-  NSMutableString *sendmail;
-  FILE            *toMail       = NULL;
-  NSException     *error;
-  int  errorCode, len, mlen, i;
-  const char *bytes;
-  char *mbytes;
-  BOOL ok;
-  
-  if (_data == nil)
-    return [self missingMailToSendError];
-  
-  sendmail = [self buildSendMailCommandLineWithSender:_sender];
-  [self addRecipients:_to toCmdLine:sendmail];
-  
-  if ((toMail = [self openStreamToSendMail:sendmail]) == NULL)
-    return [self failedToStartSendMailError:errno];
-  
-  if ([self isSendLoggingEnabled]) [self _logMailSend:sendmail ofData:_data];
-  
-  //
-  // SOPE sucks in many ways and that is one of them. The headers are actually
-  // correctly encoded (trailing \r\n is inserted) but not the base64 encoded
-  // data since it uses SOPE's dataByEncodingBase64 function which says:
-  //
-  // NGBase64Coding.h:- (NSData *)dataByEncodingBase64; /* Note: inserts '\n' every 72 chars */
-  //
-  len = [_data length];
-  i = mlen = 0;
-  
-  cleaned_data = [NSMutableData dataWithLength: len];
-  
-  bytes = [_data bytes];
-  mbytes = [cleaned_data mutableBytes];
-  
-  while (i < len)
-    {
-      if (*bytes == '\r' && (i+1 < len) && *(bytes+1) == '\n')
-	{
-	  bytes++;
-	  i++;
-	}
-  
-      *mbytes = *bytes;
-      mbytes++; bytes++;
-      i++;
-      mlen++;
+- (NSException *)sendMailAtPath:(NSString *)_path toRecipients:(NSArray *)_to sender:(NSString *)_sender {
+    NSMutableArray *arguments;
+    NSTask *task;
+    NSFileHandle *fileHandle;
+
+
+    if (_path == nil)
+      return [self missingMailToSendError];
+    
+    arguments = [NSMutableArray arrayWithArray:[self buildSendMailArgumentsWithSender:_sender]];
+    [self addRecipients:_to toArguments:arguments];
+
+    task = [self openTaskToSendMailWithArguments:arguments];
+    if (!task) {
+        return [self failedToStartSendMailError:errno];
     }
+
+    fileHandle = [self fileHandleForTask:task];
+    if (!fileHandle) {
+        [task release];
+        return [self failedToStartSendMailError:errno];
+    }
+
+    if ([self isSendLoggingEnabled]) {
+        [self _logMailSend:[arguments componentsJoinedByString:@" "] ofPath:_path];
+    }
+
+    // Read the file and write to the task's stdin
+    BOOL ok = [self _appendMessageFile:_path toFileHandle:fileHandle];
+
+    [fileHandle closeFile];
+    [task waitUntilExit];
+
+    int errorCode = [task terminationStatus];
+    if (errorCode != 0) {
+        if (ok) {
+            return [self _handleSendMailErrorCode:errorCode sendmail:[arguments componentsJoinedByString:@" "]];
+        }
+    }
+
+    if (!ok) {
+        return [self failedToSendFileToSendMail:_path];
+    }
+
+    [task release];
+    return nil; // Success
+}
+
+// - (NSException *)sendMailData:(NSData *)_data toRecipients:(NSArray *)_to
+//   sender:(NSString *)_sender
+// {
+//   NSMutableData *cleaned_data;
+//   NSMutableString *sendmail;
+//   FILE            *toMail       = NULL;
+//   NSException     *error;
+//   int  errorCode, len, mlen, i;
+//   const char *bytes;
+//   char *mbytes;
+//   BOOL ok;
   
-  [cleaned_data setLength: mlen];
+//   if (_data == nil)
+//     return [self missingMailToSendError];
+  
+//   sendmail = [self buildSendMailCommandLineWithSender:_sender];
+//   [self addRecipients:_to toCmdLine:sendmail];
+  
+//   if ((toMail = [self openStreamToSendMail:sendmail]) == NULL)
+//     return [self failedToStartSendMailError:errno];
+  
+//   if ([self isSendLoggingEnabled]) [self _logMailSend:sendmail ofData:_data];
+  
+//   //
+//   // SOPE sucks in many ways and that is one of them. The headers are actually
+//   // correctly encoded (trailing \r\n is inserted) but not the base64 encoded
+//   // data since it uses SOPE's dataByEncodingBase64 function which says:
+//   //
+//   // NGBase64Coding.h:- (NSData *)dataByEncodingBase64; /* Note: inserts '\n' every 72 chars */
+//   //
+//   len = [_data length];
+//   i = mlen = 0;
+  
+//   cleaned_data = [NSMutableData dataWithLength: len];
+  
+//   bytes = [_data bytes];
+//   mbytes = [cleaned_data mutableBytes];
+  
+//   while (i < len)
+//     {
+//       if (*bytes == '\r' && (i+1 < len) && *(bytes+1) == '\n')
+// 	{
+// 	  bytes++;
+// 	  i++;
+// 	}
+  
+//       *mbytes = *bytes;
+//       mbytes++; bytes++;
+//       i++;
+//       mlen++;
+//     }
+  
+//   [cleaned_data setLength: mlen];
  
-  ok = [self _appendData:cleaned_data to:toMail];
+//   ok = [self _appendData:cleaned_data to:toMail];
   
-  error = nil;
-  if ((errorCode = [self closeStreamToSendMail:toMail]) != 0) {
-    if (ok) {
-      error = [self _handleSendMailErrorCode:errorCode sendmail:sendmail];
+//   error = nil;
+//   if ((errorCode = [self closeStreamToSendMail:toMail]) != 0) {
+//     if (ok) {
+//       error = [self _handleSendMailErrorCode:errorCode sendmail:sendmail];
+//     }
+//   }
+//   if (!ok) error = [self failedToSendDataToSendMail:_data];
+//   return error; /* nil means 'everything is awesome' */
+// }
+
+
+- (NSMutableData *)_cleanData:(NSData *)_data {
+    int len = [_data length];
+    int mlen = 0;
+    const char *bytes = [_data bytes];
+    char *mbytes = malloc(len);
+
+    for (int i = 0; i < len; i++) {
+        if (*bytes == '\r' && (i + 1 < len) && *(bytes + 1) == '\n') {
+            bytes++;
+            i++;
+        }
+        *mbytes = *bytes;
+        mbytes++;
+        bytes++;
+        mlen++;
     }
-  }
-  if (!ok) error = [self failedToSendDataToSendMail:_data];
-  return error; /* nil means 'everything is awesome' */
+
+    return [NSData dataWithBytesNoCopy:mbytes length:mlen freeWhenDone:YES];
+}
+
+- (BOOL)_appendData:(NSData *)_data toFileHandle:(NSFileHandle *)_fileHandle {
+    if (![_data isNotEmpty]) {
+        return YES;
+    }
+
+    [_fileHandle writeData:_data];
+    return YES;
+}
+
+- (NSException *)sendMailData:(NSData *)_data toRecipients:(NSArray *)_to sender:(NSString *)_sender {
+    NSMutableArray *arguments = [NSMutableArray arrayWithArray:[self buildSendMailArgumentsWithSender:_sender]];
+    [self addRecipients:_to toArguments:arguments];
+
+    NSTask *task = [self openTaskToSendMailWithArguments:arguments];
+    if (!task) {
+        return [self failedToStartSendMailError:errno];
+    }
+
+    NSFileHandle *fileHandle = [self fileHandleForTask:task];
+    if (!fileHandle) {
+        [task release];
+        return [self failedToStartSendMailError:errno];
+    }
+
+    if ([self isSendLoggingEnabled]) {
+        [self _logMailSend:[arguments componentsJoinedByString:@" "] ofData:_data];
+    }
+
+    // Clean the data (as before)
+    NSMutableData *cleaned_data = [self _cleanData:_data];
+
+    // Write the data to the task's stdin
+    BOOL ok = [self _appendData:cleaned_data toFileHandle:fileHandle];
+
+    [fileHandle closeFile];
+    [task waitUntilExit];
+
+    int errorCode = [task terminationStatus];
+    if (errorCode != 0) {
+        if (ok) {
+            return [self _handleSendMailErrorCode:errorCode sendmail:[arguments componentsJoinedByString:@" "]];
+        }
+    }
+
+    if (!ok) {
+        return [self failedToSendDataToSendMail:_data];
+    }
+
+    [task release];
+    return nil; // Success
 }
 
 - (NSException *)sendMimePart:(id<NGMimePart>)_pt toRecipients:(NSArray *)_to

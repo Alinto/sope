@@ -31,7 +31,7 @@
   An interface to the local sendmail binary for deliverying mail.
 */
 
-@class NSString, NSArray, NSData, NSException;
+@class NSString, NSArray, NSData, NSException, NSTask;
 
 @interface NGSendMail : NSObject
 {
