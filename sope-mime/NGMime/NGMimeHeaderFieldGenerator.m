@@ -25,7 +25,13 @@
 
 static BOOL isPrintable(char ch) {
   // match printable ASCII-characters according to https://tools.ietf.org/html/rfc2047#section-4.2
-  return ch >= 32 && ch < 127 && ch != '=' && ch != '?' && ch != '_' && ch != '.' && ch != ',' && ch != ';' && ch != ':' && ch != '@' && ch != '"';
+  // RFC 822 `specials` (`()<>[]:;@\,.")` must also be Q-encoded: a literal `[Org]`
+  // inside an encoded word breaks Dovecot's rfc822 parser, which then fabricates
+  // a recipient like `Name @MISSING_DOMAIN` (mailbox truncated at `[`, domain lost).
+  return ch >= 32 && ch < 127 && ch != '=' && ch != '?' && ch != '_'
+    && ch != '(' && ch != ')' && ch != '<' && ch != '>'
+    && ch != '[' && ch != ']' && ch != '\\'
+    && ch != '.' && ch != ',' && ch != ';' && ch != ':' && ch != '@' && ch != '"';
 }
 
 @implementation NGMimeHeaderFieldGenerator
