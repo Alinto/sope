@@ -729,7 +729,7 @@ static int logCounter = 0;
     id   body;
     BOOL doZip;
     BOOL isok = YES;
-    int length;
+    unsigned long long length;
     NSFileHandle *contentFile;
     
     doZip = [_response shouldZipResponseToRequest:_request];
@@ -777,7 +777,7 @@ static int logCounter = 0;
       }
     }
 
-    snprintf((char *)buf, sizeof(buf), "%d", length);
+    snprintf((char *)buf, sizeof(buf), "%llu", length);
     t1 = [[NSString alloc] initWithCString:(char *)buf];
     [_response setHeader:t1 forKey:@"content-length"];
     [t1 release]; t1 = nil;
