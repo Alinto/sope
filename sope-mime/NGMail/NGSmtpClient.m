@@ -106,6 +106,7 @@
 - (void) _fetchExtensionInfo;
 - (id) _openSocket;
 - (BOOL) _startTLS;
+- (void) _requireDeliveryStatusNotifications;
 @end
 
 @implementation NGSmtpClient
@@ -231,6 +232,16 @@
 }
 - (BOOL)isDebuggingEnabled {
   return self->isDebuggingEnabled;
+}
+
+- (BOOL)supportsDeliveryStatusNotifications {
+  return self->extensions.hasDSN;
+}
+
+- (void)_requireDeliveryStatusNotifications {
+  if (![self supportsDeliveryStatusNotifications])
+    [NSException raise:@"SMTPException"
+                format:@"SMTP server does not support delivery status notifications"];
 }
 
 // connection
@@ -564,6 +575,7 @@
     hostName = [sockAddr hostName];
   }
 
+  self->extensions.hasDSN = NO;
   reply = [self sendCommand:@"EHLO" argument:hostName];
   if ([reply code] == NGSmtpActionCompleted) {
     NSEnumerator *lines = [[[reply text] componentsSeparatedByString:@"\n"]
@@ -573,7 +585,9 @@
     if (self->isDebuggingEnabled) [NGTextErr writeFormat:@"S: %@\n", reply];
 
     while ((line = [lines nextObject])) {
-      if ([line hasPrefix:@"EXPN"])
+      if ([[line uppercaseString] isEqualToString:@"DSN"])
+        self->extensions.hasDSN = YES;
+      else if ([line hasPrefix:@"EXPN"])
         self->extensions.hasExpand = YES;
       else if ([line hasPrefix:@"SIZE"])
         self->extensions.hasSize = YES;
@@ -744,12 +758,20 @@
 }
 
 - (BOOL)mailFrom:(id)_sender {
+  return [self mailFrom:_sender requestDeliveryNotification:NO];
+}
+
+- (BOOL)mailFrom:(id)_sender requestDeliveryNotification:(BOOL)request {
   NGSmtpResponse *reply;
   NSString       *sender;
 
   [self requireState:NGSmtpState_connected];
 
   sender = [self _sanitizeAddress: [_sender stringValue]];
+  if (request) {
+    [self _requireDeliveryStatusNotifications];
+    sender = [sender stringByAppendingString:@" RET=HDRS"];
+  }
   reply  = [self sendCommand: @"MAIL"
                     argument: [@"FROM:" stringByAppendingString: sender]];
   if ([reply isPositive]) {
@@ -771,12 +793,20 @@
 }
 
 - (BOOL)recipientTo:(id)_receiver {
+  return [self recipientTo:_receiver requestDeliveryNotification:NO];
+}
+
+- (BOOL)recipientTo:(id)_receiver requestDeliveryNotification:(BOOL)request {
   NGSmtpResponse *reply = nil;
   NSString       *rcpt  = nil;
 
   [self requireState:NGSmtpState_TRANSACTION];
 
   rcpt  = [self _sanitizeAddress: [_receiver stringValue]];
+  if (request) {
+    [self _requireDeliveryStatusNotifications];
+    rcpt = [rcpt stringByAppendingString:@" NOTIFY=SUCCESS,FAILURE"];
+  }
   reply = [self sendCommand: @"RCPT"
                    argument: [@"TO:" stringByAppendingString: rcpt]];
   if ([reply isPositive]) {
