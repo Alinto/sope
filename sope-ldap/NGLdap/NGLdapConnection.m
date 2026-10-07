@@ -83,6 +83,16 @@ static void freeMods(LDAPMod **mods) {
   LDAPUseLatin1Creds      = [ud boolForKey:@"LDAPUseLatin1Creds"];
 }
 
+- (BOOL)_shouldVerifyTLSForHost:(NSString *)hostname {
+  // Try proper URL query parsing first
+  NSRange r = [hostname rangeOfString:@"tlsVerifyMode=None"];
+  if (r.location != NSNotFound) {
+    return NO;
+  }
+
+  return YES;
+}
+
 - (BOOL)_reinit {
   static int ldap_version3 = LDAP_VERSION3;
   int rc;
@@ -96,6 +106,20 @@ static void freeMods(LDAPMod **mods) {
     if (LDAPDebugEnabled)
       [self logWithFormat:@"Using ldap_initialize for LDAP URL: %@",
                           self->hostName];
+    
+    //Set SSL before the init
+    if ([self->hostName hasPrefix: @"ldaps://"])
+    {
+      int option;
+      if([self _shouldVerifyTLSForHost: self->hostName])
+        option = LDAP_OPT_X_TLS_DEMAND;
+      else
+        option = LDAP_OPT_X_TLS_NEVER;
+
+      rc = ldap_set_option(NULL, LDAP_OPT_X_TLS_REQUIRE_CERT , &option);
+      int dbg = -1; // maximum debug
+      ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, &dbg);
+    }
 
     rc = ldap_initialize(&self->handle, [self->hostName UTF8String]);
     if (rc != LDAP_SUCCESS) {
@@ -103,6 +127,7 @@ static void freeMods(LDAPMod **mods) {
                                ldap_err2string(rc)];
       return NO;
     }
+
   }
   else {
     /* Keep deprecated API around for old configurations */
