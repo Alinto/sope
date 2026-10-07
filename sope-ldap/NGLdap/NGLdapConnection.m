@@ -117,8 +117,8 @@ static void freeMods(LDAPMod **mods) {
         option = LDAP_OPT_X_TLS_NEVER;
 
       rc = ldap_set_option(NULL, LDAP_OPT_X_TLS_REQUIRE_CERT , &option);
-      int dbg = -1; // maximum debug
-      ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, &dbg);
+      // int dbg = -1; // maximum debug
+      // ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, &dbg);
     }
 
     rc = ldap_initialize(&self->handle, [self->hostName UTF8String]);
