@@ -1255,7 +1255,7 @@ static NSMutableDictionary *namespaces;
   pool = [[NSAutoreleasePool alloc] init];
 
   cmd  = [NSString stringWithFormat:
-                     @"UID FETCH 1:* (UID) (CHANGEDSINCE %llu VANISHED)",
+                     @"UID FETCH 1:4294967295 (UID) (CHANGEDSINCE %llu VANISHED)",
                    (unsigned long long)_modseq];
   fetchres = [self processCommand:cmd];
   result   = [[self->normer normalizeFetchResponse:fetchres] retain];
