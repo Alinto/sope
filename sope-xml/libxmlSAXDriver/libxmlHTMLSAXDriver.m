@@ -29,6 +29,7 @@
 
 #include <libxml/HTMLparser.h>
 #include <libxml/HTMLtree.h>
+#include <libxml/parserInternals.h>
 
 @interface NSObject(contentHandlerExtensions)
 
@@ -248,6 +249,15 @@ static void setLocator(void *udata, xmlSAXLocatorPtr _locator);
                                         0                /* chunklen */,
                                         [_path cString]  /* filename */,
                                         charEncoding     /* encoding */);
+
+  // The enc parameter of htmlCreatePushParserCtxt is deprecated and ignored
+  // in libxml2 >= 2.12. Use xmlSwitchEncoding() to explicitly set the
+  // encoding on the parser context. This is backward-compatible with older
+  // libxml2 versions where it is a harmless no-op.
+  if (self->ctxt && charEncoding != XML_CHAR_ENCODING_NONE) {
+    xmlSwitchEncoding((xmlParserCtxtPtr)self->ctxt, charEncoding);
+  }
+
   self->doc = NULL;
 }
 - (void)tearDownParser {
