@@ -85,7 +85,7 @@ static void freeMods(LDAPMod **mods) {
 
 - (BOOL)_shouldVerifyTLSForHost:(NSString *)hostname {
   // Try proper URL query parsing first
-  NSRange r = [hostname rangeOfString:@"tlsVerifyMode=None"];
+  NSRange r = [hostname rangeOfString:@"tlsVerifyMode=None" options: NSCaseInsensitiveSearch];
   if (r.location != NSNotFound) {
     return NO;
   }
