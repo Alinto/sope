@@ -30,12 +30,13 @@
   This class manages and pools NGImap4Connection objects.
 */
 
-@class NSString, NSTimer, NSMutableDictionary, NSURL;
+@class NSString, NSTimer, NSMutableDictionary, NSLock, NSURL;
 @class NGImap4Connection, NGImap4Client;
 
 @interface NGImap4ConnectionManager : NSObject
 {
   NSMutableDictionary *urlToEntry;
+  NSLock *entryLock;
   NSTimer *gcTimer;
 }
 
