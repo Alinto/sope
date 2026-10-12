@@ -1,3 +1,55 @@
+commit 3ab2dbd914da710eb450a55779a7ed6867d4b040
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Mon Oct 12 11:15:13 2026 +0200
+
+    fix(ldap) SSL, do no be sensitive
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit 72baa1229663f52d1b6dbe57ee05a9df5fd28d7d
+Author: Hadrien Blanc <blanc.hadrien@gmail.com>
+Date:   Mon Sep 28 19:10:27 2026 +0200
+
+    fix(core): use a 64-bit content length in HTTP responses
+    
+    The response content length was held in a signed 32-bit int and
+    formatted with %d, so any body served through setContentFile: (eg. a
+    mail folder export larger than 2 GiB) produced a negative
+    'Content-Length' header - rejected by reverse proxies with a generic
+    502 after the whole archive had been generated.
+    
+    The length is now an unsigned long long and formatted with %llu.
+    
+    Fixes #6228
+
+A	sope-appserver/NGObjWeb/Tests/GNUmakefile
+A	sope-appserver/NGObjWeb/Tests/TestWOHttpContentLength.m
+M	sope-appserver/NGObjWeb/WOHttpAdaptor/WOHttpTransaction.m
+
+commit 1804ce77305a3c1694780e04d1123a46e9f636d5
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Oct 7 10:02:17 2026 +0200
+
+    fix(ldap): remove debug mode
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit ffddcc48a38d9cfdcaff8910455c096f1ca45147
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Wed Oct 7 09:48:12 2026 +0200
+
+    fix(ldap): do not verify certificate if tlsVerifyMode=None
+
+M	sope-ldap/NGLdap/NGLdapConnection.m
+
+commit a3a1d2036da20b0922fb47e7f55aff29f539807b
+Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
+Date:   Tue Mar 3 12:52:36 2026 +0100
+
+    update changelog
+
+M	ChangeLog
+
 commit c9d80d2dc59485654803239e2d612470de315c3b
 Author: Hivert Quentin <quentin.hivert.fr@gmail.com>
 Date:   Wed Feb 4 14:17:08 2026 +0100
