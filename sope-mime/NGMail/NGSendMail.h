@@ -28,7 +28,7 @@
 /*
   NGSendMail
   
-  An interface to the local sendmail binary for deliverying mail.
+  An interface to the local sendmail binary for delivering mail.
 */
 
 @class NSString, NSArray, NSData, NSException;

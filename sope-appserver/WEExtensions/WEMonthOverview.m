@@ -919,7 +919,7 @@ _takeValuesInCell(WEMonthOverview *self, WORequest *request,
     [s release];
       
     [self->template takeValuesFromRequest:_req inContext:_ctx];
-    [_ctx deleteLastElementIDComponent]; // delte index-id
+    [_ctx deleteLastElementIDComponent]; // delete index-id
   }
 }
 

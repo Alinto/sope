@@ -71,7 +71,7 @@
 
 - (NSArray*)joins;
 
-/* Convering source row in destination row */
+/* Converting source row in destination row */
 - (NSDictionary*)foreignKeyForRow:(NSDictionary*)row;
 
 /* Accessing the definition */

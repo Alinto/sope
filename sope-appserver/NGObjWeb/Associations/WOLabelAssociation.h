@@ -35,7 +35,7 @@
   WOResourceManager (or the app's manager if the component has none). It uses 
   the session and browser languages for the key lookup.
   
-  Note that this also supports keypathes by prefixing the values with an
+  Note that this also supports keypaths by prefixing the values with an
   "$", eg: "$currentDay" will first evaluate "currentDay" in the component
   and then pipe the result through the label processor.
   We consider that a bit hackish, but given that it is often required in

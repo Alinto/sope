@@ -52,7 +52,7 @@ static NSString       *AuthMechanism = nil;
   static NGImap4ConnectionManager *manager = nil; // THREAD
   static NGImap4ConnectionManager *managerXoauth = nil; // THREAD
   
-  //In case of diffrent auth type for domains, instantiate the proper imap object.
+  //In case of different auth type for domains, instantiate the proper imap object.
   if(imapAuthMech && [imapAuthMech length] > 0) {
     if([imapAuthMech isEqualToString: @"xoauth2"]) {
       if(managerXoauth == nil) {

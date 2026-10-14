@@ -5,7 +5,7 @@ This is a rule engine inspired by the "BDRuleEngine" available from
 bDistributed.com (www.bdistributed.com) which in turn is inspired by the
 direct to web framework which is part of WebObjects.
 
-We have choosen different class names, so that NGExtensions can be used
+We have chosen different class names, so that NGExtensions can be used
 together with the BDRuleEngine framework.
 
 It's a nice application of EOControl qualifiers and key-value coding to
@@ -138,7 +138,7 @@ and code like this:
 
 This code will automatically determine the correct page to be shown depending
 on the rules and the state of an object. Eg if you later decide that the
-publish page should also been selected for saved docuents which are green, just
+publish page should also been selected for saved documents which are green, just
 enhance the rule to:
 
   ( "document.status = 'saved'    => pageName = 'MyReviewPage'",

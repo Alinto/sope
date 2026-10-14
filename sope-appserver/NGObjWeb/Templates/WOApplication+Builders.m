@@ -71,7 +71,7 @@
   NSString      *relPath;
   unsigned      i;
   
-  /* scan library pathes */
+  /* scan library paths */
   
   fm = [NSFileManager defaultManager];
 
@@ -98,7 +98,7 @@
 #endif
   
   if ([pathes count] == 0) {
-    [self debugWithFormat:@"found no builder bundle pathes."];
+    [self debugWithFormat:@"found no builder bundle paths."];
     return;
   }
   
@@ -152,7 +152,7 @@
   [tmppathes release];
 #endif
   
-  /* look into FHS pathes */
+  /* look into FHS paths */
   
   relPath = [NSString stringWithFormat:
 #ifdef CGS_LIBDIR_NAME

@@ -35,7 +35,7 @@
 @class EOAttribute;
 @class EOAdaptorContext;
 
-/* The EOAdaptor class could be overriden for a concrete database adaptor.
+/* The EOAdaptor class could be overridden for a concrete database adaptor.
    You have to override only those methods marked in this header with
    `override'.
 */

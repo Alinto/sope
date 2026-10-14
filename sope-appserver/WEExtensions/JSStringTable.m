@@ -27,7 +27,7 @@
   Export a string table (usually a .strings file) to JavaScript.
   
   Note: this includes a direct action which makes all languages files
-        publically accessible! As far as we could see this has no security
+        publicly accessible! As far as we could see this has no security
         implications.
 
   Note: be aware of WOResourceManager handling when using the link instead of

@@ -11,13 +11,13 @@ handler, is the
 
 class. This class knows about the various WebDAV HTTP methods and takes
 appropriate actions by calling specified methods on either the SoObject which
-is targetted by the URL or on one of the maintenance objects. Eg WebDAV 
+is targeted by the URL or on one of the maintenance objects. Eg WebDAV 
 locking and notification is handled by the
 
   SoDAVLockManager
   SoSubscriptionManager
 
-classes, so the targetted object itself doesn't need to concern itself about
+classes, so the targeted object itself doesn't need to concern itself about
 that.
 
 Once a WebDAV action has been performed, the
@@ -126,7 +126,7 @@ TODO
 ====
 
 REPORT
-- find a good way to represent arbitary reports
+- find a good way to represent arbitrary reports
 
 extended ops: ACL, CHECKOUT etc
 

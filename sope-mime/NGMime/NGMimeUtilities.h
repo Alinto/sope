@@ -156,7 +156,7 @@ static inline NSData *_quotedPrintableEncoding(NSData *_data) {
     result = [NSData dataWithBytesNoCopy:des length:desLen];
   }
   else {
-    NSLog(@"WARNING(%s): An error occour during quoted-printable decoding",
+    NSLog(@"WARNING(%s): An error occur during quoted-printable decoding",
           __PRETTY_FUNCTION__);
     if (des) NGFree(des);
     result = _data;
@@ -189,7 +189,7 @@ static inline NSData *_rfc2047Decoding(char _enc, const char *_bytes,
       data = [NSData dataWithBytesNoCopy:dest length:resSize];
     }
     else {
-      NSLog(@"WARNING(%s): An error occour during quoted-printable decoding",
+      NSLog(@"WARNING(%s): An error occur during quoted-printable decoding",
             __PRETTY_FUNCTION__);
       if (dest != NULL) free(dest); dest = NULL;
       data = [NSData dataWithBytes:_bytes length:_length];

@@ -127,7 +127,7 @@ static Class NSCFArrayClass = Nil;
     searchPathes = [ma copy];
     
     if ([searchPathes count] == 0)
-      NSLog(@"%s: no search pathes were found!", __PRETTY_FUNCTION__);
+      NSLog(@"%s: no search paths were found!", __PRETTY_FUNCTION__);
   }
   return searchPathes;
 }

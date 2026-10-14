@@ -25,7 +25,7 @@
 @class WOElement, WOAssociation;
 
 /*
-  Class Hierachy
+  Class Hierarchy
     [WOHTMLDynamicElement]
       [WOHyperlink]
         _WOCommonStaticDAHyperlink

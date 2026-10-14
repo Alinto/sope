@@ -760,7 +760,7 @@ static NSString *_parseKey(id _ctx, const char *_buf, unsigned _bufLen,
     pos++;
   }
   else {
-    /* '{' for namspaces */
+    /* '{' for namespaces */
     register BOOL isQuotedKey = NO;
 
     if (c == '"')

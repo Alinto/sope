@@ -20,7 +20,7 @@ NGMail_LIBRARIES_DEPEND_UPON += \
 	-framework DOM -framework SaxObjC
 endif
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = \
 	.. \

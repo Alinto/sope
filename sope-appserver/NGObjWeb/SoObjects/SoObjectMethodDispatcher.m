@@ -170,7 +170,7 @@ static BOOL useRedirectsForDefaultMethods = NO;
       
       Note: you can run into situations where there is a methodObject, but
             it isn't callable. Eg this situation can occur if the default
-	    method name leads to an object which isn't a method (occured in
+	    method name leads to an object which isn't a method (occurred in
 	    the OFS context if 'index' maps to an OFSFile which itself isn't
 	    callable).
     */

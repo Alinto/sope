@@ -30,7 +30,7 @@
 
 - (id)init {
   self = [super initWithName:NSStringFromClass([self class])
-                reason:@"an IO exception occured"
+                reason:@"an IO exception occurred"
                 userInfo:nil];
   return self;
 }
@@ -68,7 +68,7 @@
 @implementation NGStreamException
 
 - (NSString *)defaultReason {
-  return @"a stream exception occured";
+  return @"a stream exception occurred";
 }
 
 - (id)init {
@@ -215,7 +215,7 @@
 - (id)initWithStream:(id<NGStream>)_stream errorCode:(int)_code {
   NSString *tmp = nil;
 
-  tmp = [NSString stringWithFormat:@"stream error occured, errno=%i error=%s",
+  tmp = [NSString stringWithFormat:@"stream error occurred, errno=%i error=%s",
                     _code, strerror(_code)];
   if ((self = [self initWithStream:_stream reason:tmp])) {
     osErrorCode = _code;
@@ -274,7 +274,7 @@
 @implementation NGUnknownStreamModeException
 
 - (NSString *)defaultReason {
-  return @"unknow stream mode";
+  return @"unknown stream mode";
 }
 
 - (id)initWithStream:(id<NGStream>)_stream mode:(NSString *)_streamMode {

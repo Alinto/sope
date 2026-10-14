@@ -243,7 +243,7 @@ typedef struct _NGMimeHeaderNames {
 
 /*
   After the headers were parsed the parser creates an NGMimePart object which
-  containes the headers. It will then begin to read in the body of the MIME
+  contains the headers. It will then begin to read in the body of the MIME
   message, usually first as an NSData object.
   You can return NO if you want to stop parsing (eg based on some values in the
   headers or YES if you want to have the parser read in the data of the body.

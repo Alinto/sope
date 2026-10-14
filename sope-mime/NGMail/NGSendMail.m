@@ -257,7 +257,7 @@
 }
 
 - (NSException *)_handleAppendMessageException:(NSException *)_exception {
-  [self logWithFormat:@"catched exception: %@", _exception];
+  [self logWithFormat:@"caught exception: %@", _exception];
   return nil;
 }
 

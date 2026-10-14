@@ -159,8 +159,8 @@
 #  endif
 
 /*
-  Polls a descriptor. Returns 1 if events occurred, 0 if a timeout occured
-  and -1 if an error other than EINTR or EAGAIN occured.
+  Polls a descriptor. Returns 1 if events occurred, 0 if a timeout occurred
+  and -1 if an error other than EINTR or EAGAIN occurred.
 */
 int NGPollDescriptor(SOCKET _fd, short _events, int _timeout);
 

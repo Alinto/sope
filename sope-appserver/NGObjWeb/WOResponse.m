@@ -107,7 +107,7 @@ static __inline__ char *monthName(int m) {
 #endif
   
   /*
-    Set expire time to one hour before now to catch inconsitencies between
+    Set expire time to one hour before now to catch inconsistencies between
     client and server time. Not using -description of NSCalendarDate to
     avoid locales and to improve performance.
   */

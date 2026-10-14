@@ -310,7 +310,7 @@ int WOWatchDogApplicationMain
       else {
         if (child == 0) {
           /* child process */
-	  /* We need to modify the arguements passed into execve() */
+	  /* We need to modify the arguments passed into execve() */
           char **childArgv;
           int index;
           int childIndex;
@@ -327,7 +327,7 @@ int WOWatchDogApplicationMain
 	  /*
 	    We need to call execve() to transform this child process into a
 	    new process.
-	    Signals set to be caught wil be set to the default action by
+	    Signals set to be caught will be set to the default action by
 	    execve().
 	  */
           

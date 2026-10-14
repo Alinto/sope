@@ -32,7 +32,7 @@
 /*"
   This class specifies a sort-ordering as used with
   EOFetchSpecification. It takes a key and a sort
-  selector which is used for comparision.
+  selector which is used for comparison.
 "*/
 
 /*" Create a sort-ordering object with the specified key and sort selector "*/

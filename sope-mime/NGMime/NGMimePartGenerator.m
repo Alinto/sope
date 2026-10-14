@@ -415,7 +415,7 @@ static BOOL       debugOn = NO;
     // TODO: length check is new, this should be correct, but might be wrong.
     //       Some strange things occur if we generate a part which is a
     //       NGMimeFileData (this method was called twiced, once without header
-    //       data which in turn resulted in a superflous "\r\n" string
+    //       data which in turn resulted in a superfluous "\r\n" string
     if ([headerData length] > 0) {
       [self->result appendData:headerData];
 
@@ -473,7 +473,7 @@ static BOOL       debugOn = NO;
 
   if (![[self generateMimeFromPart:_part]
               writeToFile:filename atomically:YES]) {
-    [self errorWithFormat: @"couldn`t write data to temorary file %@", filename];
+    [self errorWithFormat: @"couldn`t write data to temporary file %@", filename];
     return nil;
   }
   return filename;

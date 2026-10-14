@@ -27,7 +27,7 @@
 @implementation NGSocketException
 
 - (id)init {
-  return [self initWithReason:@"a socket exception occured" socket:nil];
+  return [self initWithReason:@"a socket exception occurred" socket:nil];
 }
 - (id)initWithReason:(NSString *)_reason {
   return [self initWithReason:_reason socket:nil];

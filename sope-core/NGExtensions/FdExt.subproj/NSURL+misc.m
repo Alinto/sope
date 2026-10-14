@@ -242,7 +242,7 @@ static NSString *calcRelativePathOfChildURL(NSString *self, NSString *_base) {
           s: "/a/b/ccc/d"
           >: "ccc/d"
 
-      b=s is already catched above and s is guaranteed to be
+      b=s is already caught above and s is guaranteed to be
       longer than b.
   */
   unsigned blen;

@@ -41,7 +41,7 @@ UserDefaults
     WOHttpAdaptor_LogStream | bool   |
     WOProjectDirectory      | String | /Users/znek/Projects/Foo
 
-Class-Hierachy
+Class-Hierarchy
 ==============
 
     NSObject

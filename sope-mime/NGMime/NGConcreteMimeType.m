@@ -285,7 +285,7 @@ static NGConcreteTextMimeType *textPlainNoCharset = nil;
   return YES;
 }
 
-- (BOOL)doesMatchType:(NGMimeType *)_other { // interpretes wildcards
+- (BOOL)doesMatchType:(NGMimeType *)_other { // interprets wildcards
   NSString *ot  = [_other type];
   NSString *ost = [_other subType];
 
@@ -673,7 +673,7 @@ static NGConcreteTextMimeType *textPlainNoCharset = nil;
   return YES;
 }
 
-- (BOOL)doesMatchType:(NGMimeType *)_other { // interpretes wildcards
+- (BOOL)doesMatchType:(NGMimeType *)_other { // interprets wildcards
   NSString *ot  = [_other type];
   NSString *ost = [_other subType];
 
@@ -802,7 +802,7 @@ static NGConcreteTextMimeType *textPlainNoCharset = nil;
   return YES;
 }
 
-- (BOOL)doesMatchType:(NGMimeType *)_other { // interpretes wildcards
+- (BOOL)doesMatchType:(NGMimeType *)_other { // interprets wildcards
   if (self->type) {
     NSString *ot  = [_other type];
     if ([ot  isEqualToString:@"*"]) ot  = self->type;

@@ -159,7 +159,7 @@ __appendByte(NGMBoxReader *self, NSMutableData *_data, IMP _readBytes, int _c);
     }
     
     while ((c = __readByte(self)) != '\n' &&
-           bufCnt < sepLength) {        // read oly until seperator length    
+           bufCnt < sepLength) {        // read only until separator length    
       if (c == -1)
         break;
       buf[bufCnt++] = c;

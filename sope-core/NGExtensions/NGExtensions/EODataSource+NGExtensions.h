@@ -33,7 +33,7 @@ NGExtensions_EXPORT NSString *EODataSourceDidChangeNotification;
   If a fetchspecification without a qualifier is passed, the
   datasource should fetch all objects by default. If the
   EONoFetchWithEmptyQualifierHint value in the fspec hints-dictionary
-  is YES, an emtpy array should be returned.
+  is YES, an empty array should be returned.
 */
 NGExtensions_EXPORT NSString *EONoFetchWithEmptyQualifierHint;
 

@@ -1487,7 +1487,7 @@ static NSMutableDictionary *namespaces;
   if (![_charSet isNotEmpty])
     _charSet = @"UTF-8";
 
-  // Verify server capablities
+  // Verify server capabilities
   capa = [[self capability] objectForKey: @"capability"];
   if ([capa indexOfObject: [NSString stringWithFormat: @"thread=%@", [threadAlg lowercaseString]]] == NSNotFound)
     {
@@ -1788,14 +1788,14 @@ static NSMutableDictionary *namespaces;
 
 
 - (NSException *)_processCommandParserException:(NSException *)_exception {
-  [self logWithFormat:@"ERROR(%s): catched IMAP4 parser exception %@: %@",
+  [self logWithFormat:@"ERROR(%s): caught IMAP4 parser exception %@: %@",
 	__PRETTY_FUNCTION__, [_exception name], [_exception reason]];
   [self closeConnection];
   [self->context setLastException:_exception];
   return nil;
 }
 - (NSException *)_processUnknownCommandParserException:(NSException *)_ex {
-  [self logWithFormat:@"ERROR(%s): catched non-IMAP4 parsing exception %@: %@",
+  [self logWithFormat:@"ERROR(%s): caught non-IMAP4 parsing exception %@: %@",
 	__PRETTY_FUNCTION__, [_ex name], [_ex reason]];
   return nil;
 }

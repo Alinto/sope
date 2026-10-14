@@ -151,7 +151,7 @@ static NSArray  *fileInfoAttrs    = nil;
   _dn = [_dn lowercaseString];
 
   if (![_dn hasSuffix:self->rootDN]) {
-    /* DN is not rooted in this hierachy */
+    /* DN is not rooted in this hierarchy */
     return nil;
   }
 

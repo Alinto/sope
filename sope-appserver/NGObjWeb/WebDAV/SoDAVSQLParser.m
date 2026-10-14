@@ -433,7 +433,7 @@ static inline BOOL isTokStopChar(unichar c) {
     ;
   // isDeep = YES;
   else
-    /* unknown traveral key */
+    /* unknown traversal key */
     return NO;
   
   /* some syntactic sugar (not strict about that ...) */

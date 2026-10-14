@@ -27,7 +27,7 @@
 /*
   EOTrueQualifier
   
-  This is an extremly simple qualifier which always evaluates to true ...
+  This is an extremely simple qualifier which always evaluates to true ...
   (eg used in the rule-system)
   
   Note: the EOTrueQualifier may not map properly to a storage based qualifier,

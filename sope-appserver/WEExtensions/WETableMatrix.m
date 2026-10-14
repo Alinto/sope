@@ -769,7 +769,7 @@ static NSNumber *numForUInt(unsigned int i) {
         [_response appendContentString:s];
         [_response appendContentString:@"\">&nbsp;</td>"];
         
-        /* close completly filled row */
+        /* close completely filled row */
         [_response appendContentString:@"</tr>"];
 #endif
         [s release];

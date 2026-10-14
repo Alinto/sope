@@ -94,7 +94,7 @@ static int debugOn = 0;
 {
   /* 
      spec is supposed to be a dictionary with the KVC keys as the 
-     keys and DOM query pathes as the values.
+     keys and DOM query paths as the values.
   */
   NSMutableDictionary *args;
   NSEnumerator *keys;

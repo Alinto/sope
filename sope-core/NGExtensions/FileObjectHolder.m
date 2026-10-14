@@ -94,7 +94,7 @@
 }
 
 - (void)handleException:(NSException *)_exception {
-  NSLog(@"%s: catched: %@", __PRETTY_FUNCTION__, _exception);
+  NSLog(@"%s: caught: %@", __PRETTY_FUNCTION__, _exception);
 }
 
 - (void)_dataAvailable:(NSNotification *)_notification {

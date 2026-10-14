@@ -158,7 +158,7 @@
   self->searchPathes = [ma copy];
   
   if (![self->searchPathes isNotEmpty]) {
-    [self logWithFormat:@"no search pathes were found !", 
+    [self logWithFormat:@"no search paths were found !", 
 	  __PRETTY_FUNCTION__];
   }
   
