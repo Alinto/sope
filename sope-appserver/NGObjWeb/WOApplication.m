@@ -315,7 +315,7 @@ static NSString *defaultCompRqHandlerClassName = @"WOComponentRequestHandler";
 }
 
 - (void)processHupSignal:(int)_signal {
-  /* this isn't called immediatly */
+  /* this isn't called immediately */
   [self logWithFormat:@"terminating on SIGHUP ..."];
   [self terminate];
 }

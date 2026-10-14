@@ -223,7 +223,7 @@ static NSMapTable *classToDesc  = NULL;
   NSException *e;
 
   e = [[self alloc] initWithName:@"EOAggregateException"
-                    reason:@"several exceptions occured"
+                    reason:@"several exceptions occurred"
                     userInfo:
                       [NSDictionary dictionaryWithObject:_exceptions
                                     forKey:@"exceptions"]];

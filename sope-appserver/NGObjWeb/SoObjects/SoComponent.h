@@ -27,7 +27,7 @@
 /*
   SoComponent
   
-  This is a subclass of WOComponent intendend for use with components which
+  This is a subclass of WOComponent intended for use with components which
   are placed into a product bundle. The main difference is, that SoComponent's
   use the SoProductResourceManager to locate their resources.
 */

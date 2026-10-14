@@ -303,7 +303,7 @@ static EONull   *null = nil;
       return date;
     }
     
-    // See if we can alloc a new aValue and initilize it
+    // See if we can alloc a new aValue and initialize it
     if ([aClass instancesRespondToSelector:
                 @selector(initWithString:type:)]) {
       // Note: this is still problematic! Eg NSString instances respond to
@@ -318,7 +318,7 @@ static EONull   *null = nil;
     
   // Try EODatabaseCustomValues
   if ([aValue respondsToSelector:@selector(dataForType:)]) {
-    // See if we can alloc a new aValue and initilize it
+    // See if we can alloc a new aValue and initialize it
     if ([aClass instancesRespondToSelector:
                 @selector(initWithData:type:)]) {
       return AUTORELEASE([[aClass alloc] 

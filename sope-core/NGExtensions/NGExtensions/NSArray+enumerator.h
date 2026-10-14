@@ -31,7 +31,7 @@
 - (id)initWithObjectsFromEnumerator:(NSEnumerator *)_enumerator;
 
 /*
-  Returns an array contructed using this algorithm:
+  Returns an array constructed using this algorithm:
 
     for (i = 0; i < [self count]; i++)
       newArray[i] = [array[i] performSelector:_selector];

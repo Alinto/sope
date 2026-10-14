@@ -276,7 +276,7 @@ NSString *EODatabaseChannelDidLockObjectName =
   // Check if in a transaction
   if (![databaseContext transactionNestingLevel]) {
     [self privateReportError:_cmd : 
-          @"cannot insert if contex has no transaction opened."];
+          @"cannot insert if context has no transaction opened."];
     return NO;
   }
     
@@ -407,7 +407,7 @@ NSString *EODatabaseChannelDidLockObjectName =
   // Check if in a transaction
   if (![databaseContext transactionNestingLevel]) {
     [self privateReportError:_cmd : 
-            @"cannot update if contex has no transaction opened."];
+            @"cannot update if context has no transaction opened."];
     return NO;
   }
     
@@ -660,7 +660,7 @@ NSString *EODatabaseChannelDidLockObjectName =
   // Check if in a transaction
   if (![databaseContext transactionNestingLevel]) {
     [self privateReportError:_cmd : 
-            @"cannot update if contex has no transaction opened."];
+            @"cannot update if context has no transaction opened."];
     return NO;
   }
   
@@ -766,14 +766,14 @@ NSString *EODatabaseChannelDidLockObjectName =
   // Check if in a transaction
   if (![databaseContext transactionNestingLevel]) {
     [self privateReportError:_cmd : 
-            @"cannot lock if contex has no transaction opened."];
+            @"cannot lock if context has no transaction opened."];
     return NO;
   }
     
   // Check if fetch is in progress
   if ([self isFetchInProgress]) {
     [self privateReportError:_cmd : 
-            @"cannot lock if contex has a fetch in progress."];
+            @"cannot lock if context has a fetch in progress."];
     return NO;
   }
     
@@ -940,7 +940,7 @@ NSString *EODatabaseChannelDidLockObjectName =
   [self privateUpdateCurrentEntityInfo];
   if (currentAttributes == nil) {
     [self privateReportError:_cmd : 
-          @"internal inconsitency while refetching %p.", anObj];
+          @"internal inconsistency while refetching %p.", anObj];
     return NO;
   }
     
@@ -1055,7 +1055,7 @@ NSString *EODatabaseChannelDidLockObjectName =
   [self privateUpdateCurrentEntityInfo];
   if (self->currentAttributes == nil) {
     [self privateReportError:_cmd : 
-          @"internal inconsitency while selecting."];
+          @"internal inconsistency while selecting."];
   }
 #ifdef DEBUG
   NSAssert3([self->currentAttributes count] > 0,

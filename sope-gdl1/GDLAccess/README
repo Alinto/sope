@@ -7,7 +7,7 @@ GNU Database Library Access Layer - MDlink patch Version
 
   Changes
 
-    There are no EOJoin's anymore (only for compability). EORelationships
+    There are no EOJoin's anymore (only for compatibility). EORelationships
     cannot be compound and store source and destination themselves.
     
     No compound primary keys are allowed.
@@ -67,7 +67,7 @@ GNU Database Library Access Layer - MDlink patch Version
       operation is unrestricted, i.e. it fetches all the records from
       the table
 
-  Class Hierachy
+  Class Hierarchy
 
     NSObject
       DefaultScannerHandler

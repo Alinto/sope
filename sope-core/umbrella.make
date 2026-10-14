@@ -29,7 +29,7 @@ $(FRAMEWORK_NAME)_LDFLAGS += -seg1addr $($(FRAMEWORK_NAME)_PREBIND_ADDR)
 endif
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS += \
 	EOControl EOCoreData NGExtensions NGStreams \

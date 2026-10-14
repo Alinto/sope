@@ -324,7 +324,7 @@
         reason = @"network is unreachable";
         break;
       case WSAETIMEDOUT:
-        reason = @"timeout occured";
+        reason = @"timeout occurred";
         break;
 #else
       case EADDRINUSE:
@@ -352,7 +352,7 @@
         reason = @"the address length is invalid";
         break;
       case EIO:
-        reason = @"an IO error occured";
+        reason = @"an IO error occurred";
         break;
       case EISCONN:
         reason = @"socket is already connected";
@@ -361,7 +361,7 @@
         reason = @"network is unreachable";
         break;
       case ETIMEDOUT:
-        reason = @"timeout occured";
+        reason = @"timeout occurred";
         break;
 #endif
 
@@ -568,7 +568,7 @@
   if (NGCanReadInStreamMode(_mode))  events |= POLLRDNORM;
   if (NGCanWriteInStreamMode(_mode)) events |= POLLWRNORM;
 
-  // timeout of 0 means return immediatly
+  // timeout of 0 means return immediately
   return (NGPollDescriptor([self fileDescriptor], events, 0) == 1 ? NO : YES);
 }
 
@@ -578,7 +578,7 @@
   if (NGCanReadInStreamMode(_mode))  events |= POLLRDNORM;
   if (NGCanWriteInStreamMode(_mode)) events |= POLLWRNORM;
 
-  // timeout of 0 means return immediatly
+  // timeout of 0 means return immediately
   return NGPollDescriptor([self fileDescriptor], events,
                           (int)(_timeout * 1000.0));
 }

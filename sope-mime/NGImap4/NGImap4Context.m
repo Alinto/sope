@@ -463,7 +463,7 @@ static int ImapLogEnabled                           = -1;
   if (self->serverRoot == nil) {
     /*
       Note: serverRoot is not retained by NGImap4Context to avoid a
-      retain cycle. This is why the object is autoreleased immediatly
+      retain cycle. This is why the object is autoreleased immediately
       after creation (the usercode uses -serverRoot to access the result).
     */
     [self resetSpecialFolders];

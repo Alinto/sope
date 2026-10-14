@@ -1,7 +1,7 @@
 NGMail
 ======
 
-Class-Hierachy
+Class-Hierarchy
   
   NSObject
     NGMBoxReader

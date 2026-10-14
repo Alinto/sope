@@ -600,7 +600,7 @@ static int compare_fire_dates(id timer1, id timer2, void* userData)
 	r = select(FD_SETSIZE, &readSet, &writeSet, &exceptionsSet, timeout);
 	if (r == -1) {
 	    if (errno == EINTR) {
-		/* Interrupt occured; break the loop to give a chance to
+		/* Interrupt occurred; break the loop to give a chance to
 		   UnixSignalHandler to handle the signals. */
 		errno = 0;
 		break;

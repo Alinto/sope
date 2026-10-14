@@ -226,7 +226,7 @@ static int debugOn = 0;
   for (i = 0; i < [pathes count]; i++)
     [self registerProductBundle:[pathes objectAtIndex:i]];
   
-  /* scan library pathes */
+  /* scan library paths */
   
   fm = [NSFileManager defaultManager];
 #if ! GNUSTEP_BASE_LIBRARY  
@@ -310,7 +310,7 @@ static int debugOn = 0;
                      stringByAppendingPathComponent:@"SoProducts"];
   [self scanForProductsInDirectory:relPath];
 #endif
-  /* look into FHS pathes */
+  /* look into FHS paths */
   
   relPath = [NSString stringWithFormat:
 #ifdef CGS_LIBDIR_NAME

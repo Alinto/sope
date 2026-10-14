@@ -210,7 +210,7 @@ NSEnumerator *libraryPaths;
   searchPathes = [ma copy];
   
   if ([searchPathes count] == 0)
-    NSLog(@"%s: no search pathes were found!", __PRETTY_FUNCTION__);
+    NSLog(@"%s: no search paths were found!", __PRETTY_FUNCTION__);
   
   return searchPathes;
 }
@@ -346,7 +346,7 @@ NSEnumerator *libraryPaths;
   
   pool = [[NSAutoreleasePool alloc] init];
   {
-    /* lookup bundle in Libary/SaxDrivers pathes */
+    /* lookup bundle in Library/SaxDrivers paths */
     NSEnumerator        *pathes;
     NSString            *path;
     NSMutableDictionary *nameMap, *typeMap;
@@ -363,7 +363,7 @@ NSEnumerator *libraryPaths;
 
 #if DEBUG
     if ([self->nameToBundle count] == 0) {
-      NSLog(@"%s: no XML parser could be found in pathes: %@", 
+      NSLog(@"%s: no XML parser could be found in paths: %@", 
 	    __PRETTY_FUNCTION__, [self saxReaderSearchPathes]);
     }
     else if ([self->mimeTypeToName count] == 0) {

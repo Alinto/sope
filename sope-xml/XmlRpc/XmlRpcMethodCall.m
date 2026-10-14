@@ -109,7 +109,7 @@
     
     /* 
        shallow copy parameters, it is implemented here 'by-hand', since 
-       skyrix-xml is not dependend on EOControl
+       skyrix-xml is not dependent on EOControl
     */
     cc = [_params count];
     objects = calloc(cc + 1, sizeof(id));

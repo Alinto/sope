@@ -22,10 +22,10 @@
 /*
   WETreeView
   
-  A WETreeView is very similar to a WETableView (eg it can have arbitary
+  A WETreeView is very similar to a WETableView (eg it can have arbitrary
   columns), but can also show/manage a tree of objects.
   
-  TODO: we should support a cookie to store the tree hiearchy for stateless 
+  TODO: we should support a cookie to store the tree hierarchy for stateless 
         servers like the Zope tree. This probably needs to be implemented in
         takeValues (cookie decoding) and appendToResponse (cookie encoding).
         Zooming (invokeAction) needs to ignore? the component-id in case the

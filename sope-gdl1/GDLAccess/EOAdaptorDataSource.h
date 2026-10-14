@@ -44,7 +44,7 @@
   the PKeys).
   If no primary key is set, and now primary key could find in the table
   schema, all keys will be taken as primary keys.
-  If only one primary key exsist, in insert object a new key will be generatet,
+  If only one primary key exists, in insert object a new key will be generated,
   else all keys has to be set.
   If fetch hint EOFetchResultTimeZone is set (NSTimeZone), this timezone will
   be set in date objectes.

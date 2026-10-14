@@ -64,7 +64,7 @@
 
 /*
  * Informal protocol that informs an instance that a to-one
- * relationship could not be resoved to get data for self.
+ * relationship could not be resolved to get data for self.
  * Its implementation in NSObject raises NSObjectNotAvailableException. 
  */
 

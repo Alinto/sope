@@ -151,7 +151,7 @@ static int UseLFSeperatedAddressEntries = -1;
       }
       else {
         [self warnWithFormat:
-		@"%s:%i: An error occour during quoted-printable decoding",
+		@"%s:%i: An error occur during quoted-printable decoding",
 	        __PRETTY_FUNCTION__, __LINE__];
       }
       if (des) free(des);

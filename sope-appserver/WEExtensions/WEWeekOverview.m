@@ -46,7 +46,7 @@
   headerRow = 0 / headerRowList = ( 0, 1, 2, 3, 4 );
   startDate/endDate
   
-  the numbers corresponde to the indxes in the matrix (self->matrix[])
+  the numbers correspond to the indexes in the matrix (self->matrix[])
 
   Note: it does support additional header and footer rows which can be used
         to generate content above and below the view itself.

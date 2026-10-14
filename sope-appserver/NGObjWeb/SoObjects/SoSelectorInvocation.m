@@ -151,7 +151,7 @@ static BOOL debugOn = NO;
 /* arguments */
 
 - (NSArray *)extractSOAPArgumentsFromContext:(id)_ctx specification:(id)_spec {
-  /* spec is supposed to be an array of DOM query pathes ... */
+  /* spec is supposed to be an array of DOM query paths ... */
   NSMutableArray *args;
   unsigned       i, count;
   id             soapEnvelope;

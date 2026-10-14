@@ -27,7 +27,7 @@
 @class NSString, NSDate;
 
 /*
-  Cookie values. Occures in 'Cookie' and 'Set-Cookie' header fields. Examples:
+  Cookie values. Occurs in 'Cookie' and 'Set-Cookie' header fields. Examples:
 
     'Set-Cookie: CUSTOMER=WILE_E_COYOTE; path=/'
     'Cookie: CUSTOMER=WILE_E_COYOTE'

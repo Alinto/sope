@@ -41,7 +41,7 @@
   server socket by calling receive, which blocks the thread until a datagram 
   is available and it becomes a client socket by calling send. However to send
   datagrams you have to know the target address of the server-socket. This is
-  usually acomplished by binding the socket to a well-known address.
+  usually accomplished by binding the socket to a well-known address.
 
   The receive packet methods take a timeout argument. The timeout is 
   accomplished by using a poll call that waits for read and timeout. A timeout 

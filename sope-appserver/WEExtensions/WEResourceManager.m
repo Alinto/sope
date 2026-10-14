@@ -140,7 +140,7 @@ static NSString *themesDirName = @"Themes";
   }
 #endif
 
-  /* hack in FHS pathes */
+  /* hack in FHS paths */
 
   e = [[self rootPathesInFHS] objectEnumerator];
   while ((tmp = [e nextObject]) != nil) {
@@ -184,14 +184,14 @@ static NSString *themesDirName = @"Themes";
   wsPathes = [[self findResourceDirectoryPathesWithName:
                             [self gsWebSubpath] fhsName:@"www/"] copy];
   if (debugOn)
-    NSLog(@"WebServerResources pathes: %@", wsPathes);
+    NSLog(@"WebServerResources paths: %@", wsPathes);
 
   // TODO: use appname to enable different setups, maybe some var too
   templatePathes = [[self findResourceDirectoryPathesWithName:
                             [[self class] gsTemplatesSubpath]
                                                       fhsName:@"templates/"] copy];
   if (debugOn)
-    NSLog(@"template pathes: %@", templatePathes);
+    NSLog(@"template paths: %@", templatePathes);
   if (![templatePathes isNotEmpty]) {
     NSLog(@"Note: found no directories containing flat templates (subpath=%@)",
 	  [[self class] gsTemplatesSubpath]);
@@ -725,7 +725,7 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
   NSString *path;
 
   if (debugComponents) {
-    [self logWithFormat:@"lookup component in std pathes: %@|%@|%@",
+    [self logWithFormat:@"lookup component in std paths: %@|%@|%@",
 	  _name, _framework, _theme];
   }
 
@@ -780,7 +780,7 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
   NSString *theme;
 
   if (debugComponents) {
-    [self logWithFormat:@"lookup component in std pathes(langs): %@|%@",
+    [self logWithFormat:@"lookup component in std paths(langs): %@|%@",
 	  _name, _framework];
   }
 
@@ -896,7 +896,7 @@ checkCache(NSDictionary *_cache, WEResourceKey *_key,
 	       languages:_langs];
   if (path != nil) {
     if (debugComponents)
-      [self logWithFormat:@"  found in standard pathes: %@", path];
+      [self logWithFormat:@"  found in standard paths: %@", path];
     goto done;
   }
 

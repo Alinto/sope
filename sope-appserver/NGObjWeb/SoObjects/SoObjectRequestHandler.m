@@ -136,7 +136,7 @@ static NSString *redirectURISafetySuffix = nil;
   }
   else if ([m hasPrefix:@"public"]) {
     /* Evolution query on "/public" */
-    ; // keep it completly
+    ; // keep it completely
   }
   else if ([self skipApplicationName]) {
     /* cut of appname */

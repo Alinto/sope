@@ -264,7 +264,7 @@ static NSDictionary *defaultAssocMap = nil;
   if (self->definitions == nil)
     self->definitions = [[NSMutableDictionary alloc] initWithCapacity:64];
 
-  /* process pathes */
+  /* process paths */
   
   fm   = [NSFileManager defaultManager];
   path = [_url path];
@@ -287,7 +287,7 @@ static NSDictionary *defaultAssocMap = nil;
   else if ([path hasSuffix:@".html"]) {
     /* 
        If we pass in the .html, this basically means that the .html and .wod
-       are not inside a wrapper but in some arbitary directory.
+       are not inside a wrapper but in some arbitrary directory.
        This is used in OGo to support FHS location in a Unix-like way (the
        templates live in /usr/share/ogo/templates/xyz.html and xyz.wod).
     */
@@ -315,7 +315,7 @@ static NSDictionary *defaultAssocMap = nil;
   if ([fm fileExistsAtPath:tmpPath])
     wooFile = [NSDictionary dictionaryWithContentsOfFile:tmpPath];
   
-  /* process language specific pathes */
+  /* process language specific paths */
   
   script = nil;
   if (wodFile == nil) { /* no .wod, no script (cannot be bound ...) */

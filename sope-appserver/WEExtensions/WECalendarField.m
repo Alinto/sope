@@ -147,7 +147,7 @@ static NSString *retStr02ForInt(int i) {
 
 @implementation WECalendarField(WETimeFieldImplementation)
 
-/* Private Methodes */
+/* Private Methods */
 
 - (NSString *)_divIDAndScriptInContext:(WOContext *)_ctx
   response:(WOResponse *)_response

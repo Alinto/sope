@@ -39,7 +39,7 @@ maintains the objectTraversalStack in the given context. This implies,
 that for "sub-traversals" a new context should be created.
 
 So for now -lookupName: acquires in the containment hierarchy if the
-aquisition flag is turned on and traverseKey acquires along the context
+acquisition flag is turned on and traverseKey acquires along the context
 hierarchy.
 
 Hm. This lookup issue needs to be cleared up and written down.

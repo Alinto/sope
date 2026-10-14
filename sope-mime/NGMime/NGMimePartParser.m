@@ -598,7 +598,7 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
           realFieldName = fieldName;
 	  
           if (c == -1) {
-            NSLog(@"WARNING(%s:%i): 1 an error occured during header-field "
+            NSLog(@"WARNING(%s:%i): 1 an error occurred during header-field "
                   @" parsing (maybe end of stream) fieldName: %@",
                   __PRETTY_FUNCTION__, __LINE__, fieldName);
             foundEndOfHeaders = YES;
@@ -709,7 +709,7 @@ static NSString *fieldNameForCString(id self, char *_cstring, int _len) {
     }
     if (!endOfFieldBody) {
       [self logWithFormat:
-	      @"WARNING(%s:%i): 2 an error occured during body parsing "
+	      @"WARNING(%s:%i): 2 an error occurred during body parsing "
               @"(maybe end of stream)", __PRETTY_FUNCTION__, __LINE__];
       foundEndOfHeaders = YES;
     }

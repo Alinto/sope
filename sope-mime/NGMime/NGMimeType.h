@@ -68,7 +68,7 @@ NGMime_EXPORT NSString *NGMimeParameterTextCharset;
 - (BOOL)isEqual:(id)_other;
 - (BOOL)hasSameGeneralType:(NGMimeType *)_other; // only the 'type' must match
 - (BOOL)hasSameType:(NGMimeType *)_other;        // parameters need not match
-- (BOOL)doesMatchType:(NGMimeType *)_other;      // interpretes wildcards
+- (BOOL)doesMatchType:(NGMimeType *)_other;      // interprets wildcards
 
 // parameters
 

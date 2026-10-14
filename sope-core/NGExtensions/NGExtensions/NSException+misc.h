@@ -32,7 +32,7 @@
   exceptions are identified by their name, subclasses are mainly used when
   additional information needs to be stored. This works well as long as you do
   not use exceptions very much (as in the Foundation Kit) - if you do you
-  soon wish to have a 'hierachy' of exceptions. This can be modelled - like in
+  soon wish to have a 'hierarchy' of exceptions. This can be modelled - like in
   Java - using a subclass for each different kind of exception and then using
   the type of the exception for it's identification. This is supported by
   libFoundation using the TRY and CATCH macros.
@@ -57,7 +57,7 @@
 
 /*
   The following macros are for use of locks together with exception handling.
-  A synchronized block is properly 'unlocked' even if an exception occures.
+  A synchronized block is properly 'unlocked' even if an exception occurs.
   It is used this way:
 
     SYNCHRONIZED(MyObject) {

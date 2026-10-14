@@ -35,7 +35,7 @@
   - a priority  - to select a rule if multiple ones match
   
   String Representation:
-    qualifer => action [; priority]
+    qualifier => action [; priority]
     *true*   => action
   
   Example:

@@ -25,7 +25,7 @@ endif
 ADDITIONAL_BUNDLE_LIBS += $(BUNDLE_LIBS)
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = ../SaxObjC ../../sope-core/NGExtensions
 

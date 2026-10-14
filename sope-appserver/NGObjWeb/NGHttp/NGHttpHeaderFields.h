@@ -28,7 +28,7 @@
 @class NGInternetSocketAddress;
 
 /*
-  Value field that occures in the HTTP 'Host' header field.
+  Value field that occurs in the HTTP 'Host' header field.
   Looks like this: 'Host: trex@skyrix.com:80'
 */
 @interface NGHttpHostHeaderField : NSObject
@@ -57,7 +57,7 @@
 @end
 
 /*
-  Value field that occures in the HTTP 'accept-charset' header field.
+  Value field that occurs in the HTTP 'accept-charset' header field.
   Looks like this: 'accept-charset: iso-8859-1,*,utf-8'
 */
 @interface NGHttpCharsetHeaderField : NSObject
@@ -77,7 +77,7 @@
 @end
 
 /*
-  Value field that occures in the HTTP 'accept' header field.
+  Value field that occurs in the HTTP 'accept' header field.
   Looks like this: 'accept: image/gif, image/x-xbitmap, image/jpeg, wildcard'
 */
 @interface NGHttpTypeSetHeaderField : NSObject
@@ -95,7 +95,7 @@
 @end
 
 /*
-  Value field that occures in the HTTP 'accept-language' header field.
+  Value field that occurs in the HTTP 'accept-language' header field.
 */
 @interface NGHttpLanguageSetHeaderField : NSObject
 {
@@ -112,7 +112,7 @@
 @end
 
 /*
-  Value field that occures in the HTTP 'user-agent' header field.
+  Value field that occurs in the HTTP 'user-agent' header field.
   Looks like this: 'user-agent: Mozilla/4.5b2 [en] '
 */
 @interface NGHttpUserAgent : NSObject
@@ -136,7 +136,7 @@
 @end
 
 /*
-  Value field that occures in the HTTP 'connection' header field.
+  Value field that occurs in the HTTP 'connection' header field.
   Looks like this: 'connection: Keep-Alive'
 */
 @interface NGHttpConnectionHeaderField : NSObject
@@ -156,7 +156,7 @@
 @end
 
 /*
-  Value field that occures in the HTTP 'authorization' header field.
+  Value field that occurs in the HTTP 'authorization' header field.
   Looks like this: 'authorization: Basic aGVsZ2U6ZG9vZg=='
   (class cluster)
 */
@@ -185,7 +185,7 @@
 @end
 
 /*
-  Value field that occures in the HTTP 'www-authenticate' header field.
+  Value field that occurs in the HTTP 'www-authenticate' header field.
   Looks like this: 'www-authorization: Basic realm="SKYRIX"'
 */
 @interface NGHttpChallenge : NSObject

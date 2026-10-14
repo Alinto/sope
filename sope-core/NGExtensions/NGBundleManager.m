@@ -291,7 +291,7 @@ static NSString *NGEnvVarPathSeparator = @":";
   [self _addGNUstepPathsToPathArray:self->bundleSearchPaths];
   
 #if DEBUG && NeXT_Foundation_LIBRARY && 0
-  NSLog(@"%s: bundle search pathes:\n%@", __PRETTY_FUNCTION__, 
+  NSLog(@"%s: bundle search paths:\n%@", __PRETTY_FUNCTION__, 
 	self->bundleSearchPaths);
 #endif
 }
@@ -1138,7 +1138,7 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
   NSString       *path;
 
   if (debugOn) {
-    NSLog(@"BM LOOKUP pathes (%"PRIuPTR" bundles loaded): %@ / %@", 
+    NSLog(@"BM LOOKUP paths (%"PRIuPTR" bundles loaded): %@ / %@", 
           NSCountMapTable(self->loadedBundles), _resourceName, _type);
   }
   
@@ -1147,7 +1147,7 @@ static BOOL _doesInfoMatch(NSArray *keys, NSDictionary *dict, NSDictionary *info
   
   // TODO: look in loaded bundles
   
-  /* check physical pathes */
+  /* check physical paths */
   
   e = [self->bundleSearchPaths objectEnumerator];
   while ((path = [e nextObject]) != nil) {

@@ -179,7 +179,7 @@ static NSNull           *null   = nil;
 + (id)parserWithStream:(id<NGActiveSocket>)_stream {
   NGImap4ResponseParser *parser;
 
-  parser = [NGImap4ResponseParser alloc]; /* seperate line to keep gcc happy */
+  parser = [NGImap4ResponseParser alloc]; /* separate line to keep gcc happy */
   return [[parser initWithStream:_stream] autorelease];
 }
 
@@ -511,7 +511,7 @@ static void _parseSieveRespone(NGImap4ResponseParser *self,
 }
 
 /*
-  Similair to _parseData but used to parse something like this :
+  Similar to _parseData but used to parse something like this :
 
   BODY[HEADER.FIELDS (X-PRIORITY)] {17}
   X-Priority: 1

@@ -34,7 +34,7 @@
 @class EOAdaptor;
 @class EOAdaptorChannel;
 
-/* The EOAdaptorContext class could be overriden for a concrete database
+/* The EOAdaptorContext class could be overridden for a concrete database
    adaptor. You have to override only those methods marked in this header
    with `override'.
 */
@@ -92,7 +92,7 @@
 - (id)delegate;
 - (void)setDelegate:(id)aDelegate;
 
-/* Primary methods that control the transactions. This methods dont't call the
+/* Primary methods that control the transactions. This methods don't call the
    delegate. You should implement these methods instead of the similar ones but
    without the `primary' prefix. */
 - (BOOL)primaryBeginTransaction;                // override

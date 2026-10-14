@@ -124,7 +124,7 @@ static NSNumber *YesNumber;
   for (i = 0; i < count; i++) {
     unsigned j, jc;
     
-    // TODO: not particulary efficient, but should be OK ... */
+    // TODO: not particularly efficient, but should be OK ... */
     for (j = 0, jc = [ma count]; j < jc; j++) {
       WETabItemInfo *info;
       

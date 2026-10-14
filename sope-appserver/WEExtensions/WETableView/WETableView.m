@@ -896,7 +896,7 @@ static inline void _applyState_(WETableView *self, WOComponent *cmp) {
   }
   [_response appendContentCharacter:'>'];
 
-      // apppend resize buttons
+      // append resize buttons
   [self _appendResizeButtons:_response
         actionUrl:_actionUrl
         inContext:_ctx];

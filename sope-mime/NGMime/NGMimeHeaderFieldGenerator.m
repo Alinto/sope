@@ -177,7 +177,7 @@ static NSArray *splitWordIfQPEncodingTooBig(NSString *s)
         encoded = [[self class] encodeQuotedPrintableWord: toEncode];
       }
       // Insert pending spaces from last word. Normally it will be 1 or
-      // 0 in case needsEncode && encodedLastWord (becase the spaces are
+      // 0 in case needsEncode && encodedLastWord (because the spaces are
       // already in `encoded` string)
       NSUInteger n;
       for (n = 0; n < spaces; n++)

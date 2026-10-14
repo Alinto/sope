@@ -29,7 +29,7 @@ ADDITIONAL_INCLUDE_DIRS += \
 	-I$(SOPE_ROOT)/sope-mime
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = \
 	$(SOPE_ROOT)/sope-mime/NGMail		\

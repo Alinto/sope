@@ -194,7 +194,7 @@
     self->browser = WEUA_MSOutlook;
   }
   else if (strstr(ua, "Microsoft HTTP Post")) {
-    /* Outlook 2000 with WebPublishing Assistent */
+    /* Outlook 2000 with WebPublishing Assistant */
     self->browser = WEUA_MSWebPublisher;
   }
   else if (strstr(ua, "Entourage/10")) {
@@ -741,7 +741,7 @@
   case WEUA_IE:
     if (self->browserMajorVersion >= 5)
       return YES;
-    return NO; // TODO: find out, whether IE 4 gurantees UTF-8 support
+    return NO; // TODO: find out, whether IE 4 guarantees UTF-8 support
   default:
     return NO;
   }
@@ -1064,7 +1064,7 @@ static NSString *WEClientDetectorFormName = @"WEClientDetect";
   Apple MacOSX 10.2.1 / iCal 1.0 DAV Access Framework
     'DAVAccess/1.0'
   
-  Outlook 2000 on W2K with M$ Web Publishing Assistent
+  Outlook 2000 on W2K with M$ Web Publishing Assistant
     'Microsoft HTTP Post (RFC1867)'
   
   CURL program (libcurl)

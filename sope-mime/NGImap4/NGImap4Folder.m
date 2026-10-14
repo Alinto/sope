@@ -1004,7 +1004,7 @@ static int FetchNewUnseenMessagesInSubFoldersOnDemand = -1;
     if ([self _checkResult:dict cmd:__PRETTY_FUNCTION__]) {
       [self _buildMessagesFromFetch:dict usingMessages:messageMapping];
 
-      if (_unread) { /* set unfetched messeges to unread */
+      if (_unread) { /* set unfetched messages to unread */
         NSEnumerator   *enumerator;
         NGImap4Message *m;
 

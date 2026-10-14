@@ -51,7 +51,7 @@ static BOOL debugOn = NO;
   [super dealloc];
 }
 
-/* hierachy */
+/* hierarchy */
 
 - (SoClass *)soSuperClass {
   return self->soSuperClass;
