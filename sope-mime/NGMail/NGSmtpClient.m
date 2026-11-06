@@ -790,7 +790,7 @@
     { 
       NSString* smtpError = [reply text];
       NSLog(@"SMTP(RCPT TO) error: %@", smtpError);
-      if(![smtpError containsString:rcpt])
+      if([smtpError rangeOfString:rcpt].location == NSNotFound)
       {
         smtpError = [NSString stringWithFormat: @"%@ - %@", smtpError, rcpt];
       }
