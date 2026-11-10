@@ -111,6 +111,7 @@ static int          ProfileImapEnabled = -1;
 static int          LogImapEnabled     = -1;
 static int          PreventExceptions  = -1;
 static BOOL         fetchDebug         = NO;
+static NSTimeInterval ConnectionTimeout = 60.0;
 static BOOL         ImapDebugEnabled   = YES;
 static NSArray      *Imap4SystemFlags  = nil;
 
@@ -135,6 +136,12 @@ static NSMutableDictionary *namespaces;
   LogImapEnabled     = [ud boolForKey:@"ImapLogEnabled"]?1:0;
   ProfileImapEnabled = [ud boolForKey:@"ProfileImapEnabled"]?1:0;
   ImapDebugEnabled   = [ud boolForKey:@"ImapDebugEnabled"];
+
+  /* connect/read/write timeout in seconds, 0 disables it */
+  if ([ud objectForKey:@"NGImap4ConnectionTimeout"])
+    ConnectionTimeout = [ud integerForKey:@"NGImap4ConnectionTimeout"];
+  if (ConnectionTimeout < 0)
+    ConnectionTimeout = 0;
 
   YesNumber = [[NSNumber numberWithBool:YES] retain];
   NoNumber  = [[NSNumber numberWithBool:NO]  retain];
@@ -320,9 +327,11 @@ static NSMutableDictionary *namespaces;
   NS_DURING {
       if (sslSocket) {
         sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
-                                            withVerifyMode: tlsVerifyMode];
+                                            withVerifyMode: tlsVerifyMode
+                                                   timeout: ConnectionTimeout];
       } else {
-        sock = [NGActiveSocket socketConnectedToAddress:self->address];
+        sock = [NGActiveSocket socketConnectedToAddress:self->address
+                                                timeout:ConnectionTimeout];
       }
   }
   NS_HANDLER {

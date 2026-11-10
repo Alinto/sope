@@ -101,6 +101,15 @@ DEALINGS IN THE SOFTWARE.
 + (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
                   withVerifyMode: (int) mode
 {
+  return [self socketConnectedToAddress: _address
+                         withVerifyMode: mode
+                                timeout: 0.0];
+}
+
++ (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
+                  withVerifyMode: (int) mode
+                         timeout: (NSTimeInterval) _timeout
+{
   NGActiveSSLSocket *sock = [[self alloc] initWithDomain:[_address domain]
                       onHostName: [_address hostName]];
   if (mode == TLSVerifyNone ||
@@ -109,6 +118,11 @@ DEALINGS IN THE SOFTWARE.
   }
   else {
     [sock validatePeerCertificate: YES];
+  }
+  if (_timeout > 0.0) {
+    [sock setConnectTimeout: _timeout];
+    [sock setReceiveTimeout: _timeout];
+    [sock setSendTimeout: _timeout];
   }
   if (![sock connectToAddress:_address]) {
     NSException *e;

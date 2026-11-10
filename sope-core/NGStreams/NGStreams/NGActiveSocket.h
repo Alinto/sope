@@ -54,9 +54,13 @@
   
   NSTimeInterval receiveTimeout;
   NSTimeInterval sendTimeout;
+  NSTimeInterval connectTimeout;
 }
 
 + (id)socketConnectedToAddress:(id<NGSocketAddress>)_address;
+/* _timeout (seconds) is used for connect, read and write, 0 means none */
++ (id)socketConnectedToAddress:(id<NGSocketAddress>)_address
+                       timeout:(NSTimeInterval)_timeout;
 - (id)initWithDomain:(id<NGSocketDomain>)_domain; // designated initializer
 
 #if !defined(WIN32)
@@ -87,6 +91,15 @@
 - (NSTimeInterval)sendTimeout;
 - (void)setReceiveTimeout:(NSTimeInterval)_timeout;
 - (NSTimeInterval)receiveTimeout;
+
+/*
+   Timeout of the connect() call, 0 (default) means block until the
+   kernel gives up. Receive and send timeouts set before connecting are
+   applied as soon as the connection is established (eg. before a TLS
+   handshake).
+*/
+- (void)setConnectTimeout:(NSTimeInterval)_timeout;
+- (NSTimeInterval)connectTimeout;
 
 // test whether a read, a write or both would block the thread (using select)
 - (BOOL)wouldBlockInMode:(NGStreamMode)_mode;

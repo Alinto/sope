@@ -172,9 +172,20 @@
 #endif
 
 + (id)socketConnectedToAddress:(id<NGSocketAddress>)_address {
+  return [self socketConnectedToAddress:_address timeout:0.0];
+}
+
++ (id)socketConnectedToAddress:(id<NGSocketAddress>)_address
+                       timeout:(NSTimeInterval)_timeout
+{
   volatile id sock = [[self alloc] initWithDomain:[_address domain]];
 
   if (sock != nil) {
+    if (_timeout > 0.0) {
+      [sock setConnectTimeout:_timeout];
+      [sock setReceiveTimeout:_timeout];
+      [sock setSendTimeout:_timeout];
+    }
     if (![sock connectToAddress:_address]) {
       NSException *e;
       /*
@@ -199,6 +210,7 @@
     self->mode           = NGStreamMode_readWrite;
     self->receiveTimeout = 0.0;
     self->sendTimeout    = 0.0;
+    self->connectTimeout = 0.0;
   }
   return self;
 }
@@ -275,15 +287,62 @@
 #endif
 }
 
+/* connect(), limited to connectTimeout if set. Returns like connect(). */
+- (int)_connectToAddress:(id<NGSocketAddress>)_address {
+#if !defined(WIN32) || defined(__CYGWIN32__)
+  int fdFlags, rc, err;
+  socklen_t len;
+
+  if (self->connectTimeout <= 0.0)
+    return connect(fd,
+                   (struct sockaddr *)[_address internalAddressRepresentation],
+                   [_address addressRepresentationSize]);
+
+  fdFlags = NGGetDescriptorFlags(fd);
+  NGSetDescriptorFlags(fd, fdFlags | O_NONBLOCK);
+
+  rc = connect(fd,
+               (struct sockaddr *)[_address internalAddressRepresentation],
+               [_address addressRepresentationSize]);
+  err = (rc != 0) ? errno : 0;
+
+  if (rc != 0 && err == EINPROGRESS) {
+    rc = NGPollDescriptor(fd, POLLOUT, (int)(self->connectTimeout * 1000.0));
+    if (rc == 0) {
+      rc = -1;
+      err = ETIMEDOUT;
+    }
+    else if (rc < 0) {
+      rc = -1;
+      err = errno;
+    }
+    else {
+      err = 0;
+      len = sizeof(err);
+      if (getsockopt(fd, SOL_SOCKET, SO_ERROR, &err, &len) != 0)
+        err = errno;
+      rc = (err != 0) ? -1 : 0;
+    }
+  }
+
+  /* restore the original (blocking) mode */
+  NGSetDescriptorFlags(fd, fdFlags);
+  errno = err;
+  return rc;
+#else
+  return connect(fd,
+                 (struct sockaddr *)[_address internalAddressRepresentation],
+                 [_address addressRepresentationSize]);
+#endif
+}
+
 - (BOOL)primaryConnectToAddress:(id<NGSocketAddress>)_address {
   // throws
   //   NGCouldNotConnectException  if the the connect() call fails
 
   [self resetLastException];
 
-  if (connect(fd,
-              (struct sockaddr *)[_address internalAddressRepresentation],
-              [_address addressRepresentationSize]) != 0) {
+  if ([self _connectToAddress:_address] != 0) {
     NSString *reason   = nil;
     int      errorCode = errno;
     NSException *e;
@@ -396,6 +455,13 @@
     NSAssert((NGGetDescriptorFlags(self->fd) & O_NONBLOCK),
              @"could not enable non-blocking mode ..");
   }
+
+  /* apply timeouts set before connecting (used by blocking SSL sockets) */
+  if (self->receiveTimeout > 0.0)
+    [self setReceiveTimeout:self->receiveTimeout];
+  if (self->sendTimeout > 0.0)
+    [self setSendTimeout:self->sendTimeout];
+
   return YES;
 }
 
@@ -557,6 +623,13 @@
 }
 - (NSTimeInterval)receiveTimeout {
   return self->receiveTimeout;
+}
+
+- (void)setConnectTimeout:(NSTimeInterval)_timeout {
+  self->connectTimeout = _timeout;
+}
+- (NSTimeInterval)connectTimeout {
+  return self->connectTimeout;
 }
 
 - (BOOL)wouldBlockInMode:(NGStreamMode)_mode {

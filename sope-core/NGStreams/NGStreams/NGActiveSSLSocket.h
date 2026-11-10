@@ -50,6 +50,11 @@ enum {
 
 + (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
                  withVerifyMode: (int) mode;
+/* _timeout (seconds) is used for connect, TLS handshake, read and write,
+   0 means no timeout */
++ (id) socketConnectedToAddress: (id<NGSocketAddress>) _address
+                 withVerifyMode: (int) mode
+                        timeout: (NSTimeInterval) _timeout;
 
 - (id)initWithConnectedActiveSocket: (NGActiveSocket *) _socket
                      withVerifyMode: (int) mode;

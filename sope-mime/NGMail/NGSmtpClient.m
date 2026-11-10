@@ -108,7 +108,24 @@
 - (BOOL) _startTLS;
 @end
 
+static NSTimeInterval ConnectionTimeout = 60.0;
+
 @implementation NGSmtpClient
+
++ (void)initialize {
+  static BOOL didInit = NO;
+  NSUserDefaults *ud;
+
+  if (didInit) return;
+  didInit = YES;
+
+  /* connect/read/write timeout in seconds, 0 disables it */
+  ud = [NSUserDefaults standardUserDefaults];
+  if ([ud objectForKey:@"NGSmtpConnectionTimeout"])
+    ConnectionTimeout = [ud integerForKey:@"NGSmtpConnectionTimeout"];
+  if (ConnectionTimeout < 0)
+    ConnectionTimeout = 0;
+}
 
 - (BOOL)useSSL {
   return self->useSSL;
@@ -242,9 +259,11 @@
   NS_DURING {
     if (sslSocket) {
       sock = [NGActiveSSLSocket socketConnectedToAddress:self->address
-                                          withVerifyMode: tlsVerifyMode];
+                                          withVerifyMode: tlsVerifyMode
+                                                 timeout: ConnectionTimeout];
     } else {
-      sock = [NGActiveSocket socketConnectedToAddress:self->address];
+      sock = [NGActiveSocket socketConnectedToAddress:self->address
+                                              timeout:ConnectionTimeout];
     }
   }
   NS_HANDLER {
