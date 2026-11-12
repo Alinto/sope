@@ -79,8 +79,20 @@
         if (chars[i] > 127) {
           unsigned char nbuf[16];
           unsigned int k;
-          
-          sprintf((char *)nbuf, "&#%i;", (int)chars[i]);
+          unsigned int c = chars[i];
+
+          /* A character outside of the BMP, e.g. an emoji, is a pair of
+             UTF-16 surrogates. XML needs one reference for the character,
+             because a reference to a surrogate is not allowed. */
+          if (c >= 0xD800 && c <= 0xDBFF && i + 1 < len &&
+              chars[i + 1] >= 0xDC00 && chars[i + 1] <= 0xDFFF) {
+            c = 0x10000 + ((c - 0xD800) << 10) + (chars[i + 1] - 0xDC00);
+            i++;
+          }
+          else if (c >= 0xD800 && c <= 0xDFFF)
+            c = 0xFFFD; /* lone surrogate */
+
+          sprintf((char *)nbuf, "&#%i;", (int)c);
           for (k = 0; nbuf[k] != '\0'; k++) {
             buf[j] = nbuf[k];
             j++;
