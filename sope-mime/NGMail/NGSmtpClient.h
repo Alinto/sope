@@ -60,6 +60,7 @@ typedef enum {
     BOOL hasPipelining;
     BOOL hasAuthPlain;
     BOOL hasStartTls;
+    BOOL hasDSN;
   } extensions;
 
   BOOL useStartTLS;
@@ -79,6 +80,7 @@ typedef enum {
 
 - (void)setDebuggingEnabled:(BOOL)_flag;
 - (BOOL)isDebuggingEnabled;
+- (BOOL)supportsDeliveryStatusNotifications;
 
 // connection
 - (BOOL)connect;
@@ -121,8 +123,12 @@ typedef enum {
 
 // transaction commands
 
+/* RFC 3461: requesting a notification adds RET=HDRS to MAIL and
+   NOTIFY=SUCCESS,FAILURE to RCPT. Raises SMTPException if DSN is unavailable. */
 - (BOOL)mailFrom:(id)_sender;
+- (BOOL)mailFrom:(id)_sender requestDeliveryNotification:(BOOL)request;
 - (BOOL)recipientTo:(id)_receiver;
+- (BOOL)recipientTo:(id)_receiver requestDeliveryNotification:(BOOL)request;
 - (BOOL)sendData:(NSData *)_data;
 
 @end
