@@ -129,15 +129,28 @@ static int      LogImapEnabled = -1;
 }
 
 - (NSDictionary *)normalizeSortResponse:(NGHashMap *)_map {
-  /* filter for sort response (search  : NSArray (msn)) */
+  /*
+    Filter for sort response (sort: NSArray of UIDs).
+
+    Some IMAP servers (e.g. Dovecot) may return SORT data in an untagged
+    response but then send a tagged NO (e.g. "sort would have taken too
+    long").  The data is still valid, so if we received sort results we
+    treat the command as successful regardless of the tagged status.
+  */
   id                  obj;
   NSMutableDictionary *result;
 
   result = [self normalizeResponse:_map];
-  
-  if ((obj = [[_map objectEnumeratorForKey:@"sort"] nextObject]) != nil)
+
+  if ((obj = [[_map objectEnumeratorForKey:@"sort"] nextObject]) != nil) {
     [result setObject:obj forKey:@"sort"];
-  
+
+    /* Promote to success when sort data was returned despite a tagged NO */
+    if (![[result objectForKey:@"result"] boolValue]) {
+      [result setObject:[NSNumber numberWithBool:YES] forKey:@"result"];
+    }
+  }
+
   return result;
 }
 
