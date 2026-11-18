@@ -119,7 +119,7 @@ static Class NSStringClass  = Nil;
 
   /* some unsupported, but known encoding */
   else if ([charset isEqualToString:@"ks_c_5601-1987"]) {
-    encoding = NSISOLatin1StringEncoding;
+    encoding = NSKoreanEUCStringEncoding;
   }
   else if ([charset isEqualToString:@"euc-kr"]) {
     encoding = NSKoreanEUCStringEncoding;
