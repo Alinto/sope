@@ -50,7 +50,7 @@ ADDITIONAL_LDFLAGS += -framework Foundation
 endif
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = \
 	$(SOPE_ROOT)/sope-core/NGStreams	\

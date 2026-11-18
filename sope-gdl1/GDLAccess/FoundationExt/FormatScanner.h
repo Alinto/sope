@@ -38,7 +38,7 @@
  * selectors that have to be called when a specifier is found in the format
  * string. The selector must have exactly two arguments: the first one is a
  * pointer to a va_list and the second one is the format scanner. It is the
- * responsability of handler to increase the pointer to the va_list with the
+ * responsibility of handler to increase the pointer to the va_list with the
  * size of the object it handles. During the execution of the method the
  * scanner calls, the handler can ask the scanner about the flags, width,
  * precision, modifiers and the specifier character. The method should return a

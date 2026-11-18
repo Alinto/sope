@@ -39,7 +39,7 @@ endif
 # umbrella dependencies
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS += \
 	$(SOPE_ROOT)/sope-core			\

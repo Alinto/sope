@@ -27,7 +27,7 @@ EOCacheDataSource
 
 A "regular" EODataSource in SOPE is not supposed to cache the results it
 fetches, it should just perform the raw fetch and then tidy up. To provide
-caching, you can wrap an arbitary datasource in an EOCacheDataSource which
+caching, you can wrap an arbitrary datasource in an EOCacheDataSource which
 will manage the cache, perform on-demand loads etc.
 
 To keep the cache consistent, in SOPE a EODataSource is supposed to call
@@ -72,9 +72,9 @@ TODO document.
 
 - Groupings on an EODataSource still return an array, but one sorted by the
   'grouping keys'. Remember that the grouping does *not* need to be a plain
-  KVC key but can be arbitary.
+  KVC key but can be arbitrary.
 
-- You can add grouping facilities to arbitary datasources using
+- You can add grouping facilities to arbitrary datasources using
   EOFilterDataSource.
 
 Convenience methods

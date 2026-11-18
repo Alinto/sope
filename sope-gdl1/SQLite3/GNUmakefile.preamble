@@ -58,7 +58,7 @@ gdltest_TOOL_LIBS   += -framework GDLAccess -framework EOControl
 endif
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = \
 	../GDLAccess \

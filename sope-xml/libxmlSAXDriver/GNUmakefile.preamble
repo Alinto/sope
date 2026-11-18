@@ -21,7 +21,7 @@ libxmlSAXDriver_BUNDLE_LIBS += -framework SaxObjC $(libxml_LIBS)
 endif
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = ../SaxObjC
 

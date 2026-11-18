@@ -164,7 +164,7 @@ static BOOL profileDS = NO;
   return self->oldUnseen;
 }
 
-/* private methodes */
+/* private methods */
 
 - (NSException *)handleImapException:(NSException *)_exception {
   if ([_exception isKindOfClass:[NGImap4ResponseException class]]) {

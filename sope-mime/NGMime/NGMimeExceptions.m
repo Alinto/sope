@@ -25,7 +25,7 @@
 @implementation NGMimeException
 
 - (id)init {
-  return [self initWithReason:@"a MIME exception occured"];
+  return [self initWithReason:@"a MIME exception occurred"];
 }
   
 @end /* NGMimeException */
@@ -33,7 +33,7 @@
 @implementation NGMimeParserException
 
 - (id)init {
-  return [self initWithReason:@"a MIME exception occured during parsing"];
+  return [self initWithReason:@"a MIME exception occurred during parsing"];
 }
 
 @end /* NGMimeParserException */

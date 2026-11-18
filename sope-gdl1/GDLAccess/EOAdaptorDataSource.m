@@ -82,7 +82,7 @@ static EONull *null = nil;
   connectionDictionary:(NSDictionary *)_connDict;
 @end /* EOAdaptorDataSource(Internals) */
 
-@interface EODataSource(Notificiations)
+@interface EODataSource(Notifications)
 - (void)postDataSourceChangedNotification;
 @end
 
@@ -1142,7 +1142,7 @@ static NSNotificationCenter *getNC(void ) {
   
 
   if ([pKeys count] != [_gid keyCount]) {
-    NSLog(@"ERROR[%s]: internal inconsitency pkeys %@ gid %@",
+    NSLog(@"ERROR[%s]: internal inconsistency pkeys %@ gid %@",
           __PRETTY_FUNCTION__, pKeys, _gid);
     return nil;
   }

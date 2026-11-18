@@ -24,7 +24,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 include ../Version
 include ./Version
 
-# Global properties and dependancies
+# Global properties and dependencies
 SOPE_ROOT=../..
 ORACLE_VERSION=$(shell echo /usr/include/oracle/* | awk '{ print $$NF }' | awk -F / '{ print $$NF }')
 #ORACLE_VERSION=10.2.0.3

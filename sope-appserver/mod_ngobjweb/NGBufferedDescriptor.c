@@ -320,8 +320,8 @@ char NGBufferedDescriptor_writeHttpHeader(NGBufferedDescriptor *self,
   len = strlen((char *)_value);
   
   /*
-     Required for deliverying certificates, we encode \n and \r as %10 and %13
-     assuming that the certficiate is in base64. To safeguard, we also encode
+     Required for delivering certificates, we encode \n and \r as %10 and %13
+     assuming that the certificate is in base64. To safeguard, we also encode
      % as %25.
   */
   if (len > 0 && (index((char *)_value, '\n') != NULL || 

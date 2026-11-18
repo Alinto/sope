@@ -39,7 +39,7 @@ Protocols
   NGSocketAddress
   NGSocketDomain
 
-Class Hierachy
+Class Hierarchy
 ==============
   
   NSObject

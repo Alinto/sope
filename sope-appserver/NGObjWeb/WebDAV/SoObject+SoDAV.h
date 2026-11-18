@@ -70,7 +70,7 @@
   inContext:(id)_ctx;
 
 /*
-  Use the attribute map to map WebDAV propery names to KVC keys for the
+  Use the attribute map to map WebDAV property names to KVC keys for the
   object. If the object returns a map, the SoObjectWebDAVDispatcher will
   properly justify the EOFetchSpecification for queries.
 */

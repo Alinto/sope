@@ -41,7 +41,7 @@ static inline BOOL NGCanWriteInStreamMode(NGStreamMode _mode) {
 
 // ******************** primitives ********************
 
-// Never returns 0. If an EOF like condition occures, NGEndOfStreamException
+// Never returns 0. If an EOF like condition occurs, NGEndOfStreamException
 // is thrown.
 - (unsigned)readBytes:(void *)_buf count:(unsigned)_len;       // abstract
 - (unsigned)writeBytes:(const void *)_buf count:(unsigned)_len; // abstract

@@ -574,7 +574,7 @@ static void _checkOpen(NGFileStream *self, NSString *_reason) {
   if (NGCanReadInStreamMode(_mode))  events |= POLLRDNORM;
   if (NGCanWriteInStreamMode(_mode)) events |= POLLWRNORM;
 
-  // timeout of 0 means return immediatly
+  // timeout of 0 means return immediately
   return (NGPollDescriptor(self->fd, events, 0) == 1 ? NO : YES);
 }
 #endif

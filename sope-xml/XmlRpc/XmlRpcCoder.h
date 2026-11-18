@@ -34,9 +34,9 @@
   
   Encoder example: 
 
-   NSMutableString *str;                 // asume that exists
-   XmlRpcMethodResponse *methodResponse; // asume that exists
-   XmlRpcMethodCall     *methodCall;     // asume that exists
+   NSMutableString *str;                 // assume that exists
+   XmlRpcMethodResponse *methodResponse; // assume that exists
+   XmlRpcMethodCall     *methodCall;     // assume that exists
  
    coder = [[XmlRpcEncoder alloc] initForWritingWithMutableString:str];
    
@@ -94,7 +94,7 @@
   
   Decoder example:
 
-   NSString             *xmlRpcString; // asume that exists
+   NSString             *xmlRpcString; // assume that exists
    XmlRpcMethodCall     *methodCall     = nil;
    XmlRpcMethodResponse *methodResponse = nil;
 

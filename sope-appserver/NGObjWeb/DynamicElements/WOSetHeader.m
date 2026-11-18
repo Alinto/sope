@@ -26,7 +26,7 @@
 
   This element can set/add a header field using -setHeader:forKey:. Usually its
   used with a WOResponse (context.response is the default 'object'), but can be
-  used with arbitary objects implementing the same API (eg context.request).
+  used with arbitrary objects implementing the same API (eg context.request).
   
   Usage:
     ChangeContentType: WOSetHeader {

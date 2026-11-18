@@ -86,7 +86,7 @@
 	      @"are set, use only one! ('selection' is deprecated!)"];
     }
     
-    // compatiblity
+    // compatibility
     if (self->noSelectionString == nil)
       self->noSelectionString = OWGetProperty(_config, @"nilString");
     

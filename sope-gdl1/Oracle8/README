@@ -2,7 +2,7 @@ Oracle 10g GDL Adaptor
 Copyright (c) 2007  Inverse groupe conseil inc. and Ludovic Marcotte
 ====================================================================
 
-This adaptor allows you to use an Oracle 10g (or above/below) server togeter
+This adaptor allows you to use an Oracle 10g (or above/below) server together
 with GDL. It makes use of the new OCI API from Oracle. In order to compile
 and use this adaptor, you must install the Oracle Instant Client.
 
@@ -23,9 +23,9 @@ instructions to get the adaptor working.
 Installation and Configuration
 ==============================
 
-1- Based on where you've installed the Oracle dependancies, modify the
+1- Based on where you've installed the Oracle dependencies, modify the
    GNUmakefile so gnustep-make can find the location of Oracle's headers
-   and client librairies. You would want to modify at least:
+   and client libraries. You would want to modify at least:
 
    ORACLE_VERSION
    -lnnz

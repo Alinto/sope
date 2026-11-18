@@ -255,7 +255,7 @@ static NSMutableArray *activeApps = nil; // THREAD
 /* signals */
 
 - (void)processHupSignal:(int)_signal {
-  /* this isn't called immediatly */
+  /* this isn't called immediately */
 }
 
 - (void)terminateOnSignal:(int)_signal {

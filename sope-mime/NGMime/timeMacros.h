@@ -65,7 +65,7 @@
   fprintf(stderr,\
           "}%s: <%s>[%d] : \n" \
           "  time needed:           %4.4fs (%4.4fs) \n"\
-          "  memory wasted virtual: %d absolut %d \n" \
+          "  memory wasted virtual: %d absolute %d \n" \
           "  resident set size:     %d absolute %d\n", \
           __PRETTY_FUNCTION__, timeDescription, CountCalls,\
           ti < 0.0 ? -1.0 : ti, AddedTime, vm1 - vm, vm1, rss1 - rss, rss1); \

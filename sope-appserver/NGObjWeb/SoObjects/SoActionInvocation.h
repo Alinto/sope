@@ -53,7 +53,7 @@
     argument info, the additional arguments will be ignore (a warning will get
     printed).
     
-    If less arguments are passed in, the additional keys will be resetted to
+    If less arguments are passed in, the additional keys will be reset to
     'nil' (-takeValue:nil forKey:key will get called) to ensure that the call
     signature is deterministic.
     
@@ -71,7 +71,7 @@
   SOAP Arguments
 
     When being queried using SOAP, you can extract keys from the SOAP message
-    using EDOM query pathes. The values are assigned to the specified keys of
+    using EDOM query paths. The values are assigned to the specified keys of
     the action/page object.
     
     methods = {

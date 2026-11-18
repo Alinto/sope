@@ -37,7 +37,7 @@ static BOOL debugActionExecute = NO;
 /* active element */
 
 - (id)executeAction:(WOAssociation *)_action inContext:(WOContext *)_ctx {
-  // TODO: I think this is deprectated?
+  // TODO: I think this is deprecated?
   id  object;
   SEL act;
   

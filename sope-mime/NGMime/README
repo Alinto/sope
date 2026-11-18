@@ -24,7 +24,7 @@ Removed in SKYRiX 4.1, available in MOF3
 NGMime Objective-C Kit
 ======================
 
-  Class-Hierachy
+  Class-Hierarchy
 
     NSObject
       NGMimeType                          < NSCopying, NSCoding >

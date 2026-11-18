@@ -204,7 +204,7 @@ static inline void _removeDatabaseInstance(EODatabase *_db) {
     [NSException raise:NSInvalidArgumentException
 		 format:
               @"EODatabase:%@: All channels must be closed when changing "
-              @"snapshoting mode in the EODatabase, "
+              @"snapshotting mode in the EODatabase, "
               @"in [EODatabase setKeepsSnapshots:]",
 		 self];
   }

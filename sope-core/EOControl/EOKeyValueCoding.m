@@ -293,7 +293,7 @@ static GetKeyValueBinding* newGetBinding(NSString* key, id instance)
     
   // If no way to access value warn
   if (!ret && keyValueDebug)
-    NSLog(@"cannnot get key `%@' for instance of class `%@'",
+    NSLog(@"cannot get key `%@' for instance of class `%@'",
           key, NSStringFromClass([instance class]));
     
   return ret;
@@ -471,7 +471,7 @@ static SetKeyValueBinding* newSetBinding(NSString* key, id instance)
   }
   // If no way to access value warn
   if (!ret && keyValueDebug)
-    NSLog(@"cannnot set key `%@' for instance of class `%@'",
+    NSLog(@"cannot set key `%@' for instance of class `%@'",
           key, NSStringFromClass([instance class]));
   
   return ret;

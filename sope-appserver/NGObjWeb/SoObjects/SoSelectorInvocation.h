@@ -27,7 +27,7 @@
 /*
   An invocation object for Objective-C selector based SoClass methods. Multiple
   selectors can map to a single SoClass method because those methods have a
-  name independend from the arguments.
+  name independent from the arguments.
 */
 
 @class NSString, NSDictionary;

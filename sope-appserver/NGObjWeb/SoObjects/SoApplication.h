@@ -28,7 +28,7 @@
   SoApplication
   
   A convenience WOApplication subclass for So based products. It:
-  - registeres SoObjectRequestHandler as 'so','dav','RPC2' and default handler
+  - registers SoObjectRequestHandler as 'so','dav','RPC2' and default handler
   - loads products based on the SoApplicationLoadProducts default
   - initializes all required global objects (registries, security manager)
 */

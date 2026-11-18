@@ -57,7 +57,7 @@ SELECT a.attnum, a.attname, t.typname, a.attlen, a.attnotnull
         AND a.atttypid = t.oid
   ORDER BY attnum;
 
-Quering the databases of a server
+Querying the databases of a server
 ---------------------------------
 
   SELECT * FROM pg_database

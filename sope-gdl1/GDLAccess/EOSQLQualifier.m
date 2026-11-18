@@ -208,7 +208,7 @@ static EONull *null          = nil;
   /* Make a qualifier string in the following manner. If the relationship is
      not flattened we must join using the join operator the values from `row'
      and the foreign keys taken from the destination entity of relatioship.
-     If the relationship is flattend we must append then joins between the
+     If the relationship is flattened we must append then joins between the
      components of relationship. */
 
   if (componentRelationships) {

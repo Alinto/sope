@@ -356,7 +356,7 @@ static int      LogImapEnabled = -1;
     id (*objForKey)(id, SEL, id);
     
     /*
-       Process one 'fetch' reponse dictionary, walk over each key of the 
+       Process one 'fetch' response dictionary, walk over each key of the 
        dict and check for a collection of known response keys.
     */
     count     = 0;

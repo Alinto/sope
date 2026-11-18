@@ -595,7 +595,7 @@ static inline int _skipLWSP(NGHttpMessageParser *self, int _c) {
               doParse = YES;
             else
 #endif
-	      // We got an empty content because Content-Lenght was specified
+	      // We got an empty content because Content-Length was specified
 	      // We set the content to an empty body to avoid parsing it
 	      // with the NGMimePartParser's streaming parser. Not parsing
 	      // anything and not setting a content would lead to a 500 error code.

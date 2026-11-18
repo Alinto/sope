@@ -30,7 +30,7 @@
   WEPageLink associations:
     
     pageName
-    sync     (either array of names or a string with names seperated by ',')
+    sync     (either array of names or a string with names separated by ',')
 */
 
 @class WOAssociation, WOElement;
@@ -124,7 +124,7 @@
     if (![sync isKindOfClass:[NSArray class]])
       sync = [[sync stringValue] componentsSeparatedByString:@","];
     
-    // Note: we cannot use keypathes in a useful way here because we reuse
+    // Note: we cannot use keypaths in a useful way here because we reuse
     //       the key for assignment
     for (i = 0, count = [sync count]; i < count; i++) {
       NSString *key;

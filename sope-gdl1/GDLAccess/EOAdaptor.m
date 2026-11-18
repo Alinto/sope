@@ -182,7 +182,7 @@
     return nil;
   }
     
-  /* Get the adaptor bundle "infoDictionary", and pricipal class, ie. the
+  /* Get the adaptor bundle "infoDictionary", and principal class, ie. the
      adaptor class. Other info about the adaptor should be put in the
      bundle's "Info.plist" file (property list format - see NSBundle class
      documentation for details about reserved keys in this dictionary

@@ -22,7 +22,7 @@
 #include "WOHyperlink.h"
 
 /*
-  Class Hierachy
+  Class Hierarchy
     [WOHTMLDynamicElement]
       [WOHyperlink]
         _WOSimpleActionHyperlink

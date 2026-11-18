@@ -177,7 +177,7 @@ static const NSTimeInterval NGNoTimeout = 0.0;
   if (NGCanReadInStreamMode(_mode))  events |= POLLRDNORM;
   if (NGCanWriteInStreamMode(_mode)) events |= POLLWRNORM;
 
-  // timeout of 0 means return immediatly
+  // timeout of 0 means return immediately
   return (NGPollDescriptor([self fileDescriptor], events, 0) == 1 ? NO : YES);
 }
 
@@ -192,7 +192,7 @@ static const NSTimeInterval NGNoTimeout = 0.0;
          [[_packet receiver] internalAddressRepresentation],
          [[_packet receiver] addressRepresentationSize]);
 
-  if (!self->flags.isBound) // was not explictly bound, so get local address
+  if (!self->flags.isBound) // was not explicitly bound, so get local address
     [self kernelBoundAddress];
 
   [_packet setSender:[self localAddress]];
@@ -242,7 +242,7 @@ static const NSTimeInterval NGNoTimeout = 0.0;
                   (void *)data, &len);
   remote = [[self domain] addressWithRepresentation:(void *)data size:len];
 
-  if (!self->flags.isBound) // was not explictly bound, so get local address
+  if (!self->flags.isBound) // was not explicitly bound, so get local address
     [self kernelBoundAddress];
 
   packet = [[self packetFactory] packetWithBytes:buffer size:size];

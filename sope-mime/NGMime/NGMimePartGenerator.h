@@ -100,7 +100,7 @@
 - (BOOL)appendHeaderField:(NSString *)_field values:(NSEnumerator *)_values
   toData:(NSMutableData *)_data;
 
-/* looking for a NGMimeBodyGenerator in dependece to the content-type */
+/* looking for a NGMimeBodyGenerator in dependence to the content-type */
 - (id<NGMimeBodyGenerator>)generatorForBodyOfPart:(id<NGMimePart>)_part;
 
 /* ----- end hooks for subclasses ----- */
@@ -115,7 +115,7 @@
 /*
   The delegete has the opportunity to generate data for specified
   header-field with the given enumerator. The classes of the values depends
-  on the _headerField name, normaly they are NSStrings
+  on the _headerField name, normally they are NSStrings
 */   
 - (NSData *)mimePartGenerator:(id<NGMimePartGenerator>)_gen
   generateDataForHeaderField:(NSString *)_headerField

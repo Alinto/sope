@@ -126,9 +126,9 @@ Warning: you are configuring for a non standard FHS style prefix.
          prefix: $ARG_PREFIX
 
 Some code in SOPE only looks in /usr and /usr/local for resources and is
-therefore incompatible with arbitary install pathes.
+therefore incompatible with arbitrary install paths.
 
-If you want to have the flexibility of installation in arbitary pathes just
+If you want to have the flexibility of installation in arbitrary paths just
 configure GNUstep-make and source the GNUstep.sh script prior executing tools
 to ensure a proper environment.
 All SOPE based code is completely relocatable when being used in a GNUstep
@@ -685,7 +685,7 @@ if test $ARG_BEQUIET != 1; then
   printGNUstepSetup;
 fi
 
-# setup some GNUstep dependend defaults
+# setup some GNUstep dependent defaults
 if test "x$GNUSTEP_HOST_VENDOR" = "xapple"; then
   setupAppleArgs;
 fi

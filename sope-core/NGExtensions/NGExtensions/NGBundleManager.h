@@ -39,8 +39,8 @@
   The default bundle search path is:
 
     1. bundles contained in the main-bundle
-    2. pathes specified by the 'NGBundlePath' user default
-    3. pathes specified by the 'NGBundlePath' environment variable
+    2. paths specified by the 'NGBundlePath' user default
+    3. paths specified by the 'NGBundlePath' environment variable
 
   Bundles managed by NGBundleManager can specify load-requirements, this
   is done via the 'bundle-info.plist' file contained at the root of the

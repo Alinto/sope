@@ -327,7 +327,7 @@ static int _compareByName(id obj1, id obj2, void * context);
   return dict;
 }
 
-/* Getting attributes used for database oprations */
+/* Getting attributes used for database operations */
 
 - (NSArray*)attributesUsedForInsert
 {

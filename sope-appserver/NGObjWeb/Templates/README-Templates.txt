@@ -17,7 +17,7 @@ Practical difference:
   the visual clutter in the template itself
 - XML templates do not need to have a 1:1 mapping from tag to WODynamicElement
   and the mapping between tag and element is completely controlled by the
-  builder while for hash templates you always use the actuall WODynamicElement
+  builder while for hash templates you always use the actual WODynamicElement
   subclass name in the .wod file
 
 Class Overview

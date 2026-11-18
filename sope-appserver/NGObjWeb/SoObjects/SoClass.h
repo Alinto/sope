@@ -45,7 +45,7 @@
 
 - (id)initWithSoSuperClass:(SoClass *)_soClass;
 
-/* hierachy */
+/* hierarchy */
 
 - (SoClass *)soSuperClass;
 

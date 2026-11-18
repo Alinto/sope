@@ -21,7 +21,7 @@ STXSaxDriver_BUNDLE_LIBS += -framework SaxObjC
 endif
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = ../SaxObjC
 

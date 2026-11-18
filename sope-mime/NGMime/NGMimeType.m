@@ -328,7 +328,7 @@ static Class NSStringClass  = Nil;
   return YES;
 }
 
-- (BOOL)doesMatchType:(NGMimeType *)_other { // interpretes wildcards
+- (BOOL)doesMatchType:(NGMimeType *)_other { // interprets wildcards
   NSString *t, *st, *ot, *ost;
 
   t   = [self type];

@@ -17,7 +17,7 @@ NGStreams_LIBRARIES_DEPEND_UPON += \
 	-lz
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = \
 	../NGExtensions	\

@@ -218,7 +218,7 @@ static BOOL heavyLog = NO;
     self->cdata = [[NSMutableString alloc] initWithCapacity:256];
 }
 - (void)endSQLElement {
-  /* TODO: could immediatly parse SQL into fetch-spec */
+  /* TODO: could immediately parse SQL into fetch-spec */
   self->in.SQL = 0;
   [self->searchSQL release]; self->searchSQL = nil;
   self->searchSQL = [self->cdata copy];

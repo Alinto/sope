@@ -35,7 +35,7 @@
 
 static EONull *null = nil;
 
-@interface EOJoin : EORelationship // for adaptor compability
+@interface EOJoin : EORelationship // for adaptor compatibility
 @end
 
 @implementation EORelationship

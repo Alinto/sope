@@ -99,7 +99,7 @@
 	  [data appendBytes:des length:(isoLen + desLen + isoEndLen)];
 	}
 	else {
-          [self logWithFormat:@"WARNING(%s:%i): An error occour during "
+          [self logWithFormat:@"WARNING(%s:%i): An error occur during "
 		@"quoted-printable decoding",
                 __PRETTY_FUNCTION__, __LINE__];
 	  if (des != NULL) free(des);

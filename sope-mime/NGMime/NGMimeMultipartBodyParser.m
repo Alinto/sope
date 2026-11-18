@@ -35,7 +35,7 @@ static int MimeLogEnabled = -1;
   MimeLogEnabled = [ud boolForKey:@"MimeLogEnabled"] ? 1 : 0;
 }
 
-// returns the postion of the '\r' that starts the boundary
+// returns the position of the '\r' that starts the boundary
 static inline const char
 *_findNextBoundary(const char *_from, unsigned _len,
                    const char *_boundary, unsigned _boundaryLen, BOOL _isFirst)

@@ -135,7 +135,7 @@ struct EODatabaseContextModificationQueue;
 @end
 
 /*
- * Methods used by database classess internally
+ * Methods used by database classes internally
  */
 
 @interface EODatabaseContext(Private)

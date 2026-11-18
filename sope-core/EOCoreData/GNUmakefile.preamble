@@ -10,7 +10,7 @@ libEOCoreData_LIBRARIES_DEPEND_UPON += -lEOControl
 EOCoreData_LIBRARIES_DEPEND_UPON += -framework EOControl
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = ../EOControl
 

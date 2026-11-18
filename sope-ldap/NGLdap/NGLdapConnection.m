@@ -433,7 +433,7 @@ static void freeMods(LDAPMod **mods) {
     }
   else
     {
-      // A NULL control object doesn't mean it failed. 389-ds retuns one only
+      // A NULL control object doesn't mean it failed. 389-ds returns one only
       // when it actually fails - upon success, it returns nothing.
       [self logWithFormat: @"bind - ldap_parse_result - ctrls is NULL"];
       *_perr = 65535;

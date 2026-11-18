@@ -572,7 +572,7 @@ static void DBTerminate()
 	  //NSLog(@"Read type %d, width %d at %d", info->type, info->width, info->value);
 	  o = nil;
       
-	  // On Oracle, if we've read a lenght of 0, it means that we got a NULL.
+	  // On Oracle, if we've read a length of 0, it means that we got a NULL.
 	  if (info->type != SQLT_CLOB && info->width == 0)
 	    {
 	      o = [NSNull null];

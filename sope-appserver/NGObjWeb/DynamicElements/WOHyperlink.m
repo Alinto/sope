@@ -48,7 +48,7 @@
     disabled
     queryDictionary
 
-  Concrete Class Hierachy
+  Concrete Class Hierarchy
 
     _WOTemporaryHyperlink
     WOHTMLDynamicElement

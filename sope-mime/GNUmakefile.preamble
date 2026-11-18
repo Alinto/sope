@@ -26,7 +26,7 @@ NGMime_LIBRARIES_DEPEND_UPON += \
 	-framework DOM -framework SaxObjC
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = \
 	$(SOPE_ROOT)/sope-core/EOControl $(SOPE_ROOT)/sope-core/NGExtensions \

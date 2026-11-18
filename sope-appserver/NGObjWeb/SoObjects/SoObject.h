@@ -28,7 +28,7 @@
   This mostly defines a new KVC interface on NSObject. The major difference
   to KVC is, that KVC calls method keys while SoObjectLookup returns an
   invocation object.
-  It also introduces a new "class" hierachy used for "web" methods and classes
+  It also introduces a new "class" hierarchy used for "web" methods and classes
   that basically mirrors the Python object system (where ivars and methods are
   both "attributes").
 */

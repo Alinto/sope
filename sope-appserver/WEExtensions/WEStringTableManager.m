@@ -67,7 +67,7 @@ static BOOL   debugOn = NO;
   return bm;
 }
 
-/* resource pathes */
+/* resource paths */
 
 + (NSString *)findResourceDirectoryNamed:(NSString *)_name
   fhsName:(NSString *)_fhs
@@ -80,7 +80,7 @@ static BOOL   debugOn = NO;
   if (env == nil) env = [[[NSProcessInfo processInfo] environment] retain];
   fm = [NSFileManager defaultManager];
 
-  /* look in GNUstep pathes */
+  /* look in GNUstep paths */
   
   tmp = [[WEResourceManager rootPathesInGNUstep] objectEnumerator];
   while ((path = [tmp nextObject]) != nil) {
@@ -90,7 +90,7 @@ static BOOL   debugOn = NO;
       return path;
   }
   
-  /* look in FHS pathes */
+  /* look in FHS paths */
   
   tmp = [[WEResourceManager rootPathesInFHS] objectEnumerator];
   while ((path = [tmp nextObject])) {

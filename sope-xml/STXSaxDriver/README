@@ -66,11 +66,11 @@ But we have added a few thinks:
   this, we can parse a string like that: "Link":'http://www.url.com', and the 
   comma will be left out of the link).
 - link target: they are not a first class citizen (specially in XHTML), but 
-  sometime they are very usefull. To define a target, you can add it after a 
+  sometime they are very useful. To define a target, you can add it after a 
   link: "Link":'http://www.url.com'::'target'. Also the target can be quoted 
   in order to avoid problems with punctuation.
 - Image link: in order to create a link around an image, we have defined the 
-  following sintax: 
+  following syntax: 
     ["Alt text":http://www.url.com/image.gif]:'http://www.url.com'. 
   Here too, quoting and target are supported.
 ---snap---

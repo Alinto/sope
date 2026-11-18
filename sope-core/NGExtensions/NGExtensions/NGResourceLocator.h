@@ -30,7 +30,7 @@
   This class can be used by libraries to lookup resources in either the GNUstep
   hierarchy or in FHS locations (/usr/local etc).
   
-  The pathes given in are relative to the respective root, eg: "Library/Models"
+  The paths given in are relative to the respective root, eg: "Library/Models"
   and "share/mytool/models".
 */
 
@@ -81,7 +81,7 @@
 + (id)resourceLocatorForGNUstepPath:(NSString *)_path fhsPath:(NSString *)_fhs;
 - (id)initWithGNUstepPath:(NSString *)_path fhsPath:(NSString *)_fhs;
 
-/* resource pathes */
+/* resource paths */
 
 /* It's not a good idea to access these directly if you want portable
  * code.  More logical to use directly the 'operations' lookup methods

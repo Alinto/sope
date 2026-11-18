@@ -39,7 +39,7 @@
     previousIndex - previous item index // used to calculate groupBy (unsigned)
     
     indexOfFirst  - index of first item of current page              (unsigned)
-    indexOfLast   - index of last  item of current page              (unsigend)
+    indexOfLast   - index of last  item of current page              (unsigned)
     
     sortedKey     -                                                  (NSString)
     isDescending  - sort descending                                  (BOOL)

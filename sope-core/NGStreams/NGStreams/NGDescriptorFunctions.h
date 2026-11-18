@@ -27,8 +27,8 @@
 #if !defined(WIN32)
 
 /*
-  Polls a descriptor. Returns 1 if events occurred, 0 if a timeout occured
-  and -1 if an error other than EINTR or EAGAIN occured.
+  Polls a descriptor. Returns 1 if events occurred, 0 if a timeout occurred
+  and -1 if an error other than EINTR or EAGAIN occurred.
 */
 extern int NGPollDescriptor(int _fd, short _events, int _timeout);
 

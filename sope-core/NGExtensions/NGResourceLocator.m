@@ -59,7 +59,7 @@
   [super dealloc];
 }
 
-/* search pathes */
+/* search paths */
 
 - (NSArray *)gsRootPathes {
   static NSArray *pathes = nil;
@@ -258,7 +258,7 @@
   
   [ms appendString:@" cache"];
   if (self->flags.cacheSearchPathes)
-    [ms appendString:@":pathes"];
+    [ms appendString:@":paths"];
   if (self->flags.cachePathHits)
     [ms appendString:@":hits"];
   if (self->flags.cachePathMisses)

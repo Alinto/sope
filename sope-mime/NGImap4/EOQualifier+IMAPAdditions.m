@@ -103,7 +103,7 @@ static void _initImap4SearchCategory(void) {
 }
 
 - (id)imap4SearchString { /* returns exception on fail */
-  [self logWithFormat:@"ERROR(%s): subclass %@ must overide this method!",
+  [self logWithFormat:@"ERROR(%s): subclass %@ must override this method!",
 	__PRETTY_FUNCTION__, [self class]];
   return nil;
 }

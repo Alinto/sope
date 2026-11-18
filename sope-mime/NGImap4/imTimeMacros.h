@@ -52,7 +52,7 @@
   }; \
   ti = (double)tv.tv_sec + ((double)tv.tv_usec / 1000000.0) - ti; \
   fprintf(stderr,\
-          "}%s: <%s> : time needed: %4.4fs memory wasted %d absolut"\
+          "}%s: <%s> : time needed: %4.4fs memory wasted %d absolute"\
           " %d\n", __PRETTY_FUNCTION__, timeDescription, \
           ti < 0.0 ? -1.0 : ti, vm1 - vm, vm1); \
 }

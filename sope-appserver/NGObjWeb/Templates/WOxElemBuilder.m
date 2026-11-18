@@ -657,7 +657,7 @@ static WOAssociation *yesAssoc = nil;
     return nil;
   if ([list length] > 1) {
     [self warnWithFormat:
-	    @"more than once occurence of tag %@ in element: %@", 
+	    @"more than once occurrence of tag %@ in element: %@", 
 	    _name, _elem];
   }
   return [list objectAtIndex:0];

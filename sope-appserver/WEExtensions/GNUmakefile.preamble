@@ -53,7 +53,7 @@ WEExtensions_LIBRARIES_DEPEND_UPON += \
 endif
 
 
-# library/framework search pathes
+# library/framework search paths
 
 DEP_DIRS = \
 	../NGObjWeb \

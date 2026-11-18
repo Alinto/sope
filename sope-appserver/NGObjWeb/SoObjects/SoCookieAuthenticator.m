@@ -73,7 +73,7 @@ static NSString *prefix = @"0xHIGHFLYx";
 }
 
 - (NSString *)checkCredentials:(NSString *)_creds {
-  /* checks credentials, returnes login if successful */
+  /* checks credentials, returns login if successful */
   NSString *login, *pwd;
   NSArray  *creds;
   
@@ -217,7 +217,7 @@ static NSString *prefix = @"0xHIGHFLYx";
   
   /*
     Should be 'basic ' (basic + space), but lets be tolerant and allow an
-    arbitary amount of leading spaces.
+    arbitrary amount of leading spaces.
   */
   k = [[auth substringFromIndex:5] stringByTrimmingLeadWhiteSpaces];
   if ((k = [k stringByDecodingBase64]) == nil) {

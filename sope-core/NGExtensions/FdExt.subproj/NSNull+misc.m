@@ -242,7 +242,7 @@ static inline BOOL doAbort(void) {
     return NO;
   
   // TODO: just check the first char for performance ...
-  // But: a single space should be treated as emtpy, since this is very common
+  // But: a single space should be treated as empty, since this is very common
   //      in SQL (Sybase in special)
   for (i = 0; i < len; i++) {
     if (!isspace([self characterAtIndex:i]))

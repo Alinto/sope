@@ -365,9 +365,9 @@ static inline id parseDomainLiteral(NGMailAddressParser *self, BOOL _guessMode) 
 	   autorelease];
 }
 
-/* Receives one or more mail addresses. Addresses should be seperated by a comma
+/* Receives one or more mail addresses. Addresses should be separated by a comma
  *
- * returns a string containing well formated addresses or the input as-is
+ * returns a string containing well formatted addresses or the input as-is
  * if it couldn't make sense out of it.
  * The displayName portion is always quoted and multiple addresses will be
  * separated by a comma

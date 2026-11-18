@@ -109,7 +109,7 @@
 @implementation InvalidValueTypeException
 - initWithType:type
 {
-    id _reason = [NSString stringWithFormat:@"unknow value type '%@'", type];
+    id _reason = [NSString stringWithFormat:@"unknown value type '%@'", type];
     [self initWithName:@"InvalidValueTypeException"
             reason:_reason userInfo:nil];
     return self;

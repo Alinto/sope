@@ -950,7 +950,7 @@ typedef enum {
       NS_HANDLER {
         terminate = YES;
         [self errorWithFormat:
-                @"an exception occured in runloop %@", localException];
+                @"an exception occurred in runloop %@", localException];
       }
       NS_ENDHANDLER;
 

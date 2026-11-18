@@ -41,7 +41,7 @@
   Since WOApplications are synchronous by nature, we define a "special" HTTP
   response with status code "20001" meaning "response not yet ready". If
   the transaction gets this response, it puts itself into a pending state
-  and waits for a notification targetting the async-object token given in
+  and waits for a notification targeting the async-object token given in
   the user-info of the response.
   (Eg this is used in the skysystemd to be able to fork and process multiple
   system commands at the same time)

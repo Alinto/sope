@@ -36,7 +36,7 @@
   NOTE: work in progress.
   
   TODO: we also need a WOSessionAuthenticator which assumes that the
-        existance of a session implies a successful authentication?
+        existence of a session implies a successful authentication?
 */
 
 @class NSString, NSException, NSArray;
@@ -51,7 +51,7 @@
 
 - (BOOL)checkLogin:(NSString *)_login password:(NSString *)_pwd;
 
-/* To set additionnal cookies (override in subclasses !)*/
+/* To set additional cookies (override in subclasses !)*/
 - (NSArray *)getCookiesIfNeeded: (WOContext *)_ctx;
 
 /* Cookie authentication */
